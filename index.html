@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Calculateurs optique</title>
-
-<!-- ============================================================
-     PARTIE 1 : LE STYLE (CSS) — l'apparence de la page
-     Les couleurs sont rangées dans des "variables" (--fond, --texte…)
-     pour pouvoir changer tout le thème d'un coup (ex. mode sombre).
-     ============================================================ -->
+<meta name="description" content="Révise l'optique en t'entraînant : QCM corrigés et calculateurs pour étudiants en BTS OL et licence d'optique. Gratuit, par un opticien diplômé.">
+<!-- Ces balises "og" règlent l'aperçu quand on partage le lien (WhatsApp, Discord, Messenger…) -->
+<meta property="og:title" content="Opticonversion · Révise l'optique en t'entraînant">
+<meta property="og:description" content="QCM corrigés et calculateurs pour étudiants en optique. Gratuit.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://opticonversion.github.io/">
+<title>Opticonversion · Révise l'optique en t'entraînant</title>
 <style>
   :root {
     --fond: #f6f7f9;
@@ -18,7 +18,6 @@
     --doux: #5c6673;
     --accent: #1f6feb;
     --bord: #d9dee5;
-    --resultat: #eef4ff;
   }
   @media (prefers-color-scheme: dark) {
     :root {
@@ -28,7 +27,6 @@
       --doux: #9aa4b1;
       --accent: #5b9bff;
       --bord: #2a313a;
-      --resultat: #1a2638;
     }
   }
   * { box-sizing: border-box; }
@@ -43,255 +41,76 @@
   nav { display: flex; gap: 16px; margin-bottom: 20px; font-size: 0.95rem; }
   nav a { color: var(--accent); text-decoration: none; }
   nav a.actif { color: var(--texte); font-weight: 600; }
-  h1 { font-size: 1.6rem; margin: 0 0 4px; }
-  .sous-titre { color: var(--doux); margin: 0 0 24px; }
-  section {
+
+  .marque { font-weight: 700; letter-spacing: 0.02em; color: var(--accent); margin: 32px 0 8px; }
+  h1 { font-size: 2rem; line-height: 1.2; margin: 0 0 12px; }
+  .accroche { font-size: 1.1rem; color: var(--doux); margin: 0 0 32px; }
+
+  .cartes { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+  .carte {
+    display: block;
     background: var(--carte);
     border: 1px solid var(--bord);
     border-radius: 12px;
     padding: 20px;
-    margin-bottom: 20px;
-  }
-  h2 { font-size: 1.15rem; margin: 0 0 4px; }
-  .aide { color: var(--doux); font-size: 0.9rem; margin: 0 0 16px; }
-  .champs { display: flex; flex-wrap: wrap; gap: 12px; }
-  label { display: flex; flex-direction: column; font-size: 0.85rem; color: var(--doux); flex: 1 1 120px; }
-  input, select {
-    margin-top: 4px;
-    padding: 10px;
-    font-size: 1rem;
-    border: 1px solid var(--bord);
-    border-radius: 8px;
-    background: var(--fond);
     color: var(--texte);
+    text-decoration: none;
+    transition: border-color 0.15s;
   }
-  .resultat {
-    margin-top: 16px;
-    padding: 14px;
-    border-radius: 8px;
-    background: var(--resultat);
-    font-size: 1.05rem;
-  }
-  .resultat strong { font-size: 1.25rem; }
-  .calcul { display: block; margin-top: 8px; color: var(--doux); font-size: 0.85rem; }
-  .erreur { color: #d1242f; }
+  .carte:hover { border-color: var(--accent); }
+  .carte h2 { font-size: 1.2rem; margin: 0 0 6px; }
+  .carte p { margin: 0 0 12px; color: var(--doux); }
+  .carte .lien { color: var(--accent); font-weight: 600; }
+
+  .points { margin: 40px 0 0; padding: 0; list-style: none; }
+  .points li { padding: 10px 0; border-top: 1px solid var(--bord); }
+  .points li:last-child { border-bottom: 1px solid var(--bord); }
+  .points strong { display: block; }
+  .points span { color: var(--doux); font-size: 0.95rem; }
+
+  footer { margin-top: 48px; color: var(--doux); font-size: 0.85rem; }
 </style>
 </head>
-
-<!-- ============================================================
-     PARTIE 2 : LE CONTENU (HTML) — ce qui s'affiche
-     Chaque calculateur est une <section> avec des champs <input>.
-     Chaque champ a un "id" pour que le JavaScript le retrouve.
-     ============================================================ -->
 <body>
 <main>
   <nav>
-    <a href="index.html" class="actif">Calculateurs</a>
+    <a href="index.html" class="actif">Accueil</a>
+    <a href="calculateurs.html">Calculateurs</a>
     <a href="qcm.html">QCM</a>
   </nav>
-  <h1>Calculateurs optique</h1>
-  <p class="sous-titre">Par un opticien diplômé, Master Expert de la vision.</p>
 
-  <!-- ---------- Calculateur 1 : Transposition ---------- -->
-  <section>
-    <h2>1. Transposition de formule</h2>
-    <p class="aide">Passe d'un cylindre positif à négatif (ou l'inverse).</p>
-    <div class="champs">
-      <label>Sphère (D)<input id="t-sph" inputmode="decimal" placeholder="-2,00"></label>
-      <label>Cylindre (D)<input id="t-cyl" inputmode="decimal" placeholder="+1,50"></label>
-      <label>Axe (°)<input id="t-axe" inputmode="numeric" placeholder="90"></label>
-    </div>
-    <div class="resultat" id="t-res">Remplis les trois champs.</div>
-  </section>
+  <p class="marque">OPTICONVERSION</p>
+  <h1>Révise l'optique en t'entraînant.</h1>
+  <p class="accroche">QCM corrigés et calculateurs pour les étudiants en BTS OL et en licence d'optique. Gratuit, sans inscription.</p>
 
-  <!-- ---------- Calculateur 2 : Distance verre-œil ---------- -->
-  <section>
-    <h2>2. Compensation de distance verre-œil</h2>
-    <p class="aide">Convertit une correction lunettes en lentilles (ou l'inverse).</p>
-    <div class="champs">
-      <label>Sphère (D)<input id="v-sph" inputmode="decimal" placeholder="-6,00"></label>
-      <label>Cylindre (D)<input id="v-cyl" inputmode="decimal" placeholder="0" value="0"></label>
-      <label>Axe (°)<input id="v-axe" inputmode="numeric" placeholder="180" value="180"></label>
-      <label>Distance verre-œil (mm)<input id="v-dvo" inputmode="decimal" value="12"></label>
-      <label>Sens
-        <select id="v-sens">
-          <option value="vers-lentille">Lunettes → lentilles</option>
-          <option value="vers-lunette">Lentilles → lunettes</option>
-        </select>
-      </label>
-    </div>
-    <div class="resultat" id="v-res">Remplis la sphère.</div>
-  </section>
+  <div class="cartes">
+    <a class="carte" href="qcm.html">
+      <h2>QCM</h2>
+      <p><span id="nb-questions">Des dizaines de</span> questions en réfraction, contactologie, vision binoculaire et calculs. Chaque réponse est expliquée.</p>
+      <span class="lien">S'entraîner →</span>
+    </a>
+    <a class="carte" href="calculateurs.html">
+      <h2>Calculateurs</h2>
+      <p>Transposition, compensation de distance verre-œil, règle de Prentice. Avec le détail du calcul pour comprendre.</p>
+      <span class="lien">Calculer →</span>
+    </a>
+  </div>
 
-  <!-- ---------- Calculateur 3 : Prentice ---------- -->
-  <section>
-    <h2>3. Effet prismatique (règle de Prentice)</h2>
-    <p class="aide">Prisme induit quand l'œil regarde à côté du centre optique (verre sphérique).</p>
-    <div class="champs">
-      <label>Puissance (D)<input id="p-puis" inputmode="decimal" placeholder="+4,00"></label>
-      <label>Décentrement (mm)<input id="p-dec" inputmode="decimal" placeholder="5"></label>
-      <label>Le point regardé est…
-        <select id="p-dir">
-          <option value="nasal">côté nasal du centre</option>
-          <option value="temporal">côté temporal du centre</option>
-          <option value="haut">au-dessus du centre</option>
-          <option value="bas">en dessous du centre</option>
-        </select>
-      </label>
-    </div>
-    <div class="resultat" id="p-res">Remplis la puissance et le décentrement.</div>
-  </section>
+  <ul class="points">
+    <li><strong>Fait par un opticien</strong><span>Diplômé, Master Expert de la vision. Le contenu suit le programme de l'optique-lunetterie.</span></li>
+    <li><strong>Pensé pour comprendre</strong><span>Pas juste la bonne réponse : le raisonnement et la formule, à chaque fois.</span></li>
+    <li><strong>De nouvelles questions régulièrement</strong><span>La banque de questions s'agrandit chaque semaine.</span></li>
+  </ul>
+
+  <footer>© 2026 Opticonversion · Outil de révision, ne remplace pas un cours ni un avis professionnel.</footer>
 </main>
 
-<!-- ============================================================
-     PARTIE 3 : LA LOGIQUE (JavaScript) — les calculs
-     ============================================================ -->
+<!-- On charge la banque de questions juste pour afficher leur nombre exact -->
+<script src="questions.js"></script>
 <script>
-  // --- Petits outils réutilisés partout ---
-
-  // Lit un champ et renvoie un nombre (accepte "−2,50" avec virgule).
-  // Renvoie null si le champ est vide ou n'est pas un nombre.
-  function lireNombre(id) {
-    const texte = document.getElementById(id).value.trim().replace(",", ".");
-    if (texte === "") return null;
-    const n = Number(texte);
-    return isNaN(n) ? null : n;
+  if (typeof QUESTIONS !== "undefined") {
+    document.getElementById("nb-questions").textContent = QUESTIONS.length;
   }
-
-  // Arrondit au 0,25 D le plus proche (les verres existent par pas de 0,25).
-  function arrondi025(x) {
-    return Math.round(x * 4) / 4;
-  }
-
-  // Affiche une puissance à la française : +1,50 / -2,25
-  function formatD(x) {
-    if (Math.abs(x) < 0.001) x = 0;           // évite d'afficher "-0,00"
-    const signe = x >= 0 ? "+" : "";
-    return signe + x.toFixed(2).replace(".", ",");
-  }
-
-  // Garde un axe entre 1° et 180° (0° s'écrit 180° par convention).
-  function normaliserAxe(a) {
-    a = ((a % 180) + 180) % 180;
-    return a === 0 ? 180 : a;
-  }
-
-  // --- Calculateur 1 : Transposition ---
-  // Règle : nouvelle sphère = S + C ; nouveau cylindre = -C ; axe ± 90°
-  function calculTransposition() {
-    const s = lireNombre("t-sph");
-    const c = lireNombre("t-cyl");
-    const a = lireNombre("t-axe");
-    const zone = document.getElementById("t-res");
-
-    if (s === null || c === null || a === null) {
-      zone.textContent = "Remplis les trois champs.";
-      return;
-    }
-    if (a < 0 || a > 180) {
-      zone.innerHTML = '<span class="erreur">L\'axe doit être entre 0° et 180°.</span>';
-      return;
-    }
-
-    const nouvSph = s + c;
-    const nouvCyl = -c;
-    const nouvAxe = normaliserAxe(a + 90);
-
-    zone.innerHTML =
-      "<strong>" + formatD(nouvSph) + " (" + formatD(nouvCyl) + ") " + nouvAxe + "°</strong>" +
-      '<span class="calcul">Sphère : ' + formatD(s) + " + (" + formatD(c) + ") = " + formatD(nouvSph) +
-      " · Cylindre : signe inversé · Axe : " + a + "° ± 90° = " + nouvAxe + "°</span>";
-  }
-
-  // --- Calculateur 2 : Distance verre-œil ---
-  // Formule : F' = F / (1 - d × F), avec d en mètres.
-  // d est positif quand on rapproche le verre de l'œil (lunettes → lentilles).
-  // Pour un verre torique, on calcule chaque méridien séparément.
-  function calculVerreOeil() {
-    const s = lireNombre("v-sph");
-    const c = lireNombre("v-cyl") ?? 0;
-    const a = lireNombre("v-axe") ?? 180;
-    const dvo = lireNombre("v-dvo");
-    const sens = document.getElementById("v-sens").value;
-    const zone = document.getElementById("v-res");
-
-    if (s === null || dvo === null) {
-      zone.textContent = "Remplis la sphère et la distance verre-œil.";
-      return;
-    }
-
-    let d = dvo / 1000;                         // mm → mètres
-    if (sens === "vers-lunette") d = -d;        // on éloigne le verre : d négatif
-
-    const compenser = F => F / (1 - d * F);
-
-    const meridien1 = s;        // puissance dans l'axe du cylindre
-    const meridien2 = s + c;    // puissance à 90° de l'axe
-    const m1 = compenser(meridien1);
-    const m2 = compenser(meridien2);
-
-    const sphExacte = m1;
-    const cylExact = m2 - m1;
-    const sph = arrondi025(sphExacte);
-    const cyl = arrondi025(cylExact);
-
-    let texte = "<strong>" + formatD(sph);
-    if (Math.abs(cyl) > 0.001) texte += " (" + formatD(cyl) + ") " + normaliserAxe(a) + "°";
-    texte += "</strong>";
-    texte += '<span class="calcul">Valeur exacte : ' + formatD(sphExacte);
-    if (Math.abs(c) > 0.001) texte += " (" + formatD(cylExact) + ")";
-    texte += " · F' = F / (1 − " + d.toFixed(3).replace(".", ",") + " × F)";
-    if (Math.abs(s) < 4 && Math.abs(s + c) < 4) {
-      texte += "<br>Sous ±4,00 D, l'écart est en général négligeable.";
-    }
-    texte += "</span>";
-    zone.innerHTML = texte;
-  }
-
-  // --- Calculateur 3 : Prentice ---
-  // Formule : P (Δ) = c (cm) × F (D)
-  // Verre convexe (+) : la base est tournée VERS le centre optique.
-  // Verre concave (−) : la base est tournée vers le bord, du côté du point regardé.
-  function calculPrentice() {
-    const F = lireNombre("p-puis");
-    const decMm = lireNombre("p-dec");
-    const dir = document.getElementById("p-dir").value;
-    const zone = document.getElementById("p-res");
-
-    if (F === null || decMm === null) {
-      zone.textContent = "Remplis la puissance et le décentrement.";
-      return;
-    }
-
-    const cCm = decMm / 10;                      // mm → cm
-    const P = Math.abs(cCm * F);
-
-    const oppose = { nasal: "temporale", temporal: "nasale", haut: "inférieure", bas: "supérieure" };
-    const memeCote = { nasal: "nasale", temporal: "temporale", haut: "supérieure", bas: "inférieure" };
-
-    let base;
-    if (F > 0) base = "base " + oppose[dir];
-    else if (F < 0) base = "base " + memeCote[dir];
-    else base = "aucun prisme (verre plan)";
-
-    zone.innerHTML =
-      "<strong>" + P.toFixed(2).replace(".", ",") + " Δ " + base + "</strong>" +
-      '<span class="calcul">P = ' + cCm.toFixed(1).replace(".", ",") + " cm × " +
-      Math.abs(F).toFixed(2).replace(".", ",") + " D = " + P.toFixed(2).replace(".", ",") + " Δ</span>";
-  }
-
-  // --- Brancher les calculs sur les champs ---
-  // À chaque frappe ("input") ou changement de menu ("change"), on recalcule.
-  function brancher(ids, fonction) {
-    ids.forEach(id => {
-      const el = document.getElementById(id);
-      el.addEventListener("input", fonction);
-      el.addEventListener("change", fonction);
-    });
-  }
-  brancher(["t-sph", "t-cyl", "t-axe"], calculTransposition);
-  brancher(["v-sph", "v-cyl", "v-axe", "v-dvo", "v-sens"], calculVerreOeil);
-  brancher(["p-puis", "p-dec", "p-dir"], calculPrentice);
 </script>
 </body>
 </html>
