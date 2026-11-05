@@ -3,109 +3,72 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Révise l'optique en t'entraînant : QCM corrigés et calculateurs pour étudiants en BTS OL et licence d'optique. Gratuit, par un opticien diplômé.">
+<meta name="description" content="Révise le BTS Opticien-Lunetier en t'entraînant : QCM par épreuve basés sur les sujets officiels, corrigés et expliqués, et calculateurs d'optique. Gratuit.">
+<meta name="theme-color" content="#0b0d12">
 <!-- Ces balises "og" règlent l'aperçu quand on partage le lien (WhatsApp, Discord, Messenger…) -->
-<meta property="og:title" content="Opticonversion · Révise l'optique en t'entraînant">
-<meta property="og:description" content="QCM corrigés et calculateurs pour étudiants en optique. Gratuit.">
+<meta property="og:title" content="Opticonversion · Révise le BTS OL en t'entraînant">
+<meta property="og:description" content="QCM par épreuve, basés sur les sujets officiels, et calculateurs d'optique. Gratuit.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://opticonversion.github.io/">
-<title>Opticonversion · Révise l'optique en t'entraînant</title>
-<style>
-  :root {
-    --fond: #f6f7f9;
-    --carte: #ffffff;
-    --texte: #1b1f24;
-    --doux: #5c6673;
-    --accent: #1f6feb;
-    --bord: #d9dee5;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --fond: #0f1216;
-      --carte: #181c22;
-      --texte: #e6e9ed;
-      --doux: #9aa4b1;
-      --accent: #5b9bff;
-      --bord: #2a313a;
-    }
-  }
-  * { box-sizing: border-box; }
-  body {
-    margin: 0;
-    background: var(--fond);
-    color: var(--texte);
-    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
-    line-height: 1.5;
-  }
-  main { max-width: 720px; margin: 0 auto; padding: 24px 16px 64px; }
-  nav { display: flex; gap: 16px; margin-bottom: 20px; font-size: 0.95rem; }
-  nav a { color: var(--accent); text-decoration: none; }
-  nav a.actif { color: var(--texte); font-weight: 600; }
-
-  .marque { font-weight: 700; letter-spacing: 0.02em; color: var(--accent); margin: 32px 0 8px; }
-  h1 { font-size: 2rem; line-height: 1.2; margin: 0 0 12px; }
-  .accroche { font-size: 1.1rem; color: var(--doux); margin: 0 0 32px; }
-
-  .cartes { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
-  .carte {
-    display: block;
-    background: var(--carte);
-    border: 1px solid var(--bord);
-    border-radius: 12px;
-    padding: 20px;
-    color: var(--texte);
-    text-decoration: none;
-    transition: border-color 0.15s;
-  }
-  .carte:hover { border-color: var(--accent); }
-  .carte h2 { font-size: 1.2rem; margin: 0 0 6px; }
-  .carte p { margin: 0 0 12px; color: var(--doux); }
-  .carte .lien { color: var(--accent); font-weight: 600; }
-
-  .points { margin: 40px 0 0; padding: 0; list-style: none; }
-  .points li { padding: 10px 0; border-top: 1px solid var(--bord); }
-  .points li:last-child { border-bottom: 1px solid var(--bord); }
-  .points strong { display: block; }
-  .points span { color: var(--doux); font-size: 0.95rem; }
-
-  footer { margin-top: 48px; color: var(--doux); font-size: 0.85rem; }
-</style>
+<title>Opticonversion · Révise le BTS OL en t'entraînant</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='13' fill='none' stroke='%23d9b26f' stroke-width='3'/%3E%3Ccircle cx='16' cy='16' r='5' fill='%23d9b26f'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-<main>
+
+<header class="entete">
+  <a class="logo" href="index.html" aria-label="Opticonversion, accueil">
+    <svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="13" fill="none" stroke="#d9b26f" stroke-width="2.5"/><circle cx="16" cy="16" r="5.5" fill="#d9b26f"/><circle cx="18.5" cy="13.5" r="1.6" fill="#0b0d12"/></svg>
+    <span>Opticonversion</span>
+  </a>
   <nav>
     <a href="index.html" class="actif">Accueil</a>
-    <a href="calculateurs.html">Calculateurs</a>
     <a href="qcm.html">QCM</a>
+    <a href="calculateurs.html">Calculs</a>
   </nav>
+</header>
 
-  <p class="marque">OPTICONVERSION</p>
-  <h1>Révise l'optique en t'entraînant.</h1>
-  <p class="accroche">QCM corrigés et calculateurs pour les étudiants en BTS OL et en licence d'optique. Gratuit, sans inscription.</p>
-
-  <div class="cartes">
-    <a class="carte" href="qcm.html">
-      <h2>QCM</h2>
-      <p>Classés par épreuve du BTS OL, sur ce qui tombe le plus souvent. <span id="nb-questions">Des dizaines de</span> questions, chaque réponse est expliquée.</p>
-      <span class="lien">S'entraîner →</span>
-    </a>
-    <a class="carte" href="calculateurs.html">
-      <h2>Calculateurs</h2>
-      <p>Transposition, compensation de distance verre-œil, règle de Prentice. Avec le détail du calcul pour comprendre.</p>
-      <span class="lien">Calculer →</span>
-    </a>
+<main>
+  <div class="hero">
+    <p class="marque apparait">BTS Opticien-Lunetier</p>
+    <h1 class="apparait" style="--d:1">Révise l'optique <em>en t'entraînant.</em></h1>
+    <p class="accroche apparait" style="--d:2">Des QCM par épreuve, construits à partir de ce qui tombe vraiment aux sujets officiels. Chaque réponse est corrigée et expliquée. Gratuit, sans inscription.</p>
+    <div class="actions apparait" style="--d:3">
+      <a class="bouton" href="qcm.html">Commencer un QCM →</a>
+      <a class="bouton secondaire" href="calculateurs.html">Calculateurs</a>
+    </div>
   </div>
 
-  <ul class="points">
-    <li><strong>Fait par un opticien</strong><span>Diplômé, Master Expert de la vision. Le contenu suit le programme de l'optique-lunetterie.</span></li>
-    <li><strong>Pensé pour comprendre</strong><span>Pas juste la bonne réponse : le raisonnement et la formule, à chaque fois.</span></li>
-    <li><strong>De nouvelles questions régulièrement</strong><span>La banque de questions s'agrandit chaque semaine.</span></li>
-  </ul>
+  <div class="chiffres apparait" style="--d:4">
+    <div class="chiffre"><b id="nb-questions">200</b><span>questions</span></div>
+    <div class="chiffre"><b id="nb-epreuves">5</b><span>épreuves</span></div>
+    <div class="chiffre"><b>2016–24</b><span>sujets analysés</span></div>
+  </div>
 
-  <footer>© 2026 Opticonversion · Outil de révision, ne remplace pas un cours ni un avis professionnel.</footer>
+  <div class="titre-section apparait" style="--d:5">
+    <h2>Choisis ton épreuve</h2>
+    <a href="qcm.html">Tout voir →</a>
+  </div>
+  <div class="epreuves" id="liste-epreuves"></div>
+
+  <a class="carte carte-calc apparait" style="--d:8" href="calculateurs.html">
+    <div>
+      <h2>Calculateurs d'optique</h2>
+      <p>Transposition, distance verre-œil, règle de Prentice. Avec le détail du calcul.</p>
+    </div>
+    <span class="fleche">→</span>
+  </a>
+
+  <ul class="points">
+    <li class="apparait" style="--d:9"><span class="icone">◎</span><div><strong>Fait par un opticien</strong><span>Diplômé, Master Expert de la vision. Le contenu suit le programme du BTS OL.</span></div></li>
+    <li class="apparait" style="--d:10"><span class="icone">✦</span><div><strong>Basé sur les vrais sujets</strong><span>Chaque question indique la session du BTS où ce type de question est tombé.</span></div></li>
+    <li class="apparait" style="--d:11"><span class="icone">↻</span><div><strong>Pensé pour comprendre</strong><span>Pas juste la bonne réponse : le raisonnement et la formule, à chaque fois.</span></div></li>
+  </ul>
 </main>
 
-<!-- On charge la banque de questions juste pour afficher leur nombre exact -->
+<footer>© 2026 Opticonversion · Outil de révision, ne remplace pas un cours ni un avis professionnel.</footer>
+
+<!-- On charge les épreuves et les questions pour afficher les cartes et les chiffres exacts -->
 <script src="epreuves.js"></script>
 <script src="questions-U41.js"></script>
 <script src="questions-U42.js"></script>
@@ -115,6 +78,22 @@
 <script>
   if (typeof QUESTIONS !== "undefined") {
     document.getElementById("nb-questions").textContent = QUESTIONS.length;
+    document.getElementById("nb-epreuves").textContent = EPREUVES.length;
+
+    // Une carte par épreuve, qui ouvre directement son QCM
+    const liste = document.getElementById("liste-epreuves");
+    EPREUVES.forEach((e, i) => {
+      const nb = QUESTIONS.filter(q => q.epreuve === e.code).length;
+      const a = document.createElement("a");
+      a.className = "epreuve apparait";
+      a.style.setProperty("--d", 6 + i * 0.5);
+      a.href = "qcm.html#" + e.code;
+      a.innerHTML = '<span class="code"></span><span class="nom"></span><span class="info"></span>';
+      a.querySelector(".code").textContent = e.court || e.code;
+      a.querySelector(".nom").textContent = e.nom;
+      a.querySelector(".info").textContent = nb + " questions · " + e.detail;
+      liste.appendChild(a);
+    });
   }
 </script>
 </body>

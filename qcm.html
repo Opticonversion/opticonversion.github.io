@@ -5,129 +5,24 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="QCM du BTS Opticien-Lunetier classés par épreuve : analyse de la vision, optique géométrique et physique, ETSO, mathématiques. Corrigés et expliqués.">
 <title>QCM BTS OL par épreuve · Opticonversion</title>
-<style>
-  :root {
-    --fond: #f6f7f9;
-    --carte: #ffffff;
-    --texte: #1b1f24;
-    --doux: #5c6673;
-    --accent: #1f6feb;
-    --bord: #d9dee5;
-    --vert: #1a7f37;
-    --vert-fond: #e6f4ea;
-    --rouge: #cf222e;
-    --rouge-fond: #fdecea;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --fond: #0f1216;
-      --carte: #181c22;
-      --texte: #e6e9ed;
-      --doux: #9aa4b1;
-      --accent: #5b9bff;
-      --bord: #2a313a;
-      --vert: #4ac26b;
-      --vert-fond: #12261a;
-      --rouge: #ff7b72;
-      --rouge-fond: #2d1517;
-    }
-  }
-  * { box-sizing: border-box; }
-  [hidden] { display: none !important; }
-  body {
-    margin: 0;
-    background: var(--fond);
-    color: var(--texte);
-    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
-    line-height: 1.5;
-  }
-  main { max-width: 720px; margin: 0 auto; padding: 24px 16px 64px; }
-  nav { display: flex; gap: 16px; margin-bottom: 20px; font-size: 0.95rem; }
-  nav a { color: var(--accent); text-decoration: none; }
-  nav a.actif { color: var(--texte); font-weight: 600; }
-  h1 { font-size: 1.6rem; margin: 0 0 4px; }
-  .sous-titre { color: var(--doux); margin: 0 0 24px; }
-  section {
-    background: var(--carte);
-    border: 1px solid var(--bord);
-    border-radius: 12px;
-    padding: 20px;
-  }
-
-  /* --- Choix de l'épreuve --- */
-  .epreuves { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
-  .epreuve {
-    text-align: left;
-    background: var(--carte);
-    border: 1px solid var(--bord);
-    border-radius: 12px;
-    padding: 16px;
-    color: var(--texte);
-    font: inherit;
-    cursor: pointer;
-  }
-  .epreuve:hover:not(:disabled) { border-color: var(--accent); }
-  .epreuve:disabled { cursor: default; opacity: 0.55; }
-  .epreuve .code { color: var(--accent); font-weight: 700; font-size: 0.85rem; }
-  .epreuve .nom { display: block; font-weight: 600; margin: 2px 0 4px; }
-  .epreuve .info { color: var(--doux); font-size: 0.85rem; }
-  .retour { background: none; border: none; color: var(--accent); font: inherit; cursor: pointer; padding: 0; margin-bottom: 12px; }
-
-  /* --- Thèmes --- */
-  .themes { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
-  .theme {
-    padding: 6px 14px;
-    border-radius: 999px;
-    border: 1px solid var(--bord);
-    background: var(--carte);
-    color: var(--texte);
-    cursor: pointer;
-    font-size: 0.9rem;
-  }
-  .theme.actif { background: var(--accent); border-color: var(--accent); color: #fff; }
-
-  /* --- Questions --- */
-  .progression { color: var(--doux); font-size: 0.85rem; margin-bottom: 8px; }
-  .enonce { font-size: 1.15rem; font-weight: 600; margin: 0 0 16px; }
-  .choix { display: flex; flex-direction: column; gap: 10px; }
-  .choix button {
-    text-align: left;
-    padding: 12px 14px;
-    font-size: 1rem;
-    border-radius: 8px;
-    border: 1px solid var(--bord);
-    background: var(--fond);
-    color: var(--texte);
-    cursor: pointer;
-  }
-  .choix button:hover:not(:disabled) { border-color: var(--accent); }
-  .choix button:disabled { cursor: default; }
-  .choix button.juste { border-color: var(--vert); background: var(--vert-fond); }
-  .choix button.faux { border-color: var(--rouge); background: var(--rouge-fond); }
-  .explication { margin-top: 16px; padding: 12px 14px; border-radius: 8px; background: var(--fond); }
-  .bouton {
-    margin-top: 16px;
-    padding: 10px 18px;
-    font-size: 1rem;
-    border: none;
-    border-radius: 8px;
-    background: var(--accent);
-    color: #fff;
-    cursor: pointer;
-  }
-  .score { font-size: 2rem; font-weight: 700; margin: 0; }
-  .erreurs li { margin-bottom: 10px; }
-  .doux { color: var(--doux); }
-</style>
+<meta name="theme-color" content="#0b0d12">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='13' fill='none' stroke='%23d9b26f' stroke-width='3'/%3E%3Ccircle cx='16' cy='16' r='5' fill='%23d9b26f'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-<main>
+<header class="entete">
+  <a class="logo" href="index.html" aria-label="Opticonversion, accueil">
+    <svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="13" fill="none" stroke="#d9b26f" stroke-width="2.5"/><circle cx="16" cy="16" r="5.5" fill="#d9b26f"/><circle cx="18.5" cy="13.5" r="1.6" fill="#0b0d12"/></svg>
+    <span>Opticonversion</span>
+  </a>
   <nav>
     <a href="index.html">Accueil</a>
-    <a href="calculateurs.html">Calculateurs</a>
     <a href="qcm.html" class="actif">QCM</a>
+    <a href="calculateurs.html">Calculs</a>
   </nav>
-  <h1 id="titre">QCM du BTS OL</h1>
+</header>
+<main>
+  <h1 id="titre" class="apparait">QCM du BTS OL</h1>
   <p class="sous-titre" id="sous-titre">Choisis une épreuve. Les questions reprennent ce qui tombe le plus souvent à l'examen.</p>
 
   <div id="ecran-epreuves" class="epreuves"></div>
@@ -239,26 +134,45 @@
 
   function afficherQuestion() {
     const q = serie[numero];
+    const pourcent = Math.round((numero / serie.length) * 100);
+    let pastilleSession = "";
+    if (q.session) {
+      pastilleSession = q.session === "complément"
+        ? '<span class="pastille">Complément</span>'
+        : '<span class="pastille bts">Type BTS ' + q.session + "</span>";
+    }
     zone.innerHTML =
-      '<div class="progression">Question ' + (numero + 1) + " / " + serie.length +
-      " · " + q.theme +
-      (q.session ? " · " + (q.session === "complément" ? "complément" : "type BTS " + q.session) : "") +
-      " · Score : " + score + "</div>" +
+      '<div class="barre"><div class="barre-remplie" style="width:' + pourcent + '%"></div></div>' +
+      '<div class="progression"><span>Question ' + (numero + 1) + " / " + serie.length + "</span>" +
+      '<span class="pastille"></span>' + pastilleSession +
+      "<span>Score : " + score + "</span></div>" +
       '<p class="enonce"></p><div class="choix"></div>';
+    zone.querySelector(".progression .pastille").textContent = q.theme;
     zone.querySelector(".enonce").textContent = q.question;
 
     const blocChoix = zone.querySelector(".choix");
-    q.reponses.forEach(r => {
+    q.reponses.forEach((r, i) => {
       const b = document.createElement("button");
       b.textContent = r.texte;
+      b.dataset.lettre = "ABCD"[i];
       b.onclick = () => repondre(r, b);
       blocChoix.appendChild(b);
     });
+    rejouerAnimation(zone);
+  }
+
+  // Relance l'animation d'apparition (petit glissement) sur un élément
+  function rejouerAnimation(el) {
+    el.classList.remove("apparait");
+    void el.offsetWidth;
+    el.classList.add("apparait");
   }
 
   function repondre(reponse, boutonClique) {
     const q = serie[numero];
-    zone.querySelectorAll(".choix button").forEach((b, i) => {
+    const blocChoix = zone.querySelector(".choix");
+    blocChoix.classList.add("repondu");
+    blocChoix.querySelectorAll("button").forEach((b, i) => {
       b.disabled = true;
       if (q.reponses[i].juste) b.classList.add("juste");
     });
@@ -266,9 +180,14 @@
     if (reponse.juste) score++;
     else { boutonClique.classList.add("faux"); erreurs.push(q); }
 
+    // La barre avance dès qu'on a répondu
+    zone.querySelector(".barre-remplie").style.width = Math.round(((numero + 1) / serie.length) * 100) + "%";
+
     const expl = document.createElement("div");
-    expl.className = "explication";
-    expl.textContent = (reponse.juste ? "✅ Bonne réponse. " : "❌ Raté. ") + q.explication;
+    expl.className = "explication " + (reponse.juste ? "bien" : "mal");
+    expl.innerHTML = "<strong></strong><span></span>";
+    expl.querySelector("strong").textContent = reponse.juste ? "Bonne réponse" : "Pas tout à fait";
+    expl.querySelector("span").textContent = q.explication;
     zone.appendChild(expl);
 
     const suivant = document.createElement("button");
@@ -278,19 +197,38 @@
       numero++;
       if (numero < serie.length) afficherQuestion();
       else afficherBilan();
+      window.scrollTo({ top: 0, behavior: "smooth" });
     };
     zone.appendChild(suivant);
+    suivant.focus({ preventScroll: true });
   }
 
   function afficherBilan() {
     const pourcent = Math.round((score / serie.length) * 100);
-    let message = "Continue, ça va venir.";
-    if (pourcent >= 80) message = "Excellent, tu maîtrises.";
-    else if (pourcent >= 50) message = "Pas mal, revois les erreurs ci-dessous.";
+    let message = "Continue, ça va venir. Revois les points ci-dessous.";
+    if (pourcent >= 80) message = "Excellent, tu maîtrises cette épreuve.";
+    else if (pourcent >= 50) message = "Pas mal ! Revois les erreurs ci-dessous.";
 
     zone.innerHTML =
-      '<p class="score">' + score + " / " + serie.length + " (" + pourcent + " %)</p>" +
-      '<p class="doux">' + message + "</p>";
+      '<div class="bilan">' +
+      '<div class="anneau"><div class="anneau-int"><p class="score">0 %<small>' + score + " / " + serie.length + "</small></p></div></div>" +
+      '<p class="doux"></p></div>';
+    zone.querySelector(".bilan .doux").textContent = message;
+    rejouerAnimation(zone);
+
+    // L'anneau se remplit et le pourcentage monte petit à petit
+    const anneau = zone.querySelector(".anneau");
+    const texte = zone.querySelector(".score");
+    const debut = performance.now();
+    const duree = 900;
+    function etape(t) {
+      const avance = Math.min(1, (t - debut) / duree);
+      const valeur = Math.round(pourcent * (1 - Math.pow(1 - avance, 3)));
+      anneau.style.setProperty("--p", valeur);
+      texte.firstChild.textContent = valeur + " %";
+      if (avance < 1) requestAnimationFrame(etape);
+    }
+    requestAnimationFrame(etape);
 
     if (erreurs.length > 0) {
       const titre = document.createElement("h3");
