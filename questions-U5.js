@@ -14,305 +14,305 @@
 //
 //  Règles : calculatrice interdite à l'examen → chiffres qui tombent juste.
 //  Énoncés et chiffres à nous : ne jamais recopier un sujet ou un corrigé.
+//  Normes vérifiées sur les propositions de corrigé 2020, 2022, 2023, 2024
+//  et sur la « Synthèse 2024 » de la commission (éduscol STI).
 // ==============================================================
 
 QUESTIONS.push(
 
-
-
   // ---------- Test de Worth (tombé 4 années sur 4) ----------
   {
-    epreuve: "U5", theme: "Worth",
+    epreuve: "U5", theme: "Worth", session: "2024",
     question: "Test de Worth, filtre rouge sur l'OD, filtre vert sur l'OG. Le sujet ne voit que 2 symboles rouges. Conclusion ?",
     choix: ["Neutralisation de l'OG", "Neutralisation de l'OD", "Diplopie", "Vision binoculaire normale"],
     bonne: 0,
-    explication: "Seul l'œil qui porte le filtre rouge (OD) perçoit : il voit le symbole rouge et le symbole blanc, qui lui paraît rouge. Rien n'arrive de l'OG, qui est neutralisé."
+    explication: "Seul l'œil au filtre rouge (OD) perçoit : il voit son marqueur monoculaire rouge et l'élément fusionnel blanc, qui lui paraît rouge. Les marqueurs verts de l'OG manquent : pas de vision simultanée (1er degré), donc pas de fusion (2e degré). L'OG est neutralisé."
   },
   {
-    epreuve: "U5", theme: "Worth",
+    epreuve: "U5", theme: "Worth", session: "2023",
     question: "Test de Worth, filtre rouge sur l'OD, filtre vert sur l'OG. Le sujet ne voit que 3 symboles verts. Conclusion ?",
     choix: ["Neutralisation de l'OG", "Neutralisation de l'OD", "Diplopie croisée", "Dominance de l'OD"],
     bonne: 1,
-    explication: "Seul l'œil au filtre vert (OG) perçoit : les 2 symboles verts plus le blanc, vu vert. L'OD est neutralisé."
+    explication: "Seul l'œil au filtre vert (OG) perçoit : ses 2 marqueurs verts plus l'élément fusionnel blanc, vu vert (le filtre ne laisse passer que sa couleur). L'OD est neutralisé. Piège classique : l'élément fusionnel prend toujours la couleur du filtre de l'œil qui voit."
   },
   {
-    epreuve: "U5", theme: "Worth",
+    epreuve: "U5", theme: "Worth", session: "2023",
     question: "Au test de Worth, le sujet voit 5 symboles. Que met-on en évidence ?",
-    choix: ["Une neutralisation", "Une diplopie (absence de fusion)", "Une vision binoculaire normale", "Une amblyopie"],
+    choix: ["Une neutralisation", "Une diplopie : vision simultanée présente, mais pas de fusion", "Une vision binoculaire normale", "Une amblyopie"],
     bonne: 1,
-    explication: "2 rouges + 3 verts = les deux yeux voient, mais les images ne sont pas fusionnées : c'est une diplopie."
+    explication: "Les marqueurs des deux yeux sont vus : le 1er degré (vision simultanée) est présent. L'élément fusionnel est vu double : le 2e degré (fusion) manque. Le sens de la diplopie (homonyme ou croisée) indique ensuite la phorie associée."
   },
   {
-    epreuve: "U5", theme: "Worth",
-    question: "Filtre rouge sur l'OD. Le sujet voit 4 symboles, le symbole du bas lui paraît rosé ou rouge. Conclusion ?",
+    epreuve: "U5", theme: "Worth", session: "2022",
+    question: "Filtre rouge sur l'OD. Le sujet voit 4 symboles, l'élément fusionnel lui paraît rosé. Conclusion ?",
     choix: ["Neutralisation de l'OG", "Diplopie homonyme", "Vision binoculaire avec dominance de l'OD", "Vision binoculaire avec dominance de l'OG"],
     bonne: 2,
-    explication: "4 symboles = fusion. Le symbole blanc prend la couleur de l'œil dominant : rouge = l'œil au filtre rouge, l'OD."
+    explication: "4 symboles = vision simultanée et fusion. L'élément fusionnel prend la couleur de l'œil dominant : rosé = l'œil au filtre rouge, l'OD."
   },
   {
-    epreuve: "U5", theme: "Worth",
-    question: "Filtre rouge sur l'OD. Le sujet voit 5 symboles, les rouges à DROITE des verts. Type de diplopie et déviation ?",
-    choix: ["Diplopie croisée, exodéviation", "Diplopie homonyme, ésodéviation", "Diplopie croisée, ésodéviation", "Diplopie homonyme, exodéviation"],
+    epreuve: "U5", theme: "Worth", session: "2020",
+    question: "Filtre rouge sur l'OD. Le sujet voit 5 symboles, les rouges à DROITE des verts. Type de diplopie et phorie associée ?",
+    choix: ["Diplopie croisée, exophorie associée", "Diplopie homonyme, ésophorie associée", "Diplopie croisée, ésophorie associée", "Diplopie homonyme, exophorie associée"],
     bonne: 1,
-    explication: "L'image de l'OD (rouge) est du côté de l'OD (à droite) : diplopie homonyme, qui correspond à une ésodéviation. Croisée = exo."
+    explication: "L'image de l'OD (rouge) est du côté de l'OD (à droite) : diplopie homonyme. Loi de Desmarres : homonyme = éso, croisée = exo. C'est donc une ésophorie associée."
   },
 
   // ---------- Masquage (cover test) ----------
   {
-    epreuve: "U5", theme: "Masquage et phories",
+    epreuve: "U5", theme: "Masquage et phories", session: "2024",
     question: "Au masquage unilatéral, aucun mouvement au masquage. Au DÉMASQUAGE, l'œil fait un mouvement temporo-nasal. Conclusion ?",
     choix: ["Exophorie", "Ésophorie", "Exotropie", "Ésotropie"],
     bonne: 0,
-    explication: "Mouvement au démasquage = phorie. L'œil revient vers le nez (temporo-nasal) : sous le cache, il était parti vers l'extérieur. C'est une exophorie."
+    explication: "Aucun mouvement au masquage = pas de tropie. Mouvement au démasquage = phorie dissociée (supérieure à 3 Δ, sinon on ne la voit pas). L'œil revient vers le nez (temporo-nasal) : sous le cache, il était parti vers l'extérieur. C'est une exophorie."
   },
   {
-    epreuve: "U5", theme: "Masquage et phories",
+    epreuve: "U5", theme: "Masquage et phories", session: "2020",
     question: "On masque l'OD : l'OG non masqué fait un mouvement naso-temporal pour prendre la fixation. Conclusion ?",
     choix: ["Ésophorie OG", "Ésotropie OG", "Exotropie OG", "Exophorie OG"],
     bonne: 1,
-    explication: "L'œil NON masqué bouge : il ne fixait pas, la déviation est manifeste (tropie). Il part vers la tempe pour fixer : il était dévié vers le nez. C'est une ésotropie de l'OG."
+    explication: "Au masquage, si l'œil NON masqué bouge, il ne fixait pas : la déviation est manifeste (tropie). Il part vers la tempe pour fixer : il était dévié vers le nez. C'est une ésotropie (strabisme convergent) de l'OG."
   },
   {
-    epreuve: "U5", theme: "Masquage et phories",
-    question: "Quelle phorie horizontale est considérée comme « physiologique » en vision de près ?",
-    choix: ["Une légère ésophorie", "Une légère exophorie (environ 3 Δ)", "Une orthophorie stricte", "Une exophorie de 15 Δ"],
+    epreuve: "U5", theme: "Masquage et phories", session: "2024",
+    question: "Normes de phorie dissociée horizontale (méthode de von Graefe) : quelle est la valeur attendue en vision de près, à 40 cm ?",
+    choix: ["Orthophorie à 1 Δ d'exophorie", "Exophorie de 4 à 6 Δ", "Ésophorie de 4 à 6 Δ", "Exophorie de 15 Δ"],
     bonne: 1,
-    explication: "Les moyennes statistiques donnent une phorie de loin proche de 0 (légère exo) et une légère exophorie de près, autour de 3 Δ."
+    explication: "Normes du BTS : en VL, orthophorie à 1 Δ d'exophorie ; en VP (40 cm), exophorie de 4 à 6 Δ ; dans le plan vertical, orthophorie. Le passage VL → VP donne donc une prise d'exophorie de 4 à 6 Δ (jeu phorique)."
   },
 
   // ---------- Maddox ----------
   {
-    epreuve: "U5", theme: "Masquage et phories",
-    question: "Un cylindre de Maddox est placé devant l'OD avec ses cylindres HORIZONTAUX. Le sujet voit :",
+    epreuve: "U5", theme: "Masquage et phories", session: "2024",
+    question: "Un cylindre de Maddox est placé devant l'OD avec ses stries HORIZONTALES. Le sujet voit :",
     choix: ["Une barre horizontale, pour mesurer la phorie verticale", "Une barre verticale, pour mesurer la phorie horizontale", "Un point lumineux rouge", "Deux points lumineux"],
     bonne: 1,
-    explication: "La barre vue est perpendiculaire aux cylindres. Cylindres horizontaux → barre verticale → on mesure le décalage horizontal, donc la phorie horizontale."
+    explication: "La barre vue est perpendiculaire aux stries. Stries horizontales → barre verticale → on mesure le décalage horizontal, donc la phorie horizontale. La dissociation est totale et sensorielle (les deux yeux ne voient pas la même image)."
   },
   {
-    epreuve: "U5", theme: "Masquage et phories",
+    epreuve: "U5", theme: "Masquage et phories", session: "2024",
     question: "Maddox sur l'OD (barre verticale). Le sujet voit la barre rouge à GAUCHE du point lumineux. Conclusion ?",
     choix: ["Ésophorie", "Exophorie", "Orthophorie", "Hyperphorie droite"],
     bonne: 1,
-    explication: "L'image de l'OD est vue à gauche, du côté opposé à l'OD : diplopie croisée, qui correspond à une exophorie."
+    explication: "L'image de l'OD est vue à gauche, du côté opposé à l'OD : diplopie croisée. En position passive, les lignes de regard se croisent en arrière du point de fixation : c'est une exophorie."
   },
   {
-    epreuve: "U5", theme: "Masquage et phories",
-    question: "En VP à 40 cm, la barre de Maddox est vue à 2 cm du point lumineux. Valeur de la phorie ?",
-    choix: ["0,8 Δ", "2 Δ", "5 Δ", "8 Δ"],
+    epreuve: "U5", theme: "Masquage et phories", session: "2024",
+    question: "Test placé à 50 cm : la barre de Maddox est vue décalée de 3 cm par rapport au point lumineux. Valeur de la phorie ?",
+    choix: ["1,5 Δ", "3 Δ", "6 Δ", "15 Δ"],
     bonne: 2,
-    explication: "Une dioptrie prismatique = 1 cm de déviation à 1 m. P = 2 cm ÷ 0,40 m = 5 Δ."
+    explication: "1 Δ = 1 cm de déviation à 1 m. P (Δ) = décalage (cm) ÷ distance (m) = 3 ÷ 0,50 = 6 Δ."
   },
   {
-    epreuve: "U5", theme: "Masquage et phories",
-    question: "Pour réaligner la barre de Maddox chez un sujet exophore, on place un prisme :",
+    epreuve: "U5", theme: "Masquage et phories", session: "2024",
+    question: "Pour réaligner la barre de Maddox chez un sujet exophore, le prisme de réalignement est placé :",
     choix: ["Base interne (nasale)", "Base externe (temporale)", "Base supérieure", "Base inférieure"],
     bonne: 0,
-    explication: "Exophorie → prisme base interne ; ésophorie → base externe. Le prisme dévie l'image vers son sommet, dans le sens de la déviation de l'œil."
+    explication: "Exophorie → prisme base interne ; ésophorie → base externe. Le prisme dévie la lumière vers sa base : son sommet est orienté du côté où l'œil est parti, il ramène l'image dans la direction de la ligne de regard passive."
   },
   {
-    epreuve: "U5", theme: "Masquage et phories",
-    question: "Selon le critère de Sheard, la réserve fusionnelle compensatrice doit être au moins :",
+    epreuve: "U5", theme: "Masquage et phories", session: "2022",
+    question: "Selon le critère de Sheard, la vision est plutôt confortable si la réserve opposée à la phorie est au moins :",
     choix: ["Égale à la phorie", "Le double de la phorie", "Le triple de la phorie", "La moitié de la phorie"],
     bonne: 1,
-    explication: "Sheard : réserve compensatrice ≥ 2 × phorie. Pour une exophorie, la réserve compensatrice est la réserve convergente (base externe)."
+    explication: "Sheard : réserve opposée à la phorie ≥ 2 × phorie. Pour une exophorie, c'est la réserve en convergence (prismes base externe) ; pour une ésophorie, la réserve en divergence (base interne). On prend le point de flou, ou le point de bris s'il n'y a pas de flou."
   },
 
   // ---------- Anisométropie, aniséiconie, effets prismatiques ----------
   {
-    epreuve: "U5", theme: "Anisométropie",
-    question: "OD −1,00 et OG −5,00, verres à 15 mm de l'œil. Estimation de l'aniséiconie en lunettes ?",
-    choix: ["Environ 1,5 %", "Environ 4 %", "Environ 6 %", "Environ 15 %"],
+    epreuve: "U5", theme: "Anisométropie", session: "2024",
+    question: "Anisométropie de puissance : OD −0,50 et OG −5,50 (sphériques), verres à 14 mm de l'œil. Estimation de l'aniséiconie en lunettes ?",
+    choix: ["Environ 1,4 %", "Environ 5 %", "Environ 7 %", "Environ 14 %"],
     bonne: 2,
-    explication: "Aniséiconie ≈ d × différence de puissance = 0,015 × 4 = 0,06, soit environ 6 %. Au-delà de quelques %, la fusion peut devenir difficile."
+    explication: "Anisométropie de puissance : les deux yeux ont la même longueur, l'aniséiconie axile est nulle. Aniséiconie induite ≈ distance verre-œil (cm) × différence des verres = 1,4 × 5 = 7 %, en faveur de l'OD (le moins myope voit plus gros). Repères : moins de 3 % = pas de gêne ; 3 à 10 % = gêne possible de la fusion ; plus de 10 % = fusion le plus souvent impossible."
   },
   {
-    epreuve: "U5", theme: "Anisométropie",
+    epreuve: "U5", theme: "Anisométropie", session: "2024",
     question: "Pour une anisométropie de PUISSANCE (réfractive), quel équipement réduit le plus l'aniséiconie ?",
     choix: ["Des lunettes à 15 mm", "Des lentilles de contact", "Des lunettes à 25 mm", "Aucun équipement"],
     bonne: 1,
-    explication: "Anisométropie de puissance : les lentilles, placées près du plan principal de l'œil, limitent la différence de grandissement. Pour une anisométropie AXIALE, la loi de Knapp favorise les lunettes placées au foyer objet de l'œil."
+    explication: "L'aniséiconie induite dépend de la distance compensation-œil. En lentilles, cette distance passe d'environ 15 mm à moins de 2 mm : l'aniséiconie devient beaucoup plus faible. (Pour une anisométropie AXIALE, la loi de Knapp favorise au contraire les lunettes placées au foyer objet de l'œil.)"
   },
   {
-    epreuve: "U5", theme: "Anisométropie",
-    question: "OD −1,00 et OG −5,00 (sphériques). Le sujet regarde 1 cm au-dessus des centres optiques. Effet prismatique vertical différentiel ?",
-    choix: ["1 Δ", "4 Δ", "5 Δ", "6 Δ"],
+    epreuve: "U5", theme: "Anisométropie", session: "2024",
+    question: "OD +1,00 et OG +4,00 (sphériques). En lecture, le regard passe 1 cm sous les centres optiques. Effet prismatique vertical différentiel ?",
+    choix: ["1 Δ", "3 Δ", "4 Δ", "5 Δ"],
     bonne: 1,
-    explication: "Prentice : OD 1 × 1 = 1 Δ, OG 1 × 5 = 5 Δ, les deux bases supérieures (verres divergents). Différentiel = 5 − 1 = 4 Δ : c'est ce qui peut faire voir double en regard vers le haut."
+    explication: "Prentice : P = d (cm) × |D|. OD : 1 × 1 = 1 Δ ; OG : 1 × 4 = 4 Δ. Verres convergents, regard sous le centre optique : base en haut pour les deux. Différentiel = 4 − 1 = 3 Δ base en haut sur l'OG. Les réserves fusionnelles verticales sont faibles (bris vers 3 Δ) : risque de vision double."
   },
   {
-    epreuve: "U5", theme: "Anisométropie",
+    epreuve: "U5", theme: "Anisométropie", session: "2024",
     question: "Pourquoi un anisométrope équipé en lentilles ne voit-il plus double quand il regarde vers le haut ?",
     choix: ["Les lentilles corrigent la phorie", "La lentille suit l'œil : la ligne de regard reste centrée, pas d'effet prismatique différentiel", "Les lentilles augmentent les réserves fusionnelles", "Les lentilles suppriment l'anisométropie"],
     bonne: 1,
-    explication: "En lunettes, regarder hors du centre optique crée un prisme différent sur chaque œil. La lentille bouge avec l'œil : le regard passe toujours par son centre."
+    explication: "En lunettes, regarder hors du centre optique crée un prisme différent sur chaque œil, donc une phorie induite. La lentille suit le globe dans ses mouvements et reste centrée sur la cornée : pas d'effet prismatique, donc pas de phorie induite."
   },
   {
-    epreuve: "U5", theme: "Anisométropie",
+    epreuve: "U5", theme: "Anisométropie", session: "2023",
     question: "Un enfant anisométrope non corrigé développe une amblyopie fonctionnelle de l'œil le plus amétrope. Pourquoi ?",
-    choix: ["Une lésion de la rétine", "L'image floue de cet œil pendant la période sensible du développement visuel", "Un glaucome congénital", "Une cataracte"],
+    choix: ["Une lésion de la rétine", "L'image floue de cet œil pendant la période de maturation visuelle", "Un glaucome congénital", "Une cataracte"],
     bonne: 1,
-    explication: "Le cerveau privilégie l'image nette de l'autre œil. Sans correction pendant la période sensible (avant 7-8 ans environ), l'œil flou ne développe pas une acuité normale, sans lésion organique."
+    explication: "Amblyopie fonctionnelle = baisse d'acuité liée à la non-utilisation d'un œil pendant la période de maturation visuelle, sans lésion organique. Le cerveau privilégie l'image nette de l'autre œil. Si chaque œil est utilisé à son tour (un pour le loin, l'autre pour le près), l'amblyopie peut ne pas apparaître."
   },
 
   // ---------- Examen préliminaire ----------
   {
-    epreuve: "U5", theme: "Examen préliminaire",
-    question: "Compensation portée OD −1,00 (−0,50) ; autoréfractomètre OD −1,50 (−0,50). Sphère résiduelle attendue (en sphères équivalentes) ?",
-    choix: ["+0,50", "−0,50", "−0,25", "0,00"],
+    epreuve: "U5", theme: "Examen préliminaire", session: "2024",
+    question: "Compensation portée OD −2,00 (−1,00) ; autoréfractomètre OD −3,00 (−0,50). Réfraction complémentaire attendue (en sphères équivalentes), si l'autoréfractomètre était exact ?",
+    choix: ["+0,75", "−0,75", "−0,50", "−1,00"],
     bonne: 1,
-    explication: "ES portée = −1,00 + (−0,25) = −1,25. ES autoréfracto = −1,50 + (−0,25) = −1,75. Résiduel = −1,75 − (−1,25) = −0,50."
+    explication: "SE = S + C/2. Portée : −2,00 + (−0,50) = −2,50. Autoréfractomètre : −3,00 + (−0,25) = −3,25. RC = −3,25 − (−2,50) = −0,75. Attention : à l'autoréfractomètre, le sujet accommode souvent (accommodation instrumentale) et la myopie est surestimée. On vérifie avec les acuités."
   },
   {
-    epreuve: "U5", theme: "Examen préliminaire",
-    question: "Avec sa correction, un sujet lit 14/10. Avec +1,50 ajouté, il tombe à 2,5/10. Conclusion ?",
-    choix: ["Hypermétropie latente non corrigée", "Pas de sphère positive résiduelle notable : pas de sous-correction en positif", "Surcorrection en positif", "Astigmatisme non corrigé"],
-    bonne: 1,
-    explication: "Si le sujet était sous-corrigé en positif, le +1,50 le gênerait peu. Une forte chute d'acuité montre qu'il n'y a pas d'hypermétropie résiduelle importante."
+    epreuve: "U5", theme: "Examen préliminaire", session: "2020 et 2024",
+    question: "Avec sa compensation, un sujet lit 10/10. On ajoute +2,00 : son acuité tombe à 2/10. Sphère résiduelle estimée (test du verre convexe) ?",
+    choix: ["+0,75", "−0,75", "+1,25", "0,00"],
+    bonne: 0,
+    explication: "Règle de Swaine (valable pour une acuité ≤ 5/10) : brouillage ≈ 1 ÷ (4 × AV) = 1 ÷ (4 × 0,2) = 1,25 D. Sphère résiduelle = verre ajouté − brouillage = +2,00 − 1,25 = +0,75 D. Il reste donc une hypermétropie résiduelle : le sujet est sous-corrigé en positif."
   },
   {
-    epreuve: "U5", theme: "Examen préliminaire",
-    question: "Au cadran de Parent (sujet myopisé), la ligne 3h-9h est la plus nette. Axe du cylindre négatif compensateur ?",
+    epreuve: "U5", theme: "Examen préliminaire", session: "2024",
+    question: "Au cadran de Parent (sujet légèrement myopisé), la ligne 3h-9h est vue la plus noire. Axe du cylindre négatif compensateur ?",
     choix: ["30°", "90°", "180°", "120°"],
     bonne: 1,
-    explication: "Règle des 30 : plus petit chiffre de la ligne la plus nette × 30. 3 × 30 = 90°."
+    explication: "Sujet myopisé : la ligne la plus noire correspond à la focale arrière, la plus proche de la rétine. Elle est horizontale (0°-180°). L'axe du cylindre négatif est perpendiculaire à la direction vue la plus noire : 90°. À l'examen, le « calcul » avec les chiffres du cadran (×30) n'est pas accepté comme justification."
   },
   {
-    epreuve: "U5", theme: "Examen préliminaire",
-    question: "Pourquoi myopise-t-on le sujet avant le cadran de Parent ?",
-    choix: ["Pour mesurer l'acuité", "Pour placer les deux focales devant la rétine et empêcher l'accommodation", "Pour mesurer la phorie", "Pour tester la vision des couleurs"],
+    epreuve: "U5", theme: "Examen préliminaire", session: "2024",
+    question: "Pourquoi myopise-t-on légèrement le sujet avant le cadran de Parent ?",
+    choix: ["Pour mesurer l'acuité", "Pour placer les deux focales en avant de la rétine et empêcher l'accommodation de fausser le test", "Pour mesurer la phorie", "Pour tester la vision des couleurs"],
     bonne: 1,
-    explication: "Avec les deux focales en avant de la rétine, la ligne la plus nette correspond à la focale la plus proche de la rétine, et le sujet ne peut pas fausser le test en accommodant."
+    explication: "Avec une défocalisation en avant de la rétine, la ligne la plus noire correspond toujours à la focale arrière, et accommoder ne ferait qu'aggraver le flou : le sujet n'a pas intérêt à accommoder."
   },
   {
-    epreuve: "U5", theme: "Examen préliminaire",
-    question: "Un myope de −3,00 non compensé lit à 25 cm. Quelle accommodation met-il en jeu ?",
-    choix: ["0 D", "1 D", "3 D", "7 D"],
+    epreuve: "U5", theme: "Examen préliminaire", session: "2023",
+    question: "Un myope de −2,00 non compensé lit à 25 cm. Quelle accommodation met-il en jeu ?",
+    choix: ["0 D", "2 D", "4 D", "6 D"],
     bonne: 1,
-    explication: "Accommodation requise = 1/d + R = 4 + (−3) = 1 D. Son punctum remotum est à 33 cm : il accommode peu pour lire à 25 cm."
+    explication: "Acc = R − 1/HT = −2,00 − 1/(−0,25) = −2 + 4 = 2 D. Son punctum remotum est à 50 cm : il n'a que 2 D à fournir pour lire à 25 cm."
   },
   {
-    epreuve: "U5", theme: "Examen préliminaire",
-    question: "Un hypermétrope de +0,50 non compensé lit à 40 cm. Quelle accommodation met-il en jeu ?",
-    choix: ["2,00 D", "2,50 D", "3,00 D", "0,50 D"],
+    epreuve: "U5", theme: "Examen préliminaire", session: "2023",
+    question: "Un hypermétrope de +1,50 non compensé lit à 50 cm. Quelle accommodation met-il en jeu ?",
+    choix: ["2,00 D", "0,50 D", "3,50 D", "1,50 D"],
     bonne: 2,
-    explication: "1/0,40 = 2,50 D pour la distance, plus 0,50 D pour compenser son hypermétropie : 3,00 D."
+    explication: "Acc = R − 1/HT = +1,50 − 1/(−0,50) = 1,50 + 2,00 = 3,50 D : 2 D pour la distance, plus 1,50 D pour compenser son hypermétropie."
   },
 
   // ---------- Réfraction ----------
   {
-    epreuve: "U5", theme: "Réfraction",
+    epreuve: "U5", theme: "Réfraction", session: "2023",
     question: "Quelle est la formule sphéro-cylindrique d'un cylindre croisé (CCR) ±0,25 dont l'axe du cylindre négatif est à 90° ?",
     choix: ["+0,25 (−0,50) 90°", "−0,25 (+0,25) 90°", "0,00 (−0,25) 90°", "+0,50 (−0,25) 90°"],
     bonne: 0,
-    explication: "Le CCR ±0,25 a +0,25 sur un méridien et −0,25 sur l'autre : sphère +0,25, cylindre −0,50."
+    explication: "Le CCR (cylindre croisé par retournement) ±0,25 a +0,25 sur un méridien et −0,25 sur l'autre : sphère +0,25, cylindre −0,50, à l'axe du cylindre négatif."
   },
   {
-    epreuve: "U5", theme: "Réfraction",
+    epreuve: "U5", theme: "Réfraction", session: "2020",
     question: "Lors de la vérification de la puissance du cylindre, on ajoute −0,50 de cylindre. Comment ajuster la sphère ?",
     choix: ["Ajouter −0,25", "Ajouter +0,25", "Ajouter +0,50", "Ne rien changer"],
     bonne: 1,
-    explication: "On garde l'équivalent sphérique constant : −0,50 de cylindre fait −0,25 d'ES, qu'on compense par +0,25 de sphère."
+    explication: "On garde la sphère équivalente constante pour maintenir le cercle de moindre diffusion sur la rétine (acc = 0) : −0,50 de cylindre fait −0,25 de SE, qu'on compense par +0,25 de sphère."
   },
   {
-    epreuve: "U5", theme: "Réfraction",
-    question: "Au duochrome (rouge-vert), le patient voit plus net sur le rouge. Que faites-vous ?",
+    epreuve: "U5", theme: "Réfraction", session: "complément",
+    question: "Au test rouge-vert, le sujet voit plus net sur le rouge. Que faites-vous ?",
     choix: ["Ajouter −0,25 D", "Ajouter +0,25 D", "Tourner l'axe du cylindre", "Rien, l'équilibre est bon"],
     bonne: 0,
-    explication: "Moyen mnémotechnique « RAM » : Rouge → Ajouter du Moins."
+    explication: "Rouge plus net : l'image est en avant de la rétine (trop de positif). Moyen mnémotechnique « RAM » : Rouge → Ajouter du Moins."
   },
   {
-    epreuve: "U5", theme: "Réfraction",
-    question: "Les acuités des deux yeux sont très différentes (14/10 et 8/10). Quel test choisir pour l'équilibre bioculaire ?",
-    choix: ["Lignes de lettres dissociées", "Duochrome dissocié (rouge-vert polarisé)", "Cadran de Parent", "Test de Worth"],
+    epreuve: "U5", theme: "Réfraction", session: "2024",
+    question: "Client anisométrope, vision binoculaire fragile. Pour l'équilibre bioculaire, quel test préférer ?",
+    choix: ["Lignes de lettres dissociées par prisme", "Test rouge-vert polarisé", "Cadran de Parent", "Test de Worth"],
     bonne: 1,
-    explication: "Comparer la netteté de lettres suppose des acuités proches. Le duochrome compare le rouge et le vert pour chaque œil, et reste utilisable quand les acuités diffèrent."
+    explication: "Avec les lignes dissociées par prisme, la dissociation est totale : risque de neutralisation d'un œil, et l'anisométrope compare des images de tailles différentes. Avec le rouge-vert polarisé, la dissociation est partielle (favorise la vision binoculaire) et chaque œil juge sa propre mise au point, sans comparer les deux yeux."
   },
   {
-    epreuve: "U5", theme: "Réfraction",
+    epreuve: "U5", theme: "Réfraction", session: "2022",
     question: "Pourquoi utilise-t-on le brouillage en réfraction subjective ?",
     choix: ["Pour relâcher l'accommodation", "Pour mesurer l'astigmatisme", "Pour tester la vision des couleurs", "Pour stimuler la convergence"],
     bonne: 0,
-    explication: "En ajoutant du positif, l'image devient floue : le patient n'a plus intérêt à accommoder. Indispensable pour ne pas sous-corriger un hypermétrope."
+    explication: "En ajoutant du positif, l'image passe en avant de la rétine : accommoder ne ferait qu'augmenter le flou, le sujet relâche son accommodation. Indispensable pour ne pas sous-corriger un hypermétrope ni surcorriger un myope."
   },
 
   // ---------- Lentilles de contact ----------
   {
-    epreuve: "U5", theme: "Lentilles",
-    question: "Un rayon de courbure cornéen de 7,50 mm correspond à une puissance kératométrique de :",
+    epreuve: "U5", theme: "Lentilles", session: "complément",
+    question: "Un rayon de courbure cornéen de 7,50 mm correspond à une puissance lue au kératomètre de :",
     choix: ["40 D", "42 D", "45 D", "47,50 D"],
     bonne: 2,
-    explication: "K ≈ 337,5 / r (mm) = 337,5 / 7,5 = 45 D. À connaître sans calculatrice."
+    explication: "Avec l'indice d'étalonnage des kératomètres (1,3375) : K ≈ 337,5 / r (mm) = 337,5 / 7,5 = 45 D. À connaître sans calculatrice."
   },
   {
-    epreuve: "U5", theme: "Lentilles",
-    question: "Kératométrie : 7,90 mm à 0° et 7,70 mm à 90°. Astigmatisme cornéen ?",
-    choix: ["1,00 D direct", "1,00 D inverse", "0,50 D direct", "2,00 D inverse"],
+    epreuve: "U5", theme: "Lentilles", session: "2020 et 2023",
+    question: "Kératométrie : 7,75 mm à 0° et 7,65 mm à 90°. Astigmatisme cornéen (face avant) ?",
+    choix: ["0,60 D direct", "0,60 D inverse", "1,00 D direct", "0,25 D inverse"],
     bonne: 0,
-    explication: "Écart de 0,20 mm, et 0,05 mm ≈ 0,25 D, donc environ 1,00 D. Le méridien vertical (90°) est le plus cambré : astigmatisme direct (conforme à la règle)."
+    explication: "Toricité = 7,75 − 7,65 = 0,10 mm, soit environ 0,60 D (indice réel de la cornée ; un kératomètre affiche plutôt 0,50 D). Le méridien vertical (90°) a le plus petit rayon, il est le plus cambré : astigmatisme direct, compensé par plan (−0,60) 0°."
   },
   {
-    epreuve: "U5", theme: "Lentilles",
+    epreuve: "U5", theme: "Lentilles", session: "2023",
     question: "Un œil a 1,00 D d'astigmatisme cornéen direct mais aucun astigmatisme total. Son astigmatisme interne est :",
     choix: ["Nul", "1,00 D direct", "1,00 D inverse", "2,00 D direct"],
     bonne: 2,
-    explication: "Astigmatisme total = cornéen + interne. Pour que le total soit nul, l'interne compense exactement le cornéen : 1,00 D inverse."
+    explication: "Astigmatisme total = cornéen (+) interne. Pour un total nul, l'interne compense exactement le cornéen : 1,00 D inverse (compensé par plan (−1,00) 90°). C'est la situation physiologique : cornée directe, interne inverse."
   },
   {
-    epreuve: "U5", theme: "Lentilles",
-    question: "Quelle valeur minimale de Dk/e est retenue pour un port journalier sans œdème cornéen (critère de Holden et Mertz) ?",
-    choix: ["Environ 12", "Environ 24", "Environ 87", "Environ 150"],
-    bonne: 1,
-    explication: "Holden et Mertz : 24 pour le port journalier, 87 pour le port prolongé (nuit comprise)."
+    epreuve: "U5", theme: "Lentilles", session: "2023",
+    question: "Selon Harvitt et Bonanno, quelle transmissibilité minimale (Dk/e, en 10⁻⁹ unités Fatt) faut-il pour un port nocturne sans hypoxie ?",
+    choix: ["24", "35", "87", "125"],
+    bonne: 3,
+    explication: "Critère de Harvitt et Bonanno (1999), retenu au BTS : 35 pour le port journalier, 125 pour le port prolongé (nocturne). Les fortes valeurs de Dk/e correspondent aux silicone-hydrogels."
   },
   {
-    epreuve: "U5", theme: "Lentilles",
+    epreuve: "U5", theme: "Lentilles", session: "2020",
     question: "Citez les 3 couches du film lacrymal, de l'air vers la cornée.",
     choix: ["Lipidique, aqueuse, mucinique", "Aqueuse, lipidique, mucinique", "Mucinique, aqueuse, lipidique", "Lipidique, mucinique, aqueuse"],
     bonne: 0,
-    explication: "Lipidique en surface (limite l'évaporation), aqueuse au milieu, mucinique au contact de la cornée (mouillabilité). Le BUT évalue surtout la stabilité du film, liée à la couche lipidique."
+    explication: "Lipidique en surface (limite l'évaporation), aqueuse au milieu, mucinique au contact de la cornée (mouillabilité). La stabilité du film, évaluée par le BUT, dépend surtout de la couche lipidique."
   },
   {
-    epreuve: "U5", theme: "Lentilles",
-    question: "Un Break-Up Time (BUT) est considéré comme normal à partir d'environ :",
-    choix: ["3 secondes", "5 secondes", "10 secondes", "30 secondes"],
+    epreuve: "U5", theme: "Lentilles", session: "2024",
+    question: "Quelle est la norme du Break-Up Time (BUT) ?",
+    choix: ["3 à 5 secondes", "5 à 8 secondes", "10 à 20 secondes", "30 à 60 secondes"],
     bonne: 2,
-    explication: "Un BUT d'au moins 10 secondes est considéré comme normal. En dessous, le port de lentilles demande des précautions."
+    explication: "Le BUT évalue la qualité des larmes ; la norme est de 10 à 20 s. En dessous de 10 s, c'est une contre-indication aux lentilles souples hydrogel. La quantité de larmes s'évalue avec la hauteur de la rivière lacrymale (norme 0,2 à 0,4 mm)."
   },
   {
-    epreuve: "U5", theme: "Lentilles",
+    epreuve: "U5", theme: "Lentilles", session: "2020",
     question: "À la fluorescéine, une LRPG montre beaucoup de fluo en périphérie, très peu au centre, et bouge trop. L'adaptation est :",
     choix: ["Serrée", "Alignée", "Plate", "Parfaite"],
     bonne: 2,
-    explication: "Appui central (peu de fluo au centre) + forte mobilité = lentille plate. On resserre en diminuant le rayon de la face postérieure (Ro)."
+    explication: "Appui central (peu de fluo au centre) + forte mobilité = adaptation plate. On resserre en diminuant le rayon de la face arrière (ro)."
   },
   {
-    epreuve: "U5", theme: "Lentilles",
-    question: "On resserre une LRPG en diminuant son Ro de 0,10 mm. Le ménisque de larmes devient :",
-    choix: ["Plus positif d'environ +0,50 D", "Plus négatif d'environ −0,50 D", "Inchangé", "Plus positif d'environ +1,00 D"],
+    epreuve: "U5", theme: "Lentilles", session: "2020",
+    question: "On resserre une LRPG en diminuant son ro de 0,10 mm. Le ménisque de larmes devient :",
+    choix: ["Plus convergent d'environ +0,50 D", "Plus divergent d'environ −0,50 D", "Inchangé", "Plus convergent d'environ +1,00 D"],
     bonne: 0,
-    explication: "Une lentille plus cambrée crée un ménisque de larmes plus convergent : environ +0,25 D par 0,05 mm, soit +0,50 D. Il faut compenser avec −0,50 D sur la puissance de la lentille."
+    explication: "Une modification de 10/100 de mm du ro change la vergence du ménisque de larmes d'environ 0,50 D. Lentille plus cambrée = ménisque plus convexe (+0,50 D). On commande donc une lentille plus divergente de 0,50 D."
   },
 
   // ---------- Pathologie ----------
   {
-    epreuve: "U5", theme: "Pathologie",
+    epreuve: "U5", theme: "Pathologie", session: "2024",
     question: "La mesure de la pression intraoculaire (PIO) sert principalement au dépistage :",
     choix: ["De la cataracte", "Du glaucome", "De la DMLA", "Du kératocône"],
     bonne: 1,
-    explication: "Une PIO élevée est le principal facteur de risque du glaucome. Elle ne dépiste pas la cataracte."
+    explication: "Une PIO élevée est le principal facteur de risque du glaucome. La cataracte se dépiste à la lampe à fente (biomicroscope) par l'ophtalmologiste."
   },
   {
-    epreuve: "U5", theme: "Pathologie",
-    question: "Quelle est la plage habituelle d'une pression intraoculaire normale ?",
-    choix: ["2 à 8 mmHg", "10 à 21 mmHg", "25 à 35 mmHg", "40 à 50 mmHg"],
+    epreuve: "U5", theme: "Pathologie", session: "2023",
+    question: "Quelle est la valeur moyenne d'une PIO normale, et à partir de quand est-elle jugée trop forte ?",
+    choix: ["Environ 8 mmHg, trop forte au-delà de 12", "Environ 16 mmHg, trop forte au-delà de 21", "Environ 25 mmHg, trop forte au-delà de 35", "Environ 40 mmHg, trop forte au-delà de 50"],
     bonne: 1,
-    explication: "On considère une PIO normale entre environ 10 et 21 mmHg. Une valeur normale n'exclut pas un glaucome : d'autres examens complètent (champ visuel, fond d'œil)."
+    explication: "PIO moyenne d'environ 16 mmHg ; au-delà de 21 mmHg (pour une cornée d'épaisseur normale), elle est jugée trop forte. Une PIO normale n'exclut pas un glaucome : champ visuel et fond d'œil complètent. Des antécédents familiaux de glaucome à angle ouvert justifient la mesure."
   },
   {
-    epreuve: "U5", theme: "Pathologie",
+    epreuve: "U5", theme: "Pathologie", session: "complément",
     question: "Un patient de 70 ans devient plus myope et peut de nouveau lire sans lunettes. Cela évoque :",
     choix: ["Un glaucome", "Une cataracte nucléaire (myopie d'indice)", "Une DMLA", "Un décollement de rétine"],
     bonne: 1,
-    explication: "La cataracte nucléaire augmente l'indice du cristallin : l'œil devient plus myope. Autres signes : baisse progressive d'acuité, éblouissement, couleurs ternes."
+    explication: "La cataracte (opacification du cristallin) nucléaire augmente l'indice du cristallin : l'œil devient plus myope. Autres symptômes : baisse d'acuité, sensation de brouillard, photophobie (éblouissement), diplopie monoculaire, couleurs altérées."
   }
 );
