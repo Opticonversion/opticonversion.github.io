@@ -28,13 +28,32 @@
   <div id="ecran-epreuves" class="epreuves"></div>
 
   <div id="ecran-qcm" hidden>
-    <button class="retour" id="retour">← Toutes les épreuves</button>
-    <div class="themes" id="themes"></div>
-    <section id="zone"></section>
+    <div class="barre-outils">
+      <button class="retour" id="retour">← Toutes les épreuves</button>
+      <!-- Le choix de la vue : QCM seul, Shorts + QCM, ou Shorts seuls -->
+      <div class="vues" role="group" aria-label="Affichage">
+        <button data-vue="qcm">QCM</button>
+        <button data-vue="deux">Shorts + QCM</button>
+        <button data-vue="shorts">Shorts</button>
+      </div>
+    </div>
+
+    <div class="disposition vue-deux" id="disposition">
+      <aside class="colonne-shorts">
+        <div class="lecteur" id="lecteur" hidden></div>
+        <p class="titre-colonne">▶ Les Shorts</p>
+        <div class="liste-shorts" id="liste-shorts"></div>
+      </aside>
+      <div class="colonne-qcm">
+        <div class="themes" id="themes"></div>
+        <section id="zone"></section>
+      </div>
+    </div>
   </div>
 </main>
 
-<!-- On charge d'abord les questions, puis le moteur qui les affiche -->
+<!-- On charge d'abord les questions et les vidéos, puis le moteur qui les affiche -->
+<script src="videos.js"></script>
 <script src="epreuves.js"></script>
 <script src="questions-U41.js"></script>
 <script src="questions-U42.js"></script>
@@ -90,16 +109,29 @@
   }
 
   // ---------------- Écran 2 : le QCM d'une épreuve ----------------
-  function ouvrirEpreuve(code) {
+  function ouvrirEpreuve(code, theme) {
     const e = EPREUVES.find(x => x.code === code);
     if (!e || questionsDe(code).length === 0) { afficherEpreuves(); return; }
 
+    const themes = new Set(questionsDe(code).map(q => q.theme));
     epreuveChoisie = code;
-    themeChoisi = "Tous";
+    themeChoisi = theme && themes.has(theme) ? theme : "Tous";
     document.getElementById("ecran-epreuves").hidden = true;
     document.getElementById("ecran-qcm").hidden = false;
+    document.querySelector("main").classList.add("large");
     document.getElementById("titre").textContent = e.nom;
     document.getElementById("sous-titre").textContent = e.code + " · " + e.detail;
+    document.getElementById("lecteur").hidden = true;
+    document.getElementById("lecteur").innerHTML = "";
+    afficherThemes();
+    demarrer();
+  }
+
+  // Choisir un thème : met à jour les pastilles, les Shorts, l'adresse, et relance le QCM
+  function choisirTheme(t) {
+    themeChoisi = t;
+    const adresse = "#" + epreuveChoisie + (t === "Tous" ? "" : "/" + encodeURIComponent(t));
+    history.replaceState(null, "", adresse);
     afficherThemes();
     demarrer();
   }
@@ -114,10 +146,92 @@
       const b = document.createElement("button");
       b.className = "theme" + (t === themeChoisi ? " actif" : "");
       b.textContent = t + " (" + nb + ")";
-      b.onclick = () => { themeChoisi = t; afficherThemes(); demarrer(); };
+      b.onclick = () => choisirTheme(t);
       conteneur.appendChild(b);
     });
+    afficherShorts();
   }
+
+  // ---------------- Les Shorts ----------------
+  function lienVideo(theme) {
+    return (typeof VIDEOS !== "undefined" && VIDEOS[epreuveChoisie + "/" + theme]) || "";
+  }
+
+  // Transforme un lien YouTube (shorts, watch, youtu.be) en lecteur intégrable.
+  // youtube-nocookie = version sans cookies publicitaires.
+  function lecteurYouTube(url) {
+    const m = url.match(/(?:shorts\/|watch\?v=|youtu\.be\/|embed\/)([\w-]{11})/);
+    return m ? "https://www.youtube-nocookie.com/embed/" + m[1] + "?autoplay=1&rel=0" : "";
+  }
+
+  function afficherShorts() {
+    const qs = questionsDe(epreuveChoisie);
+    const themes = [...new Set(qs.map(q => q.theme))];
+    const liste = document.getElementById("liste-shorts");
+    liste.innerHTML = "";
+    themes.forEach(t => {
+      const url = lienVideo(t);
+      const b = document.createElement("button");
+      b.className = "short" + (t === themeChoisi ? " actif" : "") + (url ? "" : " a-venir");
+      b.innerHTML = '<span class="vignette">' + (url ? "▶" : "◷") + '</span><span class="texte"><strong></strong><small></small></span>';
+      b.querySelector("strong").textContent = t;
+      b.querySelector("small").textContent = (url ? "" : "vidéo bientôt · ") + qs.filter(q => q.theme === t).length + " questions";
+      b.onclick = () => { jouerShort(t); if (themeChoisi !== t) choisirTheme(t); };
+      liste.appendChild(b);
+    });
+  }
+
+  // Lance la vidéo d'un thème dans le lecteur (sans toucher au QCM)
+  function jouerShort(theme) {
+    const url = lienVideo(theme);
+    const lecteur = document.getElementById("lecteur");
+    lecteur.hidden = false;
+    lecteur.innerHTML = "";
+    const titre = document.createElement("p");
+    titre.className = "lecteur-titre";
+    titre.textContent = theme;
+    const fermer = document.createElement("button");
+    fermer.className = "lecteur-fermer";
+    fermer.setAttribute("aria-label", "Fermer la vidéo");
+    fermer.textContent = "✕";
+    fermer.onclick = () => { lecteur.hidden = true; lecteur.innerHTML = ""; };
+
+    let contenu;
+    const integre = url && lecteurYouTube(url);
+    if (integre) {
+      contenu = document.createElement("iframe");
+      contenu.src = integre;
+      contenu.title = "Short : " + theme;
+      contenu.allow = "autoplay; encrypted-media; picture-in-picture";
+      contenu.allowFullscreen = true;
+    } else if (url) {
+      contenu = document.createElement("a");
+      contenu.className = "bouton";
+      contenu.href = url;
+      contenu.target = "_blank";
+      contenu.rel = "noopener";
+      contenu.textContent = "Voir le Short sur TikTok ↗";
+    } else {
+      contenu = document.createElement("p");
+      contenu.className = "doux";
+      contenu.textContent = "Le Short sur ce thème arrive bientôt. En attendant, entraîne-toi avec les questions.";
+    }
+    lecteur.append(titre, fermer, contenu);
+  }
+
+  // ---------------- Le choix de la vue (QCM / Shorts + QCM / Shorts) ----------------
+  // La préférence est retenue dans le navigateur de l'élève.
+  function choisirVue(vue) {
+    const dispo = document.getElementById("disposition");
+    dispo.classList.remove("vue-qcm", "vue-deux", "vue-shorts");
+    dispo.classList.add("vue-" + vue);
+    document.querySelectorAll(".vues button").forEach(b => b.classList.toggle("actif", b.dataset.vue === vue));
+    try { localStorage.setItem("vue", vue); } catch (e) {}
+  }
+  document.querySelectorAll(".vues button").forEach(b => b.onclick = () => choisirVue(b.dataset.vue));
+  let vueRetenue = "deux";
+  try { vueRetenue = localStorage.getItem("vue") || "deux"; } catch (e) {}
+  choisirVue(["qcm", "deux", "shorts"].includes(vueRetenue) ? vueRetenue : "deux");
 
   function demarrer() {
     const qs = questionsDe(epreuveChoisie);
@@ -190,6 +304,19 @@
     expl.querySelector("span").textContent = q.explication;
     zone.appendChild(expl);
 
+    // En cas d'erreur : un bouton pour revoir le Short du thème
+    if (!reponse.juste) {
+      const revoir = document.createElement("button");
+      revoir.className = "bouton secondaire revoir";
+      revoir.textContent = "▶ Revoir le Short « " + q.theme + " »";
+      revoir.onclick = () => {
+        if (document.getElementById("disposition").classList.contains("vue-qcm")) choisirVue("deux");
+        jouerShort(q.theme);
+        document.getElementById("lecteur").scrollIntoView({ behavior: "smooth", block: "nearest" });
+      };
+      expl.appendChild(revoir);
+    }
+
     const suivant = document.createElement("button");
     suivant.className = "bouton";
     suivant.textContent = numero + 1 < serie.length ? "Question suivante →" : "Voir mon score";
@@ -253,13 +380,19 @@
   }
 
   // ---------------- Navigation ----------------
-  // L'adresse qcm.html#U5 ouvre directement l'épreuve U5 :
-  // pratique pour mettre un lien précis sous une vidéo.
+  // L'adresse qcm.html#U5 ouvre directement l'épreuve U5,
+  // et qcm.html#U5/Worth ouvre directement le thème Worth :
+  // c'est le lien à mettre sous chaque Short.
   function selonAdresse() {
-    const code = location.hash.slice(1);
-    if (code) ouvrirEpreuve(code); else afficherEpreuves();
+    const [code, theme] = location.hash.slice(1).split("/");
+    if (code) ouvrirEpreuve(code, theme ? decodeURIComponent(theme) : null);
+    else afficherEpreuves();
   }
-  document.getElementById("retour").onclick = () => { history.pushState("", "", "qcm.html"); afficherEpreuves(); };
+  document.getElementById("retour").onclick = () => {
+    history.pushState("", "", "qcm.html");
+    document.querySelector("main").classList.remove("large");
+    afficherEpreuves();
+  };
   window.addEventListener("hashchange", selonAdresse);
   selonAdresse();
 </script>
