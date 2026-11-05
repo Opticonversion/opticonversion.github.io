@@ -1,32 +1,24 @@
 // ==============================================================
-//  BANQUE DE QUESTIONS — c'est ICI que tu ajoutes tes questions.
+//  QUESTIONS · Analyse de la vision (U5)
+//  Ce fichier ne contient QUE les questions de cette épreuve.
 //
-//  1) La liste EPREUVES décrit les épreuves du BTS OL.
-//  2) La liste QUESTIONS contient les questions. Chaque question a :
-//       epreuve     : le code de l'épreuve (ex. "U5")
-//       theme       : le thème dans l'épreuve (sert au filtre)
-//       question    : l'énoncé
-//       choix       : 4 réponses proposées
-//       bonne       : le NUMÉRO de la bonne réponse, en comptant à partir de 0
-//                     (0 = la 1re, 1 = la 2e, 2 = la 3e, 3 = la 4e)
-//       explication : ce qui s'affiche après la réponse
+//  Chaque question est un bloc { ... } avec :
+//    epreuve     : "U5" (toujours le même dans ce fichier)
+//    theme       : le thème dans l'épreuve (sert au filtre)
+//    session     : l'année où ce type de question est tombé, ex. "2024",
+//                  ou "complément" si ce n'est pas tombé tel quel
+//    question    : l'énoncé
+//    choix       : 4 réponses proposées
+//    bonne       : le NUMÉRO de la bonne réponse (0 = la 1re, 1 = la 2e…)
+//    explication : ce qui s'affiche après la réponse
 //
-//  Pour ajouter une question : copie un bloc { ... }, colle-le
-//  avant le "];" final, change le texte. Virgule entre deux blocs.
-//  Règle : calculatrice interdite à l'examen → des chiffres qui tombent juste.
+//  Règles : calculatrice interdite à l'examen → chiffres qui tombent juste.
+//  Énoncés et chiffres à nous : ne jamais recopier un sujet ou un corrigé.
 // ==============================================================
 
-const EPREUVES = [
-  { code: "U41", nom: "Mathématiques", detail: "E4 · CCF" },
-  { code: "U42", nom: "Optique géométrique et physique", court: "OGP", detail: "E4 · écrit 2 h · coef 3" },
-  { code: "U43", nom: "Étude technique des systèmes optiques", court: "ETSO", detail: "E4 · écrit 2 h · coef 3" },
-  { code: "U5",  nom: "Analyse de la vision", detail: "E5 · écrit 3 h · coef 6" },
-  { code: "U3",  nom: "Économie et gestion de l'entreprise", detail: "E3 · écrit 3 h · coef 5" }
-];
+QUESTIONS.push(
 
-const QUESTIONS = [
 
-  // ================= U5 · ANALYSE DE LA VISION =================
 
   // ---------- Test de Worth (tombé 4 années sur 4) ----------
   {
@@ -323,4 +315,4 @@ const QUESTIONS = [
     bonne: 1,
     explication: "La cataracte nucléaire augmente l'indice du cristallin : l'œil devient plus myope. Autres signes : baisse progressive d'acuité, éblouissement, couleurs ternes."
   }
-];
+);

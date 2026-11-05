@@ -140,7 +140,12 @@
 </main>
 
 <!-- On charge d'abord les questions, puis le moteur qui les affiche -->
-<script src="questions.js"></script>
+<script src="epreuves.js"></script>
+<script src="questions-U41.js"></script>
+<script src="questions-U42.js"></script>
+<script src="questions-U43.js"></script>
+<script src="questions-U5.js"></script>
+<script src="questions-U3.js"></script>
 <script>
   // ---------------- L'état du QCM ----------------
   let epreuveChoisie = null;   // ex. "U5"
@@ -236,7 +241,9 @@
     const q = serie[numero];
     zone.innerHTML =
       '<div class="progression">Question ' + (numero + 1) + " / " + serie.length +
-      " · " + q.theme + " · Score : " + score + "</div>" +
+      " · " + q.theme +
+      (q.session ? " · " + (q.session === "complément" ? "complément" : "type BTS " + q.session) : "") +
+      " · Score : " + score + "</div>" +
       '<p class="enonce"></p><div class="choix"></div>';
     zone.querySelector(".enonce").textContent = q.question;
 
