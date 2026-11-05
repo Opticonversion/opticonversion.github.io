@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="QCM d'optique corrigés et expliqués pour réviser le BTS OL : réfraction, contactologie, vision binoculaire, calculs.">
-<title>QCM optique · Opticonversion</title>
+<meta name="description" content="QCM du BTS Opticien-Lunetier classés par épreuve : analyse de la vision, optique géométrique et physique, ETSO, mathématiques. Corrigés et expliqués.">
+<title>QCM BTS OL par épreuve · Opticonversion</title>
 <style>
   :root {
     --fond: #f6f7f9;
@@ -33,6 +33,7 @@
     }
   }
   * { box-sizing: border-box; }
+  [hidden] { display: none !important; }
   body {
     margin: 0;
     background: var(--fond);
@@ -52,6 +53,27 @@
     border-radius: 12px;
     padding: 20px;
   }
+
+  /* --- Choix de l'épreuve --- */
+  .epreuves { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
+  .epreuve {
+    text-align: left;
+    background: var(--carte);
+    border: 1px solid var(--bord);
+    border-radius: 12px;
+    padding: 16px;
+    color: var(--texte);
+    font: inherit;
+    cursor: pointer;
+  }
+  .epreuve:hover:not(:disabled) { border-color: var(--accent); }
+  .epreuve:disabled { cursor: default; opacity: 0.55; }
+  .epreuve .code { color: var(--accent); font-weight: 700; font-size: 0.85rem; }
+  .epreuve .nom { display: block; font-weight: 600; margin: 2px 0 4px; }
+  .epreuve .info { color: var(--doux); font-size: 0.85rem; }
+  .retour { background: none; border: none; color: var(--accent); font: inherit; cursor: pointer; padding: 0; margin-bottom: 12px; }
+
+  /* --- Thèmes --- */
   .themes { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
   .theme {
     padding: 6px 14px;
@@ -63,6 +85,8 @@
     font-size: 0.9rem;
   }
   .theme.actif { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+  /* --- Questions --- */
   .progression { color: var(--doux); font-size: 0.85rem; margin-bottom: 8px; }
   .enonce { font-size: 1.15rem; font-weight: 600; margin: 0 0 16px; }
   .choix { display: flex; flex-direction: column; gap: 10px; }
@@ -103,27 +127,31 @@
     <a href="calculateurs.html">Calculateurs</a>
     <a href="qcm.html" class="actif">QCM</a>
   </nav>
-  <h1>QCM optique</h1>
-  <p class="sous-titre">Entraîne-toi, chaque réponse est corrigée et expliquée.</p>
+  <h1 id="titre">QCM du BTS OL</h1>
+  <p class="sous-titre" id="sous-titre">Choisis une épreuve. Les questions reprennent ce qui tombe le plus souvent à l'examen.</p>
 
-  <div class="themes" id="themes"></div>
-  <section id="zone"></section>
+  <div id="ecran-epreuves" class="epreuves"></div>
+
+  <div id="ecran-qcm" hidden>
+    <button class="retour" id="retour">← Toutes les épreuves</button>
+    <div class="themes" id="themes"></div>
+    <section id="zone"></section>
+  </div>
 </main>
 
 <!-- On charge d'abord les questions, puis le moteur qui les affiche -->
 <script src="questions.js"></script>
 <script>
   // ---------------- L'état du QCM ----------------
-  // "état" = tout ce que la page doit retenir pendant la partie.
+  let epreuveChoisie = null;   // ex. "U5"
   let themeChoisi = "Tous";
-  let serie = [];        // les questions de la partie en cours, mélangées
-  let numero = 0;        // la question affichée (0 = la première)
+  let serie = [];              // les questions de la partie, mélangées
+  let numero = 0;
   let score = 0;
-  let erreurs = [];      // les questions ratées, pour le bilan final
+  let erreurs = [];
 
   const zone = document.getElementById("zone");
 
-  // Mélange une liste au hasard (algorithme de Fisher-Yates).
   function melanger(liste) {
     const copie = liste.slice();
     for (let i = copie.length - 1; i > 0; i--) {
@@ -133,13 +161,56 @@
     return copie;
   }
 
-  // ---------------- Les boutons de thème ----------------
+  const questionsDe = code => QUESTIONS.filter(q => q.epreuve === code);
+
+  // ---------------- Écran 1 : choisir une épreuve ----------------
+  function afficherEpreuves() {
+    epreuveChoisie = null;
+    document.getElementById("ecran-qcm").hidden = true;
+    document.getElementById("titre").textContent = "QCM du BTS OL";
+    document.getElementById("sous-titre").textContent =
+      "Choisis une épreuve. Les questions reprennent ce qui tombe le plus souvent à l'examen.";
+
+    const conteneur = document.getElementById("ecran-epreuves");
+    conteneur.hidden = false;
+    conteneur.innerHTML = "";
+
+    EPREUVES.forEach(e => {
+      const nb = questionsDe(e.code).length;
+      const b = document.createElement("button");
+      b.className = "epreuve";
+      b.disabled = nb === 0;
+      b.innerHTML = '<span class="code"></span><span class="nom"></span><span class="info"></span>';
+      b.querySelector(".code").textContent = e.code + (e.court ? " · " + e.court : "");
+      b.querySelector(".nom").textContent = e.nom;
+      b.querySelector(".info").textContent = e.detail + " · " + (nb > 0 ? nb + " questions" : "bientôt");
+      b.onclick = () => { location.hash = e.code; };
+      conteneur.appendChild(b);
+    });
+  }
+
+  // ---------------- Écran 2 : le QCM d'une épreuve ----------------
+  function ouvrirEpreuve(code) {
+    const e = EPREUVES.find(x => x.code === code);
+    if (!e || questionsDe(code).length === 0) { afficherEpreuves(); return; }
+
+    epreuveChoisie = code;
+    themeChoisi = "Tous";
+    document.getElementById("ecran-epreuves").hidden = true;
+    document.getElementById("ecran-qcm").hidden = false;
+    document.getElementById("titre").textContent = e.nom;
+    document.getElementById("sous-titre").textContent = e.code + " · " + e.detail;
+    afficherThemes();
+    demarrer();
+  }
+
   function afficherThemes() {
-    const themes = ["Tous", ...new Set(QUESTIONS.map(q => q.theme))];
+    const qs = questionsDe(epreuveChoisie);
+    const themes = ["Tous", ...new Set(qs.map(q => q.theme))];
     const conteneur = document.getElementById("themes");
     conteneur.innerHTML = "";
     themes.forEach(t => {
-      const nb = t === "Tous" ? QUESTIONS.length : QUESTIONS.filter(q => q.theme === t).length;
+      const nb = t === "Tous" ? qs.length : qs.filter(q => q.theme === t).length;
       const b = document.createElement("button");
       b.className = "theme" + (t === themeChoisi ? " actif" : "");
       b.textContent = t + " (" + nb + ")";
@@ -148,10 +219,9 @@
     });
   }
 
-  // ---------------- Démarrer une partie ----------------
   function demarrer() {
-    const choisies = themeChoisi === "Tous" ? QUESTIONS : QUESTIONS.filter(q => q.theme === themeChoisi);
-    // On mélange les questions ET l'ordre des réponses de chaque question.
+    const qs = questionsDe(epreuveChoisie);
+    const choisies = themeChoisi === "Tous" ? qs : qs.filter(q => q.theme === themeChoisi);
     serie = melanger(choisies).map(q => {
       const reponses = melanger(q.choix.map((texte, i) => ({ texte, juste: i === q.bonne })));
       return { ...q, reponses };
@@ -162,7 +232,6 @@
     afficherQuestion();
   }
 
-  // ---------------- Afficher une question ----------------
   function afficherQuestion() {
     const q = serie[numero];
     zone.innerHTML =
@@ -180,23 +249,15 @@
     });
   }
 
-  // ---------------- Quand on clique sur une réponse ----------------
   function repondre(reponse, boutonClique) {
     const q = serie[numero];
-    const boutons = zone.querySelectorAll(".choix button");
-
-    // On bloque les boutons et on montre la bonne réponse en vert.
-    boutons.forEach((b, i) => {
+    zone.querySelectorAll(".choix button").forEach((b, i) => {
       b.disabled = true;
       if (q.reponses[i].juste) b.classList.add("juste");
     });
 
-    if (reponse.juste) {
-      score++;
-    } else {
-      boutonClique.classList.add("faux");
-      erreurs.push(q);
-    }
+    if (reponse.juste) score++;
+    else { boutonClique.classList.add("faux"); erreurs.push(q); }
 
     const expl = document.createElement("div");
     expl.className = "explication";
@@ -214,7 +275,6 @@
     zone.appendChild(suivant);
   }
 
-  // ---------------- Le bilan de fin ----------------
   function afficherBilan() {
     const pourcent = Math.round((score / serie.length) * 100);
     let message = "Continue, ça va venir.";
@@ -247,9 +307,16 @@
     zone.appendChild(rejouer);
   }
 
-  // ---------------- C'est parti ----------------
-  afficherThemes();
-  demarrer();
+  // ---------------- Navigation ----------------
+  // L'adresse qcm.html#U5 ouvre directement l'épreuve U5 :
+  // pratique pour mettre un lien précis sous une vidéo.
+  function selonAdresse() {
+    const code = location.hash.slice(1);
+    if (code) ouvrirEpreuve(code); else afficherEpreuves();
+  }
+  document.getElementById("retour").onclick = () => { history.pushState("", "", "qcm.html"); afficherEpreuves(); };
+  window.addEventListener("hashchange", selonAdresse);
+  selonAdresse();
 </script>
 </body>
 </html>
