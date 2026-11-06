@@ -52,9 +52,9 @@ QUESTIONS.push(
   {
     epreuve: "U43", theme: "Chaîne des conjugués", session: "2018",
     question: "Microscope réglé pour un emmétrope qui n'accommode pas. Où est placée la préparation par rapport à l'objectif ?",
-    choix: ["Exactement au foyer objet de l'objectif", "Un peu avant le foyer objet de l'objectif", "Entre le foyer objet et l'objectif", "À l'infini"],
+    choix: ["Exactement au foyer objet de l'objectif", "Un peu au-delà du foyer objet (plus loin de l'objectif que F)", "Entre le foyer objet et l'objectif", "À l'infini, très loin de l'objectif"],
     bonne: 1,
-    explication: "L'objectif doit donner une image réelle et agrandie, située au foyer objet de l'oculaire. Pour une image réelle agrandie, l'objet est un peu avant le foyer objet. Au foyer même, l'image partirait à l'infini."
+    explication: "L'objectif doit donner une image réelle et agrandie, située au foyer objet de l'oculaire. Pour une image réelle agrandie, l'objet est placé un peu plus loin que le foyer objet (entre F et 2F). Au foyer même, l'image partirait à l'infini ; entre F et l'objectif, l'image serait virtuelle."
   },
 
   // ---------- Vergences et focales ----------
@@ -118,7 +118,7 @@ QUESTIONS.push(
   },
   {
     epreuve: "U43", theme: "Œil et instrument", session: "2018",
-    question: "Oculaire de focale 25 mm, œil placé à son foyer image. On le règle pour un myope de −4,00 δ (remotum à 250 mm). De combien déplacer l'oculaire depuis le réglage emmétrope ?",
+    question: "Oculaire de focale 25 mm, œil placé à son foyer image. On le règle pour un myope de −4,00 δ (remotum à 250 mm), l'œil restant au foyer image de l'oculaire. De combien déplacer l'oculaire depuis le réglage emmétrope ?",
     choix: ["0,25 mm", "2,5 mm", "4 mm", "25 mm"],
     bonne: 1,
     explication: "Relation de Newton : x·x' = −f'². Image sur le remotum : x' = F'A' = −250 mm. Donc x = −625/(−250) = +2,5 mm. L'image intermédiaire doit être 2,5 mm après le foyer objet : on rapproche l'oculaire de 2,5 mm."
@@ -128,28 +128,28 @@ QUESTIONS.push(
   {
     epreuve: "U43", theme: "Étude des champs", session: "2022",
     question: "Dans l'espace d'étude, comment identifie-t-on la pupille ?",
-    choix: ["C'est le plus grand diaphragme", "C'est le diaphragme (ou son conjugué) vu sous le plus petit angle depuis le centre du plan des champs", "C'est toujours la monture de l'objectif", "C'est le diaphragme le plus proche de l'œil"],
+    choix: ["Le plus grand des diaphragmes, une fois conjugués dans l'espace d'étude", "Celui (ou son conjugué) vu sous le plus petit angle depuis le centre du plan des champs", "Toujours la monture de l'objectif, quel que soit l'instrument", "Le diaphragme le plus proche de l'œil de l'observateur"],
     bonne: 1,
     explication: "On conjugue d'abord tous les diaphragmes dans l'espace d'étude. Depuis le point axial du plan des champs, celui qu'on voit sous le plus petit angle limite l'ouverture : c'est la pupille. Les autres jouent le rôle de lucarnes."
   },
   {
     epreuve: "U43", theme: "Étude des champs", session: "2019",
     question: "Qu'est-ce que le champ de pleine lumière ?",
-    choix: ["La zone où l'image est la plus nette", "La zone dont chaque point envoie un faisceau qui remplit toute la pupille : éclairement maximal et uniforme", "La zone éclairée à moitié", "Tout ce que l'on voit, même faiblement"],
+    choix: ["La zone où l'image est la plus nette, au centre du champ", "La zone où chaque faisceau remplit toute la pupille, sans être coupé", "La zone où l'éclairement vaut la moitié du maximum", "Tout ce que l'on voit dans l'instrument, même faiblement"],
     bonne: 1,
-    explication: "Dans le champ de pleine lumière, aucun diaphragme de champ ne coupe le faisceau : chaque point utilise toute la pupille. L'éclairement y est maximal et uniforme."
+    explication: "Dans le champ de pleine lumière, la lucarne ne coupe aucun faisceau : chaque point utilise toute la pupille. L'éclairement y est maximal et uniforme."
   },
   {
     epreuve: "U43", theme: "Étude des champs", session: "2023",
     question: "La zone comprise entre le bord du champ de pleine lumière et le bord du champ total s'appelle :",
-    choix: ["Le champ moyen", "Le champ de contour (zone de vignettage)", "La pupille de sortie", "Le cercle oculaire"],
+    choix: ["Le champ moyen", "Le champ de contour", "La pupille de sortie", "Le cercle oculaire"],
     bonne: 1,
     explication: "Dans le champ de contour, le faisceau est en partie coupé par une lucarne : l'éclairement décroît du bord de la pleine lumière jusqu'à zéro au bord du champ total. Sur une photo, c'est le vignettage (bords assombris)."
   },
   {
     epreuve: "U43", theme: "Étude des champs", session: "2021",
     question: "Comment supprimer le champ de contour d'un instrument ?",
-    choix: ["En fermant la pupille", "En plaçant un diaphragme de champ dans le plan des champs (plan d'une image réelle)", "En agrandissant l'oculaire", "En éloignant l'œil"],
+    choix: ["En fermant davantage la pupille de l'instrument", "En plaçant un diaphragme dans le plan d'une image réelle", "En prenant un oculaire de plus grand diamètre", "En éloignant l'œil du cercle oculaire"],
     bonne: 1,
     explication: "Un diaphragme placé dans un plan où se forme une image réelle coupe le champ net, sans dégradé : champ total = champ de pleine lumière. C'est le diaphragme de champ des oculaires."
   },
@@ -158,7 +158,7 @@ QUESTIONS.push(
     question: "Au bord du champ moyen, l'éclairement de l'image vaut environ :",
     choix: ["100 % de l'éclairement maximal", "50 % de l'éclairement maximal", "0 %", "25 %"],
     bonne: 1,
-    explication: "Le bord du champ moyen est le point dont le rayon passant par le centre de la pupille rase le bord de la lucarne : la moitié du faisceau passe environ. On est au milieu du champ de contour."
+    explication: "Le bord du champ moyen est le point dont le rayon passant par le centre de la pupille rase le bord de la lucarne : la moitié du faisceau passe environ. On est au milieu du champ de contour (valeur approchée retenue au BTS)."
   },
   {
     epreuve: "U43", theme: "Étude des champs", session: "2020",
@@ -192,8 +192,8 @@ QUESTIONS.push(
   },
   {
     epreuve: "U43", theme: "Liaisons mécaniques", session: "2023",
-    question: "On dévisse un objectif photo pour faire la mise au point : il avance en tournant. Quelle est la liaison entre l'objectif et le boîtier ?",
-    choix: ["Pivot glissant", "Hélicoïdale (rotation et translation liées)", "Glissière", "Pivot"],
+    question: "Pour faire la mise au point, on tourne la bague de l'objectif : le bloc optique avance en tournant sur lui-même. Quelle est la liaison entre le bloc optique et la monture ?",
+    choix: ["Pivot glissant", "Hélicoïdale", "Glissière", "Pivot"],
     bonne: 1,
     explication: "Le filetage lie les deux mouvements : chaque tour fait avancer d'un pas. Un seul degré de liberté : liaison hélicoïdale."
   },
@@ -269,7 +269,7 @@ QUESTIONS.push(
   {
     epreuve: "U43", theme: "Œil astigmate", session: "2022",
     question: "Un client astigmate veut utiliser un télescope sans ses lunettes. Que lui conseiller ?",
-    choix: ["Régler l'oculaire : cela compense tout", "Garder ses lunettes (ou ses lentilles), car l'oculaire, sphérique, ne compense pas l'astigmatisme", "Fermer un œil", "Changer d'objectif"],
+    choix: ["Régler l'oculaire : cela compense toute l'amétropie", "Garder ses lunettes ou ses lentilles pendant l'observation", "Fermer l'œil le plus astigmate pendant l'observation", "Prendre un objectif de plus grande focale"],
     bonne: 1,
     explication: "Le réglage de l'oculaire déplace l'image, comme une sphère : il ne compense que la partie sphérique de l'amétropie. Pour l'astigmatisme, il faut garder sa compensation."
   },
@@ -294,9 +294,9 @@ QUESTIONS.push(
   {
     epreuve: "U43", theme: "Frontofocomètre", session: "2019",
     question: "Pourquoi la mire d'un frontofocomètre est-elle éclairée en lumière verte de 546,07 nm ?",
-    choix: ["Pour ne pas éblouir l'opticien", "C'est la longueur d'onde de référence (raie e) pour la vergence des verres : on évite les écarts dus au chromatisme", "Pour mesurer les traitements antireflet", "Pour voir les verres teintés"],
+    choix: ["Pour ne pas éblouir l'opticien pendant la mesure", "C'est la longueur d'onde de référence (raie e) des vergences", "Pour contrôler l'efficacité des traitements antireflet", "Pour bien voir la mire à travers les verres teintés"],
     bonne: 1,
-    explication: "La vergence d'un verre change un peu avec la couleur de la lumière (dispersion). En mesurant à la longueur d'onde de référence, on mesure la valeur exacte annoncée par le fabricant."
+    explication: "La vergence d'un verre change un peu avec la couleur de la lumière (dispersion). En mesurant à la longueur d'onde de référence (raie e, 546,07 nm), on évite les écarts dus au chromatisme et on mesure la valeur exacte annoncée par le fabricant."
   },
   {
     epreuve: "U43", theme: "Frontofocomètre", session: "2019",
@@ -310,9 +310,9 @@ QUESTIONS.push(
   {
     epreuve: "U43", theme: "Aberrations", session: "2020",
     question: "Un doublet achromatique associe :",
-    choix: ["Deux lentilles convergentes du même verre", "Une convergente peu dispersive (crown, constringence élevée) et une divergente très dispersive (flint, constringence faible)", "Deux lentilles divergentes en flint", "Une lentille et un miroir"],
+    choix: ["Deux lentilles convergentes taillées dans le même verre", "Une convergente en crown et une divergente en flint", "Deux lentilles divergentes en flint, collées", "Une lentille convergente et un miroir concave"],
     bonne: 1,
-    explication: "Les dispersions des deux verres se compensent alors que la vergence reste convergente. On corrige ainsi l'aberration chromatique (les franges colorées)."
+    explication: "Le crown est peu dispersif (constringence élevée), le flint très dispersif (constringence faible) : leurs dispersions se compensent alors que la vergence totale reste convergente. On corrige ainsi l'aberration chromatique (les franges colorées)."
   },
   {
     epreuve: "U43", theme: "Aberrations", session: "2022",

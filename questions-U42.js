@@ -137,7 +137,7 @@ QUESTIONS.push(
     question: "Un téléobjectif associe une lentille convergente puis une divergente. Quel est son principal intérêt par rapport à une lentille unique de même focale ?",
     choix: ["Il supprime la diffraction", "Il redresse l'image", "Il donne une image plus lumineuse", "Il est plus court : la distance 1re lentille → foyer image est inférieure à la focale"],
     bonne: 3,
-    explication: "Le plan principal image est rejeté en avant de la première lentille. On obtient une grande focale (forte « téléphoto ») dans un tube beaucoup plus court que f'."
+    explication: "Le plan principal image est rejeté en avant de la première lentille. On obtient une grande focale f' dans un tube nettement plus court que f' : c'est tout l'intérêt du téléobjectif, il est moins encombrant."
   },
   {
     epreuve: "U42", theme: "Doublets et achromatisme", session: "2019",
@@ -218,7 +218,7 @@ QUESTIONS.push(
     question: "Un appareil photo a des pixels de 5 µm et un objectif de focale 250 mm. Quelle est la limite de résolution angulaire due au capteur ?",
     choix: ["2 × 10⁻² rad", "1,25 × 10⁻³ rad", "2 × 10⁻⁵ rad", "5 × 10⁻⁶ rad"],
     bonne: 2,
-    explication: "Deux points sont séparés si leurs images tombent sur deux pixels différents : α = a' / f' = 5 × 10⁻⁶ / 0,250 = 2 × 10⁻⁵ rad. Si la diffraction donne moins (ex. 1 × 10⁻⁵ rad), c'est le capteur qui limite."
+    explication: "Au BTS, on admet que la limite due au capteur correspond à la taille d'un pixel vue depuis l'objectif : α = a' / f' = 5 × 10⁻⁶ / 0,250 = 2 × 10⁻⁵ rad. Si la diffraction donne une limite plus petite (ex. 1 × 10⁻⁵ rad), c'est le capteur qui limite : c'est toujours la plus grande des deux limites qui l'emporte."
   },
   {
     epreuve: "U42", theme: "Ouverture et résolution", session: "2019",
