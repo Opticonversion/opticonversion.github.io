@@ -357,11 +357,13 @@
   }
 
   // ---------------- L'écran de score ----------------
-  // 4 paliers : la couleur, le nounours, le message et les confettis changent selon le score.
+  // 5 paliers : la couleur, le nounours, le message et les confettis changent selon le score.
+  // (Les images du nounours sont dans le dossier img/.)
   function palierDe(pourcent) {
-    if (pourcent === 100) return { nom: "or", titre: "Parfait !", sous: "Sans aucune faute. Tu peux passer à la suite.", nounours: "clin-doeil", confettis: 160 };
+    if (pourcent === 100) return { nom: "or", titre: "Parfait !", sous: "Sans aucune faute. Même le nounours n'en revient pas.", nounours: "choque", confettis: 160 };
     if (pourcent >= 80) return { nom: "or", titre: "Excellent !", sous: "Tu maîtrises ce thème. Plus que quelques détails.", nounours: "clin-doeil", confettis: 90 };
-    if (pourcent >= 50) return { nom: "argent", titre: "Bien joué !", sous: "La moitié du chemin est faite. Revois tes erreurs et ça passe.", nounours: "bouche-ouverte", confettis: 0 };
+    if (pourcent >= 60) return { nom: "argent", titre: "Bien joué !", sous: "Plus de la moitié est acquise. Revois tes erreurs et ça passe.", nounours: "bouche-ouverte", confettis: 0 };
+    if (pourcent >= 40) return { nom: "bronze", titre: "Ça commence à venir", sous: "Tu as les bases. Revois tes erreurs, et le prochain essai sera meilleur.", nounours: "pensif", confettis: 0 };
     return { nom: "bronze", titre: "C'est en se trompant qu'on apprend", sous: "Revois tes erreurs, puis réessaie : la deuxième fois, ça va beaucoup mieux.", nounours: "bouche-fermee", confettis: 0 };
   }
 
