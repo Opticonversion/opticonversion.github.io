@@ -242,9 +242,15 @@
   try { vueRetenue = localStorage.getItem("vue") || "deux"; } catch (e) {}
   choisirVue(["qcm", "deux", "shorts"].includes(vueRetenue) ? vueRetenue : "deux");
 
-  function demarrer() {
+  // Démarre une partie. Sans liste : toutes les questions du thème choisi.
+  // Avec une liste : uniquement ces questions (mode « Revoir mes erreurs »).
+  let modeRevision = false;
+  let serieEnCours = 0;      // bonnes réponses d'affilée en ce moment
+  let meilleureSerie = 0;    // meilleure suite de bonnes réponses de la partie
+  function demarrer(liste) {
+    modeRevision = Array.isArray(liste);
     const qs = questionsDe(epreuveChoisie);
-    const choisies = themeChoisi === "Tous" ? qs : qs.filter(q => q.theme === themeChoisi);
+    const choisies = modeRevision ? liste : (themeChoisi === "Tous" ? qs : qs.filter(q => q.theme === themeChoisi));
     serie = melanger(choisies).map(q => {
       const reponses = melanger(q.choix.map((texte, i) => ({ texte, juste: i === q.bonne })));
       return { ...q, reponses };
@@ -252,6 +258,8 @@
     numero = 0;
     score = 0;
     erreurs = [];
+    serieEnCours = 0;
+    meilleureSerie = 0;
     afficherQuestion();
   }
 
@@ -301,8 +309,15 @@
       if (q.reponses[i].juste) b.classList.add("juste");
     });
 
-    if (reponse.juste) score++;
-    else { boutonClique.classList.add("faux"); erreurs.push(q); }
+    if (reponse.juste) {
+      score++;
+      serieEnCours++;
+      meilleureSerie = Math.max(meilleureSerie, serieEnCours);
+    } else {
+      boutonClique.classList.add("faux");
+      erreurs.push(q);
+      serieEnCours = 0;
+    }
     noterReponse(q, reponse.juste);   // pour la jauge de la page « Essentiel »
 
     // La barre avance dès qu'on a répondu
@@ -335,24 +350,142 @@
       numero++;
       if (numero < serie.length) afficherQuestion();
       else afficherBilan();
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      zone.scrollIntoView({ behavior: "smooth", block: "start" });
     };
     zone.appendChild(suivant);
     suivant.focus({ preventScroll: true });
   }
 
+  // ---------------- L'écran de score ----------------
+  // 4 paliers : la couleur, le nounours, le message et les confettis changent selon le score.
+  function palierDe(pourcent) {
+    if (pourcent === 100) return { nom: "or", titre: "Parfait !", sous: "Sans aucune faute. Tu peux passer à la suite.", nounours: "clin-doeil", confettis: 160 };
+    if (pourcent >= 80) return { nom: "or", titre: "Excellent !", sous: "Tu maîtrises ce thème. Plus que quelques détails.", nounours: "clin-doeil", confettis: 90 };
+    if (pourcent >= 50) return { nom: "argent", titre: "Bien joué !", sous: "La moitié du chemin est faite. Revois tes erreurs et ça passe.", nounours: "bouche-ouverte", confettis: 0 };
+    return { nom: "bronze", titre: "C'est en se trompant qu'on apprend", sous: "Revois tes erreurs, puis réessaie : la deuxième fois, ça va beaucoup mieux.", nounours: "bouche-fermee", confettis: 0 };
+  }
+
+  // Records : le meilleur score de l'élève par thème, gardé dans son navigateur
+  function enregistrerRecord(cle, pourcent) {
+    let records = {};
+    try { records = JSON.parse(localStorage.getItem("records") || "{}"); } catch (e) {}
+    const ancien = records[cle];
+    if (ancien === undefined || pourcent > ancien) {
+      records[cle] = pourcent;
+      try { localStorage.setItem("records", JSON.stringify(records)); } catch (e) {}
+    }
+    return { ancien, nouveau: ancien !== undefined && pourcent > ancien };
+  }
+
+  // Petite pluie de confettis dorés (désactivée si l'élève a coupé les animations)
+  function lancerConfettis(conteneur, nombre) {
+    if (!nombre || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const canvas = document.createElement("canvas");
+    canvas.className = "confettis";
+    conteneur.appendChild(canvas);
+    const ctx = canvas.getContext("2d");
+    const ratio = window.devicePixelRatio || 1;
+    const w = canvas.width = conteneur.offsetWidth * ratio;
+    const h = canvas.height = conteneur.offsetHeight * ratio;
+    const couleurs = ["#d9b26f", "#ecd3a0", "#5fd39a", "#ffffff", "#f4c27a"];
+    const morceaux = Array.from({ length: nombre }, () => ({
+      x: w / 2 + (Math.random() - 0.5) * w * 0.3,
+      y: h * 0.28,
+      vx: (Math.random() - 0.5) * 14 * ratio,
+      vy: (-Math.random() * 13 - 4) * ratio,
+      taille: (Math.random() * 6 + 4) * ratio,
+      angle: Math.random() * Math.PI,
+      tourne: (Math.random() - 0.5) * 0.3,
+      couleur: couleurs[Math.floor(Math.random() * couleurs.length)]
+    }));
+    const debut = performance.now();
+    function image(t) {
+      const ecoule = t - debut;
+      ctx.clearRect(0, 0, w, h);
+      ctx.globalAlpha = Math.max(0, 1 - ecoule / 2600);
+      morceaux.forEach(m => {
+        m.vy += 0.35 * ratio;
+        m.vx *= 0.99;
+        m.x += m.vx;
+        m.y += m.vy;
+        m.angle += m.tourne;
+        ctx.save();
+        ctx.translate(m.x, m.y);
+        ctx.rotate(m.angle);
+        ctx.fillStyle = m.couleur;
+        ctx.fillRect(-m.taille / 2, -m.taille / 4, m.taille, m.taille / 2);
+        ctx.restore();
+      });
+      if (ecoule < 2600) requestAnimationFrame(image);
+      else canvas.remove();
+    }
+    requestAnimationFrame(image);
+  }
+
   function afficherBilan() {
     const pourcent = Math.round((score / serie.length) * 100);
-    let message = "Continue, ça va venir. Revois les points ci-dessous.";
-    if (pourcent >= 80) message = "Excellent, tu maîtrises cette épreuve.";
-    else if (pourcent >= 50) message = "Pas mal ! Revois les erreurs ci-dessous.";
+    const palier = palierDe(pourcent);
+    const cle = epreuveChoisie + "/" + themeChoisi;
+    const record = modeRevision ? { nouveau: false } : enregistrerRecord(cle, pourcent);
 
     zone.innerHTML =
-      '<div class="bilan">' +
-      '<div class="anneau"><div class="anneau-int"><p class="score">0 %<small>' + score + " / " + serie.length + "</small></p></div></div>" +
-      '<p class="doux"></p></div>';
-    zone.querySelector(".bilan .doux").textContent = message;
+      '<div class="bilan palier-' + palier.nom + '">' +
+        '<div class="bilan-tete">' +
+          '<div class="anneau"><div class="anneau-int"><p class="score">0 %<small>' + score + " / " + serie.length + "</small></p></div></div>" +
+          '<img class="bilan-nounours" src="img/nounours-' + palier.nounours + '.svg" alt="" width="96" height="106">' +
+        "</div>" +
+        '<h2 class="bilan-titre"></h2>' +
+        '<p class="bilan-sous"></p>' +
+        '<div class="bilan-stats"></div>' +
+        '<div class="bilan-actions"></div>' +
+      "</div>";
+    zone.querySelector(".bilan-titre").textContent = palier.titre;
+    zone.querySelector(".bilan-sous").textContent = modeRevision
+      ? (erreurs.length === 0 ? "Toutes tes erreurs sont corrigées. Bravo !" : "Encore " + erreurs.length + " à retravailler. Tu y es presque.")
+      : palier.sous;
     rejouerAnimation(zone);
+
+    // Les petites médailles sous le score
+    const stats = zone.querySelector(".bilan-stats");
+    const medaille = (texte, classe) => {
+      const s = document.createElement("span");
+      s.className = "medaille " + (classe || "");
+      s.textContent = texte;
+      stats.appendChild(s);
+    };
+    if (meilleureSerie >= 3) medaille("🔥 " + meilleureSerie + " bonnes réponses d'affilée");
+    if (record.nouveau) medaille("🏆 Nouveau record ! (avant : " + record.ancien + " %)", "or");
+    if (!modeRevision && themeChoisi !== "Tous" && estEssentiel(epreuveChoisie, themeChoisi) && etatNotion(epreuveChoisie, themeChoisi).maitrisee) {
+      const faites = ESSENTIEL.filter(n => etatNotion(n.epreuve, n.theme).maitrisee).length;
+      medaille("★ Notion essentielle maîtrisée · " + faites + " / " + ESSENTIEL.length, "or");
+    }
+    if (!stats.children.length) stats.remove();
+
+    // Les boutons : on propose toujours LA prochaine étape la plus utile
+    const actions = zone.querySelector(".bilan-actions");
+    const bouton = (texte, classe, action) => {
+      const b = document.createElement("button");
+      b.className = "bouton " + (classe || "");
+      b.textContent = texte;
+      b.onclick = action;
+      actions.appendChild(b);
+      return b;
+    };
+    const aRevoir = erreurs.map(q => QUESTIONS.find(x => idQuestion(x) === idQuestion(q)));
+    if (aRevoir.length > 0) {
+      bouton("Revoir mes " + (aRevoir.length > 1 ? aRevoir.length + " erreurs" : "erreur") + " →", "", () => { demarrer(aRevoir); zone.scrollIntoView({ behavior: "smooth", block: "start" }); });
+    } else {
+      const prochaine = ESSENTIEL.find(n => !(n.epreuve === epreuveChoisie && n.theme === themeChoisi) && !etatNotion(n.epreuve, n.theme).maitrisee);
+      if (prochaine) {
+        bouton("Notion suivante : " + prochaine.theme + " →", "", () => {
+          location.hash = prochaine.epreuve + "/" + encodeURIComponent(prochaine.theme);
+          zone.scrollIntoView({ behavior: "smooth", block: "start" });
+        });
+      }
+    }
+    bouton(modeRevision ? "Refaire tout le thème" : "Recommencer", "secondaire", () => { demarrer(); zone.scrollIntoView({ behavior: "smooth", block: "start" }); });
+
+    lancerConfettis(zone.querySelector(".bilan"), palier.confettis);
 
     // L'anneau se remplit et le pourcentage monte petit à petit
     const anneau = zone.querySelector(".anneau");
@@ -382,12 +515,6 @@
       });
       zone.append(titre, liste);
     }
-
-    const rejouer = document.createElement("button");
-    rejouer.className = "bouton";
-    rejouer.textContent = "Recommencer";
-    rejouer.onclick = demarrer;
-    zone.appendChild(rejouer);
   }
 
   // ---------------- Navigation ----------------

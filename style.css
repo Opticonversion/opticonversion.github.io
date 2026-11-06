@@ -283,9 +283,35 @@ input:focus, select:focus { outline: none; border-color: var(--or); box-shadow: 
 .explication.mal { border-left-color: var(--rouge); }
 .explication strong { display: block; margin-bottom: 4px; }
 
-.bilan { text-align: center; padding: 12px 0 4px; }
+.bilan { --c-palier: var(--or); --c-palier-clair: var(--or-clair); position: relative; text-align: center; padding: 18px 0 6px; overflow: hidden; }
+.bilan.palier-argent { --c-palier: #c9d1dc; --c-palier-clair: #eef2f7; }
+.bilan.palier-bronze { --c-palier: #d08a5c; --c-palier-clair: #f0bf9c; }
+.bilan-tete { position: relative; width: 200px; margin: 0 auto 6px; }
+.bilan-nounours {
+  position: absolute; right: -34px; bottom: -6px; width: 96px; height: auto;
+  filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.45));
+  animation: saute 700ms 450ms cubic-bezier(.3, 1.6, .5, 1) both;
+}
+.bilan-titre { font-size: clamp(1.6rem, 5vw, 2.1rem); margin: 10px 0 6px; color: var(--c-palier-clair); animation: monte var(--doux-anim) 250ms both; }
+.bilan-sous { color: var(--doux); margin: 0 auto 16px; max-width: 460px; animation: monte var(--doux-anim) 350ms both; }
+.bilan-stats { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: 0 0 18px; }
+.medaille {
+  padding: 6px 12px; border-radius: 999px; font-size: 0.86rem;
+  background: rgba(255, 255, 255, 0.05); border: 1px solid var(--bord-fort);
+  animation: pop 420ms cubic-bezier(.3, 1.6, .5, 1) both;
+}
+.medaille:nth-child(2) { animation-delay: 120ms; }
+.medaille:nth-child(3) { animation-delay: 240ms; }
+.medaille.or { color: var(--or-clair); background: var(--or-fond); border-color: rgba(217, 178, 111, 0.45); }
+.bilan-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+.bilan-actions .bouton { margin-top: 0; }
+.confettis { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+@keyframes saute { from { opacity: 0; transform: translateY(30px) scale(0.6) rotate(-8deg); } to { opacity: 1; transform: none; } }
+@keyframes pop { from { opacity: 0; transform: scale(0.7); } to { opacity: 1; transform: none; } }
 .anneau { --p: 0; width: 150px; height: 150px; margin: 0 auto 14px; border-radius: 50%; display: grid; place-items: center;
-  background: conic-gradient(var(--or) calc(var(--p) * 1%), rgba(255, 255, 255, 0.07) 0); }
+  background: conic-gradient(var(--c-palier, var(--or)) calc(var(--p) * 1%), rgba(255, 255, 255, 0.07) 0);
+  box-shadow: 0 0 40px -10px var(--c-palier, var(--or)); }
+.bilan .score { color: var(--c-palier-clair); }
 .anneau-int { width: 122px; height: 122px; border-radius: 50%; background: var(--carte); display: grid; place-items: center; }
 .score { font-family: var(--titre); font-size: 2.2rem; font-weight: 600; margin: 0; line-height: 1; }
 .score small { display: block; font-family: var(--corps); font-size: 0.8rem; color: var(--doux); font-weight: 400; margin-top: 4px; }
@@ -458,3 +484,6 @@ footer { max-width: 760px; margin: 0 auto; padding: 24px 16px 40px; color: var(-
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }
+
+/* Quand on fait défiler jusqu'au QCM, on laisse la place du menu fixe */
+#zone { scroll-margin-top: 84px; }
