@@ -140,6 +140,13 @@ QUESTIONS.push(
     explication: "L'aniséiconie induite dépend de la distance compensation-œil. En lentilles, cette distance passe d'environ 15 mm à moins de 2 mm : l'aniséiconie devient beaucoup plus faible. (Pour une anisométropie AXIALE, la loi de Knapp favorise au contraire les lunettes placées au foyer objet de l'œil.)"
   },
   {
+    epreuve: "U5", theme: "Anisométropie", session: "complément",
+    question: "Anisométropie purement AXIALE : OD −1,00 et OG −6,00 (sphériques), verres à 15 mm de l'œil. Aniséiconie totale en lunettes ?",
+    choix: ["Environ 1 %", "Environ 7,5 %", "Environ 8,5 %", "Environ 16 %"],
+    bonne: 0,
+    explication: "Anisométropie axile : les deux aniséiconies s'opposent. Axile ≈ 1,7 % par dioptrie de différence = 5 × 1,7 = 8,5 % en faveur de l'OG (le plus long, le plus myope). Induite par les lunettes ≈ LH (cm) × différence des verres = 1,5 × 5 = 7,5 % en faveur de l'OD (le moins myope). Totale ≈ 8,5 − 7,5 = 1 % (raccourci : environ 0,2 % par dioptrie avec LH = 15 mm). En lunettes, l'aniséiconie est donc presque compensée ; en lentilles, l'induite disparaît et il resterait 8,5 %."
+  },
+  {
     epreuve: "U5", theme: "Anisométropie", session: "2024",
     question: "OD +1,00 et OG +4,00 (sphériques). En lecture, le regard passe 1 cm sous les centres optiques. Effet prismatique vertical différentiel ?",
     choix: ["1 Δ", "3 Δ", "4 Δ", "5 Δ"],
