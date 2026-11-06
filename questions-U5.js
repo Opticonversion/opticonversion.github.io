@@ -66,6 +66,13 @@ QUESTIONS.push(
     explication: "Aucun mouvement au masquage = pas de tropie. Mouvement au démasquage = phorie dissociée (supérieure à 3 Δ, sinon on ne la voit pas). L'œil revient vers le nez (temporo-nasal) : sous le cache, il était parti vers l'extérieur. C'est une exophorie."
   },
   {
+    epreuve: "U5", theme: "Masquage et phories", session: "2024",
+    question: "Au démasquage de l'OD, l'œil fait un mouvement de bas en haut pour reprendre la fixation. Aucun mouvement au masquage. Conclusion ?",
+    choix: ["Hyperphorie D/G (= hypophorie G/D)", "Hypophorie D/G (= hyperphorie G/D)", "Hypertropie D/G (= hypotropie G/D)", "Hypotropie D/G (= hypertropie G/D)"],
+    bonne: 1,
+    explication: "Aucun mouvement au masquage = pas de tropie. Au démasquage, l'œil remonte : derrière le cache, il était en bas. L'OD est plus bas que l'OG : hypophorie D/G, qu'on écrit le plus souvent hyperphorie G/D (on nomme l'œil le plus haut). Le cover test s'interprète dans les deux plans, et la norme verticale est l'orthophorie."
+  },
+  {
     epreuve: "U5", theme: "Masquage et phories", session: "2020",
     question: "On masque l'OD : l'OG non masqué fait un mouvement naso-temporal pour prendre la fixation. Conclusion ?",
     choix: ["Ésophorie OG", "Ésotropie OG", "Exotropie OG", "Exophorie OG"],
