@@ -297,9 +297,9 @@ QUESTIONS.push(
   {
     epreuve: "U41", theme: "Estimation et tests", session: "2017",
     question: "Test bilatéral à 5 % : H0 « le diamètre moyen vaut 14 mm ». Sous H0, la moyenne d'un échantillon de 100 lentilles suit une loi normale de moyenne 14 et d'écart type 0,05. Un échantillon donne 14,12 mm. Conclusion ?",
-    choix: ["On accepte H0, car 14,12 est proche de 14", "On rejette H0, car 14,12 sort de la zone d'acceptation", "On rejette H0, car 14,12 est supérieur à 14", "On ne peut pas conclure sans l'écart type de la population"],
+    choix: ["On ne rejette pas H0, car 14,12 est proche de 14", "On rejette H0, car 14,12 est dans la région de rejet", "On rejette H0, car 14,12 est supérieur à 14", "On ne peut pas conclure sans l'écart type de la population"],
     bonne: 1,
-    explication: "Zone d'acceptation : 14 ± 1,96 × 0,05 = 14 ± 0,098, soit environ [13,90 ; 14,10]. La moyenne observée 14,12 est en dehors : on rejette H0 au seuil de 5 %, il faut régler la machine. Piège : dépasser 14 ne suffit pas, il faut sortir de la zone."
+    explication: "Règle de décision : on rejette H0 si la moyenne observée sort de 14 ± 1,96 × 0,05 = 14 ± 0,098, soit environ [13,90 ; 14,10]. La moyenne observée 14,12 est en dehors, donc dans la région de rejet : on rejette H0 au seuil de 5 %, il faut régler la machine. Piège : dépasser 14 ne suffit pas, il faut sortir de la zone."
   },
 
   // ---------- Division harmonique (programme du CCF) ----------

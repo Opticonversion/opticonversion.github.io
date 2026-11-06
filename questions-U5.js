@@ -134,14 +134,14 @@ QUESTIONS.push(
   },
   {
     epreuve: "U5", theme: "Anisométropie", session: "2024",
-    question: "Pour une anisométropie de PUISSANCE (réfractive), quel équipement réduit le plus l'aniséiconie ?",
+    question: "Pour une anisométropie de PUISSANCE, quel équipement réduit le plus l'aniséiconie ?",
     choix: ["Des lunettes à 15 mm", "Des lentilles de contact", "Des lunettes à 25 mm", "Aucun équipement"],
     bonne: 1,
-    explication: "L'aniséiconie induite dépend de la distance compensation-œil. En lentilles, cette distance passe d'environ 15 mm à moins de 2 mm : l'aniséiconie devient beaucoup plus faible. (Pour une anisométropie AXIALE, la loi de Knapp favorise au contraire les lunettes placées au foyer objet de l'œil.)"
+    explication: "L'aniséiconie induite dépend de la distance compensation-œil. En lentilles, cette distance passe d'environ 15 mm à moins de 2 mm : l'aniséiconie devient beaucoup plus faible. (Pour une anisométropie AXILE, la loi de Knapp favorise au contraire les lunettes placées au foyer objet de l'œil.)"
   },
   {
     epreuve: "U5", theme: "Anisométropie", session: "complément",
-    question: "Anisométropie purement AXIALE : OD −1,00 et OG −6,00 (sphériques), verres à 15 mm de l'œil. Aniséiconie totale en lunettes ?",
+    question: "Anisométropie purement AXILE : OD −1,00 et OG −6,00 (sphériques), verres à 15 mm de l'œil. Aniséiconie totale en lunettes ?",
     choix: ["Environ 1 %", "Environ 7,5 %", "Environ 8,5 %", "Environ 16 %"],
     bonne: 0,
     explication: "Anisométropie axile : les deux aniséiconies s'opposent. Axile ≈ 1,7 % par dioptrie de différence = 5 × 1,7 = 8,5 % en faveur de l'OG (le plus long, le plus myope). Induite par les lunettes ≈ LH (cm) × différence des verres = 1,5 × 5 = 7,5 % en faveur de l'OD (le moins myope). Totale ≈ 8,5 − 7,5 = 1 % (raccourci : environ 0,2 % par dioptrie avec LH = 15 mm). En lunettes, l'aniséiconie est donc presque compensée ; en lentilles, l'induite disparaît et il resterait 8,5 %."
@@ -151,18 +151,18 @@ QUESTIONS.push(
     question: "OD +1,00 et OG +4,00 (sphériques). En lecture, le regard passe 1 cm sous les centres optiques. Effet prismatique vertical différentiel ?",
     choix: ["1 Δ", "3 Δ", "4 Δ", "5 Δ"],
     bonne: 1,
-    explication: "Prentice : P = d (cm) × |D|. OD : 1 × 1 = 1 Δ ; OG : 1 × 4 = 4 Δ. Verres convergents, regard sous le centre optique : base en haut pour les deux. Différentiel = 4 − 1 = 3 Δ base en haut sur l'OG. Les réserves fusionnelles verticales sont faibles (bris vers 3 Δ) : risque de vision double."
+    explication: "Prentice : P = d (cm) × |D|. OD : 1 × 1 = 1 Δ ; OG : 1 × 4 = 4 Δ. Verres convergents, regard sous le centre optique : base supérieure pour les deux. Différentiel = 4 − 1 = 3 Δ base supérieure sur l'OG. Les réserves fusionnelles verticales sont faibles (bris vers 3 Δ) : risque de vision double."
   },
   {
     epreuve: "U5", theme: "Anisométropie", session: "2024",
     question: "Pourquoi un anisométrope équipé en lentilles ne voit-il plus double quand il regarde vers le haut ?",
-    choix: ["Les lentilles corrigent la phorie", "La lentille suit l'œil : la ligne de regard reste centrée, pas d'effet prismatique différentiel", "Les lentilles augmentent les réserves fusionnelles", "Les lentilles suppriment l'anisométropie"],
+    choix: ["Les lentilles compensent la phorie", "La lentille suit l'œil : la ligne de regard reste centrée, pas d'effet prismatique différentiel", "Les lentilles augmentent les réserves fusionnelles", "Les lentilles suppriment l'anisométropie"],
     bonne: 1,
     explication: "En lunettes, regarder hors du centre optique crée un prisme différent sur chaque œil, donc une phorie induite. La lentille suit le globe dans ses mouvements et reste centrée sur la cornée : pas d'effet prismatique, donc pas de phorie induite."
   },
   {
     epreuve: "U5", theme: "Anisométropie", session: "2023",
-    question: "Un enfant anisométrope non corrigé développe une amblyopie fonctionnelle de l'œil le plus amétrope. Pourquoi ?",
+    question: "Un enfant anisométrope non compensé développe une amblyopie fonctionnelle de l'œil le plus amétrope. Pourquoi ?",
     choix: ["Une lésion de la rétine", "L'image floue de cet œil pendant la période de maturation visuelle", "Un glaucome congénital", "Une cataracte"],
     bonne: 1,
     explication: "Amblyopie fonctionnelle = baisse d'acuité liée à la non-utilisation d'un œil pendant la période de maturation visuelle, sans lésion organique. Le cerveau privilégie l'image nette de l'autre œil. Si chaque œil est utilisé à son tour (un pour le loin, l'autre pour le près), l'amblyopie peut ne pas apparaître."
@@ -171,17 +171,17 @@ QUESTIONS.push(
   // ---------- Examen préliminaire ----------
   {
     epreuve: "U5", theme: "Examen préliminaire", session: "2024",
-    question: "Compensation portée OD −2,00 (−1,00) ; autoréfractomètre OD −3,00 (−0,50). Réfraction complémentaire attendue (en sphères équivalentes), si l'autoréfractomètre était exact ?",
+    question: "Compensation portée OD −2,00 (−1,00) 180° ; autoréfractomètre OD −3,00 (−0,50) 180°. Réfraction complémentaire attendue (en équivalents sphériques), si l'autoréfractomètre était exact ?",
     choix: ["+0,75", "−0,75", "−0,50", "−1,00"],
     bonne: 1,
-    explication: "SE = S + C/2. Portée : −2,00 + (−0,50) = −2,50. Autoréfractomètre : −3,00 + (−0,25) = −3,25. RC = −3,25 − (−2,50) = −0,75. Attention : à l'autoréfractomètre, le sujet accommode souvent (accommodation instrumentale) et la myopie est surestimée. On vérifie avec les acuités."
+    explication: "Équivalent sphérique = S + C/2. Portée : −2,00 + (−0,50) = −2,50. Autoréfractomètre : −3,00 + (−0,25) = −3,25. RC = −3,25 − (−2,50) = −0,75. Attention : à l'autoréfractomètre, le sujet accommode souvent (accommodation instrumentale) et la myopie est surestimée. On vérifie avec les acuités."
   },
   {
     epreuve: "U5", theme: "Examen préliminaire", session: "2020 et 2024",
-    question: "Avec sa compensation, un sujet lit 10/10. On ajoute +2,00 : son acuité tombe à 2/10. Sphère résiduelle estimée (test du verre convexe) ?",
+    question: "Avec sa compensation, un sujet lit 10/10. On ajoute +2,00 : son acuité tombe à 2/10. Sphère résiduelle estimée (essai de verre convexe) ?",
     choix: ["+0,75", "−0,75", "+1,25", "0,00"],
     bonne: 0,
-    explication: "Règle de Swaine (valable pour une acuité ≤ 5/10) : brouillage ≈ 1 ÷ (4 × AV) = 1 ÷ (4 × 0,2) = 1,25 D. Sphère résiduelle = verre ajouté − brouillage = +2,00 − 1,25 = +0,75 D. Il reste donc une hypermétropie résiduelle : le sujet est sous-corrigé en positif."
+    explication: "Règle de Swaine (valable pour une acuité ≤ 5/10) : brouillage ≈ 1 ÷ (4 × AV) = 1 ÷ (4 × 0,2) = 1,25 δ. Sphère résiduelle = verre ajouté − brouillage = +2,00 − 1,25 = +0,75 δ. Il reste donc une hypermétropie résiduelle : le sujet est sous-compensé en positif."
   },
   {
     epreuve: "U5", theme: "Examen préliminaire", session: "2024",
@@ -200,16 +200,16 @@ QUESTIONS.push(
   {
     epreuve: "U5", theme: "Examen préliminaire", session: "2023",
     question: "Un myope de −2,00 non compensé lit à 25 cm. Quelle accommodation met-il en jeu ?",
-    choix: ["0 D", "2 D", "4 D", "6 D"],
+    choix: ["0 δ", "2 δ", "4 δ", "6 δ"],
     bonne: 1,
-    explication: "Acc = R − 1/HT = −2,00 − 1/(−0,25) = −2 + 4 = 2 D. Son punctum remotum est à 50 cm : il n'a que 2 D à fournir pour lire à 25 cm."
+    explication: "Acc = R − 1/HT = −2,00 − 1/(−0,25) = −2 + 4 = 2 δ. Son remotum est à 50 cm : il n'a que 2 δ à fournir pour lire à 25 cm."
   },
   {
     epreuve: "U5", theme: "Examen préliminaire", session: "2023",
     question: "Un hypermétrope de +1,50 non compensé lit à 50 cm. Quelle accommodation met-il en jeu ?",
-    choix: ["2,00 D", "0,50 D", "3,50 D", "1,50 D"],
+    choix: ["2,00 δ", "0,50 δ", "3,50 δ", "1,50 δ"],
     bonne: 2,
-    explication: "Acc = R − 1/HT = +1,50 − 1/(−0,50) = 1,50 + 2,00 = 3,50 D : 2 D pour la distance, plus 1,50 D pour compenser son hypermétropie."
+    explication: "Acc = R − 1/HT = +1,50 − 1/(−0,50) = 1,50 + 2,00 = 3,50 δ : 2 δ pour la distance, plus 1,50 δ pour compenser son hypermétropie."
   },
 
   // ---------- Réfraction ----------
@@ -225,12 +225,12 @@ QUESTIONS.push(
     question: "Lors de la vérification de la puissance du cylindre, on ajoute −0,50 de cylindre. Comment ajuster la sphère ?",
     choix: ["Ajouter −0,25", "Ajouter +0,25", "Ajouter +0,50", "Ne rien changer"],
     bonne: 1,
-    explication: "On garde la sphère équivalente constante pour maintenir le cercle de moindre diffusion sur la rétine (acc = 0) : −0,50 de cylindre fait −0,25 de SE, qu'on compense par +0,25 de sphère."
+    explication: "On garde l'équivalent sphérique constant pour maintenir le cercle de moindre diffusion sur la rétine (acc = 0) : −0,50 de cylindre fait −0,25 d'équivalent sphérique, qu'on compense par +0,25 de sphère."
   },
   {
     epreuve: "U5", theme: "Réfraction", session: "complément",
     question: "Au test rouge-vert, le sujet voit plus net sur le rouge. Que faites-vous ?",
-    choix: ["Ajouter −0,25 D", "Ajouter +0,25 D", "Tourner l'axe du cylindre", "Rien, l'équilibre est bon"],
+    choix: ["Ajouter −0,25 δ", "Ajouter +0,25 δ", "Tourner l'axe du cylindre", "Rien, l'équilibre est bon"],
     bonne: 0,
     explication: "Rouge plus net : l'image est en avant de la rétine (trop de positif). Moyen mnémotechnique « RAM » : Rouge → Ajouter du Moins."
   },
@@ -246,30 +246,30 @@ QUESTIONS.push(
     question: "Pourquoi utilise-t-on le brouillage en réfraction subjective ?",
     choix: ["Pour relâcher l'accommodation", "Pour mesurer l'astigmatisme", "Pour tester la vision des couleurs", "Pour stimuler la convergence"],
     bonne: 0,
-    explication: "En ajoutant du positif, l'image passe en avant de la rétine : accommoder ne ferait qu'augmenter le flou, le sujet relâche son accommodation. Indispensable pour ne pas sous-corriger un hypermétrope ni surcorriger un myope."
+    explication: "En ajoutant du positif, l'image passe en avant de la rétine : accommoder ne ferait qu'augmenter le flou, le sujet relâche son accommodation. Indispensable pour ne pas sous-compenser un hypermétrope ni surcompenser un myope."
   },
 
   // ---------- Lentilles de contact ----------
   {
     epreuve: "U5", theme: "Lentilles", session: "complément",
     question: "Un rayon de courbure cornéen de 7,50 mm correspond à une puissance lue au kératomètre de :",
-    choix: ["40 D", "42 D", "45 D", "47,50 D"],
+    choix: ["40 δ", "42 δ", "45 δ", "47,50 δ"],
     bonne: 2,
-    explication: "Avec l'indice d'étalonnage des kératomètres (1,3375) : K ≈ 337,5 / r (mm) = 337,5 / 7,5 = 45 D. À connaître sans calculatrice."
+    explication: "Avec l'indice d'étalonnage des kératomètres (1,3375) : K ≈ 337,5 / r (mm) = 337,5 / 7,5 = 45 δ. À connaître sans calculatrice."
   },
   {
     epreuve: "U5", theme: "Lentilles", session: "2020 et 2023",
     question: "Kératométrie : 7,75 mm à 0° et 7,65 mm à 90°. Astigmatisme cornéen (face avant) ?",
-    choix: ["0,60 D direct", "0,60 D inverse", "1,00 D direct", "0,25 D inverse"],
+    choix: ["0,60 δ direct", "0,60 δ inverse", "1,00 δ direct", "0,25 δ inverse"],
     bonne: 0,
-    explication: "Toricité = 7,75 − 7,65 = 0,10 mm, soit environ 0,60 D (indice réel de la cornée ; un kératomètre affiche plutôt 0,50 D). Le méridien vertical (90°) a le plus petit rayon, il est le plus cambré : astigmatisme direct, compensé par plan (−0,60) 0°."
+    explication: "Toricité = 7,75 − 7,65 = 0,10 mm, soit environ 0,60 δ (indice réel de la cornée ; un kératomètre affiche plutôt 0,50 δ). Le méridien vertical (90°) a le plus petit rayon, il est le plus cambré : astigmatisme direct, compensé par plan (−0,60) 0°."
   },
   {
     epreuve: "U5", theme: "Lentilles", session: "2023",
-    question: "Un œil a 1,00 D d'astigmatisme cornéen direct mais aucun astigmatisme total. Son astigmatisme interne est :",
-    choix: ["Nul", "1,00 D direct", "1,00 D inverse", "2,00 D direct"],
+    question: "Un œil a 1,00 δ d'astigmatisme cornéen direct mais aucun astigmatisme total. Son astigmatisme interne est :",
+    choix: ["Nul", "1,00 δ direct", "1,00 δ inverse", "2,00 δ direct"],
     bonne: 2,
-    explication: "Astigmatisme total = cornéen (+) interne. Pour un total nul, l'interne compense exactement le cornéen : 1,00 D inverse (compensé par plan (−1,00) 90°). C'est la situation physiologique : cornée directe, interne inverse."
+    explication: "Astigmatisme total = cornéen (+) interne. Pour un total nul, l'interne compense exactement le cornéen : 1,00 δ inverse (compensé par plan (−1,00) 90°). C'est la situation physiologique : cornée directe, interne inverse."
   },
   {
     epreuve: "U5", theme: "Lentilles", session: "2023",
@@ -294,17 +294,17 @@ QUESTIONS.push(
   },
   {
     epreuve: "U5", theme: "Lentilles", session: "2020",
-    question: "À la fluorescéine, une LRPG montre beaucoup de fluo en périphérie, très peu au centre, et bouge trop. L'adaptation est :",
+    question: "À la fluorescéine, une LRPG montre beaucoup de fluorescéine en périphérie, très peu au centre, et bouge trop. L'adaptation est :",
     choix: ["Serrée", "Alignée", "Plate", "Parfaite"],
     bonne: 2,
-    explication: "Appui central (peu de fluo au centre) + forte mobilité = adaptation plate. On resserre en diminuant le rayon de la face arrière (ro)."
+    explication: "Appui central (peu de fluorescéine au centre) + forte mobilité = adaptation plate. On resserre en diminuant le rayon de la face arrière (ro)."
   },
   {
     epreuve: "U5", theme: "Lentilles", session: "2020",
     question: "On resserre une LRPG en diminuant son ro de 0,10 mm. Le ménisque de larmes devient :",
-    choix: ["Plus convergent d'environ +0,50 D", "Plus divergent d'environ −0,50 D", "Inchangé", "Plus convergent d'environ +1,00 D"],
+    choix: ["Plus convergent d'environ +0,50 δ", "Plus divergent d'environ −0,50 δ", "Inchangé", "Plus convergent d'environ +1,00 δ"],
     bonne: 0,
-    explication: "Une modification de 10/100 de mm du ro change la vergence du ménisque de larmes d'environ 0,50 D. Lentille plus cambrée = ménisque plus convexe (+0,50 D). On commande donc une lentille plus divergente de 0,50 D."
+    explication: "Une modification de 10/100 de mm du ro change la vergence du ménisque de larmes d'environ 0,50 δ. Lentille plus cambrée = ménisque plus convexe (+0,50 δ). On commande donc une lentille plus divergente de 0,50 δ."
   },
 
   // ---------- Pathologie ----------
@@ -324,7 +324,7 @@ QUESTIONS.push(
   },
   {
     epreuve: "U5", theme: "Pathologie", session: "complément",
-    question: "Un patient de 70 ans devient plus myope et peut de nouveau lire sans lunettes. Cela évoque :",
+    question: "Un sujet de 70 ans devient plus myope et peut de nouveau lire sans lunettes. Cela évoque :",
     choix: ["Un glaucome", "Une cataracte nucléaire (myopie d'indice)", "Une DMLA", "Un décollement de rétine"],
     bonne: 1,
     explication: "La cataracte (opacification du cristallin) nucléaire augmente l'indice du cristallin : l'œil devient plus myope. Autres symptômes : baisse d'acuité, sensation de brouillard, photophobie (éblouissement), diplopie monoculaire, couleurs altérées."

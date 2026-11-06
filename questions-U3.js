@@ -67,14 +67,14 @@ QUESTIONS.push(
   },
   {
     epreuve: "U3", theme: "Marché et zone de chalandise", session: "2024",
-    question: "Marché théorique : 1 000 000 € TTC. Indice de disparité de la consommation (IDC) : 90. Évasion commerciale : 10 %. Quel est le marché réel de la zone ?",
+    question: "Marché potentiel : 1 000 000 € TTC. Indice de disparité de la consommation (IDC) : 90. Évasion commerciale : 10 %. Quel est le marché net de l'évasion commerciale ?",
     choix: ["800 000 €", "900 000 €", "810 000 €", "990 000 €"],
     bonne: 2,
     explication: "IDC 90 = les habitants dépensent 10 % de moins que la moyenne nationale : 1 000 000 × 0,90 = 900 000 €. L'évasion = 10 % de ces dépenses partent ailleurs (internet, grande ville) : 900 000 × 0,90 = 810 000 €. On multiplie, on ne soustrait pas 20 % d'un coup."
   },
   {
     epreuve: "U3", theme: "Marché et zone de chalandise", session: "2024",
-    question: "Le marché réel d'une zone est de 480 000 € TTC. Le magasin espère en capter 25 %. Quel chiffre d'affaires HT peut-il prévoir ?",
+    question: "Le marché d'une zone, net de l'évasion commerciale, est de 480 000 € TTC. Le magasin espère en capter 25 %. Quel chiffre d'affaires HT peut-il prévoir ?",
     choix: ["120 000 €", "100 000 €", "96 000 €", "144 000 €"],
     bonne: 1,
     explication: "Part de marché : 480 000 × 0,25 = 120 000 € TTC. Le chiffre d'affaires d'une entreprise se donne HT : 120 000 / 1,2 = 100 000 € HT."
@@ -90,10 +90,10 @@ QUESTIONS.push(
   // ---------- Mercatique et communication (4 années sur 5) ----------
   {
     epreuve: "U3", theme: "Mercatique et communication", session: "2018",
-    question: "Laquelle de ces actions est une communication HORS-MÉDIA ?",
+    question: "Laquelle de ces actions est une communication HORS MÉDIA ?",
     choix: ["Une annonce dans la presse régionale", "Un spot de 30 secondes sur une radio locale", "Une affiche 4 × 3 sur le rond-point (affichage)", "Un courrier personnalisé aux clients"],
     bonne: 3,
-    explication: "Les 6 grands médias : presse, radio, télévision, affichage, cinéma, internet. Le hors-média regroupe le reste : publipostage, PLV en magasin, événement, salon, parrainage, carte de fidélité… En optique, le publipostage au moment du renouvellement est un grand classique."
+    explication: "Les 6 grands médias : presse, radio, télévision, affichage, cinéma, internet. Le hors média regroupe le reste : publipostage, PLV en magasin, événement, salon, parrainage, carte de fidélité… En optique, le publipostage au moment du renouvellement est un grand classique."
   },
   {
     epreuve: "U3", theme: "Mercatique et communication", session: "2019",
@@ -164,10 +164,10 @@ QUESTIONS.push(
   },
   {
     epreuve: "U3", theme: "Analyse financière", session: "2017",
-    question: "Dettes fournisseurs : 24 000 € TTC. Achats de l'année : 144 000 € TTC. Quel est le délai moyen de crédit fournisseurs (année de 360 jours) ?",
+    question: "Dettes fournisseurs : 24 000 € TTC. Achats de l'année : 146 000 € TTC. Quel est le délai moyen de crédit fournisseurs (année de 365 jours) ?",
     choix: ["60 jours", "6 jours", "36 jours", "90 jours"],
     bonne: 0,
-    explication: "Délai fournisseurs = dettes fournisseurs / achats TTC × 360 = 24 000 / 144 000 × 360 = 1/6 × 360 = 60 jours. Même logique pour les clients (créances / CA TTC × 360). En optique, le délai clients est court (paiement au comptant, tiers payant), ce qui aide la trésorerie."
+    explication: "Délai fournisseurs = dettes fournisseurs / achats TTC × 365 = 24 000 / 146 000 × 365 = 60 jours. Même logique pour les clients (créances / CA TTC × 365). En optique, le délai clients est court (paiement au comptant, tiers payant), ce qui aide la trésorerie."
   },
   {
     epreuve: "U3", theme: "Analyse financière", session: "2017",
@@ -269,7 +269,7 @@ QUESTIONS.push(
     question: "Une opticienne crée seule sa société et la dirige. Quel est son statut social selon la forme choisie ?",
     choix: ["Gérante d'EURL : assimilée salariée ; présidente de SASU : indépendante", "Gérante d'EURL : indépendante ; présidente de SASU : assimilée salariée", "Salariée dans les deux cas", "Indépendante dans les deux cas"],
     bonne: 1,
-    explication: "Gérant associé unique d'EURL = travailleur non salarié (sécurité sociale des indépendants, cotisations plus faibles, protection moindre). Président de SASU = assimilé salarié (régime général, meilleure protection, cotisations plus élevées, mais pas d'assurance chômage). Autres différences : EURL imposée à l'IR par défaut, SASU à l'IS par défaut."
+    explication: "Gérant associé unique d'EURL = travailleur non salarié (protection sociale des indépendants, gérée par l'Urssaf et l'Assurance maladie, cotisations plus faibles, protection moindre). Président de SASU = assimilé salarié (régime général, meilleure protection, cotisations plus élevées, mais pas d'assurance chômage). Autres différences : EURL imposée à l'IR par défaut, SASU à l'IS par défaut."
   },
   {
     epreuve: "U3", theme: "Droit des entreprises", session: "2023",
@@ -299,7 +299,7 @@ QUESTIONS.push(
     question: "Avant de réaliser une réfraction pour adapter une ordonnance, que doit dire l'opticien au client ?",
     choix: ["Que l'examen est remboursé par la Sécurité sociale", "Que la réfraction pratiquée n'est pas un acte médical", "Qu'il doit revenir dans 3 mois", "Qu'il n'a pas le droit de vendre de lentilles"],
     bonne: 1,
-    explication: "Le Code de la santé publique (décret de 2016 sur l'adaptation des corrections) oblige l'opticien à informer la personne que la réfraction qu'il pratique n'est pas un acte médical : elle ne remplace pas une consultation chez l'ophtalmologiste."
+    explication: "Le Code de la santé publique (décret du 12 octobre 2016 relatif à la délivrance des verres correcteurs et à l'exercice de la profession d'opticien-lunetier) oblige l'opticien à informer la personne que la réfraction qu'il pratique n'est pas un acte médical : elle ne remplace pas une consultation chez l'ophtalmologiste."
   },
   {
     epreuve: "U3", theme: "Réglementation de l'opticien", session: "2019",

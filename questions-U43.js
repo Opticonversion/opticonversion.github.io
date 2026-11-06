@@ -38,7 +38,7 @@ QUESTIONS.push(
   {
     epreuve: "U43", theme: "Chaîne des conjugués", session: "2021",
     question: "Un utilisateur amétrope, sans lunettes et sans accommoder, voit net à travers un instrument. Où est l'image finale donnée par l'instrument ?",
-    choix: ["À l'infini", "Sur le remotum de l'utilisateur", "Sur son punctum proximum", "Au foyer objet de son œil"],
+    choix: ["À l'infini", "Sur le remotum de l'utilisateur", "Sur son proximum", "Au foyer objet de son œil"],
     bonne: 1,
     explication: "Un œil qui n'accommode pas voit net uniquement les objets placés sur son remotum. L'instrument doit donc conjuguer l'image finale avec le remotum. À l'infini, ce n'est vrai que pour l'emmétrope."
   },
@@ -287,14 +287,14 @@ QUESTIONS.push(
     question: "Skiascopie à 50 cm, faisceau divergent, sans verre : le reflet bouge en sens inverse du skiascope. Conclusion ?",
     choix: ["Hypermétropie", "Emmétropie", "Myopie de plus de 2 δ", "Myopie de moins de 2 δ"],
     bonne: 2,
-    explication: "Le mouvement est inverse quand le remotum se trouve entre le patient et l'examinateur, donc à moins de 50 cm : myopie de plus de 1/0,5 = 2 δ. Pour une myopie de 2 δ exactement, on aurait le point neutre."
+    explication: "Le mouvement est inverse quand le remotum se trouve entre le sujet et l'examinateur, donc à moins de 50 cm : myopie de plus de 1/0,5 = 2 δ. Pour une myopie de 2 δ exactement, on aurait le point neutre."
   },
 
   // ---------- Frontofocomètre (2019) ----------
   {
     epreuve: "U43", theme: "Frontofocomètre", session: "2019",
-    question: "Au frontofocomètre, la vergence d'un verre se mesure en lumière verte (raie e du mercure). Pourquoi impose-t-on une couleur précise ?",
-    choix: ["Pour ne pas éblouir l'opticien pendant la mesure", "C'est la longueur d'onde de référence (raie e, 546 nm) des vergences", "Pour contrôler l'efficacité des traitements antireflet", "Pour bien voir la mire à travers les verres teintés"],
+    question: "Au frontofocomètre, la puissance frontale image d'un verre se mesure en lumière verte (raie e du mercure). Pourquoi impose-t-on une couleur précise ?",
+    choix: ["Pour ne pas éblouir l'opticien pendant la mesure", "C'est la longueur d'onde de référence (raie e, 546 nm) pour mesurer les puissances", "Pour contrôler l'efficacité des traitements antireflet", "Pour bien voir la mire à travers les verres teintés"],
     bonne: 1,
     explication: "La vergence d'un verre change un peu avec la couleur de la lumière (dispersion). En mesurant à la longueur d'onde de référence (raie e, 546,07 nm), on évite les écarts dus au chromatisme et on mesure la valeur exacte annoncée par le fabricant."
   },
@@ -312,7 +312,7 @@ QUESTIONS.push(
     question: "Un doublet achromatique associe :",
     choix: ["Deux lentilles convergentes taillées dans le même verre", "Une convergente en crown et une divergente en flint", "Deux lentilles divergentes en flint, collées", "Une lentille convergente et un miroir concave"],
     bonne: 1,
-    explication: "Le crown est peu dispersif (constringence élevée), le flint très dispersif (constringence faible) : leurs dispersions se compensent alors que la vergence totale reste convergente. On corrige ainsi l'aberration chromatique (les franges colorées)."
+    explication: "Le crown est peu dispersif (constringence, ou nombre d'Abbe, élevée), le flint très dispersif (constringence faible) : leurs dispersions se compensent alors que la vergence totale reste convergente. On corrige ainsi l'aberration chromatique (les franges colorées)."
   },
   {
     epreuve: "U43", theme: "Aberrations", session: "2022",

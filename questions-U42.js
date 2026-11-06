@@ -208,7 +208,7 @@ QUESTIONS.push(
   },
   {
     epreuve: "U42", theme: "Ouverture et résolution", session: "2024",
-    question: "Une bijoutière utilise une loupe de puissance P = 12,5 δ. Son œil sépare 3 × 10⁻⁴ rad. Quel est le plus petit détail qu'elle peut distinguer sur l'objet ?",
+    question: "Une bijoutière utilise une loupe de puissance P = 12,5 δ. La limite de résolution angulaire de son œil est 3 × 10⁻⁴ rad. Quel est le plus petit détail qu'elle peut distinguer sur l'objet ?",
     choix: ["2,4 µm", "24 µm", "240 µm", "2,4 mm"],
     bonne: 1,
     explication: "Puissance P = α' / y (angle de l'image en rad par taille de l'objet en m). Donc y = ε / P = 3 × 10⁻⁴ / 12,5 = 2,4 × 10⁻⁵ m = 24 µm."
