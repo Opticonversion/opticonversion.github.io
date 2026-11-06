@@ -74,10 +74,10 @@ QUESTIONS.push(
   },
   {
     epreuve: "U43", theme: "Vergences et focales", session: "2023",
-    question: "On clipse une lentille macro de +4 δ sur un objectif photo réglé sur l'infini. Quel objet sera net sur la pellicule ?",
-    choix: ["Un objet à 4 cm", "Un objet à 25 cm", "Un objet à 40 cm", "Un objet à l'infini"],
+    question: "On clipse une lentille macro de +5 δ sur un objectif photo réglé sur l'infini. Quel objet sera net sur la pellicule ?",
+    choix: ["Un objet à 5 cm", "Un objet à 20 cm", "Un objet à 50 cm", "Un objet à l'infini"],
     bonne: 1,
-    explication: "L'objectif réglé sur l'infini a besoin de rayons parallèles. La lentille macro les fournit si l'objet est à son foyer objet : 1/4 = 0,25 m, soit 25 cm devant elle."
+    explication: "L'objectif réglé sur l'infini a besoin de rayons parallèles. La lentille macro les fournit si l'objet est à son foyer objet : 1/5 = 0,20 m, soit 20 cm devant elle."
   },
 
   // ---------- Œil et instrument (6/8) ----------
@@ -214,11 +214,11 @@ QUESTIONS.push(
     explication: "Le pignon (roue dentée) tourne, la crémaillère (barre dentée) se déplace : rotation → translation. C'est le réglage rapide (macrométrique) classique des microscopes."
   },
   {
-    epreuve: "U43", theme: "Mécanismes de réglage", session: "2022",
-    question: "Une bague de mise au point (système vis-écrou) est filetée au pas de 0,75 mm. Combien de tours faut-il pour déplacer l'oculaire de 3 mm ?",
-    choix: ["2 tours", "3 tours", "4 tours", "2,25 tours"],
+    epreuve: "U43", theme: "Mécanismes de réglage", session: "2021",
+    question: "Une bague de mise au point (système vis-écrou) est filetée au pas de 0,6 mm. Combien de tours faut-il pour déplacer l'oculaire de 2,4 mm ?",
+    choix: ["2 tours", "3 tours", "4 tours", "1,44 tour"],
     bonne: 2,
-    explication: "Un système vis-écrou transforme une rotation en translation : un tour fait avancer d'un pas. Nombre de tours = course ÷ pas = 3 ÷ 0,75 = 4 tours."
+    explication: "Un système vis-écrou transforme une rotation en translation : un tour fait avancer d'un pas. Nombre de tours = course ÷ pas = 2,4 ÷ 0,6 = 4 tours."
   },
 
   // ---------- Grossissement et photo ----------
@@ -293,8 +293,8 @@ QUESTIONS.push(
   // ---------- Frontofocomètre (2019) ----------
   {
     epreuve: "U43", theme: "Frontofocomètre", session: "2019",
-    question: "Pourquoi la mire d'un frontofocomètre est-elle éclairée en lumière verte de 546,07 nm ?",
-    choix: ["Pour ne pas éblouir l'opticien pendant la mesure", "C'est la longueur d'onde de référence (raie e) des vergences", "Pour contrôler l'efficacité des traitements antireflet", "Pour bien voir la mire à travers les verres teintés"],
+    question: "Au frontofocomètre, la vergence d'un verre se mesure en lumière verte (raie e du mercure). Pourquoi impose-t-on une couleur précise ?",
+    choix: ["Pour ne pas éblouir l'opticien pendant la mesure", "C'est la longueur d'onde de référence (raie e, 546 nm) des vergences", "Pour contrôler l'efficacité des traitements antireflet", "Pour bien voir la mire à travers les verres teintés"],
     bonne: 1,
     explication: "La vergence d'un verre change un peu avec la couleur de la lumière (dispersion). En mesurant à la longueur d'onde de référence (raie e, 546,07 nm), on évite les écarts dus au chromatisme et on mesure la valeur exacte annoncée par le fabricant."
   },
