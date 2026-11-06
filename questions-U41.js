@@ -52,7 +52,7 @@ QUESTIONS.push(
   {
     epreuve: "U41", theme: "Suites", session: "2016",
     question: "Quelle est la limite de u(n) = 300 − 200 × 0,8ⁿ quand n tend vers +∞ ? Que signifie-t-elle ?",
-    choix: ["+∞ : la clientèle grandit sans fin", "300 : la clientèle se stabilise vers 300 porteurs", "100 : la clientèle revient à son départ", "0 : la clientèle disparaît"],
+    choix: ["+∞ : la clientèle augmente sans limite", "300 : la clientèle se stabilise vers 300", "100 : la clientèle revient à sa valeur de départ", "0 : la clientèle finit par disparaître"],
     bonne: 1,
     explication: "Comme 0 < 0,8 < 1, 0,8ⁿ tend vers 0. Donc 200 × 0,8ⁿ tend vers 0 et u(n) tend vers 300. Interprétation : à long terme, le nombre de porteurs se rapproche de 300 sans jamais le dépasser."
   },
@@ -89,7 +89,7 @@ QUESTIONS.push(
   {
     epreuve: "U41", theme: "Fonctions", session: "2023",
     question: "Quelle est la limite de f(t) = 30 + 50 e^(−0,2t) en +∞, et que signifie-t-elle ?",
-    choix: ["80 : la température de départ", "0 : le verre gèle", "30 : asymptote y = 30, la température de la pièce", "+∞ : le verre chauffe sans fin"],
+    choix: ["80 : la température de sortie d'étuve", "0 : le verre finit par geler", "30 : la température ambiante de la pièce", "+∞ : le verre chauffe sans fin"],
     bonne: 2,
     explication: "Quand t → +∞, −0,2t → −∞ et e^(−0,2t) → 0. Donc f(t) → 30. La courbe a une asymptote horizontale y = 30 : le verre finit à la température ambiante de 30 °C."
   },
@@ -172,7 +172,7 @@ QUESTIONS.push(
   {
     epreuve: "U41", theme: "Statistique", session: "2023",
     question: "Après le changement de variable z = ln(y − 20), la calculatrice donne r ≈ −0,998 pour la série (x ; z). Que conclure ?",
-    choix: ["Ajustement affine de z en x non pertinent, car r < 0", "Ajustement affine de z en x pertinent, car |r| est très proche de 1", "On ne peut rien dire sans le nuage", "y est proportionnel à x"],
+    choix: ["Ajustement affine non pertinent, car r est négatif", "Ajustement affine pertinent, car |r| est très proche de 1", "Impossible à dire sans tracer le nuage de points", "Ajustement pertinent, car y est proportionnel à x"],
     bonne: 1,
     explication: "C'est la valeur absolue de r qui compte : |r| = 0,998, très proche de 1, donc les points (x ; z) sont presque alignés. Le signe − indique seulement que z diminue quand x augmente."
   },
@@ -185,10 +185,10 @@ QUESTIONS.push(
   },
   {
     epreuve: "U41", theme: "Statistique", session: "2023",
-    question: "La droite de régression des ventes de montures (en centaines) est y = 12x + 150, où x est le rang de l'année à partir de 2020. Quelle prévision pour 2028 ?",
+    question: "La droite de régression des ventes de montures (en centaines) est y = 12x + 150, où x est le rang de l'année (x = 0 pour 2020). Quelle prévision pour 2028 ?",
     choix: ["246 centaines", "2 460 centaines", "162 centaines", "258 centaines"],
     bonne: 0,
-    explication: "2028 correspond au rang x = 2028 − 2020 = 8. y = 12 × 8 + 150 = 96 + 150 = 246 centaines, soit 24 600 montures. Piège : se tromper de rang (x = 9 donne 258)."
+    explication: "2028 correspond au rang x = 2028 − 2020 = 8. y = 12 × 8 + 150 = 96 + 150 = 246 centaines, soit 24 600 montures. Piège : compter 2020 comme rang 1 (x = 9 donne 258)."
   },
 
   // ---------- Probabilités conditionnelles (4 sujets sur 5) ----------
@@ -231,7 +231,7 @@ QUESTIONS.push(
   },
   {
     epreuve: "U41", theme: "Lois de probabilité", session: "2017",
-    question: "X suit B(50 ; 0,02). Quelle est la probabilité qu'au moins une lentille soit défectueuse ?",
+    question: "X suit B(50 ; 0,02). Quelle est la probabilité qu'au moins une lentille soit défectueuse ? (0,98⁵⁰ ≈ 0,364)",
     choix: ["0,02", "0,364", "0,636", "1"],
     bonne: 2,
     explication: "On passe par le contraire : P(X = 0) = 0,98⁵⁰ ≈ 0,364. P(X ≥ 1) = 1 − 0,364 = 0,636. Piège : 0,364 est la probabilité qu'il n'y en ait aucune."
@@ -290,14 +290,14 @@ QUESTIONS.push(
   {
     epreuve: "U41", theme: "Estimation et tests", session: "2016",
     question: "On a trouvé l'intervalle de confiance à 95 % [0,722 ; 0,878]. La vraie proportion p est-elle sûrement dedans ?",
-    choix: ["Oui, à coup sûr", "Non : environ 95 % des intervalles construits ainsi contiennent p, mais pas tous", "Oui, si l'échantillon dépasse 30 personnes", "Non, p est forcément égal à 0,8"],
+    choix: ["Oui, c'est certain à 100 %", "Non, on a seulement une confiance de 95 %", "Oui, dès que l'échantillon dépasse 30 personnes", "Non, p vaut forcément 0,8"],
     bonne: 1,
-    explication: "On n'est jamais certain. Si l'on refaisait le sondage sur beaucoup d'échantillons, environ 95 % des intervalles obtenus contiendraient p. Il reste donc un risque de 5 % que p soit en dehors."
+    explication: "On n'est jamais certain. La méthode donne, pour environ 95 % des échantillons possibles, un intervalle qui contient p. Une fois l'intervalle calculé, on dit que p y est avec une confiance de 95 % : ce n'est plus une probabilité, p y est ou n'y est pas."
   },
   {
     epreuve: "U41", theme: "Estimation et tests", session: "2017",
     question: "Test bilatéral à 5 % : H0 « le diamètre moyen vaut 14 mm ». Sous H0, la moyenne d'un échantillon de 100 lentilles suit une loi normale de moyenne 14 et d'écart type 0,05. Un échantillon donne 14,12 mm. Conclusion ?",
-    choix: ["On accepte H0 : 14,12 est proche de 14", "On rejette H0 : 14,12 est hors de la zone [13,9 ; 14,1]", "On rejette H0 car 14,12 > 14", "On ne peut pas conclure"],
+    choix: ["On accepte H0, car 14,12 est proche de 14", "On rejette H0, car 14,12 sort de la zone d'acceptation", "On rejette H0, car 14,12 est supérieur à 14", "On ne peut pas conclure sans l'écart type de la population"],
     bonne: 1,
     explication: "Zone d'acceptation : 14 ± 1,96 × 0,05 = 14 ± 0,098, soit environ [13,90 ; 14,10]. La moyenne observée 14,12 est en dehors : on rejette H0 au seuil de 5 %, il faut régler la machine. Piège : dépasser 14 ne suffit pas, il faut sortir de la zone."
   },
@@ -315,7 +315,7 @@ QUESTIONS.push(
     question: "(A, B ; C, D) est une division harmonique et I est le milieu de [AB]. On a IA = 5 cm et IC = 2 cm (C entre I et B, D du même côté). Que vaut ID ? (relation de Newton : IA² = IC × ID)",
     choix: ["2,5 cm", "10 cm", "12,5 cm", "25 cm"],
     bonne: 2,
-    explication: "Relation de Newton : IA² = IC × ID, donc ID = IA² / IC = 25 / 2 = 12,5 cm. C est à l'intérieur de [AB] et D à l'extérieur, du même côté de I. C'est la même forme que la relation de conjugaison de Newton en optique (x × x' = −f'²)."
+    explication: "Relation de Newton : IA² = IC × ID, donc ID = IA² / IC = 25 / 2 = 12,5 cm. C est à l'intérieur de [AB] et D à l'extérieur, du même côté de I. On retrouve l'idée de la relation de Newton en optique : un produit de deux distances égal à un carré."
   }
 
 );

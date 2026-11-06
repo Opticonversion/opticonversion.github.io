@@ -91,7 +91,7 @@ QUESTIONS.push(
   {
     epreuve: "U3", theme: "Mercatique et communication", session: "2018",
     question: "Laquelle de ces actions est une communication HORS-MÉDIA ?",
-    choix: ["Une annonce dans la presse régionale", "Un spot sur une radio locale", "Une affiche 4 × 3 sur le rond-point", "Un courrier personnalisé aux clients (publipostage)"],
+    choix: ["Une annonce dans la presse régionale", "Un spot de 30 secondes sur une radio locale", "Une affiche 4 × 3 sur le rond-point (affichage)", "Un courrier personnalisé aux clients"],
     bonne: 3,
     explication: "Les 6 grands médias : presse, radio, télévision, affichage, cinéma, internet. Le hors-média regroupe le reste : publipostage, PLV en magasin, événement, salon, parrainage, carte de fidélité… En optique, le publipostage au moment du renouvellement est un grand classique."
   },
@@ -112,7 +112,7 @@ QUESTIONS.push(
   {
     epreuve: "U3", theme: "Mercatique et communication", session: "2024",
     question: "Un opticien indépendant veut rejoindre une franchise. Que doit lui remettre le franchiseur au moins 20 jours avant la signature du contrat ?",
-    choix: ["Un document d'information précontractuelle (DIP)", "Le bilan des 10 dernières années de tous les franchisés", "Un contrat de travail", "Une attestation de l'INPI"],
+    choix: ["Un document d'information précontractuelle", "Le bilan des 10 dernières années de tous les franchisés", "Un contrat de travail signé par le franchiseur", "Une attestation de dépôt de la marque à l'INPI"],
     bonne: 0,
     explication: "La loi Doubin (article L330-3 du Code de commerce) impose un DIP au moins 20 jours avant : présentation du réseau, état du marché, comptes du franchiseur, durée, conditions de renouvellement… Le franchisé reste un commerçant indépendant, propriétaire de son fonds."
   },
@@ -179,7 +179,7 @@ QUESTIONS.push(
   {
     epreuve: "U3", theme: "Analyse financière", session: "2024",
     question: "Le magasin embauche un opticien. Quel est le PREMIER solde intermédiaire de gestion touché par son salaire ?",
-    choix: ["La marge commerciale", "La valeur ajoutée", "L'excédent brut d'exploitation (EBE)", "Le résultat financier"],
+    choix: ["La marge commerciale", "La valeur ajoutée (VA)", "L'excédent brut d'exploitation (EBE)", "Le résultat courant avant impôts (RCAI)"],
     bonne: 2,
     explication: "Ordre des SIG : marge commerciale → valeur ajoutée (− charges externes) → EBE (− impôts et taxes − charges de personnel) → résultat d'exploitation → RCAI → résultat net. Le salaire et les cotisations patronales sont des charges de personnel : ils baissent l'EBE, puis tous les soldes qui suivent."
   },
@@ -192,7 +192,7 @@ QUESTIONS.push(
   },
   {
     epreuve: "U3", theme: "Investissement et financement", session: "2023",
-    question: "Une meuleuse automatique est achetée 15 000 € HT le 1er avril, amortie en linéaire sur 5 ans. Quelle est la dotation de la 1re année (exercice du 1er janvier au 31 décembre) ?",
+    question: "Une meuleuse automatique est achetée et mise en service le 1er avril, pour 15 000 € HT, amortie en linéaire sur 5 ans. Quelle est la dotation de la 1re année (exercice du 1er janvier au 31 décembre) ?",
     choix: ["3 000 €", "2 250 €", "750 €", "2 500 €"],
     bonne: 1,
     explication: "Annuité pleine = 15 000 / 5 = 3 000 € par an. La 1re année, on ne compte que d'avril à décembre, soit 9 mois (prorata temporis) : 3 000 × 9/12 = 2 250 €. Valeur nette comptable fin d'année 1 = 15 000 − 2 250 = 12 750 €. La dernière année recevra les 750 € restants."
@@ -200,7 +200,7 @@ QUESTIONS.push(
   {
     epreuve: "U3", theme: "Investissement et financement", session: "2023",
     question: "Pourquoi les dotations aux amortissements n'apparaissent-elles pas dans le budget de trésorerie ?",
-    choix: ["Parce qu'elles sont payées l'année suivante", "Parce qu'elles sont réglées par la banque", "Parce qu'elles ne sont pas déductibles du bénéfice", "Parce que c'est une charge calculée : aucun argent ne sort de l'entreprise"],
+    choix: ["Parce qu'elles ne sont payées que l'année suivante", "Parce qu'elles sont réglées directement par la banque", "Parce qu'elles ne sont pas déductibles du bénéfice", "Parce que c'est une charge calculée, sans sortie d'argent"],
     bonne: 3,
     explication: "L'argent est sorti une seule fois, le jour de l'achat (c'est ce décaissement qui figure dans le budget). La dotation étale ensuite ce coût sur la durée d'utilisation. Elle baisse le résultat, donc l'impôt (effet fiscal), sans toucher à la trésorerie."
   },
@@ -222,10 +222,10 @@ QUESTIONS.push(
   // ---------- Droit du travail ----------
   {
     epreuve: "U3", theme: "Droit du travail", session: "2024",
-    question: "Une opticienne veut recruter un salarié pour assurer durablement sa nouvelle activité d'optique à domicile. Peut-elle utiliser un CDD « pour se protéger » ?",
-    choix: ["Oui, le CDD est libre si le salarié l'accepte", "Oui, pour 3 ans maximum", "Non, un CDD ne peut pas pourvoir durablement un emploi lié à l'activité normale et permanente", "Non, le CDD est interdit dans le commerce"],
+    question: "Un opticien veut embaucher un monteur pour un poste permanent en atelier. Il hésite à proposer d'abord un CDD « pour voir ». Est-ce possible ?",
+    choix: ["Oui, le CDD est libre dès que le salarié l'accepte et le signe", "Oui, à condition de ne pas dépasser 3 ans au total", "Non, pas pour un emploi durable et permanent", "Non, le CDD est interdit dans tout le commerce de détail"],
     bonne: 2,
-    explication: "Le CDI est le contrat normal (article L1242-1 du Code du travail pour l'interdiction). Le CDD n'est permis que pour des cas précis : remplacer un salarié absent, accroissement temporaire d'activité, emploi saisonnier… Pour « se protéger », le bon outil est la période d'essai du CDI."
+    explication: "Le CDI est le contrat normal (article L1242-1 du Code du travail pour l'interdiction). Le CDD n'est permis que pour des cas précis : remplacer un salarié absent, accroissement temporaire d'activité, emploi saisonnier… Pour tester le salarié, le bon outil est la période d'essai du CDI."
   },
   {
     epreuve: "U3", theme: "Droit du travail", session: "2024",
@@ -244,16 +244,16 @@ QUESTIONS.push(
   {
     epreuve: "U3", theme: "Droit du travail", session: "2024",
     question: "La clause de non-concurrence d'un contrat ne prévoit aucune contrepartie financière. Quelle conséquence ?",
-    choix: ["Tout le contrat de travail est nul", "La clause est nulle, le contrat reste valable et le salarié pourra travailler chez un concurrent", "La clause reste valable, l'employeur paie une amende", "Le salarié doit rembourser ses salaires"],
+    choix: ["Tout le contrat de travail devient nul", "La clause est nulle, le contrat reste valable", "La clause reste valable, mais l'employeur paie une amende", "Le salarié doit rembourser une partie de ses salaires"],
     bonne: 1,
-    explication: "Seule la clause tombe. Le contrat de travail continue normalement. Après son départ, le salarié est libre de travailler chez un concurrent ou de s'installer à côté. Il peut même demander des dommages-intérêts s'il a respecté une clause nulle. D'où l'intérêt de bien la rédiger dès le départ."
+    explication: "Seule la clause tombe. Le contrat de travail continue normalement. Après son départ, le salarié est libre de travailler chez un concurrent ou de s'installer à côté. S'il a respecté une clause nulle, il peut demander des dommages-intérêts, à condition de prouver un préjudice (Cour de cassation, 2016). D'où l'intérêt de bien la rédiger dès le départ."
   },
   {
     epreuve: "U3", theme: "Droit du travail", session: "2017",
     question: "Salaire brut : 2 000 €. Cotisations salariales : 22 % du brut. Cotisations patronales : 45 % du brut. Salaire net et coût pour l'employeur ?",
     choix: ["Net 1 560 € ; coût 2 900 €", "Net 1 100 € ; coût 2 000 €", "Net 1 560 € ; coût 2 440 €", "Net 1 640 € ; coût 2 900 €"],
     bonne: 0,
-    explication: "Net = brut − cotisations salariales = 2 000 × (1 − 0,22) = 1 560 €. Coût employeur = brut + cotisations patronales = 2 000 × 1,45 = 2 900 €. Le salarié touche donc environ la moitié de ce que le poste coûte au magasin : à prendre en compte dans le seuil de rentabilité d'un projet d'embauche."
+    explication: "Net = brut − cotisations salariales = 2 000 × (1 − 0,22) = 1 560 €. Coût employeur = brut + cotisations patronales = 2 000 × 1,45 = 2 900 € (taux donnés par l'énoncé ; dans la réalité, près du SMIC, les réductions de cotisations patronales baissent nettement ce coût). Le salarié touche donc environ la moitié de ce que le poste coûte au magasin : à prendre en compte dans le seuil de rentabilité d'un projet d'embauche."
   },
   {
     epreuve: "U3", theme: "Droit du travail", session: "2023",
@@ -267,7 +267,7 @@ QUESTIONS.push(
   {
     epreuve: "U3", theme: "Droit des entreprises", session: "2023",
     question: "Une opticienne crée seule sa société et la dirige. Quel est son statut social selon la forme choisie ?",
-    choix: ["Gérante d'EURL : assimilée salariée ; présidente de SASU : indépendante", "Gérante d'EURL : indépendante (TNS) ; présidente de SASU : assimilée salariée", "Salariée dans les deux cas", "Indépendante dans les deux cas"],
+    choix: ["Gérante d'EURL : assimilée salariée ; présidente de SASU : indépendante", "Gérante d'EURL : indépendante ; présidente de SASU : assimilée salariée", "Salariée dans les deux cas", "Indépendante dans les deux cas"],
     bonne: 1,
     explication: "Gérant associé unique d'EURL = travailleur non salarié (sécurité sociale des indépendants, cotisations plus faibles, protection moindre). Président de SASU = assimilé salarié (régime général, meilleure protection, cotisations plus élevées, mais pas d'assurance chômage). Autres différences : EURL imposée à l'IR par défaut, SASU à l'IS par défaut."
   },
@@ -281,14 +281,14 @@ QUESTIONS.push(
   {
     epreuve: "U3", theme: "Droit des entreprises", session: "2023",
     question: "Bail commercial « classique » d'un magasin d'optique : quelle affirmation est juste ?",
-    choix: ["Il dure 1 an renouvelable", "Il dure 9 ans au moins ; le locataire peut partir tous les 3 ans et le loyer peut être révisé tous les 3 ans", "Le propriétaire peut augmenter le loyer chaque mois", "Le locataire ne peut jamais partir avant 9 ans"],
+    choix: ["Il dure 1 an et se renouvelle automatiquement chaque année", "9 ans minimum ; congé et révision du loyer possibles tous les 3 ans", "Le propriétaire peut augmenter le loyer librement chaque mois", "Le locataire ne peut jamais partir avant la fin des 9 ans"],
     bonne: 1,
     explication: "C'est le bail « 3-6-9 » : au moins 9 ans, le locataire peut donner congé à la fin de chaque période de 3 ans (6 mois avant), et le loyer peut être révisé tous les 3 ans. Il existe aussi un bail dérogatoire de 3 ans maximum, pour tester une activité."
   },
   {
     epreuve: "U3", theme: "Droit des entreprises", session: "2018",
-    question: "Un magasin change d'enseigne. Comment protéger le nouveau nom ?",
-    choix: ["En le déposant comme marque à l'INPI, protection de 10 ans renouvelable", "Il est protégé automatiquement dès qu'il est sur la vitrine", "En l'inscrivant au registre du commerce : protection de 5 ans", "En le déposant à la mairie"],
+    question: "Un magasin change d'enseigne. Comment protéger efficacement le nouveau nom ?",
+    choix: ["En le déposant comme marque à l'INPI, protection de 10 ans renouvelable", "Il est protégé dans toute la France dès qu'il est sur la vitrine", "En l'inscrivant au registre du commerce : protection de 5 ans", "En le déposant à la mairie"],
     bonne: 0,
     explication: "Avant le dépôt, on vérifie que le nom n'est pas déjà pris (recherche d'antériorité). Puis dépôt de marque à l'INPI, dans les classes de produits et services voulues. La protection dure 10 ans et se renouvelle sans limite. Intérêt : empêcher un concurrent d'utiliser le nom et valoriser le fonds."
   },
@@ -304,16 +304,16 @@ QUESTIONS.push(
   {
     epreuve: "U3", theme: "Réglementation de l'opticien", session: "2019",
     question: "Un client de 30 ans revient avec une ordonnance de lunettes datée d'il y a 4 ans, sans opposition du médecin. L'opticien peut-il renouveler en adaptant la correction ?",
-    choix: ["Non, une ordonnance n'est valable que 1 an", "Non, au-delà de 3 ans c'est impossible à tout âge", "Oui, de 16 à 42 ans l'ordonnance permet un renouvellement pendant 5 ans", "Oui, sans aucune limite de temps"],
+    choix: ["Non, une ordonnance de lunettes n'est valable qu'un an", "Non, au-delà de 3 ans c'est impossible à tout âge", "Oui, entre 16 et 42 ans elle reste valable 5 ans", "Oui, une ordonnance n'a aucune limite de temps"],
     bonne: 2,
     explication: "Durées pour le renouvellement avec adaptation par l'opticien : 5 ans de 16 à 42 ans, 3 ans au-delà de 42 ans, sauf si le médecin s'y est opposé sur l'ordonnance. À 30 ans, une ordonnance de 4 ans est encore valable."
   },
   {
-    epreuve: "U3", theme: "Réglementation de l'opticien", session: "2017",
+    epreuve: "U3", theme: "Réglementation de l'opticien", session: "complément",
     question: "Depuis la réforme « 100 % Santé », que doit faire l'opticien pour tout équipement de lunettes ?",
-    choix: ["Ne vendre que des équipements de classe A", "Proposer au moins un équipement de classe A (sans reste à charge) et remettre un devis normalisé", "Facturer les verres au prix fixé par la mutuelle", "Refuser les clients sans mutuelle"],
+    choix: ["Ne vendre que des équipements de classe A, sans reste à charge", "Proposer au moins une offre de classe A dans un devis normalisé", "Facturer les verres au prix fixé par la complémentaire santé", "Refuser les clients qui n'ont pas de complémentaire santé"],
     bonne: 1,
-    explication: "Depuis 2020, l'opticien doit présenter une offre « 100 % Santé » (classe A : prix plafonnés, remboursée intégralement avec un contrat responsable) dans un devis normalisé, à côté des offres à tarifs libres (classe B). Le client reste libre de choisir. La réforme fait suite aux plafonds de remboursement des contrats responsables (2015), le thème du sujet 2017."
+    explication: "Depuis 2020, l'opticien doit présenter une offre « 100 % Santé » (classe A : prix plafonnés, remboursée intégralement avec un contrat responsable) dans un devis normalisé, à côté des offres à tarifs libres (classe B). Le client reste libre de choisir. La réforme fait suite aux plafonds de remboursement des contrats responsables (2015)."
   }
 
 );
