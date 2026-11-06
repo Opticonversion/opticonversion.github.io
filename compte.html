@@ -26,7 +26,7 @@
 <main>
   <p class="marque apparait">Ton profil</p>
   <h1 class="apparait" style="--d:1" id="profil-titre">Ton profil</h1>
-  <p class="sous-titre apparait" style="--d:2">Choisis ton pseudo et ton DioSL. Ton profil n'est visible que par toi.</p>
+  <p class="sous-titre apparait" style="--d:2">Choisis ton pseudo et ton personnage. Ton profil n'est visible que par toi.</p>
 
   <section class="profil apparait" style="--d:3">
     <div class="profil-tete">
@@ -51,7 +51,7 @@
         <option>Candidat libre</option>
         <option>Déjà opticien, je révise</option>
       </select>
-      <span class="label">Ton DioSL</span>
+      <span class="label">Ton personnage</span>
       <div class="choix-avatar" id="choix-avatar" role="radiogroup" aria-label="Choix de l'avatar"></div>
       <div class="bilan-actions" style="justify-content:flex-start;margin-top:18px">
         <button class="bouton" type="submit">Enregistrer</button>
@@ -91,15 +91,15 @@
 <script src="essentiel.js"></script>
 <script>
   // ---------- Profil : gardé dans le navigateur, et en ligne si l'élève est connecté ----------
-  const AVATARS = ["clin-doeil", "bouche-ouverte", "choque", "pensif", "bouche-fermee"];
   const $ = id => document.getElementById(id);
 
   function afficherProfil() {
     const p = lireProfil();
     $("profil-pseudo").textContent = p.pseudo || "Sans pseudo";
     $("profil-titre").textContent = p.pseudo ? "Salut " + p.pseudo + " !" : "Ton profil";
-    $("profil-annee").textContent = p.annee || "";
-    $("profil-avatar").src = "img/nounours-" + (AVATARS.includes(p.avatar) ? p.avatar : "clin-doeil") + ".svg";
+    const perso = AVATARS.find(a => a.id === p.avatar) || AVATARS[0];
+    $("profil-annee").textContent = [p.annee, "avec " + perso.nom].filter(Boolean).join(" · ");
+    $("profil-avatar").src = cheminAvatar(perso.id);
     $("champ-pseudo").value = p.pseudo || "";
     $("champ-annee").value = p.annee || "";
     document.querySelectorAll(".choix-avatar button").forEach(b => b.setAttribute("aria-checked", b.dataset.avatar === (p.avatar || "clin-doeil")));
@@ -117,16 +117,18 @@
       tuile(tentees, "questions déjà tentées");
   }
 
-  AVATARS.forEach(a => {
-    const b = document.createElement("button");
-    b.type = "button";
-    b.dataset.avatar = a;
-    b.setAttribute("role", "radio");
-    b.setAttribute("aria-label", "DioSL " + a.replace(/-/g, " "));
-    b.innerHTML = '<img src="img/nounours-' + a + '.svg" alt="" width="56" height="56">';
-    b.addEventListener("click", () => document.querySelectorAll(".choix-avatar button").forEach(x => x.setAttribute("aria-checked", x === b)));
-    $("choix-avatar").appendChild(b);
-  });
+  function construireChoix() {
+    AVATARS.forEach(a => {
+      const b = document.createElement("button");
+      b.type = "button";
+      b.dataset.avatar = a.id;
+      b.setAttribute("role", "radio");
+      b.setAttribute("aria-label", a.nom);
+      b.innerHTML = '<span class="rond"><img src="' + cheminAvatar(a.id) + '" alt="" width="64" height="64"></span><span class="nom">' + a.nom + '</span>';
+      b.addEventListener("click", () => document.querySelectorAll(".choix-avatar button").forEach(x => x.setAttribute("aria-checked", x === b)));
+      $("choix-avatar").appendChild(b);
+    });
+  }
 
   $("profil-form").addEventListener("submit", e => {
     e.preventDefault();
@@ -141,9 +143,12 @@
     setTimeout(() => $("profil-ok").textContent = "", 2500);
   });
 
-  window.addEventListener("profil-charge", () => { afficherProfil(); afficherStats(); });
-  afficherProfil();
-  afficherStats();
+  // La liste des personnages vient de compte.js, chargé juste après
+  document.addEventListener("DOMContentLoaded", () => {
+    construireChoix();
+    afficherProfil();
+    afficherStats();
+  });
 </script>
 <script type="module" src="compte.js"></script>
 </body>

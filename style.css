@@ -511,11 +511,15 @@ footer a { color: var(--doux); }
 .profil-form input, .profil-form select { font: inherit; color: var(--texte); background: rgba(255, 255, 255, 0.04); border: 1px solid var(--bord-fort); border-radius: 12px; padding: 11px 14px; max-width: 360px; }
 .profil-form input:focus, .profil-form select:focus { outline: 2px solid var(--or); outline-offset: 1px; }
 .profil-form select option { background: var(--fond); }
-.choix-avatar { display: flex; flex-wrap: wrap; gap: 10px; }
-.choix-avatar button { padding: 0; width: 64px; height: 64px; border-radius: 50%; overflow: hidden; cursor: pointer; background: rgba(255, 255, 255, 0.04); border: 2px solid var(--bord-fort); transition: border-color var(--vite), transform var(--vite); }
-.choix-avatar button img { width: 100%; height: 100%; object-fit: cover; object-position: center 20%; }
-.choix-avatar button:hover { transform: translateY(-2px); }
-.choix-avatar button[aria-checked="true"] { border-color: var(--or); box-shadow: 0 0 0 3px rgba(217, 178, 111, 0.25); }
+.choix-avatar { display: grid; grid-template-columns: repeat(auto-fill, minmax(78px, 1fr)); gap: 12px 8px; max-width: 560px; }
+.choix-avatar button { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 0; background: none; border: 0; cursor: pointer; color: var(--doux); font: inherit; font-size: 0.78rem; }
+.choix-avatar .rond { width: 64px; height: 64px; border-radius: 50%; overflow: hidden; background: rgba(255, 255, 255, 0.04); border: 2px solid var(--bord-fort); transition: border-color var(--vite), transform var(--vite), box-shadow var(--vite); }
+.choix-avatar .rond img { width: 100%; height: 100%; object-fit: cover; object-position: center 20%; display: block; }
+.choix-avatar button:hover .rond { transform: translateY(-2px); }
+.choix-avatar button[aria-checked="true"] { color: var(--or); }
+.choix-avatar button[aria-checked="true"] .rond { border-color: var(--or); box-shadow: 0 0 0 3px rgba(217, 178, 111, 0.25); }
+.choix-avatar button:focus-visible { outline: none; }
+.choix-avatar button:focus-visible .rond { outline: 2px solid var(--or); outline-offset: 2px; }
 nav a.lien-compte img { width: 26px; height: 26px; border-radius: 50%; object-fit: cover; object-position: center 20%; display: block; }
 nav a.lien-compte.avec-avatar { padding: 2px; }
 @media (max-width: 520px) { .profil-stats { grid-template-columns: 1fr 1fr 1fr; gap: 6px; } .tuile { padding: 10px 8px; } .tuile strong { font-size: 1.05rem; } }
