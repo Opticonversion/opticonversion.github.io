@@ -252,7 +252,7 @@
     const qs = questionsDe(epreuveChoisie);
     const choisies = modeRevision ? liste : (themeChoisi === "Tous" ? qs : qs.filter(q => q.theme === themeChoisi));
     serie = melanger(choisies).map(q => {
-      const reponses = melanger(q.choix.map((texte, i) => ({ texte, juste: i === q.bonne })));
+      const reponses = melanger(q.choix.map((texte, i) => ({ texte, i, juste: i === q.bonne })));
       return { ...q, reponses };
     });
     numero = 0;
@@ -282,15 +282,72 @@
     zone.querySelector(".progression .pastille:not(.essentiel):not(.bts)").textContent = q.theme;
     zone.querySelector(".enonce").textContent = q.question;
 
+    // Schéma qui fait partie de l'énoncé (rare : seulement s'il faut le lire pour répondre)
+    if (q.schemaQuestion) zone.querySelector(".enonce").after(creerSchema(q.schemaQuestion, q.schemaTexte));
+
     const blocChoix = zone.querySelector(".choix");
+    if (q.choixSchemas) blocChoix.classList.add("choix-images");
     q.reponses.forEach((r, i) => {
       const b = document.createElement("button");
-      b.textContent = r.texte;
+      if (q.choixSchemas) {
+        const img = document.createElement("img");
+        img.src = q.choixSchemas[r.i];
+        img.alt = "Proposition " + "ABCD"[i];
+        img.loading = "lazy";
+        b.appendChild(img);
+        b.setAttribute("aria-label", "Proposition " + "ABCD"[i]);
+      } else {
+        b.textContent = r.texte;
+      }
       b.dataset.lettre = "ABCD"[i];
       b.onclick = () => repondre(r, b);
       blocChoix.appendChild(b);
     });
+
+    // Indice : un coup de pouce sans donner la réponse
+    if (q.indice) {
+      const bouton = document.createElement("button");
+      bouton.className = "bouton-indice";
+      bouton.type = "button";
+      bouton.innerHTML = '<span aria-hidden="true">💡</span> Besoin d\'un indice ?';
+      bouton.onclick = () => {
+        const boite = document.createElement("p");
+        boite.className = "indice";
+        boite.setAttribute("role", "status");
+        boite.innerHTML = "<strong>Indice</strong><span></span>";
+        boite.querySelector("span").textContent = q.indice;
+        bouton.replaceWith(boite);
+        rejouerAnimation(boite);
+      };
+      blocChoix.after(bouton);
+    }
     rejouerAnimation(zone);
+  }
+
+  // Un schéma SVG affiché dans un <object> : contrairement à <img>, son tracé animé se joue,
+  // et ses styles restent isolés du reste de la page. Description lue par les lecteurs d'écran.
+  // « faux » = numéro (dans q.choix) de la réponse fausse de l'élève : le schéma peut la tracer en rouge.
+  function creerSchema(chemin, texte, faux) {
+    const fig = document.createElement("figure");
+    fig.className = "schema";
+    const obj = document.createElement("object");
+    obj.type = "image/svg+xml";
+    obj.data = chemin + (faux !== null && faux !== undefined ? "#faux=" + faux : "");
+    obj.setAttribute("role", "img");
+    obj.setAttribute("aria-label", texte || "");
+    const secours = document.createElement("img");
+    secours.src = chemin;
+    secours.alt = texte || "";
+    obj.appendChild(secours);
+    // Le cadre prend les proportions réelles du schéma (qui peut s'agrandir, ex. bilan d'erreur)
+    obj.addEventListener("load", () => {
+      try {
+        const vb = obj.contentDocument.documentElement.viewBox.baseVal;
+        if (vb && vb.width && vb.height) obj.style.aspectRatio = vb.width + " / " + vb.height;
+      } catch (e) {}
+    });
+    fig.appendChild(obj);
+    return fig;
   }
 
   // Relance l'animation d'apparition (petit glissement) sur un élément
@@ -304,6 +361,8 @@
     const q = serie[numero];
     const blocChoix = zone.querySelector(".choix");
     blocChoix.classList.add("repondu");
+    const boutonIndice = zone.querySelector(".bouton-indice");
+    if (boutonIndice) boutonIndice.remove();
     blocChoix.querySelectorAll("button").forEach((b, i) => {
       b.disabled = true;
       if (q.reponses[i].juste) b.classList.add("juste");
@@ -328,6 +387,7 @@
     expl.innerHTML = "<strong></strong><span></span>";
     expl.querySelector("strong").textContent = reponse.juste ? "Bonne réponse" : "Pas tout à fait";
     expl.querySelector("span").textContent = q.explication;
+    if (q.schema) expl.appendChild(creerSchema(q.schema, q.schemaTexte, reponse.juste ? null : reponse.i));
     zone.appendChild(expl);
 
     // En cas d'erreur : un bouton pour revoir le Short du thème

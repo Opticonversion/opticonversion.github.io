@@ -523,3 +523,22 @@ footer a { color: var(--doux); }
 nav a.lien-compte img { width: 26px; height: 26px; border-radius: 50%; object-fit: cover; object-position: center 20%; display: block; }
 nav a.lien-compte.avec-avatar { padding: 2px; }
 @media (max-width: 520px) { .profil-stats { grid-template-columns: 1fr 1fr 1fr; gap: 6px; } .tuile { padding: 10px 8px; } .tuile strong { font-size: 1.05rem; } }
+
+/* ---------- Indices et schémas ---------- */
+.bouton-indice { display: inline-flex; align-items: center; gap: 8px; margin-top: 14px; padding: 8px 14px; font: inherit; font-size: 0.9rem; color: var(--or); background: transparent; border: 1px dashed rgba(217, 178, 111, 0.5); border-radius: 999px; cursor: pointer; transition: background var(--vite), border-color var(--vite); }
+.bouton-indice:hover { background: rgba(217, 178, 111, 0.08); border-color: var(--or); }
+.bouton-indice:focus-visible { outline: 2px solid var(--or); outline-offset: 2px; }
+.indice { margin: 14px 0 0; padding: 12px 16px; border-radius: 12px; background: rgba(217, 178, 111, 0.08); border: 1px solid rgba(217, 178, 111, 0.3); color: var(--texte); font-size: 0.95rem; line-height: 1.5; }
+.indice strong { display: block; color: var(--or); font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 4px; }
+figure.schema { margin: 16px 0 4px; padding: 10px; border-radius: 12px; background: #0f1219; border: 1px solid var(--bord); }
+figure.schema object, figure.schema img { display: block; width: 100%; height: auto; aspect-ratio: 480 / 340; max-height: 460px; }
+.enonce + figure.schema { margin-top: 0; margin-bottom: 16px; }
+@media (max-width: 520px) {
+  .explication figure.schema { margin-left: -14px; margin-right: -14px; padding: 4px; }
+}
+/* QCM dont les réponses sont des schémas */
+.choix.choix-images { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.choix.choix-images button { padding: 8px; }
+.choix.choix-images button::before { top: 14px; left: 14px; transform: none; z-index: 1; }
+.choix.choix-images img { display: block; width: 100%; height: auto; border-radius: 8px; background: #0f1219; }
+@media (max-width: 380px) { .choix.choix-images { grid-template-columns: 1fr; } }

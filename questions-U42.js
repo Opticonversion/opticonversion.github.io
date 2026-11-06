@@ -26,7 +26,19 @@ QUESTIONS.push(
     question: "Une lentille mince convergente a une distance focale image f' = 50 mm. Un objet réel est placé à 75 mm devant elle (OA = −75 mm). Où se trouve l'image ?",
     choix: ["OA' = +150 mm (image réelle)", "OA' = +37,5 mm", "OA' = −150 mm (image virtuelle)", "OA' = +30 mm"],
     bonne: 0,
-    explication: "Relation de Descartes : 1/OA' − 1/OA = 1/f'. Donc 1/OA' = 1/50 + 1/(−75) = 3/150 − 2/150 = 1/150, soit OA' = +150 mm. Positif = après la lentille = image réelle."
+    explication: "Relation de Descartes : 1/OA' − 1/OA = 1/f'. Donc 1/OA' = 1/50 + 1/(−75) = 3/150 − 2/150 = 1/150, soit OA' = +150 mm. Positif = après la lentille = image réelle.",
+    indice: "Un objet réel placé avant la lentille a un OA négatif. Utilise la relation de conjugaison de Descartes, en gardant bien les signes.",
+    schema: "img/schemas/U42/conjugaison-f50-objet75.svg",
+    schemaTexte: "Tracé des trois rayons utiles : l'objet AB à 75 mm devant la lentille donne une image A'B' réelle, renversée et deux fois plus grande, à 150 mm derrière."
+  },
+  {
+    epreuve: "U42", theme: "Conjugaison", session: "complément",
+    question: "Lentille mince convergente, objet réel AB placé avant le foyer objet F. Quel tracé de l'image est juste ?",
+    choix: ["Tracé juste : rayon parallèle par F', rayon par O non dévié", "Le rayon passant par O est dévié", "Le rayon parallèle ressort comme avec une lentille divergente", "Les rayons sont justes mais l'image est placée au foyer F'"],
+    choixSchemas: ["img/schemas/U42/trace-juste.svg", "img/schemas/U42/trace-faux-centre-devie.svg", "img/schemas/U42/trace-faux-divergent.svg", "img/schemas/U42/trace-faux-image-au-foyer.svg"],
+    bonne: 0,
+    explication: "Deux règles suffisent : un rayon parallèle à l'axe ressort en passant par le foyer image F', et un rayon qui passe par le centre optique O n'est pas dévié. L'image B' est là où ces rayons se croisent, ici après F', réelle et renversée. Les pièges : dévier le rayon qui passe par O, faire diverger le rayon parallèle (c'est le comportement d'une lentille divergente), ou poser l'image sur F' alors que les rayons ne s'y croisent pas.",
+    indice: "Pour une lentille convergente, deux rayons particuliers suffisent : celui qui arrive parallèle à l'axe, et celui qui passe par le centre optique. Que devient chacun d'eux ?"
   },
   {
     epreuve: "U42", theme: "Conjugaison", session: "2025",
@@ -93,7 +105,10 @@ QUESTIONS.push(
     question: "Même lunette de Kepler afocale (f'ob = 120 mm, f'oc = 20 mm). Quelle est la distance entre l'objectif et l'oculaire ?",
     choix: ["120 mm", "140 mm", "2 400 mm", "100 mm"],
     bonne: 1,
-    explication: "Afocale = le foyer image de l'objectif est confondu avec le foyer objet de l'oculaire. La longueur vaut donc f'ob + f'oc = 120 + 20 = 140 mm."
+    explication: "Afocale = le foyer image de l'objectif est confondu avec le foyer objet de l'oculaire. La longueur vaut donc f'ob + f'oc = 120 + 20 = 140 mm.",
+    indice: "Une lunette afocale transforme un faisceau parallèle en faisceau parallèle. Quel foyer de l'objectif doit alors coïncider avec quel foyer de l'oculaire ?",
+    schema: "img/schemas/U42/kepler-afocale-120-20.svg",
+    schemaTexte: "Lunette de Kepler : les rayons parallèles convergent au foyer image de l'objectif, confondu avec le foyer objet de l'oculaire, puis ressortent parallèles. Distance entre les lentilles : 120 + 20 mm."
   },
   {
     epreuve: "U42", theme: "Lunettes afocales", session: "2018",
@@ -181,7 +196,10 @@ QUESTIONS.push(
     question: "Un capteur photo mesure 18 × 24 mm. Le rayon du champ de pleine lumière image est 14 mm. Le capteur est-il éclairé uniformément ?",
     choix: ["Oui, car 14 mm > 12 mm (demi-largeur)", "Non, la demi-diagonale (15 mm) dépasse 14 mm : coins assombris", "Non, il faudrait 24 mm", "Oui, car 14 mm > 9 mm (demi-hauteur)"],
     bonne: 1,
-    explication: "Il faut comparer la DEMI-DIAGONALE : √(18² + 24²) = √900 = 30 mm, la moitié = 15 mm. Comme 15 > 14 mm, les coins sortent du champ de pleine lumière : vignettage."
+    explication: "Il faut comparer la DEMI-DIAGONALE : √(18² + 24²) = √900 = 30 mm, la moitié = 15 mm. Comme 15 > 14 mm, les coins sortent du champ de pleine lumière : vignettage.",
+    indice: "Un rectangle n'est entièrement dans un cercle que si ses quatre coins y sont. Quelle est la distance entre le centre du capteur et un coin ?",
+    schema: "img/schemas/U42/capteur-18x24-cercle14.svg",
+    schemaTexte: "Capteur rectangulaire 18 × 24 mm centré dans un cercle de rayon 14 mm : la demi-diagonale mesure 15 mm, les quatre coins dépassent du cercle et sont assombris."
   },
   {
     epreuve: "U42", theme: "Champs et diaphragmes", session: "2023",
@@ -294,14 +312,20 @@ QUESTIONS.push(
     question: "Lumière naturelle à travers deux polariseurs parfaits dont les directions font 60°. Quelle fraction de la lumière sort ?",
     choix: ["12,5 %", "6,25 %", "50 %", "25 %"],
     bonne: 0,
-    explication: "Le 1er polariseur laisse passer la moitié de la lumière naturelle : 50 %. Puis loi de Malus : × cos²60° = × 0,25. Total = 0,5 × 0,25 = 0,125, soit 12,5 %."
+    explication: "Le 1er polariseur laisse passer la moitié de la lumière naturelle : 50 %. Puis loi de Malus : × cos²60° = × 0,25. Total = 0,5 × 0,25 = 0,125, soit 12,5 %.",
+    indice: "Deux étapes : que fait le premier polariseur à une lumière naturelle, non polarisée ? Ensuite, applique la loi de Malus au second polariseur.",
+    schema: "img/schemas/U42/malus-deux-polariseurs-60.svg",
+    schemaTexte: "La lumière naturelle traverse un premier polariseur vertical, qui en laisse passer la moitié, puis un second polariseur tourné de 60°, qui en garde cos² 60°, soit un quart."
   },
   {
     epreuve: "U42", theme: "Polarisation", session: "2022",
     question: "Pour quel angle d'incidence la lumière réfléchie par la surface d'un lac (n = 1,33) est-elle totalement polarisée (angle de Brewster) ?",
     choix: ["48,8°", "53,1°", "60°", "36,9°"],
     bonne: 1,
-    explication: "tan iB = n = 1,33 → iB ≈ 53,1°. À cet angle, rayons réfléchi et réfracté sont perpendiculaires (i + r = 90°). Des lunettes polarisantes bien orientées éteignent alors le reflet de l'eau. (48,8° est l'angle limite de réflexion totale, un autre phénomène ; 36,9° est l'angle de réfraction.)"
+    explication: "tan iB = n = 1,33 → iB ≈ 53,1°. À cet angle, rayons réfléchi et réfracté sont perpendiculaires (i + r = 90°). Des lunettes polarisantes bien orientées éteignent alors le reflet de l'eau. (48,8° est l'angle limite de réflexion totale, un autre phénomène ; 36,9° est l'angle de réfraction.)",
+    indice: "À l'incidence de Brewster, le rayon réfléchi et le rayon réfracté sont perpendiculaires. Une relation trigonométrique simple relie alors cet angle à l'indice de l'eau.",
+    schema: "img/schemas/U42/brewster-lac-133.svg",
+    schemaTexte: "Rayon arrivant sur l'eau sous 53,1° de la normale : le rayon réfléchi et le rayon réfracté, à 36,9°, forment un angle droit. Le reflet est totalement polarisé."
   },
 
   // ---------- Photométrie ----------

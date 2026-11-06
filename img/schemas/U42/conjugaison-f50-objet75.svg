@@ -1,0 +1,275 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 340" role="img" aria-labelledby="t">
+  <title id="t">Lentille convergente f' = 50 mm : construction de l'image, objet déplaçable</title>
+  <style>
+    :root { background: #0f1219; color-scheme: dark; }
+    text { font-family: -apple-system, "Segoe UI", Roboto, sans-serif; font-size: 17px; fill: #e7e9ee; }
+    .p { font-size: 15px; fill: #aab2c0; }
+    .g { font-weight: 700; }
+    .num { font-size: 12px; font-weight: 800; fill: #0b0d12; }
+    .r { fill: none; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; filter: url(#lueur); }
+    .v { fill: none; stroke-width: 1.8; stroke-dasharray: 6 6; opacity: .75; }
+    .c1 { stroke: #f0c674; } .c2 { stroke: #6fd3c4; } .c3 { stroke: #c7a3ff; }
+    .trace { stroke-dasharray: 1; stroke-dashoffset: 1; animation: trace 1s ease-out forwards; }
+    .anim { opacity: 0; animation: apparait .5s ease-out forwards; }
+    @keyframes trace { to { stroke-dashoffset: 0; } }
+    @keyframes apparait { to { opacity: 1; } }
+    @media (prefers-reduced-motion: reduce) {
+      .trace { animation: none; stroke-dashoffset: 0; }
+      .anim { animation: none; opacity: 1; }
+    }
+    #poignee { cursor: grab; touch-action: none; }
+    #poignee:active { cursor: grabbing; }
+    #rejouer { cursor: pointer; }
+    #rejouer:hover rect, #bdefi:hover rect { fill-opacity: .25; }
+    #bdefi { cursor: pointer; }
+  </style>
+  <defs>
+    <pattern id="grille" width="18" height="18" patternUnits="userSpaceOnUse"><path d="M18 0 L0 0 L0 18" fill="none" stroke="#ffffff" stroke-opacity=".045"/></pattern>
+    <linearGradient id="verre" x1="0" x2="1"><stop offset="0" stop-color="#9ec5ff" stop-opacity=".04"/><stop offset=".5" stop-color="#9ec5ff" stop-opacity=".3"/><stop offset="1" stop-color="#9ec5ff" stop-opacity=".04"/></linearGradient>
+    <filter id="lueur" x="-10%" y="-20%" width="120%" height="140%"><feGaussianBlur stdDeviation="2.2" result="f"/><feMerge><feMergeNode in="f"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <clipPath id="cadre"><rect x="0" y="0" width="480" height="262"/></clipPath>
+    <marker id="mb" markerUnits="userSpaceOnUse" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="13" markerHeight="13" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#f2f2f2"/></marker>
+    <marker id="md" markerUnits="userSpaceOnUse" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="13" markerHeight="13" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#d9b26f"/></marker>
+    <marker id="ml" markerUnits="userSpaceOnUse" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="14" markerHeight="14" orient="auto-start-reverse"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#9ec5ff" stroke-width="2"/></marker>
+  </defs>
+
+  <rect x="0" y="0" width="480" height="262" fill="url(#grille)"/>
+  <line x1="8" y1="150" x2="472" y2="150" stroke="#5b6270" stroke-width="1.5"/>
+  <path d="M172 54 Q187 150 172 246 Q157 150 172 54 Z" fill="url(#verre)"/>
+  <line x1="172" y1="50" x2="172" y2="250" stroke="#9ec5ff" stroke-width="2.5" marker-start="url(#ml)" marker-end="url(#ml)"/>
+  <g fill="#e7e9ee"><circle cx="82" cy="150" r="3.5"/><circle cx="262" cy="150" r="3.5"/><circle cx="172" cy="150" r="3"/></g>
+  <text x="77" y="175" class="p">F</text>
+  <text x="257" y="138" class="p">F'</text>
+  <text x="180" y="172" class="p">O</text>
+
+  <!-- Rayons (recalculés par le script quand on déplace l'objet) -->
+  <g clip-path="url(#cadre)">
+    <path id="v1" class="v c1" d=""/><path id="v2" class="v c2" d=""/><path id="v3" class="v c3" d=""/>
+    <path id="r1" class="r c1 trace" style="animation-delay:.3s" pathLength="1" d="M37 110 L172 110 L442 230"/>
+    <path id="r2" class="r c2 trace" style="animation-delay:1.3s" pathLength="1" d="M37 110 L442 230"/>
+    <path id="r3" class="r c3 trace" style="animation-delay:2.3s" pathLength="1" d="M37 110 L172 230 L442 230"/>
+    <g id="image" class="anim" style="animation-delay:3.3s">
+      <line id="imgfl" x1="442" y1="150" x2="442" y2="228" stroke="#d9b26f" stroke-width="3.5" marker-end="url(#md)"/>
+      <text id="ia" x="412" y="140" class="g">A'</text>
+      <text id="ib" x="410" y="254" class="g">B'</text>
+    </g>
+  </g>
+
+  <!-- Objet AB : on peut le faire glisser -->
+  <g id="poignee">
+    <rect id="zone" x="17" y="96" width="40" height="70" fill="#ffffff" fill-opacity="0"/>
+    <line id="obj" x1="37" y1="150" x2="37" y2="112" stroke="#f2f2f2" stroke-width="3.5" marker-end="url(#mb)"/>
+    <text id="oa" x="31" y="175" class="g">A</text>
+    <text id="ob" x="30" y="100" class="g">B</text>
+  </g>
+
+  <!-- Légende des rayons -->
+  <g>
+    <rect x="284" y="8" width="190" height="76" rx="10" fill="#0f1219" fill-opacity=".85"/>
+    <circle cx="298" cy="22" r="9" fill="#f0c674"/><text x="298" y="26.5" text-anchor="middle" class="num">1</text><text x="314" y="27" class="p">parallèle → passe par F'</text>
+    <circle cx="298" cy="46" r="9" fill="#6fd3c4"/><text x="298" y="50.5" text-anchor="middle" class="num">2</text><text x="314" y="51" class="p">par O → non dévié</text>
+    <circle cx="298" cy="70" r="9" fill="#c7a3ff"/><text x="298" y="74.5" text-anchor="middle" class="num">3</text><text x="314" y="75" class="p">par F → ressort parallèle</text>
+  </g>
+
+  <!-- Bouton : revenir à la situation de la question -->
+  <g id="rejouer" class="anim" style="animation-delay:3.8s" role="button" aria-label="Revenir à la situation de la question et rejouer le tracé">
+    <rect x="8" y="8" width="132" height="28" rx="14" fill="#9ec5ff" fill-opacity=".12" stroke="#9ec5ff" stroke-opacity=".5"/>
+    <text x="74" y="27" text-anchor="middle" style="font-size:14px;fill:#cfe0ff">↺ Revoir le tracé</text>
+  </g>
+
+  <!-- Réponse fausse de l'élève (seulement si la page transmet #faux=n) : repère rouge sur le dessin + bilan sous le schéma -->
+  <g id="erreur" visibility="hidden">
+    <line id="errligne" x1="0" y1="100" x2="0" y2="200" stroke="#ff8a7a" stroke-width="2.5" stroke-dasharray="5 5"/>
+    <circle id="errpoint" cx="0" cy="150" r="5.5" fill="#ff8a7a" stroke="#0f1219" stroke-width="2"/>
+    <text id="errtag" x="0" y="218" text-anchor="middle" style="font-size:13px;font-weight:700;fill:#ff8a7a">ta réponse</text>
+    <line x1="20" y1="346" x2="460" y2="346" stroke="#ffffff" stroke-opacity=".08"/>
+    <circle cx="32" cy="368" r="10" fill="#ff8a7a"/><text x="32" y="373" text-anchor="middle" style="font-size:13px;font-weight:800;fill:#0f1219">✕</text>
+    <text x="52" y="373" class="p">Ta réponse</text>
+    <text id="errval" x="170" y="373" style="font-weight:700;fill:#ff8a7a"></text>
+    <circle cx="32" cy="396" r="10" fill="#5fd08a"/><text x="32" y="401" text-anchor="middle" style="font-size:13px;font-weight:800;fill:#0f1219">✓</text>
+    <text x="52" y="401" class="p">Bonne réponse</text>
+    <text x="170" y="401" style="font-weight:700;fill:#8fe0ad">OA' = +150 mm</text>
+    <text id="errpourquoi" x="20" y="432" style="font-size:15px;fill:#e7e9ee"></text>
+  </g>
+
+  <!-- Mode défi -->
+  <g id="bdefi" class="anim" style="animation-delay:3.9s" role="button" aria-label="Lancer un défi : placer l'objet pour obtenir une image donnée">
+    <rect x="148" y="8" width="82" height="28" rx="14" fill="#d9b26f" fill-opacity=".16" stroke="#d9b26f" stroke-opacity=".6"/>
+    <text x="189" y="27" text-anchor="middle" style="font-size:14px;fill:#f3dcae">🎯 Défi</text>
+  </g>
+  <g id="defi" visibility="hidden">
+    <rect id="defifond" x="8" y="42" width="264" height="44" rx="10" fill="#0f1219" fill-opacity=".9" stroke="#d9b26f" stroke-opacity=".6"/>
+    <text id="defi1" x="18" y="60" style="font-size:13px;fill:#f3dcae">Défi 1/3</text>
+    <text id="defi2" x="18" y="78" style="font-size:13px;font-weight:700">Place l'objet pour…</text>
+  </g>
+
+  <!-- Résultats en direct -->
+  <g class="anim" style="animation-delay:3.7s">
+    <text id="mesures" x="240" y="283" text-anchor="middle" class="p">OA = −75 mm   OA' = +150 mm   γ = −2</text>
+    <rect x="30" y="296" width="420" height="36" rx="18" fill="#d9b26f" fill-opacity=".14" stroke="#d9b26f" stroke-opacity=".6"/>
+    <text id="nature" x="240" y="320" text-anchor="middle" style="fill:#f3dcae">Image réelle, renversée, 2 fois plus grande</text>
+  </g>
+  <text id="aide" class="anim" style="animation-delay:4.2s;font-size:13px;fill:#7f8899" x="30" y="232">↔ fais glisser l'objet</text>
+
+  <script><![CDATA[
+  (function () {
+    // Lentille mince convergente f' = 50 mm, échelle 1,8 px par mm, lentille en x = 172, axe en y = 150
+    var K = 1.8, L = 172, Y = 150, F = 50, H = 40, BORD = 480;
+    var OA_QUESTION = -75;
+    var $ = function (id) { return document.getElementById(id); };
+    var svg = document.documentElement;
+
+    function nombre(v, dec) {
+      var s = (Math.round(v * Math.pow(10, dec)) / Math.pow(10, dec)).toFixed(dec).replace(".", ",");
+      return (v > 0 ? "+" : v < 0 ? "−" : "") + s.replace("-", "");
+    }
+    function droite(x1, y1, x2, y2, x) { return y1 + (y2 - y1) * (x - x1) / (x2 - x1); }
+    function seg(pts) { return "M" + pts.map(function (p) { return p[0].toFixed(1) + " " + p[1].toFixed(1); }).join(" L"); }
+
+    function dessiner(OA) {
+      var xo = L + OA * K, yB = Y - H;
+      $("obj").setAttribute("x1", xo); $("obj").setAttribute("x2", xo);
+      $("zone").setAttribute("x", xo - 20);
+      $("oa").setAttribute("x", xo - 6); $("ob").setAttribute("x", xo - 7);
+
+      var infini = Math.abs(OA + F) < 1.2;
+      var OAp = infini ? Infinity : 1 / (1 / F + 1 / OA);
+      var g = infini ? Infinity : OAp / OA;
+      var xi = L + OAp * K, yi = Y - H * g;
+
+      // Rayon 1 : parallèle à l'axe, puis passe par F'
+      var y1bord = droite(L, yB, L + F * K, Y, BORD);
+      $("r1").setAttribute("d", seg([[xo, yB], [L, yB], [BORD, y1bord]]));
+      // Rayon 2 : passe par O sans être dévié
+      $("r2").setAttribute("d", seg([[xo, yB], [BORD, droite(xo, yB, L, Y, BORD)]]));
+      // Rayon 3 : passe par F (ou semble en venir), puis ressort parallèle
+      var y3 = droite(xo, yB, L - F * K, Y, L);
+      if (!isFinite(y3) || Math.abs(y3) > 4000) y3 = Y + 4000;
+      $("r3").setAttribute("d", infini ? "" : seg([[xo, yB], [L, y3], [BORD, y3]]));
+
+      // Prolongements virtuels (en pointillés) si l'image est virtuelle
+      var virtuelle = !infini && OAp < 0;
+      $("v1").setAttribute("d", virtuelle ? seg([[L, yB], [xi, yi]]) : "");
+      $("v2").setAttribute("d", virtuelle ? seg([[L, Y], [xi, yi]]) : "");
+      $("v3").setAttribute("d", virtuelle ? seg([[L, y3], [xi, yi]]) : "");
+
+      var img = $("imgfl");
+      if (infini) {
+        $("image").setAttribute("visibility", "hidden");
+      } else {
+        $("image").setAttribute("visibility", "visible");
+        img.setAttribute("x1", xi); img.setAttribute("x2", xi);
+        img.setAttribute("y2", yi + (yi > Y ? -2 : 2));
+        img.setAttribute("stroke-dasharray", virtuelle ? "7 5" : "none");
+        $("ia").setAttribute("x", xi - 30); $("ia").setAttribute("y", yi > Y ? Y - 10 : Y + 24);
+        $("ib").setAttribute("x", xi - 32); $("ib").setAttribute("y", yi > Y ? yi + 24 : yi - 10);
+      }
+
+      // Mesures et nature de l'image
+      if (infini) {
+        $("mesures").textContent = "OA = " + nombre(OA, 0) + " mm : l'objet est au foyer F";
+        $("nature").textContent = "Image rejetée à l'infini";
+      } else {
+        $("mesures").textContent = "OA = " + nombre(OA, 0) + " mm  ·  OA' = " + nombre(OAp, 0) + " mm  ·  γ = " + nombre(g, 1);
+        var taille = Math.abs(g);
+        var t = taille > 1.05 ? (taille < 9.95 ? nombre(taille, 1).replace("+", "").replace(",0", "") + " fois plus grande" : "beaucoup plus grande")
+              : taille < 0.95 ? (taille >= 0.105 ? nombre(1 / taille, 1).replace("+", "").replace(",0", "") + " fois plus petite" : "beaucoup plus petite") : "de même taille";
+        $("nature").textContent = "Image " + (virtuelle ? "virtuelle, droite" : "réelle, renversée") + ", " + t;
+      }
+    }
+
+    function finirAnimations() {
+      ["r1", "r2", "r3"].forEach(function (id) { $(id).classList.remove("trace"); });
+      Array.prototype.forEach.call(document.querySelectorAll(".anim"), function (el) { el.classList.remove("anim"); });
+    }
+
+    // Glisser l'objet (souris ou doigt)
+    var poignee = $("poignee"), actif = false;
+    function versSVG(e) {
+      var p = svg.createSVGPoint(); p.x = e.clientX; p.y = e.clientY;
+      return p.matrixTransform(svg.getScreenCTM().inverse());
+    }
+    poignee.addEventListener("pointerdown", function (e) {
+      actif = true; finirAnimations(); $("aide").setAttribute("visibility", "hidden");
+      poignee.setPointerCapture(e.pointerId); e.preventDefault();
+    });
+    poignee.addEventListener("pointermove", function (e) {
+      if (!actif) return;
+      var x = Math.max(12, Math.min(L - 14, versSVG(e).x));
+      oaCourant = (x - L) / K;
+      dessiner(oaCourant);
+    });
+    function lacher() { if (actif) verifierDefi(); actif = false; }
+    poignee.addEventListener("pointerup", lacher);
+    poignee.addEventListener("pointercancel", lacher);
+
+    // Revenir à la question et rejouer le tracé
+    $("rejouer").addEventListener("click", function () {
+      oaCourant = OA_QUESTION; defi = -1; $("defi").setAttribute("visibility", "hidden");
+      dessiner(OA_QUESTION);
+      ["r1", "r2", "r3"].forEach(function (id) {
+        var el = $(id); el.classList.remove("trace"); void el.getBoundingClientRect(); el.classList.add("trace");
+      });
+      var im = $("image"); im.classList.remove("anim"); void im.getBoundingClientRect(); im.classList.add("anim");
+    });
+
+    // ---------- Mode défi : placer l'objet pour obtenir l'image demandée ----------
+    var DEFIS = [
+      { texte: "une image réelle 1,5 fois plus grande", cible: -250 / 3, ok: function (oa, g) { return isFinite(g) && g < 0 && Math.abs(Math.abs(g) - 1.5) < 0.12; } },
+      { texte: "une image virtuelle 2 fois plus grande", cible: -25, ok: function (oa, g) { return isFinite(g) && g > 0 && Math.abs(g - 2) < 0.15; } },
+      { texte: "une image rejetée à l'infini", cible: -50, ok: function (oa) { return Math.abs(oa + F) < 2.5; } }
+    ];
+    var defi = -1, oaCourant = OA_QUESTION;
+    function afficherDefi() {
+      $("defi").setAttribute("visibility", "visible");
+      $("defifond").setAttribute("stroke", "#d9b26f");
+      $("defi1").textContent = "🎯 Défi " + (defi + 1) + "/" + DEFIS.length + " : place l'objet pour obtenir";
+      $("defi2").textContent = DEFIS[defi].texte;
+    }
+    function verifierDefi() {
+      if (defi < 0) return;
+      var infini = Math.abs(oaCourant + F) < 1.2;
+      var g = infini ? Infinity : (1 / (1 / F + 1 / oaCourant)) / oaCourant;
+      if (!DEFIS[defi].ok(oaCourant, g)) return;
+      oaCourant = DEFIS[defi].cible; dessiner(oaCourant);   // on aligne sur la valeur exacte
+      $("defifond").setAttribute("stroke", "#5fd08a");
+      $("defi1").textContent = "✓ Bravo !";
+      var fini = defi === DEFIS.length - 1;
+      $("defi2").textContent = fini ? "Tous les défis sont réussis 🎉" : "Défi suivant dans un instant…";
+      var suivant = defi + 1; defi = fini ? -1 : -2;
+      if (!fini) setTimeout(function () { defi = suivant; afficherDefi(); }, 1600);
+    }
+    $("bdefi").addEventListener("click", function () {
+      finirAnimations(); $("aide").setAttribute("visibility", "visible");
+      defi = 0; afficherDefi();
+    });
+
+    // ---------- Réponse fausse de l'élève, tracée en rouge ----------
+    // Numéros = position de la réponse dans q.choix (questions-U42.js)
+    var ERREURS = {
+      1: { oap: 37.5, val: "OA' = +37,5 mm", pourquoi: "Une image réelle se forme toujours après F'." },
+      2: { oap: -150, val: "OA' = −150 mm", pourquoi: "Les rayons se croisent après la lentille : image réelle." },
+      3: { oap: 30, val: "OA' = +30 mm", pourquoi: "Erreur de signe : l'objet réel a OA = −75 mm, pas +75." }
+    };
+    var m = /faux=(\d)/.exec(location.hash);
+    var err = m && ERREURS[m[1]];
+    if (err) {
+      svg.setAttribute("viewBox", "0 0 480 450");          // on agrandit pour la zone de bilan
+      var xe = L + err.oap * K, dedans = xe > 30 && xe < BORD - 30;
+      var xr = dedans ? xe : 10;
+      $("errligne").setAttribute("x1", xr); $("errligne").setAttribute("x2", xr);
+      if (!dedans) $("errligne").setAttribute("visibility", "hidden");
+      $("errpoint").setAttribute("cx", xr);
+      $("errtag").setAttribute("x", dedans ? xe : 12);
+      $("errtag").setAttribute("text-anchor", dedans ? "middle" : "start");
+      if (!dedans) $("errtag").textContent = "← ta réponse";
+      $("errval").textContent = err.val;
+      $("errpourquoi").textContent = "→ " + err.pourquoi;
+      $("erreur").setAttribute("visibility", "visible");
+      $("aide").setAttribute("visibility", "hidden");
+    }
+
+    dessiner(OA_QUESTION);
+  })();
+  ]]></script>
+</svg>
