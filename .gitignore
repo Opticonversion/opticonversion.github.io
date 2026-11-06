@@ -1,3 +1,7 @@
 .claude/
 .DS_Store
 notes/
+.mcp.json
+firebase.json
+.firebaserc
+.firebase/
