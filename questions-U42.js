@@ -22,7 +22,7 @@ QUESTIONS.push(
 
   // ---------- Conjugaison (tombé 7 années sur 7) ----------
   {
-    epreuve: "U42", theme: "Conjugaison", session: "2024",
+    id: "U42-001", epreuve: "U42", theme: "Conjugaison", session: "2024",
     question: "Une lentille mince convergente a une distance focale image f' = 50 mm. Un objet réel est placé à 75 mm devant elle (OA = −75 mm). Où se trouve l'image ?",
     choix: ["OA' = +150 mm (image réelle)", "OA' = +37,5 mm", "OA' = −150 mm (image virtuelle)", "OA' = +30 mm"],
     bonne: 0,
@@ -32,7 +32,7 @@ QUESTIONS.push(
     schemaTexte: "Tracé des trois rayons utiles : l'objet AB à 75 mm devant la lentille donne une image A'B' réelle, renversée et deux fois plus grande, à 150 mm derrière."
   },
   {
-    epreuve: "U42", theme: "Conjugaison", session: "complément",
+    id: "U42-002", epreuve: "U42", theme: "Conjugaison", session: "complément",
     question: "Lentille mince convergente, objet réel AB placé avant le foyer objet F. Quel tracé de l'image est juste ?",
     choix: ["Tracé juste : rayon parallèle par F', rayon par O non dévié", "Le rayon passant par O est dévié", "Le rayon parallèle ressort comme avec une lentille divergente", "Les rayons sont justes mais l'image est placée au foyer F'"],
     choixSchemas: ["img/schemas/U42/trace-juste.svg", "img/schemas/U42/trace-faux-centre-devie.svg", "img/schemas/U42/trace-faux-divergent.svg", "img/schemas/U42/trace-faux-image-au-foyer.svg"],
@@ -41,7 +41,7 @@ QUESTIONS.push(
     indice: "Pour une lentille convergente, deux rayons particuliers suffisent : celui qui arrive parallèle à l'axe, et celui qui passe par le centre optique. Que devient chacun d'eux ?"
   },
   {
-    epreuve: "U42", theme: "Conjugaison", session: "complément",
+    id: "U42-003", epreuve: "U42", theme: "Conjugaison", session: "complément",
     question: "Lentille mince divergente (f' < 0), objet réel AB placé avant la lentille. Quel tracé de l'image est juste ?",
     choix: ["Le rayon parallèle converge vers F, comme avec une lentille convergente", "Les rayons sont justes mais l'image est placée réelle et renversée derrière la lentille", "Tracé juste : le rayon parallèle ressort en semblant venir de F', le rayon par O n'est pas dévié", "Le rayon passant par O est dévié"],
     choixSchemas: ["img/schemas/U42/trace-div-faux-converge.svg", "img/schemas/U42/trace-div-faux-image-reelle.svg", "img/schemas/U42/trace-div-juste.svg", "img/schemas/U42/trace-div-faux-centre-devie.svg"],
@@ -50,7 +50,7 @@ QUESTIONS.push(
     indice: "Pour une divergente, le foyer image F' est du côté de l'objet. Le rayon parallèle ressort en s'écartant de l'axe : d'où semble-t-il venir ? Et le rayon qui passe par O ?"
   },
   {
-    epreuve: "U42", theme: "Conjugaison", session: "2025",
+    id: "U42-004", epreuve: "U42", theme: "Conjugaison", session: "2025",
     question: "Un objectif assimilé à une lentille mince de f' = 20 mm donne d'un objet placé à OA = −25 mm une image à OA' = +100 mm. Quel est le grandissement transversal gy ?",
     choix: ["−0,25", "−4", "−5", "+4"],
     bonne: 1,
@@ -58,7 +58,7 @@ QUESTIONS.push(
     indice: "Le grandissement transversal compare la position de l'image à celle de l'objet, par rapport au centre O. Garde bien les signes : son signe dit si l'image est droite ou renversée."
   },
   {
-    epreuve: "U42", theme: "Conjugaison", session: "2022",
+    id: "U42-005", epreuve: "U42", theme: "Conjugaison", session: "2022",
     question: "Objectif photo de f' = 50 mm. L'objet est à 2,5 m avant le foyer objet : FA = −2 500 mm. Où se forme l'image par rapport au foyer image F' (formule de Newton) ?",
     choix: ["F'A' = +2,5 mm", "F'A' = −1,0 mm", "F'A' = +1,0 mm", "F'A' = +50 mm"],
     bonne: 2,
@@ -66,7 +66,7 @@ QUESTIONS.push(
     indice: "La formule de Newton mesure les distances à partir des foyers : FA côté objet, F'A' côté image. Elle fait intervenir le carré de la focale, avec un signe moins."
   },
   {
-    epreuve: "U42", theme: "Conjugaison", session: "2024",
+    id: "U42-006", epreuve: "U42", theme: "Conjugaison", session: "2024",
     question: "Un observateur emmétrope qui n'accommode pas regarde dans un instrument (objectif + oculaire). Où doit se trouver l'image intermédiaire donnée par l'objectif ?",
     choix: ["Au centre optique de l'oculaire", "À 25 cm de l'œil", "Au foyer image de l'objectif, toujours", "Dans le plan focal objet de l'oculaire"],
     bonne: 3,
@@ -74,7 +74,7 @@ QUESTIONS.push(
     indice: "Un emmétrope qui n'accommode pas voit net à l'infini. Où doit être un objet pour que l'oculaire en donne une image à l'infini ?"
   },
   {
-    epreuve: "U42", theme: "Conjugaison", session: "2018",
+    id: "U42-007", epreuve: "U42", theme: "Conjugaison", session: "2018",
     question: "On veut tailler une lentille mince équiconvexe (deux faces de même rayon R) d'indice n = 1,5 et de distance focale f' = 100 mm. Quelle valeur de R ?",
     choix: ["100 mm", "150 mm", "200 mm", "50 mm"],
     bonne: 0,
@@ -84,7 +84,7 @@ QUESTIONS.push(
 
   // ---------- Loupe et microscope ----------
   {
-    epreuve: "U42", theme: "Loupe et microscope", session: "2018",
+    id: "U42-008", epreuve: "U42", theme: "Loupe et microscope", session: "2018",
     question: "Une loupe a une distance focale f' = 50 mm. Quel est son grossissement commercial Gc ?",
     choix: ["Gc = 2", "Gc = 5", "Gc = 12,5", "Gc = 20"],
     bonne: 1,
@@ -92,7 +92,7 @@ QUESTIONS.push(
     indice: "Commence par la puissance en dioptries (la focale doit être en mètres), puis rappelle-toi que le grossissement commercial se rapporte à une distance de 25 cm."
   },
   {
-    epreuve: "U42", theme: "Loupe et microscope", session: "2025",
+    id: "U42-009", epreuve: "U42", theme: "Loupe et microscope", session: "2025",
     question: "Un fabricant annonce un oculaire « 8× » (grossissement commercial Gc = 8). Quelle est sa distance focale ?",
     choix: ["50 mm", "12,5 mm", "31,25 mm", "32 mm"],
     bonne: 2,
@@ -100,7 +100,7 @@ QUESTIONS.push(
     indice: "Fais le chemin à l'envers : grossissement commercial → puissance en dioptries → focale. Attention à ne pas confondre une puissance (en δ) et une focale (en mm)."
   },
   {
-    epreuve: "U42", theme: "Loupe et microscope", session: "2025",
+    id: "U42-010", epreuve: "U42", theme: "Loupe et microscope", session: "2025",
     question: "Un microscope a un objectif de grandissement gy = −40 et un oculaire de grossissement commercial 10×. Quel est le grossissement commercial du microscope ?",
     choix: ["−4", "4 000", "50", "400"],
     bonne: 3,
@@ -110,7 +110,7 @@ QUESTIONS.push(
 
   // ---------- Lunettes afocales ----------
   {
-    epreuve: "U42", theme: "Lunettes afocales", session: "2023",
+    id: "U42-011", epreuve: "U42", theme: "Lunettes afocales", session: "2023",
     question: "Une lunette de Kepler a un objectif de f'ob = 120 mm et un oculaire de f'oc = 20 mm. Quel est son grossissement (en valeur absolue) ?",
     choix: ["6", "100", "140", "2,4"],
     bonne: 0,
@@ -118,7 +118,7 @@ QUESTIONS.push(
     indice: "Pour une lunette afocale, le grossissement ne dépend que des deux focales. Laquelle doit être grande pour bien grossir ?"
   },
   {
-    epreuve: "U42", theme: "Lunettes afocales", session: "2023",
+    id: "U42-012", epreuve: "U42", theme: "Lunettes afocales", session: "2023",
     question: "Même lunette de Kepler afocale (f'ob = 120 mm, f'oc = 20 mm). Quelle est la distance entre l'objectif et l'oculaire ?",
     choix: ["120 mm", "140 mm", "2 400 mm", "100 mm"],
     bonne: 1,
@@ -128,7 +128,7 @@ QUESTIONS.push(
     schemaTexte: "Lunette de Kepler : les rayons parallèles convergent au foyer image de l'objectif, confondu avec le foyer objet de l'oculaire, puis ressortent parallèles. Distance entre les lentilles : 120 + 20 mm."
   },
   {
-    epreuve: "U42", theme: "Lunettes afocales", session: "2018",
+    id: "U42-013", epreuve: "U42", theme: "Lunettes afocales", session: "2018",
     question: "Lunette de Galilée afocale : objectif convergent f'1 = 90 mm, oculaire divergent f'2 = −30 mm. Quelle distance entre les deux lentilles ?",
     choix: ["120 mm", "30 mm", "60 mm", "90 mm"],
     bonne: 2,
@@ -138,7 +138,7 @@ QUESTIONS.push(
     schemaTexte: "Lunette de Galilée : les rayons parallèles visent le foyer F'1, confondu avec le foyer objet F2 de l'oculaire divergent, et ressortent parallèles. L'oculaire est à 90 − 30 = 60 mm de l'objectif."
   },
   {
-    epreuve: "U42", theme: "Lunettes afocales", session: "2023",
+    id: "U42-014", epreuve: "U42", theme: "Lunettes afocales", session: "2023",
     question: "Un client malvoyant a une acuité de loin de 1,5/10. On lui propose une lunette de grossissement 6×. Quelle acuité peut-il espérer avec la lunette ?",
     choix: ["10/10", "1,5/10", "6/10", "9/10"],
     bonne: 3,
@@ -146,7 +146,7 @@ QUESTIONS.push(
     indice: "En basse vision, l'aide visuelle multiplie l'acuité du client par son grossissement. Calcule, puis vérifie que le résultat reste réaliste."
   },
   {
-    epreuve: "U42", theme: "Lunettes afocales", session: "2026",
+    id: "U42-015", epreuve: "U42", theme: "Lunettes afocales", session: "2026",
     question: "Dans une lunette terrestre, un véhicule redresseur (lentille mince f'V = 25 mm) donne une image de même taille et renversée (gy = −1). De combien allonge-t-il la lunette ?",
     choix: ["100 mm", "25 mm", "50 mm", "75 mm"],
     bonne: 0,
@@ -156,7 +156,7 @@ QUESTIONS.push(
 
   // ---------- Doublets et achromatisme ----------
   {
-    epreuve: "U42", theme: "Doublets et achromatisme", session: "2025",
+    id: "U42-016", epreuve: "U42", theme: "Doublets et achromatisme", session: "2025",
     question: "Un oculaire est formé de deux lentilles minces convergentes de f'1 = f'2 = 40 mm, séparées de e = 30 mm. Quelle est sa distance focale image ?",
     choix: ["20 mm", "32 mm", "40 mm", "80 mm"],
     bonne: 1,
@@ -166,7 +166,7 @@ QUESTIONS.push(
     schemaTexte: "Un rayon parallèle traverse L1, se dirige vers F'1, puis L2 le fait couper l'axe en F', 8 mm après L2. En prolongeant les rayons, on trouve le plan principal H', et f' = H'F' = 32 mm."
   },
   {
-    epreuve: "U42", theme: "Doublets et achromatisme", session: "2026",
+    id: "U42-017", epreuve: "U42", theme: "Doublets et achromatisme", session: "2026",
     question: "Un doublet a pour symbole (3 ; 2 ; 1) avec a = 10 mm. Quelle est sa distance focale image ?",
     choix: ["60 mm", "7,5 mm", "15 mm", "20 mm"],
     bonne: 2,
@@ -174,7 +174,7 @@ QUESTIONS.push(
     indice: "Le symbole (m ; n ; p) donne, dans l'ordre, f'1, l'écart e et f'2 en multiples de a. Calcule les trois longueurs, puis applique la formule du doublet."
   },
   {
-    epreuve: "U42", theme: "Doublets et achromatisme", session: "2026",
+    id: "U42-018", epreuve: "U42", theme: "Doublets et achromatisme", session: "2026",
     question: "Un téléobjectif associe une lentille convergente puis une divergente. Quel est son principal intérêt par rapport à une lentille unique de même focale ?",
     choix: ["Il supprime la diffraction", "Il redresse l'image", "Il donne une image plus lumineuse", "Il est plus court : la distance 1re lentille → foyer image est inférieure à la focale"],
     bonne: 3,
@@ -182,7 +182,7 @@ QUESTIONS.push(
     indice: "Compare la longueur du tube (de la première lentille au capteur) à la focale de l'objectif. Qu'est-ce que le photographe y gagne ?"
   },
   {
-    epreuve: "U42", theme: "Doublets et achromatisme", session: "2019",
+    id: "U42-019", epreuve: "U42", theme: "Doublets et achromatisme", session: "2019",
     question: "On veut un doublet achromatique accolé de vergence V = +2 δ, avec un verre de nombre d'Abbe ν1 = 60 et un verre ν2 = 30. Quelles vergences V1 et V2 ?",
     choix: ["V1 = +4 δ ; V2 = −2 δ", "V1 = −2 δ ; V2 = +4 δ", "V1 = +3 δ ; V2 = −1 δ", "V1 = +1 δ ; V2 = +1 δ"],
     bonne: 0,
@@ -190,7 +190,7 @@ QUESTIONS.push(
     indice: "Deux équations : les vergences s'additionnent (lentilles accolées), et la somme V/ν doit être nulle pour supprimer le chromatisme. Résous ce petit système."
   },
   {
-    epreuve: "U42", theme: "Doublets et achromatisme", session: "2019",
+    id: "U42-020", epreuve: "U42", theme: "Doublets et achromatisme", session: "2019",
     question: "Un verre a les indices nd = 1,500, nF = 1,505 et nC = 1,497. Quel est son nombre d'Abbe ?",
     choix: ["0,008", "62,5", "100", "187,5"],
     bonne: 1,
@@ -200,7 +200,7 @@ QUESTIONS.push(
 
   // ---------- Champs et diaphragmes (tombé 7 années sur 7) ----------
   {
-    epreuve: "U42", theme: "Champs et diaphragmes", session: "2022",
+    id: "U42-021", epreuve: "U42", theme: "Champs et diaphragmes", session: "2022",
     question: "Qu'appelle-t-on la pupille d'entrée d'un système optique ?",
     choix: ["La pupille de l'œil de l'observateur", "La première lentille du système", "L'image du diaphragme d'ouverture par la partie du système placée avant lui", "L'image du diaphragme de champ par tout le système"],
     bonne: 2,
@@ -208,7 +208,7 @@ QUESTIONS.push(
     indice: "Il y a deux diaphragmes importants : celui d'ouverture (la lumière) et celui de champ (l'étendue). La pupille d'entrée, c'est l'un des deux « vu depuis l'objet »."
   },
   {
-    epreuve: "U42", theme: "Champs et diaphragmes", session: "2024",
+    id: "U42-022", epreuve: "U42", theme: "Champs et diaphragmes", session: "2024",
     question: "Dans l'espace d'étude : pupille de rayon 6 mm en x = 0, diaphragme de champ de rayon 4 mm en x = 20 mm, plan des champs en x = 40 mm. Rayon du champ de pleine lumière ?",
     choix: ["4 mm", "8 mm", "14 mm", "2 mm"],
     bonne: 3,
@@ -218,7 +218,7 @@ QUESTIONS.push(
     schemaTexte: "Trois droites partent de la pupille et passent par le bord du diaphragme : bords du même côté (pleine lumière, 2 mm), centre de la pupille (champ moyen, 8 mm), bords opposés (champ total, 14 mm)."
   },
   {
-    epreuve: "U42", theme: "Champs et diaphragmes", session: "2024",
+    id: "U42-023", epreuve: "U42", theme: "Champs et diaphragmes", session: "2024",
     question: "Un fabricant place un diaphragme dans le plan de l'image intermédiaire (plan des champs), avec un diamètre égal (ou très légèrement inférieur) au champ de pleine lumière. À quoi sert-il ?",
     choix: ["À supprimer le champ de contour : bord du champ net, éclairement uniforme", "À réduire la diffraction", "À redresser l'image", "À augmenter la luminosité"],
     bonne: 0,
@@ -226,7 +226,7 @@ QUESTIONS.push(
     indice: "Au bord du champ, l'éclairement baisse peu à peu : c'est le champ de contour. Un diaphragme placé net dans le plan de l'image agit sur ce bord."
   },
   {
-    epreuve: "U42", theme: "Champs et diaphragmes", session: "2026",
+    id: "U42-024", epreuve: "U42", theme: "Champs et diaphragmes", session: "2026",
     question: "Un capteur photo mesure 18 × 24 mm. Le rayon du champ de pleine lumière image est 14 mm. Le capteur est-il éclairé uniformément ?",
     choix: ["Oui, car 14 mm > 12 mm (demi-largeur)", "Non, la demi-diagonale (15 mm) dépasse 14 mm : coins assombris", "Non, il faudrait 24 mm", "Oui, car 14 mm > 9 mm (demi-hauteur)"],
     bonne: 1,
@@ -236,7 +236,7 @@ QUESTIONS.push(
     schemaTexte: "Capteur rectangulaire 18 × 24 mm centré dans un cercle de rayon 14 mm : la demi-diagonale mesure 15 mm, les quatre coins dépassent du cercle et sont assombris."
   },
   {
-    epreuve: "U42", theme: "Champs et diaphragmes", session: "2023",
+    id: "U42-025", epreuve: "U42", theme: "Champs et diaphragmes", session: "2023",
     question: "Une lunette a un objectif de f'ob = 60 mm. Dans son plan focal, le champ de pleine lumière a un rayon de 3 mm. Quelle largeur de champ voit-on sur un bateau à 50 m ?",
     choix: ["1,25 m", "2,5 m", "5 m", "10 m"],
     bonne: 2,
@@ -246,7 +246,7 @@ QUESTIONS.push(
 
   // ---------- Ouverture et résolution ----------
   {
-    epreuve: "U42", theme: "Ouverture et résolution", session: "2026",
+    id: "U42-026", epreuve: "U42", theme: "Ouverture et résolution", session: "2026",
     question: "Un téléobjectif de focale 400 mm est ouvert à f/8 (nombre d'ouverture N = 8). Quel est le diamètre de sa pupille d'entrée ?",
     choix: ["3 200 mm", "8 mm", "25 mm", "50 mm"],
     bonne: 3,
@@ -254,7 +254,7 @@ QUESTIONS.push(
     indice: "Le nombre d'ouverture est le rapport de la focale au diamètre de la pupille d'entrée. Isole le diamètre."
   },
   {
-    epreuve: "U42", theme: "Ouverture et résolution", session: "2024",
+    id: "U42-027", epreuve: "U42", theme: "Ouverture et résolution", session: "2024",
     question: "Un objectif a une pupille d'entrée de 10 mm. Limite de résolution angulaire due à la diffraction pour λ = 500 nm ?",
     choix: ["6,1 × 10⁻⁵ rad", "1,2 × 10⁻⁴ rad", "6,1 × 10⁻² rad", "5,0 × 10⁻⁵ rad"],
     bonne: 0,
@@ -262,7 +262,7 @@ QUESTIONS.push(
     indice: "Utilise α = 1,22 λ / D, avec λ et D dans la même unité (mètres). Le résultat est en radians."
   },
   {
-    epreuve: "U42", theme: "Ouverture et résolution", session: "2024",
+    id: "U42-028", epreuve: "U42", theme: "Ouverture et résolution", session: "2024",
     question: "Une bijoutière utilise une loupe de puissance P = 12,5 δ. La limite de résolution angulaire de son œil est 3 × 10⁻⁴ rad. Quel est le plus petit détail qu'elle peut distinguer sur l'objet ?",
     choix: ["2,4 µm", "24 µm", "240 µm", "2,4 mm"],
     bonne: 1,
@@ -270,7 +270,7 @@ QUESTIONS.push(
     indice: "La puissance relie l'angle sous lequel on voit l'image à la taille de l'objet : P = α' / y. L'œil sépare au mieux un angle de 3 × 10⁻⁴ rad."
   },
   {
-    epreuve: "U42", theme: "Ouverture et résolution", session: "2026",
+    id: "U42-029", epreuve: "U42", theme: "Ouverture et résolution", session: "2026",
     question: "Un appareil photo a des pixels de 5 µm et un objectif de focale 250 mm. Quelle est la limite de résolution angulaire due au capteur ?",
     choix: ["2 × 10⁻² rad", "1,25 × 10⁻³ rad", "2 × 10⁻⁵ rad", "5 × 10⁻⁶ rad"],
     bonne: 2,
@@ -278,7 +278,7 @@ QUESTIONS.push(
     indice: "Le capteur ne sépare pas deux points dont les images tombent sur le même pixel. Quel angle représente la taille d'un pixel vue depuis l'objectif ? Mets tout en mètres."
   },
   {
-    epreuve: "U42", theme: "Ouverture et résolution", session: "2024",
+    id: "U42-030", epreuve: "U42", theme: "Ouverture et résolution", session: "2024",
     question: "Avec un instrument, le plus petit détail séparable vaut 8 µm à cause de la diffraction et 12 µm à cause de l'œil. Peut-on séparer deux traits distants de 10 µm ?",
     choix: ["Non, c'est la diffraction qui limite à 8 µm", "Oui, car 10 µm > 8 µm", "Oui, en moyenne la limite est 10 µm", "Non, c'est l'œil qui limite à 12 µm"],
     bonne: 3,
@@ -288,7 +288,7 @@ QUESTIONS.push(
 
   // ---------- Transmission et antireflet ----------
   {
-    epreuve: "U42", theme: "Transmission et antireflet", session: "2023",
+    id: "U42-031", epreuve: "U42", theme: "Transmission et antireflet", session: "2023",
     question: "Quel pourcentage de lumière est réfléchi par un dioptre air / verre d'indice 1,5 en incidence normale ?",
     choix: ["4 %", "8 %", "20 %", "1,5 %"],
     bonne: 0,
@@ -296,7 +296,7 @@ QUESTIONS.push(
     indice: "En incidence normale, R = ((n − 1)/(n + 1))². Calcule le rapport avant de l'élever au carré."
   },
   {
-    epreuve: "U42", theme: "Transmission et antireflet", session: "2023",
+    id: "U42-032", epreuve: "U42", theme: "Transmission et antireflet", session: "2023",
     question: "Un viseur compte 4 lentilles non traitées dans l'air (T = 0,96 par dioptre). Quelle est sa transmission totale ?",
     choix: ["80 %", "72 %", "68 %", "96 %"],
     bonne: 1,
@@ -304,7 +304,7 @@ QUESTIONS.push(
     indice: "Compte d'abord les dioptres (combien par lentille ?). Les transmissions successives se multiplient, elles ne se soustraient pas."
   },
   {
-    epreuve: "U42", theme: "Transmission et antireflet", session: "2024",
+    id: "U42-033", epreuve: "U42", theme: "Transmission et antireflet", session: "2024",
     question: "Quel est le principe d'un traitement antireflet monocouche ?",
     choix: ["Augmenter l'indice du verre", "Absorber la lumière réfléchie", "Faire interférer de façon destructive les deux ondes réfléchies (sur la couche et sur le verre)", "Polariser la lumière réfléchie"],
     bonne: 2,
@@ -312,7 +312,7 @@ QUESTIONS.push(
     indice: "Un antireflet est une couche très mince. Deux reflets se forment : un sur la couche, un sur le verre. Que peuvent faire deux ondes qui se superposent ?"
   },
   {
-    epreuve: "U42", theme: "Transmission et antireflet", session: "2023",
+    id: "U42-034", epreuve: "U42", theme: "Transmission et antireflet", session: "2023",
     question: "Pour un verre d'indice 1,69, quel est l'indice théorique idéal de la couche antireflet ?",
     choix: ["1,50", "1,69", "0,845", "1,30"],
     bonne: 3,
@@ -320,7 +320,7 @@ QUESTIONS.push(
     indice: "Pour que les deux reflets s'annulent, ils doivent avoir la même intensité. L'indice de la couche est alors « entre » celui de l'air et celui du verre, au sens d'une racine."
   },
   {
-    epreuve: "U42", theme: "Transmission et antireflet", session: "2023",
+    id: "U42-035", epreuve: "U42", theme: "Transmission et antireflet", session: "2023",
     question: "Une couche antireflet d'indice 1,30 est optimisée pour λ = 520 nm. Quelle est son épaisseur minimale ?",
     choix: ["100 nm", "130 nm", "200 nm", "400 nm"],
     bonne: 0,
@@ -332,7 +332,7 @@ QUESTIONS.push(
 
   // ---------- Interférences et réseaux ----------
   {
-    epreuve: "U42", theme: "Interférences et réseaux", session: "2025",
+    id: "U42-036", epreuve: "U42", theme: "Interférences et réseaux", session: "2025",
     question: "Un film de savon d'indice 1,33 est éclairé en réflexion sous incidence nulle (δ = 2ne + λ/2). Épaisseur minimale pour renforcer au maximum λ = 532 nm ?",
     choix: ["50 nm", "100 nm", "200 nm", "400 nm"],
     bonne: 1,
@@ -340,7 +340,7 @@ QUESTIONS.push(
     indice: "Un maximum en réflexion demande δ = kλ. Prends le plus petit k possible, puis isole l'épaisseur e."
   },
   {
-    epreuve: "U42", theme: "Interférences et réseaux", session: "2026",
+    id: "U42-037", epreuve: "U42", theme: "Interférences et réseaux", session: "2026",
     question: "Un réseau a 500 traits par mm. Éclairé en incidence normale, à quel angle voit-on la lumière de 600 nm dans l'ordre 1 ?",
     choix: ["0,3°", "8,6°", "17,5°", "36,9°"],
     bonne: 2,
@@ -350,7 +350,7 @@ QUESTIONS.push(
     schemaTexte: "Le faisceau traverse le réseau : l'ordre 0 continue tout droit, les ordres ±1 partent à 17,5° de part et d'autre, les ordres ±2 à 36,9°."
   },
   {
-    epreuve: "U42", theme: "Interférences et réseaux", session: "2026",
+    id: "U42-038", epreuve: "U42", theme: "Interférences et réseaux", session: "2026",
     question: "Réseau de pas a = 2 µm, lumière blanche de 400 à 800 nm, incidence normale. Quel est l'ordre le plus élevé où le spectre est encore complet ?",
     choix: ["4", "5", "1", "2"],
     bonne: 3,
@@ -360,7 +360,7 @@ QUESTIONS.push(
 
   // ---------- Polarisation ----------
   {
-    epreuve: "U42", theme: "Polarisation", session: "2019",
+    id: "U42-039", epreuve: "U42", theme: "Polarisation", session: "2019",
     question: "Lumière naturelle à travers deux polariseurs parfaits dont les directions font 60°. Quelle fraction de la lumière sort ?",
     choix: ["12,5 %", "6,25 %", "50 %", "25 %"],
     bonne: 0,
@@ -370,7 +370,7 @@ QUESTIONS.push(
     schemaTexte: "La lumière naturelle traverse un premier polariseur vertical, qui en laisse passer la moitié, puis un second polariseur tourné de 60°, qui en garde cos² 60°, soit un quart."
   },
   {
-    epreuve: "U42", theme: "Polarisation", session: "2022",
+    id: "U42-040", epreuve: "U42", theme: "Polarisation", session: "2022",
     question: "Pour quel angle d'incidence la lumière réfléchie par la surface d'un lac (n = 1,33) est-elle totalement polarisée (angle de Brewster) ?",
     choix: ["48,8°", "53,1°", "60°", "36,9°"],
     bonne: 1,
@@ -382,7 +382,7 @@ QUESTIONS.push(
 
   // ---------- Photométrie ----------
   {
-    epreuve: "U42", theme: "Photométrie", session: "2024",
+    id: "U42-041", epreuve: "U42", theme: "Photométrie", session: "2024",
     question: "Une lampe de travail donne 8 000 lx à 30 cm (incidence normale). Quel éclairement donne-t-elle à 60 cm ?",
     choix: ["16 000 lx", "1 000 lx", "2 000 lx", "4 000 lx"],
     bonne: 2,
@@ -390,7 +390,7 @@ QUESTIONS.push(
     indice: "Loi de Bouguer : l'éclairement varie comme 1/d². Que devient-il quand la distance double ?"
   },
   {
-    epreuve: "U42", theme: "Photométrie", session: "2022",
+    id: "U42-042", epreuve: "U42", theme: "Photométrie", session: "2022",
     question: "On ajoute un filtre gris neutre qui transmet 25 % de la lumière. Sans filtre, le temps de pose était 1/500 s. Quel temps de pose garde la même exposition ?",
     choix: ["1/2 000 s", "1/500 s", "1/250 s", "1/125 s"],
     bonne: 3,

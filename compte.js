@@ -106,7 +106,9 @@ function majCompteurRevision() {
   if (!lien) return;
   const d = new Date();
   const aujourdhui = d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
-  const n = Object.values(lire("revisions")).filter(e => e && e.j && e.j <= aujourdhui).length;
+  const n = typeof window.nombreARevoir === "function"
+    ? window.nombreARevoir()
+    : Object.values(lire("revisions")).filter(e => e && e.j && e.j <= aujourdhui).length;
   let pastille = lien.querySelector(".compte-revoir");
   if (n === 0) { if (pastille) pastille.remove(); return; }
   if (!pastille) {
@@ -134,6 +136,20 @@ if (!FIREBASE_CONFIG) {
   });
 }
 
+// Réponses aux questions : pour chaque question, la réponse la plus récente gagne (heure de réponse).
+// Une réponse sans heure (anciennes données) ne remplace pas une réponse datée.
+function fusionnerReponses(progression, temps, progAttente, tempsAttente) {
+  tempsAttente = tempsAttente || {};
+  for (const [cle, val] of Object.entries(progAttente || {})) {
+    const tLocal = tempsAttente[cle] || 0;
+    if (tLocal >= (temps[cle] || 0)) {
+      progression[cle] = val;
+      if (tLocal) temps[cle] = tLocal;
+    }
+  }
+  return { progression, temps };
+}
+
 async function demarrer() {
   const { initializeApp } = await import(SDK + "firebase-app.js");
   const A = await import(SDK + "firebase-auth.js");
@@ -145,8 +161,18 @@ async function demarrer() {
   const db = F.getFirestore(app);
 
   // Signalement d'erreur sur une question (sans compte, sans donnée personnelle)
-  window.envoyerSignalement = donnees =>
-    F.addDoc(F.collection(db, "signalements"), Object.assign({}, donnees, { date: F.serverTimestamp() }));
+  // Garde-fou : 1 signalement toutes les 30 secondes et 10 par jour au plus depuis ce navigateur
+  // (évite les envois en double et protège le quota gratuit de Firebase).
+  window.envoyerSignalement = async donnees => {
+    const maintenant = Date.now();
+    let envois = [];
+    try { envois = JSON.parse(localStorage.getItem("signalements-envoyes") || "[]").filter(t => maintenant - t < 864e5); } catch (e) {}
+    if (envois.length >= 10) throw Object.assign(new Error("limite"), { code: "limite-jour" });
+    if (envois.length && maintenant - envois[envois.length - 1] < 30000) throw Object.assign(new Error("limite"), { code: "limite-delai" });
+    await F.addDoc(F.collection(db, "signalements"), Object.assign({}, donnees, { date: F.serverTimestamp() }));
+    envois.push(maintenant);
+    try { localStorage.setItem("signalements-envoyes", JSON.stringify(envois)); } catch (e) {}
+  };
   const fournisseur = new A.GoogleAuthProvider();
   fournisseur.setCustomParameters({ prompt: "select_account" });
 
@@ -160,7 +186,7 @@ async function demarrer() {
     const uid = utilisateur.uid;
     const premiereFois = lireTexte("compte-uid") !== uid;
     const attente = premiereFois
-      ? { progression: lire("progression"), records: lire("records"), profil: lire("profil"), revisions: lire("revisions") }
+      ? { progression: lire("progression"), "progression-t": lire("progression-t"), records: lire("records"), profil: lire("profil"), revisions: lire("revisions") }
       : lire("attente");
     const envoye = JSON.stringify(attente);
     const ref = F.doc(db, "eleves", uid);
@@ -168,7 +194,11 @@ async function demarrer() {
     const fusion = await F.runTransaction(db, async t => {
       const snap = await t.get(ref);
       const enLigne = snap.exists() ? snap.data() : {};
-      const progression = Object.assign(JSON.parse(enLigne.progression || "{}"), attente.progression || {});
+      // Réponses : pour chaque question, la plus récente gagne (heure de réponse).
+      // Une réponse sans heure (anciennes données) ne remplace pas une réponse datée.
+      const { progression, temps } = fusionnerReponses(
+        JSON.parse(enLigne.progression || "{}"), JSON.parse(enLigne.progressionT || "{}"),
+        attente.progression, attente["progression-t"]);
       const records = JSON.parse(enLigne.records || "{}");
       for (const [cle, val] of Object.entries(attente.records || {})) {
         if (records[cle] === undefined || val > records[cle]) records[cle] = val;
@@ -179,20 +209,24 @@ async function demarrer() {
       for (const [cle, val] of Object.entries(attente.revisions || {})) {
         if (!revisions[cle] || (val && val.t >= (revisions[cle].t || 0))) revisions[cle] = val;
       }
+      // Anciennes données repérées par l'énoncé → identifiants stables des questions
+      if (typeof window.migrerAnciennesCles === "function") window.migrerAnciennesCles(progression, temps, revisions);
       t.set(ref, {
         progression: JSON.stringify(progression),
+        progressionT: JSON.stringify(temps),
         records: JSON.stringify(records),
         revisions: JSON.stringify(revisions),
         profil,
         maj: F.serverTimestamp()
       });
-      return { progression, records, profil, revisions };
+      return { progression, temps, records, profil, revisions };
     });
 
     const avant = JSON.stringify([lire("progression"), lire("records"), lire("profil"), lire("revisions")]);
     ecrire("revisions", fusion.revisions);
     majCompteurRevision();
     ecrire("progression", fusion.progression);
+    ecrire("progression-t", fusion.temps);
     ecrire("records", fusion.records);
     ecrire("profil", fusion.profil);
     if (icone) majIcone(icone);
@@ -202,7 +236,32 @@ async function demarrer() {
 
     // Si un autre appareil a apporté du nouveau, on rafraîchit les pages qui l'affichent
     const apres = JSON.stringify([fusion.progression, fusion.records, fusion.profil, fusion.revisions]);
-    if (avant !== apres && document.body.dataset.rafraichir === "oui") location.reload();
+    if (avant !== apres && document.body.dataset.rafraichir === "oui") rafraichirPage();
+  }
+
+  // Recharge la page pour montrer la progression à jour, sauf si l'élève est en train d'écrire :
+  // dans ce cas, un bandeau lui propose d'actualiser quand il veut. Jamais deux fois en 30 s.
+  function rafraichirPage() {
+    const el = document.activeElement;
+    const occupe = el && el.matches && el.matches("input, textarea, select, [contenteditable]");
+    let recent = false;
+    try { recent = Date.now() - Number(sessionStorage.getItem("recharge-synchro") || 0) < 30000; } catch (e) {}
+    if (!occupe && !recent) {
+      try { sessionStorage.setItem("recharge-synchro", String(Date.now())); } catch (e) {}
+      location.reload();
+      return;
+    }
+    if (document.getElementById("bandeau-maj")) return;
+    const b = document.createElement("div");
+    b.id = "bandeau-maj";
+    b.className = "bandeau-maj";
+    b.setAttribute("role", "status");
+    b.innerHTML = '<span>Ta progression a été mise à jour depuis un autre appareil.</span>' +
+      '<button type="button" class="bouton">Actualiser</button>' +
+      '<button type="button" class="bandeau-fermer" aria-label="Fermer">×</button>';
+    b.querySelector(".bouton").onclick = () => location.reload();
+    b.querySelector(".bandeau-fermer").onclick = () => b.remove();
+    document.body.appendChild(b);
   }
 
   function planifier() {
@@ -341,7 +400,7 @@ async function demarrer() {
     await A.deleteUser(auth.currentUser);
     ecrireTexte("compte-uid", null);
     ecrire("attente", {});
-    if (effacerNavigateur) ["progression", "records", "attente", "profil", "revisions"].forEach(c => ecrireTexte(c, null));
+    if (effacerNavigateur) ["progression", "progression-t", "records", "attente", "profil", "revisions"].forEach(c => ecrireTexte(c, null));
     if (formReauth) formReauth.hidden = true;
     ui.etat("Ton compte et ta progression en ligne ont été supprimés.");
   }

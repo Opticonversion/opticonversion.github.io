@@ -14,8 +14,9 @@ service cloud.firestore {
     match /eleves/{uid} {
       allow read, delete: if request.auth != null && request.auth.uid == uid;
       allow create, update: if request.auth != null && request.auth.uid == uid
-        && request.resource.data.keys().hasOnly(["progression", "records", "revisions", "profil", "maj"])
+        && request.resource.data.keys().hasOnly(["progression", "progressionT", "records", "revisions", "profil", "maj"])
         && request.resource.data.progression is string && request.resource.data.progression.size() < 200000
+        && request.resource.data.get("progressionT", "") is string && request.resource.data.get("progressionT", "").size() < 200000
         && request.resource.data.records is string && request.resource.data.records.size() < 50000
         && request.resource.data.get("revisions", "") is string && request.resource.data.get("revisions", "").size() < 200000
         && profilValide(request.resource.data.get("profil", {}));

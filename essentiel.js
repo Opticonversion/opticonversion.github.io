@@ -63,7 +63,39 @@ const estEssentiel = (epreuve, theme) => ESSENTIEL.some(n => n.epreuve === epreu
 // Elle est gardée dans le navigateur de l'élève. S'il se connecte (compte.js),
 // elle est aussi sauvegardée en ligne pour la retrouver sur ses autres appareils.
 // Pour chaque question : 1 = bien répondu la dernière fois, 0 = raté.
-function idQuestion(q) { return q.epreuve + "|" + q.question; }
+// Repère d'une question : son identifiant stable (champ id, ex. « U5-012 ») s'il existe.
+// Avec un id, on peut corriger l'énoncé sans faire perdre la progression aux élèves.
+// Sans id, on garde l'ancien repère (épreuve + énoncé).
+function ancienIdQuestion(q) { return q.epreuve + "|" + q.question; }
+function idQuestion(q) { return q.id || ancienIdQuestion(q); }
+
+// Range sous l'identifiant stable ce qui avait été noté sous l'ancien repère.
+// prog = { repère: 1|0 }, temps = { repère: horodatage }, revs = { repère: {n, j, t} }.
+// En cas de doublon, on garde le plus récent. Renvoie true si quelque chose a changé.
+function migrerAnciennesCles(prog, temps, revs) {
+  if (typeof QUESTIONS === "undefined") return false;
+  let change = false;
+  for (const q of QUESTIONS) {
+    if (!q.id) continue;
+    const a = ancienIdQuestion(q), n = q.id;
+    if (prog && a in prog) {
+      if (!(n in prog) || (temps[a] || 0) > (temps[n] || 0)) {
+        prog[n] = prog[a];
+        if (temps[a]) temps[n] = temps[a];
+      }
+      delete prog[a];
+      change = true;
+    }
+    if (temps && a in temps) { delete temps[a]; change = true; }
+    if (revs && a in revs) {
+      const va = revs[a], vn = revs[n];
+      if (!vn || ((va && va.t) || 0) > (vn.t || 0)) revs[n] = va;
+      delete revs[a];
+      change = true;
+    }
+  }
+  return change;
+}
 
 // Note un changement pas encore envoyé en ligne, puis prévient compte.js
 function marquerEnAttente(type, cle, valeur) {
@@ -79,13 +111,44 @@ function marquerEnAttente(type, cle, valeur) {
 function lireProgression() {
   try { return JSON.parse(localStorage.getItem("progression") || "{}"); } catch (e) { return {}; }
 }
+// Heure de la dernière réponse à chaque question : sert à garder la plus récente
+// quand deux appareils ont répondu à la même question.
+function lireTempsReponses() {
+  try { return JSON.parse(localStorage.getItem("progression-t") || "{}"); } catch (e) { return {}; }
+}
 function noterReponse(q, juste) {
-  const p = lireProgression();
-  p[idQuestion(q)] = juste ? 1 : 0;
-  try { localStorage.setItem("progression", JSON.stringify(p)); } catch (e) {}
-  marquerEnAttente("progression", idQuestion(q), juste ? 1 : 0);
+  const id = idQuestion(q), maintenant = Date.now();
+  const p = lireProgression(), t = lireTempsReponses();
+  p[id] = juste ? 1 : 0;
+  t[id] = maintenant;
+  try {
+    localStorage.setItem("progression", JSON.stringify(p));
+    localStorage.setItem("progression-t", JSON.stringify(t));
+  } catch (e) {}
+  marquerEnAttente("progression-t", id, maintenant);
+  marquerEnAttente("progression", id, juste ? 1 : 0);
   return planifierRevision(q, juste);
 }
+
+// Au chargement : on passe les anciennes données (repérées par l'énoncé) sous les identifiants stables,
+// dans ce navigateur et dans ce qui attend d'être envoyé en ligne.
+(function () {
+  try {
+    const p = lireProgression(), t = lireTempsReponses();
+    const r = JSON.parse(localStorage.getItem("revisions") || "{}");
+    if (migrerAnciennesCles(p, t, r)) {
+      localStorage.setItem("progression", JSON.stringify(p));
+      localStorage.setItem("progression-t", JSON.stringify(t));
+      localStorage.setItem("revisions", JSON.stringify(r));
+    }
+    const at = JSON.parse(localStorage.getItem("attente") || "{}");
+    const ap = at.progression || {}, att = at["progression-t"] || {}, ar = at.revisions || {};
+    if (migrerAnciennesCles(ap, att, ar)) {
+      at.progression = ap; at["progression-t"] = att; at.revisions = ar;
+      localStorage.setItem("attente", JSON.stringify(at));
+    }
+  } catch (e) {}
+})();
 
 // ---------------- Révision espacée ----------------
 // Une question ratée revient le lendemain. Réussie le jour où elle revient, elle revient
@@ -134,15 +197,22 @@ function questionsARevoir() {
   const r = lireRevisions(), aujourdhui = jourLocal();
   return QUESTIONS.filter(q => { const e = r[idQuestion(q)]; return e && e.j && e.j <= aujourdhui; });
 }
-// Nombre de questions à revoir aujourd'hui (sans avoir besoin de la liste des questions)
+// Révisions des questions qui existent encore (une question supprimée ou réécrite sans id
+// ne doit plus compter). Sans la liste des questions, on compte tout.
+function revisionsValides() {
+  const r = lireRevisions();
+  if (typeof QUESTIONS === "undefined" || !QUESTIONS.length) return Object.values(r);
+  return QUESTIONS.map(q => r[idQuestion(q)]).filter(Boolean);
+}
+// Nombre de questions à revoir aujourd'hui
 function nombreARevoir() {
   const aujourdhui = jourLocal();
-  return Object.values(lireRevisions()).filter(e => e && e.j && e.j <= aujourdhui).length;
+  return revisionsValides().filter(e => e && e.j && e.j <= aujourdhui).length;
 }
 // Prochaine date de révision après aujourd'hui, et combien de questions ce jour-là
 function prochaineRevision() {
   const aujourdhui = jourLocal();
-  const dates = Object.values(lireRevisions()).map(e => e && e.j).filter(j => j && j > aujourdhui).sort();
+  const dates = revisionsValides().map(e => e && e.j).filter(j => j && j > aujourdhui).sort();
   if (!dates.length) return null;
   return { j: dates[0], nombre: dates.filter(d => d === dates[0]).length };
 }

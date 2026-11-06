@@ -22,7 +22,7 @@ QUESTIONS.push(
 
   // ---------- Chaîne des conjugués (8/8) ----------
   {
-    epreuve: "U43", theme: "Chaîne des conjugués", session: "2022",
+    id: "U43-001", epreuve: "U43", theme: "Chaîne des conjugués", session: "2022",
     question: "Dans une chaîne des conjugués, un point objet placé au foyer objet F d'une lentille mince a pour image :",
     choix: ["Le foyer image F'", "Un point à l'infini", "Un point sur la lentille", "Un point symétrique de F par rapport à la lentille"],
     bonne: 1,
@@ -30,7 +30,7 @@ QUESTIONS.push(
     indice: "Rappelle-toi la définition du foyer objet : que deviennent, après la lentille, les rayons qui en sont issus ?"
   },
   {
-    epreuve: "U43", theme: "Chaîne des conjugués", session: "2017",
+    id: "U43-002", epreuve: "U43", theme: "Chaîne des conjugués", session: "2017",
     question: "Une lunette est réglée pour un œil emmétrope qui n'accommode pas. Où se trouve l'image intermédiaire d'une étoile donnée par l'objectif ?",
     choix: ["Au foyer objet de l'objectif", "Au foyer image de l'objectif, confondu avec le foyer objet de l'oculaire", "Au foyer image de l'oculaire", "Sur la rétine"],
     bonne: 1,
@@ -38,7 +38,7 @@ QUESTIONS.push(
     indice: "Une étoile est à l'infini : où l'objectif en forme-t-il l'image ? Et où doit se trouver l'objet de l'oculaire pour que l'image finale reparte à l'infini ?"
   },
   {
-    epreuve: "U43", theme: "Chaîne des conjugués", session: "complément",
+    id: "U43-003", epreuve: "U43", theme: "Chaîne des conjugués", session: "complément",
     question: "Lunette réglée pour un œil emmétrope qui n'accommode pas. On vise une étoile B située hors de l'axe (faisceau incident incliné). Quel tracé est juste ?",
     choix: ["Tracé juste : image B₁ dans le plan F'obj = Foc, faisceau émergent parallèle et incliné", "Les rayons convergent sur l'axe, au foyer image de l'objectif", "Le faisceau émergent ressort parallèle à l'axe", "Le faisceau émergent converge : F'obj et Foc ne sont pas confondus"],
     choixSchemas: ["img/schemas/U43/lunette-trace-juste.svg", "img/schemas/U43/lunette-trace-faux-image-sur-axe.svg", "img/schemas/U43/lunette-trace-faux-parallele-axe.svg", "img/schemas/U43/lunette-trace-faux-foyers-separes.svg"],
@@ -47,7 +47,7 @@ QUESTIONS.push(
     indice: "Un faisceau parallèle incliné converge dans le plan focal image, mais pas forcément sur l'axe. Et un point du plan focal objet de l'oculaire donne un faisceau émergent… ?"
   },
   {
-    epreuve: "U43", theme: "Chaîne des conjugués", session: "2021",
+    id: "U43-004", epreuve: "U43", theme: "Chaîne des conjugués", session: "2021",
     question: "Un utilisateur amétrope, sans lunettes et sans accommoder, voit net à travers un instrument. Où est l'image finale donnée par l'instrument ?",
     choix: ["À l'infini", "Sur le remotum de l'utilisateur", "Sur son proximum", "Au foyer objet de son œil"],
     bonne: 1,
@@ -55,7 +55,7 @@ QUESTIONS.push(
     indice: "Sans accommoder, un œil ne voit net qu'un seul point de l'espace. Lequel ?"
   },
   {
-    epreuve: "U43", theme: "Chaîne des conjugués", session: "2023",
+    id: "U43-005", epreuve: "U43", theme: "Chaîne des conjugués", session: "2023",
     question: "Un miroir plan (miroir d'un reflex, miroir de renvoi d'un télescope) donne d'un objet réel une image :",
     choix: ["Réelle, renversée, de même taille", "Virtuelle, symétrique par rapport au miroir, de même taille", "Virtuelle, agrandie", "Réelle, à l'infini"],
     bonne: 1,
@@ -63,7 +63,7 @@ QUESTIONS.push(
     indice: "Pense à ton reflet dans une glace : où semble-t-il se trouver, et a-t-il changé de taille ?"
   },
   {
-    epreuve: "U43", theme: "Chaîne des conjugués", session: "2018",
+    id: "U43-006", epreuve: "U43", theme: "Chaîne des conjugués", session: "2018",
     question: "Microscope réglé pour un emmétrope qui n'accommode pas. Où est placée la préparation par rapport à l'objectif ?",
     choix: ["Exactement au foyer objet de l'objectif", "Un peu au-delà du foyer objet (plus loin de l'objectif que F)", "Entre le foyer objet et l'objectif", "À l'infini, très loin de l'objectif"],
     bonne: 1,
@@ -75,7 +75,7 @@ QUESTIONS.push(
 
   // ---------- Vergences et focales ----------
   {
-    epreuve: "U43", theme: "Vergences et focales", session: "2021",
+    id: "U43-007", epreuve: "U43", theme: "Vergences et focales", session: "2021",
     question: "Sur le tracé, on cote la distance focale image d'un collimateur : f' = 125 mm. Quelle est sa vergence ?",
     choix: ["+0,125 δ", "+1,25 δ", "+8,00 δ", "+12,50 δ"],
     bonne: 2,
@@ -83,7 +83,7 @@ QUESTIONS.push(
     indice: "D = 1/f', mais avec f' en mètres. Convertis d'abord les millimètres."
   },
   {
-    epreuve: "U43", theme: "Vergences et focales", session: "2024",
+    id: "U43-008", epreuve: "U43", theme: "Vergences et focales", session: "2024",
     question: "Un condenseur plan-convexe a un indice n = 1,5 et un rayon de courbure de 50 mm (l'autre face est plane). Sa vergence vaut environ :",
     choix: ["+5 δ", "+10 δ", "+20 δ", "+30 δ"],
     bonne: 1,
@@ -91,7 +91,7 @@ QUESTIONS.push(
     indice: "Une face plane n'a aucune vergence. Pour le dioptre sphérique, utilise D = (n − 1)/r, avec r en mètres."
   },
   {
-    epreuve: "U43", theme: "Vergences et focales", session: "2023",
+    id: "U43-009", epreuve: "U43", theme: "Vergences et focales", session: "2023",
     question: "On clipse une lentille macro de +5 δ sur un objectif photo réglé sur l'infini. Quel objet sera net sur la pellicule ?",
     choix: ["Un objet à 5 cm", "Un objet à 20 cm", "Un objet à 50 cm", "Un objet à l'infini"],
     bonne: 1,
@@ -101,7 +101,7 @@ QUESTIONS.push(
 
   // ---------- Œil et instrument (6/8) ----------
   {
-    epreuve: "U43", theme: "Œil et instrument", session: "2024",
+    id: "U43-010", epreuve: "U43", theme: "Œil et instrument", session: "2024",
     question: "Sur le tracé, on cote le remotum de l'œil : HR = −125 mm (R devant l'œil). Réfraction axiale et amétropie ?",
     choix: ["R = +8,00 δ, hypermétrope", "R = −8,00 δ, myope", "R = −0,125 δ, myope", "R = −12,50 δ, myope"],
     bonne: 1,
@@ -109,7 +109,7 @@ QUESTIONS.push(
     indice: "R = 1/HR, avec HR en mètres et son signe. Un remotum devant l'œil donne quel signe ?"
   },
   {
-    epreuve: "U43", theme: "Œil et instrument", session: "2018",
+    id: "U43-011", epreuve: "U43", theme: "Œil et instrument", session: "2018",
     question: "Le remotum est derrière l'œil : HR = +250 mm. Réfraction axiale et amétropie ?",
     choix: ["R = −4,00 δ, myope", "R = +4,00 δ, hypermétrope", "R = +2,50 δ, hypermétrope", "R = 0, emmétrope"],
     bonne: 1,
@@ -117,7 +117,7 @@ QUESTIONS.push(
     indice: "R = 1/HR, avec HR en mètres. Un remotum virtuel derrière l'œil, c'est quelle amétropie ?"
   },
   {
-    epreuve: "U43", theme: "Œil et instrument", session: "2023",
+    id: "U43-012", epreuve: "U43", theme: "Œil et instrument", session: "2023",
     question: "Un myope de −4,00 δ, sans lunettes, regarde dans un viseur dont l'image finale se trouve à 20 cm devant son œil. Quelle accommodation lui faut-il ?",
     choix: ["0 δ", "+1,00 δ", "+4,00 δ", "+5,00 δ"],
     bonne: 1,
@@ -125,7 +125,7 @@ QUESTIONS.push(
     indice: "Calcule d'abord la proximité de l'image (1/distance en m, négative devant l'œil). L'accommodation est l'écart entre R et cette proximité."
   },
   {
-    epreuve: "U43", theme: "Œil et instrument", session: "2023",
+    id: "U43-013", epreuve: "U43", theme: "Œil et instrument", session: "2023",
     question: "Le même myope (−4,00 δ), sans lunettes, regarde dans un instrument réglé pour un emmétrope (image finale à l'infini). Que se passe-t-il ?",
     choix: ["Il voit net en accommodant de 4 δ", "Il voit net sans accommoder", "Il ne peut pas voir net : l'image est au-delà de son remotum", "Il voit net en accommodant de 0,25 δ"],
     bonne: 2,
@@ -133,7 +133,7 @@ QUESTIONS.push(
     indice: "Où est le remotum d'un myope de −4 δ ? L'accommodation permet-elle de voir plus loin que lui, ou seulement plus près ?"
   },
   {
-    epreuve: "U43", theme: "Œil et instrument", session: "2021",
+    id: "U43-014", epreuve: "U43", theme: "Œil et instrument", session: "2021",
     question: "Par rapport au réglage pour un emmétrope, comment faut-il déplacer l'oculaire pour un utilisateur myope ?",
     choix: ["L'éloigner de l'image intermédiaire", "Le rapprocher de l'image intermédiaire (vers l'objectif)", "Le tourner de 90°", "Ne pas le bouger"],
     bonne: 1,
@@ -141,7 +141,7 @@ QUESTIONS.push(
     indice: "Le myope a besoin d'une image virtuelle à distance finie, pas à l'infini. Où doit alors se trouver l'image intermédiaire par rapport au foyer objet de l'oculaire ?"
   },
   {
-    epreuve: "U43", theme: "Œil et instrument", session: "2018",
+    id: "U43-015", epreuve: "U43", theme: "Œil et instrument", session: "2018",
     question: "Oculaire de focale 25 mm, œil placé à son foyer image. On le règle pour un myope de −4,00 δ (remotum à 250 mm), l'œil restant au foyer image de l'oculaire. De combien déplacer l'oculaire depuis le réglage emmétrope ?",
     choix: ["0,25 mm", "2,5 mm", "4 mm", "25 mm"],
     bonne: 1,
@@ -153,7 +153,7 @@ QUESTIONS.push(
 
   // ---------- Étude des champs (8/8) ----------
   {
-    epreuve: "U43", theme: "Étude des champs", session: "2022",
+    id: "U43-016", epreuve: "U43", theme: "Étude des champs", session: "2022",
     question: "Dans l'espace d'étude, comment identifie-t-on la pupille ?",
     choix: ["Le plus grand des diaphragmes, une fois conjugués dans l'espace d'étude", "Celui (ou son conjugué) vu sous le plus petit angle depuis le centre du plan des champs", "Toujours la monture de l'objectif, quel que soit l'instrument", "Le diaphragme le plus proche de l'œil de l'observateur"],
     bonne: 1,
@@ -163,7 +163,7 @@ QUESTIONS.push(
     schemaTexte: "Depuis le centre A du plan des champs, le diaphragme D₁ (rayon 35 mm à 120 mm) est vu sous un angle plus grand que D₂ (rayon 50 mm à 300 mm) : D₂ est la pupille, D₁ la lucarne."
   },
   {
-    epreuve: "U43", theme: "Étude des champs", session: "2019",
+    id: "U43-017", epreuve: "U43", theme: "Étude des champs", session: "2019",
     question: "Qu'est-ce que le champ de pleine lumière ?",
     choix: ["La zone où l'image est la plus nette, au centre du champ", "La zone où chaque faisceau remplit toute la pupille, sans être coupé", "La zone où l'éclairement vaut la moitié du maximum", "Tout ce que l'on voit dans l'instrument, même faiblement"],
     bonne: 1,
@@ -173,7 +173,7 @@ QUESTIONS.push(
     schemaTexte: "Schéma interactif : on fait varier le rayon de la lucarne D₁ et on voit le faisceau de pleine ouverture, les bords du champ de pleine lumière, du champ moyen et du champ total, et la vue de gauche."
   },
   {
-    epreuve: "U43", theme: "Étude des champs", session: "2023",
+    id: "U43-018", epreuve: "U43", theme: "Étude des champs", session: "2023",
     question: "La zone comprise entre le bord du champ de pleine lumière et le bord du champ total s'appelle :",
     choix: ["Le champ moyen", "Le champ de contour", "La pupille de sortie", "Le cercle oculaire"],
     bonne: 1,
@@ -183,7 +183,7 @@ QUESTIONS.push(
     schemaTexte: "Vue de gauche : au centre, le champ de pleine lumière éclairé uniformément ; autour, le champ de contour où l'éclairement baisse jusqu'à zéro au bord du champ total ; le cercle du champ moyen est au milieu."
   },
   {
-    epreuve: "U43", theme: "Étude des champs", session: "2021",
+    id: "U43-019", epreuve: "U43", theme: "Étude des champs", session: "2021",
     question: "Comment supprimer le champ de contour d'un instrument ?",
     choix: ["En fermant davantage la pupille de l'instrument", "En plaçant un diaphragme dans le plan d'une image réelle", "En prenant un oculaire de plus grand diamètre", "En éloignant l'œil du cercle oculaire"],
     bonne: 1,
@@ -191,7 +191,7 @@ QUESTIONS.push(
     indice: "Le contour vient d'une lucarne qui coupe les faisceaux progressivement. Où placer un diaphragme pour couper le champ net, sans dégradé ?"
   },
   {
-    epreuve: "U43", theme: "Étude des champs", session: "2018",
+    id: "U43-020", epreuve: "U43", theme: "Étude des champs", session: "2018",
     question: "Au bord du champ moyen, l'éclairement de l'image vaut environ :",
     choix: ["100 % de l'éclairement maximal", "50 % de l'éclairement maximal", "0 %", "25 %"],
     bonne: 1,
@@ -199,7 +199,7 @@ QUESTIONS.push(
     indice: "Au bord du champ moyen, le rayon qui passe par le centre de la pupille rase la lucarne. Quelle part du faisceau passe alors ?"
   },
   {
-    epreuve: "U43", theme: "Étude des champs", session: "2020",
+    id: "U43-021", epreuve: "U43", theme: "Étude des champs", session: "2020",
     question: "Pour qu'une photo soit éclairée en entier et de façon uniforme, le cercle du champ de pleine lumière image doit avoir un diamètre au moins égal à :",
     choix: ["La hauteur du capteur", "La largeur du capteur", "La diagonale du capteur", "La focale de l'objectif"],
     bonne: 2,
@@ -209,7 +209,7 @@ QUESTIONS.push(
 
   // ---------- Liaisons mécaniques (8/8) ----------
   {
-    epreuve: "U43", theme: "Liaisons mécaniques", session: "2024",
+    id: "U43-022", epreuve: "U43", theme: "Liaisons mécaniques", session: "2024",
     question: "Une molette ne peut que tourner autour de son axe X par rapport au boîtier. Quelle est la liaison ?",
     choix: ["Glissière d'axe X", "Pivot d'axe X", "Pivot glissant d'axe X", "Encastrement"],
     bonne: 1,
@@ -217,7 +217,7 @@ QUESTIONS.push(
     indice: "Compte les mouvements possibles : combien de rotations, combien de translations ?"
   },
   {
-    epreuve: "U43", theme: "Liaisons mécaniques", session: "2019",
+    id: "U43-023", epreuve: "U43", theme: "Liaisons mécaniques", session: "2019",
     question: "Un porte-mire ne peut que coulisser suivant l'axe optique Z, sans tourner. Quelle est la liaison ?",
     choix: ["Pivot d'axe Z", "Glissière d'axe Z", "Hélicoïdale d'axe Z", "Rotule"],
     bonne: 1,
@@ -225,7 +225,7 @@ QUESTIONS.push(
     indice: "Une seule translation, aucune rotation : quelle liaison autorise exactement ce mouvement ?"
   },
   {
-    epreuve: "U43", theme: "Liaisons mécaniques", session: "2017",
+    id: "U43-024", epreuve: "U43", theme: "Liaisons mécaniques", session: "2017",
     question: "Un tube peut, à la main, à la fois tourner sur lui-même et coulisser suivant son axe, ces deux mouvements étant indépendants. Quelle est la liaison ?",
     choix: ["Pivot", "Glissière", "Pivot glissant", "Hélicoïdale"],
     bonne: 2,
@@ -235,7 +235,7 @@ QUESTIONS.push(
     schemaTexte: "Tableau des mouvements suivant l'axe X : pivot (1 rotation), glissière (1 translation), pivot glissant (rotation et translation indépendantes, 2 ddl), hélicoïdale (rotation et translation liées, 1 ddl)."
   },
   {
-    epreuve: "U43", theme: "Liaisons mécaniques", session: "2023",
+    id: "U43-025", epreuve: "U43", theme: "Liaisons mécaniques", session: "2023",
     question: "Pour faire la mise au point, on tourne la bague de l'objectif : le bloc optique avance en tournant sur lui-même. Quelle est la liaison entre le bloc optique et la monture ?",
     choix: ["Pivot glissant", "Hélicoïdale", "Glissière", "Pivot"],
     bonne: 1,
@@ -243,7 +243,7 @@ QUESTIONS.push(
     indice: "Ici, impossible de tourner sans avancer. Les deux mouvements sont-ils indépendants ou liés ? Combien de degrés de liberté reste-t-il ?"
   },
   {
-    epreuve: "U43", theme: "Liaisons mécaniques", session: "2022",
+    id: "U43-026", epreuve: "U43", theme: "Liaisons mécaniques", session: "2022",
     question: "Lors d'une mise au point, on tourne une molette. Quel est le « mouvement utile » demandé pour l'élément optique ?",
     choix: ["La rotation de la molette", "La translation de l'élément optique suivant l'axe optique", "Une rotation de la lentille sur elle-même", "Aucun mouvement"],
     bonne: 1,
@@ -253,7 +253,7 @@ QUESTIONS.push(
 
   // ---------- Mécanismes de réglage ----------
   {
-    epreuve: "U43", theme: "Mécanismes de réglage", session: "2021",
+    id: "U43-027", epreuve: "U43", theme: "Mécanismes de réglage", session: "2021",
     question: "Mise au point d'un microscope : on tourne un bouton et le tube monte grâce à une roue dentée qui engrène sur une barre dentée. Mécanisme ?",
     choix: ["Vis-écrou", "Pignon-crémaillère", "Came", "Courroie"],
     bonne: 1,
@@ -261,7 +261,7 @@ QUESTIONS.push(
     indice: "Roue dentée = pignon, barre dentée = … ? Rotation d'un côté, translation de l'autre."
   },
   {
-    epreuve: "U43", theme: "Mécanismes de réglage", session: "2021",
+    id: "U43-028", epreuve: "U43", theme: "Mécanismes de réglage", session: "2021",
     question: "Une bague de mise au point (système vis-écrou) est filetée au pas de 0,6 mm. Combien de tours faut-il pour déplacer l'oculaire de 2,4 mm ?",
     choix: ["2 tours", "3 tours", "4 tours", "1,44 tour"],
     bonne: 2,
@@ -271,7 +271,7 @@ QUESTIONS.push(
 
   // ---------- Grossissement et photo ----------
   {
-    epreuve: "U43", theme: "Grossissement et photo", session: "2017",
+    id: "U43-029", epreuve: "U43", theme: "Grossissement et photo", session: "2017",
     question: "Lunette afocale : objectif de focale 600 mm, oculaire de focale 20 mm. Grossissement ?",
     choix: ["×12", "×30", "×580", "×0,033"],
     bonne: 1,
@@ -279,7 +279,7 @@ QUESTIONS.push(
     indice: "Pour une lunette afocale, G = f'objectif / f'oculaire."
   },
   {
-    epreuve: "U43", theme: "Grossissement et photo", session: "2017",
+    id: "U43-030", epreuve: "U43", theme: "Grossissement et photo", session: "2017",
     question: "On ajoute à cette lunette une lentille de Barlow qui double la focale de l'objectif. Que deviennent le grossissement et le champ observable ?",
     choix: ["G ×2, champ plus grand", "G ×2, champ plus petit", "G inchangé, champ plus petit", "G ÷2, champ plus grand"],
     bonne: 1,
@@ -287,7 +287,7 @@ QUESTIONS.push(
     indice: "Que devient f'objectif, donc G ? Et si on voit plus gros, voit-on une plus grande ou une plus petite partie du ciel ?"
   },
   {
-    epreuve: "U43", theme: "Grossissement et photo", session: "2018",
+    id: "U43-031", epreuve: "U43", theme: "Grossissement et photo", session: "2018",
     question: "Microscope : objectif ×40, oculaire ×10. Grossissement commercial ?",
     choix: ["×50", "×400", "×4", "×30"],
     bonne: 1,
@@ -295,7 +295,7 @@ QUESTIONS.push(
     indice: "Le grossissement commercial d'un microscope combine celui de l'objectif et celui de l'oculaire : addition ou multiplication ?"
   },
   {
-    epreuve: "U43", theme: "Grossissement et photo", session: "2020",
+    id: "U43-032", epreuve: "U43", theme: "Grossissement et photo", session: "2020",
     question: "Objectif photo de focale 100 mm dont la pupille d'entrée mesure 25 mm. Nombre d'ouverture ?",
     choix: ["f/2,5", "f/4", "f/25", "f/0,25"],
     bonne: 1,
@@ -303,7 +303,7 @@ QUESTIONS.push(
     indice: "N = focale ÷ diamètre de la pupille d'entrée, les deux dans la même unité."
   },
   {
-    epreuve: "U43", theme: "Grossissement et photo", session: "2020",
+    id: "U43-033", epreuve: "U43", theme: "Grossissement et photo", session: "2020",
     question: "On monte un multiplicateur ×2 sur cet objectif (100 mm, f/4). Résultat ?",
     choix: ["200 mm, f/4, même luminosité", "200 mm, f/8, luminosité divisée par 4", "50 mm, f/2, luminosité ×4", "200 mm, f/8, luminosité divisée par 2"],
     bonne: 1,
@@ -313,7 +313,7 @@ QUESTIONS.push(
 
   // ---------- Œil astigmate (3/8) ----------
   {
-    epreuve: "U43", theme: "Œil astigmate", session: "2021",
+    id: "U43-034", epreuve: "U43", theme: "Œil astigmate", session: "2021",
     question: "Un astigmate regarde un point dans un instrument. La tache de diffusion sur sa rétine est un petit segment horizontal. Cela signifie que :",
     choix: ["Le méridien horizontal est net sur la rétine", "Le méridien vertical est mis au point sur la rétine, le méridien horizontal ne l'est pas", "Aucun méridien n'est mis au point", "L'œil n'est pas astigmate"],
     bonne: 1,
@@ -321,7 +321,7 @@ QUESTIONS.push(
     indice: "Les rayons d'un méridien qui convergent sur la rétine donnent une focale perpendiculaire à ce méridien. Une focale horizontale vient donc de quel méridien ?"
   },
   {
-    epreuve: "U43", theme: "Œil astigmate", session: "2022",
+    id: "U43-035", epreuve: "U43", theme: "Œil astigmate", session: "2022",
     question: "Un client astigmate veut utiliser un télescope sans ses lunettes. Que lui conseiller ?",
     choix: ["Régler l'oculaire : cela compense toute l'amétropie", "Garder ses lunettes ou ses lentilles pendant l'observation", "Fermer l'œil le plus astigmate pendant l'observation", "Prendre un objectif de plus grande focale"],
     bonne: 1,
@@ -331,7 +331,7 @@ QUESTIONS.push(
 
   // ---------- Skiascopie (2024) ----------
   {
-    epreuve: "U43", theme: "Skiascopie", session: "2024",
+    id: "U43-036", epreuve: "U43", theme: "Skiascopie", session: "2024",
     question: "Skiascopie à 50 cm : le point neutre est obtenu avec un verre de +3,00 δ. Réfraction de l'œil ?",
     choix: ["+3,00 δ", "+1,00 δ", "+5,00 δ", "−1,00 δ"],
     bonne: 1,
@@ -339,7 +339,7 @@ QUESTIONS.push(
     indice: "Au point neutre, le remotum est sur ton skiascope. Retire la vergence liée à la distance de travail : 1/d, avec d en mètres."
   },
   {
-    epreuve: "U43", theme: "Skiascopie", session: "2024",
+    id: "U43-037", epreuve: "U43", theme: "Skiascopie", session: "2024",
     question: "Skiascopie à 50 cm, faisceau divergent, sans verre : le reflet bouge en sens inverse du skiascope. Conclusion ?",
     choix: ["Hypermétropie", "Emmétropie", "Myopie de plus de 2 δ", "Myopie de moins de 2 δ"],
     bonne: 2,
@@ -351,7 +351,7 @@ QUESTIONS.push(
 
   // ---------- Frontofocomètre (2019) ----------
   {
-    epreuve: "U43", theme: "Frontofocomètre", session: "2019",
+    id: "U43-038", epreuve: "U43", theme: "Frontofocomètre", session: "2019",
     question: "Au frontofocomètre, la puissance frontale image d'un verre se mesure en lumière verte (raie e du mercure). Pourquoi impose-t-on une couleur précise ?",
     choix: ["Pour ne pas éblouir l'opticien pendant la mesure", "C'est la longueur d'onde de référence (raie e, 546 nm) pour mesurer les puissances", "Pour contrôler l'efficacité des traitements antireflet", "Pour bien voir la mire à travers les verres teintés"],
     bonne: 1,
@@ -359,7 +359,7 @@ QUESTIONS.push(
     indice: "La vergence d'un verre change-t-elle avec la couleur de la lumière ? Pense à la dispersion."
   },
   {
-    epreuve: "U43", theme: "Frontofocomètre", session: "2019",
+    id: "U43-039", epreuve: "U43", theme: "Frontofocomètre", session: "2019",
     question: "Au frontofocomètre, un verre de +4,00 δ montre un effet prismatique de 2 Δ. De combien est-il décentré ?",
     choix: ["2 mm", "5 mm", "8 mm", "0,5 mm"],
     bonne: 1,
@@ -369,7 +369,7 @@ QUESTIONS.push(
 
   // ---------- Aberrations ----------
   {
-    epreuve: "U43", theme: "Aberrations", session: "2020",
+    id: "U43-040", epreuve: "U43", theme: "Aberrations", session: "2020",
     question: "Un doublet achromatique associe :",
     choix: ["Deux lentilles convergentes taillées dans le même verre", "Une convergente en crown et une divergente en flint", "Deux lentilles divergentes en flint, collées", "Une lentille convergente et un miroir concave"],
     bonne: 1,
@@ -377,7 +377,7 @@ QUESTIONS.push(
     indice: "Pour annuler les couleurs, il faut deux verres de dispersions très différentes, et un ensemble qui reste convergent."
   },
   {
-    epreuve: "U43", theme: "Aberrations", session: "2022",
+    id: "U43-041", epreuve: "U43", theme: "Aberrations", session: "2022",
     question: "Hors des conditions de Gauss, quelle aberration présente un miroir sphérique ?",
     choix: ["L'aberration chromatique", "L'aberration de sphéricité", "Aucune aberration", "La dispersion"],
     bonne: 1,

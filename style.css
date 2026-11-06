@@ -589,3 +589,9 @@ nav a.actif .compte-revoir { background: var(--fond); color: var(--or); }
 .actions-compte { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-top: 12px; }
 .actions-compte .bouton { margin-top: 0; }
 #reauth { margin-top: 16px; }
+
+/* ---------- Bandeau « progression mise à jour » (synchro depuis un autre appareil) ---------- */
+.bandeau-maj { position: fixed; left: 50%; bottom: 16px; transform: translateX(-50%); z-index: 50; display: flex; align-items: center; gap: 12px; width: max-content; max-width: calc(100% - 32px); box-sizing: border-box; padding: 12px 14px 12px 18px; border-radius: 14px; color: var(--texte); background: var(--carte); border: 1px solid rgba(217, 178, 111, 0.55); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45); font-size: 0.92rem; }
+.bandeau-maj .bouton { margin-top: 0; padding: 8px 14px; white-space: nowrap; }
+.bandeau-fermer { background: none; border: 0; color: var(--doux); font-size: 1.3rem; line-height: 1; cursor: pointer; padding: 4px; }
+@media (max-width: 520px) { .bandeau-maj { flex-wrap: wrap; } }

@@ -22,7 +22,7 @@ QUESTIONS.push(
 
   // ---------- Prix et marges (tombé 4 années sur 5) ----------
   {
-    epreuve: "U3", theme: "Prix et marges", session: "2019",
+    id: "U3-001", epreuve: "U3", theme: "Prix et marges", session: "2019",
     question: "Une monture est achetée 60 € HT et vendue 180 € TTC (TVA 20 %). Quel est le taux de marque ?",
     choix: ["60 %", "66,7 %", "50 %", "150 %"],
     bonne: 0,
@@ -32,7 +32,7 @@ QUESTIONS.push(
     schemaTexte: "Barre du prix de 180 € TTC découpée en achat 60 €, marge 90 € et TVA 30 € : taux de marque 90/150 = 60 %, taux de marge 90/60 = 150 %, coefficient TTC 3."
   },
   {
-    epreuve: "U3", theme: "Prix et marges", session: "complément",
+    id: "U3-002", epreuve: "U3", theme: "Prix et marges", session: "complément",
     question: "Même monture : achat 60 € HT, vente 150 € HT. Quel est le taux de MARGE ?",
     choix: ["60 %", "40 %", "150 %", "250 %"],
     bonne: 2,
@@ -40,7 +40,7 @@ QUESTIONS.push(
     indice: "Taux de MARGE ou taux de MARQUE ? L'un divise la marge par le coût d'achat, l'autre par le prix de vente. Lequel est demandé ici ?"
   },
   {
-    epreuve: "U3", theme: "Prix et marges", session: "2023",
+    id: "U3-003", epreuve: "U3", theme: "Prix et marges", session: "2023",
     question: "Un opticien applique un coefficient multiplicateur TTC de 3 sur un verre acheté 40 € HT. Prix de vente TTC et taux de marque ?",
     choix: ["120 € TTC, taux de marque 60 %", "120 € TTC, taux de marque 66,7 %", "100 € TTC, taux de marque 60 %", "144 € TTC, taux de marque 72 %"],
     bonne: 0,
@@ -48,7 +48,7 @@ QUESTIONS.push(
     indice: "Le coefficient TTC transforme un achat HT en prix TTC. Trouve le prix TTC, repasse en HT, puis calcule la marge."
   },
   {
-    epreuve: "U3", theme: "Prix et marges", session: "2017",
+    id: "U3-004", epreuve: "U3", theme: "Prix et marges", session: "2017",
     question: "Un magasin vise un taux de marque de 60 %. Quel coefficient multiplicateur TTC doit-il appliquer sur ses achats HT ?",
     choix: ["1,6", "2,5", "3", "3,6"],
     bonne: 2,
@@ -56,7 +56,7 @@ QUESTIONS.push(
     indice: "Prends un achat facile, par exemple 100 € HT : quel PV HT donne 60 % de marque ? Puis ajoute la TVA."
   },
   {
-    epreuve: "U3", theme: "Prix et marges", session: "2023",
+    id: "U3-005", epreuve: "U3", theme: "Prix et marges", session: "2023",
     question: "Un client paie un équipement 240 € TTC. Quel est le montant de TVA collectée par le magasin (TVA 20 %) ?",
     choix: ["48 €", "40 €", "20 €", "200 €"],
     bonne: 1,
@@ -66,7 +66,7 @@ QUESTIONS.push(
 
   // ---------- Marché et zone de chalandise (4 années sur 5) ----------
   {
-    epreuve: "U3", theme: "Marché et zone de chalandise", session: "2024",
+    id: "U3-006", epreuve: "U3", theme: "Marché et zone de chalandise", session: "2024",
     question: "Zone de chalandise : 12 000 habitants, 70 % de porteurs de lunettes, panier moyen 360 € TTC, renouvellement tous les 3 ans. Quel est le marché potentiel annuel ?",
     choix: ["3 024 000 € TTC", "1 008 000 € TTC", "336 000 € TTC", "2 520 000 € TTC"],
     bonne: 1,
@@ -74,7 +74,7 @@ QUESTIONS.push(
     indice: "Nombre de porteurs × panier moyen donne la dépense d'un cycle complet. N'oublie pas que ce cycle dure 3 ans."
   },
   {
-    epreuve: "U3", theme: "Marché et zone de chalandise", session: "2024",
+    id: "U3-007", epreuve: "U3", theme: "Marché et zone de chalandise", session: "2024",
     question: "Marché potentiel : 1 000 000 € TTC. Indice de disparité de la consommation (IDC) : 90. Évasion commerciale : 10 %. Quel est le marché net de l'évasion commerciale ?",
     choix: ["800 000 €", "900 000 €", "810 000 €", "990 000 €"],
     bonne: 2,
@@ -84,7 +84,7 @@ QUESTIONS.push(
     schemaTexte: "Entonnoir du marché : 1 000 000 € de marché potentiel, multiplié par 0,90 pour l'IDC (900 000 €), puis par 0,90 pour l'évasion commerciale : 810 000 €."
   },
   {
-    epreuve: "U3", theme: "Marché et zone de chalandise", session: "2024",
+    id: "U3-008", epreuve: "U3", theme: "Marché et zone de chalandise", session: "2024",
     question: "Le marché d'une zone, net de l'évasion commerciale, est de 480 000 € TTC. Le magasin espère en capter 25 %. Quel chiffre d'affaires HT peut-il prévoir ?",
     choix: ["120 000 €", "100 000 €", "96 000 €", "144 000 €"],
     bonne: 1,
@@ -92,7 +92,7 @@ QUESTIONS.push(
     indice: "Deux étapes : la part de marché, puis la conversion. Le marché est donné TTC, le chiffre d'affaires d'une entreprise se donne HT."
   },
   {
-    epreuve: "U3", theme: "Marché et zone de chalandise", session: "2024",
+    id: "U3-009", epreuve: "U3", theme: "Marché et zone de chalandise", session: "2024",
     question: "Une opticienne prépare un service d'optique à domicile. Lequel de ces éléments est une MENACE ?",
     choix: ["La population de la zone vieillit", "Elle est diplômée et très connue dans le village", "Un concurrent proche propose déjà ce service", "Son magasin a un stock trop important"],
     bonne: 2,
@@ -102,7 +102,7 @@ QUESTIONS.push(
 
   // ---------- Mercatique et communication (4 années sur 5) ----------
   {
-    epreuve: "U3", theme: "Mercatique et communication", session: "2018",
+    id: "U3-010", epreuve: "U3", theme: "Mercatique et communication", session: "2018",
     question: "Laquelle de ces actions est une communication HORS MÉDIA ?",
     choix: ["Une annonce dans la presse régionale", "Un spot de 30 secondes sur une radio locale", "Une affiche 4 × 3 sur le rond-point (affichage)", "Un courrier personnalisé aux clients"],
     bonne: 3,
@@ -110,7 +110,7 @@ QUESTIONS.push(
     indice: "Liste les 6 grands médias (presse, radio, télévision, affichage, cinéma, internet). Tout le reste est hors média."
   },
   {
-    epreuve: "U3", theme: "Mercatique et communication", session: "2019",
+    id: "U3-011", epreuve: "U3", theme: "Mercatique et communication", session: "2019",
     question: "Quelles sont les 4 variables du plan de marchéage (mix marketing, les « 4P ») ?",
     choix: ["Produit, prix, distribution, communication", "Produit, personnel, prix, promotion", "Prix, clientèle, concurrence, communication", "Produit, prix, publicité, profit"],
     bonne: 0,
@@ -118,7 +118,7 @@ QUESTIONS.push(
     indice: "Le plan de marchéage porte sur l'offre du magasin, pas sur les clients ni sur les résultats. En anglais, les 4 mots commencent par P."
   },
   {
-    epreuve: "U3", theme: "Mercatique et communication", session: "2023",
+    id: "U3-012", epreuve: "U3", theme: "Mercatique et communication", session: "2023",
     question: "Quelle caractéristique est propre au commerce associé (coopérative d'opticiens) ?",
     choix: ["Le franchiseur transmet un savoir-faire contre une redevance", "Chaque opticien adhérent est associé de la coopérative et vote aux décisions", "Tous les magasins appartiennent à la même société", "Le magasin n'a aucun lien avec un réseau"],
     bonne: 1,
@@ -126,7 +126,7 @@ QUESTIONS.push(
     indice: "Dans une coopérative, qui est propriétaire de la structure commune ? Pense au mot « associé »."
   },
   {
-    epreuve: "U3", theme: "Mercatique et communication", session: "2024",
+    id: "U3-013", epreuve: "U3", theme: "Mercatique et communication", session: "2024",
     question: "Un opticien indépendant veut rejoindre une franchise. Que doit lui remettre le franchiseur au moins 20 jours avant la signature du contrat ?",
     choix: ["Un document d'information précontractuelle", "Le bilan des 10 dernières années de tous les franchisés", "Un contrat de travail signé par le franchiseur", "Une attestation de dépôt de la marque à l'INPI"],
     bonne: 0,
@@ -136,7 +136,7 @@ QUESTIONS.push(
 
   // ---------- Seuil de rentabilité (3 années sur 5) ----------
   {
-    epreuve: "U3", theme: "Seuil de rentabilité", session: "2019",
+    id: "U3-014", epreuve: "U3", theme: "Seuil de rentabilité", session: "2019",
     question: "Chiffre d'affaires HT : 300 000 €. Charges variables : 120 000 €. Charges fixes : 135 000 €. Quel est le seuil de rentabilité ?",
     choix: ["255 000 €", "225 000 €", "180 000 €", "337 500 €"],
     bonne: 1,
@@ -146,7 +146,7 @@ QUESTIONS.push(
     schemaTexte: "Graphique : droite du chiffre d'affaires et droite des coûts totaux (135 000 € de charges fixes plus 40 % du CA). Elles se croisent à 225 000 €, le seuil de rentabilité. On peut faire glisser les charges fixes."
   },
   {
-    epreuve: "U3", theme: "Seuil de rentabilité", session: "2019",
+    id: "U3-015", epreuve: "U3", theme: "Seuil de rentabilité", session: "2019",
     question: "Même magasin : SR = 225 000 €, CA annuel = 300 000 €, activité régulière toute l'année. À quelle date le point mort est-il atteint ?",
     choix: ["Fin août", "Fin septembre", "Fin octobre", "Fin juin"],
     bonne: 1,
@@ -156,7 +156,7 @@ QUESTIONS.push(
     schemaTexte: "Graphique du seuil de rentabilité : le SR de 225 000 € représente les trois quarts du CA annuel de 300 000 €, soit 9 mois d'activité régulière."
   },
   {
-    epreuve: "U3", theme: "Seuil de rentabilité", session: "2018",
+    id: "U3-016", epreuve: "U3", theme: "Seuil de rentabilité", session: "2018",
     question: "Une ligne de montures se vend 125 € HT pièce, pour un coût variable de 50 € par monture. Ses charges fixes sont de 18 000 € par an. Combien faut-il en vendre PAR MOIS pour atteindre le seuil de rentabilité ?",
     choix: ["12 montures", "20 montures", "144 montures", "240 montures"],
     bonne: 1,
@@ -164,7 +164,7 @@ QUESTIONS.push(
     indice: "Combien chaque monture vendue rapporte-t-elle pour couvrir les charges fixes ? Attention à l'unité de temps demandée."
   },
   {
-    epreuve: "U3", theme: "Seuil de rentabilité", session: "2023",
+    id: "U3-017", epreuve: "U3", theme: "Seuil de rentabilité", session: "2023",
     question: "Un nouveau rayon prévoit 40 000 € HT de CA, un taux de marge sur coût variable de 50 % et 24 000 € de charges fixes. Que conclure ?",
     choix: ["Le SR ne se calcule pas car le résultat est négatif", "SR = 48 000 € : il manque 8 000 € de CA pour ne plus perdre d'argent", "SR = 12 000 € : le rayon est très rentable", "SR = 20 000 € : le rayon est rentable"],
     bonne: 1,
@@ -174,7 +174,7 @@ QUESTIONS.push(
 
   // ---------- Analyse financière (tombé chaque année sous une forme) ----------
   {
-    epreuve: "U3", theme: "Analyse financière", session: "2024",
+    id: "U3-018", epreuve: "U3", theme: "Analyse financière", session: "2024",
     question: "Bilan fonctionnel : ressources stables 180 000 €, emplois stables 150 000 €, stocks 40 000 €, créances clients 5 000 €, dettes fournisseurs, fiscales et sociales 25 000 €. FRNG et BFR ?",
     choix: ["FRNG 30 000 € ; BFR 20 000 €", "FRNG 30 000 € ; BFR 70 000 €", "FRNG −30 000 € ; BFR 20 000 €", "FRNG 20 000 € ; BFR 30 000 €"],
     bonne: 0,
@@ -182,7 +182,7 @@ QUESTIONS.push(
     indice: "Le FRNG se lit en haut du bilan (ressources et emplois stables), le BFR au milieu : ce que l'exploitation bloque moins ce qu'elle finance."
   },
   {
-    epreuve: "U3", theme: "Analyse financière", session: "2024",
+    id: "U3-019", epreuve: "U3", theme: "Analyse financière", session: "2024",
     question: "Avec un FRNG de 30 000 € et un BFR de 20 000 €, que vaut la trésorerie nette et que signifie-t-elle ?",
     choix: ["−10 000 € : le magasin vit à découvert", "50 000 € : le magasin a trop de stock", "10 000 € : le FRNG finance tout le BFR, il reste de la trésorerie", "10 000 € : le magasin doit emprunter à court terme"],
     bonne: 2,
@@ -190,7 +190,7 @@ QUESTIONS.push(
     indice: "Le FRNG finance d'abord le BFR. Ce qui reste, positif ou négatif, c'est la trésorerie."
   },
   {
-    epreuve: "U3", theme: "Analyse financière", session: "2017",
+    id: "U3-020", epreuve: "U3", theme: "Analyse financière", session: "2017",
     question: "Dettes fournisseurs : 24 000 € TTC. Achats de l'année : 146 000 € TTC. Quel est le délai moyen de crédit fournisseurs (année de 365 jours) ?",
     choix: ["60 jours", "6 jours", "36 jours", "90 jours"],
     bonne: 0,
@@ -198,7 +198,7 @@ QUESTIONS.push(
     indice: "Délai = dette / flux annuel × nombre de jours. Garde tout en TTC et utilise l'année de 365 jours demandée."
   },
   {
-    epreuve: "U3", theme: "Analyse financière", session: "2017",
+    id: "U3-021", epreuve: "U3", theme: "Analyse financière", session: "2017",
     question: "Ventes de marchandises : 400 000 € HT. Achats : 150 000 €. Stock initial : 50 000 €. Stock final : 40 000 €. Quelle est la marge commerciale ?",
     choix: ["250 000 €", "260 000 €", "240 000 €", "210 000 €"],
     bonne: 2,
@@ -206,7 +206,7 @@ QUESTIONS.push(
     indice: "Ce qu'on a vendu ne sort pas seulement des achats de l'année : ajoute le stock du début, retire celui de la fin."
   },
   {
-    epreuve: "U3", theme: "Analyse financière", session: "2024",
+    id: "U3-022", epreuve: "U3", theme: "Analyse financière", session: "2024",
     question: "Le magasin embauche un opticien. Quel est le PREMIER solde intermédiaire de gestion touché par son salaire ?",
     choix: ["La marge commerciale", "La valeur ajoutée (VA)", "L'excédent brut d'exploitation (EBE)", "Le résultat courant avant impôts (RCAI)"],
     bonne: 2,
@@ -216,7 +216,7 @@ QUESTIONS.push(
     schemaTexte: "Cascade des SIG : marge commerciale, valeur ajoutée, EBE, résultat d'exploitation, RCAI, résultat net. Les charges de personnel sont retirées au niveau de l'EBE, mis en évidence."
   },
   {
-    epreuve: "U3", theme: "Analyse financière", session: "2024",
+    id: "U3-023", epreuve: "U3", theme: "Analyse financière", session: "2024",
     question: "Dettes financières : 60 000 €. Capitaux propres : 120 000 €. Que dire du ratio d'endettement ?",
     choix: ["0,5 : le magasin peut encore emprunter", "2 : le magasin est trop endetté", "0,5 : le magasin ne peut plus emprunter", "50 % : la banque refusera tout prêt"],
     bonne: 0,
@@ -224,7 +224,7 @@ QUESTIONS.push(
     indice: "Ratio d'endettement = dettes financières / capitaux propres. Compare le résultat au repère de 1."
   },
   {
-    epreuve: "U3", theme: "Investissement et financement", session: "2023",
+    id: "U3-024", epreuve: "U3", theme: "Investissement et financement", session: "2023",
     question: "Une meuleuse automatique est achetée et mise en service le 1er avril, pour 15 000 € HT, amortie en linéaire sur 5 ans. Quelle est la dotation de la 1re année (exercice du 1er janvier au 31 décembre) ?",
     choix: ["3 000 €", "2 250 €", "750 €", "2 500 €"],
     bonne: 1,
@@ -232,7 +232,7 @@ QUESTIONS.push(
     indice: "Amortissement linéaire : annuité = valeur / durée. La première année, compte seulement les mois depuis la mise en service."
   },
   {
-    epreuve: "U3", theme: "Investissement et financement", session: "2023",
+    id: "U3-025", epreuve: "U3", theme: "Investissement et financement", session: "2023",
     question: "Pourquoi les dotations aux amortissements n'apparaissent-elles pas dans le budget de trésorerie ?",
     choix: ["Parce qu'elles ne sont payées que l'année suivante", "Parce qu'elles sont réglées directement par la banque", "Parce qu'elles ne sont pas déductibles du bénéfice", "Parce que c'est une charge calculée, sans sortie d'argent"],
     bonne: 3,
@@ -240,7 +240,7 @@ QUESTIONS.push(
     indice: "Demande-toi quand l'argent sort vraiment de la banque : le jour de l'achat, ou chaque année de la dotation ?"
   },
   {
-    epreuve: "U3", theme: "Investissement et financement", session: "2024",
+    id: "U3-026", epreuve: "U3", theme: "Investissement et financement", session: "2024",
     question: "Emprunt de 20 000 € sur 5 ans à 5 %, remboursé par annuités constantes de 4 619,50 €. Que contient la 1re annuité ?",
     choix: ["1 000 € d'intérêts et 3 619,50 € de capital remboursé", "4 000 € de capital et 619,50 € d'intérêts", "4 619,50 € d'intérêts", "923,90 € d'intérêts et 3 695,60 € de capital remboursé"],
     bonne: 0,
@@ -248,7 +248,7 @@ QUESTIONS.push(
     indice: "Les intérêts d'une année se calculent sur le capital restant dû. Le capital remboursé, c'est ce qui reste de l'annuité."
   },
   {
-    epreuve: "U3", theme: "Investissement et financement", session: "2024",
+    id: "U3-027", epreuve: "U3", theme: "Investissement et financement", session: "2024",
     question: "Le magasin finance son véhicule de tournée par crédit-bail plutôt que par emprunt. Quel est l'effet sur les comptes ?",
     choix: ["Le véhicule est inscrit à l'actif et amorti", "Les loyers sont des charges externes, ce qui baisse la valeur ajoutée", "Les loyers sont des charges financières, ce qui baisse seulement le RCAI", "Il n'y a aucun effet sur le compte de résultat"],
     bonne: 1,
@@ -258,7 +258,7 @@ QUESTIONS.push(
 
   // ---------- Droit du travail ----------
   {
-    epreuve: "U3", theme: "Droit du travail", session: "2024",
+    id: "U3-028", epreuve: "U3", theme: "Droit du travail", session: "2024",
     question: "Un opticien veut embaucher un monteur pour un poste permanent en atelier. Il hésite à proposer d'abord un CDD « pour voir ». Est-ce possible ?",
     choix: ["Oui, le CDD est libre dès que le salarié l'accepte et le signe", "Oui, à condition de ne pas dépasser 3 ans au total", "Non, pas pour un emploi durable et permanent", "Non, le CDD est interdit dans tout le commerce de détail"],
     bonne: 2,
@@ -266,7 +266,7 @@ QUESTIONS.push(
     indice: "Le CDD n'est autorisé que pour des motifs précis et temporaires. Un poste permanent en fait-il partie ? Quel outil sert à tester un salarié ?"
   },
   {
-    epreuve: "U3", theme: "Droit du travail", session: "2024",
+    id: "U3-029", epreuve: "U3", theme: "Droit du travail", session: "2024",
     question: "En CDI, quelle est la durée maximale de la période d'essai d'un EMPLOYÉ fixée par le Code du travail (hors renouvellement) ?",
     choix: ["1 mois", "2 mois", "3 mois", "4 mois"],
     bonne: 1,
@@ -274,7 +274,7 @@ QUESTIONS.push(
     indice: "Le Code du travail fixe trois durées selon la catégorie : ouvriers et employés, agents de maîtrise et techniciens, cadres."
   },
   {
-    epreuve: "U3", theme: "Droit du travail", session: "2017",
+    id: "U3-030", epreuve: "U3", theme: "Droit du travail", session: "2017",
     question: "Pour être valable, que doit OBLIGATOIREMENT prévoir une clause de non-concurrence dans le contrat d'un opticien salarié ?",
     choix: ["Une durée d'au moins 3 ans", "L'accord de l'inspection du travail", "Une contrepartie financière versée au salarié", "Une interdiction valable dans toute la France"],
     bonne: 2,
@@ -282,7 +282,7 @@ QUESTIONS.push(
     indice: "Une clause de non-concurrence prive le salarié d'une partie de sa liberté de travailler. Que doit-il recevoir en échange ?"
   },
   {
-    epreuve: "U3", theme: "Droit du travail", session: "2024",
+    id: "U3-031", epreuve: "U3", theme: "Droit du travail", session: "2024",
     question: "La clause de non-concurrence d'un contrat ne prévoit aucune contrepartie financière. Quelle conséquence ?",
     choix: ["Tout le contrat de travail devient nul", "La clause est nulle, le contrat reste valable", "La clause reste valable, mais l'employeur paie une amende", "Le salarié doit rembourser une partie de ses salaires"],
     bonne: 1,
@@ -290,7 +290,7 @@ QUESTIONS.push(
     indice: "Une clause mal rédigée n'entraîne pas forcément tout le contrat avec elle. Qu'est-ce qui tombe exactement ?"
   },
   {
-    epreuve: "U3", theme: "Droit du travail", session: "2017",
+    id: "U3-032", epreuve: "U3", theme: "Droit du travail", session: "2017",
     question: "Salaire brut : 2 000 €. Cotisations salariales : 22 % du brut. Cotisations patronales : 45 % du brut. Salaire net et coût pour l'employeur ?",
     choix: ["Net 1 560 € ; coût 2 900 €", "Net 1 100 € ; coût 2 000 €", "Net 1 560 € ; coût 2 440 €", "Net 1 640 € ; coût 2 900 €"],
     bonne: 0,
@@ -298,7 +298,7 @@ QUESTIONS.push(
     indice: "Les cotisations salariales sont retirées du brut, les cotisations patronales s'ajoutent au brut. Deux calculs séparés."
   },
   {
-    epreuve: "U3", theme: "Droit du travail", session: "2023",
+    id: "U3-033", epreuve: "U3", theme: "Droit du travail", session: "2023",
     question: "Une opticienne rachète un fonds de commerce où travaille déjà un salarié. Que devient son contrat ?",
     choix: ["Il s'arrête automatiquement à la vente", "Le vendeur doit le licencier avant la vente", "Il continue automatiquement avec le nouvel employeur", "Le repreneur peut choisir de le garder ou non"],
     bonne: 2,
@@ -308,7 +308,7 @@ QUESTIONS.push(
 
   // ---------- Droit des entreprises ----------
   {
-    epreuve: "U3", theme: "Droit des entreprises", session: "2023",
+    id: "U3-034", epreuve: "U3", theme: "Droit des entreprises", session: "2023",
     question: "Une opticienne crée seule sa société et la dirige. Quel est son statut social selon la forme choisie ?",
     choix: ["Gérante d'EURL : assimilée salariée ; présidente de SASU : indépendante", "Gérante d'EURL : indépendante ; présidente de SASU : assimilée salariée", "Salariée dans les deux cas", "Indépendante dans les deux cas"],
     bonne: 1,
@@ -316,7 +316,7 @@ QUESTIONS.push(
     indice: "Le gérant d'EURL et le président de SAS n'ont pas le même régime de protection sociale. Lequel relève du régime général ?"
   },
   {
-    epreuve: "U3", theme: "Droit des entreprises", session: "2023",
+    id: "U3-035", epreuve: "U3", theme: "Droit des entreprises", session: "2023",
     question: "Lequel de ces éléments NE fait PAS partie du fonds de commerce d'un magasin d'optique ?",
     choix: ["La clientèle", "Le droit au bail", "L'enseigne et le nom commercial", "Les murs du magasin"],
     bonne: 3,
@@ -324,7 +324,7 @@ QUESTIONS.push(
     indice: "Le fonds de commerce ne contient que des biens meubles. Cherche l'élément qui est un bien immobilier."
   },
   {
-    epreuve: "U3", theme: "Droit des entreprises", session: "2023",
+    id: "U3-036", epreuve: "U3", theme: "Droit des entreprises", session: "2023",
     question: "Bail commercial « classique » d'un magasin d'optique : quelle affirmation est juste ?",
     choix: ["Il dure 1 an et se renouvelle automatiquement chaque année", "9 ans minimum ; congé et révision du loyer possibles tous les 3 ans", "Le propriétaire peut augmenter le loyer librement chaque mois", "Le locataire ne peut jamais partir avant la fin des 9 ans"],
     bonne: 1,
@@ -334,7 +334,7 @@ QUESTIONS.push(
     schemaTexte: "Frise du bail commercial sur 9 ans : à 3 et 6 ans, congé possible pour le locataire et révision du loyer, avec un préavis de 6 mois ; à 9 ans, fin du bail ou renouvellement."
   },
   {
-    epreuve: "U3", theme: "Droit des entreprises", session: "2018",
+    id: "U3-037", epreuve: "U3", theme: "Droit des entreprises", session: "2018",
     question: "Un magasin change d'enseigne. Comment protéger efficacement le nouveau nom ?",
     choix: ["En le déposant comme marque à l'INPI, protection de 10 ans renouvelable", "Il est protégé dans toute la France dès qu'il est sur la vitrine", "En l'inscrivant au registre du commerce : protection de 5 ans", "En le déposant à la mairie"],
     bonne: 0,
@@ -344,7 +344,7 @@ QUESTIONS.push(
 
   // ---------- Réglementation de l'opticien ----------
   {
-    epreuve: "U3", theme: "Réglementation de l'opticien", session: "2019",
+    id: "U3-038", epreuve: "U3", theme: "Réglementation de l'opticien", session: "2019",
     question: "Avant de réaliser une réfraction pour adapter une ordonnance, que doit dire l'opticien au client ?",
     choix: ["Que l'examen est remboursé par la Sécurité sociale", "Que la réfraction pratiquée n'est pas un acte médical", "Qu'il doit revenir dans 3 mois", "Qu'il n'a pas le droit de vendre de lentilles"],
     bonne: 1,
@@ -352,7 +352,7 @@ QUESTIONS.push(
     indice: "Le décret de 2016 encadre la réfraction faite par l'opticien. Qu'est-ce qui la distingue d'une consultation chez l'ophtalmologiste ?"
   },
   {
-    epreuve: "U3", theme: "Réglementation de l'opticien", session: "2019",
+    id: "U3-039", epreuve: "U3", theme: "Réglementation de l'opticien", session: "2019",
     question: "Un client de 30 ans revient avec une ordonnance de lunettes datée d'il y a 4 ans, sans opposition du médecin. L'opticien peut-il renouveler en adaptant la correction ?",
     choix: ["Non, une ordonnance de lunettes n'est valable qu'un an", "Non, au-delà de 3 ans c'est impossible à tout âge", "Oui, entre 16 et 42 ans elle reste valable 5 ans", "Oui, une ordonnance n'a aucune limite de temps"],
     bonne: 2,
@@ -360,7 +360,7 @@ QUESTIONS.push(
     indice: "La durée pendant laquelle l'opticien peut adapter une ordonnance dépend de l'âge du client. Dans quelle tranche se trouve un client de 30 ans ?"
   },
   {
-    epreuve: "U3", theme: "Réglementation de l'opticien", session: "complément",
+    id: "U3-040", epreuve: "U3", theme: "Réglementation de l'opticien", session: "complément",
     question: "Depuis la réforme « 100 % Santé », que doit faire l'opticien pour tout équipement de lunettes ?",
     choix: ["Ne vendre que des équipements de classe A, sans reste à charge", "Proposer au moins une offre de classe A dans un devis normalisé", "Facturer les verres au prix fixé par la complémentaire santé", "Refuser les clients qui n'ont pas de complémentaire santé"],
     bonne: 1,
