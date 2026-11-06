@@ -94,7 +94,7 @@ const ui = {
     dehors.hidden = connecte;
     dedans.hidden = !connecte;
     const qui = document.getElementById("compte-qui");
-    if (qui && utilisateur) qui.textContent = utilisateur.email || "ton compte Google";
+    if (qui && utilisateur) qui.textContent = utilisateur.email || "ton compte";
   }
 };
 
@@ -248,26 +248,137 @@ async function demarrer() {
     ui.etat("Tu es déconnecté. Ta progression reste gardée dans ce navigateur.");
   });
 
+  // ---------- Connexion par e-mail et mot de passe ----------
+  const MESSAGES = {
+    "auth/email-already-in-use": "Un compte existe déjà avec cet e-mail. Connecte-toi, ou utilise « Mot de passe oublié ? ».",
+    "auth/invalid-email": "Cette adresse e-mail n'est pas valide.",
+    "auth/missing-email": "Indique ton adresse e-mail.",
+    "auth/weak-password": "Mot de passe trop faible : 8 caractères minimum.",
+    "auth/missing-password": "Indique ton mot de passe.",
+    "auth/invalid-credential": "E-mail ou mot de passe incorrect.",
+    "auth/wrong-password": "E-mail ou mot de passe incorrect.",
+    "auth/user-not-found": "E-mail ou mot de passe incorrect.",
+    "auth/too-many-requests": "Trop d'essais d'un coup. Patiente quelques minutes et réessaie.",
+    "auth/network-request-failed": "Pas de connexion internet. Vérifie ton réseau.",
+    "auth/user-disabled": "Ce compte a été désactivé."
+  };
+  const message = e => MESSAGES[e && e.code] || "Ça n'a pas marché. Réessaie dans un instant.";
+
+  const formEmail = document.getElementById("form-email");
+  if (formEmail) {
+    let inscription = false;
+    const champEmail = document.getElementById("champ-email");
+    const champMdp = document.getElementById("champ-mdp");
+    const valider = document.getElementById("valider-email");
+    const choisirOnglet = nouvelleInscription => {
+      inscription = nouvelleInscription;
+      document.getElementById("onglet-connexion").setAttribute("aria-selected", !inscription);
+      document.getElementById("onglet-inscription").setAttribute("aria-selected", inscription);
+      valider.textContent = inscription ? "Créer mon compte" : "Se connecter";
+      champMdp.autocomplete = inscription ? "new-password" : "current-password";
+      document.getElementById("regle-mdp").hidden = !inscription;
+      document.getElementById("mdp-oublie").hidden = inscription;
+      ui.etat("");
+    };
+    document.getElementById("onglet-connexion").onclick = () => choisirOnglet(false);
+    document.getElementById("onglet-inscription").onclick = () => choisirOnglet(true);
+    document.getElementById("voir-mdp").onclick = () => {
+      const visible = champMdp.type === "text";
+      champMdp.type = visible ? "password" : "text";
+      document.getElementById("voir-mdp").setAttribute("aria-label", visible ? "Afficher le mot de passe" : "Masquer le mot de passe");
+    };
+
+    formEmail.addEventListener("submit", async e => {
+      e.preventDefault();
+      const email = champEmail.value.trim(), mdp = champMdp.value;
+      if (!email) { ui.etat(MESSAGES["auth/missing-email"]); champEmail.focus(); return; }
+      if (inscription && mdp.length < 8) { ui.etat(MESSAGES["auth/weak-password"]); champMdp.focus(); return; }
+      valider.disabled = true;
+      ui.etat(inscription ? "Création du compte…" : "Connexion…");
+      try {
+        if (inscription) {
+          const res = await A.createUserWithEmailAndPassword(auth, email, mdp);
+          try { await A.sendEmailVerification(res.user); } catch (err) { console.error(err); }
+        } else {
+          await A.signInWithEmailAndPassword(auth, email, mdp);
+        }
+        champMdp.value = "";
+      } catch (err) {
+        console.error(err);
+        ui.etat(message(err));
+      } finally {
+        valider.disabled = false;
+      }
+    });
+
+    document.getElementById("mdp-oublie").onclick = async () => {
+      const email = champEmail.value.trim();
+      if (!email) { ui.etat("Écris d'abord ton adresse e-mail, puis clique sur « Mot de passe oublié ? »."); champEmail.focus(); return; }
+      try {
+        await A.sendPasswordResetEmail(auth, email);
+      } catch (err) {
+        if (err.code === "auth/invalid-email" || err.code === "auth/network-request-failed" || err.code === "auth/too-many-requests") { ui.etat(message(err)); return; }
+      }
+      // Même message dans tous les cas, pour ne pas révéler si un compte existe
+      ui.etat("Si un compte existe avec cette adresse, tu vas recevoir un e-mail pour choisir un nouveau mot de passe (pense à regarder les spams).");
+    };
+  }
+
+  // Le compte est-il un compte e-mail (et l'adresse est-elle vérifiée) ?
+  const estCompteEmail = u => u && u.providerData.some(p => p.providerId === "password");
+  A.onAuthStateChanged(auth, u => {
+    const verif = document.getElementById("compte-verif");
+    if (!verif) return;
+    verif.hidden = !(estCompteEmail(u) && !u.emailVerified);
+    verif.textContent = "Pense à valider ton adresse : on t'a envoyé un e-mail (regarde aussi les spams).";
+  });
+
+  // ---------- Supprimer son compte ----------
+  // On confirme d'abord l'identité (Google ou mot de passe), PUIS on efface les données et le compte.
+  const formReauth = document.getElementById("reauth");
+  async function supprimerTout(effacerNavigateur) {
+    await F.deleteDoc(F.doc(db, "eleves", auth.currentUser.uid));
+    await A.deleteUser(auth.currentUser);
+    ecrireTexte("compte-uid", null);
+    ecrire("attente", {});
+    if (effacerNavigateur) ["progression", "records", "attente", "profil", "revisions"].forEach(c => ecrireTexte(c, null));
+    if (formReauth) formReauth.hidden = true;
+    ui.etat("Ton compte et ta progression en ligne ont été supprimés.");
+  }
+  let effacerNavigateurDemande = false;
+
   const bSupprimer = document.getElementById("bouton-supprimer");
   if (bSupprimer) bSupprimer.addEventListener("click", async () => {
     if (!utilisateur) return;
     if (!confirm("Supprimer ton compte et ta progression en ligne ? C'est définitif.")) return;
-    const effacerNavigateur = confirm("Effacer aussi la progression gardée dans ce navigateur ?");
+    effacerNavigateurDemande = confirm("Effacer aussi la progression gardée dans ce navigateur ?");
+    if (estCompteEmail(utilisateur)) {
+      formReauth.hidden = false;
+      document.getElementById("champ-mdp-confirmer").focus();
+      return;
+    }
     try {
-      await F.deleteDoc(F.doc(db, "eleves", utilisateur.uid));
-      try { await A.deleteUser(utilisateur); }
-      catch (e) {
-        if (e.code !== "auth/requires-recent-login") throw e;
-        await A.reauthenticateWithPopup(utilisateur, fournisseur);
-        await A.deleteUser(auth.currentUser);
-      }
-      ecrireTexte("compte-uid", null);
-      ecrire("attente", {});
-      if (effacerNavigateur) ["progression", "records", "attente", "profil", "revisions"].forEach(c => ecrireTexte(c, null));
-      ui.etat("Ton compte et ta progression en ligne ont été supprimés.");
+      await A.reauthenticateWithPopup(utilisateur, fournisseur);
+      await supprimerTout(effacerNavigateurDemande);
     } catch (e) {
       console.error(e);
-      ui.etat("La suppression n'a pas marché. Réessaie, ou écris-nous à l'adresse de la page confidentialité.");
+      ui.etat(e.code === "auth/popup-closed-by-user" ? "Suppression annulée." : "La suppression n'a pas marché. Réessaie, ou écris-nous à l'adresse de la page confidentialité.");
     }
   });
+  if (formReauth) {
+    document.getElementById("reauth-annuler").onclick = () => { formReauth.hidden = true; ui.etat("Suppression annulée."); };
+    formReauth.addEventListener("submit", async e => {
+      e.preventDefault();
+      const champ = document.getElementById("champ-mdp-confirmer");
+      try {
+        const cred = A.EmailAuthProvider.credential(auth.currentUser.email, champ.value);
+        await A.reauthenticateWithCredential(auth.currentUser, cred);
+        champ.value = "";
+        await supprimerTout(effacerNavigateurDemande);
+      } catch (err) {
+        console.error(err);
+        ui.etat(message(err));
+      }
+    });
+  }
 }

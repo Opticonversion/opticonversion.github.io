@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Crée ton compte Opticonversion pour retrouver ta progression au BTS OL sur tous tes appareils.">
+<meta name="description" content="Crée ton compte Opticonversion (Google ou e-mail) pour retrouver ta progression au BTS OL sur tous tes appareils.">
 <meta name="theme-color" content="#0b0d12">
 <title>Mon profil · Opticonversion</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='13' fill='none' stroke='%23d9b26f' stroke-width='3'/%3E%3Ccircle cx='16' cy='16' r='5' fill='%23d9b26f'/%3E%3C/svg%3E">
@@ -63,16 +63,49 @@
   <section class="apparait" style="--d:4">
     <div id="compte-deconnecte">
       <h2>Retrouve ta progression partout</h2>
-      <p class="aide">Connecte-toi avec Google pour retrouver ton profil et tes scores sur ton téléphone comme sur ton ordinateur. Sans compte, tout reste dans ce navigateur.</p>
-      <button class="bouton" id="bouton-connexion">Se connecter avec Google</button>
+      <p class="aide">Un compte gratuit pour retrouver ton profil, tes scores et tes révisions sur ton téléphone comme sur ton ordinateur. Sans compte, tout reste dans ce navigateur.</p>
+      <button class="bouton bouton-google" id="bouton-connexion" type="button">
+        <svg viewBox="0 0 48 48" width="18" height="18" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9 3.5l6.7-6.7C35.6 2.4 30.2 0 24 0 14.6 0 6.6 5.4 2.7 13.2l7.8 6.1C12.4 13.6 17.7 9.5 24 9.5z"/><path fill="#4285F4" d="M46.1 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.4c-.5 2.9-2.2 5.3-4.6 6.9l7.4 5.8c4.3-4 6.9-9.9 6.9-17.2z"/><path fill="#FBBC05" d="M10.5 28.7c-.5-1.4-.8-3-.8-4.7s.3-3.2.8-4.7l-7.8-6.1C1 16.6 0 20.2 0 24s1 7.4 2.7 10.8l7.8-6.1z"/><path fill="#34A853" d="M24 48c6.5 0 11.9-2.1 15.9-5.8l-7.4-5.8c-2.1 1.4-4.8 2.3-8.5 2.3-6.3 0-11.6-4.1-13.5-9.8l-7.8 6.1C6.6 42.6 14.6 48 24 48z"/></svg>
+        Continuer avec Google
+      </button>
+
+      <p class="separateur-compte"><span>ou avec ton e-mail</span></p>
+
+      <form id="form-email" class="form-compte" novalidate>
+        <div class="onglets-compte" role="tablist">
+          <button type="button" role="tab" id="onglet-connexion" aria-selected="true">J'ai déjà un compte</button>
+          <button type="button" role="tab" id="onglet-inscription" aria-selected="false">Créer un compte</button>
+        </div>
+        <label for="champ-email">Adresse e-mail</label>
+        <input id="champ-email" type="email" autocomplete="email" inputmode="email" required>
+        <label for="champ-mdp">Mot de passe</label>
+        <div class="mdp">
+          <input id="champ-mdp" type="password" autocomplete="current-password" minlength="8" required>
+          <button type="button" id="voir-mdp" aria-label="Afficher le mot de passe">👁</button>
+        </div>
+        <p class="aide" id="regle-mdp" hidden style="margin:4px 0 0">8 caractères minimum.</p>
+        <div class="actions-compte">
+          <button class="bouton" type="submit" id="valider-email">Se connecter</button>
+          <button class="lien-signaler" type="button" id="mdp-oublie">Mot de passe oublié ?</button>
+        </div>
+      </form>
     </div>
     <div id="compte-connecte" hidden>
       <h2>Tu es connecté</h2>
       <p class="aide">Compte : <b id="compte-qui"></b></p>
+      <p class="aide" id="compte-verif" hidden></p>
       <div class="bilan-actions" style="justify-content:flex-start">
         <button class="bouton secondaire" id="bouton-deconnexion">Se déconnecter</button>
         <button class="bouton danger" id="bouton-supprimer">Supprimer mon compte</button>
       </div>
+      <form id="reauth" class="form-compte" hidden>
+        <label for="champ-mdp-confirmer">Pour supprimer ton compte, confirme ton mot de passe</label>
+        <input id="champ-mdp-confirmer" type="password" autocomplete="current-password" required>
+        <div class="actions-compte">
+          <button class="bouton danger" type="submit">Supprimer définitivement</button>
+          <button class="bouton secondaire" type="button" id="reauth-annuler">Annuler</button>
+        </div>
+      </form>
     </div>
     <p class="aide" id="compte-etat" role="status" style="margin-top:14px"></p>
   </section>

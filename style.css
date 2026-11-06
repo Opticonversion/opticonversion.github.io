@@ -570,3 +570,22 @@ figure.schema object, figure.schema img { display: block; width: 100%; height: a
 .carte.carte-revoir { border-color: rgba(217, 178, 111, 0.55); background: linear-gradient(135deg, rgba(217, 178, 111, 0.16), rgba(217, 178, 111, 0.04)); }
 .compte-revoir { display: inline-grid; place-items: center; min-width: 18px; height: 18px; padding: 0 5px; margin-left: 5px; border-radius: 999px; font-size: 0.72rem; font-weight: 700; color: var(--fond); background: var(--or); vertical-align: 1px; }
 nav a.actif .compte-revoir { background: var(--fond); color: var(--or); }
+
+/* ---------- Connexion par e-mail ---------- */
+.bouton-google { display: inline-flex; align-items: center; gap: 10px; color: #1f1f1f; background: #ffffff; box-shadow: none; }
+.bouton-google:hover { background: #f2f2f2; }
+.separateur-compte { display: flex; align-items: center; gap: 12px; margin: 22px 0 14px; color: var(--doux); font-size: 0.85rem; }
+.separateur-compte::before, .separateur-compte::after { content: ""; flex: 1; height: 1px; background: var(--bord); }
+.form-compte { display: grid; gap: 6px; max-width: 380px; }
+.form-compte label { color: var(--doux); font-size: 0.88rem; margin-top: 6px; }
+.form-compte input { font: inherit; color: var(--texte); background: rgba(255, 255, 255, 0.04); border: 1px solid var(--bord-fort); border-radius: 12px; padding: 11px 14px; width: 100%; box-sizing: border-box; }
+.form-compte input:focus { outline: 2px solid var(--or); outline-offset: 1px; }
+.mdp { position: relative; }
+.mdp input { padding-right: 44px; }
+.mdp button { position: absolute; right: 6px; top: 50%; transform: translateY(-50%); background: none; border: 0; cursor: pointer; font-size: 1rem; opacity: 0.7; padding: 6px; }
+.onglets-compte { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; padding: 4px; border-radius: 12px; background: rgba(255, 255, 255, 0.04); border: 1px solid var(--bord); margin-bottom: 4px; }
+.onglets-compte button { font: inherit; font-size: 0.88rem; padding: 8px; border: 0; border-radius: 9px; color: var(--doux); background: transparent; cursor: pointer; }
+.onglets-compte button[aria-selected="true"] { color: var(--fond); background: var(--or); font-weight: 600; }
+.actions-compte { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-top: 12px; }
+.actions-compte .bouton { margin-top: 0; }
+#reauth { margin-top: 16px; }
