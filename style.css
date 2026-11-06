@@ -362,6 +362,46 @@ main.large h1, main.large .sous-titre { max-width: 760px; }
   .vues button { padding: 6px 10px; }
 }
 
+/* ---------- 8 ter. L'essentiel du BTS OL ---------- */
+.jauge { margin: 8px 0 24px; }
+.jauge-texte { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 8px; margin-bottom: 10px; color: var(--doux); }
+.jauge-texte strong { font-family: var(--titre); font-size: 1.3rem; color: var(--or-clair); font-weight: 600; }
+.barre.grosse { height: 10px; border-radius: 10px; margin-bottom: 12px; }
+.barre.grosse .barre-remplie { border-radius: 10px; }
+.jauge .aide { margin: 0; }
+
+.notions { list-style: none; margin: 0 0 24px; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+.notion {
+  display: flex; align-items: center; gap: 14px; padding: 14px 16px;
+  background: var(--carte); border: 1px solid var(--bord); border-radius: var(--rayon);
+  transition: border-color var(--vite), transform var(--vite);
+}
+.notion:hover { border-color: rgba(217, 178, 111, 0.4); transform: translateX(2px); }
+.notion .rang {
+  flex: none; width: 36px; height: 36px; border-radius: 10px; display: grid; place-items: center;
+  font-family: var(--titre); font-weight: 600; color: var(--or); background: var(--or-fond);
+}
+.notion.maitrisee { border-color: rgba(95, 211, 154, 0.35); }
+.notion.maitrisee .rang { color: var(--fond); background: var(--vert); }
+.notion-corps { flex: 1; min-width: 0; }
+.notion-haut { display: flex; flex-wrap: wrap; gap: 6px; font-size: 0.76rem; color: var(--doux); }
+.notion-titre { display: block; font-family: var(--titre); font-size: 1.12rem; font-weight: 600; margin: 4px 0 6px; }
+.notion-barre { display: flex; align-items: center; gap: 10px; }
+.notion-barre .barre { flex: 1; max-width: 220px; margin: 0; }
+.notion-barre small { color: var(--doux); font-size: 0.78rem; white-space: nowrap; }
+.notion.maitrisee .barre-remplie { background: var(--vert); }
+.notion-actions { display: flex; gap: 8px; flex: none; }
+.notion-actions .bouton { margin: 0; padding: 9px 16px; font-size: 0.88rem; }
+@media (max-width: 600px) {
+  .notion { flex-wrap: wrap; }
+  .notion-actions { width: 100%; padding-left: 50px; }
+}
+
+/* Badge « Essentiel » dans le QCM */
+.pastille.essentiel { color: var(--fond); background: var(--or); border-color: var(--or); font-weight: 600; }
+.theme .etoile { color: var(--or); margin-right: 4px; }
+.theme.actif .etoile { color: var(--fond); }
+
 /* ---------- 9. Accueil ---------- */
 .hero { padding: 36px 0 28px; }
 .marque { display: inline-block; color: var(--or); font-size: 0.8rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; margin: 0 0 14px; }

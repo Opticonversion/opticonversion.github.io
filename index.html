@@ -23,6 +23,7 @@
   </a>
   <nav>
     <a href="index.html" class="actif">Accueil</a>
+    <a href="essentiel.html">Essentiel</a>
     <a href="qcm.html">QCM</a>
     <a href="calculateurs.html">Calculs</a>
   </nav>
@@ -34,18 +35,27 @@
     <h1 class="apparait" style="--d:1">Révise l'optique <em>en t'entraînant.</em></h1>
     <p class="accroche apparait" style="--d:2">Des QCM par épreuve, construits à partir de ce qui tombe vraiment aux sujets officiels. Chaque réponse est corrigée et expliquée. Gratuit, sans inscription.</p>
     <div class="actions apparait" style="--d:3">
-      <a class="bouton" href="qcm.html">Commencer un QCM →</a>
-      <a class="bouton secondaire" href="calculateurs.html">Calculateurs</a>
+      <a class="bouton" href="essentiel.html">Commencer par l'essentiel →</a>
+      <a class="bouton secondaire" href="qcm.html">Tous les QCM</a>
     </div>
   </div>
 
   <div class="chiffres apparait" style="--d:4">
     <div class="chiffre"><b id="nb-questions">200</b><span>questions</span></div>
     <div class="chiffre"><b id="nb-epreuves">5</b><span>épreuves</span></div>
-    <div class="chiffre"><b>2016–24</b><span>sujets analysés</span></div>
+    <div class="chiffre"><b id="nb-essentiel">28</b><span>notions essentielles</span></div>
   </div>
 
-  <div class="titre-section apparait" style="--d:5">
+  <a class="carte carte-calc apparait" style="--d:5" href="essentiel.html">
+    <div>
+      <span class="marque" style="margin:0 0 6px">★ Parcours prioritaire</span>
+      <h2>L'essentiel du BTS OL</h2>
+      <p id="essentiel-resume">Les notions qui tombent le plus souvent aux sujets officiels, classées par priorité, avec ta progression.</p>
+    </div>
+    <span class="fleche">→</span>
+  </a>
+
+  <div class="titre-section apparait" style="--d:5; margin-top: 40px">
     <h2>Choisis ton épreuve</h2>
     <a href="qcm.html">Tout voir →</a>
   </div>
@@ -75,10 +85,16 @@
 <script src="questions-U43.js"></script>
 <script src="questions-U5.js"></script>
 <script src="questions-U3.js"></script>
+<script src="essentiel.js"></script>
 <script>
   if (typeof QUESTIONS !== "undefined") {
     document.getElementById("nb-questions").textContent = QUESTIONS.length;
     document.getElementById("nb-epreuves").textContent = EPREUVES.length;
+    document.getElementById("nb-essentiel").textContent = ESSENTIEL.length;
+    const faites = ESSENTIEL.filter(n => etatNotion(n.epreuve, n.theme).maitrisee).length;
+    document.getElementById("essentiel-resume").textContent = faites > 0
+      ? "Tu maîtrises " + faites + " des " + ESSENTIEL.length + " notions essentielles. Continue là où tu t'es arrêté."
+      : "Les " + ESSENTIEL.length + " notions qui tombent le plus souvent aux sujets officiels, classées par priorité, avec ta progression.";
 
     // Une carte par épreuve, qui ouvre directement son QCM
     const liste = document.getElementById("liste-epreuves");

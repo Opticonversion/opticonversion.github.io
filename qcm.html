@@ -17,6 +17,7 @@
   </a>
   <nav>
     <a href="index.html">Accueil</a>
+    <a href="essentiel.html">Essentiel</a>
     <a href="qcm.html" class="actif">QCM</a>
     <a href="calculateurs.html">Calculs</a>
   </nav>
@@ -60,6 +61,7 @@
 <script src="questions-U43.js"></script>
 <script src="questions-U5.js"></script>
 <script src="questions-U3.js"></script>
+<script src="essentiel.js"></script>
 <script>
   // ---------------- L'état du QCM ----------------
   let epreuveChoisie = null;   // ex. "U5"
@@ -146,6 +148,13 @@
       const b = document.createElement("button");
       b.className = "theme" + (t === themeChoisi ? " actif" : "");
       b.textContent = t + " (" + nb + ")";
+      if (t !== "Tous" && estEssentiel(epreuveChoisie, t)) {
+        const etoile = document.createElement("span");
+        etoile.className = "etoile";
+        etoile.textContent = "★";
+        etoile.title = "Notion essentielle";
+        b.prepend(etoile);
+      }
       b.onclick = () => choisirTheme(t);
       conteneur.appendChild(b);
     });
@@ -258,10 +267,11 @@
     zone.innerHTML =
       '<div class="barre"><div class="barre-remplie" style="width:' + pourcent + '%"></div></div>' +
       '<div class="progression"><span>Question ' + (numero + 1) + " / " + serie.length + "</span>" +
+      (estEssentiel(q.epreuve, q.theme) ? '<span class="pastille essentiel">★ Essentiel</span>' : "") +
       '<span class="pastille"></span>' + pastilleSession +
       "<span>Score : " + score + "</span></div>" +
       '<p class="enonce"></p><div class="choix"></div>';
-    zone.querySelector(".progression .pastille").textContent = q.theme;
+    zone.querySelector(".progression .pastille:not(.essentiel):not(.bts)").textContent = q.theme;
     zone.querySelector(".enonce").textContent = q.question;
 
     const blocChoix = zone.querySelector(".choix");
@@ -293,6 +303,7 @@
 
     if (reponse.juste) score++;
     else { boutonClique.classList.add("faux"); erreurs.push(q); }
+    noterReponse(q, reponse.juste);   // pour la jauge de la page « Essentiel »
 
     // La barre avance dès qu'on a répondu
     zone.querySelector(".barre-remplie").style.width = Math.round(((numero + 1) / serie.length) * 100) + "%";

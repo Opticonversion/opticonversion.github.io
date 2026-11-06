@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="L'essentiel du BTS Opticien-Lunetier : les notions qui tombent le plus souvent aux sujets officiels, classées par priorité, avec QCM corrigés et Shorts.">
+<meta name="theme-color" content="#0b0d12">
+<title>L'essentiel du BTS OL · Opticonversion</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='13' fill='none' stroke='%23d9b26f' stroke-width='3'/%3E%3Ccircle cx='16' cy='16' r='5' fill='%23d9b26f'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="entete">
+  <a class="logo" href="index.html" aria-label="Opticonversion, accueil">
+    <svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="13" fill="none" stroke="#d9b26f" stroke-width="2.5"/><circle cx="16" cy="16" r="5.5" fill="#d9b26f"/><circle cx="18.5" cy="13.5" r="1.6" fill="#0b0d12"/></svg>
+    <span>Opticonversion</span>
+  </a>
+  <nav>
+    <a href="index.html">Accueil</a>
+    <a href="essentiel.html" class="actif">Essentiel</a>
+    <a href="qcm.html">QCM</a>
+    <a href="calculateurs.html">Calculs</a>
+  </nav>
+</header>
+
+<main>
+  <p class="marque apparait">Parcours prioritaire</p>
+  <h1 class="apparait" style="--d:1">L'essentiel du BTS OL</h1>
+  <p class="sous-titre apparait" style="--d:2">Les <b id="nb-notions">27</b> notions qui tombent le plus souvent aux sujets officiels, classées de la plus rentable à la moins rentable. Si tu as peu de temps, commence par le haut de la liste.</p>
+
+  <section class="jauge apparait" style="--d:3">
+    <div class="jauge-texte">
+      <span>Ta progression</span>
+      <strong id="jauge-chiffre">0 / 27 notions maîtrisées</strong>
+    </div>
+    <div class="barre grosse"><div class="barre-remplie" id="jauge-barre" style="width:0%"></div></div>
+    <p class="aide" id="jauge-conseil">Une notion est maîtrisée quand tu réussis au moins 80 % de ses questions. Ta progression reste dans ton navigateur, sans compte.</p>
+  </section>
+
+  <ol class="notions" id="notions"></ol>
+
+  <p class="aide apparait">Comment ce classement est calculé : pour chaque notion, on regarde combien de fois elle est tombée aux sujets officiels du BTS depuis 2016, et on multiplie par le coefficient de l'épreuve. Ce sont les notions qui tombent le plus souvent : personne ne peut garantir le sujet de l'année prochaine.</p>
+</main>
+
+<footer>© 2026 Opticonversion · Outil de révision, ne remplace pas un cours ni un avis professionnel.</footer>
+
+<script src="videos.js"></script>
+<script src="epreuves.js"></script>
+<script src="questions-U41.js"></script>
+<script src="questions-U42.js"></script>
+<script src="questions-U43.js"></script>
+<script src="questions-U5.js"></script>
+<script src="questions-U3.js"></script>
+<script src="essentiel.js"></script>
+<script>
+  const liste = document.getElementById("notions");
+  let maitrisees = 0;
+
+  ESSENTIEL.forEach((n, i) => {
+    const e = EPREUVES.find(x => x.code === n.epreuve);
+    const etat = etatNotion(n.epreuve, n.theme);
+    if (etat.maitrisee) maitrisees++;
+    const video = (typeof VIDEOS !== "undefined" && VIDEOS[n.epreuve + "/" + n.theme]) || "";
+    const lien = "qcm.html#" + n.epreuve + "/" + encodeURIComponent(n.theme);
+
+    const li = document.createElement("li");
+    li.className = "notion apparait" + (etat.maitrisee ? " maitrisee" : "");
+    li.style.setProperty("--d", Math.min(4 + i * 0.4, 14));
+    li.innerHTML =
+      '<span class="rang"></span>' +
+      '<div class="notion-corps">' +
+        '<div class="notion-haut"><span class="pastille bts"></span><span class="pastille"></span></div>' +
+        '<strong class="notion-titre"></strong>' +
+        '<div class="notion-barre"><div class="barre"><div class="barre-remplie"></div></div><small></small></div>' +
+      "</div>" +
+      '<div class="notion-actions"><a class="bouton">S\'entraîner</a></div>';
+    li.querySelector(".rang").textContent = etat.maitrisee ? "✓" : i + 1;
+    li.querySelector(".pastille.bts").textContent = (e ? (e.court || e.nom) : n.epreuve) + " · coef " + n.coef;
+    li.querySelector(".pastille:not(.bts)").textContent = "Tombé " + n.tombe + " fois sur " + n.sur;
+    li.querySelector(".notion-titre").textContent = n.theme;
+    const pct = etat.total ? Math.round((etat.reussies / etat.total) * 100) : 0;
+    li.querySelector(".notion-barre .barre-remplie").style.width = pct + "%";
+    li.querySelector(".notion-barre small").textContent =
+      etat.tentees === 0 ? etat.total + " questions · pas encore commencé" : etat.reussies + " / " + etat.total + " réussies";
+    const bouton = li.querySelector(".bouton");
+    bouton.href = lien;
+    if (video) {
+      const v = document.createElement("a");
+      v.className = "bouton secondaire";
+      v.href = lien;
+      v.textContent = "▶ Short";
+      li.querySelector(".notion-actions").prepend(v);
+    }
+    liste.appendChild(li);
+  });
+
+  const total = ESSENTIEL.length;
+  document.getElementById("nb-notions").textContent = total;
+  document.getElementById("jauge-chiffre").textContent = maitrisees + " / " + total + " notions maîtrisées";
+  requestAnimationFrame(() => {
+    document.getElementById("jauge-barre").style.width = Math.round((maitrisees / total) * 100) + "%";
+  });
+  if (maitrisees > 0) {
+    const prochaine = ESSENTIEL.find(n => !etatNotion(n.epreuve, n.theme).maitrisee);
+    document.getElementById("jauge-conseil").textContent = prochaine
+      ? "Prochaine notion à travailler : « " + prochaine.theme + " »."
+      : "Bravo, tu maîtrises toutes les notions essentielles. Passe au reste du programme dans les QCM.";
+  }
+</script>
+</body>
+</html>
