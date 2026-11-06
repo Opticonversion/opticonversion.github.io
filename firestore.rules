@@ -1,0 +1,28 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Profil : pseudo (20 caractères max), année et avatar, rien d'autre.
+    function profilValide(p) {
+      return p is map
+        && p.keys().hasOnly(["pseudo", "annee", "avatar"])
+        && p.get("pseudo", "") is string && p.get("pseudo", "").size() <= 20
+        && p.get("annee", "") is string && p.get("annee", "").size() <= 40
+        && p.get("avatar", "") is string && p.get("avatar", "").size() <= 20;
+    }
+
+    // Chaque élève ne peut lire et écrire que son propre document.
+    match /eleves/{uid} {
+      allow read, delete: if request.auth != null && request.auth.uid == uid;
+      allow create, update: if request.auth != null && request.auth.uid == uid
+        && request.resource.data.keys().hasOnly(["progression", "records", "profil", "maj"])
+        && request.resource.data.progression is string && request.resource.data.progression.size() < 200000
+        && request.resource.data.records is string && request.resource.data.records.size() < 50000
+        && profilValide(request.resource.data.get("profil", {}));
+    }
+
+    // Tout le reste est fermé.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

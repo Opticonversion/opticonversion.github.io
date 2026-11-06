@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Crée ton compte Opticonversion pour retrouver ta progression au BTS OL sur tous tes appareils.">
+<meta name="theme-color" content="#0b0d12">
+<title>Mon profil · Opticonversion</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='13' fill='none' stroke='%23d9b26f' stroke-width='3'/%3E%3Ccircle cx='16' cy='16' r='5' fill='%23d9b26f'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-rafraichir="oui">
+<header class="entete">
+  <a class="logo" href="index.html" aria-label="Opticonversion, accueil">
+    <svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="13" fill="none" stroke="#d9b26f" stroke-width="2.5"/><circle cx="16" cy="16" r="5.5" fill="#d9b26f"/><circle cx="18.5" cy="13.5" r="1.6" fill="#0b0d12"/></svg>
+    <span>Opticonversion</span>
+  </a>
+  <nav>
+    <a href="index.html">Accueil</a>
+    <a href="essentiel.html">Essentiel</a>
+    <a href="qcm.html">QCM</a>
+    <a href="calculateurs.html">Calculs</a>
+  </nav>
+</header>
+
+<main>
+  <p class="marque apparait">Ton profil</p>
+  <h1 class="apparait" style="--d:1" id="profil-titre">Ton profil</h1>
+  <p class="sous-titre apparait" style="--d:2">Choisis ton pseudo et ton DioSL. Ton profil n'est visible que par toi.</p>
+
+  <section class="profil apparait" style="--d:3">
+    <div class="profil-tete">
+      <img class="profil-avatar" id="profil-avatar" src="img/nounours-clin-doeil.svg" alt="" width="88" height="88">
+      <div>
+        <p class="profil-pseudo" id="profil-pseudo">Sans pseudo</p>
+        <p class="aide" id="profil-annee" style="margin:0"></p>
+      </div>
+    </div>
+
+    <div class="profil-stats" id="profil-stats"></div>
+
+    <form id="profil-form" class="profil-form" autocomplete="off">
+      <label for="champ-pseudo">Pseudo ou prénom</label>
+      <input id="champ-pseudo" maxlength="20" placeholder="Ex. : Lina, OptiKing…">
+      <label for="champ-annee">Où tu en es</label>
+      <select id="champ-annee">
+        <option value="">Je préfère ne pas dire</option>
+        <option>1re année de BTS</option>
+        <option>2e année de BTS</option>
+        <option>Je redouble</option>
+        <option>Candidat libre</option>
+        <option>Déjà opticien, je révise</option>
+      </select>
+      <span class="label">Ton DioSL</span>
+      <div class="choix-avatar" id="choix-avatar" role="radiogroup" aria-label="Choix de l'avatar"></div>
+      <div class="bilan-actions" style="justify-content:flex-start;margin-top:18px">
+        <button class="bouton" type="submit">Enregistrer</button>
+        <span class="aide" id="profil-ok" role="status" style="margin:0;align-self:center"></span>
+      </div>
+    </form>
+  </section>
+
+  <section class="apparait" style="--d:4">
+    <div id="compte-deconnecte">
+      <h2>Retrouve ta progression partout</h2>
+      <p class="aide">Connecte-toi avec Google pour retrouver ton profil et tes scores sur ton téléphone comme sur ton ordinateur. Sans compte, tout reste dans ce navigateur.</p>
+      <button class="bouton" id="bouton-connexion">Se connecter avec Google</button>
+    </div>
+    <div id="compte-connecte" hidden>
+      <h2>Tu es connecté</h2>
+      <p class="aide">Compte : <b id="compte-qui"></b></p>
+      <div class="bilan-actions" style="justify-content:flex-start">
+        <button class="bouton secondaire" id="bouton-deconnexion">Se déconnecter</button>
+        <button class="bouton danger" id="bouton-supprimer">Supprimer mon compte</button>
+      </div>
+    </div>
+    <p class="aide" id="compte-etat" role="status" style="margin-top:14px"></p>
+  </section>
+
+  <p class="aide apparait">Ce qui est gardé et pourquoi : voir la page <a href="confidentialite.html">confidentialité</a>.</p>
+</main>
+
+<footer>© 2026 Opticonversion · <a href="confidentialite.html">Confidentialité</a></footer>
+
+<script src="epreuves.js"></script>
+<script src="questions-U41.js"></script>
+<script src="questions-U42.js"></script>
+<script src="questions-U43.js"></script>
+<script src="questions-U5.js"></script>
+<script src="questions-U3.js"></script>
+<script src="essentiel.js"></script>
+<script>
+  // ---------- Profil : gardé dans le navigateur, et en ligne si l'élève est connecté ----------
+  const AVATARS = ["clin-doeil", "bouche-ouverte", "choque", "pensif", "bouche-fermee"];
+  const $ = id => document.getElementById(id);
+
+  function afficherProfil() {
+    const p = lireProfil();
+    $("profil-pseudo").textContent = p.pseudo || "Sans pseudo";
+    $("profil-titre").textContent = p.pseudo ? "Salut " + p.pseudo + " !" : "Ton profil";
+    $("profil-annee").textContent = p.annee || "";
+    $("profil-avatar").src = "img/nounours-" + (AVATARS.includes(p.avatar) ? p.avatar : "clin-doeil") + ".svg";
+    $("champ-pseudo").value = p.pseudo || "";
+    $("champ-annee").value = p.annee || "";
+    document.querySelectorAll(".choix-avatar button").forEach(b => b.setAttribute("aria-checked", b.dataset.avatar === (p.avatar || "clin-doeil")));
+  }
+
+  function afficherStats() {
+    const prog = lireProgression();
+    const reussies = QUESTIONS.filter(q => prog[idQuestion(q)] === 1).length;
+    const tentees = QUESTIONS.filter(q => prog[idQuestion(q)] !== undefined).length;
+    const maitrisees = ESSENTIEL.filter(n => etatNotion(n.epreuve, n.theme).maitrisee).length;
+    const tuile = (chiffre, texte) => '<div class="tuile"><strong>' + chiffre + '</strong><span>' + texte + '</span></div>';
+    $("profil-stats").innerHTML =
+      tuile(maitrisees + " / " + ESSENTIEL.length, "notions essentielles maîtrisées") +
+      tuile(reussies + " / " + QUESTIONS.length, "questions réussies") +
+      tuile(tentees, "questions déjà tentées");
+  }
+
+  AVATARS.forEach(a => {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.dataset.avatar = a;
+    b.setAttribute("role", "radio");
+    b.setAttribute("aria-label", "DioSL " + a.replace(/-/g, " "));
+    b.innerHTML = '<img src="img/nounours-' + a + '.svg" alt="" width="56" height="56">';
+    b.addEventListener("click", () => document.querySelectorAll(".choix-avatar button").forEach(x => x.setAttribute("aria-checked", x === b)));
+    $("choix-avatar").appendChild(b);
+  });
+
+  $("profil-form").addEventListener("submit", e => {
+    e.preventDefault();
+    const choisi = document.querySelector('.choix-avatar button[aria-checked="true"]');
+    enregistrerProfil({
+      pseudo: $("champ-pseudo").value.trim().replace(/\s+/g, " ").slice(0, 20),
+      annee: $("champ-annee").value,
+      avatar: choisi ? choisi.dataset.avatar : "clin-doeil"
+    });
+    afficherProfil();
+    $("profil-ok").textContent = "Enregistré ✓";
+    setTimeout(() => $("profil-ok").textContent = "", 2500);
+  });
+
+  window.addEventListener("profil-charge", () => { afficherProfil(); afficherStats(); });
+  afficherProfil();
+  afficherStats();
+</script>
+<script type="module" src="compte.js"></script>
+</body>
+</html>

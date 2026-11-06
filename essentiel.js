@@ -60,9 +60,21 @@ const ESSENTIEL = ESSENTIEL_SOURCE
 const estEssentiel = (epreuve, theme) => ESSENTIEL.some(n => n.epreuve === epreuve && n.theme === theme);
 
 // ---------------- La progression de l'élève ----------------
-// Elle est gardée uniquement dans le navigateur de l'élève (pas de compte, rien n'est envoyé).
+// Elle est gardée dans le navigateur de l'élève. S'il se connecte (compte.js),
+// elle est aussi sauvegardée en ligne pour la retrouver sur ses autres appareils.
 // Pour chaque question : 1 = bien répondu la dernière fois, 0 = raté.
 function idQuestion(q) { return q.epreuve + "|" + q.question; }
+
+// Note un changement pas encore envoyé en ligne, puis prévient compte.js
+function marquerEnAttente(type, cle, valeur) {
+  try {
+    const attente = JSON.parse(localStorage.getItem("attente") || "{}");
+    attente[type] = attente[type] || {};
+    attente[type][cle] = valeur;
+    localStorage.setItem("attente", JSON.stringify(attente));
+  } catch (e) {}
+  window.dispatchEvent(new Event("progression-modifiee"));
+}
 
 function lireProgression() {
   try { return JSON.parse(localStorage.getItem("progression") || "{}"); } catch (e) { return {}; }
@@ -71,6 +83,16 @@ function noterReponse(q, juste) {
   const p = lireProgression();
   p[idQuestion(q)] = juste ? 1 : 0;
   try { localStorage.setItem("progression", JSON.stringify(p)); } catch (e) {}
+  marquerEnAttente("progression", idQuestion(q), juste ? 1 : 0);
+}
+
+// Profil de l'élève (pseudo, année, avatar) : visible par lui seul
+function lireProfil() {
+  try { return JSON.parse(localStorage.getItem("profil") || "{}"); } catch (e) { return {}; }
+}
+function enregistrerProfil(p) {
+  try { localStorage.setItem("profil", JSON.stringify(p)); } catch (e) {}
+  for (const [cle, val] of Object.entries(p)) marquerEnAttente("profil", cle, val);
 }
 
 // Une notion est « maîtrisée » quand au moins 80 % de ses questions

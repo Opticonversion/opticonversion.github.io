@@ -375,6 +375,7 @@
     if (ancien === undefined || pourcent > ancien) {
       records[cle] = pourcent;
       try { localStorage.setItem("records", JSON.stringify(records)); } catch (e) {}
+      marquerEnAttente("records", cle, pourcent);
     }
     return { ancien, nouveau: ancien !== undefined && pourcent > ancien };
   }
@@ -441,7 +442,8 @@
         '<div class="bilan-stats"></div>' +
         '<div class="bilan-actions"></div>' +
       "</div>";
-    zone.querySelector(".bilan-titre").textContent = palier.titre;
+    const pseudo = lireProfil().pseudo;
+    zone.querySelector(".bilan-titre").textContent = pseudo && palier.titre.endsWith(" !") ? palier.titre.slice(0, -2) + ", " + pseudo + " !" : palier.titre;
     zone.querySelector(".bilan-sous").textContent = modeRevision
       ? (erreurs.length === 0 ? "Toutes tes erreurs sont corrigées. Bravo !" : "Encore " + erreurs.length + " à retravailler. Tu y es presque.")
       : palier.sous;
@@ -536,5 +538,6 @@
   window.addEventListener("hashchange", selonAdresse);
   selonAdresse();
 </script>
+<script type="module" src="compte.js"></script>
 </body>
 </html>
