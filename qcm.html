@@ -73,6 +73,7 @@
   let numero = 0;
   let score = 0;
   let erreurs = [];
+  let seanceRevision = false;  // séance « À revoir aujourd'hui » (toutes épreuves)
 
   const zone = document.getElementById("zone");
 
@@ -98,6 +99,19 @@
     const conteneur = document.getElementById("ecran-epreuves");
     conteneur.hidden = false;
     conteneur.innerHTML = "";
+    if (seanceRevision) document.querySelector(".vues").hidden = false;
+    seanceRevision = false;
+
+    // Bandeau « À revoir aujourd'hui » s'il y a des questions à revoir
+    const dues = questionsARevoir().length;
+    if (dues > 0) {
+      const a = document.createElement("a");
+      a.className = "bandeau-revoir";
+      a.href = "#a-revoir";
+      a.innerHTML = '<span class="icone-revoir" aria-hidden="true">📅</span><span><b></b><small>Toutes épreuves · environ 1 minute par question</small></span><span class="fleche">→</span>';
+      a.querySelector("b").textContent = dues + (dues > 1 ? " questions à revoir aujourd'hui" : " question à revoir aujourd'hui");
+      conteneur.appendChild(a);
+    }
 
     EPREUVES.forEach(e => {
       const nb = questionsDe(e.code).length;
@@ -119,6 +133,13 @@
     if (!e || questionsDe(code).length === 0) { afficherEpreuves(); return; }
 
     const themes = new Set(questionsDe(code).map(q => q.theme));
+    if (seanceRevision) {                    // on sort d'une séance : on remet la vue préférée
+      let v = "deux";
+      try { v = localStorage.getItem("vue") || "deux"; } catch (e) {}
+      choisirVue(["qcm", "deux", "shorts"].includes(v) ? v : "deux");
+      document.querySelector(".vues").hidden = false;
+    }
+    seanceRevision = false;
     epreuveChoisie = code;
     themeChoisi = theme && themes.has(theme) ? theme : "Tous";
     document.getElementById("ecran-epreuves").hidden = true;
@@ -130,6 +151,27 @@
     document.getElementById("lecteur").innerHTML = "";
     afficherThemes();
     demarrer();
+  }
+
+  // ---------------- Séance « À revoir aujourd'hui » ----------------
+  function ouvrirRevision() {
+    const dues = questionsARevoir();
+    if (dues.length === 0) { history.replaceState("", "", "qcm.html"); afficherEpreuves(); return; }
+    seanceRevision = true;
+    epreuveChoisie = dues[0].epreuve;
+    themeChoisi = "Tous";
+    document.getElementById("ecran-epreuves").hidden = true;
+    document.getElementById("ecran-qcm").hidden = false;
+    document.querySelector("main").classList.add("large");
+    document.getElementById("titre").textContent = "À revoir aujourd'hui";
+    document.getElementById("sous-titre").textContent = dues.length + (dues.length > 1 ? " questions" : " question") +
+      " que tu avais ratées, toutes épreuves. Chaque bonne réponse les espace davantage.";
+    document.getElementById("themes").innerHTML = "";
+    const dispo = document.getElementById("disposition");
+    dispo.classList.remove("vue-qcm", "vue-deux", "vue-shorts");
+    dispo.classList.add("vue-qcm");          // en séance : QCM seul (sans changer la préférence)
+    document.querySelector(".vues").hidden = true;
+    demarrer(dues);
   }
 
   // Choisir un thème : met à jour les pastilles, les Shorts, l'adresse, et relance le QCM
@@ -282,7 +324,7 @@
       '<span class="pastille"></span>' + pastilleSession +
       "<span>Score : " + score + "</span></div>" +
       '<p class="enonce"></p><div class="choix"></div>';
-    zone.querySelector(".progression .pastille:not(.essentiel):not(.bts)").textContent = q.theme;
+    zone.querySelector(".progression .pastille:not(.essentiel):not(.bts)").textContent = (seanceRevision ? q.epreuve + " · " : "") + q.theme;
     zone.querySelector(".enonce").textContent = q.question;
 
     // Schéma qui fait partie de l'énoncé (rare : seulement s'il faut le lire pour répondre)
@@ -380,7 +422,7 @@
       erreurs.push(q);
       serieEnCours = 0;
     }
-    noterReponse(q, reponse.juste);   // pour la jauge de la page « Essentiel »
+    const suite = noterReponse(q, reponse.juste);   // jauge « Essentiel » + révision espacée
 
     // La barre avance dès qu'on a répondu
     zone.querySelector(".barre-remplie").style.width = Math.round(((numero + 1) / serie.length) * 100) + "%";
@@ -391,10 +433,18 @@
     expl.querySelector("strong").textContent = reponse.juste ? "Bonne réponse" : "Pas tout à fait";
     expl.querySelector("span").textContent = q.explication;
     if (q.schema) expl.appendChild(creerSchema(q.schema, q.schemaTexte, reponse.juste ? null : reponse.i));
+    if (suite) {
+      const info = document.createElement("p");
+      info.className = "info-revision";
+      info.textContent = suite.acquise
+        ? "✓ Question acquise : elle ne reviendra plus dans « À revoir »."
+        : "📅 Elle reviendra " + (suite.jours === 1 ? "demain" : "dans " + suite.jours + " jours") + " dans « À revoir aujourd'hui ».";
+      expl.appendChild(info);
+    }
     zone.appendChild(expl);
 
     // En cas d'erreur : un bouton pour revoir le Short du thème
-    if (!reponse.juste) {
+    if (!reponse.juste && !seanceRevision) {
       const revoir = document.createElement("button");
       revoir.className = "bouton secondaire revoir";
       revoir.textContent = "▶ Revoir le Short « " + q.theme + " »";
@@ -578,7 +628,9 @@
       "</div>";
     const pseudo = lireProfil().pseudo;
     zone.querySelector(".bilan-titre").textContent = pseudo && palier.titre.endsWith(" !") ? palier.titre.slice(0, -2) + ", " + pseudo + " !" : palier.titre;
-    zone.querySelector(".bilan-sous").textContent = modeRevision
+    zone.querySelector(".bilan-sous").textContent = seanceRevision
+      ? (erreurs.length === 0 ? "Révision du jour terminée. Les questions reviendront de plus en plus tard." : "Les questions ratées reviendront demain, les autres plus tard. À demain !")
+      : modeRevision
       ? (erreurs.length === 0 ? "Toutes tes erreurs sont corrigées. Bravo !" : "Encore " + erreurs.length + " à retravailler. Tu y es presque.")
       : palier.sous;
     rejouerAnimation(zone);
@@ -621,7 +673,11 @@
         });
       }
     }
-    bouton(modeRevision ? "Refaire tout le thème" : "Recommencer", "secondaire", () => { demarrer(); zone.scrollIntoView({ behavior: "smooth", block: "start" }); });
+    if (seanceRevision) {
+      bouton("Retour aux épreuves", "secondaire", () => { history.pushState("", "", "qcm.html"); document.querySelector("main").classList.remove("large"); afficherEpreuves(); });
+    } else {
+      bouton(modeRevision ? "Refaire tout le thème" : "Recommencer", "secondaire", () => { demarrer(); zone.scrollIntoView({ behavior: "smooth", block: "start" }); });
+    }
 
     lancerConfettis(zone.querySelector(".bilan"), palier.confettis);
 
@@ -661,7 +717,8 @@
   // c'est le lien à mettre sous chaque Short.
   function selonAdresse() {
     const [code, theme] = location.hash.slice(1).split("/");
-    if (code) ouvrirEpreuve(code, theme ? decodeURIComponent(theme) : null);
+    if (code === "a-revoir") ouvrirRevision();
+    else if (code) ouvrirEpreuve(code, theme ? decodeURIComponent(theme) : null);
     else afficherEpreuves();
   }
   document.getElementById("retour").onclick = () => {

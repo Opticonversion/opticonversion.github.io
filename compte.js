@@ -99,6 +99,27 @@ const ui = {
 };
 
 const icone = ajouterIcone();
+
+// Petit compteur « à revoir aujourd'hui » sur le lien QCM du menu
+function majCompteurRevision() {
+  const lien = document.querySelector('.entete nav a[href="qcm.html"]');
+  if (!lien) return;
+  const d = new Date();
+  const aujourdhui = d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
+  const n = Object.values(lire("revisions")).filter(e => e && e.j && e.j <= aujourdhui).length;
+  let pastille = lien.querySelector(".compte-revoir");
+  if (n === 0) { if (pastille) pastille.remove(); return; }
+  if (!pastille) {
+    pastille = document.createElement("span");
+    pastille.className = "compte-revoir";
+    lien.appendChild(pastille);
+  }
+  pastille.textContent = n;
+  pastille.title = n + " à revoir aujourd'hui";
+  lien.setAttribute("aria-label", "QCM, " + n + " question" + (n > 1 ? "s" : "") + " à revoir aujourd'hui");
+}
+majCompteurRevision();
+window.addEventListener("progression-modifiee", majCompteurRevision);
 window.addEventListener("progression-modifiee", () => icone && majIcone(icone));
 
 if (!FIREBASE_CONFIG) {
@@ -139,7 +160,7 @@ async function demarrer() {
     const uid = utilisateur.uid;
     const premiereFois = lireTexte("compte-uid") !== uid;
     const attente = premiereFois
-      ? { progression: lire("progression"), records: lire("records"), profil: lire("profil") }
+      ? { progression: lire("progression"), records: lire("records"), profil: lire("profil"), revisions: lire("revisions") }
       : lire("attente");
     const envoye = JSON.stringify(attente);
     const ref = F.doc(db, "eleves", uid);
@@ -153,16 +174,24 @@ async function demarrer() {
         if (records[cle] === undefined || val > records[cle]) records[cle] = val;
       }
       const profil = Object.assign({}, enLigne.profil || {}, attente.profil || {});
+      // Révision espacée : pour chaque question, on garde la version la plus récente (champ t)
+      const revisions = JSON.parse(enLigne.revisions || "{}");
+      for (const [cle, val] of Object.entries(attente.revisions || {})) {
+        if (!revisions[cle] || (val && val.t >= (revisions[cle].t || 0))) revisions[cle] = val;
+      }
       t.set(ref, {
         progression: JSON.stringify(progression),
         records: JSON.stringify(records),
+        revisions: JSON.stringify(revisions),
         profil,
         maj: F.serverTimestamp()
       });
-      return { progression, records, profil };
+      return { progression, records, profil, revisions };
     });
 
-    const avant = JSON.stringify([lire("progression"), lire("records"), lire("profil")]);
+    const avant = JSON.stringify([lire("progression"), lire("records"), lire("profil"), lire("revisions")]);
+    ecrire("revisions", fusion.revisions);
+    majCompteurRevision();
     ecrire("progression", fusion.progression);
     ecrire("records", fusion.records);
     ecrire("profil", fusion.profil);
@@ -172,7 +201,7 @@ async function demarrer() {
     if (JSON.stringify(lire("attente")) === envoye || premiereFois) ecrire("attente", {});
 
     // Si un autre appareil a apporté du nouveau, on rafraîchit les pages qui l'affichent
-    const apres = JSON.stringify([fusion.progression, fusion.records, fusion.profil]);
+    const apres = JSON.stringify([fusion.progression, fusion.records, fusion.profil, fusion.revisions]);
     if (avant !== apres && document.body.dataset.rafraichir === "oui") location.reload();
   }
 
@@ -234,7 +263,7 @@ async function demarrer() {
       }
       ecrireTexte("compte-uid", null);
       ecrire("attente", {});
-      if (effacerNavigateur) ["progression", "records", "attente", "profil"].forEach(c => ecrireTexte(c, null));
+      if (effacerNavigateur) ["progression", "records", "attente", "profil", "revisions"].forEach(c => ecrireTexte(c, null));
       ui.etat("Ton compte et ta progression en ligne ont été supprimés.");
     } catch (e) {
       console.error(e);

@@ -558,3 +558,15 @@ figure.schema object, figure.schema img { display: block; width: 100%; height: a
 .actions-signalement .bouton { margin-top: 0; padding: 9px 18px; font-size: 0.9rem; }
 .etat-signalement { margin: 8px 0 0; }
 .merci-signalement { margin: 6px 0 0; color: var(--vert); font-size: 0.92rem; }
+
+/* ---------- Révision espacée ---------- */
+.bandeau-revoir { grid-column: 1 / -1; display: flex; align-items: center; gap: 14px; padding: 16px 18px; border-radius: 16px; text-decoration: none; color: var(--texte); background: linear-gradient(135deg, rgba(217, 178, 111, 0.18), rgba(217, 178, 111, 0.05)); border: 1px solid rgba(217, 178, 111, 0.55); transition: transform var(--vite), border-color var(--vite); }
+.bandeau-revoir:hover { transform: translateY(-2px); border-color: var(--or); }
+.bandeau-revoir .icone-revoir { font-size: 1.6rem; }
+.bandeau-revoir b { display: block; font-family: var(--titre); font-size: 1.1rem; }
+.bandeau-revoir small { color: var(--doux); }
+.bandeau-revoir .fleche { margin-left: auto; color: var(--or); font-size: 1.3rem; }
+.info-revision { margin: 12px 0 0; font-size: 0.88rem; color: var(--or-clair, #f3dcae); }
+.carte.carte-revoir { border-color: rgba(217, 178, 111, 0.55); background: linear-gradient(135deg, rgba(217, 178, 111, 0.16), rgba(217, 178, 111, 0.04)); }
+.compte-revoir { display: inline-grid; place-items: center; min-width: 18px; height: 18px; padding: 0 5px; margin-left: 5px; border-radius: 999px; font-size: 0.72rem; font-weight: 700; color: var(--fond); background: var(--or); vertical-align: 1px; }
+nav a.actif .compte-revoir { background: var(--fond); color: var(--or); }

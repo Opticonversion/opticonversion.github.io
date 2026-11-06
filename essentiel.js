@@ -84,6 +84,67 @@ function noterReponse(q, juste) {
   p[idQuestion(q)] = juste ? 1 : 0;
   try { localStorage.setItem("progression", JSON.stringify(p)); } catch (e) {}
   marquerEnAttente("progression", idQuestion(q), juste ? 1 : 0);
+  return planifierRevision(q, juste);
+}
+
+// ---------------- Révision espacée ----------------
+// Une question ratée revient le lendemain. Réussie le jour où elle revient, elle revient
+// de plus en plus tard : 1, 3, 7, 14 puis 30 jours. Réussie à 30 jours : elle est acquise.
+// Ratée à n'importe quel moment : elle repart à 1 jour.
+// Stockage : localStorage « revisions » = { id: { n: étape, j: "AAAA-MM-JJ" ou "" si acquise, t: horodatage } }
+const INTERVALLES = [1, 3, 7, 14, 30];
+
+function jourLocal(decalage) {
+  const d = new Date();
+  d.setDate(d.getDate() + (decalage || 0));
+  return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
+}
+function lireRevisions() {
+  try { return JSON.parse(localStorage.getItem("revisions") || "{}"); } catch (e) { return {}; }
+}
+function ecrireRevision(id, entree) {
+  const r = lireRevisions();
+  r[id] = entree;
+  try { localStorage.setItem("revisions", JSON.stringify(r)); } catch (e) {}
+  marquerEnAttente("revisions", id, entree);
+}
+
+// Renvoie ce qui se passe pour cette question : { jours: n } (prochain retour), { acquise: true }, ou null.
+function planifierRevision(q, juste) {
+  const id = idQuestion(q);
+  const r = lireRevisions()[id];
+  const aujourdhui = jourLocal();
+  if (!juste) {
+    ecrireRevision(id, { n: 0, j: jourLocal(INTERVALLES[0]), t: Date.now() });
+    return { jours: INTERVALLES[0] };
+  }
+  if (!r || !r.j) return null;              // jamais ratée, ou déjà acquise
+  if (r.j > aujourdhui) return null;        // pas encore le jour : on ne compte pas
+  const etape = r.n + 1;
+  if (etape >= INTERVALLES.length) {
+    ecrireRevision(id, { n: etape, j: "", t: Date.now() });
+    return { acquise: true };
+  }
+  ecrireRevision(id, { n: etape, j: jourLocal(INTERVALLES[etape]), t: Date.now() });
+  return { jours: INTERVALLES[etape] };
+}
+
+// Les questions à revoir aujourd'hui (retard compris), toutes épreuves confondues
+function questionsARevoir() {
+  const r = lireRevisions(), aujourdhui = jourLocal();
+  return QUESTIONS.filter(q => { const e = r[idQuestion(q)]; return e && e.j && e.j <= aujourdhui; });
+}
+// Nombre de questions à revoir aujourd'hui (sans avoir besoin de la liste des questions)
+function nombreARevoir() {
+  const aujourdhui = jourLocal();
+  return Object.values(lireRevisions()).filter(e => e && e.j && e.j <= aujourdhui).length;
+}
+// Prochaine date de révision après aujourd'hui, et combien de questions ce jour-là
+function prochaineRevision() {
+  const aujourdhui = jourLocal();
+  const dates = Object.values(lireRevisions()).map(e => e && e.j).filter(j => j && j > aujourdhui).sort();
+  if (!dates.length) return null;
+  return { j: dates[0], nombre: dates.filter(d => d === dates[0]).length };
 }
 
 // Profil de l'élève (pseudo, année, avatar) : visible par lui seul

@@ -46,6 +46,15 @@
     <div class="chiffre"><b id="nb-essentiel">28</b><span>notions essentielles</span></div>
   </div>
 
+  <a class="carte carte-calc carte-revoir apparait" style="--d:5" href="qcm.html#a-revoir" id="carte-revoir" hidden>
+    <div>
+      <span class="marque" style="margin:0 0 6px">📅 Révision espacée</span>
+      <h2 id="revoir-titre">À revoir aujourd'hui</h2>
+      <p id="revoir-texte"></p>
+    </div>
+    <span class="fleche">→</span>
+  </a>
+
   <a class="carte carte-calc apparait" style="--d:5" href="essentiel.html">
     <div>
       <span class="marque" style="margin:0 0 6px">★ Parcours prioritaire</span>
@@ -97,6 +106,26 @@
     document.getElementById("essentiel-resume").textContent = faites > 0
       ? "Tu maîtrises " + faites + " des " + ESSENTIEL.length + " notions essentielles. Continue là où tu t'es arrêté."
       : "Les " + ESSENTIEL.length + " notions qui tombent le plus souvent aux sujets officiels, classées par priorité, avec ta progression.";
+
+    // Révision espacée : les questions ratées reviennent au bon moment
+    const dues = questionsARevoir().length;
+    const prochaine = prochaineRevision();
+    if (dues > 0 || prochaine) {
+      const carte = document.getElementById("carte-revoir");
+      carte.hidden = false;
+      if (dues > 0) {
+        document.getElementById("revoir-titre").textContent = dues + (dues > 1 ? " questions à revoir aujourd'hui" : " question à revoir aujourd'hui");
+        document.getElementById("revoir-texte").textContent = "Des questions que tu avais ratées. Les revoir au bon moment, c'est ce qui les fait rester en mémoire.";
+      } else {
+        const j = new Date(prochaine.j + "T12:00:00");
+        const demain = jourLocal(1) === prochaine.j;
+        document.getElementById("revoir-titre").textContent = "Rien à revoir aujourd'hui ✓";
+        document.getElementById("revoir-texte").textContent = "Prochaine révision " + (demain ? "demain" : "le " + j.toLocaleDateString("fr-FR", { weekday: "long", day: "numeric", month: "long" })) +
+          " : " + prochaine.nombre + (prochaine.nombre > 1 ? " questions." : " question.");
+        carte.href = "qcm.html";
+        carte.querySelector(".fleche").textContent = "✓";
+      }
+    }
 
     // Une carte par épreuve, qui ouvre directement son QCM
     const liste = document.getElementById("liste-epreuves");
