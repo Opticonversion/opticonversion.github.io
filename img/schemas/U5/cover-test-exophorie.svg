@@ -1,0 +1,190 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 340" role="img" aria-labelledby="t">
+  <title id="t">Test du masquage : l'OD masqué dévie, puis revient au démasquage</title>
+  <style>
+    :root { background: #0f1219; color-scheme: dark; }
+    text { font-family: -apple-system, "Segoe UI", Roboto, sans-serif; font-size: 16px; fill: #e7e9ee; }
+    .p { font-size: 15px; fill: #aab2c0; }
+    .g { font-weight: 700; }
+    .bt { cursor: pointer; }
+    .bt:hover rect { fill-opacity: .28; }
+    .bt text { font-size: 14px; pointer-events: none; }
+    .glisse { transition: transform .7s ease-in-out; }
+    .bouge { transition: transform .7s ease-out; }
+    .apparait { transition: opacity .4s; }
+    @media (prefers-reduced-motion: reduce) { .glisse, .bouge, .apparait { transition: none; } }
+  </style>
+  <defs>
+    <pattern id="grille" width="18" height="18" patternUnits="userSpaceOnUse"><path d="M18 0 L0 0 L0 18" fill="none" stroke="#ffffff" stroke-opacity=".045"/></pattern>
+    <clipPath id="cadre"><rect x="0" y="0" width="480" height="340"/></clipPath>
+    <clipPath id="cD"><path d="M85 150 Q150 108 215 150 Q150 192 85 150 Z"/></clipPath>
+    <clipPath id="cG"><path d="M265 150 Q330 108 395 150 Q330 192 265 150 Z"/></clipPath>
+    <marker id="fo" markerUnits="userSpaceOnUse" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="13" markerHeight="13" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#f0c674"/></marker>
+    <marker id="fr" markerUnits="userSpaceOnUse" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="13" markerHeight="13" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#ff8a7a"/></marker>
+  </defs>
+  <rect x="0" y="0" width="480" height="450" fill="url(#grille)"/>
+
+  <!-- Boutons -->
+  <g id="rejouer" class="bt" role="button" aria-label="Rejouer le test"><rect x="8" y="8" width="104" height="28" rx="14" fill="#9ec5ff" fill-opacity=".12" stroke="#9ec5ff" stroke-opacity=".5"/><text x="60" y="27" text-anchor="middle" style="fill:#cfe0ff">↺ Rejouer</text></g>
+  <g id="bdefi" class="bt" role="button" aria-label="Défi : reconnaître la phorie"><rect x="120" y="8" width="82" height="28" rx="14" fill="#d9b26f" fill-opacity=".16" stroke="#d9b26f" stroke-opacity=".6"/><text x="161" y="27" text-anchor="middle" style="fill:#f3dcae">🎯 Défi</text></g>
+  <g id="puces"></g>
+
+  <text x="240" y="66" text-anchor="middle" class="p" style="font-size:13px">sujet vu de face : son OD est à gauche de l'image</text>
+  <text x="150" y="98" text-anchor="middle" class="g">OD</text>
+  <text x="330" y="98" text-anchor="middle" class="g">OG</text>
+  <path d="M240 112 Q232 150 228 168 Q236 176 246 170" fill="none" stroke="#5b6270" stroke-width="2"/>
+
+  <!-- Les deux yeux -->
+  <g>
+    <path d="M85 150 Q150 108 215 150 Q150 192 85 150 Z" fill="#e9e4dc"/>
+    <g clip-path="url(#cD)"><g id="irisD" class="bouge"><circle cx="150" cy="150" r="21" fill="#5f86b8"/><circle cx="150" cy="150" r="8.5" fill="#0b0d12"/><circle cx="155" cy="145" r="3" fill="#fff"/></g></g>
+    <path d="M85 150 Q150 108 215 150 Q150 192 85 150 Z" fill="none" stroke="#9aa3b2" stroke-width="2"/>
+    <path d="M265 150 Q330 108 395 150 Q330 192 265 150 Z" fill="#e9e4dc"/>
+    <g clip-path="url(#cG)"><circle cx="330" cy="150" r="21" fill="#5f86b8"/><circle cx="330" cy="150" r="8.5" fill="#0b0d12"/><circle cx="335" cy="145" r="3" fill="#fff"/></g>
+    <path d="M265 150 Q330 108 395 150 Q330 192 265 150 Z" fill="none" stroke="#9aa3b2" stroke-width="2"/>
+  </g>
+
+  <!-- Flèche du mouvement au démasquage -->
+  <g id="fleche" class="apparait" opacity="0"><path id="flechep" d="M118 208 H150" stroke="#f0c674" stroke-width="3.5" fill="none" marker-end="url(#fo)"/></g>
+
+  <!-- Le cache (translucide : on voit ce qui se passe derrière) -->
+  <g clip-path="url(#cadre)"><g id="cache" class="glisse" style="transform: translate(-250px, 0px)">
+    <rect id="cacherect" x="72" y="104" width="156" height="92" rx="16" fill="#2a303c" fill-opacity=".72" stroke="#8a93a3"/>
+    <text x="150" y="190" text-anchor="middle" class="p" style="font-size:12px">cache</text>
+  </g></g>
+
+  <!-- Étapes -->
+  <text id="etape1" x="240" y="246" text-anchor="middle" class="g" style="font-size:15px"></text>
+  <text id="etape2" x="240" y="268" text-anchor="middle" class="p"></text>
+  <g id="bilan">
+    <rect id="bilanfond" x="20" y="292" width="440" height="36" rx="18" fill="#d9b26f" fill-opacity=".14" stroke="#d9b26f" stroke-opacity=".6"/>
+    <text id="bilantexte" x="240" y="316" text-anchor="middle" style="fill:#f3dcae"></text>
+  </g>
+  <g id="reponses" visibility="hidden"></g>
+
+  <!-- Réponse fausse de l'élève (#faux=n) -->
+  <g id="erreur" visibility="hidden">
+    <g id="errfleche" visibility="hidden"><path d="M182 228 H128" stroke="#ff8a7a" stroke-width="3" stroke-dasharray="6 5" fill="none" marker-end="url(#fr)"/><text x="190" y="233" style="font-size:13px;font-weight:700;fill:#ff8a7a">ta réponse</text></g>
+    <g id="errog" visibility="hidden"><ellipse cx="330" cy="150" rx="74" ry="48" fill="none" stroke="#ff8a7a" stroke-width="2.5" stroke-dasharray="6 5"/><text x="330" y="222" text-anchor="middle" style="font-size:13px;font-weight:700;fill:#ff8a7a">l'OG n'a pas bougé</text></g>
+    <line x1="20" y1="346" x2="460" y2="346" stroke="#ffffff" stroke-opacity=".08"/>
+    <circle cx="32" cy="368" r="10" fill="#ff8a7a"/><text x="32" y="373" text-anchor="middle" style="font-size:13px;font-weight:800;fill:#0f1219">✕</text>
+    <text x="52" y="373" class="p">Ta réponse</text><text id="errval" x="170" y="373" style="font-weight:700;fill:#ff8a7a"></text>
+    <circle cx="32" cy="396" r="10" fill="#5fd08a"/><text x="32" y="401" text-anchor="middle" style="font-size:13px;font-weight:800;fill:#0f1219">✓</text>
+    <text x="52" y="401" class="p">Bonne réponse</text><text x="170" y="401" style="font-weight:700;fill:#8fe0ad">Exophorie</text>
+    <text id="errpourquoi" x="20" y="432" style="font-size:15px"></text>
+  </g>
+
+  <script><![CDATA[
+  (function () {
+    var NS = "http://www.w3.org/2000/svg", svg = document.documentElement;
+    var $ = function (id) { return document.getElementById(id); };
+    // Déviation de l'OD sous le cache, en px dans l'image (sujet vu de face : la tempe de l'OD est à GAUCHE de l'image)
+    var PHORIES = {
+      exo:   { dx: -18, dy: 0,   nom: "Exophorie",       mvt: "temporo-nasal (vers le nez)", court: "Exo" },
+      eso:   { dx: 18,  dy: 0,   nom: "Ésophorie",       mvt: "naso-temporal (vers la tempe)", court: "Éso" },
+      hyper: { dx: 0,   dy: -14, nom: "Hyperphorie D/G", mvt: "de haut en bas", court: "Hyper D/G" },
+      hypo:  { dx: 0,   dy: 14,  nom: "Hypophorie D/G",  mvt: "de bas en haut", court: "Hypo D/G" }
+    };
+    var ORDRE = ["exo", "eso", "hyper", "hypo"];
+    var actuelle = "exo", minuteurs = [], defi = null;
+
+    function el(nom, attrs, parent, txt) {
+      var e = document.createElementNS(NS, nom);
+      for (var k in attrs) e.setAttribute(k, attrs[k]);
+      if (txt) e.textContent = txt;
+      if (parent) parent.appendChild(e);
+      return e;
+    }
+    function bouton(parent, x, y, w, texte, couleur, action) {
+      var g = el("g", { "class": "bt", role: "button" }, parent);
+      var r = el("rect", { x: x, y: y, width: w, height: 28, rx: 14, fill: couleur, "fill-opacity": ".12", stroke: couleur, "stroke-opacity": ".55" }, g);
+      el("text", { x: x + w / 2, y: y + 19, "text-anchor": "middle" }, g, texte);
+      g.addEventListener("click", action);
+      return { g: g, r: r };
+    }
+    function etapes(a, b) { $("etape1").textContent = a; $("etape2").textContent = b || ""; }
+    function bilan(t) { $("bilantexte").textContent = t; }
+    function plus(f, ms) { minuteurs.push(setTimeout(f, ms)); }
+    function iris(dx, dy) { $("irisD").style.transform = "translate(" + dx + "px," + dy + "px)"; }
+    function cache(dedans) { $("cache").style.transform = dedans ? "translate(0px,0px)" : "translate(-250px,0px)"; }
+
+    // Puces pour choisir la phorie à observer
+    var puces = {};
+    ORDRE.forEach(function (k, i) {
+      puces[k] = bouton($("puces"), 212 + i * 66, 8, 62, PHORIES[k].court.replace(" D/G", ""), "#9ec5ff", function () { defi = null; actuelle = k; jouer(); });
+    });
+    function marquerPuce() { ORDRE.forEach(function (k) { puces[k].r.setAttribute("fill-opacity", k === actuelle ? ".35" : ".12"); }); }
+
+    function flecheMouvement(p) {
+      // Mouvement au démasquage = sens opposé à la déviation sous le cache
+      var d = p.dx !== 0 ? "M" + (150 + p.dx * 1.8) + " 208 H" + 150 : "M60 " + (150 + p.dy * 2.4) + " V150";
+      $("flechep").setAttribute("d", d);
+    }
+
+    function jouer(fin) {
+      minuteurs.forEach(clearTimeout); minuteurs = [];
+      var p = PHORIES[actuelle];
+      marquerPuce(); flecheMouvement(p);
+      $("fleche").setAttribute("opacity", "0");
+      $("cacherect").setAttribute("fill-opacity", defi ? "1" : ".72");
+      iris(0, 0); cache(false);
+      etapes("1. Les deux yeux fixent le test", "");
+      bilan(defi ? "🎯 Défi " + (defi.n + 1) + "/3 : observe bien" : "Phorie étudiée : " + p.nom);
+      plus(function () { cache(true); etapes("2. Masquage de l'OD", "L'OG ne bouge pas : pas de tropie"); }, 900);
+      plus(function () { iris(p.dx, p.dy); etapes("3. Derrière le cache, l'OD dévie", defi ? "(cache opaque : on ne voit rien)" : "Il prend sa position passive"); }, 2100);
+      plus(function () { cache(false); }, 3400);
+      plus(function () {
+        iris(0, 0); $("fleche").setAttribute("opacity", "1");
+        if (defi) { etapes("4. Démasquage : l'OD reprend la fixation", "Quelle est la phorie ?"); montrerReponses(); }
+        else { etapes("4. Démasquage : mouvement " + p.mvt.split(" (")[0], p.mvt.indexOf("(") > 0 ? p.mvt.slice(p.mvt.indexOf("(")) : ""); bilan("Mouvement au démasquage → " + p.nom); }
+        if (fin) fin();
+      }, 3900);
+    }
+
+    // ---------- Défi : 3 phories au hasard, cache opaque ----------
+    function montrerReponses() {
+      var z = $("reponses"); while (z.firstChild) z.removeChild(z.firstChild);
+      $("bilan").setAttribute("visibility", "hidden"); z.setAttribute("visibility", "visible");
+      ORDRE.forEach(function (k, i) {
+        bouton(z, 12 + i * 115, 296, 108, PHORIES[k].court, "#d9b26f", function () { repondre(k); });
+      });
+    }
+    function repondre(k) {
+      if (!defi || defi.attente) return;
+      var p = PHORIES[actuelle], ok = k === actuelle;
+      if (ok) defi.score++;
+      defi.attente = true;
+      $("reponses").setAttribute("visibility", "hidden"); $("bilan").setAttribute("visibility", "visible");
+      $("bilanfond").setAttribute("stroke", ok ? "#5fd08a" : "#ff8a7a");
+      bilan((ok ? "✓ Oui : " : "✕ Non : ") + p.mvt.split(" (")[0] + " = " + p.nom);
+      plus(function () {
+        $("bilanfond").setAttribute("stroke", "#d9b26f");
+        defi.n++; defi.attente = false;
+        if (defi.n >= 3) { bilan("Défi terminé : " + defi.score + "/3 " + (defi.score === 3 ? "🎉" : "")); etapes("Rejoue le défi pour t'entraîner", ""); defi = null; return; }
+        actuelle = defi.tirage[defi.n]; jouer();
+      }, 2200);
+    }
+    $("bdefi").addEventListener("click", function () {
+      var t = ORDRE.slice().sort(function () { return Math.random() - .5; });
+      defi = { n: 0, score: 0, tirage: t, attente: false };
+      actuelle = t[0]; ["erreur", "errfleche", "errog"].forEach(function (i) { $(i).setAttribute("visibility", "hidden"); }); jouer();
+    });
+    $("rejouer").addEventListener("click", function () { defi = null; $("reponses").setAttribute("visibility", "hidden"); $("bilan").setAttribute("visibility", "visible"); jouer(); });
+
+    // ---------- Réponse fausse de l'élève (numéros = position dans q.choix de questions-U5.js) ----------
+    var ERREURS = {
+      1: { val: "Ésophorie", quoi: "errfleche", pourquoi: "→ Une ésophorie : l'œil reviendrait vers la tempe." },
+      2: { val: "Exotropie", quoi: "errog", pourquoi: "→ Une tropie se voit au masquage : l'OG bougerait." },
+      3: { val: "Ésotropie", quoi: "errog", pourquoi: "→ Une tropie se voit au masquage : l'OG bougerait." }
+    };
+    var m = /faux=(\d)/.exec(location.hash), err = m && ERREURS[m[1]];
+    if (err) svg.setAttribute("viewBox", "0 0 480 450");   // tout de suite : la page lit la taille au chargement
+    jouer(function () {
+      if (!err) return;
+      $("errval").textContent = err.val;
+      $("errpourquoi").textContent = err.pourquoi;
+      $(err.quoi).setAttribute("visibility", "visible");
+      $("erreur").setAttribute("visibility", "visible");
+    });
+  })();
+  ]]></script>
+</svg>

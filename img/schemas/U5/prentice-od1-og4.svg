@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 340" role="img" aria-labelledby="t">
+  <title id="t">Effet prismatique vertical : OD +1,00 et OG +4,00, regard 1 cm sous les centres optiques</title>
+  <style>
+    :root { background: #0f1219; color-scheme: dark; }
+    text { font-family: -apple-system, "Segoe UI", Roboto, sans-serif; font-size: 16px; fill: #e7e9ee; }
+    .p { font-size: 15px; fill: #aab2c0; }
+    .g { font-weight: 700; }
+    .or { fill: #f3dcae; }
+    .trace { stroke-dasharray: 1; stroke-dashoffset: 1; animation: trace 1s ease-out forwards; }
+    .anim { opacity: 0; animation: apparait .5s ease-out forwards; }
+    @keyframes trace { to { stroke-dashoffset: 0; } }
+    @keyframes apparait { to { opacity: 1; } }
+    @media (prefers-reduced-motion: reduce) {
+      .trace { animation: none; stroke-dashoffset: 0; }
+      .anim { animation: none; opacity: 1; }
+    }
+  </style>
+  <defs>
+    <pattern id="grille" width="18" height="18" patternUnits="userSpaceOnUse"><path d="M18 0 L0 0 L0 18" fill="none" stroke="#ffffff" stroke-opacity=".045"/></pattern>
+    <marker id="fo" markerUnits="userSpaceOnUse" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="12" markerHeight="12" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#f0c674"/></marker>
+    <marker id="fg" markerUnits="userSpaceOnUse" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="11" markerHeight="11" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#aab2c0"/></marker>
+    <marker id="fr" markerUnits="userSpaceOnUse" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="12" markerHeight="12" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#ff8a7a"/></marker>
+  </defs>
+  <rect x="0" y="0" width="480" height="340" fill="url(#grille)"/>
+  <text x="240" y="26" text-anchor="middle" class="p">Lunettes vues de face (OD à gauche de l'image)</text>
+  <circle cx="130" cy="120" r="82" fill="#9ec5ff" fill-opacity=".06" stroke="#9ec5ff" stroke-width="2.5"/>
+  <path d="M122 120 H138 M130 112 V128" stroke="#e7e9ee" stroke-width="2"/>
+  <text x="142" y="110" class="p">CO</text>
+  <text x="130" y="64" text-anchor="middle" class="g">OD +1,00</text>
+  <circle cx="130" cy="160" r="5" fill="#f0c674"/>
+  <path class="trace" pathLength="1" style="animation-delay:0.4s" d="M130 160 V130" stroke="#f0c674" stroke-width="3" fill="none" marker-end="url(#fo)"/>
+  <text class="anim g or" style="animation-delay:0.9s" x="144" y="166">1 Δ base sup.</text>
+  <circle cx="350" cy="120" r="82" fill="#9ec5ff" fill-opacity=".06" stroke="#9ec5ff" stroke-width="2.5"/>
+  <path d="M342 120 H358 M350 112 V128" stroke="#e7e9ee" stroke-width="2"/>
+  <text x="362" y="110" class="p">CO</text>
+  <text x="350" y="64" text-anchor="middle" class="g">OG +4,00</text>
+  <circle cx="350" cy="160" r="5" fill="#f0c674"/>
+  <path class="trace" pathLength="1" style="animation-delay:1.2s" d="M350 160 V130" stroke="#f0c674" stroke-width="3" fill="none" marker-end="url(#fo)"/>
+  <text class="anim g or" style="animation-delay:1.7s" x="364" y="166">4 Δ base sup.</text>
+  <path d="M90 120 V160" stroke="#aab2c0" stroke-width="1.2" marker-start="url(#fg)" marker-end="url(#fg)"/><text x="54" y="145.0" class="p">1 cm</text>
+  <g class="anim" style="animation-delay:2s">
+    <text x="20" y="232" class="p">Prentice : P (Δ) = d (cm) × |D|</text>
+    <text x="20" y="256" class="p">Verre convergent : la base est vers le centre optique.</text>
+    <text x="20" y="280" class="p">Sous le centre → base supérieure pour les deux yeux.</text>
+  </g>
+  <g class="anim" style="animation-delay:2.6s">
+    <rect x="20" y="294" width="440" height="36" rx="18" fill="#d9b26f" fill-opacity=".14" stroke="#d9b26f" stroke-opacity=".6"/>
+    <text x="240" y="318" text-anchor="middle" class="or">Différentiel : 4 − 1 = 3 Δ base supérieure sur l'OG</text>
+  </g>
+</svg>

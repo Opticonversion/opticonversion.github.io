@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 340" role="img" aria-labelledby="t">
+  <title id="t">Fluorescéine en lentille rigide : adaptations alignée, plate et serrée</title>
+  <style>
+    :root { background: #0f1219; color-scheme: dark; }
+    text { font-family: -apple-system, "Segoe UI", Roboto, sans-serif; font-size: 16px; fill: #e7e9ee; }
+    .p { font-size: 15px; fill: #aab2c0; }
+    .g { font-weight: 700; }
+    .or { fill: #f3dcae; }
+    .trace { stroke-dasharray: 1; stroke-dashoffset: 1; animation: trace 1s ease-out forwards; }
+    .anim { opacity: 0; animation: apparait .5s ease-out forwards; }
+    @keyframes trace { to { stroke-dashoffset: 0; } }
+    @keyframes apparait { to { opacity: 1; } }
+    @media (prefers-reduced-motion: reduce) {
+      .trace { animation: none; stroke-dashoffset: 0; }
+      .anim { animation: none; opacity: 1; }
+    }
+  </style>
+  <defs>
+    <pattern id="grille" width="18" height="18" patternUnits="userSpaceOnUse"><path d="M18 0 L0 0 L0 18" fill="none" stroke="#ffffff" stroke-opacity=".045"/></pattern>
+    <marker id="fo" markerUnits="userSpaceOnUse" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="12" markerHeight="12" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#f0c674"/></marker>
+    <marker id="fg" markerUnits="userSpaceOnUse" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="11" markerHeight="11" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#aab2c0"/></marker>
+    <marker id="fr" markerUnits="userSpaceOnUse" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="12" markerHeight="12" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#ff8a7a"/></marker>
+  </defs>
+  <rect x="0" y="0" width="480" height="340" fill="url(#grille)"/>
+  <defs><radialGradient id="g-al"><stop offset="0" stop-color="#7dff9a" stop-opacity=".22"/><stop offset=".85" stop-color="#7dff9a" stop-opacity=".25"/><stop offset="1" stop-color="#7dff9a" stop-opacity=".6"/></radialGradient><radialGradient id="g-pl"><stop offset="0" stop-color="#7dff9a" stop-opacity="0"/><stop offset=".35" stop-color="#7dff9a" stop-opacity=".02"/><stop offset=".75" stop-color="#7dff9a" stop-opacity=".45"/><stop offset="1" stop-color="#7dff9a" stop-opacity=".85"/></radialGradient><radialGradient id="g-se"><stop offset="0" stop-color="#7dff9a" stop-opacity=".75"/><stop offset=".5" stop-color="#7dff9a" stop-opacity=".35"/><stop offset=".78" stop-color="#7dff9a" stop-opacity="0"/><stop offset=".92" stop-color="#7dff9a" stop-opacity="0"/><stop offset="1" stop-color="#7dff9a" stop-opacity=".5"/></radialGradient></defs>
+  <rect x="13" y="14" width="144" height="246" rx="12" fill="#ffffff" fill-opacity=".03" stroke="#5b6270" stroke-opacity="0.6" stroke-width="1"/>
+  <text x="85" y="38" text-anchor="middle" class="g">Alignée</text>
+  <circle cx="85" cy="98" r="52" fill="url(#g-al)" stroke="#9ec5ff" stroke-width="1.5"/>
+  <path d="M41 213.2 A80.0 80.0 0 0 1 129 213.2" fill="none" stroke="#e7e9ee" stroke-width="2"/>
+  <path d="M41 208.4 A84.0 84.0 0 0 1 129 208.4" fill="none" stroke="#9ec5ff" stroke-width="3"/>
+  <rect x="168" y="14" width="144" height="246" rx="12" fill="#ffffff" fill-opacity=".07" stroke="#d9b26f" stroke-opacity="1" stroke-width="2"/>
+  <text x="240" y="38" text-anchor="middle" class="g or">Plate</text>
+  <circle cx="240" cy="98" r="52" fill="url(#g-pl)" stroke="#9ec5ff" stroke-width="1.5"/>
+  <path d="M196 213.2 A80.0 80.0 0 0 1 284 213.2" fill="none" stroke="#e7e9ee" stroke-width="2"/>
+  <path d="M196 206.7 A130.0 130.0 0 0 1 284 206.7" fill="none" stroke="#9ec5ff" stroke-width="3"/>
+  <rect x="323" y="14" width="144" height="246" rx="12" fill="#ffffff" fill-opacity=".03" stroke="#5b6270" stroke-opacity="0.6" stroke-width="1"/>
+  <text x="395" y="38" text-anchor="middle" class="g">Serrée</text>
+  <circle cx="395" cy="98" r="52" fill="url(#g-se)" stroke="#9ec5ff" stroke-width="1.5"/>
+  <path d="M351 213.2 A80.0 80.0 0 0 1 439 213.2" fill="none" stroke="#e7e9ee" stroke-width="2"/>
+  <path d="M351 212.2 A62.0 62.0 0 0 1 439 212.2" fill="none" stroke="#9ec5ff" stroke-width="3"/>
+  <text x="240" y="280" text-anchor="middle" class="p" style="font-size:13px">profil : bleu = lentille, blanc = cornée</text>
+  <text x="85" y="236" text-anchor="middle" class="p" style="font-size:13px">film régulier</text>
+  <text x="240" y="236" text-anchor="middle" class="p" style="font-size:13px">appui central</text>
+  <text x="395" y="236" text-anchor="middle" class="p" style="font-size:13px">réservoir central</text>
+  <g class="anim" style="animation-delay:0.8s">
+    <rect x="20" y="296" width="440" height="36" rx="18" fill="#d9b26f" fill-opacity=".14" stroke="#d9b26f" stroke-opacity=".6"/>
+    <text x="240" y="320" text-anchor="middle" class="or">Plate : fluo en périphérie, mobile → diminuer le ro</text>
+  </g>
+</svg>

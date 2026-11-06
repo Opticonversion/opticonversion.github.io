@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 340" role="img" aria-labelledby="t">
+  <title id="t">Marché d'une zone : du marché potentiel au marché net de l'évasion</title>
+  <style>
+    :root { background: #0f1219; color-scheme: dark; }
+    text { font-family: -apple-system, "Segoe UI", Roboto, sans-serif; font-size: 16px; fill: #e7e9ee; }
+    .p { font-size: 15px; fill: #aab2c0; }
+    .g { font-weight: 700; }
+    .num { font-size: 12px; font-weight: 800; fill: #0b0d12; }
+    .anim { opacity: 0; animation: apparait .5s ease-out forwards; }
+    .trace { stroke-dasharray: 1; stroke-dashoffset: 1; animation: trace 1s ease-out forwards; }
+    @keyframes apparait { to { opacity: 1; } }
+    @keyframes trace { to { stroke-dashoffset: 0; } }
+    @media (prefers-reduced-motion: reduce) {
+      .anim { animation: none; opacity: 1; }
+      .trace { animation: none; stroke-dashoffset: 0; }
+    }
+  </style>
+  <defs>
+    <pattern id="grille" width="18" height="18" patternUnits="userSpaceOnUse"><path d="M18 0 L0 0 L0 18" fill="none" stroke="#ffffff" stroke-opacity=".045"/></pattern>
+    <marker id="fg" markerUnits="userSpaceOnUse" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="11" markerHeight="11" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#aab2c0"/></marker>
+  </defs>
+  <rect x="0" y="0" width="480" height="340" fill="url(#grille)"/>
+  <g class="anim" style="animation-delay:0.3s">
+    <rect x="40.0" y="52" width="400.0" height="44" rx="8" fill="#9ec5ff" fill-opacity=".2" stroke="#9ec5ff" stroke-width="2"/>
+    <text x="240" y="80" text-anchor="middle"><tspan class="p">Marché potentiel : </tspan><tspan class="g">1 000 000 €</tspan></text>
+  </g>
+  <g class="anim" style="animation-delay:1.2s">
+    <rect x="60.0" y="142" width="360.0" height="44" rx="8" fill="#6fd3c4" fill-opacity=".2" stroke="#6fd3c4" stroke-width="2"/>
+    <text x="240" y="170" text-anchor="middle"><tspan class="p">Après l'IDC 90 : </tspan><tspan class="g">900 000 €</tspan></text>
+  </g>
+  <g class="anim" style="animation-delay:2.1s">
+    <rect x="78.0" y="232" width="324.0" height="44" rx="8" fill="#f0c674" fill-opacity=".2" stroke="#f0c674" stroke-width="2"/>
+    <text x="240" y="260" text-anchor="middle"><tspan class="p">Net de l'évasion : </tspan><tspan class="g">810 000 €</tspan></text>
+  </g>
+  <g class="anim" style="animation-delay:0.8s">
+    <line x1="60" y1="100" x2="60" y2="138" stroke="#aab2c0" stroke-width="2" marker-end="url(#fg)"/>
+    <text x="74" y="124.0"><tspan class="g" style="fill:#f3dcae">× 0,90</tspan><tspan class="p">  IDC 90 : on dépense 10 % de moins</tspan></text>
+  </g>
+  <g class="anim" style="animation-delay:1.7s">
+    <line x1="60" y1="190" x2="60" y2="228" stroke="#aab2c0" stroke-width="2" marker-end="url(#fg)"/>
+    <text x="74" y="214.0"><tspan class="g" style="fill:#f3dcae">× 0,90</tspan><tspan class="p">  évasion : 10 % des achats partent ailleurs</tspan></text>
+  </g>
+  <g class="anim" style="animation-delay:2.6s">
+    <rect x="30" y="296" width="420" height="36" rx="18" fill="#d9b26f" fill-opacity=".14" stroke="#d9b26f" stroke-opacity=".6"/>
+    <text x="240" y="320" text-anchor="middle" style="fill:#f3dcae">1 000 000 × 0,90 × 0,90 = 810 000 € TTC</text>
+  </g>
+  <g id="erreur" visibility="hidden">
+    <rect id="errbar" x="0" y="228" width="0" height="52" rx="10" fill="none" stroke="#ff8a7a" stroke-width="2.5" stroke-dasharray="6 5"/>
+    <text id="errtag" x="0" y="259" style="font-size:13px;font-weight:700;fill:#ff8a7a">✕</text>
+    <line x1="20" y1="346" x2="460" y2="346" stroke="#ffffff" stroke-opacity=".08"/>
+    <circle cx="32" cy="368" r="10" fill="#ff8a7a"/><text x="32" y="373" text-anchor="middle" style="font-size:13px;font-weight:800;fill:#0f1219">✕</text>
+    <text x="52" y="373" class="p">Ta réponse</text><text id="errval" x="190" y="373" style="font-weight:700;fill:#ff8a7a"></text>
+    <circle cx="32" cy="396" r="10" fill="#5fd08a"/><text x="32" y="401" text-anchor="middle" style="font-size:13px;font-weight:800;fill:#0f1219">✓</text>
+    <text x="52" y="401" class="p">Bonne réponse</text><text x="190" y="401" style="font-weight:700;fill:#8fe0ad">810 000 €</text>
+    <text id="errp1" x="20" y="430" style="font-size:15px"></text><text id="errp2" x="20" y="450" style="font-size:15px"></text>
+  </g>
+  <script><![CDATA[
+  (function () {
+    var ERREURS = {
+      0: { w: 320.0, val: "800 000 €", p1: "→ Tu as retiré 20 % d'un coup. La 2e baisse se fait", p2: "sur 900 000 €, pas sur 1 000 000 €." },
+      1: { w: 360.0, val: "900 000 €", p1: "→ Tu as oublié l'évasion commerciale :", p2: "il faut encore multiplier par 0,90." },
+      3: { w: 396.0, val: "990 000 €", p1: "→ Tu as retiré 1 % (10 % de 10 %). Chaque taux", p2: "s'applique en entier : × 0,90 puis × 0,90." }
+    };
+    var m = /faux=(\d)/.exec(location.hash), e = m && ERREURS[m[1]];
+    if (!e) return;
+    var $ = function (id) { return document.getElementById(id); };
+    document.documentElement.setAttribute("viewBox", "0 0 480 462");
+    $("errbar").setAttribute("x", 240 - e.w / 2 - 4); $("errbar").setAttribute("width", e.w + 8);
+    $("errtag").setAttribute("x", 240 - e.w / 2 + 8);
+    $("errval").textContent = e.val; $("errp1").textContent = e.p1; $("errp2").textContent = e.p2;
+    $("erreur").setAttribute("visibility", "visible");
+  })();
+  ]]></script>
+</svg>

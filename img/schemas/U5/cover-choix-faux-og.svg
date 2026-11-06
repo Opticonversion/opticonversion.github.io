@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 180" role="img">
+  <style>
+    text { font-family: -apple-system, "Segoe UI", Roboto, sans-serif; font-size: 14px; fill: #aab2c0; }
+    .g { font-weight: 700; fill: #e7e9ee; }
+  </style>
+  <defs>
+    <marker id="fo" markerUnits="userSpaceOnUse" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="12" markerHeight="12" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#f0c674"/></marker>
+    <marker id="fg" markerUnits="userSpaceOnUse" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#aab2c0"/></marker>
+  </defs>
+  <text x="80" y="40" text-anchor="middle" class="g">OD</text><text x="220" y="40" text-anchor="middle" class="g">OG</text>
+  <path d="M30 92 Q80 58 130 92 Q80 126 30 92 Z" fill="#e9e4dc" stroke="#9aa3b2" stroke-width="1.5"/><circle cx="80" cy="92" r="15" fill="#5f86b8"/><circle cx="80" cy="92" r="6" fill="#0b0d12"/><path d="M170 92 Q220 58 270 92 Q220 126 170 92 Z" fill="#e9e4dc" stroke="#9aa3b2" stroke-width="1.5"/><circle cx="220" cy="92" r="15" fill="#5f86b8"/><circle cx="220" cy="92" r="6" fill="#0b0d12"/>
+  <path d="M150 64 Q144 98 141 112 Q147 118 155 114" fill="none" stroke="#5b6270" stroke-width="2"/>
+  <path d="M242 140 H198" stroke="#f0c674" stroke-width="3.5" fill="none" marker-end="url(#fo)"/>
+  <text x="150" y="172" text-anchor="middle" style="font-size:12px">sujet vu de face</text>
+</svg>

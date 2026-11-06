@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 340" role="img" aria-labelledby="t">
+  <title id="t">Oculaire réglé pour un myope de −4 δ : déplacement de 2,5 mm</title>
+  <style>
+    :root { background: #0f1219; color-scheme: dark; }
+    text { font-family: -apple-system, "Segoe UI", Roboto, sans-serif; font-size: 16px; fill: #e7e9ee; }
+    .p { font-size: 15px; fill: #aab2c0; }
+    .g { font-weight: 700; }
+    .num { font-size: 12px; font-weight: 800; fill: #0b0d12; }
+    .r { fill: none; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; filter: url(#lueur); }
+    .v { fill: none; stroke-width: 1.8; stroke-dasharray: 6 6; opacity: .75; }
+    .c1 { stroke: #f0c674; } .c2 { stroke: #6fd3c4; } .c3 { stroke: #c7a3ff; }
+    .trace { stroke-dasharray: 1; stroke-dashoffset: 1; animation: trace 1s ease-out forwards; }
+    .anim { opacity: 0; animation: apparait .5s ease-out forwards; }
+    @keyframes trace { to { stroke-dashoffset: 0; } }
+    @keyframes apparait { to { opacity: 1; } }
+    @media (prefers-reduced-motion: reduce) {
+      .trace { animation: none; stroke-dashoffset: 0; }
+      .anim { animation: none; opacity: 1; }
+    }
+  </style>
+  <defs>
+    <pattern id="grille" width="18" height="18" patternUnits="userSpaceOnUse"><path d="M18 0 L0 0 L0 18" fill="none" stroke="#ffffff" stroke-opacity=".045"/></pattern>
+    <linearGradient id="verre" x1="0" x2="1"><stop offset="0" stop-color="#9ec5ff" stop-opacity=".04"/><stop offset=".5" stop-color="#9ec5ff" stop-opacity=".3"/><stop offset="1" stop-color="#9ec5ff" stop-opacity=".04"/></linearGradient>
+    <filter id="lueur" x="-10%" y="-20%" width="120%" height="140%"><feGaussianBlur stdDeviation="2.2" result="f"/><feMerge><feMergeNode in="f"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <clipPath id="cadre"><rect x="0" y="0" width="480" height="262"/></clipPath>
+    <marker id="mb" markerUnits="userSpaceOnUse" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="13" markerHeight="13" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#f2f2f2"/></marker>
+    <marker id="md" markerUnits="userSpaceOnUse" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="13" markerHeight="13" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#d9b26f"/></marker>
+    <marker id="mg" markerUnits="userSpaceOnUse" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#aab2c0"/></marker>
+    <marker id="ml" markerUnits="userSpaceOnUse" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="14" markerHeight="14" orient="auto-start-reverse"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#9ec5ff" stroke-width="2"/></marker>
+  </defs>
+
+  <rect x="0" y="0" width="480" height="262" fill="url(#grille)"/>
+  <line x1="8" y1="170" x2="472" y2="170" stroke="#5b6270" stroke-width="1.5"/>
+  <path d="M300 134 Q312 170 300 206 Q288 170 300 134 Z" fill="url(#verre)"/><line x1="300" y1="130" x2="300" y2="210" stroke="#9ec5ff" stroke-width="2.5" marker-start="url(#ml)" marker-end="url(#ml)"/>
+  <text x="300" y="234" text-anchor="middle" class="p">oculaire</text>
+  <circle cx="275" cy="170" r="3.5" fill="#e7e9ee"/><text x="269" y="192" text-anchor="end" class="p">F</text>
+  <circle cx="325" cy="170" r="3.5" fill="#e7e9ee"/><text x="331" y="160" class="p">F' = œil</text>
+  <g clip-path="url(#cadre)">
+    <path class="v c1 anim" style="animation-delay:2.4s" d="M300 158 L75 50"/>
+    <path class="v c2 anim" style="animation-delay:2.4s" d="M300 170 L75 50"/>
+    <path class="r c1 trace" style="animation-delay:.3s" pathLength="1" d="M277.5 158 L300 158 L325 170 L475 242"/>
+    <path class="r c2 trace" style="animation-delay:1.2s" pathLength="1" d="M277.5 158 L300 170 L475 263.3"/>
+  </g>
+  <line x1="277.5" y1="170" x2="277.5" y2="159" stroke="#f2f2f2" stroke-width="3.5" marker-end="url(#mb)"/>
+  <text x="279.5" y="192" class="g">A₁</text>
+  <g class="anim" style="animation-delay:2.8s"><line x1="75" y1="170" x2="75" y2="52" stroke="#d9b26f" stroke-width="3" stroke-dasharray="7 5" marker-end="url(#md)"/><text x="83" y="60" class="g" style="fill:#d9b26f">B' sur R</text><text x="75" y="192" text-anchor="middle" class="p">R</text></g>
+  <g class="anim" style="animation-delay:2.8s"><line x1="75" y1="28" x2="325" y2="28" stroke="#aab2c0" stroke-width="1.2" marker-start="url(#mg)" marker-end="url(#mg)"/><text x="200" y="20" text-anchor="middle" class="p">250 mm (remotum du myope −4 δ)</text></g>
+  <text x="470" y="64" text-anchor="end" style="font-size:13px;fill:#aab2c0">échelles : axiale 1:1, transversale ×4</text>
+  <g class="anim" style="animation-delay:3s">
+    <rect x="14" y="208" width="236" height="56" rx="8" fill="#0f1219" fill-opacity=".9" stroke="#aab2c0" stroke-opacity=".4"/>
+    <line x1="22" y1="246" x2="244" y2="246" stroke="#5b6270" stroke-width="1.2"/>
+    <circle cx="60" cy="246" r="3.5" fill="#e7e9ee"/><text x="53" y="251" text-anchor="end" style="font-size:13px;fill:#aab2c0">F</text>
+    <line x1="105" y1="238" x2="105" y2="254" stroke="#f2f2f2" stroke-width="2.5"/><text x="110" y="243" style="font-size:13px;font-weight:700">A₁</text>
+    <line x1="60" y1="257" x2="104" y2="257" stroke="#d9b26f" stroke-width="1.6" marker-end="url(#md)"/><text x="113" y="261" style="font-size:13px;fill:#f3dcae">2,5 mm</text>
+    <text x="244" y="261" text-anchor="end" style="font-size:12px;fill:#7f8899">zoom ×18</text>
+  </g>
+  <g class="anim" style="animation-delay:3.4s">
+    <text x="240" y="283" text-anchor="middle" class="p">Newton : x·x' = −f'²  →  x = −625 / (−250) = +2,5 mm</text>
+    <rect x="20" y="296" width="440" height="36" rx="18" fill="#d9b26f" fill-opacity=".14" stroke="#d9b26f" stroke-opacity=".6"/>
+    <text x="240" y="320" text-anchor="middle" style="fill:#f3dcae">A₁ à 2,5 mm après F : on rapproche l'oculaire de 2,5 mm</text>
+  </g>
+  <g id="erreur" visibility="hidden">
+    <line id="errligne" x1="0" y1="246" x2="0" y2="264" stroke="#ff8a7a" stroke-width="2.5"/>
+    <text id="errtag" x="0" y="278" text-anchor="middle" style="font-size:13px;font-weight:700;fill:#ff8a7a">ta réponse</text>
+    <line x1="20" y1="346" x2="460" y2="346" stroke="#ffffff" stroke-opacity=".08"/>
+    <circle cx="32" cy="368" r="10" fill="#ff8a7a"/><text x="32" y="373" text-anchor="middle" style="font-size:13px;font-weight:800;fill:#0f1219">✕</text>
+    <text x="52" y="373" class="p">Ta réponse</text>
+    <text id="errval" x="160" y="373" style="font-weight:700;fill:#ff8a7a"></text>
+    <circle cx="32" cy="396" r="10" fill="#5fd08a"/><text x="32" y="401" text-anchor="middle" style="font-size:13px;font-weight:800;fill:#0f1219">✓</text>
+    <text x="52" y="401" class="p">Bonne réponse</text>
+    <text x="160" y="401" style="font-weight:700;fill:#8fe0ad">2,5 mm</text>
+    <text id="errpourquoi1" x="20" y="430" style="font-size:15px"></text>
+    <text id="errpourquoi2" x="20" y="450" style="font-size:15px"></text>
+  </g>
+  <script><![CDATA[
+  (function () {
+    // Numéros = position de la réponse dans q.choix (questions-U43.js) : 0,25 mm / 2,5 mm / 4 mm / 25 mm
+    var ZX0 = 60, ZK = 18;
+    var ERREURS = {
+      0: { d: 0.25, val: "0,25 mm", l1: "→ x' = −625 / 0,25 = −2 500 mm : réglage pour −0,40 δ.", l2: "Vérifie l'unité : x = 625 / 250 = 2,5 mm." },
+      2: { d: 4, val: "4 mm", l1: "→ x' = −625 / 4 ≈ −156 mm : réglage pour −6,40 δ.", l2: "4 est la valeur de l'amétropie, pas un déplacement." },
+      3: { d: 25, val: "25 mm", l1: "→ A₁ serait sur l'oculaire : plus d'image du tout.", l2: "Utilise x·x' = −f'², avec x' = −250 mm." }
+    };
+    var m = /faux=(\d)/.exec(location.hash), e = m && ERREURS[m[1]];
+    if (!e) return;
+    var svg = document.documentElement, $ = function (id) { return document.getElementById(id); };
+    svg.setAttribute("viewBox", "0 0 480 462");
+    var x = ZX0 + e.d * ZK, dedans = x < 244;
+    if (!dedans) x = 240;
+    $("errligne").setAttribute("x1", x); $("errligne").setAttribute("x2", x);
+    $("errligne").setAttribute("y1", 231); $("errligne").setAttribute("y2", 250);
+    $("errtag").setAttribute("x", dedans ? x : 236); $("errtag").setAttribute("y", 222);
+    $("errtag").setAttribute("text-anchor", dedans ? "middle" : "end");
+    $("errtag").textContent = dedans ? "ta réponse" : "ta réponse : hors du zoom →";
+    $("errval").textContent = e.val;
+    $("errpourquoi1").textContent = e.l1; $("errpourquoi2").textContent = e.l2;
+    $("erreur").setAttribute("visibility", "visible");
+  })();
+  ]]></script>
+</svg>

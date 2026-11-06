@@ -1,0 +1,187 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 340" role="img" aria-labelledby="t">
+  <title id="t">Myope de −2,00 : remotum à 50 cm, accommodation pour lire à 25 cm, texte déplaçable</title>
+  <style>
+    :root { background: #0f1219; color-scheme: dark; }
+    text { font-family: -apple-system, "Segoe UI", Roboto, sans-serif; font-size: 16px; fill: #e7e9ee; }
+    .p { font-size: 15px; fill: #aab2c0; }
+    .s { font-size: 13px; fill: #aab2c0; }
+    .g { font-weight: 700; }
+    .bt { cursor: pointer; }
+    .bt:hover rect { fill-opacity: .28; }
+    #poignee { cursor: grab; touch-action: none; }
+    #poignee:active { cursor: grabbing; }
+    .anim { opacity: 0; animation: apparait .5s ease-out forwards; }
+    @keyframes apparait { to { opacity: 1; } }
+    @media (prefers-reduced-motion: reduce) { .anim { animation: none; opacity: 1; } }
+  </style>
+  <defs>
+    <pattern id="grille" width="18" height="18" patternUnits="userSpaceOnUse"><path d="M18 0 L0 0 L0 18" fill="none" stroke="#ffffff" stroke-opacity=".045"/></pattern>
+    <marker id="mt" markerUnits="userSpaceOnUse" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="13" markerHeight="13" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#f2f2f2"/></marker>
+  </defs>
+  <rect x="0" y="0" width="480" height="450" fill="url(#grille)"/>
+
+  <g id="rejouer" class="bt" role="button" aria-label="Revenir à la situation de la question"><rect x="8" y="8" width="132" height="28" rx="14" fill="#9ec5ff" fill-opacity=".12" stroke="#9ec5ff" stroke-opacity=".5"/><text x="74" y="27" text-anchor="middle" style="font-size:14px;fill:#cfe0ff">↺ Revoir à 25 cm</text></g>
+  <g id="bdefi" class="bt" role="button" aria-label="Défi : placer le texte pour une accommodation donnée"><rect x="148" y="8" width="82" height="28" rx="14" fill="#d9b26f" fill-opacity=".16" stroke="#d9b26f" stroke-opacity=".6"/><text x="189" y="27" text-anchor="middle" style="font-size:14px;fill:#f3dcae">🎯 Défi</text></g>
+  <g id="defi" visibility="hidden">
+    <rect id="defifond" x="238" y="8" width="234" height="46" rx="10" fill="#0f1219" fill-opacity=".9" stroke="#d9b26f" stroke-opacity=".6"/>
+    <text id="defi1" x="248" y="26" style="font-size:13px;fill:#f3dcae">Défi</text>
+    <text id="defi2" x="248" y="45" style="font-size:13px;font-weight:700"></text>
+  </g>
+
+  <!-- Zones : au-delà du remotum (flou) / entre R et l'œil (net en accommodant) -->
+  <rect x="60" y="134" width="76" height="32" fill="#ff8a7a" fill-opacity=".14"/>
+  <rect x="136" y="134" width="304" height="32" fill="#5fd08a" fill-opacity=".1"/>
+  <text x="66" y="98" class="s" style="fill:#ff9b9b">flou</text>
+  <text x="300" y="98" class="s" style="fill:#8fe0ad">net en accommodant</text>
+
+  <!-- Axe des proximités 1/HT (δ) : x = 60 + 38 × |1/HT| ; l'œil (H) est à droite -->
+  <line x1="40" y1="150" x2="446" y2="150" stroke="#5b6270" stroke-width="1.5"/>
+  <g id="graduations"></g>
+  <text x="6" y="186" class="s" style="font-size:12px">1/HT</text><text x="6" y="204" class="s" style="font-size:12px;fill:#7f8899">HT</text>
+  <path d="M452 128 Q470 128 474 150 Q470 172 452 172 Q446 150 452 128 Z" fill="#9ec5ff" fill-opacity=".18" stroke="#9ec5ff" stroke-width="2"/>
+  <text x="452" y="120" text-anchor="middle" class="s">œil</text>
+
+  <!-- Remotum -->
+  <line x1="136" y1="112" x2="136" y2="166" stroke="#c7a3ff" stroke-width="2.5"/>
+  <text x="136" y="76" text-anchor="middle" class="g" style="font-size:15px;fill:#d9c4ff">R = −2 δ</text>
+  <text x="136" y="94" text-anchor="middle" class="s">remotum</text>
+
+  <!-- Accommodation = écart entre R et 1/HT -->
+  <g id="crochet">
+    <path id="crochetp" d="M136 122 V116 H212 V122" fill="none" stroke="#f0c674" stroke-width="2"/>
+    <text id="crochett" x="174" y="110" text-anchor="middle" class="g" style="font-size:15px;fill:#f3dcae">2 δ</text>
+  </g>
+  <!-- Réponse fausse : longueur d'accommodation proposée par l'élève -->
+  <g id="errcrochet" visibility="hidden">
+    <path id="errp" d="" fill="none" stroke="#ff8a7a" stroke-width="2" stroke-dasharray="5 4"/>
+    <text id="errt" x="0" y="196" text-anchor="middle" style="font-size:13px;font-weight:700;fill:#ff8a7a">ta réponse</text>
+  </g>
+
+  <!-- Le texte lu (déplaçable) -->
+  <g id="poignee">
+    <rect id="zone" x="190" y="122" width="44" height="64" fill="#fff" fill-opacity="0"/>
+    <line id="obj" x1="212" y1="150" x2="212" y2="127" stroke="#f2f2f2" stroke-width="3.5" marker-end="url(#mt)"/>
+    <text id="objt" x="222" y="140" class="g" style="font-size:15px">T</text>
+  </g>
+  <text id="aide" class="anim" style="animation-delay:1s;font-size:13px;fill:#7f8899" x="250" y="210">↔ fais glisser le texte T</text>
+
+  <text id="l1" x="20" y="240" class="p"></text>
+  <text id="l2" x="20" y="266" class="p"></text>
+  <rect id="resfond" x="20" y="290" width="440" height="36" rx="18" fill="#d9b26f" fill-opacity=".14" stroke="#d9b26f" stroke-opacity=".6"/>
+  <text id="res" x="240" y="314" text-anchor="middle" style="fill:#f3dcae"></text>
+
+  <g id="erreur" visibility="hidden">
+    <line x1="20" y1="346" x2="460" y2="346" stroke="#ffffff" stroke-opacity=".08"/>
+    <circle cx="32" cy="368" r="10" fill="#ff8a7a"/><text x="32" y="373" text-anchor="middle" style="font-size:13px;font-weight:800;fill:#0f1219">✕</text>
+    <text x="52" y="373" class="p">Ta réponse</text><text id="errval" x="170" y="373" style="font-weight:700;fill:#ff8a7a"></text>
+    <circle cx="32" cy="396" r="10" fill="#5fd08a"/><text x="32" y="401" text-anchor="middle" style="font-size:13px;font-weight:800;fill:#0f1219">✓</text>
+    <text x="52" y="401" class="p">Bonne réponse</text><text x="170" y="401" style="font-weight:700;fill:#8fe0ad">2 δ</text>
+    <text id="errpourquoi" x="20" y="432" style="font-size:15px"></text>
+  </g>
+
+  <script><![CDATA[
+  (function () {
+    var NS = "http://www.w3.org/2000/svg", svg = document.documentElement;
+    var $ = function (id) { return document.getElementById(id); };
+    var X0 = 60, K = 38, R = -2, P_QUESTION = 4, PMIN = 0.2, PMAX = 10;   // P = |1/HT| en δ
+    var xde = function (P) { return X0 + K * P; };
+    var nb = function (v) { var s = (Math.round(v * 100) / 100).toFixed(2).replace(/0$/, "").replace(/\.0$/, "").replace(".", ","); return s; };
+    var sg = function (v) { return (v < 0 ? "−" : v > 0 ? "+" : "") + nb(Math.abs(v)); };
+
+    // Graduations : 0 à −10 δ, et quelques distances
+    var gr = $("graduations"), DIST = { 0: "∞", 1: "1 m", 2: "50 cm", 4: "25 cm", 5: "20", 10: "10 cm" };
+    for (var P = 0; P <= 10; P++) {
+      var x = xde(P);
+      var l = document.createElementNS(NS, "line");
+      l.setAttribute("x1", x); l.setAttribute("x2", x); l.setAttribute("y1", 146); l.setAttribute("y2", 154);
+      l.setAttribute("stroke", "#8a93a3"); gr.appendChild(l);
+      var t = document.createElementNS(NS, "text");
+      t.setAttribute("x", x); t.setAttribute("y", 186); t.setAttribute("text-anchor", "middle"); t.setAttribute("class", "s");
+      t.textContent = P === 0 ? "0" : "−" + P; gr.appendChild(t);
+      if (DIST[P]) {
+        var d = document.createElementNS(NS, "text");
+        d.setAttribute("x", x); d.setAttribute("y", 204); d.setAttribute("text-anchor", "middle"); d.setAttribute("class", "s");
+        d.setAttribute("style", "font-size:12px;fill:#7f8899"); d.textContent = DIST[P]; gr.appendChild(d);
+      }
+    }
+
+    var Pcourant = P_QUESTION;
+    function dessiner(P) {
+      var x = xde(P);
+      $("obj").setAttribute("x1", x); $("obj").setAttribute("x2", x);
+      $("zone").setAttribute("x", x - 22); $("objt").setAttribute("x", x + 10);
+      var d = 100 / P, acc = R + P;               // Acc = R − 1/HT, avec 1/HT = −P
+      var dr = Math.round(d); $("l1").textContent = "HT " + (Math.abs(d - dr) < 0.05 ? "= −" : "≈ −") + dr + " cm → 1/HT = −" + nb(P) + " δ";
+      if (acc >= 0) {
+        $("crochet").setAttribute("visibility", "visible");
+        $("crochetp").setAttribute("d", "M136 122 V116 H" + x.toFixed(1) + " V122");
+        $("crochett").setAttribute("x", ((136 + x) / 2).toFixed(1));
+        $("crochett").textContent = nb(acc) + " δ";
+        $("l2").textContent = "Acc = R − 1/HT = −2 − (−" + nb(P) + ") = " + nb(acc) + " δ";
+        $("res").textContent = acc < 0.05 ? "Au remotum : net sans accommoder" : "Il accommode de " + nb(acc) + " δ";
+      } else {
+        $("crochet").setAttribute("visibility", "hidden");
+        $("l2").textContent = "Au-delà du remotum : même sans accommoder,";
+        $("res").textContent = "l'image reste floue (myope non compensé)";
+      }
+    }
+
+    // Glisser le texte
+    var poignee = $("poignee"), actif = false;
+    function versSVG(e) { var p = svg.createSVGPoint(); p.x = e.clientX; p.y = e.clientY; return p.matrixTransform(svg.getScreenCTM().inverse()); }
+    poignee.addEventListener("pointerdown", function (e) { actif = true; $("aide").setAttribute("visibility", "hidden"); poignee.setPointerCapture(e.pointerId); e.preventDefault(); });
+    poignee.addEventListener("pointermove", function (e) {
+      if (!actif) return;
+      Pcourant = Math.max(PMIN, Math.min(PMAX, (versSVG(e).x - X0) / K));
+      dessiner(Pcourant);
+    });
+    function lacher() { if (actif) verifierDefi(); actif = false; }
+    poignee.addEventListener("pointerup", lacher); poignee.addEventListener("pointercancel", lacher);
+    poignee.addEventListener("lostpointercapture", lacher); document.addEventListener("pointerup", lacher);
+
+    $("rejouer").addEventListener("click", function () { defi = -1; $("defi").setAttribute("visibility", "hidden"); Pcourant = P_QUESTION; dessiner(Pcourant); });
+
+    // Défi : placer le texte pour obtenir une accommodation donnée (tolérance 0,3 δ)
+    var DEFIS = [
+      { texte: "il accommode de 1 δ", P: 3 },
+      { texte: "il accommode de 5 δ", P: 7 },
+      { texte: "il voit net sans accommoder", P: 2 }
+    ];
+    var defi = -1;
+    function afficherDefi() {
+      $("defi").setAttribute("visibility", "visible"); $("defifond").setAttribute("stroke", "#d9b26f");
+      $("defi1").textContent = "🎯 Défi " + (defi + 1) + "/3 : place T pour que"; $("defi2").textContent = DEFIS[defi].texte;
+    }
+    function verifierDefi() {
+      if (defi < 0) return;
+      if (Math.abs(Pcourant - DEFIS[defi].P) > 0.3) return;
+      Pcourant = DEFIS[defi].P; dessiner(Pcourant);
+      $("defifond").setAttribute("stroke", "#5fd08a"); $("defi1").textContent = "✓ Bravo ! T à " + nb(100 / Pcourant) + " cm";
+      var fini = defi === DEFIS.length - 1, suivant = defi + 1;
+      $("defi2").textContent = fini ? "Tous les défis sont réussis 🎉" : "Défi suivant dans un instant…";
+      defi = fini ? -1 : -2;
+      if (!fini) setTimeout(function () { defi = suivant; afficherDefi(); }, 1600);
+    }
+    $("bdefi").addEventListener("click", function () { defi = 0; afficherDefi(); $("aide").setAttribute("visibility", "visible"); });
+
+    // Réponse fausse de l'élève (position dans q.choix : 0 δ, 2 δ, 4 δ, 6 δ)
+    var ERREURS = {
+      0: { acc: 0, val: "0 δ", pourquoi: "→ 0 δ seulement si le texte est au remotum (50 cm)." },
+      2: { acc: 4, val: "4 δ", pourquoi: "→ 4 δ = 1/0,25 : c'est oublier que R = −2 δ." },
+      3: { acc: 6, val: "6 δ", pourquoi: "→ 6 δ : erreur de signe, R d'un myope est négatif." }
+    };
+    var m = /faux=(\d)/.exec(location.hash), err = m && ERREURS[m[1]];
+    if (err) {
+      svg.setAttribute("viewBox", "0 0 480 450");
+      var xt = xde(P_QUESTION), xf = Math.max(14, xt - K * err.acc);   // où l'élève a mis, sans le dire, le remotum
+      $("errp").setAttribute("d", err.acc ? "M" + xt + " 214 V220 H" + xf + " V214" : "M" + (xt - 8) + " 214 H" + (xt + 8));
+      $("errt").setAttribute("x", err.acc ? Math.max(48, (xt + xf) / 2) : xt);
+      $("errt").setAttribute("y", 236);
+      $("l1").setAttribute("visibility", "hidden"); $("aide").setAttribute("visibility", "hidden");
+      $("errval").textContent = err.val; $("errpourquoi").textContent = err.pourquoi;
+      $("errcrochet").setAttribute("visibility", "visible"); $("erreur").setAttribute("visibility", "visible");
+    }
+    dessiner(Pcourant);
+  })();
+  ]]></script>
+</svg>

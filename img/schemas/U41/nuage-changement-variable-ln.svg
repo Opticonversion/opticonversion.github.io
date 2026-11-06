@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 340" role="img" aria-labelledby="t">
+  <title id="t">Nuage de points : la série (x ; y) est courbe, la série (x ; z) avec z = ln(y − 20) est alignée, r ≈ −0,998</title>
+  <style>
+    :root { background: #0f1219; color-scheme: dark; }
+    text { font-family: -apple-system, "Segoe UI", Roboto, sans-serif; font-size: 16px; fill: #e7e9ee; }
+    .p { font-size: 15px; fill: #aab2c0; }
+    .g { font-weight: 700; }
+    .num { font-size: 12px; font-weight: 800; fill: #0b0d12; }
+    .ax { stroke: #5b6270; stroke-width: 1.5; fill: none; }
+    .r { fill: none; stroke-width: 2.8; stroke-linecap: round; stroke-linejoin: round; }
+    .c1 { stroke: #f0c674; } .c2 { stroke: #6fd3c4; } .c3 { stroke: #c7a3ff; }
+    .tir { stroke-dasharray: 7 6; }
+    .trace { stroke-dasharray: 1; stroke-dashoffset: 1; animation: trace 1.4s ease-out forwards; }
+    .anim { opacity: 0; animation: apparait .5s ease-out forwards; }
+    @keyframes trace { to { stroke-dashoffset: 0; } }
+    @keyframes apparait { to { opacity: 1; } }
+    @media (prefers-reduced-motion: reduce) {
+      .trace { animation: none; stroke-dashoffset: 0; }
+      .anim { animation: none; opacity: 1; }
+    }
+  </style>
+  <defs>
+    <pattern id="grille" width="18" height="18" patternUnits="userSpaceOnUse"><path d="M18 0 L0 0 L0 18" fill="none" stroke="#ffffff" stroke-opacity=".045"/></pattern>
+    <marker id="fl" markerUnits="userSpaceOnUse" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="11" markerHeight="11" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#5b6270" stroke-width="2"/></marker>
+  </defs>
+  <rect x="0" y="0" width="480" height="285" fill="url(#grille)"/>
+  <line class="ax" x1="32" y1="250" x2="245" y2="250" marker-end="url(#fl)"/><line class="ax" x1="32" y1="250" x2="32" y2="38" marker-end="url(#fl)"/>
+  <text x="18" y="52" class="g">y</text><text x="140" y="274" text-anchor="middle" class="p">série (x ; y)</text>
+  <line class="ax" x1="262" y1="250" x2="475" y2="250" marker-end="url(#fl)"/><line class="ax" x1="262" y1="250" x2="262" y2="38" marker-end="url(#fl)"/>
+  <text x="248" y="52" class="g">z</text><text x="370" y="274" text-anchor="middle" class="p">série (x ; z)</text>
+  <circle class="anim" style="animation-delay:0.2s" cx="40" cy="48.4" r="5" fill="#e7e9ee"/>
+  <circle class="anim" style="animation-delay:1.2s" cx="270" cy="70.1" r="5" fill="#6fd3c4"/>
+  <circle class="anim" style="animation-delay:0.3s" cx="66" cy="110.7" r="5" fill="#e7e9ee"/>
+  <circle class="anim" style="animation-delay:1.3s" cx="296" cy="85.6" r="5" fill="#6fd3c4"/>
+  <circle class="anim" style="animation-delay:0.4s" cx="92" cy="165.9" r="5" fill="#e7e9ee"/>
+  <circle class="anim" style="animation-delay:1.4s" cx="322" cy="109.1" r="5" fill="#6fd3c4"/>
+  <circle class="anim" style="animation-delay:0.5s" cx="118" cy="183.2" r="5" fill="#e7e9ee"/>
+  <circle class="anim" style="animation-delay:1.5s" cx="348" cy="121.3" r="5" fill="#6fd3c4"/>
+  <circle class="anim" style="animation-delay:0.6s" cx="144" cy="204.2" r="5" fill="#e7e9ee"/>
+  <circle class="anim" style="animation-delay:1.6s" cx="374" cy="145.5" r="5" fill="#6fd3c4"/>
+  <circle class="anim" style="animation-delay:0.7s" cx="170" cy="209.9" r="5" fill="#e7e9ee"/>
+  <circle class="anim" style="animation-delay:1.7s" cx="400" cy="156.6" r="5" fill="#6fd3c4"/>
+  <circle class="anim" style="animation-delay:0.8s" cx="196" cy="217.7" r="5" fill="#e7e9ee"/>
+  <circle class="anim" style="animation-delay:1.8s" cx="426" cy="180.5" r="5" fill="#6fd3c4"/>
+  <circle class="anim" style="animation-delay:0.9s" cx="222" cy="220.6" r="5" fill="#e7e9ee"/>
+  <circle class="anim" style="animation-delay:1.9s" cx="452" cy="195.9" r="5" fill="#6fd3c4"/>
+  <path class="r c1 trace" style="animation-delay:2.2s" pathLength="1" d="M262.2 64.3 L465.0 205.5"/>
+  <text class="anim" style="animation-delay:1s;fill:#ff8a7a;font-size:14px" x="123.2" y="110">points en courbe</text>
+  <text class="anim" style="animation-delay:2.6s;fill:#f0c674;font-size:14px" x="311.6" y="70">z ≈ −0,50x + 5,01</text>
+  <g class="anim" style="animation-delay:3s">
+    <rect x="20" y="296" width="440" height="36" rx="18" fill="#d9b26f" fill-opacity=".14" stroke="#d9b26f" stroke-opacity=".6"/>
+    <text x="240" y="320" text-anchor="middle" style="fill:#f3dcae">Avec z = ln(y − 20), les points s'alignent : r ≈ −0,998</text>
+  </g>
+</svg>

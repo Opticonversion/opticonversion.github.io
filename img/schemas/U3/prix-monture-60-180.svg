@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 340" role="img" aria-labelledby="t">
+  <title id="t">Prix d'une monture : coût d'achat, marge, TVA</title>
+  <style>
+    :root { background: #0f1219; color-scheme: dark; }
+    text { font-family: -apple-system, "Segoe UI", Roboto, sans-serif; font-size: 16px; fill: #e7e9ee; }
+    .p { font-size: 15px; fill: #aab2c0; }
+    .g { font-weight: 700; }
+    .num { font-size: 12px; font-weight: 800; fill: #0b0d12; }
+    .anim { opacity: 0; animation: apparait .5s ease-out forwards; }
+    .trace { stroke-dasharray: 1; stroke-dashoffset: 1; animation: trace 1s ease-out forwards; }
+    @keyframes apparait { to { opacity: 1; } }
+    @keyframes trace { to { stroke-dashoffset: 0; } }
+    @media (prefers-reduced-motion: reduce) {
+      .anim { animation: none; opacity: 1; }
+      .trace { animation: none; stroke-dashoffset: 0; }
+    }
+  </style>
+  <defs>
+    <pattern id="grille" width="18" height="18" patternUnits="userSpaceOnUse"><path d="M18 0 L0 0 L0 18" fill="none" stroke="#ffffff" stroke-opacity=".045"/></pattern>
+    <marker id="fg" markerUnits="userSpaceOnUse" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="11" markerHeight="11" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#aab2c0"/></marker>
+  </defs>
+  <rect x="0" y="0" width="480" height="340" fill="url(#grille)"/>
+  <text x="240" y="30" text-anchor="middle" class="g">Prix de vente : 180 € TTC</text>
+  <g class="anim" style="animation-delay:0.3s">
+    <rect x="40.0" y="96" width="133.3" height="56" rx="6" fill="#6fd3c4" fill-opacity=".22" stroke="#6fd3c4" stroke-width="2"/>
+    <text x="106.7" y="120" text-anchor="middle" class="p">Achat</text>
+    <text x="106.7" y="141" text-anchor="middle" class="g">60 €</text>
+  </g>
+  <g class="anim" style="animation-delay:0.9s">
+    <rect x="173.3" y="96" width="200.0" height="56" rx="6" fill="#f0c674" fill-opacity=".22" stroke="#f0c674" stroke-width="2"/>
+    <text x="273.3" y="120" text-anchor="middle" class="p">Marge</text>
+    <text x="273.3" y="141" text-anchor="middle" class="g">90 €</text>
+  </g>
+  <g class="anim" style="animation-delay:1.5s">
+    <rect x="373.3" y="96" width="66.7" height="56" rx="6" fill="#c7a3ff" fill-opacity=".22" stroke="#c7a3ff" stroke-width="2"/>
+    <text x="406.7" y="120" text-anchor="middle" class="p">TVA</text>
+    <text x="406.7" y="141" text-anchor="middle" class="g">30 €</text>
+  </g>
+  <g class="anim" style="animation-delay:2.1s">
+    <path d="M40 86 L40 76 L373.3 76 L373.3 86" fill="none" stroke="#d9b26f" stroke-width="2"/>
+    <text x="206.7" y="66" text-anchor="middle" style="fill:#f3dcae">PV HT = 180 / 1,2 = 150 €</text>
+    <path d="M40 162 L40 172 L440.0 172 L440.0 162" fill="none" stroke="#aab2c0" stroke-width="1.6"/>
+    <text x="240" y="194" text-anchor="middle" class="p">PV TTC = 180 €</text>
+  </g>
+  <g class="anim" style="animation-delay:2.4s">
+    <text x="40" y="232" class="p">Taux de marge = 90 / 60 (achat) = 150 %</text>
+    <text x="40" y="258" class="p">Coefficient TTC = 180 / 60 = 3</text>
+  </g>
+  <g class="anim" style="animation-delay:2.8s">
+    <rect x="30" y="296" width="420" height="36" rx="18" fill="#d9b26f" fill-opacity=".14" stroke="#d9b26f" stroke-opacity=".6"/>
+    <text x="240" y="320" text-anchor="middle" style="fill:#f3dcae">Taux de marque = 90 / 150 (PV HT) = 60 %</text>
+  </g>
+</svg>

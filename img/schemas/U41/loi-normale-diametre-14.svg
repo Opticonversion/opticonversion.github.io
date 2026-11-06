@@ -1,0 +1,200 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 340" role="img" aria-labelledby="t">
+  <title id="t">Loi normale de moyenne 14 et d'écart type 0,1 : l'aire entre 13,8 et 14,2 vaut environ 0,954 ; bornes déplaçables</title>
+  <style>
+    :root { background: #0f1219; color-scheme: dark; }
+    text { font-family: -apple-system, "Segoe UI", Roboto, sans-serif; font-size: 16px; fill: #e7e9ee; }
+    .p { font-size: 15px; fill: #aab2c0; }
+    .g { font-weight: 700; }
+    .r { fill: none; stroke-width: 2.8; stroke-linecap: round; stroke-linejoin: round; }
+    .trace { stroke-dasharray: 1; stroke-dashoffset: 1; animation: trace 1.4s ease-out forwards; }
+    .anim { opacity: 0; animation: apparait .5s ease-out forwards; }
+    @keyframes trace { to { stroke-dashoffset: 0; } }
+    @keyframes apparait { to { opacity: 1; } }
+    @media (prefers-reduced-motion: reduce) {
+      .trace { animation: none; stroke-dashoffset: 0; }
+      .anim { animation: none; opacity: 1; }
+    }
+    .poignee { cursor: ew-resize; touch-action: none; }
+    #rejouer, #bdefi { cursor: pointer; }
+    #rejouer:hover rect, #bdefi:hover rect { fill-opacity: .25; }
+  </style>
+  <defs>
+    <pattern id="grille" width="18" height="18" patternUnits="userSpaceOnUse"><path d="M18 0 L0 0 L0 18" fill="none" stroke="#ffffff" stroke-opacity=".045"/></pattern>
+    <marker id="fl" markerUnits="userSpaceOnUse" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="11" markerHeight="11" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#5b6270" stroke-width="2"/></marker>
+  </defs>
+  <rect x="0" y="0" width="480" height="285" fill="url(#grille)"/>
+
+  <path id="aire" class="anim" style="animation-delay:1.2s" d="M140.0 250.0 L140.0 224.6 L145.0 219.2 L150.0 212.9 L155.0 205.8 L160.0 197.9 L165.0 189.1 L170.0 179.6 L175.0 169.5 L180.0 158.7 L185.0 147.6 L190.0 136.3 L195.0 124.9 L200.0 113.8 L205.0 103.2 L210.0 93.4 L215.0 84.5 L220.0 76.9 L225.0 70.7 L230.0 66.2 L235.0 63.4 L240.0 62.5 L245.0 63.4 L250.0 66.2 L255.0 70.7 L260.0 76.9 L265.0 84.5 L270.0 93.4 L275.0 103.2 L280.0 113.8 L285.0 124.9 L290.0 136.3 L295.0 147.6 L300.0 158.7 L305.0 169.5 L310.0 179.6 L315.0 189.1 L320.0 197.9 L325.0 205.8 L330.0 212.9 L335.0 219.2 L340.0 224.6 L340.0 250.0 Z" fill="#6fd3c4" fill-opacity=".28"/>
+  <line x1="20" y1="250" x2="468" y2="250" stroke="#5b6270" stroke-width="1.5" marker-end="url(#fl)"/>
+  <line x1="90.0" y1="250" x2="90.0" y2="256" stroke="#5b6270"/><text x="90.0" y="273" text-anchor="middle" class="p">13,7</text>
+  <line x1="140.0" y1="250" x2="140.0" y2="256" stroke="#5b6270"/><text x="140.0" y="273" text-anchor="middle" class="p">13,8</text>
+  <line x1="190.0" y1="250" x2="190.0" y2="256" stroke="#5b6270"/><text x="190.0" y="273" text-anchor="middle" class="p">13,9</text>
+  <line x1="240.0" y1="250" x2="240.0" y2="256" stroke="#5b6270"/><text x="240.0" y="273" text-anchor="middle" class="p">14</text>
+  <line x1="290.0" y1="250" x2="290.0" y2="256" stroke="#5b6270"/><text x="290.0" y="273" text-anchor="middle" class="p">14,1</text>
+  <line x1="340.0" y1="250" x2="340.0" y2="256" stroke="#5b6270"/><text x="340.0" y="273" text-anchor="middle" class="p">14,2</text>
+  <line x1="390.0" y1="250" x2="390.0" y2="256" stroke="#5b6270"/><text x="390.0" y="273" text-anchor="middle" class="p">14,3</text>
+  <path class="r trace" style="stroke:#f0c674;animation-delay:.2s" pathLength="1" d="M40.0 249.9 L45.0 249.9 L50.0 249.9 L55.0 249.8 L60.0 249.7 L65.0 249.6 L70.0 249.4 L75.0 249.2 L80.0 248.9 L85.0 248.5 L90.0 247.9 L95.0 247.2 L100.0 246.3 L105.0 245.1 L110.0 243.6 L115.0 241.8 L120.0 239.5 L125.0 236.7 L130.0 233.3 L135.0 229.3 L140.0 224.6 L145.0 219.2 L150.0 212.9 L155.0 205.8 L160.0 197.9 L165.0 189.1 L170.0 179.6 L175.0 169.5 L180.0 158.7 L185.0 147.6 L190.0 136.3 L195.0 124.9 L200.0 113.8 L205.0 103.2 L210.0 93.4 L215.0 84.5 L220.0 76.9 L225.0 70.7 L230.0 66.2 L235.0 63.4 L240.0 62.5 L245.0 63.4 L250.0 66.2 L255.0 70.7 L260.0 76.9 L265.0 84.5 L270.0 93.4 L275.0 103.2 L280.0 113.8 L285.0 124.9 L290.0 136.3 L295.0 147.6 L300.0 158.7 L305.0 169.5 L310.0 179.6 L315.0 189.1 L320.0 197.9 L325.0 205.8 L330.0 212.9 L335.0 219.2 L340.0 224.6 L345.0 229.3 L350.0 233.3 L355.0 236.7 L360.0 239.5 L365.0 241.8 L370.0 243.6 L375.0 245.1 L380.0 246.3 L385.0 247.2 L390.0 247.9 L395.0 248.5 L400.0 248.9 L405.0 249.2 L410.0 249.4 L415.0 249.6 L420.0 249.7 L425.0 249.8 L430.0 249.9 L435.0 249.9 L440.0 249.9"/>
+  <line x1="240" y1="250" x2="240" y2="62" stroke="#ffffff" stroke-opacity=".25" stroke-dasharray="4 5"/>
+  <text x="234" y="140" text-anchor="end" class="p">μ = 14</text>
+  <text x="456" y="242" text-anchor="end" class="p">x (mm)</text>
+
+  <!-- Erreur de l'élève (#faux=n) -->
+  <g id="erreur" visibility="hidden">
+    <line id="errg" x1="0" y1="250" x2="0" y2="70" stroke="#ff8a7a" stroke-width="2.5" stroke-dasharray="5 5"/>
+    <line id="errd" x1="0" y1="250" x2="0" y2="70" stroke="#ff8a7a" stroke-width="2.5" stroke-dasharray="5 5"/>
+    <text id="errtag" x="0" y="64" text-anchor="middle" style="font-size:13px;font-weight:700;fill:#ff8a7a">ta réponse</text>
+    <line x1="20" y1="346" x2="460" y2="346" stroke="#ffffff" stroke-opacity=".08"/>
+    <circle cx="32" cy="368" r="10" fill="#ff8a7a"/><text x="32" y="373" text-anchor="middle" style="font-size:13px;font-weight:800;fill:#0f1219">✕</text>
+    <text x="52" y="373" class="p">Ta réponse</text>
+    <text id="errval" x="170" y="373" style="font-weight:700;fill:#ff8a7a"></text>
+    <circle cx="32" cy="396" r="10" fill="#5fd08a"/><text x="32" y="401" text-anchor="middle" style="font-size:13px;font-weight:800;fill:#0f1219">✓</text>
+    <text x="52" y="401" class="p">Bonne réponse</text>
+    <text x="170" y="401" style="font-weight:700;fill:#8fe0ad">0,954 (de 13,8 à 14,2)</text>
+    <text id="errpourquoi" x="20" y="432" style="font-size:15px;fill:#e7e9ee"></text>
+  </g>
+
+  <!-- Bornes déplaçables -->
+  <g id="pg" class="poignee anim" style="animation-delay:1.4s">
+    <rect id="zg" x="120" y="60" width="40" height="200" fill="#ffffff" fill-opacity="0"/>
+    <line id="lg" x1="140" y1="250" x2="140" y2="225" stroke="#6fd3c4" stroke-width="2.5"/>
+    <circle id="cg" cx="140" cy="250" r="9" fill="#6fd3c4" stroke="#0f1219" stroke-width="2"/>
+  </g>
+  <g id="pd" class="poignee anim" style="animation-delay:1.4s">
+    <rect id="zd" x="320" y="60" width="40" height="200" fill="#ffffff" fill-opacity="0"/>
+    <line id="ld" x1="340" y1="250" x2="340" y2="225" stroke="#6fd3c4" stroke-width="2.5"/>
+    <circle id="cd" cx="340" cy="250" r="9" fill="#6fd3c4" stroke="#0f1219" stroke-width="2"/>
+  </g>
+  <text id="kk" class="anim" style="animation-delay:1.4s;font-size:15px;fill:#8fe0ad" x="240" y="200" text-anchor="middle">μ ± 2σ</text>
+  <text id="aide" class="anim" style="animation-delay:2.2s;font-size:13px;fill:#7f8899" x="472" y="110" text-anchor="end">↔ fais glisser une borne</text>
+
+  <g id="rejouer" class="anim" style="animation-delay:2s" role="button" aria-label="Revenir à l'intervalle de la question">
+    <rect x="8" y="8" width="132" height="28" rx="14" fill="#9ec5ff" fill-opacity=".12" stroke="#9ec5ff" stroke-opacity=".5"/>
+    <text x="74" y="27" text-anchor="middle" style="font-size:14px;fill:#cfe0ff">↺ Revoir</text>
+  </g>
+  <g id="bdefi" class="anim" style="animation-delay:2.1s" role="button" aria-label="Lancer un défi : régler l'intervalle pour obtenir une probabilité donnée">
+    <rect x="148" y="8" width="82" height="28" rx="14" fill="#d9b26f" fill-opacity=".16" stroke="#d9b26f" stroke-opacity=".6"/>
+    <text x="189" y="27" text-anchor="middle" style="font-size:14px;fill:#f3dcae">🎯 Défi</text>
+  </g>
+  <g id="defi" visibility="hidden">
+    <rect id="defifond" x="8" y="42" width="290" height="44" rx="10" fill="#0f1219" fill-opacity=".9" stroke="#d9b26f" stroke-opacity=".6"/>
+    <text id="defi1" x="18" y="60" style="font-size:13px;fill:#f3dcae">Défi 1/3</text>
+    <text id="defi2" x="18" y="78" style="font-size:13px;font-weight:700">…</text>
+  </g>
+
+  <g class="anim" style="animation-delay:1.8s">
+    <rect x="20" y="296" width="440" height="36" rx="18" fill="#d9b26f" fill-opacity=".14" stroke="#d9b26f" stroke-opacity=".6"/>
+    <text id="resultat" x="240" y="320" text-anchor="middle" style="fill:#f3dcae">P(13,80 ≤ X ≤ 14,20) ≈ 0,954</text>
+  </g>
+
+  <script><![CDATA[
+  (function () {
+    // Loi normale μ = 14 mm, σ = 0,1 mm. Échelle : 500 px par mm, μ en x = 240, axe en y = 250.
+    var MU = 14, SG = 0.1, PX = 500, X0 = 240, AXE = 250, H = 470, K_QUESTION = 2;
+    var $ = function (id) { return document.getElementById(id); };
+    var svg = document.documentElement;
+    function phi(z) { return Math.exp(-z * z / 2) / Math.sqrt(2 * Math.PI); }
+    function erf(x) {   // Abramowitz et Stegun 7.1.26, erreur < 2e-7
+      var t = 1 / (1 + 0.3275911 * x);
+      return 1 - (((((1.061405429 * t - 1.453152027) * t) + 1.421413741) * t - 0.284496736) * t + 0.254829592) * t * Math.exp(-x * x);
+    }
+    function proba(k) { return erf(k / Math.SQRT2); }   // P(μ − kσ ≤ X ≤ μ + kσ)
+    function fr(v, d) { return v.toFixed(d).replace(".", ","); }
+    var k = K_QUESTION;
+
+    function dessiner() {
+      var xg = X0 - k * SG * PX, xd = X0 + k * SG * PX, pts = [];
+      for (var i = 0; i <= 80; i++) {
+        var z = -k + 2 * k * i / 80;
+        pts.push((X0 + z * SG * PX).toFixed(1) + " " + (AXE - phi(z) * H).toFixed(1));
+      }
+      $("aire").setAttribute("d", "M" + xg.toFixed(1) + " " + AXE + " L" + pts.join(" L") + " L" + xd.toFixed(1) + " " + AXE + " Z");
+      [["g", xg], ["d", xd]].forEach(function (c) {
+        $("z" + c[0]).setAttribute("x", c[1] - 20);
+        $("l" + c[0]).setAttribute("x1", c[1]); $("l" + c[0]).setAttribute("x2", c[1]);
+        $("l" + c[0]).setAttribute("y2", AXE - phi(k) * H);
+        $("c" + c[0]).setAttribute("cx", c[1]);
+      });
+      $("kk").textContent = "μ ± " + fr(k, 2) + " σ";
+      $("resultat").textContent = "P(" + fr(MU - k * SG, 2) + " ≤ X ≤ " + fr(MU + k * SG, 2) + ") ≈ " + fr(proba(k), 3);
+    }
+
+    function finirAnimations() {
+      Array.prototype.forEach.call(document.querySelectorAll(".anim, .trace"), function (el) { el.classList.remove("anim"); el.classList.remove("trace"); });
+    }
+    function versSVG(e) {
+      var p = svg.createSVGPoint(); p.x = e.clientX; p.y = e.clientY;
+      return p.matrixTransform(svg.getScreenCTM().inverse());
+    }
+    var actif = null;
+    ["pg", "pd"].forEach(function (id) {
+      var g = $(id);
+      g.addEventListener("pointerdown", function (e) {
+        actif = id; finirAnimations(); $("aide").setAttribute("visibility", "hidden");
+        g.setPointerCapture(e.pointerId); e.preventDefault();
+      });
+      g.addEventListener("pointermove", function (e) {
+        if (actif !== id) return;
+        k = Math.max(0.1, Math.min(3.9, Math.abs(versSVG(e).x - X0) / (SG * PX)));
+        dessiner();
+      });
+      function lacher() { if (actif) verifierDefi(); actif = null; }
+      g.addEventListener("pointerup", lacher);
+      g.addEventListener("pointercancel", lacher);
+    });
+
+    $("rejouer").addEventListener("click", function () {
+      k = K_QUESTION; defi = -1; $("defi").setAttribute("visibility", "hidden"); dessiner();
+    });
+
+    // Défi : régler l'intervalle pour obtenir une probabilité donnée (tolérance large pour le doigt)
+    var DEFIS = [
+      { texte: "une probabilité d'environ 0,683", k: 1 },
+      { texte: "une probabilité de 0,95 (intervalle de confiance)", k: 1.96 },
+      { texte: "une probabilité d'environ 0,997", k: 3 }
+    ];
+    var defi = -1;
+    function afficherDefi() {
+      $("defi").setAttribute("visibility", "visible");
+      $("defifond").setAttribute("stroke", "#d9b26f");
+      $("defi1").textContent = "🎯 Défi " + (defi + 1) + "/" + DEFIS.length + " : règle les bornes pour obtenir";
+      $("defi2").textContent = DEFIS[defi].texte;
+    }
+    function verifierDefi() {
+      if (defi < 0) return;
+      if (Math.abs(k - DEFIS[defi].k) > 0.08) return;
+      k = DEFIS[defi].k; dessiner();                       // on aligne sur la valeur exacte
+      $("defifond").setAttribute("stroke", "#5fd08a");
+      $("defi1").textContent = "✓ Bravo ! C'est μ ± " + fr(k, 2).replace(",00", "") + " σ";
+      var fini = defi === DEFIS.length - 1;
+      $("defi2").textContent = fini ? "Tous les défis sont réussis 🎉" : "Défi suivant dans un instant…";
+      var suivant = defi + 1; defi = fini ? -1 : -2;
+      if (!fini) setTimeout(function () { defi = suivant; afficherDefi(); }, 1600);
+    }
+    $("bdefi").addEventListener("click", function () {
+      finirAnimations(); $("aide").setAttribute("visibility", "visible"); defi = 0; afficherDefi();
+    });
+
+    // Réponse fausse de l'élève (numéros = position dans q.choix de questions-U41.js)
+    var ERREURS = {
+      0: { g: 13.9, d: 14.1, val: "0,68 (de 13,9 à 14,1)", pourquoi: "0,68, c'est μ ± 1σ. Ici 0,2 mm = 2 écarts types." },
+      2: { g: 13.7, d: 14.3, val: "0,997 (de 13,7 à 14,3)", pourquoi: "0,997, c'est μ ± 3σ : intervalle trop large." },
+      3: { g: 13.6, d: 14, val: "0,5 (tout ce qui est sous 14)", pourquoi: "0,5, c'est P(X ≤ 14) : la moitié de la courbe." }
+    };
+    var m = /faux=(\d)/.exec(location.hash);
+    var err = m && ERREURS[m[1]];
+    if (err) {
+      svg.setAttribute("viewBox", "0 0 480 450");
+      var xg = X0 + (err.g - MU) * PX, xd = X0 + (err.d - MU) * PX;
+      $("errg").setAttribute("x1", xg); $("errg").setAttribute("x2", xg);
+      $("errd").setAttribute("x1", xd); $("errd").setAttribute("x2", xd);
+      if (err.g < 13.65) $("errg").setAttribute("visibility", "hidden");
+      $("errtag").setAttribute("x", err.g < 13.65 ? xd : xg);
+      $("errval").textContent = err.val;
+      $("errpourquoi").textContent = "→ " + err.pourquoi;
+      $("erreur").setAttribute("visibility", "visible");
+      $("aide").setAttribute("visibility", "hidden");
+    }
+    dessiner();
+  })();
+  ]]></script>
+</svg>

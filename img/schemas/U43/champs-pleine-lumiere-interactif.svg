@@ -1,0 +1,162 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 340" role="img" aria-labelledby="t">
+  <title id="t">Étude des champs : fais varier la lucarne et observe PL, M et T</title>
+  <style>
+    :root { background: #0f1219; color-scheme: dark; }
+    text { font-family: -apple-system, "Segoe UI", Roboto, sans-serif; font-size: 16px; fill: #e7e9ee; }
+    .p { font-size: 15px; fill: #aab2c0; }
+    .g { font-weight: 700; }
+    .num { font-size: 12px; font-weight: 800; fill: #0b0d12; }
+    .r { fill: none; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; filter: url(#lueur); }
+    .v { fill: none; stroke-width: 1.8; stroke-dasharray: 6 6; opacity: .75; }
+    .c1 { stroke: #f0c674; } .c2 { stroke: #6fd3c4; } .c3 { stroke: #c7a3ff; }
+    .trace { stroke-dasharray: 1; stroke-dashoffset: 1; animation: trace 1s ease-out forwards; }
+    .anim { opacity: 0; animation: apparait .5s ease-out forwards; }
+    @keyframes trace { to { stroke-dashoffset: 0; } }
+    @keyframes apparait { to { opacity: 1; } }
+    @media (prefers-reduced-motion: reduce) {
+      .trace { animation: none; stroke-dashoffset: 0; }
+      .anim { animation: none; opacity: 1; }
+    }
+    #poignee { cursor: ns-resize; touch-action: none; }
+    #rejouer, #bdefi { cursor: pointer; }
+    #rejouer:hover rect, #bdefi:hover rect { fill-opacity: .25; }
+  </style>
+  <defs>
+    <pattern id="grille" width="18" height="18" patternUnits="userSpaceOnUse"><path d="M18 0 L0 0 L0 18" fill="none" stroke="#ffffff" stroke-opacity=".045"/></pattern>
+    <linearGradient id="verre" x1="0" x2="1"><stop offset="0" stop-color="#9ec5ff" stop-opacity=".04"/><stop offset=".5" stop-color="#9ec5ff" stop-opacity=".3"/><stop offset="1" stop-color="#9ec5ff" stop-opacity=".04"/></linearGradient>
+    <filter id="lueur" x="-10%" y="-20%" width="120%" height="140%"><feGaussianBlur stdDeviation="2.2" result="f"/><feMerge><feMergeNode in="f"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <clipPath id="cadre"><rect x="0" y="0" width="480" height="262"/></clipPath>
+    <marker id="mb" markerUnits="userSpaceOnUse" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="13" markerHeight="13" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#f2f2f2"/></marker>
+    <marker id="md" markerUnits="userSpaceOnUse" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="13" markerHeight="13" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#d9b26f"/></marker>
+    <marker id="mg" markerUnits="userSpaceOnUse" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#aab2c0"/></marker>
+    <marker id="ml" markerUnits="userSpaceOnUse" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="14" markerHeight="14" orient="auto-start-reverse"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#9ec5ff" stroke-width="2"/></marker>
+  </defs>
+
+  <rect x="0" y="0" width="480" height="266" fill="url(#grille)"/>
+  <line x1="8" y1="180" x2="472" y2="180" stroke="#5b6270" stroke-width="1.5"/>
+  <line x1="40" y1="44" x2="40" y2="250" stroke="#aab2c0" stroke-width="1.6" stroke-dasharray="3 5"/>
+  <text x="46" y="256" class="p">plan des champs</text>
+  <g clip-path="url(#cadre)">
+    <path id="faisceau" d="" fill="#5fd08a" fill-opacity=".16" stroke="#5fd08a" stroke-width="1.6"/>
+    <path id="rayonT" d="" class="r" stroke="#ff8a7a"/>
+    <path id="rayonM" d="" class="v c3"/>
+  </g>
+  <g id="d1" stroke="#6fd3c4" stroke-width="4"><line id="d1h" x1="160" x2="160"/><line id="d1b" x1="160" x2="160"/></g>
+  <g stroke="#f0c674" stroke-width="4"><line x1="340" y1="98" x2="340" y2="130"/><line x1="340" y1="230" x2="340" y2="262"/></g>
+  <text id="nd1" x="160" y="0" text-anchor="middle" class="g" style="fill:#6fd3c4">[D₁]</text>
+  <text x="340" y="90" text-anchor="middle" class="g" style="fill:#f0c674">[D₂]</text>
+  <text id="rd1" x="160" y="0" text-anchor="middle" class="p"></text>
+  <text id="rd2" x="340" y="74" text-anchor="middle" class="p"></text>
+  <g id="pts">
+    <circle id="pPL" cx="40" r="5" fill="#5fd08a"/><text id="tPL" x="30" text-anchor="end" class="g" style="fill:#5fd08a">PL</text>
+    <circle id="pM" cx="40" r="4" fill="#c7a3ff"/><text id="tM" x="30" text-anchor="end" class="g" style="fill:#c7a3ff">M</text>
+    <circle id="pT" cx="40" r="5" fill="#ff8a7a"/><text id="tT" x="30" text-anchor="end" class="g" style="fill:#ff8a7a">T</text>
+  </g>
+  <g id="poignee">
+    <rect id="zone" x="132" y="0" width="56" height="60" fill="#fff" fill-opacity="0"/>
+    <circle id="bouton" cx="160" r="9" fill="#6fd3c4" stroke="#0f1219" stroke-width="2"/>
+    <text id="fleche" x="160" text-anchor="middle" style="font-size:13px;font-weight:800;fill:#0b0d12">↕</text>
+  </g>
+  <g transform="translate(424 180)">
+    <circle id="vT" r="0" fill="none" stroke="#ff8a7a" stroke-width="2"/>
+    <circle id="vM" r="0" fill="none" stroke="#c7a3ff" stroke-width="1.6" stroke-dasharray="4 4"/>
+    <circle id="vPL" r="0" fill="#5fd08a" fill-opacity=".35" stroke="#5fd08a" stroke-width="2"/>
+    <text x="0" y="74" text-anchor="middle" class="p">vue de gauche</text>
+  </g>
+  <g id="rejouer" role="button" aria-label="Revenir à la situation de départ">
+    <rect x="8" y="8" width="132" height="28" rx="14" fill="#9ec5ff" fill-opacity=".12" stroke="#9ec5ff" stroke-opacity=".5"/>
+    <text x="74" y="27" text-anchor="middle" style="font-size:14px;fill:#cfe0ff">↺ Revoir</text>
+  </g>
+  <g id="bdefi" role="button" aria-label="Lancer un défi">
+    <rect x="148" y="8" width="82" height="28" rx="14" fill="#d9b26f" fill-opacity=".16" stroke="#d9b26f" stroke-opacity=".6"/>
+    <text x="189" y="27" text-anchor="middle" style="font-size:14px;fill:#f3dcae">🎯 Défi</text>
+  </g>
+  <g id="defi" visibility="hidden">
+    <rect id="defifond" x="238" y="6" width="236" height="44" rx="10" fill="#0f1219" fill-opacity=".92" stroke="#d9b26f" stroke-opacity=".6"/>
+    <text id="defi1" x="248" y="24" style="font-size:13px;fill:#f3dcae">Défi</text>
+    <text id="defi2" x="248" y="42" style="font-size:13px;font-weight:700"></text>
+  </g>
+  <text id="aide" x="196" y="60" style="font-size:13px;fill:#7f8899">↕ fais glisser le bord de [D₁]</text>
+  <text id="mesures" x="240" y="283" text-anchor="middle" class="p"></text>
+  <rect x="20" y="296" width="440" height="36" rx="18" fill="#d9b26f" fill-opacity=".14" stroke="#d9b26f" stroke-opacity=".6"/>
+  <text id="bilan" x="240" y="320" text-anchor="middle" style="fill:#f3dcae"></text>
+  <script><![CDATA[
+  (function () {
+    // Unités : mm, 1 px = 1 mm. Plan des champs en x = 40, axe en y = 180.
+    var XC = 40, Y = 180, X1 = 120, X2 = 300, R2 = 50, R1_DEPART = 35, VG = 0.38;
+    var $ = function (id) { return document.getElementById(id); };
+    var svg = document.documentElement, r1 = R1_DEPART;
+    function n(v) { return String(Math.round(v)).replace("-", "−"); }
+    function seg(pts) { return "M" + pts.map(function (p) { return (XC + p[0]).toFixed(1) + " " + (Y - p[1]).toFixed(1); }).join(" L"); }
+    function sur(p, q, x) { return p[1] + (q[1] - p[1]) * (x - p[0]) / (q[0] - p[0]); }
+    function calcul(r) {
+      var d2pupille = r / X1 > R2 / X2;                      // angle vu depuis le centre du plan des champs
+      var xP = d2pupille ? X2 : X1, rP = d2pupille ? R2 : r, xL = d2pupille ? X1 : X2, rL = d2pupille ? r : R2;
+      var t = xL / xP, k = Math.abs(1 - t);
+      return { d2: d2pupille, xP: xP, rP: rP, PL: Math.max(0, (rL - rP * t) / k), M: rL / k, T: (rL + rP * t) / k };
+    }
+    function dessiner(r) {
+      var c = calcul(r), xmax = 300;
+      $("d1h").setAttribute("y1", Y - r - 32); $("d1h").setAttribute("y2", Y - r);
+      $("d1b").setAttribute("y1", Y + r); $("d1b").setAttribute("y2", Y + r + 32);
+      $("nd1").setAttribute("y", Y - r - 40);
+      $("bouton").setAttribute("cy", Y - r); $("fleche").setAttribute("y", Y - r + 4.5);
+      $("zone").setAttribute("y", Y - r - 30);
+      $("rd1").setAttribute("y", Y - r - 60); $("rd1").textContent = c.d2 ? "lucarne" : "pupille";
+      $("rd2").textContent = c.d2 ? "pupille" : "lucarne";
+      $("rd1").style.fill = c.d2 ? "#aab2c0" : "#f3dcae"; $("rd2").style.fill = c.d2 ? "#f3dcae" : "#aab2c0";
+      // faisceau de pleine ouverture issu du bord de PL (s'appuie sur les bords de la pupille)
+      var A = [0, c.PL], h = [c.xP, c.rP], b = [c.xP, -c.rP];
+      $("faisceau").setAttribute("d", seg([A, [xmax, sur(A, h, xmax)], [xmax, sur(A, b, xmax)]]) + " Z");
+      var At = [0, c.T], bt = [c.xP, -c.rP];
+      $("rayonT").setAttribute("d", seg([At, [xmax, sur(At, bt, xmax)]]));
+      $("rayonM").setAttribute("d", seg([[0, c.M], [xmax, sur([0, c.M], [c.xP, 0], xmax)]]));
+      [["pPL", "tPL", c.PL], ["pM", "tM", c.M], ["pT", "tT", c.T]].forEach(function (e) {
+        $(e[0]).setAttribute("cy", Y - e[2]); $(e[1]).setAttribute("y", Y - e[2] + 5);
+      });
+      $("tPL").setAttribute("y", Y - c.PL + (c.PL < 14 ? 16 : 5));
+      $("vT").setAttribute("r", VG * c.T); $("vM").setAttribute("r", VG * c.M); $("vPL").setAttribute("r", VG * c.PL);
+      $("mesures").textContent = "Demi-champs : PL = " + n(c.PL) + " mm · M = " + n(c.M) + " mm · T = " + n(c.T) + " mm";
+      $("bilan").textContent = c.PL < 0.5 ? "Plus de pleine lumière : tout le champ est en contour"
+        : (c.d2 ? "[D₂] est la pupille, [D₁] la lucarne" : "[D₁] est devenu la pupille, [D₂] la lucarne");
+      return c;
+    }
+    var actif = false;
+    function versSVG(e) { var p = svg.createSVGPoint(); p.x = e.clientX; p.y = e.clientY; return p.matrixTransform(svg.getScreenCTM().inverse()); }
+    var poignee = $("poignee");
+    poignee.addEventListener("pointerdown", function (e) { actif = true; $("aide").setAttribute("visibility", "hidden"); poignee.setPointerCapture(e.pointerId); e.preventDefault(); });
+    poignee.addEventListener("pointermove", function (e) {
+      if (!actif) return;
+      r1 = Math.max(8, Math.min(58, Y - versSVG(e).y));
+      dessiner(r1);
+    });
+    function lacher() { if (actif) verifierDefi(); actif = false; }
+    poignee.addEventListener("pointerup", lacher); poignee.addEventListener("pointercancel", lacher);
+    $("rejouer").addEventListener("click", function () { r1 = R1_DEPART; defi = -1; $("defi").setAttribute("visibility", "hidden"); dessiner(r1); });
+
+    var DEFIS = [
+      { texte: "un demi-champ PL de 40 mm", cible: 44, ok: function (c) { return c.d2 && Math.abs(c.PL - 40) < 3; } },
+      { texte: "plus de pleine lumière (PL = 0)", cible: 20, ok: function (c) { return c.PL < 2; } },
+      { texte: "[D₁] devient la pupille", cible: 14, ok: function (c) { return !c.d2; } }
+    ];
+    var defi = -1;
+    function afficherDefi() {
+      $("defi").setAttribute("visibility", "visible"); $("defifond").setAttribute("stroke", "#d9b26f");
+      $("defi1").textContent = "🎯 Défi " + (defi + 1) + "/" + DEFIS.length + " : règle [D₁] pour avoir";
+      $("defi2").textContent = DEFIS[defi].texte;
+    }
+    function verifierDefi() {
+      if (defi < 0) return;
+      if (!DEFIS[defi].ok(calcul(r1))) return;
+      r1 = DEFIS[defi].cible; dessiner(r1);
+      $("defifond").setAttribute("stroke", "#5fd08a"); $("defi1").textContent = "✓ Bravo !";
+      var fini = defi === DEFIS.length - 1;
+      $("defi2").textContent = fini ? "Tous les défis sont réussis 🎉" : "Défi suivant dans un instant…";
+      var suivant = defi + 1; defi = fini ? -1 : -2;
+      if (!fini) setTimeout(function () { defi = suivant; afficherDefi(); }, 1600);
+    }
+    $("bdefi").addEventListener("click", function () { $("aide").setAttribute("visibility", "visible"); defi = 0; afficherDefi(); });
+    dessiner(r1);
+  })();
+  ]]></script>
+</svg>

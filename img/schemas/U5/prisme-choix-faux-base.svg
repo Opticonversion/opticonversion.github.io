@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 180" role="img">
+  <style>
+    text { font-family: -apple-system, "Segoe UI", Roboto, sans-serif; font-size: 14px; fill: #aab2c0; }
+    .g { font-weight: 700; fill: #e7e9ee; }
+  </style>
+  <defs>
+    <marker id="fo" markerUnits="userSpaceOnUse" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="12" markerHeight="12" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#f0c674"/></marker>
+    <marker id="fg" markerUnits="userSpaceOnUse" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#aab2c0"/></marker>
+  </defs>
+  <line x1="10" y1="90" x2="290" y2="90" stroke="#5b6270" stroke-dasharray="5 4"/>
+  <path d="M150 18 Q172 90 150 162 Q128 90 150 18 Z" fill="#9ec5ff" fill-opacity=".14" stroke="#9ec5ff" stroke-width="2"/>
+  <text x="150" y="14" text-anchor="middle" class="g" style="font-size:13px">+4,00</text>
+  <text x="128" y="86" text-anchor="end" style="font-size:12px">CO</text>
+  <path d="M20 140 H268" stroke="#f0c674" stroke-width="2" fill="none" marker-end="url(#fo)"/>
+  <path d="M268 128 Q290 140 268 152" fill="none" stroke="#e7e9ee" stroke-width="2"/>
+  <path d="M108 90 V140" stroke="#aab2c0" stroke-width="1.2" marker-start="url(#fg)" marker-end="url(#fg)"/>
+  <text x="66" y="120.0" style="font-size:12px">1 cm</text>
+  <path d="M138 153 H162 L150 127 Z" fill="#ff8a7a" fill-opacity=".85"/>
+  <text x="172" y="124" class="g" style="font-size:13px">4 Δ base inf.</text>
+</svg>

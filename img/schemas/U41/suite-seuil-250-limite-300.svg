@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 340" role="img" aria-labelledby="t">
+  <title id="t">Termes de la suite u(n+1) = 0,8 u(n) + 60 : premier terme au-dessus de 250 et limite 300</title>
+  <style>
+    :root { background: #0f1219; color-scheme: dark; }
+    text { font-family: -apple-system, "Segoe UI", Roboto, sans-serif; font-size: 16px; fill: #e7e9ee; }
+    .p { font-size: 15px; fill: #aab2c0; }
+    .g { font-weight: 700; }
+    .num { font-size: 12px; font-weight: 800; fill: #0b0d12; }
+    .ax { stroke: #5b6270; stroke-width: 1.5; fill: none; }
+    .r { fill: none; stroke-width: 2.8; stroke-linecap: round; stroke-linejoin: round; }
+    .c1 { stroke: #f0c674; } .c2 { stroke: #6fd3c4; } .c3 { stroke: #c7a3ff; }
+    .tir { stroke-dasharray: 7 6; }
+    .trace { stroke-dasharray: 1; stroke-dashoffset: 1; animation: trace 1.4s ease-out forwards; }
+    .anim { opacity: 0; animation: apparait .5s ease-out forwards; }
+    @keyframes trace { to { stroke-dashoffset: 0; } }
+    @keyframes apparait { to { opacity: 1; } }
+    @media (prefers-reduced-motion: reduce) {
+      .trace { animation: none; stroke-dashoffset: 0; }
+      .anim { animation: none; opacity: 1; }
+    }
+  </style>
+  <defs>
+    <pattern id="grille" width="18" height="18" patternUnits="userSpaceOnUse"><path d="M18 0 L0 0 L0 18" fill="none" stroke="#ffffff" stroke-opacity=".045"/></pattern>
+    <marker id="fl" markerUnits="userSpaceOnUse" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="11" markerHeight="11" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#5b6270" stroke-width="2"/></marker>
+  </defs>
+  <rect x="0" y="0" width="480" height="285" fill="url(#grille)"/>
+  <line class="ax" x1="46" y1="262.0" x2="470" y2="262.0" marker-end="url(#fl)"/>
+  <line class="ax" x1="46" y1="262.0" x2="46" y2="22" marker-end="url(#fl)"/>
+  <text x="60" y="282.0" text-anchor="middle" class="p">0</text>
+  <text x="126" y="282.0" text-anchor="middle" class="p">2</text>
+  <text x="192" y="282.0" text-anchor="middle" class="p">4</text>
+  <text x="258" y="282.0" text-anchor="middle" class="p">6</text>
+  <text x="324" y="282.0" text-anchor="middle" class="p">8</text>
+  <text x="390" y="282.0" text-anchor="middle" class="p">10</text>
+  <text x="456" y="282.0" text-anchor="middle" class="p">12</text>
+  <text x="468" y="254.0" text-anchor="end" class="p">n</text>
+  <text x="40" y="248.6" text-anchor="end" class="p">100</text>
+  <text x="40" y="110.6" text-anchor="end" class="p">250</text>
+  <text x="40" y="64.6" text-anchor="end" class="p">300</text>
+  <line class="r c2 tir" style="stroke-width:2" x1="46" y1="59.6" x2="465" y2="59.6"/>
+  <line class="r c1 tir" style="stroke-width:1.6;opacity:.8" x1="46" y1="105.6" x2="465" y2="105.6"/>
+  <circle class="anim" style="animation-delay:0.20s" cx="60" cy="243.6" r="4.5" fill="#e7e9ee"/>
+  <circle class="anim" style="animation-delay:0.38s" cx="93" cy="206.8" r="4.5" fill="#e7e9ee"/>
+  <circle class="anim" style="animation-delay:0.56s" cx="126" cy="177.4" r="4.5" fill="#e7e9ee"/>
+  <circle class="anim" style="animation-delay:0.74s" cx="159" cy="153.8" r="4.5" fill="#e7e9ee"/>
+  <circle class="anim" style="animation-delay:0.92s" cx="192" cy="135.0" r="4.5" fill="#e7e9ee"/>
+  <circle class="anim" style="animation-delay:1.10s" cx="225" cy="119.9" r="4.5" fill="#e7e9ee"/>
+  <circle class="anim" style="animation-delay:1.28s" cx="258" cy="107.8" r="6.5" fill="#ff8a7a"/>
+  <circle class="anim" style="animation-delay:1.46s" cx="291" cy="98.2" r="6.5" fill="#5fd08a"/>
+  <circle class="anim" style="animation-delay:1.64s" cx="324" cy="90.5" r="4.5" fill="#e7e9ee"/>
+  <circle class="anim" style="animation-delay:1.82s" cx="357" cy="84.3" r="4.5" fill="#e7e9ee"/>
+  <circle class="anim" style="animation-delay:2.00s" cx="390" cy="79.4" r="4.5" fill="#e7e9ee"/>
+  <circle class="anim" style="animation-delay:2.18s" cx="423" cy="75.4" r="4.5" fill="#e7e9ee"/>
+  <circle class="anim" style="animation-delay:2.36s" cx="456" cy="72.2" r="4.5" fill="#e7e9ee"/>
+  <text class="anim" style="animation-delay:1.4s;font-size:14px;fill:#ff8a7a" x="254" y="131.8" text-anchor="middle">u6 ≈ 247,6</text>
+  <text class="anim" style="animation-delay:1.6s;font-size:14px;fill:#8fe0ad" x="297" y="86.2" text-anchor="middle">u7 ≈ 258,1</text>
+  <g class="anim" style="animation-delay:2.4s">
+  <rect x="250" y="150" width="222" height="56" rx="10" fill="#0f1219" fill-opacity=".85"/>
+  <circle cx="264" cy="166" r="9" fill="#f0c674"/><text x="264" y="170.5" text-anchor="middle" class="num">1</text><text x="280" y="171" class="p">seuil de la boucle : 250</text>
+  <circle cx="264" cy="190" r="9" fill="#6fd3c4"/><text x="264" y="194.5" text-anchor="middle" class="num">2</text><text x="280" y="195" class="p">limite ℓ = 300</text>
+  </g>
+  <g class="anim" style="animation-delay:2.8s">
+    <rect x="20" y="296" width="440" height="36" rx="18" fill="#d9b26f" fill-opacity=".14" stroke="#d9b26f" stroke-opacity=".6"/>
+    <text x="240" y="320" text-anchor="middle" style="fill:#f3dcae">u6 &lt; 250 : on continue · u7 ≥ 250 : arrêt, n = 7</text>
+  </g>
+</svg>

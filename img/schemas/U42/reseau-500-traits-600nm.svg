@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 340" role="img" aria-labelledby="t">
+  <title id="t">Réseau de 500 traits par mm éclairé en lumière de 600 nm : ordres 0, ±1 et ±2</title>
+  <style>
+    :root { background: #0f1219; color-scheme: dark; }
+    text { font-family: -apple-system, "Segoe UI", Roboto, sans-serif; font-size: 17px; fill: #e7e9ee; }
+    .p { font-size: 15px; fill: #aab2c0; }
+    .g { font-weight: 700; }
+    .num { font-size: 12px; font-weight: 800; fill: #0b0d12; }
+    .r { fill: none; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; filter: url(#lueur); }
+    .v { fill: none; stroke-width: 1.8; stroke-dasharray: 6 6; opacity: .75; }
+    .c1 { stroke: #f0c674; } .c2 { stroke: #6fd3c4; } .c3 { stroke: #c7a3ff; }
+    .cote { stroke: #9aa3b2; stroke-width: 1.2; }
+    .trace { stroke-dasharray: 1; stroke-dashoffset: 1; animation: trace 1s ease-out forwards; }
+    .anim { opacity: 0; animation: apparait .5s ease-out forwards; }
+    @keyframes trace { to { stroke-dashoffset: 0; } }
+    @keyframes apparait { to { opacity: 1; } }
+    @media (prefers-reduced-motion: reduce) {
+      .trace { animation: none; stroke-dashoffset: 0; }
+      .anim { animation: none; opacity: 1; }
+    }
+  </style>
+  <defs>
+    <pattern id="grille" width="18" height="18" patternUnits="userSpaceOnUse"><path d="M18 0 L0 0 L0 18" fill="none" stroke="#ffffff" stroke-opacity=".045"/></pattern>
+    <filter id="lueur" filterUnits="userSpaceOnUse" x="0" y="0" width="480" height="340"><feGaussianBlur stdDeviation="2.2" result="f"/><feMerge><feMergeNode in="f"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <marker id="ml" markerUnits="userSpaceOnUse" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="14" markerHeight="14" orient="auto-start-reverse"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#9ec5ff" stroke-width="2"/></marker>
+    <marker id="mi" markerUnits="userSpaceOnUse" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="14" markerHeight="14" orient="auto-start-reverse"><path d="M9 1 L1 5 L9 9" fill="none" stroke="#9ec5ff" stroke-width="2"/></marker>
+    <marker id="mc" markerUnits="userSpaceOnUse" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="11" markerHeight="11" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#9aa3b2"/></marker>
+    <marker id="m1" markerUnits="userSpaceOnUse" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="12" markerHeight="12" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#f0c674"/></marker>
+    <marker id="m2" markerUnits="userSpaceOnUse" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="12" markerHeight="12" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#6fd3c4"/></marker>
+    <marker id="m3" markerUnits="userSpaceOnUse" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="12" markerHeight="12" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#c7a3ff"/></marker>
+  </defs>
+  <rect x="0" y="0" width="480" height="262" fill="url(#grille)"/>
+  <line x1="60" y1="18" x2="60" y2="258" stroke="#9ec5ff" stroke-width="3" stroke-dasharray="2 4"/>
+  <text x="68" y="254" class="p">réseau</text>
+  <path class="r c1 trace" style="animation-delay:0.2s" pathLength="1" d="M14 140 L60 140" marker-end="url(#m1)"/>
+  <line x1="60" y1="140" x2="470" y2="140" stroke="#5b6270" stroke-width="1.2" stroke-dasharray="4 4"/>
+  <path class="r c1 trace" style="animation-delay:1.0s" pathLength="1" d="M60 140 L217.4 90.5" marker-end="url(#m1)"/>
+  <text x="157.4" y="84.5" class="p">k = 1</text>
+  <path class="r c1 trace" style="animation-delay:1.4s" pathLength="1" d="M60 140 L217.4 189.5" marker-end="url(#m1)"/>
+  <text x="157.4" y="209.5" class="p">k = −1</text>
+  <path class="r c3 trace" style="animation-delay:1.8s" pathLength="1" d="M60 140 L192 41" marker-end="url(#m3)"/>
+  <text x="132" y="35" class="p">k = 2</text>
+  <path class="r c3 trace" style="animation-delay:2.2s" pathLength="1" d="M60 140 L192 239" marker-end="url(#m3)"/>
+  <text x="132" y="259" class="p">k = −2</text>
+  <path class="r c2 trace" style="animation-delay:1.0s" pathLength="1" d="M60 140 L225 140" marker-end="url(#m2)"/>
+  <text x="233" y="160" class="p">k = 0</text>
+  <path class="anim" style="animation-delay:2.4s" d="M130 140 A70 70 0 0 0 126.8 119" fill="none" stroke="#f0c674" stroke-width="2"/>
+  <text x="138" y="132" class="g" style="fill:#f0c674">17,5°</text>
+  <g>
+    <rect x="236" y="8" width="238" height="76" rx="10" fill="#0f1219" fill-opacity=".85"/>
+    <circle cx="250" cy="22" r="9" fill="#f0c674"/><text x="250" y="26.5" text-anchor="middle" class="num">1</text><text x="266" y="27" class="p">ordre ±1 : sin i' = λ / a</text>
+    <circle cx="250" cy="46" r="9" fill="#6fd3c4"/><text x="250" y="50.5" text-anchor="middle" class="num">2</text><text x="266" y="51" class="p">ordre 0 : non dévié</text>
+    <circle cx="250" cy="70" r="9" fill="#c7a3ff"/><text x="250" y="74.5" text-anchor="middle" class="num">3</text><text x="266" y="75" class="p">ordre ±2 : sin i' = 2λ / a</text>
+  </g>
+  <g class="anim" style="animation-delay:2.8s">
+    <text x="240" y="283" text-anchor="middle" class="p">a = 1 / 500 mm = 2 µm ; sin i' = 0,6 / 2 = 0,3</text>
+    <rect x="20" y="296" width="440" height="36" rx="18" fill="#d9b26f" fill-opacity=".14" stroke="#d9b26f" stroke-opacity=".6"/>
+    <text x="240" y="320" text-anchor="middle" style="fill:#f3dcae">Ordre 1 : i' ≈ 17,5° (ordre 2 : 36,9°)</text>
+  </g>
+</svg>

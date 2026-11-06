@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 180" role="img">
+  <style>
+    text { font-family: -apple-system, "Segoe UI", Roboto, sans-serif; font-size: 13px; fill: #aab2c0; }
+    .r { fill: none; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+    .c1 { stroke: #f0c674; } .c2 { stroke: #6fd3c4; }
+    .v { fill: none; stroke-width: 1.6; stroke-dasharray: 5 4; opacity: .8; }
+  </style>
+  <defs>
+    <marker id="mb" markerUnits="userSpaceOnUse" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="10" markerHeight="10" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#f2f2f2"/></marker>
+    <marker id="md" markerUnits="userSpaceOnUse" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="10" markerHeight="10" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#d9b26f"/></marker>
+    <marker id="mi" markerUnits="userSpaceOnUse" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="11" markerHeight="11" orient="auto-start-reverse"><path d="M9 1 L1 5 L9 9" fill="none" stroke="#9ec5ff" stroke-width="2"/></marker>
+    <clipPath id="c"><rect x="0" y="0" width="300" height="180"/></clipPath>
+  </defs>
+  <line x1="6" y1="95" x2="294" y2="95" stroke="#5b6270" stroke-width="1.3"/>
+  <line x1="150" y1="22" x2="150" y2="168" stroke="#9ec5ff" stroke-width="2.2" marker-start="url(#mi)" marker-end="url(#mi)"/>
+  <g fill="#e7e9ee"><circle cx="100.0" cy="95" r="3"/><circle cx="200.0" cy="95" r="3"/></g>
+  <text x="94.0" y="113">F'</text><text x="196.0" y="113">F</text>
+  <line x1="50.0" y1="95" x2="50.0" y2="55.0" stroke="#f2f2f2" stroke-width="3" marker-end="url(#mb)"/>
+  <g clip-path="url(#c)">
+    <path class="r c1" d="M50.0 53.0 L150.0 53.0 L300.0 -73.0"/>
+    <path class="v c1" d="M150.0 53.0 L100.0 95.0"/>
+    <path class="r c2" d="M50.0 53.0 L300.0 158.0"/>
+    <line x1="116.7" y1="95" x2="116.7" y2="83.0" stroke="#d9b26f" stroke-width="3" stroke-dasharray="4 3" marker-end="url(#md)"/>
+  </g>
+</svg>

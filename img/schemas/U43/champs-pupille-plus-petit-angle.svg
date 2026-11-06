@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 340" role="img" aria-labelledby="t">
+  <title id="t">Comment trouver la pupille : le diaphragme vu sous le plus petit angle</title>
+  <style>
+    :root { background: #0f1219; color-scheme: dark; }
+    text { font-family: -apple-system, "Segoe UI", Roboto, sans-serif; font-size: 16px; fill: #e7e9ee; }
+    .p { font-size: 15px; fill: #aab2c0; }
+    .g { font-weight: 700; }
+    .num { font-size: 12px; font-weight: 800; fill: #0b0d12; }
+    .r { fill: none; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; filter: url(#lueur); }
+    .v { fill: none; stroke-width: 1.8; stroke-dasharray: 6 6; opacity: .75; }
+    .c1 { stroke: #f0c674; } .c2 { stroke: #6fd3c4; } .c3 { stroke: #c7a3ff; }
+    .trace { stroke-dasharray: 1; stroke-dashoffset: 1; animation: trace 1s ease-out forwards; }
+    .anim { opacity: 0; animation: apparait .5s ease-out forwards; }
+    @keyframes trace { to { stroke-dashoffset: 0; } }
+    @keyframes apparait { to { opacity: 1; } }
+    @media (prefers-reduced-motion: reduce) {
+      .trace { animation: none; stroke-dashoffset: 0; }
+      .anim { animation: none; opacity: 1; }
+    }
+  </style>
+  <defs>
+    <pattern id="grille" width="18" height="18" patternUnits="userSpaceOnUse"><path d="M18 0 L0 0 L0 18" fill="none" stroke="#ffffff" stroke-opacity=".045"/></pattern>
+    <linearGradient id="verre" x1="0" x2="1"><stop offset="0" stop-color="#9ec5ff" stop-opacity=".04"/><stop offset=".5" stop-color="#9ec5ff" stop-opacity=".3"/><stop offset="1" stop-color="#9ec5ff" stop-opacity=".04"/></linearGradient>
+    <filter id="lueur" x="-10%" y="-20%" width="120%" height="140%"><feGaussianBlur stdDeviation="2.2" result="f"/><feMerge><feMergeNode in="f"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <clipPath id="cadre"><rect x="0" y="0" width="480" height="262"/></clipPath>
+    <marker id="mb" markerUnits="userSpaceOnUse" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="13" markerHeight="13" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#f2f2f2"/></marker>
+    <marker id="md" markerUnits="userSpaceOnUse" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="13" markerHeight="13" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#d9b26f"/></marker>
+    <marker id="mg" markerUnits="userSpaceOnUse" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#aab2c0"/></marker>
+    <marker id="ml" markerUnits="userSpaceOnUse" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="14" markerHeight="14" orient="auto-start-reverse"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#9ec5ff" stroke-width="2"/></marker>
+  </defs>
+
+  <rect x="0" y="0" width="480" height="262" fill="url(#grille)"/>
+  <line x1="8" y1="175" x2="472" y2="175" stroke="#5b6270" stroke-width="1.5"/>
+  <line x1="60" y1="80" x2="60" y2="245" stroke="#aab2c0" stroke-width="1.6" stroke-dasharray="3 5"/>
+  <text x="60" y="265" text-anchor="middle" class="p">plan des champs</text>
+  <circle cx="60" cy="175" r="5" fill="#f2f2f2"/><text x="38" y="197" class="g">A</text>
+  <line x1="180" y1="110" x2="180" y2="140" stroke="#6fd3c4" stroke-width="4"/><line x1="180" y1="210" x2="180" y2="240" stroke="#6fd3c4" stroke-width="4"/><text x="180" y="102" text-anchor="middle" class="g" style="fill:#6fd3c4">[D₁]</text>
+  <line x1="360" y1="95" x2="360" y2="125" stroke="#f0c674" stroke-width="4"/><line x1="360" y1="225" x2="360" y2="255" stroke="#f0c674" stroke-width="4"/><text x="360" y="87" text-anchor="middle" class="g" style="fill:#f0c674">[D₂]</text>
+  <path class="r c2 trace" style="animation-delay:.3s" pathLength="1" d="M60 175 L180 140"/>
+  <path class="r c1 trace" style="animation-delay:1.1s" pathLength="1" d="M60 175 L360 125"/>
+  <text x="132" y="149" class="p anim" style="animation-delay:.9s;fill:#6fd3c4">α₁</text>
+  <text x="290" y="145" class="p anim" style="animation-delay:1.8s;fill:#f0c674">α₂</text>
+  <g class="anim" style="animation-delay:2s"><text x="192" y="219" class="p">tan α₁ = 35/120 ≈ 0,29</text><text x="192" y="241" class="p">tan α₂ = 50/300 ≈ 0,17</text></g>
+  <text x="20" y="30" class="p">Depuis A, on regarde chaque diaphragme :</text>
+  <g class="anim" style="animation-delay:2.6s">
+    <text x="240" y="283" text-anchor="middle" class="p">[D₁] (pourtant plus petit) joue le rôle de lucarne</text>
+    <rect x="20" y="296" width="440" height="36" rx="18" fill="#d9b26f" fill-opacity=".14" stroke="#d9b26f" stroke-opacity=".6"/>
+    <text x="240" y="320" text-anchor="middle" style="fill:#f3dcae">[D₂] est vu sous le plus petit angle → pupille [Pu]</text>
+  </g>
+</svg>
