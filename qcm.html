@@ -53,7 +53,10 @@
   </div>
 </main>
 
+<footer>© 2026 Opticonversion · Outil de révision, ne remplace pas un cours ni un avis professionnel. · <a href="confidentialite.html">Confidentialité</a> · <a href="mentions-legales.html">Mentions légales</a></footer>
+
 <!-- On charge d'abord les questions et les vidéos, puis le moteur qui les affiche -->
+
 <script src="videos.js"></script>
 <script src="epreuves.js"></script>
 <script src="questions-U41.js"></script>
@@ -403,6 +406,8 @@
       expl.appendChild(revoir);
     }
 
+    expl.appendChild(creerSignalement(q));
+
     const suivant = document.createElement("button");
     suivant.className = "bouton";
     suivant.textContent = numero + 1 < serie.length ? "Question suivante →" : "Voir mon score";
@@ -414,6 +419,75 @@
     };
     zone.appendChild(suivant);
     suivant.focus({ preventScroll: true });
+  }
+
+  // ---------------- Signaler une erreur ----------------
+  // Petit formulaire sous la correction. Envoyé dans Firebase (collection « signalements »),
+  // sans compte et sans donnée personnelle. Secours : un e-mail pré-rempli.
+  const TYPES_SIGNALEMENT = ["Réponse fausse", "Explication pas claire", "Schéma faux", "Faute ou coquille", "Autre"];
+  function creerSignalement(q) {
+    const bloc = document.createElement("div");
+    bloc.className = "signalement";
+    const lien = document.createElement("button");
+    lien.type = "button";
+    lien.className = "lien-signaler";
+    lien.textContent = "⚑ Signaler une erreur";
+    bloc.appendChild(lien);
+
+    lien.onclick = () => {
+      const form = document.createElement("form");
+      form.className = "form-signalement";
+      form.innerHTML =
+        '<p class="titre-signalement">Qu\'est-ce qui ne va pas ?</p>' +
+        '<div class="types-signalement" role="radiogroup" aria-label="Type d\'erreur"></div>' +
+        '<label class="aide" for="detail-signalement" style="margin:10px 0 4px;display:block">Précise si tu veux (facultatif) :</label>' +
+        '<textarea id="detail-signalement" maxlength="500" rows="3" placeholder="Ex. : la bonne réponse devrait être C, car…"></textarea>' +
+        '<div class="actions-signalement"><button class="bouton" type="submit">Envoyer</button>' +
+        '<button class="bouton secondaire" type="button" data-annuler>Annuler</button></div>' +
+        '<p class="aide etat-signalement" role="status"></p>';
+      let choisi = null;
+      const types = form.querySelector(".types-signalement");
+      TYPES_SIGNALEMENT.forEach(t => {
+        const b = document.createElement("button");
+        b.type = "button";
+        b.textContent = t;
+        b.setAttribute("role", "radio");
+        b.setAttribute("aria-checked", "false");
+        b.onclick = () => {
+          choisi = t;
+          types.querySelectorAll("button").forEach(x => x.setAttribute("aria-checked", x === b));
+        };
+        types.appendChild(b);
+      });
+      form.querySelector("[data-annuler]").onclick = () => form.replaceWith(lien);
+      form.onsubmit = async e => {
+        e.preventDefault();
+        const etat = form.querySelector(".etat-signalement");
+        if (!choisi) { etat.textContent = "Choisis d'abord le type d'erreur."; return; }
+        const donnees = {
+          epreuve: q.epreuve, theme: q.theme, question: q.question.slice(0, 600),
+          type: choisi, message: form.querySelector("textarea").value.trim().slice(0, 500)
+        };
+        const envoyer = form.querySelector('[type="submit"]');
+        envoyer.disabled = true;
+        etat.textContent = "Envoi…";
+        try {
+          if (!window.envoyerSignalement) throw new Error("hors ligne");
+          await window.envoyerSignalement(donnees);
+          const merci = document.createElement("p");
+          merci.className = "merci-signalement";
+          merci.textContent = "✓ Merci ! On vérifie la question et on la corrige si besoin.";
+          form.replaceWith(merci);
+        } catch (err) {
+          const corps = encodeURIComponent("Épreuve : " + q.epreuve + " / " + q.theme + "\nQuestion : " + q.question + "\nProblème : " + choisi + "\n" + donnees.message);
+          etat.innerHTML = 'L\'envoi n\'a pas marché. <a href="mailto:opticonversion.bts@gmail.com?subject=' + encodeURIComponent("Erreur dans une question") + "&body=" + corps + '">Envoie-le par e-mail</a>.';
+          envoyer.disabled = false;
+        }
+      };
+      lien.replaceWith(form);
+      types.querySelector("button").focus();
+    };
+    return bloc;
   }
 
   // ---------------- L'écran de score ----------------

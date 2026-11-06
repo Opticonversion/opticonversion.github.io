@@ -122,6 +122,10 @@ async function demarrer() {
   const auth = A.getAuth(app);
   auth.languageCode = "fr";
   const db = F.getFirestore(app);
+
+  // Signalement d'erreur sur une question (sans compte, sans donnée personnelle)
+  window.envoyerSignalement = donnees =>
+    F.addDoc(F.collection(db, "signalements"), Object.assign({}, donnees, { date: F.serverTimestamp() }));
   const fournisseur = new A.GoogleAuthProvider();
   fournisseur.setCustomParameters({ prompt: "select_account" });
 

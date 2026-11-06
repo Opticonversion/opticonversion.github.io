@@ -542,3 +542,19 @@ figure.schema object, figure.schema img { display: block; width: 100%; height: a
 .choix.choix-images button::before { top: 14px; left: 14px; transform: none; z-index: 1; }
 .choix.choix-images img { display: block; width: 100%; height: auto; border-radius: 8px; background: #0f1219; }
 @media (max-width: 380px) { .choix.choix-images { grid-template-columns: 1fr; } }
+
+/* ---------- Signaler une erreur ---------- */
+.signalement { margin-top: 12px; }
+.lien-signaler { padding: 0; font: inherit; font-size: 0.82rem; color: var(--doux); background: none; border: 0; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
+.lien-signaler:hover { color: var(--texte); }
+.form-signalement { margin-top: 4px; padding: 14px; border-radius: 12px; background: rgba(255, 255, 255, 0.03); border: 1px solid var(--bord); }
+.titre-signalement { margin: 0 0 8px; font-weight: 600; }
+.types-signalement { display: flex; flex-wrap: wrap; gap: 6px; }
+.types-signalement button { font: inherit; font-size: 0.85rem; padding: 6px 12px; border-radius: 999px; color: var(--texte); background: transparent; border: 1px solid var(--bord-fort); cursor: pointer; }
+.types-signalement button[aria-checked="true"] { color: var(--fond); background: var(--or); border-color: var(--or); font-weight: 600; }
+.form-signalement textarea { width: 100%; box-sizing: border-box; font: inherit; font-size: 0.92rem; color: var(--texte); background: rgba(255, 255, 255, 0.04); border: 1px solid var(--bord-fort); border-radius: 10px; padding: 10px 12px; resize: vertical; }
+.form-signalement textarea:focus { outline: 2px solid var(--or); outline-offset: 1px; }
+.actions-signalement { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
+.actions-signalement .bouton { margin-top: 0; padding: 9px 18px; font-size: 0.9rem; }
+.etat-signalement { margin: 8px 0 0; }
+.merci-signalement { margin: 6px 0 0; color: var(--vert); font-size: 0.92rem; }

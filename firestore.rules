@@ -20,6 +20,19 @@ service cloud.firestore {
         && profilValide(request.resource.data.get("profil", {}));
     }
 
+    // Signalements d'erreur : n'importe qui peut en ENVOYER un (sans compte),
+    // personne ne peut les lire ni les modifier depuis le site (lecture dans la console Firebase).
+    match /signalements/{id} {
+      allow create: if request.resource.data.keys().hasOnly(["epreuve", "theme", "question", "type", "message", "date"])
+        && request.resource.data.epreuve is string && request.resource.data.epreuve.size() <= 5
+        && request.resource.data.theme is string && request.resource.data.theme.size() <= 80
+        && request.resource.data.question is string && request.resource.data.question.size() <= 600
+        && request.resource.data.type in ["Réponse fausse", "Explication pas claire", "Schéma faux", "Faute ou coquille", "Autre"]
+        && request.resource.data.message is string && request.resource.data.message.size() <= 500
+        && request.resource.data.date == request.time;
+      allow read, update, delete: if false;
+    }
+
     // Tout le reste est fermé.
     match /{document=**} {
       allow read, write: if false;
