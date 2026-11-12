@@ -52,6 +52,24 @@
     t.textContent = contenu;
     return t;
   }
+  // Étiquette posée près de l'axe (A, F, F', O, A₂…). Si deux points coïncident (A sur F dans la loupe, A₂ sur F'
+  // dans un doublet), la seconde étiquette se décale d'une ligne au lieu de recouvrir la première.
+  // Le registre S.etiquettes est vidé à chaque nouveau dessin.
+  function etiquetteAxe(x, y, contenu, classe, parent) {
+    const posees = S.etiquettes || (S.etiquettes = []);
+    // Sur téléphone les étiquettes sont écrites plus gros (voir style.css, max-width: 520px)
+    const gros = typeof matchMedia === "function" && matchMedia("(max-width: 520px)").matches;
+    const petit = /petit/.test(classe || "");
+    const corps = gros ? (petit ? 15 : 20) : (petit ? 11 : 15);             // taille des lettres
+    const large = corps * 0.62 * String(contenu).length + 4;                // largeur approximative du texte
+    const centre = /centre/.test(classe || "") ? x : x + large / 2;
+    const ligne = gros ? 19 : 14;
+    const pas = y > H / 2 ? ligne : -ligne;                                 // sous l'axe : vers le bas ; au-dessus : vers le haut
+    let yy = y;
+    for (let n = 0; n < 4 && posees.some(p => Math.abs(p.centre - centre) < (p.large + large) / 2 && Math.abs(p.y - yy) < ligne - 2); n++) yy += pas;
+    posees.push({ centre, y: yy, large });
+    return texte(x, yy, contenu, classe, parent);
+  }
   const nb = (v, d, s) => (typeof ecrireNombre === "function" ? ecrireNombre(v, d, s) : String(Math.round(v * 10 ** d) / 10 ** d));
   const echapper = t => String(t).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
   function melanger(t) { for (let i = t.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [t[i], t[j]] = [t[j], t[i]]; } return t; }
@@ -108,6 +126,7 @@
   // ---------------- Dessin ----------------
   function dessiner() {
     svg.innerHTML = "";
+    S.etiquettes = [];
     const defs = el("defs", {});
     const m = el("marker", { id: "pointe", viewBox: "0 0 10 10", refX: 8, refY: 5, markerWidth: 7, markerHeight: 7, orient: "auto-start-reverse" }, defs);
     el("path", { d: "M0 0 L10 5 L0 10 Z", class: "t-pointe" }, m);
@@ -135,9 +154,9 @@
       if (!S.vision) [[L.x - L.f, nomFoyer(k, false)], [L.x + L.f, nomFoyer(k, true)]].forEach(([xf, nom]) => {
         if (xf < v.xmin || xf > v.xmax) return;
         el("circle", { cx: X(xf), cy: H / 2, r: 3, class: "t-point" });
-        texte(X(xf), H / 2 + 18, nom, "centre petit");
+        etiquetteAxe(X(xf), H / 2 + 18, nom, "centre petit");
       });
-      if (S.sys.lentilles.length === 1 && !S.vision) { el("circle", { cx: x, cy: H / 2, r: 3, class: "t-point" }); texte(x - 10, H / 2 + 18, "O", "centre"); }
+      if (S.sys.lentilles.length === 1 && !S.vision) { el("circle", { cx: x, cy: H / 2, r: 3, class: "t-point" }); etiquetteAxe(x - 10, H / 2 + 18, "O", "centre"); }
     });
     // Diaphragmes (hors montures) : deux traits épais qui partent du bord de l'ouverture
     S.sys.diaphragmes.filter(d => !d.monture).forEach(d => {
@@ -162,7 +181,7 @@
       texte(x0, y0 - 10, "B à l'infini (α = " + nb(o.angle, 1) + "°)", "petit");
     } else if (o.x !== undefined) {
       el("line", { x1: X(o.x), y1: H / 2, x2: X(o.x), y2: Y(o.h), class: "t-objet", "marker-end": "url(#pointe)" });
-      texte(X(o.x) - 4, H / 2 + 18, "A", "centre");
+      etiquetteAxe(X(o.x) - 4, H / 2 + 18, "A", "centre");
       texte(X(o.x) - 14, Y(o.h) + 4, "B");
     }
     // Ce qui a déjà été trouvé
@@ -204,7 +223,10 @@
     S.revele.filter(r => r.oeil).forEach(r => dessinerRevele(r, g));
   }
 
-  // Un rayon donné dans l'espace objet, tracé de xDebut à xFin (et prolongé en pointillés si demandé)
+  // Un rayon donné dans l'espace objet, tracé de xDebut à xFin, et prolongé en pointillés si demandé :
+  // prolonger = "arriere" (ou true) : son dernier morceau vers l'arrière (image virtuelle) ;
+  // prolonger = "avant" : au-delà de xFin, comme si la lentille suivante n'existait pas (l'image se forme
+  // derrière elle : c'est un objet virtuel pour cette lentille, lunette de Galilée, doublets).
   function tracerRayon(r0, xDebut, xFin, classe, prolonger, g) {
     const p = Optique.parcours(S.sys, r0, xDebut, xFin);
     const grp = el("g", { class: "t-rayon " + (classe || "") }, g);
@@ -212,7 +234,10 @@
       const a = p.points[i], b = p.points[i + 1];
       el("line", { x1: X(a.x), y1: Y(a.y), x2: X(b.x), y2: Y(b.y) }, grp);
     }
-    if (prolonger) {
+    if (prolonger === "avant") {
+      const b = p.points[p.points.length - 1], s = p.pentes[p.pentes.length - 1];
+      if (S.vue.xmax > b.x) el("line", { x1: X(b.x), y1: Y(b.y), x2: X(S.vue.xmax), y2: Y(b.y + s * (S.vue.xmax - b.x)), class: "t-virtuel" }, grp);
+    } else if (prolonger) {
       // Prolongement vers l'arrière du dernier morceau (image virtuelle)
       const a = p.points[p.points.length - 2], s = p.pentes[p.pentes.length - 1];
       el("line", { x1: X(a.x), y1: Y(a.y), x2: X(S.vue.xmin), y2: Y(a.y + s * (S.vue.xmin - a.x)), class: "t-virtuel" }, grp);
@@ -227,7 +252,7 @@
     const grp = el("g", { class: "t-image" + (virtuelle ? " virtuelle" : "") }, g);
     el("line", { x1: X(im.x), y1: H / 2, x2: X(im.x), y2: Y(im.h), "marker-end": "url(#pointe)" }, grp);
     texte(X(im.x) + 6, Y(im.h) + (im.h < 0 ? 16 : -6), nomImage(k, "B"), "or", grp);
-    texte(X(im.x) + 6, H / 2 + (im.h < 0 ? -8 : 20), nomImage(k, "A"), "or", grp);
+    etiquetteAxe(X(im.x) + 6, H / 2 + (im.h < 0 ? -8 : 20), nomImage(k, "A"), "or", grp);
   }
   function dessinerImageDiaphragme(im, classe, g) {
     if (im.infini) return;
@@ -247,7 +272,7 @@
     else if (r.type === "faisceau") dessinerFaisceau(r.rayons, "t-faisceau-juste", g);
     else if (r.type === "point") {
       el("circle", { cx: X(r.x), cy: Y(r.y || 0), r: 5, class: "t-point-or" }, g);
-      texte(X(r.x), Y(r.y || 0) - 10, r.nom, "centre or", g);
+      (r.y ? texte : etiquetteAxe)(X(r.x), Y(r.y || 0) - 10, r.nom, "centre or", g);
     } else if (r.type === "rayonsOeil") r.rayons.forEach(ry => { const grp = el("g", { class: "t-rayon" }, g); el("line", { x1: X(ry.x1), y1: Y(ry.y1), x2: X(ry.x2), y2: Y(ry.y2) }, grp); });
   }
   // Les deux droites limites d'un champ (en haut et, symétrique, en bas), et la limite dans le plan de l'objet
@@ -425,6 +450,11 @@
     const fin = xArret(c.k || 0);
     aides.forEach(r0 => tracerRayon(r0, xDepart(), fin, "", false));
     const virtuelle = E.quoi === "image" && c.x < S.sys.lentilles[c.k].x;
+    // L'image se forme derrière la lentille suivante (elle lui sert d'objet virtuel) : les rayons d'aide
+    // s'arrêtent avant de se croiser, il faut les prolonger vers l'avant.
+    const suivante = E.quoi === "image" ? S.sys.lentilles[c.k + 1] : null;
+    const derriere = !!suivante && !virtuelle && c.x > suivante.x + 1e-6;
+    const sens = virtuelle ? "arriere" : derriere ? "avant" : false;
     // Le point qu'on fait glisser (départ neutre, en bas à droite de la lentille)
     nettoyerGlisser();
     svg.style.touchAction = "none";
@@ -469,8 +499,8 @@
       etiquette.textContent = juste ? "" : "ton " + c.nom;
       if (juste) setTimeout(() => g.remove(), 900);
       // La correction : rayons prolongés si l'image est virtuelle, puis l'image
-      aides.forEach(r0 => tracerRayon(r0, xDepart(), fin, "", virtuelle));
-      S.revele.push(...aides.map(r0 => ({ type: "rayon", r0, debut: xDepart(), fin, prolonger: virtuelle })), ...c.revele);
+      aides.forEach(r0 => tracerRayon(r0, xDepart(), fin, "", sens));
+      S.revele.push(...aides.map(r0 => ({ type: "rayon", r0, debut: xDepart(), fin, prolonger: sens })), ...c.revele);
       const gr = el("g", { "clip-path": "url(#t-cadre)" });
       c.revele.forEach(r => dessinerRevele(r, gr));
       let piste = "";
@@ -479,6 +509,7 @@
           const L = S.sys.lentilles[c.k];
           if (virtuelle && mm.x > L.x) piste = "L'image est <b>virtuelle</b> : les rayons ne se croisent pas après la lentille, ce sont leurs <b>prolongements</b> qui se croisent, du côté de l'objet.";
           else if (!virtuelle && mm.x < L.x) piste = "Ici les rayons se croisent bien <b>après</b> la lentille : l'image est réelle, de l'autre côté.";
+          else if (derriere && mm.x < suivante.x) piste = "Avant " + echapper(suivante.nom) + ", les rayons ne se sont pas encore croisés : <b>prolonge-les</b> au-delà, en pointillés. L'image se forme derrière " + echapper(suivante.nom) + " (elle lui sert d'objet virtuel).";
           else if (mm.y * c.y < 0) piste = "Regarde de quel côté de l'axe les rayons se croisent : l'image est " + (c.y < 0 ? "<b>sous</b>" : "<b>au-dessus de</b>") + " l'axe.";
           else piste = "Tu n'es pas loin : l'image est exactement là où les rayons se croisent.";
         } else if (c.axe) piste = mm.x < c.x ? "Trop à gauche." : "Trop à droite.";
@@ -487,8 +518,10 @@
       fini(juste, (juste ? "<p><b>Exact !</b></p>" : "<p><b>Pas tout à fait.</b> " + piste + "</p>") + (S.calculApres ? "" : '<p class="verif">Par le calcul : ' + c.verif + ".</p>"), indice);
     }
     const actions = [["Valider", () => valider()]];
-    if (E.prolonger && aides.length) actions.push(["Indice : prolonger les rayons", () => {
-      if (!indice) { indice = true; aides.forEach(r0 => tracerRayon(r0, xDepart(), fin, "t-indice", true)); svg.appendChild(g); }
+    // L'indice est proposé si le niveau le demande (prolonger: true), et toujours quand l'image se forme derrière
+    // la lentille suivante : sans lui, les rayons d'aide s'arrêtent avant de se croiser.
+    if ((E.prolonger || derriere) && aides.length) actions.push(["Indice : prolonger les rayons", () => {
+      if (!indice) { indice = true; aides.forEach(r0 => tracerRayon(r0, xDepart(), fin, "t-indice", sens || "arriere")); svg.appendChild(g); }
       const b = [...document.querySelectorAll("#jeu-actions button")].find(x => x.textContent.startsWith("Indice"));
       if (b) { b.disabled = true; b.textContent = "Indice utilisé (−1 étoile)"; }
     }, "secondaire"]);
@@ -521,7 +554,14 @@
     const P = Optique.pupilleEntree(sys), Lu = Optique.lucarneEntree(sys);
     const bonNom = (E.quoi === "pupille-entree" || E.quoi === "diaphragme-ouverture" ? P : Lu).nom;
     dessiner();
-    const liste = enImages ? ims.map(im => ({ nom: im.nom, im, label: "Image de " + im.nom + " (" + im.nom + "′)" }))
+    // images: true = le moteur dessine toutes les images des diaphragmes. Sinon l'élève ne peut désigner que ce
+    // qu'il connaît déjà : les images qu'il a placées lui-même (étapes « placer »), et les ouvertures qui n'ont
+    // aucune lentille devant elles (elles sont leur propre image). Si cela ne laisse pas le choix, on dessine tout.
+    const connue = im => !sys.lentilles.some(L => L.x < im.d.x - 1e-9)
+      || S.revele.some(r => (r.type === "imageDiaphragme" || r.type === "pupille" || r.type === "lucarne") && r.im && r.im.nom === im.nom);
+    let proposees = E.images === true ? ims : ims.filter(connue);
+    if (proposees.length < 2 || !proposees.some(im => im.nom === bonNom)) proposees = ims;
+    const liste = enImages ? proposees.map(im => ({ nom: im.nom, im, label: "Image de " + im.nom + " (" + im.nom + "′)" }))
       : sys.diaphragmes.map(d => ({ nom: d.nom, im: { nom: d.nom, x: d.x, rayon: d.rayon }, label: (d.monture ? "Monture de " : "") + d.nom }));
     const groupes = liste.map((c, i) => {
       const grp = dessinerImageDiaphragme(enImages ? c.im : { ...c.im, nom: c.nom.replace(/′$/, "") }, "t-designable") || el("g", {});
@@ -568,7 +608,9 @@
       { id: "L-", x: Lu.x, y: -Lu.rayon, nom: "bord bas de la lucarne" }
     ];
     if (type === "moyen") poignees.splice(2, 0, { id: "P0", x: P.x, y: 0, nom: "centre de la pupille" });
-    const justes = type === "total" ? [["P+", "L-"], ["P-", "L+"]] : type === "moyen" ? [["P0", "L+"], ["P0", "L-"]] : [["P+", "L+"], ["P-", "L-"]];
+    // Le moteur dit quel bord de la pupille va avec quel bord de la lucarne (c.cote) : « même côté = pleine lumière »
+    // s'inverse quand le plan de l'objet est entre la pupille et la lucarne.
+    const justes = c.cote === "oppose" ? [["P+", "L-"], ["P-", "L+"]] : c.cote === "centre" ? [["P0", "L+"], ["P0", "L-"]] : [["P+", "L+"], ["P-", "L-"]];
     const choisis = [];
     const ronds = poignees.map(p => {
       const g = el("g", { class: "t-poignee" });
@@ -596,9 +638,9 @@
       S.revele.push({ type: "champ", c });
       dessinerChamp(c, el("g", { "clip-path": "url(#t-cadre)" }));
       const nomChamp = type === "total" ? "champ total" : type === "moyen" ? "champ moyen" : "champ de pleine lumière";
-      const regle = type === "total" ? "on relie un bord de la pupille au bord <b>opposé</b> de la lucarne"
-        : type === "moyen" ? "on relie le <b>centre</b> de la pupille au bord de la lucarne"
-        : "on relie les bords <b>du même côté</b> de la pupille et de la lucarne";
+      const regle = type === "moyen" ? "on relie le <b>centre</b> de la pupille au bord de la lucarne"
+        : (c.cote === "oppose" ? "on relie un bord de la pupille au bord <b>opposé</b> de la lucarne" : "on relie les bords <b>du même côté</b> de la pupille et de la lucarne")
+          + (c.entre ? ". Ici le plan de l'objet est <b>entre</b> la pupille et la lucarne : la règle habituelle s'inverse. Repère sûr : la pleine lumière est toujours la plus petite des deux limites dans le plan de l'objet, le champ total la plus grande" : "");
       fini(juste, "<p><b>" + (juste ? "Exact" : "Pas tout à fait") + " :</b> pour le " + nomChamp + ", " + regle + ".</p>");
     }
   }
@@ -746,7 +788,7 @@
       }
       if (i + 1 < n) {
         retour(message, juste ? "bien" : "mal");
-        boutons([["Continuer →", () => { effacerRetour(); if (S.zoom && N.etapes[i + 1].quoi !== "image-retine") { S.zoom = false; regler(N.vue ? { ...N.vue } : cadrageAuto(S.sys)); } etape(i + 1); }]]);
+        boutons([["Continuer", () => { effacerRetour(); if (S.zoom && N.etapes[i + 1].quoi !== "image-retine") { S.zoom = false; regler(N.vue ? { ...N.vue } : cadrageAuto(S.sys)); } etape(i + 1); }]]);
       } else suite(message);
     });
     function suite(message) { terminer((message || "") + (N.conclusion ? "<p>" + echapper(N.conclusion) + "</p>" : "")); }
@@ -761,7 +803,7 @@
     const lien = niveau.theme ? '<p><a href="qcm.html#' + niveau.epreuve + "/" + encodeURIComponent(niveau.theme) + '">S\'entraîner au QCM : ' + echapper(niveau.theme) + " →</a></p>" : "";
     retour(message + lien + `<p class="etoiles-gagnees" aria-label="${etoiles} étoile${etoiles > 1 ? "s" : ""} sur 3">${"★".repeat(etoiles)}${"☆".repeat(3 - etoiles)}</p>`, "bien", etoiles === 3 ? "clin-doeil" : "bouche-ouverte");
     boutons([
-      suivant ? ["Niveau suivant →", () => ouvrir(suivant)] : ["Retour aux niveaux", afficherNiveaux],
+      suivant ? ["Niveau suivant", () => ouvrir(suivant)] : ["Retour aux niveaux", afficherNiveaux],
       ["Rejouer", () => ouvrir(niveau), "secondaire"]
     ]);
   }
@@ -810,7 +852,7 @@
         ["parallele", "O"].forEach(par => tracerRayon(Optique.versEspaceObjet(S.sys, Optique.rayonType(S.sys, 0, par)), xDepart(), W, "", S.ch[1].x < 0));
         if (juste) reussies++;
         retour(juste ? "<p><b>Exact !</b> " + reussies + " / " + manche + "</p>" : "<p><b>Raté.</b> L'image était là où se croisent les rayons.</p>", juste ? "bien" : "mal");
-        boutons([[manche < manches ? "Manche suivante →" : "Voir mon résultat", suivante]]);
+        boutons([[manche < manches ? "Manche suivante" : "Voir mon résultat", suivante]]);
       });
     };
     suivante();

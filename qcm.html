@@ -10,7 +10,7 @@
 <script>/* Fond choisi par l'élève (profil), appliqué avant l'affichage */ try { if (localStorage.getItem("fond") === "clair") { document.documentElement.dataset.fond = "clair"; var m = document.querySelector('meta[name="theme-color"]'); if (m) m.content = "#1a1f2a"; } } catch (e) {}</script>
 <link rel="preload" href="polices/bodoni-moda.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="polices/atkinson-hyperlegible-next.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="style.css?v=416319f5">
+<link rel="stylesheet" href="style.css?v=29608544">
 </head>
 <body>
 <header class="entete">
@@ -87,7 +87,7 @@
 <script src="specificites-U43.js?v=0918c26c"></script>
 <script src="specificites-U5.js?v=4d12d3b3"></script>
 <script src="specificites-U3.js?v=2ee96b01"></script>
-<script src="essentiel.js?v=93b1ee7c"></script>
+<script src="essentiel.js?v=412cefda"></script>
 <script>
   // ---------------- L'état du QCM ----------------
   let epreuveChoisie = null;   // ex. "U5"
@@ -619,7 +619,7 @@
     expl.innerHTML = '<div class="expl-tete"><img class="expl-diosl" alt="" width="52" height="57"><strong></strong></div><span></span>';
     montrerCompagnon(expl.querySelector(".expl-diosl"), reponse.juste ? "bouche-ouverte" : "pensif");
     expl.querySelector("strong").textContent = reponse.juste
-      ? (serieEnCours >= 3 ? "Bonne réponse · " + serieEnCours + " d'affilée 🔥" : "Bonne réponse")
+      ? (serieEnCours >= 3 ? "Bonne réponse · " + serieEnCours + " d'affilée" : "Bonne réponse")
       : "Pas tout à fait";
     expl.querySelector("span").textContent = q.explication;
     if (reponse.calcul) {
@@ -634,8 +634,8 @@
       const info = document.createElement("p");
       info.className = "info-revision";
       info.textContent = suite.acquise
-        ? "✓ Question acquise : elle ne reviendra plus dans « À revoir »."
-        : "📅 Elle reviendra " + (suite.jours === 1 ? "demain" : "dans " + suite.jours + " jours") + " dans « À revoir aujourd'hui ».";
+        ? "Question acquise : elle ne reviendra plus dans « À revoir »."
+        : "Elle reviendra " + (suite.jours === 1 ? "demain" : "dans " + suite.jours + " jours") + " dans « À revoir aujourd'hui ».";
       expl.appendChild(info);
     }
     zone.appendChild(expl);
@@ -657,7 +657,7 @@
 
     const suivant = document.createElement("button");
     suivant.className = "bouton";
-    suivant.textContent = numero + 1 < serie.length ? "Question suivante →" : "Voir mon score";
+    suivant.textContent = numero + 1 < serie.length ? "Question suivante" : "Voir mon score";
     suivant.onclick = () => {
       numero++;
       if (numero < serie.length) afficherQuestion();
@@ -771,7 +771,7 @@
         (record !== undefined ? " · meilleur score " + record + " %" : bilan.faites ? " · commencé" : "");
       const a = carte.querySelector("a");
       a.href = "#" + c.epreuve + "/cas:" + encodeURIComponent(c.id);
-      a.textContent = (record !== undefined ? "Refaire le cas" : "Commencer le cas") + " →";
+      a.textContent = record !== undefined ? "Refaire le cas" : "Commencer le cas";
       conteneur.appendChild(carte);
     });
     rejouerAnimation(zone);
@@ -1200,7 +1200,7 @@
           await window.envoyerSignalement(donnees);
           const merci = document.createElement("p");
           merci.className = "merci-signalement";
-          merci.textContent = "✓ Merci ! On vérifie la question et on la corrige si besoin.";
+          merci.textContent = "Merci, c'est reçu. On vérifie la question et on la corrige si besoin.";
           form.replaceWith(merci);
         } catch (err) {
           if (err && err.code === "limite-delai") {
@@ -1226,11 +1226,11 @@
   // 5 paliers : la couleur, le nounours, le message et les confettis changent selon le score.
   // (Les images du nounours sont dans le dossier img/.)
   function palierDe(pourcent) {
-    if (pourcent === 100) return { nom: "or", titre: "Parfait !", sous: "Sans aucune faute. Même " + nomCompagnon() + " n'en revient pas.", nounours: "choque", confettis: 160 };
-    if (pourcent >= 80) return { nom: "or", titre: "Excellent !", sous: "Tu maîtrises ce thème. Plus que quelques détails.", nounours: "clin-doeil", confettis: 90 };
-    if (pourcent >= 60) return { nom: "argent", titre: "Bien joué !", sous: "Plus de la moitié est acquise. Revois tes erreurs et ça passe.", nounours: "bouche-ouverte", confettis: 0 };
-    if (pourcent >= 40) return { nom: "bronze", titre: "Ça commence à venir", sous: "Tu as les bases. Revois tes erreurs, et le prochain essai sera meilleur.", nounours: "pensif", confettis: 0 };
-    return { nom: "bronze", titre: "C'est en se trompant qu'on apprend", sous: "Revois tes erreurs, puis réessaie : la deuxième fois, ça va beaucoup mieux.", nounours: "bouche-fermee", confettis: 0 };
+    if (pourcent === 100) return { nom: "or", titre: "Sans faute !", sous: "Même " + nomCompagnon() + " n'en revient pas.", nounours: "choque", confettis: 160 };
+    if (pourcent >= 80) return { nom: "or", titre: "Très bien", sous: "Le thème est presque acquis. Relis les quelques erreurs ci-dessous.", nounours: "clin-doeil", confettis: 90 };
+    if (pourcent >= 60) return { nom: "argent", titre: "Plus de la moitié", sous: "Relis tes erreurs, puis refais la série : ça devrait passer.", nounours: "bouche-ouverte", confettis: 0 };
+    if (pourcent >= 40) return { nom: "bronze", titre: "Les bases sont là", sous: "Relis l'explication de chaque erreur avant de refaire la série.", nounours: "pensif", confettis: 0 };
+    return { nom: "bronze", titre: "Thème à reprendre", sous: "Relis l'explication de chaque erreur, puis refais la série.", nounours: "bouche-fermee", confettis: 0 };
   }
 
   // Records : le meilleur score de l'élève par thème, gardé dans son navigateur
@@ -1317,7 +1317,7 @@
       : casFini
       ? "Cas pratique « " + casFini.titre + " » : " + score + (score > 1 ? " étapes réussies sur " : " étape réussie sur ") + serie.length + ". " + palier.sous
       : modeRevision
-      ? (erreurs.length === 0 ? "Toutes tes erreurs sont corrigées. Bravo !" : "Encore " + erreurs.length + " à retravailler. Tu y es presque.")
+      ? (erreurs.length === 0 ? "Toutes tes erreurs sont corrigées." : "Encore " + erreurs.length + " à retravailler.")
       : palier.sous;
     rejouerAnimation(zone);
 
@@ -1329,11 +1329,11 @@
       s.textContent = texte;
       stats.appendChild(s);
     };
-    if (meilleureSerie >= 3) medaille("🔥 " + meilleureSerie + " bonnes réponses d'affilée");
-    if (record.nouveau) medaille("🏆 Nouveau record ! (avant : " + record.ancien + " %)", "or");
+    if (meilleureSerie >= 3) medaille(meilleureSerie + " bonnes réponses d'affilée");
+    if (record.nouveau) medaille("Nouveau record (avant : " + record.ancien + " %)", "or");
     if (!modeRevision && !serieSpeciale && themeChoisi !== "Tous" && estEssentiel(epreuveChoisie, themeChoisi) && etatNotion(epreuveChoisie, themeChoisi).maitrisee) {
       const faites = ESSENTIEL.filter(n => etatNotion(n.epreuve, n.theme).maitrisee).length;
-      medaille("★ Notion essentielle maîtrisée · " + faites + " / " + ESSENTIEL.length, "or");
+      medaille("Notion essentielle maîtrisée (" + faites + " / " + ESSENTIEL.length + ")", "or");
     }
     if (!stats.children.length) stats.remove();
 
@@ -1349,12 +1349,12 @@
     };
     const aRevoir = erreurs.map(q => QUESTIONS.find(x => idQuestion(x) === idQuestion(q)));
     if (aRevoir.length > 0) {
-      bouton((aRevoir.length > 1 ? "Revoir mes " + aRevoir.length + " erreurs" : "Revoir mon erreur") + " →", "", () => { demarrer(aRevoir); zone.scrollIntoView({ behavior: "smooth", block: "start" }); });
+      bouton(aRevoir.length > 1 ? "Revoir mes " + aRevoir.length + " erreurs" : "Revoir mon erreur", "", () => { demarrer(aRevoir); zone.scrollIntoView({ behavior: "smooth", block: "start" }); });
     }
     // La notion essentielle suivante pas encore maîtrisée (bouton principal si aucune erreur)
     const prochaine = seanceRevision || serieSpeciale ? null : ESSENTIEL.find(n => !(n.epreuve === epreuveChoisie && n.theme === themeChoisi) && !etatNotion(n.epreuve, n.theme).maitrisee);
     if (prochaine) {
-      bouton("Notion suivante : " + prochaine.theme + " →", aRevoir.length > 0 ? "secondaire" : "", () => {
+      bouton("Notion suivante : " + prochaine.theme, aRevoir.length > 0 ? "secondaire" : "", () => {
         location.hash = prochaine.epreuve + "/" + encodeURIComponent(prochaine.theme);
         zone.scrollIntoView({ behavior: "smooth", block: "start" });
       });
@@ -1431,7 +1431,7 @@
   window.addEventListener("hashchange", selonAdresse);
   selonAdresse();
 </script>
-<script src="vivant.js?v=350e7712" defer></script>
+<script src="vivant.js?v=a055ba08" defer></script>
 <script type="module" src="compte.js?v=c47ff213"></script>
 <!-- Mesure d'audience anonyme, sans cookies (GoatCounter) -->
 <script data-goatcounter="https://opticonversion.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>

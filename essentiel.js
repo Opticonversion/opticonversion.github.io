@@ -343,6 +343,11 @@ function montrerCompagnon(img, pose) {
   };
   img.src = imageCompagnon(pose);
 }
+// Le compagnon en haut d'une page : <img data-pose="pensif"> montre DioSL par défaut,
+// et le personnage choisi par l'élève s'il en a pris un autre dans son profil.
+document.querySelectorAll("img[data-pose]").forEach(img => {
+  if (img.getAttribute("src") !== imageCompagnon(img.dataset.pose)) montrerCompagnon(img, img.dataset.pose);
+});
 
 // ---------------- Valeurs tapées (questions « calcul » et étapes de l'Atelier) ----------------
 // Lit un nombre écrit à la française : virgule ou point, − ou -, espaces, 2,5e-3. Sinon null.

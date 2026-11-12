@@ -162,17 +162,37 @@ const Optique = (function () {
     if (tri[0].im.infini) return null;
     return { ...tri[0].im, ecart: tri.length > 1 ? tri[1].a / tri[0].a : Infinity };
   }
-  // Limite d'un champ : droite qui passe par un point de la pupille et le bord haut de la lucarne.
-  // type : "pleine-lumiere" (bord du même côté), "total" (bord opposé), "moyen" (centre de la pupille).
+  // Limite d'un champ : droite qui passe par un point de la pupille d'entrée et le bord haut de la lucarne d'entrée.
+  // type : "pleine-lumiere", "total" ou "moyen" (centre de la pupille).
+  // Un rayon parti du point de hauteur y de l'objet vers le point u de la pupille coupe le plan de la lucarne à
+  // y(1 − t) + u·t, avec t = (xLucarne − xObjet) / (xPupille − xObjet). D'où, dans le plan de l'objet :
+  //   pleine lumière (tous les rayons passent) : (R − ρ|t|) / |1 − t|     total (au moins un) : (R + ρ|t|) / |1 − t|
+  // La pleine lumière est donc TOUJOURS la plus petite des deux limites (bords du même côté / bords opposés),
+  // et le champ total la plus grande. « Bords du même côté = pleine lumière » n'est vrai que si l'objet n'est pas
+  // entre la pupille et la lucarne (t > 0) ; quand il est entre les deux (t < 0, sujet 2025), c'est l'inverse.
+  // Renvoie aussi : cote ("meme", "oppose" ou "centre" : le point de la pupille à relier au bord haut de la lucarne),
+  // entre (objet entre la pupille et la lucarne), ecart (grande limite / petite : proche de 1 = champs confondus).
   function champ(sys, type) {
     const P = pupilleEntree(sys), Lu = lucarneEntree(sys);
     if (!P || !Lu || P.infini) return null;
-    const yP = type === "total" ? -P.rayon : type === "moyen" ? 0 : P.rayon;
     if (Math.abs(Lu.x - P.x) < EPS) return null;
-    const m = (Lu.rayon - yP) / (Lu.x - P.x);
-    const res = { type, pupille: P, lucarne: Lu, p1: { x: P.x, y: yP }, p2: { x: Lu.x, y: Lu.rayon }, pente: m,
-      angle: Math.atan(Math.abs(m)) * 180 / Math.PI };
-    if (!sys.objet.infini) res.rayon = Math.abs(yP + m * (sys.objet.x - P.x));
+    const fini = !sys.objet.infini;
+    if (fini && Math.abs(sys.objet.x - P.x) < EPS) return null;       // objet dans le plan de la pupille : pas de champ
+    const t = fini ? (Lu.x - sys.objet.x) / (P.x - sys.objet.x) : 1;   // objet à l'infini : t tend vers 1
+    const limite = (yP, cote) => {
+      const m = (Lu.rayon - yP) / (Lu.x - P.x);
+      const rayon = fini ? Math.abs(yP + m * (sys.objet.x - P.x)) : undefined;
+      return { yP, m, cote, rayon, taille: fini ? rayon : Math.abs(m) };   // taille : rayon du champ, ou pente (objet à l'infini)
+    };
+    const meme = limite(P.rayon, "meme"), oppose = limite(-P.rayon, "oppose");
+    const petite = meme.taille <= oppose.taille ? meme : oppose, grande = petite === meme ? oppose : meme;
+    // Pas de pleine lumière si aucun point de l'objet ne voit la pupille entière
+    if (type !== "total" && type !== "moyen" && Lu.rayon - P.rayon * Math.abs(t) <= EPS) return null;
+    const l = type === "moyen" ? limite(0, "centre") : type === "total" ? grande : petite;
+    const res = { type, pupille: P, lucarne: Lu, p1: { x: P.x, y: l.yP }, p2: { x: Lu.x, y: Lu.rayon }, pente: l.m,
+      angle: Math.atan(Math.abs(l.m)) * 180 / Math.PI, cote: l.cote, entre: fini && t < 0,
+      ecart: petite.taille > EPS ? grande.taille / petite.taille : Infinity };
+    if (fini) res.rayon = l.rayon;
     return res;
   }
   // Faisceau issu d'un point de l'objet ("A" ou "B"), limité par la pupille d'entrée : ses deux rayons extrêmes (espace objet)

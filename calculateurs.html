@@ -11,7 +11,7 @@
 <script>/* Fond choisi par l'élève (profil), appliqué avant l'affichage */ try { if (localStorage.getItem("fond") === "clair") { document.documentElement.dataset.fond = "clair"; var m = document.querySelector('meta[name="theme-color"]'); if (m) m.content = "#1a1f2a"; } } catch (e) {}</script>
 <link rel="preload" href="polices/bodoni-moda.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="polices/atkinson-hyperlegible-next.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="style.css?v=416319f5">
+<link rel="stylesheet" href="style.css?v=29608544">
 </head>
 
 <!-- ============================================================
@@ -35,9 +35,12 @@
   </nav>
 </header>
 <main>
-  <h1 class="apparait">Calculateurs d'optique</h1>
-  <p class="marque apparait" style="--d:1">Outils</p>
-  <p class="sous-titre apparait" style="--d:2">Transposition, distance verre-œil, règle de Prentice : le résultat avec le détail du calcul, pour vérifier tes exercices. Par un opticien diplômé, Master Expert de la vision.</p>
+  <!-- Le haut de la page : le titre, sa phrase, et le compagnon de l'élève qui dépasse de derrière le premier bloc -->
+  <div class="tete-page">
+    <h1 class="apparait">Calculateurs d'optique</h1>
+    <p class="sous-titre apparait" style="--d:2">Transposition, distance verre-œil, règle de Prentice : le résultat avec le détail du calcul, pour vérifier tes exercices.</p>
+    <img class="tete-compagnon apparait" style="--d:3" data-pose="bouche-fermee" src="img/nounours-bouche-fermee.svg" alt="" width="120" height="132">
+  </div>
 
   <!-- ---------- Calculateur 1 : Transposition ---------- -->
   <section class="apparait" style="--d:3">
@@ -243,7 +246,9 @@
   brancher(["v-sph", "v-cyl", "v-axe", "v-dvo", "v-sens"], calculVerreOeil);
   brancher(["p-puis", "p-dec", "p-dir"], calculPrentice);
 </script>
-<script src="vivant.js?v=350e7712" defer></script>
+<!-- Pour afficher le compagnon choisi par l'élève en haut de la page -->
+<script src="essentiel.js?v=412cefda"></script>
+<script src="vivant.js?v=a055ba08" defer></script>
 <script type="module" src="compte.js?v=c47ff213"></script>
 <!-- Mesure d'audience anonyme, sans cookies (GoatCounter) -->
 <script data-goatcounter="https://opticonversion.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>

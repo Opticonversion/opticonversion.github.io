@@ -10,7 +10,7 @@
 <script>/* Fond choisi par l'élève (profil), appliqué avant l'affichage */ try { if (localStorage.getItem("fond") === "clair") { document.documentElement.dataset.fond = "clair"; var m = document.querySelector('meta[name="theme-color"]'); if (m) m.content = "#1a1f2a"; } } catch (e) {}</script>
 <link rel="preload" href="polices/bodoni-moda.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="polices/atkinson-hyperlegible-next.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="style.css?v=416319f5">
+<link rel="stylesheet" href="style.css?v=29608544">
 </head>
 <body data-rafraichir="oui">
 <header class="entete">
@@ -29,9 +29,12 @@
 </header>
 
 <main>
-  <h1 class="apparait">L'essentiel du BTS OL</h1>
-  <p class="marque apparait" style="--d:1">Parcours prioritaire</p>
-  <p class="sous-titre apparait" style="--d:2">Les <b id="nb-notions">27</b> notions qui tombent le plus souvent aux sujets officiels, classées de la plus rentable à la moins rentable. Si tu as peu de temps, commence par le haut de la liste.</p>
+  <!-- Le haut de la page : le titre, sa phrase, et le compagnon de l'élève qui dépasse de derrière le premier bloc -->
+  <div class="tete-page">
+    <h1 class="apparait">L'essentiel du BTS OL</h1>
+    <p class="sous-titre apparait" style="--d:2">Les <b id="nb-notions">27</b> notions qui tombent le plus souvent aux sujets officiels, classées de la plus rentable à la moins rentable. Si tu as peu de temps, commence par le haut de la liste.</p>
+    <img class="tete-compagnon apparait" style="--d:3" data-pose="clin-doeil" src="img/nounours-clin-doeil.svg" alt="" width="120" height="132">
+  </div>
 
   <section class="jauge apparait" style="--d:3">
     <div class="jauge-texte">
@@ -58,7 +61,7 @@
 <script src="questions-U43.js?v=5af1d8ea"></script>
 <script src="questions-U5.js?v=2ec6d276"></script>
 <script src="questions-U3.js?v=f5a7264a"></script>
-<script src="essentiel.js?v=93b1ee7c"></script>
+<script src="essentiel.js?v=412cefda"></script>
 <script>
   const liste = document.getElementById("notions");
   let maitrisees = 0;
@@ -118,7 +121,7 @@
       : "Bravo, tu maîtrises toutes les notions essentielles. Passe au reste du programme dans les QCM.";
   }
 </script>
-<script src="vivant.js?v=350e7712" defer></script>
+<script src="vivant.js?v=a055ba08" defer></script>
 <script type="module" src="compte.js?v=c47ff213"></script>
 <!-- Mesure d'audience anonyme, sans cookies (GoatCounter) -->
 <script data-goatcounter="https://opticonversion.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>

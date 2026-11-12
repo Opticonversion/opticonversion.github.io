@@ -10,7 +10,7 @@
 <script>/* Fond choisi par l'élève (profil), appliqué avant l'affichage */ try { if (localStorage.getItem("fond") === "clair") { document.documentElement.dataset.fond = "clair"; var m = document.querySelector('meta[name="theme-color"]'); if (m) m.content = "#1a1f2a"; } } catch (e) {}</script>
 <link rel="preload" href="polices/bodoni-moda.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="polices/atkinson-hyperlegible-next.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="style.css?v=416319f5">
+<link rel="stylesheet" href="style.css?v=29608544">
 </head>
 <body data-rafraichir="oui">
 <header class="entete">
@@ -30,7 +30,6 @@
 
 <main>
   <h1 class="apparait" id="profil-titre">Ton profil</h1>
-  <p class="marque apparait" style="--d:1">Mon espace</p>
   <p class="sous-titre apparait" style="--d:2" id="profil-sous-titre">Choisis ton pseudo et ton personnage. Ton profil n'est visible que par toi.</p>
 
   <section class="profil apparait" style="--d:3">
@@ -150,7 +149,7 @@
 <script src="questions-U43.js?v=5af1d8ea"></script>
 <script src="questions-U5.js?v=2ec6d276"></script>
 <script src="questions-U3.js?v=f5a7264a"></script>
-<script src="essentiel.js?v=93b1ee7c"></script>
+<script src="essentiel.js?v=412cefda"></script>
 <script>
   // ---------- Profil : gardé dans le navigateur, et en ligne si l'élève est connecté ----------
   const $ = id => document.getElementById(id);
@@ -279,7 +278,7 @@
     if (!lireProfil().pseudo) $("profil-modifier").open = true;
   });
 </script>
-<script src="vivant.js?v=350e7712" defer></script>
+<script src="vivant.js?v=a055ba08" defer></script>
 <script type="module" src="compte.js?v=c47ff213"></script>
 <!-- Mesure d'audience anonyme, sans cookies (GoatCounter) -->
 <script data-goatcounter="https://opticonversion.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>

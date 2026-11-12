@@ -214,7 +214,7 @@
     const actions = $("def-fin-actions");
     actions.innerHTML = "";
     const bouton = (texte, classe, action) => { const b = document.createElement("button"); b.type = "button"; b.className = "bouton " + classe; b.textContent = texte; b.onclick = action; actions.appendChild(b); };
-    if (aRevoir.length) bouton("Revoir les " + aRevoir.length + " à revoir →", "", () => lancerRevision(aRevoir.slice()));
+    if (aRevoir.length) bouton(aRevoir.length > 1 ? "Revoir ces " + aRevoir.length + " définitions" : "Revoir cette définition", "", () => lancerRevision(aRevoir.slice()));
     bouton("Retour à la liste", aRevoir.length ? "secondaire" : "", retourListe);
     $("ecran-fin").scrollIntoView({ behavior: "smooth", block: "start" });
   }

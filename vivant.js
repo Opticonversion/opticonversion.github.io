@@ -1,12 +1,12 @@
 // =====================================================================
 // VIVANT · le mouvement du site (chargé sur toutes les pages)
 // ---------------------------------------------------------------------
-//  1. Reflet : une lumière suit le pointeur sur les cartes et les réponses.
-//  2. Relief : les cartes d'épreuve et de niveau s'inclinent sous le pointeur.
-//  3. Étincelles : une bonne réponse fait jaillir quelques grains d'or.
-//  4. Personnages : un clic sur le compagnon le fait sauter.
-//  5. Compteurs : les chiffres de l'accueil montent depuis zéro.
-//  6. Calculateurs : le résultat se « met au point » à chaque calcul.
+//  1. Relief : les cartes d'épreuve et de niveau s'inclinent sous le pointeur.
+//  2. Étincelles : une bonne réponse fait jaillir quelques grains d'or.
+//  3. Personnages : un clic sur le compagnon le fait sauter.
+//  4. Calculateurs : le résultat se « met au point » à chaque calcul.
+// (Retirés le 2026-11-12 parce qu'ils faisaient « site fait par une IA » :
+//  la lumière qui suivait le pointeur et les compteurs de l'accueil.)
 // Tout est coupé si l'élève a désactivé les animations dans son système.
 // Aucun de ces effets n'est nécessaire au fonctionnement des pages.
 // =====================================================================
@@ -15,8 +15,7 @@
   const calme = matchMedia("(prefers-reduced-motion: reduce)").matches;
   const souris = matchMedia("(hover: hover) and (pointer: fine)").matches;
 
-  // ---------------- 1 et 2. Reflet et relief (ordinateur seulement) ----------------
-  const REFLET = "section, .carte, .epreuve, .outil-vedette, .niveau, .choix button";
+  // ---------------- 1. Relief (ordinateur seulement) ----------------
   const RELIEF = ".epreuve, .niveau";
   if (souris && !calme) {
     let dernier = null, incline = null, prevu = false;
@@ -24,15 +23,7 @@
       prevu = false;
       const e = dernier;
       if (!e || !e.target || !e.target.closest) return;
-      // Reflet : position du pointeur dans chaque carte survolée (la carte et celles qui la contiennent)
-      let el = e.target.closest(REFLET), tours = 0;
-      while (el && tours++ < 3) {
-        const r = el.getBoundingClientRect();
-        el.style.setProperty("--mx", (e.clientX - r.left) + "px");
-        el.style.setProperty("--my", (e.clientY - r.top) + "px");
-        el = el.parentElement && el.parentElement.closest(REFLET);
-      }
-      // Relief : la carte penche vers le pointeur
+      // La carte penche vers le pointeur
       const carte = e.target.closest(RELIEF);
       if (incline && incline !== carte) { incline.style.removeProperty("--rx"); incline.style.removeProperty("--ry"); }
       incline = carte && !carte.disabled ? carte : null;
@@ -52,7 +43,7 @@
     });
   }
 
-  // ---------------- 3. Étincelles d'une bonne réponse ----------------
+  // ---------------- 2. Étincelles d'une bonne réponse ----------------
   function etincelles(x, y) {
     if (calme || !document.body.animate) return;
     for (let i = 0; i < 16; i++) {
@@ -80,9 +71,9 @@
   });
   window.etincelles = etincelles;
 
-  // ---------------- 4. Un clic sur le compagnon le fait sauter ----------------
+  // ---------------- 3. Un clic sur le compagnon le fait sauter ----------------
   document.addEventListener("click", e => {
-    const img = e.target.closest && e.target.closest(".expl-diosl, .bilan-nounours, .jeu-compagnon, .def-fin-compagnon, .profil-avatar");
+    const img = e.target.closest && e.target.closest(".expl-diosl, .bilan-nounours, .jeu-compagnon, .def-fin-compagnon, .profil-avatar, .tete-compagnon");
     if (!img || calme) return;
     img.classList.remove("perso-saut");
     void img.offsetWidth;
@@ -90,27 +81,7 @@
     img.addEventListener("animationend", () => img.classList.remove("perso-saut"), { once: true });
   });
 
-  // ---------------- 5. Les chiffres de l'accueil montent depuis zéro ----------------
-  if (!calme && "IntersectionObserver" in window) {
-    const vus = new IntersectionObserver(entrees => {
-      entrees.forEach(en => {
-        if (!en.isIntersecting) return;
-        vus.unobserve(en.target);
-        const cible = parseInt(en.target.textContent, 10);
-        if (!(cible > 0) || String(cible) !== en.target.textContent.trim()) return;
-        const debut = performance.now(), duree = 1100;
-        const pas = t => {
-          const a = Math.min(1, (t - debut) / duree);
-          en.target.textContent = Math.round(cible * (1 - Math.pow(1 - a, 4)));
-          if (a < 1) requestAnimationFrame(pas);
-        };
-        requestAnimationFrame(pas);
-      });
-    }, { threshold: 0.6 });
-    document.querySelectorAll(".chiffre b").forEach(b => vus.observe(b));
-  }
-
-  // ---------------- 6. Calculateurs : le résultat se met au point ----------------
+  // ---------------- 4. Calculateurs : le résultat se met au point ----------------
   if (!calme && "MutationObserver" in window) {
     document.querySelectorAll(".resultat").forEach(zone => {
       new MutationObserver(() => {
