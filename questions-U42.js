@@ -11,6 +11,10 @@
 //    choix       : 4 réponses proposées
 //    bonne       : le NUMÉRO de la bonne réponse (0 = la 1re, 1 = la 2e…)
 //    explication : ce qui s'affiche après la réponse
+//    indice, schema, schemaTexte… : facultatifs (voir .claude/guide-schemas-indices.md)
+//    type: "calcul" + reponse : question où l'élève tape la valeur (pas de choix ni de bonne)
+//    cas, etape, contexte : seulement pour les questions du mini-sujet
+//                  (déclaré par CAS.push tout en bas du fichier)
 //
 //  Règles : calculatrice AUTORISÉE à l'U42 (mode examen ou type collège),
 //  mais on garde des chiffres simples pour calculer vite.
@@ -20,7 +24,7 @@
 
 QUESTIONS.push(
 
-  // ---------- Conjugaison (tombé 7 années sur 7) ----------
+  // ---------- Conjugaison (tombé 8 années sur 8) ----------
   {
     id: "U42-001", epreuve: "U42", theme: "Conjugaison", session: "2024",
     question: "Une lentille mince convergente a une distance focale image f' = 50 mm. Un objet réel est placé à 75 mm devant elle (OA = −75 mm). Où se trouve l'image ?",
@@ -81,6 +85,56 @@ QUESTIONS.push(
     explication: "1/f' = (n − 1) × (1/R1 − 1/R2) avec R1 = +R et R2 = −R, donc 1/f' = (n − 1) × 2/R. D'où R = 2 × (n − 1) × f' = 2 × 0,5 × 100 = 100 mm.",
     indice: "Utilise la formule des opticiens 1/f' = (n − 1)(1/R1 − 1/R2). Pour une lentille équiconvexe, attention au signe de R2 : la deuxième face est bombée dans l'autre sens."
   },
+  {
+    id: "U42-043", epreuve: "U42", theme: "Conjugaison", session: "2021 et 2024",
+    question: "Consigne du sujet : « Montrer que l'image se forme à 60 mm après la lentille. » Lentille mince convergente de f' = +20 mm, objet réel placé à 30 mm devant elle. Quelle démarche est juste ?",
+    choix: [
+      "OA = +30 mm. Descartes : 1/OA' = 1/OA − 1/f' = 1/30 − 1/20 = −1/60. Donc l'image est à 60 mm de la lentille.",
+      "D'après la relation de conjugaison de Descartes, on trouve directement OA' = +60 mm.",
+      "Objet réel : OA = −30 mm. Descartes : 1/OA' = 1/f' + 1/OA = 1/20 − 1/30 = 1/60. Donc OA' = +60 mm : l'image est réelle, 60 mm après la lentille.",
+      "Objet réel : OA = −30 mm. Descartes : 1/OA' − 1/OA = 1/f', donc 1/OA' = 1/20 − 1/30."
+    ],
+    bonne: 2,
+    explication: "Dans un « Montrer que », la valeur est donnée : ce sont la méthode et la rédaction qui rapportent les points. Trois temps : la donnée avec son signe (objet réel, OA = −30 mm), la relation appliquée avec les chiffres (1/OA' = 1/20 − 1/30 = 1/60), la conclusion (OA' = +60 mm, image réelle). La copie qui part de OA = +30 mm trouve −1/60 puis écrit « 60 mm » : elle arrange le résultat, et le correcteur le voit. Citer Descartes sans calcul ne démontre rien. S'arrêter avant le résultat ne répond pas à la consigne.",
+    indice: "Une démarche complète tient en trois temps : la donnée avec son signe, la relation appliquée avec les chiffres, puis une phrase de conclusion."
+  },
+  {
+    id: "U42-044", epreuve: "U42", theme: "Conjugaison", session: "complément",
+    question: "Copie d'un élève : « Lentille divergente de distance focale 40 mm, objet réel à 40 mm devant elle, donc OA = −40 mm. Descartes : 1/OA' = 1/40 − 1/40 = 0. L'image est à l'infini. » Où est l'erreur ?",
+    choix: [
+      "OA devrait être positif, puisque l'objet est réel",
+      "Il n'y a pas d'erreur : un objet placé à la distance focale donne une image à l'infini",
+      "La relation de Descartes ne s'applique pas à une lentille divergente",
+      "Pour une divergente, f' = −40 mm : 1/OA' = −1/40 − 1/40, donc OA' = −20 mm"
+    ],
+    bonne: 3,
+    explication: "Une lentille divergente a une distance focale image négative : f' = −40 mm. Alors 1/OA' = 1/f' + 1/OA = −1/40 − 1/40 = −1/20, donc OA' = −20 mm. L'image est virtuelle, droite et deux fois plus petite, entre l'objet et la lentille. L'objet n'est pas au foyer objet : pour une divergente, F est de l'autre côté, après la lentille. Avec une lentille divergente, un objet réel donne toujours une image virtuelle.",
+    indice: "Relis la copie signe par signe. Quel est le signe de la distance focale image d'une lentille divergente ?"
+  },
+  {
+    id: "U42-054", epreuve: "U42", theme: "Conjugaison", session: "2021 et 2024",
+    type: "calcul",
+    question: "Lentille mince convergente de f' = +40 mm. Un objet réel est placé à 60 mm devant elle. Calcule OA', avec son signe.",
+    reponse: { valeur: 120, unite: "mm", decimales: 0, signe: true },
+    explication: "Objet réel : OA = −60 mm. Descartes : 1/OA' = 1/f' + 1/OA = 1/40 − 1/60 = 3/120 − 2/120 = 1/120. Donc OA' = +120 mm : l'image est réelle, 120 mm après la lentille.",
+    indice: "Un objet réel placé devant la lentille a un OA négatif. Utilise la relation de conjugaison de Descartes, sans perdre les signes."
+  },
+  {
+    id: "U42-055", epreuve: "U42", theme: "Conjugaison", session: "2024 et 2025",
+    type: "calcul",
+    question: "Un objectif donne d'un objet placé à OA = −36 mm une image à OA' = +180 mm. Calcule le grandissement transversal, avec son signe.",
+    reponse: { valeur: -5, unite: "", decimales: 0, signe: true },
+    explication: "γ = OA' / OA = 180 / (−36) = −5. L'image est 5 fois plus grande que l'objet, et renversée : c'est ce que dit le signe moins.",
+    indice: "Le grandissement transversal est le rapport de la position de l'image à celle de l'objet, mesurées depuis le centre O. Garde les signes."
+  },
+  {
+    id: "U42-056", epreuve: "U42", theme: "Conjugaison", session: "complément",
+    type: "calcul",
+    question: "Lentille mince divergente de f' = −50 mm. Un objet réel est placé à 200 mm devant elle. Calcule OA', avec son signe.",
+    reponse: { valeur: -40, unite: "mm", decimales: 0, signe: true },
+    explication: "OA = −200 mm et f' = −50 mm. Descartes : 1/OA' = 1/f' + 1/OA = −1/50 − 1/200 = −4/200 − 1/200 = −5/200. Donc OA' = −40 mm : l'image est virtuelle, du côté de l'objet, droite et 5 fois plus petite (γ = −40 / −200 = +0,2).",
+    indice: "Deux signes à ne pas oublier : celui de OA (objet réel) et celui de f' (lentille divergente)."
+  },
 
   // ---------- Loupe et microscope ----------
   {
@@ -106,6 +160,14 @@ QUESTIONS.push(
     bonne: 3,
     explication: "Gc microscope = |gy objectif| × Gc oculaire = 40 × 10 = 400. L'objectif agrandit l'objet en une image intermédiaire, l'oculaire joue le rôle de loupe sur cette image.",
     indice: "Dans un microscope, l'objectif agrandit d'abord l'objet, puis l'oculaire sert de loupe sur cette image. Les deux effets se multiplient (on prend le grandissement en valeur absolue)."
+  },
+  {
+    id: "U42-057", epreuve: "U42", theme: "Loupe et microscope", session: "2018 et 2025",
+    type: "calcul",
+    question: "Une loupe a une distance focale f' = 40 mm. Calcule son grossissement commercial.",
+    reponse: { valeur: 6.25, unite: "", decimales: 2, signe: false },
+    explication: "Puissance : P = 1 / f' = 1 / 0,040 = 25 δ. Grossissement commercial : Gc = P / 4 = 25 / 4 = 6,25. Le 4 vient de la distance de référence de 25 cm (1 / 0,25 = 4).",
+    indice: "Passe d'abord par la puissance en dioptries, avec la focale en mètres. Le grossissement commercial se rapporte à une distance de 25 cm."
   },
 
   // ---------- Lunettes afocales ----------
@@ -153,6 +215,14 @@ QUESTIONS.push(
     explication: "gy = −1 : l'objet est à 2f' avant la lentille (−50 mm) et l'image à 2f' après (+50 mm). L'image intermédiaire est donc déplacée de 50 + 50 = 100 mm, soit 4 × f'V.",
     indice: "Avec un grandissement de −1, l'objet et l'image sont à la même distance de la lentille, de part et d'autre. Laquelle ? Pense au cas « 2f' »."
   },
+  {
+    id: "U42-058", epreuve: "U42", theme: "Lunettes afocales", session: "2023 et 2026",
+    type: "calcul",
+    question: "Lunette de Kepler afocale : objectif de f'ob = 200 mm, oculaire de f'oc = 25 mm. Calcule son grossissement, avec son signe.",
+    reponse: { valeur: -8, unite: "", decimales: 0, signe: true },
+    explication: "G = −f'ob / f'oc = −200 / 25 = −8. Le signe moins indique une image renversée : c'est le cas de toute lunette de Kepler sans redresseur.",
+    indice: "Pour une lunette afocale, le grossissement est le rapport des deux focales. Demande-toi si l'image d'une lunette de Kepler est droite ou renversée."
+  },
 
   // ---------- Doublets et achromatisme ----------
   {
@@ -197,8 +267,16 @@ QUESTIONS.push(
     explication: "ν = (nd − 1) / (nF − nC) = 0,500 / 0,008 = 62,5. Plus ν est grand, moins le verre disperse les couleurs. Un verre « ED » (Extra low Dispersion) a un ν très élevé (souvent > 80).",
     indice: "Le nombre d'Abbe compare l'écart à l'air (nd − 1) à l'écart entre le bleu et le rouge (nF − nC). Un grand nombre veut dire peu de dispersion."
   },
+  {
+    id: "U42-059", epreuve: "U42", theme: "Doublets et achromatisme", session: "2025 et 2026",
+    type: "calcul",
+    question: "Doublet de deux lentilles minces : f'1 = 60 mm, f'2 = 30 mm, séparées de e = 40 mm. Calcule sa distance focale image f'.",
+    reponse: { valeur: 36, unite: "mm", decimales: 0, signe: true },
+    explication: "Formule de Gullstrand : f' = f'1 × f'2 / (f'1 + f'2 − e) = 60 × 30 / (60 + 30 − 40) = 1 800 / 50 = 36 mm.",
+    indice: "Formule du doublet (Gullstrand) : le produit des deux focales, divisé par leur somme diminuée de l'écart e."
+  },
 
-  // ---------- Champs et diaphragmes (tombé 7 années sur 7) ----------
+  // ---------- Champs et diaphragmes (tombé 8 années sur 8) ----------
   {
     id: "U42-021", epreuve: "U42", theme: "Champs et diaphragmes", session: "2022",
     question: "Qu'appelle-t-on la pupille d'entrée d'un système optique ?",
@@ -243,6 +321,63 @@ QUESTIONS.push(
     explication: "Demi-champ angulaire : tan ω = 3 / 60 = 0,05. À 50 m, demi-largeur = 50 × 0,05 = 2,5 m, donc largeur totale 2 × 2,5 = 5 m. Piège : ne pas oublier de doubler.",
     indice: "Le rayon dans le plan focal et la focale de l'objectif donnent la tangente du demi-champ. Reporte cet angle à 50 m, et n'oublie pas de doubler."
   },
+  {
+    id: "U42-045", epreuve: "U42", theme: "Champs et diaphragmes", session: "2022 et 2023",
+    question: "Consigne du sujet : « Montrer que le rayon du champ de pleine lumière vaut 3 mm. » Pupille de rayon 9 mm en x = 0, diaphragme de champ de rayon 5 mm en x = 40 mm, plan des champs en x = 60 mm. Quelle démarche est juste ?",
+    choix: [
+      "Droite par les bords du même côté, (0 ; 9) et (40 ; 5) : pente = (5 − 9)/40 = −0,1. En x = 60 : 9 − 0,1 × 60 = 3 mm. Le rayon du champ de pleine lumière vaut bien 3 mm.",
+      "Droite par le centre de la pupille (0 ; 0) et le bord du diaphragme (40 ; 5) : pente = 5/40 = 0,125. En x = 60 : 0,125 × 60 = 7,5 mm. Le rayon du champ vaut 7,5 mm.",
+      "Sur le schéma, le rayon tracé arrive à 3 mm de l'axe dans le plan des champs. Le rayon du champ de pleine lumière vaut donc bien 3 mm.",
+      "Droite par les bords du même côté, (0 ; 9) et (40 ; 5) : pente = (5 − 9)/40 = −0,1. L'équation de la droite est y = 9 − 0,1 x."
+    ],
+    bonne: 0,
+    explication: "Dans un « Montrer que », la valeur est donnée : les points sont pour la méthode, le calcul et la conclusion. Ici le plan des champs (x = 60) est au-delà du diaphragme (x = 40) : la droite de pleine lumière passe par les bords du même côté. Pente −0,1, donc en x = 60 : 9 − 6 = 3 mm. La droite par le centre de la pupille donne le champ moyen (7,5 mm). Lire la valeur sur le schéma ne démontre rien. S'arrêter à l'équation de la droite ne répond pas à la consigne.",
+    indice: "Trois temps : quelle droite (et pourquoi celle-là), le calcul jusqu'au plan des champs, puis la phrase qui répond à la consigne."
+  },
+  {
+    id: "U42-046", epreuve: "U42", theme: "Champs et diaphragmes", session: "2025",
+    question: "Copie d'un élève : « Pupille de rayon 2 mm en x = 0, diaphragme de champ de rayon 5 mm en x = 100 mm, plan des champs en x = 80 mm. Pleine lumière : bords du même côté, (0 ; 2) et (100 ; 5). En x = 80 : 2 + 0,03 × 80 = 4,4 mm. » Où est l'erreur ?",
+    choix: [
+      "Il fallait passer par le centre de la pupille : on trouve 4 mm",
+      "Le plan des champs est entre la pupille et le diaphragme : il fallait les bords opposés, on trouve 3,6 mm",
+      "Le calcul est faux : 2 + 0,03 × 80 = 4,8 mm",
+      "Il n'y a pas d'erreur : la pleine lumière, c'est toujours les bords du même côté"
+    ],
+    bonne: 1,
+    explication: "Ici le plan des champs (x = 80) est ENTRE la pupille (x = 0) et le diaphragme de champ (x = 100). Les rayons se croisent dans ce plan avant d'atteindre le diaphragme : celui qui limite la pleine lumière joint les bords opposés, (0 ; −2) et (100 ; 5). Pente = 7/100 = 0,07, donc en x = 80 : −2 + 0,07 × 80 = 3,6 mm. Les 4,4 mm de la copie sont la limite du champ total. Méthode sûre : trace les deux droites qui s'appuient sur les bords ; celle qui donne le plus petit champ limite la pleine lumière. La règle « bords du même côté » vaut quand le plan des champs est en dehors de l'intervalle pupille-diaphragme, le cas le plus fréquent.",
+    indice: "Regarde où se trouve le plan des champs par rapport à la pupille et au diaphragme de champ. Les rayons se croisent-ils avant d'atteindre le diaphragme ?",
+    schema: "img/schemas/U42/champs-plan-entre-pupille-diaphragme.svg",
+    schemaTexte: "Pupille de rayon 2 mm, diaphragme de champ de rayon 5 mm, plan des champs placé entre les deux. Le faisceau converge en B puis s'ouvre jusqu'au diaphragme : la droite par les bords opposés donne 3,6 mm (pleine lumière), celle par les bords du même côté 4,4 mm (champ total)."
+  },
+  {
+    id: "U42-047", epreuve: "U42", theme: "Champs et diaphragmes", session: "2022 et 2026",
+    question: "Un capteur mesure 6 × 8 mm. Le champ de pleine lumière image a un rayon de 5,5 mm. Consigne du sujet : « Le capteur est-il éclairé uniformément ? Justifier. » Quelle réponse est complète et juste ?",
+    choix: [
+      "Diagonale du capteur : √(6² + 8²) = 10 mm. Elle est plus grande que le rayon du champ (5,5 mm) : les coins sont assombris, le capteur n'est pas éclairé uniformément.",
+      "Oui : le capteur est entièrement dans le champ de pleine lumière, il est donc éclairé uniformément.",
+      "Demi-diagonale du capteur : √(3² + 4²) = 5 mm. Elle est plus petite que le rayon du champ (5,5 mm) : même les coins sont en pleine lumière, le capteur est éclairé uniformément.",
+      "La demi-diagonale du capteur vaut √(3² + 4²) = 5 mm et le rayon du champ de pleine lumière vaut 5,5 mm."
+    ],
+    bonne: 2,
+    explication: "On compare ce qui est comparable : la distance du centre à un coin (la demi-diagonale) et le RAYON du champ. √(3² + 4²) = 5 mm, plus petit que 5,5 mm : même les coins reçoivent toute la lumière. Comparer la diagonale entière (10 mm) au rayon est faux : il faudrait la comparer au diamètre (11 mm). Répondre « oui » sans chiffre ne justifie rien. Donner les deux chiffres sans conclure ne répond pas à la question.",
+    indice: "Quel point du capteur est le plus éloigné du centre ? Compare cette distance au rayon du champ, sans oublier la phrase de conclusion."
+  },
+  {
+    id: "U42-060", epreuve: "U42", theme: "Champs et diaphragmes", session: "2023 et 2024",
+    type: "calcul",
+    question: "Dans l'espace d'étude : pupille de rayon 10 mm en x = 0, diaphragme de champ de rayon 6 mm en x = 40 mm, plan des champs en x = 60 mm. Calcule le rayon du champ de pleine lumière.",
+    reponse: { valeur: 4, unite: "mm", decimales: 0, signe: false },
+    explication: "Le plan des champs (x = 60) est au-delà du diaphragme (x = 40) : la droite de pleine lumière passe par les bords du même côté, (0 ; 10) et (40 ; 6). Pente = (6 − 10)/40 = −0,1. En x = 60 : 10 − 0,1 × 60 = 4 mm. (Champ moyen : 9 mm ; champ total : 14 mm.)",
+    indice: "Écris l'équation de la droite appuyée sur les deux bords du même côté, puis prolonge-la jusqu'au plan des champs."
+  },
+  {
+    id: "U42-061", epreuve: "U42", theme: "Champs et diaphragmes", session: "2018 et 2023",
+    type: "calcul",
+    question: "Une lunette a un objectif de f'ob = 100 mm. Dans son plan focal image, le champ de pleine lumière a un rayon de 4 mm. Calcule la largeur du champ de pleine lumière sur un objet situé à 30 m.",
+    reponse: { valeur: 2.4, unite: "m", decimales: 1, signe: false },
+    explication: "Le rayon du champ dans le plan focal donne l'angle : tan ω = 4 / 100 = 0,04. À 30 m : demi-largeur = 30 × 0,04 = 1,2 m, donc largeur = 2 × 1,2 = 2,4 m. Piège : ne pas oublier de doubler.",
+    indice: "Le rayon du champ et la focale de l'objectif donnent la tangente du demi-champ. Reporte cet angle à 30 m. On demande une largeur, pas une demi-largeur."
+  },
 
   // ---------- Ouverture et résolution ----------
   {
@@ -284,6 +419,14 @@ QUESTIONS.push(
     bonne: 3,
     explication: "La limite de l'ensemble est la PLUS GRANDE des deux : ici l'œil (12 µm). 10 µm < 12 µm, donc les deux traits ne sont pas séparés.",
     indice: "Quand deux causes limitent la résolution, c'est la plus sévère qui commande. Compare ensuite l'écart entre les traits à cette limite."
+  },
+  {
+    id: "U42-062", epreuve: "U42", theme: "Ouverture et résolution", session: "2018 et 2024",
+    type: "calcul",
+    question: "Un objectif a une pupille d'entrée de diamètre 20 mm. Pour λ = 550 nm, la diffraction limite sa résolution à α = 1,22 λ / D. Calcule le plus petit détail qu'il sépare sur un objet situé à 50 m.",
+    reponse: { valeur: 1.7, unite: "mm", decimales: 1, tolerance: 0.06, signe: false },
+    explication: "Tout en mètres : α = 1,22 × 550 × 10⁻⁹ / 0,020 ≈ 3,36 × 10⁻⁵ rad. À 50 m : détail = α × 50 ≈ 1,68 × 10⁻³ m, soit environ 1,7 mm. Piège : les nanomètres et les millimètres doivent être convertis en mètres avant de diviser.",
+    indice: "Calcule d'abord l'angle limite en radians, avec λ et D en mètres. Un angle petit multiplié par une distance donne une longueur."
   },
 
   // ---------- Transmission et antireflet ----------
@@ -328,6 +471,14 @@ QUESTIONS.push(
     indice: "La lumière fait un aller-retour dans la couche. Ce trajet, multiplié par l'indice de la couche, doit valoir une demi-longueur d'onde.",
     schema: "img/schemas/U42/antireflet-couche-130-520nm.svg",
     schemaTexte: "Un rayon se réfléchit une fois sur la couche et une fois sur le verre. Les deux reflets sont décalés d'une demi-longueur d'onde : ils s'annulent. Épaisseur e = 520 / (4 × 1,30) = 100 nm."
+  },
+  {
+    id: "U42-063", epreuve: "U42", theme: "Transmission et antireflet", session: "2023 et 2024",
+    type: "calcul",
+    question: "Un instrument compte 5 lentilles non traitées dans l'air (T = 0,96 par face). Calcule sa transmission totale, en pourcentage.",
+    reponse: { valeur: 66, unite: "%", decimales: 0, signe: false },
+    explication: "5 lentilles = 10 faces. T totale = 0,96¹⁰ ≈ 0,665, soit environ 66 %. Piège : ce n'est pas 1 − 10 × 0,04 = 60 %, car les transmissions se multiplient.",
+    indice: "Compte les faces traversées (combien par lentille ?). Les transmissions successives se multiplient, elles ne se soustraient pas."
   },
 
   // ---------- Interférences et réseaux ----------
@@ -396,6 +547,92 @@ QUESTIONS.push(
     bonne: 3,
     explication: "Exposition = E × t constante. Avec le filtre, E2 = 0,25 × E1, donc t2 = t1 / 0,25 = 4 × t1 = 4/500 = 1/125 s. Le temps de pose augmente.",
     indice: "Pour garder la même exposition, le produit éclairement × temps de pose doit rester constant. Si le filtre retire de la lumière, le temps doit compenser."
+  },
+
+  // ---------- Mini-sujet : jumelles de théâtre (6 étapes, déclaré par CAS.push en bas du fichier) ----------
+  {
+    id: "U42-048", epreuve: "U42", theme: "Conjugaison", session: "2023 et 2026",
+    cas: "CAS-U42-01", etape: 1,
+    question: "La scène, à 24 m, est considérée comme à l'infini. Quelle chaîne des images est juste ?",
+    choix: [
+      "AB à l'infini → A1B1 en F'1, confondu avec F2 → A'B' à l'infini",
+      "AB à l'infini → A1B1 en F'1, confondu avec F'2 → A'B' à l'infini",
+      "AB à l'infini → A1B1 à l'infini → A'B' en F'2",
+      "AB en F1 → A1B1 à l'infini → A'B' en F'2"
+    ],
+    bonne: 0,
+    explication: "L'objet est à l'infini : son image par l'objectif se forme dans le plan focal image, en F'1. La cliente est emmétrope et n'accommode pas : l'image finale doit être à l'infini. Pour cela, A1B1 doit se trouver au foyer OBJET de l'oculaire, F2. Donc F'1 = F2 : les jumelles sont afocales, et la distance entre les lentilles vaut f'1 + f'2 = 120 − 40 = 80 mm, comme sur la notice. Piège : pour une lentille divergente, F2 est après la lentille et F'2 avant.",
+    indice: "Deux questions à te poser : où se forme l'image d'un objet à l'infini ? Et où doit se trouver un objet pour que l'oculaire renvoie son image à l'infini ?"
+  },
+  {
+    id: "U42-049", epreuve: "U42", theme: "Lunettes afocales", session: "2018",
+    cas: "CAS-U42-01", etape: 2,
+    question: "Quel est le grossissement de ces jumelles ? Est-il conforme à la notice, et l'image est-elle à l'endroit ?",
+    choix: [
+      "G = −3 : conforme à la notice, mais image renversée",
+      "G = +3 : conforme à la notice, image droite",
+      "G ≈ 2 : non conforme à la notice",
+      "G = +1/3 : la scène paraît 3 fois plus petite"
+    ],
+    bonne: 1,
+    explication: "Pour une lunette afocale : G = −f'1 / f'2 = −120 / (−40) = +3. C'est bien le « 3× » de la notice. Le signe + veut dire que l'image est droite : pas besoin de prismes pour la redresser, c'est pour cela que des jumelles de théâtre sont si courtes. Avec deux lentilles convergentes (lunette de Kepler), G serait négatif et l'image renversée. Le « 2 » vient de la formule de la loupe (Gc = P/4), qui ne s'applique pas à une lunette.",
+    indice: "Pour une lunette afocale, le grossissement est le rapport des deux focales, avec un signe moins devant. Garde le signe de f'2 : l'oculaire est divergent."
+  },
+  {
+    id: "U42-050", epreuve: "U42", theme: "Champs et diaphragmes", session: "2018",
+    cas: "CAS-U42-01", etape: 3,
+    contexte: "La monture de l'objectif (rayon 20 mm) est le diaphragme d'ouverture. La monture de l'oculaire (rayon 10 mm), 80 mm plus loin, est le diaphragme de champ. Le plan des champs est celui de l'image intermédiaire A1B1, à 120 mm de l'objectif.",
+    question: "Quel est le rayon du champ de pleine lumière dans le plan de l'image intermédiaire ?",
+    choix: ["10 mm", "15 mm", "5 mm", "25 mm"],
+    bonne: 2,
+    explication: "Le plan des champs (x = 120) est au-delà du diaphragme de champ (x = 80) : la droite de pleine lumière passe par les bords du même côté, (0 ; 20) et (80 ; 10). Pente = (10 − 20)/80 = −0,125. En x = 120 : 20 − 0,125 × 120 = 5 mm. Par le centre de l'objectif, on trouve le champ moyen (15 mm) ; par les bords opposés, le champ total (25 mm). 10 mm est seulement le rayon de l'oculaire.",
+    indice: "Place l'objectif en x = 0, l'oculaire en x = 80 et le plan des champs en x = 120. Quelle droite, appuyée sur deux bords, limite la pleine lumière ?",
+    schema: "img/schemas/U42/cas-jumelles-champ.svg",
+    schemaTexte: "Objectif de rayon 20 mm, oculaire de rayon 10 mm placé 80 mm plus loin, plan de l'image intermédiaire à 120 mm. Trois droites passent par le bord de l'oculaire : bords du même côté (5 mm, pleine lumière), centre de l'objectif (15 mm, champ moyen), bords opposés (25 mm, champ total)."
+  },
+  {
+    id: "U42-051", epreuve: "U42", theme: "Champs et diaphragmes", session: "2018 et 2023",
+    cas: "CAS-U42-01", etape: 4,
+    contexte: "Résultat à garder pour la suite : dans le plan de l'image intermédiaire, le champ de pleine lumière a un rayon de 5 mm.",
+    question: "Depuis sa place, à 24 m, quelle largeur de scène la cliente voit-elle en pleine lumière ?",
+    choix: ["1 m", "6 m", "8 m", "2 m"],
+    bonne: 3,
+    explication: "Le rayon du champ dans le plan focal de l'objectif donne l'angle : tan ω = 5 / 120 ≈ 0,042, soit ω ≈ 2,4°. À 24 m : demi-largeur = 24 × 5 / 120 = 1 m, donc largeur = 2 × 1 = 2 m. Elle voit un chanteur en entier, mais pas toute la scène d'un seul regard. Pièges : oublier de doubler (1 m), diviser par la focale de l'oculaire (6 m), ou partir du rayon de l'objectif au lieu du rayon du champ (8 m).",
+    indice: "Le rayon du champ et la focale de l'objectif donnent la tangente du demi-champ. Reporte cet angle à 24 m, et pense que la largeur vaut deux fois la demi-largeur."
+  },
+  {
+    id: "U42-052", epreuve: "U42", theme: "Ouverture et résolution", session: "2018",
+    cas: "CAS-U42-01", etape: 5,
+    contexte: "Résultat à garder : à 24 m, le champ de pleine lumière couvre 2 m de large. L'œil de la cliente sépare deux points vus sous un angle d'au moins 3 × 10⁻⁴ rad. La diffraction par l'objectif donne une limite de 1,7 × 10⁻⁵ rad.",
+    question: "Avec les jumelles, quel est le plus petit détail qu'elle peut distinguer sur la scène, à 24 m ?",
+    choix: ["7,2 mm", "2,4 mm", "0,4 mm", "21,6 mm"],
+    bonne: 1,
+    explication: "Les jumelles grossissent 3 fois : ramenée dans l'espace objet, la limite de l'œil vaut 3 × 10⁻⁴ / 3 = 1 × 10⁻⁴ rad. Elle est plus grande que la limite de diffraction (1,7 × 10⁻⁵ rad) : c'est donc l'œil qui limite. À 24 m : 24 × 1 × 10⁻⁴ = 2,4 × 10⁻³ m, soit 2,4 mm. Sans jumelles, elle ne séparerait que 24 × 3 × 10⁻⁴ m, soit 7,2 mm. 0,4 mm est la limite de diffraction seule ; 21,6 mm vient d'une multiplication par 3 au lieu d'une division.",
+    indice: "Ramène d'abord la limite de l'œil dans l'espace objet en la divisant par le grossissement. Compare-la à la limite de diffraction : laquelle commande ?"
+  },
+  {
+    id: "U42-053", epreuve: "U42", theme: "Lunettes afocales", session: "2019 et 2023",
+    cas: "CAS-U42-01", etape: 6,
+    contexte: "Résultats à garder : avec les jumelles, elle sépare des détails de 2,4 mm à 24 m (7,2 mm à l'œil nu). Elle veut lire les expressions des chanteurs, donc distinguer des détails de 5 mm. La scène mesure 12 m de large.",
+    question: "Quelle conclusion donner à la cliente ?",
+    choix: [
+      "Le grossissement vaut 3, le champ de pleine lumière 2 m et le plus petit détail séparé 2,4 mm.",
+      "Ces jumelles conviennent à ce qu'elle veut faire.",
+      "Elles ne conviennent pas : le champ de 2 m est plus petit que la scène de 12 m, elle ne verra donc pas les chanteurs.",
+      "Elles conviennent : elle sépare des détails de 2,4 mm, donc ceux de 5 mm (impossible à l'œil nu : 7,2 mm), et voit un chanteur en entier dans un champ de 2 m. Elle ne verra pas toute la scène d'un seul regard."
+    ],
+    bonne: 3,
+    explication: "Une conclusion complète fait trois choses : elle répond à la question du client, elle s'appuie sur les chiffres trouvés et elle signale la limite de l'appareil. Ici : détails de 2,4 mm séparés, donc ceux de 5 mm aussi, alors qu'à l'œil nu elle s'arrête à 7,2 mm ; champ de 2 m, donc un chanteur en entier, mais pas les 12 m de scène à la fois. Écrire seulement « elles conviennent » ne rapporte pas les points. Aligner les chiffres sans conclure non plus. Et un petit champ n'empêche pas de voir les chanteurs : il oblige seulement à déplacer les jumelles.",
+    indice: "Une bonne conclusion répond à la question du client, s'appuie sur les chiffres trouvés et signale la limite de l'appareil."
   }
 
 );
+
+// ---------- Mini-sujet (cas pratique) : ses questions portent cas: "CAS-U42-01" et etape: 1, 2, 3… ----------
+CAS.push({
+  id: "CAS-U42-01",
+  epreuve: "U42",
+  titre: "Des jumelles de théâtre pour une abonnée de l'opéra",
+  contexte: "Une cliente abonnée à l'opéra veut mieux voir les chanteurs depuis sa place au balcon, à 24 m de la scène. Tu lui proposes des jumelles de théâtre : une lunette de Galilée, faite d'un objectif convergent et d'un oculaire divergent, sans prisme. Elle est emmétrope et regarde sans accommoder.",
+  annexe: { titre: "Notice des jumelles", colonnes: ["Caractéristique", "Valeur"], lignes: [["Grossissement", "3×"], ["Objectif (convergent)", "f'1 = +120 mm, diamètre 40 mm"], ["Oculaire (divergent)", "f'2 = −40 mm, diamètre 20 mm"], ["Distance entre les lentilles", "80 mm"]] }
+});

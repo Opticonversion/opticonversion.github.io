@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Atelier des tracés du BTS Opticien-Lunetier : images, chaînes de lentilles, pupille, champs, faisceaux et œil amétrope, niveau par niveau, avec correction.">
+<title>Atelier des tracés · Opticonversion</title>
+<meta name="theme-color" content="#13171f">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='13' fill='none' stroke='%23d9b26f' stroke-width='3'/%3E%3Ccircle cx='16' cy='16' r='5' fill='%23d9b26f'/%3E%3C/svg%3E">
+<script>/* Fond choisi par l'élève (profil), appliqué avant l'affichage */ try { if (localStorage.getItem("fond") === "clair") { document.documentElement.dataset.fond = "clair"; var m = document.querySelector('meta[name="theme-color"]'); if (m) m.content = "#1a1f2a"; } } catch (e) {}</script>
+<link rel="preload" href="polices/bodoni-moda.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="polices/atkinson-hyperlegible-next.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="style.css?v=416319f5">
+</head>
+<body>
+<header class="entete">
+  <a class="logo" href="index.html" aria-label="Opticonversion, accueil">
+    <svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="13" fill="none" stroke="#d9b26f" stroke-width="2.5"/><circle cx="16" cy="16" r="5.5" fill="#d9b26f"/><circle cx="18.5" cy="13.5" r="1.6" fill="#0b0d12"/></svg>
+    <span>Opticonversion</span>
+  </a>
+  <nav>
+    <a href="index.html">Accueil</a>
+    <a href="essentiel.html">Essentiel</a>
+    <a href="qcm.html">QCM</a>
+    <a href="definitions.html">Définitions</a>
+    <a href="traces.html" class="actif">Tracés</a>
+    <a href="calculateurs.html">Calculs</a>
+  </nav>
+</header>
+
+<main>
+  <h1 class="apparait">Atelier des tracés</h1>
+  <p class="marque apparait" style="--d:1">Atelier</p>
+  <p class="sous-titre apparait" style="--d:2">Les tracés de l'examen pas à pas, en OGP, en ETSO et en Vision : une règle à la fois, puis de plus en plus difficile. Chaque erreur est expliquée, et le calcul vérifie toujours le tracé.</p>
+
+  <!-- Une matière par épreuve qui a des niveaux (traces-XX.js) : boutons créés par traces.js -->
+  <div class="ateliers apparait" style="--d:3" role="tablist" aria-label="Matière"></div>
+
+  <!-- La carte des niveaux -->
+  <section class="apparait" style="--d:4" id="ecran-niveaux" aria-labelledby="titre-niveaux">
+    <div class="titre-section">
+      <h2 id="titre-niveaux">Les niveaux</h2>
+      <span class="aide" id="total-etoiles" style="margin:0"></span>
+    </div>
+    <div id="niveaux"></div>
+    <p class="aide" style="margin:14px 0 0">Dans chaque chapitre, un niveau réussi débloque le suivant. 3 étoiles : sans erreur ni indice.</p>
+  </section>
+
+  <!-- Le jeu -->
+  <section id="ecran-jeu" hidden data-epreuve="U42">
+    <div class="jeu-tete">
+      <button class="retour" id="retour-niveaux" type="button">← Les niveaux</button>
+      <span class="jeu-niveau" id="jeu-niveau"></span>
+    </div>
+    <h2 id="jeu-titre"></h2>
+    <p class="regle" id="jeu-regle"></p>
+    <p class="consigne" id="jeu-consigne"></p>
+    <div class="trace-cadre">
+      <svg class="trace" id="trace" viewBox="0 0 480 300" role="img" aria-labelledby="jeu-consigne"></svg>
+    </div>
+    <div class="jeu-actions" id="jeu-actions"></div>
+    <div class="jeu-retour" id="jeu-retour" role="status" aria-live="polite"></div>
+  </section>
+</main>
+
+<footer><span class="pied-marque"><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="13" fill="none" stroke="#d9b26f" stroke-width="2.5"/><circle cx="16" cy="16" r="5.5" fill="#d9b26f"/><circle cx="18.5" cy="13.5" r="1.6" fill="#0b0d12"/></svg>Opticonversion</span><span>© 2026</span><span class="pied-liens"><a href="confidentialite.html">Confidentialité</a> <span aria-hidden="true">·</span> <a href="mentions-legales.html">Mentions légales</a> <span aria-hidden="true">·</span> <a href="mailto:opticonversion.bts@gmail.com">Contact</a></span></footer>
+
+<script src="epreuves.js?v=cc645427"></script>
+<!-- Niveaux de l'Atelier, un fichier par épreuve (facultatifs) -->
+<script src="traces-U42.js?v=deddab01"></script>
+<script src="traces-U43.js?v=65b6cc27"></script>
+<script src="traces-U5.js?v=3c44feba"></script>
+<script src="essentiel.js?v=93b1ee7c"></script>
+<script src="optique.js?v=8d5031a1"></script>
+<script src="traces.js?v=44535c8e"></script>
+<script src="vivant.js?v=350e7712" defer></script>
+<script type="module" src="compte.js?v=c47ff213"></script>
+<!-- Mesure d'audience anonyme, sans cookies (GoatCounter) -->
+<script data-goatcounter="https://opticonversion.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+</body>
+</html>

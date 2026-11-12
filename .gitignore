@@ -5,3 +5,8 @@ notes/
 firebase.json
 .firebaserc
 .firebase/
+
+# Documents de travail du design (jamais publiés)
+PRODUCT.md
+DESIGN.md
+.impeccable/

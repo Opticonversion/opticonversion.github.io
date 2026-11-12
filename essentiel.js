@@ -240,3 +240,159 @@ function etatNotion(epreuve, theme) {
     maitrisee: qs.length > 0 && reussies / qs.length >= 0.8
   };
 }
+
+// ---------------- Barres de progression ----------------
+// Pour une liste de questions : combien ont déjà été faites, et combien réussies (dernière tentative).
+function bilanQuestions(qs) {
+  const p = lireProgression();
+  let faites = 0, reussies = 0;
+  qs.forEach(q => {
+    const v = p[idQuestion(q)];
+    if (v !== undefined) { faites++; if (v === 1) reussies++; }
+  });
+  return { total: qs.length, faites, reussies };
+}
+const questionsEssentielles = () => QUESTIONS.filter(q => estEssentiel(q.epreuve, q.theme));
+
+// Les trois grandes mesures : l'essentiel et tous les QCM (questions FAITES),
+// et le niveau de maîtrise (questions RÉUSSIES à la dernière tentative, sur tout le site).
+function bilansGeneraux() {
+  const essentiel = bilanQuestions(questionsEssentielles());
+  const qcm = bilanQuestions(QUESTIONS);
+  // Pour la maîtrise, la barre ne montre que les réussies : « faites » = « réussies »
+  const maitrise = { total: qcm.total, faites: qcm.reussies, reussies: qcm.reussies };
+  return { essentiel, qcm, maitrise };
+}
+
+// Crée une barre : partie pleine = réussies, partie claire = faites mais ratées, vide = à découvrir.
+// options : { titre, petite, detail (texte qui remplace le détail automatique), extra (texte ajouté), aria (texte lu par les lecteurs d'écran) }
+function creerBarreProgression(bilan, options) {
+  options = options || {};
+  const largeur = n => (bilan.total ? Math.min(100, (n / bilan.total) * 100) : 0);
+  const pFaites = Math.round(largeur(bilan.faites));
+  const bloc = document.createElement("div");
+  bloc.className = "progression-bloc" + (options.petite ? " petite" : "") + (bilan.total && bilan.faites >= bilan.total ? " fini" : "");
+  bloc.innerHTML =
+    (options.titre ? '<div class="progression-tete"><span class="progression-titre"></span><span class="progression-pct"></span></div>' : "") +
+    '<div class="progression-barre" role="progressbar" aria-valuemin="0" aria-valuemax="100"><span class="part-reussies"></span><span class="part-ratees"></span></div>' +
+    '<small class="progression-detail"></small>';
+  if (options.titre) {
+    bloc.querySelector(".progression-titre").textContent = options.titre;
+    bloc.querySelector(".progression-pct").textContent = pFaites + " %";
+  }
+  let detail = options.detail;
+  if (!detail) {
+    if (bilan.faites === 0) detail = options.petite ? "Pas encore commencé" : bilan.total + " questions · pas encore commencé";
+    else if (bilan.faites >= bilan.total) detail = "✓ Tout fait · " + bilan.reussies + " réussies sur " + bilan.total;
+    else detail = bilan.faites + " / " + bilan.total + " faites · " + bilan.reussies + " réussies · " + (bilan.total - bilan.faites) + " à découvrir";
+  }
+  bloc.querySelector(".progression-detail").textContent = detail + (options.extra ? " · " + options.extra : "");
+  const barre = bloc.querySelector(".progression-barre");
+  barre.setAttribute("aria-valuenow", pFaites);
+  barre.setAttribute("aria-label", options.aria ||
+    (options.titre || "Progression") + " : " + pFaites + " % fait, " + bilan.reussies + " questions réussies sur " + bilan.total);
+  // Les barres partent de zéro puis se remplissent (l'animation est coupée si l'élève l'a désactivée)
+  const r = bloc.querySelector(".part-reussies"), m = bloc.querySelector(".part-ratees");
+  const remplir = () => {
+    r.style.width = largeur(bilan.reussies) + "%";
+    m.style.width = Math.max(0, largeur(bilan.faites) - largeur(bilan.reussies)) + "%";
+  };
+  requestAnimationFrame(() => requestAnimationFrame(remplir));
+  return bloc;
+}
+
+// Ordre d'une série : d'abord les questions jamais faites, puis les ratées, puis les réussies
+// (chaque groupe mélangé). Ainsi l'élève ne retombe pas sans cesse sur les mêmes questions.
+function ordonnerParProgression(qs, melanger) {
+  const p = lireProgression();
+  const groupe = v => (v === undefined ? 0 : v === 0 ? 1 : 2);
+  const groupes = [[], [], []];
+  qs.forEach(q => groupes[groupe(p[idQuestion(q)])].push(q));
+  return groupes.flatMap(g => melanger(g));
+}
+
+// ---------------- Le compagnon de révision ----------------
+// DioSL par défaut. Si l'élève choisit un autre personnage dans son profil, c'est lui qui
+// l'accompagne partout (accueil, corrections, écran de score), avec ses propres expressions :
+// clin-doeil, bouche-ouverte (ravi), pensif, choque, bouche-fermee (sérieux).
+// Dessins : img/nounours-<pose>.svg pour DioSL, img/avatar-<animal>-<pose>.svg pour les autres
+// (fabriqués par .claude/scripts/generer-poses-avatars.py ; « bouche-fermee » = img/avatar-<animal>.svg).
+const POSES_DIOSL_IDS = ["clin-doeil", "choque", "pensif", "bouche-ouverte", "bouche-fermee"];
+const PERSONNAGES_RETIRES = ["renard"];       // un élève qui l'avait choisi retrouve DioSL
+function compagnon() {                       // null = DioSL
+  const id = lireProfil().avatar;
+  return id && !POSES_DIOSL_IDS.includes(id) && !PERSONNAGES_RETIRES.includes(id) ? id : null;
+}
+function imageCompagnon(pose) {
+  const animal = compagnon();
+  if (!animal) return "img/nounours-" + pose + ".svg";
+  return pose === "bouche-fermee" ? "img/avatar-" + animal + ".svg" : "img/avatar-" + animal + "-" + pose + ".svg";
+}
+function nomCompagnon() {
+  const animal = compagnon();
+  if (!animal) return "DioSL";
+  const perso = (window.AVATARS || []).find(a => a.id === animal);
+  return perso ? perso.nom : "ton compagnon";
+}
+// Affiche le compagnon dans une image ; si une expression n'existe pas encore, on garde son dessin de base
+function montrerCompagnon(img, pose) {
+  img.onerror = () => {
+    img.onerror = null;
+    const animal = compagnon();
+    img.src = animal ? "img/avatar-" + animal + ".svg" : "img/nounours-clin-doeil.svg";
+  };
+  img.src = imageCompagnon(pose);
+}
+
+// ---------------- Valeurs tapées (questions « calcul » et étapes de l'Atelier) ----------------
+// Lit un nombre écrit à la française : virgule ou point, − ou -, espaces, 2,5e-3. Sinon null.
+function lireNombre(texte) {
+  if (typeof texte !== "string") return null;
+  const s = texte.trim().replace(/[\s  ]/g, "").replace(/[−–—]/g, "-").replace(",", ".");
+  if (!/^[+-]?(\d+\.?\d*|\.\d+)(e[+-]?\d+)?$/i.test(s)) return null;
+  const v = parseFloat(s);
+  return isFinite(v) ? v : null;
+}
+// Écrit un nombre à la française : 150 → « +150 » (avec signe si demandé), −0,5…
+function ecrireNombre(v, decimales, avecSigne) {
+  const d = decimales === undefined ? 2 : decimales;
+  let t = (Math.round(Math.abs(v) * 10 ** d) / 10 ** d).toFixed(d).replace(".", ",");
+  t = t.replace(/\B(?=(\d{3})+(?!\d))/g, " ").replace(/ (?=\d*,)/g, m => m);
+  if (v < 0 && Number(t.replace(",", ".").replace(/ /g, "")) !== 0) return "−" + t;
+  return (avecSigne && v > 0 ? "+" : "") + t;
+}
+// Corrige une valeur tapée. reponse = { valeur, unite, decimales, tolerance | toleranceRelative, signe }.
+// Renvoie { etat: "vide" | "juste" | "signe" | "unite" | "faux", arrondi (juste mais pas à l'arrondi demandé), valeur }
+function corrigerCalcul(reponse, texte) {
+  const v = lireNombre(texte);
+  if (v === null) return { etat: "vide" };
+  const V = reponse.valeur, avecSigne = reponse.signe !== false;
+  const dec = reponse.decimales === undefined ? 2 : reponse.decimales;
+  const tol = (reponse.tolerance !== undefined ? reponse.tolerance
+    : reponse.toleranceRelative !== undefined ? Math.abs(V) * reponse.toleranceRelative
+    : 0.5 * 10 ** -dec) + 1e-9;
+  const proche = x => avecSigne ? Math.abs(x - V) <= tol : Math.abs(Math.abs(x) - Math.abs(V)) <= tol;
+  if (proche(v)) {
+    const partie = String(texte).trim().replace(/[eE].*$/, "").split(/[.,]/)[1] || "";
+    const decTapees = partie.replace(/\D/g, "").length;
+    return { etat: "juste", valeur: v, arrondi: reponse.decimales !== undefined && decTapees !== reponse.decimales };
+  }
+  if (avecSigne && Math.abs(-v - V) <= tol && V !== 0) return { etat: "signe", valeur: v };
+  for (const k of [1, 2, 3, 6, 9, -1, -2, -3, -6, -9]) {
+    if (V !== 0 && proche(v / 10 ** k)) return { etat: "unite", valeur: v };
+  }
+  return { etat: "faux", valeur: v };
+}
+// Texte de correction commun (HTML échappé par l'appelant pour les parties libres)
+function messageCalcul(reponse, resultat) {
+  const unite = reponse.unite ? " " + reponse.unite : "";
+  const dec = reponse.decimales === undefined ? 2 : reponse.decimales;
+  const attendu = ecrireNombre(reponse.valeur, dec, reponse.signe !== false) + unite;
+  const arrondi = dec === 0 ? "à l'unité" : "à " + ecrireNombre(10 ** -dec, dec) + " près";
+  if (resultat.etat === "juste") return resultat.arrondi ? "Juste. Pense à arrondir " + arrondi + " comme demandé : " + attendu + "." : "Juste : " + attendu + ".";
+  if (resultat.etat === "signe") return "Ta valeur est juste au signe près : attention au sens (mesure algébrique). La réponse est " + attendu + ".";
+  if (resultat.etat === "unite") return reponse.unite
+    ? "Ta valeur est juste mais pas dans la bonne unité : la réponse est attendue en " + reponse.unite + " : " + attendu + "."
+    : "Ta valeur est juste à une puissance de 10 près : vérifie la virgule (ou un pourcentage écrit en décimal). La réponse est " + attendu + ".";
+  return "La bonne valeur est " + attendu + ".";
+}

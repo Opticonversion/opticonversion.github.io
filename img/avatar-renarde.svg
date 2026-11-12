@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 440" width="800" height="880">
+  <defs>
+    <!-- écaille havane : brun foncé marbré caramel et noir -->
+    <pattern id="ecaille" width="34" height="34" patternUnits="userSpaceOnUse" patternTransform="rotate(28)">
+      <rect width="34" height="34" fill="#4a2814"/>
+      <ellipse cx="8" cy="9" rx="9" ry="5" fill="#a9652a"/>
+      <ellipse cx="25" cy="22" rx="7" ry="4" fill="#c27a35" opacity="0.85"/>
+      <ellipse cx="22" cy="6" rx="5" ry="3" fill="#1c0e06"/>
+      <ellipse cx="7" cy="26" rx="6" ry="3.5" fill="#1c0e06" opacity="0.9"/>
+      <ellipse cx="17" cy="15" rx="3" ry="2" fill="#7a4419"/>
+    </pattern>
+  </defs>
+  <!-- oreilles hautes et fines -->
+  <path d="M76 158 L88 8 L178 96 Z" fill="#e47a3c"/>
+  <path d="M324 158 L312 8 L222 96 Z" fill="#e47a3c"/>
+  <path d="M90 34 L96 14 L150 78 Z" fill="#3a2214"/>
+  <path d="M310 34 L304 14 L250 78 Z" fill="#3a2214"/>
+  <path d="M98 126 L104 56 L150 100 Z" fill="#f7e6d2"/>
+  <path d="M302 126 L296 56 L250 100 Z" fill="#f7e6d2"/>
+  <!-- pull prune, liseré or -->
+  <path d="M60 440 Q64 348 200 334 Q336 348 340 440 Z" fill="#c45a7a" stroke="#d9b26f" stroke-width="5" stroke-linejoin="round"/>
+  <path d="M146 340 Q200 368 254 340" fill="none" stroke="#d9b26f" stroke-width="9" stroke-linecap="round"/>
+  <!-- tête plus fine -->
+  <ellipse cx="200" cy="210" rx="144" ry="136" fill="#e47a3c"/>
+  <!-- petite houppe de poils sur le front -->
+  <path d="M172 110 Q168 82 190 70 Q184 90 196 106 Z" fill="#c95f26"/>
+  <path d="M190 106 Q190 70 220 62 Q206 84 214 106 Z" fill="#d36d2e"/>
+  <path d="M210 108 Q220 80 244 82 Q228 94 230 112 Z" fill="#c95f26"/>
+  <path d="M201 98 Q204 80 216 72" fill="none" stroke="#f3b27a" stroke-width="3.5" stroke-linecap="round"/>
+  <!-- masque crème du museau -->
+  <path d="M60 236 Q126 240 164 262 Q184 300 200 302 Q216 300 236 262 Q274 240 340 236 Q322 322 200 338 Q78 322 60 236 Z" fill="#f8e8d6"/>
+  <!-- boucles d'oreilles dorées -->
+  <circle cx="60" cy="236" r="6" fill="none" stroke="#e2bd72" stroke-width="3.5"/>
+  <circle cx="340" cy="236" r="6" fill="none" stroke="#e2bd72" stroke-width="3.5"/>
+  <circle cx="61" cy="227" r="3" fill="#e2bd72"/>
+  <circle cx="339" cy="227" r="3" fill="#e2bd72"/>
+  <!-- joues roses -->
+  <ellipse cx="110" cy="260" rx="22" ry="14" fill="#f2899a" opacity="0.55"/>
+  <ellipse cx="290" cy="260" rx="22" ry="14" fill="#f2899a" opacity="0.55"/>
+  <!-- yeux -->
+  <circle cx="150" cy="202" r="17" fill="#2a1a10"/>
+  <circle cx="250" cy="202" r="17" fill="#2a1a10"/>
+  <circle cx="156" cy="195" r="6" fill="#fff"/>
+  <circle cx="256" cy="195" r="6" fill="#fff"/>
+  <!-- longs cils -->
+  <path d="M135 190 Q127 183 122 175 M142 186 Q138 177 137 169 M130 197 Q120 193 114 188" stroke="#2a1a10" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+  <path d="M265 190 Q273 183 278 175 M258 186 Q262 177 263 169 M270 197 Q280 193 286 188" stroke="#2a1a10" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+  <!-- monture pilote carrée, coins arrondis, face haute, acétate écaille -->
+  <path d="M102 160 H180 Q192 160 192 172 V210 Q192 238 164 238 H120 Q94 238 92 212 V172 Q92 160 102 160 Z" fill="#fff" fill-opacity="0.14" stroke="url(#ecaille)" stroke-width="12" stroke-linejoin="round"/>
+  <path d="M298 160 H220 Q208 160 208 172 V210 Q208 238 236 238 H280 Q306 238 308 212 V172 Q308 160 298 160 Z" fill="#fff" fill-opacity="0.14" stroke="url(#ecaille)" stroke-width="12" stroke-linejoin="round"/>
+  <!-- double pont : le pont bas et la barre du haut -->
+  <path d="M192 180 Q200 172 208 180" fill="none" stroke="url(#ecaille)" stroke-width="9" stroke-linecap="round"/>
+  <path d="M168 152 H232" stroke="url(#ecaille)" stroke-width="8" stroke-linecap="round"/>
+  <!-- branches, et rappel doré aux charnières -->
+  <path d="M90 172 L56 162" stroke="url(#ecaille)" stroke-width="10" stroke-linecap="round"/>
+  <path d="M310 172 L344 162" stroke="url(#ecaille)" stroke-width="10" stroke-linecap="round"/>
+  <rect x="84" y="166" width="10" height="7" rx="2" fill="#e2bd72"/>
+  <rect x="306" y="166" width="10" height="7" rx="2" fill="#e2bd72"/>
+  <!-- reflets sur les verres -->
+  <path d="M112 196 L130 176" stroke="#fff" stroke-opacity="0.55" stroke-width="5" stroke-linecap="round"/>
+  <path d="M228 196 L246 176" stroke="#fff" stroke-opacity="0.55" stroke-width="5" stroke-linecap="round"/>
+  <!-- truffe fine -->
+  <ellipse cx="200" cy="262" rx="12" ry="9" fill="#2a1a10"/>
+  <ellipse cx="196" cy="259" rx="4" ry="2.3" fill="#fff" opacity="0.5"/>
+  <path d="M185 277 Q192.5 287 200 276 Q207.5 287 215 277" stroke="#3a2618" stroke-width="4.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

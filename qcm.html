@@ -5,9 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="QCM du BTS Opticien-Lunetier classés par épreuve : analyse de la vision, optique géométrique et physique, ETSO, mathématiques. Corrigés et expliqués.">
 <title>QCM BTS OL par épreuve · Opticonversion</title>
-<meta name="theme-color" content="#0b0d12">
+<meta name="theme-color" content="#13171f">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='13' fill='none' stroke='%23d9b26f' stroke-width='3'/%3E%3Ccircle cx='16' cy='16' r='5' fill='%23d9b26f'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="style.css?v=176935d0">
+<script>/* Fond choisi par l'élève (profil), appliqué avant l'affichage */ try { if (localStorage.getItem("fond") === "clair") { document.documentElement.dataset.fond = "clair"; var m = document.querySelector('meta[name="theme-color"]'); if (m) m.content = "#1a1f2a"; } } catch (e) {}</script>
+<link rel="preload" href="polices/bodoni-moda.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="polices/atkinson-hyperlegible-next.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="style.css?v=416319f5">
 </head>
 <body>
 <header class="entete">
@@ -19,6 +22,8 @@
     <a href="index.html">Accueil</a>
     <a href="essentiel.html">Essentiel</a>
     <a href="qcm.html" class="actif">QCM</a>
+    <a href="definitions.html">Définitions</a>
+    <a href="traces.html">Tracés</a>
     <a href="calculateurs.html">Calculs</a>
   </nav>
 </header>
@@ -39,6 +44,12 @@
       </div>
     </div>
 
+    <!-- Par où commencer : Atelier, cas, Spécificités (épreuves « échauffement »), ou petits liens -->
+    <div class="mise-en-avant" id="mise-en-avant" hidden></div>
+
+    <!-- Spécificités de l'épreuve (fichier specificites-XX.js), repliable -->
+    <details class="specificites" id="specificites" hidden></details>
+
     <div class="disposition vue-deux" id="disposition">
       <aside class="colonne-shorts">
         <div class="lecteur" id="lecteur" hidden></div>
@@ -46,25 +57,37 @@
         <div class="liste-shorts" id="liste-shorts"></div>
       </aside>
       <div class="colonne-qcm">
+        <h2 class="titre-echauffement" id="titre-echauffement" hidden>Échauffement : le QCM</h2>
         <div class="themes" id="themes"></div>
+        <a class="lien-atelier" id="lien-atelier" href="traces.html" hidden><span class="ico i-crayon" aria-hidden="true"></span> Entraîne-toi aussi aux tracés de lentilles dans l'Atelier →</a>
         <section id="zone"></section>
       </div>
     </div>
   </div>
 </main>
 
-<footer>© 2026 Opticonversion · Outil de révision, ne remplace pas un cours ni un avis professionnel. · <a href="confidentialite.html">Confidentialité</a> · <a href="mentions-legales.html">Mentions légales</a></footer>
+<footer><span class="pied-marque"><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="13" fill="none" stroke="#d9b26f" stroke-width="2.5"/><circle cx="16" cy="16" r="5.5" fill="#d9b26f"/><circle cx="18.5" cy="13.5" r="1.6" fill="#0b0d12"/></svg>Opticonversion</span><span>© 2026</span><span class="pied-liens"><a href="confidentialite.html">Confidentialité</a> <span aria-hidden="true">·</span> <a href="mentions-legales.html">Mentions légales</a> <span aria-hidden="true">·</span> <a href="mailto:opticonversion.bts@gmail.com">Contact</a></span></footer>
 
 <!-- On charge d'abord les questions et les vidéos, puis le moteur qui les affiche -->
 
 <script src="videos.js?v=6f234673"></script>
-<script src="epreuves.js?v=9b701326"></script>
-<script src="questions-U41.js?v=ea42723b"></script>
-<script src="questions-U42.js?v=3346c508"></script>
-<script src="questions-U43.js?v=6dbf46ca"></script>
-<script src="questions-U5.js?v=6615784c"></script>
-<script src="questions-U3.js?v=5dbfc08d"></script>
-<script src="essentiel.js?v=882c064c"></script>
+<script src="epreuves.js?v=cc645427"></script>
+<script src="questions-U41.js?v=11469e6b"></script>
+<script src="questions-U42.js?v=a01cfd04"></script>
+<script src="questions-U43.js?v=5af1d8ea"></script>
+<script src="questions-U5.js?v=2ec6d276"></script>
+<script src="questions-U3.js?v=f5a7264a"></script>
+<!-- Fiches « Spécificités » (facultatives : la page marche sans elles) -->
+<!-- Niveaux de l'Atelier (pour compter niveaux et étoiles sur la page de l'épreuve) -->
+<script src="traces-U42.js?v=deddab01"></script>
+<script src="traces-U43.js?v=65b6cc27"></script>
+<script src="traces-U5.js?v=3c44feba"></script>
+<script src="specificites-U41.js?v=172ce418"></script>
+<script src="specificites-U42.js?v=3dc3c146"></script>
+<script src="specificites-U43.js?v=0918c26c"></script>
+<script src="specificites-U5.js?v=4d12d3b3"></script>
+<script src="specificites-U3.js?v=2ee96b01"></script>
+<script src="essentiel.js?v=93b1ee7c"></script>
 <script>
   // ---------------- L'état du QCM ----------------
   let epreuveChoisie = null;   // ex. "U5"
@@ -88,9 +111,23 @@
 
   const questionsDe = code => QUESTIONS.filter(q => q.epreuve === code);
 
+  // ---------------- Cas pratiques ----------------
+  // Un cas (CAS, déclaré dans questions-XX.js) regroupe des questions qui portent cas + etape.
+  // Ses questions ne sortent pas dans les séries ordinaires : seulement dans le cas, dans l'ordre.
+  const listeCas = () => (typeof CAS !== "undefined" ? CAS : []);
+  const casParId = id => listeCas().find(c => c.id === id);
+  const questionsDuCas = id => QUESTIONS.filter(q => q.cas === id).sort((a, b) => a.etape - b.etape);
+  const casDe = code => listeCas().filter(c => c.epreuve === code && questionsDuCas(c.id).length > 0);
+  const dansUnCas = q => !!(q.cas && casParId(q.cas));
+  const ordinairesDe = code => questionsDe(code).filter(q => !dansUnCas(q));
+  const questionsDesCas = code => casDe(code).flatMap(c => questionsDuCas(c.id));
+  let onglet = "theme";        // "theme", "cas" (liste des cas ou un cas) ou "selection" (questions choisies)
+  let defilerVersZone = false; // après un lien des Spécificités : descendre jusqu'aux questions
+
   // ---------------- Écran 1 : choisir une épreuve ----------------
   function afficherEpreuves() {
     epreuveChoisie = null;
+    delete document.querySelector("main").dataset.epreuve;
     document.getElementById("ecran-qcm").hidden = true;
     document.getElementById("titre").textContent = "QCM du BTS OL";
     document.getElementById("sous-titre").textContent =
@@ -102,13 +139,20 @@
     if (seanceRevision) document.querySelector(".vues").hidden = false;
     seanceRevision = false;
 
+    // Barre « Tous les QCM » en haut de la liste des épreuves
+    const generale = document.createElement("div");
+    generale.className = "carte progression-generale";
+    generale.style.gridColumn = "1 / -1";
+    generale.appendChild(creerBarreProgression(bilanQuestions(QUESTIONS), { titre: "Tous les QCM" }));
+    conteneur.appendChild(generale);
+
     // Bandeau « À revoir aujourd'hui » s'il y a des questions à revoir
     const dues = questionsARevoir().length;
     if (dues > 0) {
       const a = document.createElement("a");
       a.className = "bandeau-revoir";
       a.href = "#a-revoir";
-      a.innerHTML = '<span class="icone-revoir" aria-hidden="true">📅</span><span><b></b><small>Toutes épreuves · environ 1 minute par question</small></span><span class="fleche">→</span>';
+      a.innerHTML = '<span class="icone-revoir ico i-calendrier" aria-hidden="true"></span><span><b></b><small>Toutes épreuves · environ 1 minute par question</small></span><span class="fleche">→</span>';
       a.querySelector("b").textContent = dues + (dues > 1 ? " questions à revoir aujourd'hui" : " question à revoir aujourd'hui");
       conteneur.appendChild(a);
     }
@@ -117,22 +161,27 @@
       const nb = questionsDe(e.code).length;
       const b = document.createElement("button");
       b.className = "epreuve";
+      b.dataset.epreuve = e.code;
       b.disabled = nb === 0;
       b.innerHTML = '<span class="code"></span><span class="nom"></span><span class="info"></span>';
       b.querySelector(".code").textContent = e.code + (e.court ? " · " + e.court : "");
       b.querySelector(".nom").textContent = e.nom;
-      b.querySelector(".info").textContent = e.detail + " · " + (nb > 0 ? nb + " questions" : "bientôt");
+      const nbCas = casDe(e.code).length;
+      b.querySelector(".info").textContent = e.detail + " · " + (nb > 0 ? nb + " questions" : "bientôt") +
+        (nbCas ? " · " + nbCas + (nbCas > 1 ? " cas pratiques" : " cas pratique") : "");
+      if (nb > 0) b.appendChild(creerBarreProgression(bilanQuestions(questionsDe(e.code)), { petite: true }));
       b.onclick = () => { location.hash = e.code; };
       conteneur.appendChild(b);
     });
   }
 
   // ---------------- Écran 2 : le QCM d'une épreuve ----------------
-  function ouvrirEpreuve(code, theme) {
+  // special : { cas: "liste" | "CAS-U5-01" } ou { questions: ["U5-012", …] } (liens des Spécificités)
+  function ouvrirEpreuve(code, theme, special) {
     const e = EPREUVES.find(x => x.code === code);
     if (!e || questionsDe(code).length === 0) { afficherEpreuves(); return; }
 
-    const themes = new Set(questionsDe(code).map(q => q.theme));
+    const themes = new Set(ordinairesDe(code).map(q => q.theme));
     if (seanceRevision) {                    // on sort d'une séance : on remet la vue préférée
       let v = "deux";
       try { v = localStorage.getItem("vue") || "deux"; } catch (e) {}
@@ -141,16 +190,43 @@
     }
     seanceRevision = false;
     epreuveChoisie = code;
+    document.querySelector("main").dataset.epreuve = code;
+    document.getElementById("lien-atelier").hidden = true;   // remplacé par les cartes « Par où commencer »
     themeChoisi = theme && themes.has(theme) ? theme : "Tous";
     document.getElementById("ecran-epreuves").hidden = true;
     document.getElementById("ecran-qcm").hidden = false;
     document.querySelector("main").classList.add("large");
     document.getElementById("titre").textContent = e.nom;
     document.getElementById("sous-titre").textContent = e.code + " · " + e.detail;
-    document.getElementById("lecteur").hidden = true;
-    document.getElementById("lecteur").innerHTML = "";
-    afficherThemes();
-    demarrer();
+    const lecteurOuvert = !document.getElementById("lecteur").hidden && document.getElementById("specificites").dataset.epreuve === code;
+    if (!lecteurOuvert) {
+      document.getElementById("lecteur").hidden = true;
+      document.getElementById("lecteur").innerHTML = "";
+    }
+    afficherSpecificites(code);
+    afficherMiseEnAvant(code);
+
+    // Cas pratiques, ou questions choisies (lien d'un piège)
+    const cas = special && special.cas ? (special.cas === "liste" ? "liste" : casDe(code).find(c => c.id === special.cas)) : null;
+    const selection = special && special.questions
+      ? special.questions.map(id => QUESTIONS.find(q => q.id === id && q.epreuve === code)).filter(Boolean) : [];
+    if (cas) {
+      onglet = "cas";
+      afficherThemes();
+      if (cas === "liste") afficherListeCas(); else demarrerCas(cas);
+    } else if (selection.length) {
+      onglet = "selection";
+      afficherThemes();
+      demarrer(selection, { selection: true });
+    } else {
+      onglet = "theme";
+      afficherThemes();
+      demarrer();
+    }
+    if (defilerVersZone) {
+      defilerVersZone = false;
+      document.getElementById("themes").scrollIntoView({ behavior: "smooth", block: "start" });
+    }
   }
 
   // ---------------- Séance « À revoir aujourd'hui » ----------------
@@ -158,6 +234,8 @@
     const dues = questionsARevoir();
     if (dues.length === 0) { history.replaceState("", "", "qcm.html"); afficherEpreuves(); return; }
     seanceRevision = true;
+    delete document.querySelector("main").dataset.epreuve;
+    document.getElementById("lien-atelier").hidden = true;
     epreuveChoisie = dues[0].epreuve;
     themeChoisi = "Tous";
     document.getElementById("ecran-epreuves").hidden = true;
@@ -167,6 +245,14 @@
     document.getElementById("sous-titre").textContent = dues.length + (dues.length > 1 ? " questions" : " question") +
       " que tu avais ratées, toutes épreuves. Chaque bonne réponse les espace davantage.";
     document.getElementById("themes").innerHTML = "";
+    const spec = document.getElementById("specificites");
+    spec.hidden = true;
+    document.getElementById("mise-en-avant").hidden = true;
+    document.getElementById("titre-echauffement").hidden = true;
+    delete spec.dataset.epreuve;
+    onglet = "theme";
+    const barreEpreuve = document.getElementById("progression-epreuve");
+    if (barreEpreuve) barreEpreuve.hidden = true;
     const dispo = document.getElementById("disposition");
     dispo.classList.remove("vue-qcm", "vue-deux", "vue-shorts");
     dispo.classList.add("vue-qcm");          // en séance : QCM seul (sans changer la préférence)
@@ -177,6 +263,7 @@
   // Choisir un thème : met à jour les pastilles, les Shorts, l'adresse, et relance le QCM
   function choisirTheme(t) {
     themeChoisi = t;
+    onglet = "theme";
     const adresse = "#" + epreuveChoisie + (t === "Tous" ? "" : "/" + encodeURIComponent(t));
     history.replaceState(null, "", adresse);
     afficherThemes();
@@ -184,15 +271,19 @@
   }
 
   function afficherThemes() {
-    const qs = questionsDe(epreuveChoisie);
+    const qs = ordinairesDe(epreuveChoisie);
     const themes = ["Tous", ...new Set(qs.map(q => q.theme))];
     const conteneur = document.getElementById("themes");
     conteneur.innerHTML = "";
     themes.forEach(t => {
       const nb = t === "Tous" ? qs.length : qs.filter(q => q.theme === t).length;
       const b = document.createElement("button");
-      b.className = "theme" + (t === themeChoisi ? " actif" : "");
-      b.textContent = t + " (" + nb + ")";
+      b.className = "theme" + (onglet === "theme" && t === themeChoisi ? " actif" : "");
+      b.dataset.theme = t;
+      b.textContent = t;
+      const compte = document.createElement("span");
+      compte.className = "compte-theme";
+      b.appendChild(compte);
       if (t !== "Tous" && estEssentiel(epreuveChoisie, t)) {
         const etoile = document.createElement("span");
         etoile.className = "etoile";
@@ -203,8 +294,48 @@
       b.onclick = () => choisirTheme(t);
       conteneur.appendChild(b);
     });
+    // Les cas pratiques de l'épreuve : une pastille à part, en dernier
+    if (casDe(epreuveChoisie).length) {
+      const b = document.createElement("button");
+      b.className = "theme theme-cas" + (onglet === "cas" ? " actif" : "");
+      b.dataset.theme = "";
+      b.innerHTML = '<span class="ico i-dossier" aria-hidden="true"></span> Cas pratiques<span class="compte-theme"></span>';
+      b.onclick = () => { location.hash = epreuveChoisie + "/cas"; };
+      conteneur.appendChild(b);
+    }
+    majProgressionEpreuve();
     afficherShorts();
   }
+
+  // Compteurs « faites / total » sur chaque thème, et barre du thème choisi sous les thèmes.
+  // Mis à jour à chaque réponse, sans toucher à la question en cours.
+  function majProgressionEpreuve() {
+    if (!epreuveChoisie || seanceRevision) return;
+    const qs = ordinairesDe(epreuveChoisie);
+    const qsCas = questionsDesCas(epreuveChoisie);
+    document.querySelectorAll("#themes .theme").forEach(b => {
+      const t = b.dataset.theme;
+      const bilan = bilanQuestions(t === "" ? qsCas : t === "Tous" ? qs : qs.filter(q => q.theme === t));
+      const fini = bilan.faites >= bilan.total;
+      b.classList.toggle("fini", fini);
+      b.querySelector(".compte-theme").textContent = bilan.faites === 0 ? "(" + bilan.total + ")" : (fini ? "✓ " : "") + bilan.faites + "/" + bilan.total;
+      b.setAttribute("aria-label", (t || "Cas pratiques") + " : " + bilan.faites + " questions faites sur " + bilan.total);
+    });
+    if (onglet === "selection") { const z = document.getElementById("progression-epreuve"); if (z) z.hidden = true; return; }
+    const choisies = onglet === "cas" ? qsCas : themeChoisi === "Tous" ? qs : qs.filter(q => q.theme === themeChoisi);
+    let zoneBarre = document.getElementById("progression-epreuve");
+    if (!zoneBarre) {
+      zoneBarre = document.createElement("div");
+      zoneBarre.id = "progression-epreuve";
+      zoneBarre.className = "progression-epreuve";
+      document.getElementById("themes").after(zoneBarre);
+    }
+    zoneBarre.hidden = false;
+    zoneBarre.replaceChildren(creerBarreProgression(bilanQuestions(choisies), {
+      titre: onglet === "cas" ? "Cas pratiques" : themeChoisi === "Tous" ? "Toute l'épreuve" : themeChoisi, petite: true
+    }));
+  }
+  window.addEventListener("progression-modifiee", () => majProgressionEpreuve());
 
   // ---------------- Les Shorts ----------------
   function lienVideo(theme) {
@@ -219,18 +350,18 @@
   }
 
   function afficherShorts() {
-    const qs = questionsDe(epreuveChoisie);
+    const qs = ordinairesDe(epreuveChoisie);
     const themes = [...new Set(qs.map(q => q.theme))];
     const liste = document.getElementById("liste-shorts");
     liste.innerHTML = "";
     themes.forEach(t => {
       const url = lienVideo(t);
       const b = document.createElement("button");
-      b.className = "short" + (t === themeChoisi ? " actif" : "") + (url ? "" : " a-venir");
+      b.className = "short" + (onglet === "theme" && t === themeChoisi ? " actif" : "") + (url ? "" : " a-venir");
       b.innerHTML = '<span class="vignette">' + (url ? "▶" : "◷") + '</span><span class="texte"><strong></strong><small></small></span>';
       b.querySelector("strong").textContent = t;
       b.querySelector("small").textContent = (url ? "" : "vidéo bientôt · ") + qs.filter(q => q.theme === t).length + " questions";
-      b.onclick = () => { jouerShort(t); if (themeChoisi !== t) choisirTheme(t); };
+      b.onclick = () => { jouerShort(t); if (themeChoisi !== t || onglet !== "theme") choisirTheme(t); };
       liste.appendChild(b);
     });
   }
@@ -287,17 +418,23 @@
   try { vueRetenue = localStorage.getItem("vue") || "deux"; } catch (e) {}
   choisirVue(["qcm", "deux", "shorts"].includes(vueRetenue) ? vueRetenue : "deux");
 
-  // Démarre une partie. Sans liste : toutes les questions du thème choisi.
+  // Démarre une partie. Sans liste : les questions ordinaires (hors cas) du thème choisi.
   // Avec une liste : uniquement ces questions (mode « Revoir mes erreurs »).
+  // speciale = { cas } (un cas pratique, dans l'ordre des étapes) ou { selection: true } (questions choisies, dans l'ordre).
   let modeRevision = false;
+  let serieSpeciale = null;
   let serieEnCours = 0;      // bonnes réponses d'affilée en ce moment
   let meilleureSerie = 0;    // meilleure suite de bonnes réponses de la partie
-  function demarrer(liste) {
-    modeRevision = Array.isArray(liste);
-    const qs = questionsDe(epreuveChoisie);
-    const choisies = modeRevision ? liste : (themeChoisi === "Tous" ? qs : qs.filter(q => q.theme === themeChoisi));
-    serie = melanger(choisies).map(q => {
-      const reponses = melanger(q.choix.map((texte, i) => ({ texte, i, juste: i === q.bonne })));
+  function demarrer(liste, speciale) {
+    serieSpeciale = speciale || null;
+    modeRevision = Array.isArray(liste) && !serieSpeciale;
+    const qs = ordinairesDe(epreuveChoisie);
+    const choisies = Array.isArray(liste) ? liste : (themeChoisi === "Tous" ? qs : qs.filter(q => q.theme === themeChoisi));
+    // Hors « Revoir mes erreurs » : les questions jamais faites d'abord, puis les ratées, puis les réussies
+    const ordre = serieSpeciale ? choisies : modeRevision ? melanger(choisies) : ordonnerParProgression(choisies, melanger);
+    serie = ordre.map(q => {
+      // Question « calcul » (valeur à taper) : pas de choix à mélanger
+      const reponses = Array.isArray(q.choix) ? melanger(q.choix.map((texte, i) => ({ texte, i, juste: i === q.bonne }))) : null;
       return { ...q, reponses };
     });
     numero = 0;
@@ -319,20 +456,24 @@
     }
     zone.innerHTML =
       '<div class="barre"><div class="barre-remplie" style="width:' + pourcent + '%"></div></div>' +
-      '<div class="progression"><span>Question ' + (numero + 1) + " / " + serie.length + "</span>" +
+      '<div class="progression"><span>' + (serieSpeciale && serieSpeciale.cas ? "Étape " : "Question ") + (numero + 1) + " / " + serie.length + "</span>" +
       (estEssentiel(q.epreuve, q.theme) ? '<span class="pastille essentiel">★ Essentiel</span>' : "") +
       '<span class="pastille"></span>' + pastilleSession +
       "<span>Score : " + score + "</span></div>" +
       '<p class="enonce"></p><div class="choix"></div>';
     zone.querySelector(".progression .pastille:not(.essentiel):not(.bts)").textContent = (seanceRevision ? q.epreuve + " · " : "") + q.theme;
     zone.querySelector(".enonce").textContent = q.question;
+    // Contexte et annexe (le cas pratique en entier jusqu'à cette étape, ou ceux de la question)
+    const contexte = creerContexte(q);
+    if (contexte) zone.querySelector(".enonce").before(contexte);
 
     // Schéma qui fait partie de l'énoncé (rare : seulement s'il faut le lire pour répondre)
     if (q.schemaQuestion) zone.querySelector(".enonce").after(creerSchema(q.schemaQuestion, q.schemaTexte));
 
-    const blocChoix = zone.querySelector(".choix");
+    let blocChoix = zone.querySelector(".choix");
+    if (q.type === "calcul") blocChoix = creerSaisie(q, blocChoix);
     if (q.choixSchemas) blocChoix.classList.add("choix-images");
-    q.reponses.forEach((r, i) => {
+    (q.reponses || []).forEach((r, i) => {
       const b = document.createElement("button");
       if (q.choixSchemas) {
         const img = document.createElement("img");
@@ -354,7 +495,7 @@
       const bouton = document.createElement("button");
       bouton.className = "bouton-indice";
       bouton.type = "button";
-      bouton.innerHTML = '<span aria-hidden="true">💡</span> Besoin d\'un indice ?';
+      bouton.innerHTML = '<span class="ico i-ampoule" aria-hidden="true"></span> Besoin d\'un indice ?';
       bouton.onclick = () => {
         const boite = document.createElement("p");
         boite.className = "indice";
@@ -366,7 +507,39 @@
       };
       blocChoix.after(bouton);
     }
+    const aide = document.createElement("p");
+    aide.className = "raccourcis";
+    aide.innerHTML = q.type === "calcul" ? 'Astuce : tape ta réponse puis <kbd>Entrée</kbd>, et encore <kbd>Entrée</kbd> pour continuer.'
+      : 'Astuce : réponds avec les touches <kbd>A</kbd> <kbd>B</kbd> <kbd>C</kbd> <kbd>D</kbd>, puis <kbd>Entrée</kbd> pour continuer.';
+    zone.appendChild(aide);
     rejouerAnimation(zone);
+  }
+
+  // Question « calcul » : une case où taper la valeur, l'unité à droite, l'arrondi demandé dessous.
+  // Corrigée par corrigerCalcul (essentiel.js) : virgule acceptée, messages si le signe ou l'unité est faux.
+  function creerSaisie(q, place) {
+    const r = q.reponse;
+    const form = document.createElement("form");
+    form.className = "saisie-calcul saisie-qcm";
+    form.innerHTML = '<label class="saisie-ligne"><span class="visuellement-cache"></span><input type="text" inputmode="decimal" autocomplete="off" spellcheck="false" enterkeyhint="done"><span class="saisie-unite"></span></label>' +
+      '<button class="bouton" type="submit">Valider</button><p class="saisie-aide"></p>';
+    form.querySelector(".visuellement-cache").textContent = "Ta réponse" + (r.unite ? " en " + r.unite : "");
+    form.querySelector(".saisie-unite").textContent = r.unite || "";
+    const dec = r.decimales === undefined ? 2 : r.decimales;
+    form.querySelector(".saisie-aide").textContent = "Arrondi " + (dec === 0 ? "à l'unité" : "à " + ecrireNombre(10 ** -dec, dec) + " près") + (r.signe !== false ? " · avec son signe" : "") + ".";
+    form.onsubmit = e => {
+      e.preventDefault();
+      const champ = form.querySelector("input");
+      const res = corrigerCalcul(r, champ.value);
+      if (res.etat === "vide") { form.querySelector(".saisie-aide").textContent = "Écris un nombre (ex. −12,5 ou 0,25)."; champ.focus(); return; }
+      champ.disabled = true;
+      form.querySelector("button").disabled = true;
+      form.classList.add(res.etat === "juste" ? "juste" : "faux");
+      repondre({ juste: res.etat === "juste", i: null, calcul: res }, null);
+    };
+    place.replaceWith(form);
+    setTimeout(() => { if (!matchMedia("(pointer: coarse)").matches) form.querySelector("input").focus({ preventScroll: true }); });
+    return form;
   }
 
   // Un schéma SVG affiché dans un <object> : contrairement à <img>, son tracé animé se joue,
@@ -402,13 +575,26 @@
     el.classList.add("apparait");
   }
 
+  // Raccourcis clavier : A, B, C, D (ou 1, 2, 3, 4) pour répondre ; Entrée pour continuer (bouton déjà sélectionné)
+  document.addEventListener("keydown", e => {
+    if (e.ctrlKey || e.metaKey || e.altKey || e.repeat) return;
+    if (e.target.closest && e.target.closest("input, textarea, select, [contenteditable], #specificites")) return;
+    const bloc = zone.querySelector(".choix:not(.repondu)");
+    if (!bloc || document.getElementById("ecran-qcm").hidden) return;
+    const n = "abcd".indexOf(e.key.toLowerCase()) !== -1 ? "abcd".indexOf(e.key.toLowerCase()) : "1234".indexOf(e.key);
+    const bouton = n >= 0 ? bloc.querySelectorAll("button")[n] : null;
+    if (bouton) { e.preventDefault(); bouton.click(); }
+  });
+
   function repondre(reponse, boutonClique) {
     const q = serie[numero];
-    const blocChoix = zone.querySelector(".choix");
+    const blocChoix = zone.querySelector(".choix, .saisie-qcm");
     blocChoix.classList.add("repondu");
     const boutonIndice = zone.querySelector(".bouton-indice");
     if (boutonIndice) boutonIndice.remove();
-    blocChoix.querySelectorAll("button").forEach((b, i) => {
+    const aideClavier = zone.querySelector(".raccourcis");
+    if (aideClavier) aideClavier.remove();
+    if (q.reponses) blocChoix.querySelectorAll("button").forEach((b, i) => {
       b.disabled = true;
       if (q.reponses[i].juste) b.classList.add("juste");
     });
@@ -418,7 +604,7 @@
       serieEnCours++;
       meilleureSerie = Math.max(meilleureSerie, serieEnCours);
     } else {
-      boutonClique.classList.add("faux");
+      if (boutonClique) boutonClique.classList.add("faux");
       erreurs.push(q);
       serieEnCours = 0;
     }
@@ -429,9 +615,20 @@
 
     const expl = document.createElement("div");
     expl.className = "explication " + (reponse.juste ? "bien" : "mal");
-    expl.innerHTML = "<strong></strong><span></span>";
-    expl.querySelector("strong").textContent = reponse.juste ? "Bonne réponse" : "Pas tout à fait";
+    expl.setAttribute("role", "status");      // la correction est annoncée par les lecteurs d'écran
+    expl.innerHTML = '<div class="expl-tete"><img class="expl-diosl" alt="" width="52" height="57"><strong></strong></div><span></span>';
+    montrerCompagnon(expl.querySelector(".expl-diosl"), reponse.juste ? "bouche-ouverte" : "pensif");
+    expl.querySelector("strong").textContent = reponse.juste
+      ? (serieEnCours >= 3 ? "Bonne réponse · " + serieEnCours + " d'affilée 🔥" : "Bonne réponse")
+      : "Pas tout à fait";
     expl.querySelector("span").textContent = q.explication;
+    if (reponse.calcul) {
+      // La bonne valeur, et ce qui cloche (signe, unité, arrondi)
+      const msg = document.createElement("p");
+      msg.className = "correction-calcul";
+      msg.textContent = messageCalcul(q.reponse, reponse.calcul);
+      expl.querySelector("span").before(msg);
+    }
     if (q.schema) expl.appendChild(creerSchema(q.schema, q.schemaTexte, reponse.juste ? null : reponse.i));
     if (suite) {
       const info = document.createElement("p");
@@ -471,6 +668,483 @@
     suivant.focus({ preventScroll: true });
   }
 
+  // ---------------- Contexte, annexe et cas pratiques ----------------
+  // Annexe : { titre, colonnes: ["", "OD", "OG"], lignes: [["Sphère", "+1,00", "+3,00"], …] }
+  // Petit tableau qui défile de côté s'il est trop large pour le téléphone.
+  function creerAnnexe(a) {
+    if (!a || !Array.isArray(a.colonnes) || !Array.isArray(a.lignes)) return null;
+    const fig = document.createElement("figure");
+    fig.className = "annexe";
+    if (a.titre) {
+      const leg = document.createElement("figcaption");
+      leg.textContent = a.titre;
+      fig.appendChild(leg);
+    }
+    const defile = document.createElement("div");
+    defile.className = "annexe-defile";
+    defile.tabIndex = 0;
+    defile.setAttribute("role", "region");
+    defile.setAttribute("aria-label", a.titre || "Annexe");
+    const table = document.createElement("table");
+    const tete = table.createTHead().insertRow();
+    a.colonnes.forEach(c => {
+      const th = document.createElement("th");
+      th.scope = "col";
+      th.textContent = c;
+      tete.appendChild(th);
+    });
+    const corps = table.createTBody();
+    a.lignes.forEach(l => {
+      const tr = corps.insertRow();
+      (Array.isArray(l) ? l : []).forEach((v, i) => {
+        const cellule = document.createElement(i === 0 ? "th" : "td");
+        if (i === 0) cellule.scope = "row";
+        cellule.textContent = v;
+        tr.appendChild(cellule);
+      });
+    });
+    defile.appendChild(table);
+    fig.appendChild(defile);
+    return fig;
+  }
+
+  // Ce qu'on sait avant de répondre : pour un cas, son contexte, son annexe et ce que les étapes
+  // précédentes ont apporté (la nouvelle information de l'étape en cours est mise en avant).
+  function creerContexte(q) {
+    const cas = q.cas && casParId(q.cas);
+    if (!cas && !q.contexte && !q.annexe) return null;
+    const boite = document.createElement("div");
+    boite.className = "contexte";
+    const texte = (t, classe) => {
+      const p = document.createElement("p");
+      if (classe) p.className = classe;
+      p.textContent = t;
+      boite.appendChild(p);
+      return p;
+    };
+    const ajouterAnnexe = a => { const f = creerAnnexe(a); if (f) boite.appendChild(f); };
+    if (cas) {
+      const etapes = questionsDuCas(cas.id);
+      texte(serieSpeciale && serieSpeciale.cas ? "Cas pratique" : "Cas pratique · étape " + q.etape + " / " + etapes.length, "contexte-tete");
+      texte(cas.titre, "contexte-titre");
+      if (cas.contexte) texte(cas.contexte);
+      ajouterAnnexe(cas.annexe);
+      etapes.filter(x => x.etape <= q.etape && (x.contexte || x.annexe)).forEach(x => {
+        const bloc = document.createElement("div");
+        bloc.className = "contexte-etape" + (x.etape === q.etape ? " nouveau" : "");
+        const p = document.createElement("p");
+        p.innerHTML = "<b></b> <span></span>";
+        p.querySelector("b").textContent = x.etape === q.etape ? "Nouveau :" : "Étape " + x.etape + " :";
+        p.querySelector("span").textContent = x.contexte || "";
+        bloc.appendChild(p);
+        const f = creerAnnexe(x.annexe);
+        if (f) bloc.appendChild(f);
+        boite.appendChild(bloc);
+      });
+    } else {
+      if (q.contexte) texte(q.contexte);
+      ajouterAnnexe(q.annexe);
+    }
+    return boite;
+  }
+
+  // La liste des cas pratiques de l'épreuve
+  function afficherListeCas() {
+    serieSpeciale = null;
+    const liste = casDe(epreuveChoisie);
+    let records = {};
+    try { records = JSON.parse(localStorage.getItem("records") || "{}"); } catch (e) {}
+    zone.innerHTML = '<h2 class="titre-cas">Cas pratiques</h2>' +
+      '<p class="doux intro-cas">Un client, une situation, plusieurs questions à la suite comme dans le sujet. Le contexte reste affiché jusqu\'à la fin.</p>' +
+      '<div class="liste-cas"></div>';
+    const conteneur = zone.querySelector(".liste-cas");
+    liste.forEach(c => {
+      const qs = questionsDuCas(c.id);
+      const bilan = bilanQuestions(qs);
+      const record = records[c.epreuve + "/" + c.id];
+      const carte = document.createElement("article");
+      carte.className = "carte-cas";
+      carte.innerHTML = '<h3></h3><p class="carte-cas-texte"></p><p class="carte-cas-info"></p><a class="bouton"></a>';
+      carte.querySelector("h3").textContent = c.titre;
+      carte.querySelector(".carte-cas-texte").textContent = c.contexte || "";
+      carte.querySelector(".carte-cas-info").textContent = qs.length + " étapes" +
+        (record !== undefined ? " · meilleur score " + record + " %" : bilan.faites ? " · commencé" : "");
+      const a = carte.querySelector("a");
+      a.href = "#" + c.epreuve + "/cas:" + encodeURIComponent(c.id);
+      a.textContent = (record !== undefined ? "Refaire le cas" : "Commencer le cas") + " →";
+      conteneur.appendChild(carte);
+    });
+    rejouerAnimation(zone);
+  }
+
+  function demarrerCas(cas) {
+    demarrer(questionsDuCas(cas.id), { cas });
+  }
+
+  // ---------------- Par où commencer (page « échauffement ») ----------------
+  // OGP, ETSO, Éco (page: "echauffement" dans EPREUVES) : trois grandes cartes (Atelier, cas, Spécificités),
+  // puis le QCM présenté comme un échauffement. Les autres épreuves : une petite rangée de liens.
+  function afficherMiseEnAvant(code) {
+    const zoneMA = document.getElementById("mise-en-avant");
+    const e = EPREUVES.find(x => x.code === code);
+    const echauffement = e && e.page === "echauffement";
+    zoneMA.innerHTML = "";
+    zoneMA.className = "mise-en-avant" + (echauffement ? " cartes-avant" : " liens-avant");
+    document.getElementById("titre-echauffement").hidden = !echauffement;
+    const niveaux = (typeof TRACES !== "undefined" ? TRACES : []).filter(N => N.epreuve === code);
+    let etoiles = {}, records = {};
+    try { etoiles = JSON.parse(localStorage.getItem("traces") || "{}") || {}; } catch (err) {}
+    try { records = JSON.parse(localStorage.getItem("records") || "{}") || {}; } catch (err) {}
+    const cas = casDe(code), spec = document.getElementById("specificites");
+    const nbCalculs = questionsDe(code).filter(q => q.type === "calcul").length;
+    const cartes = [];
+    if (niveaux.length) {
+      const gagnees = niveaux.reduce((t, N) => t + (etoiles[N.id] || 0), 0);
+      cartes.push({ icone: "i-crayon", titre: "Atelier des tracés", texte: niveaux.length + " niveaux · ★ " + gagnees + " / " + niveaux.length * 3, lien: "traces.html#" + code,
+        court: code === "U5" ? "L'œil à l'Atelier" : "Atelier des tracés" });
+    }
+    if (cas.length) {
+      const faits = cas.filter(c => records[code + "/" + c.id] !== undefined).length;
+      cartes.push({ icone: "i-dossier", titre: code === "U3" ? "Cas et calculs posés" : "Cas pratiques",
+        texte: cas.length + (cas.length > 1 ? " cas" : " cas") + (faits ? " · " + faits + " déjà faits" : "") + (code === "U3" && nbCalculs ? " · " + nbCalculs + " calculs à taper" : ""),
+        lien: "#" + code + "/cas", court: "Cas pratiques" });
+    }
+    if (!spec.hidden) {
+      const calc = (SPECIFICITES.find(s => s.epreuve === code) || { blocs: [] }).blocs.some(b => b.type === "calculatrice");
+      cartes.push({ icone: calc ? "i-calcul" : "i-boussole", titre: "Spécificités de l'épreuve", texte: "Ce qui tombe, les pièges, les formules",
+        action: () => { spec.open = true; spec.scrollIntoView({ behavior: "smooth", block: "start" }); }, court: calc ? "Guide calculatrice" : "Spécificités",
+        actionCourte: calc ? () => { spec.open = true; const c = spec.querySelector(".spec-type-calculatrice") || spec; c.scrollIntoView({ behavior: "smooth", block: "start" }); } : null });
+    }
+    if (!cartes.length) { zoneMA.hidden = true; return; }
+    zoneMA.hidden = false;
+    cartes.forEach(c => {
+      const a = document.createElement("a");
+      a.href = c.lien || "#" + code;
+      if (echauffement) {
+        a.className = "carte-avant";
+        a.innerHTML = '<span class="ico" aria-hidden="true"></span><span class="carte-avant-texte"><b></b><small></small></span><span class="fleche" aria-hidden="true">→</span>';
+        a.querySelector(".ico").classList.add(c.icone);
+        a.querySelector("b").textContent = c.titre;
+        a.querySelector("small").textContent = c.texte;
+      } else {
+        // Vision, Maths : une petite rangée de liens au-dessus du QCM
+        if (c.lien && c.lien.startsWith("#")) return;
+        a.className = "lien-avant";
+        a.innerHTML = '<span class="ico" aria-hidden="true"></span> ';
+        a.querySelector(".ico").classList.add(c.icone);
+        a.appendChild(document.createTextNode(c.court + " →"));
+      }
+      const action = echauffement ? c.action : (c.actionCourte || c.action);
+      if (action) a.onclick = ev => { ev.preventDefault(); action(); };
+      else if (c.lien && c.lien.startsWith("#")) a.onclick = ev => { ev.preventDefault(); allerVers(c.lien); };
+      zoneMA.appendChild(a);
+    });
+    if (!zoneMA.childElementCount) zoneMA.hidden = true;
+  }
+
+  // ---------------- Spécificités de l'épreuve ----------------
+  // Fiche courte en haut de l'épreuve (fichier specificites-XX.js). Repliée par défaut ;
+  // le choix de l'élève (ouverte ou repliée) est retenu dans son navigateur.
+  function afficherSpecificites(code) {
+    const det = document.getElementById("specificites");
+    if (det.dataset.epreuve === code && det.childElementCount) { det.hidden = false; return; }
+    det.dataset.epreuve = code;
+    det.innerHTML = "";
+    const fiche = (typeof SPECIFICITES !== "undefined" ? SPECIFICITES : []).find(s => s && s.epreuve === code);
+    if (!fiche || !Array.isArray(fiche.blocs)) { det.hidden = true; return; }
+    det.hidden = false;
+    const resume = document.createElement("summary");
+    resume.innerHTML = '<span class="spec-tete"><span class="ico i-boussole" aria-hidden="true"></span><b>Spécificités de l\'épreuve</b></span><small></small>';
+    resume.querySelector("small").textContent = fiche.resume || "";
+    resume.addEventListener("click", () => setTimeout(() => {
+      try { localStorage.setItem("specificites-ouvert", det.open ? "1" : "0"); } catch (e) {}
+    }));
+    det.appendChild(resume);
+    const corps = document.createElement("div");
+    corps.className = "spec-corps";
+    fiche.blocs.forEach(b => {
+      try { const el = creerBlocSpec(b, code); if (el) corps.appendChild(el); } catch (e) {}
+    });
+    det.appendChild(corps);
+    let pref = null;
+    try { pref = localStorage.getItem("specificites-ouvert"); } catch (e) {}
+    det.open = pref === "1";   // repliée par défaut : ouverte, elle est bien plus longue que l'écran
+  }
+
+  // Aller vers un thème ou des questions depuis la fiche, puis descendre jusqu'aux questions
+  function allerVers(adresse) {
+    defilerVersZone = true;
+    if (location.hash === adresse) selonAdresse();
+    else location.hash = adresse;
+  }
+  function lienSpec(code, theme, questions) {
+    const liens = document.createElement("p");
+    liens.className = "spec-liens";
+    const lien = (adresse, texte) => {
+      const a = document.createElement("a");
+      a.href = adresse;
+      a.textContent = texte;
+      a.onclick = e => { e.preventDefault(); allerVers(adresse); };
+      liens.appendChild(a);
+    };
+    if (theme && ordinairesDe(code).some(q => q.theme === theme)) lien("#" + code + "/" + encodeURIComponent(theme), "S'entraîner : " + theme + " →");
+    const ids = (Array.isArray(questions) ? questions : []).filter(id => QUESTIONS.some(q => q.id === id && q.epreuve === code));
+    if (ids.length) lien("#" + code + "/questions:" + ids.join(","), (ids.length > 1 ? "Faire les " + ids.length + " questions" : "Faire la question") + " →");
+    return liens.childElementCount ? liens : null;
+  }
+
+  // Liste à cocher gardée dans le navigateur : { "U5/<bloc>/<item>": 1 }
+  function lireCoches() {
+    try { return JSON.parse(localStorage.getItem("specificites-coches") || "{}") || {}; } catch (e) { return {}; }
+  }
+  function ecrireCoche(cle, oui) {
+    const c = lireCoches();
+    if (oui) c[cle] = 1; else delete c[cle];
+    try { localStorage.setItem("specificites-coches", JSON.stringify(c)); } catch (e) {}
+  }
+
+  function creerBlocSpec(b, code) {
+    if (!b || typeof b !== "object") return null;
+    const bloc = document.createElement("div");
+    bloc.className = "spec-bloc spec-type-" + b.type;
+    const h = document.createElement("h3");
+    h.textContent = b.titre || "";
+    bloc.appendChild(h);
+    const el = (balise, classe, texte) => {
+      const x = document.createElement(balise);
+      if (classe) x.className = classe;
+      if (texte !== undefined) x.textContent = texte;
+      return x;
+    };
+    const ajouterLiens = (parent, theme, questions) => { const l = lienSpec(code, theme, questions); if (l) parent.appendChild(l); };
+
+    if (b.type === "texte") {
+      const ul = el("ul", "spec-points");
+      (b.points || []).forEach(t => ul.appendChild(el("li", "", t)));
+      bloc.appendChild(ul);
+
+    } else if (b.type === "etapes") {
+      const ol = el("ol", "spec-etapes");
+      (b.etapes || []).forEach(e => {
+        const li = el("li");
+        const haut = el("p", "spec-etape-haut");
+        haut.appendChild(el("b", "", e.titre));
+        if (e.frequence) haut.appendChild(el("span", "spec-freq", e.frequence));
+        li.appendChild(haut);
+        if (e.texte) li.appendChild(el("p", "spec-etape-texte", e.texte));
+        ajouterLiens(li, e.theme);
+        ol.appendChild(li);
+      });
+      bloc.appendChild(ol);
+
+    } else if (b.type === "frequences") {
+      const table = el("table", "spec-table");
+      const tete = table.createTHead().insertRow();
+      ["Exercice", "Fréquence"].forEach(t => { const th = el("th", "", t); th.scope = "col"; tete.appendChild(th); });
+      const corps = table.createTBody();
+      (b.lignes || []).forEach(l => {
+        const tr = corps.insertRow();
+        const th = el("th");
+        th.scope = "row";
+        th.appendChild(document.createTextNode(l.sujet));
+        ajouterLiens(th, l.theme);
+        tr.appendChild(th);
+        tr.appendChild(el("td", "spec-freq-cellule", l.frequence));
+      });
+      bloc.appendChild(table);
+
+    } else if (b.type === "cocher") {
+      const coches = lireCoches();
+      const items = b.items || [];
+      const compte = el("span", "spec-compte");
+      h.appendChild(compte);
+      const ul = el("ul", "spec-cocher-liste");
+      const majCompte = () => {
+        const n = ul.querySelectorAll("input:checked").length;
+        compte.textContent = n + " / " + items.length;
+      };
+      items.forEach(it => {
+        const cle = code + "/" + b.id + "/" + it.id;
+        const li = el("li");
+        const label = el("label");
+        const input = el("input");
+        input.type = "checkbox";
+        input.checked = !!coches[cle];
+        input.onchange = () => { ecrireCoche(cle, input.checked); majCompte(); };
+        label.append(input, el("span", "", it.texte));
+        li.appendChild(label);
+        ul.appendChild(li);
+      });
+      bloc.appendChild(ul);
+      majCompte();
+
+    } else if (b.type === "pieges") {
+      const liste = el("div", "spec-pieges");
+      (b.items || []).forEach(p => {
+        const carte = el("div", "piege");
+        carte.appendChild(el("p", "piege-titre", p.titre));
+        const faux = el("p", "piege-faux");
+        faux.append(el("span", "piege-marque", "Faux"), document.createTextNode(" " + p.faux));
+        const juste = el("p", "piege-juste");
+        juste.append(el("span", "piege-marque", "Juste"), document.createTextNode(" " + p.juste));
+        carte.append(faux, juste);
+        ajouterLiens(carte, p.theme, p.questions);
+        liste.appendChild(carte);
+      });
+      bloc.appendChild(liste);
+
+    } else if (b.type === "formules") {
+      const groupes = [["À savoir par cœur", false], ["Rappelée dans le sujet", true]];
+      groupes.forEach(([titre, rappelee]) => {
+        const lignes = (b.lignes || []).filter(l => !!l.rappelee === rappelee);
+        if (!lignes.length) return;
+        bloc.appendChild(el("p", "spec-sous-titre" + (rappelee ? "" : " par-coeur"), titre));
+        const ul = el("ul", "spec-formules");
+        lignes.forEach(l => {
+          const li = el("li");
+          li.appendChild(el("span", "formule-nom", l.nom));
+          li.appendChild(el("span", "formule", l.formule));
+          if (l.exemple) li.appendChild(el("span", "formule-exemple", "Ex. : " + l.exemple));
+          ul.appendChild(li);
+        });
+        bloc.appendChild(ul);
+      });
+
+    } else if (b.type === "normes") {
+      bloc.appendChild(el("p", "spec-aide", "Essaie de retrouver la valeur, puis touche la ligne pour vérifier."));
+      const ul = el("ul", "spec-normes");
+      (b.lignes || []).forEach(l => {
+        const li = el("li");
+        const bouton = el("button", "norme");
+        bouton.type = "button";
+        bouton.setAttribute("aria-expanded", "false");
+        bouton.append(el("span", "norme-nom", l.nom), el("span", "norme-valeur", "?"));
+        const remarque = l.remarque ? el("span", "norme-remarque", l.remarque) : null;
+        if (remarque) { remarque.hidden = true; bouton.appendChild(remarque); }
+        bouton.onclick = () => {
+          const voir = bouton.getAttribute("aria-expanded") !== "true";
+          bouton.setAttribute("aria-expanded", voir);
+          bouton.querySelector(".norme-valeur").textContent = voir ? l.valeur : "?";
+          if (remarque) remarque.hidden = !voir;
+        };
+        li.appendChild(bouton);
+        ul.appendChild(li);
+      });
+      const tout = el("button", "spec-tout", "Tout montrer");
+      tout.type = "button";
+      tout.onclick = () => {
+        const montrer = tout.textContent === "Tout montrer";
+        ul.querySelectorAll(".norme").forEach(n => { if ((n.getAttribute("aria-expanded") === "true") !== montrer) n.click(); });
+        tout.textContent = montrer ? "Tout cacher" : "Tout montrer";
+      };
+      bloc.append(ul, tout);
+
+    } else if (b.type === "calculatrice") {
+      creerGuideCalculatrice(b, bloc, code);
+    } else {
+      return null;
+    }
+    return bloc;
+  }
+
+  // ---------------- Guide calculatrice (bloc « calculatrice » des Spécificités) ----------------
+  // L'élève choisit une fois son modèle (retenu dans localStorage « calculatrice ») ;
+  // chaque tâche montre alors les touches de SA calculatrice. [touche] est dessinée comme une touche.
+  const MODELES_CALC = [
+    { id: "ti83-premium-ce", nom: "TI-83 Premium CE" },
+    { id: "casio-graph90", nom: "Casio Graph 90+E" },
+    { id: "casio-graph35", nom: "Casio Graph 35+E II" },
+    { id: "numworks", nom: "NumWorks" }
+  ];
+  function lireCalculatrice() { try { return localStorage.getItem("calculatrice") || ""; } catch (e) { return ""; } }
+  function texteAvecTouches(texte) {
+    const frag = document.createDocumentFragment();
+    String(texte).split(/(\[[^\]]+\])/).forEach(m => {
+      if (/^\[[^\]]+\]$/.test(m)) {
+        const k = document.createElement("kbd");
+        k.className = "touche";
+        k.textContent = m.slice(1, -1);
+        frag.appendChild(k);
+      } else if (m) frag.appendChild(document.createTextNode(m));
+    });
+    return frag;
+  }
+  function creerGuideCalculatrice(b, bloc, code) {
+    const choix = document.createElement("div");
+    choix.className = "calc-modeles";
+    choix.setAttribute("role", "radiogroup");
+    choix.setAttribute("aria-label", "Ma calculatrice");
+    const etiquette = document.createElement("p");
+    etiquette.className = "spec-aide";
+    etiquette.textContent = "Ma calculatrice :";
+    const taches = document.createElement("div");
+    taches.className = "calc-taches";
+    bloc.append(etiquette, choix, taches);
+    const afficher = () => {
+      const modele = lireCalculatrice();
+      choix.querySelectorAll("button").forEach(x => x.setAttribute("aria-checked", x.dataset.modele === modele));
+      taches.innerHTML = "";
+      if (!modele) {
+        const p = document.createElement("p");
+        p.className = "calc-vide";
+        p.textContent = "Choisis ta calculatrice : tu ne verras plus que ses touches.";
+        taches.appendChild(p);
+      }
+      (b.taches || []).forEach(tache => {
+        const det = document.createElement("details");
+        det.className = "calc-tache";
+        const resume = document.createElement("summary");
+        const titre = document.createElement("b");
+        titre.textContent = tache.titre;
+        resume.appendChild(titre);
+        if (tache.quand) {
+          const q = document.createElement("small");
+          q.textContent = tache.quand;
+          resume.appendChild(q);
+        }
+        det.appendChild(resume);
+        let fiche = tache.modeles && tache.modeles[modele];
+        if (fiche && fiche.memeQue) fiche = tache.modeles[fiche.memeQue];
+        if (!modele) {
+          // pas de modèle choisi : la tâche reste fermée, sans touches
+        } else if (!fiche || !Array.isArray(fiche.etapes)) {
+          const p = document.createElement("p");
+          p.className = "calc-vide";
+          p.textContent = "Pas encore écrit pour ce modèle.";
+          det.appendChild(p);
+        } else {
+          const ol = document.createElement("ol");
+          ol.className = "calc-etapes";
+          fiche.etapes.forEach(e => { const li = document.createElement("li"); li.appendChild(texteAvecTouches(e)); ol.appendChild(li); });
+          det.appendChild(ol);
+          if (fiche.remarque) {
+            const r = document.createElement("p");
+            r.className = "calc-remarque";
+            r.appendChild(texteAvecTouches(fiche.remarque));
+            det.appendChild(r);
+          }
+        }
+        const liens = lienSpec(code, null, tache.questions);
+        if (liens) det.appendChild(liens);
+        taches.appendChild(det);
+      });
+    };
+    MODELES_CALC.forEach(m => {
+      const bt = document.createElement("button");
+      bt.type = "button";
+      bt.dataset.modele = m.id;
+      bt.setAttribute("role", "radio");
+      bt.textContent = m.nom;
+      bt.onclick = () => {
+        try { localStorage.setItem("calculatrice", m.id); } catch (e) {}
+        // Les autres guides de la page (s'il y en a) suivent le même choix
+        afficher();
+      };
+      choix.appendChild(bt);
+    });
+    afficher();
+  }
+
   // ---------------- Signaler une erreur ----------------
   // Petit formulaire sous la correction. Envoyé dans Firebase (collection « signalements »),
   // sans compte et sans donnée personnelle. Secours : un e-mail pré-rempli.
@@ -481,7 +1155,7 @@
     const lien = document.createElement("button");
     lien.type = "button";
     lien.className = "lien-signaler";
-    lien.textContent = "⚑ Signaler une erreur";
+    lien.textContent = "Signaler une erreur";
     bloc.appendChild(lien);
 
     lien.onclick = () => {
@@ -552,7 +1226,7 @@
   // 5 paliers : la couleur, le nounours, le message et les confettis changent selon le score.
   // (Les images du nounours sont dans le dossier img/.)
   function palierDe(pourcent) {
-    if (pourcent === 100) return { nom: "or", titre: "Parfait !", sous: "Sans aucune faute. Même le nounours n'en revient pas.", nounours: "choque", confettis: 160 };
+    if (pourcent === 100) return { nom: "or", titre: "Parfait !", sous: "Sans aucune faute. Même " + nomCompagnon() + " n'en revient pas.", nounours: "choque", confettis: 160 };
     if (pourcent >= 80) return { nom: "or", titre: "Excellent !", sous: "Tu maîtrises ce thème. Plus que quelques détails.", nounours: "clin-doeil", confettis: 90 };
     if (pourcent >= 60) return { nom: "argent", titre: "Bien joué !", sous: "Plus de la moitié est acquise. Revois tes erreurs et ça passe.", nounours: "bouche-ouverte", confettis: 0 };
     if (pourcent >= 40) return { nom: "bronze", titre: "Ça commence à venir", sous: "Tu as les bases. Revois tes erreurs, et le prochain essai sera meilleur.", nounours: "pensif", confettis: 0 };
@@ -620,24 +1294,28 @@
   function afficherBilan() {
     const pourcent = Math.round((score / serie.length) * 100);
     const palier = palierDe(pourcent);
-    const cle = epreuveChoisie + "/" + themeChoisi;
-    const record = modeRevision ? { nouveau: false } : enregistrerRecord(cle, pourcent);
+    const casFini = serieSpeciale && serieSpeciale.cas;
+    const cle = epreuveChoisie + "/" + (casFini ? casFini.id : themeChoisi);
+    const record = modeRevision || (serieSpeciale && !casFini) ? { nouveau: false } : enregistrerRecord(cle, pourcent);
 
     zone.innerHTML =
       '<div class="bilan palier-' + palier.nom + '">' +
         '<div class="bilan-tete">' +
           '<div class="anneau"><div class="anneau-int"><p class="score">0 %<small>' + score + " / " + serie.length + "</small></p></div></div>" +
-          '<img class="bilan-nounours" src="img/nounours-' + palier.nounours + '.svg" alt="" width="96" height="106">' +
+          '<img class="bilan-nounours" alt="" width="96" height="106">' +
         "</div>" +
         '<h2 class="bilan-titre"></h2>' +
         '<p class="bilan-sous"></p>' +
         '<div class="bilan-stats"></div>' +
         '<div class="bilan-actions"></div>' +
       "</div>";
+    montrerCompagnon(zone.querySelector(".bilan-nounours"), palier.nounours);
     const pseudo = lireProfil().pseudo;
     zone.querySelector(".bilan-titre").textContent = pseudo && palier.titre.endsWith(" !") ? palier.titre.slice(0, -2) + ", " + pseudo + " !" : palier.titre;
     zone.querySelector(".bilan-sous").textContent = seanceRevision
       ? (erreurs.length === 0 ? "Révision du jour terminée. Les questions reviendront de plus en plus tard." : "Les questions ratées reviendront demain, les autres plus tard. À demain !")
+      : casFini
+      ? "Cas pratique « " + casFini.titre + " » : " + score + (score > 1 ? " étapes réussies sur " : " étape réussie sur ") + serie.length + ". " + palier.sous
       : modeRevision
       ? (erreurs.length === 0 ? "Toutes tes erreurs sont corrigées. Bravo !" : "Encore " + erreurs.length + " à retravailler. Tu y es presque.")
       : palier.sous;
@@ -653,7 +1331,7 @@
     };
     if (meilleureSerie >= 3) medaille("🔥 " + meilleureSerie + " bonnes réponses d'affilée");
     if (record.nouveau) medaille("🏆 Nouveau record ! (avant : " + record.ancien + " %)", "or");
-    if (!modeRevision && themeChoisi !== "Tous" && estEssentiel(epreuveChoisie, themeChoisi) && etatNotion(epreuveChoisie, themeChoisi).maitrisee) {
+    if (!modeRevision && !serieSpeciale && themeChoisi !== "Tous" && estEssentiel(epreuveChoisie, themeChoisi) && etatNotion(epreuveChoisie, themeChoisi).maitrisee) {
       const faites = ESSENTIEL.filter(n => etatNotion(n.epreuve, n.theme).maitrisee).length;
       medaille("★ Notion essentielle maîtrisée · " + faites + " / " + ESSENTIEL.length, "or");
     }
@@ -671,20 +1349,27 @@
     };
     const aRevoir = erreurs.map(q => QUESTIONS.find(x => idQuestion(x) === idQuestion(q)));
     if (aRevoir.length > 0) {
-      bouton("Revoir mes " + (aRevoir.length > 1 ? aRevoir.length + " erreurs" : "erreur") + " →", "", () => { demarrer(aRevoir); zone.scrollIntoView({ behavior: "smooth", block: "start" }); });
-    } else {
-      const prochaine = ESSENTIEL.find(n => !(n.epreuve === epreuveChoisie && n.theme === themeChoisi) && !etatNotion(n.epreuve, n.theme).maitrisee);
-      if (prochaine) {
-        bouton("Notion suivante : " + prochaine.theme + " →", "", () => {
-          location.hash = prochaine.epreuve + "/" + encodeURIComponent(prochaine.theme);
-          zone.scrollIntoView({ behavior: "smooth", block: "start" });
-        });
-      }
+      bouton((aRevoir.length > 1 ? "Revoir mes " + aRevoir.length + " erreurs" : "Revoir mon erreur") + " →", "", () => { demarrer(aRevoir); zone.scrollIntoView({ behavior: "smooth", block: "start" }); });
+    }
+    // La notion essentielle suivante pas encore maîtrisée (bouton principal si aucune erreur)
+    const prochaine = seanceRevision || serieSpeciale ? null : ESSENTIEL.find(n => !(n.epreuve === epreuveChoisie && n.theme === themeChoisi) && !etatNotion(n.epreuve, n.theme).maitrisee);
+    if (prochaine) {
+      bouton("Notion suivante : " + prochaine.theme + " →", aRevoir.length > 0 ? "secondaire" : "", () => {
+        location.hash = prochaine.epreuve + "/" + encodeURIComponent(prochaine.theme);
+        zone.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
     }
     if (seanceRevision) {
       bouton("Retour aux épreuves", "secondaire", () => { history.pushState("", "", "qcm.html"); document.querySelector("main").classList.remove("large"); afficherEpreuves(); });
+    } else if (casFini) {
+      bouton("Refaire le cas", "secondaire", () => { demarrerCas(casFini); zone.scrollIntoView({ behavior: "smooth", block: "start" }); });
+      if (casDe(epreuveChoisie).length > 1) bouton("Tous les cas pratiques", "secondaire", () => { afficherListeCas(); zone.scrollIntoView({ behavior: "smooth", block: "start" }); });
+    } else if (serieSpeciale) {
+      const memes = serie.map(q => QUESTIONS.find(x => idQuestion(x) === idQuestion(q)));
+      bouton("Refaire ces questions", "secondaire", () => { demarrer(memes, { selection: true }); zone.scrollIntoView({ behavior: "smooth", block: "start" }); });
     } else {
-      bouton(modeRevision ? "Refaire tout le thème" : "Recommencer", "secondaire", () => { demarrer(); zone.scrollIntoView({ behavior: "smooth", block: "start" }); });
+      const libelle = onglet === "cas" ? "Retour aux cas pratiques" : modeRevision ? "Refaire tout le thème" : "Recommencer";
+      bouton(libelle, "secondaire", () => { onglet === "cas" ? afficherListeCas() : demarrer(); zone.scrollIntoView({ behavior: "smooth", block: "start" }); });
     }
 
     lancerConfettis(zone.querySelector(".bilan"), palier.confettis);
@@ -710,9 +1395,12 @@
       liste.className = "erreurs";
       erreurs.forEach(q => {
         const li = document.createElement("li");
-        li.innerHTML = "<strong></strong><br><span class='doux'></span>";
+        li.innerHTML = "<strong></strong><span class='erreur-reponse'></span><span class='doux'></span>";
         li.querySelector("strong").textContent = q.question;
-        li.querySelector("span").textContent = q.explication;
+        li.querySelector(".erreur-reponse").textContent = "✓ " + (q.type === "calcul"
+          ? ecrireNombre(q.reponse.valeur, q.reponse.decimales === undefined ? 2 : q.reponse.decimales, q.reponse.signe !== false) + (q.reponse.unite ? " " + q.reponse.unite : "")
+          : q.choix[q.bonne]);
+        li.querySelector(".doux").textContent = q.explication;
         liste.appendChild(li);
       });
       zone.append(titre, liste);
@@ -723,10 +1411,16 @@
   // L'adresse qcm.html#U5 ouvre directement l'épreuve U5,
   // et qcm.html#U5/Worth ouvre directement le thème Worth :
   // c'est le lien à mettre sous chaque Short.
+  // qcm.html#U5/cas : les cas pratiques ; #U5/cas:CAS-U5-01 : un cas ;
+  // #U5/questions:U5-012,U5-020 : une petite série de questions choisies (liens des pièges).
   function selonAdresse() {
-    const [code, theme] = location.hash.slice(1).split("/");
+    const [code, suite] = location.hash.slice(1).split("/");
+    const theme = suite ? decodeURIComponent(suite) : null;
     if (code === "a-revoir") ouvrirRevision();
-    else if (code) ouvrirEpreuve(code, theme ? decodeURIComponent(theme) : null);
+    else if (code && theme === "cas") ouvrirEpreuve(code, null, { cas: "liste" });
+    else if (code && theme && theme.startsWith("cas:")) ouvrirEpreuve(code, null, { cas: theme.slice(4) });
+    else if (code && theme && theme.startsWith("questions:")) ouvrirEpreuve(code, null, { questions: theme.slice(10).split(",") });
+    else if (code) ouvrirEpreuve(code, theme);
     else afficherEpreuves();
   }
   document.getElementById("retour").onclick = () => {
@@ -737,7 +1431,8 @@
   window.addEventListener("hashchange", selonAdresse);
   selonAdresse();
 </script>
-<script type="module" src="compte.js?v=e48e74e2"></script>
+<script src="vivant.js?v=350e7712" defer></script>
+<script type="module" src="compte.js?v=c47ff213"></script>
 <!-- Mesure d'audience anonyme, sans cookies (GoatCounter) -->
 <script data-goatcounter="https://opticonversion.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </body>

@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 300" role="img" aria-labelledby="t">
+  <title id="t">Trois diaphragmes dans l'espace d'étude</title>
+  <style>
+    :root { background: #0f1219; color-scheme: dark; }
+    text { font-family: -apple-system, "Segoe UI", Roboto, sans-serif; font-size: 16px; fill: #e7e9ee; }
+    .p { font-size: 15px; fill: #aab2c0; }
+    .g { font-weight: 700; }
+    .r { fill: none; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
+  </style>
+  <defs>
+    <pattern id="grille" width="18" height="18" patternUnits="userSpaceOnUse"><path d="M18 0 L0 0 L0 18" fill="none" stroke="#ffffff" stroke-opacity=".045"/></pattern>
+    <marker id="mg" markerUnits="userSpaceOnUse" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#aab2c0"/></marker>
+    <marker id="mo" markerUnits="userSpaceOnUse" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="12" markerHeight="12" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#f0c674"/></marker>
+  </defs>
+  <rect x="0" y="0" width="480" height="300" fill="url(#grille)"/>
+  <line x1="8" y1="150" x2="472" y2="150" stroke="#5b6270" stroke-width="1.5"/>
+  <line x1="40" y1="50" x2="40" y2="230" stroke="#aab2c0" stroke-width="1.6" stroke-dasharray="3 5"/>
+  <circle cx="40" cy="150" r="5" fill="#f2f2f2"/><text x="48" y="172" class="g">A</text>
+  <text x="10" y="250" class="p">plan des champs</text>
+  <line x1="144" y1="100" x2="144" y2="126" stroke="#6fd3c4" stroke-width="4"/><line x1="144" y1="174" x2="144" y2="200" stroke="#6fd3c4" stroke-width="4"/>
+  <text x="144" y="92" text-anchor="middle" class="g" style="fill:#6fd3c4">[D₁]</text>
+  <text x="152" y="194"  class="p">r = 6 mm</text>
+  <line x1="300" y1="44" x2="300" y2="70" stroke="#c7a3ff" stroke-width="4"/><line x1="300" y1="230" x2="300" y2="256" stroke="#c7a3ff" stroke-width="4"/>
+  <text x="300" y="36" text-anchor="middle" class="g" style="fill:#c7a3ff">[D₃]</text>
+  <text x="308" y="250"  class="p">r = 20 mm</text>
+  <line x1="430" y1="64" x2="430" y2="90" stroke="#f0c674" stroke-width="4"/><line x1="430" y1="210" x2="430" y2="236" stroke="#f0c674" stroke-width="4"/>
+  <text x="430" y="56" text-anchor="middle" class="g" style="fill:#f0c674">[D₂]</text>
+  <text x="422" y="230" text-anchor="end" class="p">r = 15 mm</text>
+  <line x1="40" y1="266" x2="144" y2="266" stroke="#aab2c0" stroke-width="1.2" marker-start="url(#mg)" marker-end="url(#mg)"/><text x="92" y="284" text-anchor="middle" class="p">40 mm</text>
+  <line x1="144" y1="266" x2="300" y2="266" stroke="#aab2c0" stroke-width="1.2" marker-start="url(#mg)" marker-end="url(#mg)"/><text x="222" y="284" text-anchor="middle" class="p">+ 60 mm</text>
+  <line x1="300" y1="266" x2="430" y2="266" stroke="#aab2c0" stroke-width="1.2" marker-start="url(#mg)" marker-end="url(#mg)"/><text x="365" y="284" text-anchor="middle" class="p">+ 50 mm</text>
+</svg>

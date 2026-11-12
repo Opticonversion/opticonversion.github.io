@@ -369,3 +369,347 @@ QUESTIONS.push(
   }
 
 );
+
+// ==============================================================
+//  MINI-CAS : un magasin, une annexe, calculer → commenter → conseiller
+// ==============================================================
+
+CAS.push({
+  id: "CAS-U3-01",
+  epreuve: "U3",
+  titre: "Optique du Belvédère : embaucher ou pas ?",
+  contexte: "Optique du Belvédère est un magasin indépendant (EURL) d'une petite ville. La gérante voudrait embaucher un opticien à temps plein pour ouvrir le samedi après-midi et développer les lentilles. Elle te confie son compte de résultat de l'an dernier, présenté en charges fixes et variables.",
+  annexe: {
+    titre: "Compte de résultat différentiel de l'an dernier",
+    colonnes: ["", "Montant (€ HT)"],
+    lignes: [
+      ["Chiffre d'affaires", "360 000"],
+      ["Charges variables (achats de marchandises vendues)", "144 000"],
+      ["Charges fixes (loyer, salaires actuels, amortissements…)", "180 000"],
+      ["Résultat", "36 000"]
+    ]
+  }
+});
+
+QUESTIONS.push(
+
+  {
+    id: "U3-041", epreuve: "U3", theme: "Seuil de rentabilité", session: "2019",
+    cas: "CAS-U3-01", etape: 1,
+    question: "Quel est le taux de marge sur coût variable du magasin ?",
+    choix: ["60 %", "40 %", "150 %", "10 %"],
+    bonne: 0,
+    explication: "Marge sur coût variable = CA − charges variables = 360 000 − 144 000 = 216 000 €. Taux de MCV = 216 000 / 360 000 = 60 %. (40 % est le poids des charges variables ; 10 % = résultat / CA.)",
+    indice: "Commence par la marge sur coût variable (CA moins charges variables), puis rapporte-la au chiffre d'affaires."
+  },
+  {
+    id: "U3-042", epreuve: "U3", theme: "Seuil de rentabilité", session: "2019",
+    cas: "CAS-U3-01", etape: 2,
+    question: "Quel est le seuil de rentabilité du magasin ?",
+    choix: ["324 000 €", "216 000 €", "300 000 €", "450 000 €"],
+    bonne: 2,
+    explication: "SR = charges fixes / taux de MCV = 180 000 / 0,60 = 300 000 € HT. Vérification : à 300 000 € de CA, la MCV vaut 180 000 € et couvre tout juste les charges fixes. (450 000 € = 180 000 / 0,40 : on a divisé par le taux de charges variables.)",
+    indice: "Seuil de rentabilité = charges fixes divisées par le taux de marge sur coût variable trouvé juste avant."
+  },
+  {
+    id: "U3-043", epreuve: "U3", theme: "Seuil de rentabilité", session: "complément",
+    cas: "CAS-U3-01", etape: 3,
+    contexte: "Le seuil de rentabilité est de 300 000 € pour un chiffre d'affaires de 360 000 €.",
+    question: "Commente ce seuil de rentabilité : quel commentaire est le plus juste ?",
+    choix: [
+      "Le magasin est rentable.",
+      "Le magasin perd de l'argent, car son seuil de rentabilité est inférieur à son chiffre d'affaires.",
+      "Le seuil est atteint fin octobre : le magasin est rentable, avec une marge de sécurité de 60 000 €, soit 1/6 de son CA ; une baisse des ventes de plus de 17 % le ferait passer en perte.",
+      "Le magasin devrait passer en SASU pour mieux protéger la gérante."
+    ],
+    bonne: 2,
+    explication: "Point mort = 300 000 / 360 000 × 12 = 10 mois, donc fin octobre. Marge de sécurité = 360 000 − 300 000 = 60 000 €, soit 16,7 % du CA. Un bon commentaire chiffre la situation, la compare (au CA) et dit ce qu'elle signifie. « Le magasin est rentable » est vrai mais sans argument ; le 2e commentaire inverse le sens du seuil ; le 4e est hors sujet.",
+    indice: "Un bon commentaire compare le seuil au CA (marge de sécurité, date du point mort) et en tire une conclusion chiffrée."
+  },
+  {
+    id: "U3-044", epreuve: "U3", theme: "Seuil de rentabilité", session: "complément",
+    cas: "CAS-U3-01", etape: 4,
+    contexte: "Le nouvel opticien coûterait 36 000 € par an (salaire brut et cotisations patronales). C'est une charge fixe de plus.",
+    question: "Sans vente supplémentaire, quel serait le nouveau seuil de rentabilité ?",
+    choix: ["336 000 €", "360 000 €", "396 000 €", "324 000 €"],
+    bonne: 1,
+    explication: "Nouvelles charges fixes = 180 000 + 36 000 = 216 000 €. Nouveau SR = 216 000 / 0,60 = 360 000 €, exactement le CA actuel : sans ventes en plus, le résultat tomberait à 0. Piège : ajouter 36 000 € directement au SR (336 000 €) ; chaque euro de charge fixe demande 1 / 0,60 ≈ 1,67 € de CA.",
+    indice: "Ajoute le coût du poste aux charges fixes, puis refais le calcul du seuil avec le même taux de MCV."
+  },
+  {
+    id: "U3-045", epreuve: "U3", theme: "Seuil de rentabilité", session: "complément",
+    cas: "CAS-U3-01", etape: 5,
+    contexte: "La gérante pense que le samedi après-midi et les lentilles apporteraient 45 000 € de CA HT en plus par an, au même taux de marge sur coût variable.",
+    question: "Que conseilles-tu à la gérante ?",
+    choix: [
+      "Embaucher : 45 000 € de chiffre d'affaires en plus couvrent largement les 36 000 € que coûte le poste.",
+      "Ne pas embaucher tout de suite, c'est trop risqué.",
+      "Passer en SASU avant d'embaucher, pour que la gérante soit assimilée salariée.",
+      "Pas d'embauche à temps plein pour l'instant : 45 000 € de CA n'apportent que 27 000 € de marge, le résultat baisserait de 9 000 €. Il faudrait 60 000 € de CA en plus ; commencer par un temps partiel et suivre les ventes du samedi."
+    ],
+    bonne: 3,
+    explication: "Marge apportée = 45 000 × 0,60 = 27 000 €, pour un coût de 36 000 € : résultat 36 000 + 27 000 − 36 000 = 27 000 €, soit 9 000 € de moins qu'aujourd'hui. CA nécessaire pour payer le poste = 36 000 / 0,60 = 60 000 €. Piège classique : comparer un chiffre d'affaires à un coût, alors qu'il faut comparer la MARGE au coût. Le 2e choix est prudent mais sans argument, le 3e hors sujet.",
+    indice: "Ce n'est pas le chiffre d'affaires supplémentaire qui paie le salaire, c'est la marge qu'il apporte. Calcule-la et compare-la au coût du poste."
+  },
+
+  // ---------- « Commente ce chiffre » ----------
+  {
+    id: "U3-046", epreuve: "U3", theme: "Analyse financière", session: "2019",
+    contexte: "Bilan fonctionnel d'un magasin d'optique au 31 décembre.",
+    annexe: {
+      titre: "Indicateurs du bilan fonctionnel",
+      colonnes: ["", "Montant (€)"],
+      lignes: [["FRNG", "25 000"], ["BFR", "40 000"], ["Trésorerie nette", "−15 000"]]
+    },
+    question: "Commente le FRNG et le BFR de ce magasin : quel commentaire est le plus juste ?",
+    choix: [
+      "Le FRNG est positif, donc la trésorerie du magasin est forcément positive.",
+      "Le FRNG ne couvre pas le BFR : il manque 15 000 €, financés par du découvert. Il faut renforcer les ressources stables (apport, emprunt à long terme) ou réduire le BFR (stock, délais clients).",
+      "La situation de trésorerie est tendue.",
+      "Le magasin devrait baisser son taux de marque pour attirer des clients."
+    ],
+    bonne: 1,
+    explication: "TN = FRNG − BFR = 25 000 − 40 000 = −15 000 € : les ressources durables ne suffisent pas à financer le cycle d'exploitation, le magasin vit sur des concours bancaires, qui coûtent des agios. Le bon commentaire explique la cause, chiffre le manque et propose deux pistes. « Tendue » est vrai mais sans argument ; le 1er confond FRNG positif et trésorerie positive ; le 4e est hors sujet.",
+    indice: "Compare le FRNG au BFR : qui finance l'autre ? Ensuite, propose une solution qui agit sur l'un ou sur l'autre."
+  },
+  {
+    id: "U3-047", epreuve: "U3", theme: "Analyse financière", session: "2024",
+    contexte: "Le magasin réalise 300 000 € de chiffre d'affaires HT et envisage d'acheter une meuleuse à 30 000 €.",
+    annexe: {
+      titre: "Indicateurs du bilan fonctionnel",
+      colonnes: ["", "Montant (€)"],
+      lignes: [["FRNG", "90 000"], ["BFR", "30 000"], ["Trésorerie nette", "60 000"]]
+    },
+    question: "Commente la trésorerie de ce magasin : quel commentaire est le plus juste ?",
+    choix: [
+      "La trésorerie est positive.",
+      "Le bail commercial peut être révisé tous les 3 ans.",
+      "Le FRNG couvre largement le BFR : l'équilibre est assuré et 60 000 € sont disponibles. Une partie de cet argent dort : le magasin peut autofinancer la meuleuse sans emprunter, en gardant une réserve.",
+      "La trésorerie est positive, donc le magasin est forcément rentable."
+    ],
+    bonne: 2,
+    explication: "TN = 90 000 − 30 000 = 60 000 € : équilibre financier solide. Mais trop de trésorerie qui dort, c'est de l'argent qui ne rapporte rien : ici, elle peut financer les 30 000 € de la meuleuse en gardant 30 000 € de réserve. Le 4e choix confond trésorerie (de l'argent disponible) et rentabilité (un bénéfice) ; le 1er est vrai sans argument ; le 2e hors sujet.",
+    indice: "Une trésorerie positive dit que l'équilibre est assuré. Demande-toi aussi à quoi pourrait servir l'argent disponible."
+  },
+  {
+    id: "U3-048", epreuve: "U3", theme: "Analyse financière", session: "2024",
+    contexte: "Le magasin veut emprunter 40 000 € pour refaire sa vitrine.",
+    annexe: {
+      titre: "Extrait du bilan",
+      colonnes: ["", "Montant (€)"],
+      lignes: [["Dettes financières", "150 000"], ["Capitaux propres", "100 000"]]
+    },
+    question: "Commente le ratio d'endettement : quel commentaire est le plus juste ?",
+    choix: [
+      "Le magasin est très endetté.",
+      "Le ratio vaut 1,5 % : la banque prêtera sans difficulté.",
+      "Le magasin devrait proposer un service d'optique à domicile.",
+      "Le ratio vaut 1,5 : les dettes bancaires dépassent de moitié les capitaux propres. Un nouvel emprunt sera difficile ; mieux vaut d'abord renforcer les capitaux propres (mise en réserve, apport) ou financer autrement (autofinancement, crédit-bail)."
+    ],
+    bonne: 3,
+    explication: "Ratio d'endettement = dettes financières / capitaux propres = 150 000 / 100 000 = 1,5. Au-dessus de 1, les banques prêtent plus que les propriétaires n'ont apporté : elles hésiteront à prêter encore. Le bon commentaire donne le chiffre, le compare au repère de 1 et propose une solution. « Très endetté » est vrai sans argument ; 1,5 n'est pas un pourcentage ; le 3e choix est hors sujet.",
+    indice: "Calcule dettes financières / capitaux propres et compare au repère de 1. Puis dis ce que ça change pour le projet d'emprunt."
+  },
+  {
+    id: "U3-049", epreuve: "U3", theme: "Prix et marges", session: "2023",
+    contexte: "Le magasin compare ses résultats à ceux de la profession.",
+    annexe: {
+      titre: "Taux de marque",
+      colonnes: ["", "Taux"],
+      lignes: [["Magasin", "52 %"], ["Moyenne de la profession", "60 %"]]
+    },
+    question: "Commente le taux de marque du magasin : quel commentaire est le plus juste ?",
+    choix: [
+      "Le taux de marque est 8 points sous la moyenne : le magasin garde moins de marge par vente que ses concurrents. Il doit revoir ses prix d'achat (centrale, fournisseurs) ou son coefficient, sans casser son positionnement.",
+      "Avec 52 % de taux de marque, le magasin vend à perte 48 % de ses équipements.",
+      "La TVA sur les lunettes est de 20 %.",
+      "Le taux de marque est un peu faible."
+    ],
+    bonne: 0,
+    explication: "52 % contre 60 % : sur un équipement à 300 € HT, le magasin garde 156 € de marge au lieu de 180 €. Le bon commentaire chiffre l'écart, l'explique et propose des leviers (acheter moins cher, ajuster les prix). 48 % est la part du coût d'achat dans le prix HT, pas une vente à perte ; « un peu faible » est vrai sans argument ; la TVA est hors sujet.",
+    indice: "Compare au chiffre de la profession, dis ce que l'écart signifie pour chaque vente, puis propose un levier."
+  }
+
+);
+
+// ==============================================================
+//  CALCULS À TAPER (étape 2) : l'élève écrit le résultat
+// ==============================================================
+
+QUESTIONS.push(
+
+  {
+    id: "U3-050", epreuve: "U3", theme: "Prix et marges", session: "2019",
+    type: "calcul",
+    question: "Une monture est achetée 48 € HT et vendue 168 € TTC (TVA 20 %). Calcule le taux de marque.",
+    reponse: { valeur: 65.7, unite: "%", decimales: 1, tolerance: 0.1, signe: false },
+    explication: "PV HT = 168 / 1,2 = 140 €. Marge brute = 140 − 48 = 92 €. Taux de marque = 92 / 140 × 100 = 65,7 %. On divise par le prix de vente HT, jamais par le TTC ni par le coût d'achat.",
+    indice: "Retire d'abord la TVA du prix de vente. Le taux de marque se calcule sur le prix de vente HT."
+  },
+  {
+    id: "U3-051", epreuve: "U3", theme: "Prix et marges", session: "2023",
+    type: "calcul",
+    question: "Un verre est acheté 35 € HT et vendu 126 € TTC. Calcule le coefficient multiplicateur TTC.",
+    reponse: { valeur: 3.6, unite: "", decimales: 1, signe: false },
+    explication: "Coefficient TTC = PV TTC / coût d'achat HT = 126 / 35 = 3,6. C'est le coefficient le plus utilisé en optique : il passe directement de l'achat HT au prix affiché TTC.",
+    indice: "Coefficient TTC = prix de vente TTC divisé par le coût d'achat HT. Pas de conversion à faire ici."
+  },
+  {
+    id: "U3-052", epreuve: "U3", theme: "Marché et zone de chalandise", session: "2024",
+    type: "calcul",
+    question: "Zone de chalandise : 15 000 habitants, 65 % de porteurs de lunettes, panier moyen 330 € TTC, renouvellement tous les 3 ans. Calcule le marché potentiel annuel.",
+    reponse: { valeur: 1072500, unite: "€ TTC", decimales: 0, tolerance: 1, signe: false },
+    explication: "Porteurs = 15 000 × 0,65 = 9 750. Dépense d'un cycle = 9 750 × 330 = 3 217 500 €. Par an : 3 217 500 / 3 = 1 072 500 € TTC.",
+    indice: "Nombre de porteurs × panier moyen, puis ramène à une seule année avec le rythme de renouvellement."
+  },
+  {
+    id: "U3-053", epreuve: "U3", theme: "Marché et zone de chalandise", session: "2024",
+    type: "calcul",
+    question: "Marché potentiel : 800 000 € TTC. IDC : 95. Évasion commerciale : 12 %. Le magasin vise 20 % du marché restant. Calcule son chiffre d'affaires prévisionnel HT (arrondi à l'euro).",
+    reponse: { valeur: 111467, unite: "€ HT", decimales: 0, tolerance: 1, signe: false },
+    explication: "800 000 × 0,95 = 760 000 € ; × (1 − 0,12) = 668 800 € (marché net de l'évasion) ; × 0,20 = 133 760 € TTC ; / 1,2 = 111 466,67 €, soit 111 467 € HT. On enchaîne les multiplications, et on finit par passer en HT.",
+    indice: "Quatre étapes dans l'ordre : IDC, évasion, part de marché, puis retire la TVA."
+  },
+  {
+    id: "U3-054", epreuve: "U3", theme: "Seuil de rentabilité", session: "2019",
+    type: "calcul",
+    question: "CA : 420 000 € HT. Charges variables : 147 000 €. Charges fixes : 189 000 €. Calcule le seuil de rentabilité (arrondi à l'euro).",
+    reponse: { valeur: 290769, unite: "€ HT", decimales: 0, tolerance: 1, signe: false },
+    explication: "MCV = 420 000 − 147 000 = 273 000 €, taux de MCV = 273 000 / 420 000 = 65 %. SR = 189 000 / 0,65 = 290 769,23 €, soit 290 769 € HT.",
+    indice: "Calcule le taux de marge sur coût variable, puis divise les charges fixes par ce taux."
+  },
+  {
+    id: "U3-055", epreuve: "U3", theme: "Seuil de rentabilité", session: "2019",
+    type: "calcul",
+    question: "SR = 270 000 €, CA annuel = 405 000 €, activité régulière sur une année de 360 jours. Au bout de combien de jours le point mort est-il atteint ?",
+    reponse: { valeur: 240, unite: "jours", decimales: 0, tolerance: 1, signe: false },
+    explication: "Point mort = SR / CA × 360 = 270 000 / 405 000 × 360 = 2/3 × 360 = 240 jours, soit 8 mois : fin août.",
+    indice: "Quelle fraction du CA annuel représente le SR ? Applique-la au nombre de jours de l'année."
+  },
+  {
+    id: "U3-056", epreuve: "U3", theme: "Analyse financière", session: "2024",
+    type: "calcul",
+    question: "Ressources stables 210 000 €, emplois stables 172 000 €, stocks 58 000 €, créances clients 6 000 €, dettes fournisseurs, fiscales et sociales 31 000 €. Calcule la trésorerie nette.",
+    reponse: { valeur: 5000, unite: "€", decimales: 0, tolerance: 1, signe: true },
+    explication: "FRNG = 210 000 − 172 000 = 38 000 €. BFR = 58 000 + 6 000 − 31 000 = 33 000 €. TN = FRNG − BFR = 38 000 − 33 000 = +5 000 € : positive, mais faible.",
+    indice: "Calcule d'abord le FRNG, puis le BFR. La trésorerie nette est l'écart entre les deux, avec son signe."
+  },
+  {
+    id: "U3-057", epreuve: "U3", theme: "Investissement et financement", session: "2023",
+    type: "calcul",
+    question: "Un frontofocomètre est acheté et mis en service le 1er octobre pour 18 000 € HT, amorti en linéaire sur 6 ans. Calcule la dotation de la 1re année (exercice civil).",
+    reponse: { valeur: 750, unite: "€", decimales: 0, tolerance: 1, signe: false },
+    explication: "Annuité pleine = 18 000 / 6 = 3 000 €. D'octobre à décembre : 3 mois, soit 3 000 × 3 / 12 = 750 €. Les années suivantes : 3 000 €, et la dernière reçoit les 2 250 € restants.",
+    indice: "Annuité pleine = valeur / durée. La 1re année, ne compte que les mois depuis la mise en service."
+  },
+  {
+    id: "U3-058", epreuve: "U3", theme: "Investissement et financement", session: "2024",
+    type: "calcul",
+    question: "Emprunt de 24 000 € sur 4 ans à 4 %, annuités constantes de 6 611,76 €. Calcule les intérêts de la 2e année.",
+    reponse: { valeur: 733.93, unite: "€", decimales: 2, tolerance: 0.02, signe: false },
+    explication: "Année 1 : intérêts = 24 000 × 4 % = 960 € ; capital remboursé = 6 611,76 − 960 = 5 651,76 € ; reste dû = 24 000 − 5 651,76 = 18 348,24 €. Année 2 : intérêts = 18 348,24 × 4 % = 733,93 €.",
+    indice: "Les intérêts se calculent sur le capital restant dû. Commence par trouver ce qui reste dû après la 1re annuité."
+  },
+  {
+    id: "U3-059", epreuve: "U3", theme: "Droit du travail", session: "2017",
+    type: "calcul",
+    question: "Salaire brut mensuel : 2 200 €. Cotisations salariales : 23 % du brut. Cotisations patronales : 42 % du brut. Calcule le coût mensuel pour l'employeur.",
+    reponse: { valeur: 3124, unite: "€", decimales: 0, tolerance: 1, signe: false },
+    explication: "Coût employeur = brut + cotisations patronales = 2 200 × 1,42 = 3 124 €. (Le salaire net, lui, vaut 2 200 × 0,77 = 1 694 €.) Les cotisations salariales ne changent pas le coût pour l'employeur : elles sont prises sur le brut.",
+    indice: "Le coût pour l'employeur part du brut et y ajoute ses propres cotisations. Les cotisations salariales n'entrent pas dans ce calcul."
+  }
+
+);
+
+// ==============================================================
+//  CAS « CALCULS POSÉS » : une annexe, des calculs à taper, puis commenter et conseiller
+// ==============================================================
+
+CAS.push({
+  id: "CAS-U3-02",
+  epreuve: "U3",
+  titre: "Optique des Remparts : le bilan avant d'investir",
+  contexte: "Optique des Remparts, magasin indépendant (SARL), envisage d'acheter un nouvel équipement de mesure. Avant d'aller voir sa banque, le gérant te demande d'analyser son bilan fonctionnel de fin d'année.",
+  annexe: {
+    titre: "Bilan fonctionnel au 31 décembre (en €)",
+    colonnes: ["", "Montant (€)"],
+    lignes: [
+      ["Emplois stables (immobilisations brutes)", "240 000"],
+      ["Ressources stables", "265 000"],
+      ["… dont capitaux propres", "165 000"],
+      ["… dont emprunts bancaires", "100 000"],
+      ["Stocks", "72 000"],
+      ["Créances clients", "8 000"],
+      ["Dettes fournisseurs", "38 000"],
+      ["Dettes fiscales et sociales", "22 000"],
+      ["Trésorerie active (banque, caisse)", "9 000"],
+      ["Concours bancaires courants", "4 000"]
+    ]
+  }
+});
+
+QUESTIONS.push(
+
+  {
+    id: "U3-060", epreuve: "U3", theme: "Analyse financière", session: "2024",
+    cas: "CAS-U3-02", etape: 1, type: "calcul",
+    question: "Calcule le fonds de roulement net global (FRNG).",
+    reponse: { valeur: 25000, unite: "€", decimales: 0, tolerance: 1, signe: true },
+    explication: "FRNG = ressources stables − emplois stables = 265 000 − 240 000 = 25 000 €.",
+    indice: "Le FRNG se lit en haut du bilan fonctionnel : ressources stables moins emplois stables."
+  },
+  {
+    id: "U3-061", epreuve: "U3", theme: "Analyse financière", session: "2024",
+    cas: "CAS-U3-02", etape: 2, type: "calcul",
+    question: "Calcule le besoin en fonds de roulement (BFR).",
+    reponse: { valeur: 20000, unite: "€", decimales: 0, tolerance: 1, signe: true },
+    explication: "BFR = (stocks + créances clients) − (dettes fournisseurs + dettes fiscales et sociales) = 80 000 − 60 000 = 20 000 €. La trésorerie (active et passive) n'entre pas dans le BFR.",
+    indice: "Actif circulant d'exploitation moins dettes d'exploitation. Laisse de côté la banque et les concours bancaires."
+  },
+  {
+    id: "U3-062", epreuve: "U3", theme: "Analyse financière", session: "2024",
+    cas: "CAS-U3-02", etape: 3, type: "calcul",
+    question: "Calcule la trésorerie nette, puis vérifie-la avec le bas du bilan.",
+    reponse: { valeur: 5000, unite: "€", decimales: 0, tolerance: 1, signe: true },
+    explication: "TN = FRNG − BFR = 25 000 − 20 000 = 5 000 €. Vérification : trésorerie active − concours bancaires = 9 000 − 4 000 = 5 000 €. Les deux calculs doivent toujours tomber sur le même chiffre.",
+    indice: "Deux chemins possibles : FRNG − BFR, ou trésorerie active − trésorerie passive. Ils doivent donner le même résultat."
+  },
+  {
+    id: "U3-063", epreuve: "U3", theme: "Analyse financière", session: "2024",
+    cas: "CAS-U3-02", etape: 4, type: "calcul",
+    question: "Calcule le ratio d'endettement (emprunts bancaires / capitaux propres), arrondi à 0,01.",
+    reponse: { valeur: 0.61, unite: "", decimales: 2, tolerance: 0.01, signe: false },
+    explication: "Ratio = 100 000 / 165 000 = 0,61. Il est sous 1 : les banques ont prêté moins que ce qu'ont apporté les associés, le magasin peut encore emprunter.",
+    indice: "Divise les emprunts bancaires par les capitaux propres. Ce n'est pas un pourcentage, compare-le à 1."
+  },
+  {
+    id: "U3-064", epreuve: "U3", theme: "Analyse financière", session: "complément",
+    cas: "CAS-U3-02", etape: 5,
+    question: "Commente la situation financière du magasin : quel commentaire est le plus juste ?",
+    choix: [
+      "La situation financière est correcte.",
+      "Équilibre assuré mais serré : le FRNG (25 000 €) couvre le BFR (20 000 €) et laisse 5 000 € de trésorerie. Le stock (72 000 €) pèse lourd dans le BFR. L'endettement (0,61) reste sous 1 : le magasin peut encore emprunter.",
+      "La trésorerie est négative, car les concours bancaires sont de 4 000 €.",
+      "Le magasin devrait déposer sa marque à l'INPI."
+    ],
+    bonne: 1,
+    explication: "Un bon commentaire reprend les chiffres, les compare (FRNG au BFR, ratio à 1), repère ce qui pèse (le stock) et en tire une conclusion utile pour le projet. « Correcte » est vrai sans argument ; la trésorerie nette est positive malgré le découvert, car la banque contient 9 000 € ; l'INPI est hors sujet.",
+    indice: "Reprends tes 4 résultats : qui couvre quoi, ce qui reste, ce qui pèse le plus, et ce que dit le ratio pour un futur emprunt."
+  },
+  {
+    id: "U3-065", epreuve: "U3", theme: "Investissement et financement", session: "complément",
+    cas: "CAS-U3-02", etape: 6,
+    contexte: "L'équipement coûte 30 000 € HT. Le gérant hésite entre le payer comptant ou emprunter sur 5 ans.",
+    question: "Que conseilles-tu au gérant ?",
+    choix: [
+      "Le payer comptant, puisque la trésorerie est positive.",
+      "Emprunter.",
+      "L'emprunter sur 5 ans : un bien durable se finance par une ressource durable. Payé comptant, il ferait tomber la trésorerie à −25 000 €. Avec l'emprunt, le ratio d'endettement passe à 0,79, toujours sous 1. En parallèle, alléger le stock pour réduire le BFR.",
+      "Changer d'enseigne pour attirer de nouveaux clients."
+    ],
+    bonne: 2,
+    explication: "Comptant : l'immobilisation augmente de 30 000 € sans ressource stable, le FRNG tombe à −5 000 € et la trésorerie à −5 000 − 20 000 = −25 000 €. Avec un emprunt de 30 000 €, FRNG et trésorerie ne bougent pas, et le ratio devient 130 000 / 165 000 = 0,79. Le 1er choix oublie que 5 000 € ne paient pas 30 000 € ; « Emprunter » est juste mais sans argument ; le 4e est hors sujet.",
+    indice: "Un investissement durable devrait être financé par une ressource durable. Calcule ce que deviendrait la trésorerie si on payait comptant, puis le ratio avec l'emprunt."
+  }
+
+);

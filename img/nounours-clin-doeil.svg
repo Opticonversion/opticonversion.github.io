@@ -1,9 +1,16 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 440" width="800" height="880">
+  <!-- DioSL est vivant : il cligne des yeux et remue les oreilles (animation coupée si l'élève l'a désactivée) -->
+  <style>
+    .oreille { transform-box: fill-box; transform-origin: 50% 88%; animation: oreille 7s ease-in-out infinite; }
+    .oreille.droite { animation-delay: 0.18s; }
+    .oeil { transform-box: fill-box; transform-origin: 50% 50%; animation: cligne 5.2s infinite; }
+    @keyframes cligne { 0%, 92%, 100% { transform: scaleY(1); } 95.5% { transform: scaleY(0.08); } }
+    @keyframes oreille { 0%, 84%, 100% { transform: rotate(0deg); } 89% { transform: rotate(-8deg); } 94% { transform: rotate(5deg); } }
+    @media (prefers-reduced-motion: reduce) { .oreille, .oeil { animation: none; } }
+  </style>
   <!-- oreilles -->
-  <circle cx="98" cy="92" r="56" fill="#b47a45"/>
-  <circle cx="302" cy="92" r="56" fill="#b47a45"/>
-  <circle cx="98" cy="92" r="31" fill="#f0cfa6"/>
-  <circle cx="302" cy="92" r="31" fill="#f0cfa6"/>
+  <g class="oreille"><circle cx="98" cy="92" r="56" fill="#b47a45"/><circle cx="98" cy="92" r="31" fill="#f0cfa6"/></g>
+  <g class="oreille droite"><circle cx="302" cy="92" r="56" fill="#b47a45"/><circle cx="302" cy="92" r="31" fill="#f0cfa6"/></g>
   <!-- sweat anthracite, bords or -->
   <path d="M55 440 Q60 345 200 330 Q340 345 345 440 Z" fill="#262b36" stroke="#d9b26f" stroke-width="5" stroke-linejoin="round"/>
   <!-- tete -->
@@ -25,8 +32,10 @@
   <!-- verres -->
   <rect x="92" y="160" width="96" height="64" rx="10" fill="#ffffff" fill-opacity="0.16"/>
   <rect x="212" y="160" width="96" height="64" rx="10" fill="#ffffff" fill-opacity="0.16"/>
+  <g class="oeil">
   <circle cx="150" cy="195" r="14" fill="#2a1a10"/>
   <circle cx="155" cy="189" r="5" fill="#ffffff"/>
+  </g>
   <path d="M235 198 Q250 185 265 198" stroke="#2a1a10" stroke-width="6" fill="none" stroke-linecap="round"/>
   <!-- monture acétate noir épaisse, rectangulaire large, haut droit -->
   <rect x="92" y="160" width="96" height="64" rx="10" fill="none" stroke="#111214" stroke-width="15"/>

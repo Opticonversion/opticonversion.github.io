@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 440" width="800" height="880">
+  <path d="M55 440 Q60 345 200 330 Q340 345 345 440 Z" fill="#e2b23a" stroke="#8a6a1c" stroke-width="5" stroke-linejoin="round"/>
+  <path d="M140 336 Q200 368 260 336" fill="none" stroke="#8a6a1c" stroke-width="10" stroke-linecap="round"/>
+  <ellipse cx="200" cy="230" rx="160" ry="118" fill="#6fb14a"/>
+  <circle cx="125" cy="140" r="58" fill="#6fb14a"/>
+  <circle cx="275" cy="140" r="58" fill="#6fb14a"/>
+  <circle cx="125" cy="140" r="40" fill="#fff"/>
+  <circle cx="275" cy="140" r="40" fill="#fff"/>
+  <circle cx="130" cy="144" r="10.8" fill="#1c2414"/><circle cx="134" cy="139" r="4.2" fill="#fff"/>
+  <circle cx="270" cy="144" r="10.8" fill="#1c2414"/><circle cx="274" cy="139" r="4.2" fill="#fff"/>
+  
+  
+  <ellipse cx="200" cy="290" rx="120" ry="40" fill="#a8d67f"/>
+  <ellipse cx="200" cy="290" rx="16" ry="20" fill="#3a1a12"/><ellipse cx="200" cy="299" rx="9" ry="6" fill="#e8737a"/>
+  <ellipse cx="96" cy="250" rx="18" ry="10" fill="#f29a8e" opacity="0.5"/>
+  <ellipse cx="304" cy="250" rx="18" ry="10" fill="#f29a8e" opacity="0.5"/>
+  <circle cx="186" cy="226" r="4" fill="#2f5a1c"/>
+  <circle cx="214" cy="226" r="4" fill="#2f5a1c"/>
+  <circle cx="275" cy="140" r="46" fill="#fff" fill-opacity="0.12" stroke="#c9a24e" stroke-width="6"/>
+  <path d="M296 182 Q310 240 300 300" stroke="#c9a24e" stroke-width="3" fill="none"/>
+  <path d="M252 116 L266 104" stroke="#fff" stroke-opacity="0.7" stroke-width="5" stroke-linecap="round"/>
+
+  <path d="M100 84 Q130 66 158 80" stroke="#2f5a1c" stroke-width="8" fill="none" stroke-linecap="round"/><path d="M242 80 Q270 66 300 84" stroke="#2f5a1c" stroke-width="8" fill="none" stroke-linecap="round"/><path d="M30 70 L50 92" stroke="#ecd3a0" stroke-width="7" stroke-linecap="round"/><path d="M18 118 L44 122" stroke="#ecd3a0" stroke-width="7" stroke-linecap="round"/><path d="M370 70 L350 92" stroke="#ecd3a0" stroke-width="7" stroke-linecap="round"/><path d="M382 118 L356 122" stroke="#ecd3a0" stroke-width="7" stroke-linecap="round"/>
+</svg>

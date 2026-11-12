@@ -383,5 +383,109 @@ QUESTIONS.push(
     bonne: 1,
     explication: "Un miroir réfléchit toutes les couleurs de la même façon : pas de chromatisme. Mais les rayons du bord ne convergent pas au même point que ceux du centre : aberration de sphéricité. La lame de Schmidt la corrige.",
     indice: "Un miroir ne traverse pas de verre : peut-il disperser les couleurs ? Et que font les rayons du bord d'une surface sphérique ?"
+  },
+  // ---------- Lecture de schéma ----------
+  {
+    id: "U43-048", epreuve: "U43", theme: "Étude des champs", session: "complément",
+    question: "Les trois diaphragmes du schéma sont déjà ramenés dans l'espace d'étude. Lequel est la pupille ?",
+    choix: ["[D₁], le plus petit", "[D₂]", "[D₃], le plus grand", "On ne peut pas savoir sans connaître le champ"],
+    bonne: 1,
+    explication: "Depuis A, centre du plan des champs, on compare les angles : tan = rayon ÷ distance. [D₁] : 6/40 = 0,15 ; [D₃] : 20/100 = 0,20 ; [D₂] : 15/150 = 0,10. [D₂] est vu sous le plus petit angle : c'est la pupille, même s'il n'est pas le plus petit.",
+    indice: "Ne regarde pas seulement la taille : compare l'angle sous lequel on voit chaque diaphragme depuis A (rayon ÷ distance).",
+    schemaQuestion: "img/schemas/U43/champs-trois-diaphragmes.svg",
+    schemaTexte: "Depuis le point A du plan des champs : [D₁] de rayon 6 mm à 40 mm, [D₃] de rayon 20 mm à 100 mm, [D₂] de rayon 15 mm à 150 mm."
+  },
+  {
+    id: "U43-049", epreuve: "U43", theme: "Étude des champs", session: "complément",
+    question: "Le point Y du plan des champs envoie vers la pupille le faisceau dessiné : une partie est arrêtée par la lucarne. À quelle zone du champ appartient Y ?",
+    choix: ["Au champ de pleine lumière", "Au champ de contour", "Hors du champ total", "Exactement au bord du champ total"],
+    bonne: 1,
+    explication: "Une partie du faisceau passe (zone en or) et une partie est arrêtée par la lucarne : l'image de Y est moins éclairée que le centre, mais pas noire. C'est le champ de contour. En pleine lumière, tout le faisceau atteindrait la pupille ; hors du champ total, rien ne passerait.",
+    indice: "Le faisceau issu de Y remplit-il toute la pupille, une partie seulement, ou rien du tout ?",
+    schemaQuestion: "img/schemas/U43/champs-point-y-faisceau.svg",
+    schemaTexte: "Un point Y du plan des champs, une lucarne et une pupille : le cône de lumière issu de Y vers la pupille est en partie arrêté par le bord de la lucarne ; seule la partie basse atteint la pupille."
+  },
+  {
+    id: "U43-050", epreuve: "U43", theme: "Mécanismes de réglage", session: "complément",
+    question: "Sur le dessin, on tourne la molette autour de l'axe Z. Quel est le mouvement du tube ?",
+    choix: ["Une rotation autour de Z", "Une translation suivant X", "Une translation suivant Y", "Une translation suivant Z"],
+    bonne: 2,
+    explication: "La molette porte un pignon (roue dentée) qui engrène sur une crémaillère (barre dentée) fixée au tube. La rotation du pignon autour de Z fait glisser la crémaillère le long de ses dents, ici verticalement : le tube translate suivant Y. C'est le système pignon-crémaillère.",
+    indice: "Repère la direction dans laquelle s'alignent les dents fixées au tube : c'est la seule direction où il peut glisser.",
+    schemaQuestion: "img/schemas/U43/mecanisme-molette-tube.svg",
+    schemaTexte: "Vue de face : une roue dentée (molette, axe Z sortant de l'écran) engrène sur une barre dentée verticale fixée au tube ; axes X vers la droite et Y vers le haut."
+  },
+
+  // ---------- Mini-sujet : microscope d'atelier ----------
+  {
+    id: "U43-042", epreuve: "U43", theme: "Chaîne des conjugués", session: "complément",
+    cas: "CAS-U43-01", etape: 1,
+    question: "Où se forme l'image intermédiaire A₁B₁ de la charnière, donnée par l'objectif ?",
+    choix: ["À 120 mm après l'objectif, réelle et renversée", "À 60 mm après l'objectif, réelle et renversée", "À 120 mm avant l'objectif, virtuelle et droite", "Au foyer image de l'objectif, à 20 mm"],
+    bonne: 0,
+    explication: "Relation de conjugaison : 1/OA₁ = 1/f' + 1/OA = 1/20 + 1/(−24) = 6/120 − 5/120 = 1/120, donc OA₁ = +120 mm. Positive : image réelle, après l'objectif. Grandissement γ = OA₁/OA = 120/(−24) = −5 : renversée et 5 fois plus grande.",
+    indice: "La charnière est un objet réel avant l'objectif : OA = −24 mm. Utilise la relation de conjugaison avec f' = 20 mm.",
+    schema: "img/schemas/U43/microscope-chaine-emmetrope.svg",
+    schemaTexte: "Tracé à l'échelle : l'objet AB à 24 mm de l'objectif (f' = 20 mm) donne une image A₁B₁ réelle, renversée, 5 fois plus grande, à 120 mm, dans le plan focal objet de l'oculaire."
+  },
+  {
+    id: "U43-043", epreuve: "U43", theme: "Chaîne des conjugués", session: "complément",
+    cas: "CAS-U43-01", etape: 2,
+    question: "Le microscope est réglé pour un œil emmétrope qui n'accommode pas. Quelle distance sépare l'objectif de l'oculaire ?",
+    choix: ["120 mm", "145 mm", "95 mm", "170 mm"],
+    bonne: 1,
+    explication: "L'image finale doit être à l'infini : A₁B₁ doit donc se trouver au foyer objet de l'oculaire, 25 mm avant lui. Distance objectif-oculaire = 120 + 25 = 145 mm. Dans la chaîne, on note « A₁ = Foc ».",
+    indice: "Pour un emmétrope qui n'accommode pas, où doit se trouver A₁B₁ par rapport à l'oculaire ?"
+  },
+  {
+    id: "U43-044", epreuve: "U43", theme: "Étude des champs", session: "complément",
+    cas: "CAS-U43-01", etape: 3,
+    contexte: "On étudie les champs dans l'espace entre l'objectif et l'oculaire. Le plan des champs est le plan de A₁B₁. Seules les montures des deux lentilles limitent la lumière.",
+    question: "D'après le schéma, quel diaphragme est la pupille ?",
+    choix: ["La monture de l'objectif", "La monture de l'oculaire", "Aucune : il faut d'abord un diaphragme de champ", "Les deux montures jouent ce rôle à égalité"],
+    bonne: 0,
+    explication: "Depuis A₁, on compare les angles : monture de l'objectif, tan = 4/120 ≈ 0,03 ; monture de l'oculaire, tan = 10/25 = 0,40. La monture de l'objectif est vue sous le plus petit angle : c'est la pupille. La monture de l'oculaire est la lucarne.",
+    indice: "Les deux montures sont déjà dans l'espace d'étude. Compare rayon ÷ distance à A₁ pour chacune.",
+    schemaQuestion: "img/schemas/U43/cas-microscope-diaphragmes.svg",
+    schema: "img/schemas/U43/cas-microscope-diaphragmes-correction.svg",
+    schemaTexte: "Plan des champs en A₁ ; monture de l'objectif de rayon 4 mm, 120 mm avant ; monture de l'oculaire de rayon 10 mm, 25 mm après."
+  },
+  {
+    id: "U43-045", epreuve: "U43", theme: "Étude des champs", session: "complément",
+    cas: "CAS-U43-01", etape: 4,
+    question: "Avec la monture de l'oculaire comme lucarne, le bord de l'image est dégradé. Où placer un diaphragme pour obtenir un bord net ?",
+    choix: ["Dans le plan de A₁B₁, au foyer objet de l'oculaire", "Contre l'objectif", "Contre l'oculaire", "Au foyer image de l'oculaire"],
+    bonne: 0,
+    explication: "Un diaphragme placé dans le plan d'une image réelle (ici A₁B₁, plan des champs) coupe le champ net : il supprime le champ de contour. C'est le diaphragme de champ des oculaires. Contre l'objectif, il réduirait la lumière (c'est la pupille) sans rendre le bord net.",
+    indice: "Le champ de contour disparaît quand le diaphragme est dans un plan où se forme une image réelle. Lequel, ici ?"
+  },
+  {
+    id: "U43-046", epreuve: "U43", theme: "Œil et instrument", session: "complément",
+    cas: "CAS-U43-01", etape: 5,
+    contexte: "Un collègue myope de −8,00 δ veut utiliser le microscope sans ses lunettes. Son œil reste au foyer image de l'oculaire.",
+    question: "De combien, et dans quel sens, faut-il déplacer l'oculaire par rapport au réglage emmétrope ?",
+    choix: ["5 mm, en le rapprochant de l'objectif", "5 mm, en l'éloignant de l'objectif", "8 mm, en le rapprochant de l'objectif", "0,2 mm, en le rapprochant de l'objectif"],
+    bonne: 0,
+    explication: "Remotum à 1/8 = 0,125 m devant l'œil, donc x' = F'A' = −125 mm. Newton : x = −f'²/x' = −625/(−125) = +5 mm. A₁ doit être 5 mm après le foyer objet de l'oculaire, c'est-à-dire entre Foc et l'oculaire : on rapproche l'oculaire de l'objectif de 5 mm.",
+    indice: "Place l'image finale sur le remotum du myope, puis utilise x·x' = −f'² avec f' = 25 mm. Attention au signe de x'."
+  },
+  {
+    id: "U43-047", epreuve: "U43", theme: "Liaisons mécaniques", session: "complément",
+    cas: "CAS-U43-01", etape: 6,
+    contexte: "L'oculaire est monté dans une bague filetée au pas de 0,5 mm : en la tournant, l'oculaire avance en tournant.",
+    question: "Quelle est la liaison entre la bague et le tube, et combien de tours faut-il pour le réglage de l'étape précédente ?",
+    choix: ["Hélicoïdale, 10 tours", "Pivot glissant, 10 tours", "Hélicoïdale, 2,5 tours", "Glissière, 5 tours"],
+    bonne: 0,
+    explication: "Rotation et translation liées par un filetage : liaison hélicoïdale (1 degré de liberté). Chaque tour fait avancer d'un pas : N = course ÷ pas = 5 ÷ 0,5 = 10 tours.",
+    indice: "Les deux mouvements sont-ils liés ou indépendants ? Pour le nombre de tours, divise la course par le pas."
   }
 );
+
+// ---------- Mini-sujet (cas) ----------
+CAS.push({
+  id: "CAS-U43-01",
+  epreuve: "U43",
+  titre: "Le microscope d'atelier",
+  contexte: "Ton magasin achète un petit microscope pour contrôler l'usure des charnières de montures. L'objectif est une lentille mince de focale 20 mm, l'oculaire une lentille mince de focale 25 mm. La charnière observée est placée à 24 mm devant l'objectif.",
+  annexe: { titre: "Données", colonnes: ["Élément", "Valeur"], lignes: [["Focale de l'objectif", "f'obj = 20 mm"], ["Focale de l'oculaire", "f'oc = 25 mm"], ["Position de la charnière", "OA = −24 mm"]] }
+});

@@ -4,10 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="Crée ton compte Opticonversion (Google ou e-mail) pour retrouver ta progression au BTS OL sur tous tes appareils.">
-<meta name="theme-color" content="#0b0d12">
+<meta name="theme-color" content="#13171f">
 <title>Mon profil · Opticonversion</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='13' fill='none' stroke='%23d9b26f' stroke-width='3'/%3E%3Ccircle cx='16' cy='16' r='5' fill='%23d9b26f'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="style.css?v=176935d0">
+<script>/* Fond choisi par l'élève (profil), appliqué avant l'affichage */ try { if (localStorage.getItem("fond") === "clair") { document.documentElement.dataset.fond = "clair"; var m = document.querySelector('meta[name="theme-color"]'); if (m) m.content = "#1a1f2a"; } } catch (e) {}</script>
+<link rel="preload" href="polices/bodoni-moda.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="polices/atkinson-hyperlegible-next.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="style.css?v=416319f5">
 </head>
 <body data-rafraichir="oui">
 <header class="entete">
@@ -19,14 +22,16 @@
     <a href="index.html">Accueil</a>
     <a href="essentiel.html">Essentiel</a>
     <a href="qcm.html">QCM</a>
+    <a href="definitions.html">Définitions</a>
+    <a href="traces.html">Tracés</a>
     <a href="calculateurs.html">Calculs</a>
   </nav>
 </header>
 
 <main>
-  <p class="marque apparait">Ton profil</p>
-  <h1 class="apparait" style="--d:1" id="profil-titre">Ton profil</h1>
-  <p class="sous-titre apparait" style="--d:2">Choisis ton pseudo et ton personnage. Ton profil n'est visible que par toi.</p>
+  <h1 class="apparait" id="profil-titre">Ton profil</h1>
+  <p class="marque apparait" style="--d:1">Mon espace</p>
+  <p class="sous-titre apparait" style="--d:2" id="profil-sous-titre">Choisis ton pseudo et ton personnage. Ton profil n'est visible que par toi.</p>
 
   <section class="profil apparait" style="--d:3">
     <div class="profil-tete">
@@ -39,6 +44,8 @@
 
     <div class="profil-stats" id="profil-stats"></div>
 
+    <details class="profil-modifier" id="profil-modifier">
+    <summary>Modifier mon pseudo et mon personnage</summary>
     <form id="profil-form" class="profil-form" autocomplete="off">
       <label for="champ-pseudo">Pseudo ou prénom</label>
       <input id="champ-pseudo" maxlength="20" placeholder="Ex. : Lina, OptiKing…">
@@ -58,9 +65,31 @@
         <span class="aide" id="profil-ok" role="status" style="margin:0;align-self:center"></span>
       </div>
     </form>
+    </details>
   </section>
 
-  <section class="apparait" style="--d:4">
+  <section class="apparait" style="--d:3" aria-labelledby="titre-mes-epreuves">
+    <h2 id="titre-mes-epreuves">Mes épreuves</h2>
+    <div class="profil-epreuves" id="profil-epreuves"></div>
+    <div id="bloc-records" hidden>
+      <h3>Mes meilleurs scores</h3>
+      <ol class="profil-records" id="profil-records"></ol>
+    </div>
+  </section>
+
+  <section class="apparait" style="--d:4" aria-labelledby="titre-affichage">
+    <h2 id="titre-affichage">Affichage</h2>
+    <p class="aide">Choisis le fond qui te repose le plus les yeux. Ce réglage est gardé sur cet appareil.</p>
+    <div class="interrupteur-ligne">
+      <span class="interrupteur-texte" id="texte-sombre" aria-hidden="true">Sombre</span>
+      <button type="button" class="interrupteur" id="interrupteur-fond" role="switch" aria-checked="false" aria-label="Fond plus clair">
+        <span class="interrupteur-point" aria-hidden="true"></span>
+      </button>
+      <span class="interrupteur-texte" id="texte-clair" aria-hidden="true">Plus clair</span>
+    </div>
+  </section>
+
+  <section class="apparait" style="--d:5">
     <div id="compte-deconnecte">
       <h2>Retrouve ta progression partout</h2>
       <p class="aide">Un compte gratuit pour retrouver ton profil, tes scores et tes révisions sur ton téléphone comme sur ton ordinateur. Sans compte, tout reste dans ce navigateur.</p>
@@ -73,7 +102,7 @@
 
       <form id="form-email" class="form-compte" novalidate>
         <div class="onglets-compte" role="tablist">
-          <button type="button" role="tab" id="onglet-connexion" aria-selected="true">J'ai déjà un compte</button>
+          <button type="button" role="tab" id="onglet-connexion" aria-selected="true">J'ai un compte</button>
           <button type="button" role="tab" id="onglet-inscription" aria-selected="false">Créer un compte</button>
         </div>
         <label for="champ-email">Adresse e-mail</label>
@@ -81,7 +110,7 @@
         <label for="champ-mdp">Mot de passe</label>
         <div class="mdp">
           <input id="champ-mdp" type="password" autocomplete="current-password" minlength="8" required>
-          <button type="button" id="voir-mdp" aria-label="Afficher le mot de passe">👁</button>
+          <button type="button" id="voir-mdp" aria-label="Afficher le mot de passe"><span class="ico i-oeil" aria-hidden="true"></span></button>
         </div>
         <p class="aide" id="regle-mdp" hidden style="margin:4px 0 0">8 caractères minimum.</p>
         <div class="actions-compte">
@@ -113,15 +142,15 @@
   <p class="aide apparait">Ce qui est gardé et pourquoi : voir la page <a href="confidentialite.html">confidentialité</a>.</p>
 </main>
 
-<footer>© 2026 Opticonversion · <a href="confidentialite.html">Confidentialité</a> · <a href="mentions-legales.html">Mentions légales</a></footer>
+<footer><span class="pied-marque"><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="13" fill="none" stroke="#d9b26f" stroke-width="2.5"/><circle cx="16" cy="16" r="5.5" fill="#d9b26f"/><circle cx="18.5" cy="13.5" r="1.6" fill="#0b0d12"/></svg>Opticonversion</span><span>© 2026</span><span class="pied-liens"><a href="confidentialite.html">Confidentialité</a> <span aria-hidden="true">·</span> <a href="mentions-legales.html">Mentions légales</a> <span aria-hidden="true">·</span> <a href="mailto:opticonversion.bts@gmail.com">Contact</a></span></footer>
 
-<script src="epreuves.js?v=9b701326"></script>
-<script src="questions-U41.js?v=ea42723b"></script>
-<script src="questions-U42.js?v=3346c508"></script>
-<script src="questions-U43.js?v=6dbf46ca"></script>
-<script src="questions-U5.js?v=6615784c"></script>
-<script src="questions-U3.js?v=5dbfc08d"></script>
-<script src="essentiel.js?v=882c064c"></script>
+<script src="epreuves.js?v=cc645427"></script>
+<script src="questions-U41.js?v=11469e6b"></script>
+<script src="questions-U42.js?v=a01cfd04"></script>
+<script src="questions-U43.js?v=5af1d8ea"></script>
+<script src="questions-U5.js?v=2ec6d276"></script>
+<script src="questions-U3.js?v=f5a7264a"></script>
+<script src="essentiel.js?v=93b1ee7c"></script>
 <script>
   // ---------- Profil : gardé dans le navigateur, et en ligne si l'élève est connecté ----------
   const $ = id => document.getElementById(id);
@@ -130,12 +159,15 @@
     const p = lireProfil();
     $("profil-pseudo").textContent = p.pseudo || "Sans pseudo";
     $("profil-titre").textContent = p.pseudo ? "Salut " + p.pseudo + " !" : "Ton profil";
+    $("profil-sous-titre").textContent = p.pseudo
+      ? "Ton espace de révision : où tu en es, épreuve par épreuve. Il n'est visible que par toi."
+      : "Choisis ton pseudo et ton personnage. Ton profil n'est visible que par toi.";
     const perso = AVATARS.find(a => a.id === p.avatar) || AVATARS[0];
     $("profil-annee").textContent = [p.annee, "avec " + perso.nom].filter(Boolean).join(" · ");
     $("profil-avatar").src = cheminAvatar(perso.id);
     $("champ-pseudo").value = p.pseudo || "";
     $("champ-annee").value = p.annee || "";
-    document.querySelectorAll(".choix-avatar button").forEach(b => b.setAttribute("aria-checked", b.dataset.avatar === (p.avatar || "clin-doeil")));
+    document.querySelectorAll(".choix-avatar button").forEach(b => b.setAttribute("aria-checked", b.dataset.avatar === perso.id));
   }
 
   function afficherStats() {
@@ -148,6 +180,44 @@
       tuile(maitrisees + " / " + ESSENTIEL.length, "notions essentielles maîtrisées") +
       tuile(reussies + " / " + QUESTIONS.length, "questions réussies") +
       tuile(tentees, "questions déjà tentées");
+  }
+
+  // Avancée par épreuve (cliquable) et meilleurs scores par thème
+  function afficherEpreuvesEtRecords() {
+    const zone = $("profil-epreuves");
+    zone.innerHTML = "";
+    EPREUVES.forEach(e => {
+      const a = document.createElement("a");
+      a.className = "profil-epreuve";
+      a.dataset.epreuve = e.code;
+      a.href = "qcm.html#" + e.code;
+      a.innerHTML = '<span class="profil-epreuve-nom"><b></b><span></span></span>';
+      a.querySelector("b").textContent = e.court || e.code;
+      a.querySelector("span span").textContent = e.nom;
+      a.appendChild(creerBarreProgression(bilanQuestions(QUESTIONS.filter(q => q.epreuve === e.code)), { petite: true }));
+      zone.appendChild(a);
+    });
+
+    let records = {};
+    try { records = JSON.parse(localStorage.getItem("records") || "{}"); } catch (e) {}
+    const liste = Object.entries(records)
+      .filter(([cle, val]) => typeof val === "number" && EPREUVES.some(e => e.code === cle.split("/")[0]))
+      .sort((a, b) => b[1] - a[1]).slice(0, 6);
+    $("bloc-records").hidden = liste.length === 0;
+    $("profil-records").innerHTML = "";
+    liste.forEach(([cle, val]) => {
+      const [code, theme] = cle.split("/");
+      const e = EPREUVES.find(x => x.code === code);
+      const li = document.createElement("li");
+      li.dataset.epreuve = code;
+      li.innerHTML = '<a><span class="record-theme"></span><small></small><b></b></a>';
+      li.querySelector("a").href = "qcm.html#" + code + (theme && theme !== "Tous" ? "/" + encodeURIComponent(theme) : "");
+      li.querySelector(".record-theme").textContent = !theme || theme === "Tous" ? "Toute l'épreuve" : theme;
+      li.querySelector("small").textContent = e.court || e.nom;
+      li.querySelector("b").textContent = val + " %";
+      if (val === 100) li.classList.add("parfait");
+      $("profil-records").appendChild(li);
+    });
   }
 
   function construireChoix() {
@@ -173,17 +243,44 @@
     });
     afficherProfil();
     $("profil-ok").textContent = "Enregistré ✓";
-    setTimeout(() => $("profil-ok").textContent = "", 2500);
+    setTimeout(() => { $("profil-ok").textContent = ""; $("profil-modifier").open = false; }, 1600);
   });
+
+  // ---------- Affichage : fond « Sombre » ou « Plus clair », gardé sur cet appareil ----------
+  function appliquerFond(fond) {
+    if (fond === "clair") document.documentElement.dataset.fond = "clair";
+    else delete document.documentElement.dataset.fond;
+    const meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) meta.content = fond === "clair" ? "#1a1f2a" : "#13171f";
+    $("interrupteur-fond").setAttribute("aria-checked", fond === "clair");
+    $("texte-sombre").classList.toggle("actif", fond !== "clair");
+    $("texte-clair").classList.toggle("actif", fond === "clair");
+  }
+  let fondActuel = "sombre";
+  try { fondActuel = localStorage.getItem("fond") === "clair" ? "clair" : "sombre"; } catch (e) {}
+  appliquerFond(fondActuel);
+  // Un clic sur l'interrupteur (ou sur un des deux mots) fait glisser le point et change le fond
+  const basculerFond = vers => {
+    fondActuel = vers || (fondActuel === "clair" ? "sombre" : "clair");
+    try { localStorage.setItem("fond", fondActuel); } catch (e) {}
+    appliquerFond(fondActuel);
+  };
+  $("interrupteur-fond").addEventListener("click", () => basculerFond());
+  $("texte-sombre").addEventListener("click", () => basculerFond("sombre"));
+  $("texte-clair").addEventListener("click", () => basculerFond("clair"));
 
   // La liste des personnages vient de compte.js, chargé juste après
   document.addEventListener("DOMContentLoaded", () => {
     construireChoix();
     afficherProfil();
     afficherStats();
+    afficherEpreuvesEtRecords();
+    // Sans pseudo : le formulaire est ouvert d'emblée ; sinon il reste replié
+    if (!lireProfil().pseudo) $("profil-modifier").open = true;
   });
 </script>
-<script type="module" src="compte.js?v=e48e74e2"></script>
+<script src="vivant.js?v=350e7712" defer></script>
+<script type="module" src="compte.js?v=c47ff213"></script>
 <!-- Mesure d'audience anonyme, sans cookies (GoatCounter) -->
 <script data-goatcounter="https://opticonversion.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </body>

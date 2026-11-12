@@ -1,9 +1,16 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 440" width="800" height="880">
+  <!-- DioSL est vivant : il cligne des yeux et remue les oreilles (animation coupée si l'élève l'a désactivée) -->
+  <style>
+    .oreille { transform-box: fill-box; transform-origin: 50% 88%; animation: oreille 7s ease-in-out infinite; }
+    .oreille.droite { animation-delay: 0.18s; }
+    .oeil { transform-box: fill-box; transform-origin: 50% 50%; animation: cligne 5.2s infinite; }
+    @keyframes cligne { 0%, 92%, 100% { transform: scaleY(1); } 95.5% { transform: scaleY(0.08); } }
+    @keyframes oreille { 0%, 84%, 100% { transform: rotate(0deg); } 89% { transform: rotate(-8deg); } 94% { transform: rotate(5deg); } }
+    @media (prefers-reduced-motion: reduce) { .oreille, .oeil { animation: none; } }
+  </style>
   <!-- oreilles -->
-  <circle cx="98" cy="92" r="56" fill="#b47a45"/>
-  <circle cx="302" cy="92" r="56" fill="#b47a45"/>
-  <circle cx="98" cy="92" r="31" fill="#f0cfa6"/>
-  <circle cx="302" cy="92" r="31" fill="#f0cfa6"/>
+  <g class="oreille"><circle cx="98" cy="92" r="56" fill="#b47a45"/><circle cx="98" cy="92" r="31" fill="#f0cfa6"/></g>
+  <g class="oreille droite"><circle cx="302" cy="92" r="56" fill="#b47a45"/><circle cx="302" cy="92" r="31" fill="#f0cfa6"/></g>
   <!-- sweat anthracite, bords or -->
   <path d="M55 440 Q60 345 200 330 Q340 345 345 440 Z" fill="#262b36" stroke="#d9b26f" stroke-width="5" stroke-linejoin="round"/>
   <!-- tete -->
@@ -26,12 +33,14 @@
   <rect x="92" y="160" width="96" height="64" rx="10" fill="#ffffff" fill-opacity="0.16"/>
   <rect x="212" y="160" width="96" height="64" rx="10" fill="#ffffff" fill-opacity="0.16"/>
   <!-- yeux écarquillés -->
+  <g class="oeil">
   <circle cx="150" cy="193" r="22" fill="#ffffff"/>
   <circle cx="250" cy="193" r="22" fill="#ffffff"/>
   <circle cx="150" cy="195" r="10" fill="#2a1a10"/>
   <circle cx="250" cy="195" r="10" fill="#2a1a10"/>
   <circle cx="153" cy="191" r="3.5" fill="#ffffff"/>
   <circle cx="253" cy="191" r="3.5" fill="#ffffff"/>
+  </g>
   <!-- monture acétate noir épaisse, rectangulaire large, haut droit -->
   <rect x="92" y="160" width="96" height="64" rx="10" fill="none" stroke="#111214" stroke-width="15"/>
   <rect x="212" y="160" width="96" height="64" rx="10" fill="none" stroke="#111214" stroke-width="15"/>

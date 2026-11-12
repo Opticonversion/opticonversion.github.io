@@ -4,10 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="L'essentiel du BTS Opticien-Lunetier : les notions qui tombent le plus souvent aux sujets officiels, classées par priorité, avec QCM corrigés et Shorts.">
-<meta name="theme-color" content="#0b0d12">
+<meta name="theme-color" content="#13171f">
 <title>L'essentiel du BTS OL · Opticonversion</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='13' fill='none' stroke='%23d9b26f' stroke-width='3'/%3E%3Ccircle cx='16' cy='16' r='5' fill='%23d9b26f'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="style.css?v=176935d0">
+<script>/* Fond choisi par l'élève (profil), appliqué avant l'affichage */ try { if (localStorage.getItem("fond") === "clair") { document.documentElement.dataset.fond = "clair"; var m = document.querySelector('meta[name="theme-color"]'); if (m) m.content = "#1a1f2a"; } } catch (e) {}</script>
+<link rel="preload" href="polices/bodoni-moda.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="polices/atkinson-hyperlegible-next.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="style.css?v=416319f5">
 </head>
 <body data-rafraichir="oui">
 <header class="entete">
@@ -19,13 +22,15 @@
     <a href="index.html">Accueil</a>
     <a href="essentiel.html" class="actif">Essentiel</a>
     <a href="qcm.html">QCM</a>
+    <a href="definitions.html">Définitions</a>
+    <a href="traces.html">Tracés</a>
     <a href="calculateurs.html">Calculs</a>
   </nav>
 </header>
 
 <main>
-  <p class="marque apparait">Parcours prioritaire</p>
-  <h1 class="apparait" style="--d:1">L'essentiel du BTS OL</h1>
+  <h1 class="apparait">L'essentiel du BTS OL</h1>
+  <p class="marque apparait" style="--d:1">Parcours prioritaire</p>
   <p class="sous-titre apparait" style="--d:2">Les <b id="nb-notions">27</b> notions qui tombent le plus souvent aux sujets officiels, classées de la plus rentable à la moins rentable. Si tu as peu de temps, commence par le haut de la liste.</p>
 
   <section class="jauge apparait" style="--d:3">
@@ -34,7 +39,9 @@
       <strong id="jauge-chiffre">0 / 27 notions maîtrisées</strong>
     </div>
     <div class="barre grosse"><div class="barre-remplie" id="jauge-barre" style="width:0%"></div></div>
-    <p class="aide" id="jauge-conseil">Une notion est maîtrisée quand tu réussis au moins 80 % de ses questions. Ta progression est gardée dans ton navigateur, et en ligne si tu te connectes.</p>
+    <div id="jauge-questions"></div>
+    <p class="legende-progression" aria-hidden="true"><span><i class="l-reussies"></i>réussies</span><span><i class="l-ratees"></i>faites mais ratées</span><span><i class="l-vide"></i>à découvrir</span></p>
+    <p class="aide" id="jauge-conseil" style="margin-top:12px">Une notion est maîtrisée quand tu réussis au moins 80 % de ses questions. Ta progression est gardée dans ton navigateur, et en ligne si tu te connectes.</p>
   </section>
 
   <ol class="notions" id="notions"></ol>
@@ -42,16 +49,16 @@
   <p class="aide apparait">Comment ce classement est calculé : pour chaque notion, on regarde combien de fois elle est tombée aux sujets officiels du BTS depuis 2016, et on multiplie par le coefficient de l'épreuve. Ce sont les notions qui tombent le plus souvent : personne ne peut garantir le sujet de l'année prochaine.</p>
 </main>
 
-<footer>© 2026 Opticonversion · Outil de révision, ne remplace pas un cours ni un avis professionnel. · <a href="confidentialite.html">Confidentialité</a> · <a href="mentions-legales.html">Mentions légales</a></footer>
+<footer><span class="pied-marque"><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="13" fill="none" stroke="#d9b26f" stroke-width="2.5"/><circle cx="16" cy="16" r="5.5" fill="#d9b26f"/><circle cx="18.5" cy="13.5" r="1.6" fill="#0b0d12"/></svg>Opticonversion</span><span>© 2026</span><span class="pied-liens"><a href="confidentialite.html">Confidentialité</a> <span aria-hidden="true">·</span> <a href="mentions-legales.html">Mentions légales</a> <span aria-hidden="true">·</span> <a href="mailto:opticonversion.bts@gmail.com">Contact</a></span></footer>
 
 <script src="videos.js?v=6f234673"></script>
-<script src="epreuves.js?v=9b701326"></script>
-<script src="questions-U41.js?v=ea42723b"></script>
-<script src="questions-U42.js?v=3346c508"></script>
-<script src="questions-U43.js?v=6dbf46ca"></script>
-<script src="questions-U5.js?v=6615784c"></script>
-<script src="questions-U3.js?v=5dbfc08d"></script>
-<script src="essentiel.js?v=882c064c"></script>
+<script src="epreuves.js?v=cc645427"></script>
+<script src="questions-U41.js?v=11469e6b"></script>
+<script src="questions-U42.js?v=a01cfd04"></script>
+<script src="questions-U43.js?v=5af1d8ea"></script>
+<script src="questions-U5.js?v=2ec6d276"></script>
+<script src="questions-U3.js?v=f5a7264a"></script>
+<script src="essentiel.js?v=93b1ee7c"></script>
 <script>
   const liste = document.getElementById("notions");
   let maitrisees = 0;
@@ -64,7 +71,8 @@
     const lien = "qcm.html#" + n.epreuve + "/" + encodeURIComponent(n.theme);
 
     const li = document.createElement("li");
-    li.className = "notion apparait" + (etat.maitrisee ? " maitrisee" : "");
+    li.className = "notion apparait" + (etat.maitrisee ? " maitrisee" : "") + (i < 3 ? " podium" : "");
+    li.dataset.epreuve = n.epreuve;
     li.style.setProperty("--d", Math.min(4 + i * 0.4, 14));
     li.innerHTML =
       '<span class="rang"></span>' +
@@ -94,6 +102,9 @@
     liste.appendChild(li);
   });
 
+  document.getElementById("jauge-questions").appendChild(
+    creerBarreProgression(bilanQuestions(questionsEssentielles()), { titre: "Questions de l'essentiel" }));
+
   const total = ESSENTIEL.length;
   document.getElementById("nb-notions").textContent = total;
   document.getElementById("jauge-chiffre").textContent = maitrisees + " / " + total + " notions maîtrisées";
@@ -107,7 +118,8 @@
       : "Bravo, tu maîtrises toutes les notions essentielles. Passe au reste du programme dans les QCM.";
   }
 </script>
-<script type="module" src="compte.js?v=e48e74e2"></script>
+<script src="vivant.js?v=350e7712" defer></script>
+<script type="module" src="compte.js?v=c47ff213"></script>
 <!-- Mesure d'audience anonyme, sans cookies (GoatCounter) -->
 <script data-goatcounter="https://opticonversion.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </body>

@@ -54,17 +54,16 @@ function ajouterIcone() {
 // ---------- Les avatars (une seule liste pour tout le site) ----------
 const AVATARS = [
   { id: "clin-doeil", nom: "DioSL" },
-  { id: "renard", nom: "Roxane" },
+  { id: "renarde", nom: "Linouche" },
   { id: "chat", nom: "Pixel" },
   { id: "hibou", nom: "Archibald" },
   { id: "panda", nom: "Bambou" },
   { id: "lapin", nom: "Pompon" },
-  { id: "grenouille", nom: "Kiwi" },
-  { id: "choque", nom: "DioSL choqué" },
-  { id: "pensif", nom: "DioSL pensif" },
-  { id: "bouche-ouverte", nom: "DioSL ravi" },
-  { id: "bouche-fermee", nom: "DioSL sérieux" }
+  { id: "grenouille", nom: "Kiwi" }
 ];
+// Les expressions de DioSL (choqué, pensif, ravi, sérieux) ne se choisissent plus comme personnage :
+// elles servent aux réactions. Un ancien choix de l'une d'elles, ou d'un personnage retiré
+// (le renard), redevient simplement DioSL.
 const POSES_DIOSL = ["clin-doeil", "choque", "pensif", "bouche-ouverte", "bouche-fermee"];
 function cheminAvatar(id) {
   return POSES_DIOSL.includes(id) ? "img/nounours-" + id + ".svg" : "img/avatar-" + id + ".svg";
@@ -75,8 +74,9 @@ window.cheminAvatar = cheminAvatar;
 // L'icône montre l'avatar choisi dans le profil, sinon un petit bonhomme
 function majIcone(a) {
   const p = lire("profil");
-  if (AVATARS.some(x => x.id === p.avatar)) {
-    a.innerHTML = '<img src="' + cheminAvatar(p.avatar) + '" alt="">';
+  const id = p.avatar && (POSES_DIOSL.includes(p.avatar) || !AVATARS.some(x => x.id === p.avatar)) ? "clin-doeil" : p.avatar;
+  if (AVATARS.some(x => x.id === id)) {
+    a.innerHTML = '<img src="' + cheminAvatar(id) + '" alt="">';
     a.classList.add("avec-avatar");
   } else {
     a.innerHTML = ICONE;

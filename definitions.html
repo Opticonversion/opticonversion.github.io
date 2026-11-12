@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Les définitions à savoir pour le BTS Opticien-Lunetier, épreuve par épreuve, avec celles déjà tombées à l'examen et un mode révision en cartes.">
+<title>Définitions du BTS OL · Opticonversion</title>
+<meta name="theme-color" content="#13171f">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='13' fill='none' stroke='%23d9b26f' stroke-width='3'/%3E%3Ccircle cx='16' cy='16' r='5' fill='%23d9b26f'/%3E%3C/svg%3E">
+<script>/* Fond choisi par l'élève (profil), appliqué avant l'affichage */ try { if (localStorage.getItem("fond") === "clair") { document.documentElement.dataset.fond = "clair"; var m = document.querySelector('meta[name="theme-color"]'); if (m) m.content = "#1a1f2a"; } } catch (e) {}</script>
+<link rel="preload" href="polices/bodoni-moda.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="polices/atkinson-hyperlegible-next.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="style.css?v=416319f5">
+</head>
+<body>
+<header class="entete">
+  <a class="logo" href="index.html" aria-label="Opticonversion, accueil">
+    <svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="13" fill="none" stroke="#d9b26f" stroke-width="2.5"/><circle cx="16" cy="16" r="5.5" fill="#d9b26f"/><circle cx="18.5" cy="13.5" r="1.6" fill="#0b0d12"/></svg>
+    <span>Opticonversion</span>
+  </a>
+  <nav>
+    <a href="index.html">Accueil</a>
+    <a href="essentiel.html">Essentiel</a>
+    <a href="qcm.html">QCM</a>
+    <a href="definitions.html" class="actif">Définitions</a>
+    <a href="traces.html">Tracés</a>
+    <a href="calculateurs.html">Calculs</a>
+  </nav>
+</header>
+
+<main>
+  <h1 class="apparait">Définitions</h1>
+  <p class="marque apparait" style="--d:1">Vocabulaire</p>
+  <p class="sous-titre apparait" style="--d:2">Les définitions à savoir réciter à l'écrit, épreuve par épreuve. Le badge « Tombée » indique les années où elle a été demandée au BTS.</p>
+
+  <div class="def-epreuves apparait" style="--d:3" id="def-epreuves" role="tablist" aria-label="Épreuve"></div>
+
+  <!-- La liste -->
+  <div id="ecran-liste">
+    <section class="def-outils apparait" style="--d:4">
+      <label class="def-recherche">
+        <span class="visuellement-cache">Chercher une définition</span>
+        <span class="ico i-loupe" aria-hidden="true"></span>
+        <input type="search" id="def-recherche" placeholder="Chercher un mot…" autocomplete="off">
+      </label>
+      <div class="interrupteur-ligne">
+        <button type="button" class="interrupteur" id="def-tombees" role="switch" aria-checked="false" aria-labelledby="def-tombees-texte">
+          <span class="interrupteur-point" aria-hidden="true"></span>
+        </button>
+        <span class="interrupteur-texte" id="def-tombees-texte">Déjà tombées seulement</span>
+      </div>
+      <div class="themes def-themes" id="def-themes"></div>
+      <div id="def-progression"></div>
+      <button class="bouton" type="button" id="def-reviser"><span class="ico i-cartes" aria-hidden="true"></span> Réviser ces définitions</button>
+    </section>
+
+    <p class="aide" id="def-compte" role="status" aria-live="polite"></p>
+    <ul class="def-liste" id="def-liste"></ul>
+  </div>
+
+  <!-- Le mode révision : une carte à retourner -->
+  <section id="ecran-revision" class="def-revision" hidden aria-labelledby="def-carte-terme">
+    <div class="jeu-tete">
+      <button class="retour" type="button" id="def-arreter">← Arrêter</button>
+      <span class="jeu-niveau" id="def-avancement"></span>
+    </div>
+    <div class="barre"><div class="barre-remplie" id="def-barre" style="width:0%"></div></div>
+
+    <div class="def-carte" id="def-carte">
+      <div class="def-face def-recto">
+        <span class="def-carte-theme" id="def-carte-theme"></span>
+        <p class="def-carte-terme" id="def-carte-terme"></p>
+        <p class="aide">Récite la définition dans ta tête (ou à voix haute), puis retourne la carte.</p>
+      </div>
+      <div class="def-face def-verso">
+        <span class="def-carte-theme" id="def-carte-theme-2"></span>
+        <p class="def-carte-terme petit" id="def-carte-terme-2"></p>
+        <p class="def-carte-definition" id="def-carte-definition"></p>
+        <span id="def-carte-badge"></span>
+      </div>
+    </div>
+
+    <!-- Lu par les lecteurs d'écran au moment où la carte se retourne -->
+    <p class="visuellement-cache" role="status" id="def-annonce"></p>
+
+    <div class="def-actions" id="def-actions-recto">
+      <button class="bouton" type="button" id="def-retourner">Retourner la carte</button>
+    </div>
+    <div class="def-actions" id="def-actions-verso" hidden>
+      <button class="bouton def-savais" type="button" id="def-savais">✓ Je savais</button>
+      <button class="bouton secondaire def-arevoir" type="button" id="def-arevoir">↻ À revoir</button>
+    </div>
+    <p class="raccourcis">Astuce : <kbd>Espace</kbd> pour retourner, puis <kbd>→</kbd> je savais ou <kbd>←</kbd> à revoir.</p>
+  </section>
+
+  <section id="ecran-fin" hidden class="def-fin">
+    <img class="def-fin-compagnon" id="def-fin-compagnon" src="img/nounours-clin-doeil.svg" alt="" width="110" height="121">
+    <h2 id="def-fin-titre"></h2>
+    <p class="aide" id="def-fin-texte"></p>
+    <div class="bilan-actions" id="def-fin-actions"></div>
+  </section>
+</main>
+
+<footer><span class="pied-marque"><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="13" fill="none" stroke="#d9b26f" stroke-width="2.5"/><circle cx="16" cy="16" r="5.5" fill="#d9b26f"/><circle cx="18.5" cy="13.5" r="1.6" fill="#0b0d12"/></svg>Opticonversion</span><span>© 2026</span><span class="pied-liens"><a href="confidentialite.html">Confidentialité</a> <span aria-hidden="true">·</span> <a href="mentions-legales.html">Mentions légales</a> <span aria-hidden="true">·</span> <a href="mailto:opticonversion.bts@gmail.com">Contact</a></span></footer>
+
+<script src="epreuves.js?v=cc645427"></script>
+<script src="definitions-U41.js?v=95e92ca3"></script>
+<script src="definitions-U42.js?v=de99d26f"></script>
+<script src="definitions-U43.js?v=3f861567"></script>
+<script src="definitions-U5.js?v=793998d8"></script>
+<script src="definitions-U3.js?v=725a8abe"></script>
+<script src="essentiel.js?v=93b1ee7c"></script>
+<script src="definitions.js?v=694be9b5"></script>
+<script src="vivant.js?v=350e7712" defer></script>
+<script type="module" src="compte.js?v=c47ff213"></script>
+<!-- Mesure d'audience anonyme, sans cookies (GoatCounter) -->
+<script data-goatcounter="https://opticonversion.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+</body>
+</html>

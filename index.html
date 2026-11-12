@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="Révise le BTS Opticien-Lunetier en t'entraînant : QCM par épreuve basés sur les sujets officiels, corrigés et expliqués, et calculateurs d'optique. Gratuit.">
-<meta name="theme-color" content="#0b0d12">
+<meta name="theme-color" content="#13171f">
 <!-- Ces balises "og" règlent l'aperçu quand on partage le lien (WhatsApp, Discord, Messenger…) -->
 <meta property="og:title" content="Opticonversion · Révise le BTS OL en t'entraînant">
 <meta property="og:description" content="QCM par épreuve, basés sur les sujets officiels, et calculateurs d'optique. Gratuit.">
@@ -12,7 +12,10 @@
 <meta property="og:url" content="https://opticonversion.github.io/">
 <title>Opticonversion · Révise le BTS OL en t'entraînant</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='13' fill='none' stroke='%23d9b26f' stroke-width='3'/%3E%3Ccircle cx='16' cy='16' r='5' fill='%23d9b26f'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="style.css?v=176935d0">
+<script>/* Fond choisi par l'élève (profil), appliqué avant l'affichage */ try { if (localStorage.getItem("fond") === "clair") { document.documentElement.dataset.fond = "clair"; var m = document.querySelector('meta[name="theme-color"]'); if (m) m.content = "#1a1f2a"; } } catch (e) {}</script>
+<link rel="preload" href="polices/bodoni-moda.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="polices/atkinson-hyperlegible-next.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="style.css?v=416319f5">
 </head>
 <body data-rafraichir="oui">
 
@@ -25,81 +28,129 @@
     <a href="index.html" class="actif">Accueil</a>
     <a href="essentiel.html">Essentiel</a>
     <a href="qcm.html">QCM</a>
+    <a href="definitions.html">Définitions</a>
+    <a href="traces.html">Tracés</a>
     <a href="calculateurs.html">Calculs</a>
   </nav>
 </header>
 
-<main>
+<main class="vaste">
   <div class="hero">
-    <p class="marque apparait" id="salut">BTS Opticien-Lunetier</p>
-    <h1 class="apparait" style="--d:1">Révise l'optique <em>en t'entraînant.</em></h1>
-    <p class="accroche apparait" style="--d:2">Des QCM par épreuve, construits à partir de ce qui tombe vraiment aux sujets officiels. Chaque réponse est corrigée et expliquée. Gratuit, sans inscription.</p>
-    <div class="actions apparait" style="--d:3">
-      <a class="bouton" href="essentiel.html">Commencer par l'essentiel →</a>
-      <a class="bouton secondaire" href="qcm.html">Tous les QCM</a>
+    <div class="hero-texte">
+      <h1 class="apparait">Révise l'optique <em>en t'entraînant.</em></h1>
+      <p class="marque apparait" style="--d:1" id="salut">BTS Opticien-Lunetier</p>
+      <p class="accroche apparait" style="--d:2" id="accroche">QCM corrigés, définitions à réciter et tracés interactifs, construits à partir de ce qui tombe vraiment aux sujets officiels. Gratuit, sans inscription.</p>
+      <div class="actions apparait" style="--d:3">
+        <a class="bouton" href="essentiel.html" id="action-principale">Commencer par l'essentiel →</a>
+        <a class="bouton secondaire" href="qcm.html" id="action-secondaire">Tous les QCM</a>
+      </div>
+    </div>
+    <!-- Le banc d'optique (banc.js) : le compagnon est l'objet, la lentille forme son image -->
+    <div class="banc apparait" style="--d:4" id="banc">
+      <div class="banc-echelle"><div class="banc-scene">
+        <svg aria-hidden="true"></svg>
+        <div class="banc-lentille" aria-hidden="true"></div>
+        <div class="banc-image" aria-hidden="true"><img src="img/nounours-clin-doeil.svg" alt=""></div>
+        <div class="banc-objet" role="slider" tabindex="0" aria-orientation="horizontal" aria-label="Position du personnage sur le banc d'optique" aria-valuemin="-540" aria-valuemax="-285" aria-valuenow="-400"><span class="hero-diosl"><img src="img/nounours-clin-doeil.svg" alt="" width="200" height="220"></span></div>
+      </div></div>
+    </div>
+    <div class="banc-pied apparait" style="--d:5">
+      <div class="banc-commandes" id="banc-commandes" hidden>
+        <button type="button" class="banc-bouton" id="banc-gauche" aria-label="Éloigner le personnage de la lentille"><span class="ico i-gauche" aria-hidden="true"></span></button>
+        <button type="button" class="banc-bouton" id="banc-droite" aria-label="Rapprocher le personnage de la lentille"><span class="ico i-droite" aria-hidden="true"></span></button>
+        <button type="button" class="banc-bouton banc-pause" id="banc-pause"><span class="ico i-pause" aria-hidden="true"></span><span>Pause</span></button>
+      </div>
+      <p class="banc-lecture" id="banc-lecture" hidden></p>
     </div>
   </div>
 
-  <div class="chiffres apparait" style="--d:4">
+  <div class="chiffres apparait" id="chiffres" style="--d:6">
     <div class="chiffre"><b id="nb-questions">200</b><span>questions</span></div>
     <div class="chiffre"><b id="nb-epreuves">5</b><span>épreuves</span></div>
     <div class="chiffre"><b id="nb-essentiel">28</b><span>notions essentielles</span></div>
   </div>
 
-  <a class="carte carte-calc carte-revoir apparait" style="--d:5" href="qcm.html#a-revoir" id="carte-revoir" hidden>
+  <section class="carte progression-generale apparait" style="--d:6" aria-labelledby="titre-progression" id="bloc-progression" hidden>
+    <h2 id="titre-progression">Ta progression</h2>
+    <div id="barres-generales"></div>
+    <p class="legende-progression" aria-hidden="true"><span><i class="l-reussies"></i>réussies</span><span><i class="l-ratees"></i>faites mais ratées</span><span><i class="l-vide"></i>à découvrir</span></p>
+  </section>
+
+  <a class="carte carte-calc carte-revoir apparait" style="--d:7" href="qcm.html#a-revoir" id="carte-revoir" hidden>
     <div>
-      <span class="marque" style="margin:0 0 6px">📅 Révision espacée</span>
+      <span class="marque"><span class="ico i-calendrier" aria-hidden="true"></span> Révision espacée</span>
       <h2 id="revoir-titre">À revoir aujourd'hui</h2>
       <p id="revoir-texte"></p>
     </div>
     <span class="fleche">→</span>
   </a>
 
-  <a class="carte carte-calc apparait" style="--d:5" href="essentiel.html">
-    <div>
-      <span class="marque" style="margin:0 0 6px">★ Parcours prioritaire</span>
-      <h2>L'essentiel du BTS OL</h2>
-      <p id="essentiel-resume">Les notions qui tombent le plus souvent aux sujets officiels, classées par priorité, avec ta progression.</p>
-    </div>
-    <span class="fleche">→</span>
-  </a>
+  <div class="titre-section">
+    <h2>Pour réviser</h2>
+  </div>
+  <div class="outils">
+    <a class="outil outil-vedette" href="essentiel.html">
+      <span class="outil-icone" aria-hidden="true"><span class="ico i-etoile"></span></span>
+      <span class="outil-texte">
+        <span class="outil-etiquette">Parcours prioritaire</span>
+        <b>L'essentiel du BTS OL</b>
+        <span id="essentiel-resume">Les notions qui tombent le plus souvent aux sujets officiels, classées par priorité, avec ta progression.</span>
+      </span>
+      <span class="fleche" aria-hidden="true">→</span>
+    </a>
+    <a class="outil" href="qcm.html">
+      <span class="outil-icone" aria-hidden="true"><span class="ico i-coche"></span></span>
+      <span class="outil-texte"><b>QCM par épreuve</b><span id="outil-qcm">Des questions corrigées et expliquées, épreuve par épreuve.</span></span>
+      <span class="fleche" aria-hidden="true">→</span>
+    </a>
+    <a class="outil" href="definitions.html">
+      <span class="outil-icone" aria-hidden="true"><span class="ico i-cartes"></span></span>
+      <span class="outil-texte"><b>Définitions</b><span>À réciter en cartes, avec celles déjà tombées au BTS.</span></span>
+      <span class="fleche" aria-hidden="true">→</span>
+    </a>
+    <a class="outil" href="traces.html">
+      <span class="outil-icone" aria-hidden="true"><span class="ico i-crayon"></span></span>
+      <span class="outil-texte"><b>Atelier des tracés <span class="outil-nouveau">Nouveau</span></b><span>Construis l'image d'une lentille, niveau par niveau.</span></span>
+      <span class="fleche" aria-hidden="true">→</span>
+    </a>
+    <a class="outil" href="calculateurs.html">
+      <span class="outil-icone" aria-hidden="true"><span class="ico i-calcul"></span></span>
+      <span class="outil-texte"><b>Calculateurs</b><span>Transposition, verre-œil, Prentice, avec le détail.</span></span>
+      <span class="fleche" aria-hidden="true">→</span>
+    </a>
+  </div>
 
-  <div class="titre-section apparait" style="--d:5; margin-top: 40px">
+  <div class="titre-section">
     <h2>Choisis ton épreuve</h2>
     <a href="qcm.html">Tout voir →</a>
   </div>
   <div class="epreuves" id="liste-epreuves"></div>
 
-  <a class="carte carte-calc apparait" style="--d:8" href="calculateurs.html">
-    <div>
-      <h2>Calculateurs d'optique</h2>
-      <p>Transposition, distance verre-œil, règle de Prentice. Avec le détail du calcul.</p>
-    </div>
-    <span class="fleche">→</span>
-  </a>
-
-  <ul class="points">
-    <li class="apparait" style="--d:9"><span class="icone">◎</span><div><strong>Fait par un opticien</strong><span>Diplômé, Master Expert de la vision. Le contenu suit le programme du BTS OL.</span></div></li>
-    <li class="apparait" style="--d:10"><span class="icone">✦</span><div><strong>Basé sur les vrais sujets</strong><span>Chaque question indique la session du BTS où ce type de question est tombé.</span></div></li>
-    <li class="apparait" style="--d:11"><span class="icone">↻</span><div><strong>Pensé pour comprendre</strong><span>Pas juste la bonne réponse : le raisonnement et la formule, à chaque fois.</span></div></li>
+  <ul class="points" id="atouts">
+    <li><span class="icone" aria-hidden="true"><span class="ico i-oeil"></span></span><div><strong>Fait par un opticien</strong><span>Diplômé, Master Expert de la vision. Le contenu suit le programme du BTS OL.</span></div></li>
+    <li><span class="icone" aria-hidden="true"><span class="ico i-cartes"></span></span><div><strong>Basé sur les vrais sujets</strong><span>Chaque question indique la session du BTS où ce type de question est tombé.</span></div></li>
+    <li><span class="icone" aria-hidden="true"><span class="ico i-ampoule"></span></span><div><strong>Pensé pour comprendre</strong><span>Pas juste la bonne réponse : le raisonnement et la formule, à chaque fois.</span></div></li>
   </ul>
 </main>
 
-<footer>© 2026 Opticonversion · Outil de révision, ne remplace pas un cours ni un avis professionnel. · <a href="confidentialite.html">Confidentialité</a> · <a href="mentions-legales.html">Mentions légales</a></footer>
+<footer><span class="pied-marque"><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="13" fill="none" stroke="#d9b26f" stroke-width="2.5"/><circle cx="16" cy="16" r="5.5" fill="#d9b26f"/><circle cx="18.5" cy="13.5" r="1.6" fill="#0b0d12"/></svg>Opticonversion</span><span>© 2026</span><span class="pied-liens"><a href="confidentialite.html">Confidentialité</a> <span aria-hidden="true">·</span> <a href="mentions-legales.html">Mentions légales</a> <span aria-hidden="true">·</span> <a href="mailto:opticonversion.bts@gmail.com">Contact</a></span></footer>
 
 <!-- On charge les épreuves et les questions pour afficher les cartes et les chiffres exacts -->
-<script src="epreuves.js?v=9b701326"></script>
-<script src="questions-U41.js?v=ea42723b"></script>
-<script src="questions-U42.js?v=3346c508"></script>
-<script src="questions-U43.js?v=6dbf46ca"></script>
-<script src="questions-U5.js?v=6615784c"></script>
-<script src="questions-U3.js?v=5dbfc08d"></script>
-<script src="essentiel.js?v=882c064c"></script>
+<script src="epreuves.js?v=cc645427"></script>
+<script src="questions-U41.js?v=11469e6b"></script>
+<script src="questions-U42.js?v=a01cfd04"></script>
+<script src="questions-U43.js?v=5af1d8ea"></script>
+<script src="questions-U5.js?v=2ec6d276"></script>
+<script src="questions-U3.js?v=f5a7264a"></script>
+<script src="essentiel.js?v=93b1ee7c"></script>
 <script>
+  // Le compagnon choisi dans le profil (DioSL par défaut) accueille l'élève
+  montrerCompagnon(document.querySelector(".hero-diosl img"), "clin-doeil");
   // Petit mot d'accueil si l'élève a choisi un pseudo
   { const p = lireProfil(); if (p.pseudo) document.getElementById("salut").textContent = "Content de te revoir, " + p.pseudo; }
   if (typeof QUESTIONS !== "undefined") {
     document.getElementById("nb-questions").textContent = QUESTIONS.length;
+    document.getElementById("outil-qcm").textContent = QUESTIONS.length + " questions corrigées et expliquées, épreuve par épreuve.";
     document.getElementById("nb-epreuves").textContent = EPREUVES.length;
     document.getElementById("nb-essentiel").textContent = ESSENTIEL.length;
     const faites = ESSENTIEL.filter(n => etatNotion(n.epreuve, n.theme).maitrisee).length;
@@ -107,10 +158,65 @@
       ? "Tu maîtrises " + faites + " des " + ESSENTIEL.length + " notions essentielles. Continue là où tu t'es arrêté."
       : "Les " + ESSENTIEL.length + " notions qui tombent le plus souvent aux sujets officiels, classées par priorité, avec ta progression.";
 
+    // Ta progression : l'essentiel, tous les QCM, et les deux réunis
+    {
+      const b = bilansGeneraux();
+      const zoneBarres = document.getElementById("barres-generales");
+      zoneBarres.appendChild(creerBarreProgression(b.essentiel, { titre: "★ L'essentiel", extra: faites + " / " + ESSENTIEL.length + " notions maîtrisées" }));
+      zoneBarres.appendChild(creerBarreProgression(b.qcm, { titre: "Tous les QCM" }));
+      zoneBarres.appendChild(creerBarreProgression(b.maitrise, {
+        titre: "Niveau de maîtrise",
+        aria: "Niveau de maîtrise : " + Math.round(b.maitrise.reussies / b.maitrise.total * 100) + " %, " + b.maitrise.reussies + " questions réussies sur " + b.maitrise.total,
+        detail: b.qcm.faites === 0
+          ? "Les questions que tu sais : réussies à ta dernière tentative. Lance-toi avec l'essentiel !"
+          : b.maitrise.reussies + " / " + b.maitrise.total + " questions réussies à ta dernière tentative"
+      }));
+    }
+
     // Révision espacée : les questions ratées reviennent au bon moment
     const dues = questionsARevoir().length;
+
+    // Élève qui revient : le haut de page propose directement la suite
+    {
+      const deja = bilanQuestions(QUESTIONS).faites;
+      if (deja > 0) {
+        const principale = document.getElementById("action-principale");
+        const secondaire = document.getElementById("action-secondaire");
+        const prochaine = ESSENTIEL.find(n => !etatNotion(n.epreuve, n.theme).maitrisee);
+        const lienNotion = n => "qcm.html#" + n.epreuve + "/" + encodeURIComponent(n.theme);
+        document.getElementById("accroche").textContent = "Tu as déjà fait " + deja + " question" + (deja > 1 ? "s" : "") + " sur " + QUESTIONS.length +
+          (dues > 0 ? ", et " + dues + (dues > 1 ? " reviennent" : " revient") + " aujourd'hui pour bien les ancrer." : ".");
+        // Élève qui a déjà commencé : sa progression remonte juste sous le haut de page,
+        // et la présentation (chiffres, atouts) ne sert plus qu'aux nouveaux venus.
+        document.getElementById("chiffres").hidden = true;
+        document.getElementById("atouts").hidden = true;
+        document.getElementById("bloc-progression").hidden = false;
+        // Haut de page compact : un titre court, la suite à faire tout de suite visible
+        const pseudo = lireProfil().pseudo;
+        document.querySelector(".hero").classList.add("hero-retour");
+        document.querySelector(".hero h1").innerHTML = pseudo ? "On continue, <em></em> ?" : "On <em>continue</em> ?";
+        if (pseudo) document.querySelector(".hero h1 em").textContent = pseudo;
+        document.getElementById("salut").textContent = "Content de te revoir";
+        if (dues > 0) {
+          principale.innerHTML = '<span class="ico i-calendrier" aria-hidden="true"></span> ';
+          principale.append("Réviser mes " + dues + " question" + (dues > 1 ? "s" : "") + " du jour →");
+          principale.href = "qcm.html#a-revoir";
+          if (prochaine) { secondaire.textContent = "Continuer : " + prochaine.theme; secondaire.href = lienNotion(prochaine); }
+        } else if (prochaine) {
+          principale.textContent = "Continuer : " + prochaine.theme + " →";
+          principale.href = lienNotion(prochaine);
+        } else {
+          // Tout l'essentiel est maîtrisé et rien à revoir : place au reste du programme
+          principale.textContent = "Faire un QCM →";
+          principale.href = "qcm.html";
+          secondaire.hidden = true;
+        }
+      }
+    }
     const prochaine = prochaineRevision();
-    if (dues > 0 || prochaine) {
+    // Si le haut de page propose déjà « Réviser mes questions du jour », pas besoin de la carte en double
+    const dejaPropose = dues > 0 && bilanQuestions(QUESTIONS).faites > 0;
+    if ((dues > 0 || prochaine) && !dejaPropose) {
       const carte = document.getElementById("carte-revoir");
       carte.hidden = false;
       if (dues > 0) {
@@ -132,18 +238,21 @@
     EPREUVES.forEach((e, i) => {
       const nb = QUESTIONS.filter(q => q.epreuve === e.code).length;
       const a = document.createElement("a");
-      a.className = "epreuve apparait";
-      a.style.setProperty("--d", 6 + i * 0.5);
+      a.className = "epreuve";
+      a.dataset.epreuve = e.code;
       a.href = "qcm.html#" + e.code;
       a.innerHTML = '<span class="code"></span><span class="nom"></span><span class="info"></span>';
       a.querySelector(".code").textContent = e.court || e.code;
       a.querySelector(".nom").textContent = e.nom;
       a.querySelector(".info").textContent = nb + " questions · " + e.detail;
+      a.appendChild(creerBarreProgression(bilanQuestions(QUESTIONS.filter(q => q.epreuve === e.code)), { petite: true }));
       liste.appendChild(a);
     });
   }
 </script>
-<script type="module" src="compte.js?v=e48e74e2"></script>
+<script src="banc.js?v=90809218" defer></script>
+<script src="vivant.js?v=350e7712" defer></script>
+<script type="module" src="compte.js?v=c47ff213"></script>
 <!-- Mesure d'audience anonyme, sans cookies (GoatCounter) -->
 <script data-goatcounter="https://opticonversion.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </body>

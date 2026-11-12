@@ -384,6 +384,165 @@ QUESTIONS.push(
     bonne: 2,
     explication: "Relation de Newton : IA² = IC × ID, donc ID = IA² / IC = 25 / 2 = 12,5 cm. C est à l'intérieur de [AB] et D à l'extérieur, du même côté de I. On retrouve l'idée de la relation de Newton en optique : un produit de deux distances égal à un carré.",
     indice: "Isole ID dans la relation de Newton : divise IA² par IC."
+  },
+
+  // ---------- Mini-cas en cascade (CAS-U41-01) ----------
+  {
+    id: "U41-042", epreuve: "U41", theme: "Statistique", session: "2022 et 2023",
+    cas: "CAS-U41-01",
+    etape: 1,
+    question: "Le nuage (t ; N) n'est pas aligné. On pose z = ln(50 − N) : la calculatrice donne r ≈ −0,999 et la droite z ≈ −0,30t + 3,68. Quelle expression de N en déduit-on ? (e^3,68 ≈ 40)",
+    choix: ["N ≈ 50 − 40 e^(−0,3t)", "N ≈ 40 − 50 e^(−0,3t)", "N ≈ 50 + 40 e^(−0,3t)", "N ≈ 50 − 3,68 e^(−0,3t)"],
+    bonne: 0,
+    explication: "ln(50 − N) = −0,30t + 3,68, donc 50 − N = e^(−0,3t + 3,68) = e^3,68 × e^(−0,3t) ≈ 40 e^(−0,3t). On isole N : N ≈ 50 − 40 e^(−0,3t). Contrôle avec le tableau : pour t = 0, on trouve 50 − 40 = 10 ✓.",
+    indice: "Applique l'exponentielle des deux côtés pour faire disparaître ln, puis isole N. N'oublie pas que e^(a + b) = e^a × e^b."
+  },
+  {
+    id: "U41-043", epreuve: "U41", theme: "Équations différentielles", session: "2017 et 2023",
+    cas: "CAS-U41-01",
+    etape: 2,
+    contexte: "On modélise maintenant les ventes par une fonction y, solution de l'équation différentielle (E) : y' + 0,3y = 15.",
+    question: "Quelle est la solution constante de (E) ?",
+    choix: ["y = 50", "y = 15", "y = 4,5", "y = 45"],
+    bonne: 0,
+    explication: "Une constante c a une dérivée nulle : 0 + 0,3c = 15, donc c = 15 / 0,3 = 50. On retrouve le 50 du changement de variable : c'est le plafond des ventes.",
+    indice: "Une fonction constante a une dérivée nulle : remplace y' par 0 et y par c, puis divise."
+  },
+  {
+    id: "U41-044", epreuve: "U41", theme: "Équations différentielles", session: "2018 et 2023",
+    cas: "CAS-U41-01",
+    etape: 3,
+    contexte: "Les solutions de (E) sont les fonctions y = k e^(−0,3t) + 50. Le premier mois, le magasin a vendu 10 dizaines de montures.",
+    question: "Quelle est la fonction f, solution de (E), qui vérifie f(0) = 10 ?",
+    choix: ["f(t) = 50 − 40 e^(−0,3t)", "f(t) = 50 + 10 e^(−0,3t)", "f(t) = 10 + 50 e^(−0,3t)", "f(t) = 50 − 10 e^(−0,3t)"],
+    bonne: 0,
+    explication: "f(0) = k × e⁰ + 50 = k + 50. On veut f(0) = 10, donc k = 10 − 50 = −40. D'où f(t) = 50 − 40 e^(−0,3t) : c'est bien l'expression trouvée par le changement de variable.",
+    indice: "Remplace t par 0 dans k e^(−0,3t) + 50 (e⁰ = 1), puis écris que le résultat vaut 10 pour trouver k."
+  },
+  {
+    id: "U41-045", epreuve: "U41", theme: "Fonctions", session: "2017 et 2022",
+    cas: "CAS-U41-01",
+    etape: 4,
+    question: "f(t) = 50 − 40 e^(−0,3t). Quelle est la dérivée de f et le sens de variation de f sur [0 ; +∞[ ?",
+    choix: ["f'(t) = 12 e^(−0,3t) > 0 : f est croissante", "f'(t) = −12 e^(−0,3t) < 0 : f est décroissante", "f'(t) = 12 e^(−0,3t) : f est décroissante", "f'(t) = −40 e^(−0,3t) : f est décroissante"],
+    bonne: 0,
+    explication: "La dérivée de 50 est 0. (−40 e^(−0,3t))' = −40 × (−0,3) e^(−0,3t) = 12 e^(−0,3t). Une exponentielle est toujours positive, donc f'(t) > 0 et f est croissante : les ventes augmentent chaque mois.",
+    indice: "La dérivée de C e^(kt) est C × k × e^(kt). Attention au produit de deux nombres négatifs, puis étudie le signe."
+  },
+  {
+    id: "U41-046", epreuve: "U41", theme: "Fonctions", session: "2022 et 2023",
+    cas: "CAS-U41-01",
+    etape: 5,
+    contexte: "Rappel : N est exprimé en dizaines de montures vendues par mois.",
+    question: "Quelle est la limite de f en +∞, et que signifie-t-elle pour le magasin ?",
+    choix: ["Les ventes mensuelles se rapprochent de 500 montures sans jamais les dépasser", "Les ventes mensuelles se rapprochent de 50 montures", "Les ventes mensuelles augmentent sans limite", "Les ventes mensuelles retombent vers 100 montures"],
+    bonne: 0,
+    explication: "Quand t → +∞, e^(−0,3t) → 0, donc f(t) → 50 : la droite y = 50 est asymptote. Comme 40 e^(−0,3t) > 0, f(t) reste en dessous de 50. N est en dizaines : les ventes se rapprochent de 50 × 10 = 500 montures par mois sans les dépasser. Piège : répondre 50 montures en oubliant l'unité.",
+    indice: "Cherche vers quoi tend e^(−0,3t), puis relis l'unité de N avant de conclure : la réponse doit être en montures."
+  },
+  {
+    id: "U41-047", epreuve: "U41", theme: "Lois de probabilité", session: "2016 et 2017 et 2018",
+    contexte: "Un stock contient 2 % de lentilles défectueuses. On prélève 50 lentilles au hasard, le stock est assez grand pour assimiler ce prélèvement à un tirage avec remise. X est le nombre de lentilles défectueuses.",
+    question: "Quelle justification est juste pour affirmer que X suit une loi binomiale ?",
+    choix: ["On répète 50 fois, de façon identique et indépendante, une épreuve à deux issues (défectueuse ou non) de probabilité 0,02 ; X compte les lentilles défectueuses, donc X suit la loi binomiale B(50 ; 0,02).", "On répète 50 fois une épreuve à deux issues de probabilité 0,02, donc X suit une loi normale.", "X suit une loi binomiale, car c'est un nombre de lentilles prélevées au hasard.", "Les 50 prélèvements sont identiques et indépendants, et chacun a deux issues de probabilité 0,02."],
+    bonne: 0,
+    explication: "Une justification complète donne les trois conditions (épreuves identiques, indépendantes, à deux issues), le paramètre p, ce que compte X, et conclut avec la loi et ses paramètres B(50 ; 0,02). La 2e conclut sur la mauvaise loi, la 3e n'a aucun argument, la 4e oublie la conclusion.",
+    indice: "Une justification complète a deux parties : les conditions (combien d'épreuves, comment, quelles issues, quelle probabilité), puis une conclusion avec le nom de la loi et ses paramètres."
+  },
+  {
+    id: "U41-048", epreuve: "U41", theme: "Estimation et tests", session: "2017 et 2018",
+    contexte: "Test bilatéral au seuil de 5 % : H0 « le diamètre moyen vaut 14 mm ». Sous H0, la moyenne d'un échantillon de 100 lentilles suit une loi normale de moyenne 14 et d'écart type 0,05, et P(13,90 ≤ moyenne ≤ 14,10) ≈ 0,95.",
+    question: "Quelle est la règle de décision correctement énoncée ?",
+    choix: ["Si la moyenne de l'échantillon est comprise entre 13,90 et 14,10, on ne rejette pas H0 ; sinon, on rejette H0 au seuil de 5 %.", "Si la moyenne de l'échantillon vaut exactement 14, on accepte H0 ; sinon, on la rejette.", "On rejette H0 si la moyenne de l'échantillon est trop éloignée de 14.", "La région de rejet est formée des moyennes inférieures à 13,90 ou supérieures à 14,10."],
+    bonne: 0,
+    explication: "La règle de décision dit quoi conclure dans chaque cas, avec les bornes chiffrées et le seuil. La 2e est fausse (une moyenne d'échantillon ne vaut presque jamais exactement 14), la 3e ne donne pas les bornes, la 4e décrit la région de rejet sans dire ce qu'on décide.",
+    indice: "Une règle de décision commence par « Si… » : elle donne les bornes chiffrées, puis dit ce qu'on décide dans chacun des deux cas."
+  },
+  {
+    id: "U41-049", epreuve: "U41", theme: "Statistique", session: "2018 et 2023",
+    contexte: "Après le changement de variable z = ln(y − 20), la calculatrice donne r ≈ −0,995 pour la série (x ; z).",
+    question: "Quelle justification est juste pour dire si un ajustement affine de z en x est pertinent ?",
+    choix: ["|r| ≈ 0,995 est très proche de 1 : les points (x ; z) sont presque alignés, donc un ajustement affine de z en x est pertinent.", "r est négatif, donc un ajustement affine de z en x n'est pas pertinent.", "Un ajustement affine de z en x est pertinent.", "|r| ≈ 0,995 est très proche de 1."],
+    bonne: 0,
+    explication: "On s'appuie sur |r|, pas sur son signe, puis on conclut. La 2e est fausse (un r négatif veut seulement dire que z diminue), la 3e affirme sans argument, la 4e donne l'argument sans conclure.",
+    indice: "Une bonne justification a un argument chiffré, ce qu'il signifie pour le nuage, et une conclusion. Regarde la valeur absolue de r, pas son signe."
+  },
+  {
+    id: "U41-050", epreuve: "U41", theme: "Estimation et tests", session: "2016 et 2022",
+    contexte: "Sur un échantillon de 100 porteurs de lentilles, on a obtenu l'intervalle de confiance à 95 % : [0,722 ; 0,878].",
+    question: "On demande : « La proportion p de clients satisfaits appartient-elle de façon certaine à cet intervalle ? Justifier. » Quelle réponse est juste et complète ?",
+    choix: ["Non : la méthode donne un intervalle qui contient p pour environ 95 % des échantillons. Pour cet échantillon, on ne peut donc pas être certain que p soit dans [0,722 ; 0,878].", "Oui, car l'intervalle a été calculé avec un niveau de confiance de 95 %.", "Non, ce n'est pas certain.", "La méthode donne un intervalle qui contient p pour environ 95 % des échantillons."],
+    bonne: 0,
+    explication: "La réponse complète dit « non », donne la raison (la méthode échoue pour environ 5 % des échantillons) et conclut pour cet intervalle-là. La 2e est fausse, la 3e n'a pas d'argument, la 4e donne l'argument sans répondre à la question.",
+    indice: "Réponds d'abord par oui ou par non, puis explique sur quoi porte le « 95 % » : sur la méthode, pas sur un intervalle en particulier."
+  },
+
+  // ---------- Calculs à taper (calculatrice) ----------
+  {
+    id: "U41-051", epreuve: "U41", theme: "Lois de probabilité", session: "complément", type: "calcul",
+    contexte: "5 % des montures d'un lot ont un défaut. On en prélève 40 au hasard, ce qu'on assimile à un tirage avec remise. X est le nombre de montures avec un défaut.",
+    question: "À la calculatrice, calcule P(X = 3).",
+    reponse: {"valeur": 0.185, "unite": "", "decimales": 3, "signe": true},
+    explication: "X suit la loi binomiale B(40 ; 0,05). À la calculatrice (probabilité binomiale en un point) : P(X = 3) ≈ 0,18511, soit 0,185 arrondi à 10⁻³.",
+    indice: "Repère n et p, puis utilise la probabilité binomiale « en un point » (X = k), pas la cumulée."
+  },
+  {
+    id: "U41-052", epreuve: "U41", theme: "Lois de probabilité", session: "complément", type: "calcul",
+    contexte: "Le temps X (en minutes) d'un ajustement de monture suit la loi normale de moyenne 50 et d'écart type 4.",
+    question: "À la calculatrice, calcule P(45 ≤ X ≤ 55).",
+    reponse: {"valeur": 0.789, "unite": "", "decimales": 3, "signe": true},
+    explication: "Loi normale cumulée entre 45 et 55, avec μ = 50 et σ = 4 : P(45 ≤ X ≤ 55) ≈ 0,7887, soit 0,789 arrondi à 10⁻³.",
+    indice: "Utilise la loi normale entre deux bornes : borne basse 45, borne haute 55, puis μ et σ (l'écart type, pas la variance)."
+  },
+  {
+    id: "U41-053", epreuve: "U41", theme: "Lois de probabilité", session: "complément", type: "calcul",
+    contexte: "Le temps X (en minutes) d'un ajustement de monture suit la loi normale de moyenne 50 et d'écart type 4.",
+    question: "À la calculatrice, trouve la durée t telle que P(X ≤ t) = 0,95.",
+    reponse: {"valeur": 56.58, "unite": "min", "decimales": 2, "signe": true},
+    explication: "On cherche la valeur inverse de la loi normale pour une aire de 0,95 à gauche, avec μ = 50 et σ = 4 : t ≈ 56,579, soit 56,58 min. 95 % des ajustements durent moins de 56,58 minutes.",
+    indice: "C'est l'opération inverse : tu connais la probabilité (aire à gauche) et tu cherches la borne. Utilise la fonction inverse de la loi normale."
+  },
+  {
+    id: "U41-054", epreuve: "U41", theme: "Lois de probabilité", session: "complément", type: "calcul",
+    contexte: "Le temps d'attente T (en minutes) au comptoir suit la loi exponentielle de paramètre λ = 0,2.",
+    question: "Calcule P(3 ≤ T ≤ 6).",
+    reponse: {"valeur": 0.248, "unite": "", "decimales": 3, "signe": true},
+    explication: "P(3 ≤ T ≤ 6) = P(T ≤ 6) − P(T ≤ 3) = (1 − e^(−1,2)) − (1 − e^(−0,6)) = e^(−0,6) − e^(−1,2) ≈ 0,5488 − 0,3012 = 0,2476, soit 0,248.",
+    indice: "P(a ≤ T ≤ b) = P(T ≤ b) − P(T ≤ a), avec P(T ≤ t) = 1 − e^(−λt)."
+  },
+  {
+    id: "U41-055", epreuve: "U41", theme: "Suites", session: "complément", type: "calcul",
+    contexte: "u0 = 200 et, pour tout n, u(n+1) = 0,9 u(n) + 40.",
+    question: "Avec le tableau de valeurs de la calculatrice, trouve le premier rang n tel que u(n) > 350.",
+    reponse: {"valeur": 14, "unite": "", "decimales": 0, "signe": true},
+    explication: "Le tableau donne u13 ≈ 349,2 (encore ≤ 350) et u14 ≈ 354,2 (> 350). Le premier rang est donc n = 14.",
+    indice: "Entre la suite récurrente avec son premier terme u0 = 200, puis parcours le tableau jusqu'au premier terme qui dépasse 350. Attention au rang de départ (n = 0)."
+  },
+  {
+    id: "U41-056", epreuve: "U41", theme: "Statistique", session: "complément", type: "calcul",
+    contexte: "Après le changement de variable z = ln(y − 20), on obtient le tableau ci-dessous.",
+    annexe: {"titre": "Série (x ; z)", "colonnes": ["x", "0", "1", "2", "3", "4", "5"], "lignes": [["z", "4,38", "4,11", "3,75", "3,52", "3,18", "2,93"]]},
+    question: "À la calculatrice, donne le coefficient a de la droite de régression de z en x (z = ax + b), arrondi à 10⁻².",
+    reponse: {"valeur": -0.29, "unite": "", "decimales": 2, "signe": true},
+    explication: "Régression linéaire de z en x (moindres carrés) : a ≈ −0,2934 et b ≈ 4,3786, avec r ≈ −0,999. Arrondi à 10⁻² : a = −0,29. Le signe − indique que z diminue quand x augmente.",
+    indice: "Saisis x et z dans deux listes, puis lance la régression linéaire de type ax + b. Garde le signe de a."
+  },
+  {
+    id: "U41-057", epreuve: "U41", theme: "Calcul intégral", session: "complément", type: "calcul",
+    contexte: "Les ventes journalières d'un modèle de verre sont modélisées par f(x) = 40 − 8 e^(−0,5x) sur [0 ; 5].",
+    question: "À la calculatrice, calcule la valeur moyenne de f sur [0 ; 5], arrondie à 10⁻².",
+    reponse: {"valeur": 37.06, "unite": "", "decimales": 2, "signe": true},
+    explication: "Valeur moyenne = (1/5) × intégrale de 0 à 5 de f. La calculatrice donne l'intégrale ≈ 185,313. Divisée par 5 : ≈ 37,063, soit 37,06. À la main : 40 × 5 − 16 (1 − e^(−2,5)) ≈ 185,31.",
+    indice: "Calcule d'abord l'intégrale entre 0 et 5 à la calculatrice, puis n'oublie pas de diviser par la longueur de l'intervalle."
   }
 
 );
+
+// ---------- Mini-cas ----------
+CAS.push({
+  id: "CAS-U41-01",
+  epreuve: "U41",
+  titre: "Les ventes d'une nouvelle monture",
+  contexte: "Un magasin d'optique lance un nouveau modèle de monture. N est le nombre de montures vendues pendant le mois de rang t (t = 0 pour le premier mois), exprimé en dizaines. Les ventes montent vite au début, puis ralentissent.",
+  annexe: { titre: "Ventes relevées", colonnes: ["Mois t", "0", "1", "2", "3", "4", "5"], lignes: [["N (dizaines)", "10,0", "21,3", "27,2", "34,1", "37,6", "41,2"]] }
+});
