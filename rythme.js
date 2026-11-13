@@ -552,10 +552,13 @@ function reserverInvitation(type) {
 // de compte (afficherCarteJour).
 const DECOUVERTES = [
   { id: "atelier", quand: s => s.jour >= 3, titre: "L'Atelier des tracés", lien: "traces.html", bouton: "Ouvrir l'Atelier",
+    invite: "Aujourd'hui, essaie l'Atelier des tracés", dessin: true,
     texte: "Tu construis l'image d'une lentille rayon par rayon, comme sur ta copie, et chaque tracé est vérifié." },
   { id: "definitions", quand: s => s.jour >= 4, titre: "Les définitions à réciter", lien: "definitions.html", bouton: "Réciter",
+    invite: "Aujourd'hui, essaie les définitions à réciter", icone: "i-cartes",
     texte: "Celles des sujets officiels, en cartes à retourner. Les définitions à savoir par cœur viennent en premier." },
   { id: "calculs", quand: s => s.joursActifs >= 6, titre: "Les calculateurs", lien: "calculateurs.html", bouton: "Ouvrir les calculs",
+    invite: "Aujourd'hui, essaie les calculateurs", icone: "i-calcul",
     texte: "Transposition, verre-œil, Prentice : le calcul est détaillé, pour vérifier le tien." }
 ];
 function lireDecouverte() {
@@ -624,6 +627,113 @@ function creerDecouverte(d, apresFermeture) {
   });
   bloc.append(img, corps, fermer);
   return bloc;
+}
+
+// La grande carte de l'outil du jour, en tête de l'écran de la séance du jour : titre, dessin ou icône, bouton or.
+// L'Atelier a son petit tracé : l'objet AB, la lentille, les trois rayons qui forment l'image A'B'.
+const DESSIN_TRACE = '<svg class="outil-jour-dessin" viewBox="0 0 280 96" aria-hidden="true">' +
+  '<path class="axe" d="M8 48H272"/><path class="repere" d="M95 44v8M185 44v8"/>' +
+  '<path class="verre" d="M140 8Q153 48 140 88Q127 48 140 8Z"/>' +
+  '<path class="rayon" d="M50 22H140L230 74M50 22L230 74M50 22L140 74H230"/>' +
+  '<path class="fleche" d="M50 48V22M46 28L50 22L54 28M230 48V74M226 68L230 74L234 68"/>' +
+  '<text x="42" y="18">B</text><text x="236" y="86">B\u2032</text><text x="91" y="64">F</text><text x="189" y="42">F\u2032</text></svg>';
+function creerOutilDuJour(d, apresFermeture) {
+  const creer = (balise, classe, texte) => {
+    const n = document.createElement(balise);
+    if (classe) n.className = classe;
+    if (texte !== undefined) n.textContent = texte;
+    return n;
+  };
+  const bloc = creer("div", "outil-jour");
+  bloc.setAttribute("role", "region");
+  bloc.setAttribute("aria-label", "À découvrir : " + d.titre);
+  if (d.dessin) bloc.insertAdjacentHTML("beforeend", DESSIN_TRACE);
+  else if (d.icone) { const ico = creer("span", "ico outil-jour-ico " + d.icone); ico.setAttribute("aria-hidden", "true"); bloc.appendChild(ico); }
+  const lien = creer("a", "bouton bouton-grand", d.bouton);
+  lien.href = d.lien;
+  lien.addEventListener("click", () => fermerDecouverte(d.id));
+  const fermer = creer("button", "decouverte-fermer");
+  fermer.type = "button";
+  fermer.setAttribute("aria-label", "Fermer");
+  fermer.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 6.5l11 11M17.5 6.5l-11 11" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>';
+  fermer.addEventListener("click", () => {
+    fermerDecouverte(d.id);
+    bloc.remove();
+    if (apresFermeture) apresFermeture();
+  });
+  bloc.append(creer("h2", "outil-jour-titre", d.invite), creer("p", "", d.texte), lien, fermer);
+  return bloc;
+}
+
+// ---------------- Les jours suivants : l'écran de la séance du jour (index.html) ----------------
+// À partir du deuxième jour de révision, tant que la séance du jour n'est ni faite ni passée, l'accueil ne montre que
+// cela (html[data-accueil="jour"], posé dans le <head> avant l'affichage, confirmé ou corrigé ici) : combien de
+// questions (le dernier choix reste coché), sur quelle matière, « Commencer ma séance ». « Passer pour aujourd'hui »
+// rend l'accueil habituel. Le menu reste : l'élève peut toujours aller ailleurs.
+// Le jour où un outil se présente (Atelier au 3e jour, définitions au 4e), sa grande carte est en tête d'écran et
+// porte le bouton or ; les jours où c'est le tour du compte, sa proposition est sous les boutons, discrète.
+function ecranDuJourVoulu() {
+  if (document.documentElement.dataset.accueil === "premier" || typeof QUESTIONS === "undefined") return false;
+  if (bilanQuestions(QUESTIONS).faites === 0 || premierJourDeRevision()) return false;
+  return !calculerRythme().aujourdhui.atteint && !seancePassee();
+}
+function preparerEcranDuJour(el) {
+  const html = document.documentElement;
+  if (!el || !ecranDuJourVoulu()) {
+    if (html.dataset.accueil === "jour") delete html.dataset.accueil;
+    return false;
+  }
+  html.dataset.accueil = "jour";
+  const r = calculerRythme(), a = r.aujourdhui, form = el.querySelector("form");
+  // Le titre, et dessous : la dernière séance, ce qui est déjà fait aujourd'hui, la série
+  const pseudo = lireProfil().pseudo;
+  el.querySelector("h1").textContent = pseudo ? "On continue, " + pseudo + "\u00a0?" : "On continue\u00a0?";
+  const mot = messageCompagnon(r), serie = phraseSerie(r), phrases = [];
+  if (mot) phrases.push(mot.phrases[0]);
+  if (a.n > 0) phrases.push("Déjà " + a.n + (a.n > 1 ? " questions" : " question") + " aujourd'hui.");
+  phrases.push(/[.?!]$/.test(serie) ? serie : serie + ".");
+  el.querySelector(".sous-titre").textContent = phrases.join(" ");
+  montrerCompagnon(el.querySelector(".tete-compagnon"), mot ? mot.pose : "clin-doeil");
+  // Les deux choix : le dernier nombre choisi reste coché, « Aléatoire » au départ
+  const objectif = lireObjectif() || OBJECTIFS[1];
+  form.querySelectorAll('input[name="objectif"]').forEach(i => { i.checked = Number(i.value) === objectif; });
+  const lancer = form.querySelector('button[type="submit"]');
+  lancer.textContent = a.n > 0 ? "Reprendre ma séance" : "Commencer ma séance";
+  form.addEventListener("submit", e => {
+    e.preventDefault();
+    const o = form.querySelector('input[name="objectif"]:checked');
+    choisirObjectif(o ? Number(o.value) : objectif);
+    const m = form.querySelector('input[name="matiere"]:checked'), matiere = m ? matiereSeance(m.value) : null;
+    location.href = "qcm.html#seance" + (matiere ? "/" + matiere : "");
+  });
+  el.querySelector("#ecran-jour-passer").addEventListener("click", () => {
+    passerSeance(true);
+    delete html.dataset.accueil;
+    afficherCarteJour(document.getElementById("jour"));
+    window.dispatchEvent(new Event("resize"));        // le banc d'optique était caché : il se recalcule
+    window.scrollTo(0, 0);
+    const titre = document.querySelector(".hero h1");
+    if (titre) { titre.tabIndex = -1; titre.focus({ preventScroll: true }); }
+  });
+  // La proposition du jour : un outil (grande carte, en tête) ou, sinon, le compte (sous les boutons)
+  const zoneOutil = el.querySelector("#ecran-jour-outil"), zoneCompte = el.querySelector("#ecran-jour-compte");
+  const dec = decouverteDuJour();
+  if (dec) {
+    lancer.classList.add("secondaire");               // ce jour-là, le bouton or est celui de l'outil
+    zoneOutil.hidden = false;
+    zoneOutil.appendChild(creerOutilDuJour(dec, () => {
+      zoneOutil.hidden = true;
+      lancer.classList.remove("secondaire");
+      lancer.focus({ preventScroll: true });
+    }));
+  } else {
+    const inv = invitationDuMoment("accueil");
+    if (inv) {
+      zoneCompte.hidden = false;
+      zoneCompte.appendChild(creerInvitationCompte(inv, true, () => { zoneCompte.hidden = true; }));
+    }
+  }
+  return true;
 }
 
 // ---------------- Affichage : carte de l'accueil et bloc du profil ----------------
@@ -822,7 +932,12 @@ function afficherCarteJour(el, options) {
     action.append(ico, "5 minutes de plus");
     ligne.appendChild(action);
   } else if (passee) {
-    suite = discret("Faire ma séance quand même", () => { passerSeance(false); rafraichir(".jour-matiere"); });
+    suite = discret("Faire ma séance quand même", () => {
+      passerSeance(false);
+      // Sur l'accueil, la séance du jour a son écran plein (preparerEcranDuJour) : on y retourne
+      if (!options.profil && document.getElementById("ecran-jour") && ecranDuJourVoulu()) location.reload();
+      else rafraichir(".jour-matiere");
+    });
   } else {
     suite = creer("div", "jour-matieres");
     // Combien de questions : le profil a déjà ce choix juste au-dessus
@@ -897,12 +1012,55 @@ function afficherCarteJour(el, options) {
 
 // ---------------- Première ouverture : « Cinq questions pour commencer » (index.html) ----------------
 // Montrée quand l'élève n'a encore répondu à rien : html[data-accueil="premier"], posé dans le <head> de l'accueil
-// avant l'affichage (rien ne change sans JavaScript). La matière des questions (ou « Aléatoire » : une par matière),
-// deux réglages facultatifs (année, objectif), puis UNE action : 5 questions faciles (qcm.html#premiers-pas, ou
-// #premiers-pas/U42 pour une matière). « Passer : je connais déjà le site » : localStorage « accueil » = "passe".
+// avant l'affichage (rien ne change sans JavaScript). Le personnage (voir preparerChoixPersonnage), la matière des
+// questions (ou « Aléatoire » : une par matière), deux réglages facultatifs (année, objectif), puis UNE action :
+// 5 questions faciles (qcm.html#premiers-pas, ou #premiers-pas/U42 pour une matière).
+// « Passer : je connais déjà le site » : localStorage « accueil » = "passe".
+// Le personnage : proposé ici, le premier jour, et plus jamais ensuite (David, 13 nov. 2026) ; il reste modifiable dans
+// le profil. Sept ronds sur une ligne, DioSL coché au départ. Un toucher l'enregistre dans le profil (comme la page du
+// profil) : il remplace DioSL partout, dès la première question. La liste est celle de compte.js (window.AVATARS), un
+// module chargé après ce fichier : les ronds sont donc posés quand la page a fini de charger.
+function preparerChoixPersonnage(zone, apresChoix) {
+  const persos = window.AVATARS || [];
+  if (!zone || !persos.length || typeof window.cheminAvatar !== "function") return;
+  const rangee = zone.querySelector(".perso-rangee"), nom = zone.querySelector("#premiers-perso-nom");
+  const actuel = (typeof compagnon === "function" && compagnon()) || persos[0].id;
+  rangee.innerHTML = "";
+  persos.forEach(a => {
+    const etiquette = document.createElement("label"), bouton = document.createElement("input");
+    bouton.type = "radio";
+    bouton.name = "personnage";
+    bouton.value = a.id;
+    bouton.checked = a.id === actuel;
+    const rond = document.createElement("span"), img = document.createElement("img"), texte = document.createElement("span");
+    rond.className = "rond";
+    img.src = window.cheminAvatar(a.id);
+    img.alt = "";
+    img.width = 56;
+    img.height = 56;
+    rond.appendChild(img);
+    texte.className = "visuellement-cache";
+    texte.textContent = a.nom;
+    etiquette.append(bouton, rond, texte);
+    bouton.addEventListener("change", () => {
+      enregistrerProfil(Object.assign(lireProfil(), { avatar: a.id }));
+      nom.textContent = a.nom;
+      window.dispatchEvent(new Event("progression-modifiee"));      // l'icône du profil suit le choix (compte.js)
+      if (apresChoix) apresChoix();
+    });
+    if (bouton.checked) nom.textContent = a.nom;
+    rangee.appendChild(etiquette);
+  });
+  zone.hidden = false;
+}
 function preparerPremiersPas(el) {
   if (!el) return;
   const form = el.querySelector("form");
+  // Le personnage : la tête du haut de l'écran change avec le choix
+  const poserPersonnages = () => preparerChoixPersonnage(el.querySelector("#premiers-perso"),
+    () => montrerCompagnon(el.querySelector(".tete-compagnon"), "clin-doeil"));
+  if (window.AVATARS) poserPersonnages();
+  else document.addEventListener("DOMContentLoaded", poserPersonnages, { once: true });
   // Un élève qui revient sans avoir encore répondu retrouve ses réglages
   const annee = lireProfil().annee || "";
   form.querySelectorAll('input[name="annee"]').forEach(i => { i.checked = i.value === annee; });

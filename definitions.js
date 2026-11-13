@@ -58,6 +58,7 @@
   const simplifier = t => String(t).normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
   const echapper = t => String(t).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
   // Surligne le mot cherché dans un texte (en ignorant les accents)
+  const avecMath = t => typeof t === "string" && (t.indexOf("[[") >= 0 || t.indexOf("\n") >= 0);
   function surligner(texte) {
     const q = simplifier(recherche.trim());
     if (q.length < 2) return echapper(texte);
@@ -183,11 +184,11 @@
       if (d.explication) {
         const ex = document.createElement("p");
         ex.className = "def-explication";
-        ex.innerHTML = "<b>Pour comprendre :</b> " + surligner(d.explication);
+        ex.innerHTML = "<b>Pour comprendre :</b> " + (avecMath(d.explication) ? texteMathHTML(d.explication) : surligner(d.explication));
         li.querySelector(".def-bas").before(ex);
       }
       li.querySelector(".def-terme").innerHTML = surligner(d.terme);
-      li.querySelector(".def-texte").innerHTML = surligner(d.definition);
+      li.querySelector(".def-texte").innerHTML = avecMath(d.definition) ? texteMathHTML(d.definition) : surligner(d.definition);
       li.querySelector(".def-theme").textContent = d.theme;
       if (parCoeur(d)) li.querySelector(".def-bas").prepend(mentionParCoeur());
       li.querySelector(".def-haut").appendChild(badge(d));
@@ -325,9 +326,9 @@
     $("def-carte").classList.toggle("par-coeur", parCoeur(d));
     $("def-carte-theme").textContent = $("def-carte-theme-2").textContent = d.theme + (parCoeur(d) ? " · " + MENTION : "");
     $("def-carte-terme").textContent = $("def-carte-terme-2").textContent = d.terme;
-    $("def-carte-definition").textContent = d.definition;
+    ecrireTexteMath($("def-carte-definition"), d.definition);
     $("def-carte-explication").hidden = !d.explication;
-    $("def-carte-explication").textContent = d.explication ? "Pour comprendre : " + d.explication : "";
+    ecrireTexteMath($("def-carte-explication"), d.explication ? "Pour comprendre : " + d.explication : "");
     $("def-carte-badge").replaceChildren(...[badge(d), mentionUtilise(d)].filter(Boolean));
     $("def-carte-retour").hidden = !revient;          // « Elle revient » : la carte n'était pas sue tout à l'heure
     $("def-actions-recto").hidden = false;
@@ -337,7 +338,7 @@
   function retourner() {
     if ($("ecran-revision").hidden || $("def-carte").classList.contains("retournee")) return;
     $("def-carte").classList.add("retournee");
-    $("def-annonce").textContent = pile[0].terme + " : " + pile[0].definition + (pile[0].explication ? " Pour comprendre : " + pile[0].explication : "");
+    $("def-annonce").textContent = pile[0].terme + " : " + texteMathLu(pile[0].definition) + (pile[0].explication ? " Pour comprendre : " + texteMathLu(pile[0].explication) : "");
     $("def-actions-recto").hidden = true;
     $("def-actions-verso").hidden = false;
     $("def-savais").focus({ preventScroll: true });
@@ -431,7 +432,8 @@
       b.className = "exo-carte";
       b.innerHTML = '<span class="exo-lettre" aria-hidden="true"></span><span class="exo-texte"></span>';
       b.querySelector(".exo-lettre").textContent = "ABCD"[i];
-      b.querySelector(".exo-texte").textContent = c.definition;
+      ecrireTexteMath(b.querySelector(".exo-texte"), c.definition);
+      b.dataset.def = c.id;
       b.onclick = e => choisirCarte(c, b, e);
       zone.appendChild(b);
     });
@@ -444,7 +446,7 @@
     const d = exo.questions[exo.rang], juste = c.id === d.id;
     [...$("exo-choix").children].forEach(b => {
       b.disabled = true;
-      if (b.querySelector(".exo-texte").textContent === d.definition) b.classList.add("juste");
+      if (b.dataset.def === d.id) b.classList.add("juste");
     });
     if (juste) {
       exo.justes++;
@@ -458,7 +460,7 @@
     $("exo-retour").className = "exo-retour " + (juste ? "bien" : "mal");
     $("exo-retour").textContent = juste ? "C'est la bonne définition." : "Ce n'est pas celle-là : la bonne est entourée en vert. Cette carte retourne dans le tiroir 1.";
     $("exo-explication").hidden = !d.explication;
-    $("exo-explication").textContent = d.explication ? "Pour comprendre : " + d.explication : "";
+    ecrireTexteMath($("exo-explication"), d.explication ? "Pour comprendre : " + d.explication : "");
     const dernier = exo.rang + 1 >= exo.questions.length;
     $("exo-suivant").textContent = dernier ? "Voir mon résultat" : "Question suivante";
     $("exo-suivant").hidden = false;

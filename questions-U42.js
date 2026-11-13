@@ -30,7 +30,7 @@ QUESTIONS.push(
     question: "Une lentille mince convergente a une distance focale image f' = 50 mm. Un objet réel est placé à 75 mm devant elle (OA = −75 mm). Où se trouve l'image ?",
     choix: ["OA' = +150 mm (image réelle)", "OA' = +37,5 mm", "OA' = −150 mm (image virtuelle)", "OA' = +30 mm"],
     bonne: 0,
-    explication: "Relation de Descartes : 1/OA' − 1/OA = 1/f'. Donc 1/OA' = 1/50 + 1/(−75) = 3/150 − 2/150 = 1/150, soit OA' = +150 mm. Positif = après la lentille = image réelle.",
+    explication: "Relation de Descartes :\n[[1|OA']] − [[1|OA]] = [[1|f']]\n[[1|OA']] = [[1|f']] + [[1|OA]] = [[1|50]] + [[1|−75]]\n[[1|OA']] = [[3|150]] − [[2|150]] = [[1|150]]\nSoit OA' = +150 mm. Positif = après la lentille = image réelle.",
     indice: "Un objet réel placé avant la lentille a un OA négatif. Utilise la relation de conjugaison de Descartes, en gardant bien les signes.",
     schema: "img/schemas/U42/conjugaison-f50-objet75.svg",
     schemaTexte: "Tracé des trois rayons utiles : l'objet AB à 75 mm devant la lentille donne une image A'B' réelle, renversée et deux fois plus grande, à 150 mm derrière."
@@ -116,7 +116,7 @@ QUESTIONS.push(
     type: "calcul",
     question: "Lentille mince convergente de f' = +40 mm. Un objet réel est placé à 60 mm devant elle. Calcule OA', avec son signe.",
     reponse: { valeur: 120, unite: "mm", decimales: 0, signe: true },
-    explication: "Objet réel : OA = −60 mm. Descartes : 1/OA' = 1/f' + 1/OA = 1/40 − 1/60 = 3/120 − 2/120 = 1/120. Donc OA' = +120 mm : l'image est réelle, 120 mm après la lentille.",
+    explication: "Objet réel : OA = −60 mm.\nDescartes : [[1|OA']] = [[1|f']] + [[1|OA]]\n[[1|OA']] = [[1|40]] − [[1|60]]\n[[1|OA']] = [[3|120]] − [[2|120]] = [[1|120]]\nDonc OA' = +120 mm : l'image est réelle, 120 mm après la lentille.",
     indice: "Un objet réel placé devant la lentille a un OA négatif. Utilise la relation de conjugaison de Descartes, sans perdre les signes."
   },
   {
@@ -124,7 +124,7 @@ QUESTIONS.push(
     type: "calcul",
     question: "Un objectif donne d'un objet placé à OA = −36 mm une image à OA' = +180 mm. Calcule le grandissement transversal, avec son signe.",
     reponse: { valeur: -5, unite: "", decimales: 0, signe: true },
-    explication: "γ = OA' / OA = 180 / (−36) = −5. L'image est 5 fois plus grande que l'objet, et renversée : c'est ce que dit le signe moins.",
+    explication: "γ = [[OA'|OA]]\nγ = [[180|−36]] = −5\nL'image est 5 fois plus grande que l'objet, et renversée : c'est ce que dit le signe moins.",
     indice: "Le grandissement transversal est le rapport de la position de l'image à celle de l'objet, mesurées depuis le centre O. Garde les signes."
   },
   {
@@ -132,7 +132,7 @@ QUESTIONS.push(
     type: "calcul",
     question: "Lentille mince divergente de f' = −50 mm. Un objet réel est placé à 200 mm devant elle. Calcule OA', avec son signe.",
     reponse: { valeur: -40, unite: "mm", decimales: 0, signe: true },
-    explication: "OA = −200 mm et f' = −50 mm. Descartes : 1/OA' = 1/f' + 1/OA = −1/50 − 1/200 = −4/200 − 1/200 = −5/200. Donc OA' = −40 mm : l'image est virtuelle, du côté de l'objet, droite et 5 fois plus petite (γ = −40 / −200 = +0,2).",
+    explication: "OA = −200 mm et f' = −50 mm.\nDescartes : [[1|OA']] = [[1|f']] + [[1|OA]]\n[[1|OA']] = −[[1|50]] − [[1|200]]\n[[1|OA']] = −[[4|200]] − [[1|200]] = −[[5|200]]\nDonc OA' = −[[200|5]] = −40 mm : l'image est virtuelle, du côté de l'objet, droite et 5 fois plus petite.\nγ = [[OA'|OA]] = [[−40|−200]] = +0,2",
     indice: "Deux signes à ne pas oublier : celui de OA (objet réel) et celui de f' (lentille divergente)."
   },
 
@@ -166,7 +166,7 @@ QUESTIONS.push(
     type: "calcul",
     question: "Une loupe a une distance focale f' = 40 mm. Calcule son grossissement commercial.",
     reponse: { valeur: 6.25, unite: "", decimales: 2, signe: false },
-    explication: "Puissance : P = 1 / f' = 1 / 0,040 = 25 δ. Grossissement commercial : Gc = P / 4 = 25 / 4 = 6,25. Le 4 vient de la distance de référence de 25 cm (1 / 0,25 = 4).",
+    explication: "P = [[1|f']] = [[1|0,040]] = 25 δ\nGc = [[P|4]] = [[25|4]] = 6,25\nLe 4 vient de la distance de référence de 25 cm : [[1|0,25]] = 4.",
     indice: "Passe d'abord par la puissance en dioptries, avec la focale en mètres. Le grossissement commercial se rapporte à une distance de 25 cm."
   },
 
@@ -220,7 +220,7 @@ QUESTIONS.push(
     type: "calcul",
     question: "Lunette de Kepler afocale : objectif de f'ob = 200 mm, oculaire de f'oc = 25 mm. Calcule son grossissement, avec son signe.",
     reponse: { valeur: -8, unite: "", decimales: 0, signe: true },
-    explication: "G = −f'ob / f'oc = −200 / 25 = −8. Le signe moins indique une image renversée : c'est le cas de toute lunette de Kepler sans redresseur.",
+    explication: "G = −[[f'ob|f'oc]] = −[[200|25]] = −8\nLe signe moins indique une image renversée : c'est le cas de toute lunette de Kepler sans redresseur.",
     indice: "Pour une lunette afocale, le grossissement est le rapport des deux focales. Demande-toi si l'image d'une lunette de Kepler est droite ou renversée."
   },
 
@@ -272,7 +272,7 @@ QUESTIONS.push(
     type: "calcul",
     question: "Doublet de deux lentilles minces : f'1 = 60 mm, f'2 = 30 mm, séparées de e = 40 mm. Calcule sa distance focale image f'.",
     reponse: { valeur: 36, unite: "mm", decimales: 0, signe: true },
-    explication: "Formule de Gullstrand : f' = f'1 × f'2 / (f'1 + f'2 − e) = 60 × 30 / (60 + 30 − 40) = 1 800 / 50 = 36 mm.",
+    explication: "Formule de Gullstrand : f' = [[f'1 × f'2|f'1 + f'2 − e]]\nf' = [[60 × 30|60 + 30 − 40]] = [[1 800|50]] = 36 mm\nLe doublet a une distance focale image de 36 mm.",
     indice: "Formule du doublet (Gullstrand) : le produit des deux focales, divisé par leur somme diminuée de l'écart e."
   },
 
@@ -367,7 +367,7 @@ QUESTIONS.push(
     type: "calcul",
     question: "Dans l'espace d'étude : pupille de rayon 10 mm en x = 0, diaphragme de champ de rayon 6 mm en x = 40 mm, plan des champs en x = 60 mm. Calcule le rayon du champ de pleine lumière.",
     reponse: { valeur: 4, unite: "mm", decimales: 0, signe: false },
-    explication: "Le plan des champs (x = 60) est au-delà du diaphragme (x = 40) : la droite de pleine lumière passe par les bords du même côté, (0 ; 10) et (40 ; 6). Pente = (6 − 10)/40 = −0,1. En x = 60 : 10 − 0,1 × 60 = 4 mm. (Champ moyen : 9 mm ; champ total : 14 mm.)",
+    explication: "Le plan des champs (x = 60) est au-delà du diaphragme (x = 40) : on prend la droite par les bords du même côté, (0 ; 10) et (40 ; 6).\nPente = [[6 − 10|40]] = −0,1\nEn x = 60 : 10 − 0,1 × 60 = 4 mm.\nPour comparer : champ moyen 9 mm, champ total 14 mm.",
     indice: "Écris l'équation de la droite appuyée sur les deux bords du même côté, puis prolonge-la jusqu'au plan des champs."
   },
   {
@@ -375,7 +375,7 @@ QUESTIONS.push(
     type: "calcul",
     question: "Une lunette a un objectif de f'ob = 100 mm. Dans son plan focal image, le champ de pleine lumière a un rayon de 4 mm. Calcule la largeur du champ de pleine lumière sur un objet situé à 30 m.",
     reponse: { valeur: 2.4, unite: "m", decimales: 1, signe: false },
-    explication: "Le rayon du champ dans le plan focal donne l'angle : tan ω = 4 / 100 = 0,04. À 30 m : demi-largeur = 30 × 0,04 = 1,2 m, donc largeur = 2 × 1,2 = 2,4 m. Piège : ne pas oublier de doubler.",
+    explication: "tan ω = [[4|100]] = 0,04\nÀ 30 m : demi-largeur = 30 × 0,04 = 1,2 m\nLargeur = 2 × 1,2 = 2,4 m. Piège : ne pas oublier de doubler.",
     indice: "Le rayon du champ et la focale de l'objectif donnent la tangente du demi-champ. Reporte cet angle à 30 m. On demande une largeur, pas une demi-largeur."
   },
 
@@ -425,7 +425,7 @@ QUESTIONS.push(
     type: "calcul",
     question: "Un objectif a une pupille d'entrée de diamètre 20 mm. Pour λ = 550 nm, la diffraction limite sa résolution à α = 1,22 λ / D. Calcule le plus petit détail qu'il sépare sur un objet situé à 50 m.",
     reponse: { valeur: 1.7, unite: "mm", decimales: 1, tolerance: 0.06, signe: false },
-    explication: "Tout en mètres : α = 1,22 × 550 × 10⁻⁹ / 0,020 ≈ 3,36 × 10⁻⁵ rad. À 50 m : détail = α × 50 ≈ 1,68 × 10⁻³ m, soit environ 1,7 mm. Piège : les nanomètres et les millimètres doivent être convertis en mètres avant de diviser.",
+    explication: "Tout en mètres : α = [[1,22 × λ|D]]\nα = [[1,22 × 550 × 10⁻⁹|0,020]] ≈ 3,36 × 10⁻⁵ rad\nÀ 50 m : détail = α × 50 ≈ 1,68 × 10⁻³ m, soit environ 1,7 mm.\nPiège : les nanomètres et les millimètres doivent être convertis en mètres avant de diviser.",
     indice: "Calcule d'abord l'angle limite en radians, avec λ et D en mètres. Un angle petit multiplié par une distance donne une longueur."
   },
 

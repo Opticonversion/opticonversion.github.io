@@ -43,7 +43,7 @@
     svg.setAttribute("viewBox", "0 0 " + R.L + " " + R.H);
     objet.setAttribute("aria-valuemin", R.min);
     objet.setAttribute("aria-valuemax", R.max);
-    if (!ancien || ancien.L !== R.L) { OA = R.depart; decor(); }
+    if (!ancien || ancien.L !== R.L || !ancien.k) { OA = R.depart; decor(); }   // !ancien.k : le banc était caché
     tracer();
   }
 
@@ -56,6 +56,7 @@
   };
   let rayons = [], noms = {};
   function decor() {
+    if (!R.k) return;                          // banc caché (écran de première ouverture) : rien à dessiner, il se recalcule en réapparaissant
     svg.innerHTML = "";
     const { L, axe, xl, f } = R, police = Math.max(15, 12.5 / R.k);
     el("line", { x1: 0, y1: axe, x2: L, y2: axe, class: "b-axe" });
@@ -93,6 +94,7 @@
   const nomDuPerso = () => (typeof nomCompagnon === "function" ? nomCompagnon() : "DioSL");
   let dernierTexte = "";
   function tracer() {
+    if (!R.k) return;
     const { L, axe, xl, f, h, rl } = R, police = Math.max(15, 12.5 / R.k);
     const OAp = 1 / (1 / f + 1 / OA), g = OAp / OA;           // relation de conjugaison, grandissement
     const xA = xl + OA, yB = axe - h, xAp = xl + OAp, yBp = axe - g * h;

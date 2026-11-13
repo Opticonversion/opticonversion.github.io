@@ -589,7 +589,7 @@ QUESTIONS.push(
     contexte: "Les ventes journalières d'un modèle de verre sont modélisées par f(x) = 40 − 8 e^(−0,5x) sur [0 ; 5].",
     question: "À la calculatrice, calcule la valeur moyenne de f sur [0 ; 5], arrondie à 10⁻².",
     reponse: {"valeur": 37.06, "unite": "", "decimales": 2, "signe": true},
-    explication: "Valeur moyenne = (1/5) × intégrale de 0 à 5 de f. La calculatrice donne l'intégrale ≈ 185,313. Divisée par 5 : ≈ 37,063, soit 37,06. À la main : 40 × 5 − 16 (1 − e^(−2,5)) ≈ 185,31.",
+    explication: "Valeur moyenne = [[1|5 − 0]] × ∫ de 0 à 5 de f(t) dt\nLa calculatrice donne l'intégrale ≈ 185,313.\nValeur moyenne = [[185,313|5]] ≈ 37,063, soit 37,06.\nÀ la main : l'intégrale vaut 40 × 5 − 16 (1 − e^(−2,5)) ≈ 185,31.",
     indice: "Calcule d'abord l'intégrale entre 0 et 5 à la calculatrice, puis n'oublie pas de diviser par la longueur de l'intervalle."
   }
 

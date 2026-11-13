@@ -261,6 +261,113 @@ const Optique = (function () {
     }
   }
 
+  // ---------- Schémas de l'examen (U5) : le couple oculaire en vue de dessus ----------
+  // schema = { type: "couple-oculaire", distance (cm), fixateur: "OD"|"OG", dissociateur: { nom, oeil },
+  //            perception: { oeil, cote: "droite"|"gauche", ecart (cm) } }
+  // La perception dit où le sujet voit l'image de l'œil « perception.oeil » par rapport à celle de l'autre œil.
+  // Loi de Desmarres : diplopie croisée = exophorie, homonyme = ésophorie. Phorie (Δ) = écart (cm) / distance (m).
+  // cotes : +1 = vers la droite du dessin (la droite du sujet, vue de dessus), −1 = vers la gauche.
+  function coupleOculaire(sch) {
+    if (!sch || sch.type !== "couple-oculaire") return null;
+    const p = sch.perception || {}, cote = { droite: 1, gauche: -1 };
+    if (!["OD", "OG"].includes(sch.fixateur) || !["OD", "OG"].includes(p.oeil) || !cote[p.cote]) return null;
+    if (!(sch.distance > 0) || !(p.ecart > 0)) return null;
+    const devie = sch.fixateur === "OD" ? "OG" : "OD";
+    const tempeDe = oeil => (oeil === "OD" ? 1 : -1);               // côté de la tempe de chaque œil, vu de dessus
+    // Croisée : l'image d'un œil est vue du côté de l'autre œil
+    const croisee = cote[p.cote] !== tempeDe(p.oeil);
+    const exo = croisee;
+    const valeur = p.ecart / (sch.distance / 100);
+    const s = tempeDe(devie);
+    return {
+      fixateur: sch.fixateur, devie, croisee, exo,
+      nature: exo ? "exophorie" : "ésophorie",
+      diplopie: croisee ? "croisée" : "homonyme",
+      valeur,                                                       // en Δ
+      base: exo ? "interne" : "externe",                            // prisme de réalignement, sur l'œil dévié
+      rotation: exo ? s : -s,                                       // sens où tourne la ligne de regard de l'œil dévié (position passive)
+      coteTprime: exo ? s : -s,                                     // côté de T' par rapport à la fovéa de l'œil dévié
+      retine: exo ? "temporale" : "nasale",
+      coteExteriorisation: exo ? -s : s,                            // côté de l'extériorisation de l'œil dévié (œil cyclope)
+      croisementLR: exo ? "derrière" : "devant"                      // où les lignes de regard se croisent, par rapport à T
+    };
+  }
+  // ---------- L'œil réduit amétrope (sans verre, sans accommodation) ----------
+  // schema = { type: "oeil-reduit", ametropie (δ, = R, proximité du remotum) }
+  function oeilReduit(sch) {
+    if (!sch || typeof sch.ametropie !== "number" || !isFinite(sch.ametropie)) return null;
+    const R = sch.ametropie;
+    return {
+      R, nature: R < 0 ? "myope" : R > 0 ? "hypermétrope" : "emmétrope",
+      image: R < 0 ? "devant" : R > 0 ? "derriere" : "sur",      // T' (objet éloigné, Acc = 0) par rapport à la rétine
+      remotum: R < 0 ? "devant" : R > 0 ? "derriere" : "infini",  // R réel devant l'œil, virtuel derrière, ou à l'infini
+      HR: R === 0 ? null : 100 / R,                               // cm, mesure algébrique depuis H
+      ecart: Math.abs(R)                                          // δ : proximité de T' au plan rétinien
+    };
+  }
+  // ---------- Parcours d'accommodation d'un œil myope (œil nu) ----------
+  // schema = { type: "parcours", ametropie (δ, < 0), amplitude (δ) }
+  function parcoursAccommodation(sch) {
+    if (!sch || !(sch.ametropie < 0) || !(sch.amplitude > 0)) return null;
+    const R = sch.ametropie, P = R - sch.amplitude;
+    return { R, A: sch.amplitude, P, HR: 100 / R, HP: 100 / P };   // HR, HP en cm (négatifs : devant l'œil)
+  }
+  // ---------- Image rétinienne : lunettes ou lentilles, et image intermédiaire ----------
+  // schema = { type: "image-retinienne", verre (δ), LH (cm, verre → plan principal objet de l'œil) }
+  // Règle d'estimation du BTS : l'image change d'environ LH(cm) × |DL| % entre lunettes et lentilles.
+  function imageRetinienne(sch) {
+    if (!sch || typeof sch.verre !== "number" || !sch.verre || !(sch.LH > 0)) return null;
+    const P = sch.verre, fp = 100 / P;                              // focale image du verre en cm
+    return {
+      P, LH: sch.LH,
+      intermediaire: P < 0 ? "devant" : fp > sch.LH ? "derriere" : "entre",   // Ai Bi = F' du verre (objet éloigné)
+      plusGrande: P < 0 ? "lentilles" : "lunettes",
+      ecart: sch.LH * Math.abs(P)                                   // %
+    };
+  }
+  // ---------- Aniséiconie induite par des verres ----------
+  // schema = { type: "aniseiconie", OD (δ), OG (δ), LH (cm) } : ρ ≈ LH(cm) × |DLd − DLg| %
+  function aniseiconie(sch) {
+    if (!sch || typeof sch.OD !== "number" || typeof sch.OG !== "number" || sch.OD === sch.OG || !(sch.LH > 0)) return null;
+    return { OD: sch.OD, OG: sch.OG, LH: sch.LH, plusGrande: sch.OD > sch.OG ? "OD" : "OG", valeur: sch.LH * Math.abs(sch.OD - sch.OG) };
+  }
+  // ---------- Effet prismatique vertical, regard décentré dans les verres (Prentice) ----------
+  // schema = { type: "prisme-vertical", OD, OG (δ, méridien vertical), c (cm), regard: "bas" | "haut" }
+  // Un verre convergent a sa base vers le centre optique ; un divergent, vers le bord. La lumière est déviée vers la base,
+  // l'image vers le sommet. Regard vers le bas : plus le verre est convergent, plus l'œil doit tourner.
+  function prismeVertical(sch) {
+    if (!sch || typeof sch.OD !== "number" || typeof sch.OG !== "number" || !sch.OD || !sch.OG || !(sch.c > 0) || !["bas", "haut"].includes(sch.regard)) return null;
+    const vers = sch.regard === "bas" ? "bas" : "haut", oppose = vers === "bas" ? "haut" : "bas";
+    const base = P => (P > 0 ? oppose : vers);                      // côté de la base au point de passage
+    return {
+      c: sch.c, regard: sch.regard,
+      OD: { P: sch.OD, effet: sch.c * Math.abs(sch.OD), base: base(sch.OD) },
+      OG: { P: sch.OG, effet: sch.c * Math.abs(sch.OG), base: base(sch.OG) },
+      difference: sch.c * Math.abs(sch.OD - sch.OG),                // Δ, effet prismatique vertical subi par le couple
+      tourneLePlus: sch.OD === sch.OG ? null : (sch.OD > sch.OG ? "OD" : "OG")
+    };
+  }
+  function schema(sch) {
+    const f = { "couple-oculaire": coupleOculaire, "oeil-reduit": oeilReduit, "parcours": parcoursAccommodation,
+      "image-retinienne": imageRetinienne, "aniseiconie": aniseiconie, "prisme-vertical": prismeVertical }[sch && sch.type];
+    return f ? f(sch) : null;
+  }
+  // Grandeurs des étapes « calcul » d'un schéma (unités : phorie Δ, HR et HP cm, écarts %, prismes Δ)
+  function grandeurSchema(sch, g) {
+    const c = schema(sch);
+    if (!c) return null;
+    const v = {
+      "couple-oculaire": { phorie: c.valeur },
+      "oeil-reduit": { remotum: c.HR },
+      "parcours": { remotum: c.HR, punctum: c.HP },
+      "image-retinienne": { "ecart-taille": c.ecart },
+      "aniseiconie": { aniseiconie: c.valeur },
+      "prisme-vertical": { "prisme-od": c.OD && c.OD.effet, "prisme-og": c.OG && c.OG.effet, "difference-prismatique": c.difference }
+    }[sch.type][g];
+    return typeof v === "number" && isFinite(v) ? v : null;
+  }
+
   return { preparer, conjuguer, chaine, indexLentille, versEspaceObjet, parcours, pentesApres, rayonType, penteApres,
-    foyerImage, foyerObjet, lentilleOeil, remotum, punctum, retine, imageOeil, imageDiaphragme, imagesDiaphragmes, pupilleEntree, lucarneEntree, champ, faisceau, grandeur };
+    foyerImage, foyerObjet, lentilleOeil, remotum, punctum, retine, imageOeil, imageDiaphragme, imagesDiaphragmes, pupilleEntree, lucarneEntree, champ, faisceau, grandeur,
+    coupleOculaire, oeilReduit, parcoursAccommodation, imageRetinienne, aniseiconie, prismeVertical, schema, grandeurSchema };
 })();

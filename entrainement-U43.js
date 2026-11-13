@@ -21,8 +21,8 @@ QUESTIONS.push(
     "decimales": 0,
     "signe": true
   },
-  "explication": "Relation de conjugaison : 1/OA' = 1/f' + 1/OA = 1/30 + 1/(−40) = 4/120 − 3/120 = 1/120, donc OA' = +120 mm. Positif : l'image est réelle, après l'objectif. Le grandissement vaut 120/(−40) = −3 : image renversée, 3 fois plus grande.",
-  "indice": "La préparation est un objet réel avant la lentille : OA = −40 mm. Applique 1/OA' = 1/f' + 1/OA, puis inverse."
+  "explication": "Relation de conjugaison :\n[[1|OA']] = [[1|f']] + [[1|OA]] = [[1|30]] + [[1|−40]]\n[[1|OA']] = [[4|120]] − [[3|120]] = [[1|120]]\nDonc OA' = +120 mm. Positif : l'image est réelle, après l'objectif.\nGrandissement : γ = [[OA'|OA]] = [[120|−40]] = −3\nImage renversée, 3 fois plus grande.",
+  "indice": "La préparation est un objet réel avant la lentille : OA = −40 mm. Applique [[1|OA']] = [[1|f']] + [[1|OA]], puis inverse."
 },
 {
   "id": "U43-052",
@@ -39,7 +39,7 @@ QUESTIONS.push(
     "decimales": 1,
     "signe": true
   },
-  "explication": "D = 1/f' avec f' en mètres : 1/0,08 = +12,5 δ. Positive : lentille convergente.",
+  "explication": "D = [[1|f']] avec f' en mètres :\nD = [[1|0,08]] = +12,5 δ\nPositive : lentille convergente.",
   "indice": "Convertis d'abord les millimètres en mètres, puis prends l'inverse de la focale."
 },
 {
@@ -57,8 +57,8 @@ QUESTIONS.push(
     "+0,015 δ"
   ],
   "bonne": 0,
-  "explication": "La face plane n'apporte rien. Pour la face courbe : D = (n − 1)/r = 0,6/0,040 = +15 δ. Oublier le « − 1 » donne +40 δ ; garder les millimètres donne +0,015 δ.",
-  "indice": "Seule la face courbe compte. Utilise D = (n − 1)/r, avec r en mètres."
+  "explication": "La face plane n'apporte rien. Pour la face courbe :\nD = [[n − 1|r]] = [[0,6|0,040]] = +15 δ\nOublier le « − 1 » donne +40 δ ; garder les millimètres donne +0,015 δ.",
+  "indice": "Seule la face courbe compte. Utilise D = [[n − 1|r]], avec r en mètres."
 },
 {
   "id": "U43-054",
@@ -75,7 +75,7 @@ QUESTIONS.push(
     "decimales": 0,
     "signe": true
   },
-  "explication": "Il faut d'abord revenir à la vraie grandeur : f' = 40/2 = 20 mm = 0,020 m. Puis D = 1/0,020 = +50 δ. Sans convertir l'échelle, on trouverait +25 δ.",
+  "explication": "Il faut d'abord revenir à la vraie grandeur :\nf' = [[40|2]] = 20 mm = 0,020 m\nD = [[1|0,020]] = +50 δ\nSans convertir l'échelle, on trouverait +25 δ.",
   "indice": "Le dessin est agrandi : divise la cote mesurée par l'échelle avant de calculer, puis convertis en mètres."
 },
 {
@@ -93,8 +93,8 @@ QUESTIONS.push(
     "1 m"
   ],
   "bonne": 2,
-  "explication": "L'objectif réglé sur l'infini attend des rayons parallèles : l'objet doit être au foyer objet de la lentille macro. Distance = 1/D = 1/2,5 = 0,4 m, soit 40 cm.",
-  "indice": "Les rayons doivent ressortir parallèles : l'objet est au foyer objet de la lentille macro. Quelle distance donne 1/D ?"
+  "explication": "L'objectif réglé sur l'infini attend des rayons parallèles : l'objet doit être au foyer objet de la lentille macro.\nDistance = [[1|D]] = [[1|2,5]] = 0,4 m, soit 40 cm.",
+  "indice": "Les rayons doivent ressortir parallèles : l'objet est au foyer objet de la lentille macro. Quelle distance donne [[1|D]] ?"
 },
 {
   "id": "U43-056",
@@ -111,8 +111,8 @@ QUESTIONS.push(
     "decimales": 2,
     "signe": true
   },
-  "explication": "R = 1/HR = 1/(−0,160) = −6,25 δ. Remotum réel devant l'œil, donc R négatif : l'œil est myope.",
-  "indice": "R = 1/HR, avec HR en mètres et son signe : le remotum est devant l'œil."
+  "explication": "R = [[1|HR]] = [[1|−0,160]] = −6,25 δ\nRemotum réel devant l'œil, donc R négatif : l'œil est myope.",
+  "indice": "R = [[1|HR]], avec HR en mètres et son signe : le remotum est devant l'œil."
 },
 {
   "id": "U43-057",
@@ -129,8 +129,8 @@ QUESTIONS.push(
     "R = +25 δ, hypermétrope"
   ],
   "bonne": 1,
-  "explication": "R = 1/HR = 1/0,4 = +2,5 δ. Remotum virtuel derrière l'œil, R positif : l'œil est hypermétrope de 2,5 δ. Oublier d'inverser donne +0,4 δ.",
-  "indice": "R = 1/HR, avec HR en mètres. Un remotum derrière l'œil donne quel signe ?"
+  "explication": "R = [[1|HR]] = [[1|0,4]] = +2,5 δ\nRemotum virtuel derrière l'œil, R positif : l'œil est hypermétrope de 2,5 δ. Oublier d'inverser donne +0,4 δ.",
+  "indice": "R = [[1|HR]], avec HR en mètres. Un remotum derrière l'œil donne quel signe ?"
 },
 {
   "id": "U43-058",
@@ -147,8 +147,8 @@ QUESTIONS.push(
     "decimales": 2,
     "signe": true
   },
-  "explication": "Proximité de l'image : 1/(−0,25) = −4 δ. Accommodation = R − proximité = −2,5 − (−4) = +1,5 δ. Son remotum est à 40 cm : l'image à 25 cm est plus près, il accommode un peu.",
-  "indice": "Calcule la proximité de l'image (1/distance, négative devant l'œil). L'accommodation est l'écart entre R et cette proximité."
+  "explication": "Proximité de l'image : [[1|−0,25]] = −4 δ\nAccommodation = R − proximité = −2,5 − (−4) = +1,5 δ\nSon remotum est à 40 cm : l'image à 25 cm est plus près, il accommode un peu.",
+  "indice": "Calcule la proximité de l'image ([[1|distance]], négative devant l'œil). L'accommodation est l'écart entre R et cette proximité."
 },
 {
   "id": "U43-059",
@@ -165,7 +165,7 @@ QUESTIONS.push(
     "decimales": 1,
     "signe": false
   },
-  "explication": "Remotum à 1/5 = 0,2 m, donc x' = F'A' = −200 mm. Relation de Newton : x·x' = −f'², donc x = −400/(−200) = +2 mm. On rapproche l'oculaire de l'image intermédiaire de 2 mm.",
+  "explication": "Remotum à [[1|5]] m = 0,2 m, donc x' = F'A' = −200 mm.\nRelation de Newton : x·x' = −f'²\nx = [[−f'²|x']] = [[−400|−200]] = +2 mm\nOn rapproche l'oculaire de l'image intermédiaire de 2 mm.",
   "indice": "Utilise x·x' = −f'², avec x' = F'A' compté depuis l'œil, c'est-à-dire la distance du remotum. Attention au signe de x'."
 },
 {
@@ -183,7 +183,7 @@ QUESTIONS.push(
     "On ne peut pas le savoir sans connaître le champ"
   ],
   "bonne": 1,
-  "explication": "On compare les angles depuis A : tan = rayon ÷ distance. [D₁] : 8/50 = 0,16 ; [D₂] : 10/125 = 0,08 ; [D₃] : 24/200 = 0,12. [D₂] est vu sous le plus petit angle : c'est la pupille, même si ce n'est ni le plus petit ni le plus grand.",
+  "explication": "On compare les angles depuis A : tan = [[rayon|distance]].\n[D₁] : [[8|50]] = 0,16\n[D₂] : [[10|125]] = 0,08\n[D₃] : [[24|200]] = 0,12\n[D₂] est vu sous le plus petit angle : c'est la pupille, même si ce n'est ni le plus petit ni le plus grand.",
   "indice": "Ne regarde pas seulement la taille : compare l'angle sous lequel on voit chaque diaphragme depuis A (rayon ÷ distance)."
 },
 {
@@ -202,7 +202,7 @@ QUESTIONS.push(
     "decimales": 0,
     "signe": false
   },
-  "explication": "Le bord du champ de pleine lumière est la droite qui joint le bord haut de la pupille (+12 mm à 240 mm) au bord haut de la lucarne (+15 mm à 120 mm). Sa pente est (12 − 15)/120 = −0,025 mm par mm. En remontant jusqu'au plan des champs : 15 + 0,025 × 120 = 18 mm.",
+  "explication": "Le bord du champ de pleine lumière est la droite qui joint le bord haut de la pupille (+12 mm à 240 mm) au bord haut de la lucarne (+15 mm à 120 mm).\nPente : [[12 − 15|120]] = −0,025 mm par mm\nEn remontant jusqu'au plan des champs : 15 + 0,025 × 120 = 18 mm",
   "indice": "Trace la droite qui passe par les bords du même côté de la pupille et de la lucarne, puis prolonge-la jusqu'au plan des champs."
 },
 {
@@ -221,7 +221,7 @@ QUESTIONS.push(
     "27 mm"
   ],
   "bonne": 0,
-  "explication": "Le bord du champ total est la droite qui joint le bord bas de la pupille (−12 mm à 240 mm) au bord haut de la lucarne (+15 mm à 120 mm). Pente : (−12 − 15)/120 = −0,225. Au plan des champs : 15 + 0,225 × 120 = 42 mm. 18 mm est le champ de pleine lumière, 27 mm vient d'une addition sans tenir compte des distances.",
+  "explication": "Le bord du champ total est la droite qui joint le bord bas de la pupille (−12 mm à 240 mm) au bord haut de la lucarne (+15 mm à 120 mm).\nPente : [[−12 − 15|120]] = −0,225\nAu plan des champs : 15 + 0,225 × 120 = 42 mm\n18 mm est le champ de pleine lumière, 27 mm vient d'une addition sans tenir compte des distances.",
   "indice": "Cette fois, prends les bords opposés : le bord bas de la pupille et le bord haut de la lucarne."
 },
 {
@@ -293,7 +293,7 @@ QUESTIONS.push(
     "decimales": 0,
     "signe": false
   },
-  "explication": "Un tour fait avancer d'un pas. Nombre de tours = course ÷ pas = 4,5 ÷ 0,75 = 6 tours.",
+  "explication": "Un tour fait avancer d'un pas.\nNombre de tours = [[course|pas]] = [[4,5|0,75]] = 6 tours",
   "indice": "Un tour de vis fait avancer d'un pas. Combien de pas dans la course demandée ?"
 },
 {
@@ -347,8 +347,8 @@ QUESTIONS.push(
     "decimales": 0,
     "signe": false
   },
-  "explication": "G = f'objectif / f'oculaire = 800/25 = 32. Pour une lunette astronomique, G = −f'objectif/f'oculaire = −32 : l'image est renversée ; en valeur absolue, 32.",
-  "indice": "Pour une lunette afocale, G = f'objectif / f'oculaire, les deux focales dans la même unité."
+  "explication": "G = [[f'objectif|f'oculaire]] = [[800|25]] = 32\nPour une lunette astronomique, G = −[[f'objectif|f'oculaire]] = −32 : l'image est renversée ; en valeur absolue, 32.",
+  "indice": "Pour une lunette afocale, G = [[f'objectif|f'oculaire]], les deux focales dans la même unité."
 },
 {
   "id": "U43-070",
@@ -383,7 +383,7 @@ QUESTIONS.push(
     "decimales": 0,
     "signe": true
   },
-  "explication": "N = focale ÷ diamètre de la pupille d'entrée = 150/30 = 5. L'objectif s'ouvre à f/5.",
+  "explication": "N = [[focale|diamètre de la pupille d'entrée]] = [[150|30]] = 5\nL'objectif s'ouvre à f/5.",
   "indice": "N = focale ÷ diamètre de la pupille d'entrée, les deux dans la même unité."
 },
 {
@@ -419,8 +419,8 @@ QUESTIONS.push(
     "decimales": 2,
     "signe": true
   },
-  "explication": "R = verre de point neutre − 1/d = +4 − 1/0,4 = +4 − 2,5 = +1,5 δ. L'œil est hypermétrope de 1,5 δ.",
-  "indice": "On retire la vergence liée à la distance de travail : 1/d, avec d en mètres."
+  "explication": "R = verre de point neutre − [[1|d]] = +4 − [[1|0,4]] = +4 − 2,5 = +1,5 δ\nL'œil est hypermétrope de 1,5 δ.",
+  "indice": "On retire la vergence liée à la distance de travail : [[1|d]], avec d en mètres."
 },
 {
   "id": "U43-074",
@@ -437,8 +437,8 @@ QUESTIONS.push(
     "−1,00 δ"
   ],
   "bonne": 1,
-  "explication": "R = +1 − 1/1 = 0 : l'œil est emmétrope. Ajouter au lieu de retrancher donnerait +2 δ ; oublier la distance donnerait +1 δ.",
-  "indice": "Retire de la vergence du verre celle de la distance de travail, 1/d, avec d en mètres."
+  "explication": "R = +1 − [[1|1]] = 0 : l'œil est emmétrope.\nAjouter au lieu de retrancher donnerait +2 δ ; oublier la distance donnerait +1 δ.",
+  "indice": "Retire de la vergence du verre celle de la distance de travail, [[1|d]], avec d en mètres."
 },
 {
   "id": "U43-075",
@@ -473,7 +473,7 @@ QUESTIONS.push(
     "decimales": 1,
     "signe": true
   },
-  "explication": "L₁ : 1/O₁A₁ = 1/100 − 1/150 = 1/300, donc l'image intermédiaire est à +300 mm de L₁, soit 150 mm après L₂. Pour L₂, c'est un objet virtuel : O₂A₁ = +150 mm. L₂ : 1/O₂A' = 1/50 + 1/150 = 4/150, donc O₂A' = +37,5 mm. Traiter A₁ comme un objet réel (O₂A₁ = −150 mm) donnerait +75 mm, faux.",
+  "explication": "L₁ : [[1|O₁A₁]] = [[1|100]] + [[1|−150]] = [[3|300]] − [[2|300]] = [[1|300]]\nL'image intermédiaire est à +300 mm de L₁, soit 150 mm après L₂. Pour L₂, c'est un objet virtuel : O₂A₁ = +150 mm.\nL₂ : [[1|O₂A']] = [[1|50]] + [[1|150]] = [[3|150]] + [[1|150]] = [[4|150]]\nDonc O₂A' = +37,5 mm.\nTraiter A₁ comme un objet réel (O₂A₁ = −150 mm) donnerait +75 mm, faux.",
   "indice": "Deux conjugaisons à la suite. Calcule A₁ avec L₁, puis repère-le par rapport à L₂ : il est après L₂ ou avant ?"
 },
 {
@@ -545,8 +545,8 @@ QUESTIONS.push(
     "+10 δ"
   ],
   "bonne": 2,
-  "explication": "V = (n − 1)(1/R₁ − 1/R₂) = 0,5 × (1/0,05 − 1/0,1) = 0,5 × (20 − 10) = +5 δ. Les deux rayons ont le même signe : les effets des deux faces se retranchent. Mettre un signe + entre les deux termes donnerait +15 δ, et ne regarder que la première face +10 δ.",
-  "indice": "Garde les signes des rayons dans la formule : V = (n − 1)(1/R₁ − 1/R₂), rayons en mètres."
+  "explication": "V = (n − 1)([[1|R₁]] − [[1|R₂]]) = 0,5 × ([[1|0,05]] − [[1|0,1]])\nV = 0,5 × (20 − 10) = +5 δ\nLes deux rayons ont le même signe : les effets des deux faces se retranchent. Mettre un signe + entre les deux termes donnerait +15 δ, et ne regarder que la première face +10 δ.",
+  "indice": "Garde les signes des rayons dans la formule : V = (n − 1)([[1|R₁]] − [[1|R₂]]), rayons en mètres."
 },
 {
   "id": "U43-081",
@@ -563,8 +563,8 @@ QUESTIONS.push(
     "Il n'y a pas de foyer image"
   ],
   "bonne": 0,
-  "explication": "f' = 1/V = 1/(−4) = −0,25 m = −250 mm. Le signe négatif place F' avant la lentille, du côté d'où arrive la lumière : les rayons émergents divergent et semblent venir de ce point. C'est un foyer virtuel, mais il existe bien.",
-  "indice": "f' = 1/V, puis regarde le signe : positif = après la lentille, négatif = avant."
+  "explication": "f' = [[1|V]] = [[1|−4]] = −0,25 m = −250 mm\nLe signe négatif place F' avant la lentille, du côté d'où arrive la lumière : les rayons émergents divergent et semblent venir de ce point. C'est un foyer virtuel, mais il existe bien.",
+  "indice": "f' = [[1|V]], puis regarde le signe : positif = après la lentille, négatif = avant."
 },
 {
   "id": "U43-082",
@@ -581,8 +581,8 @@ QUESTIONS.push(
     "decimales": 1,
     "signe": false
   },
-  "explication": "Il faut 1/0,4 = 2,5 δ pour voir net à 40 cm, plus 3 δ simplement pour ramener sur la rétine l'image d'un objet à l'infini (son remotum est derrière l'œil) : A = 2,5 + 3 = 5,5 δ. Un myope de −3 δ, lui, ne verrait pas net cette image : son remotum est à 33 cm, et l'accommodation ne permet pas de voir plus loin que le remotum.",
-  "indice": "A = 1/d + R, avec R la réfraction algébrique de l'œil (positive pour un hypermétrope)."
+  "explication": "Pour voir net à 40 cm : [[1|0,4]] = 2,5 δ.\nIl faut en plus 3 δ simplement pour ramener sur la rétine l'image d'un objet à l'infini (son remotum est derrière l'œil).\nA = 2,5 + 3 = 5,5 δ\nUn myope de −3 δ, lui, ne verrait pas net cette image : son remotum est à 33 cm, et l'accommodation ne permet pas de voir plus loin que le remotum.",
+  "indice": "A = [[1|d]] + R, avec R la réfraction algébrique de l'œil (positive pour un hypermétrope)."
 },
 {
   "id": "U43-083",
@@ -617,7 +617,7 @@ QUESTIONS.push(
     "decimales": 0,
     "signe": false
   },
-  "explication": "À 80 mm du plan des champs, soit 80/200 = 40 % du chemin vers la pupille, le faisceau issu du point y couvre 0,6·y ± 0,4 × 5 = 0,6·y ± 2. Pleine lumière : tout le faisceau passe, donc 0,6·y + 2 ≤ 14, soit y ≤ 20 mm.",
+  "explication": "À 80 mm du plan des champs, soit [[80|200]] = 40 % du chemin vers la pupille, le faisceau issu du point y couvre 0,6·y ± 0,4 × 5 = 0,6·y ± 2.\nPleine lumière : tout le faisceau passe, donc 0,6·y + 2 ≤ 14, soit y ≤ [[12|0,6]] = 20 mm",
   "indice": "Pleine lumière : le faisceau entier, jusqu'au bord de la pupille, doit traverser le diaphragme de rayon 14 mm. À 80 mm du plan, la hauteur du bord du faisceau est 0,6·y + 0,4 × 5."
 },
 {
@@ -635,7 +635,7 @@ QUESTIONS.push(
     "14,0 mm"
   ],
   "bonne": 0,
-  "explication": "Champ total : un seul rayon, celui du bord de la pupille le plus favorable, doit encore passer. À 80 mm du plan, le faisceau couvre 0,6·y ± 2 : on veut 0,6·y − 2 ≤ 14, donc y ≤ 26,7 mm. 20 mm est le champ de pleine lumière, 23,3 mm (14/0,6) est le champ moyen, donné par le rayon qui passe au centre de la pupille.",
+  "explication": "Champ total : un seul rayon, celui du bord de la pupille le plus favorable, doit encore passer. À 80 mm du plan, le faisceau couvre 0,6·y ± 2.\nOn veut 0,6·y − 2 ≤ 14, donc y ≤ [[16|0,6]] = 26,7 mm\n20 mm est le champ de pleine lumière, 23,3 mm ([[14|0,6]]) est le champ moyen, donné par le rayon qui passe au centre de la pupille.",
   "indice": "Pour le champ total, il suffit que le rayon le plus bas du faisceau passe : 0,6·y − 2 ≤ 14."
 },
 {
@@ -689,8 +689,8 @@ QUESTIONS.push(
     "decimales": 2,
     "signe": true
   },
-  "explication": "Les deux verres cumulés donnent −3,00 + 0,50 = −2,50 δ. Réfraction de l'œil = verre au point neutre − 1/d = −2,50 − 2,00 = −4,50 δ. Oublier la distance de travail donnerait −2,50 δ, ne pas ajouter les lunettes −2,00 δ.",
-  "indice": "Additionne d'abord tous les verres devant l'œil, puis retranche la distance de travail 1/d."
+  "explication": "Les deux verres cumulés donnent −3,00 + 0,50 = −2,50 δ.\nRéfraction de l'œil = verre au point neutre − [[1|d]] = −2,50 − 2,00 = −4,50 δ\nOublier la distance de travail donnerait −2,50 δ, ne pas ajouter les lunettes −2,00 δ.",
+  "indice": "Additionne d'abord tous les verres devant l'œil, puis retranche la distance de travail [[1|d]]."
 },
 {
   "id": "U43-089",
@@ -707,8 +707,8 @@ QUESTIONS.push(
     "+0,40 δ"
   ],
   "bonne": 0,
-  "explication": "La distance de travail de 40 cm équivaut à 1/0,4 = 2,5 δ. Réfraction = verre − 1/d, donc pour R = 0 il faut un verre de +2,50 δ. Sans verre, l'œil emmétrope n'est pas neutre : son remotum est à l'infini, au-delà de l'examinateur.",
-  "indice": "Réfraction de l'œil = verre neutralisant − 1/d. Cherche le verre pour R = 0."
+  "explication": "La distance de travail de 40 cm équivaut à [[1|0,4]] = 2,5 δ.\nRéfraction = verre − [[1|d]], donc pour R = 0 il faut un verre de +2,50 δ.\nSans verre, l'œil emmétrope n'est pas neutre : son remotum est à l'infini, au-delà de l'examinateur.",
+  "indice": "Réfraction de l'œil = verre neutralisant − [[1|d]]. Cherche le verre pour R = 0."
 },
 {
   "id": "U43-090",
@@ -887,7 +887,7 @@ QUESTIONS.push(
     "decimales": 0,
     "signe": false
   },
-  "explication": "Un tour fait avancer la vis de 0,5 mm = 500 µm. Une division est 1/50 de tour : 500/50 = 10 µm. Sans convertir, on trouverait 0,01 mm : c'est la même valeur, mais la réponse est demandée en micromètres.",
+  "explication": "Un tour fait avancer la vis de 0,5 mm = 500 µm.\nUne division est [[1|50]] de tour : [[500|50]] = 10 µm\nSans convertir, on trouverait 0,01 mm : c'est la même valeur, mais la réponse est demandée en micromètres.",
   "indice": "Un tour = un pas. Divise par le nombre de divisions, puis convertis en µm (1 mm = 1000 µm)."
 },
 {
@@ -905,7 +905,7 @@ QUESTIONS.push(
     "4 tours, dans le sens contraire"
   ],
   "bonne": 1,
-  "explication": "Rapport de réduction : 10/40 = 1/4, donc la roue tourne 4 fois moins vite que le pignon : 4 tours de molette donnent 1 tour de vis. Deux roues dentées engrenées tournent en sens contraires. Un tel réducteur rend le réglage plus fin.",
+  "explication": "Rapport de réduction : [[10|40]] = [[1|4]]\nLa roue tourne 4 fois moins vite que le pignon : 4 tours de molette donnent 1 tour de vis. Deux roues dentées engrenées tournent en sens contraires. Un tel réducteur rend le réglage plus fin.",
   "indice": "Pendant que la petite roue fait un tour, combien de dents passent ? Et la grande roue avance de combien de tour ?"
 },
 {
@@ -923,8 +923,8 @@ QUESTIONS.push(
     "decimales": 2,
     "signe": false
   },
-  "explication": "Vergence : 1/0,040 = 25 δ. Grossissement commercial de la loupe : G = V/4 = 25/4 = 6,25. Le « 4 » vient de la distance conventionnelle de 25 cm (1/0,25 = 4 δ). Confondre avec 40/25 = 1,6 est une erreur courante.",
-  "indice": "G = V/4, avec V en dioptries : convertis d'abord la focale en mètres."
+  "explication": "Vergence : V = [[1|0,040]] = 25 δ\nG = [[V|4]] = [[25|4]] = 6,25\nLe « 4 » vient de la distance conventionnelle de 25 cm ([[1|0,25]] = 4 δ). Confondre avec [[40|25]] = 1,6 est une erreur courante.",
+  "indice": "G = [[V|4]], avec V en dioptries : convertis d'abord la focale en mètres."
 },
 {
   "id": "U43-102",
@@ -941,7 +941,7 @@ QUESTIONS.push(
     "decimales": 0,
     "signe": false
   },
-  "explication": "Le diamètre du cercle oculaire vaut D/G = 80/16 = 5 mm. C'est la section du faisceau lumineux qui sort de l'oculaire : plus le grossissement est fort, plus il est fin.",
+  "explication": "Diamètre du cercle oculaire = [[diamètre de l'objectif|G]] = [[80|16]] = 5 mm\nC'est la section du faisceau lumineux qui sort de l'oculaire : plus le grossissement est fort, plus il est fin.",
   "indice": "Le cercle oculaire est l'image de la monture de l'objectif par l'oculaire : son diamètre est D divisé par G."
 },
 {
@@ -959,7 +959,7 @@ QUESTIONS.push(
     "Environ 25 %"
   ],
   "bonne": 0,
-  "explication": "Le faisceau sortant a 5 mm de diamètre, la pupille de l'œil 3 mm : c'est elle qui limite. La lumière est proportionnelle à la surface, donc (3/5)² = 0,36. Le rapport des diamètres (60 %) oublie de passer aux surfaces.",
+  "explication": "Le faisceau sortant a 5 mm de diamètre, la pupille de l'œil 3 mm : c'est elle qui limite. La lumière est proportionnelle à la surface :\n([[3|5]])² = 0,36, soit 36 %\nLe rapport des diamètres (60 %) oublie de passer aux surfaces.",
   "indice": "L'œil joue le rôle de pupille de l'ensemble. La lumière varie comme la surface, c'est-à-dire comme le carré du diamètre."
 },
 {
@@ -996,8 +996,8 @@ QUESTIONS.push(
     "signe": false,
     "tolerance": 0.1
   },
-  "explication": "1/OA' = 1/50 + 1/(−10 000) = 199/10 000, donc OA' = 50,25 mm. Grandissement : 50,25/10 000 = 0,00503, donc image de 1800 × 0,00503 ≈ 9,0 mm. Comme l'objet est loin, le résultat est très proche de 1800 × 50/10 000 = 9 mm.",
-  "indice": "Calcule OA' avec la relation de conjugaison (OA = −10 000 mm), puis le grandissement OA'/OA."
+  "explication": "[[1|OA']] = [[1|50]] + [[1|−10 000]] = [[199|10 000]]\nDonc OA' = 50,25 mm.\nGrandissement : [[OA'|OA]] = [[50,25|10 000]] = 0,00503\nImage : 1800 × 0,00503 ≈ 9,0 mm\nComme l'objet est loin, le résultat est très proche de [[1800 × 50|10 000]] = 9 mm.",
+  "indice": "Calcule OA' avec la relation de conjugaison (OA = −10 000 mm), puis le grandissement [[OA'|OA]]."
 },
 {
   "id": "U43-106",
@@ -1014,8 +1014,8 @@ QUESTIONS.push(
     "decimales": 0,
     "signe": false
   },
-  "explication": "Grandissement de l'objectif : |γ| = Δ/f'obj = 160/8 = 20. Grossissement de l'oculaire : Goc = 250/f'oc = 250/25 = 10. Grossissement commercial : 20 × 10 = 200. Les deux facteurs se multiplient.",
-  "indice": "G = |γ objectif| × G oculaire, avec γ = Δ/f' pour l'objectif et G = 250/f' (en mm) pour l'oculaire."
+  "explication": "Grandissement de l'objectif : ∣γ∣ = [[Δ|f'obj]] = [[160|8]] = 20\nGrossissement de l'oculaire : Goc = [[250|f'oc]] = [[250|25]] = 10\nGrossissement commercial : 20 × 10 = 200\nLes deux facteurs se multiplient.",
+  "indice": "G = ∣γ objectif∣ × G oculaire, avec γ = [[Δ|f']] pour l'objectif et G = [[250|f']] (en mm) pour l'oculaire."
 },
 {
   "id": "U43-107",
@@ -1032,8 +1032,8 @@ QUESTIONS.push(
     "decimales": 1,
     "signe": false
   },
-  "explication": "Le demi-champ vérifie tan α = 18/50 = 0,36, donc α = 19,8° et l'angle de champ vaut 2α = 39,6°. Diviser 36 par 50 et convertir directement ne marche pas : la relation passe par la tangente.",
-  "indice": "Dessine le triangle rectangle : demi-largeur du capteur / focale = tangente du demi-angle. Pense à doubler."
+  "explication": "Le demi-champ vérifie tan α = [[18|50]] = 0,36, donc α = 19,8°.\nL'angle de champ vaut 2α = 39,6°.\nDiviser 36 par 50 et convertir directement ne marche pas : la relation passe par la tangente.",
+  "indice": "Dessine le triangle rectangle : [[demi-largeur du capteur|focale]] = tangente du demi-angle. Pense à doubler."
 },
 {
   "id": "U43-108",
@@ -1068,7 +1068,7 @@ QUESTIONS.push(
     "À 150 mm devant le miroir"
   ],
   "bonne": 0,
-  "explication": "Pour un miroir sphérique, f = R/2 = 300 mm. Le faisceau est réfléchi : il converge devant le miroir, du côté d'où vient la lumière, à 300 mm. Le centre de courbure (600 mm) n'est pas le foyer.",
+  "explication": "Pour un miroir sphérique, f = [[R|2]] = [[600|2]] = 300 mm\nLe faisceau est réfléchi : il converge devant le miroir, du côté d'où vient la lumière, à 300 mm. Le centre de courbure (600 mm) n'est pas le foyer.",
   "indice": "Le foyer d'un miroir sphérique est à mi-chemin entre le sommet et le centre de courbure."
 },
 {
@@ -1104,7 +1104,7 @@ QUESTIONS.push(
     "decimales": 0,
     "signe": true
   },
-  "explication": "Vergences : +10 δ et −5 δ, qui s'additionnent pour des lentilles accolées : +5 δ, donc f' = 1/5 = 0,2 m = +200 mm. Additionner les focales (−100 mm) est faux : ce sont les vergences qui s'ajoutent.",
+  "explication": "Vergences : [[1|0,1]] = +10 δ et [[1|−0,2]] = −5 δ. Elles s'additionnent pour des lentilles accolées : +5 δ.\nf' = [[1|5]] = 0,2 m = +200 mm\nAdditionner les focales (−100 mm) est faux : ce sont les vergences qui s'ajoutent.",
   "indice": "Ce sont les vergences qui s'additionnent. Convertis d'abord chaque focale."
 },
 {
@@ -1122,8 +1122,8 @@ QUESTIONS.push(
     "decimales": 1,
     "signe": true
   },
-  "explication": "1/OA = 1/OA' − V = 1/0,1 − 25 = 10 − 25 = −15, donc OA = −0,0667 m = −66,7 mm. L'objet est à 66,7 mm devant la lentille, entre le foyer (40 mm) et 2f'. Le signe négatif indique un objet réel.",
-  "indice": "1/OA' − 1/OA = V. Isole 1/OA, avec les distances en mètres."
+  "explication": "[[1|OA]] = [[1|OA']] − V = [[1|0,1]] − 25 = 10 − 25 = −15\nDonc OA = [[1|−15]] = −0,0667 m = −66,7 mm\nL'objet est à 66,7 mm devant la lentille, entre le foyer (40 mm) et 2f'. Le signe négatif indique un objet réel.",
+  "indice": "[[1|OA']] − [[1|OA]] = V. Isole [[1|OA]], avec les distances en mètres."
 },
 {
   "id": "U43-113",
@@ -1176,8 +1176,8 @@ QUESTIONS.push(
     "decimales": 1,
     "signe": false
   },
-  "explication": "Le diaphragme de champ est la lucarne : son rayon (10 mm) vu depuis l'objectif sous un demi-angle tel que tan α = 10/500 = 0,02, soit α = 1,15°. Le champ réel total est 2α ≈ 2,3°. Il ne dépend que du diamètre de la lucarne et de la focale de l'objectif.",
-  "indice": "Demi-champ : tan α = rayon de la lucarne / focale de l'objectif. Pense à doubler."
+  "explication": "Le diaphragme de champ est la lucarne : son rayon (10 mm) est vu depuis l'objectif sous un demi-angle tel que\ntan α = [[10|500]] = 0,02, soit α = 1,15°\nLe champ réel total est 2α ≈ 2,3°. Il ne dépend que du diamètre de la lucarne et de la focale de l'objectif.",
+  "indice": "Demi-champ : tan α = [[rayon de la lucarne|focale de l'objectif]]. Pense à doubler."
 },
 {
   "id": "U43-116",
@@ -1266,8 +1266,8 @@ QUESTIONS.push(
     "decimales": 0,
     "signe": false
   },
-  "explication": "Un tour (360°) déplace de 1,25 mm. Pour 0,5 mm : 0,5/1,25 = 0,4 tour, soit 0,4 × 360 = 144°.",
-  "indice": "Fraction de tour = déplacement / pas. Multiplie ensuite par 360°."
+  "explication": "Un tour (360°) déplace de 1,25 mm.\nFraction de tour = [[0,5|1,25]] = 0,4 tour\nAngle : 0,4 × 360 = 144°",
+  "indice": "Fraction de tour = [[déplacement|pas]]. Multiplie ensuite par 360°."
 },
 {
   "id": "U43-121",
@@ -1284,7 +1284,7 @@ QUESTIONS.push(
     "decimales": 1,
     "signe": false
   },
-  "explication": "La roue de 36 dents tourne 12/36 = 1/3 de tour quand la molette fait un tour. La vis de pas 1,5 mm avance de 1/3 × 1,5 = 0,5 mm. Deux transformations se suivent : réduction par engrenage, puis rotation en translation.",
+  "explication": "La roue de 36 dents tourne [[12|36]] = [[1|3]] de tour quand la molette fait un tour.\nLa vis de pas 1,5 mm avance de [[1|3]] × 1,5 = 0,5 mm\nDeux transformations se suivent : réduction par engrenage, puis rotation en translation.",
   "indice": "Première étape : fraction de tour de la roue. Deuxième : avance de la vis pour cette fraction de tour."
 },
 {
@@ -1338,7 +1338,7 @@ QUESTIONS.push(
     "decimales": 2,
     "signe": true
   },
-  "explication": "Équivalent sphérique = sphère + cylindre/2 = +1,00 + (−2,00)/2 = 0,00 δ. C'est la puissance sphérique qui place le cercle de moindre diffusion (entre les deux lignes focales) sur la rétine. Ne garder que la sphère donnerait +1,00 δ.",
+  "explication": "Équivalent sphérique = sphère + [[cylindre|2]] = +1,00 + [[−2,00|2]] = 0,00 δ\nC'est la puissance sphérique qui place le cercle de moindre diffusion (entre les deux lignes focales) sur la rétine. Ne garder que la sphère donnerait +1,00 δ.",
   "indice": "Équivalent sphérique = sphère + la moitié du cylindre, signes compris."
 },
 {

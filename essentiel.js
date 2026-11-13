@@ -426,3 +426,188 @@ function messageCalcul(reponse, resultat) {
     : "Ta valeur est juste à une puissance de 10 près : vérifie la virgule (ou un pourcentage écrit en décimal). La réponse est " + attendu + ".";
   return "La bonne valeur est " + attendu + ".";
 }
+
+// ---------------- Écriture des calculs : vraies fractions et calculs posés ----------------
+// Dans les textes (énoncé, choix, indice, explication, définitions, spécificités, Atelier) :
+//   [[haut|bas]]  -> une fraction : le haut au-dessus d'une barre horizontale, le bas en dessous.
+//                    Imbrication possible : [[1|[[1|f']] + 2]]. Valeur absolue dans une fraction : ∣γ∣ (pas « | »).
+//   un retour à la ligne (\n dans la chaîne) -> une nouvelle ligne : on pose le calcul, une étape par ligne.
+// Rendu en HTML/CSS (style.css : .frac, .ligne-calcul) ; un lecteur d'écran lit « 1 sur OA' ».
+// Format pour les sessions qui écrivent : notes/coordination/format-fractions.md. Le vérificateur refuse une fraction mal fermée.
+function analyserMath(texte) {
+  let i = 0;
+  function suite(arret) {                     // arret : null (texte), "haut" (jusqu'à |) ou "bas" (jusqu'à ]])
+    const noeuds = [];
+    let morceau = "";
+    while (i < texte.length) {
+      if (texte.startsWith("[[", i)) {
+        if (morceau) { noeuds.push(morceau); morceau = ""; }
+        i += 2;
+        const haut = suite("haut");
+        if (texte[i] !== "|") throw new Error("fraction sans « | » entre le haut et le bas");
+        i += 1;
+        const bas = suite("bas");
+        if (!texte.startsWith("]]", i)) throw new Error("fraction mal fermée (il manque « ]] »)");
+        i += 2;
+        if (!haut.length || !bas.length) throw new Error("fraction vide en haut ou en bas");
+        noeuds.push({ haut, bas });
+        continue;
+      }
+      if (arret === "haut" && texte[i] === "|") break;
+      if (arret === "bas" && texte.startsWith("]]", i)) break;
+      if (arret === "bas" && texte[i] === "|") throw new Error("deux « | » dans la même fraction");
+      if (arret === null && texte.startsWith("]]", i)) throw new Error("« ]] » sans « [[ »");
+      morceau += texte[i];
+      i++;
+    }
+    if (morceau) noeuds.push(morceau);
+    return noeuds;
+  }
+  return suite(null);
+}
+// Ce qu'entend un lecteur d'écran : « 1 sur OA' », et des parenthèses quand le haut ou le bas est une expression
+function lireMath(noeuds) {
+  const partie = n => {
+    const t = lireMath(n).trim();
+    return /[\s+−×÷=-]/.test(t) && !/^\(.*\)$/.test(t) ? "(" + t + ")" : t;
+  };
+  return noeuds.map(n => typeof n === "string" ? n : partie(n.haut) + " sur " + partie(n.bas)).join("");
+}
+function creerMath(noeuds, lu) {
+  const frag = document.createDocumentFragment();
+  let signe = "";                             // le signe (=, +, −, ×) qui précède une fraction reste collé à elle
+  noeuds.forEach((n, k) => {
+    if (typeof n === "string") {
+      let t = n;
+      if (noeuds[k + 1] && typeof noeuds[k + 1] !== "string") {
+        const m = t.match(/(?:[=+−×·-] ?)+$/);              // « = », « + », « = − »…
+        if (m) { signe = m[0].replace(/ /g, "\u00a0"); t = t.slice(0, -m[0].length); }
+      }
+      if (t) frag.appendChild(document.createTextNode(t));
+      return;
+    }
+    const cible = signe ? document.createElement("span") : frag;
+    if (signe) { cible.className = "frac-groupe"; cible.appendChild(document.createTextNode(signe)); frag.appendChild(cible); signe = ""; }
+    const frac = document.createElement("span");
+    frac.className = "frac";
+    const haut = document.createElement("span"), bas = document.createElement("span");
+    haut.className = "frac-haut";
+    bas.className = "frac-bas";
+    haut.appendChild(creerMath(n.haut, false));
+    bas.appendChild(creerMath(n.bas, false));
+    frac.append(haut, bas);
+    if (!lu) { cible.appendChild(frac); return; }
+    // La fraction dessinée est cachée aux lecteurs d'écran, qui lisent le texte à côté
+    frac.setAttribute("aria-hidden", "true");
+    const texteLu = document.createElement("span");
+    texteLu.className = "visuellement-cache";
+    texteLu.textContent = lireMath([n]);
+    cible.append(frac, texteLu);
+  });
+  return frag;
+}
+// Écrit un texte dans un élément, avec ses fractions et ses lignes (sans écriture spéciale : comme textContent)
+function ecrireTexteMath(el, texte) {
+  texte = texte === undefined || texte === null ? "" : String(texte);
+  if (texte.indexOf("[[") < 0 && texte.indexOf("\n") < 0) { el.textContent = texte; return el; }
+  el.textContent = "";
+  const lignes = texte.split("\n");
+  lignes.forEach(ligne => {
+    let noeuds;
+    try { noeuds = analyserMath(ligne); } catch (e) { noeuds = [ligne]; }   // mal écrit : affiché tel quel
+    if (lignes.length === 1) { el.appendChild(creerMath(noeuds, true)); return; }
+    const span = document.createElement("span");
+    span.className = "ligne-calcul" + (noeuds.some(n => typeof n !== "string") ? " avec-fraction" : "");
+    span.appendChild(creerMath(noeuds, true));
+    el.appendChild(span);
+  });
+  return el;
+}
+// Le même texte en HTML (pour les pages qui assemblent du HTML), et en texte simple lisible (annonces, recherche)
+function texteMathHTML(texte) {
+  const s = document.createElement("span");
+  ecrireTexteMath(s, texte);
+  return s.innerHTML;
+}
+function texteMathLu(texte) {
+  return String(texte === undefined || texte === null ? "" : texte).split("\n").map(ligne => {
+    try { return lireMath(analyserMath(ligne)); } catch (e) { return ligne; }
+  }).reduce((tout, ligne) => !tout ? ligne : tout + (/[.:;!?]$/.test(tout.trim()) ? " " : ". ") + ligne, "");
+}
+
+// ---------------- Quelle unité ? (calculs à taper : QCM et Atelier) ----------------
+// Pour l'unité attendue, la règle à appliquer en une ou deux phrases, avec un exemple (écriture des calculs :
+// fractions [[haut|bas]]). Avec des dioptries dans l'énoncé, la règle des mm et des cm parle de la conversion
+// depuis les mètres. Montrée par le bouton « Quelle unité ? » sous la case, et dans la correction si l'unité est fausse.
+const AIDE_UNITES = {
+  "m": "C'est l'unité des dioptries : [[1|V]] donne directement des mètres. Pour convertir : 1 m = 100 cm = 1 000 mm.",
+  "µm": "1 µm = 0,001 mm (10⁻⁶ m). Calcule en mm, puis multiplie par 1 000 pour avoir des µm.",
+  "nm": "Une longueur d'onde se donne en nanomètres : 1 nm = 10⁻⁹ m = 0,001 µm. La lumière visible va d'environ 380 à 780 nm.",
+  "°": "Un angle en degrés : calculatrice en mode degrés (DEG). Seule exception : pour un petit angle, tan θ ≈ θ en radians (1 rad ≈ 57,3°).",
+  "lx": "Un éclairement en lux, face à la source : E = [[I|d²]], avec l'intensité I en candelas et la distance d en mètres.",
+  "%": "Un pourcentage : [[partie|total]] × 100. Un taux de 0,25 s'écrit 25 %. Une évolution : [[arrivée − départ|départ]] × 100.",
+  "€": "Garde les euros et arrondis au centime.",
+  "€ HT": "Un montant hors taxes, sans la TVA. Si tu pars d'un prix TTC : HT = [[TTC|1 + taux de TVA]] (avec une TVA à 20 % : [[120|1,20]] = 100 € HT).",
+  "€ TTC": "Un montant toutes taxes comprises, TVA incluse : TTC = HT × (1 + taux de TVA) (avec une TVA à 20 % : 100 × 1,20 = 120 € TTC).",
+  "€ brut": "Le salaire brut se compte avant les cotisations salariales : le net est plus petit que le brut.",
+  "k€": "En milliers d'euros : 1 k€ = 1 000 €, donc 45 000 € = 45 k€.",
+  "min": "Une durée en minutes : 1 h = 60 min, donc 0,5 h = 30 min.",
+  "jours": "Une durée en jours. En gestion, l'année compte parfois 360 jours au lieu de 365 : l'énoncé le précise.",
+  "jours ouvrables": "Les jours ouvrables vont du lundi au samedi, sans les dimanches ni les jours fériés.",
+  "": "Un rapport (grandissement, grossissement, coefficient…) n'a pas d'unité."
+};
+function aideUnite(reponse, texteEnonce, seulementRegle) {   // seulementRegle : sans « Réponse attendue en … » (la correction le dit déjà)
+  const u = reponse && reponse.unite ? String(reponse.unite) : "";
+  // Des dioptries dans l'énoncé : le mot, le symbole, une amétropie, ou une puissance écrite « −4,00 »
+  const dioptries = /δ|dioptri|vergence|myop|hypermétrop|presbyt|amétrop|remotum|punctum|[+−-]\s?\d+,\d\d\b/i.test(texteEnonce || "");
+  // L'exemple ne doit jamais tomber sur la réponse attendue : on prend le premier dont le résultat diffère
+  const attendu = reponse && typeof reponse.valeur === "number" ? Math.abs(reponse.valeur) : NaN;
+  const choisir = liste => liste.find(e => !(Math.abs(e.r - attendu) < 1e-9)) || liste[0];
+  const fr = x => String(x).replace(".", ",");
+  let regle = AIDE_UNITES[u];
+  if (u === "δ") {
+    const e = choisir([{ mm: 200, r: 5 }, { mm: 125, r: 8 }, { mm: 400, r: 2.5 }]);
+    regle = "Une vergence en dioptries, c'est 1 divisé par une distance en mètres (1 δ = 1 m⁻¹). Passe d'abord les distances en mètres : " +
+      e.mm + " mm = " + fr(e.mm / 1000) + " m, donc [[1|" + fr(e.mm / 1000) + "]] = " + fr(e.r) + " δ.";
+  }
+  if (u === "Δ") {
+    const e = choisir([{ c: 3, d: 0.5, r: 6 }, { c: 1, d: 0.25, r: 4 }, { c: 2, d: 0.4, r: 5 }]);
+    regle = "Une dioptrie prismatique (Δ), c'est un décalage de 1 cm vu à 1 m : " + e.c + " cm vus à " + fr(e.d * 100) + " cm donnent [[" + e.c + "|" + fr(e.d) + "]] = " + e.r + " Δ. " +
+      "Formule de Prentice : P = c × D, avec le décentrement c en cm et la puissance D en dioptries.";
+  }
+  if (u === "mm") {
+    const e = choisir([{ v: 5, r: 200 }, { v: 8, r: 125 }, { v: 4, r: 250 }]);
+    regle = dioptries
+      ? "Avec des dioptries, [[1|V]] donne des mètres : multiplie par 1 000 pour avoir des mm. Exemple : [[1|" + e.v + "]] = " + fr(e.r / 1000) + " m = " + e.r + " mm."
+      : "Mets toutes les distances en mm avant de calculer (1 cm = 10 mm ; 1 m = 1 000 mm) et garde les mm jusqu'au bout.";
+  }
+  if (u === "cm") {
+    const e = choisir([{ v: 2, r: 50 }, { v: 5, r: 20 }, { v: 4, r: 25 }]);
+    regle = dioptries
+      ? "Avec des dioptries, [[1|V]] donne des mètres : multiplie par 100 pour avoir des cm. Exemple : [[1|" + e.v + "]] = " + fr(e.r / 100) + " m = " + e.r + " cm."
+      : "Mets toutes les distances en cm avant de calculer (10 mm = 1 cm ; 1 m = 100 cm).";
+  }
+  regle = regle || "Convertis tes données dans cette unité avant de calculer ; dans la case, écris seulement le nombre.";
+  if (seulementRegle) return regle;
+  return (u ? "Réponse attendue en " + u + "." : "Réponse sans unité : écris seulement le nombre.") + " " + regle;
+}
+// Le bouton « Quelle unité ? » sous la case d'un calcul : il s'ouvre en un petit encadré, comme l'indice
+function ajouterAideUnite(form, reponse, texteEnonce) {
+  const bouton = document.createElement("button");
+  bouton.type = "button";
+  bouton.className = "bouton-unite";
+  bouton.textContent = "Quelle unité ?";
+  bouton.addEventListener("click", () => {
+    const boite = document.createElement("p");
+    boite.className = "aide-unite";
+    boite.setAttribute("role", "status");
+    const titre = document.createElement("strong");
+    titre.textContent = "Quelle unité ?";
+    const texte = document.createElement("span");
+    ecrireTexteMath(texte, aideUnite(reponse, texteEnonce));
+    boite.append(titre, texte);
+    bouton.replaceWith(boite);
+  });
+  form.appendChild(bouton);
+  return bouton;
+}

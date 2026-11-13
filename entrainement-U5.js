@@ -16,8 +16,8 @@ QUESTIONS.push(
     type: "calcul",
     question: "Un myope de −1,00 non compensé lit à 25 cm. Calcule l'accommodation qu'il met en jeu.",
     reponse: {"valeur": 3, "unite": "δ", "decimales": 2, "signe": true},
-    explication: "Acc = R − 1/HT = −1,00 − 1/(−0,25) = −1,00 + 4,00 = +3,00 δ. Son remotum est à 1 m : il a 3 δ à fournir pour lire à 25 cm.",
-    indice: "Acc = R − 1/HT, avec HT négatif et en mètres. 25 cm = 0,25 m."
+    explication: "Acc = R − [[1|HT]] = −1,00 − [[1|−0,25]] = −1,00 + 4,00 = +3,00 δ.\nSon remotum est à 1 m : il a 3 δ à fournir pour lire à 25 cm.",
+    indice: "Acc = R − [[1|HT]], avec HT négatif et en mètres. 25 cm = 0,25 m."
   },
   {
     id: "U5-071",
@@ -29,8 +29,8 @@ QUESTIONS.push(
     question: "Un hypermétrope de +1,00 non compensé lit à 50 cm. Quelle accommodation met-il en jeu ?",
     choix: ["+3,00 δ", "+2,00 δ", "+1,00 δ", "−1,00 δ"],
     bonne: 0,
-    explication: "Acc = R − 1/HT = +1,00 − 1/(−0,50) = 1,00 + 2,00 = +3,00 δ : 2 δ pour la distance, plus 1 δ pour compenser son hypermétropie. +2,00 oublie l'hypermétropie, +1,00 oublie la distance, −1,00 vient d'une erreur de signe.",
-    indice: "Même formule que pour le myope : Acc = R − 1/HT, avec HT = −0,50 m. Le signe de R change tout."
+    explication: "Acc = R − [[1|HT]] = +1,00 − [[1|−0,50]] = 1,00 + 2,00 = +3,00 δ.\nC'est 2 δ pour la distance, plus 1 δ pour compenser son hypermétropie. +2,00 oublie l'hypermétropie, +1,00 oublie la distance, −1,00 vient d'une erreur de signe.",
+    indice: "Même formule que pour le myope : Acc = R − [[1|HT]], avec HT = −0,50 m. Le signe de R change tout."
   },
   {
     id: "U5-072",
@@ -42,8 +42,8 @@ QUESTIONS.push(
     type: "calcul",
     question: "Un myope de −4,00 n'accommode pas. Calcule la position de son remotum HR (mesure algébrique depuis l'œil).",
     reponse: {"valeur": -25, "unite": "cm", "decimales": 0, "signe": true},
-    explication: "HR = 1/R = 1/(−4,00) = −0,25 m = −25 cm. Le signe − indique un remotum réel, 25 cm devant l'œil.",
-    indice: "HR = 1/R en mètres, puis convertis en cm. Le signe dit si le remotum est devant ou derrière l'œil."
+    explication: "HR = [[1|R]] = [[1|−4,00]] = −0,25 m = −25 cm.\nLe signe − indique un remotum réel, 25 cm devant l'œil.",
+    indice: "HR = [[1|R]] en mètres, puis convertis en cm. Le signe dit si le remotum est devant ou derrière l'œil."
   },
   {
     id: "U5-073",
@@ -55,8 +55,8 @@ QUESTIONS.push(
     type: "calcul",
     question: "Un hypermétrope de +4,00 n'accommode pas. Calcule la position de son remotum HR (mesure algébrique depuis l'œil).",
     reponse: {"valeur": 25, "unite": "cm", "decimales": 0, "signe": true},
-    explication: "HR = 1/R = 1/(+4,00) = +0,25 m = +25 cm. Le signe + indique un remotum virtuel, 25 cm derrière l'œil : aucun objet réel n'est vu net sans accommoder.",
-    indice: "HR = 1/R. Un R positif donne un remotum de l'autre côté de l'œil."
+    explication: "HR = [[1|R]] = [[1|+4,00]] = +0,25 m = +25 cm.\nLe signe + indique un remotum virtuel, 25 cm derrière l'œil : aucun objet réel n'est vu net sans accommoder.",
+    indice: "HR = [[1|R]]. Un R positif donne un remotum de l'autre côté de l'œil."
   },
   {
     id: "U5-074",
@@ -68,8 +68,8 @@ QUESTIONS.push(
     type: "calcul",
     question: "Un enfant emmétrope a une amplitude d'accommodation de 10 δ. Calcule la position de son proximum HP (mesure algébrique depuis l'œil).",
     reponse: {"valeur": -10, "unite": "cm", "decimales": 0, "signe": true},
-    explication: "Amax = R − 1/HP avec R = 0, donc 1/HP = −10 δ et HP = −0,10 m = −10 cm. Le proximum est à 10 cm devant l'œil.",
-    indice: "Amax = R − 1/HP. Un emmétrope a R = 0. Isole 1/HP puis inverse."
+    explication: "Amax = R − [[1|HP]] avec R = 0, donc [[1|HP]] = −10 δ.\nHP = [[1|−10]] = −0,10 m = −10 cm.\nLe proximum est à 10 cm devant l'œil.",
+    indice: "Amax = R − [[1|HP]]. Un emmétrope a R = 0. Isole [[1|HP]] puis inverse."
   },
   {
     id: "U5-075",
@@ -81,8 +81,8 @@ QUESTIONS.push(
     question: "Avec sa compensation, un sujet lit 10/10. On ajoute +2,25 : son acuité tombe à 2/10. Sphère résiduelle estimée ?",
     choix: ["+1,25", "+3,50", "+1,00", "−1,00"],
     bonne: 2,
-    explication: "Règle de Swaine : brouillage ≈ 1 ÷ (4 × AV) = 1 ÷ (4 × 0,2) = 1,25 δ. Sphère résiduelle = verre ajouté − brouillage = +2,25 − 1,25 = +1,00 δ. +1,25 est le brouillage seul, +3,50 est une somme au lieu d'une différence, −1,00 est le signe inversé.",
-    indice: "Swaine : brouillage ≈ 1 ÷ (4 × AV). Le verre ajouté se partage entre ce brouillage et la sphère résiduelle."
+    explication: "Règle de Swaine : brouillage ≈ [[1|4 × AV]] = [[1|4 × 0,2]] = [[1|0,8]] = 1,25 δ.\nSphère résiduelle = verre ajouté − brouillage = +2,25 − 1,25 = +1,00 δ.\n+1,25 est le brouillage seul, +3,50 est une somme au lieu d'une différence, −1,00 est le signe inversé.",
+    indice: "Swaine : brouillage ≈ [[1|4 × AV]]. Le verre ajouté se partage entre ce brouillage et la sphère résiduelle."
   },
   {
     id: "U5-076",
@@ -94,7 +94,7 @@ QUESTIONS.push(
     question: "Compensation portée OD −1,00 (−1,00) 180° ; autoréfractomètre OD −2,00 (−0,50) 180°. Réfraction complémentaire attendue, en équivalents sphériques ?",
     choix: ["−0,75", "−1,00", "+0,75", "−0,25"],
     bonne: 0,
-    explication: "Équivalent sphérique = S + C/2. Portée : −1,00 − 0,50 = −1,50. Autoréfractomètre : −2,00 − 0,25 = −2,25. RC = −2,25 − (−1,50) = −0,75. −1,00 ne compare que les sphères, +0,75 inverse le sens de la différence. L'autoréfractomètre surestime souvent la myopie (accommodation instrumentale).",
+    explication: "Équivalent sphérique = S + [[C|2]].\nPortée : −1,00 + [[−1,00|2]] = −1,50.\nAutoréfractomètre : −2,00 + [[−0,50|2]] = −2,25.\nRC = −2,25 − (−1,50) = −0,75.\n−1,00 ne compare que les sphères, +0,75 inverse le sens de la différence. L'autoréfractomètre surestime souvent la myopie (accommodation instrumentale).",
     indice: "Passe les deux formules en équivalent sphérique avant de comparer. La RC, c'est ce qu'il faut ajouter à la portée."
   },
   {
@@ -107,7 +107,7 @@ QUESTIONS.push(
     type: "calcul",
     question: "Compensation +2,00 (−1,50) 180°. Calcule l'équivalent sphérique.",
     reponse: {"valeur": 1.25, "unite": "δ", "decimales": 2, "signe": true},
-    explication: "Équivalent sphérique = S + C/2 = +2,00 + (−1,50)/2 = +2,00 − 0,75 = +1,25 δ.",
+    explication: "Équivalent sphérique = S + [[C|2]] = +2,00 + [[−1,50|2]] = +2,00 − 0,75 = +1,25 δ.",
     indice: "Équivalent sphérique = sphère + cylindre divisé par 2, avec le signe du cylindre."
   },
   {
@@ -172,7 +172,7 @@ QUESTIONS.push(
     type: "calcul",
     question: "Le remotum d'un myope est à 112,5 mm devant la cornée. Le verre de lunettes est à 12,5 mm de la cornée. Calcule la puissance du verre compensateur.",
     reponse: {"valeur": -10, "unite": "δ", "decimales": 2, "signe": true},
-    explication: "Le foyer image du verre doit être sur le remotum. Distance verre → remotum : 112,5 − 12,5 = 100 mm devant le verre, soit f' = −0,100 m. D = 1/f' = −10,00 δ.",
+    explication: "Le foyer image du verre doit être sur le remotum.\nDistance verre → remotum : 112,5 − 12,5 = 100 mm devant le verre, soit f' = −0,100 m.\nD = [[1|f']] = [[1|−0,100]] = −10,00 δ.",
     indice: "Le foyer image du verre doit tomber sur le remotum. Mesure la distance depuis le verre, pas depuis la cornée."
   },
   {
@@ -185,7 +185,7 @@ QUESTIONS.push(
     type: "calcul",
     question: "Un rayon de courbure cornéen vaut 6,75 mm. Calcule la puissance lue au kératomètre.",
     reponse: {"valeur": 50, "unite": "δ", "decimales": 0, "signe": true},
-    explication: "K ≈ 337,5 / r = 337,5 / 6,75 = 50 δ. Vérification de tête : 6,75 × 50 = 337,5.",
+    explication: "K ≈ [[337,5|r]] = [[337,5|6,75]] = 50 δ.\nVérification de tête : 6,75 × 50 = 337,5.",
     indice: "K (δ) ≈ 337,5 divisé par r en mm. Pose la division ou vérifie par la multiplication."
   },
   {
@@ -224,7 +224,7 @@ QUESTIONS.push(
     question: "Un myope porte −12,00 à 12 mm de l'œil. Quelle puissance approximative pour une lentille de contact ?",
     choix: ["−10,50 δ environ", "−12,00 δ", "−14,00 δ environ", "+10,50 δ environ"],
     bonne: 0,
-    explication: "Remotum à 1/12 m ≈ 83,3 mm devant le verre, soit 95,3 mm devant la cornée. D_lentille = 1/(−0,0953) ≈ −10,49 δ, soit environ −10,50 δ. Formule directe : D / (1 − d·D) = −12 / 1,144.",
+    explication: "Remotum à [[1|12]] m ≈ 83,3 mm devant le verre, soit 95,3 mm devant la cornée.\nD_lentille = [[1|−0,0953]] ≈ −10,49 δ, soit environ −10,50 δ.\nFormule directe : D_lentille = [[D|1 − d·D]] = [[−12|1,144]].",
     indice: "Place le remotum, puis mesure sa distance à la cornée. Elle est plus grande que celle mesurée depuis le verre."
   },
   {
@@ -250,7 +250,7 @@ QUESTIONS.push(
     type: "calcul",
     question: "Test à 25 cm : avec un cylindre de Maddox, la barre est vue décalée de 2 cm par rapport au point lumineux. Calcule la valeur de la phorie.",
     reponse: {"valeur": 8, "unite": "Δ", "decimales": 1, "signe": false},
-    explication: "1 Δ = 1 cm de déviation à 1 m. P = 2 cm ÷ 0,25 m = 8 Δ. Le sens (éso ou exo) se lit au côté de la barre, pas au calcul.",
+    explication: "1 Δ = 1 cm de déviation à 1 m.\nP = [[2 cm|0,25 m]] = 8 Δ.\nLe sens (éso ou exo) se lit au côté de la barre, pas au calcul.",
     indice: "Ramène le décalage à 1 m : décalage en cm divisé par la distance en mètres."
   },
   {
@@ -393,7 +393,7 @@ QUESTIONS.push(
     type: "calcul",
     question: "Un hypermétrope porte des lunettes de +8,00 à 13 mm de la cornée. Calcule la puissance de la lentille de contact équivalente.",
     reponse: {"valeur": 8.93, "unite": "δ", "decimales": 2, "signe": true, "tolerance": 0.1},
-    explication: "P(lentille) = P / (1 − d·P), avec d en mètres : 8,00 / (1 − 0,013 × 8,00) = 8,00 / 0,896 ≈ +8,93 δ. Un verre convexe devient plus fort en lentille, un verre concave plus faible.",
+    explication: "P(lentille) = [[P|1 − d·P]], avec d en mètres.\nP(lentille) = [[8,00|1 − 0,013 × 8,00]] = [[8,00|0,896]] ≈ +8,93 δ.\nUn verre convexe devient plus fort en lentille, un verre concave plus faible.",
     indice: "P(lentille) = P / (1 − d·P). 13 mm = 0,013 m."
   },
   {
@@ -406,7 +406,7 @@ QUESTIONS.push(
     question: "Une lentille souple a une transmissibilité Dk/e. Le matériau a un Dk de 100 (en 10⁻¹¹) et la lentille 0,20 mm d'épaisseur centrale. Quelle est sa transmissibilité, et suffit-elle ?",
     choix: ["Dk/e = 50 × 10⁻⁹ : suffisant même en port nocturne", "Dk/e = 5 × 10⁻⁹ : insuffisant même en port journalier", "Dk/e = 50 × 10⁻⁹ : suffisant en port journalier, insuffisant en port nocturne", "Dk/e = 500 × 10⁻⁹ : suffisant même en port nocturne"],
     bonne: 2,
-    explication: "Il faut passer l'épaisseur en cm : 0,20 mm = 0,02 cm, donc Dk/e = 100 × 10⁻¹¹ / 0,02 = 50 × 10⁻⁹. C'est au-dessus de 35 (port journalier) mais en dessous de 125 (port nocturne). Garder l'épaisseur en mm donnerait 5 × 10⁻⁹, un facteur 10 de trop faible.",
+    explication: "Il faut passer l'épaisseur en cm : 0,20 mm = 0,02 cm.\nDk/e = [[Dk|e]] = [[100 × 10⁻¹¹|0,02]] = 50 × 10⁻⁹.\nC'est au-dessus de 35 (port journalier) mais en dessous de 125 (port nocturne). Garder l'épaisseur en mm donnerait 5 × 10⁻⁹, un facteur 10 de trop faible.",
     indice: "Convertis l'épaisseur en cm avant de diviser. Compare ensuite à 35 et à 125."
   },
   {
@@ -419,7 +419,7 @@ QUESTIONS.push(
     type: "calcul",
     question: "Lunettes de −5,00 (−1,00) 180° à 12 mm de la cornée. Calcule la puissance sphérique de la lentille souple correspondant à l'équivalent sphérique.",
     reponse: {"valeur": -5.16, "unite": "δ", "decimales": 2, "signe": true, "tolerance": 0.1},
-    explication: "Équivalent sphérique : −5,00 + (−1,00 / 2) = −5,50 δ. Puis P(lentille) = P / (1 − d·P) = −5,50 / (1 + 0,012 × 5,50) = −5,50 / 1,066 ≈ −5,16 δ. Le verre concave est plus faible en lentille.",
+    explication: "Équivalent sphérique : −5,00 + [[−1,00|2]] = −5,50 δ.\nP(lentille) = [[P|1 − d·P]] = [[−5,50|1 + 0,012 × 5,50]] = [[−5,50|1,066]] ≈ −5,16 δ.\nLe verre concave est plus faible en lentille.",
     indice: "Deux étapes : l'équivalent sphérique, puis la formule de vertex P / (1 − d·P) avec d = 0,012 m."
   },
   {
@@ -471,7 +471,7 @@ QUESTIONS.push(
     type: "calcul",
     question: "Un presbyte emmétrope a une amplitude d'accommodation de 1,50 δ. Il veut lire à 40 cm en gardant la moitié de son amplitude en réserve. Quelle addition faut-il ?",
     reponse: {"valeur": 1.75, "unite": "δ", "decimales": 2, "signe": false},
-    explication: "À 40 cm, il faut 1/0,40 = 2,50 δ. Il n'utilise que la moitié de son amplitude : 0,75 δ. L'addition apporte le reste : 2,50 − 0,75 = +1,75 δ.",
+    explication: "Besoin à 40 cm : [[1|0,40]] = 2,50 δ.\nIl n'utilise que la moitié de son amplitude : 0,75 δ.\nL'addition apporte le reste : 2,50 − 0,75 = +1,75 δ.",
     indice: "Besoin à la distance de lecture, moins ce que l'œil fournit sans fatigue."
   },
   {
@@ -484,7 +484,7 @@ QUESTIONS.push(
     question: "Le plus petit détail qu'un sujet distingue est vu sous un angle de 4 minutes d'arc. Quelle est son acuité visuelle ?",
     choix: ["2,5/10", "10/4", "4/10", "1/10"],
     bonne: 0,
-    explication: "Acuité visuelle = 1 / angle minimal de résolution (en minutes d'arc) : 1/4 = 0,25, soit 2,5/10. Un angle de 1 minute correspond à 10/10 ; plus l'angle est grand, plus l'acuité est faible.",
+    explication: "Acuité visuelle = [[1|angle minimal de résolution (en minutes d'arc)]] = [[1|4]] = 0,25, soit 2,5/10.\nUn angle de 1 minute correspond à 10/10 ; plus l'angle est grand, plus l'acuité est faible.",
     indice: "10/10 correspond à 1 minute d'arc. L'acuité est l'inverse de l'angle."
   },
   {
@@ -497,8 +497,8 @@ QUESTIONS.push(
     type: "calcul",
     question: "Un hypermétrope de +5,00 a une amplitude d'accommodation de 3,00 δ. Calcule la position de son proximum HP (mesure algébrique depuis l'œil).",
     reponse: {"valeur": 50, "unite": "cm", "decimales": 0, "signe": true},
-    explication: "1/HP = R − Amp = 5,00 − 3,00 = +2,00 δ, donc HP = +0,50 m = +50 cm. Le signe + place le proximum derrière l'œil : même en accommodant au maximum, cet œil ne voit net aucun objet réel.",
-    indice: "1/HP = R − amplitude. Regarde le signe du résultat."
+    explication: "[[1|HP]] = R − Amp = 5,00 − 3,00 = +2,00 δ.\nHP = [[1|+2,00]] = +0,50 m = +50 cm.\nLe signe + place le proximum derrière l'œil : même en accommodant au maximum, cet œil ne voit net aucun objet réel.",
+    indice: "[[1|HP]] = R − amplitude. Regarde le signe du résultat."
   },
   {
     id: "U5-108",
@@ -549,7 +549,7 @@ QUESTIONS.push(
     type: "calcul",
     question: "Un sujet est exophore de 5 Δ. On fait le test de Maddox à 40 cm. De quelle distance la barre est-elle décalée du point lumineux ?",
     reponse: {"valeur": 2, "unite": "cm", "decimales": 1, "signe": false},
-    explication: "Phorie (Δ) = décalage (cm) / distance (m), donc décalage = 5 × 0,40 = 2,0 cm. Une déviation de 1 Δ décale de 1 cm à 1 m.",
+    explication: "Phorie (Δ) = [[décalage (cm)|distance (m)]], donc décalage = 5 × 0,40 = 2,0 cm.\nUne déviation de 1 Δ décale de 1 cm à 1 m.",
     indice: "1 Δ = 1 cm à 1 m. Ici la distance est de 0,40 m."
   },
   {
@@ -718,7 +718,7 @@ QUESTIONS.push(
     type: "calcul",
     question: "Un kératomètre lit 44,50 δ dans un méridien. Calcule le rayon de courbure de ce méridien, avec l'indice conventionnel 1,3375.",
     reponse: {"valeur": 7.58, "unite": "mm", "decimales": 2, "signe": false, "tolerance": 0.02},
-    explication: "D = (n − 1) / R, donc R = 0,3375 / 44,50 = 0,007584 m = 7,58 mm. Repère utile : R (mm) = 337,5 / D.",
+    explication: "D = [[n − 1|R]], donc R = [[0,3375|44,50]] = 0,007584 m = 7,58 mm.\nRepère utile : R (mm) = [[337,5|D]].",
     indice: "Inverse la formule du kératomètre : R = (n − 1) / D, avec n − 1 = 0,3375. Résultat en mètres puis en mm."
   },
   {
@@ -757,7 +757,7 @@ QUESTIONS.push(
     type: "calcul",
     question: "Un matériau de lentille a un Dk de 140 (en 10⁻¹¹). Quelle épaisseur centrale maximale permet d'atteindre Dk/e = 125 × 10⁻⁹ (port nocturne) ?",
     reponse: {"valeur": 0.112, "unite": "mm", "decimales": 3, "signe": false, "tolerance": 0.005},
-    explication: "e = Dk / (Dk/e) = 140 × 10⁻¹¹ / (125 × 10⁻⁹) = 0,0112 cm = 0,112 mm. Au-delà, la transmissibilité tombe sous 125 et le port nocturne n'est plus justifié.",
+    explication: "e = [[Dk|Dk/e]] = [[140 × 10⁻¹¹|125 × 10⁻⁹]] = 0,0112 cm = 0,112 mm.\nAu-delà, la transmissibilité tombe sous 125 et le port nocturne n'est plus justifié.",
     indice: "Dk/e donne e = Dk / (Dk/e). Mets les puissances de dix en face l'une de l'autre, puis passe les cm en mm."
   },
   {
@@ -796,7 +796,7 @@ QUESTIONS.push(
     type: "calcul",
     question: "Un hypermétrope est compensé par +10,00 placé à 12 mm de la cornée. On rapproche le verre à 8 mm de la cornée. Quelle puissance pour garder le même effet ?",
     reponse: {"valeur": 10.42, "unite": "δ", "decimales": 2, "signe": true, "tolerance": 0.05},
-    explication: "Effet à la cornée : F = 10,00 / (1 − 0,012 × 10,00) = 11,36 δ. À 8 mm, P = F / (1 + 0,008 × F) = 11,36 / 1,0909 ≈ +10,42 δ. Un verre convexe perd en efficacité quand on le rapproche de l'œil : il faut donc plus de puissance.",
+    explication: "Effet à la cornée : F = [[10,00|1 − 0,012 × 10,00]] = 11,36 δ.\nÀ 8 mm : P = [[F|1 + 0,008 × F]] = [[11,36|1,0909]] ≈ +10,42 δ.\nUn verre convexe perd en efficacité quand on le rapproche de l'œil : il faut donc plus de puissance.",
     indice: "Deux étapes : l'effet à la cornée à 12 mm, puis la puissance qui donne cet effet à 8 mm."
   },
   {
@@ -913,7 +913,7 @@ QUESTIONS.push(
     type: "calcul",
     question: "On veut obtenir 2 Δ avec un verre de +5,00 en décentrant le verre. Quel décentrement faut-il ?",
     reponse: {"valeur": 4, "unite": "mm", "decimales": 1, "signe": false},
-    explication: "Prentice : P = d × D, donc d = P / D = 2 / 5 = 0,4 cm = 4 mm. Retrouver le décentrement à partir d'un prisme demandé est l'usage courant de la formule.",
+    explication: "Prentice : P = d × D, donc d = [[P|D]] = [[2|5]] = 0,4 cm = 4 mm.\nRetrouver le décentrement à partir d'un prisme demandé est l'usage courant de la formule.",
     indice: "Prentice : P = d (cm) × D. Isole d, puis passe de cm en mm."
   },
   {

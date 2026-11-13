@@ -37,7 +37,7 @@ QUESTIONS.push(
     difficulte: "moyen",
     question: "On a u0 = 50 et u(n+1) = 0,9 u(n) + 30 pour le nombre de porteurs de lentilles le mois n. À l'aide du tableau de valeurs de la calculatrice, trouve le premier rang n tel que u(n) > 250.",
     reponse: {"valeur": 16, "unite": "", "decimales": 0, "signe": false},
-    explication: "Le tableau donne u15 ≈ 248,5 (encore inférieur à 250) et u16 ≈ 253,7 (supérieur à 250). Le premier rang qui convient est donc n = 16. La limite de la suite est 30 / 0,1 = 300, ce qui confirme que 250 finit par être dépassé.",
+    explication: "Le tableau donne u15 ≈ 248,5 (encore inférieur à 250) et u16 ≈ 253,7 (supérieur à 250).\nLe premier rang qui convient est donc n = 16.\nContrôle : la limite de la suite est ℓ = [[30|1 − 0,9]] = [[30|0,1]] = 300, donc 250 finit par être dépassé.",
     indice: "Entre la suite avec son premier terme u0 = 50 et parcours le tableau jusqu'au premier terme au-dessus de 250. Fais attention au rang de départ."
   },
   {
@@ -63,7 +63,7 @@ QUESTIONS.push(
     difficulte: "difficile",
     question: "La température g(t) = 20 + 60 e^(−0,5t) d'un verre, en °C, est mesurée au bout de t minutes. À partir de quel instant a-t-on g(t) ≤ 30 ? Donne la plus petite valeur de t, arrondie au centième.",
     reponse: {"valeur": 3.58, "unite": "min", "decimales": 2, "signe": false},
-    explication: "g(t) ≤ 30 équivaut à 60 e^(−0,5t) ≤ 10, donc e^(−0,5t) ≤ 1/6. En passant au logarithme, −0,5 t ≤ −ln 6, donc t ≥ 2 ln 6 ≈ 3,5835. Le plus petit t est 3,58 min. Attention : diviser par −0,5 change le sens de l'inégalité.",
+    explication: "g(t) ≤ 30 équivaut à 60 e^(−0,5t) ≤ 10\ndonc e^(−0,5t) ≤ [[10|60]] = [[1|6]]\nEn passant au logarithme : −0,5 t ≤ −ln 6\nDiviser par −0,5 change le sens de l'inégalité : t ≥ [[ln 6|0,5]] = 2 ln 6 ≈ 3,5835\nLe plus petit t est 3,58 min.",
     indice: "Isole d'abord l'exponentielle, puis applique ln des deux côtés. Fais attention au signe quand tu divises par un nombre négatif."
   },
   {
@@ -80,7 +80,7 @@ QUESTIONS.push(
     difficulte: "facile",
     question: "On cherche une solution constante g(t) = c de l'équation 3y' + 0,6y = 12. Combien vaut c ?",
     reponse: {"valeur": 20, "unite": "", "decimales": 0, "signe": false},
-    explication: "Une constante a une dérivée nulle : 3 × 0 + 0,6 c = 12, donc c = 12 / 0,6 = 20.",
+    explication: "Une constante a une dérivée nulle : 3 × 0 + 0,6 c = 12\nc = [[12|0,6]] = 20",
     indice: "Une fonction constante a une dérivée nulle. Remplace y' par 0 et y par c, puis résous."
   },
   {
@@ -132,7 +132,7 @@ QUESTIONS.push(
     difficulte: "difficile",
     question: "Dans un magasin, 60 % des verres sont organiques (O) et 40 % sont minéraux. 30 % des verres organiques sont photochromiques (P), contre 25 % des verres minéraux. On choisit un verre photochromique. Quelle est la probabilité qu'il soit organique ? Arrondis à 10⁻³.",
     reponse: {"valeur": 0.643, "unite": "", "decimales": 3, "signe": false},
-    explication: "P(O ∩ P) = 0,6 × 0,30 = 0,18. P(P) = 0,18 + 0,4 × 0,25 = 0,28. P_P(O) = P(O ∩ P) / P(P) = 0,18 / 0,28 = 9/14 ≈ 0,643.",
+    explication: "P(O ∩ P) = 0,6 × 0,30 = 0,18\nP(P) = 0,18 + 0,4 × 0,25 = 0,28\nP_P(O) = [[P(O ∩ P)|P(P)]] = [[0,18|0,28]] = [[9|14]]\nDonc P_P(O) ≈ 0,643.",
     indice: "On cherche P_P(O). Calcule P(O ∩ P) et P(P) avec l'arbre, puis divise."
   },
   {
@@ -184,7 +184,7 @@ QUESTIONS.push(
     difficulte: "facile",
     question: "Le temps d'attente T, en minutes, au comptoir suit la loi exponentielle de paramètre λ = 0,5. Calcule P(T ≤ 3), arrondie à 10⁻³.",
     reponse: {"valeur": 0.777, "unite": "", "decimales": 3, "signe": false},
-    explication: "P(T ≤ 3) = 1 − e^(−0,5 × 3) = 1 − e^(−1,5) ≈ 1 − 0,2231 = 0,7769, soit 0,777 arrondi à 10⁻³. L'attente moyenne vaut 1/λ = 2 minutes.",
+    explication: "P(T ≤ 3) = 1 − e^(−0,5 × 3) = 1 − e^(−1,5)\nP(T ≤ 3) ≈ 1 − 0,2231 = 0,7769, soit 0,777 arrondi à 10⁻³.\nL'attente moyenne vaut [[1|λ]] = [[1|0,5]] = 2 minutes.",
     indice: "Pour une loi exponentielle, P(T ≤ t) = 1 − e^(−λt). Remplace λ et t, puis calcule."
   },
   {
@@ -210,7 +210,7 @@ QUESTIONS.push(
     difficulte: "moyen",
     question: "Sur 200 porteurs de lentilles interrogés, 160 sont satisfaits. Calcule la demi-largeur 1,96 √(f(1 − f)/n) de l'intervalle de confiance à 95 %, arrondie à 10⁻³.",
     reponse: {"valeur": 0.055, "unite": "", "decimales": 3, "signe": false},
-    explication: "f = 160/200 = 0,8. √(0,8 × 0,2 / 200) = √0,0008 ≈ 0,02828. Puis 1,96 × 0,02828 ≈ 0,0554, soit 0,055 arrondi à 10⁻³. L'intervalle de confiance est alors environ [0,745 ; 0,855].",
+    explication: "f = [[160|200]] = 0,8\n√([[f(1 − f)|n]]) = √([[0,8 × 0,2|200]]) = √0,0008 ≈ 0,02828\nDemi-largeur = 1,96 × 0,02828 ≈ 0,0554, soit 0,055 arrondi à 10⁻³.\nL'intervalle de confiance est alors environ [0,745 ; 0,855].",
     indice: "Calcule d'abord f, puis la racine, puis multiplie par 1,96. Garde assez de chiffres avant d'arrondir à la fin."
   },
   {
@@ -227,7 +227,7 @@ QUESTIONS.push(
     difficulte: "moyen",
     question: "Un magasin dépense 12 000 € en publicité la première année. Chaque année, ce budget baisse de 10 %. Calcule la somme des budgets des 5 premières années, arrondie à l'euro.",
     reponse: {"valeur": 49141, "unite": "€", "decimales": 0, "signe": false},
-    explication: "Les budgets forment une suite géométrique de premier terme 12 000 et de raison 0,9. La somme de 5 termes vaut 12 000 × (1 − 0,9⁵) / (1 − 0,9) = 12 000 × 0,40951 / 0,1 = 49 141,2, soit 49 141 € arrondi à l'euro. Le piège : additionner 12 000 × 5 sans tenir compte de la baisse.",
+    explication: "Suite géométrique de premier terme 12 000 et de raison 0,9.\nS = 12 000 × [[1 − 0,9⁵|1 − 0,9]]\nS = 12 000 × [[0,40951|0,1]] = 49 141,2\nSoit 49 141 € arrondi à l'euro. Le piège : additionner 12 000 × 5 sans tenir compte de la baisse.",
     indice: "Premier terme × (1 − raison^nombre de termes) / (1 − raison). Compte bien 5 termes, de la première à la cinquième année."
   },
   {
@@ -253,7 +253,7 @@ QUESTIONS.push(
     difficulte: "difficile",
     question: "Un équipement vaut 18 000 € à l'achat et perd 12 % de sa valeur chaque année. Au bout de combien d'années sa valeur passe-t-elle sous 9 000 € pour la première fois ?",
     reponse: {"valeur": 6, "unite": "ans", "decimales": 0, "signe": false},
-    explication: "La valeur après n années est 18 000 × 0,88ⁿ. On veut 0,88ⁿ < 0,5, donc n > ln 0,5 / ln 0,88 ≈ 5,42. Le premier entier est 6. Contrôle au tableau : 9 499 € après 5 ans (encore au-dessus de 9 000), 8 359 € après 6 ans.",
+    explication: "La valeur après n années est 18 000 × 0,88ⁿ.\nOn veut 18 000 × 0,88ⁿ < 9 000, donc 0,88ⁿ < 0,5\nn > [[ln 0,5|ln 0,88]] ≈ 5,42\nLe premier entier est 6.\nContrôle au tableau : 9 499 € après 5 ans (encore au-dessus de 9 000), 8 359 € après 6 ans.",
     indice: "Écris 0,88ⁿ < 0,5 puis utilise le logarithme, ou fais défiler le tableau de valeurs de la calculatrice. Attention au sens de l'inégalité quand on divise par ln 0,88."
   },
   {
@@ -373,7 +373,7 @@ QUESTIONS.push(
     difficulte: "difficile",
     question: "Dans un dépistage, 2 % des personnes ont une anomalie. Le test est positif dans 95 % des cas chez une personne avec anomalie, et dans 8 % des cas chez une personne sans anomalie. Une personne a un test positif. Quelle est la probabilité qu'elle ait l'anomalie ? (arrondie au millième)",
     reponse: {"valeur": 0.195, "unite": "", "decimales": 3, "signe": false},
-    explication: "P(A ∩ +) = 0,02 × 0,95 = 0,019 et P(non A ∩ +) = 0,98 × 0,08 = 0,0784. Donc P(+) = 0,0974 et P(A sachant +) = 0,019 / 0,0974 ≈ 0,195. Un test positif ne donne l'anomalie qu'une fois sur cinq environ, parce que l'anomalie est rare.",
+    explication: "P(A ∩ +) = 0,02 × 0,95 = 0,019\nP(non A ∩ +) = 0,98 × 0,08 = 0,0784\nP(+) = 0,019 + 0,0784 = 0,0974\nP_+(A) = [[P(A ∩ +)|P(+)]] = [[0,019|0,0974]] ≈ 0,195\nUn test positif ne donne l'anomalie qu'une fois sur cinq environ, parce que l'anomalie est rare.",
     indice: "Calcule P(+) avec les deux branches de l'arbre, puis divise la branche « anomalie et positif » par P(+)."
   },
   {
@@ -424,7 +424,7 @@ QUESTIONS.push(
     difficulte: "moyen",
     question: "On veut estimer une proportion avec un intervalle de confiance de demi-largeur au plus 0,03. On utilise la majoration de la demi-largeur par 1/√n. Quel est le plus petit nombre n de personnes à interroger ?",
     reponse: {"valeur": 1112, "unite": "", "decimales": 0, "signe": false},
-    explication: "On veut 1/√n ≤ 0,03, donc √n ≥ 1/0,03 et n ≥ 1/0,03² = 1 111,1. Il faut arrondir par excès : n = 1 112. Prendre 1 111 donnerait une marge un peu trop grande.",
+    explication: "On veut [[1|√n]] ≤ 0,03\ndonc √n ≥ [[1|0,03]]\net n ≥ [[1|0,03²]] = [[1|0,0009]] ≈ 1 111,1\nIl faut arrondir par excès : n = 1 112. Prendre 1 111 donnerait une marge un peu trop grande.",
     indice: "Résous 1/√n ≤ 0,03 en élevant au carré. Dans quel sens faut-il arrondir ?"
   },
   {
@@ -520,7 +520,7 @@ QUESTIONS.push(
     difficulte: "difficile",
     question: "La concentration y(t) vérifie y' = −0,3y + 6 avec y(0) = 10. Au bout de combien de minutes atteint-elle 19 ? (arrondi au centième)",
     reponse: {"valeur": 7.68, "unite": "min", "decimales": 2, "signe": false},
-    explication: "Solution constante : 0,3c = 6, donc c = 20. Avec y(0) = 10 : y(t) = 20 − 10 e^(−0,3t). On résout 20 − 10 e^(−0,3t) = 19 : e^(−0,3t) = 0,1, d'où t = ln 10 / 0,3 ≈ 2,3026 / 0,3 ≈ 7,68 min.",
+    explication: "Solution constante : 0,3c = 6, donc c = [[6|0,3]] = 20\nAvec y(0) = 10 : y(t) = 20 − 10 e^(−0,3t)\nOn résout 20 − 10 e^(−0,3t) = 19, soit e^(−0,3t) = [[1|10]] = 0,1\nt = [[ln 10|0,3]] ≈ [[2,3026|0,3]] ≈ 7,68 min.",
     indice: "Écris l'équation sous la forme y' + 0,3y = 6. Trouve y(t), puis résous y(t) = 19 avec un logarithme."
   },
   {
@@ -572,7 +572,7 @@ QUESTIONS.push(
     difficulte: "difficile",
     question: "Même atelier : F1 (50 %, 2 % de défauts), F2 (30 %, 3 %) et F3 (20 %, 5 %). Un verre est défectueux. Quelle est la probabilité qu'il vienne de F3 ? (arrondie au millième)",
     reponse: {"valeur": 0.345, "unite": "", "decimales": 3, "signe": false},
-    explication: "P(D) = 0,5 × 0,02 + 0,3 × 0,03 + 0,2 × 0,05 = 0,029 et P(F3 ∩ D) = 0,2 × 0,05 = 0,010. Donc P(F3 sachant D) = 0,010 / 0,029 ≈ 0,345. F3 fournit 20 % des verres mais 34,5 % des défauts.",
+    explication: "P(D) = 0,5 × 0,02 + 0,3 × 0,03 + 0,2 × 0,05 = 0,029\nP(F3 ∩ D) = 0,2 × 0,05 = 0,010\nP_D(F3) = [[P(F3 ∩ D)|P(D)]] = [[0,010|0,029]] ≈ 0,345\nF3 fournit 20 % des verres mais 34,5 % des défauts.",
     indice: "Probabilité conditionnelle : P(F3 ∩ D) divisé par P(D), que tu calcules avec les trois branches."
   },
   {
@@ -622,7 +622,7 @@ QUESTIONS.push(
     difficulte: "moyen",
     question: "Avec les mêmes données, une demi-largeur de 0,048 correspond à un niveau de confiance de 95 % (coefficient 1,96). On passe à un niveau de 99 % (coefficient 2,58). Quelle devient la demi-largeur ? (arrondie au millième)",
     reponse: {"valeur": 0.063, "unite": "", "decimales": 3, "signe": false},
-    explication: "La demi-largeur est proportionnelle au coefficient : 0,048 × 2,58 / 1,96 ≈ 0,063. Un niveau de confiance plus élevé donne un intervalle plus large : on est plus sûr de couvrir la vraie valeur, mais moins précis.",
+    explication: "La demi-largeur est proportionnelle au coefficient.\nNouvelle demi-largeur = 0,048 × [[2,58|1,96]] ≈ 0,063\nUn niveau de confiance plus élevé donne un intervalle plus large : on est plus sûr de couvrir la vraie valeur, mais moins précis.",
     indice: "La demi-largeur est proportionnelle au coefficient 1,96 ou 2,58."
   },
   {
@@ -648,7 +648,7 @@ QUESTIONS.push(
     difficulte: "moyen",
     question: "AB = 12 cm. Le point C est sur [AB] avec AC = 3 cm. Le point D est sur la droite (AB), à l'extérieur de [AB], tel que (A, B ; C, D) soit une division harmonique. Calcule DA en cm.",
     reponse: {"valeur": 6, "unite": "cm", "decimales": 0, "signe": false},
-    explication: "Dans une division harmonique, CA / CB = DA / DB. Ici CA / CB = 3 / 9 = 1/3. D est du côté de A, donc DB = DA + 12. On résout DA / (DA + 12) = 1/3 : 3 DA = DA + 12 et DA = 6 cm. Contrôle : 6 / 18 = 1/3.",
+    explication: "Division harmonique : [[CA|CB]] = [[DA|DB]]\nIci [[CA|CB]] = [[3|9]] = [[1|3]]\nD est du côté de A, donc DB = DA + 12.\n[[DA|DA + 12]] = [[1|3]]\n3 DA = DA + 12, donc DA = 6 cm\nContrôle : [[6|18]] = [[1|3]].",
     indice: "Écris le rapport CA / CB, puis le même rapport DA / DB en notant DA = x et DB = x + 12."
   }
 );

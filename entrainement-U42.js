@@ -22,7 +22,7 @@ QUESTIONS.push(
     type: "calcul",
     question: "Un objectif donne d'un objet placé à OA = −24 mm une image à OA' = +72 mm. Calcule le grandissement transversal, avec son signe.",
     reponse: { valeur: -3, unite: "", decimales: 0, signe: true },
-    explication: "γ = OA' / OA = 72 / (−24) = −3. L'image est 3 fois plus grande que l'objet et renversée : c'est ce que dit le signe moins.",
+    explication: "γ = [[OA'|OA]] = [[72|−24]] = −3\nL'image est 3 fois plus grande que l'objet et renversée : c'est ce que dit le signe moins.",
     indice: "Le grandissement est le rapport de la position de l'image à celle de l'objet, mesurées depuis O. Garde les signes."
   },
   {
@@ -38,7 +38,7 @@ QUESTIONS.push(
     type: "calcul",
     question: "Lentille mince divergente de f' = −60 mm. Un objet réel est placé à 120 mm devant elle. Calcule OA', avec son signe.",
     reponse: { valeur: -40, unite: "mm", decimales: 0, signe: true },
-    explication: "OA = −120 mm et f' = −60 mm. Descartes : 1/OA' = 1/f' + 1/OA = −1/60 − 1/120 = −2/120 − 1/120 = −3/120. Donc OA' = −40 mm : image virtuelle, du côté de l'objet, droite et 3 fois plus petite (γ = −40 / −120 = +1/3).",
+    explication: "OA = −120 mm et f' = −60 mm.\nDescartes : [[1|OA']] = [[1|f']] + [[1|OA]]\n[[1|OA']] = −[[1|60]] − [[1|120]] = −[[2|120]] − [[1|120]] = −[[3|120]]\nDonc OA' = −[[120|3]] = −40 mm : image virtuelle, du côté de l'objet, droite et 3 fois plus petite.\nγ = [[OA'|OA]] = [[−40|−120]] = +[[1|3]]",
     indice: "Deux signes à ne pas perdre : celui de OA (objet réel) et celui de f' (lentille divergente)."
   },
   {
@@ -56,7 +56,7 @@ QUESTIONS.push(
     type: "calcul",
     question: "Une loupe a une distance focale f' = 25 mm. Calcule son grossissement commercial.",
     reponse: { valeur: 10, unite: "", decimales: 0, signe: false },
-    explication: "Puissance : P = 1 / f' = 1 / 0,025 = 40 δ. Grossissement commercial : Gc = P / 4 = 40 / 4 = 10. Le 4 vient de la distance de référence de 25 cm (1 / 0,25 = 4).",
+    explication: "P = [[1|f']] = [[1|0,025]] = 40 δ\nGc = [[P|4]] = [[40|4]] = 10\nLe 4 vient de la distance de référence de 25 cm : [[1|0,25]] = 4.",
     indice: "Passe d'abord par la puissance en dioptries, avec f' en mètres. Le grossissement commercial se rapporte à 25 cm."
   },
   {
@@ -90,8 +90,8 @@ QUESTIONS.push(
     type: "calcul",
     question: "Lunette de Galilée afocale : objectif de f'1 = +100 mm, oculaire divergent de f'2 = −25 mm. Calcule son grossissement, avec son signe.",
     reponse: { valeur: 4, unite: "", decimales: 0, signe: true },
-    explication: "G = −f'1 / f'2 = −100 / (−25) = +4. Le signe plus indique une image droite : une lunette de Galilée ne demande pas de redresseur. Avec deux lentilles convergentes (Kepler), le résultat serait négatif.",
-    indice: "Pour une lunette afocale, G = −f'1 / f'2. Garde le signe de f'2 : l'oculaire est divergent."
+    explication: "G = −[[f'1|f'2]] = −[[100|−25]] = +4\nLe signe plus indique une image droite : une lunette de Galilée ne demande pas de redresseur. Avec deux lentilles convergentes (Kepler), le résultat serait négatif.",
+    indice: "Pour une lunette afocale, G = −[[f'1|f'2]]. Garde le signe de f'2 : l'oculaire est divergent."
   },
   {
     id: "U42-074", difficulte: "facile", epreuve: "U42", theme: "Lunettes afocales", session: "complément", entrainement: true,
@@ -113,7 +113,7 @@ QUESTIONS.push(
     type: "calcul",
     question: "Doublet de deux lentilles minces : f'1 = 60 mm et f'2 = 60 mm, séparées de e = 40 mm. Calcule sa distance focale image f'.",
     reponse: { valeur: 45, unite: "mm", decimales: 0, signe: true },
-    explication: "Formule de Gullstrand : f' = f'1 × f'2 / (f'1 + f'2 − e) = 60 × 60 / (60 + 60 − 40) = 3 600 / 80 = 45 mm.",
+    explication: "Formule de Gullstrand : f' = [[f'1 × f'2|f'1 + f'2 − e]]\nf' = [[60 × 60|60 + 60 − 40]] = [[3 600|80]] = 45 mm",
     indice: "Formule du doublet : le produit des deux focales, divisé par leur somme diminuée de e."
   },
   {
@@ -139,7 +139,7 @@ QUESTIONS.push(
     type: "calcul",
     question: "Dans l'espace d'étude : pupille de rayon 8 mm en x = 0, diaphragme de champ de rayon 5 mm en x = 30 mm, plan des champs en x = 50 mm. Calcule le rayon du champ de pleine lumière.",
     reponse: { valeur: 3, unite: "mm", decimales: 0, signe: false },
-    explication: "Le plan des champs (x = 50) est au-delà du diaphragme (x = 30) : la droite de pleine lumière passe par les bords du même côté, (0 ; 8) et (30 ; 5). Pente = (5 − 8) / 30 = −0,1. En x = 50 : 8 − 0,1 × 50 = 3 mm.",
+    explication: "Le plan des champs (x = 50) est au-delà du diaphragme (x = 30) : on prend la droite par les bords du même côté, (0 ; 8) et (30 ; 5).\nPente = [[5 − 8|30]] = −0,1\nEn x = 50 : 8 − 0,1 × 50 = 3 mm.",
     indice: "Écris l'équation de la droite appuyée sur les deux bords du même côté, puis prolonge-la jusqu'au plan des champs."
   },
   {
@@ -168,7 +168,7 @@ QUESTIONS.push(
     type: "calcul",
     question: "Une lunette a un objectif de f'ob = 80 mm. Dans son plan focal image, le champ de pleine lumière a un rayon de 4 mm. Calcule la largeur du champ de pleine lumière sur un objet situé à 40 m.",
     reponse: { valeur: 4, unite: "m", decimales: 0, signe: false },
-    explication: "tan ω = 4 / 80 = 0,05. À 40 m : demi-largeur = 40 × 0,05 = 2 m, donc largeur = 2 × 2 = 4 m. Piège : donner la demi-largeur.",
+    explication: "tan ω = [[4|80]] = 0,05\nÀ 40 m : demi-largeur = 40 × 0,05 = 2 m\nLargeur = 2 × 2 = 4 m. Piège : donner la demi-largeur.",
     indice: "Le rayon du champ et la focale de l'objectif donnent la tangente du demi-champ. On demande une largeur, pas une demi-largeur."
   },
 
@@ -178,7 +178,7 @@ QUESTIONS.push(
     type: "calcul",
     question: "Un objectif de focale 300 mm est ouvert à f/6 (nombre d'ouverture N = 6). Calcule le diamètre de sa pupille d'entrée.",
     reponse: { valeur: 50, unite: "mm", decimales: 0, signe: false },
-    explication: "N = f' / D, donc D = f' / N = 300 / 6 = 50 mm. Plus N est petit, plus la pupille est grande.",
+    explication: "N = [[f'|D]], donc D = [[f'|N]] = [[300|6]] = 50 mm\nPlus N est petit, plus la pupille est grande.",
     indice: "Le nombre d'ouverture est le rapport de la focale au diamètre. Isole le diamètre."
   },
   {
@@ -194,8 +194,8 @@ QUESTIONS.push(
     type: "calcul",
     question: "Un bijoutier utilise une loupe de puissance P = 20 δ. La limite de résolution angulaire de son œil est 3 × 10⁻⁴ rad. Quel est le plus petit détail qu'il distingue sur l'objet, en µm ?",
     reponse: { valeur: 15, unite: "µm", decimales: 0, signe: false },
-    explication: "P = α' / y. Le plus petit détail vu est celui dont l'image est vue sous la limite de résolution de l'œil : α' = ε = 3 × 10⁻⁴ rad. Donc y = ε / P = 3 × 10⁻⁴ / 20 = 1,5 × 10⁻⁵ m, soit 15 µm.",
-    indice: "La puissance relie l'angle de l'image à la taille de l'objet : P = α' / y. Convertis ensuite le résultat de mètres en micromètres."
+    explication: "P = [[α'|y]], donc y = [[α'|P]]\nLe plus petit détail vu est celui dont l'image est vue sous la limite de résolution de l'œil : α' = ε = 3 × 10⁻⁴ rad.\ny = [[3 × 10⁻⁴|20]] = 1,5 × 10⁻⁵ m = 15 µm",
+    indice: "La puissance relie l'angle de l'image à la taille de l'objet : P = [[α'|y]]. Convertis ensuite le résultat de mètres en micromètres."
   },
 
   // ---------- Transmission et antireflet ----------
@@ -222,7 +222,7 @@ QUESTIONS.push(
     type: "calcul",
     question: "Un réseau a 400 traits par mm. Éclairé en incidence normale, sous quel angle voit-on la lumière de 500 nm dans l'ordre 1 ? Donne l'angle en degrés, au dixième.",
     reponse: { valeur: 11.5, unite: "°", decimales: 1, signe: false },
-    explication: "Pas a = 1 / 400 mm = 2,5 µm. Formule des réseaux : a × sin i' = k × λ, donc sin i' = 0,5 / 2,5 = 0,2 et i' ≈ 11,5°.",
+    explication: "Pas a = [[1|400]] mm = 2,5 µm\nRéseaux : a × sin i' = k × λ, donc sin i' = [[k × λ|a]] = [[0,5|2,5]] = 0,2\nDonc i' ≈ 11,5°.",
     indice: "Calcule d'abord le pas du réseau en micromètres, puis utilise a × sin i' = k × λ avec k = 1."
   },
 
@@ -252,7 +252,7 @@ QUESTIONS.push(
     type: "calcul",
     question: "Lentille mince divergente de f' = −50 mm. Un faisceau convergent la traverse et viendrait former l'image de l'objet 25 mm après la lentille (objet virtuel, OA = +25 mm). Calcule OA', avec son signe.",
     reponse: { valeur: 50, unite: "mm", decimales: 0, signe: true },
-    explication: "1/OA' = 1/f' + 1/OA = −1/50 + 1/25 = −1/50 + 2/50 = +1/50, donc OA' = +50 mm. Une lentille divergente peut donner une image réelle si l'objet est virtuel et plus proche que son foyer (25 mm < 50 mm).",
+    explication: "Descartes : [[1|OA']] = [[1|f']] + [[1|OA]]\n[[1|OA']] = −[[1|50]] + [[1|25]] = −[[1|50]] + [[2|50]] = +[[1|50]]\nDonc OA' = +50 mm. Une lentille divergente peut donner une image réelle si l'objet est virtuel et plus proche que son foyer (25 mm < 50 mm).",
     indice: "Objet virtuel : OA = +25 mm. Garde le signe négatif de f' pour une divergente."
   },
   {
@@ -268,7 +268,7 @@ QUESTIONS.push(
     type: "calcul",
     question: "Deux lentilles minces convergentes : L1 (f'1 = +60 mm) puis L2 (f'2 = +30 mm), séparées de 120 mm. Un objet réel est à 90 mm avant L1. Calcule le grandissement transversal total du système, avec son signe, à 0,01 près.",
     reponse: { valeur: -0.67, unite: "", decimales: 2, tolerance: 0.01, signe: true },
-    explication: "L1 : OA1' = +180 mm, donc γ1 = 180 / (−90) = −2. L2 : objet virtuel OA2 = +60 mm, image OA2' = +20 mm, donc γ2 = 20 / 60 = +1/3. Les grandissements se multiplient : γ = −2 × 1/3 = −0,67. L'image finale est renversée et plus petite que l'objet.",
+    explication: "L1 : OA1' = +180 mm\nγ1 = [[OA1'|OA1]] = [[180|−90]] = −2\nL2 : objet virtuel OA2 = +60 mm, image OA2' = +20 mm\nγ2 = [[OA2'|OA2]] = [[20|60]] = +[[1|3]]\nLes grandissements se multiplient : γ = −2 × [[1|3]] = −0,67\nL'image finale est renversée et plus petite que l'objet.",
     indice: "Calcule le grandissement de chaque lentille, puis multiplie-les. Pour L2, l'objet est virtuel."
   },
   {
@@ -284,8 +284,8 @@ QUESTIONS.push(
     type: "calcul",
     question: "On taille une face sphérique convexe (tournée vers la lumière) entre l'air et un verre d'indice 1,5. Pour que ce dioptre ait une vergence de +12,5 δ, quel rayon de courbure faut-il ?",
     reponse: { valeur: 40, unite: "mm", decimales: 0, signe: false },
-    explication: "Vergence d'un dioptre : V = (n' − n) / R. Donc R = (1,5 − 1) / 12,5 = 0,04 m, soit 40 mm. Piège : donner la réponse en mètres (0,04) sans convertir.",
-    indice: "V = (n' − n) / R avec R en mètres. Isole R, puis convertis en millimètres."
+    explication: "V = [[n' − n|R]], donc R = [[n' − n|V]]\nR = [[1,5 − 1|12,5]] = 0,04 m = 40 mm\nPiège : donner la réponse en mètres (0,04) sans convertir.",
+    indice: "V = [[n' − n|R]] avec R en mètres. Isole R, puis convertis en millimètres."
   },
   {
     id: "U42-095", difficulte: "moyen", epreuve: "U42", theme: "Conjugaison", session: "complément", entrainement: true,
@@ -300,7 +300,7 @@ QUESTIONS.push(
     type: "calcul",
     question: "Un objectif de f' = +30 mm doit donner d'un objet réel une image réelle 5 fois plus grande et renversée (γ = −5). À quelle distance de la lentille faut-il placer l'objet ? Donne OA, avec son signe.",
     reponse: { valeur: -36, unite: "mm", decimales: 0, signe: true },
-    explication: "On part de γ = OA'/OA = −5, donc OA' = −5 × OA. Descartes : 1/OA' − 1/OA = 1/f' devient −1/(5 OA) − 1/OA = 1/30, soit −6/(5 OA) = 1/30, donc OA = −36 mm. Contrôle : OA' = +180 mm et 1/180 + 1/36 = 1/30. L'objet est juste au-delà du foyer objet (30 mm).",
+    explication: "γ = [[OA'|OA]] = −5, donc OA' = −5 × OA\nDescartes : [[1|OA']] − [[1|OA]] = [[1|f']]\n−[[1|5 OA]] − [[1|OA]] = [[1|30]]\n−[[6|5 OA]] = [[1|30]]\nDonc OA = −[[6 × 30|5]] = −36 mm\nContrôle : OA' = +180 mm, et [[1|180]] + [[1|36]] = [[1|30]]. L'objet est juste au-delà du foyer objet (30 mm).",
     indice: "Remplace OA' par γ × OA dans la relation de Descartes, puis isole OA."
   },
 
@@ -310,7 +310,7 @@ QUESTIONS.push(
     type: "calcul",
     question: "Une loupe a une distance focale f' = 40 mm. Un observateur veut voir l'image virtuelle à 250 mm devant la loupe (OA' = −250 mm). À quelle distance de la loupe faut-il placer l'objet ? Donne OA, avec son signe, à 0,1 mm près.",
     reponse: { valeur: -34.5, unite: "mm", decimales: 1, signe: true },
-    explication: "1/OA = 1/OA' − 1/f' = −1/250 − 1/40 = −(4 + 25)/1000 = −29/1000. Donc OA = −1000/29 = −34,5 mm. L'objet est entre le foyer objet (40 mm) et la loupe : c'est ce qui donne une image virtuelle.",
+    explication: "OA' = −250 mm. Descartes : [[1|OA']] − [[1|OA]] = [[1|f']]\n[[1|OA]] = [[1|OA']] − [[1|f']] = −[[1|250]] − [[1|40]]\n[[1|OA]] = −[[4|1000]] − [[25|1000]] = −[[29|1000]]\nDonc OA = −[[1 000|29]] = −34,5 mm. L'objet est entre le foyer objet (40 mm) et la loupe : c'est ce qui donne une image virtuelle.",
     indice: "Isole 1/OA dans la relation de conjugaison avec OA' = −250 mm. Le signe moins sur OA' est important."
   },
   {
@@ -326,8 +326,8 @@ QUESTIONS.push(
     type: "calcul",
     question: "Un microscope a un objectif de focale f'ob = 4 mm, un oculaire de focale f'oc = 25 mm et un intervalle optique Δ = 160 mm (distance entre le foyer image de l'objectif et le foyer objet de l'oculaire). Calcule son grossissement commercial.",
     reponse: { valeur: 400, unite: "", decimales: 0, signe: false },
-    explication: "Grandissement de l'objectif : |γob| = Δ / f'ob = 160 / 4 = 40. Grossissement commercial de l'oculaire : 250 / f'oc = 250 / 25 = 10. Le grossissement du microscope est le produit : 40 × 10 = 400.",
-    indice: "Le grandissement de l'objectif vaut Δ / f'ob. Multiplie-le par le grossissement commercial de l'oculaire (250 / f'oc, f' en mm)."
+    explication: "Objectif : ∣γob∣ = [[Δ|f'ob]] = [[160|4]] = 40\nOculaire : Gc = [[250|f'oc]] = [[250|25]] = 10\nMicroscope : Gc = 40 × 10 = 400",
+    indice: "Le grandissement de l'objectif vaut [[Δ|f'ob]]. Multiplie-le par le grossissement commercial de l'oculaire ([[250|f'oc]], f' en mm)."
   },
   {
     id: "U42-100", difficulte: "facile", epreuve: "U42", theme: "Loupe et microscope", session: "complément", entrainement: true,
@@ -344,7 +344,7 @@ QUESTIONS.push(
     type: "calcul",
     question: "Des jumelles portent la mention « 8 × 42 » : grossissement 8, objectifs de diamètre 42 mm. Quel est le diamètre du cercle oculaire (pupille de sortie) ?",
     reponse: { valeur: 5.25, unite: "mm", decimales: 2, signe: false },
-    explication: "Le diamètre du cercle oculaire est celui de l'objectif divisé par le grossissement : 42 / 8 = 5,25 mm. Pour utiliser toute la lumière captée, il doit être inférieur ou égal à la pupille de l'œil.",
+    explication: "D' = [[D|G]] = [[42|8]] = 5,25 mm\nPour utiliser toute la lumière captée, il doit être inférieur ou égal à la pupille de l'œil.",
     indice: "Le cercle oculaire est l'image de l'objectif donnée par l'oculaire. Son diamètre vaut D / G."
   },
   {
@@ -381,7 +381,7 @@ QUESTIONS.push(
     type: "calcul",
     question: "Lunette de Kepler : f'ob = 200 mm, f'oc = 25 mm, réglée afocale. Un myope rapproche l'oculaire de l'objectif de 1 mm. Où se forme alors l'image donnée par l'oculaire ? Donne OA', avec son signe, depuis l'oculaire.",
     reponse: { valeur: -600, unite: "mm", decimales: 0, signe: true },
-    explication: "L'image donnée par l'objectif reste au foyer image de l'objectif. Après déplacement, elle est à 25 − 1 = 24 mm avant l'oculaire : OA = −24 mm. 1/OA' = 1/25 − 1/24 = (24 − 25)/600 = −1/600, donc OA' = −600 mm. L'image est virtuelle, à 60 cm devant l'œil : de quoi corriger une myopie d'environ 1,7 δ.",
+    explication: "L'image donnée par l'objectif reste au foyer image de l'objectif. Après déplacement, elle est à 25 − 1 = 24 mm avant l'oculaire : OA = −24 mm.\nDescartes : [[1|OA']] = [[1|f']] + [[1|OA]]\n[[1|OA']] = [[1|25]] − [[1|24]] = [[24|600]] − [[25|600]] = −[[1|600]]\nDonc OA' = −600 mm : image virtuelle, à 60 cm devant l'œil, de quoi corriger une myopie d'environ 1,7 δ.",
     indice: "L'objet de l'oculaire est maintenant à 24 mm de lui (avant). Applique Descartes à l'oculaire seul."
   },
 
@@ -391,7 +391,7 @@ QUESTIONS.push(
     type: "calcul",
     question: "Deux lentilles minces accolées (distance nulle) ont pour vergences V1 = +8 δ et V2 = −3 δ. Calcule la distance focale image du doublet.",
     reponse: { valeur: 200, unite: "mm", decimales: 0, signe: true },
-    explication: "Pour des lentilles accolées, les vergences s'ajoutent : V = 8 − 3 = +5 δ. Donc f' = 1/V = 0,2 m = 200 mm. Le doublet est convergent.",
+    explication: "Lentilles accolées : les vergences s'ajoutent.\nV = V1 + V2 = 8 − 3 = +5 δ\nf' = [[1|V]] = [[1|5]] = 0,2 m = 200 mm\nLe doublet est convergent.",
     indice: "Lentilles accolées : les vergences s'additionnent avec leur signe. Convertis la focale en millimètres."
   },
   {
@@ -407,7 +407,7 @@ QUESTIONS.push(
     type: "calcul",
     question: "On veut un doublet achromatique accolé de vergence totale V = +4 δ avec deux verres de nombres d'Abbe ν1 = 60 et ν2 = 36. Quelle est la distance focale de la lentille convergente ?",
     reponse: { valeur: 100, unite: "mm", decimales: 0, signe: false },
-    explication: "Deux conditions : V1 + V2 = 4 et V1/ν1 + V2/ν2 = 0, soit V1/60 + V2/36 = 0, donc V1 = −(5/3) V2. Alors −(5/3) V2 + V2 = 4, soit −(2/3) V2 = 4, donc V2 = −6 δ et V1 = +10 δ. La lentille convergente a f'1 = 1/10 = 0,1 m = 100 mm.",
+    explication: "V1 + V2 = 4 et [[V1|ν1]] + [[V2|ν2]] = 0\n[[V1|60]] + [[V2|36]] = 0, donc V1 = −[[5|3]] V2\n−[[5|3]] V2 + V2 = 4, soit −[[2|3]] V2 = 4\nDonc V2 = −6 δ et V1 = +10 δ\nf'1 = [[1|V1]] = [[1|10]] = 0,1 m = 100 mm",
     indice: "Écris les deux équations (somme des vergences, condition d'achromatisme) et résous le système."
   },
   {
@@ -443,7 +443,7 @@ QUESTIONS.push(
     type: "calcul",
     question: "Dans l'espace d'étude : pupille de rayon 12 mm en x = 0, diaphragme de champ de rayon 7 mm en x = 20 mm, plan des champs en x = 40 mm. Calcule le rayon du champ de pleine lumière.",
     reponse: { valeur: 2, unite: "mm", decimales: 0, signe: false },
-    explication: "La droite de pleine lumière passe par les bords du même côté : (0 ; 12) et (20 ; 7). Pente = (7 − 12) / 20 = −0,25. En x = 40 : 12 − 0,25 × 40 = 2 mm.",
+    explication: "La droite de pleine lumière passe par les bords du même côté : (0 ; 12) et (20 ; 7).\nPente = [[7 − 12|20]] = −0,25\nEn x = 40 : 12 − 0,25 × 40 = 2 mm.",
     indice: "Droite par les deux bords du même côté, prolongée jusqu'au plan des champs (x = 40)."
   },
   {
@@ -459,7 +459,7 @@ QUESTIONS.push(
     type: "calcul",
     question: "Dans l'espace d'étude : pupille de rayon 6 mm en x = 0, diaphragme de champ de rayon 3 mm en x = 15 mm, plan des champs en x = 50 mm. Calcule le rayon du champ moyen (droite passant par le centre de la pupille et le bord du diaphragme de champ).",
     reponse: { valeur: 10, unite: "mm", decimales: 0, signe: false },
-    explication: "La droite passe par (0 ; 0) et (15 ; 3). Pente = 3 / 15 = 0,2. En x = 50 : 0,2 × 50 = 10 mm. Le rayon de la pupille n'intervient pas pour le champ moyen.",
+    explication: "La droite passe par (0 ; 0) et (15 ; 3).\nPente = [[3|15]] = 0,2\nEn x = 50 : 0,2 × 50 = 10 mm. Le rayon de la pupille n'intervient pas pour le champ moyen.",
     indice: "Droite du centre de la pupille au bord du diaphragme de champ, prolongée jusqu'au plan des champs."
   },
 
@@ -489,7 +489,7 @@ QUESTIONS.push(
     type: "calcul",
     question: "Un microscope a un objectif d'ouverture numérique ON = 0,85. Pour λ = 510 nm, la plus petite distance séparable vaut d = 0,61 λ / ON. Calcule d.",
     reponse: { valeur: 366, unite: "nm", decimales: 0, signe: false },
-    explication: "d = 0,61 × 510 / 0,85 = 311,1 / 0,85 = 366 nm. Il faut garder la même unité que λ : on obtient des nanomètres, soit 0,37 µm.",
+    explication: "d = [[0,61 × λ|ON]]\nd = [[0,61 × 510|0,85]] = [[311,1|0,85]] = 366 nm\nOn garde la même unité que λ : nanomètres, soit 0,37 µm.",
     indice: "Garde λ en nanomètres : le résultat sort dans la même unité."
   },
   {
@@ -505,7 +505,7 @@ QUESTIONS.push(
     type: "calcul",
     question: "Un objectif de pupille D = 5 mm observe une scène à 25 m, en lumière de 500 nm. Quel est le plus petit écart séparable à cette distance, limité par la diffraction ? Donne la réponse à 0,01 mm près.",
     reponse: { valeur: 3.05, unite: "mm", decimales: 2, signe: false },
-    explication: "α = 1,22 × 500 × 10⁻⁹ / 5 × 10⁻³ = 1,22 × 10⁻⁴ rad. À 25 m : écart = α × L = 1,22 × 10⁻⁴ × 25 = 3,05 × 10⁻³ m = 3,05 mm.",
+    explication: "α = [[1,22 × λ|D]] = [[1,22 × 500 × 10⁻⁹|5 × 10⁻³]] = 1,22 × 10⁻⁴ rad\nÀ 25 m : écart = α × L = 1,22 × 10⁻⁴ × 25 = 3,05 × 10⁻³ m = 3,05 mm.",
     indice: "Calcule d'abord l'angle limite, puis multiplie-le par la distance (petits angles)."
   },
   {
@@ -531,7 +531,7 @@ QUESTIONS.push(
     type: "calcul",
     question: "Un verre non traité d'indice 1,74 est entouré d'air (on néglige l'absorption). Chaque face réfléchit R = ((n − 1)/(n + 1))². Quelle part de la lumière traverse le verre (les deux faces), en pourcentage arrondi à l'unité ?",
     reponse: { valeur: 86, unite: "%", decimales: 0, signe: false },
-    explication: "R = (0,74 / 2,74)² = 0,0729, soit 7,3 % par face. Transmission d'une face : 0,927. Deux faces : 0,927² = 0,859, soit 86 %. Piège : retirer 7,3 % une seule fois (92,7 %) oublie la seconde face.",
+    explication: "R = ([[n − 1|n + 1]])² = ([[0,74|2,74]])² = 0,0729, soit 7,3 % par face\nTransmission d'une face : 0,927. Deux faces : 0,927² = 0,859, soit 86 %.\nPiège : retirer 7,3 % une seule fois (92,7 %) oublie la seconde face.",
     indice: "Calcule R pour une face, puis la transmission 1 − R, puis élève au carré pour deux faces."
   },
   {
@@ -552,8 +552,8 @@ QUESTIONS.push(
     type: "calcul",
     question: "Une couche antireflet d'indice 1,25 est optimisée pour λ = 600 nm. Épaisseur minimale : e = λ / (4n) = 120 nm. Quelle est l'épaisseur suivante (la deuxième plus petite) qui convient aussi ?",
     reponse: { valeur: 360, unite: "nm", decimales: 0, signe: false },
-    explication: "La condition est e = (2k + 1) × λ / (4n). Pour k = 0 : 120 nm. Pour k = 1 : 3 × 120 = 360 nm. Ce n'est pas 240 nm (λ/2n) : cette épaisseur annule l'effet de la couche.",
-    indice: "Les épaisseurs qui conviennent sont des multiples impairs de λ / (4n)."
+    explication: "Condition : e = (2k + 1) × [[λ|4n]]\nk = 0 : e = [[600|4 × 1,25]] = 120 nm\nk = 1 : e = 3 × 120 = 360 nm\nCe n'est pas 240 nm ([[λ|2n]]) : cette épaisseur annule l'effet de la couche.",
+    indice: "Les épaisseurs qui conviennent sont des multiples impairs de [[λ|4n]]."
   },
   {
     id: "U42-124", difficulte: "difficile", epreuve: "U42", theme: "Transmission et antireflet", session: "complément", entrainement: true,
@@ -591,7 +591,7 @@ QUESTIONS.push(
     type: "calcul",
     question: "Fentes d'Young distantes de a = 0,4 mm, écran à D = 2 m, lumière de λ = 600 nm. Calcule l'interfrange i = λ D / a.",
     reponse: { valeur: 3, unite: "mm", decimales: 0, signe: false },
-    explication: "i = 600 × 10⁻⁹ × 2 / 0,4 × 10⁻³ = 3 × 10⁻³ m = 3 mm. Piège : garder λ en nm et a en mm sans convertir donne 3 000 au lieu de 0,003 m, un résultat faux d'un facteur un million.",
+    explication: "i = [[λ × D|a]]\ni = [[600 × 10⁻⁹ × 2|0,4 × 10⁻³]] = 3 × 10⁻³ m = 3 mm\nPiège : garder λ en nm et a en mm sans convertir donne 3 000 au lieu de 0,003 m, un résultat faux d'un facteur un million.",
     indice: "Convertis tout en mètres avant de calculer."
   },
   {
@@ -607,7 +607,7 @@ QUESTIONS.push(
     type: "calcul",
     question: "Un réseau a 600 traits par mm. Éclairé en incidence normale par une lumière de 500 nm, combien de faisceaux émergent au total (ordre 0 compris, ordres positifs et négatifs) ?",
     reponse: { valeur: 7, unite: "", decimales: 0, signe: false },
-    explication: "Pas a = 1/600 mm = 1,667 µm. Un ordre k existe si sin i' = kλ/a ≤ 1, donc k ≤ a/λ = 1,667/0,5 = 3,33. Les ordres possibles sont −3, −2, −1, 0, 1, 2, 3 : 7 faisceaux. Piège : répondre 3 oublie les ordres négatifs et l'ordre 0.",
+    explication: "Pas a = [[1|600]] mm = 1,667 µm\nUn ordre k existe si sin i' = [[k × λ|a]] ≤ 1, donc k ≤ [[a|λ]] = [[1,667|0,5]] = 3,33\nOrdres possibles : −3, −2, −1, 0, 1, 2, 3, soit 7 faisceaux. Piège : répondre 3 oublie les ordres négatifs et l'ordre 0.",
     indice: "Cherche l'ordre maximal k tel que sin i' ne dépasse pas 1. Compte ensuite les deux côtés."
   },
   {
@@ -615,7 +615,7 @@ QUESTIONS.push(
     type: "calcul",
     question: "Un réseau de 500 traits par mm, en incidence normale, étale la lumière blanche. À l'ordre 1, de quel angle sont écartées la lumière de 400 nm et celle de 600 nm ? Donne l'écart en degrés, à 0,1° près.",
     reponse: { valeur: 5.9, unite: "°", decimales: 1, signe: false },
-    explication: "Pas a = 2 µm. Ordre 1 : sin i'(400) = 0,4 / 2 = 0,2, soit 11,54°. sin i'(600) = 0,6 / 2 = 0,3, soit 17,46°. Écart = 17,46 − 11,54 = 5,9°. Il faut calculer les deux angles puis soustraire, et non soustraire d'abord les longueurs d'onde.",
+    explication: "Pas a = 2 µm. Ordre 1 : sin i' = [[k × λ|a]]\n400 nm : sin i' = [[0,4|2]] = 0,2, soit 11,54°\n600 nm : sin i' = [[0,6|2]] = 0,3, soit 17,46°\nÉcart = 17,46 − 11,54 = 5,9°. Il faut calculer les deux angles puis soustraire, et non soustraire d'abord les longueurs d'onde.",
     indice: "Calcule l'angle de chaque couleur avec a sin i' = λ, puis fais la différence."
   },
   {
@@ -662,7 +662,7 @@ QUESTIONS.push(
     type: "calcul",
     question: "Une lumière polarisée rectilignement traverse un analyseur parfait. Pour quel angle entre sa polarisation et l'analyseur ne laisse-t-il passer que 20 % de l'intensité ? Donne l'angle en degrés, à 0,1° près.",
     reponse: { valeur: 63.4, unite: "°", decimales: 1, signe: false },
-    explication: "Loi de Malus : I/I0 = cos² θ = 0,2, donc cos θ = √0,2 = 0,447 et θ = 63,4°. Piège : prendre cos θ = 0,2 donnerait 78,5°.",
+    explication: "Loi de Malus : [[I|I0]] = cos² θ = 0,2\ncos θ = √0,2 = 0,447, donc θ = 63,4°\nPiège : prendre cos θ = 0,2 donnerait 78,5°.",
     indice: "Résous cos² θ = 0,2 : prends d'abord la racine carrée."
   },
 
@@ -672,7 +672,7 @@ QUESTIONS.push(
     type: "calcul",
     question: "Une source ponctuelle d'intensité 500 cd éclaire, à 2 m, un plan dont la normale fait 60° avec la direction de la lumière. Calcule l'éclairement, avec E = I cos θ / d².",
     reponse: { valeur: 62.5, unite: "lx", decimales: 1, signe: false },
-    explication: "E = 500 × cos 60° / 2² = 500 × 0,5 / 4 = 62,5 lx. À incidence normale, on aurait 125 lx : l'inclinaison divise ici l'éclairement par 2.",
+    explication: "E = [[I × cos θ|d²]] = [[500 × cos 60°|2²]] = [[500 × 0,5|4]] = 62,5 lx\nÀ incidence normale, on aurait 125 lx : l'inclinaison divise ici l'éclairement par 2.",
     indice: "L'angle est celui entre la normale du plan et les rayons. Ne l'oublie pas dans la formule."
   },
   {
@@ -688,8 +688,8 @@ QUESTIONS.push(
     type: "calcul",
     question: "Deux lampes ponctuelles de 100 cd et 400 cd sont alignées à 3 m l'une de l'autre. Entre elles, un point est éclairé à égalité par les deux (incidence normale pour les deux). À quelle distance de la lampe de 100 cd se trouve-t-il ?",
     reponse: { valeur: 1, unite: "m", decimales: 0, signe: false },
-    explication: "E1 = E2 donne I1/d1² = I2/d2², donc d2/d1 = √(I2/I1) = √4 = 2. Avec d1 + d2 = 3 m : d1 + 2 d1 = 3, donc d1 = 1 m (et d2 = 2 m). Le point d'égalité est plus près de la lampe la plus faible.",
-    indice: "Égalise les deux éclairements en utilisant E = I / d², puis ajoute la condition d1 + d2 = 3 m."
+    explication: "E1 = E2 donne [[I1|d1²]] = [[I2|d2²]]\n[[d2|d1]] = √([[I2|I1]]) = √([[400|100]]) = 2\nAvec d1 + d2 = 3 m : d1 + 2 d1 = 3, donc d1 = 1 m (et d2 = 2 m). Le point d'égalité est plus près de la lampe la plus faible.",
+    indice: "Égalise les deux éclairements en utilisant E = [[I|d²]], puis ajoute la condition d1 + d2 = 3 m."
   }
 
 );

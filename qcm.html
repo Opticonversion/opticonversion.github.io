@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Opticonversion">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
-<link rel="stylesheet" href="style.css?v=e7375bae">
+<link rel="stylesheet" href="style.css?v=bc07fa26">
 </head>
 <body>
 <header class="entete">
@@ -53,9 +53,14 @@
       </div>
     </div>
 
-    <!-- Au début d'une séance (matière choisie ou « Aléatoire ») : penser à la calculatrice. Montré par montrerPasser,
-         retiré dès que l'élève touche à la première question. -->
-    <p class="rappel-calculatrice" id="rappel-calculatrice" hidden><span class="ico i-calcul" aria-hidden="true"></span> Sors ta calculatrice&nbsp;: certaines questions demandent un calcul.</p>
+    <!-- Au début d'une séance (matière choisie ou « Aléatoire ») : penser à la calculatrice. Un bandeau bien visible,
+         montré par montrerPasser. Il reste jusqu'à ce que l'élève appuie sur « Je l'ai » (jamais sur un clic à côté),
+         ou jusqu'à la fin de la séance. -->
+    <div class="rappel-calculatrice apparait" id="rappel-calculatrice" role="status" hidden>
+      <span class="ico i-calcul" aria-hidden="true"></span>
+      <p><b>Sors ta calculatrice</b> <span>Certaines questions demandent un calcul.</span></p>
+      <button class="bouton secondaire" type="button" id="rappel-calculatrice-ok">Je l'ai</button>
+    </div>
 
     <!-- Par où commencer : Atelier, cas, Spécificités (épreuves « échauffement »), ou petits liens -->
     <div class="mise-en-avant" id="mise-en-avant" hidden></div>
@@ -85,29 +90,29 @@
 
 <script src="videos.js?v=6f234673"></script>
 <script src="epreuves.js?v=cc645427"></script>
-<script src="questions-U41.js?v=bc3d6d5f"></script>
-<script src="questions-U42.js?v=eee28f5a"></script>
-<script src="questions-U43.js?v=41c83925"></script>
-<script src="questions-U5.js?v=15b8a311"></script>
-<script src="questions-U3.js?v=944da1c9"></script>
+<script src="questions-U41.js?v=5f14d644"></script>
+<script src="questions-U42.js?v=0686046a"></script>
+<script src="questions-U43.js?v=214a6318"></script>
+<script src="questions-U5.js?v=5d47a41f"></script>
+<script src="questions-U3.js?v=6c9ccac7"></script>
 <!-- Questions d'entraînement (mêmes notions, autres chiffres) : chargées ici seulement, hors Essentiel -->
-<script src="entrainement-U41.js?v=911e2e04"></script>
-<script src="entrainement-U42.js?v=b99d7c72"></script>
-<script src="entrainement-U43.js?v=6b06c6d1"></script>
-<script src="entrainement-U5.js?v=88378b59"></script>
-<script src="entrainement-U3.js?v=da114840"></script>
+<script src="entrainement-U41.js?v=1b78bba4"></script>
+<script src="entrainement-U42.js?v=06b93d7d"></script>
+<script src="entrainement-U43.js?v=6dc2c735"></script>
+<script src="entrainement-U5.js?v=98511033"></script>
+<script src="entrainement-U3.js?v=6bad30af"></script>
 <!-- Fiches « Spécificités » (facultatives : la page marche sans elles) -->
 <!-- Niveaux de l'Atelier (pour compter niveaux et étoiles sur la page de l'épreuve) -->
 <script src="traces-U42.js?v=cd7fcf7c"></script>
 <script src="traces-U43.js?v=65b6cc27"></script>
-<script src="traces-U5.js?v=3c44feba"></script>
+<script src="traces-U5.js?v=c4c5f919"></script>
 <script src="specificites-U41.js?v=172ce418"></script>
 <script src="specificites-U42.js?v=3dc3c146"></script>
 <script src="specificites-U43.js?v=0918c26c"></script>
 <script src="specificites-U5.js?v=4d12d3b3"></script>
 <script src="specificites-U3.js?v=2ee96b01"></script>
-<script src="essentiel.js?v=f3b7979d"></script>
-<script src="rythme.js?v=40d59d2f"></script>
+<script src="essentiel.js?v=ef2a4256"></script>
+<script src="rythme.js?v=c63f73c6"></script>
 <script>
   // ---------------- L'état du QCM ----------------
   let epreuveChoisie = null;   // ex. "U5"
@@ -569,7 +574,7 @@
       "<span>Score : " + score + "</span></div>" +
       '<p class="enonce"></p><div class="choix"></div>';
     zone.querySelector(".progression .pastille:not(.essentiel):not(.bts):not(.entrainement)").textContent = (seanceRevision ? q.epreuve + " · " : "") + q.theme;
-    zone.querySelector(".enonce").textContent = q.question;
+    ecrireTexteMath(zone.querySelector(".enonce"), q.question);      // fractions [[haut|bas]] et lignes (essentiel.js)
     // Contexte et annexe (le cas pratique en entier jusqu'à cette étape, ou ceux de la question)
     const contexte = creerContexte(q);
     if (contexte) zone.querySelector(".enonce").before(contexte);
@@ -593,7 +598,7 @@
         b.appendChild(img);
         b.setAttribute("aria-label", "Proposition " + "ABCD"[i]);
       } else {
-        b.textContent = r.texte;
+        ecrireTexteMath(b, r.texte);
       }
       b.dataset.lettre = "ABCD"[i];
       b.onclick = () => repondre(r, b);
@@ -611,7 +616,7 @@
         boite.className = "indice";
         boite.setAttribute("role", "status");
         boite.innerHTML = "<strong>Indice</strong><span></span>";
-        boite.querySelector("span").textContent = q.indice;
+        ecrireTexteMath(boite.querySelector("span"), q.indice);
         bouton.replaceWith(boite);
         rejouerAnimation(boite);
       };
@@ -637,6 +642,7 @@
     form.querySelector(".saisie-unite").textContent = r.unite || "";
     const dec = r.decimales === undefined ? 2 : r.decimales;
     form.querySelector(".saisie-aide").textContent = "Arrondi " + (dec === 0 ? "à l'unité" : "à " + ecrireNombre(10 ** -dec, dec) + " près") + (r.signe !== false ? " · avec son signe" : "") + ".";
+    ajouterAideUnite(form, r, q.question + " " + (q.contexte || ""));      // « Quelle unité ? » (essentiel.js)
     form.onsubmit = e => {
       e.preventDefault();
       const champ = form.querySelector("input");
@@ -732,13 +738,19 @@
     expl.querySelector("strong").textContent = reponse.juste
       ? (serieEnCours >= 3 ? "Bonne réponse · " + serieEnCours + " d'affilée" : "Bonne réponse")
       : "Pas tout à fait";
-    expl.querySelector("span").textContent = q.explication;
+    ecrireTexteMath(expl.querySelector("span"), q.explication);   // calcul posé : une étape par ligne, vraies fractions
     if (reponse.calcul) {
       // La bonne valeur, et ce qui cloche (signe, unité, arrondi)
       const msg = document.createElement("p");
       msg.className = "correction-calcul";
       msg.textContent = messageCalcul(q.reponse, reponse.calcul);
       expl.querySelector("span").before(msg);
+      if (reponse.calcul.etat === "unite") {          // la bonne valeur, mais pas dans la bonne unité : la règle à retenir
+        const regle = document.createElement("p");
+        regle.className = "aide-unite dans-correction";
+        ecrireTexteMath(regle, aideUnite(q.reponse, q.question + " " + (q.contexte || ""), true));
+        msg.after(regle);
+      }
     }
     if (q.schema) expl.appendChild(creerSchema(q.schema, q.schemaTexte, reponse.juste ? null : reponse.i));
     if (suite) {
@@ -1024,7 +1036,7 @@
     const el = (balise, classe, texte) => {
       const x = document.createElement(balise);
       if (classe) x.className = classe;
-      if (texte !== undefined) x.textContent = texte;
+      if (texte !== undefined) ecrireTexteMath(x, texte);      // fractions [[haut|bas]] et lignes (essentiel.js)
       return x;
     };
     const ajouterLiens = (parent, theme, questions) => { const l = lienSpec(code, theme, questions); if (l) parent.appendChild(l); };
@@ -1095,9 +1107,9 @@
         const carte = el("div", "piege");
         carte.appendChild(el("p", "piege-titre", p.titre));
         const faux = el("p", "piege-faux");
-        faux.append(el("span", "piege-marque", "Faux"), document.createTextNode(" " + p.faux));
+        faux.append(el("span", "piege-marque", "Faux"), " ", el("span", "", p.faux));
         const juste = el("p", "piege-juste");
-        juste.append(el("span", "piege-marque", "Juste"), document.createTextNode(" " + p.juste));
+        juste.append(el("span", "piege-marque", "Juste"), " ", el("span", "", p.juste));
         carte.append(faux, juste);
         ajouterLiens(carte, p.theme, p.questions);
         liste.appendChild(carte);
@@ -1546,11 +1558,11 @@
       erreurs.forEach(q => {
         const li = document.createElement("li");
         li.innerHTML = "<strong></strong><span class='erreur-reponse'></span><span class='doux'></span>";
-        li.querySelector("strong").textContent = q.question;
-        li.querySelector(".erreur-reponse").textContent = "✓ " + (q.type === "calcul"
+        ecrireTexteMath(li.querySelector("strong"), q.question);
+        ecrireTexteMath(li.querySelector(".erreur-reponse"), "✓ " + (q.type === "calcul"
           ? ecrireNombre(q.reponse.valeur, q.reponse.decimales === undefined ? 2 : q.reponse.decimales, q.reponse.signe !== false) + (q.reponse.unite ? " " + q.reponse.unite : "")
-          : q.choix[q.bonne]);
-        li.querySelector(".doux").textContent = q.explication;
+          : q.choix[q.bonne]));
+        ecrireTexteMath(li.querySelector(".doux"), q.explication);
         liste.appendChild(li);
       });
       zone.append(titre, liste);
@@ -1581,8 +1593,12 @@
   }
   // « Passer » pendant une séance : retour à l'accueil. Première ouverture : l'écran de départ ne reviendra pas ;
   // séance du jour : elle est notée « passée pour aujourd'hui » (rythme.js), l'élève peut la reprendre depuis l'accueil.
-  // Le rappel de la calculatrice s'efface dès que l'élève touche à la première question
-  document.getElementById("zone").addEventListener("click", () => { document.getElementById("rappel-calculatrice").hidden = true; });
+  // Le rappel de la calculatrice ne s'en va que si l'élève appuie sur « Je l'ai » ; le focus passe alors à la question
+  document.getElementById("rappel-calculatrice-ok").onclick = () => {
+    document.getElementById("rappel-calculatrice").hidden = true;
+    const suite = document.querySelector("#zone input, #zone button");
+    if (suite) suite.focus({ preventScroll: true });
+  };
   document.getElementById("passer-seance").onclick = () => {
     if (seanceMode === "premiers") { try { localStorage.setItem("accueil", "passe"); } catch (e) {} }
     else passerSeance(true);

@@ -79,23 +79,23 @@ QUESTIONS.push(
     question: "Sur le tracé, on cote la distance focale image d'un collimateur : f' = 125 mm. Quelle est sa vergence ?",
     choix: ["+0,125 δ", "+1,25 δ", "+8,00 δ", "+12,50 δ"],
     bonne: 2,
-    explication: "D = 1/f' avec f' en mètres : 1/0,125 = +8,00 δ. Attention à l'échelle du dessin : on convertit la cote en vraie grandeur avant de calculer.",
-    indice: "D = 1/f', mais avec f' en mètres. Convertis d'abord les millimètres."
+    explication: "D = [[1|f']] avec f' en mètres.\nD = [[1|0,125]] = +8,00 δ\nAttention à l'échelle du dessin : on convertit la cote en vraie grandeur avant de calculer.",
+    indice: "D = [[1|f']], mais avec f' en mètres. Convertis d'abord les millimètres."
   },
   {
     id: "U43-008", epreuve: "U43", theme: "Vergences et focales", session: "2024", difficulte: "moyen",
     question: "Un condenseur plan-convexe a un indice n = 1,5 et un rayon de courbure de 50 mm (l'autre face est plane). Sa vergence vaut environ :",
     choix: ["+5 δ", "+10 δ", "+20 δ", "+30 δ"],
     bonne: 1,
-    explication: "La face plane a une vergence nulle. Il reste celle du dioptre sphérique : D = (n − 1)/r = 0,5/0,050 = +10 δ.",
-    indice: "Une face plane n'a aucune vergence. Pour le dioptre sphérique, utilise D = (n − 1)/r, avec r en mètres."
+    explication: "La face plane a une vergence nulle. Il reste celle du dioptre sphérique :\nD = [[n − 1|r]] = [[0,5|0,050]] = +10 δ",
+    indice: "Une face plane n'a aucune vergence. Pour le dioptre sphérique, utilise D = [[n − 1|r]], avec r en mètres."
   },
   {
     id: "U43-009", epreuve: "U43", theme: "Vergences et focales", session: "2023", difficulte: "moyen",
     question: "On clipse une lentille macro de +5 δ sur un objectif photo réglé sur l'infini. Quel objet sera net sur la pellicule ?",
     choix: ["Un objet à 5 cm", "Un objet à 20 cm", "Un objet à 50 cm", "Un objet à l'infini"],
     bonne: 1,
-    explication: "L'objectif réglé sur l'infini a besoin de rayons parallèles. La lentille macro les fournit si l'objet est à son foyer objet : 1/5 = 0,20 m, soit 20 cm devant elle.",
+    explication: "L'objectif réglé sur l'infini a besoin de rayons parallèles. La lentille macro les fournit si l'objet est à son foyer objet :\nd = [[1|D]] = [[1|5]] = 0,20 m\nSoit 20 cm devant elle.",
     indice: "L'objectif réglé sur l'infini attend des rayons parallèles. Où placer l'objet pour que la lentille macro les rende parallèles ?"
   },
 
@@ -105,24 +105,24 @@ QUESTIONS.push(
     question: "Sur le tracé, on cote le remotum de l'œil : HR = −125 mm (R devant l'œil). Réfraction axiale et amétropie ?",
     choix: ["R = +8,00 δ, hypermétrope", "R = −8,00 δ, myope", "R = −0,125 δ, myope", "R = −12,50 δ, myope"],
     bonne: 1,
-    explication: "R = 1/HR = 1/(−0,125) = −8,00 δ. Remotum réel devant l'œil, donc R négatif : l'œil est myope.",
-    indice: "R = 1/HR, avec HR en mètres et son signe. Un remotum devant l'œil donne quel signe ?"
+    explication: "R = [[1|HR]] = [[1|−0,125]] = −8,00 δ\nRemotum réel devant l'œil, donc R négatif : l'œil est myope.",
+    indice: "R = [[1|HR]], avec HR en mètres et son signe. Un remotum devant l'œil donne quel signe ?"
   },
   {
     id: "U43-011", epreuve: "U43", theme: "Œil et instrument", session: "2018", difficulte: "facile",
     question: "Le remotum est derrière l'œil : HR = +250 mm. Réfraction axiale et amétropie ?",
     choix: ["R = −4,00 δ, myope", "R = +4,00 δ, hypermétrope", "R = +2,50 δ, hypermétrope", "R = 0, emmétrope"],
     bonne: 1,
-    explication: "R = 1/HR = 1/(+0,25) = +4,00 δ. Remotum virtuel derrière l'œil, donc R positif : l'œil est hypermétrope.",
-    indice: "R = 1/HR, avec HR en mètres. Un remotum virtuel derrière l'œil, c'est quelle amétropie ?"
+    explication: "R = [[1|HR]] = [[1|+0,25]] = +4,00 δ\nRemotum virtuel derrière l'œil, donc R positif : l'œil est hypermétrope.",
+    indice: "R = [[1|HR]], avec HR en mètres. Un remotum virtuel derrière l'œil, c'est quelle amétropie ?"
   },
   {
     id: "U43-012", epreuve: "U43", theme: "Œil et instrument", session: "2023", difficulte: "difficile",
     question: "Un myope de −4,00 δ, sans lunettes, regarde dans un viseur dont l'image finale se trouve à 20 cm devant son œil. Quelle accommodation lui faut-il ?",
     choix: ["0 δ", "+1,00 δ", "+4,00 δ", "+5,00 δ"],
     bonne: 1,
-    explication: "Proximité de l'image : 1/(−0,20) = −5 δ. Accommodation = R − proximité = −4 − (−5) = +1,00 δ. Son remotum est à 25 cm : l'image à 20 cm est un peu plus près, il accommode un peu.",
-    indice: "Calcule d'abord la proximité de l'image (1/distance en m, négative devant l'œil). L'accommodation est l'écart entre R et cette proximité."
+    explication: "Proximité de l'image : [[1|−0,20]] = −5 δ\nAccommodation = R − proximité = −4 − (−5) = +1,00 δ\nSon remotum est à 25 cm : l'image à 20 cm est un peu plus près, il accommode un peu.",
+    indice: "Calcule d'abord la proximité de l'image ([[1|distance]] en m, négative devant l'œil). L'accommodation est l'écart entre R et cette proximité."
   },
   {
     id: "U43-013", epreuve: "U43", theme: "Œil et instrument", session: "2023", difficulte: "moyen",
@@ -145,7 +145,7 @@ QUESTIONS.push(
     question: "Oculaire de focale 25 mm, œil placé à son foyer image. On le règle pour un myope de −4,00 δ (remotum à 250 mm), l'œil restant au foyer image de l'oculaire. De combien déplacer l'oculaire depuis le réglage emmétrope ?",
     choix: ["0,25 mm", "2,5 mm", "4 mm", "25 mm"],
     bonne: 1,
-    explication: "Relation de Newton : x·x' = −f'². Image sur le remotum : x' = F'A' = −250 mm. Donc x = −625/(−250) = +2,5 mm. L'image intermédiaire doit être 2,5 mm après le foyer objet : on rapproche l'oculaire de 2,5 mm.",
+    explication: "Relation de Newton : x·x' = −f'²\nImage sur le remotum : x' = F'A' = −250 mm.\nx = [[−f'²|x']] = [[−625|−250]] = +2,5 mm\nL'image intermédiaire doit être 2,5 mm après le foyer objet : on rapproche l'oculaire de 2,5 mm.",
     indice: "Utilise la relation de Newton x·x' = −f'², avec x' = F'A' compté depuis l'œil (en F'). Attention au signe de x'.",
     schema: "img/schemas/U43/oculaire-reglage-myope-2-5-mm.svg",
     schemaTexte: "Oculaire de 25 mm réglé pour un myope de −4 δ : l'image intermédiaire A₁ est 2,5 mm après le foyer objet F, et l'image finale B' se forme sur le remotum, 250 mm devant l'œil placé en F'."
@@ -265,7 +265,7 @@ QUESTIONS.push(
     question: "Une bague de mise au point (système vis-écrou) est filetée au pas de 0,6 mm. Combien de tours faut-il pour déplacer l'oculaire de 2,4 mm ?",
     choix: ["2 tours", "3 tours", "4 tours", "1,44 tour"],
     bonne: 2,
-    explication: "Un système vis-écrou transforme une rotation en translation : un tour fait avancer d'un pas. Nombre de tours = course ÷ pas = 2,4 ÷ 0,6 = 4 tours.",
+    explication: "Un système vis-écrou transforme une rotation en translation : un tour fait avancer d'un pas.\nNombre de tours = [[course|pas]] = [[2,4|0,6]] = 4 tours",
     indice: "Un tour de vis fait avancer d'un pas. Combien de pas faut-il pour parcourir la course demandée ?"
   },
 
@@ -275,15 +275,15 @@ QUESTIONS.push(
     question: "Lunette afocale : objectif de focale 600 mm, oculaire de focale 20 mm. Grossissement ?",
     choix: ["×12", "×30", "×580", "×0,033"],
     bonne: 1,
-    explication: "G = f'obj / f'oc = 600/20 = 30.",
-    indice: "Pour une lunette afocale, G = f'objectif / f'oculaire."
+    explication: "G = [[f'obj|f'oc]] = [[600|20]] = 30",
+    indice: "Pour une lunette afocale, G = [[f'objectif|f'oculaire]]."
   },
   {
     id: "U43-030", epreuve: "U43", theme: "Grossissement et photo", session: "2017", difficulte: "moyen",
     question: "On ajoute à cette lunette une lentille de Barlow qui double la focale de l'objectif. Que deviennent le grossissement et le champ observable ?",
     choix: ["G ×2, champ plus grand", "G ×2, champ plus petit", "G inchangé, champ plus petit", "G ÷2, champ plus grand"],
     bonne: 1,
-    explication: "La focale de l'objectif passe à 1 200 mm : G = 1 200/20 = 60. On voit plus gros, mais une portion du ciel plus petite.",
+    explication: "La focale de l'objectif passe à 1 200 mm :\nG = [[1 200|20]] = 60\nOn voit plus gros, mais une portion du ciel plus petite.",
     indice: "Que devient f'objectif, donc G ? Et si on voit plus gros, voit-on une plus grande ou une plus petite partie du ciel ?"
   },
   {
@@ -299,7 +299,7 @@ QUESTIONS.push(
     question: "Objectif photo de focale 100 mm dont la pupille d'entrée mesure 25 mm. Nombre d'ouverture ?",
     choix: ["f/2,5", "f/4", "f/25", "f/0,25"],
     bonne: 1,
-    explication: "N = focale ÷ diamètre de la pupille d'entrée = 100/25 = 4. On écrit f/4.",
+    explication: "N = [[focale|diamètre de la pupille d'entrée]] = [[100|25]] = 4\nOn écrit f/4.",
     indice: "N = focale ÷ diamètre de la pupille d'entrée, les deux dans la même unité."
   },
   {
@@ -307,8 +307,8 @@ QUESTIONS.push(
     question: "On monte un multiplicateur ×2 sur cet objectif (100 mm, f/4). Résultat ?",
     choix: ["200 mm, f/4, même luminosité", "200 mm, f/8, luminosité divisée par 4", "50 mm, f/2, luminosité ×4", "200 mm, f/8, luminosité divisée par 2"],
     bonne: 1,
-    explication: "La focale double (200 mm) mais la pupille d'entrée ne change pas : N = 200/25 = 8. L'éclairement varie comme 1/N² : (8/4)² = 4, donc 4 fois moins de lumière.",
-    indice: "La focale change, mais la pupille d'entrée de l'objectif, elle, reste la même. Et l'éclairement varie comme 1/N²."
+    explication: "La focale double (200 mm) mais la pupille d'entrée ne change pas :\nN = [[200|25]] = 8\nL'éclairement varie comme [[1|N²]] : ([[8|4]])² = 4, donc 4 fois moins de lumière.",
+    indice: "La focale change, mais la pupille d'entrée de l'objectif, elle, reste la même. Et l'éclairement varie comme [[1|N²]]."
   },
 
   // ---------- Œil astigmate (3/8) ----------
@@ -335,15 +335,15 @@ QUESTIONS.push(
     question: "Skiascopie à 50 cm : le point neutre est obtenu avec un verre de +3,00 δ. Réfraction de l'œil ?",
     choix: ["+3,00 δ", "+1,00 δ", "+5,00 δ", "−1,00 δ"],
     bonne: 1,
-    explication: "On retire la vergence liée à la distance de travail : R = verre de point neutre − 1/d = +3 − 1/0,5 = +3 − 2 = +1,00 δ. L'œil est hypermétrope d'une dioptrie.",
-    indice: "Au point neutre, le remotum est sur ton skiascope. Retire la vergence liée à la distance de travail : 1/d, avec d en mètres."
+    explication: "On retire la vergence liée à la distance de travail :\nR = verre de point neutre − [[1|d]] = +3 − [[1|0,5]] = +3 − 2 = +1,00 δ\nL'œil est hypermétrope d'une dioptrie.",
+    indice: "Au point neutre, le remotum est sur ton skiascope. Retire la vergence liée à la distance de travail : [[1|d]], avec d en mètres."
   },
   {
     id: "U43-037", epreuve: "U43", theme: "Skiascopie", session: "2024", difficulte: "difficile",
     question: "Skiascopie à 50 cm, faisceau divergent, sans verre : le reflet bouge en sens inverse du skiascope. Conclusion ?",
     choix: ["Hypermétropie", "Emmétropie", "Myopie de plus de 2 δ", "Myopie de moins de 2 δ"],
     bonne: 2,
-    explication: "Le mouvement est inverse quand le remotum se trouve entre le sujet et l'examinateur, donc à moins de 50 cm : myopie de plus de 1/0,5 = 2 δ. Pour une myopie de 2 δ exactement, on aurait le point neutre.",
+    explication: "Le mouvement est inverse quand le remotum se trouve entre le sujet et l'examinateur, donc à moins de 50 cm : myopie de plus de [[1|0,5]] = 2 δ.\nPour une myopie de 2 δ exactement, on aurait le point neutre.",
     indice: "Le sens du reflet dépend de la position du remotum par rapport au skiascope. Où est le remotum quand le mouvement est inverse ?",
     schema: "img/schemas/U43/skiascopie-sens-du-reflet-50cm.svg",
     schemaTexte: "Skiascopie à 50 cm : un remotum entre le patient et le skiascope (myope de −4 δ) donne un mouvement inverse ; à 50 cm (−2 δ), c'est le point neutre ; au-delà (−1 δ) ou derrière l'œil, le mouvement est direct."
@@ -363,7 +363,7 @@ QUESTIONS.push(
     question: "Au frontofocomètre, un verre de +4,00 δ montre un effet prismatique de 2 Δ. De combien est-il décentré ?",
     choix: ["2 mm", "5 mm", "8 mm", "0,5 mm"],
     bonne: 1,
-    explication: "Règle de Prentice : P = c (cm) × D, donc c = P/D = 2/4 = 0,5 cm = 5 mm.",
+    explication: "Règle de Prentice : P = c (cm) × D\nc = [[P|D]] = [[2|4]] = 0,5 cm = 5 mm",
     indice: "Règle de Prentice : P (Δ) = c (cm) × D. Isole c, puis convertis les centimètres en millimètres."
   },
 
@@ -390,7 +390,7 @@ QUESTIONS.push(
     question: "Les trois diaphragmes du schéma sont déjà ramenés dans l'espace d'étude. Lequel est la pupille ?",
     choix: ["[D₁], le plus petit", "[D₂]", "[D₃], le plus grand", "On ne peut pas savoir sans connaître le champ"],
     bonne: 1,
-    explication: "Depuis A, centre du plan des champs, on compare les angles : tan = rayon ÷ distance. [D₁] : 6/40 = 0,15 ; [D₃] : 20/100 = 0,20 ; [D₂] : 15/150 = 0,10. [D₂] est vu sous le plus petit angle : c'est la pupille, même s'il n'est pas le plus petit.",
+    explication: "Depuis A, centre du plan des champs, on compare les angles : tan = [[rayon|distance]].\n[D₁] : [[6|40]] = 0,15\n[D₃] : [[20|100]] = 0,20\n[D₂] : [[15|150]] = 0,10\n[D₂] est vu sous le plus petit angle : c'est la pupille, même s'il n'est pas le plus petit.",
     indice: "Ne regarde pas seulement la taille : compare l'angle sous lequel on voit chaque diaphragme depuis A (rayon ÷ distance).",
     schemaQuestion: "img/schemas/U43/champs-trois-diaphragmes.svg",
     schemaTexte: "Depuis le point A du plan des champs : [D₁] de rayon 6 mm à 40 mm, [D₃] de rayon 20 mm à 100 mm, [D₂] de rayon 15 mm à 150 mm."
@@ -423,7 +423,7 @@ QUESTIONS.push(
     question: "Où se forme l'image intermédiaire A₁B₁ de la charnière, donnée par l'objectif ?",
     choix: ["À 120 mm après l'objectif, réelle et renversée", "À 60 mm après l'objectif, réelle et renversée", "À 120 mm avant l'objectif, virtuelle et droite", "Au foyer image de l'objectif, à 20 mm"],
     bonne: 0,
-    explication: "Relation de conjugaison : 1/OA₁ = 1/f' + 1/OA = 1/20 + 1/(−24) = 6/120 − 5/120 = 1/120, donc OA₁ = +120 mm. Positive : image réelle, après l'objectif. Grandissement γ = OA₁/OA = 120/(−24) = −5 : renversée et 5 fois plus grande.",
+    explication: "Relation de conjugaison :\n[[1|OA₁]] = [[1|f']] + [[1|OA]] = [[1|20]] + [[1|−24]]\n[[1|OA₁]] = [[6|120]] − [[5|120]] = [[1|120]]\nDonc OA₁ = +120 mm. Positive : image réelle, après l'objectif.\nGrandissement : γ = [[OA₁|OA]] = [[120|−24]] = −5\nL'image est renversée et 5 fois plus grande.",
     indice: "La charnière est un objet réel avant l'objectif : OA = −24 mm. Utilise la relation de conjugaison avec f' = 20 mm.",
     schema: "img/schemas/U43/microscope-chaine-emmetrope.svg",
     schemaTexte: "Tracé à l'échelle : l'objet AB à 24 mm de l'objectif (f' = 20 mm) donne une image A₁B₁ réelle, renversée, 5 fois plus grande, à 120 mm, dans le plan focal objet de l'oculaire."
@@ -444,7 +444,7 @@ QUESTIONS.push(
     question: "D'après le schéma, quel diaphragme est la pupille ?",
     choix: ["La monture de l'objectif", "La monture de l'oculaire", "Aucune : il faut d'abord un diaphragme de champ", "Les deux montures jouent ce rôle à égalité"],
     bonne: 0,
-    explication: "Depuis A₁, on compare les angles : monture de l'objectif, tan = 4/120 ≈ 0,03 ; monture de l'oculaire, tan = 10/25 = 0,40. La monture de l'objectif est vue sous le plus petit angle : c'est la pupille. La monture de l'oculaire est la lucarne.",
+    explication: "Depuis A₁, on compare les angles : tan = [[rayon|distance]].\nMonture de l'objectif : [[4|120]] ≈ 0,03\nMonture de l'oculaire : [[10|25]] = 0,40\nLa monture de l'objectif est vue sous le plus petit angle : c'est la pupille. La monture de l'oculaire est la lucarne.",
     indice: "Les deux montures sont déjà dans l'espace d'étude. Compare rayon ÷ distance à A₁ pour chacune.",
     schemaQuestion: "img/schemas/U43/cas-microscope-diaphragmes.svg",
     schema: "img/schemas/U43/cas-microscope-diaphragmes-correction.svg",
@@ -466,7 +466,7 @@ QUESTIONS.push(
     question: "De combien, et dans quel sens, faut-il déplacer l'oculaire par rapport au réglage emmétrope ?",
     choix: ["5 mm, en le rapprochant de l'objectif", "5 mm, en l'éloignant de l'objectif", "8 mm, en le rapprochant de l'objectif", "0,2 mm, en le rapprochant de l'objectif"],
     bonne: 0,
-    explication: "Remotum à 1/8 = 0,125 m devant l'œil, donc x' = F'A' = −125 mm. Newton : x = −f'²/x' = −625/(−125) = +5 mm. A₁ doit être 5 mm après le foyer objet de l'oculaire, c'est-à-dire entre Foc et l'oculaire : on rapproche l'oculaire de l'objectif de 5 mm.",
+    explication: "Remotum à [[1|8]] m = 0,125 m devant l'œil, donc x' = F'A' = −125 mm.\nNewton : x = [[−f'²|x']] = [[−625|−125]] = +5 mm\nA₁ doit être 5 mm après le foyer objet de l'oculaire, c'est-à-dire entre Foc et l'oculaire : on rapproche l'oculaire de l'objectif de 5 mm.",
     indice: "Place l'image finale sur le remotum du myope, puis utilise x·x' = −f'² avec f' = 25 mm. Attention au signe de x'."
   },
   {

@@ -26,7 +26,7 @@ QUESTIONS.push(
     question: "Une monture est achetée 60 € HT et vendue 180 € TTC (TVA 20 %). Quel est le taux de marque ?",
     choix: ["60 %", "66,7 %", "50 %", "150 %"],
     bonne: 0,
-    explication: "On travaille en HT. PV HT = 180 / 1,2 = 150 €. Marge brute = 150 − 60 = 90 €. Taux de marque = marge / PV HT = 90 / 150 = 60 %. (66,7 % = 120/180 : on a oublié de retirer la TVA ; 150 % = le taux de marge.)",
+    explication: "On travaille en HT.\nPV HT = [[180|1,2]] = 150 €\nMarge brute = 150 − 60 = 90 €\nTaux de marque = [[marge|PV HT]] = [[90|150]] = 0,60, soit 60 %.\nLes autres réponses : 66,7 % = [[120|180]] (TVA oubliée), 150 % = le taux de marge.",
     indice: "Les taux se calculent toujours HT. Commence par enlever la TVA du prix de vente, puis divise la marge par le bon prix.",
     schema: "img/schemas/U3/prix-monture-60-180.svg",
     schemaTexte: "Barre du prix de 180 € TTC découpée en achat 60 €, marge 90 € et TVA 30 € : taux de marque 90/150 = 60 %, taux de marge 90/60 = 150 %, coefficient TTC 3."
@@ -36,7 +36,7 @@ QUESTIONS.push(
     question: "Même monture : achat 60 € HT, vente 150 € HT. Quel est le taux de MARGE ?",
     choix: ["60 %", "40 %", "150 %", "250 %"],
     bonne: 2,
-    explication: "Taux de marge = marge / coût d'achat HT = 90 / 60 = 150 %. Piège classique : le taux de MARQUE divise par le prix de vente (90/150 = 60 %), le taux de MARGE divise par le coût d'achat.",
+    explication: "Taux de marge = [[marge|coût d'achat HT]] = [[90|60]] = 1,50, soit 150 %.\nPiège classique : le taux de MARQUE divise par le prix de vente, [[90|150]] = 60 %. Le taux de MARGE divise par le coût d'achat.",
     indice: "Taux de MARGE ou taux de MARQUE ? L'un divise la marge par le coût d'achat, l'autre par le prix de vente. Lequel est demandé ici ?"
   },
   {
@@ -44,7 +44,7 @@ QUESTIONS.push(
     question: "Un opticien applique un coefficient multiplicateur TTC de 3 sur un verre acheté 40 € HT. Prix de vente TTC et taux de marque ?",
     choix: ["120 € TTC, taux de marque 60 %", "120 € TTC, taux de marque 66,7 %", "100 € TTC, taux de marque 60 %", "144 € TTC, taux de marque 72 %"],
     bonne: 0,
-    explication: "Coefficient TTC = PV TTC / achat HT, donc PV TTC = 40 × 3 = 120 €. PV HT = 120 / 1,2 = 100 €. Marge = 100 − 40 = 60 €. Taux de marque = 60 / 100 = 60 %.",
+    explication: "Coefficient TTC = [[PV TTC|achat HT]], donc PV TTC = 40 × 3 = 120 €\nPV HT = [[120|1,2]] = 100 €\nMarge = 100 − 40 = 60 €\nTaux de marque = [[60|100]] = 60 %.",
     indice: "Le coefficient TTC transforme un achat HT en prix TTC. Trouve le prix TTC, repasse en HT, puis calcule la marge."
   },
   {
@@ -52,7 +52,7 @@ QUESTIONS.push(
     question: "Un magasin vise un taux de marque de 60 %. Quel coefficient multiplicateur TTC doit-il appliquer sur ses achats HT ?",
     choix: ["1,6", "2,5", "3", "3,6"],
     bonne: 2,
-    explication: "Coefficient HT = 1 / (1 − taux de marque) = 1 / 0,4 = 2,5. Coefficient TTC = 2,5 × 1,2 = 3. Vérification : achat 100 € → PV HT 250 €, marge 150 €, 150/250 = 60 %.",
+    explication: "Coefficient HT = [[1|1 − taux de marque]] = [[1|1 − 0,6]] = [[1|0,4]] = 2,5\nCoefficient TTC = 2,5 × 1,2 = 3\nVérification : achat 100 €, PV HT 250 €, marge 150 €, taux de marque [[150|250]] = 60 %.",
     indice: "Prends un achat facile, par exemple 100 € HT : quel PV HT donne 60 % de marque ? Puis ajoute la TVA."
   },
   {
@@ -60,7 +60,7 @@ QUESTIONS.push(
     question: "Un client paie un équipement 240 € TTC. Quel est le montant de TVA collectée par le magasin (TVA 20 %) ?",
     choix: ["48 €", "40 €", "20 €", "200 €"],
     bonne: 1,
-    explication: "Le prix TTC contient déjà la TVA. HT = 240 / 1,2 = 200 €, donc TVA = 240 − 200 = 40 € (soit 1/6 du TTC). Le piège : 240 × 20 % = 48 €, ce qui revient à appliquer la TVA deux fois.",
+    explication: "Le prix TTC contient déjà la TVA.\nPrix HT = [[240|1,2]] = 200 €\nTVA = 240 − 200 = 40 € (soit [[1|6]] du TTC).\nLe piège : 240 × 20 % = 48 € revient à appliquer la TVA deux fois.",
     indice: "Le prix TTC contient déjà la TVA. Retrouve d'abord le prix HT, la TVA est la différence."
   },
 
@@ -70,7 +70,7 @@ QUESTIONS.push(
     question: "Zone de chalandise : 12 000 habitants, 70 % de porteurs de lunettes, panier moyen 360 € TTC, renouvellement tous les 3 ans. Quel est le marché potentiel annuel ?",
     choix: ["3 024 000 € TTC", "1 008 000 € TTC", "336 000 € TTC", "2 520 000 € TTC"],
     bonne: 1,
-    explication: "Porteurs = 12 000 × 0,70 = 8 400. Dépense sur 3 ans = 8 400 × 360 = 3 024 000 €. Chaque client ne renouvelle que tous les 3 ans, donc par an : 3 024 000 / 3 = 1 008 000 € TTC.",
+    explication: "Porteurs = 12 000 × 0,70 = 8 400\nDépense sur 3 ans = 8 400 × 360 = 3 024 000 €\nChaque client ne renouvelle que tous les 3 ans, donc par an :\n[[3 024 000|3]] = 1 008 000 € TTC.",
     indice: "Nombre de porteurs × panier moyen donne la dépense d'un cycle complet. N'oublie pas que ce cycle dure 3 ans."
   },
   {
@@ -88,7 +88,7 @@ QUESTIONS.push(
     question: "Le marché d'une zone, net de l'évasion commerciale, est de 480 000 € TTC. Le magasin espère en capter 25 %. Quel chiffre d'affaires HT peut-il prévoir ?",
     choix: ["120 000 €", "100 000 €", "96 000 €", "144 000 €"],
     bonne: 1,
-    explication: "Part de marché : 480 000 × 0,25 = 120 000 € TTC. Le chiffre d'affaires d'une entreprise se donne HT : 120 000 / 1,2 = 100 000 € HT.",
+    explication: "Part de marché : 480 000 × 0,25 = 120 000 € TTC\nLe chiffre d'affaires d'une entreprise se donne HT :\n[[120 000|1,2]] = 100 000 € HT.",
     indice: "Deux étapes : la part de marché, puis la conversion. Le marché est donné TTC, le chiffre d'affaires d'une entreprise se donne HT."
   },
   {
@@ -140,7 +140,7 @@ QUESTIONS.push(
     question: "Chiffre d'affaires HT : 300 000 €. Charges variables : 120 000 €. Charges fixes : 135 000 €. Quel est le seuil de rentabilité ?",
     choix: ["255 000 €", "225 000 €", "180 000 €", "337 500 €"],
     bonne: 1,
-    explication: "Marge sur coût variable = 300 000 − 120 000 = 180 000 €, soit un taux de 180 000 / 300 000 = 60 %. Seuil de rentabilité = charges fixes / taux de MCV = 135 000 / 0,60 = 225 000 €. C'est le CA à partir duquel le magasin ne perd plus d'argent.",
+    explication: "Marge sur coût variable = 300 000 − 120 000 = 180 000 €\nTaux de MCV = [[180 000|300 000]] = 0,60, soit 60 %\nSeuil de rentabilité = [[charges fixes|taux de MCV]] = [[135 000|0,60]] = 225 000 €\nC'est le CA à partir duquel le magasin ne perd plus d'argent.",
     indice: "Calcule d'abord la marge sur coût variable et son taux. Le seuil de rentabilité, c'est les charges fixes divisées par ce taux.",
     schema: "img/schemas/U3/seuil-rentabilite-300k.svg",
     schemaTexte: "Graphique : droite du chiffre d'affaires et droite des coûts totaux (135 000 € de charges fixes plus 40 % du CA). Elles se croisent à 225 000 €, le seuil de rentabilité. On peut faire glisser les charges fixes."
@@ -150,7 +150,7 @@ QUESTIONS.push(
     question: "Même magasin : SR = 225 000 €, CA annuel = 300 000 €, activité régulière toute l'année. À quelle date le point mort est-il atteint ?",
     choix: ["Fin août", "Fin septembre", "Fin octobre", "Fin juin"],
     bonne: 1,
-    explication: "Point mort = SR / CA × 12 mois = 225 000 / 300 000 × 12 = 0,75 × 12 = 9 mois, donc fin septembre. Si le magasin ferme un mois (par exemple en août), on compte sur les jours ou les mois réellement travaillés.",
+    explication: "Point mort = [[SR|CA]] × 12 mois = [[225 000|300 000]] × 12 = 0,75 × 12 = 9 mois\nSoit fin septembre.\nSi le magasin ferme un mois (par exemple en août), on compte sur les jours ou les mois réellement travaillés.",
     indice: "Le point mort est le moment de l'année où le CA atteint le SR. Quelle fraction du CA annuel représente le SR ?",
     schema: "img/schemas/U3/seuil-rentabilite-300k.svg",
     schemaTexte: "Graphique du seuil de rentabilité : le SR de 225 000 € représente les trois quarts du CA annuel de 300 000 €, soit 9 mois d'activité régulière."
@@ -160,7 +160,7 @@ QUESTIONS.push(
     question: "Une ligne de montures se vend 125 € HT pièce, pour un coût variable de 50 € par monture. Ses charges fixes sont de 18 000 € par an. Combien faut-il en vendre PAR MOIS pour atteindre le seuil de rentabilité ?",
     choix: ["12 montures", "20 montures", "144 montures", "240 montures"],
     bonne: 1,
-    explication: "Marge sur coût variable par monture = 125 − 50 = 75 €. SR en volume = 18 000 / 75 = 240 montures par an, soit 240 / 12 = 20 montures par mois. (240 est la bonne réponse… mais par an.)",
+    explication: "Marge sur coût variable par monture = 125 − 50 = 75 €\nSR en volume = [[18 000|75]] = 240 montures par an\nPar mois : [[240|12]] = 20 montures.\nLe chiffre 240 est le seuil annuel : attention à l'unité de temps demandée.",
     indice: "Combien chaque monture vendue rapporte-t-elle pour couvrir les charges fixes ? Attention à l'unité de temps demandée."
   },
   {
@@ -168,7 +168,7 @@ QUESTIONS.push(
     question: "Un nouveau rayon prévoit 40 000 € HT de CA, un taux de marge sur coût variable de 50 % et 24 000 € de charges fixes. Que conclure ?",
     choix: ["Le SR ne se calcule pas car le résultat est négatif", "SR = 48 000 € : il manque 8 000 € de CA pour ne plus perdre d'argent", "SR = 12 000 € : le rayon est très rentable", "SR = 20 000 € : le rayon est rentable"],
     bonne: 1,
-    explication: "MCV = 40 000 × 0,5 = 20 000 €, moins 24 000 € de charges fixes : perte de 4 000 €. Le SR se calcule quand même : 24 000 / 0,5 = 48 000 €. Il est AU-DESSUS du CA prévu, il manque 8 000 € de ventes. Pour conclure, on propose des solutions : baisser les charges fixes, augmenter les ventes ou le taux de marge.",
+    explication: "MCV = 40 000 × 0,5 = 20 000 €\nRésultat = 20 000 − 24 000 = −4 000 € : une perte.\nSR = [[24 000|0,5]] = 48 000 €\nIl est AU-DESSUS du CA prévu : il manque 8 000 € de ventes.\nPour conclure, on propose des solutions : baisser les charges fixes, augmenter les ventes ou le taux de marge.",
     indice: "Calcule le résultat (MCV − charges fixes), puis le SR avec la formule habituelle. La formule marche même quand on perd de l'argent."
   },
 
@@ -194,8 +194,8 @@ QUESTIONS.push(
     question: "Dettes fournisseurs : 24 000 € TTC. Achats de l'année : 146 000 € TTC. Quel est le délai moyen de crédit fournisseurs (année de 365 jours) ?",
     choix: ["60 jours", "6 jours", "36 jours", "90 jours"],
     bonne: 0,
-    explication: "Délai fournisseurs = dettes fournisseurs / achats TTC × 365 = 24 000 / 146 000 × 365 = 60 jours. Même logique pour les clients (créances / CA TTC × 365). En optique, le délai clients est court (paiement au comptant, tiers payant), ce qui aide la trésorerie.",
-    indice: "Délai = dette / flux annuel × nombre de jours. Garde tout en TTC et utilise l'année de 365 jours demandée."
+    explication: "Délai fournisseurs = [[dettes fournisseurs|achats TTC]] × 365 = [[24 000|146 000]] × 365 = 60 jours\nMême logique pour les clients : [[créances|CA TTC]] × 365.\nEn optique, le délai clients est court (paiement au comptant, tiers payant), ce qui aide la trésorerie.",
+    indice: "Délai = [[dette|flux annuel]] × nombre de jours. Garde tout en TTC et utilise l'année de 365 jours demandée."
   },
   {
     id: "U3-021", difficulte: "moyen", epreuve: "U3", theme: "Analyse financière", session: "2017",
@@ -220,16 +220,16 @@ QUESTIONS.push(
     question: "Dettes financières : 60 000 €. Capitaux propres : 120 000 €. Que dire du ratio d'endettement ?",
     choix: ["0,5 : le magasin peut encore emprunter", "2 : le magasin est trop endetté", "0,5 : le magasin ne peut plus emprunter", "50 % : la banque refusera tout prêt"],
     bonne: 0,
-    explication: "Ratio d'endettement = dettes financières / capitaux propres = 60 000 / 120 000 = 0,5. Repère : au-dessous de 1, les dettes bancaires restent inférieures à ce qu'ont apporté les propriétaires, la banque peut encore prêter. La banque regarde aussi la CAF (capacité de remboursement).",
-    indice: "Ratio d'endettement = dettes financières / capitaux propres. Compare le résultat au repère de 1."
+    explication: "Ratio d'endettement = [[dettes financières|capitaux propres]] = [[60 000|120 000]] = 0,5\nRepère : au-dessous de 1, les dettes bancaires restent inférieures à ce qu'ont apporté les propriétaires, la banque peut encore prêter. La banque regarde aussi la CAF (capacité de remboursement).",
+    indice: "Ratio d'endettement = dettes financières sur capitaux propres. Compare le résultat au repère de 1."
   },
   {
     id: "U3-024", difficulte: "moyen", epreuve: "U3", theme: "Investissement et financement", session: "2023",
     question: "Une meuleuse automatique est achetée et mise en service le 1er avril, pour 15 000 € HT, amortie en linéaire sur 5 ans. Quelle est la dotation de la 1re année (exercice du 1er janvier au 31 décembre) ?",
     choix: ["3 000 €", "2 250 €", "750 €", "2 500 €"],
     bonne: 1,
-    explication: "Annuité pleine = 15 000 / 5 = 3 000 € par an. La 1re année, on ne compte que d'avril à décembre, soit 9 mois (prorata temporis) : 3 000 × 9/12 = 2 250 €. Valeur nette comptable fin d'année 1 = 15 000 − 2 250 = 12 750 €. La dernière année recevra les 750 € restants.",
-    indice: "Amortissement linéaire : annuité = valeur / durée. La première année, compte seulement les mois depuis la mise en service."
+    explication: "Annuité pleine = [[15 000|5]] = 3 000 € par an\nLa 1re année, on ne compte que d'avril à décembre, soit 9 mois (prorata temporis) :\n3 000 × [[9|12]] = 2 250 €\nValeur nette comptable fin d'année 1 = 15 000 − 2 250 = 12 750 €\nLa dernière année recevra les 750 € restants.",
+    indice: "Amortissement linéaire : annuité = [[valeur|durée]]. La première année, compte seulement les mois depuis la mise en service."
   },
   {
     id: "U3-025", difficulte: "facile", epreuve: "U3", theme: "Investissement et financement", session: "2023",
@@ -399,7 +399,7 @@ QUESTIONS.push(
     question: "Quel est le taux de marge sur coût variable du magasin ?",
     choix: ["60 %", "40 %", "150 %", "10 %"],
     bonne: 0,
-    explication: "Marge sur coût variable = CA − charges variables = 360 000 − 144 000 = 216 000 €. Taux de MCV = 216 000 / 360 000 = 60 %. (40 % est le poids des charges variables ; 10 % = résultat / CA.)",
+    explication: "Marge sur coût variable = CA − charges variables = 360 000 − 144 000 = 216 000 €\nTaux de MCV = [[216 000|360 000]] = 0,60, soit 60 %\n(40 % est le poids des charges variables ; 10 % = [[résultat|CA]].)",
     indice: "Commence par la marge sur coût variable (CA moins charges variables), puis rapporte-la au chiffre d'affaires."
   },
   {
@@ -408,7 +408,7 @@ QUESTIONS.push(
     question: "Quel est le seuil de rentabilité du magasin ?",
     choix: ["324 000 €", "216 000 €", "300 000 €", "450 000 €"],
     bonne: 2,
-    explication: "SR = charges fixes / taux de MCV = 180 000 / 0,60 = 300 000 € HT. Vérification : à 300 000 € de CA, la MCV vaut 180 000 € et couvre tout juste les charges fixes. (450 000 € = 180 000 / 0,40 : on a divisé par le taux de charges variables.)",
+    explication: "SR = [[charges fixes|taux de MCV]] = [[180 000|0,60]] = 300 000 € HT\nVérification : à 300 000 € de CA, la MCV vaut 180 000 € et couvre tout juste les charges fixes.\n(450 000 € = [[180 000|0,40]] : on a divisé par le taux de charges variables.)",
     indice: "Seuil de rentabilité = charges fixes divisées par le taux de marge sur coût variable trouvé juste avant."
   },
   {
@@ -423,7 +423,7 @@ QUESTIONS.push(
       "Le magasin devrait passer en SASU pour mieux protéger la gérante."
     ],
     bonne: 2,
-    explication: "Point mort = 300 000 / 360 000 × 12 = 10 mois, donc fin octobre. Marge de sécurité = 360 000 − 300 000 = 60 000 €, soit 16,7 % du CA. Un bon commentaire chiffre la situation, la compare (au CA) et dit ce qu'elle signifie. « Le magasin est rentable » est vrai mais sans argument ; le 2e commentaire inverse le sens du seuil ; le 4e est hors sujet.",
+    explication: "Point mort = [[300 000|360 000]] × 12 = 10 mois, donc fin octobre.\nMarge de sécurité = 360 000 − 300 000 = 60 000 €, soit [[60 000|360 000]] = 16,7 % du CA.\nUn bon commentaire chiffre la situation, la compare (au CA) et dit ce qu'elle signifie. « Le magasin est rentable » est vrai mais sans argument ; le 2e commentaire inverse le sens du seuil ; le 4e est hors sujet.",
     indice: "Un bon commentaire compare le seuil au CA (marge de sécurité, date du point mort) et en tire une conclusion chiffrée."
   },
   {
@@ -433,7 +433,7 @@ QUESTIONS.push(
     question: "Sans vente supplémentaire, quel serait le nouveau seuil de rentabilité ?",
     choix: ["336 000 €", "360 000 €", "396 000 €", "324 000 €"],
     bonne: 1,
-    explication: "Nouvelles charges fixes = 180 000 + 36 000 = 216 000 €. Nouveau SR = 216 000 / 0,60 = 360 000 €, exactement le CA actuel : sans ventes en plus, le résultat tomberait à 0. Piège : ajouter 36 000 € directement au SR (336 000 €) ; chaque euro de charge fixe demande 1 / 0,60 ≈ 1,67 € de CA.",
+    explication: "Nouvelles charges fixes = 180 000 + 36 000 = 216 000 €\nNouveau SR = [[216 000|0,60]] = 360 000 €\nC'est exactement le CA actuel : sans ventes en plus, le résultat tomberait à 0.\nPiège : ajouter 36 000 € directement au SR (336 000 €). Chaque euro de charge fixe demande [[1|0,60]] ≈ 1,67 € de CA.",
     indice: "Ajoute le coût du poste aux charges fixes, puis refais le calcul du seuil avec le même taux de MCV."
   },
   {
@@ -448,7 +448,7 @@ QUESTIONS.push(
       "Pas d'embauche à temps plein pour l'instant : 45 000 € de CA n'apportent que 27 000 € de marge, le résultat baisserait de 9 000 €. Il faudrait 60 000 € de CA en plus ; commencer par un temps partiel et suivre les ventes du samedi."
     ],
     bonne: 3,
-    explication: "Marge apportée = 45 000 × 0,60 = 27 000 €, pour un coût de 36 000 € : résultat 36 000 + 27 000 − 36 000 = 27 000 €, soit 9 000 € de moins qu'aujourd'hui. CA nécessaire pour payer le poste = 36 000 / 0,60 = 60 000 €. Piège classique : comparer un chiffre d'affaires à un coût, alors qu'il faut comparer la MARGE au coût. Le 2e choix est prudent mais sans argument, le 3e hors sujet.",
+    explication: "Marge apportée = 45 000 × 0,60 = 27 000 €, pour un coût de 36 000 €\nRésultat = 36 000 + 27 000 − 36 000 = 27 000 €, soit 9 000 € de moins qu'aujourd'hui.\nCA nécessaire pour payer le poste = [[36 000|0,60]] = 60 000 €\nPiège classique : comparer un chiffre d'affaires à un coût, alors qu'il faut comparer la MARGE au coût. Le 2e choix est prudent mais sans argument, le 3e hors sujet.",
     indice: "Ce n'est pas le chiffre d'affaires supplémentaire qui paie le salaire, c'est la marge qu'il apporte. Calcule-la et compare-la au coût du poste."
   },
 
@@ -507,8 +507,8 @@ QUESTIONS.push(
       "Le ratio vaut 1,5 : les dettes bancaires dépassent de moitié les capitaux propres. Un nouvel emprunt sera difficile ; mieux vaut d'abord renforcer les capitaux propres (mise en réserve, apport) ou financer autrement (autofinancement, crédit-bail)."
     ],
     bonne: 3,
-    explication: "Ratio d'endettement = dettes financières / capitaux propres = 150 000 / 100 000 = 1,5. Au-dessus de 1, les banques prêtent plus que les propriétaires n'ont apporté : elles hésiteront à prêter encore. Le bon commentaire donne le chiffre, le compare au repère de 1 et propose une solution. « Très endetté » est vrai sans argument ; 1,5 n'est pas un pourcentage ; le 3e choix est hors sujet.",
-    indice: "Calcule dettes financières / capitaux propres et compare au repère de 1. Puis dis ce que ça change pour le projet d'emprunt."
+    explication: "Ratio d'endettement = [[dettes financières|capitaux propres]] = [[150 000|100 000]] = 1,5\nAu-dessus de 1, les banques prêtent plus que les propriétaires n'ont apporté : elles hésiteront à prêter encore. Le bon commentaire donne le chiffre, le compare au repère de 1 et propose une solution. « Très endetté » est vrai sans argument ; 1,5 n'est pas un pourcentage ; le 3e choix est hors sujet.",
+    indice: "Calcule dettes financières sur capitaux propres et compare au repère de 1. Puis dis ce que ça change pour le projet d'emprunt."
   },
   {
     id: "U3-049", difficulte: "moyen", epreuve: "U3", theme: "Prix et marges", session: "2023",
@@ -543,7 +543,7 @@ QUESTIONS.push(
     type: "calcul",
     question: "Une monture est achetée 48 € HT et vendue 168 € TTC (TVA 20 %). Calcule le taux de marque.",
     reponse: { valeur: 65.7, unite: "%", decimales: 1, tolerance: 0.1, signe: false },
-    explication: "PV HT = 168 / 1,2 = 140 €. Marge brute = 140 − 48 = 92 €. Taux de marque = 92 / 140 × 100 = 65,7 %. On divise par le prix de vente HT, jamais par le TTC ni par le coût d'achat.",
+    explication: "PV HT = [[168|1,2]] = 140 €\nMarge brute = 140 − 48 = 92 €\nTaux de marque = [[92|140]] × 100 = 65,7 %\nOn divise par le prix de vente HT, jamais par le TTC ni par le coût d'achat.",
     indice: "Retire d'abord la TVA du prix de vente. Le taux de marque se calcule sur le prix de vente HT."
   },
   {
@@ -551,7 +551,7 @@ QUESTIONS.push(
     type: "calcul",
     question: "Un verre est acheté 35 € HT et vendu 126 € TTC. Calcule le coefficient multiplicateur TTC.",
     reponse: { valeur: 3.6, unite: "", decimales: 1, signe: false },
-    explication: "Coefficient TTC = PV TTC / coût d'achat HT = 126 / 35 = 3,6. C'est le coefficient le plus utilisé en optique : il passe directement de l'achat HT au prix affiché TTC.",
+    explication: "Coefficient TTC = [[PV TTC|coût d'achat HT]] = [[126|35]] = 3,6\nC'est le coefficient le plus utilisé en optique : il passe directement de l'achat HT au prix affiché TTC.",
     indice: "Coefficient TTC = prix de vente TTC divisé par le coût d'achat HT. Pas de conversion à faire ici."
   },
   {
@@ -559,7 +559,7 @@ QUESTIONS.push(
     type: "calcul",
     question: "Zone de chalandise : 15 000 habitants, 65 % de porteurs de lunettes, panier moyen 330 € TTC, renouvellement tous les 3 ans. Calcule le marché potentiel annuel.",
     reponse: { valeur: 1072500, unite: "€ TTC", decimales: 0, tolerance: 1, signe: false },
-    explication: "Porteurs = 15 000 × 0,65 = 9 750. Dépense d'un cycle = 9 750 × 330 = 3 217 500 €. Par an : 3 217 500 / 3 = 1 072 500 € TTC.",
+    explication: "Porteurs = 15 000 × 0,65 = 9 750\nDépense d'un cycle = 9 750 × 330 = 3 217 500 €\nPar an : [[3 217 500|3]] = 1 072 500 € TTC.",
     indice: "Nombre de porteurs × panier moyen, puis ramène à une seule année avec le rythme de renouvellement."
   },
   {
@@ -567,7 +567,7 @@ QUESTIONS.push(
     type: "calcul",
     question: "Marché potentiel : 800 000 € TTC. IDC : 95. Évasion commerciale : 12 %. Le magasin vise 20 % du marché restant. Calcule son chiffre d'affaires prévisionnel HT (arrondi à l'euro).",
     reponse: { valeur: 111467, unite: "€ HT", decimales: 0, tolerance: 1, signe: false },
-    explication: "800 000 × 0,95 = 760 000 € ; × (1 − 0,12) = 668 800 € (marché net de l'évasion) ; × 0,20 = 133 760 € TTC ; / 1,2 = 111 466,67 €, soit 111 467 € HT. On enchaîne les multiplications, et on finit par passer en HT.",
+    explication: "800 000 × 0,95 = 760 000 €\n760 000 × (1 − 0,12) = 668 800 € (marché net de l'évasion)\n668 800 × 0,20 = 133 760 € TTC\nEn HT : [[133 760|1,2]] = 111 466,67 €, soit 111 467 € HT.\nOn enchaîne les multiplications, et on finit par passer en HT.",
     indice: "Quatre étapes dans l'ordre : IDC, évasion, part de marché, puis retire la TVA."
   },
   {
@@ -575,7 +575,7 @@ QUESTIONS.push(
     type: "calcul",
     question: "CA : 420 000 € HT. Charges variables : 147 000 €. Charges fixes : 189 000 €. Calcule le seuil de rentabilité (arrondi à l'euro).",
     reponse: { valeur: 290769, unite: "€ HT", decimales: 0, tolerance: 1, signe: false },
-    explication: "MCV = 420 000 − 147 000 = 273 000 €, taux de MCV = 273 000 / 420 000 = 65 %. SR = 189 000 / 0,65 = 290 769,23 €, soit 290 769 € HT.",
+    explication: "MCV = 420 000 − 147 000 = 273 000 €\nTaux de MCV = [[273 000|420 000]] = 0,65, soit 65 %\nSR = [[189 000|0,65]] = 290 769,23 €, soit 290 769 € HT.",
     indice: "Calcule le taux de marge sur coût variable, puis divise les charges fixes par ce taux."
   },
   {
@@ -583,7 +583,7 @@ QUESTIONS.push(
     type: "calcul",
     question: "SR = 270 000 €, CA annuel = 405 000 €, activité régulière sur une année de 360 jours. Au bout de combien de jours le point mort est-il atteint ?",
     reponse: { valeur: 240, unite: "jours", decimales: 0, tolerance: 1, signe: false },
-    explication: "Point mort = SR / CA × 360 = 270 000 / 405 000 × 360 = 2/3 × 360 = 240 jours, soit 8 mois : fin août.",
+    explication: "Point mort = [[SR|CA]] × 360 = [[270 000|405 000]] × 360 = [[2|3]] × 360 = 240 jours\nSoit 8 mois : fin août.",
     indice: "Quelle fraction du CA annuel représente le SR ? Applique-la au nombre de jours de l'année."
   },
   {
@@ -599,8 +599,8 @@ QUESTIONS.push(
     type: "calcul",
     question: "Un frontofocomètre est acheté et mis en service le 1er octobre pour 18 000 € HT, amorti en linéaire sur 6 ans. Calcule la dotation de la 1re année (exercice civil).",
     reponse: { valeur: 750, unite: "€", decimales: 0, tolerance: 1, signe: false },
-    explication: "Annuité pleine = 18 000 / 6 = 3 000 €. D'octobre à décembre : 3 mois, soit 3 000 × 3 / 12 = 750 €. Les années suivantes : 3 000 €, et la dernière reçoit les 2 250 € restants.",
-    indice: "Annuité pleine = valeur / durée. La 1re année, ne compte que les mois depuis la mise en service."
+    explication: "Annuité pleine = [[18 000|6]] = 3 000 €\nD'octobre à décembre : 3 mois, soit 3 000 × [[3|12]] = 750 €\nLes années suivantes : 3 000 €, et la dernière reçoit les 2 250 € restants.",
+    indice: "Annuité pleine = [[valeur|durée]]. La 1re année, ne compte que les mois depuis la mise en service."
   },
   {
     id: "U3-058", difficulte: "difficile", epreuve: "U3", theme: "Investissement et financement", session: "2024",
@@ -679,7 +679,7 @@ QUESTIONS.push(
     cas: "CAS-U3-02", etape: 4, type: "calcul",
     question: "Calcule le ratio d'endettement (emprunts bancaires / capitaux propres), arrondi à 0,01.",
     reponse: { valeur: 0.61, unite: "", decimales: 2, tolerance: 0.01, signe: false },
-    explication: "Ratio = 100 000 / 165 000 = 0,61. Il est sous 1 : les banques ont prêté moins que ce qu'ont apporté les associés, le magasin peut encore emprunter.",
+    explication: "Ratio = [[100 000|165 000]] = 0,61\nIl est sous 1 : les banques ont prêté moins que ce qu'ont apporté les associés, le magasin peut encore emprunter.",
     indice: "Divise les emprunts bancaires par les capitaux propres. Ce n'est pas un pourcentage, compare-le à 1."
   },
   {
@@ -708,7 +708,7 @@ QUESTIONS.push(
       "Changer d'enseigne pour attirer de nouveaux clients."
     ],
     bonne: 2,
-    explication: "Comptant : l'immobilisation augmente de 30 000 € sans ressource stable, le FRNG tombe à −5 000 € et la trésorerie à −5 000 − 20 000 = −25 000 €. Avec un emprunt de 30 000 €, FRNG et trésorerie ne bougent pas, et le ratio devient 130 000 / 165 000 = 0,79. Le 1er choix oublie que 5 000 € ne paient pas 30 000 € ; « Emprunter » est juste mais sans argument ; le 4e est hors sujet.",
+    explication: "Comptant : l'immobilisation augmente de 30 000 € sans ressource stable, le FRNG tombe à −5 000 € et la trésorerie à −5 000 − 20 000 = −25 000 €.\nAvec un emprunt de 30 000 €, FRNG et trésorerie ne bougent pas, et le ratio devient [[130 000|165 000]] = 0,79.\nLe 1er choix oublie que 5 000 € ne paient pas 30 000 € ; « Emprunter » est juste mais sans argument ; le 4e est hors sujet.",
     indice: "Un investissement durable devrait être financé par une ressource durable. Calcule ce que deviendrait la trésorerie si on payait comptant, puis le ratio avec l'emprunt."
   }
 

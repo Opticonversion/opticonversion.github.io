@@ -146,7 +146,7 @@ QUESTIONS.push(
     question: "Test placé à 50 cm : la barre de Maddox est vue décalée de 3 cm par rapport au point lumineux. Valeur de la phorie ?",
     choix: ["1,5 Δ", "3 Δ", "6 Δ", "15 Δ"],
     bonne: 2,
-    explication: "1 Δ = 1 cm de déviation à 1 m. P (Δ) = décalage (cm) ÷ distance (m) = 3 ÷ 0,50 = 6 Δ.",
+    explication: "1 Δ = 1 cm de déviation à 1 m.\nP (Δ) = [[décalage (cm)|distance (m)]] = [[3|0,50]] = 6 Δ.",
     indice: "1 Δ dévie de 1 cm à 1 m. Ramène le décalage à ce qu'il serait à 1 m : la distance se met en mètres."
   },
   {
@@ -245,7 +245,7 @@ QUESTIONS.push(
     question: "Compensation portée OD −2,00 (−1,00) 180° ; autoréfractomètre OD −3,00 (−0,50) 180°. Réfraction complémentaire attendue (en équivalents sphériques), si l'autoréfractomètre était exact ?",
     choix: ["+0,75", "−0,75", "−0,50", "−1,00"],
     bonne: 1,
-    explication: "Équivalent sphérique = S + C/2. Portée : −2,00 + (−0,50) = −2,50. Autoréfractomètre : −3,00 + (−0,25) = −3,25. RC = −3,25 − (−2,50) = −0,75. Attention : à l'autoréfractomètre, le sujet accommode souvent (accommodation instrumentale) et la myopie est surestimée. On vérifie avec les acuités.",
+    explication: "Équivalent sphérique = S + [[C|2]].\nPortée : −2,00 + [[−1,00|2]] = −2,50.\nAutoréfractomètre : −3,00 + [[−0,50|2]] = −3,25.\nRC = −3,25 − (−2,50) = −0,75.\nAttention : à l'autoréfractomètre, le sujet accommode souvent (accommodation instrumentale) et la myopie est surestimée. On vérifie avec les acuités.",
     indice: "Équivalent sphérique = S + C/2, pour la portée et pour l'autoréfractomètre. La réfraction complémentaire, c'est ce qu'il faut ajouter à la portée."
   },
   {
@@ -254,8 +254,8 @@ QUESTIONS.push(
     question: "Avec sa compensation, un sujet lit 10/10. On ajoute +2,00 : son acuité tombe à 2/10. Sphère résiduelle estimée (essai de verre convexe) ?",
     choix: ["+0,75", "−0,75", "+1,25", "0,00"],
     bonne: 0,
-    explication: "Règle de Swaine (valable pour une acuité ≤ 5/10) : brouillage ≈ 1 ÷ (4 × AV) = 1 ÷ (4 × 0,2) = 1,25 δ. Sphère résiduelle = verre ajouté − brouillage = +2,00 − 1,25 = +0,75 δ. Il reste donc une hypermétropie résiduelle : le sujet est sous-compensé en positif.",
-    indice: "Règle de Swaine : brouillage ≈ 1 ÷ (4 × AV). Le verre ajouté produit ce brouillage avec la sphère résiduelle : fais la différence, attention au signe."
+    explication: "Règle de Swaine (valable pour une acuité ≤ 5/10) :\nbrouillage ≈ [[1|4 × AV]] = [[1|4 × 0,2]] = [[1|0,8]] = 1,25 δ.\nSphère résiduelle = verre ajouté − brouillage = +2,00 − 1,25 = +0,75 δ.\nIl reste donc une hypermétropie résiduelle : le sujet est sous-compensé en positif.",
+    indice: "Règle de Swaine : brouillage ≈ [[1|4 × AV]]. Le verre ajouté produit ce brouillage avec la sphère résiduelle : fais la différence, attention au signe."
   },
   {
     id: "U5-025", epreuve: "U5", theme: "Examen préliminaire", session: "2024",
@@ -283,8 +283,8 @@ QUESTIONS.push(
     question: "Un myope de −2,00 non compensé lit à 25 cm. Quelle accommodation met-il en jeu ?",
     choix: ["0 δ", "2 δ", "4 δ", "6 δ"],
     bonne: 1,
-    explication: "Acc = R − 1/HT = −2,00 − 1/(−0,25) = −2 + 4 = 2 δ. Son remotum est à 50 cm : il n'a que 2 δ à fournir pour lire à 25 cm.",
-    indice: "Acc = R − 1/HT, avec HT négatif et en mètres. Le remotum d'un myope de −2,00 est déjà à 50 cm : il part avec de l'avance.",
+    explication: "Acc = R − [[1|HT]] = −2,00 − [[1|−0,25]] = −2,00 + 4,00 = 2 δ.\nSon remotum est à 50 cm : il n'a que 2 δ à fournir pour lire à 25 cm.",
+    indice: "Acc = R − [[1|HT]], avec HT négatif et en mètres. Le remotum d'un myope de −2,00 est déjà à 50 cm : il part avec de l'avance.",
     schema: "img/schemas/U5/accommodation-myope-2.svg",
     schemaTexte: "Axe des proximités 1/HT : le remotum R est à −2 δ (50 cm), le texte T à −4 δ (25 cm). L'écart entre R et T vaut l'accommodation, 2 δ. Le texte est déplaçable."
   },
@@ -294,8 +294,8 @@ QUESTIONS.push(
     question: "Un hypermétrope de +1,50 non compensé lit à 50 cm. Quelle accommodation met-il en jeu ?",
     choix: ["2,00 δ", "0,50 δ", "3,50 δ", "1,50 δ"],
     bonne: 2,
-    explication: "Acc = R − 1/HT = +1,50 − 1/(−0,50) = 1,50 + 2,00 = 3,50 δ : 2 δ pour la distance, plus 1,50 δ pour compenser son hypermétropie.",
-    indice: "Même formule : Acc = R − 1/HT, avec HT = −0,50 m. L'hypermétrope doit d'abord compenser son amétropie, puis la distance."
+    explication: "Acc = R − [[1|HT]] = +1,50 − [[1|−0,50]] = 1,50 + 2,00 = 3,50 δ.\nC'est 2 δ pour la distance, plus 1,50 δ pour compenser son hypermétropie.",
+    indice: "Même formule : Acc = R − [[1|HT]], avec HT = −0,50 m. L'hypermétrope doit d'abord compenser son amétropie, puis la distance."
   },
 
   // ---------- Réfraction ----------
@@ -356,7 +356,7 @@ QUESTIONS.push(
     question: "Un rayon de courbure cornéen de 7,50 mm correspond à une puissance lue au kératomètre de :",
     choix: ["40 δ", "42 δ", "45 δ", "47,50 δ"],
     bonne: 2,
-    explication: "Avec l'indice d'étalonnage des kératomètres (1,3375) : K ≈ 337,5 / r (mm) = 337,5 / 7,5 = 45 δ. À connaître sans calculatrice.",
+    explication: "Avec l'indice d'étalonnage des kératomètres (1,3375) :\nK ≈ [[337,5|r (mm)]] = [[337,5|7,5]] = 45 δ.\nÀ connaître sans calculatrice.",
     indice: "Utilise K (δ) ≈ 337,5 / r, avec r en mm (indice d'étalonnage 1,3375). Pose la division : elle tombe juste."
   },
   {
@@ -496,7 +496,7 @@ QUESTIONS.push(
     question: "Nature et valeur de la phorie de près ?",
     choix: ["Exophorie de 8 Δ", "Ésophorie de 8 Δ", "Exophorie de 1,28 Δ", "Ésophorie de 12,8 Δ"],
     bonne: 0,
-    explication: "L'image de l'OD est vue du côté opposé à l'OD : diplopie croisée, donc exophorie. Valeur : 3,2 cm ÷ 0,40 m = 8 Δ.",
+    explication: "L'image de l'OD est vue du côté opposé à l'OD : diplopie croisée, donc exophorie.\nValeur : P = [[3,2 cm|0,40 m]] = 8 Δ.",
     indice: "Côté de la barre par rapport à l'œil qui porte le Maddox : homonyme ou croisée ? Puis 1 Δ = 1 cm à 1 m, distance en mètres."
   },
   {
@@ -556,8 +556,8 @@ QUESTIONS.push(
     question: "Sphère résiduelle estimée ?",
     choix: ["+1,00", "+0,50", "−1,00", "0,00"],
     bonne: 0,
-    explication: "Acuité ≤ 5/10 : la règle de Swaine s'applique. Brouillage ≈ 1 ÷ (4 × 0,5) = 0,50 δ. Sphère résiduelle = +1,50 − 0,50 = +1,00 δ : elle est sous-compensée de +1,00, une hypermétropie latente.",
-    indice: "Règle de Swaine : brouillage ≈ 1 ÷ (4 × AV). Le verre ajouté se partage entre ce brouillage et la sphère résiduelle."
+    explication: "Acuité ≤ 5/10 : la règle de Swaine s'applique.\nBrouillage ≈ [[1|4 × 0,5]] = [[1|2]] = 0,50 δ.\nSphère résiduelle = +1,50 − 0,50 = +1,00 δ : elle est sous-compensée de +1,00, une hypermétropie latente.",
+    indice: "Règle de Swaine : brouillage ≈ [[1|4 × AV]]. Le verre ajouté se partage entre ce brouillage et la sphère résiduelle."
   },
   {
     id: "U5-052",
@@ -570,8 +570,8 @@ QUESTIONS.push(
     question: "Avec sa compensation actuelle (sous-compensée de +1,00), quelle accommodation pour lire à 40 cm ?",
     choix: ["3,50 δ", "2,50 δ", "1,50 δ", "4,50 δ"],
     bonne: 0,
-    explication: "La sphère résiduelle (+1,00) se comporte comme une hypermétropie non compensée : Acc ≈ R − 1/HT = +1,00 − 1/(−0,40) = 1,00 + 2,50 = 3,50 δ, au lieu de 2,50 δ si elle était bien compensée.",
-    indice: "Traite la sphère résiduelle comme une petite hypermétropie : Acc = R − 1/HT, avec HT = −0,40 m."
+    explication: "La sphère résiduelle (+1,00) se comporte comme une hypermétropie non compensée :\nAcc ≈ R − [[1|HT]] = +1,00 − [[1|−0,40]] = 1,00 + 2,50 = 3,50 δ.\nC'est 1,00 δ de plus que les 2,50 δ qu'il fournirait s'il était bien compensé.",
+    indice: "Traite la sphère résiduelle comme une petite hypermétropie : Acc = R − [[1|HT]], avec HT = −0,40 m."
   },
   {
     id: "U5-053",
@@ -702,8 +702,8 @@ QUESTIONS.push(
     type: "calcul",
     question: "Un myope de −1,50 non compensé lit à 40 cm. Calcule l'accommodation qu'il met en jeu.",
     reponse: {"valeur": 1, "unite": "δ", "decimales": 2, "signe": true},
-    explication: "Acc = R − 1/HT = −1,50 − 1/(−0,40) = −1,50 + 2,50 = +1,00 δ. Son remotum est à 67 cm : il n'a qu'un peu d'accommodation à fournir.",
-    indice: "Acc = R − 1/HT, avec HT négatif et en mètres. 1/0,40 se calcule de tête."
+    explication: "Acc = R − [[1|HT]] = −1,50 − [[1|−0,40]] = −1,50 + 2,50 = +1,00 δ.\nSon remotum est à 67 cm : il n'a qu'un peu d'accommodation à fournir.",
+    indice: "Acc = R − [[1|HT]], avec HT négatif et en mètres. [[1|0,40]] se calcule de tête."
   },
   {
     id: "U5-063",
@@ -714,8 +714,8 @@ QUESTIONS.push(
     type: "calcul",
     question: "Un hypermétrope de +2,50 n'accommode pas. Calcule la position de son remotum HR (mesure algébrique depuis l'œil).",
     reponse: {"valeur": 40, "unite": "cm", "decimales": 0, "signe": true},
-    explication: "HR = 1/R = 1/(+2,50) = +0,40 m = +40 cm. Le signe + indique un remotum virtuel, 40 cm DERRIÈRE l'œil : l'hypermétrope ne voit net aucun objet réel sans accommoder.",
-    indice: "HR = 1/R, en mètres, puis convertis en cm. Le signe dit si le remotum est devant ou derrière l'œil."
+    explication: "HR = [[1|R]] = [[1|+2,50]] = +0,40 m = +40 cm.\nLe signe + indique un remotum virtuel, 40 cm DERRIÈRE l'œil : l'hypermétrope ne voit net aucun objet réel sans accommoder.",
+    indice: "HR = [[1|R]], en mètres, puis convertis en cm. Le signe dit si le remotum est devant ou derrière l'œil."
   },
   {
     id: "U5-064",
@@ -726,8 +726,8 @@ QUESTIONS.push(
     type: "calcul",
     question: "Un myope de −2,00 a une amplitude d'accommodation de 6 δ. Calcule la position de son proximum HP (mesure algébrique depuis l'œil).",
     reponse: {"valeur": -12.5, "unite": "cm", "decimales": 1, "signe": true},
-    explication: "Amax = R − 1/HP, donc 1/HP = R − Amax = −2 − 6 = −8 δ, et HP = −1/8 m = −12,5 cm : le proximum est 12,5 cm devant l'œil.",
-    indice: "Amax = R − 1/HP. Isole 1/HP, puis inverse. Le signe − veut dire « devant l'œil »."
+    explication: "Amax = R − [[1|HP]], donc [[1|HP]] = R − Amax = −2 − 6 = −8 δ.\nHP = [[1|−8]] m = −0,125 m = −12,5 cm : le proximum est 12,5 cm devant l'œil.",
+    indice: "Amax = R − [[1|HP]]. Isole [[1|HP]], puis inverse. Le signe − veut dire « devant l'œil »."
   },
   {
     id: "U5-065",
@@ -738,8 +738,8 @@ QUESTIONS.push(
     type: "calcul",
     question: "Un œil sphérique non compensé lit 1/10 de loin. Estime sa défocalisation (en valeur absolue) avec la règle de Swaine.",
     reponse: {"valeur": 2.5, "unite": "δ", "decimales": 2, "signe": false},
-    explication: "Règle de Swaine (acuité ≤ 5/10) : défocalisation ≈ 1 ÷ (4 × AV) = 1 ÷ (4 × 0,1) = 1 ÷ 0,4 = 2,50 δ.",
-    indice: "Swaine : défocalisation ≈ 1 ÷ (4 × AV), avec l'acuité écrite en décimal (1/10 = 0,1)."
+    explication: "Règle de Swaine (acuité ≤ 5/10) :\ndéfocalisation ≈ [[1|4 × AV]] = [[1|4 × 0,1]] = [[1|0,4]] = 2,50 δ.",
+    indice: "Swaine : défocalisation ≈ [[1|4 × AV]], avec l'acuité écrite en décimal (1/10 = 0,1)."
   },
   {
     id: "U5-066",
@@ -750,7 +750,7 @@ QUESTIONS.push(
     type: "calcul",
     question: "Un fort myope a son remotum à 62,5 mm devant la cornée. Le verre de lunettes est à 12,5 mm de la cornée. Calcule la puissance du verre compensateur.",
     reponse: {"valeur": -20, "unite": "δ", "decimales": 2, "signe": true},
-    explication: "Le foyer image du verre doit être sur le remotum. Distance verre → remotum : 62,5 − 12,5 = 50 mm devant le verre, soit f' = −0,050 m. D = 1/f' = −20,00 δ. En lentille (à la cornée), il faudrait 1/(−0,0625) = −16,00 δ : plus l'équipement est près de l'œil, plus un verre divergent peut être faible.",
+    explication: "Le foyer image du verre doit être sur le remotum.\nDistance verre → remotum : 62,5 − 12,5 = 50 mm devant le verre, soit f' = −0,050 m.\nD = [[1|f']] = [[1|−0,050]] = −20,00 δ.\nEn lentille (à la cornée), il faudrait [[1|−0,0625]] = −16,00 δ : plus l'équipement est près de l'œil, plus un verre divergent peut être faible.",
     indice: "Le foyer image du verre doit tomber sur le remotum. Mesure la distance depuis le VERRE, pas depuis la cornée."
   },
   {
@@ -762,7 +762,7 @@ QUESTIONS.push(
     type: "calcul",
     question: "Un sujet aphaque porte un verre de +16,00 à 12,5 mm de la cornée. Calcule la puissance de la lentille de contact équivalente.",
     reponse: {"valeur": 20, "unite": "δ", "decimales": 2, "signe": true},
-    explication: "Le foyer image du verre est à 1/16 m = 62,5 mm derrière le verre, donc à 62,5 − 12,5 = 50 mm derrière la cornée. La lentille doit avoir ce foyer : D = 1/0,050 = +20,00 δ. Un verre convergent doit être plus fort en lentille qu'en lunettes.",
+    explication: "Le foyer image du verre est à [[1|16]] m = 62,5 mm derrière le verre, donc à 62,5 − 12,5 = 50 mm derrière la cornée.\nLa lentille doit avoir ce foyer : D = [[1|0,050]] = +20,00 δ.\nUn verre convergent doit être plus fort en lentille qu'en lunettes.",
     indice: "Trouve où tombe le foyer image du verre, puis mesure cette distance depuis la cornée : c'est la focale de la lentille."
   },
   {
@@ -786,8 +786,8 @@ QUESTIONS.push(
     type: "calcul",
     question: "Test à 40 cm : avec un cylindre de Maddox, la barre est vue décalée de 2,2 cm par rapport au point lumineux. Calcule la valeur de la phorie.",
     reponse: {"valeur": 5.5, "unite": "Δ", "decimales": 1, "signe": false},
-    explication: "1 Δ = 1 cm de déviation à 1 m. P = 2,2 cm ÷ 0,40 m = 5,5 Δ. Le sens (éso ou exo) se lit au côté de la barre, pas au calcul.",
-    indice: "Ramène le décalage à ce qu'il serait à 1 m : décalage en cm ÷ distance en mètres."
+    explication: "1 Δ = 1 cm de déviation à 1 m.\nP = [[2,2 cm|0,40 m]] = 5,5 Δ.\nLe sens (éso ou exo) se lit au côté de la barre, pas au calcul.",
+    indice: "Ramène le décalage à ce qu'il serait à 1 m : [[décalage (cm)|distance (m)]]."
   }
 );
 

@@ -13,7 +13,7 @@ QUESTIONS.push(
     question: "Un verre est acheté 50 € HT et vendu 180 € TTC (TVA 20 %). Quel est le taux de marque ?",
     choix: ["66,7 %", "72,2 %", "200 %", "55,6 %"],
     bonne: 0,
-    explication: "On travaille en HT. PV HT = 180 / 1,2 = 150 €. Marge brute = 150 − 50 = 100 €. Taux de marque = 100 / 150 = 66,7 %. Les autres réponses viennent d'erreurs classiques : 72,2 % = (180 − 50) / 180 (marge calculée avec le TTC), 200 % = 100 / 50 (taux de marge), 55,6 % = 100 / 180 (marge divisée par le prix TTC).",
+    explication: "On travaille en HT.\nPV HT = [[180|1,2]] = 150 €\nMarge brute = 150 − 50 = 100 €\nTaux de marque = [[100|150]] = 66,7 %\nErreurs classiques : 72,2 % = [[180 − 50|180]] (marge calculée avec le TTC), 200 % = [[100|50]] (taux de marge), 55,6 % = [[100|180]] (marge divisée par le prix TTC).",
     indice: "Le taux de marque se calcule sur le prix de vente HT. Commence par retirer la TVA du prix affiché."
   },
   {
@@ -21,7 +21,7 @@ QUESTIONS.push(
     type: "calcul",
     question: "Une paire de lunettes solaires est achetée 80 € HT et vendue 140 € HT. Calcule le taux de MARGE.",
     reponse: { valeur: 75, unite: "%", decimales: 0, tolerance: 1, signe: false },
-    explication: "Marge brute = 140 − 80 = 60 €. Taux de marge = marge / coût d'achat HT = 60 / 80 = 75 %. Le taux de marque, lui, serait 60 / 140 = 42,9 % : ce n'est pas le même calcul.",
+    explication: "Marge brute = 140 − 80 = 60 €\nTaux de marge = [[marge|coût d'achat HT]] = [[60|80]] = 75 %\nLe taux de marque, lui, serait [[60|140]] = 42,9 % : ce n'est pas le même calcul.",
     indice: "Le taux de marge divise la marge par le coût d'achat HT, pas par le prix de vente."
   },
   {
@@ -29,7 +29,7 @@ QUESTIONS.push(
     question: "Un opticien applique un coefficient multiplicateur TTC de 3,3 sur un verre acheté 60 € HT. Quels sont le prix de vente TTC et le taux de marque ?",
     choix: ["198 € TTC, taux de marque 63,6 %", "198 € TTC, taux de marque 69,7 %", "165 € TTC, taux de marque 63,6 %", "198 € TTC, taux de marque 175 %"],
     bonne: 0,
-    explication: "PV TTC = 60 × 3,3 = 198 €. PV HT = 198 / 1,2 = 165 €. Marge = 165 − 60 = 105 €. Taux de marque = 105 / 165 = 63,6 %. Erreurs : 69,7 % = (198 − 60) / 198 (marge mélangeant TTC et HT), 165 € est le prix HT, et 175 % = 105 / 60 est le taux de marge.",
+    explication: "PV TTC = 60 × 3,3 = 198 €\nPV HT = [[198|1,2]] = 165 €\nMarge = 165 − 60 = 105 €\nTaux de marque = [[105|165]] = 63,6 %\nErreurs : 69,7 % = [[198 − 60|198]] (marge mélangeant TTC et HT), 165 € est le prix HT, et 175 % = [[105|60]] est le taux de marge.",
     indice: "Le coefficient TTC donne le prix TTC. Repasse en HT avant de calculer la marge et le taux."
   },
   {
@@ -37,7 +37,7 @@ QUESTIONS.push(
     type: "calcul",
     question: "Un magasin vise un taux de marque de 50 %. Quel coefficient multiplicateur TTC doit-il appliquer à ses achats HT ?",
     reponse: { valeur: 2.4, unite: "", decimales: 1, tolerance: 0.05, signe: false },
-    explication: "Coefficient HT = 1 / (1 − taux de marque) = 1 / 0,5 = 2. Coefficient TTC = 2 × 1,2 = 2,4. Vérification : achat 100 € HT, prix HT 200 €, marge 100 €, taux de marque 100 / 200 = 50 %, prix TTC 240 €.",
+    explication: "Coefficient HT = [[1|1 − taux de marque]] = [[1|0,5]] = 2\nCoefficient TTC = 2 × 1,2 = 2,4\nVérification : achat 100 € HT, prix HT 200 €, marge 100 €, taux de marque [[100|200]] = 50 %, prix TTC 240 €.",
     indice: "Trouve d'abord le coefficient qui donne le bon taux de marque en HT, puis ajoute la TVA."
   },
   {
@@ -45,7 +45,7 @@ QUESTIONS.push(
     type: "calcul",
     question: "Un client paie une paire de lunettes 360 € TTC. Quel est le montant de TVA collectée (TVA 20 %) ?",
     reponse: { valeur: 60, unite: "€", decimales: 0, tolerance: 0.5, signe: false },
-    explication: "Le prix TTC contient déjà la TVA. HT = 360 / 1,2 = 300 €, donc TVA = 360 − 300 = 60 € (soit 1/6 du TTC). Calculer 360 × 20 % = 72 € serait une erreur : on appliquerait le taux à un prix qui contient déjà la taxe.",
+    explication: "Le prix TTC contient déjà la TVA.\nPrix HT = [[360|1,2]] = 300 €\nTVA = 360 − 300 = 60 € (soit [[1|6]] du TTC).\nCalculer 360 × 20 % = 72 € serait une erreur : on appliquerait le taux à un prix qui contient déjà la taxe.",
     indice: "Retrouve d'abord le prix HT en divisant le TTC par 1,2. La TVA est la différence."
   },
   {
@@ -53,7 +53,7 @@ QUESTIONS.push(
     question: "Un opticien veut vendre une monture 250 € HT avec un taux de marque de 60 %. Quel est son prix d'achat HT maximum ?",
     choix: ["156,25 €", "100 €", "150 €", "208,33 €"],
     bonne: 1,
-    explication: "Taux de marque 60 % : la marge vaut 60 % du prix de vente HT, soit 250 × 0,60 = 150 €. Coût d'achat = 250 − 150 = 100 €. Erreurs : 150 € est la marge, pas le coût ; 156,25 € = 250 / 1,6 correspondrait à un taux de MARGE de 60 % ; 208,33 € = 250 / 1,2 retire une TVA qui n'a rien à faire ici.",
+    explication: "Taux de marque 60 % : la marge vaut 60 % du prix de vente HT.\nMarge = 250 × 0,60 = 150 €\nCoût d'achat = 250 − 150 = 100 €\nErreurs : 150 € est la marge, pas le coût ; 156,25 € = [[250|1,6]] correspondrait à un taux de MARGE de 60 % ; 208,33 € = [[250|1,2]] retire une TVA qui n'a rien à faire ici.",
     indice: "La marge vaut 60 % du prix de vente HT. Le coût d'achat est ce qui reste."
   },
 
@@ -63,7 +63,7 @@ QUESTIONS.push(
     type: "calcul",
     question: "Zone de chalandise : 20 000 habitants, 60 % de porteurs de lunettes, panier moyen 450 € TTC, renouvellement tous les 3 ans. Calcule le marché potentiel annuel.",
     reponse: { valeur: 1800000, unite: "€ TTC", decimales: 0, tolerance: 1, signe: false },
-    explication: "Porteurs = 20 000 × 0,60 = 12 000. Dépense sur 3 ans = 12 000 × 450 = 5 400 000 €. Par an : 5 400 000 / 3 = 1 800 000 € TTC.",
+    explication: "Porteurs = 20 000 × 0,60 = 12 000\nDépense sur 3 ans = 12 000 × 450 = 5 400 000 €\nPar an : [[5 400 000|3]] = 1 800 000 € TTC.",
     indice: "Nombre de porteurs × panier moyen donne la dépense d'un cycle complet. Ramène-la à une seule année."
   },
   {
@@ -79,7 +79,7 @@ QUESTIONS.push(
     question: "Le marché d'une zone, net de l'évasion commerciale, est de 360 000 € TTC. Le magasin espère en capter 30 %. Quel chiffre d'affaires HT peut-il prévoir ?",
     choix: ["90 000 €", "108 000 €", "129 600 €", "75 000 €"],
     bonne: 0,
-    explication: "Part de marché : 360 000 × 0,30 = 108 000 € TTC. Un chiffre d'affaires se donne HT : 108 000 / 1,2 = 90 000 € HT. Erreurs : 108 000 € est resté en TTC, 129 600 € multiplie par 1,2 au lieu de diviser, 75 000 € divise deux fois par 1,2.",
+    explication: "Part de marché : 360 000 × 0,30 = 108 000 € TTC\nUn chiffre d'affaires se donne HT : [[108 000|1,2]] = 90 000 € HT\nErreurs : 108 000 € est resté en TTC, 129 600 € multiplie par 1,2 au lieu de diviser, 75 000 € divise deux fois par 1,2.",
     indice: "Calcule la part de marché, puis passe du TTC au HT dans le bon sens."
   },
   {
@@ -97,7 +97,7 @@ QUESTIONS.push(
     type: "calcul",
     question: "Chiffre d'affaires HT : 600 000 €. Charges variables : 270 000 €. Charges fixes : 220 000 €. Calcule le seuil de rentabilité.",
     reponse: { valeur: 400000, unite: "€ HT", decimales: 0, tolerance: 1, signe: false },
-    explication: "Marge sur coût variable = 600 000 − 270 000 = 330 000 €, soit un taux de 330 000 / 600 000 = 55 %. Seuil de rentabilité = charges fixes / taux de MCV = 220 000 / 0,55 = 400 000 € HT.",
+    explication: "Marge sur coût variable = 600 000 − 270 000 = 330 000 €\nTaux de MCV = [[330 000|600 000]] = 0,55, soit 55 %\nSeuil de rentabilité = [[charges fixes|taux de MCV]] = [[220 000|0,55]] = 400 000 € HT.",
     indice: "Calcule la marge sur coût variable et son taux, puis divise les charges fixes par ce taux."
   },
   {
@@ -105,7 +105,7 @@ QUESTIONS.push(
     type: "calcul",
     question: "SR = 180 000 €, CA annuel = 240 000 €, le magasin est ouvert 312 jours par an. Au bout de combien de jours d'ouverture le point mort est-il atteint ?",
     reponse: { valeur: 234, unite: "jours", decimales: 0, tolerance: 1, signe: false },
-    explication: "Point mort = SR / CA × nombre de jours d'ouverture = 180 000 / 240 000 × 312 = 0,75 × 312 = 234 jours. Le magasin ne gagne de l'argent qu'après ces 234 jours : il en reste 78.",
+    explication: "Point mort = [[SR|CA]] × jours d'ouverture = [[180 000|240 000]] × 312 = 0,75 × 312 = 234 jours\nLe magasin ne gagne de l'argent qu'après ces 234 jours : il en reste 78.",
     indice: "Quelle fraction du CA annuel représente le seuil ? Applique-la au nombre de jours d'ouverture."
   },
   {
@@ -113,7 +113,7 @@ QUESTIONS.push(
     question: "Une ligne de montures se vend 90 € HT pièce, pour un coût variable de 36 € par monture. Ses charges fixes sont de 19 440 € par an. Combien faut-il en vendre PAR MOIS pour atteindre le seuil de rentabilité ?",
     choix: ["18 montures", "30 montures", "216 montures", "360 montures"],
     bonne: 1,
-    explication: "Marge sur coût variable par monture = 90 − 36 = 54 €. SR en volume = 19 440 / 54 = 360 montures par an, soit 360 / 12 = 30 par mois. Erreurs : 360 est le seuil annuel, 216 = 19 440 / 90 oublie le coût variable, 18 = 216 / 12.",
+    explication: "Marge sur coût variable par monture = 90 − 36 = 54 €\nSR en volume = [[19 440|54]] = 360 montures par an\nPar mois : [[360|12]] = 30 montures\nErreurs : 360 est le seuil annuel, 216 = [[19 440|90]] oublie le coût variable, 18 = [[216|12]].",
     indice: "Combien chaque monture vendue rapporte-t-elle, une fois son coût variable payé ? Attention à l'unité de temps demandée."
   },
   {
@@ -121,7 +121,7 @@ QUESTIONS.push(
     question: "Un nouveau rayon prévoit 50 000 € HT de CA, un taux de marge sur coût variable de 40 % et 24 000 € de charges fixes. Que conclure ?",
     choix: ["SR = 60 000 € : il manque 10 000 € de CA pour ne plus perdre d'argent", "Le SR ne se calcule pas car le résultat est négatif", "SR = 9 600 € : le rayon est très rentable", "SR = 20 000 € : le rayon est rentable"],
     bonne: 0,
-    explication: "MCV = 50 000 × 0,40 = 20 000 €, moins 24 000 € de charges fixes : perte de 4 000 €. Le SR se calcule quand même : 24 000 / 0,40 = 60 000 €. Il est au-dessus du CA prévu, il manque 10 000 € de ventes. 9 600 € = 24 000 × 0,40 multiplie au lieu de diviser ; 20 000 € est la MCV, pas le seuil.",
+    explication: "MCV = 50 000 × 0,40 = 20 000 €\nRésultat = 20 000 − 24 000 = −4 000 € : une perte.\nSR = [[24 000|0,40]] = 60 000 €\nIl est au-dessus du CA prévu : il manque 10 000 € de ventes.\n9 600 € = 24 000 × 0,40 multiplie au lieu de diviser ; 20 000 € est la MCV, pas le seuil.",
     indice: "La formule du seuil marche même quand le rayon perd de l'argent. Compare ensuite le résultat au CA prévu."
   },
 
@@ -163,8 +163,8 @@ QUESTIONS.push(
     question: "Dettes financières : 84 000 €. Capitaux propres : 70 000 €. Que dire du ratio d'endettement ?",
     choix: ["1,2 : les banques ont prêté plus que les propriétaires n'ont apporté, un nouvel emprunt sera difficile", "0,83 : le magasin peut encore emprunter facilement", "1,2 : le ratio est bon car supérieur à 1", "1,2 % : l'endettement est négligeable"],
     bonne: 0,
-    explication: "Ratio d'endettement = dettes financières / capitaux propres = 84 000 / 70 000 = 1,2. Au-dessus de 1, les dettes bancaires dépassent les capitaux propres : le magasin est déjà très endetté et la banque hésitera à prêter davantage. 0,83 = 70 000 / 84 000 est le calcul à l'envers. Le ratio n'est pas un pourcentage.",
-    indice: "Calcule dettes financières / capitaux propres, puis compare le résultat au repère de 1."
+    explication: "Ratio d'endettement = [[dettes financières|capitaux propres]] = [[84 000|70 000]] = 1,2\nAu-dessus de 1, les dettes bancaires dépassent les capitaux propres : le magasin est déjà très endetté et la banque hésitera à prêter davantage. 0,83 = [[70 000|84 000]] est le calcul à l'envers. Le ratio n'est pas un pourcentage.",
+    indice: "Calcule dettes financières sur capitaux propres, puis compare le résultat au repère de 1."
   },
 
   // ---------- Investissement et financement ----------
@@ -173,8 +173,8 @@ QUESTIONS.push(
     type: "calcul",
     question: "Un autoréfractomètre est acheté et mis en service le 1er juillet pour 24 000 € HT, amorti en linéaire sur 8 ans. Calcule la dotation de la 1re année (exercice civil).",
     reponse: { valeur: 1500, unite: "€", decimales: 0, tolerance: 1, signe: false },
-    explication: "Annuité pleine = 24 000 / 8 = 3 000 €. De juillet à décembre : 6 mois, soit 3 000 × 6 / 12 = 1 500 €. Les années suivantes : 3 000 €, et la dernière année recevra les 1 500 € restants.",
-    indice: "Annuité pleine = valeur / durée. La 1re année, ne compte que les mois depuis la mise en service."
+    explication: "Annuité pleine = [[24 000|8]] = 3 000 €\nDe juillet à décembre : 6 mois, soit 3 000 × [[6|12]] = 1 500 €\nLes années suivantes : 3 000 €, et la dernière année recevra les 1 500 € restants.",
+    indice: "Annuité pleine = [[valeur|durée]]. La 1re année, ne compte que les mois depuis la mise en service."
   },
   {
     id: "U3-086", difficulte: "difficile", epreuve: "U3", theme: "Investissement et financement", session: "2024", entrainement: true,
@@ -225,7 +225,7 @@ QUESTIONS.push(
     type: "calcul",
     question: "Une monture est achetée 72 € HT. L'opticien veut un taux de marque de 40 %. Quel prix de vente TTC affiche-t-il (TVA 20 %) ?",
     reponse: { valeur: 144, unite: "€ TTC", decimales: 0, tolerance: 0.5, signe: false },
-    explication: "Le taux de marque porte sur le prix de vente HT : marge = 40 % du PV HT, donc l'achat représente 60 % du PV HT. PV HT = 72 / 0,6 = 120 €. PV TTC = 120 × 1,2 = 144 €. Erreur fréquente : 72 × 1,4 = 100,80 €, qui applique 40 % à l'achat (c'est un taux de marge).",
+    explication: "Le taux de marque porte sur le prix de vente HT : marge = 40 % du PV HT, donc l'achat en représente 60 %.\nPV HT = [[72|0,6]] = 120 €\nPV TTC = 120 × 1,2 = 144 €\nErreur fréquente : 72 × 1,4 = 100,80 €, qui applique 40 % à l'achat (c'est un taux de marge).",
     indice: "Si la marge vaut 40 % du prix de vente HT, l'achat en vaut 60 %. Divise l'achat par 0,6, puis ajoute la TVA."
   },
   {
@@ -233,7 +233,7 @@ QUESTIONS.push(
     question: "Un opticien applique un coefficient multiplicateur de 2,5 sur son coût d'achat HT pour obtenir son prix de vente HT. Quels sont ses taux de marge et de marque ?",
     choix: ["Taux de marge 150 %, taux de marque 60 %", "Taux de marge 60 %, taux de marque 150 %", "Taux de marge 150 %, taux de marque 40 %", "Taux de marge 250 %, taux de marque 60 %"],
     bonne: 0,
-    explication: "Prenons un achat de 100 € HT : prix de vente HT = 250 €, marge = 150 €. Taux de marge = 150 / 100 = 150 %. Taux de marque = 150 / 250 = 60 %. Le taux de marque est toujours inférieur à 100 %, pas le taux de marge. 40 % est la part de l'achat dans le prix (100 / 250), et 250 % est le coefficient pris pour un taux.",
+    explication: "Prenons un achat de 100 € HT : PV HT = 250 €, marge = 150 €.\nTaux de marge = [[150|100]] = 150 %\nTaux de marque = [[150|250]] = 60 %\nLe taux de marque est toujours inférieur à 100 %, pas le taux de marge. 40 % est la part de l'achat dans le prix ([[100|250]]), et 250 % est le coefficient pris pour un taux.",
     indice: "Pose un achat de 100 € : calcule le prix de vente, puis la marge, puis divise une fois par l'achat et une fois par la vente."
   },
   {
@@ -241,7 +241,7 @@ QUESTIONS.push(
     question: "Une monture affichée 240 € TTC, achetée 80 € HT, est soldée avec 25 % de remise. Quel est le taux de marque après remise (TVA 20 %) ?",
     choix: ["46,7 %", "55,6 %", "53,3 %", "87,5 %"],
     bonne: 0,
-    explication: "Prix remisé TTC = 240 × 0,75 = 180 €. PV HT = 180 / 1,2 = 150 €. Marge = 150 − 80 = 70 €. Taux de marque = 70 / 150 = 46,7 % (contre 60 % avant remise : 200 € HT, marge 120 €). Erreurs : 55,6 % = (180 − 80) / 180 (TTC mélangé au HT), 53,3 % = 80 / 150 (c'est la part de l'achat), 87,5 % = 70 / 80 (taux de marge).",
+    explication: "Prix remisé TTC = 240 × 0,75 = 180 €\nPV HT = [[180|1,2]] = 150 €\nMarge = 150 − 80 = 70 €\nTaux de marque = [[70|150]] = 46,7 % (contre 60 % avant remise : 200 € HT, marge 120 €)\nErreurs : 55,6 % = [[180 − 80|180]] (TTC mélangé au HT), 53,3 % = [[80|150]] (part de l'achat), 87,5 % = [[70|80]] (taux de marge).",
     indice: "Applique d'abord la remise, repasse en HT, puis calcule la marge. Le taux de marque se divise par le prix de vente HT."
   },
   {
@@ -265,7 +265,7 @@ QUESTIONS.push(
     question: "Un fournisseur augmente le prix d'un verre de 70 € à 84 € HT. L'opticien veut conserver un taux de marque de 60 %. Quel nouveau prix de vente TTC doit-il afficher (TVA 20 %) ?",
     choix: ["252 €", "210 €", "201,60 €", "134,40 €"],
     bonne: 0,
-    explication: "L'achat représente 40 % du prix de vente HT : PV HT = 84 / 0,4 = 210 €. PV TTC = 210 × 1,2 = 252 €. Erreurs : 210 € oublie la TVA, 201,60 € = 84 × 2,4 (coefficient d'un taux de marque de 50 %), 134,40 € = 84 × 1,6 (applique 60 % comme un taux de marge).",
+    explication: "L'achat représente 40 % du prix de vente HT.\nPV HT = [[84|0,4]] = 210 €\nPV TTC = 210 × 1,2 = 252 €\nErreurs : 210 € oublie la TVA, 201,60 € = 84 × 2,4 (coefficient d'un taux de marque de 50 %), 134,40 € = 84 × 1,6 (applique 60 % comme un taux de marge).",
     indice: "Taux de marque 60 % : l'achat vaut 40 % du prix de vente HT. Ensuite, ajoute la TVA."
   },
 
@@ -275,7 +275,7 @@ QUESTIONS.push(
     type: "calcul",
     question: "Le marché local de l'optique représente 3 000 000 € TTC par an. Le magasin réalise 450 000 € TTC de CA. Quelle est sa part de marché ?",
     reponse: { valeur: 15, unite: "%", decimales: 0, tolerance: 0.5, signe: false },
-    explication: "Part de marché = CA du magasin / CA du marché, avec la même unité des deux côtés (ici TTC) : 450 000 / 3 000 000 = 0,15, soit 15 %.",
+    explication: "Part de marché = [[CA du magasin|CA du marché]] = [[450 000|3 000 000]] = 0,15, soit 15 %\nLes deux montants sont dans la même unité (ici TTC).",
     indice: "Divise le CA du magasin par le marché total, les deux en TTC."
   },
   {
@@ -283,7 +283,7 @@ QUESTIONS.push(
     question: "Une ville de 60 000 habitants compte 24 magasins d'optique. La moyenne du département est de 3 magasins pour 10 000 habitants. Quel commentaire est le plus juste ?",
     choix: ["4 magasins pour 10 000 habitants : plus dense que la moyenne, marché plus concurrentiel", "Un magasin pour 2 500 habitants : zone moins concurrentielle que la moyenne", "2,5 magasins pour 10 000 habitants : zone un peu moins dense que la moyenne", "La densité ne peut pas se comparer à une moyenne départementale"],
     bonne: 0,
-    explication: "Densité = 24 / 60 000 × 10 000 = 4 magasins pour 10 000 habitants, contre 3 en moyenne : la zone est plus dense, donc plus concurrentielle. Piège de la 2e réponse : 60 000 / 24 = 2 500 habitants par magasin, ce qui correspond bien à 4 magasins pour 10 000, donc à plus de concurrence, pas à moins.",
+    explication: "Densité = [[24|60 000]] × 10 000 = 4 magasins pour 10 000 habitants, contre 3 en moyenne : la zone est plus dense, donc plus concurrentielle.\nPiège de la 2e réponse : [[60 000|24]] = 2 500 habitants par magasin, ce qui correspond bien à 4 magasins pour 10 000, donc à plus de concurrence, pas à moins.",
     indice: "Ramène le nombre de magasins à 10 000 habitants avant de comparer avec la référence."
   },
   {
@@ -291,7 +291,7 @@ QUESTIONS.push(
     type: "calcul",
     question: "Le CA d'un magasin progresse de 10 % sur un an, alors que le marché local progresse de 6 %. De combien augmente sa part de marché, en pourcentage de sa part initiale (arrondi à 0,1 %) ?",
     reponse: { valeur: 3.8, unite: "%", decimales: 1, tolerance: 0.05, signe: false },
-    explication: "Part de marché = CA magasin / CA marché. Nouvelle part / ancienne part = 1,10 / 1,06 = 1,0377, soit une hausse relative de 3,8 %. Le magasin gagne des parts de marché, mais l'écart n'est pas 10 − 6 = 4 points. Exemple : 10 % de part de marché passerait à 10,38 %.",
+    explication: "Part de marché = [[CA magasin|CA marché]]\n[[nouvelle part|ancienne part]] = [[1,10|1,06]] = 1,0377, soit une hausse relative de 3,8 %.\nLe magasin gagne des parts de marché, mais l'écart n'est pas 10 − 6 = 4 points. Exemple : 10 % de part de marché passerait à 10,38 %.",
     indice: "Le CA est multiplié par 1,10 et le marché par 1,06. Divise l'un par l'autre."
   },
   {
@@ -333,7 +333,7 @@ QUESTIONS.push(
     type: "calcul",
     question: "Sur un mois, un compteur à l'entrée a enregistré 840 visiteurs. Le magasin a réalisé 252 ventes. Quel est son taux de transformation ?",
     reponse: { valeur: 30, unite: "%", decimales: 0, tolerance: 0.5, signe: false },
-    explication: "Taux de transformation = nombre de ventes / nombre de visiteurs = 252 / 840 = 0,30, soit 30 %. Il mesure la capacité du magasin à convertir une visite en achat, indépendamment du trafic.",
+    explication: "Taux de transformation = [[ventes|visiteurs]] = [[252|840]] = 0,30, soit 30 %\nIl mesure la capacité du magasin à convertir une visite en achat, indépendamment du trafic.",
     indice: "Ventes divisées par visiteurs."
   },
   {
@@ -341,7 +341,7 @@ QUESTIONS.push(
     type: "calcul",
     question: "Un magasin envoie 2 500 courriers de rappel à 0,80 € l'unité. 100 clients reviennent grâce à cette campagne. Combien coûte, en moyenne, chaque client revenu ?",
     reponse: { valeur: 20, unite: "€", decimales: 0, tolerance: 0.5, signe: false },
-    explication: "Coût de la campagne = 2 500 × 0,80 = 2 000 €. Coût par client revenu = 2 000 / 100 = 20 €. Le taux de réponse est de 100 / 2 500 = 4 %. Ce coût se compare à la marge dégagée par un client qui revient : si elle est supérieure à 20 €, l'action est rentable.",
+    explication: "Coût de la campagne = 2 500 × 0,80 = 2 000 €\nCoût par client revenu = [[2 000|100]] = 20 €\nLe taux de réponse est de [[100|2 500]] = 4 %.\nCe coût se compare à la marge dégagée par un client qui revient : si elle est supérieure à 20 €, l'action est rentable.",
     indice: "Calcule d'abord le coût total de l'envoi, puis divise par le nombre de clients revenus."
   },
   {
@@ -367,7 +367,7 @@ QUESTIONS.push(
     type: "calcul",
     question: "Un magasin réalise 500 000 € HT de CA avec un seuil de rentabilité de 350 000 €. Quel est son indice de sécurité ?",
     reponse: { valeur: 30, unite: "%", decimales: 0, tolerance: 0.5, signe: false },
-    explication: "Marge de sécurité = CA − seuil de rentabilité = 500 000 − 350 000 = 150 000 €. Indice de sécurité = marge de sécurité / CA = 150 000 / 500 000 = 30 %. Le CA peut baisser de 30 % avant que le magasin ne perde de l'argent.",
+    explication: "Marge de sécurité = CA − seuil de rentabilité = 500 000 − 350 000 = 150 000 €\nIndice de sécurité = [[marge de sécurité|CA]] = [[150 000|500 000]] = 30 %\nLe CA peut baisser de 30 % avant que le magasin ne perde de l'argent.",
     indice: "Marge de sécurité = CA − SR ; on la rapporte au CA."
   },
   {
@@ -375,7 +375,7 @@ QUESTIONS.push(
     type: "calcul",
     question: "Un magasin a un CA de 400 000 € HT, des charges variables de 160 000 € et des charges fixes de 180 000 €. Si son CA augmente de 10 % (charges fixes inchangées), de combien augmente son résultat, en pourcentage ?",
     reponse: { valeur: 40, unite: "%", decimales: 0, tolerance: 0.5, signe: false },
-    explication: "Marge sur coût variable = 400 000 − 160 000 = 240 000 €. Résultat = 240 000 − 180 000 = 60 000 €. Avec +10 % de CA, les charges variables suivent : MCV = 264 000 €, résultat = 84 000 €, soit +24 000 € sur 60 000 € = +40 %. C'est l'effet de levier : les charges fixes ne bougent pas, donc chaque euro de MCV supplémentaire va au résultat. Le levier est ici de 240 000 / 60 000 = 4.",
+    explication: "Marge sur coût variable = 400 000 − 160 000 = 240 000 €\nRésultat = 240 000 − 180 000 = 60 000 €\nAvec +10 % de CA, les charges variables suivent : MCV = 264 000 €, résultat = 264 000 − 180 000 = 84 000 €\nHausse du résultat = [[84 000 − 60 000|60 000]] = [[24 000|60 000]] = 40 %\nC'est l'effet de levier : les charges fixes ne bougent pas, donc chaque euro de MCV supplémentaire va au résultat. Le levier est ici de [[240 000|60 000]] = 4.",
     indice: "Recalcule le résultat avec 10 % de CA en plus, en gardant les charges fixes."
   },
   {
@@ -383,7 +383,7 @@ QUESTIONS.push(
     type: "calcul",
     question: "Une ligne de montures se vend 150 € HT pièce, pour un coût variable de 60 € par monture. Ses charges fixes sont de 45 000 € par an. Combien de montures faut-il vendre pour atteindre le seuil de rentabilité ?",
     reponse: { valeur: 500, unite: "montures", decimales: 0, tolerance: 0.5, signe: false },
-    explication: "Marge sur coût variable unitaire = 150 − 60 = 90 €. Seuil en quantités = charges fixes / MCV unitaire = 45 000 / 90 = 500 montures. En euros : 500 × 150 = 75 000 € de CA.",
+    explication: "Marge sur coût variable unitaire = 150 − 60 = 90 €\nSeuil en quantités = [[charges fixes|MCV unitaire]] = [[45 000|90]] = 500 montures\nEn euros : 500 × 150 = 75 000 € de CA.",
     indice: "Chaque monture vendue couvre une part des charges fixes égale à son prix moins son coût variable."
   },
   {
@@ -391,7 +391,7 @@ QUESTIONS.push(
     type: "calcul",
     question: "Un magasin a 72 000 € de charges fixes et un taux de marge sur coût variable de 45 %. Quel CA HT doit-il réaliser pour dégager un résultat de 18 000 € ?",
     reponse: { valeur: 200000, unite: "€ HT", decimales: 0, tolerance: 1, signe: false },
-    explication: "La marge sur coût variable doit couvrir les charges fixes et le résultat voulu : 72 000 + 18 000 = 90 000 €. CA = 90 000 / 0,45 = 200 000 € HT. Le seuil de rentabilité seul serait 72 000 / 0,45 = 160 000 € : le résultat visé demande 40 000 € de CA en plus.",
+    explication: "La marge sur coût variable doit couvrir les charges fixes et le résultat voulu : 72 000 + 18 000 = 90 000 €\nCA = [[90 000|0,45]] = 200 000 € HT\nLe seuil de rentabilité seul serait [[72 000|0,45]] = 160 000 € : le résultat visé demande 40 000 € de CA en plus.",
     indice: "Remplace les charges fixes par charges fixes + résultat souhaité dans la formule du seuil."
   },
   {
@@ -407,7 +407,7 @@ QUESTIONS.push(
     question: "Un magasin vend de plus en plus de solaires (taux de marge sur coût variable 30 %) et moins de verres progressifs (taux de 55 %). Ses charges fixes ne changent pas. Quel est l'effet sur son seuil de rentabilité ?",
     choix: ["Il augmente, car le taux de marge sur coût variable moyen baisse", "Il diminue, car le CA augmente", "Il ne change pas, car les charges fixes sont les mêmes", "Il diminue, car les solaires sont plus faciles à vendre"],
     bonne: 0,
-    explication: "Seuil = charges fixes / taux de marge sur coût variable. Si le mix de ventes se déplace vers des produits à faible taux (30 % au lieu de 55 %), le taux moyen du magasin baisse, donc le dénominateur diminue et le seuil augmente. Il faut alors plus de CA pour couvrir les mêmes charges fixes. Un seuil dépend donc du mix des ventes, pas seulement des charges fixes.",
+    explication: "Seuil = [[charges fixes|taux de marge sur coût variable]]\nSi le mix de ventes se déplace vers des produits à faible taux (30 % au lieu de 55 %), le taux moyen du magasin baisse, donc le dénominateur diminue et le seuil augmente. Il faut alors plus de CA pour couvrir les mêmes charges fixes. Un seuil dépend donc du mix des ventes, pas seulement des charges fixes.",
     indice: "Le seuil est une division : que devient le résultat si le diviseur baisse ?"
   },
 
@@ -443,7 +443,7 @@ QUESTIONS.push(
     type: "calcul",
     question: "À la clôture, les créances clients d'un magasin (mutuelles et tiers payant compris) s'élèvent à 36 000 € TTC. Ses ventes de l'année sont de 432 000 € TTC. Quel est le délai moyen de crédit clients, en jours (année de 360 jours) ?",
     reponse: { valeur: 30, unite: "jours", decimales: 0, tolerance: 0.5, signe: false },
-    explication: "Délai de crédit clients = créances clients TTC / ventes TTC × 360 = 36 000 / 432 000 × 360 = 30 jours. Comme les créances sont TTC, les ventes doivent l'être aussi. Un délai long pèse sur le BFR : les mutuelles paient après le client.",
+    explication: "Délai de crédit clients = [[créances clients TTC|ventes TTC]] × 360 = [[36 000|432 000]] × 360 = 30 jours\nComme les créances sont TTC, les ventes doivent l'être aussi. Un délai long pèse sur le BFR : les mutuelles paient après le client.",
     indice: "Créances et ventes dans la même unité (TTC), puis × 360."
   },
   {
@@ -467,7 +467,7 @@ QUESTIONS.push(
     type: "calcul",
     question: "Un magasin a un résultat net de 24 000 € et des capitaux propres de 160 000 €. Quelle est sa rentabilité financière ?",
     reponse: { valeur: 15, unite: "%", decimales: 0, tolerance: 0.5, signe: false },
-    explication: "Rentabilité financière = résultat net / capitaux propres = 24 000 / 160 000 = 15 %. Elle mesure ce que rapporte l'argent mis par les associés. On la compare à ce que donnerait un placement sans risque : si elle est plus faible, le risque pris par le propriétaire n'est pas payé.",
+    explication: "Rentabilité financière = [[résultat net|capitaux propres]] = [[24 000|160 000]] = 15 %\nElle mesure ce que rapporte l'argent mis par les associés. On la compare à ce que donnerait un placement sans risque : si elle est plus faible, le risque pris par le propriétaire n'est pas payé.",
     indice: "Résultat net divisé par les capitaux propres, pas par le CA."
   },
   {
@@ -485,7 +485,7 @@ QUESTIONS.push(
     type: "calcul",
     question: "Un matériel d'atelier acheté 30 000 € HT le 1er janvier N est amorti en linéaire sur 5 ans. Quelle est sa valeur nette comptable au 31 décembre N+2 ?",
     reponse: { valeur: 12000, unite: "€", decimales: 0, tolerance: 1, signe: false },
-    explication: "Annuité = 30 000 / 5 = 6 000 €. Au 31 décembre N+2, trois années ont été amorties : 3 × 6 000 = 18 000 €. VNC = 30 000 − 18 000 = 12 000 €. La VNC est la valeur du bien qui reste à amortir.",
+    explication: "Annuité = [[30 000|5]] = 6 000 €\nAu 31 décembre N+2, trois années ont été amorties : 3 × 6 000 = 18 000 €\nVNC = 30 000 − 18 000 = 12 000 €\nLa VNC est la valeur du bien qui reste à amortir.",
     indice: "Compte les années entières amorties : N, N+1 et N+2."
   },
   {
@@ -501,7 +501,7 @@ QUESTIONS.push(
     type: "calcul",
     question: "Un investissement de 45 000 € rapporte des flux nets de trésorerie de 15 000 € la 1re année, 18 000 € la 2e et 20 000 € la 3e. Quel est son délai de récupération, en années (réparti régulièrement dans l'année) ?",
     reponse: { valeur: 2.6, unite: "ans", decimales: 1, tolerance: 0.05, signe: false },
-    explication: "Cumul des flux : 15 000 après 1 an, 33 000 après 2 ans, 53 000 après 3 ans. L'investissement (45 000 €) est récupéré pendant la 3e année. Il manque 45 000 − 33 000 = 12 000 € au début de cette année, où l'on gagne 20 000 € : 12 000 / 20 000 = 0,6 an. Délai = 2,6 ans.",
+    explication: "Cumul des flux : 15 000 après 1 an, 33 000 après 2 ans, 53 000 après 3 ans. L'investissement (45 000 €) est récupéré pendant la 3e année.\nIl manque 45 000 − 33 000 = 12 000 € au début de cette année, où l'on gagne 20 000 € :\n[[12 000|20 000]] = 0,6 an\nDélai = 2 + 0,6 = 2,6 ans.",
     indice: "Cumule les flux année par année jusqu'à dépasser 45 000 €, puis prends une fraction de la dernière année."
   },
   {
@@ -575,7 +575,7 @@ QUESTIONS.push(
     question: "Un CDD d'accroissement temporaire d'activité de 6 mois s'achève sur le poste de vendeur. Hors cas particuliers, quel délai l'employeur doit-il en principe respecter avant de conclure un nouveau CDD sur ce même poste ?",
     choix: ["2 mois (le tiers de la durée du premier contrat)", "6 mois (la durée du premier contrat)", "15 jours", "Aucun, il peut enchaîner immédiatement"],
     bonne: 0,
-    explication: "Entre deux CDD successifs sur le même poste, la loi impose un délai de carence : le tiers de la durée du contrat précédent (renouvellement compris) quand il dure 14 jours ou plus, la moitié s'il dure moins de 14 jours. Ici 6 / 3 = 2 mois. Cela évite de remplacer un CDI par une suite de CDD. Il existe des exceptions, par exemple le remplacement d'un salarié absent.",
+    explication: "Entre deux CDD successifs sur le même poste, la loi impose un délai de carence : le tiers de la durée du contrat précédent (renouvellement compris) quand il dure 14 jours ou plus, la moitié s'il dure moins de 14 jours.\nIci [[6|3]] = 2 mois.\nCela évite de remplacer un CDI par une suite de CDD. Il existe des exceptions, par exemple le remplacement d'un salarié absent.",
     indice: "La règle est une fraction de la durée du premier contrat."
   },
   {

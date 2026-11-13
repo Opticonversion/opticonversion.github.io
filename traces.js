@@ -106,6 +106,8 @@
   }
 
   function nouvelleScene(N, systeme) {
+    // Schéma de l'examen (Vision) : pas de montage sur un axe, un schéma à main levée (voir dessinerSchema)
+    if (N.schema) { S = { N, schema: N.schema, co: Optique.schema(N.schema), etiq: {}, regard: null, faits: new Set(), revele: [], zoom: false }; return; }
     const sys = Optique.preparer(systeme);
     // Vision : un œil avec son amétropie (schéma hors échelle). Sinon l'œil n'est qu'un observateur (loupe…).
     S = { N, sys, ch: Optique.chaine(sys), revele: [], zoom: false, entree: ouverture ? 1 : 0, vision: !!(sys.oeil && sys.oeil.ametropie !== undefined) };
@@ -136,6 +138,7 @@
     });
     const clip = el("clipPath", { id: "t-cadre" }, defs);
     el("rect", { x: 0, y: 0, width: W, height: H }, clip);
+    if (S.schema) { dessinerSchema(); return; }
     if (S.zoom) { dessinerOeilGrossi(); return; }
     const v = S.vue;
     // Quadrillage (1 carreau = carreauX × carreauY mm) : un trait plus marqué tous les 5 carreaux, comme un papier millimétré
@@ -210,6 +213,11 @@
   function legende() {
     const zone = $("trace-legende");
     if (!zone) return;
+    if (S.schema) {
+      zone.innerHTML = '<span class="legende-echelle"></span>';
+      zone.firstChild.textContent = "Schéma à main levée, hors échelle : les angles sont exagérés, comme sur une copie.";
+      return;
+    }
     const v = S.vue, court = n => String(Math.round(n * 100) / 100).replace(".", ",");
     const echelle = S.zoom ? "L'œil grossi, schéma hors échelle" : S.vision ? "Schéma hors échelle"
       : v.carreauX === v.carreauY ? "1 carreau = " + court(v.carreauX) + " mm"
@@ -1131,16 +1139,17 @@
   }
 
   // ---------- 6. calcul : taper une valeur ----------
-  const SIGNE_PAR_DEFAUT = { "rayon-champ": false, "angle-champ": false };
-  const UNITE_PAR_DEFAUT = { "OA'": "mm", "A'B'": "mm", "f-systeme": "mm", "rayon-champ": "mm", "angle-champ": "°", "remotum": "cm", "punctum": "cm", "gamma": "", "grossissement": "" };
+  const SIGNE_PAR_DEFAUT = { "rayon-champ": false, "angle-champ": false, "phorie": false, "ecart-taille": false, "aniseiconie": false, "prisme-od": false, "prisme-og": false, "difference-prismatique": false };
+  const UNITE_PAR_DEFAUT = { "OA'": "mm", "A'B'": "mm", "f-systeme": "mm", "rayon-champ": "mm", "angle-champ": "°", "remotum": "cm", "punctum": "cm", "gamma": "", "grossissement": "", "phorie": "Δ", "ecart-taille": "%", "aniseiconie": "%", "prisme-od": "Δ", "prisme-og": "Δ", "difference-prismatique": "Δ" };
   const NOMS_GRANDEURS = { "OA'": "la position de l'image", "A'B'": "la taille de l'image", "gamma": "le grandissement", "f-systeme": "la focale du système",
-    "rayon-champ": "le rayon du champ", "angle-champ": "l'angle du champ", "grossissement": "le grossissement", "remotum": "HR", "punctum": "HP" };
+    "rayon-champ": "le rayon du champ", "angle-champ": "l'angle du champ", "grossissement": "le grossissement", "remotum": "HR", "punctum": "HP", "phorie": "la phorie", "ecart-taille": "l'écart de taille", "aniseiconie": "l'aniséiconie",
+    "prisme-od": "l'effet prismatique de l'OD", "prisme-og": "l'effet prismatique de l'OG", "difference-prismatique": "l'effet prismatique vertical subi par le couple" };
   function valeurCalcul(E) {
-    const brute = Optique.grandeur(S.sys, E.grandeur, { apres: E.apres, champ: E.champ });
+    const brute = S.schema ? Optique.grandeurSchema(S.schema, E.grandeur) : Optique.grandeur(S.sys, E.grandeur, { apres: E.apres, champ: E.champ });
     if (brute === null) return null;
     const unite = E.unite !== undefined ? E.unite : UNITE_PAR_DEFAUT[E.grandeur] || "";
     const longueur = ["OA'", "A'B'", "f-systeme", "rayon-champ", "remotum", "punctum"].includes(E.grandeur);
-    const facteur = longueur ? ({ mm: 1, cm: 0.1, m: 0.001 }[unite] || 1) : 1;
+    const facteur = longueur && !S.schema ? ({ mm: 1, cm: 0.1, m: 0.001 }[unite] || 1) : 1;     // les schémas donnent déjà des cm
     return { valeur: brute * facteur, unite, decimales: E.decimales !== undefined ? E.decimales : 1,
       signe: E.signe !== undefined ? E.signe : SIGNE_PAR_DEFAUT[E.grandeur] !== false,
       tolerance: E.tolerance, toleranceRelative: E.toleranceRelative };
@@ -1158,6 +1167,7 @@
     form.querySelector(".visuellement-cache").textContent = "Ta réponse" + (rep.unite ? " en " + rep.unite : "");
     form.querySelector(".saisie-unite").textContent = rep.unite;
     form.querySelector(".saisie-aide").textContent = "Arrondi " + (rep.decimales === 0 ? "à l'unité" : "à " + nb(10 ** -rep.decimales, rep.decimales)) + (rep.signe ? " · n'oublie pas le signe" : "") + ".";
+    ajouterAideUnite(form, rep, $("jeu-consigne").textContent);           // « Quelle unité ? » (essentiel.js)
     zone.appendChild(form);
     const champ = form.querySelector("input");
     champ.focus({ preventScroll: true });
@@ -1167,18 +1177,799 @@
       if (r.etat === "vide") { form.querySelector(".saisie-aide").textContent = "Écris un nombre (ex. −12,5)."; return; }
       champ.disabled = true;
       form.querySelector("button").disabled = true;
-      fini(r.etat === "juste", "<p><b>" + (r.etat === "juste" ? "Exact !" : "Pas tout à fait.") + "</b> " + echapper(messageCalcul(rep, r)) + "</p>");
+      if (S.schema) { S.faits.add("calc-" + E.grandeur); dessiner(); }
+      fini(r.etat === "juste", "<p><b>" + (r.etat === "juste" ? "Exact !" : "Pas tout à fait.") + "</b> " + echapper(messageCalcul(rep, r)) + "</p>" +
+        (r.etat === "unite" ? "<p>" + texteMathHTML(aideUnite(rep, $("jeu-consigne").textContent, true)) + "</p>" : ""));
     };
   }
 
-  const GESTES = { rayon: gesteRayon, placer: gestePlacer, designer: gesteDesigner, relier: gesteRelier, faisceau: gesteFaisceau, calcul: gesteCalcul };
+  // ======================================================================
+  //  LES SCHÉMAS DE L'EXAMEN (Vision, niveaux « schema »). À l'écrit d'U5,
+  //  pas de tracé exact à la règle : un schéma à main levée, légendé, coté,
+  //  avec une conclusion rédigée. L'élève le monte pièce par pièce.
+  //  Gestes : legender, regard, pointer, conclure (et calcul).
+  //  optique.js (coupleOculaire) donne toutes les réponses.
+  //  Attentes du correcteur : notes/coordination/schemas-U5-attendus.md
+  // ======================================================================
+  const CO = {                                   // le couple oculaire vu de dessus, en unités du dessin (480 × 300)
+    T: { x: 160, y: 30 },
+    yeux: { OG: { x: 90, y: 206 }, OD: { x: 230, y: 206 } },
+    r: 38,
+    C: { x: 402, y: 210, r: 32 },                // l'œil cyclope
+    devie: 15 * Math.PI / 180                    // rotation dessinée de l'œil dévié : exagérée (schéma hors échelle)
+  };
+  const norme = v => { const l = Math.hypot(v.x, v.y) || 1; return { x: v.x / l, y: v.y / l }; };
+  const tourner = (u, a) => ({ x: u.x * Math.cos(a) - u.y * Math.sin(a), y: u.x * Math.sin(a) + u.y * Math.cos(a) });   // a > 0 : la pointe part vers la droite
+  const versT = oeil => norme({ x: CO.T.x - CO.yeux[oeil].x, y: CO.T.y - CO.yeux[oeil].y });
+  const plus = (p, u, k) => ({ x: p.x + u.x * k, y: p.y + u.y * k });
+  const minus = o => o === "OD" ? "d" : "g";
+  // Ligne de regard d'un œil : vers T pour le fixateur, tournée pour l'œil dévié (une fois orienté)
+  function regardDe(oeil) {
+    if (oeil === S.co.fixateur) return versT(oeil);
+    return S.regard || null;
+  }
+  // Où va chaque étiquette du geste « legender » (plusieurs emplacements possibles : un seul est le bon)
+  function emplacementsCouple() {
+    const sch = S.schema, c = S.co, r = CO.r, Q = CO.yeux, fix = c.fixateur, uF = versT(fix);
+    const lr = plus(Q[fix], uF, Math.hypot(CO.T.x - Q[fix].x, CO.T.y - Q[fix].y) * 0.55);
+    const barre = o => plus(Q[o], versT(o), r + 17);
+    return [
+      { id: "titre", etiquette: "Vue de dessus", places: [{ cle: "titre", x: CO.T.x, y: 288, large: 150 }], bon: "titre",
+        pose: "Vue de dessus · " + (sch.distance <= 100 ? "VP " + nb(sch.distance, 0) + " cm" : "VL " + nb(sch.distance / 100, 0) + " m"),
+        pourquoi: "Le nom de la vue et la distance du test s'écrivent sous le schéma : sans eux, le correcteur retire des points." },
+      { id: "Qg", etiquette: "Q'g", places: [{ cle: "Qg", x: Q.OG.x, y: Q.OG.y }], bon: "Qg", pose: "Q'g",
+        pourquoi: "Q'g est le centre de rotation de l'œil gauche : au centre du cercle de gauche (l'OG est à gauche, vu de dessus)." },
+      { id: "Qd", etiquette: "Q'd", places: [{ cle: "Qd", x: Q.OD.x, y: Q.OD.y }], bon: "Qd", pose: "Q'd",
+        pourquoi: "Q'd est le centre de rotation de l'œil droit : au centre du cercle de droite." },
+      { id: "f" + minus(fix), etiquette: "f'" + minus(fix), places: [{ cle: "f" + minus(fix), x: Q[fix].x - uF.x * r, y: Q[fix].y - uF.y * r }], bon: "f" + minus(fix), pose: "f'" + minus(fix),
+        pourquoi: "f'" + minus(fix) + " est la fovéa : au fond de l'œil, sur sa ligne de regard." },
+      { id: "LR", etiquette: "LR" + minus(fix).toUpperCase(), places: [{ cle: "LR", x: lr.x, y: lr.y }], bon: "LR", pose: "LR" + minus(fix).toUpperCase(),
+        pourquoi: "LR" + minus(fix).toUpperCase() + " est la ligne de regard de l'" + fix + " : de la fovéa à T, en passant par Q'." },
+      { id: "dissociateur", etiquette: sch.dissociateur.court || sch.dissociateur.nom, places: ["OG", "OD"].map(o => ({ cle: "dissociateur-" + o, oeil: o, ...barre(o) })), bon: "dissociateur-" + sch.dissociateur.oeil,
+        pose: sch.dissociateur.court || sch.dissociateur.nom,
+        pourquoi: "Le dissociateur est devant l'" + sch.dissociateur.oeil + ". Sans dissociateur, le barème de 2021 ne donnait aucun point au schéma." },
+      { id: "fixateur", etiquette: "Œil fixateur", places: [{ cle: "fixateur-OG", oeil: "OG", x: Q.OG.x - 46, y: 150, large: 82 }, { cle: "fixateur-OD", oeil: "OD", x: Q.OD.x + 50, y: 150, large: 82 }],
+        bon: "fixateur-" + fix, pose: fix + " fixateur",
+        pourquoi: "C'est l'" + fix + " qui fixe le point. Écris-le : le couple et l'œil cyclope doivent avoir le même œil fixateur." }
+    ];
+  }
+
+  function dessinerCouple() {
+    const c = S.co, sch = S.schema, r = CO.r, Q = CO.yeux, T = CO.T, fix = c.fixateur, dev = c.devie;
+    const pose = id => S.etiq[id];
+    const g = el("g", { class: "s-schema" });
+    // Repères : la médiane (de T au milieu des yeux) et la ligne des centres
+    el("line", { x1: T.x, y1: T.y, x2: T.x, y2: Q.OG.y, class: "s-repere" }, g);
+    el("line", { x1: Q.OG.x, y1: Q.OG.y, x2: Q.OD.x, y2: Q.OD.y, class: "s-repere" }, g);
+    // Le point de fixation
+    el("circle", { cx: T.x, cy: T.y, r: 3.4, class: "s-point-or" }, g);
+    texte(T.x - 12, T.y + 9, "T", "point droite", g);
+    // Chaque œil : globe, cornée tournée vers sa ligne de regard, Q', fovéa
+    ["OG", "OD"].forEach(o => {
+      const q = Q[o], u = regardDe(o) || versT(o), oriente = !!regardDe(o);
+      el("circle", { cx: q.x, cy: q.y, r, class: "s-oeil" }, g);
+      // L'œil dévié pas encore orienté : sa cornée et sa fovéa seules, sans ligne de regard
+      if (!oriente) {
+        const a1 = tourner(u, -0.5), a2 = tourner(u, 0.5);
+        el("path", { d: `M${q.x + a1.x * r} ${q.y + a1.y * r} Q${q.x + u.x * r * 1.42} ${q.y + u.y * r * 1.42} ${q.x + a2.x * r} ${q.y + a2.y * r}`, class: "s-cornee" }, g);
+      } else {
+        const a1 = tourner(u, -0.5), a2 = tourner(u, 0.5);
+        el("path", { d: `M${q.x + a1.x * r} ${q.y + a1.y * r} Q${q.x + u.x * r * 1.42} ${q.y + u.y * r * 1.42} ${q.x + a2.x * r} ${q.y + a2.y * r}`, class: "s-cornee" }, g);
+        const f = plus(q, u, -r);
+        el("circle", { cx: f.x, cy: f.y, r: 2.6, class: "s-fovea" }, g);
+        // Ligne de regard : de la fovéa, par Q', jusqu'au-delà de T (en tirets fins)
+        const loin = (q.y - T.y + 22) / -u.y;
+        const bout = plus(q, u, loin);
+        el("line", { x1: f.x, y1: f.y, x2: bout.x, y2: bout.y, class: "s-regard" + (o === dev ? " devie" : "") }, g);
+      }
+      el("circle", { cx: q.x, cy: q.y, r: 2.4, class: "s-point" }, g);
+    });
+    // Le rayon issu de T vers l'œil fixateur : sur sa ligne de regard, fléché, jusqu'à la fovéa (T' ≡ f')
+    const uF = versT(fix), fF = plus(Q[fix], uF, -r);
+    el("line", { x1: T.x, y1: T.y, x2: fF.x, y2: fF.y, class: "s-rayon" }, g);
+    flecheDeSens(T.x, T.y, Q[fix].x + uF.x * r, Q[fix].y + uF.y * r, g);
+    // Le rayon vers l'œil dévié : jusqu'à la cornée tant que T' n'est pas trouvé, puis par Q' jusqu'à la rétine
+    const u0 = versT(dev), entree = plus(Q[dev], u0, r * 1.05);
+    if (S.regard) {
+      const fin = S.faits.has("Tprime") ? plus(Q[dev], u0, -r) : entree;
+      el("line", { x1: T.x, y1: T.y, x2: fin.x, y2: fin.y, class: "s-rayon" }, g);
+      flecheDeSens(T.x, T.y, entree.x, entree.y, g);
+    }
+    // Étiquettes posées (geste legender) et ce que le moteur a révélé
+    const ecr = (x, y, t, cl) => texte(x, y, t, "s-etiq " + (cl || ""), g);
+    if (pose("titre")) { ecr(T.x, 291, pose("titre"), "centre souligne"); }
+    if (pose("Qg")) ecr(Q.OG.x - 7, Q.OG.y + 17, pose("Qg"), "droite");
+    if (pose("Qd")) ecr(Q.OD.x + 7, Q.OD.y + 17, pose("Qd"));
+    if (pose("f" + minus(fix))) ecr(fF.x + (fix === "OD" ? 6 : -6), fF.y + 17, pose("f" + minus(fix)) + (S.faits.has("Tprime") ? " ≡ T'" + minus(fix) : ""), fix === "OD" ? "" : "droite");
+    if (pose("LR")) { const p = plus(Q[fix], uF, Math.hypot(T.x - Q[fix].x, T.y - Q[fix].y) * 0.55); ecr(p.x + (fix === "OD" ? 10 : -10), p.y, pose("LR"), fix === "OD" ? "" : "droite"); }
+    if (pose("fixateur")) { const o = sch.fixateur; ecr(Q[o].x + (o === "OD" ? 50 : -46), 150, pose("fixateur"), "centre petit-etiq"); }
+    if (pose("dissociateur")) {
+      const o = sch.dissociateur.oeil, u = versT(o), m = plus(Q[o], u, r + 17), p = tourner(u, Math.PI / 2);
+      el("line", { x1: m.x - p.x * 17, y1: m.y - p.y * 17, x2: m.x + p.x * 17, y2: m.y + p.y * 17, class: "s-dissociateur" }, g);
+      ecr(m.x + (o === "OD" ? 22 : -22), m.y - 4, pose("dissociateur"), (o === "OD" ? "" : "droite") + " rouge");
+    }
+    if (S.regard && S.regardValide) {
+      const u = S.regard, q = Q[dev], f = plus(q, u, -r), p = plus(q, u, (q.y - T.y) * 0.62 / -u.y);
+      ecr(p.x + (dev === "OD" ? 10 : -10), p.y, "LR" + minus(dev).toUpperCase(), dev === "OD" ? "" : "droite");
+      ecr(f.x + (c.coteTprime > 0 ? -6 : 6), f.y + 17, "f'" + minus(dev), c.coteTprime > 0 ? "droite" : "");
+      if (S.faits.has("Tprime")) {
+        const t = plus(q, u0, -r);
+        el("circle", { cx: t.x, cy: t.y, r: 3, class: "s-point-or" }, g);
+        ecr(t.x + (c.coteTprime > 0 ? 6 : -6), t.y + 17, "T'" + minus(dev), (c.coteTprime > 0 ? "" : "droite") + " or");
+      }
+    }
+    // Ce que voit le sujet (vue de face), en haut à droite
+    const P = sch.perception, cx = CO.C.x;
+    texte(cx, 16, "Vu par le sujet", "centre s-note", g);
+    const sx = (P.cote === "droite" ? 1 : -1) * 22;
+    el("circle", { cx: cx - sx / 2, cy: 38, r: 3.6, class: "s-point-or" }, g);
+    if (/raie/.test(P.image)) el("line", { x1: cx + sx / 2, y1: 24, x2: cx + sx / 2, y2: 52, class: "s-dissociateur fin" }, g);
+    else el("circle", { cx: cx + sx / 2, cy: 38, r: 4.2, class: "s-point-rouge" }, g);
+    el("line", { x1: cx - sx / 2, y1: 60, x2: cx + sx / 2, y2: 60, class: "s-cote", "marker-start": "url(#pointe-axe)", "marker-end": "url(#pointe-axe)" }, g);
+    texte(cx + 30, 64, nb(P.ecart, 1) + " cm", "s-note", g);
+    // L'œil cyclope : même œil fixateur, extériorisations seulement ici
+    const C = CO.C, fC = { x: C.x, y: C.y + C.r };
+    el("line", { x1: C.x - 62, y1: 80, x2: C.x - 62, y2: 292, class: "s-separation" }, g);
+    el("circle", { cx: C.x, cy: C.y, r: C.r, class: "s-oeil" }, g);
+    el("path", { d: `M${C.x - C.r * 0.48} ${C.y - C.r * 0.88} Q${C.x} ${C.y - C.r * 1.42} ${C.x + C.r * 0.48} ${C.y - C.r * 0.88}`, class: "s-cornee" }, g);
+    el("circle", { cx: C.x, cy: C.y, r: 2.4, class: "s-point" }, g);
+    el("circle", { cx: fC.x, cy: fC.y, r: 2.6, class: "s-fovea" }, g);
+    const eC = S.faits.has("exterio") ? c.coteExteriorisation : 1;
+    texte(C.x - eC * 6, C.y + 16, "Q'dg", "s-note" + (eC > 0 ? " droite" : ""), g);
+    texte(C.x, 291, "Œil cyclope", "centre s-etiq souligne", g);
+    if (S.faits.has("cyclope")) {
+      // L'œil fixateur : T' sur la fovéa, extériorisé droit devant
+      el("line", { x1: fC.x, y1: fC.y, x2: C.x, y2: 96, class: "s-exterio", "marker-end": "url(#pointe)" }, g);
+      texte(C.x, fC.y + 18, "f'dg ≡ T'" + minus(fix), "centre s-note", g);
+      texte(C.x + (c.coteExteriorisation > 0 ? -5 : 5), 92, "T''" + minus(fix), (c.coteExteriorisation > 0 ? "droite" : "") + " petit-etiq", g);
+    }
+    if (S.faits.has("exterio")) {
+      const e = c.coteExteriorisation, haut = C.y - 96, dx = haut * Math.tan(CO.devie);
+      const tR = { x: C.x - e * C.r * Math.sin(CO.devie), y: C.y + C.r * Math.cos(CO.devie) };
+      el("line", { x1: tR.x, y1: tR.y, x2: C.x + e * dx, y2: 96, class: "s-exterio devie", "marker-end": "url(#pointe-image)" }, g);
+      el("circle", { cx: tR.x, cy: tR.y, r: 3, class: "s-point-or" }, g);
+      texte(tR.x - e * 7, tR.y + 6, "T'" + minus(dev), (e > 0 ? "droite" : "") + " petit-etiq or", g);
+      texte(C.x + e * (dx + 5), 92, "T''" + minus(dev), (e > 0 ? "" : "droite") + " petit-etiq or", g);
+      // L'angle entre les deux extériorisations : la phorie
+      const a0 = -Math.PI / 2, a1 = a0 + e * CO.devie, R = 62;
+      el("path", { d: `M${C.x + R * Math.cos(a0)} ${C.y + R * Math.sin(a0)} A${R} ${R} 0 0 ${e > 0 ? 1 : 0} ${C.x + R * Math.cos(a1)} ${C.y + R * Math.sin(a1)}`, class: "s-angle" }, g);
+      texte(C.x + e * 22, C.y - R - 6, c.exo ? "EXO" : "ÉSO", (e > 0 ? "" : "droite") + " s-note", g);
+    }
+    if (S.faits.has("cote")) {
+      const e = c.coteExteriorisation;
+      // L'écart métrique entre les deux extériorisations, coté sur le schéma
+      const yc = 112, ec = (C.y - yc) * Math.tan(CO.devie);
+      el("line", { x1: C.x, y1: yc, x2: C.x + e * ec, y2: yc, class: "s-cote", "marker-start": "url(#pointe-axe)", "marker-end": "url(#pointe-axe)" }, g);
+      texte(C.x - e * 6, yc + 4, nb(sch.perception.ecart, 1) + " cm", (e > 0 ? "droite" : "") + " s-note", g);
+      texte(C.x - e * 6, yc + 20, "= " + nb(c.valeur, 1) + " Δ", (e > 0 ? "droite" : "") + " petit-etiq or", g);
+    }
+    legende();
+  }
+
+  // Coordonnées du dessin à partir d'un toucher
+  function pointDessin(e) {
+    const m = svg.getScreenCTM();
+    if (!m) return null;
+    const p = svg.createSVGPoint();
+    p.x = e.clientX; p.y = e.clientY;
+    const q = p.matrixTransform(m.inverse());
+    return { x: q.x, y: q.y };
+  }
+  function aideSchema(t) {
+    let p = $("jeu-actions").querySelector(".schema-aide");
+    if (!p) { p = document.createElement("p"); p.className = "saisie-aide schema-aide"; p.setAttribute("role", "status"); $("jeu-actions").appendChild(p); }
+    p.textContent = t;
+  }
+
+  // ---------- legender : une étiquette, puis l'endroit où elle va ----------
+  function gesteLegender(E, fini) {
+    nettoyerGlisser();
+    const liste = TYPES_SCHEMA[S.schema.type].emplacements().filter(t => !E.etiquettes || E.etiquettes.includes(t.id));
+    let choisie = null, fautes = 0;
+    const remarques = [], occupes = new Set();
+    const zone = $("jeu-actions");
+    function rendre() {
+      dessiner();
+      // Les emplacements libres
+      const libres = el("g", { class: "s-emplacements" + (choisie ? " actifs" : "") });
+      let n = 0;
+      const vus = new Set();                     // un emplacement partagé par deux étiquettes (DLD / DLG) n'est dessiné qu'une fois
+      liste.forEach(t => {
+        if (S.etiq[t.id]) return;
+        t.places.forEach(p => {
+          if (vus.has(p) || occupes.has(p)) return;
+          vus.add(p);
+          n++;
+          const gr = el("g", { class: "s-emplacement", tabindex: 0, role: "button", "aria-label": "Emplacement " + n }, libres);
+          if (p.large) el("rect", { x: p.x - p.large / 2, y: p.y - 13, width: p.large, height: 20, rx: 6, class: "s-emplacement-forme" }, gr);
+          else el("circle", { cx: p.x, cy: p.y, r: 8, class: "s-emplacement-forme" }, gr);
+          el("circle", { cx: p.x, cy: p.y - (p.large ? 3 : 0), r: 20, class: "s-emplacement-zone" }, gr);
+          const agir = () => poser(p, gr);
+          gr.addEventListener("click", agir);
+          gr.addEventListener("keydown", ev => { if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); agir(); } });
+        });
+      });
+    }
+    function puces() {
+      zone.innerHTML = "";
+      const rang = document.createElement("div");
+      rang.className = "etiquettes-schema";
+      liste.forEach(t => {
+        if (S.etiq[t.id]) return;
+        const b = document.createElement("button");
+        b.type = "button";
+        b.className = "etiquette-schema" + (choisie === t ? " choisie" : "");
+        b.textContent = t.etiquette;
+        b.setAttribute("aria-pressed", choisie === t);
+        b.onclick = () => { choisie = choisie === t ? null : t; puces(); rendre(); aideSchema(choisie ? "Touche sur le dessin l'endroit où va « " + t.etiquette + " »." : ""); };
+        rang.appendChild(b);
+      });
+      zone.appendChild(rang);
+    }
+    function poser(p, gr) {
+      if (!choisie) { aideSchema("Choisis d'abord une étiquette, sous le dessin."); return; }
+      const t = choisie;
+      if (t.places.includes(p) && p.cle === t.bon) {
+        S.etiq[t.id] = t.pose;
+        occupes.add(p);
+        choisie = null;
+        if (window.Sons) Sons.juste();
+        if (liste.every(x => S.etiq[x.id])) {
+          rendre(); zone.innerHTML = "";
+          fini(fautes === 0, "<p><b>" + (fautes === 0 ? "Schéma légendé sans faute." : "Schéma légendé.") + "</b> " + (TYPES_SCHEMA[S.schema.type].legende || "") + "</p>" +
+            (remarques.length ? "<p>" + remarques.map(echapper).join("</p><p>") + "</p>" : ""));
+          return;
+        }
+        puces(); rendre(); aideSchema("« " + t.pose + " » est en place.");
+      } else {
+        fautes++;
+        if (!remarques.includes(t.pourquoi)) remarques.push(t.pourquoi);
+        gr.classList.add("s-faux");
+        if (window.Sons) Sons.faux();
+        aideSchema("Pas là. " + t.pourquoi);
+      }
+    }
+    S.etiq = S.etiq || {};
+    puces(); rendre();
+    aideSchema("");
+  }
+
+  // ---------- regard : faire pivoter la ligne de regard de l'œil dévié ----------
+  function gesteRegard(E, fini) {
+    nettoyerGlisser();
+    const c = S.co, dev = c.devie, q = CO.yeux[dev], T = CO.T;
+    let hx = T.x, fini2 = false;
+    function rendre() {
+      S.regard = norme({ x: hx - q.x, y: T.y - q.y });
+      dessiner();
+      el("line", { x1: 18, y1: T.y, x2: 312, y2: T.y, class: "s-guide" });
+      const gr = el("g", { class: "t-poignee t-choisi" });
+      el("circle", { cx: hx, cy: T.y, r: 7, class: "t-poignee-point" }, gr);
+    }
+    const bouger = e => { if (fini2) return; const p = pointDessin(e); if (!p) return; hx = Math.max(24, Math.min(306, p.x)); rendre(); };
+    let prise = false;
+    const bas = e => { const p = pointDessin(e); if (!p || p.y > q.y - CO.r || p.x > 320) return; prise = true; svg.setPointerCapture && svg.setPointerCapture(e.pointerId); bouger(e); e.preventDefault(); };
+    const mvt = e => { if (prise) bouger(e); };
+    const haut = () => { prise = false; };
+    svg.addEventListener("pointerdown", bas);
+    svg.addEventListener("pointermove", mvt);
+    svg.addEventListener("pointerup", haut);
+    svg.addEventListener("pointercancel", haut);
+    svg.classList.add("s-glisse");
+    nettoyerGlisser = () => {
+      svg.removeEventListener("pointerdown", bas); svg.removeEventListener("pointermove", mvt);
+      svg.removeEventListener("pointerup", haut); svg.removeEventListener("pointercancel", haut);
+      svg.classList.remove("s-glisse");
+      nettoyerGlisser = () => {};
+    };
+    const zone = boutons([
+      ["◀", () => { hx = Math.max(24, hx - 8); rendre(); }, "secondaire bouton-fleche"],
+      ["▶", () => { hx = Math.min(306, hx + 8); rendre(); }, "secondaire bouton-fleche"],
+      ["Valider", valider]
+    ]);
+    zone.children[0].setAttribute("aria-label", "Tourner la ligne de regard vers la gauche");
+    zone.children[1].setAttribute("aria-label", "Tourner la ligne de regard vers la droite");
+    rendre();
+    aideSchema("Fais glisser le point sur la ligne de T, ou utilise les flèches.");
+    function valider() {
+      const d = hx - T.x, s = Math.sign(d);
+      if (Math.abs(d) < 6) { aideSchema("Pour l'instant, elle passe encore par T. Sous dissociation, l'" + dev + " n'a plus de raison de fixer T."); return; }
+      fini2 = true;
+      nettoyerGlisser();
+      const juste = s === c.rotation;
+      S.regard = tourner(versT(dev), c.rotation * CO.devie);
+      S.regardValide = true;
+      dessiner();
+      const P = S.schema.perception;
+      fini(juste, "<p><b>" + (juste ? "Oui." : "Non.") + "</b> Le sujet voit l'image de l'" + P.oeil + " à " + P.cote + " : diplopie <b>" + c.diplopie + "</b>, donc " + c.nature +
+        " (loi de Desmarres). En position passive, l'" + dev + " tourne vers " + (c.exo ? "la tempe" : "le nez") + " : sa ligne de regard croise LR" + minus(c.fixateur).toUpperCase() + " <b>" + c.croisementLR + "</b> T.</p>" +
+        "<p>Sur le schéma, l'angle est exagéré pour qu'on le voie : c'est permis, le schéma n'est pas à l'échelle.</p>");
+    }
+  }
+
+  // ---------- pointer : toucher le bon côté (T' sur la rétine, extériorisation sur l'œil cyclope) ----------
+  function gestePointer(E, fini) {
+    nettoyerGlisser();
+    if (S.schema.type !== "couple-oculaire") { pointerZones(E, fini); return; }
+    const c = S.co, dev = c.devie;
+    if (E.quoi === "exteriorisation") S.faits.add("cyclope");
+    dessiner();
+    $("jeu-actions").innerHTML = "";
+    let fait = false;
+    const q = CO.yeux[dev], C = CO.C;
+    // Zones à toucher, visibles : le fond de l'œil dévié, ou le haut de l'œil cyclope
+    if (E.quoi === "image-devie") el("path", { d: `M${q.x - CO.r - 4} ${q.y + 4} A${CO.r + 4} ${CO.r + 4} 0 0 0 ${q.x + CO.r + 4} ${q.y + 4}`, class: "s-zone-touche" });
+    else el("rect", { x: C.x - 58, y: 74, width: 116, height: C.y - C.r - 84, rx: 10, class: "s-zone-touche" });
+    const toucher = e => {
+      if (fait) return;
+      const p = pointDessin(e);
+      if (!p) return;
+      let cote, attendu;
+      if (E.quoi === "image-devie") {
+        const d = Math.hypot(p.x - q.x, p.y - q.y), f = plus(q, S.regard, -CO.r);
+        if (d < CO.r * 0.4 || d > CO.r * 1.6 || p.y < q.y - 6) { aideSchema("Touche le fond de l'" + dev + ", la moitié du cercle tournée vers toi."); return; }
+        cote = Math.sign(p.x - f.x); attendu = c.coteTprime;
+        if (Math.abs(p.x - f.x) < 1.5) { aideSchema("Là, c'est la fovéa f'" + minus(dev) + " : T'" + minus(dev) + " tombe-t-il vraiment dessus ?"); return; }
+      } else {
+        if (p.x < C.x - 62 || p.y > C.y - C.r) { aideSchema("Touche au-dessus de l'œil cyclope, à gauche ou à droite de T''" + minus(c.fixateur) + "."); return; }
+        cote = Math.sign(p.x - C.x); attendu = c.coteExteriorisation;
+        if (Math.abs(p.x - C.x) < 4) { aideSchema("Droit devant, c'est T''" + minus(c.fixateur) + ". Où va l'autre ?"); return; }
+      }
+      fait = true;
+      nettoyerGlisser();
+      const juste = cote === attendu;
+      S.faits.add(E.quoi === "image-devie" ? "Tprime" : "exterio");
+      dessiner();
+      const d = minus(dev), cotePerçu = c.coteExteriorisation > 0 ? "droite" : "gauche";
+      fini(juste, E.quoi === "image-devie"
+        ? "<p><b>" + (juste ? "Oui." : "Non.") + "</b> Le rayon issu de T passe par Q'" + d + " et tombe sur la rétine <b>" + c.retine + "</b> de l'" + dev + ", à côté de la fovéa : T'" + d + " ≠ f'" + d + ".</p>" +
+          "<p>C'est ce décalage, et lui seul, qui fait voir double.</p>"
+        : "<p><b>" + (juste ? "Oui." : "Non.") + "</b> T'" + d + " est en rétine " + c.retine + " : il est extériorisé du côté opposé, à <b>" + cotePerçu + "</b>. L'image de l'" + dev + " est vue " + (c.croisee ? "du côté de l'autre œil : diplopie croisée" : "de son propre côté : diplopie homonyme") + ".</p>" +
+          "<p>Les extériorisations ne se dessinent que sur l'œil cyclope, jamais sur le couple.</p>");
+    };
+    svg.addEventListener("click", toucher);
+    svg.classList.add("s-touche");
+    nettoyerGlisser = () => { svg.removeEventListener("click", toucher); svg.classList.remove("s-touche"); nettoyerGlisser = () => {}; };
+    aideSchema("");
+  }
+
+  // ---------- conclure : la conclusion rédigée sous le schéma ----------
+  function phrasesCouple() {
+    const c = S.co, sch = S.schema, d = minus(c.devie).toUpperCase(), f = minus(c.fixateur).toUpperCase();
+    const ou = sch.distance <= 100 ? "en VP (" + nb(sch.distance, 0) + " cm)" : "en VL (" + nb(sch.distance / 100, 0) + " m)";
+    const phrase = (nature, val, crois, dipl, base) => nature.charAt(0).toUpperCase() + nature.slice(1) + " de " + val + " Δ " + ou + " : en position passive, LR" + d + " croise LR" + f + " " + crois + " T, diplopie " + dipl + ". Prisme de réalignement base " + base + " sur l'" + c.devie + ".";
+    const v = nb(c.valeur, 1), faux = nb(sch.perception.ecart * sch.distance / 100, 1);
+    const autre = { exophorie: "ésophorie", "ésophorie": "exophorie", "derrière": "devant", devant: "derrière", "croisée": "homonyme", homonyme: "croisée", interne: "externe", externe: "interne" };
+    return [
+      { juste: true, texte: phrase(c.nature, v, c.croisementLR, c.diplopie, c.base) },
+      { texte: phrase(autre[c.nature], v, autre[c.croisementLR], autre[c.diplopie], autre[c.base]), pourquoi: "Une diplopie " + c.diplopie + " donne une " + c.nature + " (loi de Desmarres)." },
+      { texte: phrase(c.nature, v, c.croisementLR, c.diplopie, autre[c.base]), pourquoi: "Le prisme de réalignement d'une " + c.nature + " est base " + c.base + "." },
+      { texte: phrase(c.nature, faux, c.croisementLR, c.diplopie, c.base), pourquoi: "La phorie est l'écart en cm divisé par la distance en m, pas multiplié." }
+    ];
+  }
+  function gesteConclure(E, fini) {
+    nettoyerGlisser();
+    S.faits.add("cote");
+    dessiner();
+    const liste = melanger(TYPES_SCHEMA[S.schema.type].conclusions());
+    const zone = boutons(liste.map((p, i) => [p.texte, () => choisir(i), "secondaire choix-rayon"]));
+    function choisir(i) {
+      const p = liste[i], bon = liste.find(x => x.juste);
+      zone.querySelectorAll("button").forEach((b, n) => { b.disabled = true; if (liste[n].juste) b.classList.add("bon"); else if (n === i) b.classList.add("mauvais"); });
+      fini(!!p.juste, "<p><b>" + (p.juste ? "C'est la bonne conclusion." : "Non.") + "</b> " + (p.juste ? (TYPES_SCHEMA[S.schema.type].bravo || "") : echapper(p.pourquoi)) + "</p>" +
+        (p.juste ? "" : "<p>À rédiger : " + echapper(bon.texte) + "</p>"));
+    }
+  }
+
+  // ---------- Les autres schémas de l'examen : œil réduit, parcours, image rétinienne, aniséiconie, prisme vertical ----------
+  // Chaque type : dessiner (selon S.faits et S.etiq), emplacements (legender), pointer (zones à toucher), conclusions.
+  function dessinerSchema() {
+    const T = TYPES_SCHEMA[S.schema.type];
+    if (!T || !S.co) { legende(); return; }
+    // Hachures (parcours d'accommodation) : un motif dans les defs du dessin
+    const defs = svg.querySelector("defs");
+    if (defs) {
+      const m = el("pattern", { id: "s-hachures", width: 7, height: 7, patternUnits: "userSpaceOnUse", patternTransform: "rotate(45)" }, defs);
+      el("line", { x1: 0, y1: 0, x2: 0, y2: 7, class: "s-hachure-trait" }, m);
+    }
+    T.dessiner(el("g", { class: "s-schema" }));
+    legende();
+  }
+  // Petits dessins communs
+  const ligne = (g, x1, y1, x2, y2, classe, fleche) => el("line", { x1, y1, x2, y2, class: classe, ...(fleche ? { "marker-end": "url(#" + fleche + ")" } : {}) }, g);
+  const ecrire = (g, x, y, t, classe) => texte(x, y, t, classe || "s-etiq centre", g);
+  function rayonFleche(g, x1, y1, x2, y2, classe) { ligne(g, x1, y1, x2, y2, classe || "s-rayon"); flecheDeSens(x1, y1, x2, y2, g); }
+  function coteH(g, x1, x2, y, t, classe) {        // cote horizontale à double flèche, texte au-dessus
+    ligne(g, x1, y, x2, y, "s-cote");
+    el("path", { d: `M${x1 + 5 * Math.sign(x2 - x1)} ${y - 3} L${x1} ${y} L${x1 + 5 * Math.sign(x2 - x1)} ${y + 3} M${x2 - 5 * Math.sign(x2 - x1)} ${y - 3} L${x2} ${y} L${x2 - 5 * Math.sign(x2 - x1)} ${y + 3}`, class: "s-cote s-cote-pointe" }, g);
+    ecrire(g, (x1 + x2) / 2, y - 6, t, classe || "s-note centre or-note");
+  }
+  function plansHH(g, x, y, h) { ligne(g, x - 4, y - h, x - 4, y + h, "s-plan"); ligne(g, x + 4, y - h, x + 4, y + h, "s-plan"); }
+  function verreSymbole(g, x, y, h, P, classe) {
+    const c = P > 0 ? 1 : -1;
+    ligne(g, x, y - h, x, y + h, "s-verre " + (classe || ""));
+    el("path", { d: `M${x - 6} ${y - h + c * 7} L${x} ${y - h} L${x + 6} ${y - h + c * 7} M${x - 6} ${y + h - c * 7} L${x} ${y + h} L${x + 6} ${y + h - c * 7}`, class: "s-verre " + (classe || ""), fill: "none" }, g);
+  }
+  const posee = id => S.etiq && S.etiq[id];
+  const dioptries = v => nb(v, 2, true) + " δ";
+
+  // ---------- pointer (schémas autres que le couple) : toucher la bonne zone du dessin ----------
+  function pointerZones(E, fini) {
+    const def = TYPES_SCHEMA[S.schema.type].pointer[E.quoi]();
+    dessiner();
+    $("jeu-actions").innerHTML = "";
+    let fait = false;
+    const gz = el("g", { class: "s-zones" });
+    def.zones.forEach(z => {
+      const gr = el("g", { class: "s-zone", tabindex: 0, role: "button", "aria-label": z.texte }, gz);
+      el("rect", { x: z.x, y: z.y, width: z.w, height: z.h, rx: 8, class: "s-zone-forme" }, gr);
+      if (z.texte) texte(z.x + z.w / 2, z.y + (z.haut ? 14 : z.h - 7), z.texte, "s-note centre", gr);
+      const agir = () => choisir(z, gr);
+      gr.addEventListener("click", agir);
+      gr.addEventListener("keydown", ev => { if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); agir(); } });
+    });
+    function choisir(z, gr) {
+      if (fait) return;
+      fait = true;
+      const juste = z.cle === def.bon;
+      S.faits.add(def.fait || E.quoi);
+      dessiner();
+      fini(juste, "<p><b>" + (juste ? "Oui." : "Non.") + "</b> " + def.message + "</p>");
+    }
+    aideSchema(def.aide || "Touche la bonne zone du dessin.");
+  }
+
+  // ===== 1. L'œil réduit amétrope : H H', rétine [R'], T∞, T', remotum =====
+  const OR_ = { y: 150, xH: 240, xR: 360 };
+  function xImageOeil(c) { return c.image === "devant" ? 312 : c.image === "derriere" ? 406 : OR_.xR; }
+  function xRemotum(c) { return c.remotum === "devant" ? 120 : c.remotum === "derriere" ? 456 : 20; }
+  const TYPE_OEIL = {
+    legende: "Plans principaux, rétine, objet à l'infini et état accommodatif : sans eux, la position de T' ne veut rien dire.",
+    bravo: "Nature, position de l'image, proximité en dioptries et remotum : tout y est.",
+    dessiner(g) {
+      const c = S.co, y = OR_.y, xH = OR_.xH, xR = OR_.xR, xT = xImageOeil(c);
+      ligne(g, 10, y, 472, y, "s-repere");
+      ecrire(g, 46, y + 5, "//", "s-note centre");
+      [-34, 34].forEach(d => rayonFleche(g, 14, y + d, xH - 4, y + d));
+      plansHH(g, xH, y, 66);
+      ligne(g, xR, y - 72, xR, y + 72, "t-retine");
+      if (S.faits.has("image")) {
+        [-34, 34].forEach(d => {
+          // De H' vers T', puis jusqu'à la rétine (myope) ; arrêté à la rétine et prolongé en tirets (hypermétrope)
+          if (c.image === "derriere") { ligne(g, xH + 4, y + d, xR, y + d * (xT - xR) / (xT - xH - 4), "s-rayon"); ligne(g, xR, y + d * (xT - xR) / (xT - xH - 4), xT, y, "s-rayon tirets"); }
+          else { ligne(g, xH + 4, y + d, xT, y, "s-rayon"); if (c.image === "devant") ligne(g, xT, y, xR, y - d * (xR - xT) / (xT - xH - 4), "s-rayon"); }
+        });
+        el("circle", { cx: xT, cy: y, r: 3.2, class: "s-point-or" }, g);
+        ecrire(g, xT, y - 10, "T'", "s-etiq centre or");
+        if (c.image !== "sur") coteH(g, Math.min(xT, xR), Math.max(xT, xR), y + 52, dioptries(c.ecart).replace(/^[+−-]/, ""));
+      }
+      if (S.faits.has("remotum")) {
+        const x = xRemotum(c);
+        el("circle", { cx: x, cy: y, r: 3.4, class: c.remotum === "derriere" ? "s-point-vide" : "s-point-or" }, g);
+        ecrire(g, x, y + 22, "R", "s-etiq centre or");
+      }
+      if (S.faits.has("calc-remotum") && c.HR !== null) coteH(g, xH, xRemotum(c), y - 94, "HR = " + nb(c.HR, 0, true) + " cm");
+      if (posee("HH")) ecrire(g, xH, y - 76, posee("HH"));
+      if (posee("retine")) ecrire(g, xR, y - 80, posee("retine"));
+      if (posee("objet")) ecrire(g, 26, y - 44, posee("objet"));
+      if (posee("acc")) ecrire(g, xH, y + 94, posee("acc"), "s-etiq centre petit-etiq");
+    },
+    emplacements() {
+      const y = OR_.y, xH = OR_.xH, xR = OR_.xR;
+      return [
+        { id: "HH", etiquette: "H H'", places: [{ cle: "HH", x: xH, y: y - 76, large: 52 }], bon: "HH", pose: "H H'", pourquoi: "H et H' sont les plans principaux de l'œil réduit : les deux traits verticaux." },
+        { id: "retine", etiquette: "[R']", places: [{ cle: "retine", x: xR, y: y - 80, large: 48 }], bon: "retine", pose: "[R']", pourquoi: "[R'] désigne la rétine : le plan conjugué du remotum, le trait rose." },
+        { id: "objet", etiquette: "T∞", places: [{ cle: "objet", x: 30, y: y - 44, large: 46 }], bon: "objet", pose: "T∞", pourquoi: "T∞ est l'objet éloigné : à gauche, d'où arrivent les rayons parallèles." },
+        { id: "acc", etiquette: "Acc = 0", places: [{ cle: "acc", x: xH, y: y + 94, large: 80 }], bon: "acc", pose: "Acc = 0", pourquoi: "L'état accommodatif se note sous l'œil, à côté des plans principaux." }
+      ];
+    },
+    pointer: {
+      image() {
+        const c = S.co, y = OR_.y;
+        return { bon: c.image, aide: "Touche la zone où se forme T' : devant la rétine, sur elle, ou derrière.",
+          zones: [{ cle: "devant", x: 256, y: y - 60, w: 92, h: 120, texte: "devant" }, { cle: "sur", x: 350, y: y - 60, w: 20, h: 120, texte: "" }, { cle: "derriere", x: 372, y: y - 60, w: 92, h: 120, texte: "derrière" }],
+          message: "Œil " + c.nature + " de " + dioptries(c.R) + " qui n'accommode pas : l'image T' de T∞ se forme " + ({ devant: "devant la rétine", derriere: "derrière la rétine", sur: "sur la rétine" })[c.image] + (c.image === "sur" ? "." : ", à " + dioptries(c.ecart).replace(/^[+−-]/, "") + " du plan rétinien. Cette proximité en dioptries se cote sur le schéma.") };
+      },
+      remotum() {
+        const c = S.co, y = OR_.y;
+        return { bon: c.remotum, aide: "Où est le remotum R de cet œil ?",
+          zones: [{ cle: "infini", x: 2, y: y - 24, w: 36, h: 48, texte: "∞" }, { cle: "devant", x: 56, y: y - 24, w: 170, h: 48, texte: "devant l'œil" }, { cle: "derriere", x: 376, y: y - 24, w: 100, h: 48, texte: "derrière l'œil" }],
+          message: c.remotum === "devant" ? "Le remotum d'un myope est réel, devant l'œil : c'est le point vu net sans accommoder." : c.remotum === "derriere" ? "Le remotum d'un hypermétrope est virtuel, derrière l'œil." : "Le remotum d'un emmétrope est à l'infini." };
+      }
+    },
+    conclusions() {
+      const c = S.co, R = dioptries(c.R), e = dioptries(c.ecart).replace(/^[+−-]/, ""), HR = c.HR === null ? "" : nb(Math.abs(c.HR), 0);
+      const ph = (img, rem, hr) => "Œil " + c.nature + " de " + R + " : sans accommoder, l'image T' d'un objet éloigné se forme " + img + " la rétine, à " + e + " du plan rétinien. Le remotum est " + rem + (hr ? " (HR = " + hr + " cm)." : ".");
+      const vrai = c.remotum === "devant" ? ["devant", "réel, devant l'œil", "−" + HR] : ["derrière", "virtuel, derrière l'œil", "+" + HR];
+      const faux = c.remotum === "devant" ? ["derrière", "virtuel, derrière l'œil", "+" + HR] : ["devant", "réel, devant l'œil", "−" + HR];
+      return [
+        { juste: true, texte: ph(...vrai) },
+        { texte: ph(faux[0], vrai[1], vrai[2]), pourquoi: "Un œil " + c.nature + " forme l'image d'un objet éloigné " + vrai[0] + " la rétine." },
+        { texte: ph(vrai[0], faux[1], faux[2]), pourquoi: "HR = 1/R : avec R " + (c.R < 0 ? "négatif, le remotum est réel, devant l'œil." : "positif, le remotum est virtuel, derrière l'œil.") },
+        { texte: ph(vrai[0], vrai[1], (c.R < 0 ? "−" : "+") + nb(Math.abs(c.HR) / 10, 0)), pourquoi: "HR = 1/R donne des mètres : " + nb(1 / Math.abs(c.R), 2) + " m, soit " + HR + " cm." }
+      ];
+    }
+  };
+
+  // ===== 2. Le parcours d'accommodation (œil nu, myope) : R, P, cotes depuis H =====
+  const PA = { y: 150, xH: 430 };
+  const xDist = d => PA.xH - 380 * d / (d + 30);                 // d en cm devant l'œil ; l'infini tout à gauche
+  const TYPE_PARCOURS = {
+    legende: "Origine des cotes, parcours hachuré et verres portés : le correcteur ne devine rien.",
+    bravo: "Le parcours, ses deux bornes cotées, et ce que l'élève voit net ou flou.",
+    dessiner(g) {
+      const c = S.co, y = PA.y, xH = PA.xH, xR = xDist(-c.HR), xP = xDist(-c.HP);
+      ligne(g, 8, y, 472, y, "s-repere");
+      ecrire(g, 22, y - 10, "∞", "s-etiq centre");
+      ligne(g, xH, y - 46, xH, y + 46, "s-plan");
+      el("ellipse", { cx: xH + 22, cy: y, rx: 26, ry: 34, class: "s-oeil" }, g);
+      if (S.faits.has("parcours")) el("rect", { x: xR, y: y - 9, width: xP - xR, height: 18, class: "s-hachure" }, g);
+      if (S.faits.has("calc-remotum")) {
+        el("circle", { cx: xR, cy: y, r: 3.4, class: "s-point-or" }, g); ecrire(g, xR, y - 14, "R", "s-etiq centre or");
+        ligne(g, xR, y + 6, xR, y + 44, "s-rappel"); coteH(g, xH, xR, y + 40, "HR = " + nb(c.HR, 1, true) + " cm");
+      }
+      if (S.faits.has("calc-punctum")) {
+        el("circle", { cx: xP, cy: y, r: 3.4, class: "s-point-or" }, g); ecrire(g, xP, y - 14, "P", "s-etiq centre or");
+        ligne(g, xP, y + 6, xP, y + 78, "s-rappel"); coteH(g, xH, xP, y + 74, "HP = " + nb(c.HP, 1, true) + " cm");
+      }
+      if (posee("H")) ecrire(g, xH, y - 54, posee("H"));
+      if (posee("parcours")) ecrire(g, (xR + xP) / 2, y - 40, posee("parcours"), "s-etiq centre or");
+      if (posee("verre")) ecrire(g, xH + 22, y + 66, posee("verre"), "s-etiq centre petit-etiq");
+    },
+    emplacements() {
+      const c = S.co, y = PA.y, xH = PA.xH, xR = xDist(-c.HR), xP = xDist(-c.HP);
+      return [
+        { id: "H", etiquette: "H, origine", places: [{ cle: "H", x: xH, y: y - 54, large: 50 }], bon: "H", pose: "H (origine)", pourquoi: "Les cotes partent de H : l'origine se précise sur le schéma." },
+        { id: "parcours", etiquette: "Parcours d'accommodation", places: [{ cle: "loin", x: (22 + xR) / 2, y: y - 40, large: 70 }, { cle: "RP", x: (xR + xP) / 2, y: y - 40, large: 70 }, { cle: "pres", x: (xP + xH) / 2, y: y - 40, large: 70 }], bon: "RP", pose: "Parcours d'accommodation",
+          pourquoi: "Le parcours d'accommodation va du remotum R au proximum P : c'est la partie hachurée." },
+        { id: "verre", etiquette: "Œil nu", places: [{ cle: "verre", x: xH + 22, y: y + 66, large: 60 }], bon: "verre", pose: "Œil nu", pourquoi: "Les verres portés (ou « œil nu ») se notent près de l'œil." }
+      ];
+    },
+    pointer: {
+      parcours() {
+        const c = S.co, y = PA.y, xR = xDist(-c.HR), xP = xDist(-c.HP);
+        return { bon: "RP", aide: "Touche la partie de l'axe à hachurer : celle où l'œil voit net en accommodant.",
+          zones: [{ cle: "loin", x: 30, y: y - 22, w: xR - 33, h: 44, texte: "", haut: true }, { cle: "RP", x: xR + 3, y: y - 22, w: xP - xR - 6, h: 44, texte: "" }, { cle: "pres", x: xP + 3, y: y - 22, w: PA.xH - xP - 7, h: 44, texte: "" }],
+          message: "Sans accommoder, l'œil voit net en R ; en accommodant au maximum (" + dioptries(c.A).replace("+", "") + "), en P. Entre les deux, tout est net : c'est le parcours d'accommodation, à hachurer. Au-delà de R, c'est flou." };
+      }
+    },
+    conclusions() {
+      const c = S.co, r = nb(Math.abs(c.HR), 1), p = nb(Math.abs(c.HP), 1), faux = nb(100 / c.A, 1);
+      const ph = (a, b, flou) => "Le parcours d'accommodation va de R, à " + a + " cm devant l'œil, à P, à " + b + " cm. Sans lunettes, ce myope voit net entre " + b + " et " + a + " cm, et flou " + flou + ".";
+      return [
+        { juste: true, texte: ph(r, p, "au-delà de " + r + " cm") },
+        { texte: ph(r, p, "en deçà de " + p + " cm seulement"), pourquoi: "Un myope voit flou au-delà de son remotum : au-delà de " + r + " cm." },
+        { texte: ph(r, faux, "au-delà de " + r + " cm"), pourquoi: "HP se calcule avec la proximité de P : R − A = " + dioptries(c.P) + ", pas avec A seule." },
+        { texte: "Le parcours d'accommodation va de R à l'infini : ce myope voit net de loin sans lunettes.", pourquoi: "Le remotum d'un myope est à distance finie : il ne voit pas net de loin sans compensation." }
+      ];
+    }
+  };
+
+  // ===== 3. Image rétinienne : lunettes ou lentilles (myope), image intermédiaire Ai Bi =====
+  const IR = { y: 150, xL: 120, xH: 250, xR: 370, u: 0.3 };
+  function rayonsLunettes(c, xAi, couleur, g, avecRetine, u) {
+    u = u || IR.u;
+    const y = IR.y, hB = (IR.xL - xAi) * u, Bi = { x: xAi, y: y - hB };
+    const pente = (y - Bi.y) / (IR.xH - Bi.x), yV = Bi.y + pente * (IR.xL - Bi.x);
+    rayonFleche(g, 14, yV - (IR.xL - 14) * u, IR.xL, yV, "s-rayon " + couleur);
+    rayonFleche(g, IR.xL, yV, IR.xH - 4, y, "s-rayon " + couleur);
+    ligne(g, Bi.x, Bi.y, IR.xL, yV, "s-rayon tirets " + couleur);
+    ligne(g, xAi, y, xAi, Bi.y, "s-image-inter " + couleur, "pointe-image");
+    const yp = (IR.xR - IR.xH - 4) * pente;
+    if (avecRetine) ligne(g, IR.xH + 4, y, IR.xR, y + yp, "s-rayon " + couleur);
+    return { Bi, yp };
+  }
+  const TYPE_IMAGE = {
+    legende: "Verre, image intermédiaire, plans principaux et images rétiniennes : chaque élément est nommé.",
+    bravo: "L'image intermédiaire, les deux images rétiniennes comparées, et l'ordre de grandeur.",
+    xAi(c) { return c.intermediaire === "devant" ? 30 : 200; },
+    dessiner(g) {
+      const c = S.co, y = IR.y;
+      ligne(g, 8, y, 472, y, "s-repere");
+      verreSymbole(g, IR.xL, y, 70, c.P);
+      plansHH(g, IR.xH, y, 70);
+      ligne(g, IR.xR, y - 80, IR.xR, y + 80, "t-retine");
+      // Lentille de contact : l'œil reçoit le faisceau sous l'angle u
+      rayonFleche(g, 14, y - (IR.xH - 14) * IR.u, IR.xH - 4, y, "s-rayon bleu");
+      const yc = (IR.xR - IR.xH - 4) * IR.u;
+      ligne(g, IR.xH + 4, y, IR.xR, y + yc, "s-rayon bleu");
+      ligne(g, IR.xR + 8, y, IR.xR + 8, y + yc, "s-image-ret bleu");
+      ecrire(g, 24, y - (IR.xH - 14) * IR.u - 8, "B∞", "s-etiq centre");
+      if (S.faits.has("intermediaire")) {
+        const r = rayonsLunettes(c, this.xAi(c), "", g, true);
+        ligne(g, IR.xR + 16, y, IR.xR + 16, y + r.yp, "s-image-ret or");
+        ecrire(g, r.Bi.x, r.Bi.y - 8, "Bi", "s-etiq centre or"); ecrire(g, r.Bi.x, y + 18, "Ai", "s-etiq centre or");
+      }
+      if (posee("DL")) ecrire(g, IR.xL, y - 80, posee("DL"));
+      if (posee("HH")) ecrire(g, IR.xH, y - 80, posee("HH"));
+      if (posee("yc")) ecrire(g, IR.xR + 12, y + yc + 18, posee("yc"), "s-etiq petit-etiq bleu-etiq");
+      if (posee("yl")) { const yl = (IR.xR - IR.xH - 4) * (IR.u * (IR.xL - this.xAi(c)) / (IR.xH - this.xAi(c))); ecrire(g, IR.xR + 12, y + yl + 2, posee("yl"), "s-etiq petit-etiq or"); }
+    },
+    emplacements() {
+      const c = S.co, y = IR.y, yc = (IR.xR - IR.xH - 4) * IR.u, yl = (IR.xR - IR.xH - 4) * (IR.u * (IR.xL - this.xAi(c)) / (IR.xH - this.xAi(c)));
+      const pres = { cle: "petite", x: IR.xR + 52, y: y + yl + 2, large: 80 }, loin = { cle: "grande", x: IR.xR + 52, y: y + yc + 18, large: 80 };
+      const grandeL = c.plusGrande === "lunettes";
+      return [
+        { id: "DL", etiquette: "DL " + dioptries(c.P), places: [{ cle: "DL", x: IR.xL, y: y - 80, large: 70 }], bon: "DL", pose: "DL " + dioptries(c.P), pourquoi: "Le verre porté et sa puissance s'écrivent au-dessus du verre." },
+        { id: "HH", etiquette: "H H'", places: [{ cle: "HH", x: IR.xH, y: y - 80, large: 52 }], bon: "HH", pose: "H H'", pourquoi: "H H' : les plans principaux de l'œil, origine des angles sur ce schéma." },
+        { id: "yl", etiquette: "y' lunettes", places: [grandeL ? loin : pres], bon: grandeL ? "grande" : "petite", pose: "y' lunettes", pourquoi: "En lunettes, suis le rayon or : il vient de Bi et arrive sur la rétine plus " + (grandeL ? "loin" : "près") + " de l'axe." },
+        { id: "yc", etiquette: "y' lentille", places: [grandeL ? pres : loin], bon: grandeL ? "petite" : "grande", pose: "y' lentille", pourquoi: "En lentilles, suis le rayon bleu : l'œil reçoit directement le faisceau sous l'angle u." }
+      ];
+    },
+    pointer: {
+      intermediaire() {
+        const c = S.co, y = IR.y;
+        return { bon: c.intermediaire, aide: "Le verre donne d'abord une image Ai Bi de l'objet éloigné. Où se forme-t-elle ?",
+          zones: [{ cle: "devant", x: 20, y: y - 40, w: 140, h: 80, texte: "devant le verre" }, { cle: "entre", x: 180, y: y - 40, w: 110, h: 80, texte: "entre verre et œil" }, { cle: "derriere", x: 312, y: y - 40, w: 100, h: 80, texte: "derrière l'œil" }],
+          message: "Pour un objet éloigné, Ai Bi est au foyer image du verre" + (c.P < 0 ? " divergent : devant lui, virtuelle (à " + nb(Math.abs(100 / c.P), 0) + " cm)" : "") + ". Le compensateur parfait met ce foyer sur le remotum. L'œil voit Ai Bi sous un angle plus petit que l'objet : son image rétinienne est plus petite." };
+      }
+    },
+    conclusions() {
+      const c = S.co, e = nb(c.ecart, 0), grand = c.plusGrande, petit = grand === "lunettes" ? "lentilles" : "lunettes";
+      const ph = (g2, p2, v) => "L'image rétinienne est plus grande en " + g2 + " qu'en " + p2 + ", d'environ " + v + " % (LH × |DL|). Un objet juste reconnu en " + g2 + " ne l'est plus en " + p2 + ".";
+      return [
+        { juste: true, texte: ph(grand, petit, e) },
+        { texte: ph(petit, grand, e), pourquoi: "En lunettes, un verre " + (c.P < 0 ? "divergent rapetisse" : "convergent agrandit") + " l'image rétinienne." },
+        { texte: ph(grand, petit, nb(c.LH * 10 * Math.abs(c.P), 0)), pourquoi: "Règle d'estimation : LH en cm, pas en mm : " + nb(c.LH, 1) + " × " + nb(Math.abs(c.P), 0) + " ≈ " + e + " %." },
+        { texte: "L'image rétinienne a la même taille en lunettes et en lentilles : seul le confort change.", pourquoi: "La distance verre-œil change la taille de l'image rétinienne : c'est tout l'intérêt de la comparaison." }
+      ];
+    }
+  };
+
+  // ===== 4. Aniséiconie : schéma comparatif OD / OG en lunettes =====
+  const TYPE_ANISEICONIE = {
+    legende: "Deux couleurs, une par œil, et les deux verres nommés : le schéma comparatif se lit d'un coup d'œil.",
+    bravo: "Le côté de l'image la plus grande, la valeur en %, et le risque pour la vision binoculaire.",
+    xAi(P) { return IR.xL - Math.min(100, Math.abs(100 / P) * 2); },
+    dessiner(g) {
+      const c = S.co, y = IR.y;
+      ligne(g, 8, y, 472, y, "s-repere");
+      verreSymbole(g, IR.xL - 7, y, 70, c.OD, "or");
+      verreSymbole(g, IR.xL + 7, y, 70, c.OG, "violet");
+      plansHH(g, IR.xH, y, 70);
+      ligne(g, IR.xR, y - 80, IR.xR, y + 80, "t-retine");
+      ecrire(g, 24, y - 92, "B∞", "s-etiq centre");
+      const voir = S.faits.has("plus-grande");
+      ["OD", "OG"].forEach(o => {
+        const xAi = this.xAi(c[o]), cl = o === "OD" ? "" : "violet";
+        const r = rayonsLunettes(c, xAi, cl, g, voir, 0.45);
+        ecrire(g, xAi, y + 18, "Ai" + o.slice(1).toLowerCase(), "s-etiq centre " + (o === "OD" ? "or" : "violet-etiq"));
+        if (voir) { ligne(g, IR.xR + (o === "OD" ? 8 : 16), y, IR.xR + (o === "OD" ? 8 : 16), y + r.yp, "s-image-ret " + (o === "OD" ? "or" : "violet")); ecrire(g, IR.xR + 24, y + r.yp + (o === "OD" ? 12 : -2), "y'" + o.slice(1).toLowerCase(), "s-etiq " + (o === "OD" ? "or" : "violet-etiq")); }
+      });
+      if (posee("DLD")) ecrire(g, IR.xL - 7, y - 80, posee("DLD"), "s-etiq droite or");
+      if (posee("DLG")) ecrire(g, IR.xL + 7, y + 92, posee("DLG"), "s-etiq violet-etiq");
+      if (posee("HH")) ecrire(g, IR.xH, y - 80, posee("HH"));
+    },
+    emplacements() {
+      const c = S.co, y = IR.y;
+      return [
+        { id: "DLD", etiquette: "DLD " + dioptries(c.OD), places: [{ cle: "haut", x: IR.xL - 44, y: y - 80, large: 76 }, { cle: "bas", x: IR.xL + 44, y: y + 92, large: 76 }], bon: "haut", pose: "DLD " + dioptries(c.OD), pourquoi: "Le verre de l'OD est tracé en or, comme ses rayons." },
+        { id: "DLG", etiquette: "DLG " + dioptries(c.OG), places: [], bon: "bas", pose: "DLG " + dioptries(c.OG), pourquoi: "Le verre de l'OG est tracé en violet, comme ses rayons." },
+        { id: "HH", etiquette: "H H'", places: [{ cle: "HH", x: IR.xH, y: y - 80, large: 52 }], bon: "HH", pose: "H H'", pourquoi: "Pour l'aniséiconie, on prend de préférence les plans principaux de chaque œil comme origine." }
+      ].map((t, i, tout) => t.id === "DLG" ? { ...t, places: tout[0].places } : t);
+    },
+    pointer: {
+      "plus-grande"() {
+        const c = S.co, y = IR.y;
+        return { bon: c.plusGrande, fait: "plus-grande", aide: "D'après les deux images intermédiaires, quel œil a la plus grande image rétinienne ? Touche-le sur la rétine.",
+          zones: [{ cle: "OD", x: IR.xR - 4, y: y + 4, w: 54, h: 44, texte: "OD" }, { cle: "OG", x: IR.xR - 4, y: y + 52, w: 54, h: 44, texte: "OG" }],
+          message: "Ai" + (c.plusGrande === "OD" ? "d" : "g") + " est vue sous le plus grand angle depuis H : l'" + c.plusGrande + " (verre de " + dioptries(c[c.plusGrande]) + ", le plus " + (c[c.plusGrande] < 0 ? "faible en myopie" : "convergent") + ") a la plus grande image rétinienne." };
+      }
+    },
+    conclusions() {
+      const c = S.co, v = nb(c.valeur, 1), autre = c.plusGrande === "OD" ? "OG" : "OD";
+      const ph = (val, oeil) => "Aniséiconie induite d'environ " + val + " % (LH × |DLd − DLg|), en faveur de l'" + oeil + ". Au-delà de quelques %, elle peut gêner la fusion et perturber la vision binoculaire.";
+      return [
+        { juste: true, texte: ph(v, c.plusGrande) },
+        { texte: ph(v, autre), pourquoi: "L'image la plus grande est celle de l'" + c.plusGrande + ", au verre le plus " + (c[c.plusGrande] < 0 ? "faible" : "convergent") + "." },
+        { texte: ph(nb(c.LH * Math.abs(c.OD + c.OG), 1), c.plusGrande), pourquoi: "C'est la différence des deux verres qui compte : |DLd − DLg| = " + nb(Math.abs(c.OD - c.OG), 2) + " δ." },
+        { texte: "Aucune aniséiconie : les deux yeux portent des verres de même signe.", pourquoi: "Des verres de puissances différentes donnent des images de tailles différentes, même de même signe." }
+      ];
+    }
+  };
+
+  // ===== 5. Le prisme vertical : deux vues de profil séparées, OD puis OG =====
+  const PV = { xV: 210, xQ: 360, r: 32, yD: 76, yG: 222, gPx: 7 };
+  function geoProfil(c, o) {
+    const y0 = o === "OD" ? PV.yD : PV.yG, s = c.regard === "bas" ? 1 : -1;
+    const B = { x: 30, y: y0 + s * 46 };
+    const yS = y0 + s * 46 * (PV.xQ - PV.xV) / (PV.xQ - B.x);          // sans verre, le rayon B → Q' couperait le verre ici
+    const I = { x: PV.xV, y: yS + s * PV.gPx * c[o].P };
+    return { y0, s, B, I };
+  }
+  const TYPE_PRISME = {
+    legende: "Deux vues de profil séparées, jamais superposées, et la base du prisme au point de passage.",
+    bravo: "L'effet de chaque verre, la différence subie par le couple, et la gêne attendue.",
+    dessiner(g) {
+      const c = S.co;
+      ligne(g, 0, 152, 480, 152, "s-separation");
+      ["OD", "OG"].forEach(o => {
+        const { y0, s, B, I } = geoProfil(c, o), Q = { x: PV.xQ, y: y0 };
+        ligne(g, 8, y0, 472, y0, "s-repere");
+        verreSymbole(g, PV.xV, y0, 56, c[o].P);
+        el("circle", { cx: PV.xV, cy: y0, r: 2.6, class: "s-point" }, g);
+        ecrire(g, PV.xV + 9, y0 - 6, "O", "s-note");
+        el("circle", { cx: Q.x, cy: Q.y, r: PV.r, class: "s-oeil" }, g);
+        el("path", { d: `M${Q.x - PV.r * 0.88} ${Q.y - PV.r * 0.48} Q${Q.x - PV.r * 1.42} ${Q.y} ${Q.x - PV.r * 0.88} ${Q.y + PV.r * 0.48}`, class: "s-cornee" }, g);
+        el("circle", { cx: Q.x, cy: Q.y, r: 2.4, class: "s-point" }, g);
+        ecrire(g, Q.x + 6, Q.y - 6, "Q'", "s-note");
+        el("circle", { cx: B.x, cy: B.y, r: 3.2, class: "s-point-or" }, g);
+        ecrire(g, B.x + 2, B.y + s * 16 + 4, "B", "s-etiq centre");
+        rayonFleche(g, B.x, B.y, I.x, I.y);
+        if (S.faits.has("deviation")) {
+          rayonFleche(g, I.x, I.y, Q.x - PV.r, Q.y + (I.y - Q.y) * PV.r / (Q.x - I.x));
+          const f = { x: Q.x + PV.r * (Q.x - I.x) / Math.hypot(Q.x - I.x, Q.y - I.y), y: Q.y + PV.r * (Q.y - I.y) / Math.hypot(Q.x - I.x, Q.y - I.y) };
+          ligne(g, Q.x - PV.r, Q.y + (I.y - Q.y) * PV.r / (Q.x - I.x), f.x, f.y, "s-rayon");
+          el("circle", { cx: f.x, cy: f.y, r: 2.6, class: "s-fovea" }, g);
+          ligne(g, I.x, I.y, I.x + (I.x - B.x) * 0.35, I.y + (I.y - B.y) * 0.35, "s-rayon tirets");     // sans déviation
+        }
+        if (S.faits.has("rotation")) {
+          const a = Math.atan2(I.y - Q.y, I.x - Q.x), R = 48, a0 = Math.PI;
+          el("path", { d: `M${Q.x + R * Math.cos(a0)} ${Q.y + R * Math.sin(a0)} A${R} ${R} 0 0 ${s > 0 ? 0 : 1} ${Q.x + R * Math.cos(a)} ${Q.y + R * Math.sin(a)}`, class: "s-angle" }, g);
+          ecrire(g, Q.x - R - 12, Q.y + s * 16 + 4, "w'" + o.slice(1).toLowerCase(), "s-note droite or-note");
+        }
+        if (S.faits.has("calc-prisme-" + o.toLowerCase())) ecrire(g, PV.xV - 10, y0 - 12, nb(c[o].effet, 1) + " Δ base " + c[o].base, "s-note droite or-note");
+        if (posee("vue" + o)) ecrire(g, 12, y0 - 52, posee("vue" + o), "s-etiq");
+        if (o === "OD" && posee("base")) { const yb = I.y + (c.OD.base === "haut" ? -18 : 22); ecrire(g, PV.xV + 12, yb, posee("base"), "s-etiq petit-etiq or"); }
+      });
+      if (S.faits.has("calc-difference-prismatique")) ecrire(g, 470, 148, "Couple : " + nb(c.difference, 1) + " Δ vertical", "s-note droite or-note");
+    },
+    emplacements() {
+      const c = S.co, I = geoProfil(c, "OD").I;
+      return [
+        { id: "vueOD", etiquette: "OD · vue de profil", places: [{ cle: "vueOD", x: 70, y: PV.yD - 52, large: 120 }, { cle: "vueOG", x: 70, y: PV.yG - 52, large: 120 }], bon: "vueOD", pose: "OD · vue de profil", pourquoi: "On dessine l'OD en haut, l'OG en bas, chacun dans sa propre vue de profil." },
+        { id: "vueOG", etiquette: "OG · vue de profil", places: [], bon: "vueOG", pose: "OG · vue de profil", pourquoi: "L'OG est la vue du bas." },
+        { id: "base", etiquette: "Base", places: [{ cle: "haut", x: PV.xV + 30, y: I.y - 18, large: 44 }, { cle: "bas", x: PV.xV + 30, y: I.y + 24, large: 44 }], bon: c.OD.base, pose: "Base",
+          pourquoi: "Verre " + (c.OD.P > 0 ? "convergent : la base est tournée vers le centre optique" : "divergent : la base est tournée vers le bord") + ", donc vers le " + c.OD.base + " au point de passage." }
+      ].map((t, i, tout) => t.id === "vueOG" ? { ...t, places: tout[0].places } : t);
+    },
+    pointer: {
+      deviation() {
+        const c = S.co, { I } = geoProfil(c, "OD");
+        return { bon: c.OD.base, fait: "deviation", aide: "Sur l'OD : après le verre, le rayon part vers le haut, tout droit, ou vers le bas ?",
+          zones: [{ cle: "haut", x: I.x + 12, y: I.y - 58, w: 90, h: 40, texte: "vers le haut", haut: true }, { cle: "droit", x: I.x + 12, y: I.y - 16, w: 90, h: 30, texte: "tout droit", haut: true }, { cle: "bas", x: I.x + 12, y: I.y + 16, w: 90, h: 40, texte: "vers le bas", haut: true }],
+          message: "Un prisme dévie la lumière vers sa base : ici vers le " + c.OD.base + ". L'image, elle, est vue déplacée vers le sommet, et l'œil doit tourner pour la suivre." };
+      },
+      rotation() {
+        const c = S.co;
+        return { bon: c.tourneLePlus, fait: "rotation", aide: "Quel œil doit tourner le plus pour regarder B ? Touche-le.",
+          zones: [{ cle: "OD", x: PV.xQ - 40, y: PV.yD - 40, w: 80, h: 80, texte: "OD", haut: true }, { cle: "OG", x: PV.xQ - 40, y: PV.yG - 40, w: 80, h: 80, texte: "OG", haut: true }],
+          message: "Le verre le plus " + (c.regard === "bas" ? "convergent" : "divergent") + " déplace le plus l'image : l'" + c.tourneLePlus + " tourne plus que l'autre (w'" + c.tourneLePlus.slice(1).toLowerCase() + " > w'" + (c.tourneLePlus === "OD" ? "g" : "d") + "). Dans le plan vertical, cette différence de rotation gêne la vision binoculaire." };
+      }
+    },
+    conclusions() {
+      const c = S.co, d = nb(c.difference, 1), autre = c.tourneLePlus === "OD" ? "OG" : "OD";
+      const ph = (val, base, oeil) => "Le couple subit " + val + " Δ d'effet prismatique vertical (OD " + nb(c.OD.effet, 1) + " Δ, OG " + nb(c.OG.effet, 1) + " Δ, bases " + base + "). L'" + oeil + " doit tourner davantage ; les réserves fusionnelles verticales sont faibles, une gêne est probable.";
+      const bases = c.OD.base === c.OG.base ? c.OD.base + "s" : "opposées";
+      return [
+        { juste: true, texte: ph(d, bases, c.tourneLePlus) },
+        { texte: ph(d, bases, autre), pourquoi: "C'est l'" + c.tourneLePlus + ", au verre le plus " + (c.regard === "bas" ? "convergent" : "divergent") + ", qui tourne le plus." },
+        { texte: ph(nb(c.OD.effet + c.OG.effet, 1), bases, c.tourneLePlus), pourquoi: "Bases du même côté : les effets se retranchent, le couple subit la différence (" + d + " Δ), pas la somme." },
+        { texte: ph(d, c.OD.base === "haut" ? "basses" : "hautes", c.tourneLePlus), pourquoi: "Au point de passage, la base est vers le " + c.OD.base + " (" + (c.OD.P > 0 ? "verre convergent : base vers le centre optique" : "verre divergent : base vers le bord") + ")." }
+      ];
+    }
+  };
+
+  const TYPES_SCHEMA = {
+    "couple-oculaire": { dessiner: () => dessinerCouple(), emplacements: () => emplacementsCouple(), conclusions: () => phrasesCouple(),
+      legende: "C'est ce que le correcteur cherche en premier : la vue, les deux yeux complets, l'œil fixateur et le dissociateur.",
+      bravo: "Nature, valeur, et base du prisme : les trois y sont." },
+    "oeil-reduit": TYPE_OEIL, "parcours": TYPE_PARCOURS, "image-retinienne": TYPE_IMAGE, "aniseiconie": TYPE_ANISEICONIE, "prisme-vertical": TYPE_PRISME
+  };
+
+  const GESTES = { rayon: gesteRayon, placer: gestePlacer, designer: gesteDesigner, relier: gesteRelier, faisceau: gesteFaisceau, calcul: gesteCalcul,
+    legender: gesteLegender, regard: gesteRegard, pointer: gestePointer, conclure: gesteConclure };
   const CONSIGNES = {
     rayon: E => "Que devient ce rayon après " + E.apres + " ?",
     placer: E => ({ image: "Place l'image après " + E.apres + ".", "image-diaphragme": "Place l'image de " + E.diaphragme + " vue depuis l'objet.", "foyer-image": "Place le foyer image du système.", "foyer-objet": "Place le foyer objet du système.", remotum: "Place le remotum R.", punctum: "Place le punctum proximum P.", "image-retine": "Place l'image B' formée par l'œil." }[E.quoi] || "Place le point."),
     designer: E => ({ "pupille-entree": "Touche la pupille d'entrée.", "lucarne-entree": "Touche la lucarne d'entrée.", "diaphragme-ouverture": "Touche le diaphragme d'ouverture.", "diaphragme-champ": "Touche le diaphragme de champ." }[E.quoi]),
     relier: E => "Touche les deux points qui donnent la limite du " + ({ "champ-total": "champ total", "champ-moyen": "champ moyen" }[E.quoi] || "champ de pleine lumière") + ".",
     faisceau: () => "Quel est le faisceau issu de B qui traverse l'instrument ?",
-    calcul: E => "Calcule " + (NOMS_GRANDEURS[E.grandeur] || "la valeur") + "."
+    calcul: E => "Calcule " + (NOMS_GRANDEURS[E.grandeur] || "la valeur") + ".",
+    legender: () => "Légende le schéma : touche une étiquette, puis l'endroit où elle va.",
+    regard: () => "Fais pivoter la ligne de regard de l'œil dévié.",
+    pointer: E => E.quoi === "exteriorisation" ? "Touche le côté où le sujet extériorise l'image de l'œil dévié." : "Touche le fond de l'œil, là où se forme l'image.",
+    conclure: () => "Choisis la conclusion à rédiger."
   };
 
   // ---------------- Déroulé d'un niveau ----------------
@@ -1195,9 +1986,12 @@
     $("ecran-jeu").dataset.epreuve = N.epreuve;
     $("jeu-niveau").textContent = "Niveau " + (liste.indexOf(N) + 1) + " / " + liste.length;
     $("jeu-titre").textContent = N.titre;
-    $("jeu-regle").textContent = N.regle || "";
-    $("jeu-regle").hidden = !N.regle;
-    $("jeu-consigne").textContent = N.consigne || "";
+    // Schéma de l'examen : la situation de l'énoncé reste sous les yeux pendant toutes les étapes
+    const situation = N.schema ? N.consigne : N.regle;
+    $("jeu-regle").textContent = situation || "";
+    $("jeu-regle").hidden = !situation;
+    $("jeu-regle").classList.toggle("situation", !!N.schema);
+    ecrireTexteMath($("jeu-consigne"), N.consigne || "");          // fractions [[haut|bas]] et lignes (essentiel.js)
     effacerRetour();
     etat = { erreurs: 0, indice: false };
     nettoyerGlisser();
@@ -1231,7 +2025,7 @@
     const N = niveau, E = N.etapes[i], n = N.etapes.length;
     filEtapes(n, i);
     const consigne = E.texte || (CONSIGNES[E.action] ? CONSIGNES[E.action](E) : "");
-    $("jeu-consigne").textContent = n > 1 ? "Étape " + (i + 1) + " sur " + n + " : " + consigne : (N.consigne || consigne);
+    ecrireTexteMath($("jeu-consigne"), n > 1 ? "Étape " + (i + 1) + " sur " + n + " : " + consigne : (N.consigne || consigne));
     const geste = GESTES[E.action];
     // Si une étape « calcul » vient après, la valeur calculée ne doit pas être donnée avant
     S.calculApres = N.etapes.slice(i + 1).some(x => x.action === "calcul");
@@ -1254,7 +2048,7 @@
       } else suite(message);
     });
     // Fin du niveau : le son de fin passe après celui de la dernière étape, s'il y en a un
-    function suite(message) { filEtapes(n, n); terminer((message || "") + (N.conclusion ? "<p>" + echapper(N.conclusion) + "</p>" : ""), true); }
+    function suite(message) { filEtapes(n, n); terminer((message || "") + (N.conclusion ? "<p>" + texteMathHTML(N.conclusion) + "</p>" : ""), true); }
   }
 
   // Trois étoiles dessinées : les gagnées en or, les autres en creux
@@ -1271,7 +2065,8 @@
     const liste = niveauxDe(niveau.epreuve), i = liste.indexOf(niveau);
     const suivant = liste[i + 1] && debloque(liste[i + 1]) ? liste[i + 1] : null;
     const lien = niveau.theme ? '<p><a href="qcm.html#' + niveau.epreuve + "/" + encodeURIComponent(niveau.theme) + '">S\'entraîner au QCM : ' + echapper(niveau.theme) + " →</a></p>" : "";
-    retour(message + lien + '<p class="etoiles-gagnees">' + etoilesHTML(etoiles) + "</p>", "bien", etoiles === 3 ? "clin-doeil" : "bouche-ouverte");
+    const copie = niveau.copie ? '<div class="sur-copie"><p><b>Sur ta copie, vérifie</b></p><ul>' + niveau.copie.map(t => "<li>" + echapper(t) + "</li>").join("") + "</ul></div>" : "";
+    retour(message + copie + lien + '<p class="etoiles-gagnees">' + etoilesHTML(etoiles) + "</p>", "bien", etoiles === 3 ? "clin-doeil" : "bouche-ouverte");
     boutons([
       suivant ? ["Niveau suivant", () => ouvrir(suivant)] : ["Retour aux niveaux", afficherNiveaux],
       ["Rejouer", () => ouvrir(niveau), "secondaire"]
@@ -1370,6 +2165,25 @@
     s.setAttribute("class", "vignette");
     const trait = (d, classe) => { const e = document.createElementNS(SVG_NS, "path"); e.setAttribute("d", d); e.setAttribute("class", classe); s.appendChild(e); };
     const lentille = (x, conv) => { const c = conv ? 1 : -1; trait(`M${x} 5 V${h - 5} M${x - 3} ${5 + c * 3.2} L${x} 5 L${x + 3} ${5 + c * 3.2} M${x - 3} ${h - 5 - c * 3.2} L${x} ${h - 5} L${x + 3} ${h - 5 - c * 3.2}`, "v-lentille"); };
+    if (N.schema && N.schema.type !== "couple-oculaire") {
+      // Les autres schémas : un axe, un verre (sauf œil nu) et l'œil réduit ; le prisme vertical : deux vues empilées
+      if (N.schema.type === "prisme-vertical") {
+        [11, 29].forEach(y => { trait(`M3 ${y} H${w - 3}`, "v-axe"); trait(`M28 ${y - 8} V${y + 8}`, "v-lentille"); trait(`M50 ${y} m-6 0 a6 6 0 1 0 12 0 a6 6 0 1 0 -12 0`, "v-oeil"); });
+        return s;
+      }
+      trait(`M2 ${m} H${w - 2}`, "v-axe");
+      if (!["oeil-reduit", "parcours"].includes(N.schema.type)) trait(`M22 6 V${h - 6}`, "v-lentille");
+      trait(`M44 8 V${h - 8} M47 8 V${h - 8}`, "v-lentille");
+      trait(`M60 8 V${h - 8}`, "v-oeil");
+      return s;
+    }
+    if (N.schema) {
+      // Le couple oculaire vu de dessus : T en haut, deux yeux, les lignes de regard
+      trait(`M34 4 L18 ${h - 13} M34 4 L50 ${h - 13}`, "v-axe");
+      trait(`M18 ${h - 13} m-7 0 a7 7 0 1 0 14 0 a7 7 0 1 0 -14 0 M50 ${h - 13} m-7 0 a7 7 0 1 0 14 0 a7 7 0 1 0 -14 0`, "v-oeil");
+      trait("M32 4 h4", "v-objet");
+      return s;
+    }
     trait(`M2 ${m} H${w - 2}`, "v-axe");
     if (N.defi) { lentille(w / 2, true); trait(`M14 ${m} V9 M11.500 12.500 L14 9 L16.500 12.500`, "v-objet"); trait(`M${w - 17} 13 a4 4 0 1 1 5.500 3.700 c-1.200.5 -1.500 1.300 -1.500 2.800 M${w - 13} 24.500 v.01`, "v-objet"); return s; }
     let sys;
@@ -1393,6 +2207,14 @@
     $("ecran-niveaux").dataset.epreuve = atelier;
     const etoiles = lireEtoiles(), conteneur = $("niveaux");
     conteneur.innerHTML = "";
+    // Vision : à l'examen, des schémas à main levée, pas des tracés exacts. L'onglet le dit d'emblée.
+    $("titre-niveaux").textContent = atelier === "U5" ? "Les schémas de l'examen" : "Les niveaux";
+    if (atelier === "U5") {
+      const p = document.createElement("p");
+      p.className = "intro-atelier";
+      p.textContent = "À l'écrit d'Analyse de la vision, on ne te demande pas un tracé exact à la règle. On attend un schéma à main levée d'une demi-page, légendé, coté, et une conclusion rédigée. Ici, tu poses chaque élément au bon endroit, comme sur ta copie.";
+      conteneur.appendChild(p);
+    }
     const liste = niveauxDe(atelier);
     const chapitres = [...new Set(liste.map(N => N.chapitre || ""))];
     let total = 0;
@@ -1467,5 +2289,5 @@
   else choisirAtelier(demande ? demande.epreuve : "U42");
 
   // Pour les tests : on expose de quoi vérifier (aucun effet sur la page)
-  window.__traces = { NIVEAUX, Optique, scene: () => S, ouvrir: id2 => ouvrir(NIVEAUX.find(N => N.id === id2)) };
+  window.__traces = { NIVEAUX, Optique, scene: () => S, schemas: TYPES_SCHEMA, ouvrir: id2 => ouvrir(NIVEAUX.find(N => N.id === id2)) };
 })();

@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Opticonversion">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
-<link rel="stylesheet" href="style.css?v=e7375bae">
+<link rel="stylesheet" href="style.css?v=bc07fa26">
 </head>
 <body>
 <header class="entete">
@@ -53,7 +53,7 @@
     <p>On n'enregistre ni ton nom, ni ta photo, ni ton e-mail dans notre base de progression. Le service de connexion (Firebase Authentication, de Google) conserve ton adresse e-mail pour te reconnaître à la prochaine connexion ; si tu choisis un mot de passe, il est stocké chiffré et personne, pas même nous, ne peut le lire. Ton e-mail sert uniquement à te connecter, à valider ton adresse et à réinitialiser ton mot de passe : jamais de publicité ni de newsletter.</p>
 
     <h3>Mesure d'audience</h3>
-    <p>Pour savoir quelles pages servent vraiment, on compte les visites avec GoatCounter, un outil sans cookies et sans suivi d'une page à l'autre. Il enregistre seulement des informations générales et anonymes : la page vue, le site d'où tu viens, le type de navigateur et d'écran, le pays. Ton adresse IP n'est pas conservée et rien ne permet de t'identifier, c'est pourquoi aucune bannière de consentement n'est nécessaire.</p>
+    <p>Pour savoir quelles pages servent vraiment, on compte les visites avec GoatCounter, un outil sans cookies et sans suivi d'une page à l'autre. Il enregistre seulement des informations générales et anonymes : la page vue, le site d'où tu viens, le type de navigateur et d'écran, le pays. Ton adresse IP sert seulement, sur le moment, à deviner le pays et à ne pas compter deux fois la même visite : elle reste au plus 8 heures dans la mémoire de GoatCounter et n'est jamais enregistrée. Rien ne permet de t'identifier, c'est pourquoi aucune bannière de consentement n'est nécessaire. Ces statistiques sont gardées 25 mois, puis effacées automatiquement.</p>
 
     <h3>Si tu signales une erreur</h3>
     <p>Le formulaire « Signaler une erreur » enregistre seulement la question concernée, le type de problème et ton message facultatif. Rien ne te relie à ce signalement : ni compte, ni e-mail, ni adresse IP conservée par nous. Ne mets pas d'informations personnelles dans le message. Les signalements sont supprimés une fois la question vérifiée.</p>
@@ -64,11 +64,19 @@
     <h3>Pourquoi</h3>
     <p>Uniquement pour que tu retrouves ta progression sur tes différents appareils. Pas de publicité, pas de revente, pas de suivi de navigation individuel.</p>
 
+    <h3>Sur quoi ça repose (base légale)</h3>
+    <ul>
+      <li>Le stockage dans ton navigateur, sans compte : il sert seulement à faire marcher le site comme tu le demandes (garder tes réponses, tes réglages).</li>
+      <li>Le compte : ton consentement, que tu donnes en le créant. Tu le retires quand tu veux en supprimant ton compte.</li>
+      <li>La mesure d'audience et les signalements d'erreur : notre intérêt légitime à savoir quelles pages servent et à corriger les questions fausses. Tu peux t'y opposer en nous écrivant.</li>
+    </ul>
+
     <h3>Où et combien de temps</h3>
-    <p>Les données sont hébergées par Google Firebase. Elles sont gardées tant que ton compte existe. Un compte inactif depuis 2 ans est supprimé.</p>
+    <p>Les données sont hébergées par Google Firebase. Ta progression (la base Firestore) est stockée en Europe. Le service de connexion (Firebase Authentication : ton e-mail et ton identifiant) peut, lui, être traité par Google hors de l'Union européenne, notamment aux États-Unis. Ces transferts sont encadrés par le « Data Privacy Framework » UE–États-Unis, auquel Google adhère.</p>
+    <p>Tes données sont gardées tant que ton compte existe. Une fois par an, on supprime les comptes sans aucune activité depuis 2 ans (ni connexion, ni réponse enregistrée), avec leur progression.</p>
 
     <h3>Tes droits</h3>
-    <p>Tu peux supprimer ton compte et toute ta progression en ligne à tout moment depuis la page <a href="compte.html">Mon compte</a>. Pour toute question (accès, rectification, suppression), écris à <a href="mailto:opticonversion.bts@gmail.com">opticonversion.bts@gmail.com</a>. Tu peux aussi saisir la CNIL.</p>
+    <p>Tu peux supprimer ton compte et toute ta progression en ligne à tout moment depuis la page <a href="compte.html">Mon compte</a>. Pour toute question (accès, rectification, suppression, opposition), écris à <a href="mailto:opticonversion.bts@gmail.com">opticonversion.bts@gmail.com</a>. Tu peux aussi saisir la CNIL sur <a href="https://www.cnil.fr/fr/plaintes" rel="noopener">cnil.fr</a>.</p>
   </section>
 </main>
 
