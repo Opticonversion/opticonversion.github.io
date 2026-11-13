@@ -10,7 +10,13 @@
 <script>/* Fond choisi par l'élève (profil), appliqué avant l'affichage */ try { if (localStorage.getItem("fond") === "clair") { document.documentElement.dataset.fond = "clair"; var m = document.querySelector('meta[name="theme-color"]'); if (m) m.content = "#1a1f2a"; } } catch (e) {}</script>
 <link rel="preload" href="polices/bodoni-moda.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="polices/atkinson-hyperlegible-next.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="style.css?v=29608544">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="img/icone-apple-180.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Opticonversion">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link rel="stylesheet" href="style.css?v=3cb4be98">
 </head>
 <body>
 <header class="entete">
@@ -32,7 +38,7 @@
   <!-- Le haut de la page : le titre, sa phrase, et le compagnon de l'élève qui dépasse de derrière le premier bloc -->
   <div class="tete-page">
     <h1 class="apparait">Définitions</h1>
-    <p class="sous-titre apparait" style="--d:2">Les définitions à savoir réciter à l'écrit, épreuve par épreuve. Le badge « Tombée » indique les années où elle a été demandée au BTS.</p>
+    <p class="sous-titre apparait" style="--d:2">Les définitions à savoir réciter à l'écrit, épreuve par épreuve. Celles marquées « À savoir par cœur » passent en premier ; le badge « Tombée » donne les années où la définition a été demandée au BTS. En révision, une carte pas sue revient jusqu'à ce que tu la saches, et une carte sue se range dans un tiroir : elle revient le lendemain, puis elle est acquise.</p>
     <img class="tete-compagnon apparait" style="--d:3" data-pose="pensif" src="img/nounours-pensif.svg" alt="" width="120" height="132">
   </div>
 
@@ -46,15 +52,35 @@
         <span class="ico i-loupe" aria-hidden="true"></span>
         <input type="search" id="def-recherche" placeholder="Chercher un mot…" autocomplete="off">
       </label>
-      <div class="interrupteur-ligne">
-        <button type="button" class="interrupteur" id="def-tombees" role="switch" aria-checked="false" aria-labelledby="def-tombees-texte">
-          <span class="interrupteur-point" aria-hidden="true"></span>
-        </button>
-        <span class="interrupteur-texte" id="def-tombees-texte">Déjà tombées seulement</span>
+      <div class="def-filtres">
+        <div class="interrupteur-ligne">
+          <button type="button" class="interrupteur" id="def-coeur" role="switch" aria-checked="false" aria-labelledby="def-coeur-texte">
+            <span class="interrupteur-point" aria-hidden="true"></span>
+          </button>
+          <span class="interrupteur-texte" id="def-coeur-texte">À savoir par cœur seulement</span>
+        </div>
+        <div class="interrupteur-ligne">
+          <button type="button" class="interrupteur" id="def-tombees" role="switch" aria-checked="false" aria-labelledby="def-tombees-texte">
+            <span class="interrupteur-point" aria-hidden="true"></span>
+          </button>
+          <span class="interrupteur-texte" id="def-tombees-texte">Déjà tombées seulement</span>
+        </div>
       </div>
       <div class="themes def-themes" id="def-themes"></div>
       <div id="def-progression"></div>
-      <button class="bouton" type="button" id="def-reviser"><span class="ico i-cartes" aria-hidden="true"></span> Réviser ces définitions</button>
+      <!-- Une révision quittée en cours de route (changement de matière, « Arrêter ») : on peut la reprendre -->
+      <div class="def-reprise" id="def-reprise" hidden>
+        <p id="def-reprise-texte"></p>
+        <div class="def-boutons">
+          <button class="bouton" type="button" id="def-reprendre"><span class="ico i-cartes" aria-hidden="true"></span> Reprendre ma révision</button>
+          <button class="bouton secondaire" type="button" id="def-abandonner">L'abandonner</button>
+        </div>
+      </div>
+      <div class="def-boutons">
+        <button class="bouton" type="button" id="def-reviser"><span class="ico i-cartes" aria-hidden="true"></span> Réviser ces définitions</button>
+        <button class="bouton secondaire" type="button" id="def-reviser-tout" hidden>Tout réviser</button>
+      </div>
+      <p class="aide def-repos" id="def-repos" hidden></p>
     </section>
 
     <p class="aide" id="def-compte" role="status" aria-live="polite"></p>
@@ -73,12 +99,14 @@
       <div class="def-face def-recto">
         <span class="def-carte-theme" id="def-carte-theme"></span>
         <p class="def-carte-terme" id="def-carte-terme"></p>
+        <p class="def-carte-retour" id="def-carte-retour" hidden>Elle revient : tu ne la savais pas tout à l'heure.</p>
         <p class="aide">Récite la définition dans ta tête (ou à voix haute), puis retourne la carte.</p>
       </div>
       <div class="def-face def-verso">
         <span class="def-carte-theme" id="def-carte-theme-2"></span>
         <p class="def-carte-terme petit" id="def-carte-terme-2"></p>
         <p class="def-carte-definition" id="def-carte-definition"></p>
+        <p class="def-carte-explication" id="def-carte-explication" hidden></p>
         <span id="def-carte-badge"></span>
       </div>
     </div>
@@ -93,7 +121,25 @@
       <button class="bouton def-savais" type="button" id="def-savais">✓ Je savais</button>
       <button class="bouton secondaire def-arevoir" type="button" id="def-arevoir">↻ À revoir</button>
     </div>
-    <p class="raccourcis">Astuce : <kbd>Espace</kbd> pour retourner, puis <kbd>→</kbd> je savais ou <kbd>←</kbd> à revoir.</p>
+    <p class="raccourcis">Astuce : <kbd>Espace</kbd> pour retourner, puis <kbd>→</kbd> je savais ou <kbd>←</kbd> à revoir. Une carte « à revoir » revient à la fin de la pile.</p>
+  </section>
+
+  <!-- L'exercice de fin de tour : pour un terme, la bonne définition parmi quatre cartes -->
+  <section id="ecran-exercice" class="def-exercice" hidden aria-labelledby="exo-terme">
+    <div class="jeu-tete">
+      <button class="retour" type="button" id="exo-arreter">← Arrêter</button>
+      <span class="jeu-niveau" id="exo-avancement"></span>
+    </div>
+    <div class="barre"><div class="barre-remplie" id="exo-barre" style="width:0%"></div></div>
+    <p class="aide exo-consigne">Quelle carte donne la bonne définition ?</p>
+    <h2 class="exo-terme" id="exo-terme"></h2>
+    <div class="exo-choix" id="exo-choix"></div>
+    <p class="exo-retour" id="exo-retour" role="status" aria-live="polite"></p>
+    <p class="def-explication exo-explication" id="exo-explication" hidden></p>
+    <div class="def-actions">
+      <button class="bouton" type="button" id="exo-suivant" hidden>Question suivante</button>
+    </div>
+    <p class="raccourcis">Astuce : choisis avec les touches <kbd>A</kbd> <kbd>B</kbd> <kbd>C</kbd> <kbd>D</kbd>, puis <kbd>Entrée</kbd> pour continuer.</p>
   </section>
 
   <section id="ecran-fin" hidden class="def-fin">
@@ -107,15 +153,17 @@
 <footer><span class="pied-marque"><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="13" fill="none" stroke="#d9b26f" stroke-width="2.5"/><circle cx="16" cy="16" r="5.5" fill="#d9b26f"/><circle cx="18.5" cy="13.5" r="1.6" fill="#0b0d12"/></svg>Opticonversion</span><span>© 2026</span><span class="pied-liens"><a href="confidentialite.html">Confidentialité</a> <span aria-hidden="true">·</span> <a href="mentions-legales.html">Mentions légales</a> <span aria-hidden="true">·</span> <a href="mailto:opticonversion.bts@gmail.com">Contact</a></span></footer>
 
 <script src="epreuves.js?v=cc645427"></script>
-<script src="definitions-U41.js?v=95e92ca3"></script>
-<script src="definitions-U42.js?v=de99d26f"></script>
-<script src="definitions-U43.js?v=3f861567"></script>
-<script src="definitions-U5.js?v=793998d8"></script>
-<script src="definitions-U3.js?v=725a8abe"></script>
-<script src="essentiel.js?v=412cefda"></script>
-<script src="definitions.js?v=f1c3de10"></script>
-<script src="vivant.js?v=a055ba08" defer></script>
-<script type="module" src="compte.js?v=c47ff213"></script>
+<script src="definitions-U41.js?v=6d18ab79"></script>
+<script src="definitions-U42.js?v=e3abf8c3"></script>
+<script src="definitions-U43.js?v=135a6649"></script>
+<script src="definitions-U5.js?v=37a10d92"></script>
+<script src="definitions-U3.js?v=27026bd1"></script>
+<script src="essentiel.js?v=f3b7979d"></script>
+<script src="definitions.js?v=e295bbc6"></script>
+<script src="vivant.js?v=ec7cf52b" defer></script>
+<script src="appli.js?v=9609be57" defer></script>
+<script src="sons.js?v=2110bb6a" defer></script>
+<script type="module" src="compte.js?v=02538a67"></script>
 <!-- Mesure d'audience anonyme, sans cookies (GoatCounter) -->
 <script data-goatcounter="https://opticonversion.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </body>

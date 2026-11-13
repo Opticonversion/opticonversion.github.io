@@ -130,10 +130,14 @@ if (!FIREBASE_CONFIG) {
   if (dehors) dehors.hidden = true;
   ui.etat("La connexion arrive bientôt. En attendant, ta progression est gardée dans ce navigateur.");
 } else {
-  demarrer().catch(err => {
+  // Sans internet (appli hors ligne), Firebase ne se charge pas : on réessaie au retour du réseau.
+  // La progression attend dans ce navigateur (« attente ») et part à ce moment-là.
+  const lancer = () => demarrer().catch(err => {
     console.error(err);
     ui.etat("La connexion est indisponible pour le moment. Ta progression reste gardée dans ce navigateur.");
+    window.addEventListener("online", lancer, { once: true });
   });
+  lancer();
 }
 
 // Réponses aux questions : pour chaque question, la réponse la plus récente gagne (heure de réponse).
@@ -269,6 +273,7 @@ async function demarrer() {
     minuterie = setTimeout(() => synchroniser().catch(e => console.error(e)), 1500);
   }
   window.addEventListener("progression-modifiee", planifier);
+  window.addEventListener("online", planifier);   // retour du réseau : on envoie ce qui attendait
 
   A.onAuthStateChanged(auth, async u => {
     utilisateur = u;
@@ -400,7 +405,7 @@ async function demarrer() {
     await A.deleteUser(auth.currentUser);
     ecrireTexte("compte-uid", null);
     ecrire("attente", {});
-    if (effacerNavigateur) ["progression", "progression-t", "records", "attente", "profil", "revisions"].forEach(c => ecrireTexte(c, null));
+    if (effacerNavigateur) ["progression", "progression-t", "records", "attente", "profil", "revisions", "jours"].forEach(c => ecrireTexte(c, null));
     if (formReauth) formReauth.hidden = true;
     ui.etat("Ton compte et ta progression en ligne ont été supprimés.");
   }

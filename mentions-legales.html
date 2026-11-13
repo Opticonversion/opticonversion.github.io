@@ -10,7 +10,13 @@
 <script>/* Fond choisi par l'élève (profil), appliqué avant l'affichage */ try { if (localStorage.getItem("fond") === "clair") { document.documentElement.dataset.fond = "clair"; var m = document.querySelector('meta[name="theme-color"]'); if (m) m.content = "#1a1f2a"; } } catch (e) {}</script>
 <link rel="preload" href="polices/bodoni-moda.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="polices/atkinson-hyperlegible-next.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="style.css?v=29608544">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="img/icone-apple-180.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Opticonversion">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link rel="stylesheet" href="style.css?v=3cb4be98">
 </head>
 <body>
 <header class="entete">
@@ -43,6 +49,7 @@
 
     <h3>Contenus</h3>
     <p>Les questions, explications, schémas, la mascotte et les textes du site sont des créations originales d'Opticonversion. Ils ne reprennent pas les sujets ni les corrigés officiels du BTS Opticien-Lunetier, qui servent seulement à repérer les notions qui tombent et à vérifier les réponses. Toute reproduction des contenus du site sans autorisation est interdite.</p>
+    <p>Les petits sons du site (bonne réponse, erreur, fin de série) viennent de <a href="https://pixabay.com/sound-effects/" rel="noopener">Pixabay</a>, sous la licence de contenu Pixabay. Leurs auteurs : DRAGON-STUDIO, Lesiakower, Universfield et freesound_community.</p>
     <p>Opticonversion n'est lié ni au ministère de l'Éducation nationale, ni à un établissement de formation, ni à une marque d'optique.</p>
 
     <h3>Responsabilité</h3>
@@ -55,8 +62,9 @@
 
 <footer><span class="pied-marque"><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="13" fill="none" stroke="#d9b26f" stroke-width="2.5"/><circle cx="16" cy="16" r="5.5" fill="#d9b26f"/><circle cx="18.5" cy="13.5" r="1.6" fill="#0b0d12"/></svg>Opticonversion</span><span>© 2026</span><span class="pied-liens"><a href="confidentialite.html">Confidentialité</a> <span aria-hidden="true">·</span> <a href="mentions-legales.html">Mentions légales</a> <span aria-hidden="true">·</span> <a href="mailto:opticonversion.bts@gmail.com">Contact</a></span></footer>
 
-<script src="vivant.js?v=a055ba08" defer></script>
-<script type="module" src="compte.js?v=c47ff213"></script>
+<script src="vivant.js?v=ec7cf52b" defer></script>
+<script src="appli.js?v=9609be57" defer></script>
+<script type="module" src="compte.js?v=02538a67"></script>
 <!-- Mesure d'audience anonyme, sans cookies (GoatCounter) -->
 <script data-goatcounter="https://opticonversion.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </body>

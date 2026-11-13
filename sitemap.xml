@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://opticonversion.github.io/</loc></url>
-  <url><loc>https://opticonversion.github.io/essentiel.html</loc></url>
-  <url><loc>https://opticonversion.github.io/qcm.html</loc></url>
-  <url><loc>https://opticonversion.github.io/calculateurs.html</loc></url>
-  <url><loc>https://opticonversion.github.io/compte.html</loc></url>
-  <url><loc>https://opticonversion.github.io/confidentialite.html</loc></url>
-  <url><loc>https://opticonversion.github.io/mentions-legales.html</loc></url>
+  <url><loc>https://opticonversion.fr/</loc></url>
+  <url><loc>https://opticonversion.fr/essentiel.html</loc></url>
+  <url><loc>https://opticonversion.fr/qcm.html</loc></url>
+  <url><loc>https://opticonversion.fr/definitions.html</loc></url>
+  <url><loc>https://opticonversion.fr/traces.html</loc></url>
+  <url><loc>https://opticonversion.fr/calculateurs.html</loc></url>
+  <url><loc>https://opticonversion.fr/compte.html</loc></url>
+  <url><loc>https://opticonversion.fr/confidentialite.html</loc></url>
+  <url><loc>https://opticonversion.fr/mentions-legales.html</loc></url>
 </urlset>

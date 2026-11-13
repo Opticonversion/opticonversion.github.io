@@ -136,8 +136,15 @@ main:has(#ecran-jeu:not([hidden])) .tete-compagnon, main:has(#ecran-fin:not([hid
 .i-pause { --i: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M8.5 5.5v13M15.5 5.5v13'/%3E%3C/svg%3E"); }
 .i-maison { --i: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 11l8-7 8 7v8.500a1 1 0 0 1-1 1h-4.500v-6h-5v6H5a1 1 0 0 1-1-1z'/%3E%3C/svg%3E"); }
 .i-dossier { --i: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='4.5' y='3' width='15' height='18' rx='2.5'/%3E%3Cpath d='M9 3v2.5h6V3M8.5 10.5h7M8.5 14h7M8.5 17.5h4'/%3E%3C/svg%3E"); }
+.i-main { --i: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M8 12.500V5.500a1.500 1.500 0 0 1 3 0V11M11 10.500V4a1.500 1.500 0 0 1 3 0v6.500M14 10.500V5.500a1.500 1.500 0 0 1 3 0V12M17 12V8.500a1.500 1.500 0 0 1 3 0V14.500c0 3.800-2.700 6.500-6.500 6.500-3 0-5-1.300-6.600-4.200l-2.300-4a1.500 1.500 0 0 1 2.600-1.500L8 13.500'/%3E%3C/svg%3E"); }
+.i-pointilles { --i: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.2' stroke-linecap='round'%3E%3Cpath d='M3.500 20.500l3-3M9.500 14.500l3-3M15.500 8.500l5-5' /%3E%3C/svg%3E"); }
+.i-son { --i: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3.500 9.500h3.200L11.500 5.800v12.400L6.700 14.500H3.500zM15 9.300a3.800 3.800 0 0 1 0 5.400M17.700 6.600a7.600 7.600 0 0 1 0 10.800'/%3E%3C/svg%3E"); }
+.i-son-coupe { --i: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3.500 9.500h3.200L11.500 5.800v12.400L6.700 14.500H3.500zM15.500 9.500l5 5M20.500 9.500l-5 5'/%3E%3C/svg%3E"); }
+.i-annuler { --i: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M8.500 5L4.500 9l4 4M4.500 9H14a5.500 5.500 0 0 1 0 11H9'/%3E%3C/svg%3E"); }
 .i-boussole { --i: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='8.5'/%3E%3Cpath d='M15.5 8.5l-2 5-5 2 2-5z'/%3E%3C/svg%3E"); }
 
+.i-chrono { --i: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='13.5' r='7.5'/%3E%3Cpath d='M9.5 2.5h5M12 2.5v3.5M12 13.5V10M18 7l1.5-1.5'/%3E%3C/svg%3E"); }
+.i-valide { --i: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E"); }
 /* ---------- 3. En-tête et menu ---------- */
 .entete {
   position: sticky; top: 0; z-index: 20;
@@ -241,6 +248,16 @@ section { margin-bottom: 20px; }
 
 .retour { background: none; border: none; color: var(--doux); font: inherit; cursor: pointer; padding: 8px 0; min-height: 44px; margin-bottom: 12px; transition: color var(--vite); }
 .retour:hover { color: var(--or); }
+/* Le bouton « Son » : ajouté par sons.js au bout de la barre d'une série (QCM, Atelier, révision des définitions) */
+.bouton-son { flex: none; display: inline-flex; align-items: center; justify-content: center; gap: 7px; min-width: 44px; min-height: 44px; padding: 8px 15px; font: inherit; font-size: 0.9rem; color: var(--texte); background: transparent; border: 1px solid var(--bord-fort); border-radius: 999px; cursor: pointer; transition: color var(--vite), border-color var(--vite); }
+.bouton-son:hover { border-color: var(--or); }
+.bouton-son .ico { width: 20px; height: 20px; vertical-align: 0; }
+.bouton-son[aria-pressed="false"] { color: var(--doux); border-style: dashed; }
+.barre-outils .vues, .jeu-tete .jeu-niveau { margin-left: auto; }
+@media (max-width: 520px) {
+  .bouton-son { padding: 8px; }
+  .bouton-son-mot { display: none; }
+}
 
 /* ---------- 6. Formulaires ---------- */
 .champs { display: flex; flex-wrap: wrap; gap: 14px; }
@@ -408,6 +425,70 @@ select option { background: var(--fond); }
 .hero-retour h1 { font-size: clamp(2.2rem, 5vw + 0.6rem, 4rem); }
 .hero-retour .accroche { margin-bottom: 18px; }
 
+/* Rythme (rythme.js) : objectif du jour avec son anneau, série de jours, compte à rebours des écrits.
+   Accueil : carte sous les boutons du haut (élève qui a déjà répondu) ; profil : bloc « Ton rythme ». */
+.jour { margin: 24px 0 0; padding: 18px 20px 16px; max-width: 640px; }
+.jour-profil { max-width: none; margin: 0; padding: 0; background: none; border: 0; border-radius: 0; }
+.jour-ligne { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 18px; }
+.jour-profil .jour-ligne { margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--bord); }
+.jour-anneau-boite { position: relative; flex: none; width: 72px; height: 72px; }
+.jour-anneau { display: block; width: 100%; height: 100%; transform: rotate(-90deg); }
+.jour-anneau circle { fill: none; stroke-width: 5; }
+.jour-piste { stroke: var(--bord-fort); }
+.jour-plein { stroke: var(--or); stroke-linecap: round; transition: stroke-dashoffset 1100ms var(--sortie); }
+.jour-nombre { position: absolute; inset: 0; display: grid; place-items: center; line-height: 1; }
+.jour-nombre b { font-family: var(--titre); font-size: 1.6rem; font-weight: 600; color: var(--or-clair); font-variant-numeric: lining-nums tabular-nums; }
+.jour-nombre small { margin-left: 1px; font-size: 0.8rem; font-weight: 700; color: var(--doux); }
+.jour-nombre .ico { width: 30px; height: 30px; color: var(--or); }
+.jour-texte { flex: 1 1 200px; min-width: 0; }
+.jour-titre { margin: 0 0 4px; font-size: 1.3rem; line-height: 1.2; }
+.jour-serie, .jour-aide { margin: 0; color: var(--doux); font-size: 0.95rem; }
+.semaine { display: flex; gap: 4px; margin: 10px 0 0; padding: 0; list-style: none; }
+.semaine li { display: flex; flex-direction: column; align-items: center; gap: 4px; width: 24px; color: var(--tres-doux); font-size: 0.75rem; font-weight: 700; line-height: 1; }
+.semaine li::before { content: ""; width: 12px; height: 12px; border-radius: 50%; border: 1.5px solid var(--bord-fort); box-sizing: border-box; }
+.semaine li.ok::before { background: var(--or); border-color: var(--or); }
+.semaine li.pause::before { border: 1.5px dashed var(--or); }
+.semaine li.aujourdhui::before { border-color: var(--or); }
+.semaine li.futur::before { border-color: var(--bord); }
+.semaine li.est-aujourdhui { color: var(--or-clair); }
+.jour .jour-cinq { flex: none; margin-top: 0; }
+.jour-cinq .ico { color: var(--or); }
+.jour-examen { margin: 16px 0 0; padding-top: 14px; border-top: 1px solid var(--bord); color: var(--doux); font-size: 0.95rem; line-height: 1.55; }
+.jour-examen b { font-family: var(--titre); font-size: 1.15rem; font-weight: 600; color: var(--or-clair); font-variant-numeric: lining-nums; }
+.jour-legende { margin: 10px 0 0; color: var(--tres-doux); font-size: 0.86rem; }
+.jour-mot { display: flex; align-items: center; gap: 14px; margin: 0 0 16px; padding-bottom: 16px; border-bottom: 1px solid var(--bord); }
+.jour-compagnon { flex: none; width: 52px; height: 52px; border-radius: 50%; object-fit: cover; object-position: center 20%; background: var(--or-fond); border: 1.5px solid var(--or); cursor: pointer; }
+.jour-message { margin: 0; color: var(--texte); font-size: 0.97rem; line-height: 1.45; }
+.jour-message span { display: block; }
+.jour-message span + span { color: var(--doux); }
+.jour-rappel { margin-top: 12px; }
+.jour-rappel a { font-weight: 700; }
+.rappel { margin-top: 22px; padding-top: 20px; border-top: 1px solid var(--bord); }
+.rappel-titre { margin: 0 0 6px; font-size: 1.2rem; }
+.rappel-ligne { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 12px 14px; }
+.rappel-ligne label { flex: 0 0 auto; }
+.rappel-ligne input { width: 8.5em; min-height: 48px; font-variant-numeric: lining-nums tabular-nums; }
+.rappel-ligne .bouton { margin-top: 0; }
+.rappel-etat { margin: 12px 0 0; }
+.rappel-etat:empty { display: none; }
+.objectif-choix { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.jour-profil .objectif-choix { margin-top: 0; }
+.objectif-choix button { min-width: 64px; min-height: 44px; padding: 8px 18px; font: inherit; font-size: 1rem; font-weight: 700; font-variant-numeric: lining-nums tabular-nums; color: var(--texte); background: transparent; border: 1px solid var(--bord-fort); border-radius: 999px; cursor: pointer; transition: color var(--vite), border-color var(--vite), background var(--vite), transform 260ms var(--sortie); }
+.objectif-choix button:hover { border-color: var(--or); }
+.objectif-choix button:active { transform: scale(0.96); }
+.objectif-choix button[aria-checked="true"] { color: var(--encre); background: var(--or); border-color: var(--or); font-weight: 700; }
+@media (max-width: 520px) {
+  .jour { padding: 16px; }
+  .jour-profil { padding: 0; }
+  .jour-anneau-boite { width: 64px; height: 64px; }
+  .jour-texte { flex-basis: 160px; }
+  .jour-titre { font-size: 1.18rem; }
+  .semaine { gap: 2px; }
+  .semaine li { width: 22px; }
+  .jour .jour-cinq { flex: 1 1 100%; justify-content: center; }
+  .rappel-ligne .bouton { flex: 1 1 100%; justify-content: center; padding-left: 16px; padding-right: 16px; }
+}
+
 /* ---------- 10. L'essentiel du BTS OL ---------- */
 .jauge { margin: 8px 0 26px; }
 .jauge-texte { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 8px; margin-bottom: 12px; color: var(--doux); }
@@ -445,6 +526,10 @@ select option { background: var(--fond); }
 .pastille { padding: 0; }
 .pastille.bts { color: rgb(var(--accent-rgb)); font-weight: 600; }
 .pastille.essentiel { color: var(--or); font-weight: 700; }
+.pastille.entrainement { color: var(--doux); font-weight: 700; }
+/* Questions d'entraînement : une pastille à part (bord en pointillés) et un lien sous la barre du thème */
+.theme.theme-entrainement:not(.actif) { border-style: dashed; }
+.lien-entrainement { display: inline-block; margin: -10px 0 18px; padding: 10px 0; font-size: 0.92rem; }
 
 /* ---------- 11. QCM ---------- */
 .themes { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
@@ -511,6 +596,16 @@ main[data-epreuve] #sous-titre { color: rgb(var(--accent-rgb)); }
 .indice strong { display: block; color: var(--or); font-size: 0.92rem; margin-bottom: 4px; }
 figure.schema { margin: 16px 0 4px; padding: 10px; border-radius: 12px; background: #0f1219; border: 1px solid var(--bord); }
 figure.schema object, figure.schema img { display: block; width: 100%; height: auto; aspect-ratio: 480 / 340; max-height: 460px; }
+/* Niveau de difficulté d'une question : un mot juste au-dessus de l'énoncé, avec 1, 2 ou 3 traits pleins.
+   Le mot et les traits prennent la couleur du niveau : vert pour Facile, ivoire pour Moyen, rouge pour Difficile.
+   Ce vert (tilleul) et ce rouge (vermillon) sont choisis exprès différents du vert et du rouge de la correction. */
+.difficulte { display: flex; align-items: center; gap: 9px; margin: 0 0 7px; font-size: 0.88rem; font-weight: 600; color: var(--doux); }
+.difficulte[data-niveau="1"] { color: #a6cf85; }
+.difficulte[data-niveau="2"] { color: var(--texte); }
+.difficulte[data-niveau="3"] { color: #f0705a; }
+.difficulte-traits { display: inline-flex; gap: 3px; }
+.difficulte-traits i { width: 13px; height: 4px; border-radius: 2px; background: rgba(255, 255, 255, 0.16); }
+.difficulte[data-niveau="1"] i:nth-child(-n+1), .difficulte[data-niveau="2"] i:nth-child(-n+2), .difficulte[data-niveau="3"] i { background: currentColor; }
 .enonce + figure.schema { margin-top: 0; margin-bottom: 18px; }
 @media (max-width: 520px) { .explication figure.schema { margin-left: -12px; margin-right: -12px; padding: 4px; } }
 
@@ -767,6 +862,11 @@ kbd.touche { display: inline-block; min-width: 1.9em; margin: 0 1px; padding: 0 
 .def-recherche input:focus { box-shadow: none; }
 .def-themes { margin: 0; }
 .def-outils .bouton { margin: 0; justify-self: start; }
+.def-filtres { display: flex; flex-wrap: wrap; gap: 14px 30px; }
+.def-boutons { display: flex; flex-wrap: wrap; gap: 10px; }
+/* Une révision en pause dans cette matière : le bloc qui propose de la reprendre */
+.def-reprise { padding: 16px 18px; border-radius: var(--rayon); background: var(--or-fond); border: 1px solid rgba(217, 178, 111, 0.45); }
+.def-reprise p { margin: 0 0 12px; font-weight: 650; }
 .def-outils .progression-bloc { margin: 0; }
 .def-liste { list-style: none; margin: 8px 0 0; padding: 0; display: grid; }
 .def-liste > li, .def-face { min-width: 0; overflow-wrap: anywhere; }
@@ -774,7 +874,51 @@ kbd.touche { display: inline-block; min-width: 1.9em; margin: 0 1px; padding: 0 
 .def-haut { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 6px 12px; }
 .def-terme { margin: 0; font-size: 1.36rem; }
 .def-texte { margin: 8px 0 10px; line-height: 1.6; max-width: 70ch; }
-.def-bas { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+/* L'explication d'une définition : le complément pour comprendre, plus petit et plus discret que la phrase à réciter */
+.def-explication { margin: -2px 0 10px; max-width: 70ch; font-size: 0.9rem; line-height: 1.55; color: var(--doux); }
+.def-explication b { font-weight: 650; color: var(--doux); }
+.def-carte-explication { margin: 0; max-width: 58ch; padding-top: 12px; border-top: 1px solid var(--bord); font-size: 0.9rem; line-height: 1.55; color: var(--doux); }
+.exo-explication { margin: 0 0 12px; }
+.def-bas { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; }
+/* Les définitions « à savoir par cœur » : le terme en or, une mention dorée, et leur groupe en tête de liste */
+.def.par-coeur .def-terme { color: var(--or-clair); }
+.def-coeur { display: inline-flex; align-items: center; gap: 5px; font-size: 0.82rem; font-weight: 700; color: var(--or); }
+.def-coeur .ico { width: 14px; height: 14px; vertical-align: 0; }
+.def-groupe { display: flex; align-items: baseline; gap: 14px; padding: 30px 6px 8px; font-family: var(--titre); font-size: 1.3rem; font-weight: 600; }
+.def-groupe:first-child { padding-top: 10px; color: var(--or-clair); }
+.def-groupe::after { content: ""; order: 1; flex: 1 1 auto; align-self: center; height: 1px; background: var(--bord-fort); }
+.def-groupe-nb { order: 2; font-family: var(--corps); font-size: 0.86rem; font-weight: 500; color: var(--doux); font-variant-numeric: tabular-nums; }
+.def-groupe + .def { border-top: 0; }
+.def-carte.par-coeur .def-carte-terme { color: var(--or-clair); }
+.def-carte-retour { margin: 0; font-size: 0.9rem; font-weight: 600; color: rgb(var(--accent-rgb)); }
+.def-repos { margin: 0; }
+/* Les tiroirs (boîte de Leitner, trois tiroirs) : combien de cartes dans chacun. Le tiroir 1, à revoir, ressort quand il n'est pas vide. */
+.tiroirs { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: 8px; margin-top: 12px; max-width: 420px; }
+.tiroir { display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 9px 4px 8px; border: 1px solid var(--bord-fort); border-radius: 10px; background: rgba(255, 255, 255, 0.02); }
+.tiroir-poignee { width: 18px; height: 3px; border-radius: 2px; background: var(--doux); opacity: 0.7; margin-bottom: 3px; }
+.tiroir b { font-size: 1.08rem; font-variant-numeric: tabular-nums; line-height: 1.1; }
+.tiroir small { font-size: 0.76rem; color: var(--doux); text-align: center; line-height: 1.2; }
+.tiroir.vide b { color: var(--tres-doux); font-weight: 500; }
+.tiroir.a-revoir { border-color: rgba(217, 178, 111, 0.6); background: var(--or-fond); }
+.tiroir.a-revoir .tiroir-poignee { background: var(--or); opacity: 1; }
+/* L'exercice de fin de tour : un terme, quatre cartes, une seule donne la bonne définition */
+.def-exercice .barre { margin: 6px 0 18px; }
+.exo-consigne { margin: 0 0 6px; }
+.exo-terme { margin: 0 0 18px; font-size: clamp(1.7rem, 4vw + 0.6rem, 2.6rem); color: var(--or-clair); text-wrap: balance; }
+.exo-choix { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-bottom: 14px; }
+.exo-carte { display: flex; align-items: flex-start; gap: 12px; min-height: 64px; padding: 16px 16px; font: inherit; font-size: 0.98rem; line-height: 1.5; text-align: left; color: var(--texte); background: var(--fond-2); border: 1px solid var(--bord-fort); border-radius: 14px; cursor: pointer; overflow-wrap: anywhere; transition: border-color var(--vite), background var(--vite), transform 260ms var(--sortie); }
+.exo-carte:hover:not(:disabled) { border-color: var(--or); }
+.exo-carte:active:not(:disabled) { transform: scale(0.985); }
+.exo-lettre { flex: none; width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; font-family: var(--titre); font-style: italic; font-weight: 600; color: var(--or); border: 1px solid rgba(217, 178, 111, 0.55); }
+.exo-carte:disabled { cursor: default; color: var(--doux); }
+.exo-carte.juste { color: var(--texte); border-color: var(--vert); background: var(--vert-fond); }
+.exo-carte.juste .exo-lettre { color: var(--fond); background: var(--vert); border-color: var(--vert); }
+.exo-carte.faux { color: var(--texte); border-color: var(--rouge); background: var(--rouge-fond); }
+.exo-carte.faux .exo-lettre { color: var(--fond); background: var(--rouge); border-color: var(--rouge); }
+.exo-retour { min-height: 1.6em; margin: 0 0 12px; font-weight: 650; }
+.exo-retour.bien { color: var(--vert); }
+.exo-retour.mal { color: var(--rouge); }
+@media (max-width: 700px) { .exo-choix { grid-template-columns: minmax(0, 1fr); } }
 .def-theme { font-size: 0.8rem; color: var(--doux); }
 .def mark { background: rgba(217, 178, 111, 0.36); color: inherit; border-radius: 3px; padding: 0 1px; }
 .def-badge { display: inline-block; padding: 3px 11px; border-radius: 999px; font-size: 0.78rem; font-weight: 700; white-space: nowrap; }
@@ -825,79 +969,176 @@ kbd.touche { display: inline-block; min-width: 1.9em; margin: 0 1px; padding: 0 
 }
 
 /* ---------- 13. Atelier des tracés (traces.html / traces.js) ---------- */
+/* La couleur d'accent est celle de l'épreuve (onglet, niveaux, outils) : bleu en OGP, vert sauge en ETSO, or en Vision. */
 .ateliers { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 18px; }
-.atelier { padding: 9px 15px; min-height: 44px; font: inherit; font-size: 0.9rem; color: var(--doux); background: transparent; border: 1px solid var(--bord-fort); border-radius: 999px; cursor: pointer; }
-.atelier.actif { color: var(--encre); background: rgb(122, 170, 230); border-color: rgb(122, 170, 230); font-weight: 700; }
+.atelier { padding: 9px 17px; min-height: 44px; font: inherit; font-size: 0.92rem; color: var(--doux); background: transparent; border: 1px solid var(--bord-fort); border-radius: 999px; cursor: pointer; transition: color var(--vite), border-color var(--vite), background var(--vite); }
+.atelier:hover:not(:disabled):not(.actif) { color: var(--texte); border-color: rgba(var(--accent-rgb), 0.7); }
+.atelier.actif { color: var(--encre); background: rgb(var(--accent-rgb)); border-color: rgb(var(--accent-rgb)); font-weight: 700; }
 .atelier:disabled { cursor: default; opacity: 0.5; }
-.niveaux { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; }
-.niveau { --accent-rgb: 122, 170, 230; width: 100%; height: 100%; display: grid; grid-template-columns: auto 1fr; grid-template-rows: auto auto; column-gap: 14px; align-items: center; padding: 14px 16px; font: inherit; text-align: left; color: var(--texte);
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid var(--bord); border-radius: 14px; cursor: pointer;
-  transform: perspective(700px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)); transition: border-color var(--vite), transform 380ms var(--sortie); }
-.niveau:hover:not(:disabled) { border-color: rgba(var(--accent-rgb), 0.6); }
-.niveau-num { grid-row: 1 / 3; width: 42px; height: 42px; border-radius: 50%; display: grid; place-items: center; font-family: var(--titre); font-style: italic; font-size: 1.3rem; font-weight: 600; color: rgb(var(--accent-rgb)); border: 1px solid rgba(var(--accent-rgb), 0.5); }
-.niveau-titre { font-weight: 700; font-size: 0.95rem; line-height: 1.3; }
-.niveau-etoiles { color: var(--or); font-size: 0.84rem; letter-spacing: 1px; }
+
+/* La carte des niveaux : des lignes séparées par un trait fin, sur deux colonnes dès qu'il y a la place */
+#ecran-niveaux .titre-section { margin-top: 4px; }
+/* Le prochain niveau à faire, en grand : un seul geste pour reprendre */
+.reprise { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 6px 20px; width: 100%; margin: 0 0 6px; padding: 18px 20px; font: inherit; text-align: left; color: var(--texte);
+  background: rgba(var(--accent-rgb), 0.08); border: 1px solid rgba(var(--accent-rgb), 0.42); border-radius: var(--rayon); cursor: pointer; transition: background var(--vite), border-color var(--vite); }
+.reprise:hover { background: rgba(var(--accent-rgb), 0.13); border-color: rgb(var(--accent-rgb)); }
+.reprise-vignette { width: 116px; color: rgb(var(--accent-rgb)); }
+.reprise-texte { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.reprise-titre { font-family: var(--titre); font-size: clamp(1.3rem, 1.2vw + 1rem, 1.65rem); font-weight: 500; line-height: 1.15; text-wrap: balance; }
+.reprise-detail { color: var(--doux); font-size: 0.92rem; }
+.reprise .bouton { margin: 0; }
+.reprise:hover .bouton { background: var(--or-clair); }
+.niveaux-fin { margin: 0 0 6px; color: var(--doux); }
+@media (max-width: 600px) {
+  .reprise { grid-template-columns: auto minmax(0, 1fr); padding: 16px; }
+  .reprise-vignette { width: 76px; }
+  .reprise .bouton { grid-column: 1 / -1; justify-self: start; margin-top: 8px; }
+}
+#niveaux .chapitre { display: flex; align-items: baseline; gap: 14px; margin: 30px 0 4px; font-family: var(--titre); font-size: 1.28rem; font-weight: 600; }
+#niveaux .chapitre:first-child { margin-top: 4px; }
+#niveaux .chapitre::after { content: ""; order: 1; flex: 1 1 auto; align-self: center; height: 1px; background: var(--bord-fort); }
+.chapitre-avance { order: 2; font-family: var(--corps); font-size: 0.86rem; font-weight: 500; color: var(--doux); font-variant-numeric: tabular-nums; }
+.chapitre-avance.fini { color: rgb(var(--accent-rgb)); font-weight: 700; }
+.niveaux { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(290px, 100%), 1fr)); column-gap: 28px; }
+.niveaux > li { border-bottom: 1px solid var(--bord); }
+.niveau { width: 100%; height: 100%; min-height: 68px; display: grid; grid-template-columns: auto minmax(0, 1fr) auto; grid-template-rows: auto auto; column-gap: 14px; row-gap: 2px; align-items: center; padding: 12px 6px; font: inherit; text-align: left; color: var(--texte);
+  background: transparent; border: 0; border-radius: 10px; cursor: pointer; transition: background var(--vite), padding 320ms var(--sortie); }
+.niveau:hover:not(:disabled) { background: rgba(var(--accent-rgb), 0.07); padding-left: 12px; }
+.niveau-num { grid-row: 1 / 3; width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; font-family: var(--titre); font-style: italic; font-size: 1.25rem; font-weight: 600; font-variant-numeric: lining-nums; color: rgb(var(--accent-rgb)); border: 1px solid rgba(var(--accent-rgb), 0.55); transition: background var(--vite), color var(--vite); }
+.niveau-titre { align-self: end; font-weight: 650; font-size: 0.98rem; line-height: 1.3; }
+.niveau-etoiles { align-self: start; color: var(--doux); font-size: 0.86rem; }
+.niveau:not(.fait):not(.ferme) .niveau-etoiles { color: rgb(var(--accent-rgb)); }
+/* La vignette : le montage du niveau en tout petit */
+.niveau-vignette { grid-column: 3; grid-row: 1 / 3; width: 68px; color: rgb(var(--accent-rgb)); }
+.vignette { display: block; width: 100%; height: auto; overflow: visible; }
+.vignette path { fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.vignette .v-axe { stroke: rgba(255, 255, 255, 0.24); stroke-width: 1; }
+.vignette .v-lentille { stroke: currentColor; stroke-width: 1.5; }
+.vignette .v-diaph { stroke: currentColor; stroke-width: 2.2; opacity: 0.75; }
+.vignette .v-oeil { stroke: currentColor; stroke-width: 1.2; opacity: 0.75; }
+.vignette .v-objet { stroke: var(--texte); stroke-width: 1.5; }
+.niveau.ferme .niveau-vignette { opacity: 0.6; }
+/* Étoiles dessinées : gagnées en or, les autres en creux */
+.etoiles { display: inline-flex; gap: 3px; vertical-align: middle; }
+.etoiles .ico { width: 15px; height: 15px; color: var(--or); }
+.etoiles .ico.vide { color: rgba(255, 255, 255, 0.18); }
 .niveau.fait .niveau-num { color: var(--fond); background: rgb(var(--accent-rgb)); border-color: rgb(var(--accent-rgb)); }
-.niveau.ferme { cursor: default; opacity: 0.45; }
-.niveau.ferme .niveau-num::before { content: ""; width: 20px; height: 20px; background: currentColor;
+.niveau.ferme { cursor: default; opacity: 0.5; }
+.niveau.ferme .niveau-num::before { content: ""; width: 19px; height: 19px; background: currentColor;
   -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='5' y='10.5' width='14' height='10' rx='2.5'/%3E%3Cpath d='M8 10.5V7.5a4 4 0 0 1 8 0v3'/%3E%3C/svg%3E") center / contain no-repeat;
   mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='5' y='10.5' width='14' height='10' rx='2.5'/%3E%3Cpath d='M8 10.5V7.5a4 4 0 0 1 8 0v3'/%3E%3C/svg%3E") center / contain no-repeat; }
 .niveau.defi { --accent-rgb: 217, 178, 111; }
-.jeu-tete { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 8px; }
+
+/* Un niveau. Le haut de la page s'efface (classe en-jeu posée par traces.js) : le dessin est l'écran.
+   Sur ordinateur : le dessin à gauche, ce qui se lit et se touche à droite. Sur téléphone : consigne, dessin, outils. */
+/* Page plus large que le reste du site : le dessin est un outil, il lui faut de la place.
+   Sa largeur est aussi bornée par la hauteur de l'écran, pour qu'il tienne en entier sans défiler. */
+main.en-jeu { max-width: min(1240px, max(900px, calc((100vh - 220px) * 1.6 + 450px))); }
+main.en-jeu .tete-page { display: none; }
+#ecran-jeu { background: none; border: 0; border-radius: 0; padding: 0; }
+.jeu-tete { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 6px; }
 .jeu-tete .retour { margin: 0; }
-.jeu-niveau { color: rgb(122, 170, 230); font-size: 0.92rem; font-weight: 700; font-variant-numeric: tabular-nums; }
-#ecran-jeu h2 { font-size: 1.7rem; margin: 6px 0 12px; }
-.regle { margin: 0 0 12px; padding: 12px 16px; border-radius: 12px; background: rgba(122, 170, 230, 0.09); border: 1px solid rgba(122, 170, 230, 0.3); font-size: 0.96rem; line-height: 1.5; }
-.consigne { margin: 0 0 12px; font-weight: 700; }
-.trace-cadre { border-radius: 14px; background: #0f1219; border: 1px solid var(--bord); padding: 6px; }
-.trace { display: block; width: 100%; height: auto; user-select: none; -webkit-user-select: none; }
-.trace:focus-visible { outline: 2px solid var(--or); outline-offset: 2px; border-radius: 8px; }
-.trace .t-grille { stroke: rgba(255, 255, 255, 0.04); stroke-width: 1; }
-.trace .t-axe { stroke: #5b6270; stroke-width: 1.5; }
-.trace .t-lentille { stroke: #9ec5ff; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
-.trace .t-point { fill: #9aa3b2; }
-.trace .t-repere { fill: none; stroke: #f0c674; stroke-width: 2; stroke-dasharray: 3 3; }
-.trace .t-label { font: 700 15px var(--corps); fill: #e7e9ee; }
+.jeu-niveau { color: rgb(var(--accent-rgb)); font-size: 0.92rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+.jeu-corps { display: grid; grid-template-columns: minmax(0, 1fr); gap: 14px; }
+.jeu-texte, .jeu-commandes { min-width: 0; }
+.jeu-dessin { margin: 0; min-width: 0; }
+#ecran-jeu h2:focus { outline: none; }
+#ecran-jeu h2 { font-size: clamp(1.5rem, 1.4vw + 1.15rem, 2.05rem); margin: 0 0 10px; color: var(--or-clair); text-wrap: balance; }
+.regle { margin: 0 0 14px; max-width: 68ch; color: var(--doux); font-size: 0.97rem; line-height: 1.55; }
+/* Le fil des étapes : un trait par étape */
+.fil-etapes { display: flex; gap: 6px; list-style: none; margin: 0 0 10px; padding: 0; }
+.fil-etapes li { flex: 1 1 0; max-width: 56px; height: 3px; border-radius: 2px; background: rgba(255, 255, 255, 0.14); transition: background var(--doux-anim); }
+.fil-etapes li.faite, .fil-etapes li.reussie { background: var(--or); }
+.fil-etapes li.en-cours { background: rgb(var(--accent-rgb)); }
+.fil-etapes li.ratee { background: var(--rouge); }
+.consigne { margin: 0; max-width: 60ch; font-size: 1.04rem; font-weight: 700; line-height: 1.4; text-wrap: pretty; }
+@media (min-width: 1000px) {
+  .jeu-corps { grid-template-columns: minmax(0, 1fr) minmax(330px, 380px); grid-template-rows: auto 1fr; grid-template-areas: "dessin texte" "dessin commandes"; column-gap: 34px; row-gap: 20px; align-items: start; }
+  .jeu-texte { grid-area: texte; }
+  .jeu-commandes { grid-area: commandes; }
+  .jeu-dessin { grid-area: dessin; position: sticky; top: 92px; }
+}
+
+/* Le dessin : une planche d'optique. Fond plus sombre que la page, quadrillage fin, la lumière en or. */
+.trace-cadre { border-radius: 14px; background: #0c0f15; border: 1px solid var(--bord-fort); overflow: hidden; }
+.trace { --t-verre: #a9c9f7; --t-lumiere: #f0cf8a; --t-image: #d9b26f; --t-ivoire: #f3eee4; --t-gris: #7f8898; --t-encre: #0c0f15;
+  display: block; width: 100%; height: auto; user-select: none; -webkit-user-select: none; -webkit-tap-highlight-color: transparent; }
+.trace:focus-visible { outline: 2px solid var(--or); outline-offset: -2px; border-radius: 14px; }
+.trace-legende { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 18px; margin: 8px 2px 0; color: var(--doux); font-size: 0.84rem; line-height: 1.4; }
+.trace-legende > span { display: inline-flex; align-items: center; gap: 8px; }
+.trace-legende svg { flex: none; height: 12px; width: auto; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.trace .t-grille { stroke: rgba(255, 255, 255, 0.05); stroke-width: 1; vector-effect: non-scaling-stroke; shape-rendering: crispEdges; }
+.trace .t-grille.fort { stroke: rgba(255, 255, 255, 0.115); }
+.trace .t-axe { stroke: var(--t-gris); stroke-width: 1.4; }
+.trace .t-graduation { stroke: var(--t-gris); stroke-width: 1; }
+.trace .t-foyer { stroke: #b4bccb; stroke-width: 1.5; stroke-linecap: round; }
+.trace .t-lentille { stroke: var(--t-verre); stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+/* Le verre : une silhouette à peine visible derrière le symbole (biconvexe ou biconcave) */
+.trace .t-verre { fill: rgba(169, 201, 247, 0.085); stroke: rgba(169, 201, 247, 0.34); stroke-width: 1; }
+.trace .t-point { fill: #cfd5e0; }
+.trace .t-repere { fill: none; stroke: var(--t-lumiere); stroke-width: 2; stroke-dasharray: 3 3; }
+.trace .t-label { font: 700 15px var(--corps); fill: #ece7dd; paint-order: stroke; stroke: var(--t-encre); stroke-width: 4px; stroke-linejoin: round; }
 .trace .t-label.centre { text-anchor: middle; }
-.trace .t-label.petit { font-size: 11px; font-weight: 500; fill: #9aa3b2; }
-.trace .t-label.or { fill: #d9b26f; }
-.trace .t-label.numero { font-size: 13px; fill: #0f1219; font-weight: 800; }
-.trace .t-pointe { fill: currentColor; }
-.trace .t-objet { stroke: #f2f2f2; stroke-width: 3; color: #f2f2f2; }
-.trace .t-image line { stroke: #d9b26f; stroke-width: 3; color: #d9b26f; }
+.trace .t-label.droite { text-anchor: end; }
+.trace .t-label.point { font: italic 600 17px var(--titre); }
+.trace .t-label.repere { font: italic 500 14px var(--titre); fill: #bcc4d2; }
+.trace .t-label.petit { font-size: 11px; font-weight: 500; fill: #a3acbb; stroke-width: 3px; }
+.trace .t-label.or { fill: #e8c98c; }
+.trace .t-label.numero { font-size: 13px; fill: #0f1219; font-weight: 800; stroke: none; }
+.trace .t-pointe { fill: var(--t-ivoire); }
+.trace .t-pointe.image { fill: var(--t-image); }
+.trace .t-pointe.axe { fill: var(--t-gris); }
+.trace .t-objet { stroke: var(--t-ivoire); stroke-width: 3; stroke-linecap: round; }
+.trace .t-objet.fin { stroke-width: 2; }
+.trace .t-image line { stroke: var(--t-image); stroke-width: 3.2; stroke-linecap: round; }
 .trace .t-image.virtuelle line { stroke-dasharray: 7 5; }
-.trace .t-rayon line { stroke: #f0c674; stroke-width: 2; fill: none; }
-.trace .t-rayon line.t-virtuel { stroke-dasharray: 6 5; opacity: 0.7; stroke-width: 1.5; }
+/* Les rayons : la lumière, plus claire et plus fine que la flèche de l'image */
+.trace .t-rayon line { stroke: var(--t-lumiere); stroke-width: 1.8; stroke-linecap: round; fill: none; }
+/* Flèche de sens au milieu d'un rayon */
+.trace .t-sens { fill: var(--t-lumiere); stroke: none; }
+.trace .t-eleve .t-sens { fill: var(--t-ivoire); }
+.trace .t-indice .t-sens { fill: #6fd3c4; }
+.trace .t-rayon line.t-virtuel { stroke-dasharray: 6 5; stroke-linecap: butt; opacity: 0.8; stroke-width: 1.4; }
 .trace .t-indice line { stroke: #6fd3c4; }
-.trace .t-encours line { stroke: #f0c674; stroke-width: 2.5; }
+.trace .t-encours line { stroke: var(--t-lumiere); stroke-width: 2.4; }
 .trace .t-candidat { cursor: pointer; }
-.trace .t-candidat-trait { stroke: #c7a3ff; stroke-width: 2; stroke-dasharray: 8 6; }
+.trace .t-candidat-trait { stroke: #c7a3ff; stroke-width: 2; stroke-dasharray: 8 6; transition: stroke-width var(--vite); }
 .trace .t-zone-clic { stroke: transparent; stroke-width: 26; }
 .trace .t-numero-fond { fill: #c7a3ff; }
-.trace .t-candidat:hover .t-candidat-trait { stroke-width: 3; }
+.trace .t-candidat:hover .t-candidat-trait { stroke-width: 3.2; }
 .trace .t-candidat.t-juste .t-candidat-trait { stroke: #5fd39a; stroke-dasharray: none; stroke-width: 3; }
 .trace .t-candidat.t-juste .t-numero-fond { fill: #5fd39a; }
 .trace .t-candidat.t-faux .t-candidat-trait { stroke: #ff8a7a; stroke-width: 3; }
 .trace .t-candidat.t-faux .t-numero-fond { fill: #ff8a7a; }
 .trace .t-candidat.t-ecarte { opacity: 0.25; }
+/* Le point à poser : un réticule doré */
 .trace .t-cible { cursor: grab; }
-.trace .t-cible-anneau { fill: rgba(217, 178, 111, 0.15); stroke: #d9b26f; stroke-width: 2; stroke-dasharray: 4 3; animation: tourne 6s linear infinite; transform-box: fill-box; transform-origin: center; }
-.trace .t-cible-point { fill: #d9b26f; }
+.trace .t-cible-zone { fill: transparent; }
+.trace .t-cible-anneau { fill: rgba(217, 178, 111, 0.13); stroke: var(--t-image); stroke-width: 1.6; }
+.trace .t-cible-traits { fill: none; stroke: var(--t-image); stroke-width: 1.6; stroke-linecap: round; }
+.trace .t-cible-point { fill: #f0cf8a; stroke: var(--t-encre); stroke-width: 1; }
+/* Tant qu'il n'a pas été attrapé, le réticule bat trois fois pour qu'on le repère */
+.trace .t-cible:not(.t-prise) .t-cible-anneau { animation: repere-cible 1500ms ease-in-out 700ms 3; transform-box: fill-box; transform-origin: center; }
+@keyframes repere-cible { 50% { transform: scale(1.38); fill: rgba(217, 178, 111, 0.3); } }
+.trace.saisi .t-cible-anneau { fill: rgba(217, 178, 111, 0.05); }
 .trace .t-cible.t-juste .t-cible-anneau { stroke: #5fd39a; fill: rgba(95, 211, 154, 0.2); animation: none; }
-.trace .t-cible.t-faux .t-cible-anneau { stroke: #ff8a7a; fill: rgba(255, 138, 122, 0.18); animation: none; }
+.trace .t-cible.t-juste .t-cible-traits { stroke: #5fd39a; }
+.trace .t-cible.t-juste .t-cible-point { fill: #5fd39a; }
+.trace .t-cible.t-faux .t-cible-anneau { stroke: #ff8a7a; fill: rgba(255, 138, 122, 0.16); animation: none; }
+.trace .t-cible.t-faux .t-cible-traits { stroke: #ff8a7a; }
 .trace .t-cible.t-faux .t-cible-point { fill: #ff8a7a; }
+.trace .t-cible.t-faux .t-label { fill: #ff9d90; }
 /* Atelier : diaphragmes, œil, pupille, champs, faisceaux, saisie d'une valeur */
-.trace .t-diaphragme { stroke: #9ec5ff; stroke-width: 4; stroke-linecap: round; }
-.trace .t-oeil { fill: rgba(158, 197, 255, 0.06); stroke: #9ec5ff; stroke-width: 1.5; }
+.trace .t-diaphragme { stroke: var(--t-verre); stroke-width: 4; stroke-linecap: round; }
+.trace .t-oeil { fill: rgba(169, 201, 247, 0.06); stroke: var(--t-verre); stroke-width: 1.5; }
 .trace .t-retine { stroke: #ff9fb0; stroke-width: 3; stroke-linecap: round; }
-.trace .t-image-diaph line { stroke: #9ec5ff; stroke-width: 3; stroke-dasharray: 5 4; stroke-linecap: round; }
+.trace .t-image-diaph line { stroke: var(--t-verre); stroke-width: 3; stroke-dasharray: 5 4; stroke-linecap: round; }
 .trace .t-image-diaph.t-pupille line { stroke: #5fd39a; stroke-dasharray: none; }
 .trace .t-image-diaph.t-pupille text { fill: #5fd39a; }
 .trace .t-image-diaph.t-lucarne line { stroke: #f0c674; stroke-dasharray: none; }
 .trace .t-image-diaph.t-lucarne text { fill: #f0c674; }
 .trace .t-designable { cursor: pointer; }
-.trace .t-designable line { stroke: #c7a3ff; }
+.trace .t-designable line { stroke: #c7a3ff; transition: stroke-width var(--vite); }
 .trace .t-designable:hover line { stroke-width: 5; }
 .trace .t-designable.t-juste line { stroke: #5fd39a; stroke-dasharray: none; }
 .trace .t-designable.t-faux line { stroke: #ff8a7a; }
@@ -912,8 +1153,8 @@ kbd.touche { display: inline-block; min-width: 1.9em; margin: 0 1px; padding: 0 
 .trace .t-champ-total line { stroke: #ff9fb0; }
 .trace .t-champ-moyen line { stroke: #9ec5ff; }
 .trace .t-champ line.t-champ-limite { stroke-width: 5; opacity: 1; stroke-linecap: round; }
-.trace .t-faisceau-fond { fill: rgba(240, 198, 116, 0.16); stroke: none; }
-.trace .t-faisceau-bord { fill: none; stroke: #f0c674; stroke-width: 1.5; }
+.trace .t-faisceau-fond { fill: rgba(240, 207, 138, 0.16); stroke: none; }
+.trace .t-faisceau-bord { fill: none; stroke: var(--t-lumiere); stroke-width: 1.5; }
 .trace .t-faisceau-candidat { cursor: pointer; transition: opacity 200ms; }
 .trace .t-f0 .t-faisceau-fond { fill: rgba(199, 163, 255, 0.16); } .trace .t-f0 .t-faisceau-bord { stroke: #c7a3ff; }
 .trace .t-f1 .t-faisceau-fond { fill: rgba(158, 197, 255, 0.16); } .trace .t-f1 .t-faisceau-bord { stroke: #9ec5ff; }
@@ -921,14 +1162,50 @@ kbd.touche { display: inline-block; min-width: 1.9em; margin: 0 1px; padding: 0 
 .trace .t-faisceau-candidat.t-attenue, .trace .t-faisceau-candidat.t-ecarte { opacity: 0.15; }
 .trace .t-faisceau-candidat.t-juste .t-faisceau-fond { fill: rgba(95, 211, 154, 0.2); } .trace .t-faisceau-candidat.t-juste .t-faisceau-bord { stroke: #5fd39a; }
 .trace .t-faisceau-candidat.t-faux .t-faisceau-bord { stroke: #ff8a7a; stroke-dasharray: 6 4; }
-.trace .t-point-or { fill: #d9b26f; }
+.trace .t-point-or { fill: #d9b26f; stroke: var(--t-encre); stroke-width: 1.5; }
+/* Mouvement de l'Atelier, une seule idée : la mise au point.
+   - à l'ouverture d'un niveau, le dessin arrive flou puis net, et les rayons déjà donnés se tracent (--retard) ;
+   - un rayon qui vient d'être trouvé se trace de gauche à droite (pathLength = 1 sur chaque morceau) ;
+   - l'image trouvée par l'élève se met au point, et un anneau se resserre sur elle.
+   Tout est coupé par la règle prefers-reduced-motion du bas de la feuille : le dessin apparaît alors d'un coup, complet. */
+.trace.t-entree { animation: net-dessin 560ms var(--sortie) both; }
+@keyframes net-dessin { from { opacity: 0; filter: blur(9px); } }
+.trace .t-se-trace line:not(.t-virtuel) { stroke-dasharray: 1; animation: se-trace 560ms var(--sortie) backwards; animation-delay: calc(var(--retard, 0ms) + var(--n, 0) * 300ms); }
+.trace .t-se-trace .t-sens, .trace .t-se-trace line.t-virtuel { animation: vient 380ms ease-out backwards; animation-delay: calc(var(--retard, 0ms) + var(--n, 0) * 300ms + 340ms); }
+.trace .t-fait-net { animation: mise-au-point 900ms var(--sortie) backwards; animation-delay: 420ms; }
+.trace .t-vient { animation: vient 420ms ease-out backwards; animation-delay: 420ms; }
+.trace .t-anneau-net { fill: none; stroke: #f0cf8a; stroke-width: 1.6; opacity: 0; pointer-events: none; transform-box: fill-box; transform-origin: center; animation: anneau-net 1100ms var(--sortie) 420ms; }
+@keyframes se-trace { from { stroke-dashoffset: 1; } }
+@keyframes vient { from { opacity: 0; } }
+@keyframes mise-au-point { from { opacity: 0; filter: blur(9px); } 50% { opacity: 1; } }
+@keyframes anneau-net { from { opacity: 0; transform: scale(2.6); } 35% { opacity: 0.9; } to { opacity: 0; transform: scale(0.55); } }
+/* Construction par l'élève (geste « placer ») : ses rayons, les points qu'il peut viser, le viseur du point */
+.trace .t-trait-eleve { stroke: var(--t-ivoire); stroke-width: 1.8; stroke-linecap: round; }
+.trace .t-trait-eleve.t-virtuel { stroke-dasharray: 6 5; stroke-linecap: butt; opacity: 0.8; stroke-width: 1.4; }
+.trace .t-eleve.t-passe { opacity: 0.4; }
+.trace .t-accroche { fill: none; stroke: var(--t-verre); stroke-width: 1.5; opacity: 0.7; pointer-events: none; }
+.trace .t-accroche.arrivee { fill: var(--t-ivoire); stroke: #0f1219; opacity: 1; }
+.trace .t-accroche.croisement { fill: #0f1219; stroke: var(--t-ivoire); stroke-width: 2; opacity: 1; }
+.trace .t-accroche.guide { stroke-dasharray: 3 3; }
+.trace .t-accroche.choisi { stroke: #d9b26f; stroke-width: 2.5; opacity: 1; }
+.trace .t-accroche.survol { stroke: var(--t-ivoire); stroke-width: 2; opacity: 1; }
+.trace .t-accroche.touchable { stroke: var(--t-ivoire); stroke-width: 1.2; opacity: 0.3; transition: opacity var(--vite); }
+.trace .t-accroches.en-trace .t-accroche.touchable { opacity: 0.75; }
+.trace .t-survol-rayon { stroke: var(--t-ivoire); stroke-width: 7; stroke-linecap: round; opacity: 0.2; pointer-events: none; }
+.trace .t-apercu { stroke: var(--t-ivoire); stroke-width: 1.5; stroke-dasharray: 3 4; opacity: 0.8; pointer-events: none; }
+.trace .t-viseur line { stroke: rgba(217, 178, 111, 0.6); stroke-width: 1; stroke-dasharray: 2 4; pointer-events: none; }
+
+.aide-trace { flex: 1 1 100%; margin: 2px 0 0; min-height: 4.5em; color: var(--doux); font-size: 0.92rem; line-height: 1.5; }
+.lien-aide { display: inline-block; padding: 10px 0; font: inherit; color: var(--or-clair); background: none; border: 0; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+.lien-aide:hover { color: var(--or); }
+.effacer-trace { margin-left: auto !important; padding-inline: 18px; }
+.effacer-trace .ico { flex: none; }
+.indice-detail { white-space: pre; margin-left: -8px; }
+.aide-trace b { color: var(--or-clair); font-variant-numeric: tabular-nums; white-space: nowrap; }
 .jeu-actions .choix-rayon.choisi { box-shadow: inset 0 0 0 2px var(--or); }
-#niveaux .chapitre { margin: 18px 0 10px; font-family: var(--titre); font-size: 1.2rem; font-weight: 600; }
-#niveaux .chapitre:first-child { margin-top: 0; }
-#niveaux .niveaux + .chapitre { margin-top: 22px; }
 .saisie-calcul { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; width: 100%; }
 .saisie-calcul .saisie-ligne { display: flex; flex-direction: row; font-size: 1rem; flex: 0 1 15em; min-width: 0; align-items: center; gap: 8px; margin: 0; }
-.saisie-ligne input { flex: 1 1 auto; min-width: 0; width: 7em; min-height: 48px; padding: 8px 14px; font: inherit; font-size: 1.15rem; font-variant-numeric: tabular-nums; color: var(--texte); background: var(--fond-2); border: 1px solid var(--bord-fort); border-radius: 12px; }
+.saisie-ligne input { flex: 1 1 auto; min-width: 0; width: 7em; min-height: 48px; padding: 8px 14px; font: inherit; font-size: 1.15rem; font-variant-numeric: tabular-nums; color: var(--texte); background: var(--fond-2); border: 1px solid var(--bord-fort); border-radius: 12px; caret-color: var(--or); }
 .saisie-ligne input:focus { outline: 2px solid var(--or); outline-offset: 1px; border-color: var(--or); }
 .saisie-ligne input:disabled { opacity: 0.75; }
 .saisie-unite { font-weight: 700; color: var(--doux); min-width: 1em; }
@@ -938,29 +1215,62 @@ kbd.touche { display: inline-block; min-width: 1.9em; margin: 0 1px; padding: 0 
 .saisie-qcm.faux input { border-color: var(--rouge); background: var(--rouge-fond); }
 .correction-calcul { margin: 0 0 8px; font-weight: 700; }
 .saisie-aide { flex-basis: 100%; margin: 0; color: var(--doux); font-size: 0.88rem; }
-.jeu-actions { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 0; }
+.jeu-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 0; }
 .jeu-actions .bouton { margin: 0; }
 .jeu-actions .choix-rayon { flex: 1 1 100%; text-align: left; border-radius: 14px; }
 .jeu-actions .choix-rayon.bon { box-shadow: inset 0 0 0 1px var(--vert); background: var(--vert-fond); color: var(--texte); }
 .jeu-actions .choix-rayon.mauvais { box-shadow: inset 0 0 0 1px var(--rouge); background: var(--rouge-fond); color: var(--texte); }
 .jeu-actions .choix-rayon:disabled { cursor: default; opacity: 1; }
+/* Le retour après une réponse : le compagnon, le verdict (avec sa coche ou sa croix), l'explication */
 .jeu-retour:empty { display: none; }
-.jeu-retour { display: flex; gap: 12px; align-items: flex-start; margin-top: 16px; padding: 16px 18px; border-radius: 14px; background: var(--fond-2); border: 1px solid var(--bord-fort); animation: net 520ms var(--sortie) both; }
+.jeu-retour { display: flex; gap: 14px; align-items: flex-start; margin: 14px 0 0; padding: 16px 18px; border-radius: 14px; background: var(--fond-2); border: 1px solid var(--bord-fort); animation: net 520ms var(--sortie) both; }
 .jeu-retour.bien { border-color: rgba(95, 211, 154, 0.5); }
 .jeu-retour.mal { border-color: rgba(255, 122, 122, 0.5); }
-.jeu-retour p { margin: 0 0 8px; }
+.jeu-retour.bien .jeu-message > p:first-child > b:first-child { color: var(--vert); }
+.jeu-retour.mal .jeu-message > p:first-child > b:first-child { color: var(--rouge); }
+.jeu-retour:is(.bien, .mal) .jeu-message > p:first-child > b:first-child::before { content: ""; display: inline-block; width: 1.05em; height: 1.05em; margin-right: 0.4em; vertical-align: -0.16em; background: currentColor;
+  -webkit-mask: var(--verdict) center / contain no-repeat; mask: var(--verdict) center / contain no-repeat; }
+.jeu-retour.bien { --verdict: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4.500 12.500l5 5L19.500 7'/%3E%3C/svg%3E"); }
+.jeu-retour.mal { --verdict: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3' stroke-linecap='round'%3E%3Cpath d='M6 6l12 12M18 6L6 18'/%3E%3C/svg%3E"); }
+.jeu-retour p { margin: 0 0 8px; max-width: 64ch; }
 .jeu-retour p:last-child { margin-bottom: 0; }
 .jeu-compagnon { flex: none; width: 60px; height: auto; animation: saute 700ms var(--rebond) both; }
 .jeu-message { min-width: 0; }
-.verif { color: var(--doux); font-size: 0.9rem; }
-.etoiles-gagnees { color: var(--or); font-size: 1.7rem; letter-spacing: 4px; }
+.verif { color: var(--doux); font-size: 0.9rem; font-variant-numeric: tabular-nums; }
+.etoiles-gagnees { margin-top: 12px !important; }
+.etoiles-gagnees .etoiles { gap: 8px; }
+.etoiles-gagnees .ico { width: 30px; height: 30px; animation: net 560ms var(--sortie) backwards; animation-delay: calc(var(--n, 0) * 170ms + 250ms); }
+.etoiles-gagnees .ico.vide { animation: none; }
 @media (max-width: 520px) {
-  .trace-cadre { margin: 0 -10px; padding: 3px; }
+  /* Téléphone : le dessin prend toute la largeur de l'écran, d'un bord à l'autre */
+  .jeu-dessin { margin: 0 -16px; }
+  /* Rangée de boutons serrée : Effacer devient une icône seule (son nom reste lu par les lecteurs d'écran) */
+  .jeu-actions .bouton { padding-inline: 20px; }
+  .effacer-trace { padding-inline: 14px !important; }
+  .effacer-trace span:last-child { display: none; }
+  .aide-trace { min-height: 4.4em; }
+  .trace-cadre { border-radius: 0; border-left: 0; border-right: 0; }
+  .trace:focus-visible { border-radius: 0; }
+  .trace-legende { margin: 8px 16px 0; font-size: 0.8rem; }
+  .regle { font-size: 0.93rem; }
   .jeu-compagnon { width: 46px; }
   .trace .t-label { font-size: 20px; }
-  .trace .t-label.petit { font-size: 15px; }
-  .trace .t-label.numero { font-size: 16px; }
-  .trace .t-numero-fond { r: 15px; }
+  .trace .t-label.point { font-size: 21px; }
+  .trace .t-label.repere { font-size: 18px; }
+  .trace .t-label.petit { font-size: 18px; }
+  .niveau-vignette { width: 60px; }
+  /* Zones à toucher du dessin, élargies : sur un petit écran une unité du dessin fait moins d'un pixel */
+  .trace .t-cible-zone { r: 34px; }
+  .trace .t-zone-clic { stroke-width: 44; }
+  .trace .t-zone-clic-rond { r: 26px; }
+  .niveau:hover:not(:disabled) { padding-left: 6px; }
+  .trace .t-label.numero { font-size: 18px; }
+  .trace .t-numero-fond { r: 17px; }
+}
+
+@media (max-width: 360px) {
+  .jeu-actions .bouton { padding-inline: 16px; }
+  .indice-detail { display: none; }
 }
 
 /* ---------- 14. Profil et compte ---------- */
@@ -1040,10 +1350,17 @@ kbd.touche { display: inline-block; min-width: 1.9em; margin: 0 1px; padding: 0 
 #reauth { margin-top: 16px; }
 
 /* Bandeau « progression mise à jour » (synchro depuis un autre appareil) */
-.bandeau-maj { position: fixed; left: 50%; bottom: 16px; transform: translateX(-50%); z-index: 50; display: flex; align-items: center; gap: 12px; width: max-content; max-width: calc(100% - 32px); padding: 12px 14px 12px 18px; border-radius: 16px; color: var(--texte); background: var(--carte); border: 1px solid rgba(217, 178, 111, 0.55); box-shadow: var(--ombre); font-size: 0.94rem; animation: net 520ms var(--sortie) both; }
+.bandeau-maj { position: fixed; left: 16px; right: 16px; margin: 0 auto; bottom: 16px; z-index: 50; display: flex; align-items: center; gap: 12px; width: max-content; max-width: calc(100% - 32px); padding: 12px 14px 12px 18px; border-radius: 16px; color: var(--texte); background: var(--carte); border: 1px solid rgba(217, 178, 111, 0.55); box-shadow: var(--ombre); font-size: 0.94rem; animation: net 520ms var(--sortie) both; }
 .bandeau-maj .bouton { margin-top: 0; padding: 8px 14px; min-height: 44px; white-space: nowrap; }
 .bandeau-fermer { background: none; border: 0; color: var(--doux); font-size: 1.3rem; line-height: 1; cursor: pointer; padding: 12px; }
 @media (max-width: 720px) { .bandeau-maj { bottom: calc(92px + env(safe-area-inset-bottom)); flex-wrap: wrap; } }
+/* Centré par left/right + margin auto (pas de transform : l'animation « net » l'annulerait) */
+/* Invitation « installer l'appli » (appli.js) : même bandeau, en plus discret */
+.invitation-appli { border-color: var(--bord-fort); width: min(560px, calc(100% - 32px)); }
+.invitation-appli > span { flex: 1 1 220px; line-height: 1.45; }
+.invitation-appli .ico-partager { width: 18px; height: 18px; vertical-align: -3px; color: var(--or); }
+.bouton-discret { background: none; border: 0; color: var(--doux); font: inherit; font-size: 0.9rem; cursor: pointer; padding: 10px 6px; min-height: 44px; white-space: nowrap; text-decoration: underline; text-underline-offset: 3px; }
+.bouton-discret:hover { color: var(--or); }
 
 /* ---------- 15. Pied de page ---------- */
 footer { max-width: var(--large); margin: 0 auto; padding: 26px 18px 40px; color: var(--tres-doux); font-size: 0.84rem; border-top: 1px solid var(--bord); display: flex; flex-wrap: wrap; align-items: center; gap: 6px 14px; line-height: 1.5; }

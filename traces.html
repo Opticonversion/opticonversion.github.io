@@ -10,7 +10,13 @@
 <script>/* Fond choisi par l'élève (profil), appliqué avant l'affichage */ try { if (localStorage.getItem("fond") === "clair") { document.documentElement.dataset.fond = "clair"; var m = document.querySelector('meta[name="theme-color"]'); if (m) m.content = "#1a1f2a"; } } catch (e) {}</script>
 <link rel="preload" href="polices/bodoni-moda.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="polices/atkinson-hyperlegible-next.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="style.css?v=29608544">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="img/icone-apple-180.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Opticonversion">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link rel="stylesheet" href="style.css?v=3cb4be98">
 </head>
 <body>
 <header class="entete">
@@ -48,20 +54,32 @@
     <p class="aide" style="margin:14px 0 0">Dans chaque chapitre, un niveau réussi débloque le suivant. 3 étoiles : sans erreur ni indice.</p>
   </section>
 
-  <!-- Le jeu -->
+  <!-- Le jeu : sur ordinateur, le dessin est à gauche et tout ce qui se lit ou se touche à droite ;
+       sur téléphone, la consigne, puis le dessin, puis les outils. -->
   <section id="ecran-jeu" hidden data-epreuve="U42">
     <div class="jeu-tete">
       <button class="retour" id="retour-niveaux" type="button">← Les niveaux</button>
       <span class="jeu-niveau" id="jeu-niveau"></span>
     </div>
-    <h2 id="jeu-titre"></h2>
-    <p class="regle" id="jeu-regle"></p>
-    <p class="consigne" id="jeu-consigne"></p>
-    <div class="trace-cadre">
-      <svg class="trace" id="trace" viewBox="0 0 480 300" role="img" aria-labelledby="jeu-consigne"></svg>
+    <div class="jeu-corps">
+      <div class="jeu-texte">
+        <h2 id="jeu-titre"></h2>
+        <p class="regle" id="jeu-regle"></p>
+        <ol class="fil-etapes" id="jeu-etapes" aria-hidden="true" hidden></ol>
+        <p class="consigne" id="jeu-consigne"></p>
+      </div>
+      <figure class="jeu-dessin">
+        <div class="trace-cadre">
+          <svg class="trace" id="trace" viewBox="0 0 480 300" role="img" aria-labelledby="jeu-consigne"></svg>
+        </div>
+        <!-- L'échelle du quadrillage et le sens de la lumière, écrits par traces.js -->
+        <figcaption class="trace-legende" id="trace-legende"></figcaption>
+      </figure>
+      <div class="jeu-commandes">
+        <div class="jeu-actions" id="jeu-actions"></div>
+        <div class="jeu-retour" id="jeu-retour" role="status" aria-live="polite"></div>
+      </div>
     </div>
-    <div class="jeu-actions" id="jeu-actions"></div>
-    <div class="jeu-retour" id="jeu-retour" role="status" aria-live="polite"></div>
   </section>
 </main>
 
@@ -69,14 +87,16 @@
 
 <script src="epreuves.js?v=cc645427"></script>
 <!-- Niveaux de l'Atelier, un fichier par épreuve (facultatifs) -->
-<script src="traces-U42.js?v=deddab01"></script>
+<script src="traces-U42.js?v=cd7fcf7c"></script>
 <script src="traces-U43.js?v=65b6cc27"></script>
 <script src="traces-U5.js?v=3c44feba"></script>
-<script src="essentiel.js?v=412cefda"></script>
+<script src="essentiel.js?v=f3b7979d"></script>
 <script src="optique.js?v=88043144"></script>
-<script src="traces.js?v=3c161585"></script>
-<script src="vivant.js?v=a055ba08" defer></script>
-<script type="module" src="compte.js?v=c47ff213"></script>
+<script src="traces.js?v=96d6df33"></script>
+<script src="vivant.js?v=ec7cf52b" defer></script>
+<script src="appli.js?v=9609be57" defer></script>
+<script src="sons.js?v=2110bb6a" defer></script>
+<script type="module" src="compte.js?v=02538a67"></script>
 <!-- Mesure d'audience anonyme, sans cookies (GoatCounter) -->
 <script data-goatcounter="https://opticonversion.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </body>

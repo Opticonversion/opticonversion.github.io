@@ -73,7 +73,7 @@
 
   // ---------------- 3. Un clic sur le compagnon le fait sauter ----------------
   document.addEventListener("click", e => {
-    const img = e.target.closest && e.target.closest(".expl-diosl, .bilan-nounours, .jeu-compagnon, .def-fin-compagnon, .profil-avatar, .tete-compagnon");
+    const img = e.target.closest && e.target.closest(".expl-diosl, .bilan-nounours, .jeu-compagnon, .def-fin-compagnon, .profil-avatar, .tete-compagnon, .jour-compagnon");
     if (!img || calme) return;
     img.classList.remove("perso-saut");
     void img.offsetWidth;

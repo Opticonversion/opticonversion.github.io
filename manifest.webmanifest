@@ -1,0 +1,24 @@
+{
+  "name": "Opticonversion",
+  "short_name": "Opticonversion",
+  "description": "Révise le BTS Opticien-Lunetier : QCM, définitions, tracés et calculs d'optique, même sans internet.",
+  "lang": "fr",
+  "dir": "ltr",
+  "id": "/",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#13171f",
+  "theme_color": "#13171f",
+  "categories": ["education"],
+  "icons": [
+    { "src": "img/icone-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "img/icone-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "img/icone-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    { "name": "QCM", "url": "/qcm.html", "icons": [{ "src": "img/icone-192.png", "sizes": "192x192" }] },
+    { "name": "Définitions", "url": "/definitions.html", "icons": [{ "src": "img/icone-192.png", "sizes": "192x192" }] }
+  ]
+}

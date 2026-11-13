@@ -59,6 +59,11 @@ const ESSENTIEL = ESSENTIEL_SOURCE
 
 const estEssentiel = (epreuve, theme) => ESSENTIEL.some(n => n.epreuve === epreuve && n.theme === theme);
 
+// Questions « d'entraînement » (entrainement: true, fichiers entrainement-<épreuve>.js chargés par qcm.html seulement) :
+// les mêmes notions avec d'autres chiffres, pour s'entraîner plus. Elles ne comptent NI dans l'Essentiel, NI dans
+// « Tous les QCM », NI dans la révision espacée : seulement dans leur propre compteur, sur la page de l'épreuve.
+const questionsDeBase = () => (typeof QUESTIONS === "undefined" ? [] : QUESTIONS.filter(q => !q.entrainement));
+
 // ---------------- La progression de l'élève ----------------
 // Elle est gardée dans le navigateur de l'élève. S'il se connecte (compte.js),
 // elle est aussi sauvegardée en ligne pour la retrouver sur ses autres appareils.
@@ -127,7 +132,26 @@ function noterReponse(q, juste) {
   } catch (e) {}
   marquerEnAttente("progression-t", id, maintenant);
   marquerEnAttente("progression", id, juste ? 1 : 0);
+  compterJour();
   return planifierRevision(q, juste);
+}
+
+// Nombre de réponses données chaque jour, sur cet appareil seulement (localStorage « jours »,
+// 70 jours au plus) : sert à la série de jours (rythme.js). progression-t ne suffit pas : il ne garde
+// que la dernière réponse à chaque question, et refaire aujourd'hui une question d'hier l'enlèverait
+// du compte d'hier. ok = l'objectif du jour (localStorage « objectif ») a été atteint ce jour-là.
+function compterJour() {
+  try {
+    const jours = JSON.parse(localStorage.getItem("jours") || "{}") || {};
+    const k = jourLocal(), objectif = Number(localStorage.getItem("objectif")) || 0;
+    const e = jours[k] || { n: 0 };
+    e.n = (Number(e.n) || 0) + 1;
+    if (objectif && e.n >= objectif) e.ok = true;
+    jours[k] = e;
+    const garde = {};
+    Object.keys(jours).sort().slice(-70).forEach(j => { garde[j] = jours[j]; });
+    localStorage.setItem("jours", JSON.stringify(garde));
+  } catch (e) {}
 }
 
 // Au chargement : on passe les anciennes données (repérées par l'énoncé) sous les identifiants stables,
@@ -174,6 +198,7 @@ function ecrireRevision(id, entree) {
 
 // Renvoie ce qui se passe pour cette question : { jours: n } (prochain retour), { acquise: true }, ou null.
 function planifierRevision(q, juste) {
+  if (q.entrainement) return null;          // une question d'entraînement ne revient pas dans « À revoir »
   const id = idQuestion(q);
   const r = lireRevisions()[id];
   const aujourdhui = jourLocal();
@@ -230,7 +255,7 @@ function enregistrerProfil(p) {
 // ont été réussies à la dernière tentative.
 function etatNotion(epreuve, theme) {
   const p = lireProgression();
-  const qs = QUESTIONS.filter(q => q.epreuve === epreuve && q.theme === theme);
+  const qs = questionsDeBase().filter(q => q.epreuve === epreuve && q.theme === theme);
   const reussies = qs.filter(q => p[idQuestion(q)] === 1).length;
   const tentees = qs.filter(q => idQuestion(q) in p).length;
   return {
@@ -252,13 +277,13 @@ function bilanQuestions(qs) {
   });
   return { total: qs.length, faites, reussies };
 }
-const questionsEssentielles = () => QUESTIONS.filter(q => estEssentiel(q.epreuve, q.theme));
+const questionsEssentielles = () => questionsDeBase().filter(q => estEssentiel(q.epreuve, q.theme));
 
 // Les trois grandes mesures : l'essentiel et tous les QCM (questions FAITES),
 // et le niveau de maîtrise (questions RÉUSSIES à la dernière tentative, sur tout le site).
 function bilansGeneraux() {
   const essentiel = bilanQuestions(questionsEssentielles());
-  const qcm = bilanQuestions(QUESTIONS);
+  const qcm = bilanQuestions(questionsDeBase());
   // Pour la maîtrise, la barre ne montre que les réussies : « faites » = « réussies »
   const maitrise = { total: qcm.total, faites: qcm.reussies, reussies: qcm.reussies };
   return { essentiel, qcm, maitrise };

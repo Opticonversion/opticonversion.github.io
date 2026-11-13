@@ -38,7 +38,7 @@ TRACES.push(
   {
     id: "U42-4", epreuve: "U42", chapitre: "Lentille mince", titre: "Place l'image",
     regle: "L'image B' est le point où les rayons issus de B se croisent après la lentille.",
-    consigne: "Les trois rayons sont tracés. Fais glisser le point B' à l'endroit de l'image, puis valide.",
+    consigne: "Les trois rayons sont tracés. Amène B' là où ils se croisent : touche le croisement, ou fais glisser le réticule doré. Puis valide.",
     systeme: { objet: { x: -200, h: 60 }, elements: [{ type: "lentille", nom: "L", x: 0, f: 80 }] },
     vue: VUE_U42_LENTILLE,
     etapes: [{ action: "placer", quoi: "image", apres: "L", rayons: ["parallele", "O", "F"], tolerance: 0.8 }]
@@ -52,13 +52,13 @@ TRACES.push(
     etapes: [
       { action: "rayon", apres: "L", rayon: { depuis: "B", par: "parallele" } },
       { action: "rayon", apres: "L", rayon: { depuis: "B", par: "O" } },
-      { action: "placer", quoi: "image", apres: "L", tolerance: 0.8, texte: "Fais glisser B' au croisement des deux rayons, puis valide." }
+      { action: "placer", quoi: "image", apres: "L", tolerance: 0.8, texte: "Amène B' au croisement des deux rayons (touche le croisement, ou fais glisser le réticule doré), puis valide." }
     ]
   },
   {
     id: "U42-6", epreuve: "U42", chapitre: "Lentille mince", titre: "La loupe : image virtuelle",
     regle: "Objet entre F et la lentille : les rayons ressortent en s'écartant. L'image est là où se croisent leurs prolongements, du côté de l'objet : elle est virtuelle et droite.",
-    consigne: "Les rayons ne se croisent pas après la lentille. Où est l'image B' ?",
+    consigne: "Les rayons ne se croisent pas après la lentille. Touche chaque rayon pour le prolonger en pointillés, puis pose B' sur leur croisement.",
     systeme: { objet: { x: -60, h: 30 }, elements: [{ type: "lentille", nom: "L", x: 0, f: 100 }] },
     vue: VUE_U42_LENTILLE,
     etapes: [{ action: "placer", quoi: "image", apres: "L", rayons: ["parallele", "O"], prolonger: true, tolerance: 0.8 }]
@@ -74,15 +74,15 @@ TRACES.push(
   {
     id: "U42-8", epreuve: "U42", chapitre: "Lentille mince", titre: "Lentille divergente : l'image",
     regle: "Avec une lentille divergente, l'image d'un objet réel est toujours virtuelle, droite et plus petite, entre F' et la lentille.",
-    consigne: "Place l'image B' donnée par la lentille divergente.",
+    consigne: "Place l'image B' donnée par la lentille divergente : touche les rayons qui sortent pour les prolonger en pointillés, puis pose B' sur leur croisement.",
     systeme: { objet: { x: -150, h: 60 }, elements: [{ type: "lentille", nom: "L", x: 0, f: -100 }] },
     vue: VUE_U42_LENTILLE,
     etapes: [{ action: "placer", quoi: "image", apres: "L", rayons: ["parallele", "O"], prolonger: true, tolerance: 0.8 }]
   },
   {
     id: "U42-9", epreuve: "U42", chapitre: "Lentille mince", titre: "Défi : 5 tracés sans aide",
-    regle: "Plus de rayons ni d'indice : imagine les rayons et place B' directement. 4 bonnes réponses sur 5 pour réussir.",
-    consigne: "Place l'image B' de l'objet AB.",
+    regle: "Plus de rayons tracés d'avance ni d'indice : trace-les toi-même (de B vers O ; de B vers la lentille à la même hauteur, puis vers F'), puis pose B' sur leur croisement. 4 bonnes réponses sur 5 pour réussir.",
+    consigne: "Construis l'image B' de l'objet AB.",
     defi: { manches: 5, reussir: 4 }
   }
 );

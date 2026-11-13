@@ -11,7 +11,13 @@
 <script>/* Fond choisi par l'élève (profil), appliqué avant l'affichage */ try { if (localStorage.getItem("fond") === "clair") { document.documentElement.dataset.fond = "clair"; var m = document.querySelector('meta[name="theme-color"]'); if (m) m.content = "#1a1f2a"; } } catch (e) {}</script>
 <link rel="preload" href="polices/bodoni-moda.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="polices/atkinson-hyperlegible-next.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="style.css?v=29608544">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="img/icone-apple-180.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Opticonversion">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link rel="stylesheet" href="style.css?v=3cb4be98">
 </head>
 
 <!-- ============================================================
@@ -247,9 +253,10 @@
   brancher(["p-puis", "p-dec", "p-dir"], calculPrentice);
 </script>
 <!-- Pour afficher le compagnon choisi par l'élève en haut de la page -->
-<script src="essentiel.js?v=412cefda"></script>
-<script src="vivant.js?v=a055ba08" defer></script>
-<script type="module" src="compte.js?v=c47ff213"></script>
+<script src="essentiel.js?v=f3b7979d"></script>
+<script src="vivant.js?v=ec7cf52b" defer></script>
+<script src="appli.js?v=9609be57" defer></script>
+<script type="module" src="compte.js?v=02538a67"></script>
 <!-- Mesure d'audience anonyme, sans cookies (GoatCounter) -->
 <script data-goatcounter="https://opticonversion.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </body>

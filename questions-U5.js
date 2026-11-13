@@ -23,6 +23,7 @@ QUESTIONS.push(
   // ---------- Test de Worth (tombé 4 années sur 4) ----------
   {
     id: "U5-001", epreuve: "U5", theme: "Worth", session: "2024",
+    difficulte: "facile",
     question: "Test de Worth, filtre rouge sur l'OD, filtre vert sur l'OG. Le sujet ne voit que 2 symboles rouges. Conclusion ?",
     choix: ["Neutralisation de l'OG", "Neutralisation de l'OD", "Diplopie", "Vision binoculaire normale"],
     bonne: 0,
@@ -33,6 +34,7 @@ QUESTIONS.push(
   },
   {
     id: "U5-002", epreuve: "U5", theme: "Worth", session: "2023",
+    difficulte: "facile",
     question: "Test de Worth, filtre rouge sur l'OD, filtre vert sur l'OG. Le sujet ne voit que 3 symboles verts. Conclusion ?",
     choix: ["Neutralisation de l'OG", "Neutralisation de l'OD", "Diplopie croisée", "Dominance de l'OD"],
     bonne: 1,
@@ -41,6 +43,7 @@ QUESTIONS.push(
   },
   {
     id: "U5-003", epreuve: "U5", theme: "Worth", session: "2023",
+    difficulte: "facile",
     question: "Au test de Worth, le sujet voit 5 symboles. Que met-on en évidence ?",
     choix: ["Une neutralisation", "Une diplopie : vision simultanée présente, mais pas de fusion", "Une vision binoculaire normale", "Une amblyopie"],
     bonne: 1,
@@ -49,6 +52,7 @@ QUESTIONS.push(
   },
   {
     id: "U5-004", epreuve: "U5", theme: "Worth", session: "2022",
+    difficulte: "moyen",
     question: "Filtre rouge sur l'OD. Le sujet voit 4 symboles, l'élément fusionnel lui paraît rosé. Conclusion ?",
     choix: ["Neutralisation de l'OG", "Diplopie homonyme", "Vision binoculaire avec dominance de l'OD", "Vision binoculaire avec dominance de l'OG"],
     bonne: 2,
@@ -57,6 +61,7 @@ QUESTIONS.push(
   },
   {
     id: "U5-005", epreuve: "U5", theme: "Worth", session: "2020",
+    difficulte: "moyen",
     question: "Filtre rouge sur l'OD. Le sujet voit 5 symboles, les rouges à DROITE des verts. Type de diplopie et phorie associée ?",
     choix: ["Diplopie croisée, exophorie associée", "Diplopie homonyme, ésophorie associée", "Diplopie croisée, ésophorie associée", "Diplopie homonyme, exophorie associée"],
     bonne: 1,
@@ -69,6 +74,7 @@ QUESTIONS.push(
   // ---------- Masquage (cover test) ----------
   {
     id: "U5-006", epreuve: "U5", theme: "Masquage et phories", session: "2024",
+    difficulte: "moyen",
     question: "Au masquage unilatéral, aucun mouvement au masquage. Au DÉMASQUAGE, l'œil fait un mouvement temporo-nasal. Conclusion ?",
     choix: ["Exophorie", "Ésophorie", "Exotropie", "Ésotropie"],
     bonne: 0,
@@ -79,6 +85,7 @@ QUESTIONS.push(
   },
   {
     id: "U5-007", epreuve: "U5", theme: "Masquage et phories", session: "2024",
+    difficulte: "difficile",
     question: "Au démasquage de l'OD, l'œil fait un mouvement de bas en haut pour reprendre la fixation. Aucun mouvement au masquage. Conclusion ?",
     choix: ["Hyperphorie D/G (= hypophorie G/D)", "Hypophorie D/G (= hyperphorie G/D)", "Hypertropie D/G (= hypotropie G/D)", "Hypotropie D/G (= hypertropie G/D)"],
     bonne: 1,
@@ -87,6 +94,7 @@ QUESTIONS.push(
   },
   {
     id: "U5-008", epreuve: "U5", theme: "Masquage et phories", session: "2020",
+    difficulte: "difficile",
     question: "On masque l'OD : l'OG non masqué fait un mouvement naso-temporal pour prendre la fixation. Conclusion ?",
     choix: ["Ésophorie OG", "Ésotropie OG", "Exotropie OG", "Exophorie OG"],
     bonne: 1,
@@ -95,6 +103,7 @@ QUESTIONS.push(
   },
   {
     id: "U5-009", epreuve: "U5", theme: "Masquage et phories", session: "complément",
+    difficulte: "moyen",
     question: "Exophorie de l'OD. On démasque l'OD : quel schéma (sujet vu de face) montre le bon mouvement ?",
     choix: ["Flèche sous l'OD, vers le nez (temporo-nasal)", "Flèche sous l'OD, vers la tempe (naso-temporal)", "Flèche sous l'OG, vers le nez", "Flèche verticale à côté de l'OD, vers le haut"],
     choixSchemas: ["img/schemas/U5/cover-choix-juste.svg", "img/schemas/U5/cover-choix-faux-sens.svg", "img/schemas/U5/cover-choix-faux-og.svg", "img/schemas/U5/cover-choix-faux-vertical.svg"],
@@ -104,6 +113,7 @@ QUESTIONS.push(
   },
   {
     id: "U5-010", epreuve: "U5", theme: "Masquage et phories", session: "2024",
+    difficulte: "facile",
     question: "Normes de phorie dissociée horizontale (méthode de von Graefe) : quelle est la valeur attendue en vision de près, à 40 cm ?",
     choix: ["Orthophorie à 1 Δ d'exophorie", "Exophorie de 4 à 6 Δ", "Ésophorie de 4 à 6 Δ", "Exophorie de 15 Δ"],
     bonne: 1,
@@ -114,6 +124,7 @@ QUESTIONS.push(
   // ---------- Maddox ----------
   {
     id: "U5-011", epreuve: "U5", theme: "Masquage et phories", session: "2024",
+    difficulte: "moyen",
     question: "Un cylindre de Maddox est placé devant l'OD avec ses stries HORIZONTALES. Le sujet voit :",
     choix: ["Une barre horizontale, pour mesurer la phorie verticale", "Une barre verticale, pour mesurer la phorie horizontale", "Un point lumineux rouge", "Deux points lumineux"],
     bonne: 1,
@@ -122,6 +133,7 @@ QUESTIONS.push(
   },
   {
     id: "U5-012", epreuve: "U5", theme: "Masquage et phories", session: "2024",
+    difficulte: "moyen",
     question: "Maddox sur l'OD (barre verticale). Le sujet voit la barre rouge à GAUCHE du point lumineux. Conclusion ?",
     choix: ["Ésophorie", "Exophorie", "Orthophorie", "Hyperphorie droite"],
     bonne: 1,
@@ -130,6 +142,7 @@ QUESTIONS.push(
   },
   {
     id: "U5-013", epreuve: "U5", theme: "Masquage et phories", session: "2024",
+    difficulte: "facile",
     question: "Test placé à 50 cm : la barre de Maddox est vue décalée de 3 cm par rapport au point lumineux. Valeur de la phorie ?",
     choix: ["1,5 Δ", "3 Δ", "6 Δ", "15 Δ"],
     bonne: 2,
@@ -138,6 +151,7 @@ QUESTIONS.push(
   },
   {
     id: "U5-014", epreuve: "U5", theme: "Masquage et phories", session: "2024",
+    difficulte: "moyen",
     question: "Pour réaligner la barre de Maddox chez un sujet exophore, le prisme de réalignement est placé :",
     choix: ["Base interne (nasale)", "Base externe (temporale)", "Base supérieure", "Base inférieure"],
     bonne: 0,
@@ -146,6 +160,7 @@ QUESTIONS.push(
   },
   {
     id: "U5-015", epreuve: "U5", theme: "Masquage et phories", session: "2022",
+    difficulte: "facile",
     question: "Selon le critère de Sheard, la vision est plutôt confortable si la réserve opposée à la phorie est au moins :",
     choix: ["Égale à la phorie", "Le double de la phorie", "Le triple de la phorie", "La moitié de la phorie"],
     bonne: 1,
@@ -156,6 +171,7 @@ QUESTIONS.push(
   // ---------- Anisométropie, aniséiconie, effets prismatiques ----------
   {
     id: "U5-016", epreuve: "U5", theme: "Anisométropie", session: "2024",
+    difficulte: "moyen",
     question: "Anisométropie de puissance : OD −0,50 et OG −5,50 (sphériques), verres à 14 mm de l'œil. Estimation de l'aniséiconie en lunettes ?",
     choix: ["Environ 1,4 %", "Environ 5 %", "Environ 7 %", "Environ 14 %"],
     bonne: 2,
@@ -166,6 +182,7 @@ QUESTIONS.push(
   },
   {
     id: "U5-017", epreuve: "U5", theme: "Anisométropie", session: "2024",
+    difficulte: "facile",
     question: "Pour une anisométropie de PUISSANCE, quel équipement réduit le plus l'aniséiconie ?",
     choix: ["Des lunettes à 15 mm", "Des lentilles de contact", "Des lunettes à 25 mm", "Aucun équipement"],
     bonne: 1,
@@ -174,6 +191,7 @@ QUESTIONS.push(
   },
   {
     id: "U5-018", epreuve: "U5", theme: "Anisométropie", session: "complément",
+    difficulte: "difficile",
     question: "Anisométropie purement AXILE : OD −1,00 et OG −6,00 (sphériques), verres à 15 mm de l'œil. Aniséiconie totale en lunettes ?",
     choix: ["Environ 1 %", "Environ 7,5 %", "Environ 8,5 %", "Environ 16 %"],
     bonne: 0,
@@ -182,6 +200,7 @@ QUESTIONS.push(
   },
   {
     id: "U5-019", epreuve: "U5", theme: "Anisométropie", session: "2024",
+    difficulte: "moyen",
     question: "OD +1,00 et OG +4,00 (sphériques). En lecture, le regard passe 1 cm sous les centres optiques. Effet prismatique vertical différentiel ?",
     choix: ["1 Δ", "3 Δ", "4 Δ", "5 Δ"],
     bonne: 1,
@@ -192,6 +211,7 @@ QUESTIONS.push(
   },
   {
     id: "U5-020", epreuve: "U5", theme: "Anisométropie", session: "complément",
+    difficulte: "moyen",
     question: "Verre +4,00 vu de côté. Le regard passe 1 cm sous le centre optique. Quel schéma de l'effet prismatique est juste ?",
     choix: ["1 cm sous le centre, 4 Δ base supérieure", "1 cm sous le centre, 4 Δ base inférieure", "1 cm sous le centre, 40 Δ base supérieure", "1 cm au-dessus du centre, 4 Δ base inférieure"],
     choixSchemas: ["img/schemas/U5/prisme-choix-juste.svg", "img/schemas/U5/prisme-choix-faux-base.svg", "img/schemas/U5/prisme-choix-faux-mm.svg", "img/schemas/U5/prisme-choix-faux-dessus.svg"],
@@ -201,6 +221,7 @@ QUESTIONS.push(
   },
   {
     id: "U5-021", epreuve: "U5", theme: "Anisométropie", session: "2024",
+    difficulte: "moyen",
     question: "Pourquoi un anisométrope équipé en lentilles ne voit-il plus double quand il regarde vers le haut ?",
     choix: ["Les lentilles compensent la phorie", "La lentille suit l'œil : la ligne de regard reste centrée, pas d'effet prismatique différentiel", "Les lentilles augmentent les réserves fusionnelles", "Les lentilles suppriment l'anisométropie"],
     bonne: 1,
@@ -209,6 +230,7 @@ QUESTIONS.push(
   },
   {
     id: "U5-022", epreuve: "U5", theme: "Anisométropie", session: "2023",
+    difficulte: "facile",
     question: "Un enfant anisométrope non compensé développe une amblyopie fonctionnelle de l'œil le plus amétrope. Pourquoi ?",
     choix: ["Une lésion de la rétine", "L'image floue de cet œil pendant la période de maturation visuelle", "Un glaucome congénital", "Une cataracte"],
     bonne: 1,
@@ -219,6 +241,7 @@ QUESTIONS.push(
   // ---------- Examen préliminaire ----------
   {
     id: "U5-023", epreuve: "U5", theme: "Examen préliminaire", session: "2024",
+    difficulte: "moyen",
     question: "Compensation portée OD −2,00 (−1,00) 180° ; autoréfractomètre OD −3,00 (−0,50) 180°. Réfraction complémentaire attendue (en équivalents sphériques), si l'autoréfractomètre était exact ?",
     choix: ["+0,75", "−0,75", "−0,50", "−1,00"],
     bonne: 1,
@@ -227,6 +250,7 @@ QUESTIONS.push(
   },
   {
     id: "U5-024", epreuve: "U5", theme: "Examen préliminaire", session: "2020 et 2024",
+    difficulte: "difficile",
     question: "Avec sa compensation, un sujet lit 10/10. On ajoute +2,00 : son acuité tombe à 2/10. Sphère résiduelle estimée (essai de verre convexe) ?",
     choix: ["+0,75", "−0,75", "+1,25", "0,00"],
     bonne: 0,
@@ -235,6 +259,7 @@ QUESTIONS.push(
   },
   {
     id: "U5-025", epreuve: "U5", theme: "Examen préliminaire", session: "2024",
+    difficulte: "moyen",
     question: "Au cadran de Parent (sujet légèrement myopisé), la ligne 3h-9h est vue la plus noire. Axe du cylindre négatif compensateur ?",
     choix: ["30°", "90°", "180°", "120°"],
     bonne: 1,
@@ -245,6 +270,7 @@ QUESTIONS.push(
   },
   {
     id: "U5-026", epreuve: "U5", theme: "Examen préliminaire", session: "2024",
+    difficulte: "moyen",
     question: "Pourquoi myopise-t-on légèrement le sujet avant le cadran de Parent ?",
     choix: ["Pour mesurer l'acuité", "Pour placer les deux focales en avant de la rétine et empêcher l'accommodation de fausser le test", "Pour mesurer la phorie", "Pour tester la vision des couleurs"],
     bonne: 1,
@@ -253,6 +279,7 @@ QUESTIONS.push(
   },
   {
     id: "U5-027", epreuve: "U5", theme: "Examen préliminaire", session: "2023",
+    difficulte: "moyen",
     question: "Un myope de −2,00 non compensé lit à 25 cm. Quelle accommodation met-il en jeu ?",
     choix: ["0 δ", "2 δ", "4 δ", "6 δ"],
     bonne: 1,
@@ -263,6 +290,7 @@ QUESTIONS.push(
   },
   {
     id: "U5-028", epreuve: "U5", theme: "Examen préliminaire", session: "2023",
+    difficulte: "moyen",
     question: "Un hypermétrope de +1,50 non compensé lit à 50 cm. Quelle accommodation met-il en jeu ?",
     choix: ["2,00 δ", "0,50 δ", "3,50 δ", "1,50 δ"],
     bonne: 2,
@@ -273,6 +301,7 @@ QUESTIONS.push(
   // ---------- Réfraction ----------
   {
     id: "U5-029", epreuve: "U5", theme: "Réfraction", session: "2023",
+    difficulte: "facile",
     question: "Quelle est la formule sphéro-cylindrique d'un cylindre croisé (CCR) ±0,25 dont l'axe du cylindre négatif est à 90° ?",
     choix: ["+0,25 (−0,50) 90°", "−0,25 (+0,25) 90°", "0,00 (−0,25) 90°", "+0,50 (−0,25) 90°"],
     bonne: 0,
@@ -283,6 +312,7 @@ QUESTIONS.push(
   },
   {
     id: "U5-030", epreuve: "U5", theme: "Réfraction", session: "2020",
+    difficulte: "moyen",
     question: "Lors de la vérification de la puissance du cylindre, on ajoute −0,50 de cylindre. Comment ajuster la sphère ?",
     choix: ["Ajouter −0,25", "Ajouter +0,25", "Ajouter +0,50", "Ne rien changer"],
     bonne: 1,
@@ -291,6 +321,7 @@ QUESTIONS.push(
   },
   {
     id: "U5-031", epreuve: "U5", theme: "Réfraction", session: "complément",
+    difficulte: "facile",
     question: "Au test rouge-vert, le sujet voit plus net sur le rouge. Que faites-vous ?",
     choix: ["Ajouter −0,25 δ", "Ajouter +0,25 δ", "Tourner l'axe du cylindre", "Rien, l'équilibre est bon"],
     bonne: 0,
@@ -301,6 +332,7 @@ QUESTIONS.push(
   },
   {
     id: "U5-032", epreuve: "U5", theme: "Réfraction", session: "2024",
+    difficulte: "difficile",
     question: "Client anisométrope, vision binoculaire fragile. Pour l'équilibre bioculaire, quel test préférer ?",
     choix: ["Lignes de lettres dissociées par prisme", "Test rouge-vert polarisé", "Cadran de Parent", "Test de Worth"],
     bonne: 1,
@@ -309,6 +341,7 @@ QUESTIONS.push(
   },
   {
     id: "U5-033", epreuve: "U5", theme: "Réfraction", session: "2022",
+    difficulte: "facile",
     question: "Pourquoi utilise-t-on le brouillage en réfraction subjective ?",
     choix: ["Pour relâcher l'accommodation", "Pour mesurer l'astigmatisme", "Pour tester la vision des couleurs", "Pour stimuler la convergence"],
     bonne: 0,
@@ -319,6 +352,7 @@ QUESTIONS.push(
   // ---------- Lentilles de contact ----------
   {
     id: "U5-034", epreuve: "U5", theme: "Lentilles", session: "complément",
+    difficulte: "facile",
     question: "Un rayon de courbure cornéen de 7,50 mm correspond à une puissance lue au kératomètre de :",
     choix: ["40 δ", "42 δ", "45 δ", "47,50 δ"],
     bonne: 2,
@@ -327,6 +361,7 @@ QUESTIONS.push(
   },
   {
     id: "U5-035", epreuve: "U5", theme: "Lentilles", session: "2020 et 2023",
+    difficulte: "moyen",
     question: "Kératométrie : 7,75 mm à 0° et 7,65 mm à 90°. Astigmatisme cornéen (face avant) ?",
     choix: ["0,60 δ direct", "0,60 δ inverse", "1,00 δ direct", "0,25 δ inverse"],
     bonne: 0,
@@ -335,6 +370,7 @@ QUESTIONS.push(
   },
   {
     id: "U5-036", epreuve: "U5", theme: "Lentilles", session: "2023",
+    difficulte: "moyen",
     question: "Un œil a 1,00 δ d'astigmatisme cornéen direct mais aucun astigmatisme total. Son astigmatisme interne est :",
     choix: ["Nul", "1,00 δ direct", "1,00 δ inverse", "2,00 δ direct"],
     bonne: 2,
@@ -343,6 +379,7 @@ QUESTIONS.push(
   },
   {
     id: "U5-037", epreuve: "U5", theme: "Lentilles", session: "2023",
+    difficulte: "facile",
     question: "Selon Harvitt et Bonanno, quelle transmissibilité minimale (Dk/e, en 10⁻⁹ unités Fatt) faut-il pour un port nocturne sans hypoxie ?",
     choix: ["24", "35", "87", "125"],
     bonne: 3,
@@ -351,6 +388,7 @@ QUESTIONS.push(
   },
   {
     id: "U5-038", epreuve: "U5", theme: "Lentilles", session: "2020",
+    difficulte: "facile",
     question: "Citez les 3 couches du film lacrymal, de l'air vers la cornée.",
     choix: ["Lipidique, aqueuse, mucinique", "Aqueuse, lipidique, mucinique", "Mucinique, aqueuse, lipidique", "Lipidique, mucinique, aqueuse"],
     bonne: 0,
@@ -359,6 +397,7 @@ QUESTIONS.push(
   },
   {
     id: "U5-039", epreuve: "U5", theme: "Lentilles", session: "2024",
+    difficulte: "facile",
     question: "Quelle est la norme du Break-Up Time (BUT) ?",
     choix: ["3 à 5 secondes", "5 à 8 secondes", "10 à 20 secondes", "30 à 60 secondes"],
     bonne: 2,
@@ -367,6 +406,7 @@ QUESTIONS.push(
   },
   {
     id: "U5-040", epreuve: "U5", theme: "Lentilles", session: "2020",
+    difficulte: "moyen",
     question: "À la fluorescéine, une LRPG montre beaucoup de fluorescéine en périphérie, très peu au centre, et bouge trop. L'adaptation est :",
     choix: ["Serrée", "Alignée", "Plate", "Parfaite"],
     bonne: 2,
@@ -377,6 +417,7 @@ QUESTIONS.push(
   },
   {
     id: "U5-041", epreuve: "U5", theme: "Lentilles", session: "2020",
+    difficulte: "moyen",
     question: "On resserre une LRPG en diminuant son ro de 0,10 mm. Le ménisque de larmes devient :",
     choix: ["Plus convergent d'environ +0,50 δ", "Plus divergent d'environ −0,50 δ", "Inchangé", "Plus convergent d'environ +1,00 δ"],
     bonne: 0,
@@ -387,6 +428,7 @@ QUESTIONS.push(
   // ---------- Pathologie ----------
   {
     id: "U5-042", epreuve: "U5", theme: "Pathologie", session: "2024",
+    difficulte: "facile",
     question: "La mesure de la pression intraoculaire (PIO) sert principalement au dépistage :",
     choix: ["De la cataracte", "Du glaucome", "De la DMLA", "Du kératocône"],
     bonne: 1,
@@ -395,6 +437,7 @@ QUESTIONS.push(
   },
   {
     id: "U5-043", epreuve: "U5", theme: "Pathologie", session: "2023",
+    difficulte: "facile",
     question: "Quelle est la valeur moyenne d'une PIO normale, et à partir de quand est-elle jugée trop forte ?",
     choix: ["Environ 8 mmHg, trop forte au-delà de 12", "Environ 16 mmHg, trop forte au-delà de 21", "Environ 25 mmHg, trop forte au-delà de 35", "Environ 40 mmHg, trop forte au-delà de 50"],
     bonne: 1,
@@ -403,6 +446,7 @@ QUESTIONS.push(
   },
   {
     id: "U5-044", epreuve: "U5", theme: "Pathologie", session: "complément",
+    difficulte: "facile",
     question: "Un sujet de 70 ans devient plus myope et peut de nouveau lire sans lunettes. Cela évoque :",
     choix: ["Un glaucome", "Une cataracte nucléaire (myopie d'indice)", "Une DMLA", "Un décollement de rétine"],
     bonne: 1,
@@ -413,6 +457,7 @@ QUESTIONS.push(
   // ---------- Mini-cas 1 : anisométropie de puissance (CAS-U5-01) ----------
   {
     id: "U5-045",
+    difficulte: "moyen",
     epreuve: "U5",
     theme: "Anisométropie",
     session: "2024",
@@ -426,6 +471,7 @@ QUESTIONS.push(
   },
   {
     id: "U5-046",
+    difficulte: "difficile",
     epreuve: "U5",
     theme: "Worth",
     session: "2024",
@@ -440,6 +486,7 @@ QUESTIONS.push(
   },
   {
     id: "U5-047",
+    difficulte: "moyen",
     epreuve: "U5",
     theme: "Masquage et phories",
     session: "2024",
@@ -454,6 +501,7 @@ QUESTIONS.push(
   },
   {
     id: "U5-048",
+    difficulte: "facile",
     epreuve: "U5",
     theme: "Masquage et phories",
     session: "2024",
@@ -467,6 +515,7 @@ QUESTIONS.push(
   },
   {
     id: "U5-049",
+    difficulte: "moyen",
     epreuve: "U5",
     theme: "Anisométropie",
     session: "2024",
@@ -481,6 +530,7 @@ QUESTIONS.push(
   },
   {
     id: "U5-050",
+    difficulte: "moyen",
     epreuve: "U5",
     theme: "Lentilles",
     session: "2024",
@@ -496,6 +546,7 @@ QUESTIONS.push(
   // ---------- Mini-cas 2 : hypermétropie latente et ésophorie (CAS-U5-02) ----------
   {
     id: "U5-051",
+    difficulte: "difficile",
     epreuve: "U5",
     theme: "Examen préliminaire",
     session: "2020 et 2024",
@@ -510,6 +561,7 @@ QUESTIONS.push(
   },
   {
     id: "U5-052",
+    difficulte: "difficile",
     epreuve: "U5",
     theme: "Examen préliminaire",
     session: "2023",
@@ -523,6 +575,7 @@ QUESTIONS.push(
   },
   {
     id: "U5-053",
+    difficulte: "moyen",
     epreuve: "U5",
     theme: "Masquage et phories",
     session: "2024",
@@ -537,6 +590,7 @@ QUESTIONS.push(
   },
   {
     id: "U5-054",
+    difficulte: "moyen",
     epreuve: "U5",
     theme: "Masquage et phories",
     session: "2024",
@@ -551,6 +605,7 @@ QUESTIONS.push(
   },
   {
     id: "U5-055",
+    difficulte: "difficile",
     epreuve: "U5",
     theme: "Masquage et phories",
     session: "complément",
@@ -566,6 +621,7 @@ QUESTIONS.push(
   // ---------- Quelle justification est juste ? ----------
   {
     id: "U5-056",
+    difficulte: "moyen",
     epreuve: "U5",
     theme: "Masquage et phories",
     session: "complément",
@@ -577,6 +633,7 @@ QUESTIONS.push(
   },
   {
     id: "U5-057",
+    difficulte: "moyen",
     epreuve: "U5",
     theme: "Lentilles",
     session: "complément",
@@ -588,6 +645,7 @@ QUESTIONS.push(
   },
   {
     id: "U5-058",
+    difficulte: "moyen",
     epreuve: "U5",
     theme: "Anisométropie",
     session: "complément",
@@ -599,6 +657,7 @@ QUESTIONS.push(
   },
   {
     id: "U5-059",
+    difficulte: "moyen",
     epreuve: "U5",
     theme: "Examen préliminaire",
     session: "complément",
@@ -612,6 +671,7 @@ QUESTIONS.push(
   // ---------- Calculs à taper (étape 2) ----------
   {
     id: "U5-060",
+    difficulte: "moyen",
     epreuve: "U5",
     theme: "Anisométropie",
     session: "2020 et 2024",
@@ -623,6 +683,7 @@ QUESTIONS.push(
   },
   {
     id: "U5-061",
+    difficulte: "moyen",
     epreuve: "U5",
     theme: "Anisométropie",
     session: "2024",
@@ -634,6 +695,7 @@ QUESTIONS.push(
   },
   {
     id: "U5-062",
+    difficulte: "moyen",
     epreuve: "U5",
     theme: "Examen préliminaire",
     session: "2023",
@@ -645,6 +707,7 @@ QUESTIONS.push(
   },
   {
     id: "U5-063",
+    difficulte: "moyen",
     epreuve: "U5",
     theme: "Examen préliminaire",
     session: "2023",
@@ -656,6 +719,7 @@ QUESTIONS.push(
   },
   {
     id: "U5-064",
+    difficulte: "difficile",
     epreuve: "U5",
     theme: "Examen préliminaire",
     session: "2023",
@@ -667,6 +731,7 @@ QUESTIONS.push(
   },
   {
     id: "U5-065",
+    difficulte: "facile",
     epreuve: "U5",
     theme: "Examen préliminaire",
     session: "2020 et 2024",
@@ -678,6 +743,7 @@ QUESTIONS.push(
   },
   {
     id: "U5-066",
+    difficulte: "difficile",
     epreuve: "U5",
     theme: "Réfraction",
     session: "2020 et 2024",
@@ -689,6 +755,7 @@ QUESTIONS.push(
   },
   {
     id: "U5-067",
+    difficulte: "difficile",
     epreuve: "U5",
     theme: "Lentilles",
     session: "2020 et 2024",
@@ -700,6 +767,7 @@ QUESTIONS.push(
   },
   {
     id: "U5-068",
+    difficulte: "difficile",
     epreuve: "U5",
     theme: "Réfraction",
     session: "2020",
@@ -711,6 +779,7 @@ QUESTIONS.push(
   },
   {
     id: "U5-069",
+    difficulte: "facile",
     epreuve: "U5",
     theme: "Masquage et phories",
     session: "2024",

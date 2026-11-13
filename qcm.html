@@ -10,7 +10,13 @@
 <script>/* Fond choisi par l'élève (profil), appliqué avant l'affichage */ try { if (localStorage.getItem("fond") === "clair") { document.documentElement.dataset.fond = "clair"; var m = document.querySelector('meta[name="theme-color"]'); if (m) m.content = "#1a1f2a"; } } catch (e) {}</script>
 <link rel="preload" href="polices/bodoni-moda.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="polices/atkinson-hyperlegible-next.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="style.css?v=29608544">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="img/icone-apple-180.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Opticonversion">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link rel="stylesheet" href="style.css?v=3cb4be98">
 </head>
 <body>
 <header class="entete">
@@ -72,14 +78,20 @@
 
 <script src="videos.js?v=6f234673"></script>
 <script src="epreuves.js?v=cc645427"></script>
-<script src="questions-U41.js?v=11469e6b"></script>
-<script src="questions-U42.js?v=a01cfd04"></script>
-<script src="questions-U43.js?v=5af1d8ea"></script>
-<script src="questions-U5.js?v=2ec6d276"></script>
-<script src="questions-U3.js?v=f5a7264a"></script>
+<script src="questions-U41.js?v=bc3d6d5f"></script>
+<script src="questions-U42.js?v=eee28f5a"></script>
+<script src="questions-U43.js?v=41c83925"></script>
+<script src="questions-U5.js?v=15b8a311"></script>
+<script src="questions-U3.js?v=944da1c9"></script>
+<!-- Questions d'entraînement (mêmes notions, autres chiffres) : chargées ici seulement, hors Essentiel -->
+<script src="entrainement-U41.js?v=911e2e04"></script>
+<script src="entrainement-U42.js?v=b99d7c72"></script>
+<script src="entrainement-U43.js?v=6b06c6d1"></script>
+<script src="entrainement-U5.js?v=88378b59"></script>
+<script src="entrainement-U3.js?v=da114840"></script>
 <!-- Fiches « Spécificités » (facultatives : la page marche sans elles) -->
 <!-- Niveaux de l'Atelier (pour compter niveaux et étoiles sur la page de l'épreuve) -->
-<script src="traces-U42.js?v=deddab01"></script>
+<script src="traces-U42.js?v=cd7fcf7c"></script>
 <script src="traces-U43.js?v=65b6cc27"></script>
 <script src="traces-U5.js?v=3c44feba"></script>
 <script src="specificites-U41.js?v=172ce418"></script>
@@ -87,7 +99,8 @@
 <script src="specificites-U43.js?v=0918c26c"></script>
 <script src="specificites-U5.js?v=4d12d3b3"></script>
 <script src="specificites-U3.js?v=2ee96b01"></script>
-<script src="essentiel.js?v=412cefda"></script>
+<script src="essentiel.js?v=f3b7979d"></script>
+<script src="rythme.js?v=75012fc2"></script>
 <script>
   // ---------------- L'état du QCM ----------------
   let epreuveChoisie = null;   // ex. "U5"
@@ -109,7 +122,12 @@
     return copie;
   }
 
-  const questionsDe = code => QUESTIONS.filter(q => q.epreuve === code);
+  // Les questions de base d'une épreuve. Les questions d'entraînement (entrainement: true) sont à part :
+  // elles ne sortent ni dans les séries par thème, ni dans les compteurs, ni dans l'Essentiel.
+  const questionsDe = code => QUESTIONS.filter(q => q.epreuve === code && !q.entrainement);
+  const entrainementDe = (code, theme) => QUESTIONS.filter(q => q.epreuve === code && q.entrainement && (!theme || q.theme === theme));
+  const TAILLE_ENTRAINEMENT = 10;      // une série d'entraînement = 10 questions, les jamais faites d'abord
+  let themeEntrainement = null;        // thème de la série d'entraînement en cours (null = toute l'épreuve)
 
   // ---------------- Cas pratiques ----------------
   // Un cas (CAS, déclaré dans questions-XX.js) regroupe des questions qui portent cas + etape.
@@ -121,7 +139,7 @@
   const dansUnCas = q => !!(q.cas && casParId(q.cas));
   const ordinairesDe = code => questionsDe(code).filter(q => !dansUnCas(q));
   const questionsDesCas = code => casDe(code).flatMap(c => questionsDuCas(c.id));
-  let onglet = "theme";        // "theme", "cas" (liste des cas ou un cas) ou "selection" (questions choisies)
+  let onglet = "theme";        // "theme", "cas" (liste des cas ou un cas), "entrainement" ou "selection" (questions choisies)
   let defilerVersZone = false; // après un lien des Spécificités : descendre jusqu'aux questions
 
   // ---------------- Écran 1 : choisir une épreuve ----------------
@@ -143,7 +161,7 @@
     const generale = document.createElement("div");
     generale.className = "carte progression-generale";
     generale.style.gridColumn = "1 / -1";
-    generale.appendChild(creerBarreProgression(bilanQuestions(QUESTIONS), { titre: "Tous les QCM" }));
+    generale.appendChild(creerBarreProgression(bilanQuestions(questionsDeBase()), { titre: "Tous les QCM" }));
     conteneur.appendChild(generale);
 
     // Bandeau « À revoir aujourd'hui » s'il y a des questions à revoir
@@ -210,7 +228,13 @@
     const cas = special && special.cas ? (special.cas === "liste" ? "liste" : casDe(code).find(c => c.id === special.cas)) : null;
     const selection = special && special.questions
       ? special.questions.map(id => QUESTIONS.find(q => q.id === id && q.epreuve === code)).filter(Boolean) : [];
-    if (cas) {
+    const entr = special && special.entrainement ? special.entrainement : null;
+    if (entr && entrainementDe(code, entr === "tous" ? null : entr).length) {
+      onglet = "entrainement";
+      themeEntrainement = entr === "tous" ? null : entr;
+      afficherThemes();
+      demarrerEntrainement();
+    } else if (cas) {
       onglet = "cas";
       afficherThemes();
       if (cas === "liste") afficherListeCas(); else demarrerCas(cas);
@@ -230,10 +254,14 @@
   }
 
   // ---------------- Séance « À revoir aujourd'hui » ----------------
-  function ouvrirRevision() {
-    const dues = questionsARevoir();
+  // Aussi la séance « 5 minutes » (qcm.html#cinq-minutes, bouton de l'accueil et du profil) :
+  // 5 questions choisies par rythme.js, celles à revoir d'abord.
+  let seanceCinq = false;
+  function ouvrirRevision(cinq) {
+    const dues = cinq ? questionsCinqMinutes() : questionsARevoir();
     if (dues.length === 0) { history.replaceState("", "", "qcm.html"); afficherEpreuves(); return; }
     seanceRevision = true;
+    seanceCinq = !!cinq;
     delete document.querySelector("main").dataset.epreuve;
     document.getElementById("lien-atelier").hidden = true;
     epreuveChoisie = dues[0].epreuve;
@@ -241,9 +269,24 @@
     document.getElementById("ecran-epreuves").hidden = true;
     document.getElementById("ecran-qcm").hidden = false;
     document.querySelector("main").classList.add("large");
-    document.getElementById("titre").textContent = "À revoir aujourd'hui";
-    document.getElementById("sous-titre").textContent = dues.length + (dues.length > 1 ? " questions" : " question") +
-      " que tu avais ratées, toutes épreuves. Chaque bonne réponse les espace davantage.";
+    document.getElementById("titre").textContent = cinq ? "5 minutes" : "À revoir aujourd'hui";
+    if (cinq) {
+      // « 5 questions : 2 à revoir aujourd'hui, 3 jamais faites. »
+      const prog = lireProgression(), dusAujourdhui = questionsARevoir();
+      const aRevoir = dues.filter(q => dusAujourdhui.includes(q)).length;
+      const nouvelles = dues.filter(q => !dusAujourdhui.includes(q) && prog[idQuestion(q)] === undefined).length;
+      const ratees = dues.filter(q => !dusAujourdhui.includes(q) && prog[idQuestion(q)] === 0).length;
+      const autres = dues.length - aRevoir - nouvelles - ratees;
+      const parts = [];
+      if (aRevoir) parts.push(aRevoir + " à revoir aujourd'hui");
+      if (nouvelles) parts.push(nouvelles + (nouvelles > 1 ? " jamais faites" : " jamais faite"));
+      if (ratees) parts.push(ratees + " à retravailler");
+      if (autres) parts.push(autres + (autres > 1 ? " déjà réussies" : " déjà réussie"));
+      document.getElementById("sous-titre").textContent = dues.length + (dues.length > 1 ? " questions" : " question") + ", environ une minute chacune\u00a0: " + parts.join(", ") + ".";
+    } else {
+      document.getElementById("sous-titre").textContent = dues.length + (dues.length > 1 ? " questions" : " question") +
+        " que tu avais ratées, toutes épreuves. Chaque bonne réponse les espace davantage.";
+    }
     document.getElementById("themes").innerHTML = "";
     const spec = document.getElementById("specificites");
     spec.hidden = true;
@@ -303,8 +346,22 @@
       b.onclick = () => { location.hash = epreuveChoisie + "/cas"; };
       conteneur.appendChild(b);
     }
+    // Les questions d'entraînement de l'épreuve : une pastille à part, tout au bout
+    if (entrainementDe(epreuveChoisie).length) {
+      const b = document.createElement("button");
+      b.className = "theme theme-entrainement" + (onglet === "entrainement" ? " actif" : "");
+      b.dataset.theme = "+";
+      b.innerHTML = 'Entraînement<span class="compte-theme"></span>';
+      b.onclick = () => { location.hash = epreuveChoisie + "/entrainement"; };
+      conteneur.appendChild(b);
+    }
     majProgressionEpreuve();
     afficherShorts();
+  }
+  // Une série d'entraînement : 10 questions, celles jamais faites d'abord (sur un thème, ou sur toute l'épreuve)
+  function demarrerEntrainement() {
+    const toutes = entrainementDe(epreuveChoisie, themeEntrainement);
+    demarrer(ordonnerParProgression(toutes, melanger).slice(0, TAILLE_ENTRAINEMENT), { entrainement: true });
   }
 
   // Compteurs « faites / total » sur chaque thème, et barre du thème choisi sous les thèmes.
@@ -315,14 +372,14 @@
     const qsCas = questionsDesCas(epreuveChoisie);
     document.querySelectorAll("#themes .theme").forEach(b => {
       const t = b.dataset.theme;
-      const bilan = bilanQuestions(t === "" ? qsCas : t === "Tous" ? qs : qs.filter(q => q.theme === t));
+      const bilan = bilanQuestions(t === "+" ? entrainementDe(epreuveChoisie) : t === "" ? qsCas : t === "Tous" ? qs : qs.filter(q => q.theme === t));
       const fini = bilan.faites >= bilan.total;
       b.classList.toggle("fini", fini);
       b.querySelector(".compte-theme").textContent = bilan.faites === 0 ? "(" + bilan.total + ")" : (fini ? "✓ " : "") + bilan.faites + "/" + bilan.total;
-      b.setAttribute("aria-label", (t || "Cas pratiques") + " : " + bilan.faites + " questions faites sur " + bilan.total);
+      b.setAttribute("aria-label", (t === "+" ? "Entraînement" : t || "Cas pratiques") + " : " + bilan.faites + " questions faites sur " + bilan.total);
     });
-    if (onglet === "selection") { const z = document.getElementById("progression-epreuve"); if (z) z.hidden = true; return; }
-    const choisies = onglet === "cas" ? qsCas : themeChoisi === "Tous" ? qs : qs.filter(q => q.theme === themeChoisi);
+    if (onglet === "selection") { const z = document.getElementById("progression-epreuve"), l = document.getElementById("lien-entrainement"); if (z) z.hidden = true; if (l) l.hidden = true; return; }
+    const choisies = onglet === "entrainement" ? entrainementDe(epreuveChoisie, themeEntrainement) : onglet === "cas" ? qsCas : themeChoisi === "Tous" ? qs : qs.filter(q => q.theme === themeChoisi);
     let zoneBarre = document.getElementById("progression-epreuve");
     if (!zoneBarre) {
       zoneBarre = document.createElement("div");
@@ -332,8 +389,22 @@
     }
     zoneBarre.hidden = false;
     zoneBarre.replaceChildren(creerBarreProgression(bilanQuestions(choisies), {
-      titre: onglet === "cas" ? "Cas pratiques" : themeChoisi === "Tous" ? "Toute l'épreuve" : themeChoisi, petite: true
+      titre: onglet === "entrainement" ? "Entraînement" + (themeEntrainement ? " : " + themeEntrainement : "") : onglet === "cas" ? "Cas pratiques" : themeChoisi === "Tous" ? "Toute l'épreuve" : themeChoisi, petite: true
     }));
+    // Sous la barre d'un thème : le lien vers ses questions d'entraînement, s'il en a
+    let lienE = document.getElementById("lien-entrainement");
+    const nbE = onglet === "theme" && themeChoisi !== "Tous" ? entrainementDe(epreuveChoisie, themeChoisi).length : 0;
+    if (!lienE) {
+      lienE = document.createElement("a");
+      lienE.id = "lien-entrainement";
+      lienE.className = "lien-entrainement";
+      zoneBarre.after(lienE);
+    }
+    lienE.hidden = nbE === 0;
+    if (nbE) {
+      lienE.href = "#" + epreuveChoisie + "/entrainement:" + encodeURIComponent(themeChoisi);
+      lienE.textContent = "Pour t'entraîner plus sur ce thème : " + nbE + " question" + (nbE > 1 ? "s" : "") + " d'entraînement";
+    }
   }
   window.addEventListener("progression-modifiee", () => majProgressionEpreuve());
 
@@ -445,6 +516,20 @@
     afficherQuestion();
   }
 
+  // Le niveau de difficulté d'une question : « Facile », « Moyen » ou « Difficile », avec 1, 2 ou 3 traits pleins.
+  // Rien si la question n'a pas de champ difficulte.
+  const DIFFICULTES = { facile: [1, "Facile"], moyen: [2, "Moyen"], difficile: [3, "Difficile"] };
+  function creerDifficulte(q) {
+    const d = DIFFICULTES[q.difficulte];
+    if (!d) return null;
+    const p = document.createElement("p");
+    p.className = "difficulte";
+    p.dataset.niveau = d[0];
+    p.innerHTML = '<span class="difficulte-traits" aria-hidden="true"><i></i><i></i><i></i></span><span class="visuellement-cache">Difficulté : </span>';
+    p.append(d[1]);
+    return p;
+  }
+
   function afficherQuestion() {
     const q = serie[numero];
     const pourcent = Math.round((numero / serie.length) * 100);
@@ -457,15 +542,18 @@
     zone.innerHTML =
       '<div class="barre"><div class="barre-remplie" style="width:' + pourcent + '%"></div></div>' +
       '<div class="progression"><span>' + (serieSpeciale && serieSpeciale.cas ? "Étape " : "Question ") + (numero + 1) + " / " + serie.length + "</span>" +
-      (estEssentiel(q.epreuve, q.theme) ? '<span class="pastille essentiel">★ Essentiel</span>' : "") +
+      (q.entrainement ? '<span class="pastille entrainement">Entraînement</span>' : estEssentiel(q.epreuve, q.theme) ? '<span class="pastille essentiel">★ Essentiel</span>' : "") +
       '<span class="pastille"></span>' + pastilleSession +
       "<span>Score : " + score + "</span></div>" +
       '<p class="enonce"></p><div class="choix"></div>';
-    zone.querySelector(".progression .pastille:not(.essentiel):not(.bts)").textContent = (seanceRevision ? q.epreuve + " · " : "") + q.theme;
+    zone.querySelector(".progression .pastille:not(.essentiel):not(.bts):not(.entrainement)").textContent = (seanceRevision ? q.epreuve + " · " : "") + q.theme;
     zone.querySelector(".enonce").textContent = q.question;
     // Contexte et annexe (le cas pratique en entier jusqu'à cette étape, ou ceux de la question)
     const contexte = creerContexte(q);
     if (contexte) zone.querySelector(".enonce").before(contexte);
+    // Niveau de difficulté (champ difficulte, facultatif) : un mot juste au-dessus de l'énoncé
+    const niveau = creerDifficulte(q);
+    if (niveau) zone.querySelector(".enonce").before(niveau);
 
     // Schéma qui fait partie de l'énoncé (rare : seulement s'il faut le lire pour répondre)
     if (q.schemaQuestion) zone.querySelector(".enonce").after(creerSchema(q.schemaQuestion, q.schemaTexte));
@@ -599,6 +687,7 @@
       if (q.reponses[i].juste) b.classList.add("juste");
     });
 
+    if (window.Sons) Sons[reponse.juste ? "juste" : "faux"]();   // petit son (sons.js), coupé si l'élève l'a coupé
     if (reponse.juste) {
       score++;
       serieEnCours++;
@@ -1294,6 +1383,7 @@
   function afficherBilan() {
     const pourcent = Math.round((score / serie.length) * 100);
     const palier = palierDe(pourcent);
+    if (window.Sons) Sons.fin(pourcent, true);                   // le son de fin, selon la note (après le son de la dernière réponse)
     const casFini = serieSpeciale && serieSpeciale.cas;
     const cle = epreuveChoisie + "/" + (casFini ? casFini.id : themeChoisi);
     const record = modeRevision || (serieSpeciale && !casFini) ? { nouveau: false } : enregistrerRecord(cle, pourcent);
@@ -1312,7 +1402,9 @@
     montrerCompagnon(zone.querySelector(".bilan-nounours"), palier.nounours);
     const pseudo = lireProfil().pseudo;
     zone.querySelector(".bilan-titre").textContent = pseudo && palier.titre.endsWith(" !") ? palier.titre.slice(0, -2) + ", " + pseudo + " !" : palier.titre;
-    zone.querySelector(".bilan-sous").textContent = seanceRevision
+    zone.querySelector(".bilan-sous").textContent = seanceRevision && seanceCinq
+      ? (erreurs.length === 0 ? "Cinq minutes de révision, sans erreur." : "Cinq minutes de révision. Les questions ratées reviendront demain dans «\u00a0À revoir\u00a0».")
+      : seanceRevision
       ? (erreurs.length === 0 ? "Révision du jour terminée. Les questions reviendront de plus en plus tard." : "Les questions ratées reviendront demain, les autres plus tard. À demain !")
       : casFini
       ? "Cas pratique « " + casFini.titre + " » : " + score + (score > 1 ? " étapes réussies sur " : " étape réussie sur ") + serie.length + ". " + palier.sous
@@ -1335,6 +1427,9 @@
       const faites = ESSENTIEL.filter(n => etatNotion(n.epreuve, n.theme).maitrisee).length;
       medaille("Notion essentielle maîtrisée (" + faites + " / " + ESSENTIEL.length + ")", "or");
     }
+    // Où en est l'objectif du jour (rythme.js), si l'élève en a choisi un
+    const objectifJour = typeof etatObjectifDuJour === "function" ? etatObjectifDuJour() : null;
+    if (objectifJour) medaille(objectifJour.texte, objectifJour.atteint ? "or" : "");
     if (!stats.children.length) stats.remove();
 
     // Les boutons : on propose toujours LA prochaine étape la plus utile
@@ -1352,7 +1447,7 @@
       bouton(aRevoir.length > 1 ? "Revoir mes " + aRevoir.length + " erreurs" : "Revoir mon erreur", "", () => { demarrer(aRevoir); zone.scrollIntoView({ behavior: "smooth", block: "start" }); });
     }
     // La notion essentielle suivante pas encore maîtrisée (bouton principal si aucune erreur)
-    const prochaine = seanceRevision || serieSpeciale ? null : ESSENTIEL.find(n => !(n.epreuve === epreuveChoisie && n.theme === themeChoisi) && !etatNotion(n.epreuve, n.theme).maitrisee);
+    const prochaine = seanceRevision || serieSpeciale || onglet === "entrainement" ? null : ESSENTIEL.find(n => !(n.epreuve === epreuveChoisie && n.theme === themeChoisi) && !etatNotion(n.epreuve, n.theme).maitrisee);
     if (prochaine) {
       bouton("Notion suivante : " + prochaine.theme, aRevoir.length > 0 ? "secondaire" : "", () => {
         location.hash = prochaine.epreuve + "/" + encodeURIComponent(prochaine.theme);
@@ -1360,16 +1455,24 @@
       });
     }
     if (seanceRevision) {
+      if (seanceCinq) bouton("5 minutes de plus", aRevoir.length > 0 ? "secondaire" : "", () => { ouvrirRevision(true); zone.scrollIntoView({ behavior: "smooth", block: "start" }); });
       bouton("Retour aux épreuves", "secondaire", () => { history.pushState("", "", "qcm.html"); document.querySelector("main").classList.remove("large"); afficherEpreuves(); });
     } else if (casFini) {
       bouton("Refaire le cas", "secondaire", () => { demarrerCas(casFini); zone.scrollIntoView({ behavior: "smooth", block: "start" }); });
       if (casDe(epreuveChoisie).length > 1) bouton("Tous les cas pratiques", "secondaire", () => { afficherListeCas(); zone.scrollIntoView({ behavior: "smooth", block: "start" }); });
+    } else if (onglet === "entrainement") {
+      // Entraînement : on enchaîne sur 10 autres questions (les jamais faites d'abord), ou on revient au thème
+      bouton(TAILLE_ENTRAINEMENT + " autres questions d'entraînement", aRevoir.length > 0 ? "secondaire" : "", () => { demarrerEntrainement(); zone.scrollIntoView({ behavior: "smooth", block: "start" }); });
+      bouton(themeEntrainement ? "Retour au thème" : "Retour à l'épreuve", "secondaire", () => { location.hash = epreuveChoisie + (themeEntrainement ? "/" + encodeURIComponent(themeEntrainement) : ""); });
     } else if (serieSpeciale) {
       const memes = serie.map(q => QUESTIONS.find(x => idQuestion(x) === idQuestion(q)));
       bouton("Refaire ces questions", "secondaire", () => { demarrer(memes, { selection: true }); zone.scrollIntoView({ behavior: "smooth", block: "start" }); });
     } else {
       const libelle = onglet === "cas" ? "Retour aux cas pratiques" : modeRevision ? "Refaire tout le thème" : "Recommencer";
       bouton(libelle, "secondaire", () => { onglet === "cas" ? afficherListeCas() : demarrer(); zone.scrollIntoView({ behavior: "smooth", block: "start" }); });
+      // Un thème qui a des questions d'entraînement : on les propose à la fin de sa série
+      const nbE = !modeRevision && onglet === "theme" && themeChoisi !== "Tous" ? entrainementDe(epreuveChoisie, themeChoisi).length : 0;
+      if (nbE) bouton("M'entraîner plus sur ce thème (" + nbE + ")", "secondaire", () => { location.hash = epreuveChoisie + "/entrainement:" + encodeURIComponent(themeChoisi); });
     }
 
     lancerConfettis(zone.querySelector(".bilan"), palier.confettis);
@@ -1411,15 +1514,19 @@
   // L'adresse qcm.html#U5 ouvre directement l'épreuve U5,
   // et qcm.html#U5/Worth ouvre directement le thème Worth :
   // c'est le lien à mettre sous chaque Short.
+  // qcm.html#U5/entrainement : questions d'entraînement de l'épreuve ; #U5/entrainement:Worth : celles d'un thème ;
   // qcm.html#U5/cas : les cas pratiques ; #U5/cas:CAS-U5-01 : un cas ;
   // #U5/questions:U5-012,U5-020 : une petite série de questions choisies (liens des pièges).
   function selonAdresse() {
     const [code, suite] = location.hash.slice(1).split("/");
     const theme = suite ? decodeURIComponent(suite) : null;
     if (code === "a-revoir") ouvrirRevision();
+    else if (code === "cinq-minutes") ouvrirRevision(true);
     else if (code && theme === "cas") ouvrirEpreuve(code, null, { cas: "liste" });
     else if (code && theme && theme.startsWith("cas:")) ouvrirEpreuve(code, null, { cas: theme.slice(4) });
     else if (code && theme && theme.startsWith("questions:")) ouvrirEpreuve(code, null, { questions: theme.slice(10).split(",") });
+    else if (code && theme === "entrainement") ouvrirEpreuve(code, null, { entrainement: "tous" });
+    else if (code && theme && theme.startsWith("entrainement:")) ouvrirEpreuve(code, theme.slice(13), { entrainement: theme.slice(13) });
     else if (code) ouvrirEpreuve(code, theme);
     else afficherEpreuves();
   }
@@ -1431,8 +1538,10 @@
   window.addEventListener("hashchange", selonAdresse);
   selonAdresse();
 </script>
-<script src="vivant.js?v=a055ba08" defer></script>
-<script type="module" src="compte.js?v=c47ff213"></script>
+<script src="vivant.js?v=ec7cf52b" defer></script>
+<script src="appli.js?v=9609be57" defer></script>
+<script src="sons.js?v=2110bb6a" defer></script>
+<script type="module" src="compte.js?v=02538a67"></script>
 <!-- Mesure d'audience anonyme, sans cookies (GoatCounter) -->
 <script data-goatcounter="https://opticonversion.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </body>
