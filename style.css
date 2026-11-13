@@ -1674,3 +1674,41 @@ span.frac-groupe { white-space: nowrap; }    /* « = 1/2 », « −1/2 » : la l
 span.ligne-calcul { display: block; }
 span.ligne-calcul + span.ligne-calcul { margin-top: 0.3em; }
 span.ligne-calcul.avec-fraction { margin-top: 0.45em; margin-bottom: 0.15em; padding: 0.05em 0; overflow-x: auto; overflow-y: hidden; }
+
+/* ---------- Pages « notion » (notion-*.html et notions.html) ----------
+   Écrites par .claude/scripts/generer-notions.js à partir des définitions et des questions,
+   pour qu'un moteur de recherche puisse trouver chaque thème. Elles reprennent les listes
+   de la page Définitions (.def-liste) ; seul ce qui leur est propre est ici, sous le nom
+   « fiche » (les classes .notion… sont celles de la liste de l'Essentiel). */
+.fiche-notion h2 { margin-top: 46px; }
+.fiche-actions { display: flex; flex-wrap: wrap; gap: 0 12px; margin: -14px 0 6px; }
+.fiche-actions .bouton { margin-top: 12px; }
+.fiche-notion .def-liste { margin-top: 14px; }
+.fiche-notion .def { scroll-margin-top: 90px; }
+.fiche-notion .def-terme { font-size: 1.3rem; }
+.fiche-question { padding: 20px 6px 14px; border-top: 1px solid var(--bord); }
+.fiche-info { margin: 0 0 6px; font-size: 0.88rem; font-weight: 600; color: rgb(var(--accent-rgb)); }
+.fiche-contexte { margin: 0 0 8px; max-width: 70ch; line-height: 1.55; color: var(--doux); }
+.fiche-question > .aide { margin: -6px 0 6px; }
+.fiche-enonce { margin: 0 0 12px; font-family: var(--corps); font-weight: 650; font-size: 1.08rem; line-height: 1.45; letter-spacing: 0; max-width: 70ch; }
+.fiche-choix { margin: 0 0 6px; padding-left: 1.7em; display: grid; gap: 7px; max-width: 70ch; line-height: 1.5; }
+.fiche-choix li::marker { font-weight: 700; color: var(--doux); }
+.fiche-reponse summary { display: inline-flex; align-items: center; min-height: 44px; padding: 0 2px; font-weight: 700; color: var(--or); cursor: pointer; }
+.fiche-reponse summary:hover { color: var(--or-clair); }
+.fiche-reponse p { margin: 4px 0 12px; max-width: 70ch; line-height: 1.6; }
+.fiche-reponse .schema { margin: 12px 0; }
+.fiche-suite { margin: 22px 0 0; padding: 22px 6px 0; border-top: 1px solid var(--bord); max-width: 62ch; }
+.fiche-suite + .bouton { margin-top: 14px; }
+.fiche-liens { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0 18px; }
+.fiche-liens a.theme { display: inline-flex; align-items: center; text-decoration: none; }
+.fiche-liens a.theme:hover { color: var(--texte); border-color: rgb(var(--accent-rgb)); }
+.fiche-notion .aide a { color: var(--or); }
+/* La liste de toutes les notions : des lignes séparées par un trait fin, le nom à gauche, le détail à droite */
+.fiches-epreuve h2 { color: rgb(var(--accent-rgb)); }
+.fiches-epreuve .aide { margin-bottom: 6px; }
+.fiche-index { list-style: none; margin: 0; padding: 0; }
+.fiche-index li { border-top: 1px solid var(--bord); }
+.fiche-index a { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 2px 18px; min-height: 48px; padding: 12px 6px; color: var(--texte); text-decoration: none; transition: color var(--vite); }
+.fiche-index a:hover .fiche-index-nom { color: rgb(var(--accent-rgb)); }
+.fiche-index-nom { font-weight: 650; }
+.fiche-index-detail { font-size: 0.86rem; color: var(--doux); }

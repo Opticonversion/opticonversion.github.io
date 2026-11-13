@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Transmission et antireflet, épreuve d'optique géométrique et physique (OGP) du BTS Opticien-Lunetier : 3 définitions à savoir et 3 questions corrigées. Thème tombé à 5 des 7 sessions analysées.">
+<title>Transmission et antireflet · Optique géométrique (OGP) du BTS OL · Opticonversion</title>
+<link rel="canonical" href="https://opticonversion.fr/notion-u42-transmission-et-antireflet.html">
+<meta name="theme-color" content="#13171f">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='13' fill='none' stroke='%23d9b26f' stroke-width='3'/%3E%3Ccircle cx='16' cy='16' r='5' fill='%23d9b26f'/%3E%3C/svg%3E">
+<script>/* Fond choisi par l'élève (profil), appliqué avant l'affichage */ try { if (localStorage.getItem("fond") === "clair") { document.documentElement.dataset.fond = "clair"; var m = document.querySelector('meta[name="theme-color"]'); if (m) m.content = "#1a1f2a"; } } catch (e) {}</script>
+<link rel="preload" href="polices/bodoni-moda.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="polices/atkinson-hyperlegible-next.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="img/icone-apple-180.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Opticonversion">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link rel="stylesheet" href="style.css?v=4a9eb01e">
+</head>
+<body>
+<!-- Page fabriquée par .claude/scripts/generer-notions.js : ne pas la modifier à la main -->
+<header class="entete">
+  <a class="logo" href="index.html" aria-label="Opticonversion, accueil">
+    <svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="13" fill="none" stroke="#d9b26f" stroke-width="2.5"/><circle cx="16" cy="16" r="5.5" fill="#d9b26f"/><circle cx="18.5" cy="13.5" r="1.6" fill="#0b0d12"/></svg>
+    <span>Opticonversion</span>
+  </a>
+  <nav>
+    <a href="index.html">Accueil</a>
+    <a href="essentiel.html">Essentiel</a>
+    <a href="qcm.html">QCM</a>
+    <a href="definitions.html">Définitions</a>
+    <a href="traces.html">Tracés</a>
+    <a href="calculateurs.html">Calculs</a>
+  </nav>
+</header>
+
+<main class="fiche-notion" data-epreuve="U42">
+  <h1 class="apparait">Transmission et antireflet</h1>
+  <p class="sous-titre apparait" style="--d:2">Un thème de l'épreuve d'optique géométrique et physique (OGP) (U42, coefficient 3) du BTS Opticien-Lunetier. Il est tombé à 5 des 7 sessions analysées. Sur cette page : 3 définitions à savoir et 3 questions corrigées.</p>
+  <div class="fiche-actions apparait" style="--d:3">
+    <a class="bouton" href="qcm.html#U42/Transmission%20et%20antireflet">Faire le QCM de ce thème</a>
+    <a class="bouton secondaire" href="definitions.html#U42/Transmission%20et%20antireflet">Réviser les définitions en cartes</a>
+  </div>
+
+  <div class="fiche-bloc">
+    <h2 id="titre-definitions">Les définitions à savoir</h2>
+    <ul class="def-liste">
+      <li class="def par-coeur" id="traitement-antireflet">
+        <div class="def-haut"><h3 class="def-terme">Traitement antireflet</h3><span class="def-badge tombee" title="Déjà demandée à l'écrit du BTS">★ Tombée en 2018, 2019, 2023, 2024</span></div>
+        <span class="def-utilise">Utilisée dans le sujet 2022</span>
+        <p class="def-texte">Couche mince déposée sur le verre pour que les deux ondes réfléchies, sur la couche et sur le verre, soient en opposition de phase et de même intensité.</p>
+        <p class="def-explication"><b>Pour comprendre :</b> Elles s'annulent par interférences destructives et la lumière est transmise.</p>
+        <div class="def-bas"><span class="def-coeur"><span class="ico i-etoile" aria-hidden="true"></span>À savoir par cœur</span></div>
+      </li>
+      <li class="def" id="facteurs-de-reflexion-et-de-transmission">
+        <div class="def-haut"><h3 class="def-terme">Facteurs de réflexion et de transmission</h3><span class="def-badge probable" title="Pas encore demandée, mais au programme">Probable</span></div>
+        <span class="def-utilise">Utilisée dans les sujets 2018, 2023, 2024</span>
+        <p class="def-texte">Fractions de l'intensité lumineuse réfléchie (R) et transmise (T) par un dioptre ; sans absorption, R + T = 1.</p>
+        <p class="def-explication"><b>Pour comprendre :</b> En incidence normale, R = ((n − n')/(n + n'))², et pour N dioptres la transmission totale vaut T^N.</p>
+      </li>
+      <li class="def" id="condition-d-un-antireflet-ideal">
+        <div class="def-haut"><h3 class="def-terme">Condition d'un antireflet idéal</h3><span class="def-badge probable" title="Pas encore demandée, mais au programme">Probable</span></div>
+        <span class="def-utilise">Utilisée dans les sujets 2018, 2023</span>
+        <p class="def-texte">L'indice de la couche vaut la racine de celui du verre (n = √N) et son épaisseur vaut λ / (4n).</p>
+        <p class="def-explication"><b>Pour comprendre :</b> L'épaisseur est un quart de longueur d'onde dans la couche.</p>
+      </li>
+    </ul>
+  </div>
+
+  <div class="fiche-bloc">
+    <h2 id="titre-questions">Trois questions corrigées</h2>
+    <p class="aide">Cherche d'abord ta réponse, puis ouvre la correction.</p>
+    <article class="fiche-question">
+      <p class="fiche-info">Type BTS 2023 · Niveau facile</p>
+      <h3 class="fiche-enonce">Quel pourcentage de lumière est réfléchi par un dioptre air / verre d'indice 1,5 en incidence normale ?</h3>
+      <ol class="fiche-choix" type="A">
+        <li>4 %</li>
+        <li>8 %</li>
+        <li>20 %</li>
+        <li>1,5 %</li>
+      </ol>
+      <details class="fiche-reponse">
+        <summary>Voir la correction<span class="visuellement-cache"> de la question 1</span></summary>
+        <p><strong>Réponse A.</strong> 4 %</p>
+        <p>R = ((n − 1)/(n + 1))² = (0,5 / 2,5)² = 0,2² = 0,04, soit 4 %. Le dioptre transmet donc T = 1 − R = 96 %.</p>
+      </details>
+    </article>
+    <article class="fiche-question">
+      <p class="fiche-info">Type BTS 2023 · Niveau moyen</p>
+      <h3 class="fiche-enonce">Un viseur compte 4 lentilles non traitées dans l'air (T = 0,96 par dioptre). Quelle est sa transmission totale ?</h3>
+      <ol class="fiche-choix" type="A">
+        <li>80 %</li>
+        <li>72 %</li>
+        <li>68 %</li>
+        <li>96 %</li>
+      </ol>
+      <details class="fiche-reponse">
+        <summary>Voir la correction<span class="visuellement-cache"> de la question 2</span></summary>
+        <p><strong>Réponse B.</strong> 72 %</p>
+        <p>4 lentilles = 8 dioptres. T totale = 0,96⁸ ≈ 0,72, soit 72 %. Piège : ce n'est pas 1 − 8 × 0,04 = 68 %, on multiplie les transmissions.</p>
+      </details>
+    </article>
+    <article class="fiche-question">
+      <p class="fiche-info">Type BTS 2023 et 2024 · Niveau moyen · Calcul</p>
+      <h3 class="fiche-enonce">Un instrument compte 5 lentilles non traitées dans l'air (T = 0,96 par face). Calcule sa transmission totale, en pourcentage.</h3>
+      <p class="aide">Réponse attendue en %, arrondie à l'unité.</p>
+      <details class="fiche-reponse">
+        <summary>Voir la correction<span class="visuellement-cache"> de la question 3</span></summary>
+        <p><strong>Réponse : 66 %.</strong></p>
+        <p>5 lentilles = 10 faces. T totale = 0,96¹⁰ ≈ 0,665, soit environ 66 %. Piège : ce n'est pas 1 − 10 × 0,04 = 60 %, car les transmissions se multiplient.</p>
+      </details>
+    </article>
+    <p class="fiche-suite">Le QCM compte 6 questions sur ce thème. Chacune est corrigée et expliquée, et celles que tu rates reviennent toutes seules à 1, 3, 7, 14 et 30 jours.</p>
+    <a class="bouton" href="qcm.html#U42/Transmission%20et%20antireflet">Faire le QCM de ce thème</a>
+  </div>
+
+  <div class="fiche-bloc">
+    <h2 id="titre-autres">Les autres notions de l'épreuve</h2>
+    <p class="fiche-liens">
+      <a class="theme" href="notion-u42-conjugaison.html">Conjugaison</a>
+      <a class="theme" href="notion-u42-loupe-et-microscope.html">Loupe et microscope</a>
+      <a class="theme" href="notion-u42-lunettes-afocales.html">Lunettes afocales</a>
+      <a class="theme" href="notion-u42-doublets-et-achromatisme.html">Doublets et achromatisme</a>
+      <a class="theme" href="notion-u42-champs-et-diaphragmes.html">Champs et diaphragmes</a>
+      <a class="theme" href="notion-u42-ouverture-et-resolution.html">Ouverture et résolution</a>
+      <a class="theme" href="notion-u42-interferences-et-reseaux.html">Interférences et réseaux</a>
+      <a class="theme" href="notion-u42-polarisation.html">Polarisation</a>
+      <a class="theme" href="notion-u42-photometrie.html">Photométrie</a>
+    </p>
+    <p class="aide"><a href="notions.html">Toutes les notions du BTS OL</a></p>
+  </div>
+</main>
+
+<footer><span class="pied-marque"><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="13" fill="none" stroke="#d9b26f" stroke-width="2.5"/><circle cx="16" cy="16" r="5.5" fill="#d9b26f"/><circle cx="18.5" cy="13.5" r="1.6" fill="#0b0d12"/></svg>Opticonversion</span><span>© 2026</span><span class="pied-liens"><a href="notions.html">Notions</a> <span aria-hidden="true">·</span> <a href="confidentialite.html">Confidentialité</a> <span aria-hidden="true">·</span> <a href="mentions-legales.html">Mentions légales</a> <span aria-hidden="true">·</span> <a href="mailto:opticonversion.bts@gmail.com">Contact</a></span></footer>
+
+<script src="vivant.js?v=ec7cf52b" defer></script>
+<script src="appli.js?v=b1a5a039" defer></script>
+<script type="module" src="compte.js?v=05e17079"></script>
+<!-- Mesure d'audience anonyme, sans cookies (GoatCounter) -->
+<script data-goatcounter="https://opticonversion.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+</body>
+</html>

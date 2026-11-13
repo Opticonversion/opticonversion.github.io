@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Calcul intégral, épreuve de mathématiques du BTS Opticien-Lunetier : 3 définitions à savoir et 3 questions corrigées.">
+<title>Calcul intégral · Maths du BTS OL · Opticonversion</title>
+<link rel="canonical" href="https://opticonversion.fr/notion-u41-calcul-integral.html">
+<meta name="theme-color" content="#13171f">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='13' fill='none' stroke='%23d9b26f' stroke-width='3'/%3E%3Ccircle cx='16' cy='16' r='5' fill='%23d9b26f'/%3E%3C/svg%3E">
+<script>/* Fond choisi par l'élève (profil), appliqué avant l'affichage */ try { if (localStorage.getItem("fond") === "clair") { document.documentElement.dataset.fond = "clair"; var m = document.querySelector('meta[name="theme-color"]'); if (m) m.content = "#1a1f2a"; } } catch (e) {}</script>
+<link rel="preload" href="polices/bodoni-moda.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="polices/atkinson-hyperlegible-next.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="img/icone-apple-180.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Opticonversion">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link rel="stylesheet" href="style.css?v=4a9eb01e">
+</head>
+<body>
+<!-- Page fabriquée par .claude/scripts/generer-notions.js : ne pas la modifier à la main -->
+<header class="entete">
+  <a class="logo" href="index.html" aria-label="Opticonversion, accueil">
+    <svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="13" fill="none" stroke="#d9b26f" stroke-width="2.5"/><circle cx="16" cy="16" r="5.5" fill="#d9b26f"/><circle cx="18.5" cy="13.5" r="1.6" fill="#0b0d12"/></svg>
+    <span>Opticonversion</span>
+  </a>
+  <nav>
+    <a href="index.html">Accueil</a>
+    <a href="essentiel.html">Essentiel</a>
+    <a href="qcm.html">QCM</a>
+    <a href="definitions.html">Définitions</a>
+    <a href="traces.html">Tracés</a>
+    <a href="calculateurs.html">Calculs</a>
+  </nav>
+</header>
+
+<main class="fiche-notion" data-epreuve="U41">
+  <h1 class="apparait">Calcul intégral</h1>
+  <p class="sous-titre apparait" style="--d:2">Un thème de l'épreuve de mathématiques (U41, coefficient 2) du BTS Opticien-Lunetier. Sur cette page : 3 définitions à savoir et 3 questions corrigées.</p>
+  <div class="fiche-actions apparait" style="--d:3">
+    <a class="bouton" href="qcm.html#U41/Calcul%20int%C3%A9gral">Faire le QCM de ce thème</a>
+    <a class="bouton secondaire" href="definitions.html#U41/Calcul%20int%C3%A9gral">Réviser les définitions en cartes</a>
+  </div>
+
+  <div class="fiche-bloc">
+    <h2 id="titre-definitions">Les définitions à savoir</h2>
+    <ul class="def-liste">
+      <li class="def" id="primitive">
+        <div class="def-haut"><h3 class="def-terme">Primitive</h3><span class="def-badge probable" title="Pas encore demandée, mais au programme">Probable</span></div>
+        <span class="def-utilise">Utilisée dans le sujet 2018</span>
+        <p class="def-texte">Une primitive de f sur un intervalle est une fonction F dont la dérivée est f : F' = f.</p>
+        <p class="def-explication"><b>Pour comprendre :</b> Deux primitives d'une même fonction diffèrent d'une constante.</p>
+      </li>
+      <li class="def" id="integrale">
+        <div class="def-haut"><h3 class="def-terme">Intégrale</h3><span class="def-badge probable" title="Pas encore demandée, mais au programme">Probable</span></div>
+        <span class="def-utilise">Utilisée dans les sujets 2016, 2018</span>
+        <p class="def-texte">L'intégrale de f entre a et b vaut F(b) − F(a), où F est une primitive de f.</p>
+        <p class="def-explication"><b>Pour comprendre :</b> Si f est positive, c'est l'aire du domaine compris entre la courbe, l'axe des abscisses et les droites x = a et x = b.</p>
+      </li>
+      <li class="def" id="valeur-moyenne-d-une-fonction">
+        <div class="def-haut"><h3 class="def-terme">Valeur moyenne d'une fonction</h3><span class="def-badge probable" title="Pas encore demandée, mais au programme">Probable</span></div>
+        <span class="def-utilise">Utilisée dans les sujets 2016, 2018</span>
+        <p class="def-texte">La valeur moyenne de f sur [a ; b] est l'intégrale de f entre a et b divisée par (b − a).</p>
+        <p class="def-explication"><b>Pour comprendre :</b> C'est la hauteur du rectangle de base [a ; b] qui a la même aire que le domaine sous la courbe.</p>
+      </li>
+    </ul>
+  </div>
+
+  <div class="fiche-bloc">
+    <h2 id="titre-questions">Trois questions corrigées</h2>
+    <p class="aide">Cherche d'abord ta réponse, puis ouvre la correction.</p>
+    <article class="fiche-question">
+      <p class="fiche-info">Type BTS 2018 · Niveau facile</p>
+      <h3 class="fiche-enonce">Quelle est une primitive de g(x) = e^(−0,5x) ?</h3>
+      <ol class="fiche-choix" type="A">
+        <li>−0,5 e^(−0,5x)</li>
+        <li>−2 e^(−0,5x)</li>
+        <li>2 e^(−0,5x)</li>
+        <li>e^(−0,5x)</li>
+      </ol>
+      <details class="fiche-reponse">
+        <summary>Voir la correction<span class="visuellement-cache"> de la question 1</span></summary>
+        <p><strong>Réponse B.</strong> −2 e^(−0,5x)</p>
+        <p>Une primitive de e^(kx) est (1/k) e^(kx). Avec k = −0,5 : 1/k = −2, donc G(x) = −2 e^(−0,5x). Vérification : G'(x) = −2 × (−0,5) e^(−0,5x) = e^(−0,5x) ✓.</p>
+      </details>
+    </article>
+    <article class="fiche-question">
+      <p class="fiche-info">Type BTS 2018 · Niveau moyen</p>
+      <h3 class="fiche-enonce">Les ventes mensuelles d'un modèle de monture sont modélisées par f(x) = 6x + 20 sur [0 ; 10]. Quelle est la valeur moyenne de f sur cet intervalle ?</h3>
+      <ol class="fiche-choix" type="A">
+        <li>50</li>
+        <li>500</li>
+        <li>80</li>
+        <li>26</li>
+      </ol>
+      <details class="fiche-reponse">
+        <summary>Voir la correction<span class="visuellement-cache"> de la question 2</span></summary>
+        <p><strong>Réponse A.</strong> 50</p>
+        <p>Valeur moyenne = (1 / (10 − 0)) × ∫₀¹⁰ (6x + 20) dx. Une primitive est 3x² + 20x. ∫ = (3 × 100 + 200) − 0 = 500. Moyenne = 500 / 10 = 50. Piège : 500 est l'intégrale, il faut encore diviser par la longueur de l'intervalle.</p>
+      </details>
+    </article>
+    <article class="fiche-question">
+      <p class="fiche-info">Niveau moyen · Calcul</p>
+      <p class="fiche-contexte">Les ventes journalières d'un modèle de verre sont modélisées par f(x) = 40 − 8 e^(−0,5x) sur [0 ; 5].</p>
+      <h3 class="fiche-enonce">À la calculatrice, calcule la valeur moyenne de f sur [0 ; 5], arrondie à 10⁻².</h3>
+      <p class="aide">Réponse sans unité, arrondie à 0,01 près, avec son signe.</p>
+      <details class="fiche-reponse">
+        <summary>Voir la correction<span class="visuellement-cache"> de la question 3</span></summary>
+        <p><strong>Réponse : +37,06.</strong></p>
+        <p><span class="ligne-calcul avec-fraction">Valeur moyenne <span class="frac-groupe">= <span class="frac" aria-hidden="true"><span class="frac-haut">1</span><span class="frac-bas">5 − 0</span></span><span class="visuellement-cache">1 sur (5 − 0)</span></span> × ∫ de 0 à 5 de f(t) dt</span><span class="ligne-calcul">La calculatrice donne l'intégrale ≈ 185,313.</span><span class="ligne-calcul avec-fraction">Valeur moyenne <span class="frac-groupe">= <span class="frac" aria-hidden="true"><span class="frac-haut">185,313</span><span class="frac-bas">5</span></span><span class="visuellement-cache">185,313 sur 5</span></span> ≈ 37,063, soit 37,06.</span><span class="ligne-calcul">À la main : l'intégrale vaut 40 × 5 − 16 (1 − e^(−2,5)) ≈ 185,31.</span></p>
+      </details>
+    </article>
+    <p class="fiche-suite">Le QCM compte 3 questions sur ce thème. Chacune est corrigée et expliquée, et celles que tu rates reviennent toutes seules à 1, 3, 7, 14 et 30 jours.</p>
+    <a class="bouton" href="qcm.html#U41/Calcul%20int%C3%A9gral">Faire le QCM de ce thème</a>
+  </div>
+
+  <div class="fiche-bloc">
+    <h2 id="titre-autres">Les autres notions de l'épreuve</h2>
+    <p class="fiche-liens">
+      <a class="theme" href="notion-u41-suites.html">Suites</a>
+      <a class="theme" href="notion-u41-fonctions.html">Fonctions</a>
+      <a class="theme" href="notion-u41-equations-differentielles.html">Équations différentielles</a>
+      <a class="theme" href="notion-u41-statistique.html">Statistique</a>
+      <a class="theme" href="notion-u41-probabilites.html">Probabilités</a>
+      <a class="theme" href="notion-u41-lois-de-probabilite.html">Lois de probabilité</a>
+      <a class="theme" href="notion-u41-estimation-et-tests.html">Estimation et tests</a>
+      <a class="theme" href="notion-u41-division-harmonique.html">Division harmonique</a>
+    </p>
+    <p class="aide"><a href="notions.html">Toutes les notions du BTS OL</a></p>
+  </div>
+</main>
+
+<footer><span class="pied-marque"><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="13" fill="none" stroke="#d9b26f" stroke-width="2.5"/><circle cx="16" cy="16" r="5.5" fill="#d9b26f"/><circle cx="18.5" cy="13.5" r="1.6" fill="#0b0d12"/></svg>Opticonversion</span><span>© 2026</span><span class="pied-liens"><a href="notions.html">Notions</a> <span aria-hidden="true">·</span> <a href="confidentialite.html">Confidentialité</a> <span aria-hidden="true">·</span> <a href="mentions-legales.html">Mentions légales</a> <span aria-hidden="true">·</span> <a href="mailto:opticonversion.bts@gmail.com">Contact</a></span></footer>
+
+<script src="vivant.js?v=ec7cf52b" defer></script>
+<script src="appli.js?v=b1a5a039" defer></script>
+<script type="module" src="compte.js?v=05e17079"></script>
+<!-- Mesure d'audience anonyme, sans cookies (GoatCounter) -->
+<script data-goatcounter="https://opticonversion.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+</body>
+</html>

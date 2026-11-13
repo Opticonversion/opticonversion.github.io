@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Suites, épreuve de mathématiques du BTS Opticien-Lunetier : 2 définitions à savoir et 5 questions corrigées.">
+<title>Suites · Maths du BTS OL · Opticonversion</title>
+<link rel="canonical" href="https://opticonversion.fr/notion-u41-suites.html">
+<meta name="theme-color" content="#13171f">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='13' fill='none' stroke='%23d9b26f' stroke-width='3'/%3E%3Ccircle cx='16' cy='16' r='5' fill='%23d9b26f'/%3E%3C/svg%3E">
+<script>/* Fond choisi par l'élève (profil), appliqué avant l'affichage */ try { if (localStorage.getItem("fond") === "clair") { document.documentElement.dataset.fond = "clair"; var m = document.querySelector('meta[name="theme-color"]'); if (m) m.content = "#1a1f2a"; } } catch (e) {}</script>
+<link rel="preload" href="polices/bodoni-moda.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="polices/atkinson-hyperlegible-next.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="img/icone-apple-180.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Opticonversion">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link rel="stylesheet" href="style.css?v=4a9eb01e">
+</head>
+<body>
+<!-- Page fabriquée par .claude/scripts/generer-notions.js : ne pas la modifier à la main -->
+<header class="entete">
+  <a class="logo" href="index.html" aria-label="Opticonversion, accueil">
+    <svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="13" fill="none" stroke="#d9b26f" stroke-width="2.5"/><circle cx="16" cy="16" r="5.5" fill="#d9b26f"/><circle cx="18.5" cy="13.5" r="1.6" fill="#0b0d12"/></svg>
+    <span>Opticonversion</span>
+  </a>
+  <nav>
+    <a href="index.html">Accueil</a>
+    <a href="essentiel.html">Essentiel</a>
+    <a href="qcm.html">QCM</a>
+    <a href="definitions.html">Définitions</a>
+    <a href="traces.html">Tracés</a>
+    <a href="calculateurs.html">Calculs</a>
+  </nav>
+</header>
+
+<main class="fiche-notion" data-epreuve="U41">
+  <h1 class="apparait">Suites</h1>
+  <p class="sous-titre apparait" style="--d:2">Un thème de l'épreuve de mathématiques (U41, coefficient 2) du BTS Opticien-Lunetier. Sur cette page : 2 définitions à savoir et 5 questions corrigées.</p>
+  <div class="fiche-actions apparait" style="--d:3">
+    <a class="bouton" href="qcm.html#U41/Suites">Faire le QCM de ce thème</a>
+    <a class="bouton secondaire" href="definitions.html#U41/Suites">Réviser les définitions en cartes</a>
+  </div>
+
+  <div class="fiche-bloc">
+    <h2 id="titre-definitions">Les définitions à savoir</h2>
+    <ul class="def-liste">
+      <li class="def par-coeur" id="suite-geometrique">
+        <div class="def-haut"><h3 class="def-terme">Suite géométrique</h3><span class="def-badge probable" title="Pas encore demandée, mais au programme">Probable</span></div>
+        <span class="def-utilise">Utilisée dans les sujets 2016, 2018, 2022, 2023</span>
+        <p class="def-texte">Suite où chaque terme s'obtient en multipliant le précédent par le même nombre q, appelé raison : u(n+1) = q × u(n).</p>
+        <p class="def-explication"><b>Pour comprendre :</b> Son terme général est u(n) = u0 × qⁿ. Pour prouver qu'une suite est géométrique, on montre que u(n+1) = q × u(n) pour tout n.</p>
+        <div class="def-bas"><span class="def-coeur"><span class="ico i-etoile" aria-hidden="true"></span>À savoir par cœur</span></div>
+      </li>
+      <li class="def" id="limite-d-une-suite">
+        <div class="def-haut"><h3 class="def-terme">Limite d'une suite</h3><span class="def-badge tombee" title="Déjà demandée à l'écrit du BTS">★ Tombée en 2016</span></div>
+        <p class="def-texte">La suite a pour limite ℓ quand ses termes se rapprochent autant qu'on veut de ℓ à partir d'un certain rang.</p>
+        <p class="def-explication"><b>Pour comprendre :</b> Pour une suite géométrique de raison q : qⁿ tend vers 0 si 0 &lt; q &lt; 1, et vers +∞ si q &gt; 1.</p>
+      </li>
+    </ul>
+  </div>
+
+  <div class="fiche-bloc">
+    <h2 id="titre-questions">Cinq questions corrigées</h2>
+    <p class="aide">Cherche d'abord ta réponse, puis ouvre la correction.</p>
+    <article class="fiche-question">
+      <p class="fiche-info">Type BTS 2018 · Niveau facile</p>
+      <h3 class="fiche-enonce">Chaque mois, un opticien perd 20 % de ses porteurs de lentilles mais en gagne 60 nouveaux. Le premier mois (n = 0), il en a 100. Combien en a-t-il le mois suivant (u1) ?</h3>
+      <ol class="fiche-choix" type="A">
+        <li>140</li>
+        <li>160</li>
+        <li>80</li>
+        <li>148</li>
+      </ol>
+      <details class="fiche-reponse">
+        <summary>Voir la correction<span class="visuellement-cache"> de la question 1</span></summary>
+        <p><strong>Réponse A.</strong> 140</p>
+        <p>Perdre 20 % = garder 80 %, donc u(n+1) = 0,8 × u(n) + 60. u1 = 0,8 × 100 + 60 = 80 + 60 = 140.</p>
+      </details>
+    </article>
+    <article class="fiche-question">
+      <p class="fiche-info">Type BTS 2022 · Niveau moyen</p>
+      <h3 class="fiche-enonce">Un magasin a vendu 200 verres progressifs en 2024. Les ventes augmentent de 10 % par an. Combien en vendra-t-il en 2026 selon ce modèle ?</h3>
+      <ol class="fiche-choix" type="A">
+        <li>240</li>
+        <li>242</li>
+        <li>220</li>
+        <li>264</li>
+      </ol>
+      <details class="fiche-reponse">
+        <summary>Voir la correction<span class="visuellement-cache"> de la question 2</span></summary>
+        <p><strong>Réponse B.</strong> 242</p>
+        <p>Augmenter de 10 %, c'est multiplier par 1,1 : suite géométrique de raison 1,1. u2 = 200 × 1,1² = 200 × 1,21 = 242. Piège : 240 correspond à +20 en tout (ajouter 10 % de 200 deux fois), ce qui n'est pas une suite géométrique.</p>
+      </details>
+    </article>
+    <article class="fiche-question">
+      <p class="fiche-info">Type BTS 2023 · Niveau difficile</p>
+      <h3 class="fiche-enonce">Algorithme : n ← 0 ; u ← 100 ; Tant que u &lt; 250 : n ← n + 1 ; u ← 0,8 × u + 60. Quelle valeur de n obtient-on à la fin ?</h3>
+      <ol class="fiche-choix" type="A">
+        <li>6</li>
+        <li>7</li>
+        <li>8</li>
+        <li>258</li>
+      </ol>
+      <details class="fiche-reponse">
+        <summary>Voir la correction<span class="visuellement-cache"> de la question 3</span></summary>
+        <p><strong>Réponse B.</strong> 7</p>
+        <p>On calcule les termes : u1 = 140 ; u2 = 172 ; u3 = 197,6 ; u4 ≈ 218,1 ; u5 ≈ 234,5 ; u6 ≈ 247,6 (encore &lt; 250, on continue) ; u7 ≈ 258,1 (≥ 250, on s'arrête). n = 7 : c'est au mois de rang 7 que l'on dépasse 250 porteurs. Piège : 258 est la valeur de u, pas de n.</p>
+        <figure class="schema"><img src="img/schemas/U41/suite-seuil-250-limite-300.svg" alt="Les termes de la suite montent de 100 vers la limite 300 : u6 ≈ 247,6 reste sous le seuil 250, u7 ≈ 258,1 le dépasse, donc l'algorithme s'arrête à n = 7." loading="lazy"></figure>
+      </details>
+    </article>
+    <article class="fiche-question">
+      <p class="fiche-info">Type BTS 2023 · Niveau moyen</p>
+      <h3 class="fiche-enonce">On reprend u(n+1) = 0,8 u(n) + 60. On pose v(n) = u(n) − ℓ. Quelle valeur de ℓ rend la suite (v(n)) géométrique ?</h3>
+      <ol class="fiche-choix" type="A">
+        <li>60</li>
+        <li>300</li>
+        <li>75</li>
+        <li>480</li>
+      </ol>
+      <details class="fiche-reponse">
+        <summary>Voir la correction<span class="visuellement-cache"> de la question 4</span></summary>
+        <p><strong>Réponse B.</strong> 300</p>
+        <p>ℓ est le « point fixe » : ℓ = 0,8 ℓ + 60, donc 0,2 ℓ = 60 et ℓ = 60 / 0,2 = 300. Vérification : v(n+1) = u(n+1) − 300 = 0,8 u(n) − 240 = 0,8 (u(n) − 300) = 0,8 v(n). Raison 0,8.</p>
+      </details>
+    </article>
+    <article class="fiche-question">
+      <p class="fiche-info">Niveau moyen · Calcul</p>
+      <p class="fiche-contexte">u0 = 200 et, pour tout n, u(n+1) = 0,9 u(n) + 40.</p>
+      <h3 class="fiche-enonce">Avec le tableau de valeurs de la calculatrice, trouve le premier rang n tel que u(n) &gt; 350.</h3>
+      <p class="aide">Réponse sans unité, arrondie à l'unité, avec son signe.</p>
+      <details class="fiche-reponse">
+        <summary>Voir la correction<span class="visuellement-cache"> de la question 5</span></summary>
+        <p><strong>Réponse : +14.</strong></p>
+        <p>Le tableau donne u13 ≈ 349,2 (encore ≤ 350) et u14 ≈ 354,2 (&gt; 350). Le premier rang est donc n = 14.</p>
+      </details>
+    </article>
+    <p class="fiche-suite">Le QCM compte 7 questions sur ce thème. Chacune est corrigée et expliquée, et celles que tu rates reviennent toutes seules à 1, 3, 7, 14 et 30 jours.</p>
+    <a class="bouton" href="qcm.html#U41/Suites">Faire le QCM de ce thème</a>
+  </div>
+
+  <div class="fiche-bloc">
+    <h2 id="titre-autres">Les autres notions de l'épreuve</h2>
+    <p class="fiche-liens">
+      <a class="theme" href="notion-u41-fonctions.html">Fonctions</a>
+      <a class="theme" href="notion-u41-calcul-integral.html">Calcul intégral</a>
+      <a class="theme" href="notion-u41-equations-differentielles.html">Équations différentielles</a>
+      <a class="theme" href="notion-u41-statistique.html">Statistique</a>
+      <a class="theme" href="notion-u41-probabilites.html">Probabilités</a>
+      <a class="theme" href="notion-u41-lois-de-probabilite.html">Lois de probabilité</a>
+      <a class="theme" href="notion-u41-estimation-et-tests.html">Estimation et tests</a>
+      <a class="theme" href="notion-u41-division-harmonique.html">Division harmonique</a>
+    </p>
+    <p class="aide"><a href="notions.html">Toutes les notions du BTS OL</a></p>
+  </div>
+</main>
+
+<footer><span class="pied-marque"><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="13" fill="none" stroke="#d9b26f" stroke-width="2.5"/><circle cx="16" cy="16" r="5.5" fill="#d9b26f"/><circle cx="18.5" cy="13.5" r="1.6" fill="#0b0d12"/></svg>Opticonversion</span><span>© 2026</span><span class="pied-liens"><a href="notions.html">Notions</a> <span aria-hidden="true">·</span> <a href="confidentialite.html">Confidentialité</a> <span aria-hidden="true">·</span> <a href="mentions-legales.html">Mentions légales</a> <span aria-hidden="true">·</span> <a href="mailto:opticonversion.bts@gmail.com">Contact</a></span></footer>
+
+<script src="vivant.js?v=ec7cf52b" defer></script>
+<script src="appli.js?v=b1a5a039" defer></script>
+<script type="module" src="compte.js?v=05e17079"></script>
+<!-- Mesure d'audience anonyme, sans cookies (GoatCounter) -->
+<script data-goatcounter="https://opticonversion.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+</body>
+</html>

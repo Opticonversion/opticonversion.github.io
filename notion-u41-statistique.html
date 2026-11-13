@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Statistique, épreuve de mathématiques du BTS Opticien-Lunetier : 3 définitions à savoir et 3 questions corrigées. Thème tombé à chacune des 5 sessions analysées.">
+<title>Statistique · Maths du BTS OL · Opticonversion</title>
+<link rel="canonical" href="https://opticonversion.fr/notion-u41-statistique.html">
+<meta name="theme-color" content="#13171f">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='13' fill='none' stroke='%23d9b26f' stroke-width='3'/%3E%3Ccircle cx='16' cy='16' r='5' fill='%23d9b26f'/%3E%3C/svg%3E">
+<script>/* Fond choisi par l'élève (profil), appliqué avant l'affichage */ try { if (localStorage.getItem("fond") === "clair") { document.documentElement.dataset.fond = "clair"; var m = document.querySelector('meta[name="theme-color"]'); if (m) m.content = "#1a1f2a"; } } catch (e) {}</script>
+<link rel="preload" href="polices/bodoni-moda.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="polices/atkinson-hyperlegible-next.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="img/icone-apple-180.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Opticonversion">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link rel="stylesheet" href="style.css?v=4a9eb01e">
+</head>
+<body>
+<!-- Page fabriquée par .claude/scripts/generer-notions.js : ne pas la modifier à la main -->
+<header class="entete">
+  <a class="logo" href="index.html" aria-label="Opticonversion, accueil">
+    <svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="13" fill="none" stroke="#d9b26f" stroke-width="2.5"/><circle cx="16" cy="16" r="5.5" fill="#d9b26f"/><circle cx="18.5" cy="13.5" r="1.6" fill="#0b0d12"/></svg>
+    <span>Opticonversion</span>
+  </a>
+  <nav>
+    <a href="index.html">Accueil</a>
+    <a href="essentiel.html">Essentiel</a>
+    <a href="qcm.html">QCM</a>
+    <a href="definitions.html">Définitions</a>
+    <a href="traces.html">Tracés</a>
+    <a href="calculateurs.html">Calculs</a>
+  </nav>
+</header>
+
+<main class="fiche-notion" data-epreuve="U41">
+  <h1 class="apparait">Statistique</h1>
+  <p class="sous-titre apparait" style="--d:2">Un thème de l'épreuve de mathématiques (U41, coefficient 2) du BTS Opticien-Lunetier. Il est tombé à chacune des 5 sessions analysées. Sur cette page : 3 définitions à savoir et 3 questions corrigées.</p>
+  <div class="fiche-actions apparait" style="--d:3">
+    <a class="bouton" href="qcm.html#U41/Statistique">Faire le QCM de ce thème</a>
+    <a class="bouton secondaire" href="definitions.html#U41/Statistique">Réviser les définitions en cartes</a>
+  </div>
+
+  <div class="fiche-bloc">
+    <h2 id="titre-definitions">Les définitions à savoir</h2>
+    <ul class="def-liste">
+      <li class="def par-coeur" id="ajustement-affine">
+        <div class="def-haut"><h3 class="def-terme">Ajustement affine</h3><span class="def-badge tombee" title="Déjà demandée à l'écrit du BTS">★ Tombée en 2016, 2017, 2018, 2022, 2023</span></div>
+        <p class="def-texte">Remplacer un nuage de points par une droite qui l'approche au mieux, pour faire des estimations ou des prévisions.</p>
+        <p class="def-explication"><b>Pour comprendre :</b> Il n'est pertinent que si les points sont à peu près alignés ; si le nuage est courbe, on fait d'abord un changement de variable (par exemple z = ln(y − k)).</p>
+        <div class="def-bas"><span class="def-coeur"><span class="ico i-etoile" aria-hidden="true"></span>À savoir par cœur</span></div>
+      </li>
+      <li class="def par-coeur" id="coefficient-de-correlation-lineaire">
+        <div class="def-haut"><h3 class="def-terme">Coefficient de corrélation linéaire</h3><span class="def-badge probable" title="Pas encore demandée, mais au programme">Probable</span></div>
+        <span class="def-utilise">Utilisée dans les sujets 2016, 2017, 2018, 2023</span>
+        <p class="def-texte">Nombre r compris entre −1 et 1 qui mesure à quel point les points d'un nuage sont alignés.</p>
+        <p class="def-explication"><b>Pour comprendre :</b> Plus |r| est proche de 1, plus l'ajustement affine est justifié ; le signe de r indique seulement si la série monte ou descend.</p>
+        <div class="def-bas"><span class="def-coeur"><span class="ico i-etoile" aria-hidden="true"></span>À savoir par cœur</span></div>
+      </li>
+      <li class="def par-coeur" id="droite-de-regression-methode-des-moindres-carres">
+        <div class="def-haut"><h3 class="def-terme">Droite de régression (méthode des moindres carrés)</h3><span class="def-badge probable" title="Pas encore demandée, mais au programme">Probable</span></div>
+        <span class="def-utilise">Utilisée dans les sujets 2016, 2017, 2018, 2022, 2023</span>
+        <p class="def-texte">Droite de y en x qui rend minimale la somme des carrés des écarts verticaux entre les points du nuage et la droite.</p>
+        <p class="def-explication"><b>Pour comprendre :</b> Elle passe par le point moyen du nuage.</p>
+        <div class="def-bas"><span class="def-coeur"><span class="ico i-etoile" aria-hidden="true"></span>À savoir par cœur</span></div>
+      </li>
+    </ul>
+  </div>
+
+  <div class="fiche-bloc">
+    <h2 id="titre-questions">Trois questions corrigées</h2>
+    <p class="aide">Cherche d'abord ta réponse, puis ouvre la correction.</p>
+    <article class="fiche-question">
+      <p class="fiche-info">Type BTS 2022 · Niveau facile</p>
+      <h3 class="fiche-enonce">Le nuage de points des ventes d'une lentille de couleur forme une courbe qui descend vite puis se tasse. Pourquoi un ajustement affine de y en x n'est-il pas adapté ?</h3>
+      <ol class="fiche-choix" type="A">
+        <li>Parce que les points ne sont pas alignés</li>
+        <li>Parce que y diminue</li>
+        <li>Parce que le coefficient de corrélation est négatif</li>
+        <li>Parce qu'il y a moins de 10 points</li>
+      </ol>
+      <details class="fiche-reponse">
+        <summary>Voir la correction<span class="visuellement-cache"> de la question 1</span></summary>
+        <p><strong>Réponse A.</strong> Parce que les points ne sont pas alignés</p>
+        <p>Un ajustement affine suppose des points à peu près sur une droite. Ici l'allure est courbe (type exponentielle). Une série qui diminue peut très bien être affine, et un r négatif veut seulement dire « décroissant » : ce sont des pièges.</p>
+      </details>
+    </article>
+    <article class="fiche-question">
+      <p class="fiche-info">Type BTS 2023 · Niveau moyen</p>
+      <h3 class="fiche-enonce">Après le changement de variable z = ln(y − 20), la calculatrice donne r ≈ −0,998 pour la série (x ; z). Que conclure ?</h3>
+      <ol class="fiche-choix" type="A">
+        <li>Ajustement affine non pertinent, car r est négatif</li>
+        <li>Ajustement affine pertinent, car |r| est très proche de 1</li>
+        <li>Impossible à dire sans tracer le nuage de points</li>
+        <li>Ajustement pertinent, car y est proportionnel à x</li>
+      </ol>
+      <details class="fiche-reponse">
+        <summary>Voir la correction<span class="visuellement-cache"> de la question 2</span></summary>
+        <p><strong>Réponse B.</strong> Ajustement affine pertinent, car |r| est très proche de 1</p>
+        <p>C'est la valeur absolue de r qui compte : |r| = 0,998, très proche de 1, donc les points (x ; z) sont presque alignés. Le signe − indique seulement que z diminue quand x augmente.</p>
+        <figure class="schema"><img src="img/schemas/U41/nuage-changement-variable-ln.svg" alt="À gauche, le nuage (x ; y) forme une courbe. À droite, avec z = ln(y − 20), les points s'alignent sur la droite z ≈ −0,50x + 5,01 et r ≈ −0,998." loading="lazy"></figure>
+      </details>
+    </article>
+    <article class="fiche-question">
+      <p class="fiche-info">Type BTS 2018 · Niveau moyen</p>
+      <h3 class="fiche-enonce">Avec z = ln(y − 20), on trouve la droite z = −0,5x + 5. Quelle est l'expression de y ? (e⁵ ≈ 148)</h3>
+      <ol class="fiche-choix" type="A">
+        <li>y = 20 + 148 e^(−0,5x)</li>
+        <li>y = 148 e^(−0,5x) − 20</li>
+        <li>y = 20 − 0,5x + 5</li>
+        <li>y = 20 + 5 e^(−0,5x)</li>
+      </ol>
+      <details class="fiche-reponse">
+        <summary>Voir la correction<span class="visuellement-cache"> de la question 3</span></summary>
+        <p><strong>Réponse A.</strong> y = 20 + 148 e^(−0,5x)</p>
+        <p>ln(y − 20) = −0,5x + 5 donc y − 20 = e^(−0,5x + 5) = e⁵ × e^(−0,5x) ≈ 148 e^(−0,5x). D'où y = 20 + 148 e^(−0,5x).</p>
+      </details>
+    </article>
+    <p class="fiche-suite">Le QCM compte 6 questions sur ce thème. Chacune est corrigée et expliquée, et celles que tu rates reviennent toutes seules à 1, 3, 7, 14 et 30 jours.</p>
+    <a class="bouton" href="qcm.html#U41/Statistique">Faire le QCM de ce thème</a>
+  </div>
+
+  <div class="fiche-bloc">
+    <h2 id="titre-autres">Les autres notions de l'épreuve</h2>
+    <p class="fiche-liens">
+      <a class="theme" href="notion-u41-suites.html">Suites</a>
+      <a class="theme" href="notion-u41-fonctions.html">Fonctions</a>
+      <a class="theme" href="notion-u41-calcul-integral.html">Calcul intégral</a>
+      <a class="theme" href="notion-u41-equations-differentielles.html">Équations différentielles</a>
+      <a class="theme" href="notion-u41-probabilites.html">Probabilités</a>
+      <a class="theme" href="notion-u41-lois-de-probabilite.html">Lois de probabilité</a>
+      <a class="theme" href="notion-u41-estimation-et-tests.html">Estimation et tests</a>
+      <a class="theme" href="notion-u41-division-harmonique.html">Division harmonique</a>
+    </p>
+    <p class="aide"><a href="notions.html">Toutes les notions du BTS OL</a></p>
+  </div>
+</main>
+
+<footer><span class="pied-marque"><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="13" fill="none" stroke="#d9b26f" stroke-width="2.5"/><circle cx="16" cy="16" r="5.5" fill="#d9b26f"/><circle cx="18.5" cy="13.5" r="1.6" fill="#0b0d12"/></svg>Opticonversion</span><span>© 2026</span><span class="pied-liens"><a href="notions.html">Notions</a> <span aria-hidden="true">·</span> <a href="confidentialite.html">Confidentialité</a> <span aria-hidden="true">·</span> <a href="mentions-legales.html">Mentions légales</a> <span aria-hidden="true">·</span> <a href="mailto:opticonversion.bts@gmail.com">Contact</a></span></footer>
+
+<script src="vivant.js?v=ec7cf52b" defer></script>
+<script src="appli.js?v=b1a5a039" defer></script>
+<script type="module" src="compte.js?v=05e17079"></script>
+<!-- Mesure d'audience anonyme, sans cookies (GoatCounter) -->
+<script data-goatcounter="https://opticonversion.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+</body>
+</html>

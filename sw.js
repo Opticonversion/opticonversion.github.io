@@ -13,7 +13,7 @@
 // =====================================================================
 
 // <versionner> (partie écrite par versionner.py, ne pas modifier à la main)
-const VERSION = "bda98743a7";
+const VERSION = "3beacf18fc";
 const FICHIERS = [
   "appli.js?v=b1a5a039",
   "banc.js?v=cca7d0be",
@@ -148,6 +148,7 @@ const FICHIERS = [
   "index.html",
   "manifest.webmanifest",
   "mentions-legales.html",
+  "notions.html",
   "optique.js?v=7f1099c5",
   "polices/atkinson-hyperlegible-next.woff2",
   "polices/bodoni-moda-italique.woff2",
@@ -172,7 +173,7 @@ const FICHIERS = [
   "specificites-U42.js?v=3dc3c146",
   "specificites-U43.js?v=0918c26c",
   "specificites-U5.js?v=4d12d3b3",
-  "style.css?v=bc07fa26",
+  "style.css?v=4a9eb01e",
   "traces-U42.js?v=cd7fcf7c",
   "traces-U43.js?v=65b6cc27",
   "traces-U5.js?v=c4c5f919",
