@@ -365,6 +365,7 @@
   }
   function terminer() {
     oublierSeance(toutes[0].epreuve);      // tour fini : plus rien à reprendre
+    window.compter?.("definitions-finies-" + toutes[0].epreuve, "Révision de définitions finie (" + toutes[0].epreuve + ")");     // statistiques anonymes (compter.js)
     $("ecran-revision").hidden = true;
     $("ecran-fin").hidden = false;
     const total = toutes.length, parfait = sues1 === total, n = ratees.length;

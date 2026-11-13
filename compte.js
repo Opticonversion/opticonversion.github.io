@@ -170,6 +170,7 @@ window.inscrireLettre = async (email, source) => {
   const { F, db } = await Promise.race([firebase, attente]);
   await Promise.race([F.addDoc(F.collection(db, "lettre"), { email: adresse, source: String(source || "").slice(0, 40), date: F.serverTimestamp() }), attente]);
   envois.push(maintenant);
+  window.compter?.("lettre-inscription", "Inscription à la lettre des nouveautés");     // statistiques anonymes (compter.js) : jamais l'adresse
   try { localStorage.setItem("lettre-envois", JSON.stringify(envois)); } catch (e) {}
 };
 
@@ -243,8 +244,9 @@ async function demarrer() {
         profil,
         maj: F.serverTimestamp()
       });
-      return { progression, temps, records, profil, revisions };
+      return { progression, temps, records, profil, revisions, nouveau: !snap.exists() };
     });
+    if (fusion.nouveau) window.compter?.("compte-cree", "Compte créé");     // statistiques anonymes (compter.js)
 
     const avant = JSON.stringify([lire("progression"), lire("records"), lire("profil"), lire("revisions")]);
     ecrire("revisions", fusion.revisions);

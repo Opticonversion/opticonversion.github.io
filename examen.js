@@ -127,6 +127,7 @@ const Examen = (() => {
   function nouvelEtat(code, nomFormat) {
     const format = formatDe(code, nomFormat);
     const qs = composer(code, format);
+    window.compter?.("examen-commence-" + code, "Examen blanc commencé (" + code + ")");     // statistiques anonymes (compter.js)
     const ordres = {};
     qs.forEach(q => { if (Array.isArray(q.choix)) ordres[q.id] = tirer(q.choix.map((_, i) => i), q.choix.length); });
     return { v: 1, epreuve: code, format: nomFormat || "blanc", ids: qs.map(q => q.id), ordres, reponses: {}, marques: {},
@@ -510,6 +511,9 @@ const Examen = (() => {
     ecrire(CLE_DERNIER, derniers);
     oublierEnCours(e.epreuve);
     if (window.Sons) Sons.fin(pourcent);
+    // Statistiques anonymes (compter.js) : la note seulement en 3 tranches larges, jamais la note exacte
+    const note = pourcent / 5, tranche = note < 8 ? ["moins-de-8", "moins de 8"] : note <= 12 ? ["8-a-12", "de 8 à 12"] : ["plus-de-12", "plus de 12"];
+    window.compter?.("examen-rendu-" + e.epreuve + "-" + tranche[0], "Examen blanc rendu (" + e.epreuve + ", note " + tranche[1] + ")");
     afficherResultat(copie, true, record);
   }
 

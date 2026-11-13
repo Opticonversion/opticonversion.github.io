@@ -13,13 +13,14 @@
 // =====================================================================
 
 // <versionner> (partie écrite par versionner.py, ne pas modifier à la main)
-const VERSION = "f9b0781a16";
+const VERSION = "a8713d5a3c";
 const FICHIERS = [
-  "appli.js?v=b1a5a039",
+  "appli.js?v=0724163c",
   "banc.js?v=cca7d0be",
   "calculateurs.html",
   "compte.html",
-  "compte.js?v=32e302ab",
+  "compte.js?v=a9bcc8d5",
+  "compter.js?v=920cbd98",
   "confidentialite.html",
   "definitions-U3.js?v=27026bd1",
   "definitions-U41.js?v=6d18ab79",
@@ -27,7 +28,7 @@ const FICHIERS = [
   "definitions-U43.js?v=135a6649",
   "definitions-U5.js?v=37a10d92",
   "definitions.html",
-  "definitions.js?v=b5d4b62a",
+  "definitions.js?v=6afb3766",
   "entrainement-U3.js?v=6bad30af",
   "entrainement-U41.js?v=1b78bba4",
   "entrainement-U42.js?v=06b93d7d",
@@ -36,7 +37,7 @@ const FICHIERS = [
   "epreuves.js?v=cc645427",
   "essentiel.html",
   "essentiel.js?v=ef2a4256",
-  "examen.js?v=198d7708",
+  "examen.js?v=fb7ff662",
   "img/avatar-chat-bouche-ouverte.svg",
   "img/avatar-chat-choque.svg",
   "img/avatar-chat-clin-doeil.svg",
@@ -180,7 +181,7 @@ const FICHIERS = [
   "traces-U43.js?v=65b6cc27",
   "traces-U5.js?v=c4c5f919",
   "traces.html",
-  "traces.js?v=e65c62d1",
+  "traces.js?v=06c9ad3d",
   "videos.js?v=6f234673",
   "vivant.js?v=ec7cf52b"
 ];

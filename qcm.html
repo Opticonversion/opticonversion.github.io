@@ -114,7 +114,7 @@
 <script src="essentiel.js?v=ef2a4256"></script>
 <script src="rythme.js?v=c63f73c6"></script>
 <!-- Examen blanc chronométré (#U5/examen) : avant le script de la page, qui l'ouvre dès le chargement -->
-<script src="examen.js?v=198d7708"></script>
+<script src="examen.js?v=fb7ff662"></script>
 <script>
   // ---------------- L'état du QCM ----------------
   let epreuveChoisie = null;   // ex. "U5"
@@ -1436,6 +1436,9 @@
     const casFini = serieSpeciale && serieSpeciale.cas;
     const cle = epreuveChoisie + "/" + (casFini ? casFini.id : themeChoisi);
     const record = modeRevision || (serieSpeciale && !casFini) ? { nouveau: false } : enregistrerRecord(cle, pourcent);
+    // Statistiques d'usage anonymes (compter.js)
+    if (casFini) window.compter?.("cas-fini-" + epreuveChoisie, "Cas pratique fini (" + epreuveChoisie + ")");
+    else window.compter?.("serie-finie-" + epreuveChoisie, "Série de QCM finie (" + epreuveChoisie + ")");
 
     zone.innerHTML =
       '<div class="bilan palier-' + palier.nom + '">' +
@@ -1628,10 +1631,11 @@
   window.addEventListener("hashchange", selonAdresse);
   selonAdresse();
 </script>
+<script src="compter.js?v=920cbd98" defer></script>
 <script src="vivant.js?v=ec7cf52b" defer></script>
-<script src="appli.js?v=b1a5a039" defer></script>
+<script src="appli.js?v=0724163c" defer></script>
 <script src="sons.js?v=2110bb6a" defer></script>
-<script type="module" src="compte.js?v=32e302ab"></script>
+<script type="module" src="compte.js?v=a9bcc8d5"></script>
 <!-- Mesure d'audience anonyme, sans cookies (GoatCounter) -->
 <script data-goatcounter="https://opticonversion.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </body>

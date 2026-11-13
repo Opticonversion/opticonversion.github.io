@@ -2063,6 +2063,7 @@
   function terminer(message, apresLeSon) {
     const etoiles = etoilesDuNiveau();
     noterEtoiles(niveau.id, etoiles);
+    window.compter?.("atelier-reussi-" + niveau.epreuve, "Niveau de l'Atelier réussi (" + niveau.epreuve + ")");     // statistiques anonymes (compter.js)
     if (window.Sons) Sons.fin([60, 60, 80, 100][etoiles], apresLeSon);     // 1, 2 ou 3 étoiles
     const liste = niveauxDe(niveau.epreuve), i = liste.indexOf(niveau);
     const suivant = liste[i + 1] && debloque(liste[i + 1]) ? liste[i + 1] : null;

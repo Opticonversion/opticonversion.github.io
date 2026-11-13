@@ -9,6 +9,13 @@
 
   const installee = (window.matchMedia && matchMedia("(display-mode: standalone)").matches) || navigator.standalone === true;
 
+  // Statistiques anonymes (compter.js) : la première ouverture en appli sur cet appareil compte comme une installation
+  // (l'iPhone ne prévient pas quand on installe ; « appli-comptee » reste dans ce navigateur, rien n'est envoyé)
+  if (installee && lire("appli-comptee") !== "1") {
+    ecrire("appli-comptee", "1");
+    window.compter?.("appli-installee", "Appli installée (première ouverture)");
+  }
+
   // Même bandeau que « Ta progression a été mise à jour » (compte.js), en bas de l'écran
   function bandeau(id, html) {
     const ancien = document.getElementById(id);
