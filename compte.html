@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Opticonversion">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
-<link rel="stylesheet" href="style.css?v=90728ba9">
+<link rel="stylesheet" href="style.css?v=f127d63b">
 </head>
 <body data-rafraichir="oui">
 <header class="entete">
@@ -228,9 +228,11 @@
       li.dataset.epreuve = code;
       li.innerHTML = '<a><span class="record-theme"></span><small></small><b></b></a>';
       li.querySelector("a").href = "qcm.html#" + code + (theme && theme !== "Tous" ? "/" + encodeURIComponent(theme) : "");
-      li.querySelector(".record-theme").textContent = !theme || theme === "Tous" ? "Toute l'épreuve" : theme;
+      // L'examen blanc (clé « U5/examen ») : sa meilleure note sur 20
+      const examen = theme === "examen";
+      li.querySelector(".record-theme").textContent = !theme || theme === "Tous" ? "Toute l'épreuve" : examen ? "Examen blanc" : theme;
       li.querySelector("small").textContent = e.court || e.nom;
-      li.querySelector("b").textContent = val + " %";
+      li.querySelector("b").textContent = examen ? String(Math.round(val / 5 * 10) / 10).replace(".", ",") + " / 20" : val + " %";
       if (val === 100) li.classList.add("parfait");
       $("profil-records").appendChild(li);
     });

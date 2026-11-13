@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Opticonversion">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
-<link rel="stylesheet" href="style.css?v=90728ba9">
+<link rel="stylesheet" href="style.css?v=f127d63b">
 </head>
 <body>
 <header class="entete">
@@ -113,6 +113,8 @@
 <script src="specificites-U3.js?v=2ee96b01"></script>
 <script src="essentiel.js?v=ef2a4256"></script>
 <script src="rythme.js?v=c63f73c6"></script>
+<!-- Examen blanc chronométré (#U5/examen) : avant le script de la page, qui l'ouvre dès le chargement -->
+<script src="examen.js?v=198d7708"></script>
 <script>
   // ---------------- L'état du QCM ----------------
   let epreuveChoisie = null;   // ex. "U5"
@@ -151,11 +153,12 @@
   const dansUnCas = q => !!(q.cas && casParId(q.cas));
   const ordinairesDe = code => questionsDe(code).filter(q => !dansUnCas(q));
   const questionsDesCas = code => casDe(code).flatMap(c => questionsDuCas(c.id));
-  let onglet = "theme";        // "theme", "cas" (liste des cas ou un cas), "entrainement" ou "selection" (questions choisies)
+  let onglet = "theme";        // "theme", "cas" (liste des cas ou un cas), "entrainement", "selection" (questions choisies) ou "examen" (examen.js)
   let defilerVersZone = false; // après un lien des Spécificités : descendre jusqu'aux questions
 
   // ---------------- Écran 1 : choisir une épreuve ----------------
   function afficherEpreuves() {
+    if (typeof Examen !== "undefined") Examen.fermer();   // l'examen en cours reste gardé
     epreuveChoisie = null;
     delete document.querySelector("main").dataset.epreuve;
     document.getElementById("ecran-qcm").hidden = true;
@@ -211,6 +214,7 @@
   function ouvrirEpreuve(code, theme, special) {
     const e = EPREUVES.find(x => x.code === code);
     if (!e || questionsDe(code).length === 0) { afficherEpreuves(); return; }
+    if (typeof Examen !== "undefined") Examen.fermer();
 
     const themes = new Set(ordinairesDe(code).map(q => q.theme));
     if (seanceRevision) {                    // on sort d'une séance : on remet la vue préférée
@@ -243,7 +247,10 @@
     const selection = special && special.questions
       ? special.questions.map(id => QUESTIONS.find(q => q.id === id && q.epreuve === code)).filter(Boolean) : [];
     const entr = special && special.entrainement ? special.entrainement : null;
-    if (entr && entrainementDe(code, entr === "tous" ? null : entr).length) {
+    if (special && special.examen && typeof Examen !== "undefined" && Examen.existe(code)) {
+      onglet = "examen";                     // examen blanc (examen.js) : la page ne montre plus que lui
+      Examen.ouvrir(code);
+    } else if (entr && entrainementDe(code, entr === "tous" ? null : entr).length) {
       onglet = "entrainement";
       themeEntrainement = entr === "tous" ? null : entr;
       afficherThemes();
@@ -287,6 +294,7 @@
     document.getElementById("rappel-calculatrice").hidden = !mode;
   }
   function ouvrirRevision(mode, matiere) {
+    if (typeof Examen !== "undefined") Examen.fermer();
     matiere = mode ? matiereSeance(matiere) : null;
     const dues = mode === "cinq" ? questionsCinqMinutes(matiere) : mode === "seance" ? questionsSeanceDuJour(matiere) : mode === "premiers" ? questionsPremiersPas(matiere) : questionsARevoir();
     if (dues.length === 0) { history.replaceState("", "", "qcm.html"); afficherEpreuves(); return; }
@@ -394,7 +402,7 @@
   // Compteurs « faites / total » sur chaque thème, et barre du thème choisi sous les thèmes.
   // Mis à jour à chaque réponse, sans toucher à la question en cours.
   function majProgressionEpreuve() {
-    if (!epreuveChoisie || seanceRevision) return;
+    if (!epreuveChoisie || seanceRevision || onglet === "examen") return;
     const qs = ordinairesDe(epreuveChoisie);
     const qsCas = questionsDesCas(epreuveChoisie);
     document.querySelectorAll("#themes .theme").forEach(b => {
@@ -640,6 +648,8 @@
       '<button class="bouton" type="submit">Valider</button><p class="saisie-aide"></p>';
     form.querySelector(".visuellement-cache").textContent = "Ta réponse" + (r.unite ? " en " + r.unite : "");
     form.querySelector(".saisie-unite").textContent = r.unite || "";
+    // Le clavier « décimal » de l'iPhone n'a pas de signe moins : clavier normal si la réponse a un signe
+    form.querySelector("input").inputMode = r.signe === false ? "decimal" : "text";
     const dec = r.decimales === undefined ? 2 : r.decimales;
     form.querySelector(".saisie-aide").textContent = "Arrondi " + (dec === 0 ? "à l'unité" : "à " + ecrireNombre(10 ** -dec, dec) + " près") + (r.signe !== false ? " · avec son signe" : "") + ".";
     ajouterAideUnite(form, r, q.question + " " + (q.contexte || ""));      // « Quelle unité ? » (essentiel.js)
@@ -932,6 +942,10 @@
         texte: cas.length + (cas.length > 1 ? " cas" : " cas") + (faits ? " · " + faits + " déjà faits" : "") + (code === "U3" && nbCalculs ? " · " + nbCalculs + " calculs à taper" : ""),
         lien: "#" + code + "/cas", court: "Cas pratiques" });
     }
+    // L'examen blanc (examen.js) : sur toutes les épreuves, carte ou petit lien
+    if (typeof Examen !== "undefined" && Examen.existe(code)) {
+      cartes.push({ icone: "i-chrono", titre: "Examen blanc", texte: Examen.resume(code), lien: "#" + code + "/examen", court: "Examen blanc", toujours: true });
+    }
     if (!spec.hidden) {
       const calc = (SPECIFICITES.find(s => s.epreuve === code) || { blocs: [] }).blocs.some(b => b.type === "calculatrice");
       cartes.push({ icone: calc ? "i-calcul" : "i-boussole", titre: "Spécificités de l'épreuve", texte: "Ce qui tombe, les pièges, les formules",
@@ -951,7 +965,7 @@
         a.querySelector("small").textContent = c.texte;
       } else {
         // Vision, Maths : une petite rangée de liens au-dessus du QCM
-        if (c.lien && c.lien.startsWith("#")) return;
+        if (c.lien && c.lien.startsWith("#") && !c.toujours) return;
         a.className = "lien-avant";
         a.innerHTML = '<span class="ico" aria-hidden="true"></span> ';
         a.querySelector(".ico").classList.add(c.icone);
@@ -1575,7 +1589,8 @@
   // c'est le lien à mettre sous chaque Short.
   // qcm.html#U5/entrainement : questions d'entraînement de l'épreuve ; #U5/entrainement:Worth : celles d'un thème ;
   // qcm.html#U5/cas : les cas pratiques ; #U5/cas:CAS-U5-01 : un cas ;
-  // #U5/questions:U5-012,U5-020 : une petite série de questions choisies (liens des pièges).
+  // #U5/questions:U5-012,U5-020 : une petite série de questions choisies (liens des pièges) ;
+  // qcm.html#U5/examen : l'examen blanc chronométré (examen.js).
   function selonAdresse() {
     const [code, suite] = location.hash.slice(1).split("/");
     const theme = suite ? decodeURIComponent(suite) : null;
@@ -1583,6 +1598,7 @@
     else if (code === "cinq-minutes") ouvrirRevision("cinq", theme);
     else if (code === "seance") ouvrirRevision("seance", theme);
     else if (code === "premiers-pas") ouvrirRevision("premiers", theme);
+    else if (code && theme === "examen") ouvrirEpreuve(code, null, { examen: true });
     else if (code && theme === "cas") ouvrirEpreuve(code, null, { cas: "liste" });
     else if (code && theme && theme.startsWith("cas:")) ouvrirEpreuve(code, null, { cas: theme.slice(4) });
     else if (code && theme && theme.startsWith("questions:")) ouvrirEpreuve(code, null, { questions: theme.slice(10).split(",") });

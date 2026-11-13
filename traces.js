@@ -1170,6 +1170,8 @@
     ajouterAideUnite(form, rep, $("jeu-consigne").textContent);           // « Quelle unité ? » (essentiel.js)
     zone.appendChild(form);
     const champ = form.querySelector("input");
+    // Le clavier « décimal » de l'iPhone n'a pas de signe moins : clavier normal si la réponse a un signe
+    champ.inputMode = rep.signe ? "text" : "decimal";
     champ.focus({ preventScroll: true });
     form.onsubmit = e => {
       e.preventDefault();

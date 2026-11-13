@@ -17,7 +17,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Opticonversion">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
-<link rel="stylesheet" href="style.css?v=90728ba9">
+<link rel="stylesheet" href="style.css?v=f127d63b">
 </head>
 
 <!-- ============================================================
@@ -53,8 +53,8 @@
     <h2>1. Transposition de formule</h2>
     <p class="aide">Passe d'un cylindre positif à négatif (ou l'inverse).</p>
     <div class="champs">
-      <label>Sphère (D)<input id="t-sph" inputmode="decimal" placeholder="-2,00"></label>
-      <label>Cylindre (D)<input id="t-cyl" inputmode="decimal" placeholder="+1,50"></label>
+      <label>Sphère (D)<input id="t-sph" inputmode="text" placeholder="-2,00"></label>
+      <label>Cylindre (D)<input id="t-cyl" inputmode="text" placeholder="+1,50"></label>
       <label>Axe (°)<input id="t-axe" inputmode="numeric" placeholder="90"></label>
     </div>
     <div class="resultat" id="t-res" role="status">Remplis les trois champs.</div>
@@ -65,8 +65,8 @@
     <h2>2. Compensation de distance verre-œil</h2>
     <p class="aide">Convertit une correction lunettes en lentilles (ou l'inverse).</p>
     <div class="champs">
-      <label>Sphère (D)<input id="v-sph" inputmode="decimal" placeholder="-6,00"></label>
-      <label>Cylindre (D)<input id="v-cyl" inputmode="decimal" placeholder="0" value="0"></label>
+      <label>Sphère (D)<input id="v-sph" inputmode="text" placeholder="-6,00"></label>
+      <label>Cylindre (D)<input id="v-cyl" inputmode="text" placeholder="0" value="0"></label>
       <label>Axe (°)<input id="v-axe" inputmode="numeric" placeholder="180" value="180"></label>
       <label>Distance verre-œil (mm)<input id="v-dvo" inputmode="decimal" value="12"></label>
       <label>Sens
@@ -84,7 +84,7 @@
     <h2>3. Effet prismatique (règle de Prentice)</h2>
     <p class="aide">Prisme induit quand l'œil regarde à côté du centre optique (verre sphérique).</p>
     <div class="champs">
-      <label>Puissance (D)<input id="p-puis" inputmode="decimal" placeholder="+4,00"></label>
+      <label>Puissance (D)<input id="p-puis" inputmode="text" placeholder="+4,00"></label>
       <label>Décentrement (mm)<input id="p-dec" inputmode="decimal" placeholder="5"></label>
       <label>Le point regardé est…
         <select id="p-dir">

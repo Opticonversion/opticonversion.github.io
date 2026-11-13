@@ -1730,3 +1730,115 @@ span.ligne-calcul.avec-fraction { margin-top: 0.45em; margin-bottom: 0.15em; pad
 .lettre-mention a { color: var(--or); }
 .lettre.inscrit .lettre-texte { margin: 0; color: var(--texte); }
 .lettre.inscrit .lettre-mention { display: none; }
+
+/* ---------- Examen blanc chronométré (examen.js, qcm.html#U5/examen) ---------- */
+/* Présentation */
+.examen-accueil { max-width: 64ch; }
+.examen-intro { margin: 0 0 14px; line-height: 1.55; }
+.examen-regles { margin: 0 0 16px; padding-left: 1.2em; display: grid; gap: 8px; line-height: 1.5; color: var(--doux); }
+.examen-regles li::marker { color: rgb(var(--accent-rgb)); }
+.examen-calculatrice { margin: 0 0 8px; font-weight: 700; }
+.examen-meilleure { margin: 0 0 8px; color: var(--or-clair); font-weight: 700; font-variant-numeric: lining-nums tabular-nums; }
+.examen-garde { margin: 0 0 14px; padding: 12px 14px; border-radius: 12px; background: var(--fond-2); border: 1px solid rgba(var(--accent-rgb), 0.45); }
+.examen-actions { justify-content: flex-start; margin-top: 8px; }
+.examen-retour { display: inline-flex; align-items: center; min-height: 44px; margin-top: 12px; font-size: 0.92rem; }
+
+/* Pendant l'examen : la barre du temps reste en haut, sous le menu (le focus ne doit pas passer dessous) */
+html:has(body.en-examen) { scroll-padding-top: 150px; }
+.examen-aide-choix { margin: 10px 0 0; color: var(--doux); font-size: 0.86rem; }
+.examen-barre {
+  position: sticky; top: 63px; z-index: 5;
+  display: flex; flex-wrap: wrap; align-items: center; gap: 6px 16px;
+  margin: -8px -10px 18px; padding: 8px 10px;
+  background: var(--carte); border-bottom: 1px solid var(--bord);
+}
+.examen-temps { display: inline-flex; align-items: center; gap: 8px; margin: 0; font-size: 1.35rem; font-weight: 700; font-variant-numeric: lining-nums tabular-nums; color: var(--texte); }
+.examen-temps .ico { width: 22px; height: 22px; color: rgb(var(--accent-rgb)); }
+.examen-temps.bientot { color: var(--or-clair); }
+.examen-temps.urgent { color: var(--rouge); }
+.examen-temps.urgent .ico { color: var(--rouge); }
+.examen-compte { margin: 0; color: var(--doux); font-size: 0.9rem; font-variant-numeric: tabular-nums; }
+.examen-rendre { margin: 0 0 0 auto; min-height: 44px; padding: 10px 18px; }
+
+.examen-tete { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; margin: 0 0 14px; }
+.examen-numero { margin: 0; font-size: 1.35rem; color: rgb(var(--accent-rgb)); }
+.examen-numero:focus { outline: none; }
+.examen-points { color: var(--doux); font-size: 0.88rem; }
+.examen-marquer { display: inline-flex; align-items: center; gap: 6px; margin-left: auto; min-height: 44px; padding: 8px 14px; font: inherit; font-size: 0.88rem; color: var(--doux); background: transparent; border: 1px dashed var(--bord-fort); border-radius: 999px; cursor: pointer; transition: color var(--vite), border-color var(--vite); }
+.examen-marquer .ico { width: 18px; height: 18px; }
+.examen-marquer:hover { color: var(--texte); border-color: var(--or); }
+.examen-marquer[aria-pressed="true"] { color: var(--or-clair); border-style: solid; border-color: var(--or); background: var(--or-fond); }
+
+/* Une proposition choisie (pas encore corrigée) */
+.examen-choix button[aria-pressed="true"] { border-color: var(--or); background: var(--or-fond); }
+.examen-choix button[aria-pressed="true"]::before { color: var(--encre); background: var(--or); border-color: var(--or); }
+
+.examen-nav { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; margin-top: 24px; }
+.examen-nav .bouton { margin: 0; }
+.examen-nav .ico { width: 18px; height: 18px; }
+
+/* Grille des numéros : répondue, sans réponse, marquée à revoir, en cours */
+.examen-grille { margin-top: 28px; padding-top: 18px; border-top: 1px solid var(--bord); }
+.examen-grille-titre { margin: 0 0 10px; color: var(--doux); font-size: 0.9rem; }
+.examen-grille ol { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(44px, 1fr)); gap: 6px; }
+.examen-case { position: relative; width: 100%; min-height: 44px; font: inherit; font-weight: 700; font-variant-numeric: lining-nums tabular-nums; color: var(--doux); background: transparent; border: 1px solid var(--doux); border-radius: 10px; cursor: pointer; transition: border-color var(--vite), background var(--vite); }
+.examen-case:hover { border-color: var(--or); color: var(--texte); }
+.examen-case.faite { color: var(--texte); background: var(--or-fond); border-color: var(--or); box-shadow: inset 0 0 0 1px var(--or); }
+/* Répondue : une petite coche en plus de la couleur */
+.examen-case.faite::before { content: "✓"; content: "✓" / ""; position: absolute; left: 5px; bottom: 2px; font-size: 0.7rem; line-height: 1; color: var(--or); }
+.examen-case.marquee::after { content: ""; position: absolute; top: 4px; right: 4px; width: 8px; height: 8px; border-radius: 50%; background: var(--or); }
+.examen-case[aria-current] { outline: 2px solid var(--texte); outline-offset: 1px; }
+.examen-legende { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px; margin: 12px 0 0; color: var(--doux); font-size: 0.84rem; }
+.examen-legende span { display: inline-block; width: 14px; height: 14px; border-radius: 4px; }
+.examen-legende .l-faite { background: var(--or-fond); border: 2px solid var(--or); }
+.examen-legende .l-vide { border: 1px solid var(--doux); margin-left: 8px; }
+.examen-legende .l-marque { width: 16px; height: 16px; margin-left: 8px; border-radius: 0; color: var(--or); }
+
+.examen-confirmer { margin-top: 22px; padding: 18px 20px; border-radius: 14px; background: var(--fond-2); border: 1px solid var(--or); }
+.examen-confirmer p { margin: 0 0 6px; }
+.examen-confirmer p:first-child { font-weight: 700; }
+.examen-confirmer p:focus { outline: none; }
+.examen-confirmer .bilan-actions { justify-content: flex-start; margin-top: 12px; }
+
+/* La note */
+.examen-bilan .score { font-size: 3rem; }
+.examen-bilan .score small { font-size: 0.9rem; }
+
+/* Bilan par thème */
+.examen-themes, .examen-correction { margin-top: 30px; text-align: left; }
+.examen-groupe { margin: 20px 0 6px; font-family: var(--corps); font-size: 1rem; font-weight: 700; }
+.examen-groupe.faible { color: var(--rouge); }
+.examen-groupe.moyen { color: var(--or-clair); }
+.examen-groupe.fort { color: var(--vert); }
+.examen-liste-themes { list-style: none; margin: 0; padding: 0; }
+.examen-theme { padding: 12px 2px; border-top: 1px solid var(--bord); }
+.examen-theme-haut { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2px 14px; margin: 0 0 6px; }
+.examen-theme-haut span { color: var(--doux); font-size: 0.9rem; font-variant-numeric: lining-nums tabular-nums; }
+.examen-theme-barre { display: block; height: 6px; border-radius: 3px; background: rgba(255, 255, 255, 0.07); overflow: hidden; }
+.examen-theme-barre span { display: block; height: 100%; border-radius: 3px; background: var(--or); }
+.examen-theme.faible .examen-theme-barre span { background: var(--rouge); }
+.examen-theme.fort .examen-theme-barre span { background: var(--vert); }
+.examen-theme-liens { display: flex; flex-wrap: wrap; gap: 0 18px; margin: 4px 0 0; }
+.examen-theme-liens a { display: inline-flex; align-items: center; min-height: 44px; font-size: 0.92rem; }
+
+/* Correction question par question */
+.examen-copie li.vide { border-color: var(--bord-fort); }
+.examen-copie li.juste { border-color: rgba(95, 211, 154, 0.35); }
+.examen-copie-tete { margin: 0 0 6px; color: var(--doux); font-size: 0.84rem; }
+.examen-ta-reponse { display: block; margin-bottom: 4px; color: var(--rouge); font-size: 0.94rem; }
+.examen-copie li.vide .examen-ta-reponse { color: var(--doux); font-style: italic; }
+.examen-copie .schema { margin: 12px 0 0; }
+.examen-reussies { margin-top: 14px; }
+.examen-reussies > summary { display: flex; align-items: center; min-height: 44px; font-weight: 700; color: var(--vert); cursor: pointer; }
+
+@media (max-width: 520px) {
+  .examen-barre { margin: -6px -8px 16px; padding: 6px 8px; gap: 4px 12px; }
+  .examen-temps { font-size: 1.2rem; }
+  .examen-rendre { padding: 8px 14px; font-size: 0.92rem; }
+  .examen-nav { flex-wrap: nowrap; }
+  .examen-nav .bouton { flex: 1 1 0; justify-content: center; padding: 12px 10px; }
+}
+@media (max-width: 400px) {
+  .examen-compte { display: none; }      /* la grille des numéros le montre déjà : la barre tient sur une ligne */
+  .examen-rendre { padding: 8px 12px; font-size: 0.88rem; }
+}
