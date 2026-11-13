@@ -13,13 +13,13 @@
 // =====================================================================
 
 // <versionner> (partie écrite par versionner.py, ne pas modifier à la main)
-const VERSION = "15c6a256ba";
+const VERSION = "e53a210729";
 const FICHIERS = [
-  "appli.js?v=9609be57",
+  "appli.js?v=b1a5a039",
   "banc.js?v=90809218",
   "calculateurs.html",
   "compte.html",
-  "compte.js?v=02538a67",
+  "compte.js?v=05e17079",
   "confidentialite.html",
   "definitions-U3.js?v=27026bd1",
   "definitions-U41.js?v=6d18ab79",
@@ -27,7 +27,7 @@ const FICHIERS = [
   "definitions-U43.js?v=135a6649",
   "definitions-U5.js?v=37a10d92",
   "definitions.html",
-  "definitions.js?v=e295bbc6",
+  "definitions.js?v=f90a36e3",
   "entrainement-U3.js?v=da114840",
   "entrainement-U41.js?v=911e2e04",
   "entrainement-U42.js?v=b99d7c72",
@@ -158,7 +158,7 @@ const FICHIERS = [
   "questions-U42.js?v=eee28f5a",
   "questions-U43.js?v=41c83925",
   "questions-U5.js?v=15b8a311",
-  "rythme.js?v=75012fc2",
+  "rythme.js?v=40d59d2f",
   "sons.js?v=2110bb6a",
   "sons/faux.mp3",
   "sons/fin-0.mp3",
@@ -172,7 +172,7 @@ const FICHIERS = [
   "specificites-U42.js?v=3dc3c146",
   "specificites-U43.js?v=0918c26c",
   "specificites-U5.js?v=4d12d3b3",
-  "style.css?v=3cb4be98",
+  "style.css?v=e7375bae",
   "traces-U42.js?v=cd7fcf7c",
   "traces-U43.js?v=65b6cc27",
   "traces-U5.js?v=3c44feba",

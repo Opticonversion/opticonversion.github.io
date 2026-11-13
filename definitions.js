@@ -8,8 +8,8 @@
 // indispensable: true pour les définitions « à savoir par cœur » : elles passent
 // en tête de liste, en or, ont leur filtre et sont proposées en premier en révision.
 // Mode révision : la carte montre le terme, l'élève récite, la retourne et se note.
-// Les tiroirs (boîte de Leitner) : une carte « à revoir » va dans le tiroir 1 et revient à la fin de la pile
-// jusqu'à ce qu'elle soit sue ; une carte sue monte d'un tiroir. Trois tiroirs seulement, pour que ça aille vite :
+// Les tiroirs (boîte de Leitner) : une carte « à revoir » va dans le tiroir 1 et revient quelques cartes plus loin
+// (RETOUR_CARTE), jusqu'à ce qu'elle soit sue ; une carte sue monte d'un tiroir. Trois tiroirs seulement, pour que ça aille vite :
 // à revoir (tout de suite), demain (1 jour de repos), acquis (elle repasse au bout de 3 jours, pour vérifier).
 // À la fin d'un tour, un exercice : pour un terme, choisir la bonne définition parmi quatre cartes.
 // Mémoire : localStorage « definitions » = { "D-U5-001": { s: 1 (je savais) ou 0 (à revoir), t: horodatage, b: tiroir 1 à 5 } }
@@ -264,8 +264,11 @@
 
   // ---------------- Le mode révision ----------------
   // pile : les cartes qui restent à voir, dans l'ordre (la première est à l'écran). Une carte « à revoir » y retourne
-  // à la fin. toutes : les cartes du tour. sues1 : sues du premier coup. ratees : celles qui ont dû revenir.
+  // quelques cartes plus loin. toutes : les cartes du tour. sues1 : sues du premier coup. ratees : celles qui ont dû revenir.
   let pile = [], toutes = [], sues1 = 0, ratees = [];
+  // Une carte pas sue revient après ce nombre d'autres cartes (à la fin s'il en reste moins) : assez tôt pour que
+  // l'élève s'en souvienne encore, assez tard pour qu'il doive la retrouver de mémoire. Pour changer : ce nombre.
+  const RETOUR_CARTE = 4;
   const melanger = t => { for (let i = t.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [t[i], t[j]] = [t[j], t[i]]; } return t; };
 
   // ----- La révision en cours est gardée après chaque carte, une par matière -----
@@ -345,9 +348,9 @@
     noter(d.id, savait);
     if (savait) { if (!ratees.includes(d)) sues1++; }
     else {
-      // Pas sue : elle retourne à la fin de la pile et reviendra dans ce tour, jusqu'à être sue
+      // Pas sue : elle retourne dans la pile, quelques cartes plus loin, et reviendra dans ce tour jusqu'à être sue
       if (!ratees.includes(d)) ratees.push(d);
-      pile.push(d);
+      pile.splice(Math.min(RETOUR_CARTE, pile.length), 0, d);
     }
     if (pile.length) { garderSeance(); if (savait && window.Sons) Sons.juste(); montrerCarte(); }
     else terminer();
@@ -368,7 +371,7 @@
     $("def-fin-titre").textContent = parfait ? (total > 1 ? "Toutes sues du premier coup" : "Sue du premier coup") : sues1 + " / " + total + " sues du premier coup";
     $("def-fin-texte").textContent = (parfait
       ? (total > 1 ? "Elles montent d'un tiroir et se reposent : tu les reverras le moment venu." : "Elle monte d'un tiroir et se repose : tu la reverras le moment venu.")
-      : (n > 1 ? "Les " + n + " autres sont revenues" : "L'autre est revenue") + " à la fin de la pile jusqu'à ce que tu " + (n > 1 ? "les" : "la") + " saches. Tu " + (n > 1 ? "les" : "la") + " reverras demain.")
+      : (n > 1 ? "Les " + n + " autres sont revenues" : "L'autre est revenue") + " quelques cartes plus loin, jusqu'à ce que tu " + (n > 1 ? "les" : "la") + " saches. Tu " + (n > 1 ? "les" : "la") + " reverras demain.")
       + " Vérifie maintenant avec l'exercice : pour chaque terme, retrouve la bonne définition parmi quatre cartes.";
     if (typeof montrerCompagnon === "function") montrerCompagnon($("def-fin-compagnon"), parfait ? "choque" : sues1 / total >= 0.6 ? "bouche-ouverte" : "pensif");
     const nbQuestions = nbExercice();

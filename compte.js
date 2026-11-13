@@ -346,6 +346,7 @@ async function demarrer() {
     };
     document.getElementById("onglet-connexion").onclick = () => choisirOnglet(false);
     document.getElementById("onglet-inscription").onclick = () => choisirOnglet(true);
+    if (location.hash === "#creer-compte") choisirOnglet(true);   // venu de « Créer mon compte » (accueil, bilan)
     document.getElementById("voir-mdp").onclick = () => {
       const visible = champMdp.type === "text";
       champMdp.type = visible ? "password" : "text";

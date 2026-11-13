@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Opticonversion">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
-<link rel="stylesheet" href="style.css?v=3cb4be98">
+<link rel="stylesheet" href="style.css?v=e7375bae">
 </head>
 <body>
 <header class="entete">
@@ -42,6 +42,9 @@
   <div id="ecran-qcm" hidden>
     <div class="barre-outils">
       <button class="retour" id="retour">← Toutes les épreuves</button>
+      <!-- Pendant la séance du jour ou les cinq premières questions, il remplace le bouton du dessus :
+           l'élève peut passer à tout moment (montrerPasser) -->
+      <button class="retour" id="passer-seance" type="button" hidden>Passer la séance du jour</button>
       <!-- Le choix de la vue : QCM seul, Shorts + QCM, ou Shorts seuls -->
       <div class="vues" role="group" aria-label="Affichage">
         <button data-vue="qcm">QCM</button>
@@ -49,6 +52,10 @@
         <button data-vue="shorts">Shorts</button>
       </div>
     </div>
+
+    <!-- Au début d'une séance (matière choisie ou « Aléatoire ») : penser à la calculatrice. Montré par montrerPasser,
+         retiré dès que l'élève touche à la première question. -->
+    <p class="rappel-calculatrice" id="rappel-calculatrice" hidden><span class="ico i-calcul" aria-hidden="true"></span> Sors ta calculatrice&nbsp;: certaines questions demandent un calcul.</p>
 
     <!-- Par où commencer : Atelier, cas, Spécificités (épreuves « échauffement »), ou petits liens -->
     <div class="mise-en-avant" id="mise-en-avant" hidden></div>
@@ -100,7 +107,7 @@
 <script src="specificites-U5.js?v=4d12d3b3"></script>
 <script src="specificites-U3.js?v=2ee96b01"></script>
 <script src="essentiel.js?v=f3b7979d"></script>
-<script src="rythme.js?v=75012fc2"></script>
+<script src="rythme.js?v=40d59d2f"></script>
 <script>
   // ---------------- L'état du QCM ----------------
   let epreuveChoisie = null;   // ex. "U5"
@@ -156,6 +163,7 @@
     conteneur.innerHTML = "";
     if (seanceRevision) document.querySelector(".vues").hidden = false;
     seanceRevision = false;
+    montrerPasser(null);
 
     // Barre « Tous les QCM » en haut de la liste des épreuves
     const generale = document.createElement("div");
@@ -207,6 +215,7 @@
       document.querySelector(".vues").hidden = false;
     }
     seanceRevision = false;
+    montrerPasser(null);
     epreuveChoisie = code;
     document.querySelector("main").dataset.epreuve = code;
     document.getElementById("lien-atelier").hidden = true;   // remplacé par les cartes « Par où commencer »
@@ -256,37 +265,50 @@
   // ---------------- Séance « À revoir aujourd'hui » ----------------
   // Aussi la séance « 5 minutes » (qcm.html#cinq-minutes, bouton de l'accueil et du profil) :
   // 5 questions choisies par rythme.js, celles à revoir d'abord.
-  let seanceCinq = false;
-  function ouvrirRevision(cinq) {
-    const dues = cinq ? questionsCinqMinutes() : questionsARevoir();
+  // Les autres séances, toutes épreuves, choisies par rythme.js : « 5 minutes » (#cinq-minutes), la séance du jour
+  // jusqu'à l'objectif (#seance) et les 5 questions faciles de la première ouverture (#premiers-pas).
+  // Avec une matière choisie avant de commencer (#seance/U42, #premiers-pas/U42, #cinq-minutes/U42) : seulement ses questions.
+  let seanceMode = null;       // null (À revoir), "cinq", "seance" ou "premiers"
+  let seanceMatiere = null;    // "U42"… si l'élève a choisi une matière, null pour le mélange « Aléatoire »
+  const ADRESSES_SEANCES = { cinq: "#cinq-minutes", seance: "#seance", premiers: "#premiers-pas" };
+  // « Passer » : pendant la séance du jour et les cinq premières questions, à tout moment. Il prend alors la place
+  // de « ← Toutes les épreuves » (une seule sortie, qui tient sur une ligne au téléphone).
+  function montrerPasser(mode) {
+    const passer = document.getElementById("passer-seance"), oui = mode === "seance" || mode === "premiers";
+    passer.hidden = !oui;
+    document.getElementById("retour").hidden = oui;
+    if (oui) passer.textContent = mode === "premiers" ? "Passer\u00a0: je connais déjà le site" : "Passer la séance du jour";
+    // Séance choisie par l'élève (du jour, cinq premières questions, 5 minutes) : le rappel de la calculatrice
+    document.getElementById("rappel-calculatrice").hidden = !mode;
+  }
+  function ouvrirRevision(mode, matiere) {
+    matiere = mode ? matiereSeance(matiere) : null;
+    const dues = mode === "cinq" ? questionsCinqMinutes(matiere) : mode === "seance" ? questionsSeanceDuJour(matiere) : mode === "premiers" ? questionsPremiersPas(matiere) : questionsARevoir();
     if (dues.length === 0) { history.replaceState("", "", "qcm.html"); afficherEpreuves(); return; }
     seanceRevision = true;
-    seanceCinq = !!cinq;
-    delete document.querySelector("main").dataset.epreuve;
+    seanceMode = mode || null;
+    seanceMatiere = matiere;
+    history.replaceState(null, "", (ADRESSES_SEANCES[mode] || "#a-revoir") + (matiere ? "/" + matiere : ""));
+    // Une matière choisie : la page prend sa couleur. Le mélange garde l'or.
+    if (matiere) document.querySelector("main").dataset.epreuve = matiere;
+    else delete document.querySelector("main").dataset.epreuve;
+    montrerPasser(mode);
     document.getElementById("lien-atelier").hidden = true;
     epreuveChoisie = dues[0].epreuve;
     themeChoisi = "Tous";
     document.getElementById("ecran-epreuves").hidden = true;
     document.getElementById("ecran-qcm").hidden = false;
     document.querySelector("main").classList.add("large");
-    document.getElementById("titre").textContent = cinq ? "5 minutes" : "À revoir aujourd'hui";
-    if (cinq) {
-      // « 5 questions : 2 à revoir aujourd'hui, 3 jamais faites. »
-      const prog = lireProgression(), dusAujourdhui = questionsARevoir();
-      const aRevoir = dues.filter(q => dusAujourdhui.includes(q)).length;
-      const nouvelles = dues.filter(q => !dusAujourdhui.includes(q) && prog[idQuestion(q)] === undefined).length;
-      const ratees = dues.filter(q => !dusAujourdhui.includes(q) && prog[idQuestion(q)] === 0).length;
-      const autres = dues.length - aRevoir - nouvelles - ratees;
-      const parts = [];
-      if (aRevoir) parts.push(aRevoir + " à revoir aujourd'hui");
-      if (nouvelles) parts.push(nouvelles + (nouvelles > 1 ? " jamais faites" : " jamais faite"));
-      if (ratees) parts.push(ratees + " à retravailler");
-      if (autres) parts.push(autres + (autres > 1 ? " déjà réussies" : " déjà réussie"));
-      document.getElementById("sous-titre").textContent = dues.length + (dues.length > 1 ? " questions" : " question") + ", environ une minute chacune\u00a0: " + parts.join(", ") + ".";
-    } else {
-      document.getElementById("sous-titre").textContent = dues.length + (dues.length > 1 ? " questions" : " question") +
-        " que tu avais ratées, toutes épreuves. Chaque bonne réponse les espace davantage.";
-    }
+    document.getElementById("titre").textContent = { cinq: "5 minutes", seance: "Ta séance du jour", premiers: "Cinq questions pour commencer" }[mode] || "À revoir aujourd'hui";
+    const nb = dues.length + (dues.length > 1 ? " questions" : " question") + (matiere ? " en " + nomMatiereSeance(matiere) : "");
+    const composition = () => phraseComposition(compositionSeance(dues));
+    document.getElementById("sous-titre").textContent =
+      mode === "cinq" ? nb + ", environ une minute chacune : " + composition() + "."
+      : mode === "seance" ? (tailleSeanceDuJour() === 0
+          ? "Objectif du jour atteint : " + nb + " de plus, si tu veux : " + composition() + "."
+          : nb + " pour ton objectif, environ une minute chacune : " + composition() + ".")
+      : mode === "premiers" ? "Faciles, " + (matiere ? "en " + nomMatiereSeance(matiere) + ", " : "") + "une par notion parmi celles qui tombent le plus au BTS. Après chaque réponse, la correction explique le raisonnement."
+      : nb + " que tu avais ratées, toutes épreuves. Chaque bonne réponse les espace davantage.";
     document.getElementById("themes").innerHTML = "";
     const spec = document.getElementById("specificites");
     spec.hidden = true;
@@ -1381,6 +1403,7 @@
   }
 
   function afficherBilan() {
+    montrerPasser(null);                                          // séance finie : plus rien à passer
     const pourcent = Math.round((score / serie.length) * 100);
     const palier = palierDe(pourcent);
     if (window.Sons) Sons.fin(pourcent, true);                   // le son de fin, selon la note (après le son de la dernière réponse)
@@ -1402,8 +1425,15 @@
     montrerCompagnon(zone.querySelector(".bilan-nounours"), palier.nounours);
     const pseudo = lireProfil().pseudo;
     zone.querySelector(".bilan-titre").textContent = pseudo && palier.titre.endsWith(" !") ? palier.titre.slice(0, -2) + ", " + pseudo + " !" : palier.titre;
-    zone.querySelector(".bilan-sous").textContent = seanceRevision && seanceCinq
-      ? (erreurs.length === 0 ? "Cinq minutes de révision, sans erreur." : "Cinq minutes de révision. Les questions ratées reviendront demain dans «\u00a0À revoir\u00a0».")
+    const rateesDemain = erreurs.length ? " Les questions ratées reviendront demain dans «\u00a0À revoir\u00a0»." : "";
+    const objectifAtteint = typeof calculerRythme === "function" && lireObjectif() > 0 && calculerRythme().aujourdhui.atteint;
+    const sousSeances = {
+      cinq: erreurs.length === 0 ? "Cinq minutes de révision, sans erreur." : "Cinq minutes de révision." + rateesDemain,
+      seance: (objectifAtteint ? "Séance du jour faite\u00a0: objectif atteint." : "Séance terminée.") + rateesDemain,
+      premiers: "Tes cinq premières questions sont faites." + rateesDemain
+    };
+    zone.querySelector(".bilan-sous").textContent = seanceRevision && sousSeances[seanceMode]
+      ? sousSeances[seanceMode]
       : seanceRevision
       ? (erreurs.length === 0 ? "Révision du jour terminée. Les questions reviendront de plus en plus tard." : "Les questions ratées reviendront demain, les autres plus tard. À demain !")
       : casFini
@@ -1443,7 +1473,7 @@
       return b;
     };
     const aRevoir = erreurs.map(q => QUESTIONS.find(x => idQuestion(x) === idQuestion(q)));
-    if (aRevoir.length > 0) {
+    if (aRevoir.length > 0 && seanceMode !== "premiers") {     // première ouverture : une seule suite, la séance du jour
       bouton(aRevoir.length > 1 ? "Revoir mes " + aRevoir.length + " erreurs" : "Revoir mon erreur", "", () => { demarrer(aRevoir); zone.scrollIntoView({ behavior: "smooth", block: "start" }); });
     }
     // La notion essentielle suivante pas encore maîtrisée (bouton principal si aucune erreur)
@@ -1454,8 +1484,15 @@
         zone.scrollIntoView({ behavior: "smooth", block: "start" });
       });
     }
-    if (seanceRevision) {
-      if (seanceCinq) bouton("5 minutes de plus", aRevoir.length > 0 ? "secondaire" : "", () => { ouvrirRevision(true); zone.scrollIntoView({ behavior: "smooth", block: "start" }); });
+    if (seanceRevision && seanceMode === "premiers") {
+      // Après les 5 premières questions : la suite de la séance du jour, jusqu'à l'objectif, ou l'accueil
+      const reste = tailleSeanceDuJour();
+      if (reste > 0) bouton("Continuer ma séance (" + reste + (reste > 1 ? " questions)" : " question)"), "", () => { ouvrirRevision("seance", seanceMatiere); zone.scrollIntoView({ behavior: "smooth", block: "start" }); });
+      bouton("Voir l'accueil", reste > 0 ? "secondaire" : "", () => { location.href = "index.html"; });
+    } else if (seanceRevision && (seanceMode === "cinq" || seanceMode === "seance")) {
+      bouton("5 minutes de plus", aRevoir.length > 0 ? "secondaire" : "", () => { ouvrirRevision("cinq", seanceMatiere); zone.scrollIntoView({ behavior: "smooth", block: "start" }); });
+      bouton("Retour à l'accueil", "secondaire", () => { location.href = "index.html"; });
+    } else if (seanceRevision) {
       bouton("Retour aux épreuves", "secondaire", () => { history.pushState("", "", "qcm.html"); document.querySelector("main").classList.remove("large"); afficherEpreuves(); });
     } else if (casFini) {
       bouton("Refaire le cas", "secondaire", () => { demarrerCas(casFini); zone.scrollIntoView({ behavior: "smooth", block: "start" }); });
@@ -1473,6 +1510,16 @@
       // Un thème qui a des questions d'entraînement : on les propose à la fin de sa série
       const nbE = !modeRevision && onglet === "theme" && themeChoisi !== "Tous" ? entrainementDe(epreuveChoisie, themeChoisi).length : 0;
       if (nbE) bouton("M'entraîner plus sur ce thème (" + nbE + ")", "secondaire", () => { location.hash = epreuveChoisie + "/entrainement:" + encodeURIComponent(themeChoisi); });
+    }
+
+    // Proposition de créer un compte (rythme.js) : jamais pendant une question, seulement ici, sous les boutons
+    if (typeof invitationDuMoment === "function") {
+      noterSerieFinie();
+      const inv = invitationDuMoment("bilan");
+      if (inv) zone.querySelector(".bilan").appendChild(creerInvitationCompte(inv, false, () => {
+        const titre = zone.querySelector(".bilan-titre");
+        if (titre) { titre.tabIndex = -1; titre.focus({ preventScroll: true }); }
+      }));
     }
 
     lancerConfettis(zone.querySelector(".bilan"), palier.confettis);
@@ -1521,7 +1568,9 @@
     const [code, suite] = location.hash.slice(1).split("/");
     const theme = suite ? decodeURIComponent(suite) : null;
     if (code === "a-revoir") ouvrirRevision();
-    else if (code === "cinq-minutes") ouvrirRevision(true);
+    else if (code === "cinq-minutes") ouvrirRevision("cinq", theme);
+    else if (code === "seance") ouvrirRevision("seance", theme);
+    else if (code === "premiers-pas") ouvrirRevision("premiers", theme);
     else if (code && theme === "cas") ouvrirEpreuve(code, null, { cas: "liste" });
     else if (code && theme && theme.startsWith("cas:")) ouvrirEpreuve(code, null, { cas: theme.slice(4) });
     else if (code && theme && theme.startsWith("questions:")) ouvrirEpreuve(code, null, { questions: theme.slice(10).split(",") });
@@ -1530,6 +1579,15 @@
     else if (code) ouvrirEpreuve(code, theme);
     else afficherEpreuves();
   }
+  // « Passer » pendant une séance : retour à l'accueil. Première ouverture : l'écran de départ ne reviendra pas ;
+  // séance du jour : elle est notée « passée pour aujourd'hui » (rythme.js), l'élève peut la reprendre depuis l'accueil.
+  // Le rappel de la calculatrice s'efface dès que l'élève touche à la première question
+  document.getElementById("zone").addEventListener("click", () => { document.getElementById("rappel-calculatrice").hidden = true; });
+  document.getElementById("passer-seance").onclick = () => {
+    if (seanceMode === "premiers") { try { localStorage.setItem("accueil", "passe"); } catch (e) {} }
+    else passerSeance(true);
+    location.href = "index.html";
+  };
   document.getElementById("retour").onclick = () => {
     history.pushState("", "", "qcm.html");
     document.querySelector("main").classList.remove("large");
@@ -1539,9 +1597,9 @@
   selonAdresse();
 </script>
 <script src="vivant.js?v=ec7cf52b" defer></script>
-<script src="appli.js?v=9609be57" defer></script>
+<script src="appli.js?v=b1a5a039" defer></script>
 <script src="sons.js?v=2110bb6a" defer></script>
-<script type="module" src="compte.js?v=02538a67"></script>
+<script type="module" src="compte.js?v=05e17079"></script>
 <!-- Mesure d'audience anonyme, sans cookies (GoatCounter) -->
 <script data-goatcounter="https://opticonversion.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </body>

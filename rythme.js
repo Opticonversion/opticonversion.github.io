@@ -5,7 +5,9 @@
 // - localStorage « objectif » : 5, 10 ou 20 questions par jour, choisi par l'élève (cet appareil) ;
 // - localStorage « jours » : { "AAAA-MM-JJ": { n, ok } } écrit par noterReponse (essentiel.js) :
 //   n = réponses données ce jour-là sur cet appareil, ok = objectif atteint ce jour-là ;
-// - localStorage « rappel » : heure du rappel quotidien mis dans l'agenda (fichier .ics fait sur l'appareil).
+// - localStorage « rappel » : heure du rappel quotidien mis dans l'agenda (fichier .ics fait sur l'appareil) ;
+// - localStorage « invitation-compte », « decouverte », « invitation-jour », « accueil » : la proposition de compte,
+//   les outils déjà présentés, la seule invitation du jour, l'écran de première ouverture passé (voir plus bas).
 // Les jours se lisent aussi dans « progression-t » (heure de la dernière réponse à chaque question,
 // synchronisée avec le compte) : un jour fait sur un autre appareil compte aussi.
 // Un jour compte dans la série quand l'objectif est atteint. Un jour manqué par semaine
@@ -14,6 +16,11 @@
 
 const OBJECTIFS = [5, 10, 20];
 const TAILLE_CINQ_MINUTES = 5;               // une question prend environ une minute
+// Les matières proposées avant une séance (nom court des boutons). « Aléatoire » = toutes matières, sans code.
+// Adresses : qcm.html#seance/U42 (séance du jour en OGP), #premiers-pas/U42, #cinq-minutes/U42 ; sans code : le mélange.
+const MATIERES_SEANCE = [["U41", "Maths"], ["U42", "OGP"], ["U43", "ETSO"], ["U5", "Vision"], ["U3", "Éco"]];
+function matiereSeance(code) { return MATIERES_SEANCE.some(m => m[0] === code) ? code : null; }
+function nomMatiereSeance(code) { const m = MATIERES_SEANCE.find(x => x[0] === code); return m ? m[1] : ""; }
 
 // Début des écrits du BTS, par session. 2027 : Bulletin officiel n° 38 du 8 octobre 2026
 // (épreuves communes à tous les BTS à partir du mardi 11 mai 2027). Les dates propres au BTS OL
@@ -99,8 +106,9 @@ function calculerRythme() {
     d.setDate(d.getDate() + i);
     const k = rythmeCle(d);
     const etat = k > auj ? "futur" : chaine.get(k) || (valide(k) ? "ok" : k === auj ? "aujourdhui" : "vide");
-    return { k, nom, numero: d.getDate(), etat, estAujourdhui: k === auj };
+    return { k, nom, numero: d.getDate(), etat, estAujourdhui: k === auj, dansSerie: chaine.has(k) };
   });
+  const cleLundi = rythmeCle(lundi);
 
   const n = jours[auj] ? jours[auj].n : 0;
   return {
@@ -108,6 +116,7 @@ function calculerRythme() {
     aujourdhui: { n, objectif, atteint: valide(auj) },
     semaine,
     pauseHier: chaine.get(rythmeCle(rythmeMidi(-1))) === "pause",
+    serieAvantLundi: [...chaine.keys()].some(k => k < cleLundi),
     repart: serie === 0 && Object.keys(jours).some(k => k < auj && valide(k))
   };
 }
@@ -175,32 +184,100 @@ function etatObjectifDuJour() {
   return { atteint: false, texte: "Objectif du jour\u00a0: " + a.n + " / " + a.objectif };
 }
 
-// La séance « 5 minutes » : les questions à revoir d'abord, puis des questions jamais faites
-// des notions les plus rentables (ordre de l'Essentiel), puis les ratées. Ni entraînement, ni cas.
-function questionsCinqMinutes() {
+// Les séances courtes du QCM : les questions à revoir d'abord, puis des questions jamais faites des
+// notions les plus rentables (ordre de l'Essentiel, les plus faciles d'abord), puis les ratées.
+// Ni entraînement, ni cas. « 5 minutes » = 5 questions ; « séance du jour » = ce qui manque pour l'objectif.
+// matiere (facultatif, "U42"…) : la séance ne prend que des questions de cette matière, dans le même ordre.
+const RANG_DIFFICULTE = { facile: 0, moyen: 1, difficile: 2 };
+function rangDifficulte(q) { return q.difficulte in RANG_DIFFICULTE ? RANG_DIFFICULTE[q.difficulte] : 1; }
+function melangerListe(liste) {
+  const c = liste.slice();
+  for (let i = c.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [c[i], c[j]] = [c[j], c[i]]; }
+  return c;
+}
+function questionsSeance(taille, matiere) {
   if (typeof QUESTIONS === "undefined") return [];
   const prog = lireProgression();
-  const melange = liste => {
-    const c = liste.slice();
-    for (let i = c.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [c[i], c[j]] = [c[j], c[i]]; }
-    return c;
-  };
   const choisies = [], deja = new Set();
   const prendre = liste => {
     for (const q of liste) {
-      if (choisies.length >= TAILLE_CINQ_MINUTES) return;
+      if (choisies.length >= taille) return;
       const id = idQuestion(q);
       if (!deja.has(id)) { deja.add(id); choisies.push(q); }
     }
   };
-  const base = QUESTIONS.filter(q => !q.entrainement && !q.cas);
-  prendre(melange(questionsARevoir()));
+  const parDifficulte = liste => melangerListe(liste).sort((a, b) => rangDifficulte(a) - rangDifficulte(b));
+  const deLaMatiere = q => !matiere || q.epreuve === matiere;
+  const base = QUESTIONS.filter(q => !q.entrainement && !q.cas && deLaMatiere(q));
+  prendre(melangerListe(questionsARevoir().filter(deLaMatiere)));
   const jamais = base.filter(q => prog[idQuestion(q)] === undefined);
-  if (typeof ESSENTIEL !== "undefined") ESSENTIEL.forEach(n => prendre(melange(jamais.filter(q => q.epreuve === n.epreuve && q.theme === n.theme))));
-  prendre(melange(jamais));
-  prendre(melange(base.filter(q => prog[idQuestion(q)] === 0)));
-  prendre(melange(base));
+  if (typeof ESSENTIEL !== "undefined") ESSENTIEL.forEach(n => prendre(parDifficulte(jamais.filter(q => q.epreuve === n.epreuve && q.theme === n.theme))));
+  prendre(parDifficulte(jamais));
+  prendre(melangerListe(base.filter(q => prog[idQuestion(q)] === 0)));
+  prendre(melangerListe(base));
   return choisies;
+}
+function questionsCinqMinutes(matiere) { return questionsSeance(TAILLE_CINQ_MINUTES, matiere); }
+
+// La séance du jour : ce qui manque pour atteindre l'objectif (0 s'il est atteint : on propose alors 5 minutes de plus)
+function tailleSeanceDuJour() {
+  const a = calculerRythme().aujourdhui;
+  return a.atteint ? 0 : Math.max(1, a.objectif - a.n);
+}
+function questionsSeanceDuJour(matiere) {
+  return questionsSeance(tailleSeanceDuJour() || TAILLE_CINQ_MINUTES, matiere);
+}
+// « Passer pour aujourd'hui » : localStorage « seance-passee » = "AAAA-MM-JJ" (le jour passé ; sans effet dès le lendemain).
+// Rien d'autre ne change : le jour compte comme un jour sans révision (un par semaine est pardonné).
+function seancePassee() {
+  try { return localStorage.getItem("seance-passee") === rythmeCle(rythmeMidi(0)); } catch (e) { return false; }
+}
+function passerSeance(oui) {
+  try { if (oui) localStorage.setItem("seance-passee", rythmeCle(rythmeMidi(0))); else localStorage.removeItem("seance-passee"); } catch (e) {}
+}
+
+// Ce qu'il y a dans une séance, pour l'annoncer
+function compositionSeance(liste) {
+  const prog = lireProgression(), dues = questionsARevoir();
+  const aRevoir = liste.filter(q => dues.includes(q)).length;
+  const nouvelles = liste.filter(q => !dues.includes(q) && prog[idQuestion(q)] === undefined);
+  const ratees = liste.filter(q => !dues.includes(q) && prog[idQuestion(q)] === 0).length;
+  return { aRevoir, nouvelles: nouvelles.length, ratees, autres: liste.length - aRevoir - nouvelles.length - ratees, themes: [...new Set(nouvelles.map(q => q.theme))] };
+}
+// « 2 à revoir aujourd'hui, 3 jamais faites »
+function phraseComposition(c) {
+  const parts = [];
+  if (c.aRevoir) parts.push(c.aRevoir + " à revoir aujourd'hui");
+  if (c.nouvelles) parts.push(c.nouvelles + (c.nouvelles > 1 ? " jamais faites" : " jamais faite"));
+  if (c.ratees) parts.push(c.ratees + " à retravailler");
+  if (c.autres) parts.push(c.autres + (c.autres > 1 ? " déjà réussies" : " déjà réussie"));
+  return parts.join(", ");
+}
+// Les cinq questions de la première ouverture : faciles (champ difficulte), à choix (pas de calcul à taper),
+// d'abord une notion de l'Essentiel par épreuve (l'élève voit tout le BTS), puis les notions suivantes.
+// matiere (facultatif) : cinq questions faciles de cette matière seulement, une par notion de l'Essentiel d'abord.
+function questionsPremiersPas(matiere) {
+  if (typeof QUESTIONS === "undefined" || typeof ESSENTIEL === "undefined") return [];
+  const prog = lireProgression();
+  const faciles = QUESTIONS.filter(q => (!matiere || q.epreuve === matiere) && !q.entrainement && !q.cas && q.type !== "calcul" && q.difficulte === "facile" && prog[idQuestion(q)] === undefined);
+  const choisies = [], epreuves = new Set(), notions = new Set();
+  const prendre = n => {
+    const q = melangerListe(faciles.filter(x => x.epreuve === n.epreuve && x.theme === n.theme))[0];
+    if (!q) return;
+    choisies.push(q);
+    epreuves.add(n.epreuve);
+    notions.add(n.epreuve + "/" + n.theme);
+  };
+  ESSENTIEL.forEach(n => { if (choisies.length < TAILLE_CINQ_MINUTES && !epreuves.has(n.epreuve)) prendre(n); });
+  ESSENTIEL.forEach(n => { if (choisies.length < TAILLE_CINQ_MINUTES && !notions.has(n.epreuve + "/" + n.theme)) prendre(n); });
+  if (matiere) {
+    // Pas assez de notions essentielles dans la matière : d'autres questions faciles, puis la séance ordinaire de la matière
+    const completer = liste => liste.forEach(q => { if (choisies.length < TAILLE_CINQ_MINUTES && !choisies.includes(q)) choisies.push(q); });
+    completer(melangerListe(faciles));
+    completer(questionsCinqMinutes(matiere));
+    return choisies;
+  }
+  return choisies.length ? choisies : questionsCinqMinutes();
 }
 
 // ---------------- Ce que dit le compagnon : le travail fait, sans « Bravo ! » ----------------
@@ -341,6 +418,214 @@ function afficherRappel(el) {
   });
 }
 
+// ---------------- Invitation à créer un compte (jamais obligatoire) ----------------
+// L'élève essaie d'abord librement : rien avant sa première série terminée (bilan du QCM) ou avant
+// un deuxième jour de révision. Ensuite, une proposition aux moments où il aurait quelque chose à
+// perdre : « premiere » (premier contact), « serie3 » (3 jours de suite), « objectif » (objectif du
+// jour atteint), « appli » (site ouvert depuis l'appli installée). Chaque moment au plus une fois,
+// au plus une proposition par jour, jamais pendant une question (accueil et bilan seulement), plus
+// rien une fois connecté (localStorage « compte-uid », écrit par compte.js) ni après 3 « Plus tard ».
+// localStorage « invitation-compte » = { serieFinie, vus: { moment: "AAAA-MM-JJ" }, dernier, plusTard }
+const CLE_INVITATION = "invitation-compte";
+const PLUS_TARD_MAX = 3;
+
+function lireInvitation() {
+  try { return JSON.parse(localStorage.getItem(CLE_INVITATION) || "{}") || {}; } catch (e) { return {}; }
+}
+function ecrireInvitation(etat) {
+  try { localStorage.setItem(CLE_INVITATION, JSON.stringify(etat)); } catch (e) {}
+}
+function noterSerieFinie() {                 // appelé au bilan de chaque série du QCM
+  const etat = lireInvitation();
+  if (!etat.serieFinie) { etat.serieFinie = true; ecrireInvitation(etat); }
+}
+function compteConnecte() {
+  try { return !!localStorage.getItem("compte-uid"); } catch (e) { return false; }
+}
+function appliInstallee() {
+  return (window.matchMedia && matchMedia("(display-mode: standalone)").matches) || navigator.standalone === true;
+}
+
+// Le moment à saisir maintenant (null : rien à proposer). lieu : "accueil" ou "bilan"
+function invitationDuMoment(lieu) {
+  if (compteConnecte() || !invitationLibre("compte")) return null;
+  const etat = lireInvitation(), vus = etat.vus || {};
+  if ((etat.plusTard || 0) >= PLUS_TARD_MAX) return null;
+  const auj = rythmeCle(rythmeMidi(0));
+  if (etat.dernier === auj) return null;
+  const jours = reponsesParJour();
+  const jourAvant = Object.keys(jours).some(k => k < auj && jours[k].n > 0);
+  if (!etat.serieFinie && !jourAvant && lieu !== "bilan") return null;
+  const r = calculerRythme();
+  const moments = [
+    ["serie3", r.serie >= 3],
+    ["objectif", lireObjectif() > 0 && r.aujourdhui.atteint],
+    ["appli", appliInstallee()],
+    ["premiere", !Object.keys(vus).length]
+  ];
+  const trouve = moments.find(([nom, vrai]) => vrai && !vus[nom]);
+  return trouve ? { moment: trouve[0], serie: r.serie } : null;
+}
+
+// Le bloc de la proposition. avecCompagnon : sur l'accueil, le compagnon la dit (comme le récap) ;
+// au bilan, le compagnon est déjà au-dessus. apresPlusTard : ce que la page fait une fois le bloc retiré.
+function creerInvitationCompte(inv, avecCompagnon, apresPlusTard) {
+  const creer = (balise, classe, texte) => {
+    const n = document.createElement(balise);
+    if (classe) n.className = classe;
+    if (texte !== undefined) n.textContent = texte;
+    return n;
+  };
+  const bloc = creer("div", avecCompagnon ? "jour-mot invitation-compte" : "invitation-compte invitation-bilan");
+  bloc.id = "invitation-compte";
+  bloc.setAttribute("role", "region");
+  bloc.setAttribute("aria-label", "Créer ton compte");
+  if (avecCompagnon) {
+    const img = creer("img", "jour-compagnon");
+    img.alt = "";
+    img.width = 52;
+    img.height = 52;
+    montrerCompagnon(img, inv.moment === "serie3" || inv.moment === "objectif" ? "bouche-ouverte" : "clin-doeil");
+    bloc.appendChild(img);
+  }
+  const corps = creer("div", "invitation-texte");
+  const message = creer("p", "jour-message");
+  // L'objectif atteint et la série sont déjà écrits juste à côté (carte, médailles du bilan) : pas de redite
+  if (inv.moment === "appli") message.appendChild(creer("span", "invitation-fait", "L'appli est installée."));
+  message.appendChild(creer("span", "invitation-raison", "Garde ta série " + (inv.moment === "serie3" ? "de " + inv.serie + " jours" : "de jours") +
+    " et ta progression, même si tu changes de téléphone."));
+  const detail = creer("p", "invitation-detail");
+  detail.append("Un compte gratuit, avec Google ou ton ", creer("span", "insecable", "e-mail"), ". Tu peux le supprimer en un clic.");
+  const actions = creer("div", "invitation-actions");
+  const creerCompte = creer("a", "bouton secondaire", "Créer mon compte");
+  creerCompte.href = "compte.html#creer-compte";
+  const plusTard = creer("button", "bouton-discret", "Plus tard");
+  plusTard.type = "button";
+  plusTard.addEventListener("click", () => {
+    const etat = lireInvitation();
+    etat.plusTard = (etat.plusTard || 0) + 1;
+    ecrireInvitation(etat);
+    bloc.remove();
+    if (apresPlusTard) apresPlusTard();
+  });
+  actions.append(creerCompte, plusTard);
+  corps.append(message, detail, actions);
+  bloc.appendChild(corps);
+
+  // Montrée = ce moment est passé, et c'est la proposition du jour
+  const etat = lireInvitation(), auj = rythmeCle(rythmeMidi(0));
+  etat.vus = etat.vus || {};
+  etat.vus[inv.moment] = auj;
+  if (!etat.vus.premiere) etat.vus.premiere = auj;   // le premier contact est fait, quel que soit le moment
+  etat.dernier = auj;
+  ecrireInvitation(etat);
+  reserverInvitation("compte");
+  return bloc;
+}
+
+// ---------------- Une seule invitation par jour ----------------
+// Proposition de compte, découverte d'un outil, lien vers le rappel, bandeau « installer l'appli » (appli.js) :
+// au plus une par jour, et aucune le premier jour de révision (l'élève découvre sa séance, rien d'autre).
+// localStorage « invitation-jour » = { jour: "AAAA-MM-JJ", type } : la place du jour, déjà prise ou non.
+function premierJourDeRevision() {
+  const jours = reponsesParJour();
+  const actifs = Object.keys(jours).filter(k => jours[k].n > 0).sort();
+  return !actifs.length || actifs[0] >= rythmeCle(rythmeMidi(0));
+}
+function invitationLibre(type) {
+  if (premierJourDeRevision()) return false;
+  try {
+    const e = JSON.parse(localStorage.getItem("invitation-jour") || "{}") || {};
+    return e.jour !== rythmeCle(rythmeMidi(0)) || e.type === type;
+  } catch (e) { return true; }
+}
+function reserverInvitation(type) {
+  try { localStorage.setItem("invitation-jour", JSON.stringify({ jour: rythmeCle(rythmeMidi(0)), type })); } catch (e) {}
+}
+
+// ---------------- Les outils se présentent un par un ----------------
+// Une petite carte du compagnon, dans l'ordre, chacune un seul jour (elle reste ce jour-là jusqu'à ce qu'on la
+// ferme ou qu'on l'ouvre), puis plus jamais. localStorage « decouverte » = { vus: { id: "AAAA-MM-JJ" }, fermes: { id: true } }
+// Le rythme voulu par David : 3e jour de révision, l'Atelier des tracés ; 4e jour, les définitions ; ensuite la séance
+// de QCM comme d'habitude (les calculateurs passent une fois, plus tard). « jour » = le combientième jour où l'élève
+// révise (les jours sans réponse ne comptent pas), aujourd'hui compris. Ce jour-là, l'outil passe avant la proposition
+// de compte (afficherCarteJour).
+const DECOUVERTES = [
+  { id: "atelier", quand: s => s.jour >= 3, titre: "L'Atelier des tracés", lien: "traces.html", bouton: "Ouvrir l'Atelier",
+    texte: "Tu construis l'image d'une lentille rayon par rayon, comme sur ta copie, et chaque tracé est vérifié." },
+  { id: "definitions", quand: s => s.jour >= 4, titre: "Les définitions à réciter", lien: "definitions.html", bouton: "Réciter",
+    texte: "Celles des sujets officiels, en cartes à retourner. Les définitions à savoir par cœur viennent en premier." },
+  { id: "calculs", quand: s => s.joursActifs >= 6, titre: "Les calculateurs", lien: "calculateurs.html", bouton: "Ouvrir les calculs",
+    texte: "Transposition, verre-œil, Prentice : le calcul est détaillé, pour vérifier le tien." }
+];
+function lireDecouverte() {
+  try { const e = JSON.parse(localStorage.getItem("decouverte") || "{}") || {}; e.vus = e.vus || {}; e.fermes = e.fermes || {}; return e; }
+  catch (e) { return { vus: {}, fermes: {} }; }
+}
+function fermerDecouverte(id) {
+  const e = lireDecouverte();
+  e.fermes[id] = true;
+  try { localStorage.setItem("decouverte", JSON.stringify(e)); } catch (err) {}
+}
+// L'outil à présenter aujourd'hui (null : aucun)
+function decouverteDuJour() {
+  const e = lireDecouverte(), auj = rythmeCle(rythmeMidi(0));
+  const enCours = DECOUVERTES.find(d => e.vus[d.id] === auj && !e.fermes[d.id]);
+  if (enCours) return enCours;
+  if (!invitationLibre("decouverte")) return null;
+  const jours = reponsesParJour(), objectif = lireObjectif() || OBJECTIFS[1];
+  const actifs = Object.keys(jours).filter(k => jours[k].n > 0);
+  const s = {
+    jour: actifs.filter(k => k < auj).length + 1,      // 3 = troisième jour de révision, déjà commencé ou non
+    joursActifs: actifs.length,
+    joursValides: Object.keys(jours).filter(k => jours[k].ok || jours[k].n >= objectif).length
+  };
+  const d = DECOUVERTES.find(x => !e.vus[x.id]);       // dans l'ordre : la suivante seulement
+  if (!d || !d.quand(s)) return null;
+  e.vus[d.id] = auj;
+  try { localStorage.setItem("decouverte", JSON.stringify(e)); } catch (err) {}
+  reserverInvitation("decouverte");
+  return d;
+}
+// La carte du compagnon qui présente l'outil, fermable
+function creerDecouverte(d, apresFermeture) {
+  const creer = (balise, classe, texte) => {
+    const n = document.createElement(balise);
+    if (classe) n.className = classe;
+    if (texte !== undefined) n.textContent = texte;
+    return n;
+  };
+  const bloc = creer("div", "jour-mot decouverte");
+  bloc.id = "decouverte";
+  bloc.setAttribute("role", "region");
+  bloc.setAttribute("aria-label", "À découvrir : " + d.titre);
+  const img = creer("img", "jour-compagnon");
+  img.alt = "";
+  img.width = 52;
+  img.height = 52;
+  montrerCompagnon(img, "clin-doeil");
+  const corps = creer("div", "invitation-texte");
+  const message = creer("p", "jour-message");
+  message.append(creer("span", "invitation-raison", d.titre), creer("span", "", d.texte));
+  const actions = creer("div", "invitation-actions");
+  const lien = creer("a", "bouton secondaire", d.bouton);
+  lien.href = d.lien;
+  lien.addEventListener("click", () => fermerDecouverte(d.id));
+  actions.appendChild(lien);
+  corps.append(message, actions);
+  const fermer = creer("button", "decouverte-fermer");
+  fermer.type = "button";
+  fermer.setAttribute("aria-label", "Fermer");
+  fermer.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 6.5l11 11M17.5 6.5l-11 11" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>';
+  fermer.addEventListener("click", () => {
+    fermerDecouverte(d.id);
+    bloc.remove();
+    if (apresFermeture) apresFermeture();
+  });
+  bloc.append(img, corps, fermer);
+  return bloc;
+}
+
 // ---------------- Affichage : carte de l'accueil et bloc du profil ----------------
 // options.profil : le choix de l'objectif est toujours visible (pastilles), avec les explications
 function afficherCarteJour(el, options) {
@@ -412,10 +697,13 @@ function afficherCarteJour(el, options) {
 
   const r = calculerRythme(), a = r.aujourdhui;
 
-  // Accueil : le compagnon dit ce qui a été fait (dernière séance, effort des 7 derniers jours)
+  // Accueil : le compagnon dit ce qui a été fait (dernière séance, effort des 7 derniers jours) ;
+  // le jour d'un moment clé, il propose de créer un compte, ou il présente un outil (une seule invitation par jour)
+  let inv = null, dec = null;
   if (!options.profil) {
-    const mot = messageCompagnon(r);
-    if (mot) {
+    const ligneRecap = () => {
+      const mot = messageCompagnon(r);
+      if (!mot) return null;
       const ligneMot = creer("div", "jour-mot");
       const img = creer("img", "jour-compagnon");
       img.alt = "";
@@ -425,8 +713,20 @@ function afficherCarteJour(el, options) {
       const p = creer("p", "jour-message");
       mot.phrases.forEach(t => p.appendChild(creer("span", "", t)));
       ligneMot.append(img, p);
-      el.appendChild(ligneMot);
-    }
+      return ligneMot;
+    };
+    // Une fois la carte fermée (« Plus tard », croix), le récap reprend sa place et le focus va au titre
+    const apresFermeture = () => {
+      const recap = ligneRecap();
+      if (recap) el.prepend(recap);
+      const titre = el.querySelector(".jour-titre");
+      if (titre) { titre.tabIndex = -1; titre.focus({ preventScroll: true }); }
+    };
+    // L'outil du jour (Atelier au 3e jour, définitions au 4e) passe avant la proposition de compte
+    dec = decouverteDuJour();
+    if (!dec) inv = invitationDuMoment("accueil");
+    const enTete = inv ? creerInvitationCompte(inv, true, apresFermeture) : dec ? creerDecouverte(dec, apresFermeture) : ligneRecap();
+    if (enTete) el.appendChild(enTete);
   }
 
   // L'anneau : les questions du jour sur l'objectif
@@ -461,37 +761,112 @@ function afficherCarteJour(el, options) {
   boite.appendChild(nombre);
 
   const texte = creer("div", "jour-texte");
-  const titre = creer(options.profil ? "h3" : "h2", "jour-titre",
-    a.atteint ? "Objectif du jour atteint" : a.n === 0 ? "Objectif du jour\u00a0: " + a.objectif + " questions" : "Encore " + (a.objectif - a.n) + (a.objectif - a.n > 1 ? " questions" : " question") + " pour l'objectif du jour");
+  const passee = !a.atteint && seancePassee();       // « Passer pour aujourd'hui » a été choisi
+  const titre = creer(options.profil ? "h3" : "h2", "jour-titre", a.atteint ? "Séance du jour faite" : passee ? "Séance du jour passée" : "Ta séance du jour");
   const resume = creer("span", "visuellement-cache", " (" + a.n + (a.n > 1 ? " questions faites" : " question faite") + " aujourd'hui sur " + a.objectif + ")");
   titre.appendChild(resume);
-  texte.append(titre, creer("p", "jour-serie", phraseSerie(r)));
+  const detail = creer("p", "jour-detail", a.atteint ? "Objectif atteint\u00a0: " + a.n + " questions aujourd'hui."
+    : passee ? (a.n > 0 ? "Séance arrêtée à " + a.n + (a.n > 1 ? " questions" : " question") + " sur " + a.objectif + "." : "Pas de séance aujourd'hui.") + " Un jour manqué par semaine ne casse pas ta série."
+    : a.n > 0 ? "Encore " + (a.objectif - a.n) + (a.objectif - a.n > 1 ? " questions" : " question") + " pour ton objectif."
+    : "");                                   // séance pas commencée : le nombre de questions se choisit juste en dessous
+  texte.append(titre, ...(detail.textContent ? [detail] : []), creer("p", "jour-serie", phraseSerie(r)));
 
-  // La semaine, du lundi au dimanche
+  // La semaine, du lundi au dimanche, en petit banc d'optique : chaque jour est une lentille sur l'axe optique
+  // (trait mixte). Objectif atteint : la lentille s'éclaire. Le rayon traverse les jours de la série en cours,
+  // pause comprise, et s'arrête là où elle s'arrête ; il entre par la gauche si la série a commencé avant lundi.
   const ETATS = { ok: "objectif atteint", pause: "jour de pause", vide: "pas de révision", aujourdhui: "aujourd'hui, en cours", futur: "à venir" };
+  const LENTILLE = '<svg class="lentille" viewBox="0 0 12 24" aria-hidden="true">' +
+    '<path class="lentille-verre" d="M6 1.2Q11.4 12 6 22.8Q0.6 12 6 1.2Z"/><path class="lentille-reflet" d="M4.5 6.8Q3.6 12 4.5 17.2"/></svg>';
   const semaine = creer("ol", "semaine");
   semaine.setAttribute("aria-label", "Cette semaine");
-  r.semaine.forEach(j => {
+  r.semaine.forEach((j, i) => {
     const li = creer("li", j.etat + (j.estAujourdhui ? " est-aujourdhui" : ""));
+    li.style.setProperty("--i", i);
     li.title = j.nom.charAt(0).toUpperCase() + j.nom.slice(1) + " " + j.numero + "\u00a0: " + ETATS[j.etat];
-    li.append(creer("span", "", j.nom.charAt(0).toUpperCase()));
-    li.firstChild.setAttribute("aria-hidden", "true");
-    li.append(creer("span", "visuellement-cache", j.nom + " " + j.numero + "\u00a0: " + ETATS[j.etat]));
+    li.insertAdjacentHTML("beforeend", LENTILLE);
+    const lettre = creer("span", "semaine-lettre", j.nom.charAt(0).toUpperCase());
+    lettre.setAttribute("aria-hidden", "true");
+    li.append(lettre, creer("span", "visuellement-cache", j.nom + " " + j.numero + "\u00a0: " + ETATS[j.etat]));
     semaine.appendChild(li);
   });
+  const dansSerie = r.semaine.map((j, i) => (j.dansSerie ? i : -1)).filter(i => i >= 0);
+  if (dansSerie.length && (dansSerie.length > 1 || r.serieAvantLundi)) {
+    semaine.classList.add("avec-rayon");
+    semaine.style.setProperty("--debut", r.serieAvantLundi ? -0.5 : dansSerie[0]);
+    semaine.style.setProperty("--fin", dansSerie[dansSerie.length - 1]);
+  }
   texte.appendChild(semaine);
 
-  const cinq = creer("a", "bouton secondaire jour-cinq");
-  cinq.href = "qcm.html#cinq-minutes";
-  const ico = creer("span", "ico i-chrono");
-  ico.setAttribute("aria-hidden", "true");
-  cinq.append(ico, "5 minutes");
-  cinq.setAttribute("aria-label", "5 minutes\u00a0: 5 questions, celles à revoir d'abord");
-
-  ligne.append(boite, texte, cinq);
+  // L'action du jour. Objectif atteint : 5 minutes de plus si l'élève en veut encore. Sinon, chaque jour, les mêmes
+  // questions qu'à la première visite : combien de questions (5, 10 ou 20 : c'est l'objectif, le dernier choix reste coché),
+  // sur quelle matière (ses questions seulement) ou « Aléatoire » (le mélange : à revoir, puis l'Essentiel), puis « Commencer ».
+  // « Passer pour aujourd'hui » replie le tout jusqu'au lendemain ; l'élève peut revenir dessus.
+  ligne.append(boite, texte);
+  const rafraichir = cible => {
+    afficherCarteJour(el, options);
+    const n = el.querySelector(cible) || el.querySelector(".jour-titre");
+    if (n) { if (!n.matches("a, button")) n.tabIndex = -1; n.focus({ preventScroll: true }); }
+  };
+  const discret = (texte, action) => {
+    const b = creer("button", "bouton-discret jour-passer", texte);
+    b.type = "button";
+    b.addEventListener("click", action);
+    return b;
+  };
+  let suite = null;
+  if (a.atteint) {
+    const action = creer("a", "bouton secondaire jour-action");
+    action.href = "qcm.html#cinq-minutes";
+    const ico = creer("span", "ico i-chrono");
+    ico.setAttribute("aria-hidden", "true");
+    action.append(ico, "5 minutes de plus");
+    ligne.appendChild(action);
+  } else if (passee) {
+    suite = discret("Faire ma séance quand même", () => { passerSeance(false); rafraichir(".jour-matiere"); });
+  } else {
+    suite = creer("div", "jour-matieres");
+    // Combien de questions : le profil a déjà ce choix juste au-dessus
+    if (!options.profil) suite.append(creer("p", "jour-matieres-titre", "Combien de questions aujourd'hui\u00a0?"), choix());
+    // Sur quelle matière : la matière cochée est gardée sur la carte (data-matiere) tant que la page reste ouverte
+    const question = creer("p", "jour-matieres-titre", "Sur quelle matière\u00a0?");
+    question.id = options.profil ? "jour-matieres-titre-profil" : "jour-matieres-titre";
+    const choixMatiere = creer("div", "jour-matieres-choix");
+    choixMatiere.setAttribute("role", "radiogroup");
+    choixMatiere.setAttribute("aria-labelledby", question.id);
+    const action = creer("a", (options.profil ? "bouton secondaire" : "bouton") + " jour-action", a.n > 0 ? "Reprendre ma séance" : "Commencer ma séance");
+    const majMatiere = () => {
+      const code = matiereSeance(el.dataset.matiere);
+      choixMatiere.querySelectorAll("button").forEach(b => b.setAttribute("aria-checked", String((b.dataset.epreuve || null) === code)));
+      action.href = "qcm.html#seance" + (code ? "/" + code : "");
+    };
+    MATIERES_SEANCE.concat([[null, "Aléatoire"]]).forEach(([code, nom]) => {
+      const b = creer("button", "jour-matiere" + (code ? "" : " jour-aleatoire"), nom);
+      b.type = "button";
+      b.setAttribute("role", "radio");
+      if (code) b.dataset.epreuve = code;             // la couleur de la matière (style.css)
+      b.addEventListener("click", () => { el.dataset.matiere = code || ""; majMatiere(); });
+      choixMatiere.appendChild(b);
+    });
+    // Flèches du clavier dans le groupe, comme des boutons radio
+    choixMatiere.addEventListener("keydown", e => {
+      if (!["ArrowRight", "ArrowLeft", "ArrowDown", "ArrowUp"].includes(e.key)) return;
+      const bs = [...choixMatiere.querySelectorAll("button")];
+      const i = bs.indexOf(document.activeElement);
+      if (i < 0) return;
+      e.preventDefault();
+      const b = bs[(i + (e.key === "ArrowRight" || e.key === "ArrowDown" ? 1 : bs.length - 1)) % bs.length];
+      b.click();
+      b.focus({ preventScroll: true });
+    });
+    majMatiere();
+    const actions = creer("div", "jour-actions");
+    actions.append(action, discret("Passer pour aujourd'hui", () => { passerSeance(true); rafraichir(".jour-passer"); }));
+    suite.append(question, choixMatiere, actions);
+  }
   el.appendChild(ligne);
+  if (suite) el.appendChild(suite);
 
-  if (options.profil) el.appendChild(creer("p", "jour-legende", "Rond plein\u00a0: objectif atteint. Rond en pointillé\u00a0: jour de pause, pris tout seul une fois par semaine."));
+  if (options.profil) el.appendChild(creer("p", "jour-legende", "Lentille éclairée\u00a0: objectif atteint. En pointillé\u00a0: jour de pause, pris tout seul une fois par semaine. Le rayon traverse les jours de ta série."));
 
   // Compte à rebours et rythme conseillé
   const ex = calculerExamen(), phrase = phraseExamen(ex);
@@ -506,15 +881,48 @@ function afficherCarteJour(el, options) {
   }
 
   // Objectif atteint et pas encore de rappel : une ligne qui mène au rappel du profil
-  if (!options.profil && a.atteint && !lireRappel()) {
+  if (!options.profil && a.atteint && !lireRappel() && !inv && !dec && invitationLibre("rappel")) {
     const p = creer("p", "jour-legende jour-rappel");
     const lien = creer("a", "", "Mettre un rappel chaque jour dans ton agenda");
     lien.href = "compte.html#rappel";
     p.appendChild(lien);
     el.appendChild(p);
+    reserverInvitation("rappel");
   }
 
   // L'anneau se remplit (la transition est coupée si l'élève a désactivé les animations)
   const part = a.atteint ? 1 : Math.min(1, a.n / a.objectif);
   requestAnimationFrame(() => requestAnimationFrame(() => { plein.style.strokeDashoffset = (tour * (1 - part)).toFixed(2); }));
+}
+
+// ---------------- Première ouverture : « Cinq questions pour commencer » (index.html) ----------------
+// Montrée quand l'élève n'a encore répondu à rien : html[data-accueil="premier"], posé dans le <head> de l'accueil
+// avant l'affichage (rien ne change sans JavaScript). La matière des questions (ou « Aléatoire » : une par matière),
+// deux réglages facultatifs (année, objectif), puis UNE action : 5 questions faciles (qcm.html#premiers-pas, ou
+// #premiers-pas/U42 pour une matière). « Passer : je connais déjà le site » : localStorage « accueil » = "passe".
+function preparerPremiersPas(el) {
+  if (!el) return;
+  const form = el.querySelector("form");
+  // Un élève qui revient sans avoir encore répondu retrouve ses réglages
+  const annee = lireProfil().annee || "";
+  form.querySelectorAll('input[name="annee"]').forEach(i => { i.checked = i.value === annee; });
+  const objectif = lireObjectif() || OBJECTIFS[1];
+  form.querySelectorAll('input[name="objectif"]').forEach(i => { i.checked = Number(i.value) === objectif; });
+  form.addEventListener("submit", e => {
+    e.preventDefault();
+    const a = form.querySelector('input[name="annee"]:checked');
+    if (a) enregistrerProfil(Object.assign(lireProfil(), { annee: a.value }));
+    const o = form.querySelector('input[name="objectif"]:checked');
+    choisirObjectif(o ? Number(o.value) : OBJECTIFS[1]);
+    const m = form.querySelector('input[name="matiere"]:checked'), matiere = m ? matiereSeance(m.value) : null;
+    location.href = "qcm.html#premiers-pas" + (matiere ? "/" + matiere : "");
+  });
+  el.querySelector("#premiers-passer").addEventListener("click", () => {
+    try { localStorage.setItem("accueil", "passe"); } catch (e) {}
+    delete document.documentElement.dataset.accueil;
+    window.dispatchEvent(new Event("resize"));        // le banc d'optique était caché : il se recalcule
+    window.scrollTo(0, 0);
+    const titre = document.querySelector(".hero h1");
+    if (titre) { titre.tabIndex = -1; titre.focus({ preventScroll: true }); }
+  });
 }

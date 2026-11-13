@@ -72,6 +72,21 @@
   if (Date.now() - Number(lire("appli-invitation-vue") || 0) < 7 * 864e5) return;
   function vue() { ecrire("appli-invitation-vue", String(Date.now())); }
 
+  // Une seule invitation par jour sur tout le site (rythme.js : « invitation-jour »), et aucune le premier
+  // jour de révision : ce jour-là, l'élève découvre sa séance, rien d'autre.
+  function cleJour(d) { return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0"); }
+  function placeLibre() {
+    try {
+      const temps = Object.values(JSON.parse(lire("progression-t") || "{}")).map(Number).filter(Boolean);
+      const minuit = new Date();
+      minuit.setHours(0, 0, 0, 0);
+      if (!temps.length || Math.min.apply(null, temps) >= minuit.getTime()) return false;
+      const e = JSON.parse(lire("invitation-jour") || "{}") || {};
+      return e.jour !== cleJour(new Date()) || e.type === "appli";
+    } catch (e) { return true; }
+  }
+  function prendrePlace() { ecrire("invitation-jour", JSON.stringify({ jour: cleJour(new Date()), type: "appli" })); }
+
   function fermerPourDeBon(b) {
     ecrire("appli-invitation", "fermee");
     b.remove();
@@ -83,13 +98,14 @@
 
   if (iphone) {
     window.addEventListener("load", () => setTimeout(() => {
-      if (document.getElementById("bandeau-maj") || document.getElementById("bandeau-version")) return;
+      if (document.getElementById("bandeau-maj") || document.getElementById("bandeau-version") || document.getElementById("invitation-compte") || !placeLibre()) return;
       const b = bandeau("invitation-appli",
         '<span>Pour avoir le site en appli, même sans internet : touche Partager ' + PARTAGER +
         ', puis « Sur l\'écran d\'accueil ».</span>' +
         '<button type="button" class="bouton-discret">Non merci</button>');
       b.classList.add("invitation-appli");
       vue();
+      prendrePlace();
       b.querySelector(".bouton-discret").onclick = () => fermerPourDeBon(b);
     }, 2500));
     return;
@@ -98,13 +114,14 @@
   // Android et ordinateur (Chrome, Edge…) : le navigateur prévient quand l'installation est possible
   window.addEventListener("beforeinstallprompt", ev => {
     ev.preventDefault();
-    if (document.getElementById("bandeau-maj") || document.getElementById("bandeau-version")) return;
+    if (document.getElementById("bandeau-maj") || document.getElementById("bandeau-version") || document.getElementById("invitation-compte") || !placeLibre()) return;
     const b = bandeau("invitation-appli",
       '<span>Le site s\'installe comme une appli et marche sans internet.</span>' +
       '<button type="button" class="bouton">Installer</button>' +
       '<button type="button" class="bouton-discret">Non merci</button>');
     b.classList.add("invitation-appli");
     vue();
+    prendrePlace();
     b.querySelector(".bouton").onclick = async () => {
       b.remove();
       ev.prompt();

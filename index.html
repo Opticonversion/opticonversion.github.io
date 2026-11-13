@@ -13,6 +13,7 @@
 <title>Opticonversion · Révise le BTS OL en t'entraînant</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='13' fill='none' stroke='%23d9b26f' stroke-width='3'/%3E%3Ccircle cx='16' cy='16' r='5' fill='%23d9b26f'/%3E%3C/svg%3E">
 <script>/* Fond choisi par l'élève (profil), appliqué avant l'affichage */ try { if (localStorage.getItem("fond") === "clair") { document.documentElement.dataset.fond = "clair"; var m = document.querySelector('meta[name="theme-color"]'); if (m) m.content = "#1a1f2a"; } } catch (e) {}</script>
+<script>/* Première ouverture : aucune réponse, pas de compte, écran pas encore passé (rythme.js, preparerPremiersPas). Les robots d'indexation voient la page normale. */ try { var pr = localStorage.getItem("progression"); if ((!pr || pr === "{}") && !localStorage.getItem("compte-uid") && localStorage.getItem("accueil") !== "passe" && !/bot|crawl|spider|lighthouse/i.test(navigator.userAgent)) document.documentElement.dataset.accueil = "premier"; } catch (e) {}</script>
 <link rel="preload" href="polices/bodoni-moda.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="polices/atkinson-hyperlegible-next.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="manifest" href="manifest.webmanifest">
@@ -21,7 +22,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Opticonversion">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
-<link rel="stylesheet" href="style.css?v=3cb4be98">
+<link rel="stylesheet" href="style.css?v=e7375bae">
 </head>
 <body data-rafraichir="oui">
 
@@ -41,6 +42,43 @@
 </header>
 
 <main class="vaste">
+  <!-- Première ouverture (aucune réponse encore) : une seule action, avant tout le reste (rythme.js) -->
+  <section class="premiers-pas" id="premiers-pas" aria-labelledby="titre-premiers-pas">
+    <div class="tete-page">
+      <h1 id="titre-premiers-pas" class="apparait">Cinq questions pour commencer.</h1>
+      <p class="sous-titre apparait" style="--d:1">Faciles, sur les notions qui tombent le plus au BTS OL, avec la correction expliquée. Environ cinq minutes.</p>
+      <img class="tete-compagnon" data-pose="clin-doeil" src="img/nounours-clin-doeil.svg" alt="" width="120" height="132">
+    </div>
+    <form class="premiers-reglages apparait" style="--d:2" id="premiers-reglages">
+      <fieldset class="choix-pastilles choix-matiere">
+        <legend>Sur quelle matière&nbsp;?</legend>
+        <label data-epreuve="U41"><input type="radio" name="matiere" value="U41"><span>Maths</span></label>
+        <label data-epreuve="U42"><input type="radio" name="matiere" value="U42"><span>OGP</span></label>
+        <label data-epreuve="U43"><input type="radio" name="matiere" value="U43"><span>ETSO</span></label>
+        <label data-epreuve="U5"><input type="radio" name="matiere" value="U5"><span>Vision</span></label>
+        <label data-epreuve="U3"><input type="radio" name="matiere" value="U3"><span>Éco</span></label>
+        <label><input type="radio" name="matiere" value="" checked><span>Aléatoire</span></label>
+      </fieldset>
+      <fieldset class="choix-pastilles">
+        <legend>Où tu en es</legend>
+        <label><input type="radio" name="annee" value="1re année de BTS"><span>1re année</span></label>
+        <label><input type="radio" name="annee" value="2e année de BTS"><span>2e année</span></label>
+        <label><input type="radio" name="annee" value="Déjà opticien, je révise"><span>Déjà opticien</span></label>
+      </fieldset>
+      <fieldset class="choix-pastilles">
+        <legend>Combien de questions par jour&nbsp;?</legend>
+        <label><input type="radio" name="objectif" value="5"><span>5</span></label>
+        <label><input type="radio" name="objectif" value="10" checked><span>10</span></label>
+        <label><input type="radio" name="objectif" value="20"><span>20</span></label>
+      </fieldset>
+      <p class="premiers-aide">Tu pourras changer ces réglages dans ton profil.</p>
+      <div class="premiers-actions">
+        <button class="bouton bouton-grand" type="submit">Commencer</button>
+        <button class="bouton-discret" type="button" id="premiers-passer">Passer&nbsp;: je connais déjà le site</button>
+      </div>
+    </form>
+  </section>
+
   <div class="hero">
     <div class="hero-texte">
       <h1 class="apparait">Révise l'optique en t'entraînant.</h1>
@@ -87,9 +125,9 @@
   </a>
 
   <div class="titre-section">
-    <h2>Pour réviser</h2>
+    <h2 id="titre-outils">Pour réviser</h2>
   </div>
-  <div class="outils">
+  <div class="outils" id="outils">
     <a class="outil outil-vedette" href="essentiel.html">
       <span class="outil-icone" aria-hidden="true"><span class="ico i-etoile"></span></span>
       <span class="outil-texte">
@@ -142,8 +180,10 @@
 <script src="questions-U5.js?v=15b8a311"></script>
 <script src="questions-U3.js?v=944da1c9"></script>
 <script src="essentiel.js?v=f3b7979d"></script>
-<script src="rythme.js?v=75012fc2"></script>
+<script src="rythme.js?v=40d59d2f"></script>
 <script>
+  // Première ouverture : l'écran « Cinq questions pour commencer » (rythme.js)
+  if (document.documentElement.dataset.accueil === "premier") preparerPremiersPas(document.getElementById("premiers-pas"));
   // Le compagnon choisi dans le profil (DioSL par défaut) accueille l'élève
   montrerCompagnon(document.querySelector(".hero-diosl img"), "clin-doeil");
   // Petit mot d'accueil si l'élève a choisi un pseudo
@@ -194,8 +234,11 @@
         document.querySelector(".hero").classList.add("hero-retour");
         document.querySelector(".hero h1").textContent = pseudo ? "On continue, " + pseudo + " ?" : "On continue ?";
         document.getElementById("salut").textContent = "Content de te revoir";
-        // Objectif du jour, série de jours et compte à rebours des écrits
+        // Ta séance du jour (rythme.js) : la seule grande action du haut de page. Les boutons et la phrase
+        // d'accueil des nouveaux venus sont cachés (.hero-retour), les outils passent en dessous, plus discrets.
         afficherCarteJour(document.getElementById("jour"));
+        document.getElementById("titre-outils").textContent = "Tout le site";
+        document.getElementById("outils").classList.add("outils-discrets");
         if (dues > 0) {
           principale.innerHTML = '<span class="ico i-calendrier" aria-hidden="true"></span> ';
           principale.append("Réviser mes " + dues + " question" + (dues > 1 ? "s" : "") + " du jour");
@@ -213,8 +256,8 @@
       }
     }
     const prochaine = prochaineRevision();
-    // Si le haut de page propose déjà « Réviser mes questions du jour », pas besoin de la carte en double
-    const dejaPropose = dues > 0 && bilanQuestions(QUESTIONS).faites > 0;
+    // L'élève qui a déjà répondu a sa séance du jour (questions à revoir comprises) : pas de carte en double
+    const dejaPropose = bilanQuestions(QUESTIONS).faites > 0;
     if ((dues > 0 || prochaine) && !dejaPropose) {
       const carte = document.getElementById("carte-revoir");
       carte.hidden = false;
@@ -251,8 +294,8 @@
 </script>
 <script src="banc.js?v=90809218" defer></script>
 <script src="vivant.js?v=ec7cf52b" defer></script>
-<script src="appli.js?v=9609be57" defer></script>
-<script type="module" src="compte.js?v=02538a67"></script>
+<script src="appli.js?v=b1a5a039" defer></script>
+<script type="module" src="compte.js?v=05e17079"></script>
 <!-- Mesure d'audience anonyme, sans cookies (GoatCounter) -->
 <script data-goatcounter="https://opticonversion.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </body>
