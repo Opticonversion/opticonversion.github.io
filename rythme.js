@@ -211,6 +211,25 @@ function questionsSeance(taille, matiere) {
   const base = QUESTIONS.filter(q => !q.entrainement && !q.cas && deLaMatiere(q));
   prendre(melangerListe(questionsARevoir().filter(deLaMatiere)));
   const jamais = base.filter(q => prog[idQuestion(q)] === undefined);
+  // « Mon plan » (pas de matière choisie) : les thèmes de la semaine, celui du jour d'abord (voir planDeLaSemaine).
+  // Loin des écrits, les questions jamais faites d'abord ; près des écrits, les ratées d'abord.
+  if (!matiere && planVisible()) {
+    const plan = planDeLaSemaine();
+    if (plan && plan.themes.length) {
+      // Le thème du jour prend au plus 60 % de la séance, puis les deux autres, puis encore le thème du jour s'il en faut
+      const faiblesDabord = plan.phase === "faibles" || plan.phase === "fin";
+      const ordre = themesDansLOrdreDuJour(plan);
+      const duTheme = t => {
+        const qs = base.filter(q => q.epreuve === t.e && q.theme === t.t);
+        const neuves = parDifficulte(qs.filter(q => prog[idQuestion(q)] === undefined));
+        const ratees = melangerListe(qs.filter(q => prog[idQuestion(q)] === 0));
+        return faiblesDabord ? ratees.concat(neuves) : neuves.concat(ratees);
+      };
+      const part = Math.max(choisies.length + 1, choisies.length + Math.ceil(taille * 0.6));
+      prendre(duTheme(ordre[0]).slice(0, Math.max(0, Math.min(taille, part) - choisies.length)));
+      ordre.slice(1).concat(ordre[0]).forEach(t => prendre(duTheme(t)));
+    }
+  }
   if (typeof ESSENTIEL !== "undefined") ESSENTIEL.forEach(n => prendre(parDifficulte(jamais.filter(q => q.epreuve === n.epreuve && q.theme === n.theme))));
   prendre(parDifficulte(jamais));
   prendre(melangerListe(base.filter(q => prog[idQuestion(q)] === 0)));
@@ -649,15 +668,17 @@ function creerOutilDuJour(d, apresFermeture) {
   bloc.setAttribute("aria-label", "À découvrir : " + d.titre);
   if (d.dessin) bloc.insertAdjacentHTML("beforeend", DESSIN_TRACE);
   else if (d.icone) { const ico = creer("span", "ico outil-jour-ico " + d.icone); ico.setAttribute("aria-hidden", "true"); bloc.appendChild(ico); }
+  // d.fermer (facultatif) : ce que fait la croix à la place de « outil déjà présenté » (ex. l'examen blanc du plan)
+  const marquer = () => (d.fermer ? d.fermer() : fermerDecouverte(d.id));
   const lien = creer("a", "bouton bouton-grand", d.bouton);
   lien.href = d.lien;
-  lien.addEventListener("click", () => fermerDecouverte(d.id));
+  if (!d.fermer) lien.addEventListener("click", marquer);
   const fermer = creer("button", "decouverte-fermer");
   fermer.type = "button";
   fermer.setAttribute("aria-label", "Fermer");
   fermer.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 6.5l11 11M17.5 6.5l-11 11" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>';
   fermer.addEventListener("click", () => {
-    fermerDecouverte(d.id);
+    marquer();
     bloc.remove();
     if (apresFermeture) apresFermeture();
   });
@@ -717,8 +738,20 @@ function preparerEcranDuJour(el) {
   });
   // La proposition du jour : un outil (grande carte, en tête) ou, sinon, le compte (sous les boutons)
   const zoneOutil = el.querySelector("#ecran-jour-outil"), zoneCompte = el.querySelector("#ecran-jour-compte");
-  const dec = decouverteDuJour();
-  if (dec) {
+  // Le plan de la semaine, juste au-dessus des choix ; près des écrits, l'examen blanc du jour passe avant tout outil
+  const zonePlan = el.querySelector("#ecran-jour-plan"), blocPlan = creerLignePlan();
+  if (zonePlan && blocPlan) { zonePlan.appendChild(blocPlan); zonePlan.hidden = false; }
+  const exam = examenBlancDuJour();
+  const dec = exam ? null : decouverteDuJour();
+  if (exam) {
+    lancer.classList.add("secondaire");
+    zoneOutil.hidden = false;
+    zoneOutil.appendChild(creerOutilDuJour(carteExamenBlanc(exam), () => {
+      zoneOutil.hidden = true;
+      lancer.classList.remove("secondaire");
+      lancer.focus({ preventScroll: true });
+    }));
+  } else if (dec) {
     lancer.classList.add("secondaire");               // ce jour-là, le bouton or est celui de l'outil
     zoneOutil.hidden = false;
     zoneOutil.appendChild(creerOutilDuJour(dec, () => {
@@ -954,7 +987,9 @@ function afficherCarteJour(el, options) {
       choixMatiere.querySelectorAll("button").forEach(b => b.setAttribute("aria-checked", String((b.dataset.epreuve || null) === code)));
       action.href = "qcm.html#seance" + (code ? "/" + code : "");
     };
-    MATIERES_SEANCE.concat([[null, "Aléatoire"]]).forEach(([code, nom]) => {
+    // Sans matière : « Mon plan » (les thèmes de la semaine) dès le 2e jour de révision ; le premier jour, « Aléatoire »
+    const sansMatiere = planVisible() ? "Mon plan" : "Aléatoire";
+    MATIERES_SEANCE.concat([[null, sansMatiere]]).forEach(([code, nom]) => {
       const b = creer("button", "jour-matiere" + (code ? "" : " jour-aleatoire"), nom);
       b.type = "button";
       b.setAttribute("role", "radio");
@@ -979,6 +1014,9 @@ function afficherCarteJour(el, options) {
     suite.append(question, choixMatiere, actions);
   }
   el.appendChild(ligne);
+  // Le plan de la semaine (dès le 2e jour de révision), avant les choix de la séance
+  const blocPlan = creerLignePlan(options.profil);
+  if (blocPlan) el.appendChild(blocPlan);
   if (suite) el.appendChild(suite);
 
   if (options.profil) el.appendChild(creer("p", "jour-legende", "Lentille éclairée\u00a0: objectif atteint. En pointillé\u00a0: jour de pause, pris tout seul une fois par semaine. Le rayon traverse les jours de ta série."));
@@ -1083,4 +1121,290 @@ function preparerPremiersPas(el) {
     const titre = document.querySelector(".hero h1");
     if (titre) { titre.tabIndex = -1; titre.focus({ preventScroll: true }); }
   });
+}
+
+// =====================================================================
+// Plan de révision : les thèmes de la semaine (validé par David le 13 nov. 2026)
+// ---------------------------------------------------------------------
+// Chaque lundi, 3 thèmes sont choisis, puis gardés toute la semaine (localStorage « plan », cet appareil) ;
+// un thème maîtrisé en cours de semaine (80 % réussies, etatNotion) laisse sa place au suivant.
+// Choix d'un thème = sa place au BTS × le besoin de l'élève :
+//   - place au BTS : (tombe / sur) × coef de l'Essentiel ; un thème hors Essentiel vaut 0,3 × coef de l'épreuve ;
+//   - besoin : la part de questions jamais faites (« neuf ») et la faiblesse (« faible » : 1 − taux de réussite,
+//     plus les questions à revoir aujourd'hui, plus les erreurs du dernier examen blanc de moins de 45 jours),
+//     dosés selon le temps qui reste avant les écrits (PHASES_PLAN) ; un thème maîtrisé ne garde que 15 % de son besoin.
+// Au plus 2 thèmes par épreuve (1 seul loin des écrits ou pour un élève qui a fait moins de 30 questions : il voit
+// tout le BTS). La séance « Mon plan » (questionsSeance sans matière) : à revoir, puis le thème du jour, puis les autres.
+// Examen blanc proposé en grande carte sur l'écran du jour, à un rythme qui augmente quand les écrits approchent.
+// Le plan apparaît à partir du 2e jour de révision (le premier jour, l'élève découvre le site).
+// =====================================================================
+const PLAN_THEMES = 3;
+const PLAN_POIDS_HORS_ESSENTIEL = 0.3;
+const PLAN_COEF = { U41: 2, U42: 3, U43: 3, U5: 6, U3: 5 };
+// neuf / faible : dosage du besoin ; examen : un examen blanc tous les N jours (0 : pas proposé) ; parEpreuve : thèmes au plus
+const PHASES_PLAN = {
+  decouverte: { neuf: 1,    faible: 0.8, examen: 0,  parEpreuve: 1,
+    texte: "Les écrits sont encore loin : le plan te fait d'abord voir tout le programme, en commençant par ce qui tombe le plus." },
+  melange:    { neuf: 0.7,  faible: 1,   examen: 14, parEpreuve: 2,
+    texte: "Moins de 3 mois avant les écrits : des thèmes nouveaux et tes points faibles, et un examen blanc toutes les deux semaines." },
+  faibles:    { neuf: 0.25, faible: 1,   examen: 7,  parEpreuve: 2,
+    texte: "Moins de 6 semaines avant les écrits : tes points faibles d'abord, et un examen blanc chaque semaine." },
+  fin:        { neuf: 0,    faible: 1,   examen: 3,  parEpreuve: 2,
+    texte: "Dernière ligne droite : plus de thème nouveau, tes points faibles et un examen blanc tous les 3 jours." },
+  libre:      { neuf: 0.5,  faible: 1,   examen: 0,  parEpreuve: 2,
+    texte: "Tes points faibles d'abord, puis ce qui tombe le plus au BTS." }
+};
+// Mêmes chiffres que FORMATS_EXAMEN.blanc (examen.js, chargé par qcm.html seulement) : pour l'annonce sur l'accueil
+const PLAN_EXAMEN_SECOURS = { U42: [20, 40], U43: [20, 40], U5: [25, 50], U3: [25, 50] };
+const NOMS_COURTS_PLAN = { U41: "Maths", U42: "OGP", U43: "ETSO", U5: "Vision", U3: "Éco" };
+const deNomPlan = n => (/^[AEIOUÉ]/.test(n) ? "d'" : "de ") + n;      // « de Vision », « d'Éco », « d'OGP »
+
+function lirePlanStocke() {
+  try { return JSON.parse(localStorage.getItem("plan") || "null"); } catch (e) { return null; }
+}
+function ecrirePlan(plan) {
+  try { localStorage.setItem("plan", JSON.stringify(plan)); } catch (e) {}
+}
+function joursEntre(a, b) { return Math.round((b - a) / 864e5); }
+
+// La période : selon les jours avant les écrits (calculerExamen) ; « libre » si l'élève est déjà opticien ou pendant les écrits
+function phasePlan(ex) {
+  if (ex === undefined) ex = calculerExamen();
+  if (!ex || ex.etat !== "avant") return "libre";
+  return ex.jours > 90 ? "decouverte" : ex.jours > 42 ? "melange" : ex.jours > 14 ? "faibles" : "fin";
+}
+
+// Les erreurs du dernier examen blanc (moins de 45 jours), par thème : questions de la copie encore ratées aujourd'hui
+function erreursExamenRecentes(prog) {
+  let copies = {};
+  try { copies = JSON.parse(localStorage.getItem("examen-dernier") || "{}") || {}; } catch (e) {}
+  const erreurs = {}, limite = Date.now() - 45 * 864e5;
+  Object.values(copies).forEach(c => {
+    if (!c || !Array.isArray(c.ids) || !(Number(c.date) >= limite)) return;
+    c.ids.forEach(id => {
+      if (prog[id] !== 0) return;
+      const q = QUESTIONS.find(x => x.id === id);
+      if (q) erreurs[q.epreuve + "/" + q.theme] = (erreurs[q.epreuve + "/" + q.theme] || 0) + 1;
+    });
+  });
+  return erreurs;
+}
+
+// Un bilan par thème (questions hors entraînement, cas compris, comme etatNotion)
+function statsThemesPlan() {
+  const prog = lireProgression(), dues = new Set(questionsARevoir().map(idQuestion));
+  const erreurs = erreursExamenRecentes(prog), themes = new Map();
+  QUESTIONS.forEach(q => {
+    if (q.entrainement) return;
+    const k = q.epreuve + "/" + q.theme;
+    let s = themes.get(k);
+    if (!s) {
+      const ess = ESSENTIEL.find(n => n.epreuve === q.epreuve && n.theme === q.theme);
+      s = { k, e: q.epreuve, t: q.theme, total: 0, tentees: 0, reussies: 0, aRevoir: 0, erreursExamen: erreurs[k] || 0, ess,
+        rang: ess ? ESSENTIEL.indexOf(ess) : 999,
+        poids: ess ? ess.tombe / ess.sur * ess.coef : (PLAN_COEF[q.epreuve] || 1) * PLAN_POIDS_HORS_ESSENTIEL };
+      themes.set(k, s);
+    }
+    const id = idQuestion(q);
+    s.total++;
+    if (id in prog) { s.tentees++; if (prog[id] === 1) s.reussies++; }
+    if (dues.has(id)) s.aRevoir++;
+  });
+  themes.forEach(s => { s.maitrise = s.total > 0 && s.reussies / s.total >= 0.8; });
+  return [...themes.values()];
+}
+
+function scoreThemePlan(s, phase) {
+  const p = PHASES_PLAN[phase];
+  const neuf = s.total ? 1 - s.tentees / s.total : 0;
+  const faible = s.tentees ? Math.min(1.5, (1 - s.reussies / s.tentees) + 0.15 * Math.min(3, s.aRevoir) + 0.2 * Math.min(3, s.erreursExamen)) : 0;
+  return s.poids * (p.neuf * neuf + p.faible * faible) * (s.maitrise ? 0.15 : 1);
+}
+
+// n thèmes de plus, en dehors de ceux déjà pris (cles) et de ceux maîtrisés cette semaine (exclus)
+function choisirThemesPlan(n, phase, stats, cles, exclus) {
+  const total = stats.reduce((x, s) => x + s.tentees, 0);
+  const parEpreuve = total < 30 ? 1 : PHASES_PLAN[phase].parEpreuve;
+  const compte = {};
+  stats.filter(s => cles.includes(s.k)).forEach(s => { compte[s.e] = (compte[s.e] || 0) + 1; });
+  const libres = stats.filter(s => !cles.includes(s.k) && !exclus.includes(s.k));
+  const ordre = (a, b) => b.score - a.score || a.rang - b.rang || b.poids - a.poids;
+  let candidats = libres.map(s => Object.assign({ score: scoreThemePlan(s, phase) }, s)).filter(s => s.score > 0).sort(ordre);
+  // Rien ne ressort (tout est maîtrisé, ou dernière ligne droite pour un élève qui n'a rien fait) : ce qui tombe le plus
+  if (!candidats.length) candidats = libres.filter(s => !s.maitrise).map(s => Object.assign({ score: s.poids }, s)).sort(ordre);
+  const pris = [];
+  for (const s of candidats) {
+    if (pris.length >= n) break;
+    if ((compte[s.e] || 0) >= parEpreuve) continue;
+    compte[s.e] = (compte[s.e] || 0) + 1;
+    pris.push({ e: s.e, t: s.t });
+  }
+  return pris;
+}
+
+// Le plan de la semaine : { semaine (lundi), phase, themes: [{ e, t }], faits: ["U5/Worth"], examenFerme }
+// null sans questions chargées. Écrit dans localStorage « plan » quand il change.
+function planDeLaSemaine() {
+  if (typeof QUESTIONS === "undefined" || typeof ESSENTIEL === "undefined" || !QUESTIONS.length) return null;
+  const lundi = rythmeCle(rythmeLundi(rythmeMidi(0)));
+  const phase = phasePlan();
+  let plan = lirePlanStocke();
+  const avant = JSON.stringify(plan);
+  if (!plan || plan.semaine !== lundi || !Array.isArray(plan.themes)) plan = { semaine: lundi, themes: [], faits: [] };
+  plan.phase = phase;
+  plan.faits = Array.isArray(plan.faits) ? plan.faits : [];
+  const stats = statsThemesPlan(), parCle = new Map(stats.map(s => [s.k, s]));
+  // Un thème qui n'existe plus disparaît ; un thème maîtrisé cette semaine laisse sa place
+  plan.themes = plan.themes.filter(t => {
+    const s = t && parCle.get(t.e + "/" + t.t);
+    if (s && s.maitrise && stats.some(x => !x.maitrise && !plan.themes.some(y => y.e === x.e && y.t === x.t))) {
+      if (!plan.faits.includes(s.k)) plan.faits.push(s.k);
+      return false;
+    }
+    return !!s;
+  });
+  if (plan.themes.length < PLAN_THEMES) {
+    const cles = plan.themes.map(t => t.e + "/" + t.t);
+    plan.themes = plan.themes.concat(choisirThemesPlan(PLAN_THEMES - plan.themes.length, phase, stats, cles, plan.faits));
+  }
+  if (JSON.stringify(plan) !== avant) ecrirePlan(plan);
+  return plan;
+}
+
+// Le thème du jour en premier : un thème différent chaque jour, à tour de rôle
+function themesDansLOrdreDuJour(plan) {
+  const n = plan.themes.length;
+  if (!n) return [];
+  const i = rythmeMidi(0).getDay() % n;
+  return plan.themes.slice(i).concat(plan.themes.slice(0, i));
+}
+
+// Le plan se montre à partir du 2e jour de révision
+function planVisible() {
+  return typeof QUESTIONS !== "undefined" && !premierJourDeRevision();
+}
+
+// Pourquoi ce thème : la raison principale, puis sa place dans les sujets
+function raisonThemePlan(s) {
+  const parts = [];
+  if (!s.tentees) parts.push("jamais travaillé");
+  else {
+    if (s.erreursExamen) parts.push(s.erreursExamen + (s.erreursExamen > 1 ? " erreurs" : " erreur") + " au dernier examen blanc");
+    parts.push(Math.round(s.reussies / s.tentees * 100) + " % de réussite");
+    if (s.aRevoir) parts.push(s.aRevoir + (s.aRevoir > 1 ? " questions à revoir" : " question à revoir"));
+    const neuves = s.total - s.tentees;
+    if (neuves > 0) parts.push(neuves + (neuves > 1 ? " questions jamais faites" : " question jamais faite"));
+  }
+  if (s.ess) parts.push("tombé dans " + s.ess.tombe + " sujets sur " + s.ess.sur);
+  else parts.push("tombe moins souvent");
+  const t = parts.join(", ");
+  return t.charAt(0).toUpperCase() + t.slice(1) + ".";
+}
+
+// ---------------- L'examen blanc du plan ----------------
+function derniereCopieExamen() {
+  let copies = {};
+  try { copies = JSON.parse(localStorage.getItem("examen-dernier") || "{}") || {}; } catch (e) {}
+  return Object.values(copies).filter(c => c && Number(c.date)).sort((a, b) => b.date - a.date)[0] || null;
+}
+// L'épreuve de l'examen : un examen commencé d'abord ; sinon les épreuves écrites jamais passées en examen blanc
+// (la plus forte au coef d'abord), puis la plus faible note ; pas deux fois de suite la même.
+function epreuveExamenPlan() {
+  try {
+    const enCours = JSON.parse(localStorage.getItem("examen-en-cours") || "{}") || {};
+    const code = Object.keys(enCours).find(c => PLAN_EXAMEN_SECOURS[c]);
+    if (code) return { code, enCours: true };
+  } catch (e) {}
+  let records = {};
+  try { records = JSON.parse(localStorage.getItem("records") || "{}") || {}; } catch (e) {}
+  const derniere = derniereCopieExamen();
+  let codes = Object.keys(PLAN_EXAMEN_SECOURS);
+  if (derniere && codes.length > 1) codes = codes.filter(c => c !== derniere.epreuve);
+  const note = c => (typeof records[c + "/examen"] === "number" ? records[c + "/examen"] : -1);
+  codes.sort((a, b) => note(a) - note(b) || (PLAN_COEF[b] || 0) - (PLAN_COEF[a] || 0));
+  return { code: codes[0], enCours: false };
+}
+// { code, nom, questions, minutes, enCours, dansJours } : dansJours = 0 si c'est aujourd'hui. null : pas d'examen dans le plan.
+function prochainExamenPlan(phase) {
+  const intervalle = PHASES_PLAN[phase || phasePlan()].examen;
+  if (!intervalle) return null;
+  const choix = epreuveExamenPlan(), derniere = derniereCopieExamen();
+  const format = typeof FORMATS_EXAMEN !== "undefined" && FORMATS_EXAMEN.blanc[choix.code];
+  const [questions, minutes] = format ? [format.questions, format.minutes] : PLAN_EXAMEN_SECOURS[choix.code];
+  const depuis = derniere ? joursEntre(new Date(derniere.date), new Date()) : Infinity;
+  return { code: choix.code, nom: NOMS_COURTS_PLAN[choix.code], questions, minutes, enCours: choix.enCours,
+    dansJours: choix.enCours ? 0 : Math.max(0, intervalle - depuis) };
+}
+// L'examen blanc à proposer aujourd'hui sur l'écran du jour (null : rien, ou fermé aujourd'hui)
+function examenBlancDuJour() {
+  if (!planVisible()) return null;
+  const ex = prochainExamenPlan();
+  if (!ex || ex.dansJours > 0) return null;
+  const plan = lirePlanStocke();
+  if (plan && plan.examenFerme === rythmeCle(rythmeMidi(0))) return null;
+  return ex;
+}
+// La grande carte (creerOutilDuJour) : la croix la range jusqu'à demain
+function carteExamenBlanc(ex) {
+  reserverInvitation("examen");                          // la seule proposition du jour
+  return {
+    id: "examen-plan", titre: "examen blanc " + deNomPlan(ex.nom), icone: "i-chrono", lien: "qcm.html#" + ex.code + "/examen",
+    invite: ex.enCours ? "Termine ton examen blanc " + deNomPlan(ex.nom) : "Aujourd'hui : examen blanc " + deNomPlan(ex.nom),
+    texte: ex.enCours ? "Il t'attend avec le temps qui restait. Ta note sur 20 et tes points faibles à la fin."
+      : ex.questions + " questions en " + ex.minutes + " minutes, sans correction avant la fin, comme le jour de l'examen. Tes erreurs passent dans ton plan.",
+    bouton: ex.enCours ? "Reprendre l'examen" : "Commencer l'examen blanc",
+    fermer: () => {
+      const plan = lirePlanStocke() || {};
+      plan.examenFerme = rythmeCle(rythmeMidi(0));
+      ecrirePlan(plan);
+    }
+  };
+}
+
+// ---------------- Affichage : la ligne du plan, et « Pourquoi ces thèmes ? » ----------------
+// Une ligne « Cette semaine : … Aujourd'hui : … », et un détail replié : la raison de chaque thème, la période, l'examen blanc.
+function creerLignePlan(profil) {
+  if (!planVisible()) return null;
+  const plan = planDeLaSemaine();
+  if (!plan || !plan.themes.length) return null;
+  const creer = (balise, classe, texte) => {
+    const n = document.createElement(balise);
+    if (classe) n.className = classe;
+    if (texte !== undefined) n.textContent = texte;
+    return n;
+  };
+  const stats = new Map(statsThemesPlan().map(s => [s.k, s]));
+  const nomTheme = t => t.t + " (" + NOMS_COURTS_PLAN[t.e] + ")";
+  const bloc = creer("div", "plan-semaine");
+  const ligne = creer("p", "plan-ligne");
+  ligne.append(creer("b", "", "Cette semaine : "), plan.themes.map(nomTheme).join(", ") + ".");
+  if (plan.themes.length > 1) ligne.append(" ", creer("span", "plan-jour", "Aujourd'hui : " + themesDansLOrdreDuJour(plan)[0].t + "."));
+  const details = creer("details", "plan-pourquoi");
+  const resume = creer("summary", "", "Pourquoi ces thèmes ?");
+  const liste = creer("ul", "plan-raisons");
+  plan.themes.forEach(t => {
+    const s = stats.get(t.e + "/" + t.t);
+    const li = creer("li");
+    li.dataset.epreuve = t.e;
+    li.append(creer("b", "", nomTheme(t)), " ", s ? raisonThemePlan(s) : "");
+    liste.appendChild(li);
+  });
+  details.append(resume, liste, creer("p", "plan-regle", PHASES_PLAN[plan.phase].texte + " Le plan change chaque lundi, et un thème maîtrisé laisse sa place au suivant."));
+  const ex = prochainExamenPlan(plan.phase);
+  if (ex) details.appendChild(creer("p", "plan-regle", ex.enCours ? "Ton examen blanc " + deNomPlan(ex.nom) + " t'attend."
+    : "Prochain examen blanc : " + ex.nom + ", " + (ex.dansJours === 0 ? "aujourd'hui." : ex.dansJours === 1 ? "demain." : "dans " + ex.dansJours + " jours.")));
+  let compte = false;
+  details.addEventListener("toggle", () => {
+    if (details.open && !compte) { compte = true; window.compter?.("plan-pourquoi", "Plan de révision : « Pourquoi ces thèmes ? » ouvert"); }
+  });
+  bloc.append(ligne, details);
+  if (profil) bloc.classList.add("plan-profil");
+  return bloc;
+}
+
+// Pour le sous-titre de la séance « Mon plan » (qcm.html) : « Ton plan de la semaine : Worth, Conjugaison, Prix et marges. »
+function phrasePlanSeance() {
+  if (!planVisible()) return "";
+  const plan = planDeLaSemaine();
+  return plan && plan.themes.length ? " Ton plan de la semaine : " + themesDansLOrdreDuJour(plan).map(t => t.t).join(", ") + "." : "";
 }

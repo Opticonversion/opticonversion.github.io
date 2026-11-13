@@ -428,7 +428,7 @@ async function demarrer() {
     await A.deleteUser(auth.currentUser);
     ecrireTexte("compte-uid", null);
     ecrire("attente", {});
-    if (effacerNavigateur) ["progression", "progression-t", "records", "attente", "profil", "revisions", "jours"].forEach(c => ecrireTexte(c, null));
+    if (effacerNavigateur) ["progression", "progression-t", "records", "attente", "profil", "revisions", "jours", "plan"].forEach(c => ecrireTexte(c, null));
     if (formReauth) formReauth.hidden = true;
     ui.etat("Ton compte et ta progression en ligne ont été supprimés.");
   }

@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Opticonversion">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
-<link rel="stylesheet" href="style.css?v=f127d63b">
+<link rel="stylesheet" href="style.css?v=e909078a">
 </head>
 <body>
 <header class="entete">
@@ -106,13 +106,13 @@
 <script src="traces-U42.js?v=cd7fcf7c"></script>
 <script src="traces-U43.js?v=65b6cc27"></script>
 <script src="traces-U5.js?v=c4c5f919"></script>
-<script src="specificites-U41.js?v=172ce418"></script>
+<script src="specificites-U41.js?v=79b4e37e"></script>
 <script src="specificites-U42.js?v=3dc3c146"></script>
 <script src="specificites-U43.js?v=0918c26c"></script>
 <script src="specificites-U5.js?v=4d12d3b3"></script>
 <script src="specificites-U3.js?v=2ee96b01"></script>
 <script src="essentiel.js?v=ef2a4256"></script>
-<script src="rythme.js?v=c63f73c6"></script>
+<script src="rythme.js?v=7cf9d521"></script>
 <!-- Examen blanc chronométré (#U5/examen) : avant le script de la page, qui l'ouvre dès le chargement -->
 <script src="examen.js?v=fb7ff662"></script>
 <script>
@@ -281,7 +281,7 @@
   // jusqu'à l'objectif (#seance) et les 5 questions faciles de la première ouverture (#premiers-pas).
   // Avec une matière choisie avant de commencer (#seance/U42, #premiers-pas/U42, #cinq-minutes/U42) : seulement ses questions.
   let seanceMode = null;       // null (À revoir), "cinq", "seance" ou "premiers"
-  let seanceMatiere = null;    // "U42"… si l'élève a choisi une matière, null pour le mélange « Aléatoire »
+  let seanceMatiere = null;    // "U42"… si l'élève a choisi une matière, null pour « Mon plan » (« Aléatoire » le premier jour)
   const ADRESSES_SEANCES = { cinq: "#cinq-minutes", seance: "#seance", premiers: "#premiers-pas" };
   // « Passer » : pendant la séance du jour et les cinq premières questions, à tout moment. Il prend alors la place
   // de « ← Toutes les épreuves » (une seule sortie, qui tient sur une ligne au téléphone).
@@ -316,10 +316,10 @@
     const nb = dues.length + (dues.length > 1 ? " questions" : " question") + (matiere ? " en " + nomMatiereSeance(matiere) : "");
     const composition = () => phraseComposition(compositionSeance(dues));
     document.getElementById("sous-titre").textContent =
-      mode === "cinq" ? nb + ", environ une minute chacune : " + composition() + "."
+      mode === "cinq" ? nb + ", environ une minute chacune : " + composition() + "." + (matiere ? "" : phrasePlanSeance())
       : mode === "seance" ? (tailleSeanceDuJour() === 0
           ? "Objectif du jour atteint : " + nb + " de plus, si tu veux : " + composition() + "."
-          : nb + " pour ton objectif, environ une minute chacune : " + composition() + ".")
+          : nb + " pour ton objectif, environ une minute chacune : " + composition() + "." + (matiere ? "" : phrasePlanSeance()))
       : mode === "premiers" ? "Faciles, " + (matiere ? "en " + nomMatiereSeance(matiere) + ", " : "") + "une par notion parmi celles qui tombent le plus au BTS. Après chaque réponse, la correction explique le raisonnement."
       : nb + " que tu avais ratées, toutes épreuves. Chaque bonne réponse les espace davantage.";
     document.getElementById("themes").innerHTML = "";
@@ -1635,7 +1635,7 @@
 <script src="vivant.js?v=ec7cf52b" defer></script>
 <script src="appli.js?v=0724163c" defer></script>
 <script src="sons.js?v=2110bb6a" defer></script>
-<script type="module" src="compte.js?v=a9bcc8d5"></script>
+<script type="module" src="compte.js?v=6a849ba7"></script>
 <!-- Mesure d'audience anonyme, sans cookies (GoatCounter) -->
 <script data-goatcounter="https://opticonversion.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </body>

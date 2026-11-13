@@ -22,7 +22,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Opticonversion">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
-<link rel="stylesheet" href="style.css?v=f127d63b">
+<link rel="stylesheet" href="style.css?v=e909078a">
 </head>
 <body data-rafraichir="oui">
 
@@ -94,6 +94,8 @@
     </div>
     <!-- Le jour où un outil se présente (Atelier des tracés au 3e jour, définitions au 4e) : sa grande carte -->
     <div class="apparait" style="--d:2" id="ecran-jour-outil" hidden></div>
+    <!-- Le plan de révision de la semaine (rythme.js, creerLignePlan) : une ligne, et « Pourquoi ces thèmes ? » -->
+    <div class="apparait" style="--d:2" id="ecran-jour-plan" hidden></div>
     <form class="premiers-reglages apparait" style="--d:3" id="ecran-jour-reglages">
       <fieldset class="choix-pastilles">
         <legend>Combien de questions aujourd'hui&nbsp;?</legend>
@@ -108,7 +110,7 @@
         <label data-epreuve="U43"><input type="radio" name="matiere" value="U43"><span>ETSO</span></label>
         <label data-epreuve="U5"><input type="radio" name="matiere" value="U5"><span>Vision</span></label>
         <label data-epreuve="U3"><input type="radio" name="matiere" value="U3"><span>Éco</span></label>
-        <label><input type="radio" name="matiere" value="" checked><span>Aléatoire</span></label>
+        <label><input type="radio" name="matiere" value="" checked><span>Mon plan</span></label>
       </fieldset>
       <div class="premiers-actions">
         <button class="bouton bouton-grand" type="submit">Commencer ma séance</button>
@@ -221,7 +223,7 @@
 <script src="questions-U5.js?v=5d47a41f"></script>
 <script src="questions-U3.js?v=6c9ccac7"></script>
 <script src="essentiel.js?v=ef2a4256"></script>
-<script src="rythme.js?v=c63f73c6"></script>
+<script src="rythme.js?v=7cf9d521"></script>
 <script>
   // Première ouverture : l'écran « Cinq questions pour commencer » (rythme.js)
   if (document.documentElement.dataset.accueil === "premier") preparerPremiersPas(document.getElementById("premiers-pas"));
@@ -341,7 +343,7 @@
 <script src="vivant.js?v=ec7cf52b" defer></script>
 <script src="appli.js?v=0724163c" defer></script>
 <script src="lettre.js?v=63876086" defer></script>
-<script type="module" src="compte.js?v=a9bcc8d5"></script>
+<script type="module" src="compte.js?v=6a849ba7"></script>
 <!-- Mesure d'audience anonyme, sans cookies (GoatCounter) -->
 <script data-goatcounter="https://opticonversion.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </body>

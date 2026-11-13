@@ -131,6 +131,9 @@ SPECIFICITES.push({
           titre: "Loi exponentielle",
           quand: "Temps d'attente ou durée de fonctionnement d'une machine.",
           modeles: {
+            "ti83-premium-ce": { etapes: ["La TI n'a pas de loi exponentielle dans DISTR : on tape la formule P(T ≤ t) = 1 − e^(−λt).", "Tape 1 [−], puis [2nde] [ln] : e^( s'affiche.", "Tape [(−)] λ [×] t, ferme la parenthèse [)] et valide avec [entrer].", "Pour P(T > t), tape seulement e^(−λt) ; pour P(a ≤ T ≤ b), tape e^(−λa) − e^(−λb)."], remarque: "La touche [(−)] (signe moins) n'est pas la touche [−] (soustraction)." },
+            "casio-graph90": { etapes: ["La Casio n'a pas de loi exponentielle dans DIST : on tape la formule P(T ≤ t) = 1 − e^(−λt) dans le menu de calcul (Run-Matrix, ou Exécuter-Matrice en français).", "Tape 1 [−], puis [SHIFT] [ln] : e^ s'affiche.", "Ouvre une parenthèse [(], tape [(−)] λ [×] t, ferme [)] et appuie sur [EXE].", "Pour P(T > t), tape seulement e^(−λt) ; pour P(a ≤ T ≤ b), tape e^(−λa) − e^(−λb)."], remarque: "Mets bien l'exposant entre parenthèses, sinon seul le premier nombre passe en exposant." },
+            "casio-graph35": { memeQue: "casio-graph90" },
             "numworks": { etapes: ["Ouvre l'application Probabilités et choisis Loi exponentielle.", "Tape λ, puis valide.", "Choisis le type de borne voulu, tape la ou les valeurs et appuie sur [ok]."] }
           },
           questions: ["U41-033", "U41-054"]
@@ -152,6 +155,7 @@ SPECIFICITES.push({
           titre: "Boucle « Tant que »",
           quand: "Pour contrôler un algorithme du sujet. Le jour J, fais-le d'abord tourner à la main dans un tableau.",
           modeles: {
+            "ti83-premium-ce": { etapes: ["Appuie sur [prgm], va avec les flèches dans l'onglet NOUV (NEW selon la langue) et choisis 1, tape un nom, puis [entrer].", "Dans l'éditeur, appuie sur [prgm] : le menu CTL s'ouvre. Choisis 5:While (« Tant que » selon la langue) et écris la condition.", "Écris les instructions de la boucle, une par ligne ; pour donner une valeur, utilise [sto→] (exemple : U+5→U).", "Ferme la boucle avec [prgm], menu CTL, 7:End (« Fin »).", "Pour le lancer : [2nde] [mode] (quitter), [prgm], onglet EXEC, choisis le programme et appuie deux fois sur [entrer]."], remarque: "Les noms des menus et des instructions changent selon la langue réglée (While ou Tant que, End ou Fin) : ce sont les mêmes numéros. Les signes < et > sont dans [2nde] [math] (TEST)." },
             "casio-graph90": { etapes: ["Dans l'éditeur de programme, appuie sur [SHIFT] [VARS] (PRGM).", "Ouvre COMMAND et choisis While, puis écris la condition.", "Écris les instructions de la boucle.", "Ferme la boucle avec WEnd (WhileEnd), dans le même menu COMMAND."] },
             "casio-graph35": { memeQue: "casio-graph90" },
             "numworks": { etapes: ["Ouvre l'application Python et crée un script.", "Appuie sur [boîte à outils] et ouvre « Boucles et tests ».", "Choisis le bloc while et complète la condition et les instructions."] }
