@@ -154,6 +154,25 @@ function fusionnerReponses(progression, temps, progAttente, tempsAttente) {
   return { progression, temps };
 }
 
+// Lettre des nouveautés (lettre.js) : inscription d'une adresse e-mail, sans compte.
+// Un document par inscription (les doublons sont retirés au moment d'envoyer) : un refus est toujours une vraie erreur.
+// Garde-fou : 3 inscriptions par jour au plus depuis ce navigateur (protège le quota gratuit de Firebase).
+let firebasePret;
+const firebase = new Promise(ok => { firebasePret = ok; });
+window.inscrireLettre = async (email, source) => {
+  const adresse = String(email || "").trim().toLowerCase();
+  if (!/^[^@\s/]+@[^@\s/]+\.[^@\s/]+$/.test(adresse) || adresse.length > 254) throw Object.assign(new Error("adresse"), { code: "adresse" });
+  const maintenant = Date.now();
+  let envois = [];
+  try { envois = JSON.parse(localStorage.getItem("lettre-envois") || "[]").filter(t => maintenant - t < 864e5); } catch (e) {}
+  if (envois.length >= 3) throw Object.assign(new Error("limite"), { code: "limite-jour" });
+  const attente = new Promise((_, non) => setTimeout(() => non(Object.assign(new Error("reseau"), { code: "reseau" })), 12000));
+  const { F, db } = await Promise.race([firebase, attente]);
+  await Promise.race([F.addDoc(F.collection(db, "lettre"), { email: adresse, source: String(source || "").slice(0, 40), date: F.serverTimestamp() }), attente]);
+  envois.push(maintenant);
+  try { localStorage.setItem("lettre-envois", JSON.stringify(envois)); } catch (e) {}
+};
+
 async function demarrer() {
   const { initializeApp } = await import(SDK + "firebase-app.js");
   const A = await import(SDK + "firebase-auth.js");
@@ -177,6 +196,7 @@ async function demarrer() {
     envois.push(maintenant);
     try { localStorage.setItem("signalements-envoyes", JSON.stringify(envois)); } catch (e) {}
   };
+  firebasePret({ F, db });
   const fournisseur = new A.GoogleAuthProvider();
   fournisseur.setCustomParameters({ prompt: "select_account" });
 

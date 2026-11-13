@@ -13,13 +13,13 @@
 // =====================================================================
 
 // <versionner> (partie écrite par versionner.py, ne pas modifier à la main)
-const VERSION = "3beacf18fc";
+const VERSION = "514fb7e250";
 const FICHIERS = [
   "appli.js?v=b1a5a039",
   "banc.js?v=cca7d0be",
   "calculateurs.html",
   "compte.html",
-  "compte.js?v=05e17079",
+  "compte.js?v=32e302ab",
   "confidentialite.html",
   "definitions-U3.js?v=27026bd1",
   "definitions-U41.js?v=6d18ab79",
@@ -146,6 +146,7 @@ const FICHIERS = [
   "img/schemas/U5/worth-diplopie-homonyme.svg",
   "img/schemas/U5/worth-neutralisation-og.svg",
   "index.html",
+  "lettre.js?v=63876086",
   "manifest.webmanifest",
   "mentions-legales.html",
   "notions.html",
@@ -173,7 +174,7 @@ const FICHIERS = [
   "specificites-U42.js?v=3dc3c146",
   "specificites-U43.js?v=0918c26c",
   "specificites-U5.js?v=4d12d3b3",
-  "style.css?v=4a9eb01e",
+  "style.css?v=1e384c06",
   "traces-U42.js?v=cd7fcf7c",
   "traces-U43.js?v=65b6cc27",
   "traces-U5.js?v=c4c5f919",

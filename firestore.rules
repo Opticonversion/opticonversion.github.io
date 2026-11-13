@@ -35,6 +35,21 @@ service cloud.firestore {
       allow read, update, delete: if false;
     }
 
+    // Lettre des nouveautés : n'importe qui peut S'INSCRIRE (sans compte). Une inscription = un document
+    // (nom tiré au hasard) ; une adresse inscrite deux fois donne deux documents, dédoublonnés au moment d'envoyer.
+    // Personne ne peut lire, modifier ni supprimer depuis le site : la liste se lit dans la console Firebase
+    // ou en ligne de commande. Un refus de cette règle est donc toujours une vraie erreur.
+    match /lettre/{id} {
+      allow create: if request.resource.data.keys().hasOnly(["email", "source", "date"])
+        && request.resource.data.email is string
+        && request.resource.data.email.size() <= 254
+        && request.resource.data.email == request.resource.data.email.lower()
+        && request.resource.data.email.matches('^[^@\\s/]+@[^@\\s/]+\\.[^@\\s/]+$')
+        && request.resource.data.source is string && request.resource.data.source.size() <= 40
+        && request.resource.data.date == request.time;
+      allow read, update, delete: if false;
+    }
+
     // Tout le reste est fermé.
     match /{document=**} {
       allow read, write: if false;

@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Opticonversion">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
-<link rel="stylesheet" href="style.css?v=4a9eb01e">
+<link rel="stylesheet" href="style.css?v=1e384c06">
 </head>
 <body>
 <header class="entete">
@@ -36,7 +36,7 @@
 
 <main>
   <h1 class="apparait">Confidentialité</h1>
-  <p class="sous-titre apparait" style="--d:2">Version courte : sans compte, ta progression ne quitte pas ton navigateur et les visites sont comptées de façon anonyme. Avec un compte, on garde seulement ta progression, et tu peux tout supprimer en un clic.</p>
+  <p class="sous-titre apparait" style="--d:2">Version courte : sans compte, ta progression ne quitte pas ton navigateur et les visites sont comptées de façon anonyme. Avec un compte, on garde seulement ta progression, et tu peux tout supprimer en un clic. Si tu demandes à être prévenu des nouveautés, on garde ton e-mail pour ça seulement.</p>
 
   <section class="apparait" style="--d:3">
     <h2>Sans compte</h2>
@@ -58,25 +58,31 @@
     <h3>Si tu signales une erreur</h3>
     <p>Le formulaire « Signaler une erreur » enregistre seulement la question concernée, le type de problème et ton message facultatif. Rien ne te relie à ce signalement : ni compte, ni e-mail, ni adresse IP conservée par nous. Ne mets pas d'informations personnelles dans le message. Les signalements sont supprimés une fois la question vérifiée.</p>
 
+    <h3 id="lettre">Si tu demandes à être prévenu des nouveautés</h3>
+    <p>Le bloc « Préviens-moi des nouveautés » enregistre seulement ton adresse e-mail, la date de ton inscription et la page où tu l'as faite. Elle sert uniquement à t'envoyer des nouvelles d'Opticonversion : nouvelles questions, sujets blancs, fiches de révision, dont certaines payantes. Deux e-mails par mois au plus. Elle n'est ni vendue, ni prêtée, ni reliée à ta progression ou à ton compte.</p>
+    <p>Chaque e-mail contient un lien pour te désinscrire. Tu peux aussi écrire à <a href="mailto:opticonversion.bts@gmail.com">opticonversion.bts@gmail.com</a> : ton adresse est alors effacée.</p>
+
     <h3>Vidéos</h3>
     <p>Les Shorts sont lus depuis YouTube en mode « confidentialité renforcée » : rien n'est chargé depuis YouTube tant que tu ne lances pas une vidéo. Quand tu en lances une, les règles de confidentialité de YouTube s'appliquent.</p>
 
     <h3>Pourquoi</h3>
-    <p>Uniquement pour que tu retrouves ta progression sur tes différents appareils. Pas de publicité, pas de revente, pas de suivi de navigation individuel.</p>
+    <p>Pour que tu retrouves ta progression sur tes différents appareils, et, si tu le demandes, pour te prévenir des nouveautés par e-mail. Pas de publicité sur le site, pas de revente, pas de suivi de navigation individuel.</p>
 
     <h3>Sur quoi ça repose (base légale)</h3>
     <ul>
       <li>Le stockage dans ton navigateur, sans compte : il sert seulement à faire marcher le site comme tu le demandes (garder tes réponses, tes réglages).</li>
       <li>Le compte : ton consentement, que tu donnes en le créant. Tu le retires quand tu veux en supprimant ton compte.</li>
+      <li>Les e-mails de nouveautés : ton consentement, que tu donnes en t'inscrivant. Tu le retires quand tu veux en te désinscrivant.</li>
       <li>La mesure d'audience et les signalements d'erreur : notre intérêt légitime à savoir quelles pages servent et à corriger les questions fausses. Tu peux t'y opposer en nous écrivant.</li>
     </ul>
 
     <h3>Où et combien de temps</h3>
     <p>Les données sont hébergées par Google Firebase. Ta progression (la base Firestore) est stockée en Europe. Le service de connexion (Firebase Authentication : ton e-mail et ton identifiant) peut, lui, être traité par Google hors de l'Union européenne, notamment aux États-Unis. Ces transferts sont encadrés par le « Data Privacy Framework » UE–États-Unis, auquel Google adhère.</p>
     <p>Tes données sont gardées tant que ton compte existe. Une fois par an, on supprime les comptes sans aucune activité depuis 2 ans (ni connexion, ni réponse enregistrée), avec leur progression.</p>
+    <p>Ton adresse pour les nouveautés est stockée dans la même base Firestore, en Europe. Elle est gardée jusqu'à ta désinscription, et au plus 3 ans sans nouvelle de ta part.</p>
 
     <h3>Tes droits</h3>
-    <p>Tu peux supprimer ton compte et toute ta progression en ligne à tout moment depuis la page <a href="compte.html">Mon compte</a>. Pour toute question (accès, rectification, suppression, opposition), écris à <a href="mailto:opticonversion.bts@gmail.com">opticonversion.bts@gmail.com</a>. Tu peux aussi saisir la CNIL sur <a href="https://www.cnil.fr/fr/plaintes" rel="noopener">cnil.fr</a>.</p>
+    <p>Tu peux supprimer ton compte et toute ta progression en ligne à tout moment depuis la page <a href="compte.html">Mon compte</a>. Pour te désinscrire des nouveautés, ou pour toute question (accès, rectification, suppression, opposition), écris à <a href="mailto:opticonversion.bts@gmail.com">opticonversion.bts@gmail.com</a>. Tu peux aussi saisir la CNIL sur <a href="https://www.cnil.fr/fr/plaintes" rel="noopener">cnil.fr</a>.</p>
   </section>
 </main>
 
@@ -84,7 +90,7 @@
 
 <script src="vivant.js?v=ec7cf52b" defer></script>
 <script src="appli.js?v=b1a5a039" defer></script>
-<script type="module" src="compte.js?v=05e17079"></script>
+<script type="module" src="compte.js?v=32e302ab"></script>
 <!-- Mesure d'audience anonyme, sans cookies (GoatCounter) -->
 <script data-goatcounter="https://opticonversion.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </body>
