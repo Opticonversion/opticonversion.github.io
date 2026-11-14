@@ -575,3 +575,52 @@ TRACES.push({
   ],
   "conclusion": "Grossissement d'une lunette afocale : f'objectif / f'oculaire. Le faisceau ressort parallèle, mais plus incliné : l'étoile paraît vue sous un plus grand angle."
 });
+
+// ==============================================================
+//  Instrument et œil (ajout du 14/11/2026) : l'œil réduit du moteur (60 δ) entre dans la chaîne des images,
+//  dessiné à l'échelle (echelle: true), comme sur les documents réponse d'ETSO. Tombé en 2017, 2018, 2019,
+//  2021, 2023, 2024. Même lunette dans les deux niveaux : réglée pour un emmétrope, puis pour un myope.
+// ==============================================================
+TRACES.push({
+  id: "U43-10", epreuve: "U43", chapitre: "Instrument et œil",
+  titre: "La lunette et l'œil : jusqu'à la rétine",
+  regle: "L'œil prolonge la chaîne des images : A → A₁ (objectif) → A₂ (oculaire) → A₃ (œil). Un œil emmétrope qui n'accommode pas forme sur sa rétine R' l'image d'un objet à l'infini : la lunette est réglée pour lui si A₂ est à l'infini, donc si A₁ est au foyer objet de l'oculaire.",
+  consigne: "Lunette réglée pour un œil emmétrope : objectif Ob de f' = 60 mm, oculaire Oc de f' = 20 mm, œil placé 20 mm derrière l'oculaire. L'étoile est vue sous 3°. Suis son image jusqu'à la rétine.",
+  theme: "Œil et instrument",
+  systeme: { objet: { infini: true, angle: 3 }, elements: [
+    { type: "lentille", nom: "Ob", x: 0, f: 60 },
+    { type: "lentille", nom: "Oc", x: 80, f: 20 },
+    { type: "oeil", nom: "Œil", x: 100, ametropie: 0, echelle: true }
+  ] },
+  vue: { xmin: -20, xmax: 130, hmax: 6, carreauX: 5, carreauY: 0.5 },
+  etapes: [
+    { action: "placer", quoi: "image", apres: "Ob", rayons: ["O", "F"], texte: "L'étoile est à l'infini : son image B₁ par l'objectif est dans son plan focal image. Place B₁ au croisement des deux rayons." },
+    { action: "rayon", apres: "Oc", rayon: { depuis: "B1", par: "O" }, texte: "Ce rayon part de B₁ et passe par le centre de l'oculaire. Que devient-il ?" },
+    { action: "rayon", apres: "Oc", rayon: { depuis: "B1", par: "parallele" }, texte: "Ce rayon part de B₁ parallèlement à l'axe. Par où ressort-il de l'oculaire ?" },
+    { action: "placer", quoi: "image", apres: "Œil", rayons: ["O", "F"], texte: "Les rayons sortent parallèles : B₂ est à l'infini. L'œil les fait converger. Place B₃, l'image sur la rétine." },
+    { action: "calcul", grandeur: "A'B'", apres: "Œil", decimales: 1, unite: "mm", signe: false, texte: "Calcule la taille de l'image A₃B₃ sur la rétine (sans le signe). Aide : tan α' = |G| × tan α, puis taille = (1/60 m) × tan α'." }
+  ],
+  conclusion: "B₃ tombe exactement sur la rétine : l'œil emmétrope voit l'étoile nette sans accommoder. Grâce au grossissement de 3, son image sur la rétine est 3 fois plus grande qu'à l'œil nu."
+});
+
+TRACES.push({
+  id: "U43-11", epreuve: "U43", chapitre: "Instrument et œil",
+  titre: "Régler la lunette pour un myope",
+  regle: "Un myope qui n'accommode pas voit net un point situé à son remotum R, devant l'œil : HR = 1 / R, avec R la réfraction en δ et HR en mètres. On règle la lunette pour que l'image finale A₂B₂ soit en R : l'oculaire se rapproche de l'objectif, A₁ passe juste après le foyer objet de l'oculaire. Relation de Newton : FA × F'A' = −f'².",
+  consigne: "Même lunette (Ob : f' = 60 mm ; Oc : f' = 20 mm), regardée par un myope de −5,00 δ qui n'accommode pas. L'oculaire a été réglé pour lui ; l'œil reste 20 mm derrière l'oculaire. Vérifie le réglage, puis chiffre-le.",
+  theme: "Œil et instrument",
+  systeme: { objet: { infini: true, angle: 1 }, elements: [
+    { type: "lentille", nom: "Ob", x: 2, f: 60 },
+    { type: "lentille", nom: "Oc", x: 80, f: 20 },
+    { type: "oeil", nom: "Œil", x: 100, ametropie: -5, echelle: true }
+  ] },
+  vue: { xmin: -110, xmax: 130, hmax: 12, carreauX: 5, carreauY: 1 },
+  etapes: [
+    { action: "placer", quoi: "remotum", texte: "Place le remotum R du myope sur l'axe (calcule d'abord HR)." },
+    { action: "placer", quoi: "image", apres: "Ob", rayons: ["O", "F"], texte: "Place B₁, l'image de l'étoile par l'objectif." },
+    { action: "placer", quoi: "image", apres: "Oc", rayons: ["parallele", "O"], prolonger: true, texte: "Place B₂, l'image de B₁ par l'oculaire. Les rayons ressortent en s'écartant : prolonge-les vers l'arrière." },
+    { action: "placer", quoi: "image", apres: "Œil", rayons: ["O", "F"], texte: "B₂ sert d'objet à l'œil. Place B₃, son image dans l'œil." },
+    { action: "calcul", grandeur: "FA", apres: "Oc", decimales: 1, unite: "mm", signe: true, texte: "Pour un emmétrope, A₁ serait sur le foyer objet F₂ de l'oculaire. L'œil est au foyer image F'₂ de l'oculaire, donc F'₂A₂ = HR. Calcule F₂A₁ avec Newton : c'est le déplacement de l'oculaire vers l'objectif." }
+  ],
+  conclusion: "B₂ est au remotum et B₃ sur la rétine : le myope voit net sans accommoder. L'oculaire a été rapproché de l'objectif de F₂A₁ ; pour un hypermétrope, il faudrait l'éloigner (A₁ avant F₂)."
+});

@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Opticonversion">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
-<link rel="stylesheet" href="style.css?v=e909078a">
+<link rel="stylesheet" href="style.css?v=b371ff39">
 </head>
 <body>
 <header class="entete">
@@ -77,6 +77,7 @@
       <div class="colonne-qcm">
         <h2 class="titre-echauffement" id="titre-echauffement" hidden>Échauffement : le QCM</h2>
         <div class="themes" id="themes"></div>
+        <p class="aide-erreurs" id="aide-erreurs" role="status" hidden></p>
         <a class="lien-atelier" id="lien-atelier" href="traces.html" hidden><span class="ico i-crayon" aria-hidden="true"></span> Entraîne-toi aussi aux tracés de lentilles dans l'Atelier →</a>
         <section id="zone"></section>
       </div>
@@ -90,31 +91,31 @@
 
 <script src="videos.js?v=6f234673"></script>
 <script src="epreuves.js?v=cc645427"></script>
-<script src="questions-U41.js?v=5f14d644"></script>
-<script src="questions-U42.js?v=0686046a"></script>
-<script src="questions-U43.js?v=214a6318"></script>
-<script src="questions-U5.js?v=5d47a41f"></script>
-<script src="questions-U3.js?v=6c9ccac7"></script>
+<script src="questions-U41.js?v=4ed5dc1f"></script>
+<script src="questions-U42.js?v=29d25a16"></script>
+<script src="questions-U43.js?v=be252b34"></script>
+<script src="questions-U5.js?v=901c19fe"></script>
+<script src="questions-U3.js?v=35bcd737"></script>
 <!-- Questions d'entraînement (mêmes notions, autres chiffres) : chargées ici seulement, hors Essentiel -->
 <script src="entrainement-U41.js?v=1b78bba4"></script>
 <script src="entrainement-U42.js?v=06b93d7d"></script>
-<script src="entrainement-U43.js?v=6dc2c735"></script>
+<script src="entrainement-U43.js?v=d79f0f72"></script>
 <script src="entrainement-U5.js?v=98511033"></script>
-<script src="entrainement-U3.js?v=6bad30af"></script>
+<script src="entrainement-U3.js?v=f3ed3fea"></script>
 <!-- Fiches « Spécificités » (facultatives : la page marche sans elles) -->
 <!-- Niveaux de l'Atelier (pour compter niveaux et étoiles sur la page de l'épreuve) -->
-<script src="traces-U42.js?v=cd7fcf7c"></script>
-<script src="traces-U43.js?v=65b6cc27"></script>
+<script src="traces-U42.js?v=78864426"></script>
+<script src="traces-U43.js?v=e9acf21a"></script>
 <script src="traces-U5.js?v=c4c5f919"></script>
-<script src="specificites-U41.js?v=79b4e37e"></script>
-<script src="specificites-U42.js?v=3dc3c146"></script>
-<script src="specificites-U43.js?v=0918c26c"></script>
-<script src="specificites-U5.js?v=4d12d3b3"></script>
-<script src="specificites-U3.js?v=2ee96b01"></script>
-<script src="essentiel.js?v=ef2a4256"></script>
-<script src="rythme.js?v=7cf9d521"></script>
+<script src="specificites-U41.js?v=3d591e09"></script>
+<script src="specificites-U42.js?v=f64709f2"></script>
+<script src="specificites-U43.js?v=523c07db"></script>
+<script src="specificites-U5.js?v=43533990"></script>
+<script src="specificites-U3.js?v=3245f237"></script>
+<script src="essentiel.js?v=d812b628"></script>
+<script src="rythme.js?v=5c6bd141"></script>
 <!-- Examen blanc chronométré (#U5/examen) : avant le script de la page, qui l'ouvre dès le chargement -->
-<script src="examen.js?v=fb7ff662"></script>
+<script src="examen.js?v=658f6737"></script>
 <script>
   // ---------------- L'état du QCM ----------------
   let epreuveChoisie = null;   // ex. "U5"
@@ -293,15 +294,18 @@
     // Séance choisie par l'élève (du jour, cinq premières questions, 5 minutes) : le rappel de la calculatrice
     document.getElementById("rappel-calculatrice").hidden = !mode;
   }
-  function ouvrirRevision(mode, matiere) {
+  function ouvrirRevision(mode, matiere, typeChoisi) {
     if (typeof Examen !== "undefined") Examen.fermer();
     matiere = mode ? matiereSeance(matiere) : null;
-    const dues = mode === "cinq" ? questionsCinqMinutes(matiere) : mode === "seance" ? questionsSeanceDuJour(matiere) : mode === "premiers" ? questionsPremiersPas(matiere) : questionsARevoir();
-    if (dues.length === 0) { history.replaceState("", "", "qcm.html"); afficherEpreuves(); return; }
+    const toutes = mode === "cinq" ? questionsCinqMinutes(matiere) : mode === "seance" ? questionsSeanceDuJour(matiere) : mode === "premiers" ? questionsPremiersPas(matiere) : questionsARevoir();
+    if (toutes.length === 0) { history.replaceState("", "", "qcm.html"); afficherEpreuves(); return; }
+    // « À revoir » : on peut ne garder qu'un type d'erreur (signe, unité…)
+    if (mode || !TYPES_ERREUR[typeChoisi] || !toutes.some(q => typeErreurDe(q) === typeChoisi)) typeChoisi = null;
+    const dues = typeChoisi ? toutes.filter(q => typeErreurDe(q) === typeChoisi) : toutes;
     seanceRevision = true;
     seanceMode = mode || null;
     seanceMatiere = matiere;
-    history.replaceState(null, "", (ADRESSES_SEANCES[mode] || "#a-revoir") + (matiere ? "/" + matiere : ""));
+    history.replaceState(null, "", (ADRESSES_SEANCES[mode] || "#a-revoir") + (matiere ? "/" + matiere : typeChoisi ? "/" + typeChoisi : ""));
     // Une matière choisie : la page prend sa couleur. Le mélange garde l'or.
     if (matiere) document.querySelector("main").dataset.epreuve = matiere;
     else delete document.querySelector("main").dataset.epreuve;
@@ -321,8 +325,10 @@
           ? "Objectif du jour atteint : " + nb + " de plus, si tu veux : " + composition() + "."
           : nb + " pour ton objectif, environ une minute chacune : " + composition() + "." + (matiere ? "" : phrasePlanSeance()))
       : mode === "premiers" ? "Faciles, " + (matiere ? "en " + nomMatiereSeance(matiere) + ", " : "") + "une par notion parmi celles qui tombent le plus au BTS. Après chaque réponse, la correction explique le raisonnement."
+      : typeChoisi ? nb + " ratées sur une erreur « " + TYPES_ERREUR[typeChoisi].nom + " ». Chaque bonne réponse les espace davantage."
       : nb + " que tu avais ratées, toutes épreuves. Chaque bonne réponse les espace davantage.";
     document.getElementById("themes").innerHTML = "";
+    afficherFiltresErreurs(mode ? [] : toutes, typeChoisi);
     const spec = document.getElementById("specificites");
     spec.hidden = true;
     document.getElementById("mise-en-avant").hidden = true;
@@ -338,6 +344,48 @@
     demarrer(dues);
   }
 
+  // « À revoir » trié par type d'erreur : une pastille par type présent (« Signe 3 », « Unité 1 »…),
+  // et sous les pastilles, une phrase d'aide pour le type choisi. Rien s'il n'y a qu'un seul type :
+  // le tri n'apprendrait rien. Les types viennent de typeErreur (essentiel.js).
+  function afficherFiltresErreurs(toutes, typeChoisi) {
+    const aide = document.getElementById("aide-erreurs");
+    aide.hidden = true;
+    aide.innerHTML = "";
+    const parType = {};
+    toutes.forEach(q => { const t = typeErreurDe(q); parType[t] = (parType[t] || 0) + 1; });
+    const types = Object.keys(TYPES_ERREUR).filter(t => parType[t]);
+    if (types.length < 2) return;
+    const conteneur = document.getElementById("themes");
+    const pastille = (texte, nombre, actif, type) => {
+      const b = document.createElement("button");
+      b.className = "theme" + (actif ? " actif" : "");
+      b.textContent = texte;
+      const compte = document.createElement("span");
+      compte.className = "compte-theme";
+      compte.textContent = "(" + nombre + ")";
+      b.appendChild(compte);
+      b.setAttribute("aria-pressed", actif ? "true" : "false");
+      b.onclick = () => ouvrirRevision(null, null, type);
+      conteneur.appendChild(b);
+    };
+    pastille("Toutes", toutes.length, !typeChoisi, null);
+    types.forEach(t => pastille(TYPES_ERREUR[t].nom, parType[t], t === typeChoisi, t));
+    // Sur téléphone, la rangée défile : la pastille choisie reste en vue
+    const active = conteneur.querySelector(".theme.actif");
+    if (active) conteneur.scrollLeft = Math.max(0, active.offsetLeft - conteneur.offsetLeft - 16);
+    if (typeChoisi) {
+      const info = TYPES_ERREUR[typeChoisi];
+      aide.textContent = info.aide;
+      if (info.lien) {
+        const a = document.createElement("a");
+        a.href = info.lien[0];
+        a.textContent = info.lien[1];
+        aide.append(" ", a);
+      }
+      aide.hidden = false;
+    }
+  }
+
   // Choisir un thème : met à jour les pastilles, les Shorts, l'adresse, et relance le QCM
   function choisirTheme(t) {
     themeChoisi = t;
@@ -349,6 +397,7 @@
   }
 
   function afficherThemes() {
+    document.getElementById("aide-erreurs").hidden = true;
     const qs = ordinairesDe(epreuveChoisie);
     const themes = ["Tous", ...new Set(qs.map(q => q.theme))];
     const conteneur = document.getElementById("themes");
@@ -595,6 +644,7 @@
 
     let blocChoix = zone.querySelector(".choix");
     if (q.type === "calcul") blocChoix = creerSaisie(q, blocChoix);
+    if (q.type === "pose") blocChoix = creerPose(q, blocChoix);
     if (q.choixSchemas) blocChoix.classList.add("choix-images");
     (q.reponses || []).forEach((r, i) => {
       const b = document.createElement("button");
@@ -632,7 +682,7 @@
     }
     const aide = document.createElement("p");
     aide.className = "raccourcis";
-    aide.innerHTML = q.type === "calcul" ? 'Astuce : tape ta réponse puis <kbd>Entrée</kbd>, et encore <kbd>Entrée</kbd> pour continuer.'
+    aide.innerHTML = q.type === "calcul" || q.type === "pose" ?'Astuce : tape ta réponse puis <kbd>Entrée</kbd>, et encore <kbd>Entrée</kbd> pour continuer.'
       : 'Astuce : réponds avec les touches <kbd>A</kbd> <kbd>B</kbd> <kbd>C</kbd> <kbd>D</kbd>, puis <kbd>Entrée</kbd> pour continuer.';
     zone.appendChild(aide);
     rejouerAnimation(zone);
@@ -666,6 +716,96 @@
     place.replaceWith(form);
     setTimeout(() => { if (!matchMedia("(pointer: coarse)").matches) form.querySelector("input").focus({ preventScroll: true }); });
     return form;
+  }
+
+  // Question « calcul posé » (type: "pose") : une case par étape, comme sur la copie.
+  // Étape juste : elle s'écrit posée (champ ligne, vraies fractions) et la suivante s'ouvre. Erreur : un mot sur ce qui
+  // cloche (signe, unité) et l'aide de l'étape. Deuxième erreur : la bonne valeur est donnée et on continue avec elle.
+  // La question compte juste si aucune valeur n'a été donnée. etats[i] = "juste" | "aide" (juste après une erreur) | "donne".
+  function creerPose(q, place) {
+    const ol = document.createElement("ol");
+    ol.className = "pose-liste";
+    const etats = [];
+    let etape = 0, essais = 0, premiereErreur = null;
+    function dessiner() {
+      ol.innerHTML = "";
+      q.etapes.forEach((e, i) => {
+        const li = document.createElement("li");
+        li.className = "pose-etape" + (i > etape ? " fermee" : "") + (etats[i] === "donne" ? " bloque" : etats[i] ? " juste" : "");
+        li.innerHTML = '<p class="pose-tete"><span class="pose-num" aria-hidden="true"></span><span class="pose-consigne"></span></p>';
+        li.querySelector(".pose-num").textContent = i + 1;
+        ecrireTexteMath(li.querySelector(".pose-consigne"), e.consigne);
+        if (i < etape) {
+          const l = document.createElement("p");
+          l.className = "pose-ligne";
+          ecrireTexteMath(l, e.ligne);
+          li.appendChild(l);
+        } else if (i === etape) li.appendChild(saisieEtape(e, li));
+        ol.appendChild(li);
+      });
+    }
+    function suivante() {
+      etape++;
+      essais = 0;
+      if (etape >= q.etapes.length) {
+        dessiner();
+        const bloquee = etats.indexOf("donne");
+        repondre({ juste: bloquee < 0, i: null, pose: { etats: etats.slice(), bloquee }, calcul: null, erreurPose: premiereErreur }, null);
+        return;
+      }
+      dessiner();
+      const champ = ol.querySelector(".pose-etape:not(.fermee) input");
+      if (champ && !matchMedia("(pointer: coarse)").matches) champ.focus({ preventScroll: true });
+    }
+    function saisieEtape(e, li) {
+      const f = document.createElement("form");
+      f.className = "saisie-calcul saisie-qcm";
+      f.innerHTML = '<label class="saisie-ligne"><span class="visuellement-cache"></span><input type="text" autocomplete="off" spellcheck="false" enterkeyhint="done"><span class="saisie-unite"></span></label><button class="bouton" type="submit">Valider</button>';
+      f.querySelector(".visuellement-cache").textContent = "Étape " + (etape + 1) + (e.reponse.unite ? ", en " + e.reponse.unite : "");
+      f.querySelector(".saisie-unite").textContent = e.reponse.unite || "";
+      f.querySelector("input").inputMode = e.reponse.signe === false ? "decimal" : "text";   // le « − » de l'iPhone
+      f.onsubmit = ev => {
+        ev.preventDefault();
+        const res = corrigerCalcul(e.reponse, f.querySelector("input").value);
+        if (res.etat === "vide") { f.querySelector("input").focus(); return; }
+        li.querySelectorAll(".pose-message, .pose-aide").forEach(x => x.remove());
+        if (res.etat === "juste") { etats[etape] = essais ? "aide" : "juste"; suivante(); return; }
+        if (!premiereErreur) premiereErreur = { calcul: res, reponse: e.reponse };
+        essais++;
+        const m = document.createElement("p");
+        m.className = "pose-message mal";
+        m.setAttribute("role", "status");
+        li.appendChild(m);
+        if (essais >= 2) {
+          etats[etape] = "donne";
+          li.classList.add("bloque");
+          m.textContent = messageCalcul(e.reponse, res) + " On continue avec cette valeur.";
+          f.querySelector("input").disabled = true;
+          f.querySelector("button").disabled = true;
+          const b = document.createElement("button");
+          b.className = "bouton secondaire";
+          b.type = "button";
+          b.textContent = "Étape suivante";
+          b.onclick = suivante;
+          li.appendChild(b);
+          b.focus();
+          return;
+        }
+        m.textContent = res.etat === "signe" ? "Attention au signe. Réessaie."
+          : res.etat === "unite" ? "La valeur est juste à une puissance de 10 près : vérifie l'unité. Réessaie."
+          : "Ce n'est pas ça. Réessaie avec l'aide.";
+        const a = document.createElement("p");
+        a.className = "pose-aide";
+        ecrireTexteMath(a, e.aide);
+        li.appendChild(a);
+        f.querySelector("input").select();
+      };
+      return f;
+    }
+    dessiner();
+    place.replaceWith(ol);
+    setTimeout(() => { const c = ol.querySelector("input"); if (c && !matchMedia("(pointer: coarse)").matches) c.focus({ preventScroll: true }); });
+    return ol;
   }
 
   // Un schéma SVG affiché dans un <object> : contrairement à <img>, son tracé animé se joue,
@@ -714,7 +854,7 @@
 
   function repondre(reponse, boutonClique) {
     const q = serie[numero];
-    const blocChoix = zone.querySelector(".choix, .saisie-qcm");
+    const blocChoix = zone.querySelector(".pose-liste, .choix, .saisie-qcm");
     blocChoix.classList.add("repondu");
     const boutonIndice = zone.querySelector(".bouton-indice");
     if (boutonIndice) boutonIndice.remove();
@@ -735,7 +875,8 @@
       erreurs.push(q);
       serieEnCours = 0;
     }
-    const suite = noterReponse(q, reponse.juste);   // jauge « Essentiel » + révision espacée
+    // jauge « Essentiel » + révision espacée ; le détail range l'erreur par type dans « À revoir »
+    const suite = noterReponse(q, reponse.juste, reponse.calcul ? { calcul: reponse.calcul } : reponse.erreurPose ? reponse.erreurPose : { choix: reponse.i });
 
     // La barre avance dès qu'on a répondu
     zone.querySelector(".barre-remplie").style.width = Math.round(((numero + 1) / serie.length) * 100) + "%";
@@ -749,6 +890,16 @@
       ? (serieEnCours >= 3 ? "Bonne réponse · " + serieEnCours + " d'affilée" : "Bonne réponse")
       : "Pas tout à fait";
     ecrireTexteMath(expl.querySelector("span"), q.explication);   // calcul posé : une étape par ligne, vraies fractions
+    if (reponse.pose) {
+      // Calcul posé : l'étape où l'élève bloque, ou celle où il a eu besoin de l'aide
+      const msg = document.createElement("p");
+      msg.className = "correction-calcul";
+      const b = reponse.pose.bloquee, h = reponse.pose.etats.indexOf("aide");
+      if (b >= 0) ecrireTexteMath(msg, "Tu bloques à l'étape " + (b + 1) + " (" + q.etapes[b].consigne + "). " + q.etapes[b].aide);
+      else if (h >= 0) ecrireTexteMath(msg, "Juste, avec l'aide à l'étape " + (h + 1) + " (" + q.etapes[h].consigne + ").");
+      else msg.textContent = "Juste du début à la fin.";
+      expl.querySelector("span").before(msg);
+    }
     if (reponse.calcul) {
       // La bonne valeur, et ce qui cloche (signe, unité, arrondi)
       const msg = document.createElement("p");
@@ -1576,7 +1727,8 @@
         const li = document.createElement("li");
         li.innerHTML = "<strong></strong><span class='erreur-reponse'></span><span class='doux'></span>";
         ecrireTexteMath(li.querySelector("strong"), q.question);
-        ecrireTexteMath(li.querySelector(".erreur-reponse"), "✓ " + (q.type === "calcul"
+        ecrireTexteMath(li.querySelector(".erreur-reponse"), "✓ " + (q.type === "pose" ? q.etapes[q.etapes.length - 1].ligne
+          : q.type === "calcul"
           ? ecrireNombre(q.reponse.valeur, q.reponse.decimales === undefined ? 2 : q.reponse.decimales, q.reponse.signe !== false) + (q.reponse.unite ? " " + q.reponse.unite : "")
           : q.choix[q.bonne]));
         ecrireTexteMath(li.querySelector(".doux"), q.explication);
@@ -1597,7 +1749,7 @@
   function selonAdresse() {
     const [code, suite] = location.hash.slice(1).split("/");
     const theme = suite ? decodeURIComponent(suite) : null;
-    if (code === "a-revoir") ouvrirRevision();
+    if (code === "a-revoir") ouvrirRevision(null, null, theme);      // #a-revoir/signe : seulement les erreurs de signe
     else if (code === "cinq-minutes") ouvrirRevision("cinq", theme);
     else if (code === "seance") ouvrirRevision("seance", theme);
     else if (code === "premiers-pas") ouvrirRevision("premiers", theme);
@@ -1635,7 +1787,7 @@
 <script src="vivant.js?v=ec7cf52b" defer></script>
 <script src="appli.js?v=0724163c" defer></script>
 <script src="sons.js?v=2110bb6a" defer></script>
-<script type="module" src="compte.js?v=6a849ba7"></script>
+<script type="module" src="compte.js?v=c75295cc"></script>
 <!-- Mesure d'audience anonyme, sans cookies (GoatCounter) -->
 <script data-goatcounter="https://opticonversion.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </body>

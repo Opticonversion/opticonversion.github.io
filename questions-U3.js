@@ -26,6 +26,7 @@ QUESTIONS.push(
     question: "Une monture est achetée 60 € HT et vendue 180 € TTC (TVA 20 %). Quel est le taux de marque ?",
     choix: ["60 %", "66,7 %", "50 %", "150 %"],
     bonne: 0,
+    erreurs: { 1: "ht-ttc", 3: "marque-marge" },
     explication: "On travaille en HT.\nPV HT = [[180|1,2]] = 150 €\nMarge brute = 150 − 60 = 90 €\nTaux de marque = [[marge|PV HT]] = [[90|150]] = 0,60, soit 60 %.\nLes autres réponses : 66,7 % = [[120|180]] (TVA oubliée), 150 % = le taux de marge.",
     indice: "Les taux se calculent toujours HT. Commence par enlever la TVA du prix de vente, puis divise la marge par le bon prix.",
     schema: "img/schemas/U3/prix-monture-60-180.svg",
@@ -36,6 +37,7 @@ QUESTIONS.push(
     question: "Même monture : achat 60 € HT, vente 150 € HT. Quel est le taux de MARGE ?",
     choix: ["60 %", "40 %", "150 %", "250 %"],
     bonne: 2,
+    erreurs: { 0: "marque-marge" },
     explication: "Taux de marge = [[marge|coût d'achat HT]] = [[90|60]] = 1,50, soit 150 %.\nPiège classique : le taux de MARQUE divise par le prix de vente, [[90|150]] = 60 %. Le taux de MARGE divise par le coût d'achat.",
     indice: "Taux de MARGE ou taux de MARQUE ? L'un divise la marge par le coût d'achat, l'autre par le prix de vente. Lequel est demandé ici ?"
   },
@@ -44,6 +46,7 @@ QUESTIONS.push(
     question: "Un opticien applique un coefficient multiplicateur TTC de 3 sur un verre acheté 40 € HT. Prix de vente TTC et taux de marque ?",
     choix: ["120 € TTC, taux de marque 60 %", "120 € TTC, taux de marque 66,7 %", "100 € TTC, taux de marque 60 %", "144 € TTC, taux de marque 72 %"],
     bonne: 0,
+    erreurs: { 1: "ht-ttc" },
     explication: "Coefficient TTC = [[PV TTC|achat HT]], donc PV TTC = 40 × 3 = 120 €\nPV HT = [[120|1,2]] = 100 €\nMarge = 100 − 40 = 60 €\nTaux de marque = [[60|100]] = 60 %.",
     indice: "Le coefficient TTC transforme un achat HT en prix TTC. Trouve le prix TTC, repasse en HT, puis calcule la marge."
   },
@@ -52,6 +55,7 @@ QUESTIONS.push(
     question: "Un magasin vise un taux de marque de 60 %. Quel coefficient multiplicateur TTC doit-il appliquer sur ses achats HT ?",
     choix: ["1,6", "2,5", "3", "3,6"],
     bonne: 2,
+    erreurs: { 0: "marque-marge", 1: "ht-ttc" },
     explication: "Coefficient HT = [[1|1 − taux de marque]] = [[1|1 − 0,6]] = [[1|0,4]] = 2,5\nCoefficient TTC = 2,5 × 1,2 = 3\nVérification : achat 100 €, PV HT 250 €, marge 150 €, taux de marque [[150|250]] = 60 %.",
     indice: "Prends un achat facile, par exemple 100 € HT : quel PV HT donne 60 % de marque ? Puis ajoute la TVA."
   },
@@ -60,6 +64,7 @@ QUESTIONS.push(
     question: "Un client paie un équipement 240 € TTC. Quel est le montant de TVA collectée par le magasin (TVA 20 %) ?",
     choix: ["48 €", "40 €", "20 €", "200 €"],
     bonne: 1,
+    erreurs: { 0: "ht-ttc" },
     explication: "Le prix TTC contient déjà la TVA.\nPrix HT = [[240|1,2]] = 200 €\nTVA = 240 − 200 = 40 € (soit [[1|6]] du TTC).\nLe piège : 240 × 20 % = 48 € revient à appliquer la TVA deux fois.",
     indice: "Le prix TTC contient déjà la TVA. Retrouve d'abord le prix HT, la TVA est la différence."
   },
@@ -88,6 +93,7 @@ QUESTIONS.push(
     question: "Le marché d'une zone, net de l'évasion commerciale, est de 480 000 € TTC. Le magasin espère en capter 25 %. Quel chiffre d'affaires HT peut-il prévoir ?",
     choix: ["120 000 €", "100 000 €", "96 000 €", "144 000 €"],
     bonne: 1,
+    erreurs: { 0: "ht-ttc", 3: "ht-ttc" },
     explication: "Part de marché : 480 000 × 0,25 = 120 000 € TTC\nLe chiffre d'affaires d'une entreprise se donne HT :\n[[120 000|1,2]] = 100 000 € HT.",
     indice: "Deux étapes : la part de marché, puis la conversion. Le marché est donné TTC, le chiffre d'affaires d'une entreprise se donne HT."
   },
@@ -160,6 +166,7 @@ QUESTIONS.push(
     question: "Une ligne de montures se vend 125 € HT pièce, pour un coût variable de 50 € par monture. Ses charges fixes sont de 18 000 € par an. Combien faut-il en vendre PAR MOIS pour atteindre le seuil de rentabilité ?",
     choix: ["12 montures", "20 montures", "144 montures", "240 montures"],
     bonne: 1,
+    erreurs: { 3: "mois" },
     explication: "Marge sur coût variable par monture = 125 − 50 = 75 €\nSR en volume = [[18 000|75]] = 240 montures par an\nPar mois : [[240|12]] = 20 montures.\nLe chiffre 240 est le seuil annuel : attention à l'unité de temps demandée.",
     indice: "Combien chaque monture vendue rapporte-t-elle pour couvrir les charges fixes ? Attention à l'unité de temps demandée."
   },
@@ -356,7 +363,7 @@ QUESTIONS.push(
     question: "Un client de 30 ans revient avec une ordonnance de lunettes datée d'il y a 4 ans, sans opposition du médecin. L'opticien peut-il renouveler en adaptant la correction ?",
     choix: ["Non, une ordonnance de lunettes n'est valable qu'un an", "Non, au-delà de 3 ans c'est impossible à tout âge", "Oui, entre 16 et 42 ans elle reste valable 5 ans", "Oui, une ordonnance n'a aucune limite de temps"],
     bonne: 2,
-    explication: "Durées pour le renouvellement avec adaptation par l'opticien : 5 ans de 16 à 42 ans, 3 ans au-delà de 42 ans, sauf si le médecin s'y est opposé sur l'ordonnance. À 30 ans, une ordonnance de 4 ans est encore valable.",
+    explication: "Durées pour le renouvellement avec adaptation par l'opticien : 5 ans de 16 à 42 ans, 3 ans au-delà de 42 ans, sauf si le médecin s'y est opposé sur l'ordonnance. À 30 ans, une ordonnance de 4 ans est encore valable. (Une ordonnance d'orthoptiste ne vaut que 2 ans.)",
     indice: "La durée pendant laquelle l'opticien peut adapter une ordonnance dépend de l'âge du client. Dans quelle tranche se trouve un client de 30 ans ?"
   },
   {
@@ -543,6 +550,7 @@ QUESTIONS.push(
     type: "calcul",
     question: "Une monture est achetée 48 € HT et vendue 168 € TTC (TVA 20 %). Calcule le taux de marque.",
     reponse: { valeur: 65.7, unite: "%", decimales: 1, tolerance: 0.1, signe: false },
+    erreurs: [ { valeur: 71.4, type: "ht-ttc" }, { valeur: 54.8, type: "ht-ttc" }, { valeur: 191.7, type: "marque-marge" } ],
     explication: "PV HT = [[168|1,2]] = 140 €\nMarge brute = 140 − 48 = 92 €\nTaux de marque = [[92|140]] × 100 = 65,7 %\nOn divise par le prix de vente HT, jamais par le TTC ni par le coût d'achat.",
     indice: "Retire d'abord la TVA du prix de vente. Le taux de marque se calcule sur le prix de vente HT."
   },
@@ -551,6 +559,7 @@ QUESTIONS.push(
     type: "calcul",
     question: "Un verre est acheté 35 € HT et vendu 126 € TTC. Calcule le coefficient multiplicateur TTC.",
     reponse: { valeur: 3.6, unite: "", decimales: 1, signe: false },
+    erreurs: [ { valeur: 3, type: "ht-ttc" } ],
     explication: "Coefficient TTC = [[PV TTC|coût d'achat HT]] = [[126|35]] = 3,6\nC'est le coefficient le plus utilisé en optique : il passe directement de l'achat HT au prix affiché TTC.",
     indice: "Coefficient TTC = prix de vente TTC divisé par le coût d'achat HT. Pas de conversion à faire ici."
   },
@@ -710,6 +719,72 @@ QUESTIONS.push(
     bonne: 2,
     explication: "Comptant : l'immobilisation augmente de 30 000 € sans ressource stable, le FRNG tombe à −5 000 € et la trésorerie à −5 000 − 20 000 = −25 000 €.\nAvec un emprunt de 30 000 €, FRNG et trésorerie ne bougent pas, et le ratio devient [[130 000|165 000]] = 0,79.\nLe 1er choix oublie que 5 000 € ne paient pas 30 000 € ; « Emprunter » est juste mais sans argument ; le 4e est hors sujet.",
     indice: "Un investissement durable devrait être financé par une ressource durable. Calcule ce que deviendrait la trésorerie si on payait comptant, puis le ratio avec l'emprunt."
+  },
+
+  // ---------- « Choisis la bonne justification » ----------
+  {
+    id: "U3-141", difficulte: "difficile", epreuve: "U3", theme: "Seuil de rentabilité", session: "complément",
+    question: "Un magasin réalise 300 000 € HT de CA avec un seuil de rentabilité de 225 000 € HT. Quel commentaire est le mieux rédigé ?",
+    choix: ["Le seuil de rentabilité est de 225 000 €, donc le magasin est rentable.", "Le seuil est inférieur au CA de 75 000 € : le magasin dégage donc 75 000 € de bénéfice.", "Le seuil représente 75 % du CA : le magasin est rentable avec une marge de sécurité de 75 000 €, soit 25 % du CA. Une baisse du CA de plus de 25 % le ferait passer en perte.", "Le magasin perd de l'argent tant qu'il n'a pas atteint un CA de 300 000 €."],
+    bonne: 2,
+    explication: "Un bon commentaire compare le seuil au CA, chiffre la marge de sécurité et conclut.\nMarge de sécurité = 300 000 − 225 000 = 75 000 €\nIndice de sécurité = [[75 000|300 000]] = 25 %\nLe 1er choix est vrai mais sans argument ni chiffre. Le 2e confond marge de sécurité et bénéfice : le bénéfice vaut la marge de sécurité × le taux de marge sur coût variable, pas 75 000 €. Le 4e prend le CA actuel pour le seuil.",
+    indice: "Un commentaire complet contient un chiffre, une comparaison et une conclusion."
+  },
+  {
+    id: "U3-142", difficulte: "difficile", epreuve: "U3", theme: "Seuil de rentabilité", session: "complément",
+    question: "Un poste d'opticien supplémentaire coûte 30 000 € par an à l'employeur. Le taux de marge sur coût variable du magasin est de 60 %. Quel conseil est le mieux justifié ?",
+    choix: ["Embaucher seulement si le magasin peut réaliser au moins 50 000 € de CA en plus : à 60 %, ce CA apporte 30 000 € de marge, qui couvrent le coût du poste.", "Embaucher : 30 000 € est un petit coût au regard du CA du magasin.", "Embaucher si le magasin peut réaliser 30 000 € de CA en plus, qui paieront le salaire.", "Embaucher si le magasin peut réaliser 18 000 € de CA en plus, soit 30 000 × 0,60."],
+    bonne: 0,
+    explication: "Ce n'est pas le CA qui paie un salaire, c'est la marge qu'il apporte.\nCA nécessaire = [[coût du poste|taux de MCV]] = [[30 000|0,60]] = 50 000 €\nVérification : 50 000 × 0,60 = 30 000 €. Le 2e choix ne chiffre rien. Le 3e compare un CA à un coût. Le 4e multiplie au lieu de diviser.",
+    indice: "Combien de CA faut-il pour que la marge égale 30 000 € ?"
+  },
+  {
+    id: "U3-143", difficulte: "moyen", epreuve: "U3", theme: "Analyse financière", session: "complément",
+    question: "Un magasin a un FRNG de 40 000 € et un BFR de 55 000 €. Quel commentaire est le mieux rédigé ?",
+    choix: ["Le FRNG est positif, donc la situation financière est saine.", "La trésorerie nette est de 95 000 € : le magasin a une large réserve.", "La trésorerie nette est de 15 000 € : elle est positive, il n'y a aucun souci.", "La trésorerie nette est de 40 000 − 55 000 = −15 000 € : le FRNG ne couvre pas le BFR, le magasin dépend d'un découvert. Il peut réduire ses stocks ou négocier des délais de paiement avec ses fournisseurs."],
+    bonne: 3,
+    explication: "Trésorerie nette = FRNG − BFR = 40 000 − 55 000 = −15 000 €\nUn FRNG positif ne suffit pas : il faut qu'il couvre le BFR. Le 2e choix additionne au lieu de soustraire, le 3e oublie le signe. Le bon commentaire donne le calcul, dit ce que le résultat signifie et propose une action.",
+    indice: "Soustrais le BFR du FRNG, et regarde le signe."
+  },
+  {
+    id: "U3-144", difficulte: "moyen", epreuve: "U3", theme: "Analyse financière", session: "complément",
+    question: "Un magasin a 96 000 € de dettes financières et 120 000 € de capitaux propres. Quel commentaire est le mieux justifié ?",
+    choix: ["Le ratio d'endettement est de 80 % : c'est trop élevé, la banque refusera tout prêt.", "Le ratio d'endettement est de 0,8, inférieur à 1 : les dettes bancaires restent inférieures aux capitaux propres, le magasin peut encore emprunter, sous réserve que sa CAF couvre les remboursements.", "Le ratio d'endettement est de 1,25 : le magasin est très endetté.", "Le ratio d'endettement est de 0,8, inférieur à 1 : le magasin est sans dette."],
+    bonne: 1,
+    explication: "Ratio d'endettement = [[dettes financières|capitaux propres]] = [[96 000|120 000]] = 0,8\nSous 1, les dettes bancaires sont inférieures aux capitaux propres. Le 1er choix donne le bon chiffre (0,8 = 80 %) mais en tire une conclusion fausse : sous 1, l'emprunt reste possible. Le 3e inverse la division ([[120 000|96 000]] = 1,25). Le 4e confond « inférieur à 1 » et « pas de dette ».",
+    indice: "Divise les dettes par les capitaux propres, compare à 1, puis pense à la capacité de rembourser."
+  },
+  {
+    id: "U3-145", difficulte: "moyen", epreuve: "U3", theme: "Prix et marges", session: "complément",
+    question: "Le taux de marque d'un magasin passe de 62 % à 58 % en un an. Quel commentaire est le mieux rédigé ?",
+    choix: ["Le taux de marque baisse de 4 %, ce qui est négligeable : aucune action n'est nécessaire.", "Le magasin vend moins cher, il attirera donc plus de clients : c'est forcément bon pour le résultat.", "Le taux de marque baisse de 4 points : sur 100 € de vente HT, il reste 58 € au lieu de 62 € pour payer les charges. À CA égal, le résultat diminue : il faut revoir les prix ou négocier les achats.", "Le taux de marque est passé de 62 % à 58 %, donc le taux de marge a augmenté."],
+    bonne: 2,
+    explication: "Un écart entre deux taux se dit en points : 62 − 58 = 4 points. Ici, 4 points de taux de marque, c'est 4 € de moins par tranche de 100 € de ventes HT. Le 1er choix parle de 4 % et minimise sans chiffrer. Le 2e est un pari sans calcul. Le 4e est faux : taux de marque et taux de marge baissent ou montent ensemble.",
+    indice: "Un écart entre deux pourcentages se compte en points. Dis ce que ça change par 100 € de vente."
+  },
+  {
+    id: "U3-146", difficulte: "difficile", epreuve: "U3", theme: "Investissement et financement", session: "complément",
+    question: "Un magasin finance un équipement de 30 000 € par un emprunt de 5 ans à 5 % (annuité constante de 6 929 €). Sa CAF est de 14 000 € par an. Quel conseil est le mieux justifié ?",
+    choix: ["Je conseille l'emprunt : l'annuité de 6 929 € représente environ la moitié de la CAF, le magasin peut la rembourser, et il garde sa trésorerie pour son exploitation.", "Je conseille de payer comptant : un emprunt coûte toujours plus cher.", "Je déconseille l'emprunt : l'annuité de 6 929 € dépasse la CAF.", "Je conseille l'emprunt : l'annuité est une charge de 6 929 € qui améliore le résultat."],
+    bonne: 0,
+    explication: "Part de la CAF consacrée au remboursement = [[annuité|CAF]] = [[6 929|14 000]] ≈ 49,5 %\nLa CAF couvre l'annuité avec de la marge. Le 2e choix est un principe sans calcul : payer comptant viderait la trésorerie. Le 3e est faux (6 929 est inférieur à 14 000). Le 4e est absurde : une charge diminue le résultat, et seuls les intérêts sont des charges, pas le capital remboursé.",
+    indice: "Compare l'annuité à la CAF, puis pense à la trésorerie."
+  },
+  {
+    id: "U3-147", difficulte: "moyen", epreuve: "U3", theme: "Droit des entreprises", session: "complément",
+    question: "Une opticienne a signé un bail commercial de 9 ans. Après 4 ans, elle veut quitter le local. Quelle réponse est la mieux justifiée ?",
+    choix: ["Elle peut partir à tout moment, il suffit de prévenir le propriétaire.", "Elle peut partir tout de suite, car un bail commercial dure 4 ans au maximum.", "Elle ne peut jamais partir avant la fin des 9 ans.", "Elle ne peut pas partir à 4 ans : le locataire peut donner congé à la fin de chaque période de 3 ans, donc à 6 ans, avec un préavis de 6 mois. Avant, elle reste tenue de payer le loyer, sauf accord du propriétaire ou cession du bail."],
+    bonne: 3,
+    explication: "Le bail commercial de 9 ans est dit « 3-6-9 » : le locataire peut donner congé à la fin de la 3e et de la 6e année (et à la fin de la 9e), en prévenant 6 mois avant. À 4 ans, la prochaine échéance est à 6 ans. Le 3e choix oublie la faculté triennale, le 1er l'étend à tout moment.",
+    indice: "Les échéances du bail commercial tombent tous les 3 ans."
+  },
+  {
+    id: "U3-148", difficulte: "moyen", epreuve: "U3", theme: "Mercatique et communication", session: "complément",
+    question: "Avec 800 visiteurs par mois, un magasin passe d'un taux de transformation de 25 % à 30 % après une formation de l'équipe. Quel commentaire est le mieux justifié ?",
+    choix: ["Le taux a augmenté de 5 %, donc les ventes ont augmenté de 5 %.", "Le taux de transformation passe de 25 % à 30 % : avec 800 visiteurs, cela fait 240 ventes au lieu de 200, soit 40 de plus par mois. La formation est efficace : je conseille de la prolonger et de suivre aussi le panier moyen.", "Le taux a augmenté, donc il y a plus de visiteurs.", "Un taux de transformation de 30 % signifie que 30 clients ont acheté."],
+    bonne: 1,
+    explication: "Ventes avant = 800 × 0,25 = 200\nVentes après = 800 × 0,30 = 240\nHausse = [[240 − 200|200]] = 20 % de ventes en plus, pour une hausse de 5 points du taux. Le 1er choix confond points et pourcentage. Le 3e déduit le trafic du taux, alors que le taux est un rapport ventes sur visiteurs. Le 4e oublie que le taux se rapporte aux 800 visiteurs.",
+    indice: "Applique chaque taux aux 800 visiteurs, puis compare les ventes."
   }
 
 );

@@ -1867,3 +1867,38 @@ html:has(body.en-examen) { scroll-padding-top: 150px; }
 @media (prefers-reduced-motion: reduce) {
   .plan-pourquoi > summary::after { transition: none; }
 }
+
+/* ---------- Accueil : la case « Examen blanc » des outils (index.html) : un clic présente les 5 matières ---------- */
+.outil-examen { min-width: 0; }
+.outil-examen > .outil { width: 100%; margin: 0; font: inherit; text-align: left; background: none; border: 0; border-top: 1px solid var(--bord); border-radius: 0; cursor: pointer; }
+.outil-examen > .outil[aria-expanded="true"] .fleche { opacity: 1; transform: rotate(90deg); }
+/* Ouverte : la case prend toute la largeur, les 5 matières sur une ligne (3 + 2 sur un écran étroit) */
+.outil-examen:has(> .examen-matieres:not([hidden])) { grid-column: 1 / -1; }
+.examen-matieres { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; max-width: 640px; margin: -4px 0 20px; padding-left: 46px; }
+.examen-matieres[hidden] { display: none; }
+.examen-matieres .jour-matiere { flex-direction: column; gap: 1px; text-decoration: none; }
+.examen-matieres .jour-matiere small { color: var(--doux); font-size: 0.78rem; font-weight: 400; }
+@media (max-width: 620px) {
+  .examen-matieres { grid-template-columns: repeat(3, minmax(0, 1fr)); padding-left: 0; }
+}
+
+/* ---------- « À revoir » trié par type d'erreur (qcm.html, afficherFiltresErreurs) ---------- */
+.aide-erreurs { margin: -8px 0 22px; max-width: 62ch; color: var(--doux); font-size: 0.95rem; line-height: 1.5; }
+.aide-erreurs a { color: var(--or-clair); text-underline-offset: 3px; white-space: nowrap; }
+
+/* ---------- Question « calcul posé » (qcm.html, creerPose) : une case par étape, comme sur la copie ---------- */
+.pose-liste { list-style: none; margin: 18px 0 0; padding: 0; display: grid; gap: 12px; }
+.pose-etape { padding: 14px 16px; border-radius: 14px; background: var(--fond-2); border: 1px solid var(--bord); }
+.pose-etape.fermee { opacity: 0.6; }
+.pose-etape.juste { border-color: rgba(95, 211, 154, 0.5); }
+.pose-etape.bloque { border-color: rgba(255, 122, 122, 0.5); }
+.pose-tete { display: flex; gap: 10px; align-items: baseline; margin: 0 0 10px; font-weight: 700; }
+.pose-etape.fermee .pose-tete { margin: 0; }
+.pose-num { flex: none; display: inline-grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; border: 1px solid var(--bord-fort); font-size: 0.85rem; color: var(--doux); }
+.pose-etape.juste .pose-num { border-color: var(--vert); color: var(--vert); }
+.pose-etape.bloque .pose-num { border-color: var(--rouge); color: var(--rouge); }
+.pose-ligne { margin: 10px 0 0; font-variant-numeric: tabular-nums; }
+.pose-message { margin: 10px 0 0; }
+.pose-message.mal { color: var(--rouge); font-weight: 700; }
+.pose-aide { margin: 8px 0 0; padding: 10px 12px; border-radius: 10px; background: rgba(217, 178, 111, 0.08); border: 1px solid rgba(217, 178, 111, 0.3); font-size: 0.95rem; line-height: 1.5; }
+.pose-etape .bouton.secondaire { margin-top: 10px; }

@@ -75,6 +75,39 @@ SPECIFICITES.push({
     },
 
     {
+      type: "formules", titre: "À relire la veille : formules et repères de gestion",
+      lignes: [
+        { nom: "HT, TVA, TTC", formule: "PV HT = [[PV TTC|1,2]] (TVA à 20 %)  ;  TVA = TTC − HT", exemple: "240 € TTC → 200 € HT → 40 € de TVA (jamais 20 % de 240). Taux, marges et seuil se calculent en HT.", rappelee: false },
+        { nom: "Taux de marque", formule: "[[marge brute|PV HT]] × 100", exemple: "[[90|150]] = 60 %. Repère : toujours inférieur à 100 %.", rappelee: false },
+        { nom: "Taux de marge", formule: "[[marge brute|coût d'achat HT]] × 100", exemple: "[[90|60]] = 150 %. Peut dépasser 100 %.", rappelee: false },
+        { nom: "Coefficient multiplicateur", formule: "TTC : [[PV TTC|achat HT]]  ;  HT : [[1|1 − taux de marque]]", exemple: "[[180|60]] = 3 en TTC ; [[1|0,4]] = 2,5 en HT pour 60 % de marque.", rappelee: false },
+        { nom: "Seuil de rentabilité", formule: "[[charges fixes|taux de marge sur coût variable]]", exemple: "[[135 000|0,60]] = 225 000 € HT. Au-dessus du seuil, le magasin gagne de l'argent.", rappelee: false },
+        { nom: "Point mort et indice de sécurité", formule: "[[SR|CA]] × 12 mois  ;  [[CA − SR|CA]]", exemple: "[[225 000|300 000]] × 12 = 9 mois (fin septembre) ; [[75 000|300 000]] = 25 % : le CA peut baisser de 25 % avant la perte.", rappelee: false },
+        { nom: "FRNG, BFR, trésorerie nette", formule: "FRNG = ressources stables − emplois stables  ;  trésorerie = FRNG − BFR", exemple: "30 000 − 20 000 = 10 000 €. Repère : trésorerie négative = découvert, il faut agir sur le BFR (stocks, délais) ou sur les ressources stables.", rappelee: false },
+        { nom: "Ratio d'endettement", formule: "[[dettes financières|capitaux propres]]", exemple: "[[60 000|120 000]] = 0,5. Repère : sous 1, le magasin peut encore emprunter ; au-dessus, la banque hésite.", rappelee: false },
+        { nom: "CAF", formule: "résultat net + dotations aux amortissements − reprises", exemple: "28 000 + 12 000 = 40 000 €. Repère : la CAF doit couvrir le remboursement des emprunts.", rappelee: false },
+        { nom: "Part de marché et transformation", formule: "[[CA du magasin|CA du marché]]  ;  [[ventes|visiteurs]]", exemple: "[[450 000|3 000 000]] = 15 % ; [[252|840]] = 30 %.", rappelee: false },
+        { nom: "Salaire net et coût employeur", formule: "net = brut × (1 − taux salarial)  ;  coût = brut × (1 + taux patronal)", exemple: "2 000 € brut, 22 % et 45 % : 1 560 € net, 2 900 € de coût pour le magasin.", rappelee: false }
+      ]
+    },
+
+    {
+      type: "texte", titre: "À relire la veille : phrases-types pour commenter",
+      points: [
+        "Toujours quatre temps : le chiffre, la comparaison, ce que ça signifie, le conseil.",
+        "Marque : « Le taux de marque est de … %, au-dessus (ou en dessous) de … l'an dernier. Sur 100 € de vente HT, il reste … € pour payer les charges. Je conseille de … »",
+        "Seuil : « Le seuil de rentabilité est de … € HT, soit … % du CA. Le point mort tombe fin … et la marge de sécurité est de … €, soit … % du CA : le CA peut baisser de … % avant que le magasin passe en perte. »",
+        "FRNG, BFR : « Le FRNG est de … € : les ressources stables financent les emplois stables et laissent … € pour l'exploitation. Le BFR est de … € : les stocks et créances dépassent les dettes d'exploitation. »",
+        "Trésorerie : « La trésorerie nette est de … − … = … € : positive, le magasin paie ses factures sans découvert ; négative, il dépend d'un découvert, donc je conseille de réduire … ou de négocier … »",
+        "Endettement : « Le ratio d'endettement est de …, inférieur (ou supérieur) à 1 : les dettes bancaires sont inférieures (ou supérieures) aux capitaux propres. Le magasin peut (ou ne peut pas) emprunter davantage, si sa CAF couvre les remboursements. »",
+        "Investissement : « Le projet coûte … € ; l'annuité de … € représente … % de la CAF. Je conseille un emprunt sur … ans, qui préserve la trésorerie, plutôt qu'un paiement comptant. »",
+        "Embauche : « Le poste coûte … € par an. Avec un taux de marge sur coût variable de … %, il faut … € de CA en plus pour le payer, soit … € par mois. »",
+        "Droit : « Selon … (la règle), … Dans le cas présent, … (les faits de l'annexe). Donc … (la conclusion). Je conseille au gérant de … »",
+        "Points et pourcentages : un écart entre deux taux se dit en points (62 % → 58 % : 4 points). La variation relative se dit en pourcentage (+ 20 % de ventes)."
+      ]
+    },
+
+    {
       type: "etapes", titre: "La méthode juridique en 3 étapes",
       etapes: [
         { titre: "La règle", texte: "Cite la règle de droit : article du Code du travail ou du Code de commerce, ou jurisprudence. Ex. : une clause de non-concurrence exige une contrepartie financière.", theme: "Droit du travail" },

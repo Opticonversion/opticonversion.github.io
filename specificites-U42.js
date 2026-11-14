@@ -112,6 +112,42 @@ SPECIFICITES.push({
         { nom: "Réseau (a : pas du réseau)", formule: "a × (sin i' − sin i) = k × λ", exemple: "500 traits par mm, 600 nm, ordre 1 : i' ≈ 17,5°", rappelee: true },
         { nom: "Loi de Bouguer (E en lux, d en mètres)", formule: "E = I / d²", exemple: "8 000 lx à 30 cm : 2 000 lx à 60 cm", rappelee: true }
       ]
+    },
+    {
+      type: "texte",
+      titre: "À relire la veille : les conventions de signes",
+      points: [
+        "La lumière va de gauche à droite. Ce qui est avant la lentille (à gauche) est négatif, ce qui est après (à droite) est positif.",
+        "Dans la relation de Descartes, les mesures sont algébriques et partent du centre O de la lentille : OA, OA', f'. Pour les foyers : FA part du foyer objet F, F'A' du foyer image F'.",
+        "Objet réel : avant la lentille, OA négatif. Objet virtuel : après la lentille (le faisceau converge déjà en arrivant), OA positif.",
+        "Image réelle : après la lentille, OA' positif, on peut la recueillir sur un écran. Image virtuelle : avant la lentille, OA' négatif, on ne la voit qu'à l'œil.",
+        "Lentille convergente : f' positive, V positive. Lentille divergente : f' négative, V négative.",
+        "Grandissement γ positif : image droite. γ négatif : image renversée. Sa valeur donne la taille : |γ| = 3, l'image est 3 fois plus grande."
+      ]
+    },
+    {
+      type: "formules",
+      titre: "Les signes en exemples",
+      lignes: [
+        { nom: "Objet réel, lentille convergente", formule: "1/OA' − 1/OA = 1/f' avec OA < 0 et f' > 0", exemple: "f' = +40 mm et OA = −60 mm : OA' = +120 mm (image réelle)", rappelee: false },
+        { nom: "Lentille divergente, objet réel", formule: "f' < 0 et OA < 0", exemple: "f' = −60 mm et OA = −120 mm : OA' = −40 mm (image virtuelle, droite, plus petite)", rappelee: false },
+        { nom: "Objet virtuel, lentille divergente", formule: "f' < 0 et OA > 0", exemple: "f' = −50 mm et OA = +25 mm : OA' = +50 mm (image réelle)", rappelee: false },
+        { nom: "Grandissement d'une lentille mince et son signe", formule: "γ = OA' / OA", exemple: "OA' = +120 mm et OA = −60 mm : γ = −2 (renversée, 2 fois plus grande)", rappelee: false },
+        { nom: "Vergence (f' en mètres)", formule: "V = 1 / f'", exemple: "f' = −50 mm = −0,05 m : V = −20 δ", rappelee: false },
+        { nom: "Dioptre sphérique (R algébrique)", formule: "V = (n' − n) / R", exemple: "air vers verre 1,5 : R = +50 mm donne +10 δ ; R = −50 mm donne −10 δ", rappelee: false }
+      ]
+    },
+    {
+      type: "pieges",
+      titre: "À relire la veille : les pièges de signes",
+      items: [
+        { id: "U42-signes-1", titre: "Objet réel", faux: "Écrire OA = +60 mm parce que la distance est positive.", juste: "Un objet réel est avant la lentille : OA = −60 mm. Le signe vient du sens de la lumière, pas de la distance.", theme: "Conjugaison", questions: ["U42-043", "U42-054"] },
+        { id: "U42-signes-2", titre: "Lentille divergente", faux: "Écrire f' = 40 mm pour une lentille divergente.", juste: "f' = −40 mm. Avec un objet réel, l'image est virtuelle, droite et plus petite.", theme: "Conjugaison", questions: ["U42-044", "U42-056"] },
+        { id: "U42-signes-3", titre: "Objet virtuel", faux: "Penser qu'un objet est toujours avant la lentille.", juste: "Si l'image donnée par la 1re lentille se forme après la 2e, c'est un objet virtuel pour la 2e : OA positif, mesuré depuis la 2e lentille.", theme: "Conjugaison" },
+        { id: "U42-signes-4", titre: "Signe de γ", faux: "Lire γ = −3 comme « 3 fois plus petite ».", juste: "Le signe dit seulement droite (+) ou renversée (−). La taille est dans la valeur : |γ| = 3, l'image est 3 fois plus grande.", theme: "Conjugaison", questions: ["U42-055"] },
+        { id: "U42-signes-5", titre: "Réelle ou droite : deux questions différentes", faux: "Croire que virtuelle veut toujours dire droite.", juste: "Réelle ou virtuelle dépend du signe de OA' (où elle est). Droite ou renversée dépend du signe de γ. Une seule lentille avec un objet réel : virtuelle donc droite (loupe), réelle donc renversée (projecteur). Mais l'image finale d'un microscope est virtuelle et renversée.", theme: "Conjugaison" },
+        { id: "U42-signes-6", titre: "Vergence", faux: "Calculer V = 1 / 40 avec f' en millimètres, ou perdre le signe d'une divergente.", juste: "f' en mètres : 0,040 m donne V = +25 δ. Une lentille divergente garde son signe : V négative.", theme: "Conjugaison" }
+      ]
     }
   ]
 });

@@ -89,7 +89,7 @@ const Examen = (() => {
     const cas = tirer(casDe(code), format.cas || 0);
     const qCas = cas.flatMap(c => questionsDuCas(c.id));
     const reste = Math.max(0, format.questions - qCas.length);
-    const pool = ordinairesDe(code);
+    const pool = ordinairesDe(code).filter(q => q.type !== "pose");   // le calcul posé (étape par étape) reste hors examen
     const poids = poidsThemes(code);
     const themes = [...new Set(pool.map(q => q.theme))].map(t => ({
       t, w: (poids[t] || POIDS_THEME_RARE) * (0.85 + Math.random() * 0.3),
@@ -500,7 +500,7 @@ const Examen = (() => {
     document.body.classList.remove("en-examen");
     const lignes = corriger(e);
     // Les réponses données comptent dans la progression (Essentiel, « À revoir ») ; les questions laissées vides, non
-    lignes.forEach(l => { if (!l.vide) noterReponse(l.q, l.juste); });
+    lignes.forEach(l => { if (!l.vide) noterReponse(l.q, l.juste, l.calcul ? { calcul: l.calcul } : { choix: l.r && l.r.i }); });
     const total = lignes.reduce((s, l) => s + l.max, 0), obtenus = lignes.reduce((s, l) => s + l.pts, 0);
     const pourcent = total ? Math.round(obtenus / total * 100) : 0;
     const record = enregistrerRecord(e.epreuve + "/examen", pourcent);    // qcm.html : garde le meilleur, synchronisé

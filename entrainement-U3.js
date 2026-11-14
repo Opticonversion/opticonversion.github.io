@@ -13,6 +13,7 @@ QUESTIONS.push(
     question: "Un verre est acheté 50 € HT et vendu 180 € TTC (TVA 20 %). Quel est le taux de marque ?",
     choix: ["66,7 %", "72,2 %", "200 %", "55,6 %"],
     bonne: 0,
+    erreurs: { 1: "ht-ttc", 2: "marque-marge", 3: "ht-ttc" },
     explication: "On travaille en HT.\nPV HT = [[180|1,2]] = 150 €\nMarge brute = 150 − 50 = 100 €\nTaux de marque = [[100|150]] = 66,7 %\nErreurs classiques : 72,2 % = [[180 − 50|180]] (marge calculée avec le TTC), 200 % = [[100|50]] (taux de marge), 55,6 % = [[100|180]] (marge divisée par le prix TTC).",
     indice: "Le taux de marque se calcule sur le prix de vente HT. Commence par retirer la TVA du prix affiché."
   },
@@ -21,6 +22,7 @@ QUESTIONS.push(
     type: "calcul",
     question: "Une paire de lunettes solaires est achetée 80 € HT et vendue 140 € HT. Calcule le taux de MARGE.",
     reponse: { valeur: 75, unite: "%", decimales: 0, tolerance: 1, signe: false },
+    erreurs: [ { valeur: 42.9, type: "marque-marge" } ],
     explication: "Marge brute = 140 − 80 = 60 €\nTaux de marge = [[marge|coût d'achat HT]] = [[60|80]] = 75 %\nLe taux de marque, lui, serait [[60|140]] = 42,9 % : ce n'est pas le même calcul.",
     indice: "Le taux de marge divise la marge par le coût d'achat HT, pas par le prix de vente."
   },
@@ -29,6 +31,7 @@ QUESTIONS.push(
     question: "Un opticien applique un coefficient multiplicateur TTC de 3,3 sur un verre acheté 60 € HT. Quels sont le prix de vente TTC et le taux de marque ?",
     choix: ["198 € TTC, taux de marque 63,6 %", "198 € TTC, taux de marque 69,7 %", "165 € TTC, taux de marque 63,6 %", "198 € TTC, taux de marque 175 %"],
     bonne: 0,
+    erreurs: { 1: "ht-ttc", 2: "ht-ttc", 3: "marque-marge" },
     explication: "PV TTC = 60 × 3,3 = 198 €\nPV HT = [[198|1,2]] = 165 €\nMarge = 165 − 60 = 105 €\nTaux de marque = [[105|165]] = 63,6 %\nErreurs : 69,7 % = [[198 − 60|198]] (marge mélangeant TTC et HT), 165 € est le prix HT, et 175 % = [[105|60]] est le taux de marge.",
     indice: "Le coefficient TTC donne le prix TTC. Repasse en HT avant de calculer la marge et le taux."
   },
@@ -37,6 +40,7 @@ QUESTIONS.push(
     type: "calcul",
     question: "Un magasin vise un taux de marque de 50 %. Quel coefficient multiplicateur TTC doit-il appliquer à ses achats HT ?",
     reponse: { valeur: 2.4, unite: "", decimales: 1, tolerance: 0.05, signe: false },
+    erreurs: [ { valeur: 2, type: "ht-ttc" } ],
     explication: "Coefficient HT = [[1|1 − taux de marque]] = [[1|0,5]] = 2\nCoefficient TTC = 2 × 1,2 = 2,4\nVérification : achat 100 € HT, prix HT 200 €, marge 100 €, taux de marque [[100|200]] = 50 %, prix TTC 240 €.",
     indice: "Trouve d'abord le coefficient qui donne le bon taux de marque en HT, puis ajoute la TVA."
   },
@@ -45,6 +49,7 @@ QUESTIONS.push(
     type: "calcul",
     question: "Un client paie une paire de lunettes 360 € TTC. Quel est le montant de TVA collectée (TVA 20 %) ?",
     reponse: { valeur: 60, unite: "€", decimales: 0, tolerance: 0.5, signe: false },
+    erreurs: [ { valeur: 72, type: "ht-ttc" } ],
     explication: "Le prix TTC contient déjà la TVA.\nPrix HT = [[360|1,2]] = 300 €\nTVA = 360 − 300 = 60 € (soit [[1|6]] du TTC).\nCalculer 360 × 20 % = 72 € serait une erreur : on appliquerait le taux à un prix qui contient déjà la taxe.",
     indice: "Retrouve d'abord le prix HT en divisant le TTC par 1,2. La TVA est la différence."
   },
@@ -53,6 +58,7 @@ QUESTIONS.push(
     question: "Un opticien veut vendre une monture 250 € HT avec un taux de marque de 60 %. Quel est son prix d'achat HT maximum ?",
     choix: ["156,25 €", "100 €", "150 €", "208,33 €"],
     bonne: 1,
+    erreurs: { 0: "marque-marge", 3: "ht-ttc" },
     explication: "Taux de marque 60 % : la marge vaut 60 % du prix de vente HT.\nMarge = 250 × 0,60 = 150 €\nCoût d'achat = 250 − 150 = 100 €\nErreurs : 150 € est la marge, pas le coût ; 156,25 € = [[250|1,6]] correspondrait à un taux de MARGE de 60 % ; 208,33 € = [[250|1,2]] retire une TVA qui n'a rien à faire ici.",
     indice: "La marge vaut 60 % du prix de vente HT. Le coût d'achat est ce qui reste."
   },
@@ -79,6 +85,7 @@ QUESTIONS.push(
     question: "Le marché d'une zone, net de l'évasion commerciale, est de 360 000 € TTC. Le magasin espère en capter 30 %. Quel chiffre d'affaires HT peut-il prévoir ?",
     choix: ["90 000 €", "108 000 €", "129 600 €", "75 000 €"],
     bonne: 0,
+    erreurs: { 1: "ht-ttc", 2: "ht-ttc", 3: "ht-ttc" },
     explication: "Part de marché : 360 000 × 0,30 = 108 000 € TTC\nUn chiffre d'affaires se donne HT : [[108 000|1,2]] = 90 000 € HT\nErreurs : 108 000 € est resté en TTC, 129 600 € multiplie par 1,2 au lieu de diviser, 75 000 € divise deux fois par 1,2.",
     indice: "Calcule la part de marché, puis passe du TTC au HT dans le bon sens."
   },
@@ -113,6 +120,7 @@ QUESTIONS.push(
     question: "Une ligne de montures se vend 90 € HT pièce, pour un coût variable de 36 € par monture. Ses charges fixes sont de 19 440 € par an. Combien faut-il en vendre PAR MOIS pour atteindre le seuil de rentabilité ?",
     choix: ["18 montures", "30 montures", "216 montures", "360 montures"],
     bonne: 1,
+    erreurs: { 3: "mois" },
     explication: "Marge sur coût variable par monture = 90 − 36 = 54 €\nSR en volume = [[19 440|54]] = 360 montures par an\nPar mois : [[360|12]] = 30 montures\nErreurs : 360 est le seuil annuel, 216 = [[19 440|90]] oublie le coût variable, 18 = [[216|12]].",
     indice: "Combien chaque monture vendue rapporte-t-elle, une fois son coût variable payé ? Attention à l'unité de temps demandée."
   },
@@ -225,6 +233,7 @@ QUESTIONS.push(
     type: "calcul",
     question: "Une monture est achetée 72 € HT. L'opticien veut un taux de marque de 40 %. Quel prix de vente TTC affiche-t-il (TVA 20 %) ?",
     reponse: { valeur: 144, unite: "€ TTC", decimales: 0, tolerance: 0.5, signe: false },
+    erreurs: [ { valeur: 100.8, type: "marque-marge" }, { valeur: 120, type: "ht-ttc" } ],
     explication: "Le taux de marque porte sur le prix de vente HT : marge = 40 % du PV HT, donc l'achat en représente 60 %.\nPV HT = [[72|0,6]] = 120 €\nPV TTC = 120 × 1,2 = 144 €\nErreur fréquente : 72 × 1,4 = 100,80 €, qui applique 40 % à l'achat (c'est un taux de marge).",
     indice: "Si la marge vaut 40 % du prix de vente HT, l'achat en vaut 60 %. Divise l'achat par 0,6, puis ajoute la TVA."
   },
@@ -233,6 +242,7 @@ QUESTIONS.push(
     question: "Un opticien applique un coefficient multiplicateur de 2,5 sur son coût d'achat HT pour obtenir son prix de vente HT. Quels sont ses taux de marge et de marque ?",
     choix: ["Taux de marge 150 %, taux de marque 60 %", "Taux de marge 60 %, taux de marque 150 %", "Taux de marge 150 %, taux de marque 40 %", "Taux de marge 250 %, taux de marque 60 %"],
     bonne: 0,
+    erreurs: { 1: "marque-marge" },
     explication: "Prenons un achat de 100 € HT : PV HT = 250 €, marge = 150 €.\nTaux de marge = [[150|100]] = 150 %\nTaux de marque = [[150|250]] = 60 %\nLe taux de marque est toujours inférieur à 100 %, pas le taux de marge. 40 % est la part de l'achat dans le prix ([[100|250]]), et 250 % est le coefficient pris pour un taux.",
     indice: "Pose un achat de 100 € : calcule le prix de vente, puis la marge, puis divise une fois par l'achat et une fois par la vente."
   },
@@ -241,6 +251,7 @@ QUESTIONS.push(
     question: "Une monture affichée 240 € TTC, achetée 80 € HT, est soldée avec 25 % de remise. Quel est le taux de marque après remise (TVA 20 %) ?",
     choix: ["46,7 %", "55,6 %", "53,3 %", "87,5 %"],
     bonne: 0,
+    erreurs: { 1: "ht-ttc", 3: "marque-marge" },
     explication: "Prix remisé TTC = 240 × 0,75 = 180 €\nPV HT = [[180|1,2]] = 150 €\nMarge = 150 − 80 = 70 €\nTaux de marque = [[70|150]] = 46,7 % (contre 60 % avant remise : 200 € HT, marge 120 €)\nErreurs : 55,6 % = [[180 − 80|180]] (TTC mélangé au HT), 53,3 % = [[80|150]] (part de l'achat), 87,5 % = [[70|80]] (taux de marge).",
     indice: "Applique d'abord la remise, repasse en HT, puis calcule la marge. Le taux de marque se divise par le prix de vente HT."
   },
@@ -265,6 +276,7 @@ QUESTIONS.push(
     question: "Un fournisseur augmente le prix d'un verre de 70 € à 84 € HT. L'opticien veut conserver un taux de marque de 60 %. Quel nouveau prix de vente TTC doit-il afficher (TVA 20 %) ?",
     choix: ["252 €", "210 €", "201,60 €", "134,40 €"],
     bonne: 0,
+    erreurs: { 1: "ht-ttc", 3: "marque-marge" },
     explication: "L'achat représente 40 % du prix de vente HT.\nPV HT = [[84|0,4]] = 210 €\nPV TTC = 210 × 1,2 = 252 €\nErreurs : 210 € oublie la TVA, 201,60 € = 84 × 2,4 (coefficient d'un taux de marque de 50 %), 134,40 € = 84 × 1,6 (applique 60 % comme un taux de marge).",
     indice: "Taux de marque 60 % : l'achat vaut 40 % du prix de vente HT. Ensuite, ajoute la TVA."
   },
@@ -425,7 +437,7 @@ QUESTIONS.push(
     question: "Dans un contrat de complémentaire santé « responsable », quel est le plafond de remboursement de la monture d'un équipement hors 100 % Santé (classe B) ?",
     choix: ["100 €", "50 €", "150 €", "200 €"],
     bonne: 0,
-    explication: "Pour qu'un contrat soit « responsable » (et garde ses avantages fiscaux), la prise en charge de la monture d'un équipement de classe B est plafonnée à 100 € par la complémentaire. Les verres ont des plafonds propres, fixés selon leur correction. Pour les équipements de classe A (100 % Santé), le reste à charge est nul.",
+    explication: "Pour qu'un contrat soit « responsable » (et garde ses avantages fiscaux et sociaux), la complémentaire ne peut pas rembourser plus de 100 € pour la monture d'un équipement de classe B (150 € avant 2020). Les verres ont leurs propres plafonds, selon leur correction. En classe A (100 % Santé), la monture coûte au plus 30 € et il ne reste rien à payer.",
     indice: "Un chiffre rond, qui concerne seulement la monture et seulement la classe B."
   },
 
@@ -525,6 +537,7 @@ QUESTIONS.push(
     question: "Un magasin achète un appareil 24 000 € HT (TVA 20 %). Quel traitement est correct ?",
     choix: ["Amortissement calculé sur 24 000 € HT ; la TVA de 4 800 € est récupérable", "Amortissement calculé sur 28 800 € TTC ; la TVA n'est pas récupérable", "Amortissement sur 24 000 € HT ; la TVA est une charge du magasin", "Pas d'amortissement : l'appareil est une charge de l'année"],
     bonne: 0,
+    erreurs: { 1: "ht-ttc", 2: "ht-ttc" },
     explication: "Pour une entreprise assujettie, la TVA sur un investissement est déductible : elle se récupère sur la TVA collectée. La valeur à amortir est donc le prix HT (24 000 €). En trésorerie, le magasin paie quand même 28 800 € TTC à l'achat et récupère les 4 800 € de TVA ensuite : c'est une avance de TVA à financer.",
     indice: "Une entreprise ne supporte pas la TVA : elle la collecte et la déduit."
   },

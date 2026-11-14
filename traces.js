@@ -110,8 +110,16 @@
     if (N.schema) { S = { N, schema: N.schema, co: Optique.schema(N.schema), etiq: {}, regard: null, faits: new Set(), revele: [], zoom: false }; return; }
     const sys = Optique.preparer(systeme);
     // Vision : un œil avec son amétropie (schéma hors échelle). Sinon l'œil n'est qu'un observateur (loupe…).
-    S = { N, sys, ch: Optique.chaine(sys), revele: [], zoom: false, entree: ouverture ? 1 : 0, vision: !!(sys.oeil && sys.oeil.ametropie !== undefined) };
+    // Œil « à l'échelle » (echelle: true, ETSO) : dessiné comme sur le document réponse, dans la chaîne des images
+    S = { N, sys, ch: Optique.chaine(sys), revele: [], zoom: false, entree: ouverture ? 1 : 0, vision: !!(sys.oeil && sys.oeil.ametropie !== undefined && !sys.oeil.echelle) };
     regler(N.vue ? { ...N.vue } : cadrageAuto(sys));
+    // Champs étudiés dans un autre espace que l'espace objet (espaceChamps) : pupille et lucarne de cet espace données
+    S.esp = N.espaceChamps ? Optique.indexLentille(sys, N.espaceChamps.apres) + 1 : 0;
+    if (S.esp) {
+      const P = Optique.pupilleEntree(sys, S.esp), Lu = Optique.lucarneEntree(sys, S.esp);
+      if (P) S.revele.push({ type: "pupille", im: { ...P, etiquette: N.espaceChamps.pupille || P.nom } });
+      if (Lu) S.revele.push({ type: "lucarne", im: { ...Lu, etiquette: N.espaceChamps.lucarne || Lu.nom } });
+    }
   }
   function regler(vue) {
     S.vue = vue;
@@ -119,7 +127,7 @@
     S.sy = (H / 2) / vue.hmax;
   }
   const nomLentille = k => S.sys.lentilles[k].nom;
-  const nomFoyer = (k, prime) => (prime ? "F'" : "F") + (S.sys.lentilles.length > 1 ? bas[k + 1] || "" : "");
+  const nomFoyer = (k, prime) => (prime ? "F'" : "F") + (S.sys.lentilles[k].oeil ? "œ" : S.sys.lentilles.length > 1 ? bas[k + 1] || "" : "");
   const nomImage = (k, lettre) => S.sys.lentilles.length > 1 ? lettre + (bas[k + 1] || "") : lettre + "'";
   // Abscisse où s'arrête un rayon tracé jusqu'après la lentille k : la lentille suivante, ou le bord
   const xArret = k => (k + 1 < S.sys.lentilles.length ? S.sys.lentilles[k + 1].x : S.vue.xmax);
@@ -156,7 +164,15 @@
     // Lentilles : le symbole du BTS (pointes vers l'extérieur = convergente) sur une silhouette de verre très légère
     S.sys.lentilles.forEach((L, k) => {
       const conv = L.f > 0;
-      const demi = S.vision ? 46 : L.rayon ? Math.min(H / 2 - 6, L.rayon * S.sy) : H / 2 - 28;
+      const demi = S.vision ? 46 : L.oeil ? Math.max(30, Math.min(H / 2 - 40, 11 * S.sy)) : L.rayon ? Math.min(H / 2 - 6, L.rayon * S.sy) : H / 2 - 28;
+      if (L.oeil) {
+        // L'œil réduit à l'échelle : le globe, la lentille de 60 δ en H, la rétine R'
+        const xr = X(Optique.retine(S.sys)), xh = X(L.x);
+        el("path", { class: "t-oeil", d: `M${xh} ${H / 2 - demi} C${xh + (xr - xh) * 0.2} ${H / 2 - demi * 1.25} ${xr + 6} ${H / 2 - demi * 1.05} ${xr + 6} ${H / 2} C${xr + 6} ${H / 2 + demi * 1.05} ${xh + (xr - xh) * 0.2} ${H / 2 + demi * 1.25} ${xh} ${H / 2 + demi}` });
+        el("line", { x1: xr, y1: H / 2 - demi * 0.95, x2: xr, y2: H / 2 + demi * 0.95, class: "t-retine" });
+        etiquetteAxe(xr + 9, H / 2 + demi * 0.95 + 4, "R'", "centre repere");
+        etiquetteAxe(xh - 9, H / 2 + demi + 14, "H", "centre repere");
+      }
       const x = X(L.x) - (S.vision && Math.abs(L.x - S.sys.oeil.x) < 40 ? 14 : 0), y1 = H / 2 - demi, y2 = H / 2 + demi;
       const w = Math.max(4, Math.min(12, demi * 0.13));
       el("path", { class: "t-verre", d: conv
@@ -171,6 +187,7 @@
       if (S.sys.lentilles.length > 1 || L.nom !== "L") texte(x, Math.max(14, y1 - 7), L.nom, "centre repere");
       if (!S.vision) [[L.x - L.f, nomFoyer(k, false)], [L.x + L.f, nomFoyer(k, true)]].forEach(([xf, nom]) => {
         if (xf < v.xmin || xf > v.xmax) return;
+        if (L.oeil) return;             // foyers de l'œil : ni marque ni étiquette (F'œ est sur la rétine d'un emmétrope) ; ils restent des aimants
         el("line", { x1: X(xf), y1: H / 2 - 5, x2: X(xf), y2: H / 2 + 5, class: "t-foyer" });
         el("circle", { cx: X(xf), cy: H / 2, r: 2.6, class: "t-point" });
         etiquetteAxe(X(xf), H / 2 + 20, nom, "centre repere");
@@ -185,7 +202,7 @@
       texte(x, Math.max(14, H / 2 - r - 28), d.nom, "centre repere");
     });
     if (S.vision) dessinerOeilDeLoin();
-    else if (S.sys.oeil) {
+    else if (S.sys.oeil && !S.sys.oeil.echelle) {
       // Œil observateur : un petit œil dessiné à sa place
       const xo = X(S.sys.oeil.x);
       el("path", { d: `M${xo} ${H / 2 - 12} Q${xo + 26} ${H / 2 - 14} ${xo + 26} ${H / 2} Q${xo + 26} ${H / 2 + 14} ${xo} ${H / 2 + 12}`, class: "t-oeil" });
@@ -317,7 +334,8 @@
     const x = X(im.x), r = im.rayon * S.sy;
     el("line", { x1: x, y1: H / 2 - r, x2: x, y2: H / 2 - r - 18 }, grp);
     el("line", { x1: x, y1: H / 2 + r, x2: x, y2: H / 2 + r + 18 }, grp);
-    texte(x, Math.max(12, H / 2 - r - 24), im.nom + "′", "centre repere", grp);
+    // Le diaphragme lui-même (pupille ou lucarne d'un autre espace que l'espace objet) : son nom est déjà écrit
+    if (!(im.propre && im.etiquette === im.nom)) texte(x, Math.max(12, H / 2 - r - 24), im.etiquette || im.nom + "′", "centre repere", grp);
     return grp;
   }
   function dessinerRevele(r, g) {
@@ -336,13 +354,15 @@
   // Les deux droites limites d'un champ (en haut et, symétrique, en bas), et la limite dans le plan de l'objet
   function dessinerChamp(c, g) {
     const grp = el("g", { class: "t-champ t-champ-" + c.type }, g);
+    // Espace intermédiaire ou image : les droites restent autour de la pupille, de la lucarne et du plan des champs
+    const xs = [c.p1.x, c.p2.x, c.xPlan].filter(x => x !== undefined), marge = 2 * S.vue.carreauX;
+    const xa = c.espace ? Math.max(S.vue.xmin, Math.min(...xs) - marge) : S.vue.xmin, xb = c.espace ? Math.min(S.vue.xmax, Math.max(...xs) + marge) : S.vue.xmax;
     [1, -1].forEach(sg => {
       const y1 = sg * c.p1.y, m = sg * c.pente;
-      const xa = S.vue.xmin, xb = S.vue.xmax;
       el("line", { x1: X(xa), y1: Y(y1 + m * (xa - c.p1.x)), x2: X(xb), y2: Y(y1 + m * (xb - c.p1.x)) }, grp);
     });
-    if (c.rayon !== undefined && !S.sys.objet.infini) {
-      const xo = X(S.sys.objet.x);
+    if (c.rayon !== undefined && c.xPlan !== undefined) {
+      const xo = X(c.xPlan);
       el("line", { x1: xo, y1: Y(c.rayon), x2: xo, y2: Y(-c.rayon), class: "t-champ-limite" }, grp);
     }
   }
@@ -524,7 +544,8 @@
     const o = sys.objet;
     if (!o.infini && o.x !== undefined) { plus(o.x, o.h, "B"); plus(o.x, 0, "A"); }
     sys.lentilles.forEach((L, k) => {
-      plus(L.x, 0, sys.lentilles.length > 1 ? "le centre de " + L.nom : "O");
+      plus(L.x, 0, L.oeil ? "H" : sys.lentilles.length > 1 ? "le centre de " + L.nom : "O");
+      if (L.oeil) plus(Optique.retine(sys), 0, "la rétine");
       plus(L.x - L.f, 0, nomFoyer(k, false));
       plus(L.x + L.f, 0, nomFoyer(k, true));
       if (L.rayon) [1, -1].forEach(sg => plus(L.x, sg * L.rayon, "le bord de " + L.nom));
@@ -533,7 +554,7 @@
     S.revele.forEach(r => {
       if (r.type === "image") { const im = S.ch[r.k + 1]; if (im && !im.infini) { plus(im.x, im.h, nomImage(r.k, "B")); plus(im.x, 0, nomImage(r.k, "A")); } }
       else if (r.type === "point" && !r.oeil) plus(r.x, r.y || 0, r.nom);
-      else if ((r.type === "imageDiaphragme" || r.type === "pupille" || r.type === "lucarne") && r.im && !r.im.infini) [1, -1].forEach(sg => plus(r.im.x, sg * r.im.rayon, "le bord de " + r.im.nom + "′"));
+      else if ((r.type === "imageDiaphragme" || r.type === "pupille" || r.type === "lucarne") && r.im && !r.im.infini) [1, -1].forEach(sg => plus(r.im.x, sg * r.im.rayon, "le bord de " + (r.im.etiquette || r.im.nom + "′")));
     });
     return pts;
   }
@@ -1041,10 +1062,11 @@
   // ---------- 4. relier : deux bords → limite d'un champ ----------
   function gesteRelier(E, fini) {
     const type = (E.quoi || "champ-pleine-lumiere").replace("champ-", "");
-    const c = Optique.champ(S.sys, type);
+    const c = Optique.champ(S.sys, type, S.esp);
     const P = c.pupille, Lu = c.lucarne;
     if (!S.revele.some(r => r.type === "pupille")) S.revele.push({ type: "pupille", im: P });
     if (!S.revele.some(r => r.type === "lucarne")) S.revele.push({ type: "lucarne", im: Lu });
+    const plan = S.esp ? "plan des champs" : "plan de l'objet";
     dessiner();
     const poignees = [
       { id: "P+", x: P.x, y: P.rayon, nom: "bord haut de la pupille" },
@@ -1085,7 +1107,7 @@
       const nomChamp = type === "total" ? "champ total" : type === "moyen" ? "champ moyen" : "champ de pleine lumière";
       const regle = type === "moyen" ? "on relie le <b>centre</b> de la pupille au bord de la lucarne"
         : (c.cote === "oppose" ? "on relie un bord de la pupille au bord <b>opposé</b> de la lucarne" : "on relie les bords <b>du même côté</b> de la pupille et de la lucarne")
-          + (c.entre ? ". Ici le plan de l'objet est <b>entre</b> la pupille et la lucarne : la règle habituelle s'inverse. Repère sûr : la pleine lumière est toujours la plus petite des deux limites dans le plan de l'objet, le champ total la plus grande" : "");
+          + (c.entre ? ". Ici le " + plan + " est <b>entre</b> la pupille et la lucarne : la règle habituelle s'inverse. Repère sûr : la pleine lumière est toujours la plus petite des deux limites dans le " + plan + ", le champ total la plus grande" : "");
       fini(juste, "<p><b>" + (juste ? "Exact" : "Pas tout à fait") + " :</b> pour le " + nomChamp + ", " + regle + ".</p>");
     }
   }
@@ -1140,15 +1162,15 @@
 
   // ---------- 6. calcul : taper une valeur ----------
   const SIGNE_PAR_DEFAUT = { "rayon-champ": false, "angle-champ": false, "phorie": false, "ecart-taille": false, "aniseiconie": false, "prisme-od": false, "prisme-og": false, "difference-prismatique": false };
-  const UNITE_PAR_DEFAUT = { "OA'": "mm", "A'B'": "mm", "f-systeme": "mm", "rayon-champ": "mm", "angle-champ": "°", "remotum": "cm", "punctum": "cm", "gamma": "", "grossissement": "", "phorie": "Δ", "ecart-taille": "%", "aniseiconie": "%", "prisme-od": "Δ", "prisme-og": "Δ", "difference-prismatique": "Δ" };
-  const NOMS_GRANDEURS = { "OA'": "la position de l'image", "A'B'": "la taille de l'image", "gamma": "le grandissement", "f-systeme": "la focale du système",
+  const UNITE_PAR_DEFAUT = { "FA": "mm", "OA'": "mm", "A'B'": "mm", "f-systeme": "mm", "rayon-champ": "mm", "angle-champ": "°", "remotum": "cm", "punctum": "cm", "gamma": "", "grossissement": "", "phorie": "Δ", "ecart-taille": "%", "aniseiconie": "%", "prisme-od": "Δ", "prisme-og": "Δ", "difference-prismatique": "Δ" };
+  const NOMS_GRANDEURS = { "FA": "la position de l'image intermédiaire par rapport au foyer objet", "OA'": "la position de l'image", "A'B'": "la taille de l'image", "gamma": "le grandissement", "f-systeme": "la focale du système",
     "rayon-champ": "le rayon du champ", "angle-champ": "l'angle du champ", "grossissement": "le grossissement", "remotum": "HR", "punctum": "HP", "phorie": "la phorie", "ecart-taille": "l'écart de taille", "aniseiconie": "l'aniséiconie",
     "prisme-od": "l'effet prismatique de l'OD", "prisme-og": "l'effet prismatique de l'OG", "difference-prismatique": "l'effet prismatique vertical subi par le couple" };
   function valeurCalcul(E) {
-    const brute = S.schema ? Optique.grandeurSchema(S.schema, E.grandeur) : Optique.grandeur(S.sys, E.grandeur, { apres: E.apres, champ: E.champ });
+    const brute = S.schema ? Optique.grandeurSchema(S.schema, E.grandeur) : Optique.grandeur(S.sys, E.grandeur, { apres: E.apres, champ: E.champ, espace: S.N.espaceChamps && S.N.espaceChamps.apres });
     if (brute === null) return null;
     const unite = E.unite !== undefined ? E.unite : UNITE_PAR_DEFAUT[E.grandeur] || "";
-    const longueur = ["OA'", "A'B'", "f-systeme", "rayon-champ", "remotum", "punctum"].includes(E.grandeur);
+    const longueur = ["FA", "OA'", "A'B'", "f-systeme", "rayon-champ", "remotum", "punctum"].includes(E.grandeur);
     const facteur = longueur && !S.schema ? ({ mm: 1, cm: 0.1, m: 0.001 }[unite] || 1) : 1;     // les schémas donnent déjà des cm
     return { valeur: brute * facteur, unite, decimales: E.decimales !== undefined ? E.decimales : 1,
       signe: E.signe !== undefined ? E.signe : SIGNE_PAR_DEFAUT[E.grandeur] !== false,

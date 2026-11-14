@@ -22,9 +22,10 @@
     const source = (bloc.dataset.lettre || "").slice(0, 40);
     const id = "lettre-" + rang;
     bloc.innerHTML =
-      '<h2 id="' + id + '-titre">Préviens-moi des nouveautés</h2>' +
-      '<p class="lettre-texte">Nouvelles questions, sujets blancs, fiches de révision : un e-mail quand il y a du neuf, ' +
-      "deux par mois au plus. Certains présenteront des fiches ou des sujets payants. Tu te désinscris quand tu veux.</p>" +
+      '<h2 id="' + id + '-titre">Reçois les nouveautés par e-mail</h2>' +
+      '<p class="lettre-texte">On t\'écrit quand le site s\'enrichit : nouvelles questions, sujets blancs, fiches de révision. ' +
+      "Deux e-mails par mois au maximum. Certains parleront aussi de fiches ou de sujets payants. " +
+      "Tu te désinscris quand tu veux.</p>" +
       '<form class="lettre-form" novalidate aria-labelledby="' + id + '-titre">' +
       '<label for="' + id + '-email">Ton adresse e-mail</label>' +
       '<div class="lettre-ligne">' +

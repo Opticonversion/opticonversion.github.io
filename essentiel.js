@@ -121,7 +121,9 @@ function lireProgression() {
 function lireTempsReponses() {
   try { return JSON.parse(localStorage.getItem("progression-t") || "{}"); } catch (e) { return {}; }
 }
-function noterReponse(q, juste) {
+// detail (facultatif) = { calcul: résultat de corrigerCalcul } ou { choix: numéro dans q.choix } :
+// sert à ranger l'erreur par type dans « À revoir » (typeErreur, plus bas).
+function noterReponse(q, juste, detail) {
   const id = idQuestion(q), maintenant = Date.now();
   const p = lireProgression(), t = lireTempsReponses();
   p[id] = juste ? 1 : 0;
@@ -130,6 +132,7 @@ function noterReponse(q, juste) {
     localStorage.setItem("progression", JSON.stringify(p));
     localStorage.setItem("progression-t", JSON.stringify(t));
   } catch (e) {}
+  noterTypeErreur(q, juste, detail);
   marquerEnAttente("progression-t", id, maintenant);
   marquerEnAttente("progression", id, juste ? 1 : 0);
   compterJour();
@@ -218,6 +221,73 @@ function planifierRevision(q, juste) {
 }
 
 // Les questions à revoir aujourd'hui (retard compris), toutes épreuves confondues
+// ---------------- Le type de chaque erreur (pour trier « À revoir ») ----------------
+// localStorage « erreurs-types » = { id: type } : le type de la DERNIÈRE erreur à chaque question ratée
+// (effacé dès que la question est réussie). Sur cet appareil seulement, jamais envoyé.
+// Types : signe, unite (repérés par corrigerCalcul), les erreurs-types d'éco (marque-marge, ht-ttc, mois),
+// et notion (tout le reste : formule ou notion, et tout QCM raté sans type précisé).
+// Une question peut préciser ses pièges avec le champ facultatif « erreurs » :
+//   QCM : erreurs: { 2: "marque-marge" }  (numéro du choix dans q.choix → type)
+//   calcul : erreurs: [{ valeur: 25, type: "marque-marge" }]  (valeur obtenue avec cette erreur)
+const TYPES_ERREUR = {
+  signe: { nom: "Signe", aide: "Tu te trompes surtout de signe. Relis les conventions : sens de la lumière, mesures algébriques, objet ou image réel ou virtuel.", lien: ["qcm.html#U42", "Les conventions de signes (OGP)"] },
+  unite: { nom: "Unité", aide: "Ta valeur est souvent juste à une puissance de 10 près. Convertis tout dans l'unité demandée avant de calculer (mm et m, dioptries, pourcentages).", lien: null },
+  "marque-marge": { nom: "Marque ou marge", aide: "Taux de marque et taux de marge se confondent. Le taux de marque se calcule sur le prix de vente HT, le taux de marge sur le coût d'achat.", lien: ["qcm.html#U3", "Les formules de gestion (Éco)"] },
+  "ht-ttc": { nom: "HT ou TTC", aide: "Tu mélanges HT et TTC. Les marges et les coefficients se calculent en HT ; on passe au TTC à la fin, avec le bon taux de TVA.", lien: ["qcm.html#U3", "Les formules de gestion (Éco)"] },
+  mois: { nom: "Mois ou année", aide: "Ton résultat est 12 fois trop grand ou trop petit : vérifie si on te demande un montant par mois ou par an.", lien: null },
+  notion: { nom: "Formule ou notion", aide: "Ici, c'est la formule ou la notion qui manque. Relis la définition du thème avant de refaire la question.", lien: ["definitions.html", "Les définitions"] }
+};
+const TYPES_ERREUR_ECO = ["marque-marge", "ht-ttc", "mois"];
+function lireTypesErreurs() {
+  try { return JSON.parse(localStorage.getItem("erreurs-types") || "{}") || {}; } catch (e) { return {}; }
+}
+// La valeur tapée tombe-t-elle sur « cible » ? Tolérance de la bonne réponse, ou 1 % de la cible si c'est plus large
+// (l'élève a pu arrondir en route).
+function valeurTombeSur(reponse, valeur, cible) {
+  const dec = reponse.decimales === undefined ? 2 : reponse.decimales;
+  const tol = reponse.tolerance !== undefined ? reponse.tolerance
+    : reponse.toleranceRelative !== undefined ? Math.abs(cible) * reponse.toleranceRelative : 0.5 * 10 ** -dec;
+  return Math.abs(valeur - cible) <= Math.max(tol, Math.abs(cible) * 0.01) + 1e-9;
+}
+function typeErreur(q, detail) {
+  detail = detail || {};
+  const c = detail.calcul, rep = detail.reponse || q.reponse;   // calcul posé : la réponse de l'étape ratée
+  if (c && rep) {
+    if (c.etat === "signe") return "signe";
+    if (c.etat === "unite") return "unite";
+    if (Array.isArray(q.erreurs)) {
+      const e = q.erreurs.find(e => e && typeof e.valeur === "number" && valeurTombeSur(rep, c.valeur, e.valeur));
+      if (e && TYPES_ERREUR[e.type]) return e.type;
+    }
+    // Erreurs-types d'éco reconnues toutes seules : × 12 (mois / an) et HT / TTC (TVA 20 %, 10 %, 5,5 %)
+    // Seulement pour un montant en euros (un pourcentage ou un nombre de jours × 1,2 ne serait pas une erreur de TVA)
+    if (q.epreuve === "U3" && typeof c.valeur === "number" && rep.valeur && /€/.test(rep.unite || "")) {
+      const V = rep.valeur;
+      if (valeurTombeSur(rep, c.valeur, V * 12) || valeurTombeSur(rep, c.valeur, V / 12)) return "mois";
+      if ([1.2, 1.1, 1.055].some(k => valeurTombeSur(rep, c.valeur, V * k) || valeurTombeSur(rep, c.valeur, V / k))) return "ht-ttc";
+    }
+    return "notion";
+  }
+  if (detail.choix !== undefined && q.erreurs && !Array.isArray(q.erreurs)) {
+    const t = q.erreurs[detail.choix];
+    if (TYPES_ERREUR[t]) return t;
+  }
+  return "notion";
+}
+function noterTypeErreur(q, juste, detail) {
+  try {
+    const types = lireTypesErreurs(), id = idQuestion(q);
+    if (juste) delete types[id];
+    else types[id] = typeErreur(q, detail);
+    localStorage.setItem("erreurs-types", JSON.stringify(types));
+  } catch (e) {}
+}
+// Type d'erreur d'une question à revoir (notion si on ne sait pas : erreur notée avant ce tri, ou sur un autre appareil)
+function typeErreurDe(q) {
+  const t = lireTypesErreurs()[idQuestion(q)];
+  return TYPES_ERREUR[t] ? t : "notion";
+}
+
 function questionsARevoir() {
   const r = lireRevisions(), aujourdhui = jourLocal();
   return QUESTIONS.filter(q => { const e = r[idQuestion(q)]; return e && e.j && e.j <= aujourdhui; });

@@ -278,7 +278,7 @@ function phraseComposition(c) {
 function questionsPremiersPas(matiere) {
   if (typeof QUESTIONS === "undefined" || typeof ESSENTIEL === "undefined") return [];
   const prog = lireProgression();
-  const faciles = QUESTIONS.filter(q => (!matiere || q.epreuve === matiere) && !q.entrainement && !q.cas && q.type !== "calcul" && q.difficulte === "facile" && prog[idQuestion(q)] === undefined);
+  const faciles = QUESTIONS.filter(q => (!matiere || q.epreuve === matiere) && !q.entrainement && !q.cas && !q.type && q.difficulte === "facile" && prog[idQuestion(q)] === undefined);
   const choisies = [], epreuves = new Set(), notions = new Set();
   const prendre = n => {
     const q = melangerListe(faciles.filter(x => x.epreuve === n.epreuve && x.theme === n.theme))[0];

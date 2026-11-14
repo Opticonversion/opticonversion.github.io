@@ -22,7 +22,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Opticonversion">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
-<link rel="stylesheet" href="style.css?v=e909078a">
+<link rel="stylesheet" href="style.css?v=b371ff39">
 </head>
 <body data-rafraichir="oui">
 
@@ -198,6 +198,21 @@
       <span class="outil-texte"><b>Calculateurs</b><span>Transposition, verre-œil, Prentice, avec le détail.</span></span>
       <span class="fleche" aria-hidden="true">→</span>
     </a>
+    <!-- L'examen blanc : un clic présente les 5 matières, chacune mène à son examen (examen.js, qcm.html#U5/examen) -->
+    <div class="outil-examen">
+      <button class="outil" type="button" id="examen-ouvrir" aria-expanded="false" aria-controls="examen-matieres">
+        <span class="outil-icone" aria-hidden="true"><span class="ico i-chrono"></span></span>
+        <span class="outil-texte"><b>Examen blanc</b><span>Une copie chronométrée comme le jour de l'examen, notée sur 20. Choisis ta matière.</span></span>
+        <span class="fleche" aria-hidden="true">→</span>
+      </button>
+      <div class="examen-matieres" id="examen-matieres" hidden>
+        <a class="jour-matiere" data-epreuve="U5" href="qcm.html#U5/examen">Vision<small>50 min</small></a>
+        <a class="jour-matiere" data-epreuve="U3" href="qcm.html#U3/examen">Éco<small>50 min</small></a>
+        <a class="jour-matiere" data-epreuve="U42" href="qcm.html#U42/examen">OGP<small>40 min</small></a>
+        <a class="jour-matiere" data-epreuve="U43" href="qcm.html#U43/examen">ETSO<small>40 min</small></a>
+        <a class="jour-matiere" data-epreuve="U41" href="qcm.html#U41/examen">Maths<small>30 min</small></a>
+      </div>
+    </div>
   </div>
 
   <div class="titre-section">
@@ -217,14 +232,24 @@
 
 <!-- On charge les épreuves et les questions pour afficher les cartes et les chiffres exacts -->
 <script src="epreuves.js?v=cc645427"></script>
-<script src="questions-U41.js?v=5f14d644"></script>
-<script src="questions-U42.js?v=0686046a"></script>
-<script src="questions-U43.js?v=214a6318"></script>
-<script src="questions-U5.js?v=5d47a41f"></script>
-<script src="questions-U3.js?v=6c9ccac7"></script>
-<script src="essentiel.js?v=ef2a4256"></script>
-<script src="rythme.js?v=7cf9d521"></script>
+<script src="questions-U41.js?v=4ed5dc1f"></script>
+<script src="questions-U42.js?v=29d25a16"></script>
+<script src="questions-U43.js?v=be252b34"></script>
+<script src="questions-U5.js?v=901c19fe"></script>
+<script src="questions-U3.js?v=35bcd737"></script>
+<script src="essentiel.js?v=d812b628"></script>
+<script src="rythme.js?v=5c6bd141"></script>
 <script>
+  // L'examen blanc des outils : le bouton ouvre ou referme le choix des 5 matières
+  {
+    const b = document.getElementById("examen-ouvrir"), choix = document.getElementById("examen-matieres");
+    b.addEventListener("click", () => {
+      const ouvert = choix.hidden;
+      choix.hidden = !ouvert;
+      b.setAttribute("aria-expanded", String(ouvert));
+      if (ouvert) choix.querySelector("a").focus({ preventScroll: true });
+    });
+  }
   // Première ouverture : l'écran « Cinq questions pour commencer » (rythme.js)
   if (document.documentElement.dataset.accueil === "premier") preparerPremiersPas(document.getElementById("premiers-pas"));
   // Les jours suivants : l'écran de la séance du jour, tant qu'elle n'est ni faite ni passée (rythme.js)
@@ -342,8 +367,8 @@
 <script src="compter.js?v=920cbd98" defer></script>
 <script src="vivant.js?v=ec7cf52b" defer></script>
 <script src="appli.js?v=0724163c" defer></script>
-<script src="lettre.js?v=63876086" defer></script>
-<script type="module" src="compte.js?v=6a849ba7"></script>
+<script src="lettre.js?v=92532f67" defer></script>
+<script type="module" src="compte.js?v=c75295cc"></script>
 <!-- Mesure d'audience anonyme, sans cookies (GoatCounter) -->
 <script data-goatcounter="https://opticonversion.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </body>

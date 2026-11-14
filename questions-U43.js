@@ -478,7 +478,300 @@ QUESTIONS.push(
     bonne: 0,
     explication: "Rotation et translation liées par un filetage : liaison hélicoïdale (1 degré de liberté). Chaque tour fait avancer d'un pas : N = course ÷ pas = 5 ÷ 0,5 = 10 tours.",
     indice: "Les deux mouvements sont-ils liés ou indépendants ? Pour le nombre de tours, divise la course par le pas."
-  }
+  },
+{
+  "id": "U43-126",
+  "epreuve": "U43",
+  "theme": "Chaîne des conjugués",
+  "session": "complément",
+  "difficulte": "difficile",
+  "type": "pose",
+  "question": "Deux lentilles minces : L₁ (f'₁ = 60 mm), puis L₂ (f'₂ = 40 mm) placée 100 mm après L₁. Un objet réel AB est à 90 mm devant L₁. Trouve la position de l'image finale et le grandissement total, étape par étape.",
+  "etapes": [
+    {
+      "consigne": "Position de l'image intermédiaire O₁A₁ (en mm)",
+      "reponse": {
+        "valeur": 180,
+        "unite": "mm",
+        "decimales": 0,
+        "signe": true
+      },
+      "aide": "Relation de conjugaison avec L₁ : [[1|O₁A₁]] = [[1|f'₁]] + [[1|O₁A]], avec O₁A = −90 mm (objet réel, avant la lentille).",
+      "ligne": "[[1|O₁A₁]] = [[1|60]] + [[1|−90]] = [[3|180]] − [[2|180]] = [[1|180]]\nDonc O₁A₁ = +180 mm"
+    },
+    {
+      "consigne": "Position de A₁ par rapport à L₂, O₂A₁ (en mm)",
+      "reponse": {
+        "valeur": 80,
+        "unite": "mm",
+        "decimales": 0,
+        "signe": true
+      },
+      "aide": "L₂ est à 100 mm de L₁ et A₁ à 180 mm de L₁. Compte la distance de L₂ à A₁ dans le sens de la lumière.",
+      "ligne": "O₂A₁ = O₁A₁ − O₁O₂ = 180 − 100 = +80 mm\nPositif : A₁ est après L₂, c'est un objet virtuel pour L₂."
+    },
+    {
+      "consigne": "Position de l'image finale O₂A' (en mm, au dixième)",
+      "reponse": {
+        "valeur": 26.7,
+        "unite": "mm",
+        "decimales": 1,
+        "signe": true,
+        "tolerance": 0.1
+      },
+      "aide": "Relation de conjugaison avec L₂ : [[1|O₂A']] = [[1|f'₂]] + [[1|O₂A₁]], avec O₂A₁ positif.",
+      "ligne": "[[1|O₂A']] = [[1|40]] + [[1|80]] = [[2|80]] + [[1|80]] = [[3|80]]\nDonc O₂A' = +26,7 mm"
+    },
+    {
+      "consigne": "Grandissement total γ (au centième)",
+      "reponse": {
+        "valeur": -0.67,
+        "unite": "",
+        "decimales": 2,
+        "signe": true,
+        "tolerance": 0.015
+      },
+      "aide": "γ = γ₁ × γ₂, avec γ₁ = [[O₁A₁|O₁A]] et γ₂ = [[O₂A'|O₂A₁]].",
+      "ligne": "γ₁ = [[180|−90]] = −2      γ₂ = [[26,7|80]] ≈ +0,33\nγ = γ₁ × γ₂ ≈ −0,67"
+    }
+  ],
+  "explication": "L'image finale est réelle, à 26,7 mm après L₂. Le grandissement total vaut −0,67 : elle est renversée et réduite."
+},
+{
+  "id": "U43-127",
+  "epreuve": "U43",
+  "theme": "Œil et instrument",
+  "session": "complément",
+  "difficulte": "difficile",
+  "type": "pose",
+  "question": "Une lunette a un oculaire de focale 30 mm. Un myope de −5 δ, sans lunettes, l'utilise sans accommoder, l'œil au foyer image de l'oculaire. La bague de réglage a un pas de 0,75 mm. Trouve le réglage depuis la position emmétrope, étape par étape.",
+  "etapes": [
+    {
+      "consigne": "Position du remotum HR (en mm)",
+      "reponse": {
+        "valeur": -200,
+        "unite": "mm",
+        "decimales": 0,
+        "signe": true
+      },
+      "aide": "HR = [[1|R]], en mètres et avec son signe : le remotum d'un myope est devant l'œil.",
+      "ligne": "HR = [[1|R]] = [[1|−5]] = −0,20 m = −200 mm"
+    },
+    {
+      "consigne": "Déplacement x de l'image intermédiaire par rapport au foyer objet (en mm)",
+      "reponse": {
+        "valeur": 4.5,
+        "unite": "mm",
+        "decimales": 1,
+        "signe": true
+      },
+      "aide": "L'œil est au foyer image de l'oculaire : x' = F'A' = HR. Relation de Newton : x · x' = −f'², avec f' = 30 mm.",
+      "ligne": "x' = HR = −200 mm\nx = [[−f'²|x']] = [[−900|−200]] = +4,5 mm\nPositif : on rapproche l'oculaire de l'objectif de 4,5 mm."
+    },
+    {
+      "consigne": "Nombre de tours de bague",
+      "reponse": {
+        "valeur": 6,
+        "unite": "tours",
+        "decimales": 0,
+        "signe": false
+      },
+      "aide": "Un tour fait avancer d'un pas : nombre de tours = [[course|pas]], les deux dans la même unité.",
+      "ligne": "N = [[course|pas]] = [[4,5|0,75]] = 6 tours"
+    }
+  ],
+  "explication": "Pour ce myope, on rapproche l'oculaire de l'objectif de 4,5 mm, soit 6 tours de bague."
+},
+{
+  "id": "U43-128",
+  "epreuve": "U43",
+  "theme": "Frontofocomètre",
+  "session": "complément",
+  "difficulte": "difficile",
+  "type": "pose",
+  "question": "Au frontofocomètre, un verre porte la correction +4,00 (−2,00) à 180°. Il est décentré de 5 mm horizontalement et de 3 mm verticalement. Trouve l'effet prismatique résultant, étape par étape.",
+  "etapes": [
+    {
+      "consigne": "Puissance du méridien horizontal D_H (en δ, au centième)",
+      "reponse": {
+        "valeur": 4,
+        "unite": "δ",
+        "decimales": 2,
+        "signe": true
+      },
+      "aide": "Un cylindre n'a aucun effet le long de son axe. L'axe 180° est horizontal.",
+      "ligne": "Méridien horizontal = méridien de l'axe : D_H = +4,00 δ"
+    },
+    {
+      "consigne": "Puissance du méridien vertical D_V (en δ, au centième)",
+      "reponse": {
+        "valeur": 2,
+        "unite": "δ",
+        "decimales": 2,
+        "signe": true
+      },
+      "aide": "Dans le méridien perpendiculaire à l'axe, la puissance est la sphère plus le cylindre.",
+      "ligne": "D_V = +4,00 + (−2,00) = +2,00 δ"
+    },
+    {
+      "consigne": "Prisme horizontal P_H (en Δ, au dixième)",
+      "reponse": {
+        "valeur": 2,
+        "unite": "Δ",
+        "decimales": 1,
+        "signe": false
+      },
+      "aide": "Règle de Prentice : P = décentrement (cm) × puissance. Convertis 5 mm en cm.",
+      "ligne": "P_H = 0,5 × 4,00 = 2,0 Δ"
+    },
+    {
+      "consigne": "Prisme vertical P_V (en Δ, au dixième)",
+      "reponse": {
+        "valeur": 0.6,
+        "unite": "Δ",
+        "decimales": 1,
+        "signe": false
+      },
+      "aide": "Même règle avec le décentrement vertical et la puissance verticale.",
+      "ligne": "P_V = 0,3 × 2,00 = 0,6 Δ"
+    },
+    {
+      "consigne": "Prisme résultant P (en Δ, au dixième)",
+      "reponse": {
+        "valeur": 2.1,
+        "unite": "Δ",
+        "decimales": 1,
+        "signe": false
+      },
+      "aide": "Les deux prismes sont perpendiculaires : combine-les comme les côtés d'un triangle rectangle.",
+      "ligne": "P = √(P_H² + P_V²) = √(2,0² + 0,6²) = √4,36 ≈ 2,1 Δ"
+    }
+  ],
+  "explication": "Chaque méridien a sa propre puissance, donc son propre prisme. Le prisme résultant est de 2,1 Δ."
+},
+{
+  "id": "U43-129",
+  "epreuve": "U43",
+  "theme": "Grossissement et photo",
+  "session": "complément",
+  "difficulte": "moyen",
+  "type": "pose",
+  "question": "Une lunette afocale a un objectif de focale 900 mm et de diamètre 90 mm, avec un oculaire de focale 18 mm. On ajoute une lentille de Barlow ×2 qui double la focale de l'objectif. Étudie l'effet, étape par étape.",
+  "etapes": [
+    {
+      "consigne": "Grossissement sans Barlow G₀",
+      "reponse": {
+        "valeur": 50,
+        "unite": "",
+        "decimales": 0,
+        "signe": false
+      },
+      "aide": "G = [[f'obj|f'oc]], les deux focales dans la même unité.",
+      "ligne": "G₀ = [[900|18]] = 50"
+    },
+    {
+      "consigne": "Focale de l'objectif avec la Barlow (en mm)",
+      "reponse": {
+        "valeur": 1800,
+        "unite": "mm",
+        "decimales": 0,
+        "signe": false
+      },
+      "aide": "La Barlow ×2 double la focale : on multiplie.",
+      "ligne": "f'obj = 2 × 900 = 1 800 mm"
+    },
+    {
+      "consigne": "Grossissement avec la Barlow G",
+      "reponse": {
+        "valeur": 100,
+        "unite": "",
+        "decimales": 0,
+        "signe": false
+      },
+      "aide": "Même formule, avec la nouvelle focale.",
+      "ligne": "G = [[1 800|18]] = 100"
+    },
+    {
+      "consigne": "Diamètre du cercle oculaire avec la Barlow (en mm, au centième)",
+      "reponse": {
+        "valeur": 0.9,
+        "unite": "mm",
+        "decimales": 2,
+        "signe": false
+      },
+      "aide": "Diamètre du cercle oculaire = [[diamètre de l'objectif|G]].",
+      "ligne": "d = [[90|100]] = 0,90 mm"
+    }
+  ],
+  "explication": "La Barlow double le grossissement (de 50 à 100) et divise par deux le cercle oculaire (de 1,8 à 0,9 mm) : l'image est plus grosse et moins lumineuse."
+},
+{
+  "id": "U43-130",
+  "epreuve": "U43",
+  "theme": "Chaîne des conjugués",
+  "session": "complément",
+  "difficulte": "moyen",
+  "type": "pose",
+  "question": "Un microscope a un objectif de focale 10 mm et un oculaire de focale 25 mm. La préparation est à 12 mm devant l'objectif. Il est réglé pour un œil emmétrope qui n'accommode pas. Étudie-le étape par étape.",
+  "etapes": [
+    {
+      "consigne": "Position de l'image intermédiaire O₁A₁ (en mm)",
+      "reponse": {
+        "valeur": 60,
+        "unite": "mm",
+        "decimales": 0,
+        "signe": true
+      },
+      "aide": "Relation de conjugaison : [[1|O₁A₁]] = [[1|f'obj]] + [[1|O₁A]], avec O₁A = −12 mm.",
+      "ligne": "[[1|O₁A₁]] = [[1|10]] + [[1|−12]] = [[6|60]] − [[5|60]] = [[1|60]]\nDonc O₁A₁ = +60 mm"
+    },
+    {
+      "consigne": "Grandissement de l'objectif γ",
+      "reponse": {
+        "valeur": -5,
+        "unite": "",
+        "decimales": 0,
+        "signe": true
+      },
+      "aide": "γ = [[O₁A₁|O₁A]], avec les signes.",
+      "ligne": "γ = [[O₁A₁|O₁A]] = [[60|−12]] = −5"
+    },
+    {
+      "consigne": "Distance entre l'objectif et l'oculaire (en mm)",
+      "reponse": {
+        "valeur": 85,
+        "unite": "mm",
+        "decimales": 0,
+        "signe": false
+      },
+      "aide": "Pour un emmétrope sans accommodation, l'image finale est à l'infini : A₁ doit être au foyer objet de l'oculaire, 25 mm avant lui.",
+      "ligne": "A₁ est à 60 mm après l'objectif et à 25 mm avant l'oculaire :\nO₁O₂ = 60 + 25 = 85 mm"
+    },
+    {
+      "consigne": "Grossissement de l'oculaire G_oc",
+      "reponse": {
+        "valeur": 10,
+        "unite": "",
+        "decimales": 0,
+        "signe": false
+      },
+      "aide": "G_oc = [[250|f'oc]], avec f'oc en mm.",
+      "ligne": "G_oc = [[250|25]] = 10"
+    },
+    {
+      "consigne": "Grossissement commercial G",
+      "reponse": {
+        "valeur": 50,
+        "unite": "",
+        "decimales": 0,
+        "signe": false
+      },
+      "aide": "G = ∣γ objectif∣ × G_oc.",
+      "ligne": "G = ∣−5∣ × 10 = 50"
+    }
+  ],
+  "explication": "L'image intermédiaire est à 60 mm après l'objectif, agrandie 5 fois. Les lentilles sont à 85 mm l'une de l'autre et le grossissement commercial vaut 50."
+}
 );
 
 // ---------- Mini-sujet (cas) ----------

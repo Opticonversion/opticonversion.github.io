@@ -788,6 +788,102 @@ QUESTIONS.push(
     reponse: {"valeur": 5.5, "unite": "Δ", "decimales": 1, "signe": false},
     explication: "1 Δ = 1 cm de déviation à 1 m.\nP = [[2,2 cm|0,40 m]] = 5,5 Δ.\nLe sens (éso ou exo) se lit au côté de la barre, pas au calcul.",
     indice: "Ramène le décalage à ce qu'il serait à 1 m : [[décalage (cm)|distance (m)]]."
+  },
+  {
+    id: "U5-145",
+    difficulte: "moyen",
+    epreuve: "U5",
+    theme: "Masquage et phories",
+    session: "complément",
+    question: "Au masquage de l'OD ou de l'OG, aucun mouvement. Au démasquage de l'OG, l'œil descend pour reprendre la fixation. Quelle rédaction est juste et complète ?",
+    choix: ["Pas de mouvement au masquage : pas de tropie. Au démasquage l'OG redescend, donc sous le cache il était remonté : hyperphorie de l'OG.", "Pas de mouvement au masquage, mais l'OG bouge au démasquage : hypertropie de l'OG.", "L'œil descend au démasquage, donc il était trop bas sous le cache : hypophorie de l'OG.", "Pas de tropie. L'OG descend au démasquage : c'est une hyperphorie de l'OD."],
+    bonne: 0,
+    explication: "Pas de mouvement au masquage : pas de tropie. Le mouvement n'apparaît qu'au démasquage : c'est une phorie. L'œil revient en bas pour fixer, donc sous le cache il s'était dirigé vers le haut : hyperphorie de l'OG. La proposition qui conclut à une hyperphorie de l'OD désigne le mauvais œil ; celle qui parle d'hypertropie confond tropie et phorie ; celle qui parle d'hypophorie inverse le raisonnement.",
+    indice: "Une bonne rédaction donne : le résultat du masquage, celui du démasquage, la conclusion, avec le bon sens."
+  },
+  {
+    id: "U5-146",
+    difficulte: "moyen",
+    epreuve: "U5",
+    theme: "Worth",
+    session: "complément",
+    question: "Filtre rouge sur l'OD. Le sujet voit 5 symboles, les rouges à GAUCHE des verts. Quelle rédaction est juste et complète ?",
+    choix: ["Les 5 symboles montrent une vision simultanée sans fusion. L'image de l'OD est à gauche, du côté de l'OD : diplopie homonyme, donc ésophorie.", "Les 5 symboles montrent une vision simultanée sans fusion. L'image de l'OD est du côté opposé à l'OD : diplopie croisée, donc exophorie.", "Il voit 5 symboles : la fusion est normale, puisque les deux yeux voient.", "L'OG est neutralisé car les symboles verts sont à droite : exophorie."],
+    bonne: 1,
+    explication: "Cinq symboles : chaque œil voit ses symboles, il n'y a pas de fusion. Le rouge est celui de l'OD. Vu depuis le sujet, l'OD est à droite ; ses symboles apparaissent à gauche, du côté opposé : diplopie croisée, donc exophorie. La réponse qui parle de diplopie homonyme place l'image de l'OD du mauvais côté ; celle qui conclut à une fusion normale confond vision double et fusion ; celle qui évoque une neutralisation de l'OG décrit un cas qui n'existe pas ici.",
+    indice: "Cite le nombre de symboles et ce qu'il prouve, puis le côté de l'image de l'œil au filtre rouge, puis le type de diplopie, puis la phorie."
+  },
+  {
+    id: "U5-147",
+    difficulte: "difficile",
+    epreuve: "U5",
+    theme: "Anisométropie",
+    session: "complément",
+    question: "Un anisométrope (OD −1,00, OG −5,00) porte des lunettes et voit double en lisant, pas de loin. Quelle justification est juste et complète ?",
+    choix: ["En lecture, le regard descend sous les centres optiques. Les deux verres n'ont pas la même puissance : les effets prismatiques verticaux diffèrent aux deux yeux, d'où une diplopie verticale.", "En lecture, les prismes sont égaux et de sens opposés, donc ils s'annulent et la diplopie est horizontale.", "En lecture, la distance verre-œil change et l'aniséiconie augmente, d'où la diplopie.", "En lecture, les deux yeux accommodent de façon différente, ce qui crée une diplopie verticale."],
+    bonne: 0,
+    explication: "Prentice : l'effet prismatique d'un verre vaut décentrement × puissance. En lecture le regard descend et traverse chaque verre loin de son centre optique, mais les deux verres n'ont pas la même puissance : les effets verticaux sont inégaux. La différence oblige les yeux à se désaligner verticalement : diplopie verticale, présente seulement en regard bas.",
+    indice: "Le signe est « seulement en lecture ». Qu'est-ce qui change quand le regard descend, et pourquoi aux deux yeux de façon différente ?"
+  },
+  {
+    id: "U5-148",
+    difficulte: "moyen",
+    epreuve: "U5",
+    theme: "Examen préliminaire",
+    session: "complément",
+    question: "Un enfant de 9 ans a −2,50 à l'autoréfractomètre, mais ses acuités sont meilleures qu'attendu. Quelle justification est juste et complète pour ne pas commander −2,50 ?",
+    choix: ["L'enfant a de la myopie nocturne : il faut ajouter +0,50 sans autre mesure.", "L'appareil sous-estime la myopie : on commande une valeur plus forte.", "L'enfant accommode devant l'appareil : la myopie est surestimée. On contrôle par une mesure subjective avec brouillage et on confronte aux acuités.", "L'appareil est toujours exact chez l'enfant, mais la monture doit être ajustée."],
+    bonne: 2,
+    explication: "Devant l'autoréfractomètre, le sujet accommode souvent (accommodation instrumentale), surtout un enfant : la myopie est surestimée. La valeur sert de point de départ, jamais de compensation finale. On la vérifie en subjectif, avec brouillage, et on confronte aux acuités.",
+    indice: "Que fait l'œil d'un enfant quand il regarde dans l'appareil ?"
+  },
+  {
+    id: "U5-149",
+    difficulte: "facile",
+    epreuve: "U5",
+    theme: "Réfraction",
+    session: "complément",
+    question: "En réfraction subjective, plusieurs sphères donnent la même meilleure acuité. Laquelle retient-on, et pourquoi ?",
+    choix: ["La plus négative, pour qu'il voie le plus net possible.", "La plus positive, car elle donne toujours une acuité de 10/10.", "La plus positive (ou la moins négative), pour ne pas faire accommoder le sujet.", "La plus négative, car elle relâche l'accommodation."],
+    bonne: 2,
+    explication: "On retient la sphère la plus convexe (ou la moins concave) qui donne la meilleure acuité. Une sphère plus négative ferait accommoder inutilement, d'où fatigue : surcorrection du myope, sous-correction de l'hypermétrope.",
+    indice: "Une sphère trop négative oblige-t-elle l'œil à accommoder ?"
+  },
+  {
+    id: "U5-150",
+    difficulte: "moyen",
+    epreuve: "U5",
+    theme: "Lentilles",
+    session: "complément",
+    question: "Un client a un astigmatisme purement cornéen de 2 δ. Pourquoi une lentille rigide perméable au gaz le corrige-t-elle bien ? Quelle justification est juste et complète ?",
+    choix: ["La lentille rigide corrige aussi l'astigmatisme interne, qui disparaît avec le film de larmes.", "La lentille rigide épouse la cornée et en reproduit l'astigmatisme, qui est ensuite compensé par le verre.", "Le film de larmes a un indice très différent de celui de la cornée et annule l'astigmatisme par réfraction.", "Le film de larmes sous la lentille a un indice proche de celui de la cornée : il comble l'espace, et la face avant sphérique de la lentille remplace la surface cornéenne astigmate."],
+    bonne: 3,
+    explication: "Sous une lentille rigide, le ménisque de larmes a presque le même indice que la cornée : la surface astigmate de la cornée n'intervient presque plus, et la face avant sphérique de la lentille la remplace. Un astigmatisme purement cornéen est donc à peu près supprimé. Un astigmatisme interne, lui, reste.",
+    indice: "Quel liquide comble l'espace entre lentille rigide et cornée ? Quel est son indice ?"
+  },
+  {
+    id: "U5-151",
+    difficulte: "difficile",
+    epreuve: "U5",
+    theme: "Pathologie",
+    session: "complément",
+    question: "Une cliente de 62 ans, hypermétrope, arrive avec un œil rouge, une douleur intense, des halos colorés autour des lumières, des nausées et une baisse de vue depuis 2 heures. Quelle conduite est juste et complète ?",
+    choix: ["Je refais la réfraction pour changer ses verres et je la revois dans une semaine.", "C'est une urgence : je l'adresse immédiatement à un ophtalmologiste ou aux urgences, sans refaire de lunettes ni lui annoncer un diagnostic.", "Je lui annonce un glaucome aigu, je lui propose des gouttes et un rendez-vous dans le mois.", "Je lui conseille du repos et des larmes artificielles avant de décider."],
+    bonne: 1,
+    explication: "Douleur intense, œil rouge, halos, nausées et baisse de vue brutale chez un hypermétrope évoquent une crise de fermeture de l'angle (glaucome aigu). C'est une urgence : le nerf optique peut être atteint en quelques heures. L'opticien n'a ni à faire un diagnostic ni à proposer un traitement : il oriente tout de suite.",
+    indice: "Signes brutaux et intenses : l'opticien a-t-il le temps d'équiper ? Peut-il prescrire un traitement ?"
+  },
+  {
+    id: "U5-152",
+    difficulte: "moyen",
+    epreuve: "U5",
+    theme: "Pathologie",
+    session: "complément",
+    question: "Un client de 55 ans, sans symptôme, présente un ancien compte rendu : pression intraoculaire de 26 mmHg aux deux yeux, jamais revue depuis. Quelle conduite est juste et complète ?",
+    choix: ["Je lui annonce un glaucome et je lui déconseille les lentilles.", "Je ne lui dis rien, car seul l'ophtalmologiste peut parler de pression.", "L'absence de symptôme suffit : je renouvelle la mesure dans un an.", "Je lui dis que la valeur relevée dépasse la norme, sans parler de glaucome, et je l'oriente vers l'ophtalmologiste pour un bilan du nerf optique et du champ visuel."],
+    bonne: 3,
+    explication: "La norme est autour de 16 mmHg, avec un seuil à 21 mmHg. Une valeur de 26 mmHg est trop forte, mais seuls l'atteinte du nerf optique et celle du champ visuel font le glaucome : c'est à l'ophtalmologiste de les chercher. L'opticien relève la valeur, dit qu'elle sort de la norme et oriente, sans poser de diagnostic ni attendre.",
+    indice: "Une valeur hors norme prouve-t-elle un glaucome ? Que doit faire l'opticien de ce qu'il lit dans le dossier ?"
   }
 );
 

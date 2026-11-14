@@ -77,6 +77,44 @@ SPECIFICITES.push({
       ]
     },
     {
+      type: "texte",
+      titre: "À relire la veille : le réglage pour un amétrope",
+      points: [
+        "Sans accommoder, un œil ne voit net que son remotum. L'image finale de l'instrument doit donc se former sur le remotum de l'utilisateur.",
+        "Emmétrope : remotum à l'infini, faisceau sortant parallèle. Myope : remotum devant l'œil, faisceau sortant divergent. Hypermétrope : remotum derrière l'œil, faisceau sortant convergent.",
+        "On règle l'oculaire, pas l'œil. Dans la plupart des énoncés, l'œil est placé au foyer image de l'oculaire.",
+        "L'accommodation rapproche le point vu net, jamais au-delà du remotum. L'hypermétrope accommode déjà pour voir l'infini."
+      ]
+    },
+    {
+      type: "etapes",
+      titre: "À relire la veille : régler l'oculaire en 4 étapes",
+      etapes: [
+        { titre: "Trouver le remotum", texte: "HR = [[1|R]], en mètres et avec son signe. Un myope donne HR négatif (devant l'œil), un hypermétrope HR positif (derrière)." },
+        { titre: "Poser x'", texte: "L'œil est au foyer image de l'oculaire : x' = F'A' = HR, converti en mm.", theme: "Œil et instrument" },
+        { titre: "Calculer x avec Newton", texte: "x = [[−f'²|x']], avec f' et x' dans la même unité.", theme: "Œil et instrument" },
+        { titre: "Lire le sens", texte: "x positif (myope) : on rapproche l'oculaire de l'objectif. x négatif (hypermétrope) : on l'éloigne. Le réglage emmétrope est la référence, x = 0." }
+      ]
+    },
+    {
+      type: "formules",
+      titre: "À relire la veille : formules du réglage",
+      lignes: [
+        { nom: "Remotum", formule: "HR = [[1|R]]", exemple: "R = −4 δ : HR = −0,25 m = −250 mm", rappelee: false },
+        { nom: "Réglage de l'oculaire", formule: "x · x' = −f'²", exemple: "f' = 25 mm, x' = −250 mm : x = [[−625|−250]] = +2,5 mm (on rapproche)", rappelee: false },
+        { nom: "Accommodation pour une image à d devant l'œil", formule: "A = [[1|d]] + R", exemple: "R = −4 δ, d = 0,20 m : A = 5 − 4 = 1 δ", rappelee: false }
+      ]
+    },
+    {
+      type: "pieges",
+      titre: "À relire la veille : pièges du réglage",
+      items: [
+        { id: "U43-piege-9", titre: "Le sens du déplacement", faux: "Pour un amétrope, on éloigne toujours l'oculaire.", juste: "Myope : on rapproche l'oculaire de l'objectif (x = FA > 0). Hypermétrope : on l'éloigne (x = FA < 0).", theme: "Œil et instrument", questions: ["U43-014", "U43-015"] },
+        { id: "U43-piege-10", titre: "Le signe de x'", faux: "Le remotum d'un myope est à 250 mm, donc x' = +250 mm.", juste: "Le remotum du myope est devant l'œil : x' = F'A' est négatif.", theme: "Œil et instrument", questions: ["U43-010", "U43-015"] },
+        { id: "U43-piege-11", titre: "Un seul réglage pour tous", faux: "Un instrument réglé pour un emmétrope convient à un myope sans lunettes.", juste: "Sans lunettes, chaque utilisateur doit régler l'oculaire pour son remotum. Avec ses lunettes, on garde le réglage emmétrope.", theme: "Œil et instrument", questions: ["U43-004", "U43-013"] }
+      ]
+    },
+    {
       type: "frequences",
       titre: "Ce qui tombe le plus (sujets 2017 à 2024)",
       lignes: [

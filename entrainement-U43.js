@@ -668,7 +668,7 @@ QUESTIONS.push(
     "Les deux méridiens forment leur image devant la rétine",
     "Les deux méridiens forment leur image derrière la rétine",
     "Le point est net : 350 mm est entre les deux remotums",
-    "L'image du méridien horizontal se forme derrière la rétine, celle du méridien vertical devant : astigmatisme mixte pour ce point"
+    "L'image du méridien horizontal se forme derrière la rétine, celle du méridien vertical devant : les deux focales encadrent la rétine : le point reste flou"
   ],
   "bonne": 3,
   "explication": "Le méridien horizontal verrait net à 500 mm : le point à 350 mm est plus près, son image passe derrière la rétine. Le méridien vertical verrait net à 250 mm : le point à 350 mm est plus loin, son image est devant la rétine. Un point situé entre les deux remotums donne donc une image de part et d'autre de la rétine, et reste flou.",
@@ -996,7 +996,7 @@ QUESTIONS.push(
     "signe": false,
     "tolerance": 0.1
   },
-  "explication": "[[1|OA']] = [[1|50]] + [[1|−10 000]] = [[199|10 000]]\nDonc OA' = 50,25 mm.\nGrandissement : [[OA'|OA]] = [[50,25|10 000]] = 0,00503\nImage : 1800 × 0,00503 ≈ 9,0 mm\nComme l'objet est loin, le résultat est très proche de [[1800 × 50|10 000]] = 9 mm.",
+  "explication": "[[1|OA']] = [[1|50]] + [[1|−10 000]] = [[199|10 000]]\nDonc OA' = 50,25 mm.\nGrandissement : γ = [[OA'|OA]] = [[50,25|−10 000]] = −0,00503\nHauteur de l'image : 1800 × 0,00503 ≈ 9,0 mm (image renversée)\nComme l'objet est loin, le résultat est très proche de [[1800 × 50|10 000]] = 9 mm.",
   "indice": "Calcule OA' avec la relation de conjugaison (OA = −10 000 mm), puis le grandissement [[OA'|OA]]."
 },
 {
@@ -1132,7 +1132,7 @@ QUESTIONS.push(
   "session": "complément",
   "entrainement": true,
   "difficulte": "difficile",
-  "question": "Une lunette est réglée pour un œil emmétrope (image intermédiaire au foyer objet de l'oculaire). Un hypermétrope de +2 δ, sans lunettes et sans accommoder, veut l'utiliser. Comment déplace-t-on l'oculaire ?",
+  "question": "Une lunette astronomique est réglée pour un œil emmétrope (image intermédiaire au foyer objet de l'oculaire). Un hypermétrope de +2 δ, sans lunettes et sans accommoder, veut l'utiliser. Comment déplace-t-on l'oculaire ?",
   "choix": [
     "On l'éloigne de l'objectif",
     "On le rapproche de l'objectif",
@@ -1331,15 +1331,15 @@ QUESTIONS.push(
   "entrainement": true,
   "difficulte": "moyen",
   "type": "calcul",
-  "question": "Un œil est corrigé par +1,00 (−2,00) à 90°. Quel est l'équivalent sphérique de cette correction, en δ, écrit au centième ?",
+  "question": "Un œil astigmate est corrigé par +1,00 (−2,00) à 90°. Quelle sphère place le cercle de moindre diffusion sur la rétine, en δ, écrite au centième ?",
   "reponse": {
     "valeur": 0,
     "unite": "δ",
     "decimales": 2,
     "signe": true
   },
-  "explication": "Équivalent sphérique = sphère + [[cylindre|2]] = +1,00 + [[−2,00|2]] = 0,00 δ\nC'est la puissance sphérique qui place le cercle de moindre diffusion (entre les deux lignes focales) sur la rétine. Ne garder que la sphère donnerait +1,00 δ.",
-  "indice": "Équivalent sphérique = sphère + la moitié du cylindre, signes compris."
+  "explication": "Le cercle de moindre diffusion est à mi-chemin entre les deux focales : il correspond à la sphère moyenne S + [[C|2]] = +1,00 + [[−2,00|2]] = 0,00 δ\nCette puissance place le cercle de moindre diffusion, entre les deux lignes focales, sur la rétine. Ne garder que la sphère donnerait +1,00 δ.",
+  "indice": "Le cercle de moindre diffusion est à mi-chemin entre les deux focales : sphère + la moitié du cylindre, signes compris."
 },
 {
   "id": "U43-125",

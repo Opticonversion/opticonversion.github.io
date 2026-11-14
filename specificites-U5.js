@@ -88,6 +88,68 @@ SPECIFICITES.push({
     },
 
     {
+      type: "texte",
+      titre: "À relire la veille : les signes qui demandent d'orienter",
+      points: [
+        "Baisse brutale de la vue d'un œil, ou voile sombre qui avance dans le champ : urgence, le jour même.",
+        "Éclairs lumineux et nombreux corps flottants apparus récemment : risque de décollement de rétine, urgence.",
+        "Œil rouge et très douloureux, halos autour des lumières, nausées : risque de glaucome aigu, urgence.",
+        "Œil rouge, douloureux et gêné par la lumière chez un porteur de lentilles : retirer la lentille et consulter vite.",
+        "Lignes droites vues déformées, tache au centre de la vision : atteinte de la macula, à orienter.",
+        "Double vision nouvelle, paupière qui tombe, pupilles inégales apparues récemment : urgence, le jour même (ophtalmologiste ou urgences).",
+        "Pression intraoculaire relevée au-dessus de la norme (au-delà de 21 mmHg) : à orienter, même sans symptôme.",
+        "Enfant : acuité très différente entre les deux yeux malgré la correction, ou œil qui dévie : à orienter sans attendre."
+      ]
+    },
+
+    {
+      type: "texte",
+      titre: "À relire la veille : ce que l'opticien fait et ne fait pas",
+      points: [
+        "Il fait : interroger le client, mesurer (acuité, réfraction, kératométrie), lire un compte rendu, repérer ce qui sort de la norme, expliquer, orienter.",
+        "Il fait : adapter l'équipement dans le cadre de la loi et noter sa recommandation.",
+        "Il ne fait pas : de diagnostic. Il décrit ce qu'il a mesuré, il ne dit pas « vous avez un glaucome ».",
+        "Il ne fait pas : de traitement, ni de gouttes, ni de dilatation de la pupille.",
+        "Une bonne acuité ne rassure pas : un glaucome ou une atteinte de la rétine peuvent exister avec 10/10."
+      ]
+    },
+
+    {
+      type: "etapes",
+      titre: "À relire la veille : la conduite à tenir en 4 temps",
+      etapes: [
+        { titre: "Repérer", texte: "Un signe qui sort de l'histoire de cas ou de la norme : baisse de vue, douleur, pression forte, déformation des lignes.", theme: "Pathologie" },
+        { titre: "Décider l'urgence", texte: "Brutal, douloureux ou récent : le jour même. Lent, ancien et sans douleur : un rendez-vous rapide." },
+        { titre: "Dire sans diagnostiquer", texte: "J'indique la valeur ou le signe constaté, je dis qu'il sort de la norme, je ne donne pas le nom de la maladie." },
+        { titre: "Orienter et noter", texte: "Ophtalmologiste ; orthoptiste pour un trouble binoculaire ancien (phorie mal compensée). Une diplopie récente va à l'ophtalmologiste. J'écris ma recommandation sur la fiche du client." }
+      ]
+    },
+
+    {
+      type: "pieges",
+      titre: "À relire la veille : les erreurs de rédaction",
+      items: [
+        { id: "P-U5-11", titre: "Diagnostic ou orientation ?", faux: "Je lui annonce qu'il a un glaucome.", juste: "Je décris la valeur relevée, je dis qu'elle sort de la norme et je l'oriente : le diagnostic revient à l'ophtalmologiste.", theme: "Pathologie", questions: ["U5-152"] },
+        { id: "P-U5-12", titre: "Attendre ou orienter ?", faux: "Éclairs, corps flottants et voile sombre : je refais les lunettes et je revois dans un mois.", juste: "Signes brutaux : urgence, j'adresse le jour même, sans équiper.", theme: "Pathologie" },
+        { id: "P-U5-13", titre: "Une bonne acuité rassure-t-elle ?", faux: "Il lit 10/10 : l'œil est sain.", juste: "L'acuité centrale peut rester bonne dans un glaucome ou une rétinopathie : on surveille selon l'âge et les antécédents.", theme: "Pathologie" },
+        { id: "P-U5-14", titre: "Lentilles et œil rouge", faux: "Je rince la lentille et je la remets.", juste: "Œil rouge, douleur, gêne à la lumière : je retire la lentille, je ne la remets pas, je consulte vite.", theme: "Lentilles" }
+      ]
+    },
+
+    {
+      type: "cocher",
+      titre: "À relire la veille : ma réponse de conduite à tenir",
+      id: "veille-U5",
+      items: [
+        { id: "v01", texte: "Je cite le signe ou la valeur qui m'alerte." },
+        { id: "v02", texte: "Je dis si c'est urgent ou non, et pourquoi." },
+        { id: "v03", texte: "Je n'écris pas le nom de la maladie comme un diagnostic." },
+        { id: "v04", texte: "J'indique à qui j'oriente : ophtalmologiste ou orthoptiste." },
+        { id: "v05", texte: "Je précise que je n'équipe pas avant l'avis, si le signe est brutal." }
+      ]
+    },
+
+    {
       type: "cocher",
       titre: "Le jour J",
       id: "jourj-U5",

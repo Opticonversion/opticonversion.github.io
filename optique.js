@@ -15,8 +15,11 @@ const Optique = (function () {
   function preparer(systeme) {
     const elements = (systeme.elements || []).map((e, i) => ({ ...e, rang: i }));
     const lentilles = elements.filter(e => e.type === "lentille")
-      .map(e => ({ ...e, f: e.f !== undefined ? e.f : 1000 / e.P }))
-      .sort((a, b) => a.x - b.x);
+      .map(e => ({ ...e, f: e.f !== undefined ? e.f : 1000 / e.P }));
+    // Œil « à l'échelle » (ETSO : instrument suivi de l'œil) : l'œil réduit est la dernière lentille de la chaîne
+    const oe = elements.find(e => e.type === "oeil" && e.echelle);
+    if (oe) lentilles.push({ type: "lentille", nom: oe.nom, x: oe.x, f: 1000 / P_OEIL, oeil: true });
+    lentilles.sort((a, b) => a.x - b.x);
     // Diaphragmes : les vrais, et la monture de chaque lentille qui a un rayon
     const diaphragmes = elements.filter(e => e.type === "diaphragme" || (e.type === "lentille" && e.rayon))
       .map(e => ({ nom: e.nom, x: e.x, rayon: e.rayon, monture: e.type === "lentille" }))
@@ -112,7 +115,10 @@ const Optique = (function () {
   const penteApres = (L, yL, s) => s - yL / L.f;
 
   // ---------- Foyers du système entier (doublet…) ----------
+  // Le système sans l'œil à l'échelle (foyers, grossissement : ceux de l'instrument)
+  const sansOeil = sys => sys.lentilles.some(L => L.oeil) ? { ...sys, lentilles: sys.lentilles.filter(L => !L.oeil) } : sys;
   function foyerImage(sys) {
+    sys = sansOeil(sys);
     if (!sys.lentilles.length) return null;
     const p = pentesApres(sys, { x: sys.lentilles[0].x - 1, y: 1, s: 0 });
     const fin = p[p.length - 1];
@@ -121,7 +127,7 @@ const Optique = (function () {
   }
   const miroir = sys => ({ ...sys, lentilles: sys.lentilles.map(L => ({ ...L, x: -L.x })).sort((a, b) => a.x - b.x) });
   function foyerObjet(sys) {
-    const F = foyerImage(miroir(sys));
+    const F = foyerImage(miroir(sansOeil(sys)));
     return F ? { x: -F.x, f: -F.f } : null;
   }
 
@@ -143,20 +149,43 @@ const Optique = (function () {
     const dx = Math.abs(im.x - x0);
     return dx < EPS ? Infinity : im.rayon / dx;
   }
+  // Image d'un diaphragme dans l'espace k (0 = espace objet, k = entre la lentille k−1 et la lentille k ;
+  // le dernier = espace image). Les sujets d'OGP étudient souvent les champs dans l'espace intermédiaire
+  // ou dans l'espace image, avec la pupille de sortie. propre = le diaphragme est lui-même dans cet espace.
+  function imageDiaphragmeDans(sys, d, k) {
+    if (!k) return imageDiaphragme(sys, d);
+    const Ls = sys.lentilles, j = Ls.filter(L => L.x < d.x - EPS).length;    // d est dans l'espace j
+    let p = { x: d.x, h: d.rayon };
+    if (j < k) for (let i = j; i < k && !p.infini; i++) p = conjuguer(Ls[i], p);       // dans le sens de la lumière
+    else if (j > k) {                                                                   // à rebours (miroir)
+      p = { x: -d.x, h: d.rayon };
+      for (let i = j - 1; i >= k && !p.infini; i--) p = conjuguer({ ...Ls[i], x: -Ls[i].x }, p);
+      if (!p.infini) p = { x: -p.x, h: p.h };
+    }
+    if (p.infini) return { nom: d.nom, d, infini: true, angle: Math.abs(p.s) };
+    return { nom: d.nom, d, x: p.x, rayon: Math.abs(p.h), propre: Math.abs(p.x - d.x) < 1e-6 && Math.abs(Math.abs(p.h) - d.rayon) < 1e-6 };
+  }
+  const imagesDans = (sys, k) => sys.diaphragmes.map(d => imageDiaphragmeDans(sys, d, k));
+  // Le plan des champs de l'espace k : l'objet (k = 0) ou son image dans cet espace
+  const planDesChamps = (sys, k) => (k ? chaine(sys)[k] : sys.objet);
   // Pupille d'entrée : l'image vue sous le plus petit angle depuis A (le pied de l'objet).
   // ecart = rapport entre le 2e plus petit angle et le plus petit (proche de 1 = choix ambigu).
-  function pupilleEntree(sys) {
-    const ims = imagesDiaphragmes(sys);
+  // Dans l'espace k : l'image du diaphragme d'ouverture dans cet espace (pupille de sortie dans l'espace image),
+  // vue depuis le pied de l'image de l'objet dans cet espace (mêmes rayons, donc même diaphragme qu'en entrée).
+  function pupilleEntree(sys, k) {
+    const ims = imagesDans(sys, k || 0);
     if (!ims.length) return null;
-    const xA = sys.objet.infini ? null : sys.objet.x;
+    const A = planDesChamps(sys, k || 0);
+    if (k && (!A || A.infini)) return null;
+    const xA = A.infini ? null : A.x;
     const tri = ims.map(im => ({ im, a: angleVu(im, xA) })).sort((p, q) => p.a - q.a);
     return { ...tri[0].im, ecart: tri.length > 1 ? tri[1].a / tri[0].a : Infinity };
   }
   // Lucarne d'entrée : parmi les autres, l'image vue sous le plus petit angle depuis le centre de la pupille d'entrée
-  function lucarneEntree(sys) {
-    const P = pupilleEntree(sys);
+  function lucarneEntree(sys, k) {
+    const P = pupilleEntree(sys, k);
     if (!P || P.infini) return null;
-    const autres = imagesDiaphragmes(sys).filter(im => im.nom !== P.nom);
+    const autres = imagesDans(sys, k || 0).filter(im => im.nom !== P.nom);
     if (!autres.length) return null;
     const tri = autres.map(im => ({ im, a: angleVu(im, P.x) })).sort((p, q) => p.a - q.a);
     if (tri[0].im.infini) return null;
@@ -172,16 +201,19 @@ const Optique = (function () {
   // entre la pupille et la lucarne (t > 0) ; quand il est entre les deux (t < 0, sujet 2025), c'est l'inverse.
   // Renvoie aussi : cote ("meme", "oppose" ou "centre" : le point de la pupille à relier au bord haut de la lucarne),
   // entre (objet entre la pupille et la lucarne), ecart (grande limite / petite : proche de 1 = champs confondus).
-  function champ(sys, type) {
-    const P = pupilleEntree(sys), Lu = lucarneEntree(sys);
-    if (!P || !Lu || P.infini) return null;
+  // k (facultatif) : l'espace d'étude (voir imageDiaphragmeDans) ; le « plan de l'objet » devient le plan des champs.
+  function champ(sys, type, k) {
+    k = k || 0;
+    const P = pupilleEntree(sys, k), Lu = lucarneEntree(sys, k), A = planDesChamps(sys, k);
+    if (!P || !Lu || P.infini || !A) return null;
     if (Math.abs(Lu.x - P.x) < EPS) return null;
-    const fini = !sys.objet.infini;
-    if (fini && Math.abs(sys.objet.x - P.x) < EPS) return null;       // objet dans le plan de la pupille : pas de champ
-    const t = fini ? (Lu.x - sys.objet.x) / (P.x - sys.objet.x) : 1;   // objet à l'infini : t tend vers 1
+    const fini = !A.infini;
+    if (k && !fini) return null;
+    if (fini && Math.abs(A.x - P.x) < EPS) return null;       // objet dans le plan de la pupille : pas de champ
+    const t = fini ? (Lu.x - A.x) / (P.x - A.x) : 1;   // objet à l'infini : t tend vers 1
     const limite = (yP, cote) => {
       const m = (Lu.rayon - yP) / (Lu.x - P.x);
-      const rayon = fini ? Math.abs(yP + m * (sys.objet.x - P.x)) : undefined;
+      const rayon = fini ? Math.abs(yP + m * (A.x - P.x)) : undefined;
       return { yP, m, cote, rayon, taille: fini ? rayon : Math.abs(m) };   // taille : rayon du champ, ou pente (objet à l'infini)
     };
     const meme = limite(P.rayon, "meme"), oppose = limite(-P.rayon, "oppose");
@@ -191,8 +223,8 @@ const Optique = (function () {
     const l = type === "moyen" ? limite(0, "centre") : type === "total" ? grande : petite;
     const res = { type, pupille: P, lucarne: Lu, p1: { x: P.x, y: l.yP }, p2: { x: Lu.x, y: Lu.rayon }, pente: l.m,
       angle: Math.atan(Math.abs(l.m)) * 180 / Math.PI, cote: l.cote, entre: fini && t < 0,
-      ecart: petite.taille > EPS ? grande.taille / petite.taille : Infinity };
-    if (fini) res.rayon = l.rayon;
+      ecart: petite.taille > EPS ? grande.taille / petite.taille : Infinity, espace: k };
+    if (fini) { res.rayon = l.rayon; res.xPlan = A.x; }
     return res;
   }
   // Faisceau issu d'un point de l'objet ("A" ou "B"), limité par la pupille d'entrée : ses deux rayons extrêmes (espace objet)
@@ -226,6 +258,7 @@ const Optique = (function () {
     const L = lentilleOeil(sys);
     if (!L) return null;
     const ch = chaine(sys);
+    if (sys.lentilles.some(x => x.oeil)) return ch[ch.length - 1];      // œil à l'échelle : déjà dans la chaîne
     return conjuguer(L, ch[ch.length - 1]);
   }
 
@@ -234,15 +267,21 @@ const Optique = (function () {
     options = options || {};
     const ch = chaine(sys);
     const k = options.apres !== undefined ? indexLentille(sys, options.apres) : sys.lentilles.length - 1;
+    const esp = options.espace !== undefined ? indexLentille(sys, options.espace) + 1 : 0;   // champs : espace après cette lentille
     const im = ch[k + 1], L = sys.lentilles[k];
     switch (g) {
       case "OA'": return im && !im.infini ? im.x - L.x : null;
       case "A'B'": return im && !im.infini ? im.h : null;
       case "gamma": return !sys.objet.infini && im && !im.infini ? im.h / sys.objet.h : null;
       case "f-systeme": { const F = foyerImage(sys); return F ? F.f : null; }
-      case "rayon-champ": { const c = champ(sys, options.champ || "pleine-lumiere"); return c && c.rayon !== undefined ? c.rayon : null; }
-      case "angle-champ": { const c = champ(sys, options.champ || "pleine-lumiere"); return c ? c.angle : null; }
+      case "rayon-champ": { const c = champ(sys, options.champ || "pleine-lumiere", esp); return c && c.rayon !== undefined ? c.rayon : null; }
+      case "angle-champ": { const c = champ(sys, options.champ || "pleine-lumiere", esp); return c ? c.angle : null; }
+      // FA : position de l'objet de la lentille « apres » (l'image donnée par les lentilles d'avant) par rapport à son
+      // foyer objet. Réglage d'un oculaire : 0 pour un emmétrope qui n'accommode pas (image finale à l'infini).
+      case "FA": { const o = ch[k]; return L && o && !o.infini ? o.x - (L.x - L.f) : null; }
       case "grossissement": {
+        sys = sansOeil(sys);
+        const ch = chaine(sys);
         // Objet à l'infini (lunette) : rapport des pentes en sortie et en entrée.
         if (sys.objet.infini) {
           if (Math.abs(sys.objet.s) < EPS) return null;
@@ -368,6 +407,6 @@ const Optique = (function () {
   }
 
   return { preparer, conjuguer, chaine, indexLentille, versEspaceObjet, parcours, pentesApres, rayonType, penteApres,
-    foyerImage, foyerObjet, lentilleOeil, remotum, punctum, retine, imageOeil, imageDiaphragme, imagesDiaphragmes, pupilleEntree, lucarneEntree, champ, faisceau, grandeur,
+    foyerImage, foyerObjet, lentilleOeil, remotum, punctum, retine, imageOeil, imageDiaphragme, imagesDiaphragmes, imageDiaphragmeDans, imagesDans, planDesChamps, pupilleEntree, lucarneEntree, champ, faisceau, grandeur,
     coupleOculaire, oeilReduit, parcoursAccommodation, imageRetinienne, aniseiconie, prismeVertical, schema, grandeurSchema };
 })();

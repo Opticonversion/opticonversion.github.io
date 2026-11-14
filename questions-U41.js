@@ -591,6 +591,86 @@ QUESTIONS.push(
     reponse: {"valeur": 37.06, "unite": "", "decimales": 2, "signe": true},
     explication: "Valeur moyenne = [[1|5 − 0]] × ∫ de 0 à 5 de f(t) dt\nLa calculatrice donne l'intégrale ≈ 185,313.\nValeur moyenne = [[185,313|5]] ≈ 37,063, soit 37,06.\nÀ la main : l'intégrale vaut 40 × 5 − 16 (1 − e^(−2,5)) ≈ 185,31.",
     indice: "Calcule d'abord l'intégrale entre 0 et 5 à la calculatrice, puis n'oublie pas de diviser par la longueur de l'intervalle."
+  },
+  {
+    id: "U41-133", epreuve: "U41", theme: "Estimation et tests", session: "complément",
+    difficulte: "difficile",
+    contexte: "Test bilatéral à 5 % de H0 « la masse moyenne d'une monture est 150 mg ». Sous H0, la moyenne d'un échantillon suit la loi normale d'espérance 150 et d'écart type 2. On observe une moyenne de 154,6 mg.",
+    question: "Quelle est la conclusion correctement rédigée ?",
+    choix: ["La zone d'acceptation est 150 ± 1,96 × 2, soit [146,08 ; 153,92]. 154,6 n'y est pas : au seuil de 5 %, on rejette H0 et on considère que la masse moyenne n'est plus 150 mg.", "La zone d'acceptation est 150 ± 1,96 × 2, soit [146,08 ; 153,92]. 154,6 n'y est pas, donc on accepte H0 : la masse moyenne reste 150 mg.", "La zone d'acceptation est 150 ± 1,96 × 2, soit [146,08 ; 153,92]. 154,6 n'y est pas : H0 est donc fausse à coup sûr, la masse moyenne est certainement différente de 150 mg.", "La zone d'acceptation est 150 ± 2, soit [148 ; 152] (le coefficient 1,96 est oublié). 154,6 n'y est pas : on rejette H0 au seuil de 5 %."],
+    bonne: 0,
+    explication: "Une conclusion complète donne la zone d'acceptation (150 ± 1,96 × 2), compare la valeur observée à cette zone, puis décide avec le seuil. Accepter H0 alors qu'on sort de la zone est contradictoire. Écrire « à coup sûr » est faux : un test garde un risque de 5 %. Oublier 1,96 donne une zone trop étroite : la décision tombe juste, mais par hasard et avec une zone fausse.",
+    indice: "Une bonne conclusion a trois parties : la zone chiffrée, la comparaison avec la valeur observée, la décision avec le seuil."
+  },
+  {
+    id: "U41-134", epreuve: "U41", theme: "Estimation et tests", session: "complément",
+    difficulte: "difficile",
+    contexte: "Sur 400 clients interrogés, 140 se disent prêts à recommander le magasin (f = 0,35). L'intervalle de confiance à 95 % est [0,303 ; 0,397].",
+    question: "Quelle phrase interprète correctement cet intervalle ?",
+    choix: ["Au niveau de confiance de 95 %, la proportion p est sûrement comprise entre 0,303 et 0,397 : on en est certain.", "Parmi les 400 clients interrogés, 95 % ont une proportion de satisfaction comprise entre 0,303 et 0,397, le niveau de confiance étant de 95 %.", "L'intervalle [0,303 ; 0,397] est centré sur f = 0,35 : cela prouve que la proportion p de toute la clientèle vaut exactement 0,35.", "Au niveau de confiance de 95 %, on estime que la proportion p de clients prêts à recommander le magasin est comprise entre 0,303 et 0,397, sans en avoir la certitude."],
+    bonne: 3,
+    explication: "Un intervalle de confiance donne une estimation de p avec un niveau de confiance, jamais une certitude : l'échantillon aurait pu donner un autre intervalle. Dire « sûrement » ou « certain » est faux. Parler de « 95 % des clients » confond la proportion p (un seul nombre pour toute la clientèle) avec des clients individuels. Dire que l'intervalle prouve p = 0,35 confond estimation et preuve : 0,35 est seulement la valeur observée dans l'échantillon.",
+    indice: "Que peut-on affirmer d'une estimation faite sur un échantillon ? Pense à l'expression « niveau de confiance ». Une certitude est-elle possible ?"
+  },
+  {
+    id: "U41-135", epreuve: "U41", theme: "Fonctions", session: "complément",
+    difficulte: "moyen",
+    contexte: "On étudie f(t) = 30 + 50 e^(−0,2t) sur [0 ; +∞[. On a calculé f'(t) = −10 e^(−0,2t).",
+    question: "Quelle rédaction justifie correctement le sens de variation de f ?",
+    choix: ["On a f'(t) = −10 e^(−0,2t). Cette dérivée est négative, donc f est décroissante sur [0 ; +∞[.", "f(0) = 80 et f(10) ≈ 36,8 : f diminue entre ces deux valeurs, donc f est strictement décroissante sur [0 ; +∞[.", "Pour tout t ≥ 0, e^(−0,2t) > 0, donc f'(t) = −10 e^(−0,2t) < 0. La dérivée est strictement négative : f est strictement décroissante sur [0 ; +∞[.", "f'(t) = −10 e^(−0,2t). Comme e^(−0,2t) tend vers 0 quand t tend vers +∞, f' tend vers 0, donc f est décroissante sur [0 ; +∞[."],
+    bonne: 2,
+    explication: "Il faut justifier le signe de f' (une exponentielle est strictement positive, donc −10 fois elle est négatif), puis conclure sur le sens de variation. Affirmer « cette dérivée est négative » sans dire pourquoi ne suffit pas. Comparer f(0) et f(10) ne prouve pas la variation sur tout l'intervalle. La limite de f' vers 0 ne donne pas son signe.",
+    indice: "Deux étapes : pourquoi la dérivée est négative (signe de e^(…)), puis ce que cela donne pour f."
+  },
+  {
+    id: "U41-136", epreuve: "U41", theme: "Fonctions", session: "complément",
+    difficulte: "moyen",
+    contexte: "On étudie f(t) = 30 + 50 e^(−0,2t) sur [0 ; +∞[.",
+    question: "Quelle rédaction détermine correctement la limite de f en +∞ et son interprétation graphique ?",
+    choix: ["Comme −0,2 < 0, e^(−0,2t) tend vers +∞ quand t tend vers +∞, donc lim f(t) = +∞ : la courbe n'a pas d'asymptote.", "Comme −0,2 < 0, e^(−0,2t) tend vers 0 quand t tend vers +∞. Donc lim f(t) = 30, et la droite d'équation y = 30 est asymptote horizontale à la courbe en +∞.", "e^(−0,2t) tend vers 0, donc lim f(t) = 30. La courbe finit par atteindre la droite y = 30, qui est asymptote horizontale en +∞.", "e^(−0,2t) tend vers 0, donc lim f(t) = 30 et la droite d'équation x = 30 est asymptote verticale à la courbe."],
+    bonne: 1,
+    explication: "On justifie d'abord la limite de l'exponentielle (le coefficient −0,2 est négatif), on en déduit la limite de f, puis on interprète : une limite finie ℓ en +∞ donne une asymptote horizontale y = ℓ. Dire que l'exponentielle tend vers +∞ se trompe sur le signe de l'exposant. Dire que la courbe atteint la droite est faux : elle s'en rapproche sans la toucher. Écrire x = 30 confond asymptote verticale et horizontale (y = 30).",
+    indice: "Trois temps : la limite de l'exponentielle, la limite de f, puis l'interprétation (asymptote horizontale ou verticale ?)."
+  },
+  {
+    id: "U41-137", epreuve: "U41", theme: "Suites", session: "complément",
+    difficulte: "difficile",
+    contexte: "On a u(n+1) = 0,8 u(n) + 60 et v(n) = u(n) − 300 pour tout entier n.",
+    question: "Quelle rédaction démontre correctement que la suite (v(n)) est géométrique ?",
+    choix: ["v(n+1) = u(n+1) − 300 = 0,8 u(n) + 60 − 300 = 0,8 u(n) − 240 = 0,8 (u(n) − 300) = 0,8 v(n). Donc (v(n)) est géométrique de raison 0,8.", "v(0) = u(0) − 300 = −200 et v(1) = u(1) − 300 = −160. Le rapport v(1) ÷ v(0) vaut 0,8 : la suite (v(n)) est donc géométrique de raison 0,8.", "v(n+1) = u(n+1) − 300 = 0,8 u(n) + 60 − 300 = 0,8 u(n) − 240. Comme 0,8 est le coefficient de u(n), (v(n)) est géométrique de raison 0,8.", "v(n+1) = u(n+1) − 300 = 0,8 u(n) + 60 − 300 = 0,8 (u(n) − 300) + 60 = 0,8 v(n) + 60 : (v(n)) est géométrique de raison 0,8."],
+    bonne: 0,
+    explication: "Pour montrer qu'une suite est géométrique, on exprime v(n+1) à partir de v(n) pour un n quelconque, et on trouve v(n+1) = q × v(n). Vérifier seulement v(0) et v(1) ne prouve rien pour tous les n. Écrire 0,8 u(n) − 240 sans le factoriser par u(n) − 300 ne fait pas apparaître v(n). Garder un +60 donne v(n+1) = 0,8 v(n) + 60, qui n'est pas de la forme q × v(n).",
+    indice: "Il faut une preuve valable pour tout n : pars de v(n+1) = u(n+1) − 300 et remplace u(n+1)."
+  },
+  {
+    id: "U41-138", epreuve: "U41", theme: "Probabilités", session: "complément",
+    difficulte: "moyen",
+    contexte: "30 % des verres vendus sont teintés (T). 80 % des verres teintés ont un traitement anti-UV (U), contre 50 % des verres non teintés.",
+    question: "Quelle rédaction calcule correctement P(U) ?",
+    choix: ["T et son contraire forment une partition. P(U) = P(T ∩ U) = 0,3 × 0,8 = 0,24, car on ne garde que la branche des verres teintés qui ont un anti-UV.", "T et son contraire forment une partition. P(U) = (0,8 + 0,5) / 2 = 0,65, en faisant la moyenne des taux d'anti-UV des deux branches.", "T et son contraire forment une partition. P(U) = 0,3 × 0,8 × 0,7 × 0,5 = 0,084, en multipliant toutes les probabilités de l'arbre.", "T et son contraire forment une partition de l'univers. D'après la formule des probabilités totales, P(U) = P(T ∩ U) + P(non T ∩ U) = 0,3 × 0,8 + 0,7 × 0,5 = 0,59."],
+    bonne: 3,
+    explication: "Un verre avec anti-UV peut être teinté ou non teinté : on additionne les deux branches, chacune étant un produit le long du chemin. Ne garder que les verres teintés oublie une branche. Faire la moyenne simple des deux taux ignore le poids de chaque catégorie (30 % et 70 %). Multiplier toutes les branches mélange des chemins qui s'excluent.",
+    indice: "Un chemin de l'arbre se multiplie. Plusieurs chemins qui mènent au même résultat s'additionnent."
+  },
+  {
+    id: "U41-139", epreuve: "U41", theme: "Lois de probabilité", session: "complément",
+    difficulte: "moyen",
+    contexte: "X suit la loi binomiale B(900 ; 0,2). On veut calculer des probabilités sur X avec une loi normale.",
+    question: "Quelle rédaction justifie correctement l'approximation ?",
+    choix: ["n = 900 ≥ 30 et np = 180 ≥ 5 : les conditions sont remplies. On approche X par la loi normale d'espérance 180 et d'écart type 144.", "n = 900 ≥ 30, np = 180 ≥ 5 et n(1 − p) = 720 ≥ 5 : les conditions sont remplies. On approche X par la loi normale d'espérance 0,2 et d'écart type 0,8.", "n = 900 ≥ 30, np = 180 ≥ 5 et n(1 − p) = 720 ≥ 5 : les conditions sont remplies. On approche X par la loi normale d'espérance 180 et d'écart type √(900 × 0,2 × 0,8) = 12.", "n = 900 est très grand, donc on approche directement X par la loi normale d'espérance 180 et d'écart type 12, sans autre vérification."],
+    bonne: 2,
+    explication: "Une bonne rédaction vérifie les conditions d'approximation, puis donne les deux paramètres : espérance np = 180 et écart type √(np(1 − p)) = 12. Les conditions n ≥ 30, np ≥ 5 et n(1 − p) ≥ 5 sont celles qu'on utilise d'habitude (le sujet les donne souvent). Oublier n(1 − p) et prendre la variance 144 pour l'écart type est une double erreur. Dire seulement « n est très grand » ne justifie rien. Donner 0,2 et 0,8 met p et 1 − p à la place de l'espérance et de l'écart type.",
+    indice: "Deux temps : les conditions chiffrées sur n, np et n(1 − p), puis les paramètres μ = np et σ = √(np(1 − p))."
+  },
+  {
+    id: "U41-140", epreuve: "U41", theme: "Estimation et tests", session: "complément",
+    difficulte: "moyen",
+    contexte: "Un fournisseur affirme que 90 % de ses verres sont conformes. On soupçonne que la proportion p est en réalité plus basse et on teste ce soupçon sur un échantillon.",
+    question: "Quelle rédaction pose correctement les hypothèses du test ?",
+    choix: ["H0 : p < 0,9 (le fournisseur se trompe) ; H1 : p = 0,9. C'est un test unilatéral : on rejette H0 si la fréquence observée est trop basse.", "H0 : p = 0,9 (le fournisseur a raison) ; H1 : p < 0,9 (la proportion est plus basse). C'est un test unilatéral : on rejette H0 si la fréquence observée est trop basse.", "H0 : f = 0,9 ; H1 : f < 0,9, où f est la fréquence de l'échantillon. C'est un test unilatéral : on rejette H0 si f est trop basse.", "H0 : p ≠ 0,9 ; H1 : p = 0,9. C'est un test bilatéral : on rejette H0 si la fréquence observée s'écarte trop de 0,9."],
+    bonne: 1,
+    explication: "H0 est l'hypothèse de référence, celle qu'on teste : une valeur précise, p = 0,9. H1 est ce qu'on soupçonne : p < 0,9, d'où un test unilatéral. Mettre l'inégalité dans H0 inverse les rôles. Porter les hypothèses sur f, la fréquence de l'échantillon, est faux : elles portent sur p, la proportion de toute la production. Choisir « p ≠ 0,9 » dans H0 et un test bilatéral ne correspond pas au soupçon, qui est seulement une proportion plus basse.",
+    indice: "H0 contient l'égalité. H1 est ce que tu soupçonnes. Les hypothèses portent sur la proportion de toute la production, pas sur l'échantillon."
   }
 
 );

@@ -625,7 +625,88 @@ QUESTIONS.push(
     explication: "Une conclusion complète fait trois choses : elle répond à la question du client, elle s'appuie sur les chiffres trouvés et elle signale la limite de l'appareil. Ici : détails de 2,4 mm séparés, donc ceux de 5 mm aussi, alors qu'à l'œil nu elle s'arrête à 7,2 mm ; champ de 2 m, donc un chanteur en entier, mais pas les 12 m de scène à la fois. Écrire seulement « elles conviennent » ne rapporte pas les points. Aligner les chiffres sans conclure non plus. Et un petit champ n'empêche pas de voir les chanteurs : il oblige seulement à déplacer les jumelles.",
     indice: "Une bonne conclusion répond à la question du client, s'appuie sur les chiffres trouvés et signale la limite de l'appareil."
   }
+,
 
+  // ---------- Calculs posés étape par étape ----------
+  {
+    id: "U42-139", difficulte: "moyen", epreuve: "U42", theme: "Conjugaison", session: "complément", type: "pose",
+    question: "Un objectif assimilé à une lentille mince convergente a une distance focale image f' = +25 mm. Un objet réel est placé 40 mm devant elle. Trouve la position de l'image et le grandissement, étape par étape.",
+    etapes: [
+      { consigne: "Vergence de la lentille V", reponse: { valeur: 40, unite: "δ", decimales: 0, signe: true },
+        aide: "V = [[1|f']] avec f' en mètres : 25 mm = 0,025 m.", ligne: "V = [[1|f']] = [[1|0,025]] = +40 δ" },
+      { consigne: "Vergence de l'objet [[1|OA]]", reponse: { valeur: -25, unite: "δ", decimales: 0, signe: true },
+        aide: "L'objet est réel, avant la lentille : OA est négatif. OA = −40 mm = −0,040 m.", ligne: "[[1|OA]] = [[1|−0,040]] = −25 δ" },
+      { consigne: "Vergence de l'image [[1|OA']]", reponse: { valeur: 15, unite: "δ", decimales: 0, signe: true },
+        aide: "Relation de conjugaison : [[1|OA']] = [[1|OA]] + V.", ligne: "[[1|OA']] = [[1|OA]] + V = −25 + 40 = +15 δ" },
+      { consigne: "Position de l'image OA'", reponse: { valeur: 66.7, unite: "mm", decimales: 1, signe: true, tolerance: 0.1 },
+        aide: "OA' = [[1|15]] en mètres, puis convertis en millimètres.", ligne: "OA' = [[1|15]] = +0,0667 m = +66,7 mm" },
+      { consigne: "Grandissement γ", reponse: { valeur: -1.67, unite: "", decimales: 2, signe: true, tolerance: 0.02 },
+        aide: "γ = [[OA'|OA]], avec les signes. OA' et OA se prennent dans la même unité.", ligne: "γ = [[OA'|OA]] = [[+66,7|−40]] = −1,67" }
+    ],
+    explication: "L'image est réelle (OA' > 0), renversée (γ < 0) et 1,67 fois plus grande que l'objet. Contrôle avec les vergences : γ = [[−25|+15]] = −1,67."
+  },
+  {
+    id: "U42-140", difficulte: "moyen", epreuve: "U42", theme: "Doublets et achromatisme", session: "complément", type: "pose",
+    question: "Un doublet est formé de deux lentilles minces convergentes : f'1 = +80 mm et f'2 = +40 mm, séparées de e = 40 mm. Calcule sa distance focale image, étape par étape, avec V = V1 + V2 − e × V1 × V2.",
+    etapes: [
+      { consigne: "Vergence V1 de la 1re lentille", reponse: { valeur: 12.5, unite: "δ", decimales: 1, signe: true },
+        aide: "V1 = [[1|f'1]] avec f'1 en mètres : 80 mm = 0,080 m.", ligne: "V1 = [[1|0,080]] = +12,5 δ" },
+      { consigne: "Vergence V2 de la 2e lentille", reponse: { valeur: 25, unite: "δ", decimales: 0, signe: true },
+        aide: "V2 = [[1|f'2]] avec f'2 en mètres : 40 mm = 0,040 m.", ligne: "V2 = [[1|0,040]] = +25 δ" },
+      { consigne: "Le terme e × V1 × V2", reponse: { valeur: 12.5, unite: "δ", decimales: 1, signe: false },
+        aide: "Mets l'écart e en mètres : 40 mm = 0,040 m. Multiplie ensuite 0,040 par 12,5 et par 25.", ligne: "e × V1 × V2 = 0,040 × 12,5 × 25 = 12,5 δ" },
+      { consigne: "Vergence V du doublet", reponse: { valeur: 25, unite: "δ", decimales: 0, signe: true },
+        aide: "V = V1 + V2 − e × V1 × V2 : additionne les deux vergences, puis retire le terme précédent.", ligne: "V = 12,5 + 25 − 12,5 = +25 δ" },
+      { consigne: "Distance focale image f' du doublet", reponse: { valeur: 40, unite: "mm", decimales: 0, signe: true, tolerance: 0.5 },
+        aide: "f' = [[1|V]] en mètres, puis convertis en millimètres.", ligne: "f' = [[1|V]] = [[1|25]] = 0,040 m = 40 mm" }
+    ],
+    explication: "La même formule écrite avec les focales donne le même résultat : f' = [[f'1 × f'2|f'1 + f'2 − e]] = [[80 × 40|80 + 40 − 40]] = [[3 200|80]] = 40 mm."
+  },
+  {
+    id: "U42-141", difficulte: "moyen", epreuve: "U42", theme: "Lunettes afocales", session: "complément", type: "pose",
+    question: "Lunette de Kepler afocale : objectif de f'ob = 240 mm et de diamètre 48 mm, oculaire de f'oc = 30 mm. L'œil de l'observateur a une pupille de 4 mm. Étudie la lunette étape par étape.",
+    etapes: [
+      { consigne: "Grossissement G", reponse: { valeur: -8, unite: "", decimales: 0, signe: true },
+        aide: "G = −[[f'ob|f'oc]]. Le signe moins : une lunette de Kepler renverse l'image.", ligne: "G = −[[f'ob|f'oc]] = −[[240|30]] = −8" },
+      { consigne: "Longueur de la lunette", reponse: { valeur: 270, unite: "mm", decimales: 0, signe: false },
+        aide: "Une lunette afocale a ses foyers confondus : longueur = f'ob + f'oc.", ligne: "L = f'ob + f'oc = 240 + 30 = 270 mm" },
+      { consigne: "Diamètre du cercle oculaire D'", reponse: { valeur: 6, unite: "mm", decimales: 0, signe: false },
+        aide: "D' = [[D|∣G∣]], avec le diamètre D de l'objectif et la valeur absolue du grossissement.", ligne: "D' = [[D|∣G∣]] = [[48|8]] = 6 mm" },
+      { consigne: "Part de la lumière qui entre dans l'œil", reponse: { valeur: 44, unite: "%", decimales: 0, signe: false, tolerance: 1 },
+        aide: "Le cercle oculaire (6 mm) est plus grand que la pupille (4 mm). Compare les surfaces : [[4²|6²]].", ligne: "[[4²|6²]] = [[16|36]] = 0,44, soit 44 %" }
+    ],
+    explication: "Le cercle oculaire dépasse la pupille de l'œil : environ 44 % de la lumière captée entre dans l'œil. Pour tout utiliser, il faudrait un cercle oculaire de 4 mm au plus, donc un grossissement d'au moins [[48|4]] = 12 (en valeur absolue)."
+  },
+  {
+    id: "U42-142", difficulte: "moyen", epreuve: "U42", theme: "Loupe et microscope", session: "complément", type: "pose",
+    question: "Un microscope a un objectif de focale f'ob = 10 mm, un intervalle optique Δ = 160 mm et un oculaire de focale f'oc = 25 mm. L'œil sépare deux points vus sous 3 × 10⁻⁴ rad. Étudie le microscope étape par étape.",
+    etapes: [
+      { consigne: "Grandissement de l'objectif γob", reponse: { valeur: -16, unite: "", decimales: 0, signe: true },
+        aide: "γob = −[[Δ|f'ob]] : l'objectif d'un microscope donne une image intermédiaire renversée.", ligne: "γob = −[[Δ|f'ob]] = −[[160|10]] = −16" },
+      { consigne: "Grossissement commercial de l'oculaire Gc", reponse: { valeur: 10, unite: "", decimales: 0, signe: false },
+        aide: "Gc oculaire = [[250|f'oc]], avec f'oc en millimètres.", ligne: "Gc = [[250|f'oc]] = [[250|25]] = 10" },
+      { consigne: "Grossissement commercial du microscope", reponse: { valeur: 160, unite: "", decimales: 0, signe: false },
+        aide: "Les deux effets se multiplient. Prends le grandissement de l'objectif en valeur absolue.", ligne: "Gc = ∣γob∣ × Gc oculaire = 16 × 10 = 160" },
+      { consigne: "Plus petit détail visible à travers le microscope", reponse: { valeur: 0.47, unite: "µm", decimales: 2, signe: false, tolerance: 0.01 },
+        aide: "À l'œil nu à 25 cm : 3 × 10⁻⁴ × 250 mm = 0,075 mm = 75 µm. Divise ensuite par le grossissement.", ligne: "d = [[75|160]] = 0,47 µm" }
+    ],
+    explication: "À l'œil nu, le plus petit détail séparé à 25 cm vaut 75 µm. Le microscope divise cette taille par son grossissement : [[75|160]] ≈ 0,47 µm. Il faut aussi vérifier la limite due à la diffraction de l'objectif : la plus grande des deux limites l'emporte."
+  },
+  {
+    id: "U42-143", difficulte: "difficile", epreuve: "U42", theme: "Champs et diaphragmes", session: "complément", type: "pose",
+    question: "Dans l'espace d'étude : pupille de rayon 8 mm en x = 0, diaphragme de champ de rayon 5 mm en x = 20 mm, plan des champs en x = 40 mm. Calcule les trois rayons de champ, étape par étape.",
+    etapes: [
+      { consigne: "Pente de la droite de pleine lumière (bords du même côté)", reponse: { valeur: -0.15, unite: "", decimales: 2, signe: true },
+        aide: "La droite passe par (0 ; 8) et (20 ; 5) : pente = [[y2 − y1|x2 − x1]].", ligne: "pente = [[5 − 8|20 − 0]] = −0,15" },
+      { consigne: "Rayon du champ de pleine lumière", reponse: { valeur: 2, unite: "mm", decimales: 0, signe: false },
+        aide: "En x = 40 : rayon = 8 + pente × 40.", ligne: "r = 8 − 0,15 × 40 = 2 mm" },
+      { consigne: "Rayon du champ moyen (droite par le centre de la pupille)", reponse: { valeur: 10, unite: "mm", decimales: 0, signe: false },
+        aide: "La droite passe par (0 ; 0) et (20 ; 5) : pente = [[5|20]]. Prolonge-la jusqu'à x = 40.", ligne: "r = [[5|20]] × 40 = 10 mm" },
+      { consigne: "Rayon du champ total (bords opposés)", reponse: { valeur: 18, unite: "mm", decimales: 0, signe: false },
+        aide: "La droite passe par (0 ; −8) et (20 ; 5) : pente = [[5 − (−8)|20]]. Prolonge-la jusqu'à x = 40.", ligne: "r = −8 + [[13|20]] × 40 = −8 + 26 = 18 mm" }
+    ],
+    explication: "Comme toujours, le champ de pleine lumière (2 mm) est plus petit que le champ moyen (10 mm), lui-même plus petit que le champ total (18 mm). Entre 2 et 18 mm, l'image s'assombrit peu à peu : c'est le vignettage."
+  }
 );
 
 // ---------- Mini-sujet (cas pratique) : ses questions portent cas: "CAS-U42-01" et etape: 1, 2, 3… ----------

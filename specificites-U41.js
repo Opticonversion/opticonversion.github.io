@@ -76,6 +76,54 @@ SPECIFICITES.push({
       ]
     },
     {
+      type: "texte",
+      titre: "À relire la veille : le plan",
+      points: [
+        "Reprends d'abord les deux tableaux ci-dessous, puis les trois phrases à bien rédiger.",
+        "Avant de calculer, repère la loi ou la méthode : binomiale, normale, exponentielle, Poisson, intervalle ou test.",
+        "Sur la copie, écris la formule, puis les nombres, puis le résultat arrondi comme demandé.",
+        "Garde 5 minutes à la fin pour relire les signes, les unités et les arrondis."
+      ]
+    },
+    {
+      type: "formules",
+      titre: "À relire la veille : le formulaire",
+      lignes: [
+        { nom: "Suite géométrique : terme et somme", formule: "u(n) = u(0) × qⁿ ; S = u(0) × [[1 − qⁿ|1 − q]] (n termes)", exemple: "12 000 et q = 0,9, 5 termes → 49 141", rappelee: false },
+        { nom: "Hausse ou baisse de t %", formule: "On multiplie par 1 + t (hausse) ou 1 − t (baisse). Les coefficients se multiplient, les taux ne s'additionnent pas.", exemple: "−8 % trois fois → 0,92³ ≈ 0,779, soit −22,1 %", rappelee: false },
+        { nom: "Solution de a y' + b y = c avec y(0) = y0", formule: "y(t) = (y0 − [[c|b]]) e^(−[[b|a]]t) + [[c|b]]", exemple: "y' + 0,4y = 8, y(0) = 5 → 20 − 15 e^(−0,4t)", rappelee: false },
+        { nom: "Dérivée d'un produit, primitive de 1/x", formule: "(u v)' = u' v + u v' ; une primitive de [[1|x]] est ln x (x > 0)", exemple: "(t + 2) e^(−0,5t) → −0,5 t e^(−0,5t)", rappelee: false },
+        { nom: "Probabilités totales et Bayes", formule: "P(B) = P(A ∩ B) + P(non A ∩ B) ; P_B(A) = [[P(A ∩ B)|P(B)]]", exemple: "0,3 × 0,8 + 0,7 × 0,5 = 0,59", rappelee: false },
+        { nom: "Loi binomiale B(n ; p)", formule: "P(X = k) = (k parmi n) pᵏ (1 − p)ⁿ⁻ᵏ ; E = np ; σ = √(np(1 − p))", exemple: "B(900 ; 0,2) → 180 et 12", rappelee: false },
+        { nom: "Quelle approximation ?", formule: "n grand et p petit (p ≤ 0,1) : loi de Poisson de paramètre np. Sinon, loi normale d'espérance np et d'écart type √(np(1 − p)). Les conditions chiffrées exactes sont en général données par le sujet.", exemple: "B(200 ; 0,01) → Poisson 2 ; B(900 ; 0,2) → normale 180 et 12", rappelee: false },
+        { nom: "Loi de Poisson P(λ)", formule: "P(X = k) = e^(−λ) × [[λᵏ|k!]] ; E = λ (en pratique, calcul à la calculatrice)", exemple: "λ = 3 → P(X = 0) = e⁻³ ≈ 0,0498", rappelee: false },
+        { nom: "Loi normale N(μ ; σ)", formule: "Z = [[X − μ|σ]] suit N(0 ; 1). Pour une valeur inverse, utilise FracNormale.", exemple: "N(60 ; 4), X = 68 → Z = 2", rappelee: false },
+        { nom: "Loi exponentielle de paramètre λ", formule: "P(T ≤ t) = 1 − e^(−λt) ; P(T > t) = e^(−λt) ; E(T) = [[1|λ]] ; sans mémoire : P(T > s + t sachant T > s) = P(T > t)", exemple: "λ = 0,2 : P(T > 3) = e^(−0,6) ≈ 0,549", rappelee: true },
+        { nom: "Intervalle de confiance d'une proportion", formule: "f ± 1,96 √([[f(1 − f)|n]]) à 95 % ; majoration de la demi-largeur : [[1|√n]]", exemple: "demi-largeur ≤ 0,03 → n ≥ 1 112", rappelee: false },
+        { nom: "Intervalle de confiance d'une moyenne", formule: "m ± 1,96 × [[s|√n]] à 95 %, où s est l'écart type estimé de la population (donné par le sujet)", exemple: "m = 25,2 ; s = 0,8 ; n = 64 → [25,004 ; 25,396]", rappelee: false },
+        { nom: "Test : zone d'acceptation de la moyenne", formule: "μ0 ± 1,96 × [[σ|√n]] (bilatéral, 5 %). On rejette H0 si la moyenne observée sort de la zone.", exemple: "150 ± 1,96 × 2 → [146,08 ; 153,92]", rappelee: false },
+        { nom: "Division harmonique (A, B ; C, D)", formule: "En distances : CA ÷ CB = DA ÷ DB, avec D à l'extérieur de [AB] si C est à l'intérieur. En mesures algébriques, avec I milieu de [AB] : IA² = IC × ID", exemple: "A(0), B(8), C(2) → D(−4)", rappelee: false }
+      ]
+    },
+    {
+      type: "formules",
+      titre: "À relire la veille : 1,96 ; 1,645 ; 2,58",
+      lignes: [
+        { nom: "1,96", formule: "Niveau de confiance de 95 % ; test bilatéral au seuil de 5 % (deux zones de rejet, une de chaque côté)", exemple: "f ± 1,96 √([[f(1 − f)|n]])", rappelee: false },
+        { nom: "1,645", formule: "Test unilatéral au seuil de 5 % (une seule zone de rejet, d'un seul côté)", exemple: "H1 : p < 0,9 → rejet si f < 0,9 − 1,645 σ, avec σ = √([[0,9 × 0,1|n]])", rappelee: false },
+        { nom: "2,58", formule: "Niveau de confiance de 99 % (intervalle plus large, plus sûr mais moins précis)", exemple: "0,048 × [[2,58|1,96]] ≈ 0,063", rappelee: false }
+      ]
+    },
+    {
+      type: "pieges",
+      titre: "À relire la veille : trois phrases à bien rédiger",
+      items: [
+        { id: "redaction-test", titre: "Conclure un test", faux: "154,6 est supérieur à 150, donc on rejette H0.", juste: "Zone d'acceptation chiffrée, valeur observée comparée à la zone, puis décision au seuil de 5 %.", theme: "Estimation et tests", questions: ["U41-133", "U41-140"] },
+        { id: "redaction-ic", titre: "Interpréter un intervalle de confiance", faux: "p est sûrement dans l'intervalle.", juste: "Au niveau de confiance de 95 %, on estime que p est dans l'intervalle, sans certitude.", theme: "Estimation et tests", questions: ["U41-134"] },
+        { id: "redaction-variation", titre: "Justifier un sens de variation", faux: "f' est négative, donc f est décroissante.", juste: "Dire pourquoi f' a ce signe (une exponentielle est strictement positive), puis conclure sur f.", theme: "Fonctions", questions: ["U41-135", "U41-136"] }
+      ]
+    },
+    {
       type: "calculatrice",
       titre: "Ta calculatrice le jour J",
       taches: [

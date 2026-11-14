@@ -239,3 +239,44 @@ TRACES.push(
     conclusion: "L'image du diaphragme joue le rôle de pupille d'entrée : le faisceau utile est celui qui s'appuie sur ses bords. Dans l'instrument, il passe exactement par les bords du diaphragme réel."
   }
 );
+
+// =====================================================================
+//  Champs dans l'espace intermédiaire ou image (ajout du 14/11/2026).
+//  Dans les sujets (2018 à 2026), la pupille (de sortie, ou l'image du diaphragme d'ouverture)
+//  et la lucarne sont DONNÉES dans un espace ; l'élève place le plan des champs (l'image de l'objet
+//  dans cet espace), puis la limite du champ de pleine lumière. espaceChamps : l'espace après cette
+//  lentille ; le moteur y calcule pupille, lucarne et champs (optique.js, imageDiaphragmeDans).
+// =====================================================================
+TRACES.push(
+  {
+    id: "U42-18", epreuve: "U42", chapitre: "Champs", titre: "Côté capteur : la pupille de sortie",
+    regle: "Dans l'espace image, on raisonne avec la pupille de sortie Ps (image du diaphragme d'ouverture par ce qui le suit) et la lucarne de sortie. Le plan des champs est le plan de l'image A'B'. La limite du champ de pleine lumière y est donnée par la droite qui s'appuie sur un bord de Ps et un bord de la lucarne : du même côté si Ps et la lucarne sont du même côté du plan des champs, opposés si le plan des champs est entre les deux.",
+    consigne: "Objectif L (f' = 50 mm, monture de rayon 12 mm, lucarne de sortie), diaphragme D 20 mm devant. Sa pupille de sortie Ps est dessinée : virtuelle, 33,3 mm devant L, rayon 10 mm. Place le plan des champs, puis trouve le champ de pleine lumière sur le capteur.",
+    theme: "Champs et diaphragmes",
+    systeme: { objet: { x: -150, h: 20 }, elements: [{ type: "diaphragme", nom: "D", x: -20, rayon: 6 }, { type: "lentille", nom: "L", x: 0, f: 50, rayon: 12 }] },
+    espaceChamps: { apres: "L", pupille: "Ps", lucarne: "L" },
+    vue: { xmin: -160, xmax: 100, hmax: 24, carreauX: 10, carreauY: 4 },
+    etapes: [
+      { action: "placer", quoi: "image", apres: "L", rayons: ["parallele", "O"], texte: "Le plan des champs est celui de l'image A'B', où l'on met le capteur. Place B'." },
+      { action: "relier", quoi: "champ-pleine-lumiere", texte: "Touche le bord de Ps et le bord de la lucarne qui donnent la limite du champ de pleine lumière dans le plan des champs." },
+      { action: "calcul", grandeur: "rayon-champ", decimales: 1, unite: "mm", signe: false, texte: "Calcule le rayon r'PL du champ de pleine lumière dans le plan du capteur (Thalès entre Ps, L et le plan des champs)." }
+    ],
+    conclusion: "Tout le capteur est uniformément éclairé si sa demi-diagonale est plus petite que r'PL. Le calcul dans l'espace objet donne le même résultat, multiplié par |γ| : les deux espaces sont conjugués."
+  },
+  {
+    id: "U42-19", epreuve: "U42", chapitre: "Champs", titre: "Microscope : le champ dans l'espace intermédiaire",
+    regle: "Le diaphragme d'ouverture D est placé entre Ob et Oc, donc déjà dans l'espace intermédiaire : il y est lui-même la pupille. Ici le plan des champs (A₁B₁) est ENTRE la pupille et la lucarne : la pleine lumière s'appuie alors sur les bords opposés. Des deux droites possibles, la pleine lumière donne toujours le plus petit rayon, le champ total le plus grand.",
+    consigne: "Objectif Ob (f' = 10 mm), diaphragme d'ouverture D au foyer image F'₁, rayon 2,5 mm. La monture de l'oculaire Oc (rayon 5 mm, 80 mm après Ob) est la lucarne. L'objet est 12 mm devant Ob. Étudie le champ entre Ob et Oc.",
+    theme: "Champs et diaphragmes",
+    systeme: { objet: { x: -12, h: 0.4 }, elements: [{ type: "lentille", nom: "Ob", x: 0, f: 10, rayon: 4 }, { type: "diaphragme", nom: "D", x: 10, rayon: 2.5 }, { type: "lentille", nom: "Oc", x: 80, f: 25, rayon: 5 }] },
+    espaceChamps: { apres: "Ob", pupille: "D", lucarne: "Oc" },
+    vue: { xmin: -20, xmax: 100, hmax: 7.5, carreauX: 5, carreauY: 0.5 },
+    etapes: [
+      { action: "placer", quoi: "image", apres: "Ob", rayons: ["parallele", "O"], texte: "Le plan des champs de cet espace est celui de l'image intermédiaire A₁B₁. Place B₁." },
+      { action: "relier", quoi: "champ-pleine-lumiere", texte: "Touche les deux bords qui donnent la limite du champ de pleine lumière dans le plan de A₁B₁. Regarde où est ce plan par rapport à D et Oc." },
+      { action: "calcul", grandeur: "rayon-champ", decimales: 1, unite: "mm", signe: false, texte: "Calcule le rayon du champ de pleine lumière dans le plan de A₁B₁." },
+      { action: "relier", quoi: "champ-total", texte: "Champ total : touche les deux bords qui le limitent." }
+    ],
+    conclusion: "Pour supprimer le champ de contour, il faudrait un diaphragme de champ dans le plan de A₁B₁, de rayon égal à celui de la pleine lumière. Le champ objet s'en déduit en divisant par |γ| de l'objectif."
+  }
+);
