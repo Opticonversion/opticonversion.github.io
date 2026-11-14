@@ -477,6 +477,7 @@ select option { background: var(--fond); }
 .jour .jour-action:not(.secondaire) { min-height: 52px; padding: 14px 28px; font-size: 1.05rem; }
 .jour-action.secondaire .ico { color: var(--or); }
 .jour-detail { margin: 0 0 4px; color: var(--texte); font-size: 0.97rem; line-height: 1.45; }
+.jour-detail .jour-erreurs { white-space: nowrap; }
 .jour-examen { margin: 16px 0 0; padding-top: 14px; border-top: 1px solid var(--bord); color: var(--doux); font-size: 0.95rem; line-height: 1.55; }
 .jour-examen b { font-family: var(--titre); font-size: 1.15rem; font-weight: 600; color: var(--or-clair); font-variant-numeric: lining-nums; }
 .jour-legende { margin: 10px 0 0; color: var(--tres-doux); font-size: 0.86rem; }
@@ -776,6 +777,8 @@ figure.schema object, figure.schema img { display: block; width: 100%; height: a
 .medaille.or { color: var(--or-clair); font-weight: 600; }
 .bilan-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
 .bilan-actions .bouton { margin-top: 0; }
+/* L'objectif du jour sous le résultat d'une série : discret, le score passe d'abord */
+.bilan-objectif { color: var(--doux); font-size: 0.9rem; margin: 16px auto 0; max-width: 46ch; }
 .confettis { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
 .anneau { --p: 0; width: 164px; height: 164px; margin: 0 auto 14px; border-radius: 50%; display: grid; place-items: center; background: conic-gradient(var(--c-palier, var(--or)) calc(var(--p) * 1%), rgba(255, 255, 255, 0.07) 0); animation: pop 600ms var(--rebond) both; }
 .anneau-int { width: 140px; height: 140px; border-radius: 50%; background: var(--carte); display: grid; place-items: center; }

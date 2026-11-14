@@ -7,7 +7,8 @@
 //   Sons.juste()                 bonne réponse ;
 //   Sons.faux()                  erreur ;
 //   Sons.fin(pourcent, attendre) fin d'une série, un son par palier de note
-//                                (100, 80 et plus, 60 et plus, 40 et plus, moins).
+//                                (100, 80 et plus, 60 et plus, 50 et plus ;
+//                                rien sous 50 % : pas de son joyeux sur une série ratée).
 //                                « attendre » = vrai : il passe après le son
 //                                en cours au lieu de le couper.
 // Le bouton « Son » est ajouté dans la barre du haut d'une série (QCM,
@@ -38,7 +39,7 @@
     fin40:  { fichier: "fin-40.mp3",  debut: 0.124, fin: 0.95, volume: 0.52 },
     fin0:   { fichier: "fin-0.mp3",   debut: 0.119, fin: 1.75, volume: 2.1 }
   };
-  const FINS = ["fin100", "fin80", "fin60", "fin40", "fin0"];
+  const FINS = ["fin100", "fin80", "fin60", "fin40"];       // fin0 n'est plus joué (rien sous 50 %)
 
   // ---------------- Téléchargement et lecture ----------------
   const octets = {}, tampons = {};      // promesses : le fichier téléchargé, puis le son prêt à être joué
@@ -105,7 +106,9 @@
   const faux = () => jouer("faux");
   function fin(pourcent, attendre) {
     const p = Number(pourcent) || 0;
-    jouer(p >= 100 ? "fin100" : p >= 80 ? "fin80" : p >= 60 ? "fin60" : p >= 40 ? "fin40" : "fin0", attendre);
+    // Moins de la moitié : pas de son de fin (les sons de fin sont joyeux) ; le son de la dernière réponse suffit
+    if (p < 50) return;
+    jouer(p >= 100 ? "fin100" : p >= 80 ? "fin80" : p >= 60 ? "fin60" : "fin40", attendre);
   }
 
   // Les deux sons d'une réponse sont téléchargés dès que la page est tranquille, puis préparés au premier geste

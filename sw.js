@@ -13,7 +13,7 @@
 // =====================================================================
 
 // <versionner> (partie écrite par versionner.py, ne pas modifier à la main)
-const VERSION = "f38741d468";
+const VERSION = "4a8e38472b";
 const FICHIERS = [
   "appli.js?v=0724163c",
   "banc.js?v=cca7d0be",
@@ -36,7 +36,7 @@ const FICHIERS = [
   "entrainement-U5.js?v=98511033",
   "epreuves.js?v=cc645427",
   "essentiel.html",
-  "essentiel.js?v=d812b628",
+  "essentiel.js?v=38409d63",
   "examen.js?v=658f6737",
   "img/avatar-chat-bouche-ouverte.svg",
   "img/avatar-chat-choque.svg",
@@ -157,13 +157,13 @@ const FICHIERS = [
   "polices/bodoni-moda-italique.woff2",
   "polices/bodoni-moda.woff2",
   "qcm.html",
-  "questions-U3.js?v=35bcd737",
+  "questions-U3.js?v=9619a3c6",
   "questions-U41.js?v=4ed5dc1f",
   "questions-U42.js?v=29d25a16",
   "questions-U43.js?v=be252b34",
-  "questions-U5.js?v=901c19fe",
-  "rythme.js?v=5c6bd141",
-  "sons.js?v=2110bb6a",
+  "questions-U5.js?v=636198c1",
+  "rythme.js?v=fc24144e",
+  "sons.js?v=355500ef",
   "sons/faux.mp3",
   "sons/fin-0.mp3",
   "sons/fin-100.mp3",
@@ -176,7 +176,7 @@ const FICHIERS = [
   "specificites-U42.js?v=f64709f2",
   "specificites-U43.js?v=523c07db",
   "specificites-U5.js?v=43533990",
-  "style.css?v=b371ff39",
+  "style.css?v=e8ccc2a4",
   "traces-U42.js?v=78864426",
   "traces-U43.js?v=e9acf21a",
   "traces-U5.js?v=c4c5f919",

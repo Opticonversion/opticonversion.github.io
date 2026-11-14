@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Opticonversion">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
-<link rel="stylesheet" href="style.css?v=b371ff39">
+<link rel="stylesheet" href="style.css?v=e8ccc2a4">
 </head>
 <body>
 <header class="entete">
@@ -94,8 +94,8 @@
 <script src="questions-U41.js?v=4ed5dc1f"></script>
 <script src="questions-U42.js?v=29d25a16"></script>
 <script src="questions-U43.js?v=be252b34"></script>
-<script src="questions-U5.js?v=901c19fe"></script>
-<script src="questions-U3.js?v=35bcd737"></script>
+<script src="questions-U5.js?v=636198c1"></script>
+<script src="questions-U3.js?v=9619a3c6"></script>
 <!-- Questions d'entraînement (mêmes notions, autres chiffres) : chargées ici seulement, hors Essentiel -->
 <script src="entrainement-U41.js?v=1b78bba4"></script>
 <script src="entrainement-U42.js?v=06b93d7d"></script>
@@ -112,8 +112,8 @@
 <script src="specificites-U43.js?v=523c07db"></script>
 <script src="specificites-U5.js?v=43533990"></script>
 <script src="specificites-U3.js?v=3245f237"></script>
-<script src="essentiel.js?v=d812b628"></script>
-<script src="rythme.js?v=5c6bd141"></script>
+<script src="essentiel.js?v=38409d63"></script>
+<script src="rythme.js?v=fc24144e"></script>
 <!-- Examen blanc chronométré (#U5/examen) : avant le script de la page, qui l'ouvre dès le chargement -->
 <script src="examen.js?v=658f6737"></script>
 <script>
@@ -281,9 +281,9 @@
   // Les autres séances, toutes épreuves, choisies par rythme.js : « 5 minutes » (#cinq-minutes), la séance du jour
   // jusqu'à l'objectif (#seance) et les 5 questions faciles de la première ouverture (#premiers-pas).
   // Avec une matière choisie avant de commencer (#seance/U42, #premiers-pas/U42, #cinq-minutes/U42) : seulement ses questions.
-  let seanceMode = null;       // null (À revoir), "cinq", "seance" ou "premiers"
+  let seanceMode = null;       // null (À revoir), "cinq", "seance", "premiers" ou "erreurs" (#erreurs-du-jour : ratées aujourd'hui)
   let seanceMatiere = null;    // "U42"… si l'élève a choisi une matière, null pour « Mon plan » (« Aléatoire » le premier jour)
-  const ADRESSES_SEANCES = { cinq: "#cinq-minutes", seance: "#seance", premiers: "#premiers-pas" };
+  const ADRESSES_SEANCES = { cinq: "#cinq-minutes", seance: "#seance", premiers: "#premiers-pas", erreurs: "#erreurs-du-jour" };
   // « Passer » : pendant la séance du jour et les cinq premières questions, à tout moment. Il prend alors la place
   // de « ← Toutes les épreuves » (une seule sortie, qui tient sur une ligne au téléphone).
   function montrerPasser(mode) {
@@ -296,8 +296,8 @@
   }
   function ouvrirRevision(mode, matiere, typeChoisi) {
     if (typeof Examen !== "undefined") Examen.fermer();
-    matiere = mode ? matiereSeance(matiere) : null;
-    const toutes = mode === "cinq" ? questionsCinqMinutes(matiere) : mode === "seance" ? questionsSeanceDuJour(matiere) : mode === "premiers" ? questionsPremiersPas(matiere) : questionsARevoir();
+    matiere = mode && mode !== "erreurs" ? matiereSeance(matiere) : null;
+    const toutes = mode === "erreurs" ? questionsRateesDuJour() : mode === "cinq" ? questionsCinqMinutes(matiere) : mode === "seance" ? questionsSeanceDuJour(matiere) : mode === "premiers" ? questionsPremiersPas(matiere) : questionsARevoir();
     if (toutes.length === 0) { history.replaceState("", "", "qcm.html"); afficherEpreuves(); return; }
     // « À revoir » : on peut ne garder qu'un type d'erreur (signe, unité…)
     if (mode || !TYPES_ERREUR[typeChoisi] || !toutes.some(q => typeErreurDe(q) === typeChoisi)) typeChoisi = null;
@@ -316,7 +316,7 @@
     document.getElementById("ecran-epreuves").hidden = true;
     document.getElementById("ecran-qcm").hidden = false;
     document.querySelector("main").classList.add("large");
-    document.getElementById("titre").textContent = { cinq: "5 minutes", seance: "Ta séance du jour", premiers: "Cinq questions pour commencer" }[mode] || "À revoir aujourd'hui";
+    document.getElementById("titre").textContent = { cinq: "5 minutes", seance: "Ta séance du jour", premiers: "Cinq questions pour commencer", erreurs: "Tes erreurs du jour" }[mode] || "À revoir aujourd'hui";
     const nb = dues.length + (dues.length > 1 ? " questions" : " question") + (matiere ? " en " + nomMatiereSeance(matiere) : "");
     const composition = () => phraseComposition(compositionSeance(dues));
     document.getElementById("sous-titre").textContent =
@@ -324,6 +324,7 @@
       : mode === "seance" ? (tailleSeanceDuJour() === 0
           ? "Objectif du jour atteint : " + nb + " de plus, si tu veux : " + composition() + "."
           : nb + " pour ton objectif, environ une minute chacune : " + composition() + "." + (matiere ? "" : phrasePlanSeance()))
+      : mode === "erreurs" ? nb + " ratées aujourd'hui. Elles reviennent aussi demain dans «\u00a0À revoir\u00a0»."
       : mode === "premiers" ? "Faciles, " + (matiere ? "en " + nomMatiereSeance(matiere) + ", " : "") + "une par notion parmi celles qui tombent le plus au BTS. Après chaque réponse, la correction explique le raisonnement."
       : typeChoisi ? nb + " ratées sur une erreur « " + TYPES_ERREUR[typeChoisi].nom + " ». Chaque bonne réponse les espace davantage."
       : nb + " que tu avais ratées, toutes épreuves. Chaque bonne réponse les espace davantage.";
@@ -1512,13 +1513,15 @@
 
   // ---------------- L'écran de score ----------------
   // 5 paliers : la couleur, le nounours, le message et les confettis changent selon le score.
+  // Sous 50 % : compagnon pensif, ni confettis ni son de fin (sons.js).
   // (Les images du nounours sont dans le dossier img/.)
   function palierDe(pourcent) {
     if (pourcent === 100) return { nom: "or", titre: "Sans faute !", sous: "Même " + nomCompagnon() + " n'en revient pas.", nounours: "choque", confettis: 160 };
     if (pourcent >= 80) return { nom: "or", titre: "Très bien", sous: "Le thème est presque acquis. Relis les quelques erreurs ci-dessous.", nounours: "clin-doeil", confettis: 90 };
     if (pourcent >= 60) return { nom: "argent", titre: "Plus de la moitié", sous: "Relis tes erreurs, puis refais la série : ça devrait passer.", nounours: "bouche-ouverte", confettis: 0 };
-    if (pourcent >= 40) return { nom: "bronze", titre: "Les bases sont là", sous: "Relis l'explication de chaque erreur avant de refaire la série.", nounours: "pensif", confettis: 0 };
-    return { nom: "bronze", titre: "Thème à reprendre", sous: "Relis l'explication de chaque erreur, puis refais la série.", nounours: "bouche-fermee", confettis: 0 };
+    if (pourcent >= 50) return { nom: "bronze", titre: "Les bases sont là", sous: "Relis l'explication de chaque erreur avant de refaire la série.", nounours: "pensif", confettis: 0 };
+    // Moins de la moitié : aucun ton de victoire (pas de confettis, pas de son de fin, compagnon pensif)
+    return { nom: "bronze", titre: "À retravailler", sous: "Relis l'explication de chaque erreur, puis refais la série.", nounours: "pensif", confettis: 0 };
   }
 
   // Records : le meilleur score de l'élève par thème, gardé dans son navigateur
@@ -1605,15 +1608,17 @@
     montrerCompagnon(zone.querySelector(".bilan-nounours"), palier.nounours);
     const pseudo = lireProfil().pseudo;
     zone.querySelector(".bilan-titre").textContent = pseudo && palier.titre.endsWith(" !") ? palier.titre.slice(0, -2) + ", " + pseudo + " !" : palier.titre;
-    const rateesDemain = erreurs.length ? " Les questions ratées reviendront demain dans «\u00a0À revoir\u00a0»." : "";
-    const objectifAtteint = typeof calculerRythme === "function" && lireObjectif() > 0 && calculerRythme().aujourdhui.atteint;
-    const sousSeances = {
-      cinq: erreurs.length === 0 ? "Cinq minutes de révision, sans erreur." : "Cinq minutes de révision." + rateesDemain,
-      seance: (objectifAtteint ? "Séance du jour faite\u00a0: objectif atteint." : "Séance terminée.") + rateesDemain,
-      premiers: "Tes cinq premières questions sont faites." + rateesDemain
-    };
-    zone.querySelector(".bilan-sous").textContent = seanceRevision && sousSeances[seanceMode]
-      ? sousSeances[seanceMode]
+    // Le résultat d'abord, dit simplement ; l'objectif du jour vient en dessous, plus discret.
+    // Les questions ratées reviennent demain dans « À revoir » (sauf l'entraînement, qui n'y revient pas).
+    const revient = onglet !== "entrainement";
+    const surN = score + " sur " + serie.length + ". ";
+    const sousSeance = erreurs.length === 0 ? surN + "Aucune erreur."
+      : pourcent < 50 ? surN + "Ces questions reviennent demain pour que tu les retravailles."
+      : surN + "Les questions ratées reviennent demain dans «\u00a0À revoir\u00a0».";
+    zone.querySelector(".bilan-sous").textContent = seanceRevision && seanceMode
+      ? sousSeance
+      : !casFini && !modeRevision && pourcent < 50
+      ? surN + (revient ? "Ces questions reviennent demain pour que tu les retravailles." : palier.sous)
       : seanceRevision
       ? (erreurs.length === 0 ? "Révision du jour terminée. Les questions reviendront de plus en plus tard." : "Les questions ratées reviendront demain, les autres plus tard. À demain !")
       : casFini
@@ -1637,10 +1642,16 @@
       const faites = ESSENTIEL.filter(n => etatNotion(n.epreuve, n.theme).maitrisee).length;
       medaille("Notion essentielle maîtrisée (" + faites + " / " + ESSENTIEL.length + ")", "or");
     }
-    // Où en est l'objectif du jour (rythme.js), si l'élève en a choisi un
-    const objectifJour = typeof etatObjectifDuJour === "function" ? etatObjectifDuJour() : null;
-    if (objectifJour) medaille(objectifJour.texte, objectifJour.atteint ? "or" : "");
     if (!stats.children.length) stats.remove();
+    // Où en est l'objectif du jour (rythme.js), si l'élève en a choisi un : une ligne discrète sous le résultat,
+    // avec le nombre de justes à côté de l'effort (la série de jours reste fondée sur les réponses données)
+    const objectifJour = typeof etatObjectifDuJour === "function" ? etatObjectifDuJour() : null;
+    if (objectifJour) {
+      const ligneObjectif = document.createElement("p");
+      ligneObjectif.className = "bilan-objectif";
+      ligneObjectif.textContent = objectifJour.texte + ".";
+      zone.querySelector(".bilan-actions").after(ligneObjectif);
+    }
 
     // Les boutons : on propose toujours LA prochaine étape la plus utile
     const actions = zone.querySelector(".bilan-actions");
@@ -1751,6 +1762,7 @@
     const theme = suite ? decodeURIComponent(suite) : null;
     if (code === "a-revoir") ouvrirRevision(null, null, theme);      // #a-revoir/signe : seulement les erreurs de signe
     else if (code === "cinq-minutes") ouvrirRevision("cinq", theme);
+    else if (code === "erreurs-du-jour") ouvrirRevision("erreurs");
     else if (code === "seance") ouvrirRevision("seance", theme);
     else if (code === "premiers-pas") ouvrirRevision("premiers", theme);
     else if (code && theme === "examen") ouvrirEpreuve(code, null, { examen: true });
@@ -1786,7 +1798,7 @@
 <script src="compter.js?v=920cbd98" defer></script>
 <script src="vivant.js?v=ec7cf52b" defer></script>
 <script src="appli.js?v=0724163c" defer></script>
-<script src="sons.js?v=2110bb6a" defer></script>
+<script src="sons.js?v=355500ef" defer></script>
 <script type="module" src="compte.js?v=c75295cc"></script>
 <!-- Mesure d'audience anonyme, sans cookies (GoatCounter) -->
 <script data-goatcounter="https://opticonversion.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>

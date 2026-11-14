@@ -135,7 +135,7 @@ function noterReponse(q, juste, detail) {
   noterTypeErreur(q, juste, detail);
   marquerEnAttente("progression-t", id, maintenant);
   marquerEnAttente("progression", id, juste ? 1 : 0);
-  compterJour();
+  compterJour(juste);
   return planifierRevision(q, juste);
 }
 
@@ -143,12 +143,15 @@ function noterReponse(q, juste, detail) {
 // 70 jours au plus) : sert à la série de jours (rythme.js). progression-t ne suffit pas : il ne garde
 // que la dernière réponse à chaque question, et refaire aujourd'hui une question d'hier l'enlèverait
 // du compte d'hier. ok = l'objectif du jour (localStorage « objectif ») a été atteint ce jour-là.
-function compterJour() {
+// j = réponses justes ce jour-là (ajouté le 2026-11-14 : un jour plus ancien n'a pas de j, rythme.js le recalcule).
+// La série reste fondée sur l'effort (n) ; j sert seulement à dire le résultat à côté.
+function compterJour(juste) {
   try {
     const jours = JSON.parse(localStorage.getItem("jours") || "{}") || {};
     const k = jourLocal(), objectif = Number(localStorage.getItem("objectif")) || 0;
     const e = jours[k] || { n: 0 };
     e.n = (Number(e.n) || 0) + 1;
+    e.j = (Number(e.j) || 0) + (juste ? 1 : 0);
     if (objectif && e.n >= objectif) e.ok = true;
     jours[k] = e;
     const garde = {};

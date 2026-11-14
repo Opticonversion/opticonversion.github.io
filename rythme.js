@@ -3,8 +3,9 @@
 // ---------------------------------------------------------------------
 // Chargé après essentiel.js sur l'accueil, le profil et le QCM. Rien n'est envoyé en ligne :
 // - localStorage « objectif » : 5, 10 ou 20 questions par jour, choisi par l'élève (cet appareil) ;
-// - localStorage « jours » : { "AAAA-MM-JJ": { n, ok } } écrit par noterReponse (essentiel.js) :
-//   n = réponses données ce jour-là sur cet appareil, ok = objectif atteint ce jour-là ;
+// - localStorage « jours » : { "AAAA-MM-JJ": { n, ok, j } } écrit par noterReponse (essentiel.js) :
+//   n = réponses données ce jour-là sur cet appareil, ok = objectif atteint ce jour-là,
+//   j = réponses justes (depuis le 2026-11-14 ; avant, recalculé depuis « progression ») ;
 // - localStorage « rappel » : heure du rappel quotidien mis dans l'agenda (fichier .ics fait sur l'appareil) ;
 // - localStorage « invitation-compte », « decouverte », « invitation-jour », « accueil » : la proposition de compte,
 //   les outils déjà présentés, la seule invitation du jour, l'écran de première ouverture passé (voir plus bas).
@@ -52,28 +53,34 @@ function rythmeLundi(d) {
   return l;
 }
 
-// Réponses de chaque jour : le plus grand des deux comptes (mémo de cet appareil, progression-t)
+// Réponses de chaque jour : le plus grand des deux comptes (mémo de cet appareil, progression-t).
+// justes : réponses justes ce jour-là (mémo « j », ou à défaut les questions dont la dernière réponse,
+// donnée ce jour-là, est juste). Elles ne changent rien à la série : elles disent le résultat à côté.
 function reponsesParJour() {
-  const compte = {};
+  const compte = {}, justesT = {};
   const t = typeof lireTempsReponses === "function" ? lireTempsReponses() : {};
-  for (const ms of Object.values(t)) {
+  const p = typeof lireProgression === "function" ? lireProgression() : {};
+  for (const [id, ms] of Object.entries(t)) {
     const n = Number(ms);
     if (!n) continue;
     const k = rythmeCle(new Date(n));
     compte[k] = (compte[k] || 0) + 1;
+    if (p[id] === 1) justesT[k] = (justesT[k] || 0) + 1;
   }
   let memo = {};
   try { memo = JSON.parse(localStorage.getItem("jours") || "{}") || {}; } catch (e) {}
   const jours = {};
   for (const k of new Set([...Object.keys(compte), ...Object.keys(memo)])) {
     const m = memo[k] || {};
-    jours[k] = { n: Math.max(compte[k] || 0, Number(m.n) || 0), ok: !!m.ok };
+    const n = Math.max(compte[k] || 0, Number(m.n) || 0);
+    const justes = Math.min(n, Math.max(justesT[k] || 0, m.j === undefined ? 0 : Number(m.j) || 0));
+    jours[k] = { n, ok: !!m.ok, justes };
   }
   return jours;
 }
 
 // Série de jours : remonte depuis aujourd'hui. Aujourd'hui pas encore validé ne casse rien.
-// Renvoie { serie, aujourdhui: { n, objectif, atteint }, semaine: [{ k, nom, etat }], repart }
+// Renvoie { serie, aujourdhui: { n, justes, faux, objectif, atteint }, semaine: [{ k, nom, etat }], repart }
 function calculerRythme() {
   const objectif = lireObjectif() || OBJECTIFS[1];
   const jours = reponsesParJour();
@@ -110,10 +117,10 @@ function calculerRythme() {
   });
   const cleLundi = rythmeCle(lundi);
 
-  const n = jours[auj] ? jours[auj].n : 0;
+  const n = jours[auj] ? jours[auj].n : 0, justes = jours[auj] ? jours[auj].justes : 0;
   return {
     serie,
-    aujourdhui: { n, objectif, atteint: valide(auj) },
+    aujourdhui: { n, justes, faux: Math.max(0, n - justes), aRevoir: aRevoirDuJour(), objectif, atteint: valide(auj) },
     semaine,
     pauseHier: chaine.get(rythmeCle(rythmeMidi(-1))) === "pause",
     serieAvantLundi: [...chaine.keys()].some(k => k < cleLundi),
@@ -176,12 +183,41 @@ function phraseSerie(r) {
   return "Ta série commence le jour où tu atteins ton objectif.";
 }
 
-// Pour le bilan d'une série du QCM : où en est l'objectif du jour (null si aucun objectif choisi)
+// Questions ratées aujourd'hui (chacune une fois, même refaite) : elles reviennent demain dans « À revoir ».
+// Lu dans « revisions » (essentiel.js) : une erreur y écrit { n: 0, t: heure } ; l'entraînement n'y va pas.
+function aRevoirDuJour() {
+  if (typeof lireRevisions !== "function") return 0;
+  const auj = rythmeCle(rythmeMidi(0));
+  return Object.values(lireRevisions()).filter(e => e && e.n === 0 && e.t && rythmeCle(new Date(e.t)) === auj).length;
+}
+// Le résultat du jour, à côté de l'effort : « 10 questions faites, 6 justes · 4 à revoir »
+function phraseResultatJour(a) {
+  return a.n + (a.n > 1 ? " questions faites, " : " question faite, ") + a.justes + (a.justes > 1 ? " justes" : " juste") +
+    (a.aRevoir ? " · " + a.aRevoir + " à revoir" : "");
+}
+// Le jour est-il surtout fait d'erreurs ? (moins de la moitié de justes) : pas de ton de victoire
+function journeeDifficile(a) { return a.n > 0 && a.justes * 2 < a.n; }
+
+// Les questions ratées aujourd'hui et pas encore réussies depuis (dernière réponse du jour fausse).
+// Elles reviennent demain dans « À revoir » ; qcm.html#erreurs-du-jour permet de les refaire tout de suite.
+// idsRatesDuJour : leurs identifiants (sans avoir besoin de la liste des questions, pour l'accueil et le profil).
+function idsRatesDuJour() {
+  const t = lireTempsReponses(), p = lireProgression(), auj = rythmeCle(rythmeMidi(0));
+  return Object.keys(t).filter(id => { const ms = Number(t[id]); return ms && p[id] === 0 && rythmeCle(new Date(ms)) === auj; });
+}
+function questionsRateesDuJour() {
+  if (typeof QUESTIONS === "undefined") return [];
+  const ids = new Set(idsRatesDuJour());
+  return QUESTIONS.filter(q => ids.has(idQuestion(q)));
+}
+
+// Pour le bilan d'une série du QCM : où en est l'objectif du jour (null si aucun objectif choisi).
+// La série reste fondée sur l'effort ; le nombre de justes est toujours écrit à côté.
 function etatObjectifDuJour() {
   if (!lireObjectif()) return null;
   const r = calculerRythme(), a = r.aujourdhui;
-  if (a.atteint) return { atteint: true, texte: "Objectif du jour atteint" + (r.serie > 1 ? " · " + r.serie + " jours de suite" : "") };
-  return { atteint: false, texte: "Objectif du jour\u00a0: " + a.n + " / " + a.objectif };
+  if (a.atteint) return { atteint: true, faux: a.faux, texte: "Objectif du jour atteint\u00a0: " + phraseResultatJour(a) + (r.serie > 1 ? ". " + r.serie + " jours de suite" : "") };
+  return { atteint: false, faux: a.faux, texte: "Objectif du jour\u00a0: " + a.n + " / " + a.objectif + (a.n ? " (" + a.justes + (a.justes > 1 ? " justes)" : " juste)") : "") };
 }
 
 // Les séances courtes du QCM : les questions à revoir d'abord, puis des questions jamais faites des
@@ -339,9 +375,10 @@ function messageCompagnon(r) {
     phrases.push("En 7 jours\u00a0: " + b.total7 + " questions sur " + b.joursActifs7 + " jours de révision.");
   }
   if (!phrases.length) return null;
-  // Objectif atteint : il est content ; des questions attendent et rien n'est fait : il réfléchit ; sinon il accueille.
+  // Objectif atteint : il est content (pensif si la plupart des réponses du jour sont fausses) ; des questions attendent et rien n'est fait : il réfléchit ; sinon il accueille.
   // Jamais de pose « choqué » ici : le compagnon ne boude pas et ne fait pas de reproche.
-  const pose = r.aujourdhui.atteint ? "bouche-ouverte"
+  const pose = r.aujourdhui.atteint && !journeeDifficile(r.aujourdhui) ? "bouche-ouverte"
+    : r.aujourdhui.atteint ? "pensif"
     : r.aujourdhui.n === 0 && typeof nombreARevoir === "function" && nombreARevoir() > 0 ? "pensif"
     : "clin-doeil";
   return { pose, phrases };
@@ -504,7 +541,8 @@ function creerInvitationCompte(inv, avecCompagnon, apresPlusTard) {
     img.alt = "";
     img.width = 52;
     img.height = 52;
-    montrerCompagnon(img, inv.moment === "serie3" || inv.moment === "objectif" ? "bouche-ouverte" : "clin-doeil");
+    const difficile = inv.moment === "objectif" && journeeDifficile(calculerRythme().aujourdhui);
+    montrerCompagnon(img, (inv.moment === "serie3" || inv.moment === "objectif") && !difficile ? "bouche-ouverte" : "clin-doeil");
     bloc.appendChild(img);
   }
   const corps = creer("div", "invitation-texte");
@@ -908,10 +946,19 @@ function afficherCarteJour(el, options) {
   const titre = creer(options.profil ? "h3" : "h2", "jour-titre", a.atteint ? "Séance du jour faite" : passee ? "Séance du jour passée" : "Ta séance du jour");
   const resume = creer("span", "visuellement-cache", " (" + a.n + (a.n > 1 ? " questions faites" : " question faite") + " aujourd'hui sur " + a.objectif + ")");
   titre.appendChild(resume);
-  const detail = creer("p", "jour-detail", a.atteint ? "Objectif atteint\u00a0: " + a.n + " questions aujourd'hui."
+  // Objectif atteint : l'effort compte pour la série, et le résultat est écrit à côté (justes, à revoir)
+  const detail = creer("p", "jour-detail", a.atteint ? "Objectif atteint\u00a0: " + phraseResultatJour(a) + "."
     : passee ? (a.n > 0 ? "Séance arrêtée à " + a.n + (a.n > 1 ? " questions" : " question") + " sur " + a.objectif + "." : "Pas de séance aujourd'hui.") + " Un jour manqué par semaine ne casse pas ta série."
-    : a.n > 0 ? "Encore " + (a.objectif - a.n) + (a.objectif - a.n > 1 ? " questions" : " question") + " pour ton objectif."
+    : a.n > 0 ? "Encore " + (a.objectif - a.n) + (a.objectif - a.n > 1 ? " questions" : " question") + " pour ton objectif. Pour l'instant\u00a0: " +
+      a.justes + (a.justes > 1 ? " justes" : " juste") + " sur " + a.n + "."
     : "");                                   // séance pas commencée : le nombre de questions se choisit juste en dessous
+  // Des réponses fausses aujourd'hui : un lien pour les refaire tout de suite (elles reviennent aussi demain)
+  if (a.faux && idsRatesDuJour().length) {
+    detail.append(" ");
+    const lien = creer("a", "jour-erreurs", "Revoir mes erreurs");
+    lien.href = "qcm.html#erreurs-du-jour";
+    detail.appendChild(lien);
+  }
   texte.append(titre, ...(detail.textContent ? [detail] : []), creer("p", "jour-serie", phraseSerie(r)));
 
   // La semaine, du lundi au dimanche, en petit banc d'optique : chaque jour est une lentille sur l'axe optique

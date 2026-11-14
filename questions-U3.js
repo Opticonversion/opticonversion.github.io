@@ -788,3 +788,440 @@ QUESTIONS.push(
   }
 
 );
+
+// ==============================================================
+//  DOSSIERS LONGS « FAÇON SUJET » : CAS-U3-03 à CAS-U3-07
+// ==============================================================
+
+CAS.push({
+  id: "CAS-U3-03",
+  epreuve: "U3",
+  titre: "Optique du Marché : prix, marges et seuil",
+  contexte: "Optique du Marché est une SARL de centre-ville dirigée par Mme Vidal. Elle réalise 480 000 € HT de chiffre d'affaires par an. La gérante prépare son budget de l'an prochain : elle veut vérifier ses marges, mesurer son seuil de rentabilité et savoir si elle peut embaucher un opticien de plus.",
+  annexe: { titre: "Annexe 1 : une monture et une paire de verres progressifs (TVA 20 %)", colonnes: ["", "Achat HT (€)", "Vente TTC (€)"], lignes: [["Monture (moyenne)", "55", "198"], ["Paire de verres progressifs", "110", "420"]] }
+});
+QUESTIONS.push(
+  {
+    id: "U3-149", difficulte: "facile", epreuve: "U3", theme: "Prix et marges", session: "complément",
+    cas: "CAS-U3-03", etape: 1, type: "calcul",
+    question: "Calcule le prix de vente HT d'une monture (annexe 1).",
+    reponse: { valeur: 165, unite: "€ HT", decimales: 0, tolerance: 0.5, signe: false },
+    erreurs: [ { valeur: 237.6, type: "ht-ttc" } ],
+    explication: "PV HT = [[198|1,2]] = 165 € HT\nLe prix affiché est TTC : on retire la TVA avant tout calcul de marge.",
+    indice: "Le prix affiché contient la TVA de 20 %. Divise par 1,2."
+  },
+  {
+    id: "U3-150", difficulte: "moyen", epreuve: "U3", theme: "Prix et marges", session: "complément",
+    cas: "CAS-U3-03", etape: 2, type: "calcul",
+    question: "Calcule le taux de marque de la monture, arrondi à 0,1 %.",
+    reponse: { valeur: 66.7, unite: "%", decimales: 1, tolerance: 0.1, signe: false },
+    erreurs: [ { valeur: 72.2, type: "ht-ttc" }, { valeur: 200, type: "marque-marge" } ],
+    explication: "Marge brute = 165 − 55 = 110 €\nTaux de marque = [[110|165]] × 100 = 66,7 %\nSur 100 € de vente HT, il reste 66,70 € pour payer les charges et dégager le résultat.",
+    indice: "Le taux de marque se calcule sur le prix de vente HT, pas sur le TTC ni sur l'achat."
+  },
+  {
+    id: "U3-151", difficulte: "moyen", epreuve: "U3", theme: "Prix et marges", session: "complément",
+    cas: "CAS-U3-03", etape: 3, type: "calcul",
+    question: "Calcule le taux de marge des verres progressifs, arrondi à 0,1 %.",
+    reponse: { valeur: 218.2, unite: "%", decimales: 1, tolerance: 0.1, signe: false },
+    erreurs: [ { valeur: 68.6, type: "marque-marge" }, { valeur: 281.8, type: "ht-ttc" } ],
+    explication: "PV HT = [[420|1,2]] = 350 €\nMarge brute = 350 − 110 = 240 €\nTaux de marge = [[240|110]] × 100 = 218,2 %\nLe taux de marge se calcule sur le coût d'achat et peut dépasser 100 %.",
+    indice: "Retire la TVA du prix, calcule la marge, puis divise par le coût d'achat HT."
+  },
+  {
+    id: "U3-152", difficulte: "moyen", epreuve: "U3", theme: "Seuil de rentabilité", session: "complément",
+    cas: "CAS-U3-03", etape: 4, type: "calcul",
+    annexe: { titre: "Annexe 2 : les charges de l'année (€ HT)", colonnes: ["", "Montant (€)"], lignes: [["Chiffre d'affaires HT", "480 000"], ["Charges variables (achats, commissions)", "192 000"], ["Charges fixes (loyer, salaires, assurances)", "216 000"]] },
+    question: "Calcule le seuil de rentabilité du magasin (annexe 2), à l'euro près.",
+    reponse: { valeur: 360000, unite: "€ HT", decimales: 0, tolerance: 1, signe: false },
+    explication: "Marge sur coût variable = 480 000 − 192 000 = 288 000 €\nTaux de MCV = [[288 000|480 000]] = 0,60, soit 60 %\nSeuil de rentabilité = [[charges fixes|taux de MCV]] = [[216 000|0,60]] = 360 000 € HT",
+    indice: "Calcule d'abord le taux de marge sur coût variable, puis divise les charges fixes par ce taux."
+  },
+  {
+    id: "U3-153", difficulte: "facile", epreuve: "U3", theme: "Seuil de rentabilité", session: "complément",
+    cas: "CAS-U3-03", etape: 5, type: "calcul",
+    question: "En supposant une activité régulière, au bout de combien de mois le point mort est-il atteint ?",
+    reponse: { valeur: 9, unite: "mois", decimales: 0, tolerance: 0.5, signe: false },
+    explication: "Point mort = [[SR|CA]] × 12 mois = [[360 000|480 000]] × 12 = 0,75 × 12 = 9 mois\nSoit fin septembre.",
+    indice: "Quelle fraction du CA annuel représente le seuil ? Applique-la aux 12 mois."
+  },
+  {
+    id: "U3-154", difficulte: "moyen", epreuve: "U3", theme: "Seuil de rentabilité", session: "complément",
+    cas: "CAS-U3-03", etape: 6,
+    question: "Commente le seuil de rentabilité du magasin : quel commentaire est le mieux rédigé ?",
+    choix: ["Le seuil de rentabilité est de 360 000 €, donc le magasin est rentable.", "Le seuil de 360 000 € représente 75 % du CA : le point mort tombe fin septembre. La marge de sécurité est de 120 000 €, soit 25 % du CA : le magasin est rentable et peut supporter une baisse de CA de 25 % avant de perdre de l'argent.", "Le seuil est inférieur au CA de 120 000 € : le magasin dégage donc 120 000 € de bénéfice.", "Le seuil représente 75 % du CA, ce qui est très élevé : le magasin est en danger."],
+    bonne: 1,
+    explication: "Marge de sécurité = 480 000 − 360 000 = 120 000 €\nIndice de sécurité = [[120 000|480 000]] = 25 %\nLe 1er choix est vrai mais sans chiffre ni comparaison. Le 3e confond marge de sécurité et bénéfice : le résultat actuel est de 288 000 − 216 000 = 72 000 €. Le 4e interprète à tort : 75 % laisse 25 % de marge de sécurité.",
+    indice: "Un bon commentaire compare le seuil au CA, chiffre la marge de sécurité et conclut."
+  },
+  {
+    id: "U3-155", difficulte: "difficile", epreuve: "U3", theme: "Seuil de rentabilité", session: "complément",
+    cas: "CAS-U3-03", etape: 7, type: "calcul",
+    contexte: "La gérante envisage d'embaucher un opticien : le poste coûterait 33 000 € par an (salaire et cotisations).",
+    question: "Calcule le nouveau seuil de rentabilité si ce coût s'ajoute aux charges fixes.",
+    reponse: { valeur: 415000, unite: "€ HT", decimales: 0, tolerance: 1, signe: false },
+    explication: "Nouvelles charges fixes = 216 000 + 33 000 = 249 000 €\nNouveau SR = [[249 000|0,60]] = 415 000 € HT\nChaque euro de charge fixe en plus demande [[1|0,60]] ≈ 1,67 € de CA en plus.",
+    indice: "Ajoute le coût du poste aux charges fixes, puis refais le calcul avec le même taux de MCV."
+  },
+  {
+    id: "U3-156", difficulte: "difficile", epreuve: "U3", theme: "Seuil de rentabilité", session: "complément",
+    cas: "CAS-U3-03", etape: 8,
+    contexte: "Selon la gérante, l'embauche ferait gagner 40 000 € de CA par an.",
+    question: "Que conseilles-tu à Mme Vidal au sujet de l'embauche ?",
+    choix: ["Embaucher : le CA augmentera et le magasin sera plus rentable.", "Embaucher : le nouveau seuil de 415 000 € reste inférieur au CA de 520 000 €, donc la situation s'améliore.", "Ne pas embaucher : un salarié coûte toujours plus qu'il ne rapporte.", "Ne pas embaucher dans ces conditions : les 40 000 € de CA en plus apportent 24 000 € de marge, pour un coût de 33 000 €, donc le résultat baisse de 9 000 € (de 72 000 € à 63 000 €). Il faudrait 55 000 € de CA en plus pour couvrir le poste."],
+    bonne: 3,
+    explication: "Marge apportée = 40 000 × 0,60 = 24 000 €, pour un coût de 33 000 €\nRésultat actuel = 480 000 × 0,60 − 216 000 = 72 000 €\nRésultat avec l'embauche = 520 000 × 0,60 − 249 000 = 63 000 €\nCA nécessaire pour couvrir le poste = [[33 000|0,60]] = 55 000 €\nLe 2e choix compare le seuil au CA sans regarder le résultat, qui baisse tout de même. Le 1er ne chiffre rien et le 3e est une règle générale fausse.",
+    indice: "Compare la marge que rapporte le CA en plus au coût du poste."
+  }
+);
+CAS.push({
+  id: "CAS-U3-04",
+  epreuve: "U3",
+  titre: "Optique Lumière : lire le compte de résultat avant d'emprunter",
+  contexte: "Optique Lumière est une SARL indépendante dirigée par M. Garnier. Le gérant veut ouvrir un deuxième point de vente et va voir sa banque. Tu analyses son compte de résultat, puis sa capacité à emprunter.",
+  annexe: { titre: "Annexe 1 : compte de résultat de l'exercice (en €)", colonnes: ["", "Montant (€)"], lignes: [["Ventes de marchandises", "520 000"], ["Achats de marchandises", "182 000"], ["Stock initial de marchandises", "48 000"], ["Stock final de marchandises", "56 000"], ["Autres achats et charges externes", "96 000"], ["Impôts et taxes", "9 000"], ["Charges de personnel", "168 000"], ["Dotations aux amortissements", "24 000"], ["Charges financières (intérêts d'emprunt)", "6 000"], ["Impôt sur les bénéfices", "8 000"]] }
+});
+QUESTIONS.push(
+  {
+    id: "U3-157", difficulte: "moyen", epreuve: "U3", theme: "Analyse financière", session: "complément",
+    cas: "CAS-U3-04", etape: 1, type: "calcul",
+    question: "Calcule le coût d'achat des marchandises vendues (achats + stock initial − stock final).",
+    reponse: { valeur: 174000, unite: "€", decimales: 0, tolerance: 1, signe: false },
+    explication: "Coût d'achat des marchandises vendues = achats + stock initial − stock final\n= 182 000 + 48 000 − 56 000 = 174 000 €\nLe stock a augmenté de 8 000 € : une partie des achats n'a pas été vendue.",
+    indice: "Les achats ne sont pas tous vendus : ajoute le stock du début et retire celui de la fin."
+  },
+  {
+    id: "U3-158", difficulte: "facile", epreuve: "U3", theme: "Analyse financière", session: "complément",
+    cas: "CAS-U3-04", etape: 2, type: "calcul",
+    question: "Calcule la marge commerciale.",
+    reponse: { valeur: 346000, unite: "€", decimales: 0, tolerance: 1, signe: false },
+    explication: "Marge commerciale = ventes − coût d'achat des marchandises vendues = 520 000 − 174 000 = 346 000 €",
+    indice: "Ventes moins coût d'achat des marchandises vendues."
+  },
+  {
+    id: "U3-159", difficulte: "moyen", epreuve: "U3", theme: "Prix et marges", session: "complément",
+    cas: "CAS-U3-04", etape: 3, type: "calcul",
+    question: "Calcule le taux de marque commercial du magasin, arrondi à 0,1 %.",
+    reponse: { valeur: 66.5, unite: "%", decimales: 1, tolerance: 0.1, signe: false },
+    erreurs: [ { valeur: 198.9, type: "marque-marge" } ],
+    explication: "Taux de marque = [[marge commerciale|ventes HT]] × 100 = [[346 000|520 000]] × 100 = 66,5 %\nSur 100 € de ventes HT, il reste 66,50 € pour payer les charges.",
+    indice: "Divise la marge par les ventes HT, pas par le coût d'achat."
+  },
+  {
+    id: "U3-160", difficulte: "difficile", epreuve: "U3", theme: "Analyse financière", session: "complément",
+    cas: "CAS-U3-04", etape: 4, type: "calcul",
+    question: "Calcule l'excédent brut d'exploitation (EBE).",
+    reponse: { valeur: 73000, unite: "€", decimales: 0, tolerance: 1, signe: true },
+    explication: "Valeur ajoutée = marge commerciale − autres achats et charges externes = 346 000 − 96 000 = 250 000 €\nEBE = valeur ajoutée − impôts et taxes − charges de personnel\n= 250 000 − 9 000 − 168 000 = 73 000 €\nL'EBE mesure ce que l'exploitation dégage avant amortissements, frais financiers et impôt.",
+    indice: "Passe par la valeur ajoutée, puis retire impôts, taxes et personnel."
+  },
+  {
+    id: "U3-161", difficulte: "moyen", epreuve: "U3", theme: "Analyse financière", session: "complément",
+    cas: "CAS-U3-04", etape: 5, type: "calcul",
+    question: "Calcule le résultat net de l'exercice.",
+    reponse: { valeur: 35000, unite: "€", decimales: 0, tolerance: 1, signe: true },
+    explication: "Résultat d'exploitation = EBE − dotations = 73 000 − 24 000 = 49 000 €\nRésultat courant avant impôts = 49 000 − 6 000 = 43 000 €\nRésultat net = 43 000 − 8 000 = 35 000 €",
+    indice: "Retire de l'EBE les dotations, puis les intérêts, puis l'impôt."
+  },
+  {
+    id: "U3-162", difficulte: "moyen", epreuve: "U3", theme: "Analyse financière", session: "complément",
+    cas: "CAS-U3-04", etape: 6, type: "calcul",
+    question: "Calcule la capacité d'autofinancement (CAF).",
+    reponse: { valeur: 59000, unite: "€", decimales: 0, tolerance: 1, signe: false },
+    explication: "CAF = résultat net + dotations aux amortissements = 35 000 + 24 000 = 59 000 €\nLes dotations sont une charge qui ne sort pas d'argent : on les rajoute au résultat.",
+    indice: "Une charge calculée comme l'amortissement n'est pas décaissée."
+  },
+  {
+    id: "U3-163", difficulte: "moyen", epreuve: "U3", theme: "Analyse financière", session: "complément",
+    cas: "CAS-U3-04", etape: 7, type: "calcul",
+    annexe: { titre: "Annexe 2 : situation financière", colonnes: ["", "Montant (€)"], lignes: [["Dettes financières", "150 000"], ["Capitaux propres", "180 000"], ["Annuité d'emprunt actuelle", "18 000"]] },
+    question: "Calcule la capacité de remboursement : dettes financières divisées par CAF, en années (arrondi à 0,1).",
+    reponse: { valeur: 2.5, unite: "ans", decimales: 1, tolerance: 0.05, signe: false },
+    explication: "Capacité de remboursement = [[dettes financières|CAF]] = [[150 000|59 000]] = 2,5 ans\nAvec la CAF actuelle, le magasin rembourserait toutes ses dettes en 2,5 ans.",
+    indice: "Dettes financières divisées par la CAF annuelle."
+  },
+  {
+    id: "U3-164", difficulte: "difficile", epreuve: "U3", theme: "Analyse financière", session: "complément",
+    cas: "CAS-U3-04", etape: 8,
+    question: "Commente la situation actuelle du magasin : quel commentaire est le mieux rédigé ?",
+    choix: ["La CAF est égale au résultat net, soit 35 000 €, donc elle ne couvre pas les annuités.", "L'EBE est de 73 000 €, donc le magasin est rentable.", "L'EBE de 73 000 € représente environ 14 % du CA. La CAF de 59 000 € couvre plus de 3 fois l'annuité actuelle (18 000 €) et les dettes se rembourseraient en 2,5 ans de CAF : le magasin est sain et peut envisager un nouvel emprunt.", "Le résultat net de 35 000 € est faible comparé aux ventes : le magasin ne peut pas emprunter."],
+    bonne: 2,
+    explication: "EBE sur CA = [[73 000|520 000]] ≈ 14 %\nCAF sur annuité = [[59 000|18 000]] ≈ 3,3\nLa CAF s'obtient en ajoutant les dotations au résultat net : 35 000 + 24 000. Le 2e choix ne chiffre presque rien et le 4e conclut sans regarder la CAF. Le bon commentaire donne les chiffres, les compare et conclut.",
+    indice: "Compare la CAF à l'annuité, puis regarde en combien d'années les dettes se rembourseraient."
+  },
+  {
+    id: "U3-165", difficulte: "moyen", epreuve: "U3", theme: "Investissement et financement", session: "complément",
+    cas: "CAS-U3-04", etape: 9, type: "calcul",
+    contexte: "Le projet coûte 120 000 €, financés à 100 % par un emprunt de 7 ans à 5 % (annuité constante de 20 738 €).",
+    question: "Calcule le ratio d'endettement après le projet (arrondi à 0,01).",
+    reponse: { valeur: 1.5, unite: "", decimales: 2, tolerance: 0.01, signe: false },
+    explication: "Dettes financières après le projet = 150 000 + 120 000 = 270 000 €\nRatio d'endettement = [[dettes financières|capitaux propres]] = [[270 000|180 000]] = 1,5\nAvant le projet : [[150 000|180 000]] = 0,83.",
+    indice: "Ajoute le nouvel emprunt aux dettes, puis divise par les capitaux propres."
+  },
+  {
+    id: "U3-166", difficulte: "difficile", epreuve: "U3", theme: "Investissement et financement", session: "complément",
+    cas: "CAS-U3-04", etape: 10,
+    question: "Que conseilles-tu à M. Garnier pour son projet d'emprunt ?",
+    choix: ["Emprunter les 120 000 € : la CAF de 59 000 € est supérieure à chaque annuité.", "La CAF permet de rembourser : les deux annuités (18 000 + 20 738 = 38 738 €) représentent environ 66 % de la CAF. Mais le ratio d'endettement passerait de 0,83 à 1,5, au-dessus de 1 : la banque hésitera. Je conseille de réduire l'emprunt en apportant des fonds propres ou en négociant un autofinancement partiel.", "Ne pas ouvrir le deuxième point de vente : un emprunt supplémentaire est toujours risqué.", "Emprunter, mais sur 3 ans pour rembourser vite."],
+    bonne: 1,
+    explication: "Annuités cumulées = 18 000 + 20 738 = 38 738 €\nPart de la CAF = [[38 738|59 000]] ≈ 66 %\nRatio d'endettement = 1,5 : au-dessus de 1, la banque trouvera le magasin très endetté.\nLe 1er choix ignore le ratio et compare la CAF à chaque annuité séparément : il faut les additionner. Le 3e refuse sans calcul. Le 4e augmenterait fortement les annuités.",
+    indice: "Regarde à la fois la capacité de remboursement (CAF) et le niveau d'endettement (ratio)."
+  }
+);
+CAS.push({
+  id: "CAS-U3-05",
+  epreuve: "U3",
+  titre: "Optique du Port : racheter le fonds d'un confrère",
+  contexte: "Mme Roche, opticienne salariée depuis 8 ans, veut racheter le magasin « Optique du Port », exploité par M. Lemaire qui part à la retraite. Elle te demande de préparer l'opération : prix, financement, contrat du salarié en place et bail.",
+  annexe: { titre: "Annexe 1 : le magasin à reprendre", colonnes: ["", "Information"], lignes: [["CA annuel HT", "410 000 €"], ["Valeur du fonds (usage de la profession)", "70 % du CA annuel HT"], ["Frais d'acte et honoraires", "9 000 €"], ["Besoin en fonds de roulement de démarrage", "14 000 €"], ["Apport personnel de Mme Roche", "90 000 €"], ["Salarié en place", "1 opticien en CDI, 4 ans d'ancienneté"], ["Bail commercial", "signé en 2022 pour 9 ans, loyer de 24 000 € par an"], ["Clause de l'acte de vente", "M. Lemaire s'interdit d'ouvrir un magasin d'optique à moins de 5 km pendant 5 ans"]] }
+});
+QUESTIONS.push(
+  {
+    id: "U3-167", difficulte: "moyen", epreuve: "U3", theme: "Droit des entreprises", session: "complément",
+    cas: "CAS-U3-05", etape: 1, type: "calcul",
+    question: "Calcule la valeur du fonds de commerce (annexe 1).",
+    reponse: { valeur: 287000, unite: "€", decimales: 0, tolerance: 1, signe: false },
+    explication: "Valeur du fonds = 410 000 × 70 % = 410 000 × 0,70 = 287 000 €\nLe fonds de commerce comprend la clientèle, l'enseigne, le droit au bail, le matériel et le stock commercial.",
+    indice: "70 % du CA annuel HT."
+  },
+  {
+    id: "U3-168", difficulte: "moyen", epreuve: "U3", theme: "Investissement et financement", session: "complément",
+    cas: "CAS-U3-05", etape: 2, type: "calcul",
+    question: "Quel emprunt faut-il pour équilibrer le plan de financement ? Emplois : fonds, frais d'acte, BFR de démarrage. Ressources : apport personnel et emprunt.",
+    reponse: { valeur: 220000, unite: "€", decimales: 0, tolerance: 1, signe: false },
+    explication: "Emplois = 287 000 + 9 000 + 14 000 = 310 000 €\nRessources connues = apport de 90 000 €\nEmprunt = 310 000 − 90 000 = 220 000 €\nUn plan de financement est équilibré quand emplois et ressources sont égaux.",
+    indice: "Additionne les emplois, retire l'apport : le reste est à emprunter."
+  },
+  {
+    id: "U3-169", difficulte: "difficile", epreuve: "U3", theme: "Investissement et financement", session: "complément",
+    cas: "CAS-U3-05", etape: 3, type: "calcul",
+    question: "Calcule l'annuité constante d'un emprunt de 220 000 € sur 10 ans à 4 %, à l'euro près. Formule : capital × taux / (1 − (1 + taux)^−n).",
+    reponse: { valeur: 27124, unite: "€", decimales: 0, tolerance: 1, signe: false },
+    explication: "Annuité = [[220 000 × 0,04|1 − 1,04^−10]] = [[8 800|1 − 0,675564]] = [[8 800|0,324436]] = 27 124 €\nChaque année, Mme Roche paiera 27 124 €, intérêts et capital compris.",
+    indice: "Utilise la formule avec une calculatrice : attention aux parenthèses et à l'exposant −10."
+  },
+  {
+    id: "U3-170", difficulte: "moyen", epreuve: "U3", theme: "Investissement et financement", session: "complément",
+    cas: "CAS-U3-05", etape: 4, type: "calcul",
+    question: "Calcule les intérêts de la 1re année de cet emprunt.",
+    reponse: { valeur: 8800, unite: "€", decimales: 0, tolerance: 1, signe: false },
+    explication: "Intérêts de l'année 1 = capital restant dû × taux = 220 000 × 4 % = 8 800 €\nCapital remboursé la 1re année = 27 124 − 8 800 = 18 324 €. Seuls les intérêts sont une charge ; le capital remboursé ne l'est pas.",
+    indice: "Les intérêts se calculent sur le capital restant dû, ici le capital entier."
+  },
+  {
+    id: "U3-171", difficulte: "moyen", epreuve: "U3", theme: "Analyse financière", session: "complément",
+    cas: "CAS-U3-05", etape: 5, type: "calcul",
+    contexte: "La CAF prévisionnelle du magasin repris est de 48 000 € par an.",
+    question: "Quelle part de la CAF prévisionnelle l'annuité représente-t-elle ? (arrondi à 0,1 %)",
+    reponse: { valeur: 56.5, unite: "%", decimales: 1, tolerance: 0.1, signe: false },
+    explication: "Part de la CAF = [[annuité|CAF]] × 100 = [[27 124|48 000]] × 100 = 56,5 %\nLe magasin pourra rembourser, mais il restera 43,5 % de la CAF pour investir et faire face aux imprévus.",
+    indice: "Divise l'annuité par la CAF prévisionnelle."
+  },
+  {
+    id: "U3-172", difficulte: "moyen", epreuve: "U3", theme: "Droit du travail", session: "complément",
+    cas: "CAS-U3-05", etape: 6,
+    question: "Quelle est la conséquence de la vente du magasin pour le salarié en place ?",
+    choix: ["Son contrat prend fin à la vente : il doit être réembauché s'il le souhaite.", "M. Lemaire doit le licencier avant la vente, avec une indemnité.", "Son contrat continue automatiquement avec Mme Roche, aux mêmes conditions et avec ses 4 ans d'ancienneté : elle ne peut pas le refuser ni le modifier sans l'accord du salarié.", "Mme Roche peut choisir de le garder ou non, sans conséquence."],
+    bonne: 2,
+    explication: "Quand l'entreprise change d'employeur (vente, fusion), les contrats de travail en cours passent de plein droit au nouvel employeur (Code du travail, article L1224-1). Le salarié garde son ancienneté et ses conditions. Les trois autres choix imaginent une rupture ou un choix de l'acheteur, que la loi ne prévoit pas.",
+    indice: "Le contrat suit l'entreprise, pas son ancien propriétaire."
+  },
+  {
+    id: "U3-173", difficulte: "difficile", epreuve: "U3", theme: "Droit des entreprises", session: "complément",
+    cas: "CAS-U3-05", etape: 7,
+    question: "M. Lemaire ouvre un magasin d'optique à 2 km, 6 mois après la vente. Que peut faire Mme Roche ?",
+    choix: ["La clause est valable tant qu'elle reste limitée et proportionnée (ici 5 ans et 5 km, que le juge apprécie) : la contrepartie est le prix du fonds. Mme Roche peut agir en justice pour faire cesser la concurrence et obtenir des dommages et intérêts.", "Rien : une clause de non-concurrence est nulle sans contrepartie financière versée à M. Lemaire.", "Rien : un vendeur garde toujours le droit de se réinstaller.", "Elle peut seulement baisser ses prix pour résister."],
+    bonne: 0,
+    explication: "Dans une vente de fonds de commerce, le vendeur s'engage à ne pas détourner la clientèle vendue. Cette clause est valable si sa durée, son périmètre et son activité sont limités et proportionnés ; la contrepartie est le prix payé. Il ne faut pas confondre avec la clause de non-concurrence d'un salarié, qui exige une contrepartie financière propre.",
+    indice: "Pense à ce que Mme Roche a payé : la clientèle."
+  },
+  {
+    id: "U3-174", difficulte: "moyen", epreuve: "U3", theme: "Droit des entreprises", session: "complément",
+    cas: "CAS-U3-05", etape: 8,
+    question: "Que devient le bail commercial signé en 2022 par M. Lemaire ?",
+    choix: ["Le bail s'arrête à la vente : Mme Roche doit négocier un nouveau bail de 9 ans.", "Le bail est cédé avec le fonds : Mme Roche le reprend aux conditions actuelles, pour la durée restant à courir (jusqu'en 2031). Le bailleur ne peut pas interdire la cession à l'acquéreur du fonds.", "Le propriétaire peut refuser librement et imposer un nouveau loyer.", "Le bail devient un bail précaire de 3 ans."],
+    bonne: 1,
+    explication: "Le droit au bail fait partie du fonds de commerce : il est cédé avec lui. Un bail de 9 ans signé en 2022 court jusqu'en 2031. Le bailleur doit être informé et peut vérifier la cession, mais ne peut pas la refuser pour imposer de nouvelles conditions.",
+    indice: "Le droit au bail est un des éléments du fonds de commerce."
+  },
+  {
+    id: "U3-175", difficulte: "difficile", epreuve: "U3", theme: "Investissement et financement", session: "complément",
+    cas: "CAS-U3-05", etape: 9,
+    question: "Que conseilles-tu à Mme Roche ?",
+    choix: ["Acheter en soignant le financement : l'annuité de 27 124 € représente environ 56,5 % de la CAF prévisionnelle, possible mais serrée. Je conseille d'allonger l'emprunt à 12 ans ou d'augmenter l'apport pour garder de la marge, et de vérifier le CA du magasin sur 3 ans.", "Acheter sans condition : l'annuité de 27 124 € est inférieure à la CAF de 48 000 €.", "Acheter : le fonds vaut 287 000 €, moins que son CA annuel de 410 000 €.", "Ne pas acheter : un emprunt de 220 000 € est trop élevé pour une opticienne salariée."],
+    bonne: 0,
+    explication: "Annuité sur CAF = [[27 124|48 000]] = 56,5 %\nLe projet est possible mais serré : une baisse de CA suffirait à fragiliser le remboursement.\nLe 2e choix ne regarde que la CAF sans marge de sécurité. Le 3e compare à tort un prix de vente et un CA. Le 4e refuse sans argument chiffré.",
+    indice: "Compare l'annuité à la CAF, puis cherche comment garder de la marge."
+  }
+);
+CAS.push({
+  id: "CAS-U3-06",
+  epreuve: "U3",
+  titre: "Optique Horizon : ouvrir un second point de vente",
+  contexte: "Optique Horizon est une SARL indépendante, dirigée par M. Perrin. Il envisage d'ouvrir un second point de vente dans une commune voisine. Tu étudies le marché de la commune, une action de lancement, puis la rentabilité du projet.",
+  annexe: { titre: "Annexe 1 : la zone de chalandise de la commune", colonnes: ["", "Donnée"], lignes: [["Habitants", "18 000"], ["Porteurs de correction", "66 %"], ["Panier moyen par équipement", "340 € TTC"], ["Renouvellement", "tous les 2 ans"], ["IDC (indice de disparité de la consommation)", "92"], ["Évasion commerciale", "10 %"], ["Magasins d'optique déjà installés", "5"], ["Référence du département", "3 magasins pour 10 000 habitants"]] }
+});
+QUESTIONS.push(
+  {
+    id: "U3-176", difficulte: "moyen", epreuve: "U3", theme: "Marché et zone de chalandise", session: "complément",
+    cas: "CAS-U3-06", etape: 1, type: "calcul",
+    question: "Calcule le marché potentiel annuel de la commune.",
+    reponse: { valeur: 2019600, unite: "€ TTC", decimales: 0, tolerance: 1, signe: false },
+    explication: "Porteurs = 18 000 × 0,66 = 11 880\nDépense d'un cycle de 2 ans = 11 880 × 340 = 4 039 200 €\nPar an : [[4 039 200|2]] = 2 019 600 € TTC",
+    indice: "Porteurs × panier moyen, puis ramène à une année avec le rythme de renouvellement."
+  },
+  {
+    id: "U3-177", difficulte: "difficile", epreuve: "U3", theme: "Marché et zone de chalandise", session: "complément",
+    cas: "CAS-U3-06", etape: 2, type: "calcul",
+    question: "Calcule le marché net, après l'IDC et l'évasion commerciale (à l'euro près).",
+    reponse: { valeur: 1672229, unite: "€ TTC", decimales: 0, tolerance: 1, signe: false },
+    explication: "Marché ajusté par l'IDC = 2 019 600 × [[92|100]] = 1 858 032 €\nMarché net de l'évasion = 1 858 032 × (1 − 0,10) = 1 672 228,80 €, soit 1 672 229 € TTC\nOn multiplie les deux ajustements l'un après l'autre.",
+    indice: "Applique l'IDC (92/100), puis retire 10 % d'évasion sur le résultat."
+  },
+  {
+    id: "U3-178", difficulte: "difficile", epreuve: "U3", theme: "Marché et zone de chalandise", session: "complément",
+    cas: "CAS-U3-06", etape: 3, type: "calcul",
+    question: "Le magasin vise 12 % du marché net. Calcule son CA prévisionnel HT (à l'euro près).",
+    reponse: { valeur: 167223, unite: "€ HT", decimales: 0, tolerance: 1, signe: false },
+    erreurs: [ { valeur: 200667, type: "ht-ttc" }, { valeur: 240801, type: "ht-ttc" } ],
+    explication: "Part de marché = 1 672 229 × 0,12 = 200 667 € TTC\nEn HT : [[200 667|1,2]] = 167 223 € HT\nOn finit toujours par passer du TTC au HT : un CA d'entreprise se donne HT.",
+    indice: "Applique 12 % au marché net, puis retire la TVA."
+  },
+  {
+    id: "U3-179", difficulte: "moyen", epreuve: "U3", theme: "Marché et zone de chalandise", session: "complément",
+    cas: "CAS-U3-06", etape: 4, type: "calcul",
+    question: "Combien de magasins d'optique y a-t-il pour 10 000 habitants dans la commune ? (arrondi à 0,1)",
+    reponse: { valeur: 2.8, unite: "magasins", decimales: 1, tolerance: 0.05, signe: false },
+    explication: "Densité = [[5|18 000]] × 10 000 = 2,8 magasins pour 10 000 habitants\nOn ramène toujours à 10 000 habitants pour comparer avec une référence.",
+    indice: "Magasins divisés par habitants, multipliés par 10 000."
+  },
+  {
+    id: "U3-180", difficulte: "moyen", epreuve: "U3", theme: "Marché et zone de chalandise", session: "complément",
+    cas: "CAS-U3-06", etape: 5,
+    question: "Commente la concurrence dans la commune : quel commentaire est le mieux rédigé ?",
+    choix: ["La commune compte 2,8 magasins pour 10 000 habitants, un peu moins que les 3 du département : la zone est un peu moins dense que la moyenne, donc la concurrence reste modérée. Avec l'ouverture du 6e magasin, la densité passerait à 3,3, au-dessus de la référence : il faudra se différencier.", "Il y a 5 magasins : la concurrence est trop forte, il ne faut pas ouvrir.", "2,8 est inférieur à 3 : la zone est plus concurrentielle que la moyenne.", "La densité est de 2,8 % : le marché est presque vide."],
+    bonne: 0,
+    explication: "Une densité se compare à une référence : 2,8 contre 3, soit un peu moins dense que la moyenne. Le 2e choix compte les magasins sans les rapporter à la population. Le 3e inverse le sens de la comparaison (moins de magasins, donc moins de concurrence). Le 4e prend la densité pour un pourcentage.",
+    indice: "Compare 2,8 à la référence de 3, puis dis ce que cela signifie pour un nouvel entrant."
+  },
+  {
+    id: "U3-181", difficulte: "facile", epreuve: "U3", theme: "Mercatique et communication", session: "complément",
+    cas: "CAS-U3-06", etape: 6, type: "calcul",
+    contexte: "Pour le lancement, le magasin envoie 3 000 courriers à 0,70 € l'unité. Il espère un taux de réponse de 3,5 %.",
+    question: "Combien de clients le magasin espère-t-il toucher grâce à ce courrier ?",
+    reponse: { valeur: 105, unite: "clients", decimales: 0, tolerance: 0.5, signe: false },
+    explication: "Clients attendus = 3 000 × 3,5 % = 3 000 × 0,035 = 105 clients",
+    indice: "Courriers envoyés multipliés par le taux de réponse."
+  },
+  {
+    id: "U3-182", difficulte: "moyen", epreuve: "U3", theme: "Mercatique et communication", session: "complément",
+    cas: "CAS-U3-06", etape: 7, type: "calcul",
+    question: "Quel est le coût moyen de l'action par client touché ?",
+    reponse: { valeur: 20, unite: "€", decimales: 0, tolerance: 0.5, signe: false },
+    explication: "Coût de la campagne = 3 000 × 0,70 = 2 100 €\nCoût par client = [[2 100|105]] = 20 €\nCe coût se compare à la marge que laisse un client qui revient : si elle dépasse 20 €, l'action est rentable.",
+    indice: "Coût total de l'envoi divisé par le nombre de clients touchés."
+  },
+  {
+    id: "U3-183", difficulte: "difficile", epreuve: "U3", theme: "Seuil de rentabilité", session: "complément",
+    cas: "CAS-U3-06", etape: 8, type: "calcul",
+    annexe: { titre: "Annexe 2 : prévisions du point de vente", colonnes: ["", "Valeur"], lignes: [["CA prévisionnel HT (étape 3)", "167 223 €"], ["Taux de marge sur coût variable", "55 %"], ["Charges fixes annuelles", "66 000 €"]] },
+    question: "Calcule le seuil de rentabilité du point de vente, à l'euro près.",
+    reponse: { valeur: 120000, unite: "€ HT", decimales: 0, tolerance: 1, signe: false },
+    explication: "Seuil de rentabilité = [[charges fixes|taux de MCV]] = [[66 000|0,55]] = 120 000 € HT",
+    indice: "Charges fixes divisées par le taux de marge sur coût variable."
+  },
+  {
+    id: "U3-184", difficulte: "difficile", epreuve: "U3", theme: "Seuil de rentabilité", session: "complément",
+    cas: "CAS-U3-06", etape: 9,
+    question: "Commente la rentabilité prévue du point de vente : quel commentaire est le mieux rédigé ?",
+    choix: ["Le seuil de rentabilité est de 120 000 €, donc le projet est rentable.", "Le seuil est inférieur au CA de 47 223 € : le projet dégage donc 47 223 € de bénéfice.", "Le seuil de 120 000 € HT représente 72 % du CA prévu (167 223 €) : le point mort est atteint au bout d'environ 8,6 mois d'activité (septembre si le magasin ouvre le 1er janvier). La marge de sécurité est de 47 223 €, soit 28 % du CA : le projet est rentable si le CA prévu est atteint.", "Le seuil représente 72 % du CA : le projet est trop risqué pour être lancé."],
+    bonne: 2,
+    explication: "Point mort = [[120 000|167 223]] × 12 ≈ 8,6 mois\nMarge de sécurité = 167 223 − 120 000 = 47 223 €, soit [[47 223|167 223]] = 28 %\nLe 1er choix ne chiffre rien. Le 2e confond marge de sécurité et bénéfice. Le 4e conclut sans comparer à un repère.",
+    indice: "Compare le seuil au CA prévu : marge de sécurité, date du point mort, conclusion."
+  },
+  {
+    id: "U3-185", difficulte: "difficile", epreuve: "U3", theme: "Seuil de rentabilité", session: "complément",
+    cas: "CAS-U3-06", etape: 10,
+    question: "Que conseilles-tu à M. Perrin ?",
+    choix: ["Ouvrir : le CA prévu de 167 223 € dépasse le seuil de 120 000 €.", "Ouvrir seulement si le magasin peut atteindre plus de 8,6 % de part de marché : à 8 %, le CA serait de 111 482 € HT, en dessous du seuil de 120 000 €, donc en perte. Je conseille de préparer un plan de communication pour viser les 12 % prévus, et de suivre la part de marché chaque trimestre.", "Ne pas ouvrir : il y a déjà 5 magasins dans la commune.", "Ouvrir, car 12 % de part de marché est un objectif facile à atteindre."],
+    bonne: 1,
+    explication: "Part de marché minimale = [[120 000 × 1,2|1 672 229]] = [[144 000|1 672 229]] ≈ 8,6 %\nÀ 8 % : 1 672 229 × 0,08 = 133 778 € TTC, soit [[133 778|1,2]] = 111 482 € HT, en dessous du seuil.\nLe 1er choix ne regarde que l'hypothèse la plus favorable. Le 3e refuse sans comparer avec la densité de la zone. Le 4e promet sans argument.",
+    indice: "À quelle part de marché le CA égale-t-il le seuil de 120 000 € ?"
+  }
+);
+CAS.push({
+  id: "CAS-U3-07",
+  epreuve: "U3",
+  titre: "Optique des Quais : la trésorerie du trimestre",
+  contexte: "Optique des Quais est une SARL dirigée par Mme Fabre. En mars, elle achète un nouvel équipement de mesure : 36 000 € HT (TVA 20 %), payé comptant. La trésorerie au 1er janvier est de 15 000 €. La gérante te demande de suivre sa trésorerie sur le trimestre.",
+  annexe: { titre: "Annexe 1 : budget de trésorerie du trimestre (€)", colonnes: ["", "Janvier", "Février", "Mars"], lignes: [["Encaissements (ventes TTC)", "62 000", "58 000", "66 000"], ["Achats de marchandises TTC", "24 000", "22 000", "26 000"], ["Salaires et cotisations", "20 000", "20 000", "20 000"], ["Loyer", "4 000", "4 000", "4 000"], ["TVA à reverser", "6 000", "5 500", "6 500"], ["Remboursement d'emprunt", "2 000", "2 000", "2 000"], ["Équipement payé (TTC)", "0", "0", "à calculer (étape 1)"]] }
+});
+QUESTIONS.push(
+  {
+    id: "U3-186", difficulte: "facile", epreuve: "U3", theme: "Investissement et financement", session: "complément",
+    cas: "CAS-U3-07", etape: 1, type: "calcul",
+    question: "Calcule le prix TTC de l'équipement.",
+    reponse: { valeur: 43200, unite: "€ TTC", decimales: 0, tolerance: 1, signe: false },
+    erreurs: [ { valeur: 30000, type: "ht-ttc" } ],
+    explication: "Prix TTC = 36 000 × 1,2 = 43 200 €\nLa TVA de 7 200 € est payée au fournisseur, puis récupérée sur la TVA collectée.",
+    indice: "Ajoute la TVA de 20 % au prix HT."
+  },
+  {
+    id: "U3-187", difficulte: "moyen", epreuve: "U3", theme: "Investissement et financement", session: "complément",
+    cas: "CAS-U3-07", etape: 2, type: "calcul",
+    question: "Calcule la trésorerie à la fin de janvier (annexe 1).",
+    reponse: { valeur: 21000, unite: "€", decimales: 0, tolerance: 1, signe: true },
+    explication: "Décaissements de janvier = 24 000 + 20 000 + 4 000 + 6 000 + 2 000 = 56 000 €\nSolde final = 15 000 + 62 000 − 56 000 = 21 000 €",
+    indice: "Solde initial + encaissements − tous les décaissements, TVA reversée comprise."
+  },
+  {
+    id: "U3-188", difficulte: "moyen", epreuve: "U3", theme: "Investissement et financement", session: "complément",
+    cas: "CAS-U3-07", etape: 3, type: "calcul",
+    question: "Calcule la trésorerie à la fin de février.",
+    reponse: { valeur: 25500, unite: "€", decimales: 0, tolerance: 1, signe: true },
+    explication: "Décaissements de février = 22 000 + 20 000 + 4 000 + 5 500 + 2 000 = 53 500 €\nSolde final = 21 000 + 58 000 − 53 500 = 25 500 €",
+    indice: "Le solde de fin janvier est le solde de début de février."
+  },
+  {
+    id: "U3-189", difficulte: "difficile", epreuve: "U3", theme: "Investissement et financement", session: "complément",
+    cas: "CAS-U3-07", etape: 4, type: "calcul",
+    question: "Calcule la trésorerie à la fin de mars, après l'achat de l'équipement.",
+    reponse: { valeur: -10200, unite: "€", decimales: 0, tolerance: 1, signe: true },
+    explication: "Décaissements de mars = 26 000 + 20 000 + 4 000 + 6 500 + 2 000 + 43 200 = 101 700 €\nSolde final = 25 500 + 66 000 − 101 700 = −10 200 €\nLe signe compte : un solde négatif est un découvert.",
+    indice: "N'oublie pas l'équipement TTC de l'étape 1 dans les décaissements de mars. Donne le résultat avec son signe."
+  },
+  {
+    id: "U3-190", difficulte: "moyen", epreuve: "U3", theme: "Investissement et financement", session: "complément",
+    cas: "CAS-U3-07", etape: 5, type: "calcul",
+    question: "Calcule la dotation aux amortissements de l'exercice, sachant que l'équipement est amorti en linéaire sur 6 ans à partir de sa mise en service le 1er mars (exercice clos le 31 décembre).",
+    reponse: { valeur: 5000, unite: "€", decimales: 0, tolerance: 1, signe: false },
+    explication: "Annuité pleine = [[36 000|6]] = 6 000 € (sur le prix HT)\nDe mars à décembre : 10 mois, soit 6 000 × [[10|12]] = 5 000 €\nLa dotation est une charge calculée : elle n'apparaît pas dans le budget de trésorerie.",
+    indice: "Amortis le prix HT, au prorata des mois depuis la mise en service."
+  },
+  {
+    id: "U3-191", difficulte: "moyen", epreuve: "U3", theme: "Investissement et financement", session: "complément",
+    cas: "CAS-U3-07", etape: 6,
+    question: "Commente l'évolution de la trésorerie : quel commentaire est le mieux rédigé ?",
+    choix: ["La trésorerie est négative en mars.", "Le solde passe de +25 500 € fin février à −10 200 € fin mars : l'équipement est payé d'un seul coup (43 200 € TTC) alors que ses effets sur le CA seront étalés. Le magasin sera à découvert en mars alors que son exploitation dégage de la trésorerie chaque mois ; la TVA de 7 200 € payée sur l'équipement sera récupérée ensuite.", "Le magasin est en difficulté : son exploitation perd de l'argent chaque mois.", "Le solde de −10 200 € vient des amortissements de l'équipement."],
+    bonne: 1,
+    explication: "Janvier : +6 000 €. Février : +4 500 €. L'exploitation dégage donc de la trésorerie chaque mois ; le trou de mars vient de l'achat de 43 200 € TTC. Le 1er choix est vrai sans aucun argument. Le 3e est faux. Le 4e aussi : l'amortissement est une charge calculée, sans sortie d'argent.",
+    indice: "Regarde les soldes mois par mois : d'où vient la chute de mars ?"
+  },
+  {
+    id: "U3-192", difficulte: "moyen", epreuve: "U3", theme: "Investissement et financement", session: "complément",
+    cas: "CAS-U3-07", etape: 7, type: "calcul",
+    question: "Calcule la trésorerie à la fin de mars si le magasin finance l'équipement par un emprunt de 36 000 € versé en mars (avant toute mensualité).",
+    reponse: { valeur: 25800, unite: "€", decimales: 0, tolerance: 1, signe: true },
+    explication: "Solde de mars sans emprunt = −10 200 €\nSolde avec l'emprunt = −10 200 + 36 000 = 25 800 €\nL'emprunt est un encaissement : il compense l'achat de l'équipement.",
+    indice: "L'emprunt versé est un encaissement de plus en mars."
+  },
+  {
+    id: "U3-193", difficulte: "difficile", epreuve: "U3", theme: "Investissement et financement", session: "complément",
+    cas: "CAS-U3-07", etape: 8,
+    question: "Comment la gérante devrait-elle financer l'équipement ?",
+    choix: ["Comptant, puisque l'exploitation dégage de la trésorerie chaque mois.", "Par un découvert bancaire, car l'équipement ne servira que quelques mois.", "Par un emprunt sur 5 ans : un bien durable se finance par une ressource durable. Avec 36 000 € empruntés en mars, le solde de mars serait de +25 800 € avant la 1re mensualité. La TVA de 7 200 € payée sur l'équipement sera récupérée ensuite.", "En reportant l'achat d'un an sans étudier d'autre solution."],
+    bonne: 2,
+    explication: "Un équipement dure plusieurs années : le financer par un découvert (ressource de court terme) est risqué, et le payer comptant provoque un découvert de 10 200 € en mars. L'emprunt à 5 ans adapte la ressource à la durée du bien et garde la trésorerie. Reporter sans étudier n'est pas un conseil argumenté.",
+    indice: "Un bien qui dure plusieurs années se finance par une ressource qui dure aussi."
+  }
+);

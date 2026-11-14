@@ -8,59 +8,42 @@
     @keyframes oreille { 0%, 84%, 100% { transform: rotate(0deg); } 89% { transform: rotate(-8deg); } 94% { transform: rotate(5deg); } }
     @media (prefers-reduced-motion: reduce) { .oreille, .oeil { animation: none; } }
   </style>
-  <!-- oreilles -->
-  <g class="oreille"><circle cx="98" cy="92" r="56" fill="#b47a45"/><circle cx="98" cy="92" r="31" fill="#f0cfa6"/></g>
-  <g class="oreille droite"><circle cx="302" cy="92" r="56" fill="#b47a45"/><circle cx="302" cy="92" r="31" fill="#f0cfa6"/></g>
-  <!-- sweat anthracite, bords or -->
-  <path d="M55 440 Q60 345 200 330 Q340 345 345 440 Z" fill="#262b36" stroke="#d9b26f" stroke-width="5" stroke-linejoin="round"/>
-  <!-- tete -->
-  <ellipse cx="200" cy="205" rx="152" ry="138" fill="#c78d56"/>
-  <!-- col cote or -->
-  <path d="M140 333 Q200 362 260 333" fill="none" stroke="#d9b26f" stroke-width="10" stroke-linecap="round"/>
-  <!-- cordons de capuche -->
-  <path d="M178 352 L172 400" stroke="#ecd3a0" stroke-width="6" stroke-linecap="round"/>
-  <path d="M222 352 L228 400" stroke="#ecd3a0" stroke-width="6" stroke-linecap="round"/>
-  <circle cx="172" cy="404" r="6" fill="#d9b26f"/>
-  <circle cx="228" cy="404" r="6" fill="#d9b26f"/>
-  <!-- logo O or sur la poitrine -->
-  <circle cx="290" cy="400" r="13" fill="none" stroke="#d9b26f" stroke-width="5"/>
-  <!-- joues -->
-  <ellipse cx="112" cy="256" rx="20" ry="12" fill="#f29a8e" opacity="0.55"/>
-  <ellipse cx="288" cy="256" rx="20" ry="12" fill="#f29a8e" opacity="0.55"/>
-  <!-- museau -->
-  <ellipse cx="200" cy="268" rx="70" ry="54" fill="#f0cfa6"/>
-  <!-- verres -->
-  <rect x="92" y="160" width="96" height="64" rx="10" fill="#ffffff" fill-opacity="0.16"/>
-  <rect x="212" y="160" width="96" height="64" rx="10" fill="#ffffff" fill-opacity="0.16"/>
-  <g class="oeil">
-  <circle cx="150" cy="195" r="14" fill="#2a1a10"/>
-  <circle cx="250" cy="195" r="14" fill="#2a1a10"/>
-  <circle cx="155" cy="189" r="5" fill="#ffffff"/>
-  <circle cx="255" cy="189" r="5" fill="#ffffff"/>
+  <!-- DioSL, neutre (trait à main levée, calculé une fois ; source nette gardée à part) -->
+  <g transform="translate(-56 -51)">
+    <!-- sweat anthracite, liseré or -->
+    <path d="M96 491 C102 420.4, 169.8 395.8, 256 392 C342.4 396, 407.7 422.2, 416 491 C338 493.1, 261.4 490.1, 96 491" fill="#262b36"/>
+    <path d="M96 491 C102.8 419.6, 168.4 393.3, 256 392 M256 392 C343.4 395.6, 409 421, 416 491" fill="none" stroke="#d9b26f" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M190 400 C223.4 422, 290.9 422.5, 322 398" fill="none" stroke="#d9b26f" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M232 418 C230.8 427.1, 230.1 436.6, 227 460" fill="none" stroke="#ecd3a0" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="227" cy="465" r="6" fill="#d9b26f"/>
+    <!-- fin du sweat (repère pour .claude/scripts/generer-icones.py, qui le prolonge vers le bas) -->
+    <!-- oreilles -->
+    <g class="oreille"><g><path d="M100 134 C101.9 96.1, 138.8 75, 175 92.4 C190.3 100.9, 201 113.8, 200 134 C200.1 170.7, 158.3 191.9, 125 175.6 C112 169.3, 97.3 154.1, 100 134 C100 134, 100 134, 100 134" fill="#b47a45"/><path d="M100 134 C98.6 96.9, 141.4 74.5, 175 92.4 M175 92.4 C189.2 101.8, 201.1 118, 200 134 M200 134 C200.9 170.6, 158.2 192.9, 125 175.6 M125 175.6 C109 167.7, 100.8 151.7, 100 134 M100 134 C100 134, 100 134, 100 134" fill="none" stroke="#3d2614" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></g><path d="M126 138 C128.1 119.1, 149.2 110.6, 165 117.2 C173.3 119.2, 176.6 131.5, 178 138 C179.1 157.6, 158.6 170.6, 139 158.8 C131.8 154.8, 127.9 144, 126 138 C126 138, 126 138, 126 138" fill="#e6c39a"/></g>
+    <g class="oreille droite"><g><path d="M312 134 C308.8 97.2, 350.6 71.6, 387 92.4 C403.9 101, 412.9 113.9, 412 134 C413.1 168.4, 367.3 195.6, 337 175.6 C323.6 169.6, 309.7 148.6, 312 134 C312 134, 312 134, 312 134" fill="#b47a45"/><path d="M312 134 C310.9 98.1, 354.3 73.6, 387 92.4 M387 92.4 C401.5 99.9, 410.8 116.4, 412 134 M412 134 C412.1 169.4, 370.9 194.1, 337 175.6 M337 175.6 C320.9 167.2, 311.3 152.4, 312 134 M312 134 C312 134, 312 134, 312 134" fill="none" stroke="#3d2614" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></g><path d="M334 138 C331.9 119.2, 354.4 109.6, 373 117.2 C382.2 119.8, 385.1 128.1, 386 138 C388.1 157.2, 363.3 166.8, 347 158.8 C338.8 156.4, 333.5 145.9, 334 138 C334 138, 334 138, 334 138" fill="#e6c39a"/></g>
+    <!-- tête et museau -->
+    <g><path d="M256 118 C354.8 111.7, 408.1 180.1, 406 262 C400.7 340, 335.5 395, 254 394 C170.1 397.9, 103 342.7, 104 262 C100.3 174.5, 164.6 121.2, 256 118 C256 118, 256 118, 256 118" fill="#c78d56"/><path d="M256 118 C352.3 113.1, 409.2 177.9, 406 262 M406 262 C403.1 341, 334.5 392.5, 254 394 M254 394 C170.7 395.6, 106.6 342.1, 104 262 M104 262 C103.5 174.5, 162.9 122.8, 256 118 M256 118 C256 118, 256 118, 256 118" fill="none" stroke="#3d2614" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></g>
+    <path d="M190 326 C183 292.5, 222.3 272.5, 256 272 C295 273.4, 324.1 289.7, 322 328 C315.8 361, 290 375.2, 256 376 C220.6 373.3, 192.1 359.3, 190 326 C190 326, 190 326, 190 326" fill="#f0cfa6"/>
+    <path d="M168 200 C186 195, 206.3 193.1, 224 200" fill="none" stroke="#3d2614" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M288 200 C306.2 193.3, 326.7 194.5, 344 200" fill="none" stroke="#3d2614" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+    <g class="oeil">
+      <ellipse cx="205" cy="254" rx="10" ry="12.5" fill="#21140b"/>
+      <ellipse cx="307" cy="254" rx="10" ry="12.5" fill="#21140b"/>
+    </g>
+    <!-- monture acétate noir épaisse, haut bien droit ; verres sans reflet -->
+    <path d="M161 218 C190.1 216.4, 215.6 218.5, 241 218 M241 218 C247.4 218.6, 252.1 224.3, 252 229 M252 229 C252 243.1, 251 254.5, 252 273 M252 273 C251.5 279, 247.9 284.3, 241 284 M241 284 C225.3 283, 207.6 284.1, 161 284 M161 284 C153.5 283.1, 150.4 278.7, 150 273 M150 273 C150.1 264, 151.5 251.2, 150 229 M150 229 C148.7 222.2, 155.4 217.6, 161 218 M161 218 C161 218, 161 218, 161 218" fill="none" stroke="#111214" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M271 218 C290.4 218.9, 311.3 219.2, 351 218 M351 218 C357.9 216.5, 362.6 223.8, 362 229 M362 229 C363.1 240.9, 361.3 252.7, 362 273 M362 273 C361.9 278, 357.7 285.1, 351 284 M351 284 C325.6 282.2, 298.7 283.4, 271 284 M271 284 C263.5 283.9, 260.1 279.5, 260 273 M260 273 C260.7 255.6, 260.6 240.4, 260 229 M260 229 C260.6 222, 264.7 216.7, 271 218 M271 218 C271 218, 271 218, 271 218" fill="none" stroke="#111214" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M148 205 C173 207.5, 204.3 204.1, 254 205 C255.4 204.3, 262 209, 261 212 C259.9 215.2, 259.9 218.9, 261 220 C262.2 223.8, 259.4 224.4, 254 227 C231.2 226, 202.7 226.7, 148 227 C144.5 227.3, 139.4 223.1, 141 220 C142 217.5, 140.6 217.4, 141 212 C138.7 207.3, 146.6 206.8, 148 205 C148 205, 148 205, 148 205" fill="#111214"/>
+    <path d="M258 205 C300 209.3, 338.3 203.2, 364 205 C370.5 206.9, 372.2 208.7, 371 212 C369.8 213.2, 372.2 216.4, 371 220 C369.9 224.9, 367.3 228.6, 364 227 C333.7 225.1, 301.5 225.1, 258 227 C252.7 227.6, 247.8 221.9, 251 220 C251.3 218.4, 251.7 216.2, 251 212 C249.9 206, 253.6 206.4, 258 205 C258 205, 258 205, 258 205" fill="#111214"/>
+    <path d="M252 214 C255.4 214.1, 258 213.4, 260 214 C261.7 213.2, 264.5 215.3, 263 217 C262.2 219.1, 263.5 221.2, 263 225 C261.4 228.5, 263.6 228.6, 260 228 C258.5 228.6, 255.4 228.3, 252 228 C250.3 229.7, 248.7 226.8, 249 225 C249.5 223, 249.3 220.8, 249 217 C247.6 213.7, 251.1 212, 252 214 C252 214, 252 214, 252 214" fill="#111214"/>
+    <path d="M146 226 C134.7 222.9, 122.8 218.3, 106 214" fill="none" stroke="#111214" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M366 226 C380.3 221.3, 394.2 217.8, 406 214" fill="none" stroke="#111214" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/>
+    <!-- pièces de métal argenté près des charnières -->
+    <rect x="114" y="208" width="20" height="9" rx="2" fill="#c9ccd2" transform="rotate(16 124 212)"/>
+    <rect x="378" y="208" width="20" height="9" rx="2" fill="#c9ccd2" transform="rotate(-16 388 212)"/>
+    <!-- léger brillant de l'acétate, sur la monture seulement -->
+    <path d="M150 210 L252 210 M260 210 L362 210" fill="none" stroke="#ffffff" stroke-opacity="0.28" stroke-width="3" stroke-linecap="round"/>
+    <path d="M236 302 C250.3 291.6, 267.5 293.2, 278 302 C275.8 316.7, 263.2 323.1, 257 322 C248.4 319.6, 239.6 318.4, 236 302 C236 302, 236 302, 236 302" fill="#3a2618"/>
+    <path d="M240 344 C254.7 351.5, 272.2 347.6, 284 336" fill="none" stroke="#3a2618" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
+
   </g>
-  <!-- monture acétate noir épaisse, rectangulaire large, haut droit -->
-  <rect x="92" y="160" width="96" height="64" rx="10" fill="none" stroke="#111214" stroke-width="15"/>
-  <rect x="212" y="160" width="96" height="64" rx="10" fill="none" stroke="#111214" stroke-width="15"/>
-  <!-- haut des cercles bien droit et plus épais -->
-  <rect x="84" y="149" width="112" height="20" rx="7" fill="#111214"/>
-  <rect x="204" y="149" width="112" height="20" rx="7" fill="#111214"/>
-  <!-- pont -->
-  <rect x="190" y="156" width="20" height="16" rx="3" fill="#111214"/>
-  <!-- branches épaisses -->
-  <path d="M88 160 L46 150" stroke="#111214" stroke-width="15" stroke-linecap="round"/>
-  <path d="M312 160 L354 150" stroke="#111214" stroke-width="15" stroke-linecap="round"/>
-  <!-- plaquettes de métal argenté près des tenons -->
-  <rect x="60" y="148" width="18" height="8" rx="2" fill="#c9ccd2" transform="rotate(14 69 152)"/>
-  <rect x="322" y="148" width="18" height="8" rx="2" fill="#c9ccd2" transform="rotate(-14 331 152)"/>
-  <!-- brillance de l'acétate -->
-  <path d="M94 154 L186 154" stroke="#ffffff" stroke-opacity="0.3" stroke-width="3" stroke-linecap="round"/>
-  <path d="M214 154 L306 154" stroke="#ffffff" stroke-opacity="0.3" stroke-width="3" stroke-linecap="round"/>
-  <!-- reflets -->
-  <path d="M120 180 L138 168" stroke="#ffffff" stroke-opacity="0.7" stroke-width="5" stroke-linecap="round"/>
-  <path d="M224 180 L242 168" stroke="#ffffff" stroke-opacity="0.7" stroke-width="5" stroke-linecap="round"/>
-  <!-- nez -->
-  <ellipse cx="200" cy="246" rx="23" ry="16" fill="#3a2618"/>
-  <ellipse cx="193" cy="241" rx="7" ry="4" fill="#ffffff" opacity="0.5"/>
-  <path d="M200 261 L200 273" stroke="#3a2618" stroke-width="5" stroke-linecap="round"/>
-  <path d="M176 276 Q188 290 200 274 Q212 290 224 276" stroke="#3a2618" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
