@@ -362,33 +362,40 @@ function bilansGeneraux() {
   return { essentiel, qcm, maitrise };
 }
 
+// « Bien réussi » : au moins 80 % de réussies (comme le palier « Très bien » d'une série, et la notion maîtrisée).
+// Sous ce seuil, une liste toute faite n'a ni coche ni vert : faite ne veut pas dire acquise.
+const SEUIL_BIEN_REUSSI = 0.8;
+const estBienReussi = bilan => !!bilan.total && bilan.reussies / bilan.total >= SEUIL_BIEN_REUSSI;
+const motReussies = n => n + (n > 1 ? " réussies" : " réussie");
+
 // Crée une barre : partie pleine = réussies, partie claire = faites mais ratées, vide = à découvrir.
-// options : { titre, petite, detail (texte qui remplace le détail automatique), extra (texte ajouté), aria (texte lu par les lecteurs d'écran) }
+// options : { motPct (mot après le pourcentage, ex. « faites »), titre, petite, detail (texte qui remplace le détail automatique), extra (texte ajouté), aria (texte lu par les lecteurs d'écran) }
 function creerBarreProgression(bilan, options) {
   options = options || {};
   const largeur = n => (bilan.total ? Math.min(100, (n / bilan.total) * 100) : 0);
   const pFaites = Math.round(largeur(bilan.faites));
   const bloc = document.createElement("div");
-  bloc.className = "progression-bloc" + (options.petite ? " petite" : "") + (bilan.total && bilan.faites >= bilan.total ? " fini" : "");
+  bloc.className = "progression-bloc" + (options.petite ? " petite" : "") + (bilan.total && bilan.faites >= bilan.total && estBienReussi(bilan) ? " fini" : "");
   bloc.innerHTML =
     (options.titre ? '<div class="progression-tete"><span class="progression-titre"></span><span class="progression-pct"></span></div>' : "") +
     '<div class="progression-barre" role="progressbar" aria-valuemin="0" aria-valuemax="100"><span class="part-reussies"></span><span class="part-ratees"></span></div>' +
     '<small class="progression-detail"></small>';
   if (options.titre) {
     bloc.querySelector(".progression-titre").textContent = options.titre;
-    bloc.querySelector(".progression-pct").textContent = pFaites + " %";
+    bloc.querySelector(".progression-pct").textContent = pFaites + " %" + (options.motPct ? " " + options.motPct : "");
   }
   let detail = options.detail;
   if (!detail) {
     if (bilan.faites === 0) detail = options.petite ? "Pas encore commencé" : bilan.total + " questions · pas encore commencé";
-    else if (bilan.faites >= bilan.total) detail = "✓ Tout fait · " + bilan.reussies + " réussies sur " + bilan.total;
-    else detail = bilan.faites + " / " + bilan.total + " faites · " + bilan.reussies + " réussies · " + (bilan.total - bilan.faites) + " à découvrir";
+    else if (bilan.faites >= bilan.total) detail = (estBienReussi(bilan) ? "✓ Tout fait · " + motReussies(bilan.reussies) + " sur " + bilan.total
+      : bilan.faites + " / " + bilan.total + " faites · " + motReussies(bilan.reussies));
+    else detail = bilan.faites + " / " + bilan.total + (bilan.faites > 1 ? " faites · " : " faite · ") + motReussies(bilan.reussies) + " · " + (bilan.total - bilan.faites) + " à découvrir";
   }
   bloc.querySelector(".progression-detail").textContent = detail + (options.extra ? " · " + options.extra : "");
   const barre = bloc.querySelector(".progression-barre");
   barre.setAttribute("aria-valuenow", pFaites);
   barre.setAttribute("aria-label", options.aria ||
-    (options.titre || "Progression") + " : " + pFaites + " % fait, " + bilan.reussies + " questions réussies sur " + bilan.total);
+    (options.titre || "Progression") + " : " + pFaites + " % fait, " + bilan.reussies + (bilan.reussies > 1 ? " questions réussies sur " : " question réussie sur ") + bilan.total);
   // Les barres partent de zéro puis se remplissent (l'animation est coupée si l'élève l'a désactivée)
   const r = bloc.querySelector(".part-reussies"), m = bloc.querySelector(".part-ratees");
   const remplir = () => {
@@ -419,7 +426,10 @@ const POSES_DIOSL_IDS = ["clin-doeil", "choque", "pensif", "bouche-ouverte", "bo
 const PERSONNAGES_RETIRES = ["renard"];       // un élève qui l'avait choisi retrouve DioSL
 function compagnon() {                       // null = DioSL
   const id = lireProfil().avatar;
-  return id && !POSES_DIOSL_IDS.includes(id) && !PERSONNAGES_RETIRES.includes(id) ? id : null;
+  if (!id || POSES_DIOSL_IDS.includes(id) || PERSONNAGES_RETIRES.includes(id)) return null;
+  // Un personnage inconnu (liste de compte.js chargée) : retour à DioSL plutôt qu'une image cassée
+  if (Array.isArray(window.AVATARS) && window.AVATARS.length && !window.AVATARS.some(a => a.id === id)) return null;
+  return id;
 }
 function imageCompagnon(pose) {
   const animal = compagnon();
@@ -434,9 +444,10 @@ function nomCompagnon() {
 }
 // Affiche le compagnon dans une image ; si une expression n'existe pas encore, on garde son dessin de base
 function montrerCompagnon(img, pose) {
+  // Image introuvable : le dessin de base du personnage, et s'il manque aussi, DioSL
   img.onerror = () => {
-    img.onerror = null;
     const animal = compagnon();
+    img.onerror = animal ? () => { img.onerror = null; img.src = "img/nounours-" + pose + ".svg"; } : null;
     img.src = animal ? "img/avatar-" + animal + ".svg" : "img/nounours-clin-doeil.svg";
   };
   img.src = imageCompagnon(pose);
@@ -487,7 +498,11 @@ function corrigerCalcul(reponse, texte) {
   return { etat: "faux", valeur: v };
 }
 // Texte de correction commun (HTML échappé par l'appelant pour les parties libres)
+// Le message, avec l'espace insécable de la typographie française (« près : » ne commence jamais une ligne par « : »)
 function messageCalcul(reponse, resultat) {
+  return messageCalculBrut(reponse, resultat).replace(/ ([:;?!%])/g, "\u00a0$1");
+}
+function messageCalculBrut(reponse, resultat) {
   const unite = reponse.unite ? " " + reponse.unite : "";
   const dec = reponse.decimales === undefined ? 2 : reponse.decimales;
   const attendu = ecrireNombre(reponse.valeur, dec, reponse.signe !== false) + unite;
@@ -582,10 +597,14 @@ function creerMath(noeuds, lu) {
 // Écrit un texte dans un élément, avec ses fractions et ses lignes (sans écriture spéciale : comme textContent)
 function ecrireTexteMath(el, texte) {
   texte = texte === undefined || texte === null ? "" : String(texte);
+  // Typographie française : espace insécable avant « : ; ? ! » et à l'intérieur des guillemets (la ligne ne se coupe pas là)
+  texte = texte.replace(/ ([:;?!»%])/g, "\u00a0$1").replace(/« /g, "«\u00a0");
   if (texte.indexOf("[[") < 0 && texte.indexOf("\n") < 0) { el.textContent = texte; return el; }
   el.textContent = "";
   const lignes = texte.split("\n");
   lignes.forEach(ligne => {
+    // Une ligne vide : un petit blanc entre deux paragraphes
+    if (lignes.length > 1 && !ligne.trim()) { const v = document.createElement("span"); v.className = "ligne-vide"; el.appendChild(v); return; }
     let noeuds;
     try { noeuds = analyserMath(ligne); } catch (e) { noeuds = [ligne]; }   // mal écrit : affiché tel quel
     if (lignes.length === 1) { el.appendChild(creerMath(noeuds, true)); return; }
@@ -665,7 +684,27 @@ function aideUnite(reponse, texteEnonce, seulementRegle) {   // seulementRegle :
   return (u ? "Réponse attendue en " + u + "." : "Réponse sans unité : écris seulement le nombre.") + " " + regle;
 }
 // Le bouton « Quelle unité ? » sous la case d'un calcul : il s'ouvre en un petit encadré, comme l'indice
-function ajouterAideUnite(form, reponse, texteEnonce) {
+// L'unité est-elle vraiment la difficulté ? Oui s'il faut convertir (données dans une autre unité, dioptries ↔ distances,
+// HT ↔ TTC, heures ↔ minutes…) ou s'il y a un réglage à connaître (degrés, lux). Non si l'unité de l'énoncé est déjà
+// celle de la case (ex. une focale en mm et un diamètre en mm) : le bouton serait du bruit.
+function uniteDifficile(reponse, texteEnonce) {
+  const u = reponse && reponse.unite ? String(reponse.unite) : "";
+  const t = String(texteEnonce || "");
+  const longueurs = new Set((t.match(/\d\s?(mm|cm|µm|nm|m)(?![a-zA-Zéèàù²³⁻])/g) || []).map(x => x.replace(/^\d\s?/, "")));
+  const dioptries = /δ|dioptri|vergence|myop|hypermétrop|presbyt|amétrop|remotum|punctum/i.test(t);
+  if (["mm", "cm", "m", "µm", "nm"].includes(u)) return dioptries || [...longueurs].some(x => x !== u);
+  if (u === "δ") return longueurs.size > 0;
+  if (u === "Δ") return longueurs.has("mm") || longueurs.has("m");
+  if (u === "€ HT") return /TTC|TVA/.test(t);
+  if (u === "€ TTC") return /\bHT\b|hors taxe|TVA/i.test(t);
+  if (u === "€ brut") return /\bnet/i.test(t);
+  if (u === "k€") return /\d\s?€/.test(t);
+  if (u === "min") return /\d\s?h\b|heure/i.test(t);
+  return u === "°" || u === "lx" || u === "jours ouvrables";
+}
+// options.seulementSiUtile : pas de bouton quand l'unité ne pose pas de difficulté (uniteDifficile)
+function ajouterAideUnite(form, reponse, texteEnonce, options) {
+  if (options && options.seulementSiUtile && !uniteDifficile(reponse, texteEnonce)) return null;
   const bouton = document.createElement("button");
   bouton.type = "button";
   bouton.className = "bouton-unite";

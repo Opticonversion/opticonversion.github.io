@@ -13,10 +13,10 @@
 // =====================================================================
 
 // <versionner> (partie écrite par versionner.py, ne pas modifier à la main)
-const VERSION = "4a8e38472b";
+const VERSION = "0e9c8e57ce";
 const FICHIERS = [
   "appli.js?v=0724163c",
-  "banc.js?v=cca7d0be",
+  "banc.js?v=7a80e12d",
   "calculateurs.html",
   "compte.html",
   "compte.js?v=c75295cc",
@@ -26,7 +26,7 @@ const FICHIERS = [
   "definitions-U41.js?v=6d18ab79",
   "definitions-U42.js?v=e3abf8c3",
   "definitions-U43.js?v=135a6649",
-  "definitions-U5.js?v=37a10d92",
+  "definitions-U5.js?v=6f883a4c",
   "definitions.html",
   "definitions.js?v=6afb3766",
   "entrainement-U3.js?v=f3ed3fea",
@@ -36,8 +36,8 @@ const FICHIERS = [
   "entrainement-U5.js?v=98511033",
   "epreuves.js?v=cc645427",
   "essentiel.html",
-  "essentiel.js?v=38409d63",
-  "examen.js?v=658f6737",
+  "essentiel.js?v=a61c6977",
+  "examen.js?v=e04ac9f0",
   "img/avatar-chat-bouche-ouverte.svg",
   "img/avatar-chat-choque.svg",
   "img/avatar-chat-clin-doeil.svg",
@@ -162,7 +162,7 @@ const FICHIERS = [
   "questions-U42.js?v=29d25a16",
   "questions-U43.js?v=be252b34",
   "questions-U5.js?v=636198c1",
-  "rythme.js?v=fc24144e",
+  "rythme.js?v=0b9caab9",
   "sons.js?v=355500ef",
   "sons/faux.mp3",
   "sons/fin-0.mp3",
@@ -176,13 +176,13 @@ const FICHIERS = [
   "specificites-U42.js?v=f64709f2",
   "specificites-U43.js?v=523c07db",
   "specificites-U5.js?v=43533990",
-  "style.css?v=e8ccc2a4",
+  "style.css?v=f4aceae0",
   "traces-U42.js?v=78864426",
   "traces-U43.js?v=e9acf21a",
   "traces-U5.js?v=c4c5f919",
   "traces.html",
   "traces.js?v=aae6cf72",
-  "videos.js?v=6f234673",
+  "videos.js?v=2da8e777",
   "vivant.js?v=ec7cf52b"
 ];
 // </versionner>

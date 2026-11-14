@@ -22,7 +22,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Opticonversion">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
-<link rel="stylesheet" href="style.css?v=e8ccc2a4">
+<link rel="stylesheet" href="style.css?v=f4aceae0">
 </head>
 <body data-rafraichir="oui">
 
@@ -49,38 +49,17 @@
       <p class="sous-titre apparait" style="--d:1">Faciles, sur les notions qui tombent le plus au BTS OL, avec la correction expliquée. Environ cinq minutes.</p>
       <img class="tete-compagnon" data-pose="clin-doeil" src="img/nounours-clin-doeil.svg" alt="" width="120" height="132">
     </div>
+    <!-- Une seule question avant de commencer : la matière, en une ligne compacte (« Toutes les matières » par défaut),
+         PUIS « Commencer » : le bouton suit le réglage qu'il utilise et reste dans le premier écran.
+         Le personnage, l'année et l'objectif du jour se choisissent APRÈS les 5 questions, à leur bilan (qcm.html).
+         Un lien avec ?matiere=U5 (lien d'un Short) choisit la matière d'avance. -->
     <form class="premiers-reglages apparait" style="--d:2" id="premiers-reglages">
-      <!-- Le personnage, proposé ce jour-là seulement : les ronds sont posés par rythme.js (liste de compte.js) -->
-      <fieldset class="choix-perso" id="premiers-perso" hidden>
-        <legend>Ton personnage&nbsp;: <span id="premiers-perso-nom">DioSL</span></legend>
-        <div class="perso-rangee"></div>
-      </fieldset>
-      <fieldset class="choix-pastilles choix-matiere">
-        <legend>Sur quelle matière&nbsp;?</legend>
-        <label data-epreuve="U41"><input type="radio" name="matiere" value="U41"><span>Maths</span></label>
-        <label data-epreuve="U42"><input type="radio" name="matiere" value="U42"><span>OGP</span></label>
-        <label data-epreuve="U43"><input type="radio" name="matiere" value="U43"><span>ETSO</span></label>
-        <label data-epreuve="U5"><input type="radio" name="matiere" value="U5"><span>Vision</span></label>
-        <label data-epreuve="U3"><input type="radio" name="matiere" value="U3"><span>Éco</span></label>
-        <label><input type="radio" name="matiere" value="" checked><span>Aléatoire</span></label>
-      </fieldset>
-      <fieldset class="choix-pastilles">
-        <legend>Où tu en es</legend>
-        <label><input type="radio" name="annee" value="1re année de BTS"><span>1re année</span></label>
-        <label><input type="radio" name="annee" value="2e année de BTS"><span>2e année</span></label>
-        <label><input type="radio" name="annee" value="Déjà opticien, je révise"><span>Déjà opticien</span></label>
-      </fieldset>
-      <fieldset class="choix-pastilles">
-        <legend>Combien de questions par jour&nbsp;?</legend>
-        <label><input type="radio" name="objectif" value="5"><span>5</span></label>
-        <label><input type="radio" name="objectif" value="10" checked><span>10</span></label>
-        <label><input type="radio" name="objectif" value="20"><span>20</span></label>
-      </fieldset>
-      <p class="premiers-aide">Tu pourras changer ces réglages dans ton profil.</p>
-      <div class="premiers-actions">
+      <p class="reglage-ligne"><label for="premiers-matiere">Sur quelle matière&nbsp;?</label><select id="premiers-matiere" name="matiere"></select></p>
+      <div class="premiers-actions premiers-actions-haut">
         <button class="bouton bouton-grand" type="submit">Commencer</button>
-        <button class="bouton-discret" type="button" id="premiers-passer">Passer&nbsp;: je connais déjà le site</button>
       </div>
+      <p class="premiers-aide">Ton personnage et ton objectif du jour se choisissent après les 5 questions.</p>
+      <p class="passer-ligne"><button class="bouton-discret" type="button" id="premiers-passer">Passer&nbsp;: je connais déjà le site</button><span class="passer-aide">Cet écran ne reviendra pas ; l'accueil te proposera la suite.</span></p>
     </form>
   </section>
 
@@ -92,48 +71,48 @@
       <p class="sous-titre apparait" style="--d:1"></p>
       <img class="tete-compagnon" data-pose="clin-doeil" src="img/nounours-clin-doeil.svg" alt="" width="120" height="132">
     </div>
-    <!-- Le jour où un outil se présente (Atelier des tracés au 3e jour, définitions au 4e) : sa grande carte -->
-    <div class="apparait" style="--d:2" id="ecran-jour-outil" hidden></div>
-    <!-- Le plan de révision de la semaine (rythme.js, creerLignePlan) : une ligne, et « Pourquoi ces thèmes ? » -->
-    <div class="apparait" style="--d:2" id="ecran-jour-plan" hidden></div>
-    <form class="premiers-reglages apparait" style="--d:3" id="ecran-jour-reglages">
-      <fieldset class="choix-pastilles">
-        <legend>Combien de questions aujourd'hui&nbsp;?</legend>
+    <!-- Les deux réglages en lignes compactes (le dernier choix reste coché), PUIS « Commencer ma séance », toujours le
+         bouton or. À côté, « Seulement les n à revoir » s'il y en a. Dessous : « Passer » et le plan de la semaine. -->
+    <form class="premiers-reglages apparait" style="--d:2" id="ecran-jour-reglages">
+      <fieldset class="choix-pastilles choix-compact">
+        <legend>Combien<span class="visuellement-cache"> de questions</span>&nbsp;?</legend>
         <label><input type="radio" name="objectif" value="5"><span>5</span></label>
         <label><input type="radio" name="objectif" value="10" checked><span>10</span></label>
         <label><input type="radio" name="objectif" value="20"><span>20</span></label>
       </fieldset>
-      <fieldset class="choix-pastilles choix-matiere">
-        <legend>Sur quelle matière&nbsp;?</legend>
-        <label data-epreuve="U41"><input type="radio" name="matiere" value="U41"><span>Maths</span></label>
-        <label data-epreuve="U42"><input type="radio" name="matiere" value="U42"><span>OGP</span></label>
-        <label data-epreuve="U43"><input type="radio" name="matiere" value="U43"><span>ETSO</span></label>
-        <label data-epreuve="U5"><input type="radio" name="matiere" value="U5"><span>Vision</span></label>
-        <label data-epreuve="U3"><input type="radio" name="matiere" value="U3"><span>Éco</span></label>
-        <label><input type="radio" name="matiere" value="" checked><span>Mon plan</span></label>
-      </fieldset>
-      <div class="premiers-actions">
+      <p class="reglage-ligne"><label for="ecran-jour-matiere">Sur quelle matière&nbsp;?</label><select id="ecran-jour-matiere" name="matiere"></select></p>
+      <div class="premiers-actions premiers-actions-haut">
         <button class="bouton bouton-grand" type="submit">Commencer ma séance</button>
-        <button class="bouton-discret" type="button" id="ecran-jour-passer">Passer pour aujourd'hui</button>
+        <a class="lien-seulement" id="ecran-jour-revoir" href="qcm.html#a-revoir" hidden></a>
       </div>
+      <p class="passer-ligne"><button class="bouton-discret" type="button" id="ecran-jour-passer">Passer pour aujourd'hui</button><span class="passer-aide">Pour aujourd'hui seulement · un jour manqué par semaine ne casse pas ta série.</span></p>
+      <!-- Le plan de révision de la semaine (rythme.js, creerLignePlan) : une ligne, et « Pourquoi ces thèmes ? » -->
+      <div class="ecran-jour-plan" id="ecran-jour-plan" hidden></div>
     </form>
-    <!-- La proposition de créer un compte, les jours où c'est son tour : discrète, sous les boutons -->
+    <!-- Près des écrits, l'examen blanc du plan : une carte, SOUS le bouton de séance -->
+    <div class="apparait" style="--d:3" id="ecran-jour-outil" hidden></div>
+    <!-- La proposition du jour, discrète : un outil à découvrir (Atelier, définitions) ou le compte -->
     <div class="ecran-jour-compte" id="ecran-jour-compte" hidden></div>
   </section>
 
   <div class="hero">
     <div class="hero-texte">
-      <h1 class="apparait">Révise l'optique en t'entraînant.</h1>
+      <h1 class="apparait">Révise ton BTS en t'entraînant.</h1>
       <p class="marque apparait" style="--d:1" id="salut">BTS Opticien-Lunetier</p>
-      <p class="accroche apparait" style="--d:2" id="accroche"><span id="nb-questions">300</span> questions corrigées sur les <span id="nb-epreuves">5</span> épreuves, les définitions à réciter et des tracés à construire, à partir des sujets officiels depuis 2016. Gratuit, sans inscription.</p>
+      <p class="accroche apparait" style="--d:2" id="accroche"><span id="nb-questions">300 questions</span> corrigés sur les <span id="nb-epreuves">5</span> épreuves, les définitions à réciter et des tracés à construire, à partir des sujets officiels depuis 2016. Gratuit, sans inscription.</p>
       <div class="actions apparait" style="--d:3">
         <a class="bouton" href="essentiel.html" id="action-principale">Commencer par l'essentiel</a>
         <a class="bouton secondaire" href="qcm.html" id="action-secondaire">Tous les QCM</a>
       </div>
-      <!-- Élève qui a déjà répondu : objectif du jour, série, compte à rebours (rythme.js) -->
-      <section class="jour apparait" style="--d:4" id="jour" aria-label="Ta révision du jour" hidden></section>
+      <!-- Élève qui revient (séance passée, faite, ou premier jour de retour) : la suite, en une ligne sous le titre -->
+      <p class="ligne-action apparait" style="--d:2" id="ligne-action" hidden></p>
     </div>
     <!-- Le banc d'optique (banc.js) : le compagnon est l'objet, la lentille forme son image -->
+    <!-- Élève qui a déjà répondu : objectif du jour, série, compte à rebours (rythme.js). AVANT le banc dans le code
+         (clavier, lecteurs d'écran : la séance d'abord) ; sur ordinateur, la grille la met à gauche et le banc à droite. -->
+    <section class="jour apparait" style="--d:5" id="jour" aria-label="Ta révision du jour" hidden></section>
+    <!-- Le banc et ses boutons, dans un même bloc (sur ordinateur, à côté du titre et de la carte du jour) -->
+    <div class="banc-colonne">
     <div class="banc apparait" style="--d:4" id="banc">
       <div class="banc-echelle"><div class="banc-scene">
         <svg aria-hidden="true"></svg>
@@ -149,6 +128,7 @@
         <button type="button" class="banc-bouton banc-pause" id="banc-pause"><span class="ico i-pause" aria-hidden="true"></span><span>Pause</span></button>
       </div>
       <p class="banc-lecture" id="banc-lecture" hidden></p>
+    </div>
     </div>
   </div>
 
@@ -217,7 +197,6 @@
 
   <div class="titre-section">
     <h2>Choisis ton épreuve</h2>
-    <a href="qcm.html">Tout voir →</a>
   </div>
   <div class="epreuves" id="liste-epreuves"></div>
 
@@ -237,8 +216,8 @@
 <script src="questions-U43.js?v=be252b34"></script>
 <script src="questions-U5.js?v=636198c1"></script>
 <script src="questions-U3.js?v=9619a3c6"></script>
-<script src="essentiel.js?v=38409d63"></script>
-<script src="rythme.js?v=fc24144e"></script>
+<script src="essentiel.js?v=a61c6977"></script>
+<script src="rythme.js?v=0b9caab9"></script>
 <script>
   // L'examen blanc des outils : le bouton ouvre ou referme le choix des 5 matières
   {
@@ -259,8 +238,12 @@
   // Petit mot d'accueil si l'élève a choisi un pseudo
   { const p = lireProfil(); if (p.pseudo) document.getElementById("salut").textContent = "Content de te revoir, " + p.pseudo; }
   if (typeof QUESTIONS !== "undefined") {
-    document.getElementById("nb-questions").textContent = QUESTIONS.length;
-    document.getElementById("outil-qcm").textContent = QUESTIONS.length + " questions corrigées et expliquées, épreuve par épreuve.";
+    // Un seul total partout : les questions de « Tous » (comme la page QCM et les cartes), les cas pratiques à part
+    const listeCasP = typeof CAS !== "undefined" ? CAS : [];
+    const base = QUESTIONS.filter(q => !q.entrainement && !(q.cas && listeCasP.some(c => c.id === q.cas)));
+    const nbCasP = listeCasP.filter(c => QUESTIONS.some(q => q.cas === c.id)).length;
+    document.getElementById("nb-questions").textContent = base.length + " questions et " + nbCasP + " cas pratiques";
+    document.getElementById("outil-qcm").textContent = base.length + " questions corrigées et expliquées, et " + nbCasP + " cas pratiques.";
     document.getElementById("nb-epreuves").textContent = EPREUVES.length;
     const faites = ESSENTIEL.filter(n => etatNotion(n.epreuve, n.theme).maitrisee).length;
     document.getElementById("essentiel-resume").textContent = faites > 0
@@ -269,16 +252,22 @@
 
     // Ta progression : l'essentiel, tous les QCM, et les deux réunis
     {
-      const b = bilansGeneraux();
+      // Chaque nombre dit ce qu'il compte. « Tous les QCM » et la maîtrise comptent les mêmes questions que les cartes
+      // d'épreuve et la page QCM (hors cas pratiques, comptés à part) ; l'Essentiel compte ses propres questions.
+      const bq = bilanQuestions(base);
+      const pl = (n, mot) => n + " " + mot + (n > 1 ? "s" : "");
       const zoneBarres = document.getElementById("barres-generales");
-      zoneBarres.appendChild(creerBarreProgression(b.essentiel, { titre: "★ L'essentiel", extra: faites + " / " + ESSENTIEL.length + " notions maîtrisées" }));
-      zoneBarres.appendChild(creerBarreProgression(b.qcm, { titre: "Tous les QCM" }));
-      zoneBarres.appendChild(creerBarreProgression(b.maitrise, {
-        titre: "Niveau de maîtrise",
-        aria: "Niveau de maîtrise : " + Math.round(b.maitrise.reussies / b.maitrise.total * 100) + " %, " + b.maitrise.reussies + " questions réussies sur " + b.maitrise.total,
-        detail: b.qcm.faites === 0
+      const be = bilanQuestions(base.filter(q => estEssentiel(q.epreuve, q.theme)));      // l'Essentiel, parmi ces mêmes questions
+      zoneBarres.appendChild(creerBarreProgression(be, { titre: "★ L'essentiel", motPct: "faites",
+        detail: be.faites + " faites sur les " + be.total + " questions de l'Essentiel · " + pl(faites, "notion maîtrisée") + " sur " + ESSENTIEL.length }));
+      zoneBarres.appendChild(creerBarreProgression(bq, { titre: "Tous les QCM", motPct: "faites",
+        detail: bq.faites + " faites sur " + bq.total + " questions" + (nbCasP ? " (et " + nbCasP + " cas pratiques)" : "") }));
+      zoneBarres.appendChild(creerBarreProgression({ total: bq.total, faites: bq.reussies, reussies: bq.reussies }, {
+        titre: "Niveau de maîtrise", motPct: "réussies",
+        aria: "Niveau de maîtrise : " + Math.round(bq.reussies / bq.total * 100) + " %, " + bq.reussies + " questions réussies sur " + bq.total,
+        detail: bq.faites === 0
           ? "Les questions que tu sais : réussies à ta dernière tentative. Lance-toi avec l'essentiel !"
-          : b.maitrise.reussies + " / " + b.maitrise.total + " questions réussies à ta dernière tentative"
+          : bq.reussies + " réussies sur ces " + bq.total + " questions, à ta dernière tentative"
       }));
     }
 
@@ -308,6 +297,23 @@
         // d'accueil des nouveaux venus sont cachés (.hero-retour), les outils passent en dessous, plus discrets.
         // Tant que l'écran de la séance du jour est là, la carte attend : elle ne doit pas « montrer » une invitation cachée
         if (!ecranDuJourMontre) afficherCarteJour(document.getElementById("jour"));
+        // Le titre et la ligne sous le titre, selon le jour (recalculés après « Passer pour aujourd'hui », rythme.js) :
+        // séance faite → « Séance faite, Léa. » ; passée → « À demain, Léa. » ; sinon « On continue, Léa ? ».
+        // La ligne ne propose que les questions à revoir, en lien discret : la séance a son seul bouton dans la carte du jour.
+        window.majHautAccueil = () => {
+          const a = calculerRythme().aujourdhui, ligne = document.getElementById("ligne-action"), virgule = pseudo ? ", " + pseudo : "";
+          document.querySelector(".hero h1").textContent = a.atteint ? "Séance faite" + virgule + "." : seancePassee() ? "À demain" + virgule + "." : "On continue" + virgule + "\u00a0?";
+          ligne.innerHTML = "";
+          if (dues > 0) {
+            const lien = document.createElement("a");
+            lien.href = "qcm.html#a-revoir";
+            lien.innerHTML = '<span class="ico i-calendrier" aria-hidden="true"></span><span></span>';
+            lien.lastChild.textContent = dues + (dues > 1 ? " questions à revoir aujourd'hui" : " question à revoir aujourd'hui");
+            ligne.appendChild(lien);
+          }
+          ligne.hidden = !dues;
+        };
+        majHautAccueil();
         document.getElementById("titre-outils").textContent = "Tout le site";
         document.getElementById("outils").classList.add("outils-discrets");
         if (dues > 0) {
@@ -346,24 +352,33 @@
       }
     }
 
-    // Une carte par épreuve, qui ouvre directement son QCM
+    // Une carte par épreuve, qui ouvre directement son QCM. Même ordre que la page QCM et l'examen blanc :
+    // ce qui rapporte le plus d'abord (U5 coef 6, U3 coef 5, U42, U43, puis U41 en CCF).
+    // Le nombre de questions est celui de « Tous » sur la page QCM ; les cas pratiques sont comptés en cas.
     const liste = document.getElementById("liste-epreuves");
-    EPREUVES.forEach((e, i) => {
-      const nb = QUESTIONS.filter(q => q.epreuve === e.code).length;
+    const ORDRE = ["U5", "U3", "U42", "U43", "U41"], rang = e => (ORDRE.includes(e.code) ? ORDRE.indexOf(e.code) : ORDRE.length);
+    const listeCas = typeof CAS !== "undefined" ? CAS : [];
+    EPREUVES.slice().sort((x, y) => rang(x) - rang(y)).forEach(e => {
+      const ordinaires = QUESTIONS.filter(q => q.epreuve === e.code && !q.entrainement && !(q.cas && listeCas.some(c => c.id === q.cas)));
+      const nb = ordinaires.length, nbCas = listeCas.filter(c => c.epreuve === e.code && QUESTIONS.some(q => q.cas === c.id)).length;
       const a = document.createElement("a");
       a.className = "epreuve";
       a.dataset.epreuve = e.code;
       a.href = "qcm.html#" + e.code;
-      a.innerHTML = '<span class="code"></span><span class="nom"></span><span class="info"></span>';
-      a.querySelector(".code").textContent = e.court || e.code;
-      a.querySelector(".nom").textContent = e.nom;
-      a.querySelector(".info").textContent = nb + " questions · " + e.detail;
-      a.appendChild(creerBarreProgression(bilanQuestions(QUESTIONS.filter(q => q.epreuve === e.code)), { petite: true }));
+      a.innerHTML = '<span class="code"></span><h3 class="nom"></h3><span class="info"></span>';
+      // Un seul système de noms : Vision, Éco, OGP, ETSO, Maths (comme les choix de séance), le code U en petit,
+      // le nom complet dans la ligne d'infos (sans « E5 » : le code U suffit)
+      const m = MATIERES_SEANCE.find(x => x[0] === e.code);
+      a.querySelector(".code").textContent = e.code;
+      a.querySelector(".nom").textContent = m ? m[1] : e.nom;
+      a.querySelector(".info").textContent = (m ? m[2] + " · " : "") + nb + " questions" + (nbCas ? " · " + nbCas + (nbCas > 1 ? " cas pratiques" : " cas pratique") : "") +
+        " · " + String(e.detail || "").replace(/^E\d+ · /, "");
+      a.appendChild(creerBarreProgression(bilanQuestions(ordinaires), { petite: true }));
       liste.appendChild(a);
     });
   }
 </script>
-<script src="banc.js?v=cca7d0be" defer></script>
+<script src="banc.js?v=7a80e12d" defer></script>
 <script src="compter.js?v=920cbd98" defer></script>
 <script src="vivant.js?v=ec7cf52b" defer></script>
 <script src="appli.js?v=0724163c" defer></script>

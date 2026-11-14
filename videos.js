@@ -13,7 +13,8 @@
 //   - TikTok : https://www.tiktok.com/@opticonversion/video/123...
 //     → s'ouvre dans un nouvel onglet
 //
-//  Un thème sans lien affiche « vidéo bientôt » sur le site.
+//  Un thème sans lien n'apparaît pas dans la colonne des Shorts ;
+//  une épreuve sans aucun lien n'a ni colonne ni choix de la vue.
 // ==============================================================
 
 const VIDEOS = {

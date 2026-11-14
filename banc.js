@@ -129,8 +129,9 @@
     // La lecture des mesures : réécrite seulement quand elle change
     const taille = Math.abs(g) > 1.02 ? "plus grande" : Math.abs(g) < 0.98 ? "plus petite" : "de même taille";
     const texte = "OA = " + fr(OA, 0) + " mm|OA' = " + fr(OAp, 0) + " mm|γ = " + fr(g, 2) + "|image réelle, renversée, " + taille;
-    if (texte !== dernierTexte) {
-      dernierTexte = texte;
+    // Le nom du personnage compte aussi : la liste des personnages (compte.js) arrive après le premier dessin
+    if (texte + nomDuPerso() !== dernierTexte) {
+      dernierTexte = texte + nomDuPerso();
       const [a, b, c, e] = texte.split("|");
       if (lecture) {
         lecture.innerHTML = '<span class="geste">Déplace ' + nomDuPerso() + ' : son image se forme en direct.</span>' +

@@ -89,7 +89,7 @@ b, strong { font-weight: 700; }
 a { color: var(--or); text-underline-offset: 3px; text-decoration-thickness: 1px; }
 a:hover { color: var(--or-clair); }
 .doux, .sous-titre, .aide { color: var(--doux); }
-.sous-titre { margin: 0 0 30px; font-size: 1.1rem; max-width: 62ch; }
+.sous-titre { margin: 0 0 30px; font-size: 1.1rem; max-width: 62ch; text-wrap: pretty; }
 
 /* Le haut d'une page (Essentiel, Définitions, Tracés, Calculs) : le titre et sa phrase à gauche,
    le compagnon de l'élève à droite. Sur grand écran il dépasse de derrière le premier bloc de la page. */
@@ -291,7 +291,7 @@ select option { background: var(--fond); }
 .progression-barre span { display: block; width: 0; height: 100%; transition: width 900ms var(--sortie); }
 .progression-barre .part-reussies { background: var(--or); }
 .progression-barre .part-ratees { background: rgba(217, 178, 111, 0.32); }
-.progression-detail { display: block; margin-top: 7px; color: var(--doux); font-size: 0.84rem; }
+.progression-detail { display: block; margin-top: 7px; color: var(--doux); font-size: 0.84rem; text-wrap: pretty; }
 .progression-bloc.petite .progression-barre { height: 6px; }
 .progression-bloc.petite .progression-detail { font-size: 0.8rem; }
 .progression-bloc.fini .progression-detail { color: var(--vert); }
@@ -302,7 +302,7 @@ select option { background: var(--fond); }
 .legende-progression .l-reussies { background: var(--or); }
 .legende-progression .l-ratees { background: rgba(217, 178, 111, 0.32); }
 .legende-progression .l-vide { background: rgba(255, 255, 255, 0.07); border: 1px solid var(--bord-fort); }
-.progression-epreuve { margin: -4px 0 20px; }
+.progression-epreuve { margin: -4px 0 14px; }
 
 /* ---------- 8. Une couleur par épreuve, la même que dans les Shorts ---------- */
 [data-epreuve] { --accent-rgb: 217, 178, 111; }         /* Analyse de la vision : or */
@@ -321,6 +321,14 @@ select option { background: var(--fond); }
   .epreuves > .epreuve:last-child { grid-column: 1 / -1; }
 }
 @media (max-width: 560px) { .epreuves > .epreuve, .epreuves > .epreuve:nth-last-child(-n+2) { grid-column: 1 / -1; min-height: 0; } }
+/* Accueil, téléphone : une épreuve = une ligne compacte (code, nom, barre). La page QCM garde ses cartes. */
+@media (max-width: 720px) {
+  #liste-epreuves { gap: 8px; }
+  #liste-epreuves > .epreuve { grid-column: 1 / -1; display: grid; grid-template-columns: 4.2em minmax(0, 1fr); align-items: baseline; column-gap: 10px; min-height: 0; padding: 14px 16px; }
+  #liste-epreuves .epreuve::before, #liste-epreuves .epreuve .info { display: none; }
+  #liste-epreuves .epreuve .nom { margin: 0; font-size: 1.15rem; }
+  #liste-epreuves .epreuve .progression-bloc { grid-column: 1 / -1; margin: 0; padding-top: 10px; }
+}
 .epreuve {
   position: relative; display: flex; flex-direction: column; align-items: stretch; min-height: 196px; padding: 22px; overflow: hidden;
   font: inherit; text-align: left; color: var(--texte); text-decoration: none; cursor: pointer;
@@ -340,7 +348,7 @@ select option { background: var(--fond); }
 .epreuve:active:not(:disabled) { transform: perspective(900px) scale(0.985); }
 .epreuve:disabled { cursor: default; opacity: 0.45; }
 .epreuve .code { display: block; color: rgb(var(--accent-rgb)); font-weight: 700; font-size: 0.9rem; }
-.epreuve .nom { display: block; font-family: var(--titre); font-size: 1.36rem; font-weight: 500; margin: 8px 0 8px; line-height: 1.16; }
+.epreuve .nom { display: block; font-family: var(--titre); font-size: 1.36rem; font-weight: 500; margin: 8px 0 8px; line-height: 1.16; letter-spacing: normal; color: var(--texte); text-wrap: balance; }
 .epreuve .info { display: block; color: var(--doux); font-size: 0.86rem; }
 .epreuve .progression-bloc { margin-top: auto; padding-top: 16px; }
 .epreuve .part-reussies, main[data-epreuve] #zone .barre-remplie { background: rgb(var(--accent-rgb)); }
@@ -350,7 +358,7 @@ select option { background: var(--fond); }
 .hero { position: relative; display: grid; gap: 2px; padding: 26px 0 24px; }
 .hero-texte { position: relative; z-index: 2; max-width: 660px; }
 .hero h1 { font-size: clamp(2.6rem, 6.4vw + 0.7rem, 5.4rem); line-height: 0.98; margin-bottom: 18px; }
-.accroche { font-size: 1.14rem; color: var(--doux); max-width: 54ch; margin: 0 0 24px; }
+.accroche { font-size: 1.14rem; color: var(--doux); max-width: 54ch; margin: 0 0 24px; text-wrap: pretty; }
 .actions { display: flex; flex-wrap: wrap; gap: 12px; }
 .actions .bouton { margin-top: 0; }
 
@@ -426,6 +434,21 @@ select option { background: var(--fond); }
 .hero-retour .accroche { margin-bottom: 18px; }
 .hero-retour .marque, .hero-retour .accroche, .hero-retour .actions { display: none; }
 .hero-retour .jour { margin-top: 18px; }
+/* La ligne d'action sous le titre d'un élève qui revient (séance passée, faite, 1er jour de retour) : des liens, pas d'or */
+.ligne-action { display: flex; flex-wrap: wrap; gap: 0 22px; margin: 2px 0 8px; }
+.ligne-action a { display: inline-flex; align-items: center; gap: 9px; min-height: 44px; font-weight: 700; color: var(--texte); text-decoration: underline; text-decoration-color: rgba(217, 178, 111, 0.6); text-underline-offset: 4px; }
+.ligne-action a:hover { color: var(--or-clair); }
+.ligne-action .ico { width: 20px; height: 20px; color: var(--or); }
+/* Ordinateur : la carte du jour à côté du banc d'optique (le banc reste dans le premier écran) */
+@media (min-width: 1000px) {
+  /* Le banc et ses boutons forment un seul bloc (.banc-colonne) : plus de vide entre eux */
+  .hero-retour { grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); column-gap: 40px; align-items: start; }
+  .hero-retour .hero-texte { grid-column: 1; grid-row: 1; }
+  .hero-retour .jour { grid-column: 1; grid-row: 2; margin-top: 8px; }
+  .hero-retour .banc-colonne { grid-column: 2; grid-row: 1 / span 2; }
+  .hero-retour .banc { margin: 0 0 0 -18px; }      /* ne dépasse plus du bord droit */
+}
+/* Téléphone et tablette : la carte de la séance est avant le banc d'optique, dans le code comme à l'écran */
 .outils-discrets .outil-vedette { grid-column: auto; align-items: flex-start; margin-bottom: 0; padding: 20px 4px; border: 0; border-top: 1px solid var(--bord); border-radius: 0; background: none; }
 .outils-discrets .outil-vedette:hover { padding-left: 12px; }
 .outils-discrets .outil-vedette .outil-icone { width: 30px; height: 30px; margin-top: 2px; border-radius: 0; color: var(--or); background: none; }
@@ -476,7 +499,7 @@ select option { background: var(--fond); }
 .jour .jour-action { flex: none; margin-top: 0; }
 .jour .jour-action:not(.secondaire) { min-height: 52px; padding: 14px 28px; font-size: 1.05rem; }
 .jour-action.secondaire .ico { color: var(--or); }
-.jour-detail { margin: 0 0 4px; color: var(--texte); font-size: 0.97rem; line-height: 1.45; }
+.jour-detail { margin: 0 0 4px; color: var(--texte); font-size: 0.97rem; line-height: 1.45; text-wrap: pretty; }
 .jour-detail .jour-erreurs { white-space: nowrap; }
 .jour-examen { margin: 16px 0 0; padding-top: 14px; border-top: 1px solid var(--bord); color: var(--doux); font-size: 0.95rem; line-height: 1.55; }
 .jour-examen b { font-family: var(--titre); font-size: 1.15rem; font-weight: 600; color: var(--or-clair); font-variant-numeric: lining-nums; }
@@ -502,7 +525,8 @@ select option { background: var(--fond); }
 @media (min-width: 620px) { .jour-matieres-choix { grid-template-columns: repeat(6, minmax(0, 1fr)); } }
 .jour-mot { display: flex; align-items: center; gap: 14px; margin: 0 0 16px; padding-bottom: 16px; border-bottom: 1px solid var(--bord); }
 .jour-compagnon { flex: none; width: 52px; height: 52px; border-radius: 50%; object-fit: cover; object-position: center 20%; background: var(--or-fond); border: 1.5px solid var(--or); cursor: pointer; }
-.jour-message { margin: 0; color: var(--texte); font-size: 0.97rem; line-height: 1.45; }
+.jour-message { margin: 0; max-width: 32em; color: var(--texte); font-size: 0.97rem; line-height: 1.45; text-wrap: pretty; }
+.jour-ligne + .decouverte { margin-top: 18px; }   /* « 5 minutes de plus » n'est plus collé à la carte de l'Atelier */
 .jour-message span { display: block; }
 .jour-message span + span { color: var(--doux); }
 .jour-rappel { margin-top: 12px; }
@@ -523,19 +547,41 @@ select option { background: var(--fond); }
 .decouverte-fermer:hover { color: var(--or); }
 .decouverte-fermer svg { width: 20px; height: 20px; }
 
-/* Première ouverture (index.html, html[data-accueil="premier"]) : un écran, une action, rien d'autre à explorer.
-   Le menu revient dès que l'élève a commencé, ou s'il choisit « Je connais déjà le site ». */
+/* Première ouverture (index.html, html[data-accueil="premier"]) : un écran, une action (« Commencer », juste sous la
+   phrase d'accueil), et seulement la matière à choisir dessous. Le menu (et la barre d'onglets du téléphone) reste visible. */
 .premiers-pas { display: none; }
 html[data-accueil="premier"] .premiers-pas { display: block; max-width: var(--lecture); margin: 0 auto; padding: 18px 0 0; background: none; border: 0; border-radius: 0; }
 html[data-accueil="premier"] main > :not(.premiers-pas) { display: none; }
-html[data-accueil="premier"] .entete nav { display: none; }
+.premiers-actions-haut { margin: 4px 0 14px; }
+/* Réglages compacts, AVANT le bouton qu'ils servent : une ligne chacun (accueil : premiers pas, écran du jour) */
+.reglage-ligne { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; margin: 0 0 18px; }
+.reglage-ligne label { color: var(--texte); font-size: 1.02rem; font-weight: 700; }
+.reglage-ligne select { flex: 1 1 16rem; min-width: 0; width: 100%; max-width: 26rem; min-height: 48px; margin: 0; font-size: 1rem; text-overflow: ellipsis; }
+.choix-compact { display: flex; flex-wrap: wrap; align-items: center; gap: 0 12px; margin-bottom: 10px; }
+@media (max-width: 400px) { .choix-compact { gap: 0 8px; } .choix-pastilles.choix-compact label { margin-right: 6px; } .choix-pastilles.choix-compact span { min-width: 50px; padding: 8px 12px; } }
+.choix-compact legend { float: left; margin: 0 4px 8px 0; }
+.choix-compact label { margin-bottom: 8px; }
+/* « Passer » et, à côté, ce que ça veut dire */
+.passer-ligne { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 12px; margin: 0 0 22px; }
+.passer-aide { max-width: 32em; color: var(--tres-doux); font-size: 0.86rem; text-wrap: pretty; }
+.lien-seulement { display: inline-flex; align-items: center; min-height: 44px; font-weight: 700; color: var(--texte); text-decoration: underline; text-underline-offset: 3px; }
+.choix-pastilles legend small { color: var(--doux); font-size: 0.86rem; font-weight: 400; }
+/* Le nom complet sous l'abréviation (OGP, ETSO…) */
+.choix-matiere span small { display: block; margin-top: 1px; font-size: 0.74rem; font-weight: 400; line-height: 1.2; opacity: 0.85; }
+.choix-matiere label span:has(small) { flex-direction: column; border-radius: 18px; padding-top: 6px; padding-bottom: 6px; }
+/* Au bilan des 5 premières questions (qcm.html) : personnage, année, objectif du jour */
+.reglages-bilan { max-width: 34rem; margin: 6px auto 22px; padding: 18px 0 0; text-align: left; border-top: 1px solid var(--bord); }
+.reglages-bilan h3 { margin: 0 0 14px; }
 main .tete-page + .premiers-reglages { margin-top: 6px; }
+/* « Cinq questions pour commencer. » : deux lignes au téléphone (à côté du compagnon), sans mot seul */
+@media (max-width: 520px) { #titre-premiers-pas { font-size: 1.8rem; } }
 /* Les jours suivants (index.html, html[data-accueil="jour"]) : l'écran de la séance du jour, seul sur l'accueil.
    Le menu reste ; « Passer pour aujourd'hui » rend l'accueil habituel. */
 .ecran-jour { display: none; }
 html[data-accueil="jour"] .ecran-jour { display: block; max-width: var(--lecture); margin: 0 auto; padding: 18px 0 0; background: none; border: 0; border-radius: 0; }
 html[data-accueil="jour"] main > :not(.ecran-jour) { display: none; }
 .ecran-jour .premiers-reglages { margin-top: 6px; }
+.ecran-jour-plan { margin: 0 0 22px; }
 .ecran-jour .bouton-grand.secondaire { color: var(--texte); }
 .ecran-jour-compte { margin-top: 26px; padding-top: 20px; border-top: 1px solid var(--bord); }
 .ecran-jour-compte .jour-mot { margin: 0; padding: 0; border: 0; }
@@ -581,7 +627,7 @@ html[data-accueil="jour"] main > :not(.ecran-jour) { display: none; }
 .perso-rangee input:checked + .rond { border-color: var(--or); outline: 3px solid rgba(217, 178, 111, 0.28); }
 .perso-rangee input:focus-visible + .rond { outline: 2px solid var(--or); outline-offset: 2px; }
 @media (max-width: 340px) { .perso-rangee { grid-template-columns: repeat(4, minmax(0, 56px)); gap: 8px; } }   /* très petit écran : deux lignes, des ronds assez grands pour le doigt */
-.premiers-aide { margin: -6px 0 26px; color: var(--tres-doux); font-size: 0.9rem; }
+.premiers-aide { margin: -6px 0 26px; color: var(--tres-doux); font-size: 0.9rem; text-wrap: pretty; }
 .premiers-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 18px; }
 .bouton-grand { margin-top: 0; min-height: 56px; padding: 16px 44px; font-size: 1.1rem; }
 .jour-rappel a { font-weight: 700; }
@@ -662,7 +708,7 @@ html[data-accueil="jour"] main > :not(.ecran-jour) { display: none; }
 .pastille.entrainement { color: var(--doux); font-weight: 700; }
 /* Questions d'entraînement : une pastille à part (bord en pointillés) et un lien sous la barre du thème */
 .theme.theme-entrainement:not(.actif) { border-style: dashed; }
-.lien-entrainement { display: inline-block; margin: -10px 0 18px; padding: 10px 0; font-size: 0.92rem; }
+.lien-entrainement { display: inline-block; margin: -10px 0 18px; padding: 10px 0; font-size: 0.92rem; text-wrap: pretty; }
 
 /* ---------- 11. QCM ---------- */
 .themes { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
@@ -679,7 +725,8 @@ html[data-accueil="jour"] main > :not(.ecran-jour) { display: none; }
 main[data-epreuve] #sous-titre { color: rgb(var(--accent-rgb)); }
 #zone { scroll-margin-top: 84px; padding: 26px; }
 .progression { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; color: var(--doux); font-size: 0.84rem; margin-bottom: 16px; font-variant-numeric: tabular-nums; }
-.enonce { font-size: clamp(1.2rem, 1.4vw + 0.95rem, 1.5rem); font-weight: 650; line-height: 1.36; margin: 0 0 22px; text-wrap: pretty; }
+.enonce { font-family: var(--corps); letter-spacing: 0; font-size: clamp(1.2rem, 1.4vw + 0.95rem, 1.5rem); font-weight: 650; line-height: 1.36; margin: 0 0 22px; text-wrap: pretty; }
+.enonce:focus, .bilan-titre:focus, .hero h1:focus { outline: none; }   /* focus posé par le script (lecteurs d'écran) */   /* focus posé par le script pour les lecteurs d'écran : pas de cadre */
 .choix { display: flex; flex-direction: column; gap: 10px; }
 .choix button {
   position: relative; text-align: left; min-height: 58px; padding: 15px 18px 15px 62px; font: inherit; font-size: 1.02rem; line-height: 1.42; color: var(--texte);
@@ -697,18 +744,28 @@ main[data-epreuve] #sous-titre { color: rgb(var(--accent-rgb)); }
 .choix button:active:not(:disabled) { transform: scale(0.985); }
 .choix button:disabled { cursor: default; }
 .choix.repondu button:not(.juste):not(.faux) { opacity: 0.6; }
+/* Le choix touché, juste avant la validation (DELAI_CHOIX, qcm.html) : il s'allume, un trait se remplit dessous.
+   Toucher une autre réponse change d'avis ; toucher la même valide tout de suite. */
+.choix button.choisi { border-color: var(--or); }
+.choix button.choisi::before { color: var(--encre); background: var(--or); border-color: var(--or); }
+.choix button.choisi::after { content: ""; position: absolute; left: 14px; right: 14px; bottom: 6px; height: 2px; border-radius: 2px; background: var(--or); transform-origin: left; animation: choix-remplit 450ms linear both; }
+@keyframes choix-remplit { from { transform: scaleX(0); } to { transform: scaleX(1); } }
 .choix button.juste { border-color: var(--vert); background: var(--vert-fond); animation: pulse 600ms ease-out; }
 .choix button.juste::before { content: "✓"; content: "✓" / "Bonne réponse"; font-family: var(--corps); font-style: normal; font-size: 0.95rem; font-weight: 800; color: var(--fond); background: var(--vert); border-color: var(--vert); }
 .choix button.faux { border-color: var(--rouge); background: var(--rouge-fond); animation: secoue 420ms ease-in-out; }
 .choix button.faux::before { content: "✕"; content: "✕" / "Réponse fausse"; font-family: var(--corps); font-style: normal; font-size: 0.9rem; font-weight: 800; color: var(--fond); background: var(--rouge); border-color: var(--rouge); }
 /* QCM dont les réponses sont des schémas */
 .choix.choix-images { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-.choix.choix-images button { padding: 8px; }
-.choix.choix-images button::before { top: 12px; left: 12px; transform: none; z-index: 1; background: var(--fond); }
+/* La lettre (puis ✓ ou ✕) au-dessus du dessin, plus posée dessus : elle ne cache plus les étiquettes OD/OG */
+.choix.choix-images button { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; padding: 8px; }
+.choix.choix-images button::before { position: static; transform: none; background: var(--fond); }
+/* La règle du dessus remettait le fond sombre : ✓ et ✕ devenaient invisibles sur les propositions dessinées */
+.choix.choix-images button.juste::before { color: var(--fond); background: var(--vert); border-color: var(--vert); }
+.choix.choix-images button.faux::before { color: var(--fond); background: var(--rouge); border-color: var(--rouge); }
 .choix.choix-images img { display: block; width: 100%; height: auto; border-radius: 8px; background: #0f1219; }
-@media (max-width: 380px) { .choix.choix-images { grid-template-columns: 1fr; } }
+@media (max-width: 420px) { .choix.choix-images { grid-template-columns: 1fr; } }   /* une colonne au téléphone : les textes des dessins restent lisibles */
 
-.explication { margin-top: 20px; padding: 18px 20px; border-radius: 14px; background: var(--fond-2); border: 1px solid var(--bord-fort); animation: net 520ms var(--sortie) both; }
+.explication { scroll-margin-bottom: calc(110px + env(safe-area-inset-bottom)); margin-top: 20px; padding: 18px 20px; border-radius: 14px; background: var(--fond-2); border: 1px solid var(--bord-fort); animation: net 520ms var(--sortie) both; }
 .explication.bien { border-color: rgba(95, 211, 154, 0.5); }
 .explication.mal { border-color: rgba(255, 122, 122, 0.5); }
 .expl-tete { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
@@ -717,6 +774,19 @@ main[data-epreuve] #sous-titre { color: rgb(var(--accent-rgb)); }
 .explication.mal .expl-tete strong { color: var(--rouge); }
 .expl-diosl { flex: none; width: 58px; height: auto; animation: saute 700ms var(--rebond) both; }
 .info-revision { margin: 12px 0 0; font-size: 0.9rem; color: var(--or-clair); }
+.bonne-reponse { margin: -2px 0 6px; color: var(--vert); font-weight: 700; font-size: 1rem; line-height: 1.45; }
+.ta-reponse { margin: 0 0 10px; color: var(--doux); font-size: 0.95rem; }
+/* « Question suivante » collant en bas de l'écran (au-dessus de la barre d'onglets du téléphone) : après une longue
+   explication, il reste toujours visible ; on fait défiler le milieu de l'explication. */
+#zone .bouton-suivant { position: sticky; bottom: calc(var(--bas-onglets, 0px) + 12px); z-index: 3; box-shadow: 0 0 0 6px var(--carte), 0 8px 18px rgba(0, 0, 0, 0.35); }
+.contexte-avant { margin: 10px 0 0; }
+.contexte-avant > summary { min-height: 44px; display: flex; align-items: center; cursor: pointer; color: rgb(var(--accent-rgb)); font-weight: 700; font-size: 0.92rem; }
+.contexte-avant[open] > summary { margin-bottom: 4px; }
+.pose-etape { scroll-margin-top: calc(var(--haut-entete, 64px) + 70px); scroll-margin-bottom: calc(var(--bas-onglets, 0px) + 16px); }
+.lien-arreter { display: block; min-height: 44px; margin: 6px 0 0; padding: 8px 0; font: inherit; font-size: 0.88rem; color: var(--doux); background: none; border: 0; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
+.lien-arreter:hover { color: var(--texte); }
+.indice small { display: block; margin-top: 6px; color: var(--doux); font-size: 0.82rem; }
+.erreurs .erreur-tienne { display: block; margin-bottom: 4px; color: #f0a39a; font-size: 0.94rem; }
 .revoir { margin-top: 12px; padding: 9px 16px; min-height: 44px; font-size: 0.92rem; }
 .raccourcis { margin: 16px 0 0; color: var(--tres-doux); font-size: 0.82rem; }
 .raccourcis kbd { display: inline-block; min-width: 1.7em; padding: 1px 6px; border-radius: 6px; border: 1px solid var(--bord-fort); border-bottom-width: 2px; font: 700 0.76rem var(--corps); text-align: center; color: var(--doux); }
@@ -766,7 +836,7 @@ figure.schema object, figure.schema img { display: block; width: 100%; height: a
 .bilan.palier-argent { --c-palier: #c9d1dc; --c-palier-clair: #eef2f7; }
 .bilan.palier-bronze { --c-palier: #d08a5c; --c-palier-clair: #f0bf9c; }
 .bilan-tete { position: relative; width: 210px; margin: 0 auto 8px; }
-.bilan-nounours { position: absolute; right: -40px; bottom: -8px; width: 104px; height: auto; filter: drop-shadow(0 8px 10px rgba(0, 0, 0, 0.45)); animation: saute 800ms 450ms var(--rebond) both; }
+.bilan-nounours { position: absolute; right: -92px; bottom: -8px; width: 104px; height: auto; filter: drop-shadow(0 8px 10px rgba(0, 0, 0, 0.45)); animation: saute 800ms 450ms var(--rebond) both; }
 .bilan-titre { font-size: clamp(1.9rem, 4vw + 0.8rem, 2.8rem); margin: 12px 0 8px; color: var(--c-palier-clair); animation: net 600ms 250ms var(--sortie) both; }
 .bilan-sous { color: var(--doux); margin: 0 auto 18px; max-width: 46ch; animation: net 600ms 350ms var(--sortie) both; }
 .bilan-stats { display: flex; flex-direction: column; align-items: center; gap: 4px; margin: 0 0 20px; }
@@ -792,7 +862,10 @@ figure.schema object, figure.schema img { display: block; width: 100%; height: a
 .erreurs li .doux { display: block; font-size: 0.94rem; }
 
 /* Page d'une épreuve : Shorts + QCM */
-.barre-outils { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 18px; }
+.barre-outils { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-start; gap: 8px 10px; margin-bottom: 12px; }
+/* Page d'une épreuve : un titre un peu moins haut, pour que la première question arrive dans le premier écran */
+main:has(#ecran-qcm:not([hidden])) > h1 { font-size: clamp(2.1rem, 3vw + 1rem, 3.3rem); }
+main:has(#ecran-qcm:not([hidden])) > .sous-titre { margin-bottom: 18px; }
 .barre-outils .retour { margin: 0; }
 /* « Sors ta calculatrice » au début d'une séance : un bandeau teinté d'or, comme l'outil du jour, avec son bouton « Je l'ai » */
 .rappel-calculatrice { display: flex; align-items: center; gap: 14px; margin: -2px 0 20px; padding: 12px 14px 12px 16px;
@@ -803,6 +876,11 @@ figure.schema object, figure.schema img { display: block; width: 100%; height: a
 .rappel-calculatrice p span { color: var(--texte); font-size: 0.93rem; }
 .rappel-calculatrice .bouton { flex: none; margin-top: 0; min-height: 44px; padding: 10px 18px; }
 @media (max-width: 360px) { .rappel-calculatrice { gap: 10px; padding-left: 12px; } .rappel-calculatrice p span { display: none; } }
+/* Une seule ligne : « Sors ta calculatrice » et « Je l'ai » (il n'apparaît que si la séance a un calcul) */
+.rappel-calculatrice { gap: 10px; margin: 0 0 12px; padding: 4px 6px 4px 12px; }
+.rappel-calculatrice .ico { width: 24px; height: 24px; }
+.rappel-calculatrice b { display: inline; margin-right: 6px; font-size: 1rem; }
+@media (max-width: 520px) { .rappel-calculatrice p span { display: none; } }
 .vues { display: inline-flex; padding: 4px; border-radius: 999px; border: 1px solid var(--bord-fort); background: var(--fond-2); }
 .vues button { padding: 7px 15px; min-height: 44px; font: inherit; font-size: 0.87rem; color: var(--doux); background: transparent; border: none; border-radius: 999px; cursor: pointer; transition: color var(--vite), background var(--vite); }
 .vues button:hover { color: var(--texte); }
@@ -816,7 +894,7 @@ figure.schema object, figure.schema img { display: block; width: 100%; height: a
 .vue-shorts .liste-shorts { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); }
 .vue-shorts .lecteur iframe { max-width: 360px; }
 main.large:has(.vue-qcm) { max-width: var(--lecture); }
-.colonne-shorts { position: sticky; top: 84px; }
+.colonne-shorts { position: static; }
 .titre-colonne { margin: 0 0 10px; color: var(--or); font-size: 0.95rem; font-weight: 700; }
 .liste-shorts { display: flex; flex-direction: column; gap: 8px; }
 .short { display: flex; align-items: center; gap: 12px; width: 100%; padding: 8px; font: inherit; text-align: left; color: var(--texte); background: var(--carte); border: 1px solid var(--bord); border-radius: 12px; cursor: pointer; transition: border-color var(--vite), transform 320ms var(--sortie); }
@@ -832,8 +910,6 @@ main.large:has(.vue-qcm) { max-width: var(--lecture); }
 .lecteur iframe { display: block; width: 100%; aspect-ratio: 9 / 16; border: 0; border-radius: 10px; background: #000; }
 .lecteur .bouton { margin-top: 0; }
 .lecteur p.doux { margin: 0; font-size: 0.94rem; }
-.lien-atelier { display: inline-block; margin: -6px 0 18px; padding: 9px 16px; border-radius: 999px; font-size: 0.9rem; text-decoration: none; color: rgb(122, 170, 230); background: rgba(122, 170, 230, 0.1); border: 1px solid rgba(122, 170, 230, 0.35); }
-.lien-atelier:hover { color: rgb(160, 196, 240); background: rgba(122, 170, 230, 0.18); }
 @media (max-width: 860px) {
   .vue-deux { grid-template-columns: minmax(0, 1fr); }
   .colonne-shorts { position: static; }
@@ -844,31 +920,85 @@ main.large:has(.vue-qcm) { max-width: var(--lecture); }
   .vues button { padding: 7px 11px; }
 }
 
-/* Page d'une épreuve « échauffement » : Atelier, cas et Spécificités d'abord, le QCM ensuite */
-.cartes-avant { display: grid; gap: 10px; margin: 0 0 16px; }
-@media (min-width: 760px) { .cartes-avant { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); } }
-.carte-avant { display: flex; align-items: center; gap: 14px; min-height: 76px; padding: 16px 18px; border-radius: var(--rayon); text-decoration: none; color: var(--texte);
-  background: var(--carte); border: 1px solid rgba(var(--accent-rgb), 0.45); transition: transform 320ms var(--sortie), border-color var(--vite); }
-.carte-avant:hover { color: var(--texte); transform: translateY(-2px); border-color: rgb(var(--accent-rgb)); }
-.carte-avant > .ico { width: 30px; height: 30px; color: rgb(var(--accent-rgb)); }
-.carte-avant-texte { flex: 1; min-width: 0; }
-.carte-avant b { display: block; font-family: var(--titre); font-size: 1.2rem; font-weight: 600; line-height: 1.2; }
-.carte-avant small { display: block; margin-top: 2px; color: var(--doux); font-size: 0.86rem; }
-.carte-avant .fleche { color: rgb(var(--accent-rgb)); font-size: 1.2rem; }
-.liens-avant { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 14px; }
-.lien-avant { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 8px 15px; border-radius: 999px; font-size: 0.9rem; text-decoration: none; color: rgb(var(--accent-rgb)); background: rgba(var(--accent-rgb), 0.08); border: 1px solid rgba(var(--accent-rgb), 0.4); }
-.lien-avant:hover { color: var(--texte); border-color: rgb(var(--accent-rgb)); }
-.titre-echauffement { margin: 4px 0 12px; font-size: clamp(1.3rem, 1.2vw + 1rem, 1.6rem); }
+/* Autour du QCM d'une épreuve : Atelier, Examen blanc, Spécificités sur une seule ligne discrète, dans la barre du haut
+   (entre « Toutes les épreuves » et « Son »). Sur téléphone, la ligne passe dessous et défile de côté. */
+.mise-en-avant { flex: 0 1 auto; min-width: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 2px 0; }
+.lien-avant { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 8px; border-radius: 10px; font: inherit; font-size: 0.9rem; text-decoration: none; white-space: nowrap; color: var(--texte); background: transparent; border: 0; cursor: pointer; transition: color var(--vite), background var(--vite); }
+.lien-avant .ico { width: 18px; height: 18px; color: rgb(var(--accent-rgb)); }
+.lien-avant small { color: var(--doux); font-size: 0.82rem; font-variant-numeric: tabular-nums; }
+.lien-avant:hover { color: var(--texte); background: rgba(var(--accent-rgb), 0.1); }
+.lien-avant[aria-expanded="true"] { background: rgba(var(--accent-rgb), 0.14); }
+.lien-avant:focus-visible { outline: 2px solid var(--or); outline-offset: 1px; }
+.barre-outils .bouton-son { margin-left: auto; }
+.barre-outils .vues:not([hidden]) ~ .bouton-son { margin-left: 0; }
+@media (max-width: 760px) {
+  .barre-outils { row-gap: 2px; }
+  /* Sous « Toutes les épreuves » ; passe sur 2 lignes s'il le faut (rien de caché hors de l'écran) */
+  .mise-en-avant { order: 5; flex: 1 0 100%; margin-left: -8px; }
+  .lien-avant { flex: none; }
+}
+@media (max-width: 520px) {
+  .lien-avant .mot-long, .lien-avant small { display: none; }
+}
+/* « Autres thèmes (n) » : les thèmes qui ne sont pas « Essentiel », repliés derrière une pastille */
+.theme.theme-autres { border-style: dashed; color: var(--texte); }
+/* « ★ = tombe souvent au BTS » : la légende de l'étoile des pastilles */
+.legende-etoile { margin: -12px 0 16px; color: var(--doux); font-size: 0.82rem; }
+.legende-etoile span { color: var(--or); }
+
+/* La série lancée (replierPage) : titre, liens, thèmes et barre de l'épreuve repliés dans une ligne collée sous le menu */
+main.serie-lancee > #sous-titre,
+main.serie-lancee .barre-outils:not(.barre-serie), main.serie-lancee:not(.vue-specificites) #specificites,
+main.serie-lancee #themes, main.serie-lancee #legende-etoile, main.serie-lancee #progression-epreuve,
+main.serie-lancee #lien-entrainement, main.serie-lancee #aide-erreurs { display: none; }
+.barre-serie { position: sticky; top: var(--haut-entete, 64px); z-index: 5; flex-wrap: nowrap; gap: 8px; margin: -8px 0 14px; padding: 6px 0; background: var(--fond); border-bottom: 1px solid var(--bord); }
+.barre-serie-texte { flex: 1 1 auto; min-width: 0; display: flex; align-items: baseline; gap: 10px; margin: 0; white-space: nowrap; font-size: 0.92rem; }
+.bs-lieu { min-width: 0; overflow: hidden; text-overflow: ellipsis; font-weight: 700; color: rgb(var(--accent-rgb)); }
+.bs-score .bs-court { display: none; }
+.bs-num, .bs-score { flex: none; color: var(--doux); font-variant-numeric: tabular-nums; }
+.bs-changer { flex: none; min-height: 44px; padding: 8px 14px; font: inherit; font-size: 0.88rem; color: var(--texte); background: transparent; border: 1px solid var(--bord-fort); border-radius: 999px; cursor: pointer; }
+.bs-changer:hover { border-color: var(--or); }
+.barre-serie .bouton-son { margin-left: 0; }
+.spec-retour { grid-column: 1 / -1; margin: 0; }
+.spec-retour button { min-height: 44px; padding: 8px 0; font: inherit; font-size: 0.92rem; font-weight: 700; color: rgb(var(--accent-rgb)); background: none; border: 0; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
+main.serie-lancee .progression .numero-question { display: none; }
+/* Série lancée : le titre de l'épreuve est caché à l'écran mais toujours lu (il reste un h1) */
+main.serie-lancee > #titre { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+/* Un piège ouvert par son lien arrive sous le menu et la ligne de la série collante */
+#specificites .piege, main.serie-lancee .explication { scroll-margin-top: calc(var(--haut-entete, 64px) + 70px); }
+main.serie-lancee #zone > .barre { display: none; }   /* la ligne de la série montre déjà où on en est */
+/* Premiers pas sur la page QCM : l'accueil a déjà présenté les 5 questions ; titre gardé pour les lecteurs d'écran */
+main.premiers-pas-qcm > #titre { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); }
+main.premiers-pas-qcm > #sous-titre { display: none; }
+.bilan-actions-fin { margin: 18px 0 0; }
+.continuer-haut { margin: 0 auto 18px; }
+/* Spécificités ouvertes : la fiche remplace les questions (et les thèmes) jusqu'à « Revenir aux questions » */
+main.vue-specificites #disposition, main.vue-specificites #legende-etoile, main.vue-specificites #progression-epreuve,
+main.vue-specificites #lien-entrainement { display: none; }   /* le numéro est déjà dans la ligne de la série */
+.message-vide { grid-column: 1 / -1; margin: 0 0 4px; padding: 14px 18px; border-radius: var(--rayon); background: var(--carte); border: 1px solid var(--bord-fort); color: var(--texte); }
+.info-hors-annales { margin: 10px 0 0; color: var(--doux); font-size: 0.88rem; }
+/* « Revoir la situation », « Le piège : … » : des liens discrets sous la correction */
+.lien-correction { display: block; min-height: 44px; margin: 6px 0 0; padding: 6px 0; font: inherit; font-size: 0.9rem; text-align: left; color: var(--texte); background: none; border: 0; cursor: pointer; text-decoration: underline; text-decoration-color: rgba(217, 178, 111, 0.6); text-underline-offset: 3px; }
+.lien-correction:hover { color: var(--or-clair); }
+/* La situation d'un cas, dans une fenêtre par-dessus la page (la place dans la correction ne bouge pas) */
+.fenetre-situation { width: min(92vw, 40rem); max-height: 86vh; padding: 20px; color: var(--texte); background: var(--carte); border: 1px solid rgba(var(--accent-rgb), 0.5); border-radius: var(--rayon); }
+.fenetre-situation::backdrop { background: rgba(5, 7, 10, 0.72); }
+.fenetre-situation h2 { margin: 0 0 10px; font-size: 1.3rem; }
+.fenetre-situation p { margin: 0 0 10px; line-height: 1.5; }
+.fenetre-situation .bouton { margin-top: 12px; }
+.theme.theme-revoir { display: inline-flex; align-items: center; gap: 6px; color: var(--texte); }
+.theme.theme-revoir .ico { width: 16px; height: 16px; color: var(--or); }
+main.serie-lancee #zone { scroll-margin-top: calc(var(--haut-entete, 64px) + 70px); }
 
 /* Spécificités de l'épreuve (fichier specificites-XX.js), repliable */
-.specificites { margin: 0 0 22px; border: 1px solid rgba(var(--accent-rgb), 0.35); border-radius: var(--rayon); background: var(--carte); }
+.specificites { margin: 0 0 22px; scroll-margin-top: 84px; border: 1px solid rgba(var(--accent-rgb), 0.35); border-radius: var(--rayon); background: var(--carte); }
 .specificites > summary { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 14px; padding: 14px 52px 14px 20px; min-height: 52px; cursor: pointer; list-style: none; position: relative; border-radius: var(--rayon); }
 .specificites > summary::-webkit-details-marker { display: none; }
 .specificites > summary::after { content: ""; position: absolute; right: 20px; top: 50%; width: 10px; height: 10px; margin-top: -7px; border: solid rgb(var(--accent-rgb)); border-width: 0 2px 2px 0; transform: rotate(45deg); transition: transform 320ms var(--sortie); }
 .specificites[open] > summary::after { transform: rotate(-135deg); margin-top: -2px; }
 .specificites > summary:focus-visible { outline: 2px solid var(--or); outline-offset: 2px; }
 .spec-tete { display: inline-flex; align-items: center; gap: 9px; color: rgb(var(--accent-rgb)); }
-.spec-tete b { font-family: var(--titre); font-size: 1.25rem; font-weight: 600; font-style: italic; }
+.spec-tete b { font-family: var(--titre); font-size: 1.25rem; font-weight: 600; }
 .specificites > summary small { color: var(--doux); font-size: 0.88rem; }
 .spec-corps { display: grid; gap: 14px; padding: 4px 20px 20px; }
 @media (min-width: 900px) { .spec-corps { grid-template-columns: 1fr 1fr; align-items: start; } .spec-type-pieges, .spec-type-etapes { grid-column: 1 / -1; } }
@@ -956,13 +1086,17 @@ kbd.touche { display: inline-block; min-width: 1.9em; margin: 0 1px; padding: 0 
 .contexte > p:last-child { margin-bottom: 0; }
 .contexte-tete { font-size: 0.88rem !important; font-weight: 700; color: rgb(var(--accent-rgb)); }
 .contexte-titre { font-family: var(--titre); font-size: 1.15rem; font-weight: 600; }
+.contexte-situation > summary { min-height: 44px; display: flex; flex-wrap: wrap; align-items: center; cursor: pointer; font-weight: 700; }
+.contexte-situation > summary span { margin-left: 4px; color: rgb(var(--accent-rgb)); text-decoration: underline; text-underline-offset: 3px; font-weight: 600; }
+.contexte-situation > p { margin: 4px 0 8px; }
+.contexte-etape.nouveau, .contexte .difficulte, #zone .difficulte { scroll-margin-top: calc(var(--haut-entete, 64px) + 70px); }
 .contexte-etape { margin-top: 8px; padding-top: 8px; border-top: 1px dashed var(--bord-fort); }
 .contexte-etape p { margin: 0; }
 .contexte-etape b { color: var(--doux); }
 .contexte-etape.nouveau b { color: rgb(var(--accent-rgb)); }
 .annexe { margin: 10px 0 0; }
 .annexe figcaption { margin-bottom: 4px; font-size: 0.82rem; font-weight: 700; color: var(--doux); }
-.annexe-defile { overflow-x: auto; border-radius: 10px; border: 1px solid var(--bord); }
+.annexe-defile { overflow-x: auto; }   /* pas de cadre : le tableau est déjà dans le cadre du contexte */
 .annexe-defile:focus-visible { outline: 2px solid var(--or); outline-offset: 2px; }
 .annexe table { border-collapse: collapse; min-width: 100%; font-size: 0.92rem; font-variant-numeric: tabular-nums; }
 .annexe th, .annexe td { padding: 7px 10px; text-align: center; border-top: 1px solid var(--bord); white-space: nowrap; }
@@ -970,14 +1104,18 @@ kbd.touche { display: inline-block; min-width: 1.9em; margin: 0 1px; padding: 0 
 .annexe tbody th { text-align: left; font-weight: 600; color: var(--doux); }
 
 /* Cas pratiques */
+.theme.theme-cas .compte-theme { margin-left: -2px; }
 .theme.theme-cas { display: inline-flex; align-items: center; gap: 6px; border-style: dashed; border-color: rgba(var(--accent-rgb), 0.6); color: var(--texte); }
 .theme.theme-cas.actif { border-style: solid; color: var(--encre); }
 .titre-cas { margin: 0 0 6px; font-size: clamp(1.5rem, 1.6vw + 1rem, 1.9rem); }
 .intro-cas { margin: 0 0 18px; }
 .liste-cas { display: grid; gap: 12px; }
 .carte-cas { padding: 18px; border-radius: 14px; background: var(--fond-2); border: 1px solid var(--bord-fort); }
-.carte-cas h3 { margin: 0 0 6px; font-family: var(--titre); font-size: 1.25rem; font-weight: 600; }
-.carte-cas-texte { margin: 0 0 6px; color: var(--doux); font-size: 0.95rem; }
+.carte-cas h3 { margin: 0 0 6px; font-family: var(--titre); font-size: 1.25rem; font-weight: 600; text-wrap: balance; }
+.carte-cas-texte { margin: 0 0 6px; max-width: 36em; color: var(--doux); font-size: 0.95rem; text-wrap: pretty; }
+/* La liste des cas : la zone n'est plus une carte (chaque cas est sa propre carte) */
+#zone.zone-liste { padding: 0; background: none; border: 0; }
+#zone.zone-liste .carte-cas { background: var(--carte); }
 .carte-cas-info { margin: 0 0 12px; color: rgb(var(--accent-rgb)); font-size: 0.85rem; font-weight: 700; }
 .carte-cas .bouton { margin-top: 0; }
 
@@ -1430,11 +1568,16 @@ main.en-jeu .tete-page { display: none; }
 .saisie-ligne input:disabled { opacity: 0.75; }
 .saisie-unite { font-weight: 700; color: var(--doux); min-width: 1em; }
 .saisie-calcul .bouton { margin: 0; }
+/* Une fois la réponse donnée, « Valider » n'a plus l'air d'un bouton à toucher */
+.saisie-calcul .bouton:disabled { color: var(--doux); background: transparent; box-shadow: inset 0 0 0 1px var(--bord); opacity: 1; }
 .saisie-qcm { margin-bottom: 4px; }
 .saisie-qcm.juste input { border-color: var(--vert); background: var(--vert-fond); }
 .saisie-qcm.faux input { border-color: var(--rouge); background: var(--rouge-fond); }
 .correction-calcul { margin: 0 0 8px; font-weight: 700; }
 .saisie-aide { flex-basis: 100%; margin: 0; color: var(--doux); font-size: 0.88rem; }
+/* Dans le QCM, la consigne d'arrondi passe AU-DESSUS de la case : le clavier du téléphone ne la cache plus */
+.saisie-qcm > .saisie-aide { order: -1; }
+.pose-regle { margin: 12px 0 0; max-width: 36em; text-wrap: pretty; }
 /* « Quelle unité ? » (essentiel.js, ajouterAideUnite) : sous la case d'un calcul, s'ouvre en encadré comme l'indice */
 .bouton-unite { min-height: 44px; margin: -6px 0 0; padding: 8px 2px; font: inherit; font-size: 0.9rem; color: var(--or); background: none; border: 0; cursor: pointer; text-decoration: underline; text-decoration-style: dotted; text-underline-offset: 4px; }
 .bouton-unite:hover { color: var(--or-clair); }
@@ -1587,6 +1730,7 @@ main.en-jeu .tete-page { display: none; }
 .invitation-appli .ico-partager { width: 18px; height: 18px; vertical-align: -3px; color: var(--or); }
 .bouton-discret { background: none; border: 0; color: var(--doux); font: inherit; font-size: 0.9rem; cursor: pointer; padding: 10px 6px; min-height: 44px; white-space: nowrap; text-decoration: underline; text-underline-offset: 3px; }
 .bouton-discret:hover { color: var(--or); }
+.passer-ligne .bouton-discret { padding-left: 0; padding-right: 0; }   /* aligné sur le reste de la colonne */
 
 /* ---------- 15. Pied de page ---------- */
 footer { max-width: var(--large); margin: 0 auto; padding: 26px 18px 40px; color: var(--tres-doux); font-size: 0.84rem; border-top: 1px solid var(--bord); display: flex; flex-wrap: wrap; align-items: center; gap: 6px 14px; line-height: 1.5; }
@@ -1668,8 +1812,44 @@ html[data-fond="clair"] .atelier:disabled { opacity: 0.56; }
   .choix button::before { left: 13px; }
   .specificites > summary { padding-left: 16px; }
   .spec-corps { padding: 4px 12px 14px; }
+  /* La ligne au-dessus de l'énoncé tient sur une ligne : « 3 / 66 », thème (coupé s'il est long), session.
+     « Question » reste lu par les lecteurs d'écran ; le score est dans la ligne de la série (caché ici faute de place). */
+  .progression { flex-wrap: nowrap; gap: 8px; white-space: nowrap; }
+  .progression > * { flex: none; }
+  .progression .pastille-theme { flex: 0 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+  .bs-score .bs-long { display: none; }
+  .bs-score .bs-court { display: inline; }
+  /* Séances (À revoir, séance du jour…) : un en-tête plus court, pour que la question arrive plus haut */
+  main.en-seance > h1 { font-size: 1.9rem; margin-bottom: 6px; }
+  main.en-seance > .sous-titre { font-size: 0.95rem; margin-bottom: 10px; }
+  main.en-seance .barre-outils { margin-bottom: 4px; }
+  main.en-seance #themes { margin-bottom: 8px; }
+  .bs-changer { padding: 8px 11px; font-size: 0.84rem; }
+  /* Page QCM : les thèmes passent à la ligne (plus de ruban qui défile sans le dire) */
+  #themes { flex-wrap: wrap; overflow: visible; margin-right: 0; padding-right: 0; gap: 6px; }
+  #themes .theme { padding: 6px 11px; font-size: 0.86rem; }      /* plus compact, toujours 44 px de haut */
+  .progression .mot-question { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); }
+  /* Écran de fin : le compagnon à côté de l'anneau, plus par-dessus */
+  .bilan-tete { display: flex; justify-content: center; align-items: flex-end; gap: 4px; width: auto; }
+  .bilan-tete .anneau { flex: none; margin: 0; }
+  .bilan-nounours { position: static; flex: none; width: 78px; margin-bottom: -4px; }
   .spec-bloc { padding: 14px; }
   .contexte { padding: 12px 13px; }
+}
+/* Sous 400 px, le tableau d'une annexe tient sans défiler : moins de marges, les cellules passent à la ligne */
+@media (max-width: 400px) {
+  #zone { padding-left: 12px; padding-right: 12px; }
+  .contexte { padding: 8px 10px; font-size: 0.92rem; line-height: 1.35; }
+  .contexte .contexte-titre { line-height: 1.2; }
+  .contexte > p { margin-bottom: 6px; }
+  .contexte-titre { font-size: 1.02rem; }
+  .annexe { margin-top: 6px; }
+  .annexe figcaption { margin-bottom: 2px; }
+  .annexe table { font-size: 0.84rem; line-height: 1.3; }
+  .annexe th, .annexe td { padding: 4px 5px; white-space: normal; }
+  .annexe tbody th { width: 32%; hyphens: auto; -webkit-hyphens: auto; overflow-wrap: anywhere; }
+  .contexte { margin-bottom: 12px; }
+  .progression { margin-bottom: 10px; }
 }
 
 /* ---------- Calculs posés (essentiel.js, ecrireTexteMath) : vraies fractions, une étape par ligne ---------- */
@@ -1681,6 +1861,7 @@ span.frac span.frac { font-size: 0.86em; }
 span.frac-groupe { white-space: nowrap; }    /* « = 1/2 », « −1/2 » : la ligne se coupe avant le signe, jamais entre le signe et la fraction */
 /* Une étape par ligne ; une ligne trop large pour le téléphone défile au lieu de déborder */
 span.ligne-calcul { display: block; }
+span.ligne-vide { display: block; height: 0.6em; }
 span.ligne-calcul + span.ligne-calcul { margin-top: 0.3em; }
 span.ligne-calcul.avec-fraction { margin-top: 0.45em; margin-bottom: 0.15em; padding: 0.05em 0; overflow-x: auto; overflow-y: hidden; }
 
@@ -1725,7 +1906,7 @@ span.ligne-calcul.avec-fraction { margin-top: 0.45em; margin-bottom: 0.15em; pad
 /* ---------- Lettre des nouveautés (lettre.js) : « Préviens-moi » par e-mail ---------- */
 .lettre { margin: 40px 0 0; padding: 24px; border-radius: var(--rayon); background: var(--carte); border: 1px solid var(--bord); }
 .lettre h2 { margin: 0 0 8px; font-size: 1.5rem; }
-.lettre-texte { margin: 0 0 14px; max-width: 62ch; line-height: 1.55; }
+.lettre-texte { margin: 0 0 14px; max-width: 32em; line-height: 1.55; text-wrap: pretty; }   /* ~70 signes par ligne */
 .lettre-texte:focus { outline: none; }
 .lettre-form { display: grid; gap: 6px; max-width: 520px; }
 .lettre-form label { flex: none; color: var(--doux); font-size: 0.9rem; }
@@ -1855,8 +2036,9 @@ html:has(body.en-examen) { scroll-padding-top: 150px; }
 /* Sur la carte du jour (accueil, profil) : une ligne sous la semaine ; sur l'écran du jour : juste au-dessus des choix */
 .plan-semaine { margin: 16px 0 0; padding-top: 14px; border-top: 1px solid var(--bord); }
 .ecran-jour .plan-semaine { margin: 0 0 20px; padding: 0; border: 0; }
-.plan-ligne { margin: 0; color: var(--texte); font-size: 1rem; line-height: 1.5; }
+.plan-ligne { margin: 0; max-width: 32em; color: var(--texte); font-size: 1rem; line-height: 1.5; text-wrap: pretty; }
 .plan-ligne b { color: var(--or-clair); font-weight: 700; }
+.plan-raisons, .plan-regle { max-width: 36em; text-wrap: pretty; }   /* ~70 signes par ligne */
 .plan-jour { color: var(--doux); }
 .plan-pourquoi > summary { display: inline-flex; align-items: center; min-height: 44px; color: var(--or); font-size: 0.94rem; font-weight: 700; cursor: pointer; list-style: none; }
 .plan-pourquoi > summary::-webkit-details-marker { display: none; }

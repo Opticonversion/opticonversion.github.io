@@ -179,7 +179,10 @@ const Examen = (() => {
     document.body.classList.remove("en-examen");
     const themes = document.getElementById("themes");
     if (themes) themes.hidden = false;
-    if (vuesCachees) {
+    if (vuesCachees && typeof appliquerVue === "function") {
+      vuesCachees = false;
+      appliquerVue();                         // qcm.html : sélecteur de vue seulement si l'épreuve a des Shorts
+    } else if (vuesCachees) {
       vuesCachees = false;
       document.querySelector(".vues").hidden = false;
       let v = "deux";
