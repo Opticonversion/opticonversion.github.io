@@ -785,6 +785,21 @@ main[data-epreuve] #sous-titre { color: rgb(var(--accent-rgb)); }
 .pose-etape { scroll-margin-top: calc(var(--haut-entete, 64px) + 70px); scroll-margin-bottom: calc(var(--bas-onglets, 0px) + 16px); }
 .lien-arreter { display: block; min-height: 44px; margin: 6px 0 0; padding: 8px 0; font: inherit; font-size: 0.88rem; color: var(--doux); background: none; border: 0; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
 .lien-arreter:hover { color: var(--texte); }
+/* « Je ne sais pas » : discret, sous les choix ou la case (et dans chaque étape d'un calcul posé) */
+.bouton-nsp { display: inline-flex; align-items: center; min-height: 44px; margin: 10px 16px 0 0; padding: 8px 2px; font: inherit; font-size: 0.9rem; color: var(--doux); background: none; border: 0; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
+.bouton-indice + .bouton-nsp { margin: 16px 0 0 18px; }
+.bouton-nsp:hover { color: var(--texte); }
+.bouton-nsp:disabled { display: none; }
+.pose-etape .bouton-nsp { margin: 0 0 0 4px; }
+/* Piège connu : la phrase qui dit ce que l'élève a calculé, sous « Tu as tapé… » */
+.piege-message { margin: 0 0 10px; color: var(--texte); font-size: 0.97rem; line-height: 1.5; }
+/* « Question précédente » : un lien dans la ligne du numéro ; la question revue cache ses boutons de suite */
+.lien-precedente { margin-left: auto; min-height: 44px; padding: 6px 0; font: inherit; font-size: 0.86rem; color: var(--doux); background: none; border: 0; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
+.lien-precedente:hover { color: var(--texte); }
+.lien-precedente .prec-court { display: none; }
+#zone.en-revue .bouton-suivant, #zone.en-revue .lien-arreter, #zone.en-revue .lien-precedente { display: none; }
+.revue-tete { margin: 0 0 12px; color: var(--or-clair); font-size: 0.92rem; font-weight: 700; }
+#zone .bouton-retour { margin-top: 16px; position: sticky; bottom: calc(var(--bas-onglets, 0px) + 12px); z-index: 3; box-shadow: 0 0 0 6px var(--carte), 0 8px 18px rgba(0, 0, 0, 0.35); }
 .indice small { display: block; margin-top: 6px; color: var(--doux); font-size: 0.82rem; }
 .erreurs .erreur-tienne { display: block; margin-bottom: 4px; color: #f0a39a; font-size: 0.94rem; }
 .revoir { margin-top: 12px; padding: 9px 16px; min-height: 44px; font-size: 0.92rem; }
@@ -1819,6 +1834,8 @@ html[data-fond="clair"] .atelier:disabled { opacity: 0.56; }
   .progression .pastille-theme { flex: 0 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
   .bs-score .bs-long { display: none; }
   .bs-score .bs-court { display: inline; }
+  .lien-precedente .prec-long { display: none; }
+  .lien-precedente .prec-court { display: inline; }
   /* Séances (À revoir, séance du jour…) : un en-tête plus court, pour que la question arrive plus haut */
   main.en-seance > h1 { font-size: 1.9rem; margin-bottom: 6px; }
   main.en-seance > .sous-titre { font-size: 0.95rem; margin-bottom: 10px; }

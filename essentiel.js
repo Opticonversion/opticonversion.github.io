@@ -231,16 +231,21 @@ function planifierRevision(q, juste) {
 // et notion (tout le reste : formule ou notion, et tout QCM raté sans type précisé).
 // Une question peut préciser ses pièges avec le champ facultatif « erreurs » :
 //   QCM : erreurs: { 2: "marque-marge" }  (numéro du choix dans q.choix → type)
-//   calcul : erreurs: [{ valeur: 25, type: "marque-marge" }]  (valeur obtenue avec cette erreur)
+//         ou erreurs: { 2: { type: "brut-net", message: "C'est le salaire net…" } }
+//   calcul : erreurs: [{ valeur: 25, type: "marque-marge", message: "…" }]  (valeur obtenue avec cette erreur)
+//   calcul posé : le même tableau dans une étape (etapes[k].erreurs)
+// « message » (facultatif, 200 caractères au plus) : la phrase qui explique le piège, affichée sous le verdict
+// (titre « Faux · piège connu »). Format : notes/coordination/erreurs-et-calcul-pose.md.
 const TYPES_ERREUR = {
   signe: { nom: "Signe", aide: "Tu te trompes surtout de signe. Relis les conventions : sens de la lumière, mesures algébriques, objet ou image réel ou virtuel.", lien: ["qcm.html#U42", "Les conventions de signes (OGP)"] },
   unite: { nom: "Unité", aide: "Ta valeur est souvent juste à une puissance de 10 près. Convertis tout dans l'unité demandée avant de calculer (mm et m, dioptries, pourcentages).", lien: null },
   "marque-marge": { nom: "Marque ou marge", aide: "Taux de marque et taux de marge se confondent. Le taux de marque se calcule sur le prix de vente HT, le taux de marge sur le coût d'achat.", lien: ["qcm.html#U3", "Les formules de gestion (Éco)"] },
+  "brut-net": { nom: "Brut ou net", aide: "Tu confonds brut, net et coût employeur. Le net = brut − cotisations salariales ; le coût pour l'employeur = brut + cotisations patronales.", lien: ["qcm.html#U3", "Le droit du travail (Éco)"] },
   "ht-ttc": { nom: "HT ou TTC", aide: "Tu mélanges HT et TTC. Les marges et les coefficients se calculent en HT ; on passe au TTC à la fin, avec le bon taux de TVA.", lien: ["qcm.html#U3", "Les formules de gestion (Éco)"] },
   mois: { nom: "Mois ou année", aide: "Ton résultat est 12 fois trop grand ou trop petit : vérifie si on te demande un montant par mois ou par an.", lien: null },
   notion: { nom: "Formule ou notion", aide: "Ici, c'est la formule ou la notion qui manque. Relis la définition du thème avant de refaire la question.", lien: ["definitions.html", "Les définitions"] }
 };
-const TYPES_ERREUR_ECO = ["marque-marge", "ht-ttc", "mois"];
+const TYPES_ERREUR_ECO = ["marque-marge", "ht-ttc", "brut-net", "mois"];
 function lireTypesErreurs() {
   try { return JSON.parse(localStorage.getItem("erreurs-types") || "{}") || {}; } catch (e) { return {}; }
 }
@@ -252,16 +257,31 @@ function valeurTombeSur(reponse, valeur, cible) {
     : reponse.toleranceRelative !== undefined ? Math.abs(cible) * reponse.toleranceRelative : 0.5 * 10 ** -dec;
   return Math.abs(valeur - cible) <= Math.max(tol, Math.abs(cible) * 0.01) + 1e-9;
 }
+// Le piège prévu par la question (champ « erreurs ») dans lequel l'élève est tombé : { type, message? } ou null.
+// detail : { choix } (QCM), { calcul } (calcul), { calcul, reponse, erreurs } (étape d'un calcul posé).
+function piegeDe(q, detail) {
+  detail = detail || {};
+  const c = detail.calcul, rep = detail.reponse || q.reponse, liste = detail.erreurs || q.erreurs;
+  if (c && rep) {
+    if (!Array.isArray(liste) || typeof c.valeur !== "number") return null;
+    const e = liste.find(e => e && typeof e.valeur === "number" && valeurTombeSur(rep, c.valeur, e.valeur));
+    return e && TYPES_ERREUR[e.type] ? { type: e.type, message: e.message || "" } : null;
+  }
+  if (detail.choix !== undefined && detail.choix !== null && q.erreurs && !Array.isArray(q.erreurs)) {
+    const e = q.erreurs[detail.choix];
+    if (typeof e === "string") return TYPES_ERREUR[e] ? { type: e, message: "" } : null;
+    if (e && TYPES_ERREUR[e.type]) return { type: e.type, message: e.message || "" };
+  }
+  return null;
+}
 function typeErreur(q, detail) {
   detail = detail || {};
   const c = detail.calcul, rep = detail.reponse || q.reponse;   // calcul posé : la réponse de l'étape ratée
   if (c && rep) {
     if (c.etat === "signe") return "signe";
     if (c.etat === "unite") return "unite";
-    if (Array.isArray(q.erreurs)) {
-      const e = q.erreurs.find(e => e && typeof e.valeur === "number" && valeurTombeSur(rep, c.valeur, e.valeur));
-      if (e && TYPES_ERREUR[e.type]) return e.type;
-    }
+    const p = piegeDe(q, detail);
+    if (p) return p.type;
     // Erreurs-types d'éco reconnues toutes seules : × 12 (mois / an) et HT / TTC (TVA 20 %, 10 %, 5,5 %)
     // Seulement pour un montant en euros (un pourcentage ou un nombre de jours × 1,2 ne serait pas une erreur de TVA)
     if (q.epreuve === "U3" && typeof c.valeur === "number" && rep.valeur && /€/.test(rep.unite || "")) {
@@ -271,11 +291,8 @@ function typeErreur(q, detail) {
     }
     return "notion";
   }
-  if (detail.choix !== undefined && q.erreurs && !Array.isArray(q.erreurs)) {
-    const t = q.erreurs[detail.choix];
-    if (TYPES_ERREUR[t]) return t;
-  }
-  return "notion";
+  const p = piegeDe(q, detail);
+  return p ? p.type : "notion";
 }
 function noterTypeErreur(q, juste, detail) {
   try {

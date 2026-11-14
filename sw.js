@@ -13,7 +13,7 @@
 // =====================================================================
 
 // <versionner> (partie écrite par versionner.py, ne pas modifier à la main)
-const VERSION = "0e9c8e57ce";
+const VERSION = "dda154b036";
 const FICHIERS = [
   "appli.js?v=0724163c",
   "banc.js?v=7a80e12d",
@@ -36,7 +36,7 @@ const FICHIERS = [
   "entrainement-U5.js?v=98511033",
   "epreuves.js?v=cc645427",
   "essentiel.html",
-  "essentiel.js?v=a61c6977",
+  "essentiel.js?v=ba6ab9a7",
   "examen.js?v=e04ac9f0",
   "img/avatar-chat-bouche-ouverte.svg",
   "img/avatar-chat-choque.svg",
@@ -157,7 +157,7 @@ const FICHIERS = [
   "polices/bodoni-moda-italique.woff2",
   "polices/bodoni-moda.woff2",
   "qcm.html",
-  "questions-U3.js?v=9619a3c6",
+  "questions-U3.js?v=31cf16a7",
   "questions-U41.js?v=4ed5dc1f",
   "questions-U42.js?v=29d25a16",
   "questions-U43.js?v=be252b34",
@@ -176,7 +176,7 @@ const FICHIERS = [
   "specificites-U42.js?v=f64709f2",
   "specificites-U43.js?v=523c07db",
   "specificites-U5.js?v=43533990",
-  "style.css?v=f4aceae0",
+  "style.css?v=709b68d0",
   "traces-U42.js?v=78864426",
   "traces-U43.js?v=e9acf21a",
   "traces-U5.js?v=c4c5f919",

@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Opticonversion">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
-<link rel="stylesheet" href="style.css?v=f4aceae0">
+<link rel="stylesheet" href="style.css?v=709b68d0">
 </head>
 <body>
 <header class="entete">
@@ -104,7 +104,7 @@
 <script src="questions-U42.js?v=29d25a16"></script>
 <script src="questions-U43.js?v=be252b34"></script>
 <script src="questions-U5.js?v=636198c1"></script>
-<script src="questions-U3.js?v=9619a3c6"></script>
+<script src="questions-U3.js?v=31cf16a7"></script>
 <!-- Questions d'entraînement (mêmes notions, autres chiffres) : chargées ici seulement, hors Essentiel -->
 <script src="entrainement-U41.js?v=1b78bba4"></script>
 <script src="entrainement-U42.js?v=06b93d7d"></script>
@@ -121,7 +121,7 @@
 <script src="specificites-U43.js?v=523c07db"></script>
 <script src="specificites-U5.js?v=43533990"></script>
 <script src="specificites-U3.js?v=3245f237"></script>
-<script src="essentiel.js?v=a61c6977"></script>
+<script src="essentiel.js?v=ba6ab9a7"></script>
 <script src="rythme.js?v=0b9caab9"></script>
 <!-- Examen blanc chronométré (#U5/examen) : avant le script de la page, qui l'ouvre dès le chargement -->
 <script src="examen.js?v=e04ac9f0"></script>
@@ -696,6 +696,10 @@
   let serieSpeciale = null;
   let serieEnCours = 0;      // bonnes réponses d'affilée en ce moment
   let meilleureSerie = 0;    // meilleure suite de bonnes réponses de la partie
+  // « Question précédente » : les éléments de chaque question déjà corrigée de la série, gardés tels quels
+  // (choix, correction, boutons). Pas gardé au rechargement de la page : la première question reprise n'a pas de « précédente ».
+  let dejaFaites = [];
+  let enRevue = null;        // { courante: les éléments de la question en cours, mis de côté ; k: la question revue }
   function demarrer(liste, speciale) {
     serieSpeciale = speciale || null;
     modeRevision = Array.isArray(liste) && !serieSpeciale;
@@ -715,6 +719,7 @@
     serieEnCours = 0;
     meilleureSerie = 0;
     serieArretee = false;
+    dejaFaites = [];
     if (repriseAuChargement) reprendrePosition(choisies);
     if (numero > 0) replierPage(true);
     afficherQuestion();
@@ -819,7 +824,8 @@
 
   function afficherQuestion() {
     const q = serie[numero];
-    zone.classList.remove("zone-liste");
+    zone.classList.remove("zone-liste", "en-revue");
+    enRevue = null;
     const pourcent = Math.round((numero / serie.length) * 100);
     let pastilleSession = "";
     if (q.session) {
@@ -833,6 +839,19 @@
       (q.entrainement ? '<span class="pastille entrainement">Entraînement</span>' : "") +
       '<span class="pastille pastille-theme"></span>' + pastilleSession + "</div>" +
       '<h2 class="enonce" tabindex="-1"></h2><div class="choix"></div>';
+    // « Question précédente » : la revoir avec sa correction, sans rien changer à la note
+    if (numero > 0 && dejaFaites[numero - 1]) {
+      const prec = document.createElement("button");
+      prec.type = "button";
+      prec.className = "lien-precedente";
+      // Au téléphone, « Précédente » seul (le thème garde sa place) ; le nom entier reste lu
+      const motPrec = serieSpeciale && serieSpeciale.cas ? "Étape précédente" : "Question précédente";
+      prec.innerHTML = '<span class="prec-long"></span><span class="prec-court" aria-hidden="true">Précédente</span>';
+      prec.querySelector(".prec-long").textContent = motPrec;
+      prec.setAttribute("aria-label", motPrec);
+      prec.onclick = voirPrecedente;
+      zone.querySelector(".progression").appendChild(prec);
+    }
     const pastilleTheme = zone.querySelector(".progression .pastille-theme");
     pastilleTheme.textContent = pastilleTheme.title = (seanceRevision ? q.epreuve + " · " : "") + q.theme;   // le titre : le nom entier s'il est coupé
     ecrireTexteMath(zone.querySelector(".enonce"), q.question);      // fractions [[haut|bas]] et lignes (essentiel.js)
@@ -884,10 +903,26 @@
       };
       blocChoix.after(bouton);
     }
+    // « Je ne sais pas » : la correction complète, sans deviner (compte comme une erreur, pas de son d'erreur).
+    // Calcul posé : un bouton par étape (creerPose).
+    if (q.type !== "pose") {
+      const nsp = document.createElement("button");
+      nsp.type = "button";
+      nsp.className = "bouton-nsp";
+      nsp.textContent = "Je ne sais pas";
+      nsp.onclick = () => {
+        if (zone.querySelector(".repondu")) return;
+        annulerChoix();
+        const form = zone.querySelector(".saisie-qcm");
+        if (form) { form.querySelectorAll("input, button").forEach(x => { x.disabled = true; }); form.classList.add("faux"); }
+        repondre({ juste: false, i: null, nsp: true }, null);
+      };
+      (zone.querySelector(".bouton-indice") || blocChoix).after(nsp);
+    }
     const aide = document.createElement("p");
     aide.className = "raccourcis";
     aide.innerHTML = q.type === "calcul" || q.type === "pose" ?'Astuce : tape ta réponse puis <kbd>Entrée</kbd>, et encore <kbd>Entrée</kbd> pour continuer.'
-      : 'Astuce : réponds avec les touches <kbd>A</kbd> <kbd>B</kbd> <kbd>C</kbd> <kbd>D</kbd>, puis <kbd>Entrée</kbd> pour continuer.';
+      : 'Astuce : réponds avec les touches <kbd>A</kbd> <kbd>B</kbd> <kbd>C</kbd> <kbd>D</kbd> (<kbd>?</kbd> si tu ne sais pas), puis <kbd>Entrée</kbd> pour continuer. <kbd>←</kbd> revoit la question précédente.';
     if (numero === 0) zone.appendChild(aide);     // l'astuce clavier : à la première question seulement (et cachée au doigt)
     annulerChoix();
     majBarreSerie();
@@ -981,41 +1016,50 @@
     function saisieEtape(e, li) {
       const f = document.createElement("form");
       f.className = "saisie-calcul saisie-qcm";
-      f.innerHTML = '<label class="saisie-ligne"><span class="visuellement-cache"></span><input type="text" autocomplete="off" spellcheck="false" enterkeyhint="done"><span class="saisie-unite"></span></label><button class="bouton" type="submit">Valider</button>';
+      f.innerHTML = '<label class="saisie-ligne"><span class="visuellement-cache"></span><input type="text" autocomplete="off" spellcheck="false" enterkeyhint="done"><span class="saisie-unite"></span></label><button class="bouton" type="submit">Valider</button><button class="bouton-nsp" type="button">Je ne sais pas</button>';
       // L'étiquette lue : la consigne de l'étape (et l'unité), pas seulement son numéro
       f.querySelector(".visuellement-cache").textContent = "Étape " + (etape + 1) + " : " + texteMathLu(e.consigne) + (e.reponse.unite ? ", en " + e.reponse.unite : "");
       f.querySelector(".saisie-unite").textContent = e.reponse.unite || "";
       f.querySelector(".saisie-unite").setAttribute("aria-hidden", "true");     // déjà dit par l'étiquette cachée
       f.querySelector("input").inputMode = e.reponse.signe === false ? "decimal" : "text";   // le « − » de l'iPhone
+      // La valeur de l'étape est donnée et on continue : au 2e essai manqué, ou tout de suite avec « Je ne sais pas »
+      function donner(texte) {
+        etats[etape] = "donne";
+        li.classList.add("bloque");
+        li.querySelectorAll(".pose-message, .pose-aide").forEach(x => x.remove());
+        const m = document.createElement("p");
+        m.className = "pose-message mal";
+        m.textContent = texte + " On continue avec cette valeur.";
+        li.appendChild(m);
+        f.querySelectorAll("input, button").forEach(x => { x.disabled = true; });
+        const b = document.createElement("button");
+        b.className = "bouton secondaire";
+        b.type = "button";
+        b.textContent = "Étape suivante";
+        b.onclick = suivante;
+        li.appendChild(b);
+        b.focus({ preventScroll: true });
+        li.scrollIntoView({ block: "nearest", behavior: mouvementDoux() });      // le message et « Étape suivante » à l'écran
+        annoncer(m.textContent);
+      }
+      f.querySelector(".bouton-nsp").onclick = () => { if (etats[etape] !== "donne") donner(messageCalcul(e.reponse, { etat: "faux" })); };
       f.onsubmit = ev => {
         ev.preventDefault();
         const res = corrigerCalcul(e.reponse, f.querySelector("input").value);
         if (res.etat === "vide") { f.querySelector("input").focus(); return; }
         li.querySelectorAll(".pose-message, .pose-aide").forEach(x => x.remove());
         if (res.etat === "juste") { etats[etape] = essais ? "aide" : "juste"; suivante(); return; }
-        if (!premiereErreur) premiereErreur = { calcul: res, reponse: e.reponse };
+        const detailEtape = { calcul: res, reponse: e.reponse, erreurs: e.erreurs };
+        if (!premiereErreur) premiereErreur = detailEtape;
+        // Un piège prévu par l'étape (champ erreurs) : sa phrase dit ce que l'élève a calculé
+        const piege = res.etat === "faux" ? piegeDe(q, detailEtape) : null;
+        const motPiege = piege && piege.message ? piege.message : "";
         essais++;
+        if (essais >= 2) { donner((motPiege ? motPiege + " " : "") + messageCalcul(e.reponse, res)); return; }
         const m = document.createElement("p");
         m.className = "pose-message mal";
         li.appendChild(m);
-        if (essais >= 2) {
-          etats[etape] = "donne";
-          li.classList.add("bloque");
-          m.textContent = messageCalcul(e.reponse, res) + " On continue avec cette valeur.";
-          f.querySelector("input").disabled = true;
-          f.querySelector("button").disabled = true;
-          const b = document.createElement("button");
-          b.className = "bouton secondaire";
-          b.type = "button";
-          b.textContent = "Étape suivante";
-          b.onclick = suivante;
-          li.appendChild(b);
-          b.focus({ preventScroll: true });
-          li.scrollIntoView({ block: "nearest", behavior: mouvementDoux() });      // le message et « Étape suivante » à l'écran
-          annoncer(m.textContent);
-          return;
-        }
-        m.textContent = res.etat === "signe" ? "Attention au signe. Réessaie."
+        m.textContent = motPiege ? motPiege + " Réessaie." : res.etat === "signe" ? "Attention au signe. Réessaie."
           : res.etat === "unite" ? "La valeur est juste à une puissance de 10 près : vérifie l'unité. Réessaie."
           : "Ce n'est pas ça. Réessaie avec l'aide.";
         const a = document.createElement("p");
@@ -1077,6 +1121,24 @@
   document.addEventListener("keydown", e => {
     if (e.ctrlKey || e.metaKey || e.altKey || e.repeat) return;
     if (e.target.closest && e.target.closest("input, textarea, select, [contenteditable], #specificites")) return;
+    if (document.getElementById("ecran-qcm").hidden) return;
+    // En train de revoir la question précédente : Entrée (sur rien de précis), → ou Échap ramènent à la question en cours
+    if (enRevue) {
+      if (e.key === "ArrowRight" || e.key === "Escape" || (e.key === "Enter" && !e.target.closest("a, button, summary, [tabindex]"))) { e.preventDefault(); revenirQuestion(); }
+      return;
+    }
+    // ← : la question précédente, déjà corrigée
+    if (e.key === "ArrowLeft") {
+      const prec = zone.querySelector(".lien-precedente");
+      if (prec) { e.preventDefault(); prec.click(); }
+      return;
+    }
+    // ? ou 0 : « Je ne sais pas »
+    if (e.key === "?" || e.key === "0") {
+      const nsp = zone.querySelector(".bouton-nsp:not(:disabled)");
+      if (nsp && !zone.querySelector(".choix.repondu, .saisie-qcm.repondu, .pose-liste.repondu")) { e.preventDefault(); nsp.click(); }
+      return;
+    }
     // Entrée après une réponse, le focus posé sur rien de précis (clic à côté) : question suivante
     if (e.key === "Enter" && !e.target.closest("a, button, summary, [tabindex]")) {
       const suivant = zone.querySelector(".bouton-suivant");
@@ -1124,24 +1186,27 @@
     if (boutonIndice) boutonIndice.remove();
     const aideClavier = zone.querySelector(".raccourcis");
     if (aideClavier) aideClavier.remove();
-    zone.querySelectorAll(".bouton-unite").forEach(x => x.remove());     // « Quelle unité ? » : la correction le dit si besoin
+    zone.querySelectorAll(".bouton-unite, .bouton-nsp").forEach(x => x.remove());     // « Quelle unité ? » : la correction le dit si besoin
     if (q.reponses) blocChoix.querySelectorAll("button").forEach((b, i) => {
       b.disabled = true;
       if (q.reponses[i].juste) b.classList.add("juste");
     });
 
-    if (window.Sons) Sons[reponse.juste ? "juste" : "faux"]();   // petit son (sons.js), coupé si l'élève l'a coupé
+    if (window.Sons && !reponse.nsp) Sons[reponse.juste ? "juste" : "faux"]();   // petit son (sons.js), coupé si l'élève l'a coupé ; aucun pour « Je ne sais pas »
     if (reponse.juste) {
       score++;
       serieEnCours++;
       meilleureSerie = Math.max(meilleureSerie, serieEnCours);
     } else {
       if (boutonClique) boutonClique.classList.add("faux");
-      erreurs.push({ ...q, maReponse: maReponseDe(reponse, q) });
+      erreurs.push({ ...q, maReponse: maReponseDe(reponse, q), nsp: !!reponse.nsp });
       serieEnCours = 0;
     }
     // jauge « Essentiel » + révision espacée ; le détail range l'erreur par type dans « À revoir »
-    const suite = noterReponse(q, reponse.juste, reponse.calcul ? { calcul: reponse.calcul } : reponse.erreurPose ? reponse.erreurPose : { choix: reponse.i });
+    // « Je ne sais pas » : erreur de notion. Un piège prévu (champ erreurs, essentiel.js) : sa phrase s'affiche sous le verdict.
+    const detail = reponse.nsp ? {} : reponse.calcul ? { calcul: reponse.calcul } : reponse.erreurPose ? reponse.erreurPose : { choix: reponse.i };
+    if (!reponse.juste && !reponse.nsp && !reponse.pose && !(reponse.calcul && reponse.calcul.etat !== "faux")) reponse.piege = piegeDe(q, detail);
+    const suite = noterReponse(q, reponse.juste, detail);
 
     // La barre avance dès qu'on a répondu
     zone.querySelector(".barre-remplie").style.width = Math.round(((numero + 1) / serie.length) * 100) + "%";
@@ -1164,6 +1229,12 @@
       tienne.className = "ta-reponse";
       ecrireTexteMath(tienne, (reponse.calcul ? "Tu as tapé " : "Tu as répondu ") + maReponseDe(reponse, q).replace(/ \(erreur [^)]*\)$/, "") + ".");
       (expl.querySelector(".bonne-reponse") || expl.querySelector(".expl-tete")).after(tienne);
+    }
+    if (reponse.piege && reponse.piege.message) {
+      const mot = document.createElement("p");
+      mot.className = "piege-message";
+      ecrireTexteMath(mot, reponse.piege.message);
+      (expl.querySelector(".ta-reponse") || expl.querySelector(".expl-tete")).after(mot);
     }
     ecrireTexteMath(expl.querySelector("span"), q.explication);   // calcul posé : une étape par ligne, vraies fractions
     if (reponse.pose) {
@@ -1243,7 +1314,11 @@
     suivant.textContent = numero + 1 < serie.length ? (enCas ? "Étape suivante" : "Question suivante") : "Voir mon score";
     suivant.className = "bouton bouton-suivant";
     suivant.onclick = () => {
+      if (enRevue) return;
       replierPage(true);                     // la série a commencé : l'habillage se replie en une ligne
+      const faite = document.createDocumentFragment();     // pour « Question précédente »
+      faite.append(...zone.childNodes);
+      dejaFaites[numero] = faite;
       numero++;
       if (numero < serie.length) afficherQuestion();
       else afficherBilan();
@@ -1279,6 +1354,50 @@
     sauverPosition(numero + 1);
     annoncerCorrection(reponse, q, expl);
     montrerCorrection(expl, suivant);
+  }
+
+  // ---------------- « Question précédente » : la revoir avec sa correction, en lecture seule ----------------
+  // La question en cours (répondue ou non, même une case à moitié tapée) est mise de côté telle quelle, puis remise.
+  // Rien ne change : ni la note, ni le numéro, ni la place gardée pour le rechargement (qcm-position).
+  function voirPrecedente() {
+    const k = numero - 1, faite = dejaFaites[k];
+    if (enRevue || !faite) return;
+    annulerChoix();
+    const courante = document.createDocumentFragment();
+    courante.append(...zone.childNodes);
+    enRevue = { courante, k };
+    zone.append(faite);
+    zone.classList.add("en-revue");
+    const enCas = serieSpeciale && serieSpeciale.cas;
+    const tete = document.createElement("p");
+    tete.className = "revue-tete";
+    tete.textContent = (enCas ? "Étape " : "Question ") + (k + 1) + ", déjà corrigée. Ta note ne change pas.";
+    zone.prepend(tete);
+    const retour = document.createElement("button");
+    retour.type = "button";
+    retour.className = "bouton bouton-retour";
+    retour.textContent = (enCas ? "Revenir à l'étape " : "Revenir à la question ") + (numero + 1);
+    retour.onclick = revenirQuestion;
+    zone.append(retour);
+    zone.scrollIntoView({ behavior: mouvementDoux(), block: "start" });
+    const enonce = zone.querySelector(".enonce");
+    if (enonce) enonce.focus({ preventScroll: true });
+    annoncer(tete.textContent);
+  }
+  function revenirQuestion() {
+    if (!enRevue) return;
+    zone.querySelectorAll(".revue-tete, .bouton-retour").forEach(x => x.remove());
+    const faite = document.createDocumentFragment();
+    faite.append(...zone.childNodes);
+    dejaFaites[enRevue.k] = faite;
+    zone.classList.remove("en-revue");
+    zone.append(enRevue.courante);
+    enRevue = null;
+    zone.scrollIntoView({ behavior: mouvementDoux(), block: "start" });
+    const suivant = zone.querySelector(".bouton-suivant");
+    const cible = suivant || zone.querySelector(".pose-etape:not(.fermee) input:not(:disabled), .saisie-qcm input:not(:disabled)") || zone.querySelector(".enonce");
+    if (cible) cible.focus({ preventScroll: true });
+    annoncer((serieSpeciale && serieSpeciale.cas ? "Étape " : "Question ") + (numero + 1) + (suivant ? ", déjà corrigée." : "."));
   }
 
   const mouvementDoux = () => (matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth");
@@ -1317,6 +1436,12 @@
   // pour que chaque correction soit lue, même deux fois de suite la même.
   // « Bonne réponse », « Faux · réponse B : Plate », « Faux · réponse : 65,7 mm », « Faux · bloqué à l'étape 2 »…
   function titreDeCorrection(reponse, q) {
+    if (reponse.nsp) {
+      if (q.reponses) return "Réponse : " + "ABCD"[q.reponses.findIndex(r => r.juste)];
+      const r = q.reponse;
+      return "Réponse : " + ecrireNombre(r.valeur, r.decimales === undefined ? 2 : r.decimales, r.signe !== false) + (r.unite ? " " + r.unite : "");
+    }
+    if (reponse.piege && reponse.piege.message) return "Faux · piège connu";
     if (reponse.juste) {
       if (reponse.pose && reponse.pose.etats.includes("aide")) return "Juste, avec l'aide";
       return serieEnCours >= 3 ? "Bonne réponse · " + serieEnCours + " d'affilée" : "Bonne réponse";
@@ -1328,7 +1453,7 @@
       const etats = reponse.pose.etats, donnees = etats.map((e, i) => (e === "donne" ? i + 1 : 0)).filter(Boolean);
       const reussies = etats.length - donnees.length, rang = n => n + (n === 1 ? "re" : "e");
       return reussies + (reussies > 1 ? " étapes" : " étape") + " sur " + etats.length + " · " +
-        (donnees.length === 1 ? "la " + rang(donnees[0]) + " t'a été donnée" : "les " + donnees.map(rang).join(" et ") + " t'ont été données");
+        (donnees.length === 1 ? "la " + rang(donnees[0]) + " t'a été donnée" : "les " + donnees.map(rang).slice(0, -1).join(", ") + " et " + rang(donnees[donnees.length - 1]) + " t'ont été données");
     }
     // Calcul : la bonne valeur est dite juste dessous (messageCalcul) ; le titre nomme le genre d'erreur
     if (reponse.calcul) return reponse.calcul.etat === "signe" ? "Faux · erreur de signe" : reponse.calcul.etat === "unite" ? "Faux · erreur d'unité" : "Faux";
@@ -1336,6 +1461,7 @@
   }
   // Ce que l'élève a répondu, pour la correction et la liste des erreurs du bilan
   function maReponseDe(reponse, q) {
+    if (reponse.nsp) return "";
     if (reponse.texteChoisi !== undefined) return reponse.lettre + (reponse.texteChoisi ? " : " + reponse.texteChoisi : "");
     if (reponse.calcul && reponse.calcul.valeur !== undefined) {
       const r = q.reponse || {}, v = reponse.calcul.valeur;
@@ -1358,6 +1484,7 @@
     const morceaux = [texteMathLu(titreDeCorrection(reponse, q)) + "."];
     if (!reponse.juste && reponse.texteChoisi !== undefined) morceaux.push("Tu as répondu " + reponse.lettre + ".");
     if (!reponse.juste && reponse.calcul) morceaux.push("Tu as tapé " + texteMathLu(maReponseDe(reponse, q)) + ".");
+    if (reponse.piege && reponse.piege.message) morceaux.push(texteMathLu(reponse.piege.message));
     if (!reponse.juste && q.reponses) {
       const k = q.reponses.findIndex(r => r.juste);
       if (k >= 0 && q.choix[q.bonne]) morceaux.push("La bonne réponse : " + texteMathLu(q.choix[q.bonne]) + ".");
@@ -2367,7 +2494,8 @@
         const li = document.createElement("li");
         li.innerHTML = "<strong></strong><span class='erreur-tienne'></span><span class='erreur-reponse'></span><span class='doux'></span>";
         ecrireTexteMath(li.querySelector("strong"), q.question);
-        if (q.maReponse) ecrireTexteMath(li.querySelector(".erreur-tienne"), "✕ " + (q.type === "calcul" ? "Tu as tapé " : q.type === "pose" ? "Tu as " : "Ta réponse : ") + q.maReponse); else li.querySelector(".erreur-tienne").remove();
+        if (q.nsp) li.querySelector(".erreur-tienne").textContent = "✕ Tu as répondu « Je ne sais pas »";
+        else if (q.maReponse) ecrireTexteMath(li.querySelector(".erreur-tienne"), "✕ " + (q.type === "calcul" ? "Tu as tapé " : q.type === "pose" ? "Tu as " : "Ta réponse : ") + q.maReponse); else li.querySelector(".erreur-tienne").remove();
         ecrireTexteMath(li.querySelector(".erreur-reponse"), "✓ " + (q.type === "pose" ? q.etapes[q.etapes.length - 1].ligne
           : q.type === "calcul"
           ? ecrireNombre(q.reponse.valeur, q.reponse.decimales === undefined ? 2 : q.reponse.decimales, q.reponse.signe !== false) + (q.reponse.unite ? " " + q.reponse.unite : "")

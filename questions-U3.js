@@ -624,6 +624,11 @@ QUESTIONS.push(
     type: "calcul",
     question: "Salaire brut mensuel : 2 200 €. Cotisations salariales : 23 % du brut. Cotisations patronales : 42 % du brut. Calcule le coût mensuel pour l'employeur.",
     reponse: { valeur: 3124, unite: "€", decimales: 0, tolerance: 1, signe: false },
+    erreurs: [
+      { valeur: 1694, type: "brut-net", message: "C'est le salaire net : ce que reçoit le salarié (brut − cotisations salariales). L'employeur, lui, paie le brut plus ses propres cotisations." },
+      { valeur: 3630, type: "brut-net", message: "Tu as ajouté les deux cotisations. Les cotisations salariales sont prises sur le brut : elles ne coûtent rien de plus à l'employeur." },
+      { valeur: 2200, type: "brut-net", message: "C'est le salaire brut seul. L'employeur paie en plus ses cotisations patronales (42 % du brut)." }
+    ],
     explication: "Coût employeur = brut + cotisations patronales = 2 200 × 1,42 = 3 124 €. (Le salaire net, lui, vaut 2 200 × 0,77 = 1 694 €.) Les cotisations salariales ne changent pas le coût pour l'employeur : elles sont prises sur le brut.",
     indice: "Le coût pour l'employeur part du brut et y ajoute ses propres cotisations. Les cotisations salariales n'entrent pas dans ce calcul."
   }
