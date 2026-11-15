@@ -568,6 +568,10 @@ QUESTIONS.push(
     type: "calcul",
     question: "Zone de chalandise : 15 000 habitants, 65 % de porteurs de lunettes, panier moyen 330 € TTC, renouvellement tous les 3 ans. Calcule le marché potentiel annuel.",
     reponse: { valeur: 1072500, unite: "€ TTC", decimales: 0, tolerance: 1, signe: false },
+    erreurs: [
+      { valeur: 3217500, type: "notion", message: "C'est la dépense d'un cycle complet. Un porteur ne renouvelle ses lunettes que tous les 3 ans : divise par 3 pour avoir le marché d'une année." },
+      { valeur: 1650000, type: "notion", message: "Tu as compté tous les habitants. Seuls les porteurs de lunettes (65 %) achètent un équipement." }
+    ],
     explication: "Porteurs = 15 000 × 0,65 = 9 750\nDépense d'un cycle = 9 750 × 330 = 3 217 500 €\nPar an : [[3 217 500|3]] = 1 072 500 € TTC.",
     indice: "Nombre de porteurs × panier moyen, puis ramène à une seule année avec le rythme de renouvellement."
   },
@@ -576,6 +580,11 @@ QUESTIONS.push(
     type: "calcul",
     question: "Marché potentiel : 800 000 € TTC. IDC : 95. Évasion commerciale : 12 %. Le magasin vise 20 % du marché restant. Calcule son chiffre d'affaires prévisionnel HT (arrondi à l'euro).",
     reponse: { valeur: 111467, unite: "€ HT", decimales: 0, tolerance: 1, signe: false },
+    erreurs: [
+      { valeur: 133760, type: "ht-ttc", message: "C'est le CA TTC. Le marché potentiel est exprimé TTC : il reste à retirer la TVA pour obtenir le CA HT." },
+      { valeur: 107008, type: "ht-ttc", message: "Tu as retiré 20 % du TTC. Pour passer en HT, on divise par 1,2 : la TVA se calcule sur le HT, pas sur le TTC." },
+      { valeur: 15200, type: "notion", message: "Tu as gardé les 12 % d'évasion. L'évasion est la part des achats faite ailleurs : il reste 88 % du marché." }
+    ],
     explication: "800 000 × 0,95 = 760 000 €\n760 000 × (1 − 0,12) = 668 800 € (marché net de l'évasion)\n668 800 × 0,20 = 133 760 € TTC\nEn HT : [[133 760|1,2]] = 111 466,67 €, soit 111 467 € HT.\nOn enchaîne les multiplications, et on finit par passer en HT.",
     indice: "Quatre étapes dans l'ordre : IDC, évasion, part de marché, puis retire la TVA."
   },
@@ -584,6 +593,10 @@ QUESTIONS.push(
     type: "calcul",
     question: "CA : 420 000 € HT. Charges variables : 147 000 €. Charges fixes : 189 000 €. Calcule le seuil de rentabilité (arrondi à l'euro).",
     reponse: { valeur: 290769, unite: "€ HT", decimales: 0, tolerance: 1, signe: false },
+    erreurs: [
+      { valeur: 540000, type: "notion", message: "Tu as divisé par le taux de charges variables (35 %). Le seuil se calcule avec le taux de marge sur coût variable : MCV / CA." },
+      { valeur: 336000, type: "notion", message: "C'est le total des charges. Le seuil est le CA qui couvre les charges fixes : charges fixes divisées par le taux de MCV." }
+    ],
     explication: "MCV = 420 000 − 147 000 = 273 000 €\nTaux de MCV = [[273 000|420 000]] = 0,65, soit 65 %\nSR = [[189 000|0,65]] = 290 769,23 €, soit 290 769 € HT.",
     indice: "Calcule le taux de marge sur coût variable, puis divise les charges fixes par ce taux."
   },
@@ -592,6 +605,9 @@ QUESTIONS.push(
     type: "calcul",
     question: "SR = 270 000 €, CA annuel = 405 000 €, activité régulière sur une année de 360 jours. Au bout de combien de jours le point mort est-il atteint ?",
     reponse: { valeur: 240, unite: "jours", decimales: 0, tolerance: 1, signe: false },
+    erreurs: [
+      { valeur: 540, type: "notion", message: "Tu as divisé le CA par le seuil. C'est SR / CA qui donne la fraction de l'année : elle est plus petite que 1." }
+    ],
     explication: "Point mort = [[SR|CA]] × 360 = [[270 000|405 000]] × 360 = [[2|3]] × 360 = 240 jours\nSoit 8 mois : fin août.",
     indice: "Quelle fraction du CA annuel représente le SR ? Applique-la au nombre de jours de l'année."
   },
@@ -600,6 +616,10 @@ QUESTIONS.push(
     type: "calcul",
     question: "Ressources stables 210 000 €, emplois stables 172 000 €, stocks 58 000 €, créances clients 6 000 €, dettes fournisseurs, fiscales et sociales 31 000 €. Calcule la trésorerie nette.",
     reponse: { valeur: 5000, unite: "€", decimales: 0, tolerance: 1, signe: true },
+    erreurs: [
+      { valeur: 71000, type: "notion", message: "Tu as ajouté FRNG et BFR. La trésorerie nette est ce qui reste du FRNG une fois le BFR financé : FRNG − BFR." },
+      { valeur: -57000, type: "notion", message: "Tu as ajouté les dettes fournisseurs, fiscales et sociales au BFR. Ce sont des ressources : elles se retranchent des stocks et des créances." }
+    ],
     explication: "FRNG = 210 000 − 172 000 = 38 000 €. BFR = 58 000 + 6 000 − 31 000 = 33 000 €. TN = FRNG − BFR = 38 000 − 33 000 = +5 000 € : positive, mais faible.",
     indice: "Calcule d'abord le FRNG, puis le BFR. La trésorerie nette est l'écart entre les deux, avec son signe."
   },
@@ -608,6 +628,10 @@ QUESTIONS.push(
     type: "calcul",
     question: "Un frontofocomètre est acheté et mis en service le 1er octobre pour 18 000 € HT, amorti en linéaire sur 6 ans. Calcule la dotation de la 1re année (exercice civil).",
     reponse: { valeur: 750, unite: "€", decimales: 0, tolerance: 1, signe: false },
+    erreurs: [
+      { valeur: 3000, type: "notion", message: "C'est l'annuité d'une année pleine. Le frontofocomètre n'a servi que d'octobre à décembre : prorata de 3 mois sur 12." },
+      { valeur: 2250, type: "notion", message: "Tu as compté les 9 mois avant la mise en service. On amortit à partir du 1er octobre : d'octobre à décembre, 3 mois." }
+    ],
     explication: "Annuité pleine = [[18 000|6]] = 3 000 €\nD'octobre à décembre : 3 mois, soit 3 000 × [[3|12]] = 750 €\nLes années suivantes : 3 000 €, et la dernière reçoit les 2 250 € restants.",
     indice: "Annuité pleine = [[valeur|durée]]. La 1re année, ne compte que les mois depuis la mise en service."
   },
@@ -839,6 +863,10 @@ QUESTIONS.push(
     annexe: { titre: "Annexe 2 : les charges de l'année (€ HT)", colonnes: ["", "Montant (€)"], lignes: [["Chiffre d'affaires HT", "480 000"], ["Charges variables (achats, commissions)", "192 000"], ["Charges fixes (loyer, salaires, assurances)", "216 000"]] },
     question: "Calcule le seuil de rentabilité du magasin (annexe 2), à l'euro près.",
     reponse: { valeur: 360000, unite: "€ HT", decimales: 0, tolerance: 1, signe: false },
+    erreurs: [
+      { valeur: 540000, type: "notion", message: "Tu as divisé par le taux de charges variables (40 %). Le seuil se calcule avec le taux de marge sur coût variable : MCV / CA." },
+      { valeur: 408000, type: "notion", message: "C'est le total des charges. Le seuil est le CA qui couvre les charges fixes : charges fixes divisées par le taux de MCV." }
+    ],
     explication: "Marge sur coût variable = 480 000 − 192 000 = 288 000 €\nTaux de MCV = [[288 000|480 000]] = 0,60, soit 60 %\nSeuil de rentabilité = [[charges fixes|taux de MCV]] = [[216 000|0,60]] = 360 000 € HT",
     indice: "Calcule d'abord le taux de marge sur coût variable, puis divise les charges fixes par ce taux."
   },
@@ -847,6 +875,10 @@ QUESTIONS.push(
     cas: "CAS-U3-03", etape: 5, type: "calcul",
     question: "En supposant une activité régulière, au bout de combien de mois le point mort est-il atteint ?",
     reponse: { valeur: 9, unite: "mois", decimales: 0, tolerance: 0.5, signe: false },
+    erreurs: [
+      { valeur: 16, type: "notion", message: "Tu as divisé le CA par le seuil. C'est SR / CA qui donne la fraction de l'année : elle est plus petite que 1." },
+      { valeur: 0.75, type: "mois", message: "0,75, c'est la fraction de l'année. Pour avoir un nombre de mois, multiplie-la par 12." }
+    ],
     explication: "Point mort = [[SR|CA]] × 12 mois = [[360 000|480 000]] × 12 = 0,75 × 12 = 9 mois\nSoit fin septembre.",
     indice: "Quelle fraction du CA annuel représente le seuil ? Applique-la aux 12 mois."
   },
@@ -865,6 +897,10 @@ QUESTIONS.push(
     contexte: "La gérante envisage d'embaucher un opticien : le poste coûterait 33 000 € par an (salaire et cotisations).",
     question: "Calcule le nouveau seuil de rentabilité si ce coût s'ajoute aux charges fixes.",
     reponse: { valeur: 415000, unite: "€ HT", decimales: 0, tolerance: 1, signe: false },
+    erreurs: [
+      { valeur: 393000, type: "notion", message: "Tu as ajouté 33 000 € au seuil. Le coût s'ajoute aux charges fixes, et chaque euro de charge fixe demande plus d'un euro de CA." },
+      { valeur: 622500, type: "notion", message: "Tu as divisé par le taux de charges variables (40 %). Garde le taux de marge sur coût variable de l'étape 4 : 60 %." }
+    ],
     explication: "Nouvelles charges fixes = 216 000 + 33 000 = 249 000 €\nNouveau SR = [[249 000|0,60]] = 415 000 € HT\nChaque euro de charge fixe en plus demande [[1|0,60]] ≈ 1,67 € de CA en plus.",
     indice: "Ajoute le coût du poste aux charges fixes, puis refais le calcul avec le même taux de MCV."
   },
@@ -900,6 +936,10 @@ QUESTIONS.push(
     cas: "CAS-U3-04", etape: 2, type: "calcul",
     question: "Calcule la marge commerciale.",
     reponse: { valeur: 346000, unite: "€", decimales: 0, tolerance: 1, signe: false },
+    erreurs: [
+      { valeur: 338000, type: "notion", message: "Tu as retiré les achats de l'année. La marge commerciale se calcule avec le coût d'achat des marchandises VENDUES (étape 1)." },
+      { valeur: 330000, type: "notion", message: "La variation de stock est prise à l'envers. Coût d'achat des marchandises vendues = achats + stock initial − stock final." }
+    ],
     explication: "Marge commerciale = ventes − coût d'achat des marchandises vendues = 520 000 − 174 000 = 346 000 €",
     indice: "Ventes moins coût d'achat des marchandises vendues."
   },
@@ -917,6 +957,10 @@ QUESTIONS.push(
     cas: "CAS-U3-04", etape: 4, type: "calcul",
     question: "Calcule l'excédent brut d'exploitation (EBE).",
     reponse: { valeur: 73000, unite: "€", decimales: 0, tolerance: 1, signe: true },
+    erreurs: [
+      { valeur: 49000, type: "notion", message: "C'est le résultat d'exploitation : tu as aussi retiré les dotations. L'EBE se calcule avant les amortissements." },
+      { valeur: 82000, type: "notion", message: "Il manque les impôts et taxes (9 000 €). L'EBE retire de la valeur ajoutée les impôts et taxes puis les charges de personnel." }
+    ],
     explication: "Valeur ajoutée = marge commerciale − autres achats et charges externes = 346 000 − 96 000 = 250 000 €\nEBE = valeur ajoutée − impôts et taxes − charges de personnel\n= 250 000 − 9 000 − 168 000 = 73 000 €\nL'EBE mesure ce que l'exploitation dégage avant amortissements, frais financiers et impôt.",
     indice: "Passe par la valeur ajoutée, puis retire impôts, taxes et personnel."
   },
@@ -925,6 +969,10 @@ QUESTIONS.push(
     cas: "CAS-U3-04", etape: 5, type: "calcul",
     question: "Calcule le résultat net de l'exercice.",
     reponse: { valeur: 35000, unite: "€", decimales: 0, tolerance: 1, signe: true },
+    erreurs: [
+      { valeur: 43000, type: "notion", message: "C'est le résultat avant impôt. Le résultat net retire encore l'impôt sur les bénéfices." },
+      { valeur: 41000, type: "notion", message: "Il manque les charges financières. Les intérêts d'emprunt (6 000 €) se retirent avant l'impôt." }
+    ],
     explication: "Résultat d'exploitation = EBE − dotations = 73 000 − 24 000 = 49 000 €\nRésultat courant avant impôts = 49 000 − 6 000 = 43 000 €\nRésultat net = 43 000 − 8 000 = 35 000 €",
     indice: "Retire de l'EBE les dotations, puis les intérêts, puis l'impôt."
   },
@@ -933,6 +981,10 @@ QUESTIONS.push(
     cas: "CAS-U3-04", etape: 6, type: "calcul",
     question: "Calcule la capacité d'autofinancement (CAF).",
     reponse: { valeur: 59000, unite: "€", decimales: 0, tolerance: 1, signe: false },
+    erreurs: [
+      { valeur: 11000, type: "notion", message: "Tu as retiré les dotations. Elles ne font sortir aucun argent : on les rajoute au résultat net." },
+      { valeur: 35000, type: "notion", message: "C'est le résultat net seul. La CAF y rajoute les dotations aux amortissements, une charge qui ne sort pas d'argent." }
+    ],
     explication: "CAF = résultat net + dotations aux amortissements = 35 000 + 24 000 = 59 000 €\nLes dotations sont une charge qui ne sort pas d'argent : on les rajoute au résultat.",
     indice: "Une charge calculée comme l'amortissement n'est pas décaissée."
   },
@@ -942,6 +994,11 @@ QUESTIONS.push(
     annexe: { titre: "Annexe 2 : situation financière", colonnes: ["", "Montant (€)"], lignes: [["Dettes financières", "150 000"], ["Capitaux propres", "180 000"], ["Annuité d'emprunt actuelle", "18 000"]] },
     question: "Calcule la capacité de remboursement : dettes financières divisées par CAF, en années (arrondi à 0,1).",
     reponse: { valeur: 2.5, unite: "ans", decimales: 1, tolerance: 0.05, signe: false },
+    erreurs: [
+      { valeur: 0.4, type: "notion", message: "Tu as divisé la CAF par les dettes. C'est l'inverse : dettes financières / CAF donne un nombre d'années." },
+      { valeur: 8.3, type: "notion", message: "Tu as divisé par l'annuité d'emprunt. Le ratio se calcule avec la CAF de l'étape précédente." },
+      { valeur: 4.3, type: "notion", message: "Tu as divisé par le résultat net. Le ratio se calcule avec la CAF, qui rajoute les dotations au résultat." }
+    ],
     explication: "Capacité de remboursement = [[dettes financières|CAF]] = [[150 000|59 000]] = 2,5 ans\nAvec la CAF actuelle, le magasin rembourserait toutes ses dettes en 2,5 ans.",
     indice: "Dettes financières divisées par la CAF annuelle."
   },
@@ -1002,6 +1059,12 @@ QUESTIONS.push(
     cas: "CAS-U3-05", etape: 3, type: "calcul",
     question: "Calcule l'annuité constante d'un emprunt de 220 000 € sur 10 ans à 4 %, à l'euro près. Formule : capital × taux / (1 − (1 + taux)^−n).",
     reponse: { valeur: 27124, unite: "€", decimales: 0, tolerance: 1, signe: false },
+    erreurs: [
+      { valeur: -18324, type: "notion", message: "Tu as calculé 1,04 puissance 10. L'exposant est −10 : 1,04^−10 ≈ 0,676, donc le dénominateur vaut environ 0,324." },
+      { valeur: 18324, type: "notion", message: "Tu as calculé 1,04 puissance 10. L'exposant est −10 : 1,04^−10 ≈ 0,676, donc le dénominateur vaut environ 0,324." },
+      { valeur: 8799, type: "notion", message: "Il manque des parenthèses : tu as divisé par 1 seulement. Mets tout le dénominateur entre parenthèses : (1 − 1,04^−10)." },
+      { valeur: 880000, type: "notion", message: "Tu as pris 4 au lieu de 0,04 pour le taux. Dans la formule, 4 % s'écrit 0,04." }
+    ],
     explication: "Annuité = [[220 000 × 0,04|1 − 1,04^−10]] = [[8 800|1 − 0,675564]] = [[8 800|0,324436]] = 27 124 €\nChaque année, Mme Roche paiera 27 124 €, intérêts et capital compris.",
     indice: "Utilise la formule avec une calculatrice : attention aux parenthèses et à l'exposant −10."
   },
@@ -1072,6 +1135,10 @@ QUESTIONS.push(
     cas: "CAS-U3-06", etape: 1, type: "calcul",
     question: "Calcule le marché potentiel annuel de la commune.",
     reponse: { valeur: 2019600, unite: "€ TTC", decimales: 0, tolerance: 1, signe: false },
+    erreurs: [
+      { valeur: 4039200, type: "notion", message: "C'est la dépense d'un cycle de 2 ans. Un porteur ne renouvelle ses lunettes que tous les 2 ans : divise par 2 pour avoir une année." },
+      { valeur: 3060000, type: "notion", message: "Tu as compté tous les habitants. Seuls les porteurs de correction (66 %) achètent un équipement." }
+    ],
     explication: "Porteurs = 18 000 × 0,66 = 11 880\nDépense d'un cycle de 2 ans = 11 880 × 340 = 4 039 200 €\nPar an : [[4 039 200|2]] = 2 019 600 € TTC",
     indice: "Porteurs × panier moyen, puis ramène à une année avec le rythme de renouvellement."
   },
@@ -1080,6 +1147,11 @@ QUESTIONS.push(
     cas: "CAS-U3-06", etape: 2, type: "calcul",
     question: "Calcule le marché net, après l'IDC et l'évasion commerciale (à l'euro près).",
     reponse: { valeur: 1672229, unite: "€ TTC", decimales: 0, tolerance: 1, signe: false },
+    erreurs: [
+      { valeur: 1858032, type: "notion", message: "Tu t'es arrêté à l'IDC. Il reste à retirer les 10 % d'évasion commerciale." },
+      { valeur: 1817640, type: "notion", message: "Tu as oublié l'IDC. Le marché se corrige d'abord par l'IDC (92/100), puis par l'évasion." },
+      { valeur: 185803, type: "notion", message: "Tu as gardé les 10 % d'évasion. L'évasion est la part des achats faite ailleurs : il reste 90 % du marché." }
+    ],
     explication: "Marché ajusté par l'IDC = 2 019 600 × [[92|100]] = 1 858 032 €\nMarché net de l'évasion = 1 858 032 × (1 − 0,10) = 1 672 228,80 €, soit 1 672 229 € TTC\nOn multiplie les deux ajustements l'un après l'autre.",
     indice: "Applique l'IDC (92/100), puis retire 10 % d'évasion sur le résultat."
   },
@@ -1123,6 +1195,9 @@ QUESTIONS.push(
     cas: "CAS-U3-06", etape: 7, type: "calcul",
     question: "Quel est le coût moyen de l'action par client touché ?",
     reponse: { valeur: 20, unite: "€", decimales: 0, tolerance: 0.5, signe: false },
+    erreurs: [
+      { valeur: 0.7, type: "notion", message: "0,70 €, c'est le coût d'un courrier. On demande le coût par client touché : coût total de l'envoi divisé par les 105 clients." }
+    ],
     explication: "Coût de la campagne = 3 000 × 0,70 = 2 100 €\nCoût par client = [[2 100|105]] = 20 €\nCe coût se compare à la marge que laisse un client qui revient : si elle dépasse 20 €, l'action est rentable.",
     indice: "Coût total de l'envoi divisé par le nombre de clients touchés."
   },
@@ -1132,6 +1207,10 @@ QUESTIONS.push(
     annexe: { titre: "Annexe 2 : prévisions du point de vente", colonnes: ["", "Valeur"], lignes: [["CA prévisionnel HT (étape 3)", "167 223 €"], ["Taux de marge sur coût variable", "55 %"], ["Charges fixes annuelles", "66 000 €"]] },
     question: "Calcule le seuil de rentabilité du point de vente, à l'euro près.",
     reponse: { valeur: 120000, unite: "€ HT", decimales: 0, tolerance: 1, signe: false },
+    erreurs: [
+      { valeur: 146667, type: "notion", message: "Tu as divisé par 45 %, le taux de charges variables. Le seuil se calcule avec le taux de marge sur coût variable : 55 %." },
+      { valeur: 36300, type: "notion", message: "Tu as multiplié les charges fixes par le taux de MCV. Le seuil s'obtient en divisant : charges fixes / taux de MCV." }
+    ],
     explication: "Seuil de rentabilité = [[charges fixes|taux de MCV]] = [[66 000|0,55]] = 120 000 € HT",
     indice: "Charges fixes divisées par le taux de marge sur coût variable."
   },
@@ -1176,6 +1255,10 @@ QUESTIONS.push(
     cas: "CAS-U3-07", etape: 2, type: "calcul",
     question: "Calcule la trésorerie à la fin de janvier (annexe 1).",
     reponse: { valeur: 21000, unite: "€", decimales: 0, tolerance: 1, signe: true },
+    erreurs: [
+      { valeur: 27000, type: "notion", message: "Il manque la TVA à reverser. C'est un décaissement du mois comme les autres." },
+      { valeur: 6000, type: "notion", message: "C'est le solde du mois seul. La trésorerie de fin de mois part de la trésorerie au 1er janvier (15 000 €)." }
+    ],
     explication: "Décaissements de janvier = 24 000 + 20 000 + 4 000 + 6 000 + 2 000 = 56 000 €\nSolde final = 15 000 + 62 000 − 56 000 = 21 000 €",
     indice: "Solde initial + encaissements − tous les décaissements, TVA reversée comprise."
   },
@@ -1192,6 +1275,12 @@ QUESTIONS.push(
     cas: "CAS-U3-07", etape: 4, type: "calcul",
     question: "Calcule la trésorerie à la fin de mars, après l'achat de l'équipement.",
     reponse: { valeur: -10200, unite: "€", decimales: 0, tolerance: 1, signe: true },
+    erreurs: [
+      { valeur: -3000, type: "ht-ttc", message: "Tu as pris l'équipement hors taxe. Le magasin paie le prix TTC : c'est lui qui sort de la trésorerie." },
+      { valeur: 33000, type: "notion", message: "Il manque l'équipement acheté en mars. Ajoute son prix TTC aux décaissements du mois." },
+      { valeur: -20700, type: "notion", message: "Tu es reparti de la trésorerie au 1er janvier (15 000 €). Mars commence avec la trésorerie de fin février (étape 3)." },
+      { valeur: -14700, type: "notion", message: "Tu es reparti de la trésorerie de fin janvier. Mars commence avec celle de fin février (étape 3)." }
+    ],
     explication: "Décaissements de mars = 26 000 + 20 000 + 4 000 + 6 500 + 2 000 + 43 200 = 101 700 €\nSolde final = 25 500 + 66 000 − 101 700 = −10 200 €\nLe signe compte : un solde négatif est un découvert.",
     indice: "N'oublie pas l'équipement TTC de l'étape 1 dans les décaissements de mars. Donne le résultat avec son signe."
   },
@@ -1200,6 +1289,11 @@ QUESTIONS.push(
     cas: "CAS-U3-07", etape: 5, type: "calcul",
     question: "Calcule la dotation aux amortissements de l'exercice, sachant que l'équipement est amorti en linéaire sur 6 ans à partir de sa mise en service le 1er mars (exercice clos le 31 décembre).",
     reponse: { valeur: 5000, unite: "€", decimales: 0, tolerance: 1, signe: false },
+    erreurs: [
+      { valeur: 6000, type: "notion", message: "C'est une année pleine sur le HT, ou 10 mois sur le TTC. On amortit le prix HT, au prorata des 10 mois depuis le 1er mars." },
+      { valeur: 4500, type: "notion", message: "Tu as compté 9 mois. De mars à décembre inclus, l'équipement sert 10 mois." },
+      { valeur: 7200, type: "ht-ttc", message: "Tu as amorti le prix TTC sur une année pleine. On amortit le prix HT (36 000 €), au prorata des 10 mois depuis mars." }
+    ],
     explication: "Annuité pleine = [[36 000|6]] = 6 000 € (sur le prix HT)\nDe mars à décembre : 10 mois, soit 6 000 × [[10|12]] = 5 000 €\nLa dotation est une charge calculée : elle n'apparaît pas dans le budget de trésorerie.",
     indice: "Amortis le prix HT, au prorata des mois depuis la mise en service."
   },

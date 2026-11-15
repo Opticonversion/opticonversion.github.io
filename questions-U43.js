@@ -72,6 +72,171 @@ QUESTIONS.push(
     schema: "img/schemas/U43/microscope-chaine-emmetrope.svg",
     schemaTexte: "Tracé à l'échelle : la préparation AB, placée à 24 mm de l'objectif (f' = 20 mm), donne une image A₁B₁ réelle, renversée, 5 fois plus grande, à 120 mm, dans le plan focal objet de l'oculaire ; les rayons ressortent parallèles."
   },
+  {
+    id: "U43-131", epreuve: "U43", theme: "Chaîne des conjugués", session: "2019", difficulte: "moyen",
+    question: "Frontofocomètre : la mire T donne par le collimateur une image Tc, le verre mesuré en donne T', puis l'objectif de la lunette de visée en donne T''. La lunette est réglée sur l'infini (réticule au foyer image de son objectif). La mire est nette sur le réticule. Quelle chaîne est juste ?",
+    choix: ["Tc = F'v (foyer image du verre) → T' à l'infini → T'' = F'obj, sur le réticule", "Tc à l'infini → T' = F'v → T'' = F'obj, sur le réticule", "Tc = Fv (foyer objet du verre) → T' à l'infini → T'' = F'obj, sur le réticule", "Tc = Fv → T' = F'v → T'' sur le réticule"],
+    bonne: 2,
+    explication: "On part de la fin. La lunette est réglée sur l'infini : pour que T'' soit sur le réticule (F'obj), T' doit être à l'infini. Pour que le verre donne une image à l'infini, son objet Tc doit être à son foyer objet Fv.\nChaîne : T → Tc = Fv → T' à l'infini → T'' = F'obj (réticule).\nC'est le déplacement de la mire qui amène Tc en Fv : sa lecture donne la vergence du verre.",
+    indice: "Pars de la fin : où doit être T' pour que la lunette réglée sur l'infini en donne une image sur son réticule ?",
+    erreurs: { 0: { type: "notion", message: "Un objet au foyer image ne donne pas d'image à l'infini. C'est l'objet placé au foyer objet Fv qui donne une image à l'infini." } }
+  },
+  {
+    id: "U43-133", epreuve: "U43", theme: "Chaîne des conjugués", session: "2023", difficulte: "facile",
+    cas: "CAS-U43-02", etape: 1,
+    type: "calcul",
+    question: "L'objectif donne d'un paysage lointain une image nette sur le dépoli, après renvoi par le miroir. À quelle distance du miroir faut-il placer le dépoli, mesurée le long du trajet de la lumière ? (en mm)",
+    reponse: { valeur: 20, unite: "mm", decimales: 0, signe: false },
+    explication: "Objet à l'infini : l'image se forme au foyer image de l'objectif, 50 mm après lui, en comptant tout le trajet de la lumière.\nLe miroir est à 30 mm de l'objectif. Il renvoie la lumière sans changer la longueur du trajet : il reste 50 − 30 = 20 mm après le miroir.\nLe dépoli est donc à 20 mm du miroir, sur le trajet renvoyé vers le haut.",
+    indice: "Un objet à l'infini donne son image au foyer image. Le miroir plan plie le trajet sans le raccourcir.",
+    erreurs: [
+      { valeur: 50, type: "notion", message: "Tu as donné la distance totale depuis l'objectif. Le miroir est déjà à 30 mm : il reste 20 mm après lui." },
+      { valeur: 80, type: "notion", message: "Tu as ajouté les deux distances. L'image se forme 50 mm après l'objectif en tout, miroir compris : 50 − 30 = 20 mm." }
+    ]
+  },
+  {
+    id: "U43-132", epreuve: "U43", theme: "Chaîne des conjugués", session: "2023", difficulte: "moyen",
+    cas: "CAS-U43-02", etape: 2,
+    contexte: "Le photographe est emmétrope et n'accommode pas. Il regarde le dépoli à travers la loupe.",
+    question: "On note A₁ l'image du paysage par l'objectif, A₂ son image par le miroir, A' son image par la loupe. Quelle chaîne est juste ?",
+    choix: ["A₁ = F'obj → A₂ = A₁ (le miroir ne déplace pas l'image) → A' à l'infini", "A₁ = F'obj → A₂ sur le dépoli = F'lou → A' à l'infini", "A₁ = Fobj → A₂ sur le dépoli = Flou → A' sur le remotum", "A₁ = F'obj → A₂ symétrique de A₁ par le miroir, sur le dépoli = Flou → A' à l'infini"],
+    bonne: 3,
+    explication: "Objet à l'infini : l'objectif vise A₁ = F'obj. Le miroir coupe la lumière avant ce point : A₁ est un objet virtuel pour le miroir, qui en donne A₂, symétrique de A₁ par rapport à lui. A₂ est réel, sur le dépoli.\nEmmétrope sans accommoder : A' doit être à l'infini, donc A₂ au foyer objet de la loupe.\nChaîne : A∞ → A₁ = F'obj → A₂ sur le dépoli = Flou → A' à l'infini.",
+    indice: "Pour que la loupe donne une image à l'infini, où doit se trouver son objet ?",
+    erreurs: {
+      1: { type: "notion", message: "Pour que l'image finale parte à l'infini, l'objet de la loupe doit être à son foyer objet Flou, pas à son foyer image." },
+      0: { type: "notion", message: "Le miroir plan déplace l'image : A₂ est le symétrique de A₁ par rapport au miroir. Il ne change ni sa taille ni la longueur du trajet." }
+    }
+  },
+  {
+    id: "U43-134", epreuve: "U43", theme: "Œil et instrument", session: "2023", difficulte: "difficile",
+    cas: "CAS-U43-02", etape: 3,
+    type: "calcul",
+    contexte: "Un autre photographe est myope de −5,00 δ. Il ôte ses lunettes et n'accommode pas. Son œil est au foyer image de la loupe.",
+    question: "Le dépoli ne bouge pas. De combien de millimètres faut-il rapprocher la loupe du dépoli, par rapport au réglage pour un emmétrope ?",
+    reponse: { valeur: 8, unite: "mm", decimales: 0, signe: false },
+    explication: "Remotum : HR = [[1|R]] = [[1|−5]] = −0,20 m = −200 mm.\nL'œil est en F'lou : l'image A' doit être sur le remotum, donc x' = F'lou A' = −200 mm.\nNewton : x = [[−f'²|x']] = [[−1 600|−200]] = +8 mm\nA₂ (le dépoli) doit être 8 mm après Flou : à 32 mm de la loupe au lieu de 40. On rapproche la loupe de 8 mm.",
+    indice: "Place A' sur le remotum, puis utilise Newton : x·x' = −f'², avec f' = 40 mm et x' = F'lou A'.",
+    erreurs: [
+      { valeur: 32, type: "notion", message: "32 mm est la nouvelle distance entre le dépoli et la loupe. On demande le déplacement : 40 − 32 = 8 mm." }
+    ]
+  },
+  {
+    id: "U43-135", epreuve: "U43", theme: "Chaîne des conjugués", session: "complément", difficulte: "moyen",
+    type: "calcul",
+    question: "Un emmétrope tient une loupe de focale 50 mm à 20 mm devant son œil. L'objet est à 40 mm devant la loupe. Quelle accommodation lui faut-il pour voir l'image nette ? (en δ, arrondie au dixième)",
+    reponse: { valeur: 4.5, unite: "δ", decimales: 1, signe: true, tolerance: 0.05 },
+    explication: "Image par la loupe : [[1|OA']] = [[1|50]] + [[1|−40]] = [[4|200]] − [[5|200]] = [[−1|200]]\nOA' = −200 mm : image virtuelle, 200 mm devant la loupe.\nPar rapport à l'œil : 200 + 20 = 220 mm devant lui.\nAccommodation de l'emmétrope : A = [[1|0,220]] ≈ 4,5 δ\nChaîne : A → A' (virtuelle, 220 mm devant l'œil) → A'' sur la rétine.",
+    indice: "Trouve d'abord l'image par la loupe, puis sa distance à l'œil (pas à la loupe).",
+    erreurs: [
+      { valeur: 5, type: "notion", message: "Tu as pris la distance de l'image à la loupe. L'accommodation se calcule depuis l'œil : 200 + 20 = 220 mm, soit 4,5 δ." }
+    ]
+  },
+  {
+    id: "U43-136", epreuve: "U43", theme: "Chaîne des conjugués", session: "complément", difficulte: "difficile",
+    type: "calcul",
+    question: "Un téléobjectif : lentille L₁ (f'₁ = +50 mm), puis lentille L₂ (f'₂ = −25 mm) placée 40 mm après L₁. L'objet est à l'infini. Calcule O₂A', la position de l'image finale par rapport à L₂ (en mm, au dixième, avec son signe).",
+    reponse: { valeur: 16.7, unite: "mm", decimales: 1, signe: true, tolerance: 0.1 },
+    explication: "L₁ : objet à l'infini, donc A₁ = F'₁, 50 mm après L₁.\nL₂ est à 40 mm : A₁ est 10 mm après L₂. Pour L₂, c'est un objet virtuel : O₂A₁ = +10 mm.\nL₂ : [[1|O₂A']] = [[1|−25]] + [[1|10]] = [[−2|50]] + [[5|50]] = [[3|50]]\nO₂A' ≈ +16,7 mm : image réelle, après L₂.\nChaîne : A∞ → A₁ = F'₁ (objet virtuel pour L₂) → A' à 16,7 mm après L₂.",
+    indice: "A₁ se forme-t-il avant ou après L₂ ? Le signe de O₂A₁ en dépend.",
+    erreurs: [
+      { valeur: -7.1, type: "signe", message: "Tu as pris A₁ comme un objet réel. A₁ se forme 10 mm après L₂ : pour L₂, O₂A₁ = +10 mm." }
+    ]
+  },
+  {
+    id: "U43-137", epreuve: "U43", theme: "Chaîne des conjugués", session: "complément", difficulte: "moyen",
+    type: "calcul",
+    question: "Un viseur a un objectif L₁ et une lentille de redressement L₂. L₁ donne de l'objet une image A₁B₁ avec γ₁ = −3. Pour L₂, A₁B₁ est à O₂A₁ = −60 mm, et L₂ en donne une image A₂B₂ à O₂A₂ = +90 mm. Calcule le grandissement total γ, avec son signe.",
+    reponse: { valeur: 4.5, unite: "", decimales: 1, signe: true, tolerance: 0.05 },
+    explication: "γ₂ = [[O₂A₂|O₂A₁]] = [[90|−60]] = −1,5\nγ = γ₁ × γ₂ = (−3) × (−1,5) = +4,5\nL'image finale est droite et 4,5 fois plus grande. Deux renversements de suite redonnent une image droite : c'est le rôle de L₂.",
+    indice: "Calcule γ₂ avec ses signes, puis multiplie les deux grandissements."
+  },
+  {
+    id: "U43-138", epreuve: "U43", theme: "Chaîne des conjugués", session: "complément", difficulte: "facile",
+    question: "Un emmétrope qui n'accommode pas regarde dans une lunette afocale. La chaîne se termine ainsi : … → A' à l'infini → (œil) → A''. Où se trouve A'' ?",
+    choix: ["Au foyer objet de l'œil", "Au foyer image de l'œil F'œil, sur la rétine", "Sur la rétine, en avant du foyer image de l'œil", "Au remotum de l'œil"],
+    bonne: 1,
+    explication: "Un objet à l'infini donne son image au foyer image. Pour un œil emmétrope qui n'accommode pas, ce foyer image est sur la rétine : A'' = F'œil.\nFin de chaîne : A' à l'infini → A'' = F'œil (rétine).",
+    indice: "Pour l'œil, A' est un objet à l'infini. Où se forme l'image d'un objet à l'infini ?"
+  },
+  {
+    id: "U43-139", epreuve: "U43", theme: "Chaîne des conjugués", session: "complément", difficulte: "difficile",
+    question: "Un myope de −2,50 δ (remotum à 400 mm devant l'œil), sans lunettes et sans accommoder, utilise une loupe de focale 50 mm. Son œil est au foyer image de la loupe. Où placer l'objet ?",
+    choix: ["À 56,25 mm devant la loupe", "À 43,75 mm devant la loupe (6,25 mm après le foyer objet)", "Au foyer objet, à 50 mm devant la loupe", "À 6,25 mm devant la loupe"],
+    bonne: 1,
+    explication: "L'image A' doit être sur le remotum. L'œil est en F' : x' = F'A' = −400 mm.\nNewton : x = [[−f'²|x']] = [[−2 500|−400]] = +6,25 mm\nL'objet est 6,25 mm après F, donc entre F et la loupe : à 50 − 6,25 = 43,75 mm devant elle.\nChaîne : A → A' = R (400 mm devant l'œil) → A'' sur la rétine.",
+    indice: "Place A' sur le remotum et utilise Newton : x·x' = −f'², avec x' = F'A'.",
+    erreurs: {
+      0: { type: "signe", message: "Tu as trouvé FA = −6,25 mm. Avec x' = F'A' = −400 mm, Newton donne x = +6,25 mm : l'objet est entre F et la loupe." },
+      2: { type: "notion", message: "Au foyer objet, l'image part à l'infini (réglage d'un emmétrope). Ce myope voit net sans accommoder seulement sur son remotum." }
+    }
+  },
+  {
+    id: "U43-140", epreuve: "U43", theme: "Chaîne des conjugués", session: "complément", difficulte: "difficile",
+    type: "pose",
+    question: "Un microscope a un objectif de focale 10 mm et un oculaire de focale 20 mm. La préparation est à 11 mm devant l'objectif. Un myope de −10 δ l'utilise sans lunettes et sans accommoder, l'œil au foyer image de l'oculaire. Trouve la distance entre l'objectif et l'oculaire, étape par étape.",
+    etapes: [
+      {
+        consigne: "Position de l'image intermédiaire O₁A₁ (en mm)",
+        reponse: { valeur: 110, unite: "mm", decimales: 0, signe: true },
+        aide: "Relation de conjugaison avec l'objectif : [[1|O₁A₁]] = [[1|f'obj]] + [[1|O₁A]], avec O₁A = −11 mm.",
+        ligne: "[[1|O₁A₁]] = [[1|10]] + [[1|−11]] = [[11|110]] − [[10|110]] = [[1|110]]\nDonc O₁A₁ = +110 mm",
+        erreurs: [{ valeur: 5.24, type: "signe", message: "Tu as pris O₁A = +11 mm. La préparation est un objet réel, avant l'objectif : O₁A = −11 mm." }]
+      },
+      {
+        consigne: "Position du remotum par rapport à l'œil, HR (en mm)",
+        reponse: { valeur: -100, unite: "mm", decimales: 0, signe: true },
+        aide: "HR = [[1|R]], en mètres puis en mm. Le remotum d'un myope est devant l'œil.",
+        ligne: "HR = [[1|−10]] = −0,10 m = −100 mm\nL'œil est en F'oc, donc x' = F'oc A' = −100 mm."
+      },
+      {
+        consigne: "Position de A₁ par rapport au foyer objet de l'oculaire, Foc A₁ (en mm)",
+        reponse: { valeur: 4, unite: "mm", decimales: 0, signe: true },
+        aide: "Newton avec l'oculaire : x·x' = −f'oc², avec x' = −100 mm et f'oc = 20 mm.",
+        ligne: "x = [[−f'oc²|x']] = [[−400|−100]] = +4 mm\nA₁ est 4 mm après Foc, donc à 20 − 4 = 16 mm avant l'oculaire."
+      },
+      {
+        consigne: "Distance entre l'objectif et l'oculaire O₁O₂ (en mm)",
+        reponse: { valeur: 126, unite: "mm", decimales: 0, signe: false },
+        aide: "A₁ est à 110 mm après l'objectif et à 16 mm avant l'oculaire.",
+        ligne: "O₁O₂ = 110 + 16 = 126 mm",
+        erreurs: [{ valeur: 130, type: "notion", message: "130 mm correspond au réglage d'un emmétrope (A₁ en Foc). Ici A₁ est 4 mm après Foc, à 16 mm de l'oculaire : 110 + 16 = 126 mm." }]
+      }
+    ],
+    explication: "Chaîne : A → A₁ (110 mm après l'objectif, 4 mm après Foc) → A' sur le remotum, 100 mm devant l'œil → A'' sur la rétine. L'oculaire est 4 mm plus près de l'objectif que pour un emmétrope."
+  },
+  {
+    id: "U43-141", epreuve: "U43", theme: "Chaîne des conjugués", session: "complément", difficulte: "moyen",
+    question: "Lunette de Galilée réglée pour un emmétrope qui n'accommode pas : objectif convergent, oculaire divergent. L'objectif vise l'image A₁ d'une étoile en F'obj. Pour l'oculaire, A₁ est :",
+    choix: ["Un objet réel, placé à son foyer objet Foc", "Un objet virtuel, placé à son foyer image F'oc", "Un objet virtuel, placé à son foyer objet Foc", "L'image finale, vue directement par l'œil"],
+    bonne: 2,
+    explication: "L'oculaire est placé avant F'obj : la lumière le traverse avant de converger en A₁. A₁ est donc après l'oculaire : c'est un objet virtuel pour lui.\nLunette afocale : l'image finale est à l'infini, donc A₁ = Foc. Pour une lentille divergente, le foyer objet Foc est après la lentille, ce qui est cohérent.\nChaîne : A∞ → A₁ = F'obj = Foc (objet virtuel) → A' à l'infini.",
+    indice: "La lumière rencontre-t-elle l'oculaire avant ou après le point où elle converge ?",
+    erreurs: {
+      0: { type: "notion", message: "La lumière traverse l'oculaire avant de converger en A₁ : A₁ est après l'oculaire, c'est un objet virtuel." },
+      1: { type: "notion", message: "Pour que l'image finale parte à l'infini, l'objet doit être au foyer objet. Pour une divergente, Foc est après la lentille." }
+    }
+  },
+  {
+    id: "U43-142", epreuve: "U43", theme: "Chaîne des conjugués", session: "complément", difficulte: "moyen",
+    question: "Un projecteur de diapositives : lampe, condenseur, diapositive, objectif, écran. Pour que l'écran soit éclairé de façon régulière, où le condenseur doit-il former l'image du filament de la lampe ?",
+    choix: ["Dans le plan de l'objectif (sur sa pupille)", "Sur la diapositive", "Sur l'écran", "À l'infini"],
+    bonne: 0,
+    explication: "Il y a deux chaînes à écrire. Celle de l'objet : diapositive → (objectif) → image nette sur l'écran. Celle de la source : filament → (condenseur) → image dans l'objectif.\nAinsi toute la lumière passe dans l'objectif, et le filament n'est net ni sur la diapositive ni sur l'écran : l'éclairage est régulier.\nSi l'image du filament tombait sur la diapositive, on verrait le filament sur l'écran.",
+    indice: "Le filament ne doit pas se voir sur l'écran. Et toute la lumière doit entrer dans l'objectif."
+  },
+  {
+    id: "U43-143", epreuve: "U43", theme: "Chaîne des conjugués", session: "complément", difficulte: "moyen",
+    question: "L₁ (f'₁ = +40 mm), puis L₂ (f'₂ = +30 mm) placée 150 mm après L₁. Un objet réel est à 60 mm devant L₁. Où se forme l'image finale ?",
+    choix: ["À 60 mm après L₂", "À l'infini : A₁ est au foyer objet de L₂", "Au foyer image de L₂, 30 mm après elle", "À 15 mm après L₂"],
+    bonne: 1,
+    explication: "L₁ : [[1|O₁A₁]] = [[1|40]] + [[1|−60]] = [[3|120]] − [[2|120]] = [[1|120]], donc O₁A₁ = +120 mm.\nO₂A₁ = 120 − 150 = −30 mm : A₁ est 30 mm avant L₂, exactement à son foyer objet F₂.\nL'image finale est à l'infini. Chaîne : A → A₁ = F₂ → A' à l'infini.\nIci, A₁ tombe sur F₂ : on conclut sans calculer O₂A'.",
+    indice: "Calcule O₁A₁, puis compare la position de A₁ à celle du foyer objet de L₂.",
+    erreurs: {
+      3: { type: "signe", message: "Tu as pris O₂A₁ = +30 mm. A₁ est 30 mm avant L₂ : c'est un objet réel, O₂A₁ = −30 mm, au foyer objet." },
+      2: { type: "notion", message: "Le foyer image reçoit l'image d'un objet à l'infini. Ici c'est l'inverse : l'objet A₁ est au foyer objet, l'image part à l'infini." }
+    }
+  },
 
   // ---------- Vergences et focales ----------
   {
@@ -781,4 +946,11 @@ CAS.push({
   titre: "Le microscope d'atelier",
   contexte: "Ton magasin achète un petit microscope pour contrôler l'usure des charnières de montures. L'objectif est une lentille mince de focale 20 mm, l'oculaire une lentille mince de focale 25 mm. La charnière observée est placée à 24 mm devant l'objectif.",
   annexe: { titre: "Données", colonnes: ["Élément", "Valeur"], lignes: [["Focale de l'objectif", "f'obj = 20 mm"], ["Focale de l'oculaire", "f'oc = 25 mm"], ["Position de la charnière", "OA = −24 mm"]] }
+});
+CAS.push({
+  id: "CAS-U43-02",
+  epreuve: "U43",
+  titre: "Le viseur de l'appareil reflex",
+  contexte: "Un client te montre son appareil reflex. L'objectif, assimilé à une lentille mince de focale 50 mm, est réglé sur l'infini. Un miroir plan incliné à 45°, placé 30 mm après l'objectif, renvoie la lumière vers le haut sur un verre dépoli. On regarde le dépoli à travers une loupe de focale 40 mm.",
+  annexe: { titre: "Données", colonnes: ["Élément", "Valeur"], lignes: [["Focale de l'objectif", "f'obj = 50 mm"], ["Distance objectif-miroir", "30 mm"], ["Focale de la loupe", "f'lou = 40 mm"], ["Mise au point de l'objectif", "sur l'infini"]] }
 });

@@ -678,6 +678,9 @@ QUESTIONS.push(
     type: "calcul",
     question: "OD −2,00 et OG −5,00 (sphériques). En lecture, le regard passe 8 mm sous les centres optiques. Calcule l'effet prismatique vertical différentiel.",
     reponse: {"valeur": 2.4, "unite": "Δ", "decimales": 1, "signe": false},
+    erreurs: [
+      { valeur: 5.6, type: "notion", message: "Tu as additionné les deux effets. Les deux verres sont divergents et le regard passe sous les deux centres : bases du même côté, on soustrait." }
+    ],
     explication: "Prentice, d en cm : OD 0,8 × 2 = 1,6 Δ ; OG 0,8 × 5 = 4,0 Δ. Verres divergents, regard sous le centre : base inférieure pour les deux. Différentiel = 4,0 − 1,6 = 2,4 Δ, base inférieure sur l'OG.",
     indice: "Prentice : P = d (cm) × |D|, pour chaque œil. Attention : 8 mm = 0,8 cm. Puis fais la différence."
   },
@@ -702,6 +705,10 @@ QUESTIONS.push(
     type: "calcul",
     question: "Un myope de −1,50 non compensé lit à 40 cm. Calcule l'accommodation qu'il met en jeu.",
     reponse: {"valeur": 1, "unite": "δ", "decimales": 2, "signe": true},
+    erreurs: [
+      { valeur: 2.5, type: "notion", message: "2,50 δ, c'est ce que fournit un emmétrope. Le myope non compensé accommode moins : Acc = R − 1/HT, avec R = −1,50." },
+      { valeur: 4, type: "signe", message: "Tu as ajouté la myopie. Pour un myope, R est négatif : non compensé, il accommode moins qu'un emmétrope, pas plus." }
+    ],
     explication: "Acc = R − [[1|HT]] = −1,50 − [[1|−0,40]] = −1,50 + 2,50 = +1,00 δ.\nSon remotum est à 67 cm : il n'a qu'un peu d'accommodation à fournir.",
     indice: "Acc = R − [[1|HT]], avec HT négatif et en mètres. [[1|0,40]] se calcule de tête."
   },
@@ -726,6 +733,10 @@ QUESTIONS.push(
     type: "calcul",
     question: "Un myope de −2,00 a une amplitude d'accommodation de 6 δ. Calcule la position de son proximum HP (mesure algébrique depuis l'œil).",
     reponse: {"valeur": -12.5, "unite": "cm", "decimales": 1, "signe": true},
+    erreurs: [
+      { valeur: -16.7, type: "notion", message: "C'est le proximum d'un emmétrope qui aurait 6 δ d'amplitude. La myopie compte : 1/HP = R − Amax." },
+      { valeur: -25, type: "signe", message: "Tu as pris R = +2,00. Un myope a un R négatif : refais 1/HP = R − Amax avec R = −2,00." }
+    ],
     explication: "Amax = R − [[1|HP]], donc [[1|HP]] = R − Amax = −2 − 6 = −8 δ.\nHP = [[1|−8]] m = −0,125 m = −12,5 cm : le proximum est 12,5 cm devant l'œil.",
     indice: "Amax = R − [[1|HP]]. Isole [[1|HP]], puis inverse. Le signe − veut dire « devant l'œil »."
   },
@@ -910,6 +921,10 @@ QUESTIONS.push(
     type: "calcul",
     question: "Calcule l'équivalent sphérique de l'OG.",
     reponse: {"valeur": 0.75, "unite": "δ", "decimales": 2, "signe": true},
+    erreurs: [
+      { valeur: 0.5, type: "notion", message: "Tu as ajouté tout le cylindre (ou pris l'OD). Pour l'OG, l'équivalent sphérique est S + C/2 : la moitié du cylindre seulement." },
+      { valeur: 1.25, type: "signe", message: "Tu as retiré un cylindre négatif. Dans S + C/2, le cylindre (−0,50) garde son signe." }
+    ],
     explication: "Équivalent sphérique = sphère + cylindre divisé par 2 = +1,00 + (−0,50 / 2) = +0,75 δ.",
     indice: "Équivalent sphérique = S + C/2, avec les signes."
   },
@@ -939,6 +954,10 @@ QUESTIONS.push(
     type: "calcul",
     question: "Calcule l'accommodation que fournit son OG pour lire à 40 cm.",
     reponse: {"valeur": 3.25, "unite": "δ", "decimales": 2, "signe": true},
+    erreurs: [
+      { valeur: 2.5, type: "notion", message: "2,50 δ, c'est ce que fournit un emmétrope. Son OG est hypermétrope de +0,75 : il doit accommoder en plus." },
+      { valeur: 1.75, type: "signe", message: "Tu as retiré l'hypermétropie. R est positif : non corrigé, l'hypermétrope accommode plus qu'un emmétrope, pas moins." }
+    ],
     explication: "Acc = R − 1/x, avec x = −0,40 m (position du texte) : +0,75 − 1/(−0,40) = +0,75 + 2,50 = +3,25 δ : 2,50 δ pour la distance, plus 0,75 δ pour compenser l'hypermétropie. C'est plus que l'amplitude de 2,00 δ mesurée : la lecture est impossible sans correction.",
     indice: "Acc = R − 1/x, avec x la position du texte (négative, en mètres). Le signe de R compte."
   },
@@ -969,6 +988,10 @@ QUESTIONS.push(
     type: "calcul",
     question: "Calcule la distance maximale à laquelle il voit net sans accommoder (en cm).",
     reponse: {"valeur": 67, "unite": "cm", "decimales": 0, "signe": false, "tolerance": 1},
+    erreurs: [
+      { valeur: 44, type: "notion", message: "Tu as ajouté l'hypermétropie. Il est déjà corrigé de loin : sans accommoder, seule l'addition de +1,50 compte." },
+      { valeur: 29, type: "notion", message: "29 cm, c'est le point le plus proche, en accommodant au maximum. Sans accommoder, seule l'addition joue." }
+    ],
     explication: "Sans accommoder, l'addition seule ramène au net un objet dont la vergence est de −1,50 δ, soit à 1/1,50 = 0,667 m, environ 67 cm. Au-delà, par exemple un écran à 80 cm, il devra accommoder un peu.",
     indice: "Sans accommodation, le foyer est sur la rétine si la vergence de l'objet vaut l'opposé de l'addition."
   },

@@ -570,6 +570,10 @@ QUESTIONS.push(
     contexte: "u0 = 200 et, pour tout n, u(n+1) = 0,9 u(n) + 40.",
     question: "Avec le tableau de valeurs de la calculatrice, trouve le premier rang n tel que u(n) > 350.",
     reponse: {"valeur": 14, "unite": "", "decimales": 0, "signe": true},
+    erreurs: [
+      { valeur: 13, type: "notion", message: "u13 ≈ 349,2 ne dépasse pas encore 350. On cherche le premier rang où u(n) est strictement plus grand que 350." },
+      { valeur: 15, type: "notion", message: "Ton tableau commence sans doute à n = 1. Ici le premier terme est u0 : règle le rang de départ à 0." }
+    ],
     explication: "Le tableau donne u13 ≈ 349,2 (encore ≤ 350) et u14 ≈ 354,2 (> 350). Le premier rang est donc n = 14.",
     indice: "Entre la suite récurrente avec son premier terme u0 = 200, puis parcours le tableau jusqu'au premier terme qui dépasse 350. Attention au rang de départ (n = 0)."
   },
@@ -580,6 +584,10 @@ QUESTIONS.push(
     annexe: {"titre": "Série (x ; z)", "colonnes": ["x", "0", "1", "2", "3", "4", "5"], "lignes": [["z", "4,38", "4,11", "3,75", "3,52", "3,18", "2,93"]]},
     question: "À la calculatrice, donne le coefficient a de la droite de régression de z en x (z = ax + b), arrondi à 10⁻².",
     reponse: {"valeur": -0.29, "unite": "", "decimales": 2, "signe": true},
+    erreurs: [
+      { valeur: 4.38, type: "notion", message: "4,38 est l'ordonnée à l'origine b. Le coefficient a est la pente : celui qui multiplie x." },
+      { valeur: -3.4, type: "notion", message: "Tu as fait la régression de x en z. On veut z en x : x dans la première liste, z dans la seconde." }
+    ],
     explication: "Régression linéaire de z en x (moindres carrés) : a ≈ −0,2934 et b ≈ 4,3786, avec r ≈ −0,999. Arrondi à 10⁻² : a = −0,29. Le signe − indique que z diminue quand x augmente.",
     indice: "Saisis x et z dans deux listes, puis lance la régression linéaire de type ax + b. Garde le signe de a."
   },
