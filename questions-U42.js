@@ -291,6 +291,34 @@ QUESTIONS.push(
     indice: "Un objet à l'infini donne son image au foyer image. Mesure ensuite depuis L2, dans le sens de la lumière."
   },
 
+  {
+    id: "U42-154", difficulte: "difficile", epreuve: "U42", theme: "Conjugaison", session: "complément",
+    question: "Dans une chaîne de deux lentilles, un rayon sorti de L1 arrive sur L2 incliné, sans passer par aucun foyer. Comment tracer sa suite après L2 (convergente) ?",
+    choix: ["Il ressort en passant par le foyer image F'2", "Il ressort par le point où le rayon qui lui est parallèle, passant par O2, coupe le plan focal image de L2", "Il continue tout droit", "Il ressort parallèle à l'axe"],
+    bonne: 1,
+    explication: "Des rayons parallèles entre eux convergent en un même point du plan focal image : un foyer image secondaire.\nOn trace le rayon parallèle au rayon donné qui passe par O2 (il n'est pas dévié). Il coupe le plan focal image en ce foyer secondaire, et le rayon donné ressort en passant par ce point.\nF'2 ne vaut que pour un rayon parallèle à l'axe.",
+    indice: "Des rayons parallèles entre eux convergent tous au même point du plan focal image. Lequel d'entre eux est facile à tracer ?",
+    erreurs: { 0: { type: "notion", message: "Seuls les rayons parallèles à l'axe ressortent par F'2. Un rayon incliné ressort par un foyer secondaire du plan focal image." } }
+  },
+  {
+    id: "U42-155", difficulte: "moyen", epreuve: "U42", theme: "Conjugaison", session: "complément",
+    question: "L1 est divergente : elle donne d'un objet réel une image A1B1 virtuelle, entre l'objet et L1. L2 est placée après L1. Pour L2, A1B1 est :",
+    choix: ["Un objet réel : la lumière semble venir de A1B1, qui est avant L2", "Un objet virtuel, puisque A1B1 est une image virtuelle", "Inutilisable : seule une image réelle peut servir d'objet", "Un objet à l'infini"],
+    bonne: 0,
+    explication: "Après L1, les rayons s'écartent comme s'ils venaient de A1B1. Ils arrivent sur L2 en venant de ce point, situé avant L2 : c'est un objet réel pour L2.\nRéel ou virtuel se décide pour chaque lentille, selon la place de l'objet par rapport à elle. Une image virtuelle pour L1 peut très bien être un objet réel pour L2.",
+    indice: "Regarde où se trouve A1B1 par rapport à L2, et dans quel sens arrive la lumière.",
+    erreurs: { 1: { type: "notion", message: "La nature de A1 pour L2 dépend de sa place par rapport à L2. A1B1 est avant L2 : c'est un objet réel pour elle." } }
+  },
+  {
+    id: "U42-156", difficulte: "moyen", epreuve: "U42", theme: "Conjugaison", session: "complément",
+    question: "B est dans le plan focal objet de L1 : les rayons issus de B sortent de L1 parallèles entre eux, inclinés. Où L2 (convergente) forme-t-elle B2 ?",
+    choix: ["Sur l'axe, au foyer image F'2", "Dans le plan focal objet de L2", "À l'infini", "Dans le plan focal image de L2, sur le rayon qui passe par O2 sans être dévié"],
+    bonne: 3,
+    explication: "Pour L2, B1 est à l'infini dans une direction inclinée. Ces rayons convergent dans le plan focal image de L2, au point où le coupe celui d'entre eux qui passe par O2.\nChaîne : B dans le plan focal objet de L1 → B1 à l'infini → B2 dans le plan focal image de L2.\nSur l'axe en F'2, ce ne serait vrai que pour un faisceau parallèle à l'axe.",
+    indice: "Un faisceau parallèle incliné converge dans le plan focal image, mais pas forcément sur l'axe. Quel rayon du faisceau est facile à suivre ?",
+    erreurs: { 0: { type: "notion", message: "Le faisceau est incliné : il converge dans le plan focal image, mais hors de l'axe, sur le rayon qui passe par O2." } }
+  },
+
   // ---------- Loupe et microscope ----------
   {
     id: "U42-008", difficulte: "facile", epreuve: "U42", theme: "Loupe et microscope", session: "2018",

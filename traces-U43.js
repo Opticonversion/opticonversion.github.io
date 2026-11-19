@@ -624,3 +624,129 @@ TRACES.push({
   ],
   conclusion: "B₂ est au remotum et B₃ sur la rétine : le myope voit net sans accommoder. L'oculaire a été rapproché de l'objectif de F₂A₁ ; pour un hypermétrope, il faudrait l'éloigner (A₁ avant F₂)."
 });
+
+// ==============================================================
+//  Chaîne des images, suite (ajout du 15/11/2026) : 4 niveaux de plus dans le chapitre « Chaîne des images »
+//  (le moteur les range après U43-3) et 2 dans « Instrument et œil ». Tombé dans les 8 sujets d'ETSO.
+// ==============================================================
+TRACES.push({
+  id: "U43-12", epreuve: "U43", chapitre: "Chaîne des images",
+  titre: "Le viseur : l'oculaire travaille en loupe",
+  regle: "Chaîne : A → A₁ (objectif) → A' (oculaire). Si A₁ est entre le foyer objet de l'oculaire et l'oculaire, celui-ci agit comme une loupe : l'image finale est virtuelle, du même côté que A₁, et agrandie.",
+  consigne: "Objectif Ob (f' = 50 mm), objet à 75 mm devant lui. Oculaire Oc (f' = 40 mm), 170 mm après l'objectif. Construis B₁ puis l'image finale B₂, puis calcule le grandissement total.",
+  theme: "Chaîne des conjugués",
+  systeme: { objet: { x: -75, h: 6 }, elements: [
+    { type: "lentille", nom: "Ob", x: 0, f: 50 },
+    { type: "lentille", nom: "Oc", x: 170, f: 40 }
+  ] },
+  vue: { xmin: -90, xmax: 230, hmax: 30, carreauX: 20, carreauY: 5 },
+  etapes: [
+    { action: "rayon", apres: "Ob", rayon: { depuis: "B", par: "parallele" }, texte: "Ce rayon part de B parallèlement à l'axe. Que devient-il après l'objectif ?" },
+    { action: "placer", quoi: "image", apres: "Ob", rayons: ["parallele", "O"], texte: "Place B₁, l'image de B par l'objectif." },
+    { action: "rayon", apres: "Oc", rayon: { depuis: "B1", par: "parallele" }, texte: "Ce rayon part de B₁ parallèlement à l'axe. Par où ressort-il de l'oculaire ?" },
+    { action: "placer", quoi: "image", apres: "Oc", rayons: ["parallele", "O"], prolonger: true, texte: "Les rayons ressortent en s'écartant : prolonge-les vers l'arrière et place B₂." },
+    { action: "calcul", grandeur: "gamma", decimales: 0, unite: "", signe: true, texte: "Calcule le grandissement total γ = A₂B₂ / AB, avec son signe." }
+  ],
+  conclusion: "Chaîne : A → A₁ réelle (150 mm après Ob, entre Foc et Oc) → A₂ virtuelle, 40 mm avant Oc. γ₁ = −2 et γ₂ = +2 : γ = −4."
+});
+
+TRACES.push({
+  id: "U43-13", epreuve: "U43", chapitre: "Chaîne des images",
+  titre: "Objet au foyer : l'image intermédiaire à l'infini",
+  regle: "Un point placé au foyer objet de L1 donne une image à l'infini : les rayons sortent parallèles. L2 reçoit donc un objet à l'infini et en forme l'image dans son plan focal image. Chaîne : A = F1 → A₁ à l'infini → A' = F'2.",
+  consigne: "L1 (f'1 = 40 mm), objet placé à son foyer objet. L2 (f'2 = 60 mm), 80 mm après L1. Suis les rayons dans L1, puis place l'image finale B₂ et calcule sa taille.",
+  theme: "Chaîne des conjugués",
+  systeme: { objet: { x: -40, h: 5 }, elements: [
+    { type: "lentille", nom: "L1", x: 0, f: 40 },
+    { type: "lentille", nom: "L2", x: 80, f: 60 }
+  ] },
+  vue: { xmin: -50, xmax: 160, hmax: 10, carreauX: 10, carreauY: 2 },
+  etapes: [
+    { action: "rayon", apres: "L1", rayon: { depuis: "B", par: "O" }, texte: "Ce rayon part de B et passe par le centre de L1. Que devient-il ?" },
+    { action: "rayon", apres: "L1", rayon: { depuis: "B", par: "parallele" }, texte: "Ce rayon part de B parallèlement à l'axe. Que devient-il après L1 ?" },
+    { action: "placer", quoi: "image", apres: "L2", rayons: ["O", "F"], texte: "Les rayons sortent de L1 parallèles entre eux : B₁ est à l'infini. Place B₂, l'image donnée par L2." },
+    { action: "calcul", grandeur: "A'B'", apres: "L2", decimales: 1, unite: "mm", signe: true, texte: "Calcule A₂B₂, la taille de l'image finale, avec son signe." }
+  ],
+  conclusion: "B₂ est dans le plan focal image de L2, quelle que soit la distance entre les lentilles. Sa taille vaut −f'2 × AB / f'1 = −60 × 5 / 40 = −7,5 mm."
+});
+
+TRACES.push({
+  id: "U43-14", epreuve: "U43", chapitre: "Chaîne des images",
+  titre: "Une divergente reçoit un objet virtuel",
+  regle: "L1 fait converger la lumière vers A₁, mais L2 est placée avant ce point : A₁ est un objet virtuel pour L2. Une divergente peut alors donner une image réelle, plus loin que A₁.",
+  consigne: "L1 (f'1 = 40 mm), objet à 60 mm devant elle. L2 divergente (f'2 = −60 mm), 90 mm après L1. Place B₁ comme si L2 n'existait pas, puis l'image finale B₂, puis calcule O₂A₂.",
+  theme: "Chaîne des conjugués",
+  systeme: { objet: { x: -60, h: 5 }, elements: [
+    { type: "lentille", nom: "L1", x: 0, f: 40 },
+    { type: "lentille", nom: "L2", x: 90, f: -60 }
+  ] },
+  vue: { xmin: -70, xmax: 170, hmax: 25, carreauX: 10, carreauY: 5 },
+  etapes: [
+    { action: "placer", quoi: "image", apres: "L1", rayons: ["parallele", "O"], prolonger: true, texte: "Place B₁, là où les rayons issus de B se croiseraient sans L2." },
+    { action: "rayon", apres: "L2", rayon: { depuis: "B1", par: "O" }, texte: "Ce rayon vise B₁ en passant par le centre de L2. Que devient-il ?" },
+    { action: "placer", quoi: "image", apres: "L2", rayons: ["O", "parallele"], texte: "Place l'image finale B₂ au croisement des rayons qui sortent de L2." },
+    { action: "calcul", grandeur: "OA'", apres: "L2", decimales: 0, unite: "mm", signe: true, texte: "Calcule O₂A₂, la position de l'image finale par rapport à L2." }
+  ],
+  conclusion: "O₂A₁ = +30 mm (objet virtuel). La divergente écarte les rayons : l'image se forme plus loin, à 60 mm après L2, réelle et deux fois plus grande que A₁B₁."
+});
+
+TRACES.push({
+  id: "U43-15", epreuve: "U43", chapitre: "Chaîne des images",
+  titre: "Défi : deux lentilles sans aide",
+  regle: "Sur la copie, on écrit la chaîne avant de tracer : A → A₁ → A₂, avec la nature de chaque image (réelle ou virtuelle) et les positions particulières. Puis on construit chaque image avec deux rayons particuliers.",
+  consigne: "L1 (f'1 = 60 mm), objet à 120 mm devant elle. L2 (f'2 = 40 mm), 90 mm après L1. Construis B₁ et B₂ sans rayon donné, puis calcule O₂A₂ au dixième.",
+  theme: "Chaîne des conjugués",
+  systeme: { objet: { x: -120, h: 5 }, elements: [
+    { type: "lentille", nom: "L1", x: 0, f: 60 },
+    { type: "lentille", nom: "L2", x: 90, f: 40 }
+  ] },
+  vue: { xmin: -130, xmax: 140, hmax: 8, carreauX: 10, carreauY: 1 },
+  etapes: [
+    { action: "placer", quoi: "image", apres: "L1", rayons: ["parallele", "O"], construire: true, prolonger: true, texte: "Place B₁, l'image de B par L1 seule. Trace toi-même les rayons." },
+    { action: "placer", quoi: "image", apres: "L2", rayons: ["O", "parallele"], construire: true, texte: "Place B₂, l'image finale donnée par L2." },
+    { action: "calcul", grandeur: "OA'", apres: "L2", decimales: 1, unite: "mm", signe: true, texte: "Calcule O₂A₂, la position de l'image finale par rapport à L2." }
+  ],
+  conclusion: "Chaîne : A → A₁ (120 mm après L1, donc 30 mm après L2 : objet virtuel) → A₂ réelle, à 17,1 mm après L2."
+});
+
+TRACES.push({
+  id: "U43-16", epreuve: "U43", chapitre: "Instrument et œil",
+  titre: "Le microscope et l'œil : jusqu'à la rétine",
+  regle: "Microscope réglé pour un emmétrope qui n'accommode pas : A → A₁ = Foc (objectif) → A₂ à l'infini (oculaire) → A₃ = F'œil, sur la rétine. L'œil est placé au foyer image de l'oculaire.",
+  consigne: "Objectif Ob (f' = 10 mm), préparation à 12 mm devant lui. Oculaire Oc (f' = 20 mm), 80 mm après l'objectif. Œil emmétrope, 20 mm après l'oculaire. Suis l'image jusqu'à la rétine.",
+  theme: "Œil et instrument",
+  systeme: { objet: { x: -12, h: 1 }, elements: [
+    { type: "lentille", nom: "Ob", x: 0, f: 10 },
+    { type: "lentille", nom: "Oc", x: 80, f: 20 },
+    { type: "oeil", nom: "Œil", x: 100, ametropie: 0, echelle: true }
+  ] },
+  vue: { xmin: -20, xmax: 125, hmax: 8, carreauX: 5, carreauY: 1 },
+  etapes: [
+    { action: "placer", quoi: "image", apres: "Ob", rayons: ["parallele", "O"], texte: "Place B₁, l'image de la préparation par l'objectif." },
+    { action: "calcul", grandeur: "FA", apres: "Oc", decimales: 0, unite: "mm", signe: true, texte: "Calcule F₂A₁, la position de A₁ par rapport au foyer objet de l'oculaire." },
+    { action: "rayon", apres: "Oc", rayon: { depuis: "B1", par: "O" }, texte: "Ce rayon part de B₁ et passe par le centre de l'oculaire. Que devient-il ?" },
+    { action: "placer", quoi: "image", apres: "Œil", rayons: ["O", "F"], texte: "Les rayons sortent de l'oculaire parallèles : B₂ est à l'infini. Place B₃, son image sur la rétine." },
+    { action: "calcul", grandeur: "A'B'", apres: "Œil", decimales: 1, unite: "mm", signe: false, texte: "Calcule la taille de l'image A₃B₃ sur la rétine (sans le signe)." }
+  ],
+  conclusion: "A₁ est sur Foc : l'image finale est à l'infini et l'œil emmétrope la voit nette sans accommoder, sur sa rétine. La préparation de 1 mm donne une image rétinienne d'environ 4 mm."
+});
+
+TRACES.push({
+  id: "U43-17", epreuve: "U43", chapitre: "Instrument et œil",
+  titre: "La loupe pour un myope sans lunettes",
+  regle: "Un myope qui n'accommode pas voit net à son remotum R. L'image donnée par la loupe doit donc être sur R : A → A₁ = R (loupe) → A₂ sur la rétine (œil). Si l'œil est au foyer image de la loupe, Newton donne la place de l'objet : FA × F'A' = −f'².",
+  consigne: "Loupe L (f' = 50 mm), œil myope de −10 δ placé à son foyer image, sans lunettes et sans accommoder. Le petit objet est déjà à la bonne place. Vérifie la chaîne, puis chiffre la position de l'objet.",
+  theme: "Œil et instrument",
+  systeme: { objet: { x: -25, h: 4 }, elements: [
+    { type: "lentille", nom: "L", x: 0, f: 50 },
+    { type: "oeil", nom: "Œil", x: 50, ametropie: -10, echelle: true }
+  ] },
+  vue: { xmin: -70, xmax: 80, hmax: 10, carreauX: 5, carreauY: 1 },
+  etapes: [
+    { action: "placer", quoi: "remotum", texte: "Place le remotum R du myope sur l'axe (calcule d'abord HR)." },
+    { action: "placer", quoi: "image", apres: "L", rayons: ["parallele", "O"], prolonger: true, texte: "Place B₁, l'image de B par la loupe. Les rayons ressortent en s'écartant : prolonge-les vers l'arrière." },
+    { action: "placer", quoi: "image", apres: "Œil", rayons: ["O", "parallele"], texte: "B₁ sert d'objet à l'œil. Place B₂, son image dans l'œil." },
+    { action: "calcul", grandeur: "FA", apres: "L", decimales: 0, unite: "mm", signe: true, texte: "L'œil est en F', donc F'A₁ = HR. Calcule FA, la position de l'objet par rapport au foyer objet de la loupe, avec Newton." }
+  ],
+  conclusion: "A₁ tombe sur R et A₂ sur la rétine : le myope voit net sans accommoder. FA = −2 500 / (−100) = +25 mm : l'objet est entre F et la loupe, plus près d'elle que pour un emmétrope."
+});

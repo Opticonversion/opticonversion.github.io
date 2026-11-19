@@ -159,6 +159,99 @@ TRACES.push(
     conclusion: "Compare la distance de L1 au foyer F' avec la focale f' : le tube est plus court que la focale. C'est tout l'intérêt du téléobjectif."
   },
 
+  // ---------------- Chaîne des images (ajout du 15/11/2026) ----------------
+  //  L'image donnée par L1 sert d'objet à L2. Tombé dans les 8 sujets d'OGP.
+  //  Du plus guidé (rayons donnés) au plus libre (construire: true).
+  {
+    id: "U42-20", epreuve: "U42", chapitre: "Chaîne des images", titre: "Deux convergentes : l'image de l'image",
+    regle: "Chaîne des images : A → A₁ (par L1) → A₂ (par L2). L'image A₁B₁ donnée par L1 sert d'objet à L2. Grandissement total : γ = γ₁ × γ₂.",
+    consigne: "L1 (f'1 = 40 mm) puis L2 (f'2 = 30 mm), 180 mm plus loin. L'objet AB est à 60 mm devant L1. Construis B₁, puis B₂, puis calcule le grandissement total.",
+    theme: "Conjugaison",
+    systeme: { objet: { x: -60, h: 10 }, elements: [{ type: "lentille", nom: "L1", x: 0, f: 40 }, { type: "lentille", nom: "L2", x: 180, f: 30 }] },
+    vue: { xmin: -80, xmax: 260, hmax: 25, carreauX: 20, carreauY: 5 },
+    etapes: [
+      { action: "rayon", apres: "L1", rayon: { depuis: "B", par: "parallele" }, texte: "Ce rayon part de B parallèlement à l'axe. Que devient-il après L1 ?" },
+      { action: "placer", quoi: "image", apres: "L1", rayons: ["parallele", "O"], tolerance: 0.6, texte: "Place B₁, l'image de B par L1, au croisement des deux rayons." },
+      { action: "rayon", apres: "L2", rayon: { depuis: "B1", par: "O" }, texte: "B₁ est maintenant l'objet de L2. Ce rayon part de B₁ et passe par le centre de L2. Que devient-il ?" },
+      { action: "placer", quoi: "image", apres: "L2", rayons: ["parallele", "O"], tolerance: 0.6, texte: "Place B₂, l'image finale, au croisement des deux rayons issus de B₁." },
+      { action: "calcul", grandeur: "gamma", decimales: 1, unite: "", signe: true, texte: "Calcule le grandissement total γ = A₂B₂ / AB, avec son signe." }
+    ],
+    conclusion: "L1 renverse l'image (γ₁ = −2), L2 la renverse encore (γ₂ = −1) : l'image finale est droite, deux fois plus grande."
+  },
+  {
+    id: "U42-21", epreuve: "U42", chapitre: "Chaîne des images", titre: "Image intermédiaire au foyer : l'image finale part à l'infini",
+    regle: "Quand l'image intermédiaire A₁ tombe au foyer objet F2 de la seconde lentille, les rayons issus de B₁ ressortent parallèles entre eux : l'image finale est à l'infini. On l'écrit dans la chaîne : A → A₁ = F2 → A' à l'infini.",
+    consigne: "L1 (f'1 = 30 mm), objet à 45 mm devant elle. L2 (f'2 = 40 mm) est 130 mm après L1. Place B₁, suis les rayons dans L2, puis vérifie la position de A₁ par rapport à F2.",
+    theme: "Conjugaison",
+    systeme: { objet: { x: -45, h: 6 }, elements: [{ type: "lentille", nom: "L1", x: 0, f: 30 }, { type: "lentille", nom: "L2", x: 130, f: 40 }] },
+    vue: { xmin: -60, xmax: 180, hmax: 20, carreauX: 10, carreauY: 4 },
+    etapes: [
+      { action: "placer", quoi: "image", apres: "L1", rayons: ["parallele", "O"], tolerance: 0.6, texte: "Place B₁, l'image de B par L1." },
+      { action: "rayon", apres: "L2", rayon: { depuis: "B1", par: "parallele" }, texte: "Ce rayon part de B₁ parallèlement à l'axe. Par où ressort-il de L2 ?" },
+      { action: "rayon", apres: "L2", rayon: { depuis: "B1", par: "O" }, texte: "Ce rayon part de B₁ et passe par le centre de L2. Que devient-il ?" },
+      { action: "calcul", grandeur: "FA", apres: "L2", decimales: 0, unite: "mm", signe: true, texte: "Les deux rayons ressortent parallèles. Calcule F2A₁, la position de A₁ par rapport au foyer objet de L2." }
+    ],
+    conclusion: "F2A₁ = 0 : A₁ est sur F2, donc l'image finale est à l'infini. Le sujet demande de noter cette position particulière dans la chaîne."
+  },
+  {
+    id: "U42-23", epreuve: "U42", chapitre: "Chaîne des images", titre: "Convergente puis divergente",
+    regle: "Une lentille divergente ne donne jamais d'image réelle d'un objet réel : l'image est virtuelle, droite et plus petite, entre l'objet et la lentille. Dans la chaîne, son objet est l'image A₁ donnée par la première lentille.",
+    consigne: "L1 (f'1 = 30 mm), objet à 45 mm devant elle. L2 divergente (f'2 = −40 mm) est 120 mm après L1. Place B₁, puis l'image finale B₂, puis calcule le grandissement total.",
+    theme: "Conjugaison",
+    systeme: { objet: { x: -45, h: 5 }, elements: [{ type: "lentille", nom: "L1", x: 0, f: 30 }, { type: "lentille", nom: "L2", x: 120, f: -40 }] },
+    vue: { xmin: -60, xmax: 160, hmax: 15, carreauX: 10, carreauY: 3 },
+    etapes: [
+      { action: "placer", quoi: "image", apres: "L1", rayons: ["parallele", "O"], tolerance: 0.6, texte: "Place B₁, l'image de B par L1." },
+      { action: "rayon", apres: "L2", rayon: { depuis: "B1", par: "parallele" }, texte: "Ce rayon part de B₁ parallèlement à l'axe. Que devient-il après la lentille divergente ?" },
+      { action: "placer", quoi: "image", apres: "L2", rayons: ["parallele", "O"], prolonger: true, tolerance: 0.6, texte: "Les rayons ressortent en s'écartant. Prolonge-les vers l'arrière et place B₂ à leur croisement." },
+      { action: "calcul", grandeur: "gamma", decimales: 2, unite: "", signe: true, texte: "Calcule le grandissement total γ = γ₁ × γ₂, avec son signe." }
+    ],
+    conclusion: "L'image finale est virtuelle, entre A₁ et L2. γ₁ = −2 et γ₂ ≈ +0,57 : l'image reste renversée par rapport à l'objet."
+  },
+  {
+    id: "U42-22", epreuve: "U42", chapitre: "Chaîne des images", titre: "Objet virtuel pour la seconde lentille",
+    regle: "Si L1 forme son image A₁ APRÈS L2, la lumière rencontre L2 avant de converger. Pour L2, A₁ est un objet virtuel : O2A1 est positif. On construit B₁ comme si L2 n'était pas là, puis on prend les rayons qui visent B₁.",
+    consigne: "L1 (f'1 = 60 mm), objet à 90 mm devant elle. L2 (f'2 = 40 mm) est 120 mm après L1. Place B₁, puis l'image finale B₂, puis calcule O2A2.",
+    theme: "Conjugaison",
+    systeme: { objet: { x: -90, h: 6 }, elements: [{ type: "lentille", nom: "L1", x: 0, f: 60 }, { type: "lentille", nom: "L2", x: 120, f: 40 }] },
+    vue: { xmin: -100, xmax: 200, hmax: 15, carreauX: 10, carreauY: 3 },
+    etapes: [
+      { action: "placer", quoi: "image", apres: "L1", rayons: ["parallele", "O"], prolonger: true, tolerance: 0.6, texte: "Fais comme si L2 n'était pas là. Place B₁ là où les rayons issus de B se croiseraient (prolonge-les au-delà de L2)." },
+      { action: "rayon", apres: "L2", rayon: { depuis: "B1", par: "O" }, texte: "Ce rayon vise B₁ en passant par le centre de L2. Que devient-il ?" },
+      { action: "placer", quoi: "image", apres: "L2", rayons: ["O", "parallele"], tolerance: 0.6, texte: "Deux rayons qui visaient B₁ sont tracés après L2. Place l'image finale B₂ à leur croisement." },
+      { action: "calcul", grandeur: "OA'", apres: "L2", decimales: 0, unite: "mm", signe: true, texte: "Calcule O2A2, la position de l'image finale par rapport à L2." }
+    ],
+    conclusion: "A₁ est 60 mm après L2 : O2A1 = +60 mm. L2 fait converger les rayons plus tôt, l'image finale se forme entre L2 et A₁."
+  },
+  {
+    id: "U42-24", epreuve: "U42", chapitre: "Chaîne des images", titre: "Le microscope, sans rayon donné",
+    regle: "Microscope : l'objectif donne une image A₁B₁ réelle, renversée et agrandie. L'oculaire l'observe comme une loupe : A₁ est entre son foyer objet et lui, l'image finale est virtuelle et encore agrandie.",
+    consigne: "Objectif Ob (f' = 10 mm), préparation à 12 mm devant lui. Oculaire Oc (f' = 25 mm) 75 mm après l'objectif. Trace toi-même les rayons, place B₁ puis B₂, puis calcule le grandissement total.",
+    theme: "Conjugaison",
+    systeme: { objet: { x: -12, h: 3 }, elements: [{ type: "lentille", nom: "Ob", x: 0, f: 10 }, { type: "lentille", nom: "Oc", x: 75, f: 25 }] },
+    vue: { xmin: -30, xmax: 110, hmax: 40, carreauX: 5, carreauY: 5 },
+    etapes: [
+      { action: "placer", quoi: "image", apres: "Ob", rayons: ["parallele", "O"], construire: true, tolerance: 0.6, texte: "Trace deux rayons issus de B à travers l'objectif, puis place B₁ à leur croisement." },
+      { action: "placer", quoi: "image", apres: "Oc", rayons: ["parallele", "O"], construire: true, prolonger: true, tolerance: 0.6, texte: "Trace deux rayons issus de B₁ à travers l'oculaire. Ils ressortent en s'écartant : prolonge-les vers l'arrière et place B₂." },
+      { action: "calcul", grandeur: "gamma", decimales: 1, unite: "", signe: true, texte: "Calcule le grandissement total γ = γ₁ × γ₂, avec son signe." }
+    ],
+    conclusion: "γ₁ = −5 (objectif) et γ₂ = +2,5 (oculaire) : γ = −12,5. L'image finale est virtuelle et renversée : le renversement vient de l'objectif."
+  },
+  {
+    id: "U42-25", epreuve: "U42", chapitre: "Chaîne des images", titre: "Défi : la chaîne sans aide",
+    regle: "Méthode : construis B₁ comme si L2 n'existait pas. Regarde où il tombe par rapport à L2 : avant, c'est un objet réel ; après, un objet virtuel. Puis construis B₂ avec les rayons issus de B₁ (ou qui le visent).",
+    consigne: "L1 (f'1 = 50 mm), objet à 100 mm devant elle. L2 (f'2 = 50 mm) est 60 mm après L1. Construis B₁ et B₂ sans aide, puis calcule O2A2.",
+    theme: "Conjugaison",
+    systeme: { objet: { x: -100, h: 8 }, elements: [{ type: "lentille", nom: "L1", x: 0, f: 50 }, { type: "lentille", nom: "L2", x: 60, f: 50 }] },
+    vue: { xmin: -110, xmax: 130, hmax: 10, carreauX: 10, carreauY: 2 },
+    etapes: [
+      { action: "placer", quoi: "image", apres: "L1", rayons: ["parallele", "O"], construire: true, prolonger: true, tolerance: 0.6, texte: "Place B₁, l'image de B par L1 seule. Trace toi-même les rayons." },
+      { action: "placer", quoi: "image", apres: "L2", rayons: ["O", "parallele"], construire: true, tolerance: 0.6, texte: "Place B₂, l'image finale donnée par L2." },
+      { action: "calcul", grandeur: "OA'", apres: "L2", decimales: 0, unite: "mm", signe: true, texte: "Calcule O2A2, la position de l'image finale par rapport à L2." }
+    ],
+    conclusion: "A₁ est 40 mm après L2 : objet virtuel, O2A1 = +40 mm. L2 donne une image réelle à environ 22 mm, plus petite et renversée par rapport à l'objet."
+  },
+
   // ---------------- Lunettes ----------------
   {
     id: "U42-13", epreuve: "U42", chapitre: "Lunettes", titre: "La lunette de Kepler",

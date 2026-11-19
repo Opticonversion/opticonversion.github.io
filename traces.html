@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Opticonversion">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
-<link rel="stylesheet" href="style.css?v=709b68d0">
+<link rel="stylesheet" href="style.css?v=64b1e2da">
 </head>
 <body>
 <header class="entete">
@@ -51,21 +51,21 @@
       <span class="aide" id="total-etoiles" style="margin:0"></span>
     </div>
     <div id="niveaux"></div>
-    <p class="aide" style="margin:14px 0 0">Dans chaque chapitre, un niveau réussi débloque le suivant. 3 étoiles : sans erreur ni indice.</p>
+    <p class="aide" style="margin:14px 0 0">Dans chaque chapitre, un niveau réussi débloque le suivant. Une erreur coûte une étoile, un indice aussi. Plus le niveau est long, plus il pardonne : à partir de 3 étapes, deux réponses au 2e essai coûtent une étoile ; à partir de 5 étapes, il faut deux erreurs.</p>
   </section>
 
   <!-- Le jeu : sur ordinateur, le dessin est à gauche et tout ce qui se lit ou se touche à droite ;
        sur téléphone, la consigne, puis le dessin, puis les outils. -->
   <section id="ecran-jeu" hidden data-epreuve="U42">
     <div class="jeu-tete">
-      <button class="retour" id="retour-niveaux" type="button">← Les niveaux</button>
+      <button class="retour" id="retour-niveaux" type="button"><span class="ico i-gauche" aria-hidden="true"></span> Les niveaux</button>
       <span class="jeu-niveau" id="jeu-niveau"></span>
     </div>
     <div class="jeu-corps">
       <div class="jeu-texte">
         <h2 id="jeu-titre"></h2>
         <p class="regle" id="jeu-regle"></p>
-        <ol class="fil-etapes" id="jeu-etapes" aria-hidden="true" hidden></ol>
+        <ol class="fil-etapes" id="jeu-etapes" aria-label="Étapes du niveau" hidden></ol>
         <p class="consigne" id="jeu-consigne"></p>
       </div>
       <figure class="jeu-dessin">
@@ -76,8 +76,9 @@
         <figcaption class="trace-legende" id="trace-legende"></figcaption>
       </figure>
       <div class="jeu-commandes">
-        <div class="jeu-actions" id="jeu-actions"></div>
+        <!-- La correction d'abord, puis le bouton pour continuer : on lit la raison avant d'avancer -->
         <div class="jeu-retour" id="jeu-retour" role="status" aria-live="polite"></div>
+        <div class="jeu-actions" id="jeu-actions"></div>
       </div>
     </div>
   </section>
@@ -87,12 +88,12 @@
 
 <script src="epreuves.js?v=cc645427"></script>
 <!-- Niveaux de l'Atelier, un fichier par épreuve (facultatifs) -->
-<script src="traces-U42.js?v=78864426"></script>
-<script src="traces-U43.js?v=e9acf21a"></script>
+<script src="traces-U42.js?v=67196cf4"></script>
+<script src="traces-U43.js?v=77abc155"></script>
 <script src="traces-U5.js?v=c4c5f919"></script>
 <script src="essentiel.js?v=ba6ab9a7"></script>
 <script src="optique.js?v=32ec2adc"></script>
-<script src="traces.js?v=aae6cf72"></script>
+<script src="traces.js?v=ea1c7ad8"></script>
 <script src="compter.js?v=920cbd98" defer></script>
 <script src="vivant.js?v=ec7cf52b" defer></script>
 <script src="appli.js?v=0724163c" defer></script>

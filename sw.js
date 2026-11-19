@@ -13,7 +13,7 @@
 // =====================================================================
 
 // <versionner> (partie écrite par versionner.py, ne pas modifier à la main)
-const VERSION = "9493d6c6c4";
+const VERSION = "e61ad45972";
 const FICHIERS = [
   "appli.js?v=0724163c",
   "banc.js?v=7a80e12d",
@@ -159,8 +159,8 @@ const FICHIERS = [
   "qcm.html",
   "questions-U3.js?v=9474d67d",
   "questions-U41.js?v=ff216be0",
-  "questions-U42.js?v=50a35208",
-  "questions-U43.js?v=8938d334",
+  "questions-U42.js?v=a0b309c4",
+  "questions-U43.js?v=7b120a2f",
   "questions-U5.js?v=86decd35",
   "rythme.js?v=0b9caab9",
   "sons.js?v=355500ef",
@@ -176,12 +176,12 @@ const FICHIERS = [
   "specificites-U42.js?v=f64709f2",
   "specificites-U43.js?v=523c07db",
   "specificites-U5.js?v=43533990",
-  "style.css?v=709b68d0",
-  "traces-U42.js?v=78864426",
-  "traces-U43.js?v=e9acf21a",
+  "style.css?v=64b1e2da",
+  "traces-U42.js?v=67196cf4",
+  "traces-U43.js?v=77abc155",
   "traces-U5.js?v=c4c5f919",
   "traces.html",
-  "traces.js?v=aae6cf72",
+  "traces.js?v=ea1c7ad8",
   "videos.js?v=2da8e777",
   "vivant.js?v=ec7cf52b"
 ];

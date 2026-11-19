@@ -32,7 +32,11 @@
     if (!t[id] || etoiles > t[id]) t[id] = etoiles;
     try { localStorage.setItem("traces", JSON.stringify(t)); } catch (e) {}
   }
-  const niveauxDe = code => NIVEAUX.filter(N => N.epreuve === code);
+  // Les niveaux d'une épreuve dans l'ordre où la liste les montre (chapitre par chapitre) : la même numérotation partout
+  const niveauxDe = code => {
+    const l = NIVEAUX.filter(N => N.epreuve === code), ch = [...new Set(l.map(N => N.chapitre || ""))];
+    return ch.flatMap(c => l.filter(N => (N.chapitre || "") === c));
+  };
   // Dans un chapitre, un niveau s'ouvre quand le précédent du même chapitre est réussi
   function debloque(N) {
     const memes = niveauxDe(N.epreuve).filter(x => (x.chapitre || "") === (N.chapitre || ""));
@@ -73,6 +77,14 @@
   const nb = (v, d, s) => (typeof ecrireNombre === "function" ? ecrireNombre(v, d, s) : String(Math.round(v * 10 ** d) / 10 ** d));
   const echapper = t => String(t).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
   function melanger(t) { for (let i = t.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [t[i], t[j]] = [t[j], t[i]]; } return t; }
+  // Mélange gardé pour l'étape en cours : après « Réessayer », les propositions reviennent dans le même ordre,
+  // avec les mêmes numéros (sinon le « 3 » montré juste par la correction désigne un autre rayon).
+  function melangerEtape(t) {
+    const cle = etat && etat.cle, ordres = etat && (etat.ordres = etat.ordres || {});
+    let ordre = cle && ordres[cle];
+    if (!ordre || ordre.length !== t.length) { ordre = melanger(t.map((x, i) => i)); if (cle) ordres[cle] = ordre; }
+    return ordre.map(i => t[i]);
+  }
   const joli = n => { const p = 10 ** Math.floor(Math.log10(n)); const m = n / p; return (m <= 1 ? 1 : m <= 2 ? 2 : m <= 2.5 ? 2.5 : m <= 5 ? 5 : 10) * p; };
 
   // ---------------- La scène : montage, cadrage, ce qui est déjà tracé ----------------
@@ -224,6 +236,7 @@
     const g = el("g", { "clip-path": "url(#t-cadre)" });
     S.revele.forEach(r => dessinerRevele(r, g));
     legende();
+    decollerEtiquettes();
   }
   // Sous le dessin : l'échelle du quadrillage (un carreau = tant de mm) et le sens de la lumière.
   // Écrite hors du dessin : rien ne la recouvre, et elle reste lisible sur téléphone.
@@ -376,19 +389,57 @@
     return grp;
   }
 
+  // Étiquettes qui se chevauchent (F'₁ sur F₂, A₁ sur un foyer…) : la seconde se décale d'une demi-ligne, vers le haut ou le bas
+  function decollerEtiquettes() {
+    try {
+      const t = [...svg.querySelectorAll("text.t-label")].filter(x => !x.closest(".t-cible, .t-candidat, .t-poignee, .s-emplacement, .s-zone") && !x.classList.contains("numero"));
+      const boites = t.map(x => ({ x, b: x.getBBox() }));
+      for (let i = 0; i < boites.length; i++) for (let j = i + 1; j < boites.length; j++) {
+        const a = boites[i].b, b = boites[j].b;
+        const recouvre = a.x < b.x + b.width - 1 && b.x < a.x + a.width - 1 && a.y < b.y + b.height - 1 && b.y < a.y + a.height - 1;
+        if (!recouvre) continue;
+        const vers = b.y + b.height / 2 >= a.y + a.height / 2 ? 1 : -1, dy = vers > 0 ? a.y + a.height - b.y + 1 : -(b.y + b.height - a.y + 1);
+        const el2 = boites[j].x, y0 = parseFloat(el2.getAttribute("y")) || 0;
+        el2.setAttribute("y", y0 + dy);
+        boites[j].b = el2.getBBox();
+      }
+    } catch (e) {}
+  }
   // ---------------- Retour, boutons ----------------
-  function retour(html, classe, pose) {
+  function retour(html, classe, pose, enEssai) {
     const zone = $("jeu-retour");
+    // Pendant un 2e essai, le message passe sous les boutons : rien ne saute sous le pointeur
+    const cmd = document.querySelector(".jeu-commandes"); if (cmd) cmd.classList.toggle("essai", !!enEssai);
     zone.className = "jeu-retour " + (classe || "");
     zone.innerHTML = '<img class="jeu-compagnon" alt="" width="56" height="62"><div class="jeu-message"></div>';
     zone.querySelector(".jeu-message").innerHTML = html;
     if (typeof montrerCompagnon === "function") montrerCompagnon(zone.querySelector(".jeu-compagnon"), pose || (classe === "bien" ? "bouche-ouverte" : "pensif"));
     else zone.querySelector(".jeu-compagnon").remove();
   }
-  function effacerRetour() { $("jeu-retour").innerHTML = ""; $("jeu-retour").className = "jeu-retour"; }
+  // Après une réponse : le premier bouton (Continuer, Réessayer, Niveau suivant) prend le focus, Entrée suffit pour avancer
+  function focusAction() { const b = $("jeu-actions").querySelector("button:not(:disabled)"); if (b) b.focus({ preventScroll: true }); }
+  const etroit = () => typeof matchMedia === "function" && matchMedia("(max-width: 720px)").matches;
+  const sansMouvement = () => typeof matchMedia === "function" && matchMedia("(prefers-reduced-motion: reduce)").matches;
+  // Au téléphone, la correction qui arrive est ramenée à l'écran (sans cacher le dessin plus que nécessaire)
+  // garderDessin : pendant un 2e essai, le dessin doit rester à l'écran (on y rejoue), quitte à laisser une partie du message dessous
+  function montrerRetour(garderDessin) {
+    const large = typeof matchMedia === "function" && matchMedia("(min-width: 1000px)").matches;   // dessin dans sa colonne, collant
+    if (garderDessin && !large) cadrer(document.querySelector(".jeu-dessin"), true, true, "milieu");
+    else cadrer(garderDessin ? $("jeu-consigne") : $("jeu-retour"), true, true, garderDessin ? true : false);
+  }
+  function remettreActions() { const f = $("fin-suite"); if (f) f.remove(); }
+  function effacerRetour() {
+    remettreActions();
+    const cmd = document.querySelector(".jeu-commandes"); if (cmd) cmd.classList.remove("essai"); $("jeu-retour").innerHTML = ""; $("jeu-retour").className = "jeu-retour"; }
   function boutons(liste) {
     const zone = $("jeu-actions");
     zone.innerHTML = "";
+    setTimeout(() => {
+      const nb2 = zone.querySelectorAll(".choix-rayon").length;
+      if (nb2 > 1 && typeof matchMedia === "function" && matchMedia("(pointer: fine)").matches && !zone.querySelector(".aide-touches")) {
+        const a = document.createElement("p"); a.className = "aide-touches"; a.textContent = "Au clavier : touches 1 à " + nb2 + " pour choisir."; zone.appendChild(a);
+      }
+    }, 0);
     liste.forEach(([texteBouton, action, classe]) => {
       const b = document.createElement("button");
       b.type = "button";
@@ -405,6 +456,29 @@
   //  fini(juste, messageHTML) et ajoute ce qu'il a trouvé à S.revele.
   // ======================================================================
 
+  // Règle commune des questions à choix : avec 3 propositions ou plus, une première erreur laisse un 2e essai
+  // (le choix faux est grisé, on dit pourquoi) ; la 2e erreur donne la réponse. Avec 2 propositions, la réponse est donnée tout de suite.
+  function deuxEssais(nbChoix) {
+    let rate = false;
+    return {
+      rate: () => rate,
+      essai(juste, i, groupes, pourquoi) {
+        if (juste || rate || nbChoix < 3) return false;
+        rate = true;
+        if (etat) etat.essaisFaux = (etat.essaisFaux || 0) + 1;
+        const b = [...document.querySelectorAll("#jeu-actions .choix-rayon")][i];
+        if (b) { b.disabled = true; b.classList.add("mauvais"); b.classList.remove("choisi"); b.setAttribute("aria-pressed", "false"); }
+        if (groupes && groupes[i]) { groupes[i].classList.add("t-faux"); groupes[i].style.pointerEvents = "none"; }
+        retour("<p><b>Faux.</b> " + pourquoi + "</p><p>Encore un essai : choisis une autre réponse.</p>", "mal", "pensif", true);
+        if (window.Sons) Sons.faux();
+        const autre = document.querySelector("#jeu-actions .choix-rayon:not(:disabled)");
+        if (autre) autre.focus({ preventScroll: true });
+        montrerRetour(true);
+        return true;
+      }
+    };
+  }
+
   // ---------- 1. rayon : choisir le trajet après une lentille ----------
   const TEXTES_RAYON = {
     juste: {
@@ -417,9 +491,17 @@
     droit: { t: "Il continue tout droit", p: "Seul le rayon qui passe par le centre O n'est pas dévié. Celui-ci est dévié par la lentille." },
     parallele: { t: "Il ressort parallèle à l'axe", p: "C'est le rayon qui passe par le foyer objet F qui ressort parallèle à l'axe, pas celui-ci." },
     parFp: { t: "Il passe par le foyer image F'", p: "Ne confonds pas les deux foyers : passer par F avant la lentille donne un rayon parallèle après, et inversement." },
-    envers: [{ t: "Il s'écarte de l'axe", p: "C'est ce que ferait une lentille DIVERGENTE. Ici la lentille est convergente : le rayon se rabat vers l'axe." },
-             { t: "Il se rapproche de l'axe et passe par un foyer situé après la lentille", p: "C'est le comportement d'une lentille CONVERGENTE. Ici la lentille est divergente : le rayon s'écarte de l'axe." }],
+    envers: [{ t: "Il s'écarte de l'axe", p: "C'est ce que ferait une lentille <b>divergente</b>. Ici la lentille est convergente : le rayon se rabat vers l'axe." },
+             { t: "Il se rapproche de l'axe et passe par un foyer situé après la lentille", p: "C'est le comportement d'une lentille <b>convergente</b>. Ici la lentille est divergente : le rayon s'écarte de l'axe." }],
     miroir: { t: "Il repart de l'autre côté, comme sur un miroir", p: "Une lentille ne réfléchit pas la lumière : elle la laisse passer. Par O, le rayon garde sa direction." }
+  };
+  // Pourquoi une proposition est fausse, dit au 1er essai sans désigner la bonne
+  const INDICES_RAYON = {
+    droit: "Un rayon ne traverse une lentille sans être dévié que s'il passe par son centre O. Est-ce le cas de celui-ci ?",
+    parallele: "Ressortir parallèle à l'axe, c'est ce que fait un rayon qui est d'abord passé par le foyer objet F. Est-ce le cas ici ?",
+    parFp: "F et F' ne jouent pas le même rôle : l'un concerne le rayon avant la lentille, l'autre le rayon après.",
+    envers: "Regarde le type de lentille : une convergente rabat le rayon vers l'axe, une divergente l'en écarte.",
+    miroir: "Une lentille transmet la lumière : le rayon continue vers la droite, il ne repart pas comme sur un miroir."
   };
   function candidatsRayon(L, yL, s, par) {
     const juste = s - yL / L.f, conv = L.f > 0;
@@ -435,9 +517,9 @@
       const v = faux[cle];
       if (liste.some(c => ecart(c.s, v) < 0.07)) continue;
       const tx = Array.isArray(TEXTES_RAYON[cle]) ? TEXTES_RAYON[cle][conv ? 0 : 1] : TEXTES_RAYON[cle];
-      liste.push({ s: v, juste: false, t: tx.t, p: tx.p });
+      liste.push({ s: v, juste: false, t: tx.t, p: tx.p, indice: INDICES_RAYON[cle] });
     }
-    return melanger(liste);
+    return melangerEtape(liste);
   }
   function gesteRayon(E, fini) {
     const k = Optique.indexLentille(S.sys, E.apres), L = S.sys.lentilles[k];
@@ -450,13 +532,22 @@
     if (par === "F") el("circle", { cx: X(L.x - L.f), cy: H / 2, r: 7, class: "t-repere" });
     const liste = candidatsRayon(L, r.y, r.s, par);
     const P = { x: X(L.x), y: Y(r.y) }, xFin = xArret(k);
+    const occupe = [...svg.querySelectorAll("text.t-label")].map(t => { try { const b = t.getBBox(); return { x: b.x + b.width / 2, y: b.y + b.height / 2 }; } catch (e) { return null; } }).filter(Boolean);
     const lignes = liste.map((c, i) => {
       const fin = { x: X(xFin), y: Y(r.y + c.s * (xFin - L.x)) };
       const groupe = el("g", { class: "t-candidat" });
       el("line", { x1: P.x, y1: P.y, x2: fin.x, y2: fin.y, class: "t-candidat-trait" }, groupe);
       el("line", { x1: P.x, y1: P.y, x2: fin.x, y2: fin.y, class: "t-zone-clic" }, groupe);
-      let lx = P.x + (fin.x - P.x) * 0.72, ly = P.y + (fin.y - P.y) * 0.72;
-      if (ly < 14 || ly > H - 14) { const t = ((ly < 14 ? 14 : H - 14) - P.y) / (fin.y - P.y || 1); lx = P.x + (fin.x - P.x) * t; ly = P.y + (fin.y - P.y) * t; }
+      // Le numéro se pose là où il gêne le moins : loin des étiquettes du dessin et des autres numéros, dans le cadre
+      let lx, ly, mieux = -1;
+      [0.72, 0.6, 0.84, 0.5, 0.92, 0.4].forEach(t => {
+        let x = P.x + (fin.x - P.x) * t, y = P.y + (fin.y - P.y) * t;
+        if (y < 20 || y > H - 20 || x > W - 16) return;
+        const libre = Math.min(...occupe.map(o => Math.hypot(o.x - x, o.y - y)), 999);
+        if (libre > mieux + 4) { mieux = libre; lx = x; ly = y; }
+      });
+      if (lx === undefined) { lx = P.x + (fin.x - P.x) * 0.5; ly = Math.max(20, Math.min(H - 20, P.y + (fin.y - P.y) * 0.5)); }
+      occupe.push({ x: lx, y: ly });
       el("circle", { cx: lx, cy: ly, r: 12, class: "t-numero-fond" }, groupe);
       texte(lx, ly + 5, String(i + 1), "centre numero", groupe);
       groupe.addEventListener("click", () => choisir(i));
@@ -464,17 +555,21 @@
     });
     boutons(liste.map((c, i) => [(i + 1) + ". " + c.t, () => choisir(i), "secondaire choix-rayon"]));
     let repondu = false;
+    const essais = deuxEssais(liste.length);
     function choisir(i) {
       if (repondu) return;
+      if (essais.essai(liste[i].juste, i, lignes, liste[i].indice || "Regarde par où passe le rayon avant la lentille (parallèle à l'axe, par le centre ou par un foyer).")) return;
       repondu = true;
-      lignes.forEach((g, n) => g.classList.add(liste[n].juste ? "t-juste" : (n === i ? "t-faux" : "t-ecarte")));
+      const cache = false;
+      lignes.forEach((g, n) => g.classList.add(liste[n].juste && !cache ? (essais.rate() && n === i ? "t-corrige" : "t-juste") : (n === i ? "t-faux" : g.classList.contains("t-faux") ? "t-faux" : "t-ecarte")));
       document.querySelectorAll("#jeu-actions button").forEach((b, n) => {
         b.disabled = true;
-        if (liste[n].juste) b.classList.add("bon"); else if (n === i) b.classList.add("mauvais");
+        if (liste[n].juste && !cache) b.classList.add("bon"); else if (n === i) b.classList.add("mauvais");
       });
-      S.revele.push({ type: "rayon", r0, debut: xDepart(), fin: xFin });
+      if (!cache) S.revele.push({ type: "rayon", r0, debut: xDepart(), fin: xFin });
       const c = liste[i], bon = liste.find(x => x.juste);
-      fini(c.juste, c.juste ? "<p><b>Bien vu !</b> " + c.p + "</p>" : "<p><b>Pas tout à fait.</b> " + c.p + "</p><p><b>La bonne réponse :</b> " + bon.p + "</p>");
+      const deuxieme = essais.rate();
+      fini(c.juste && !deuxieme, c.juste ? "<p><b>" + (deuxieme ? "Juste au 2e essai." : "Juste.") + "</b> " + c.p + "</p>" : "<p><b>Faux.</b> " + c.p + "</p><p><b>La bonne réponse :</b> " + bon.p + "</p>", false, c.juste && deuxieme);
     }
   }
 
@@ -651,8 +746,8 @@
       dire();
     }
     // Le point le plus proche d'un endroit touché : d'abord les points du dessin et les croisements, sinon le quadrillage
-    function candidatPres(p, P1) {
-      let best = null, db = 24;
+    function candidatPres(p, P1, rayonMax) {
+      let best = null, db = rayonMax || 24;
       aimants.concat(guides(P1)).forEach(a => { const q = ecran(a), d = Math.hypot(q.x - p.x, q.y - p.y); if (d < db) { db = d; best = a; } });
       if (best || !P1) return best;
       const mm = versMm(p), gx = Math.round(mm.x / v.carreauX) * v.carreauX, gy = Math.round(mm.y / v.carreauY) * v.carreauY;
@@ -704,6 +799,13 @@
       if (prolonges.some(q => Math.abs(q.y1 - d.y1) < 1e-6 && Math.abs(q.y2 - d.y2) < 1e-6 && q.x1 === d.x1)) { dire("Ce rayon est déjà prolongé."); return; }
       prolonges.push(d); actes.push({ type: "prolonge", d });
       dire("Rayon prolongé en pointillés. Un croisement de pointillés donne une image virtuelle (ou un objet virtuel).");
+      if (mode === "prolonger" && aides.length && prolonges.length >= aides.length) {
+        // Tous les rayons sont prolongés : l'indice n'a plus d'objet, et l'outil passe à Placer
+        const bi = [...document.querySelectorAll("#jeu-actions button")].find(b => /^Indice/.test(b.getAttribute("aria-label") || b.textContent) && /prolonger/.test(b.getAttribute("aria-label") || ""));
+        if (bi) bi.remove();
+        choisirOutil("placer", false);
+        message = "Rayons prolongés. Outil Placer " + c.nom + " : pose-le sur le croisement des pointillés.";
+      }
     }
     // Le plan focal d'un foyer (là où se forme l'image d'un objet à l'infini)
     function planFocal(foyer) {
@@ -733,7 +835,13 @@
     el("path", { d: "M0 -19V-9M0 9V19M-19 0H-9M9 0H19", class: "t-cible-traits" }, g);
     el("circle", { r: 3.6, class: "t-cible-point" }, g);
     const etiquette = texte(16, -15, c.nom + " ?", "or point", g);
-    let posMm = { x: 0, y: 0 }, sur = "", message = "", pose = false;
+    let posMm = { x: 0, y: 0 }, sur = "", message = "", pose = false, bouge = false, bValider = null, enDepart = false;
+    // L'étiquette « B' ? » passe de l'autre côté du réticule près des bords, pour ne jamais être coupée
+    function placerEtiquette(x, y) {
+      const gauche = x > W - 70, bas = y < 30;
+      etiquette.setAttribute("x", gauche ? -16 : 16); etiquette.setAttribute("y", bas ? 26 : -15);
+      etiquette.setAttribute("text-anchor", gauche ? "end" : "start");
+    }
     // Aimant : croisements et points du dessin d'abord, puis quadrillage, puis axe ; sinon le point reste libre
     function aimanter(p) {
       const mm = versMm(p);
@@ -753,9 +861,12 @@
       posMm = { x: a.x, y: c.axe ? 0 : a.y }; sur = a.sur;
       const x = X(posMm.x), y = Y(posMm.y);
       g.setAttribute("transform", `translate(${x} ${y})`);
+      placerEtiquette(x, y);
       viseurH.setAttribute("y1", y); viseurH.setAttribute("y2", y); viseurV.setAttribute("x1", x); viseurV.setAttribute("x2", x);
       message = "";
       if (!libre || pose === null) pose = true;
+      if (!enDepart) bouge = true;
+      if (bValider) bValider.disabled = !bouge;
       dire();
     }
     // La valeur lue pendant le geste (cachée si une étape « calcul » la demande ensuite)
@@ -798,8 +909,9 @@
       if (!outils) {
         if (!val && !sur) span("Fais glisser " + c.nom + " : il s'aimante au quadrillage et à l'axe.");
         else if (tactile && !sur) span(" Astuce : pose ton doigt à côté du point pour le voir pendant que tu le déplaces.");
-      } else if (!aimants.some(a => a.type === "croisement")) span((val || sur ? " " : "") + "Pour tracer un rayon, touche deux points du dessin. Pour le prolonger en pointillés, touche-le.");
-      else if (!val && !sur) span("Amène " + c.nom + " sur le croisement des rayons : touche le croisement, ou fais glisser le réticule doré.");
+      } else if (!aimants.some(a => a.type === "croisement")) span((val || sur ? " · " : "") + "Pour tracer un rayon, touche deux points du dessin. Pour le prolonger en pointillés, touche-le.");
+      else if (!val && !sur && !/croisement/.test($("jeu-consigne").textContent)) span("Amène " + c.nom + " sur le croisement des rayons : touche le croisement, ou fais glisser le réticule doré.");
+      else if (!val && !sur) span("Fais glisser le réticule doré, ou touche le croisement.");
     }
 
     // ----- Souris, doigt, clavier -----
@@ -811,12 +923,27 @@
     //   ailleurs           → le réticule s'y pose.
     const versSvg = e => { const pt = svg.createSVGPoint(); pt.x = e.clientX; pt.y = e.clientY; return pt.matrixTransform(svg.getScreenCTM().inverse()); };
     let appui = null, fait = false;
+    // Unités du dessin par pixel d'écran : au téléphone, une unité fait moins d'un pixel ; les zones se mesurent au doigt
+    const parPixel = () => { const l = svg.getBoundingClientRect().width; return l > 0 ? W / l : 1; };
+    // Outil choisi sous le dessin (facultatif) : sans outil, c'est l'endroit touché qui dit le geste
+    let mode = null, barreOutils = null, choisirOutil = () => {};
     function designe(p, doigt) {
-      if (Math.hypot(p.x - X(posMm.x), p.y - Y(posMm.y)) < (doigt ? 36 : 20)) return { quoi: "cible" };
+      const d = designeAuto(p, doigt);
+      if (!mode) return d;
+      const k = doigt ? Math.max(1, parPixel()) : 1;
+      if (mode === "placer") return d.quoi === "cible" ? d : d.quoi === "croisement" && !depart ? d : { quoi: "vide" };
+      if (mode === "prolonger") { const r = rayonPres(p, doigt ? Math.max(30, 34 * k) : 16); return r ? { quoi: "rayon", rayon: r } : { quoi: "rien" }; }
+      const cand = candidatPres(p, depart, doigt ? Math.max(30, 28 * k) : 24) || candidatPres(p, depart || { x: 0, y: 0 }, doigt ? Math.max(30, 28 * k) : 24);
+      return cand ? { quoi: "point", cand } : { quoi: "rien" };
+    }
+    function designeAuto(p, doigt) {
+      const k = doigt ? Math.max(1, parPixel()) : 1;
+      if (Math.hypot(p.x - X(posMm.x), p.y - Y(posMm.y)) < (doigt ? Math.max(36, 26 * k) : 20)) return { quoi: "cible" };
       if (!outils) return { quoi: "vide" };
-      const cand = candidatPres(p, depart);
+      const cand = candidatPres(p, depart, doigt ? Math.max(24, 20 * k) : 24);
       if (cand) return { quoi: cand.type === "croisement" ? "croisement" : "point", cand };
-      const rayon = rayonPres(p, doigt ? 18 : 12);
+      // Un rayon fait un pixel de large : au doigt, on l'attrape à 22 pixels d'écran
+      const rayon = rayonPres(p, doigt ? Math.max(18, 22 * k) : 12);
       return rayon ? { quoi: "rayon", rayon } : { quoi: "vide" };
     }
     // Un point touché : le départ d'un rayon, ou son second point
@@ -826,7 +953,7 @@
       else if (depart.suite && meme(depart.suite.p1, cand)) { depart = cand; message = ""; }          // retour au point d'où venait le rayon : un nouveau rayon part de là
       else { const P1 = depart; depart = null; creerTrait(P1, cand); }
     }
-    function saisir() { appui.deplace = true; viseur.setAttribute("visibility", "visible"); svg.classList.add("saisi"); svg.style.cursor = "grabbing"; g.classList.add("t-prise"); }
+    function saisir() { if (depart) { depart = null; } appui.deplace = true; viseur.setAttribute("visibility", "visible"); svg.classList.add("saisi"); svg.style.cursor = "grabbing"; g.classList.add("t-prise"); }
     const surAppui = e => {
       if (fait) return;
       try { svg.setPointerCapture(e.pointerId); } catch (err) {}
@@ -846,7 +973,7 @@
       const p = versSvg(e);
       if (!appui) { if (!fait && e.pointerType === "mouse") survoler(p); return; }
       const trace = appui.quoi === "point" || appui.quoi === "croisement";
-      if (!appui.bouge && Math.hypot(p.x - appui.p0.x, p.y - appui.p0.y) > (trace ? 14 : 4)) { appui.bouge = true; if (!trace && !appui.deplace) saisir(); }
+      if (!appui.bouge && Math.hypot(p.x - appui.p0.x, p.y - appui.p0.y) > (trace ? 14 : 4)) { appui.bouge = true; if (!trace && !appui.deplace && appui.quoi !== "rien" && appui.quoi !== "rayon") saisir(); }
       if (appui.deplace) {
         // Le réticule suit le déplacement du doigt (ou de la souris quand on l'a attrapé) sans sauter dessous ; sinon il suit la souris
         if (appui.bouge) poser(appui.doigt || appui.quoi === "cible" ? { x: appui.pos0.x + p.x - appui.p0.x, y: appui.pos0.y + p.y - appui.p0.y } : p);
@@ -881,6 +1008,7 @@
       else if (a.quoi === "point" || (a.quoi === "croisement" && depart)) toucherPoint(a.cand);
       else if (a.quoi === "croisement") poser(ecran(a.cand));                                    // le réticule se pose sur le croisement
       else if (a.quoi === "rayon") prolonger(a.rayon);
+      else if (a.quoi === "rien") dire(mode === "prolonger" ? "Touche un rayon pour le prolonger en pointillés." : "Touche un point du dessin : B, un foyer, le centre de la lentille, un croisement, un point du quadrillage…");
       else if (depart) dire("Départ : " + depart.nom + ". Touche un point du dessin (un foyer, le centre de la lentille, un point du quadrillage…), ou retouche le départ pour l'annuler.");
       else poser(a.p0);
       redessiner();
@@ -900,7 +1028,7 @@
       svg.removeEventListener("pointerdown", surAppui); svg.removeEventListener("pointermove", surBouge);
       svg.removeEventListener("pointerup", surLache); svg.removeEventListener("pointercancel", surAnnule); svg.removeEventListener("pointerleave", surSortie);
       document.removeEventListener("keydown", surTouche);
-      svg.onkeydown = null; svg.style.touchAction = ""; svg.style.cursor = ""; svg.classList.remove("saisi");
+      svg.onkeydown = null; svg.onfocus = null; svg.onblur = null; svg.removeAttribute("aria-describedby"); svg.style.touchAction = ""; svg.style.cursor = ""; svg.classList.remove("saisi");
       nettoyerGlisser = () => {};
     };
     // Clavier : les flèches déplacent le point (librement), Espace l'aimante au repère le plus proche, Entrée valide
@@ -912,19 +1040,56 @@
       else if (e.key === " ") {
         let best = null, db = 60;
         aimants.forEach(a => { const d = Math.hypot(X(a.x) - X(posMm.x), c.axe ? 0 : Y(a.y) - Y(posMm.y)); if (d < db) { db = d; best = a; } });
-        if (best) { posMm = { x: best.x, y: c.axe ? 0 : best.y }; sur = best.nom; pose = true; g.setAttribute("transform", `translate(${X(posMm.x)} ${Y(posMm.y)})`); message = ""; dire(); }
+        if (!best) dire("Aucun repère tout près : rapproche " + c.nom + " avec les flèches, puis Espace.");
+        if (best) { posMm = { x: best.x, y: c.axe ? 0 : best.y }; sur = best.nom; pose = true; bouge = true; if (bValider) bValider.disabled = false; g.setAttribute("transform", `translate(${X(posMm.x)} ${Y(posMm.y)})`); placerEtiquette(X(posMm.x), Y(posMm.y)); message = ""; dire(); }
         e.preventDefault();
-      } else if (e.key === "Enter") valider();
+      } else if (e.key === "Enter") { if (bouge) valider(); else dire("Déplace d'abord " + c.nom + " avec les flèches."); e.preventDefault(); }
+      else if (outils && (e.key === "n" || e.key === "N")) {
+        // Clavier : N (Maj+N à l'envers) passe d'un point du dessin à l'autre, T le prend comme point du rayon, P prolonge le rayon le plus proche du réticule
+        const pts = aimants.concat(guides(depart));
+        if (!pts.length) return;
+        let i = pts.findIndex(a => meme(a, survol));
+        i = (i + (e.shiftKey ? -1 : 1) + pts.length) % pts.length;
+        survol = pts[i]; redessiner(); dire("Point choisi : " + survol.nom + ". T pour y faire passer le rayon.");
+        e.preventDefault();
+      } else if (outils && (e.key === "t" || e.key === "T") && survol) { const cand = survol; survol = null; toucherPoint(cand); redessiner(); e.preventDefault(); }
+      else if (outils && (e.key === "p" || e.key === "P")) { const r = rayonPres({ x: X(posMm.x), y: Y(posMm.y) }, 9999); if (r) { prolonger(r); redessiner(); } e.preventDefault(); }
     };
 
     let indice = false;
+    function pisteDe(dist, surCroisement) {
+      let piste = "";
+        if (surCroisement && traits.length) piste = "Ton point est bien sur un croisement, mais pas celui des bons rayons : vérifie quels rayons tu as tracés.";
+        else if (E.quoi === "image") {
+          const L = sys.lentilles[c.k], mm = posMm;
+          if (virtuelle && mm.x > L.x) piste = "L'image est <b>virtuelle</b> : les rayons ne se croisent pas après la lentille, ce sont leurs <b>prolongements</b> qui se croisent, du côté de l'objet.";
+          else if (!virtuelle && mm.x < L.x) piste = "Ici les rayons se croisent bien <b>après</b> la lentille : l'image est réelle, de l'autre côté.";
+          else if (derriere && mm.x < suivante.x) piste = "Avant " + echapper(suivante.nom) + ", les rayons ne se sont pas encore croisés : <b>prolonge-les</b> au-delà, en pointillés. L'image se forme derrière " + echapper(suivante.nom) + " (elle lui sert d'objet virtuel).";
+          else if (mm.y * c.y < 0) piste = "Regarde de quel côté de l'axe les rayons se croisent : l'image est " + (c.y < 0 ? "<b>sous</b>" : "<b>au-dessus de</b>") + " l'axe.";
+          else if (dist <= 1.5) piste = "Tu n'es pas loin : l'image est exactement là où " + (sens ? "les prolongements des rayons" : "les rayons") + " se croisent. Pose le point <b>sur le croisement</b>, il s'y aimante.";
+          else piste = "Ton point est loin de l'image : elle est exactement là où " + (sens ? "les prolongements des rayons" : "les rayons") + " se croisent. Pose le point <b>sur le croisement</b>, il s'y aimante.";
+        } else if (c.axe) piste = (posMm.x < c.x ? "Trop à gauche" : "Trop à droite") + (dist <= 1.5 ? ", mais tout près." : ".");
+        else piste = "Regarde où le point est vraiment.";
+            return piste;
+    }
+    let dejaRate = false;
     function valider() {
       if (fait) return;
-      fait = true;
-      nettoyerGlisser();
       const dist = Math.hypot((posMm.x - c.x) / v.carreauX, c.axe ? 0 : (posMm.y - c.y) / v.carreauY);
       const juste = dist <= tol;
       const surCroisement = sur === "un croisement";
+      // Premier point faux : on dit ce qui cloche, sans montrer la bonne place, et l'élève replace son point
+      if (!juste && !dejaRate && !E.unEssai) {
+        dejaRate = true;
+        retour("<p><b>Faux.</b> " + pisteDe(dist, surCroisement) + "</p><p>Encore un essai : replace " + echapper(c.nom) + ", puis valide.</p>", "mal", "pensif", true);
+        if (window.Sons) Sons.faux();
+        montrerRetour(true);
+        svg.focus({ preventScroll: true });
+        return;
+      }
+      effacerRetour();
+      fait = true;
+      nettoyerGlisser();
       g.classList.add(juste ? "t-juste" : "t-faux");
       etiquette.textContent = juste ? "" : "ton " + c.nom;
       if (juste) setTimeout(() => g.remove(), 900);
@@ -932,6 +1097,8 @@
       gAccroches.remove(); viseur.remove(); apercu.remove();
       if (bEffacer) bEffacer.disabled = true;
       aide.remove();
+      const cl = $("aide-clavier"); if (cl) cl.remove();
+      if (barreOutils) barreOutils.remove();
       // La correction : rayons prolongés si l'image est virtuelle ou derrière la lentille suivante, puis l'image
       S.anim = juste ? "net" : "doux";                 // trouvé : l'image se met au point ; sinon elle apparaît simplement
       aides.forEach(r0 => tracerRayon(r0, xDepart(), fin, "", sens));
@@ -940,20 +1107,8 @@
       c.revele.forEach(r => dessinerRevele(r, gr));
       S.anim = null;
       if (!juste) svg.appendChild(g);
-      let piste = "";
-      if (!juste) {
-        if (surCroisement && traits.length) piste = "Ton point est bien sur un croisement, mais pas celui des bons rayons : compare ton tracé à la correction.";
-        else if (E.quoi === "image") {
-          const L = sys.lentilles[c.k], mm = posMm;
-          if (virtuelle && mm.x > L.x) piste = "L'image est <b>virtuelle</b> : les rayons ne se croisent pas après la lentille, ce sont leurs <b>prolongements</b> qui se croisent, du côté de l'objet.";
-          else if (!virtuelle && mm.x < L.x) piste = "Ici les rayons se croisent bien <b>après</b> la lentille : l'image est réelle, de l'autre côté.";
-          else if (derriere && mm.x < suivante.x) piste = "Avant " + echapper(suivante.nom) + ", les rayons ne se sont pas encore croisés : <b>prolonge-les</b> au-delà, en pointillés. L'image se forme derrière " + echapper(suivante.nom) + " (elle lui sert d'objet virtuel).";
-          else if (mm.y * c.y < 0) piste = "Regarde de quel côté de l'axe les rayons se croisent : l'image est " + (c.y < 0 ? "<b>sous</b>" : "<b>au-dessus de</b>") + " l'axe.";
-          else piste = "Tu n'es pas loin : l'image est exactement là où les rayons se croisent. Pose le point <b>sur le croisement</b>, il s'y aimante.";
-        } else if (c.axe) piste = posMm.x < c.x ? "Trop à gauche." : "Trop à droite.";
-        else piste = "Regarde où le point est vraiment.";
-      }
-      fini(juste, (juste ? "<p><b>Exact !</b></p>" : "<p><b>Pas tout à fait.</b> " + piste + "</p>") + (S.calculApres ? "" : '<p class="verif">Par le calcul : ' + c.verif + ".</p>"), indice);
+      const piste = juste ? "" : pisteDe(dist, surCroisement);
+      fini(juste && !dejaRate, (juste ? "<p><b>" + (dejaRate ? "Juste au 2e essai." : "Juste.") + "</b> " + c.nom + " est à sa place.</p>" : "<p><b>Faux.</b> " + piste + "</p>") + (S.calculApres ? "" : '<p class="verif">Par le calcul : ' + c.verif + ".</p>"), indice, juste && dejaRate);
     }
     const actions = [["Valider", () => valider()]];
     const boutonIndice = (libelle, action) => actions.push([libelle, e => {
@@ -968,6 +1123,8 @@
     // derrière la lentille suivante (sans cela, les rayons d'aide s'arrêtent avant de se croiser).
     if ((E.prolonger || derriere) && aides.length) boutonIndice("Indice : prolonger", () => { aidesVisibles = true; aides.forEach(r0 => tracerRayon(r0, xDepart(), fin, "t-indice", sens || "arriere")); });
     const zone = boutons(actions);
+    bValider = zone.querySelector("button");
+    bValider.disabled = true;
     // « Indice : prolonger » : sur un très petit écran il ne reste que « Indice » (le nom complet reste lu)
     zone.querySelectorAll("button").forEach(b => {
       const m = /^(Indice)( : .+)$/.exec(b.textContent);
@@ -987,10 +1144,42 @@
       bEffacer.onclick = effacer;
       zone.appendChild(bEffacer);
     }
+    // Les trois outils, comme sur la copie : on peut en choisir un pour que chaque toucher fasse exactement ce geste
+    if (outils) {
+      barreOutils = document.createElement("div");
+      barreOutils.className = "outils-trace"; barreOutils.setAttribute("role", "group"); barreOutils.setAttribute("aria-label", "Outil");
+      [["tracer", "Tracer"], ["prolonger", "Prolonger"], ["placer", "Placer " + c.nom]].forEach(([m, nom]) => {
+        const b = document.createElement("button");
+        b.type = "button"; b.className = "outil-trace"; b.textContent = nom; b.setAttribute("aria-pressed", "false"); b.dataset.mode = m;
+        b.onclick = () => { if (!fait) choisirOutil(m, true); };
+        barreOutils.appendChild(b);
+      });
+      zone.insertBefore(barreOutils, zone.firstChild);
+      // Un outil est toujours choisi, et c'est celui dont l'étape a besoin : construire → Tracer, rayons à prolonger → Prolonger, sinon → Placer
+      choisirOutil = (m, parEleve) => {
+        mode = m;
+        barreOutils.querySelectorAll("button").forEach(x => x.setAttribute("aria-pressed", String(x.dataset.mode === mode)));
+        depart = null;
+        dire(mode === "tracer" ? "Outil Tracer : touche le point de départ du rayon, puis un point par où il passe." : mode === "prolonger" ? "Outil Prolonger : touche un rayon pour le prolonger en pointillés." : "Outil Placer " + c.nom + " : touche l'endroit où le poser, ou fais glisser le réticule.");
+        if (parEleve) redessiner();
+      };
+    }
     zone.appendChild(aide);
+    // Les touches du clavier, écrites dès que le dessin a le focus au clavier
+    const clavier = document.createElement("p");
+    clavier.className = "aide-clavier"; clavier.id = "aide-clavier"; clavier.hidden = true;
+    clavier.textContent = "Au clavier : flèches pour déplacer " + c.nom + " (Maj : plus vite), Espace pour l'aimanter au repère le plus proche, Entrée pour valider."
+      + (outils ? " N choisit un point du dessin, T y fait passer un rayon, P prolonge le rayon le plus proche, Ctrl+Z efface." : "");
+    zone.appendChild(clavier);
+    svg.setAttribute("aria-describedby", "aide-clavier");
+    svg.onfocus = () => { clavier.hidden = !svg.matches(":focus-visible"); };
+    svg.onblur = () => { clavier.hidden = true; };
     // Départ du point : sur l'axe, ou en bas près de la lentille (hors du tracé)
     aimants = [];
+    enDepart = true;
     poser(c.axe ? { x: W * 0.5, y: H / 2 } : { x: Math.min(W - 30, X(c.k !== undefined ? sys.lentilles[c.k].x : v.xmin) + 34), y: H - 22 }, true);
+    enDepart = false;
+    if (outils) choisirOutil(E.construire ? "tracer" : sens && aides.length ? "prolonger" : "placer", false);
     redessiner();
     return valider;
   }
@@ -1032,15 +1221,17 @@
     const groupes = liste.map((c, i) => {
       const grp = dessinerImageDiaphragme(enImages ? c.im : { ...c.im, nom: c.nom.replace(/′$/, "") }, "t-designable") || el("g", {});
       if (!enImages) grp.querySelector("text") && (grp.querySelector("text").textContent = c.nom);
-      el("rect", { x: X(c.im.x) - 14, y: 0, width: 28, height: H, class: "t-zone-clic-rect" }, grp);
+      el("rect", { x: X(c.im.x) - 28, y: 0, width: 56, height: H, class: "t-zone-clic-rect" }, grp);
       grp.addEventListener("click", () => choisir(i));
       return grp;
     });
     if (E.quoi === "lucarne-entree") S.revele.push({ type: "pupille", im: P });
-    boutons(liste.map((c, i) => [c.label, () => choisir(i), "secondaire choix-rayon"]));
+    boutons(liste.map((c, i) => [(i + 1) + ". " + c.label, () => choisir(i), "secondaire choix-rayon"]));
     let repondu = false;
+    const essais = deuxEssais(liste.length);
     function choisir(i) {
       if (repondu) return;
+      if (essais.essai(liste[i].nom === bonNom, i, groupes, "Ce n'est pas " + echapper(liste[i].label) + ". Compare les angles sous lesquels on voit chaque ouverture.")) return;
       repondu = true;
       const c = liste[i], juste = c.nom === bonNom;
       groupes.forEach((g, n) => g.classList.add(liste[n].nom === bonNom ? "t-juste" : n === i ? "t-faux" : "t-ecarte"));
@@ -1049,13 +1240,13 @@
       const depuis = E.quoi === "lucarne-entree" ? P.x : sys.objet.infini ? null : sys.objet.x;
       const angles = ims.filter(im => E.quoi !== "lucarne-entree" || im.nom !== P.nom).map(im => im.nom + "′ : " + (depuis === null ? "rayon " + nb(im.rayon, 1) + " mm" : "tan u = " + nb(im.rayon, 1) + " / " + nb(Math.abs(im.x - depuis), 0) + " = " + nb(im.rayon / Math.abs(im.x - depuis), 3)));
       const regle = E.quoi === "pupille-entree" || E.quoi === "diaphragme-ouverture"
-        ? "La pupille d'entrée est l'image de diaphragme vue sous le <b>plus petit angle</b> depuis A (le pied de l'objet)" + (sys.objet.infini ? " ; objet à l'infini : la plus petite image." : ".")
+        ? "La pupille d'entrée est l'image d'un diaphragme vue sous le <b>plus petit angle</b> depuis A (le pied de l'objet)" + (sys.objet.infini ? " ; objet à l'infini : la plus petite image." : ".")
         : "La lucarne d'entrée est, parmi les autres, l'image vue sous le <b>plus petit angle</b> depuis le centre de la pupille d'entrée.";
       const nomBon = E.quoi === "pupille-entree" ? "la pupille d'entrée est " + P.nom + "′ (image de " + P.nom + ")"
         : E.quoi === "diaphragme-ouverture" ? "le diaphragme d'ouverture est " + P.nom
         : E.quoi === "lucarne-entree" ? "la lucarne d'entrée est " + Lu.nom + "′ (image de " + Lu.nom + ")" : "le diaphragme de champ est " + Lu.nom;
       S.revele.push(E.quoi === "pupille-entree" || E.quoi === "diaphragme-ouverture" ? { type: "pupille", im: ims.find(im => im.nom === P.nom) || P } : { type: "lucarne", im: ims.find(im => im.nom === Lu.nom) || Lu });
-      fini(juste, "<p><b>" + (juste ? "Oui : " : "Non : ") + "</b>" + echapper(nomBon) + ".</p><p>" + regle + "</p><p class=\"verif\">" + angles.map(echapper).join(" · ") + "</p>");
+      fini(juste && !essais.rate(), "<p><b>" + (juste ? (essais.rate() ? "Juste au 2e essai : " : "Juste : ") : "Faux.") + "</b>" + (juste ? "" : " ") + echapper(juste ? nomBon : nomBon.charAt(0).toUpperCase() + nomBon.slice(1)) + ".</p><p>" + regle + "</p><p class=\"verif\">" + angles.map(echapper).join(" · ") + "</p>", false, juste && essais.rate());
     }
   }
 
@@ -1079,20 +1270,35 @@
     // s'inverse quand le plan de l'objet est entre la pupille et la lucarne.
     const justes = c.cote === "oppose" ? [["P+", "L-"], ["P-", "L+"]] : c.cote === "centre" ? [["P0", "L+"], ["P0", "L-"]] : [["P+", "L+"], ["P-", "L-"]];
     const choisis = [];
+    let rateRelier = false;
     const ronds = poignees.map(p => {
       const g = el("g", { class: "t-poignee" });
       el("circle", { cx: X(p.x), cy: Y(p.y), r: 18, class: "t-zone-clic-rond" }, g);
       el("circle", { cx: X(p.x), cy: Y(p.y), r: 7, class: "t-poignee-point" }, g);
+      texte(X(p.x) + 16, Y(p.y) + 5, String(poignees.indexOf(p) + 1), "numero-poignee", g);
       g.addEventListener("click", () => toucher(p, g));
       return g;
     });
-    boutons(poignees.map(p => [p.nom.charAt(0).toUpperCase() + p.nom.slice(1), e => toucher(p, ronds[poignees.indexOf(p)], e.currentTarget), "secondaire choix-rayon"]));
+    boutons(poignees.map((p, k) => [(k + 1) + ". " + p.nom.charAt(0).toUpperCase() + p.nom.slice(1), e => toucher(p, ronds[poignees.indexOf(p)], e.currentTarget), "secondaire choix-rayon"]))
+      .querySelectorAll("button").forEach((b, k) => {
+        b.setAttribute("aria-pressed", "false");
+        // Survol ou focus d'un bouton : son point s'allume sur le dessin
+        const allume = on => ronds[k] && ronds[k].classList.toggle("t-survol", on);
+        b.addEventListener("mouseenter", () => allume(true)); b.addEventListener("mouseleave", () => allume(false));
+        b.addEventListener("focus", () => allume(true)); b.addEventListener("blur", () => allume(false));
+      });
     function toucher(p, g, bouton) {
-      if (choisis.length >= 2 || choisis.includes(p)) return;
+      if (choisis.length >= 2) return;
+      const b = [...document.querySelectorAll("#jeu-actions button")][poignees.indexOf(p)];
+      if (choisis.includes(p)) {                     // retouché : le choix est annulé
+        choisis.splice(choisis.indexOf(p), 1);
+        g.classList.remove("t-choisi");
+        if (b) { b.classList.remove("choisi"); b.setAttribute("aria-pressed", "false"); }
+        return;
+      }
       choisis.push(p);
       g.classList.add("t-choisi");
-      const b = [...document.querySelectorAll("#jeu-actions button")][poignees.indexOf(p)];
-      if (b) b.classList.add("choisi");
+      if (b) { b.classList.add("choisi"); b.setAttribute("aria-pressed", "true"); }
       if (choisis.length < 2) return;
       document.querySelectorAll("#jeu-actions button").forEach(x => { x.disabled = true; });
       const [a, b2] = choisis;
@@ -1101,14 +1307,35 @@
         el("line", { x1: X(S.vue.xmin), y1: Y(a.y + m * (S.vue.xmin - a.x)), x2: X(S.vue.xmax), y2: Y(a.y + m * (S.vue.xmax - a.x)), class: "t-ligne-eleve", "clip-path": "url(#t-cadre)" });
       }
       const ids = choisis.map(x => x.id);
-      const juste = justes.some(([u, v]) => ids.includes(u) && ids.includes(v));
+      const juste0 = justes.some(([u, v]) => ids.includes(u) && ids.includes(v));
+      const nomChamp0 = type === "total" ? "champ total" : type === "moyen" ? "champ moyen" : "champ de pleine lumière";
+      if (!juste0 && !rateRelier) {
+        // 1re paire fausse : la droite tracée reste en rouge, on dit pourquoi, et l'élève choisit une autre paire
+        rateRelier = true;
+        const l = [...svg.querySelectorAll("line.t-ligne-eleve")].pop(); if (l) l.classList.add("t-faux-trait");
+        choisis.forEach(x => { const k = poignees.indexOf(x); ronds[k].classList.remove("t-choisi"); });
+        choisis.length = 0;
+        document.querySelectorAll("#jeu-actions button").forEach(x => { x.disabled = false; x.classList.remove("choisi"); x.setAttribute("aria-pressed", "false"); });
+        const meme = ids[0][0] === ids[1][0], croise = !meme && ids[0].slice(1) !== ids[1].slice(1) && !ids.includes("P0");
+        let raison = meme ? "Tu as relié deux points de la même ouverture : une limite de champ joint un point de la pupille à un bord de la lucarne."
+          : type === "moyen" && !ids.includes("P0") ? "Pour le champ moyen, l'un des deux points n'est pas un bord de la pupille."
+          : croise ? "Cette droite croise l'axe entre la pupille et la lucarne : c'est la construction d'un autre champ que celui demandé."
+          : "Cette droite joint deux bords du même côté de l'axe : c'est la construction d'un autre champ que celui demandé.";
+        if (c.entre) raison += " Attention : ici le plan étudié est entre la pupille et la lucarne, la règle habituelle s'inverse.";
+        retour("<p><b>Faux.</b> " + raison + "</p><p>Encore un essai : touche deux autres points.</p>", "mal", "pensif", true);
+        if (window.Sons) Sons.faux();
+        montrerRetour(true);
+        return;
+      }
+      effacerRetour();
+      const juste = juste0 && !rateRelier;
       S.revele.push({ type: "champ", c });
       dessinerChamp(c, el("g", { "clip-path": "url(#t-cadre)" }));
       const nomChamp = type === "total" ? "champ total" : type === "moyen" ? "champ moyen" : "champ de pleine lumière";
       const regle = type === "moyen" ? "on relie le <b>centre</b> de la pupille au bord de la lucarne"
         : (c.cote === "oppose" ? "on relie un bord de la pupille au bord <b>opposé</b> de la lucarne" : "on relie les bords <b>du même côté</b> de la pupille et de la lucarne")
           + (c.entre ? ". Ici le " + plan + " est <b>entre</b> la pupille et la lucarne : la règle habituelle s'inverse. Repère sûr : la pleine lumière est toujours la plus petite des deux limites dans le " + plan + ", le champ total la plus grande" : "");
-      fini(juste, "<p><b>" + (juste ? "Exact" : "Pas tout à fait") + " :</b> pour le " + nomChamp + ", " + regle + ".</p>");
+      fini(juste, "<p><b>" + (juste0 ? (rateRelier ? "Juste au 2e essai :</b> pour le " : "Juste :</b> pour le ") : "Faux.</b> Pour le ") + nomChamp + ", " + regle + ".</p>", false, juste0 && rateRelier);
     }
   }
 
@@ -1122,41 +1349,58 @@
     // Erreur 2 : faisceau limité par une autre ouverture (la plus grande), comme si le diaphragme n'existait pas
     const autres = Optique.imagesDiaphragmes(sys).filter(im => !im.infini && im.nom !== P.nom).sort((a, b) => b.rayon - a.rayon);
     const large = autres.length ? Optique.faisceau(sys, depuis, autres[0]) : Optique.faisceau(sys, depuis, { x: P.x, rayon: P.rayon * 2.4 });
-    const liste = melanger([
+    const liste = melangerEtape([
       { rayons: juste, juste: true, t: "Il passe par les bords de la pupille d'entrée", p: "Le faisceau issu d'un point de l'objet est limité par la pupille d'entrée : ses rayons extrêmes visent les bords de la pupille, puis traversent tout l'instrument en passant par les bords du diaphragme d'ouverture." },
-      { rayons: reel, juste: false, t: "Il vise directement les bords du diaphragme", p: "On ne vise pas le diaphragme lui-même quand il est derrière une lentille : vu depuis l'objet, c'est son image (la pupille d'entrée) qui limite le faisceau." },
-      { rayons: large, juste: false, t: "Il remplit toute la monture", p: "Ce faisceau ignore le diaphragme d'ouverture : il serait coupé par lui. C'est la pupille d'entrée qui limite le faisceau." }
+      { rayons: reel, juste: false, indice: "Ce faisceau vise le diaphragme lui-même. Or, vue depuis l'objet, une ouverture placée derrière une lentille se voit à travers elle : par son image.", t: "Il vise directement les bords du diaphragme", p: "On ne vise pas le diaphragme lui-même quand il est derrière une lentille : vu depuis l'objet, c'est son image (la pupille d'entrée) qui limite le faisceau." },
+      { rayons: large, juste: false, indice: "Ce faisceau passe partout dans la monture : suis-le dans l'instrument, il serait coupé en route par une autre ouverture.", t: "Il remplit toute la monture", p: "Ce faisceau ignore le diaphragme d'ouverture : il serait coupé par lui. C'est la pupille d'entrée qui limite le faisceau." }
     ]);
     if (!S.revele.some(r => r.type === "pupille")) S.revele.push({ type: "pupille", im: P });
     dessiner();
     const groupes = liste.map((c, i) => {
       const g = dessinerFaisceau(c.rayons, "t-faisceau-candidat t-f" + i, el("g", { "clip-path": "url(#t-cadre)" }));
+      // Le numéro du faisceau, posé dans le faisceau lui-même (positions décalées d'un faisceau à l'autre)
+      try {
+        const bords = [...g.querySelectorAll(".t-faisceau-bord")].map(pl => pl.getAttribute("points").split(" ").map(xy => xy.split(",").map(Number)));
+        const xb = Math.min(W - 24, X(S.vue.xmin + (0.6 + 0.12 * i) * (S.vue.xmax - S.vue.xmin)));
+        const yA = pts => { for (let k = 1; k < pts.length; k++) { const [x1, y1] = pts[k - 1], [x2, y2] = pts[k]; if ((x1 - xb) * (x2 - xb) <= 0 && x1 !== x2) return y1 + (y2 - y1) * (xb - x1) / (x2 - x1); } return null; };
+        const ya = yA(bords[0]), yb = yA(bords[1]);
+        if (ya !== null && yb !== null) {
+          const yb2 = Math.max(18, Math.min(H - 18, (ya + yb) / 2));
+          el("circle", { cx: xb, cy: yb2, r: 11, class: "t-numero-fond t-numero-faisceau f" + i }, g);
+          texte(xb, yb2 + 4.5, String(i + 1), "centre numero", g);
+        }
+      } catch (e) {}
       g.addEventListener("click", () => montrer(i));
       return g;
     });
     // Choix en deux temps : on touche un faisceau (il passe devant, les autres s'effacent), puis on valide
     let vu = null;
     const zone = boutons(liste.map((c, i) => [(i + 1) + ". " + c.t, () => montrer(i), "secondaire choix-rayon"]));
+    // Chaque proposition porte la couleur de son faisceau sur le dessin
+    zone.querySelectorAll(".choix-rayon").forEach((b, i) => { const p = document.createElement("span"); p.className = "pastille-faisceau f" + i; p.setAttribute("aria-hidden", "true"); b.prepend(p); b.setAttribute("aria-pressed", "false"); });
     const ok = document.createElement("button");
     ok.type = "button"; ok.className = "bouton"; ok.textContent = "Valider ce faisceau"; ok.disabled = true;
     ok.onclick = () => { if (vu !== null) choisir(vu); };
     zone.appendChild(ok);
     function montrer(i) {
-      if (repondu) return;
+      if (repondu || groupes[i].classList.contains("t-faux")) return;
       vu = i; ok.disabled = false;
-      groupes.forEach((g, n) => g.classList.toggle("t-attenue", n !== i));
+      groupes.forEach((g, n) => { g.classList.toggle("t-attenue", n !== i); g.classList.toggle("t-choisi", n === i); });
       groupes[i].parentNode.parentNode.appendChild(groupes[i].parentNode);   // le faisceau choisi passe devant
-      zone.querySelectorAll(".choix-rayon").forEach((b, n) => b.classList.toggle("choisi", n === i));
+      zone.querySelectorAll(".choix-rayon").forEach((b, n) => { b.classList.toggle("choisi", n === i); b.setAttribute("aria-pressed", String(n === i)); });
     }
     let repondu = false;
+    const essais = deuxEssais(liste.length);
     function choisir(i) {
       if (repondu) return;
+      if (essais.essai(liste[i].juste, i, groupes, liste[i].indice || "Ce n'est pas ce faisceau.")) { vu = null; ok.disabled = true; groupes.forEach(g => g.classList.remove("t-attenue", "t-choisi")); return; }
       repondu = true;
-      groupes.forEach((g, n) => { g.classList.remove("t-attenue"); g.classList.add(liste[n].juste ? "t-juste" : n === i ? "t-faux" : "t-ecarte"); });
+      groupes.forEach((g, n) => { g.classList.remove("t-attenue"); g.classList.add(liste[n].juste ? (essais.rate() && n === i ? "t-corrige" : "t-juste") : n === i || g.classList.contains("t-faux") ? "t-faux" : "t-ecarte"); });
       document.querySelectorAll("#jeu-actions button").forEach((b, n) => { b.disabled = true; b.classList.remove("choisi"); if (n < liste.length && liste[n].juste) b.classList.add("bon"); else if (n === i) b.classList.add("mauvais"); });
       S.revele.push({ type: "faisceau", rayons: juste });
       const c = liste[i], bon = liste.find(x => x.juste);
-      fini(c.juste, c.juste ? "<p><b>Bien vu !</b> " + bon.p + "</p>" : "<p><b>Pas tout à fait.</b> " + c.p + "</p><p><b>La bonne réponse :</b> " + bon.p + "</p>");
+      const deuxieme = essais.rate();
+      fini(c.juste && !deuxieme, c.juste ? "<p><b>" + (deuxieme ? "Juste au 2e essai." : "Juste.") + "</b> " + bon.p + "</p>" : "<p><b>Faux.</b> " + c.p + "</p><p><b>La bonne réponse :</b> " + bon.p + "</p>", false, c.juste && deuxieme);
     }
   }
 
@@ -1166,6 +1410,30 @@
   const NOMS_GRANDEURS = { "FA": "la position de l'image intermédiaire par rapport au foyer objet", "OA'": "la position de l'image", "A'B'": "la taille de l'image", "gamma": "le grandissement", "f-systeme": "la focale du système",
     "rayon-champ": "le rayon du champ", "angle-champ": "l'angle du champ", "grossissement": "le grossissement", "remotum": "HR", "punctum": "HP", "phorie": "la phorie", "ecart-taille": "l'écart de taille", "aniseiconie": "l'aniséiconie",
     "prisme-od": "l'effet prismatique de l'OD", "prisme-og": "l'effet prismatique de l'OG", "difference-prismatique": "l'effet prismatique vertical subi par le couple" };
+  // La méthode rappelée quand le calcul est faux (seulement les formules qui ne dépendent pas du montage)
+  const METHODES_CALCUL = {
+    "OA'": "relation de conjugaison, 1/OA' − 1/OA = 1/f', avec les distances algébriques",
+    "A'B'": "grandissement γ = OA'/OA, puis A'B' = γ × AB",
+    "gamma": "γ = OA'/OA (ou A'B'/AB)",
+    "f-systeme": "formule de Gullstrand, V = V1 + V2 − e·V1·V2, puis f' = 1/V",
+    "remotum": "HR = 1/R, R en dioptries : le résultat est en mètres, à convertir en cm",
+    "punctum": "P = R − A, puis HP = 1/P, en mètres, à convertir en cm",
+    "phorie": "phorie (Δ) = écart (cm) / distance (m)",
+    "FA": "relation de Newton, FA × F'A' = −f'², avec les distances algébriques",
+    "rayon-champ": "relie les deux bords donnés par la règle du champ (pupille et lucarne), puis lis la hauteur où cette droite coupe le plan étudié (Thalès)",
+    "grossissement": "G = α' / α : l'angle sous lequel on voit l'image, divisé par l'angle sous lequel on verrait l'objet",
+    "prisme-od": "règle de Prentice, P = c × D, c en cm",
+    "prisme-og": "règle de Prentice, P = c × D, c en cm",
+    "difference-prismatique": "règle de Prentice pour chaque œil, puis la différence des deux effets verticaux"
+  };
+  // La méthode générale ne s'affiche que si elle vaut pour ce montage : pas si la consigne donne déjà sa propre aide
+  // (formule écrite), ni pour une chaîne de lentilles ou un objet à l'infini (la relation d'une lentille seule ne suffit pas)
+  function methodeCalcul(E) {
+    const m = METHODES_CALCUL[E.grandeur];
+    if (!m || /Aide|=/.test(E.texte || "")) return "";
+    if (["OA'", "A'B'", "gamma"].includes(E.grandeur) && S.sys && (S.sys.lentilles.length > 1 || S.sys.objet.infini)) return "";
+    return m;
+  }
   function valeurCalcul(E) {
     const brute = S.schema ? Optique.grandeurSchema(S.schema, E.grandeur) : Optique.grandeur(S.sys, E.grandeur, { apres: E.apres, champ: E.champ, espace: S.N.espaceChamps && S.N.espaceChamps.apres });
     if (brute === null) return null;
@@ -1185,25 +1453,64 @@
     const form = document.createElement("form");
     form.className = "saisie-calcul";
     form.innerHTML = '<label class="saisie-ligne"><span class="visuellement-cache"></span><input type="text" inputmode="decimal" autocomplete="off" spellcheck="false"><span class="saisie-unite"></span></label>' +
-      '<button class="bouton" type="submit">Valider</button><p class="saisie-aide"></p>';
+      '<button class="bouton" type="submit">Valider</button><p class="saisie-aide"></p><div class="saisie-retour" role="status" aria-live="polite"></div>';
     form.querySelector(".visuellement-cache").textContent = "Ta réponse" + (rep.unite ? " en " + rep.unite : "");
     form.querySelector(".saisie-unite").textContent = rep.unite;
+    // Les données du montage, comme sur un énoncé (lentille seule, objet à distance finie)
+    if (!S.schema && S.sys && S.sys.lentilles.length) {
+      const ls = S.sys.lentilles.filter(L => !L.oeil), o = S.sys.objet, don = document.createElement("p"), morceaux = [];
+      ls.forEach(L => morceaux.push("f'" + (ls.length > 1 ? L.nom : "") + " = " + nb(L.f, 0, true) + " mm"));
+      if (ls.length > 1) for (let k = 1; k < ls.length; k++) morceaux.push(ls[k - 1].nom + ls[k].nom + " = " + nb(ls[k].x - ls[k - 1].x, 0) + " mm");
+      if (o.infini) morceaux.push("objet à l'infini, α = " + nb(Math.abs(Math.atan(o.s || 0)) * 180 / Math.PI, 1) + "°");
+      else if (o.x !== undefined && ls[0]) { morceaux.push("O" + (ls.length > 1 ? "₁" : "") + "A = " + nb(o.x - ls[0].x, 0, true) + " mm"); morceaux.push("AB = " + nb(o.h, 0, true) + " mm"); }
+      don.className = "saisie-donnees";
+      don.textContent = "Données : " + morceaux.join(" · ");
+      form.prepend(don);
+    }
     form.querySelector(".saisie-aide").textContent = "Arrondi " + (rep.decimales === 0 ? "à l'unité" : "à " + nb(10 ** -rep.decimales, rep.decimales)) + (rep.signe ? " · n'oublie pas le signe" : "") + ".";
-    ajouterAideUnite(form, rep, $("jeu-consigne").textContent);           // « Quelle unité ? » (essentiel.js)
+    ajouterAideUnite(form, rep, $("jeu-consigne").textContent, { seulementSiUtile: true });   // « Quelle unité ? » (essentiel.js), seulement si l'unité piège
     zone.appendChild(form);
     const champ = form.querySelector("input");
     // Le clavier « décimal » de l'iPhone n'a pas de signe moins : clavier normal si la réponse a un signe
     champ.inputMode = rep.signe ? "text" : "decimal";
     champ.focus({ preventScroll: true });
+    let essais = 0, premier = null;
     form.onsubmit = e => {
       e.preventDefault();
       const r = corrigerCalcul(rep, champ.value);
       if (r.etat === "vide") { form.querySelector(".saisie-aide").textContent = "Écris un nombre (ex. −12,5)."; return; }
+      essais++;
+      // Premier essai faux : on dit ce qui cloche (signe, unité, arrondi) et la méthode, puis l'élève corrige lui-même.
+      // Le niveau compte l'erreur du premier essai, comme un calcul posé.
+      if (r.etat !== "juste" && essais === 1) {
+        premier = champ.value.trim();
+        // Valeur d'un autre champ que celui demandé : on le dit
+        let autreChamp = "";
+        if (["rayon-champ", "angle-champ"].includes(E.grandeur) && !S.schema) {
+          const tape = parseFloat(String(champ.value).replace(",", ".").replace("−", "-"));
+          ["pleine-lumiere", "moyen", "total"].filter(k => k !== (E.champ || "pleine-lumiere")).forEach(k => {
+            try { const v = Optique.grandeur(S.sys, E.grandeur, { champ: k, espace: S.N.espaceChamps && S.N.espaceChamps.apres }); if (v !== null && Math.abs(Math.abs(v) - Math.abs(tape)) <= Math.max(0.6, Math.abs(v) * 0.03)) autreChamp = k; } catch (e) {}
+          });
+        }
+        const NOMS_CHAMPS = { "pleine-lumiere": "du champ de pleine lumière", moyen: "du champ moyen", total: "du champ total" };
+        const piste = autreChamp ? "C'est la valeur " + NOMS_CHAMPS[autreChamp] + ", pas celle qui est demandée : reprends les bords à relier." : r.etat === "signe" ? "Ta valeur est juste au signe près : attention au sens (mesure algébrique)."
+          : r.etat === "unite" ? "Ta valeur est juste à une puissance de 10 près : vérifie l'unité ou la virgule."
+          : r.etat === "arrondi" ? "Presque : vérifie l'arrondi demandé." : "Ce n'est pas la bonne valeur.";
+        retour("<p><b>Faux.</b> Tu as tapé " + echapper(premier) + (rep.unite ? " " + echapper(rep.unite) : "") + ". " + piste + "</p>" +
+          (methodeCalcul(E) ? '<p class="verif">Méthode : ' + echapper(methodeCalcul(E)) + ".</p>" : "") + "<p>Encore un essai : corrige et valide.</p>", "mal", "pensif", true);
+        if (window.Sons) Sons.faux();
+        champ.select(); champ.focus({ preventScroll: true });
+        montrerRetour(true);
+        return;
+      }
+      effacerRetour();
       champ.disabled = true;
       form.querySelector("button").disabled = true;
       if (S.schema) { S.faits.add("calc-" + E.grandeur); dessiner(); }
-      fini(r.etat === "juste", "<p><b>" + (r.etat === "juste" ? "Exact !" : "Pas tout à fait.") + "</b> " + echapper(messageCalcul(rep, r)) + "</p>" +
-        (r.etat === "unite" ? "<p>" + texteMathHTML(aideUnite(rep, $("jeu-consigne").textContent, true)) + "</p>" : ""));
+      const juste = r.etat === "juste" && essais === 1;
+      fini(juste, "<p><b>" + (r.etat === "juste" ? (essais === 1 ? "Juste." : "Juste au 2e essai.") : "Faux.") + "</b> " + (essais === 2 && r.etat !== "juste" ? "Tu as tapé " + echapper(champ.value.trim()) + (rep.unite ? " " + echapper(rep.unite) : "") + ". " : "") + echapper(messageCalcul(rep, r).replace(/^Juste\s?[.:]\s*/, "")) + "</p>" +
+        (r.etat === "unite" ? "<p>" + texteMathHTML(aideUnite(rep, $("jeu-consigne").textContent, true)) + "</p>" : "") +
+        (methodeCalcul(E) ? '<p class="verif">' + (r.etat === "juste" ? "À retenir" : "Méthode") + " : " + echapper(methodeCalcul(E)) + ".</p>" : ""), false, r.etat === "juste" && essais === 2);
     };
   }
 
@@ -1324,13 +1631,13 @@
     }
     // Ce que voit le sujet (vue de face), en haut à droite
     const P = sch.perception, cx = CO.C.x;
-    texte(cx, 16, "Vu par le sujet", "centre s-note", g);
+    texte(cx, 21, "Vu par le sujet", "centre s-note", g);
     const sx = (P.cote === "droite" ? 1 : -1) * 22;
     el("circle", { cx: cx - sx / 2, cy: 38, r: 3.6, class: "s-point-or" }, g);
     if (/raie/.test(P.image)) el("line", { x1: cx + sx / 2, y1: 24, x2: cx + sx / 2, y2: 52, class: "s-dissociateur fin" }, g);
     else el("circle", { cx: cx + sx / 2, cy: 38, r: 4.2, class: "s-point-rouge" }, g);
     el("line", { x1: cx - sx / 2, y1: 60, x2: cx + sx / 2, y2: 60, class: "s-cote", "marker-start": "url(#pointe-axe)", "marker-end": "url(#pointe-axe)" }, g);
-    texte(cx + 30, 64, nb(P.ecart, 1) + " cm", "s-note", g);
+    texte(Math.min(cx + 30, W - 56), 64, nb(P.ecart, 1) + " cm", "s-note", g);
     // L'œil cyclope : même œil fixateur, extériorisations seulement ici
     const C = CO.C, fC = { x: C.x, y: C.y + C.r };
     el("line", { x1: C.x - 62, y1: 80, x2: C.x - 62, y2: 292, class: "s-separation" }, g);
@@ -1382,14 +1689,30 @@
   function aideSchema(t) {
     let p = $("jeu-actions").querySelector(".schema-aide");
     if (!p) { p = document.createElement("p"); p.className = "saisie-aide schema-aide"; p.setAttribute("role", "status"); $("jeu-actions").appendChild(p); }
+    p.classList.toggle("faux", /^Faux/.test(t));
     p.textContent = t;
   }
 
   // ---------- legender : une étiquette, puis l'endroit où elle va ----------
+  // Ce que l'emplacement désigne, pour le lecteur d'écran (seulement quand on le sait sûrement)
+  function nomEmplacement(cle) {
+    const c = String(cle || ""), oeil = /OG$/.test(c) ? "l'œil gauche" : /OD$/.test(c) ? "l'œil droit" : "";
+    if (c === "titre") return ", sous le schéma";
+    if (c === "Qg") return ", au centre de l'œil gauche";
+    if (c === "Qd") return ", au centre de l'œil droit";
+    if (c === "LR") return ", sur la ligne de regard";
+    if (/^dissociateur-/.test(c) && oeil) return ", devant " + oeil;
+    if (/^fixateur-/.test(c) && oeil) return ", à côté de " + oeil;
+    if (/^f[gd]$/.test(c)) return ", au fond de l'œil";
+    if (c === "retine") return ", sur la rétine";
+    if (c === "verre") return ", sur le verre";
+    return "";
+  }
   function gesteLegender(E, fini) {
     nettoyerGlisser();
     const liste = TYPES_SCHEMA[S.schema.type].emplacements().filter(t => !E.etiquettes || E.etiquettes.includes(t.id));
     let choisie = null, fautes = 0;
+    const ratesParEtiquette = {}, donnees = new Set();
     const remarques = [], occupes = new Set();
     const zone = $("jeu-actions");
     function rendre() {
@@ -1404,7 +1727,7 @@
           if (vus.has(p) || occupes.has(p)) return;
           vus.add(p);
           n++;
-          const gr = el("g", { class: "s-emplacement", tabindex: 0, role: "button", "aria-label": "Emplacement " + n }, libres);
+          const gr = el("g", { class: "s-emplacement", tabindex: 0, role: "button", "aria-label": "Emplacement " + n + nomEmplacement(p.cle) }, libres);
           if (p.large) el("rect", { x: p.x - p.large / 2, y: p.y - 13, width: p.large, height: 20, rx: 6, class: "s-emplacement-forme" }, gr);
           else el("circle", { cx: p.x, cy: p.y, r: 8, class: "s-emplacement-forme" }, gr);
           el("circle", { cx: p.x, cy: p.y - (p.large ? 3 : 0), r: 20, class: "s-emplacement-zone" }, gr);
@@ -1419,19 +1742,24 @@
       const rang = document.createElement("div");
       rang.className = "etiquettes-schema";
       liste.forEach(t => {
-        if (S.etiq[t.id]) return;
         const b = document.createElement("button");
         b.type = "button";
+        // Une étiquette posée reste à sa place (grisée) : les autres ne bougent pas sous le doigt
+        if (S.etiq[t.id]) { const don = donnees.has(t.id); b.className = "etiquette-schema posee" + (don ? " donnee" : ""); b.textContent = t.etiquette; b.disabled = true; b.setAttribute("aria-label", t.etiquette + (don ? ", placée pour toi" : ", posée")); rang.appendChild(b); return; }
         b.className = "etiquette-schema" + (choisie === t ? " choisie" : "");
         b.textContent = t.etiquette;
         b.setAttribute("aria-pressed", choisie === t);
-        b.onclick = () => { choisie = choisie === t ? null : t; puces(); rendre(); aideSchema(choisie ? "Touche sur le dessin l'endroit où va « " + t.etiquette + " »." : ""); };
+        b.onclick = () => {
+          choisie = choisie === t ? null : t; puces(); rendre();
+          aideSchema(choisie ? "Touche sur le dessin l'endroit où va « " + t.etiquette + " »" + (typeof matchMedia === "function" && matchMedia("(pointer: coarse)").matches ? "." : " (au clavier : Maj+Tab pour remonter jusqu'aux emplacements du dessin, puis Entrée).") : "");
+          const meme = [...zone.querySelectorAll(".etiquette-schema")].find(x => x.textContent === t.etiquette); if (meme) meme.focus({ preventScroll: true });
+        };
         rang.appendChild(b);
       });
       zone.appendChild(rang);
     }
     function poser(p, gr) {
-      if (!choisie) { aideSchema("Choisis d'abord une étiquette, sous le dessin."); return; }
+      if (!choisie) { aideSchema("Choisis d'abord une étiquette dans la liste des étiquettes."); return; }
       const t = choisie;
       if (t.places.includes(p) && p.cle === t.bon) {
         S.etiq[t.id] = t.pose;
@@ -1440,17 +1768,37 @@
         if (window.Sons) Sons.juste();
         if (liste.every(x => S.etiq[x.id])) {
           rendre(); zone.innerHTML = "";
-          fini(fautes === 0, "<p><b>" + (fautes === 0 ? "Schéma légendé sans faute." : "Schéma légendé.") + "</b> " + (TYPES_SCHEMA[S.schema.type].legende || "") + "</p>" +
-            (remarques.length ? "<p>" + remarques.map(echapper).join("</p><p>") + "</p>" : ""));
+          fini(fautes === 0, "<p><b>" + (fautes === 0 ? "Schéma légendé sans faute." : "Schéma légendé, avec " + fautes + " erreur" + (fautes > 1 ? "s" : "") + " en route.") + "</b> " + (TYPES_SCHEMA[S.schema.type].legende || "") + "</p>" +
+            (remarques.length ? "<p>" + remarques.map(echapper).join("</p><p>") + "</p>" : ""), false, fautes > 0);
           return;
         }
+        effacerRetour();
         puces(); rendre(); aideSchema("« " + t.pose + " » est en place.");
+        const premiere = zone.querySelector(".etiquette-schema:not(:disabled)"); if (premiere) premiere.focus({ preventScroll: true });
       } else {
         fautes++;
         if (!remarques.includes(t.pourquoi)) remarques.push(t.pourquoi);
+        ratesParEtiquette[t.id] = (ratesParEtiquette[t.id] || 0) + 1;
+        if (ratesParEtiquette[t.id] >= 2) {
+          // 2e erreur sur la même étiquette : elle se pose à sa place, comme une réponse donnée
+          const bonne = t.places.find(x => x.cle === t.bon);
+          S.etiq[t.id] = t.pose; if (bonne) occupes.add(bonne); choisie = null; donnees.add(t.id);
+          if (window.Sons) Sons.faux();
+          if (liste.every(x => S.etiq[x.id])) {
+            rendre(); zone.innerHTML = "";
+            fini(false, "<p><b>Schéma légendé, avec " + fautes + " erreur" + (fautes > 1 ? "s" : "") + ".</b> " + (TYPES_SCHEMA[S.schema.type].legende || "") + "</p><p>" + remarques.map(echapper).join("</p><p>") + "</p>");
+            return;
+          }
+          puces(); rendre(); aideSchema("");
+          retour("<p><b>Faux.</b> " + echapper(t.pourquoi) + "</p><p>« " + echapper(t.pose) + " » est maintenant à sa place. Continue avec les autres étiquettes.</p>", "mal", "pensif", true);
+          montrerRetour(true);
+          return;
+        }
         gr.classList.add("s-faux");
         if (window.Sons) Sons.faux();
-        aideSchema("Pas là. " + t.pourquoi);
+        aideSchema("");
+        retour("<p><b>Faux.</b> Pas à cet endroit. " + echapper(t.pourquoi) + "</p>", "mal", "pensif", true);
+        montrerRetour(true);
       }
     }
     S.etiq = S.etiq || {};
@@ -1487,8 +1835,8 @@
       nettoyerGlisser = () => {};
     };
     const zone = boutons([
-      ["◀", () => { hx = Math.max(24, hx - 8); rendre(); }, "secondaire bouton-fleche"],
-      ["▶", () => { hx = Math.min(306, hx + 8); rendre(); }, "secondaire bouton-fleche"],
+      ["◀︎", () => { hx = Math.max(24, hx - 8); rendre(); }, "secondaire bouton-fleche"],
+      ["▶︎", () => { hx = Math.min(306, hx + 8); rendre(); }, "secondaire bouton-fleche"],
       ["Valider", valider]
     ]);
     zone.children[0].setAttribute("aria-label", "Tourner la ligne de regard vers la gauche");
@@ -1505,7 +1853,7 @@
       S.regardValide = true;
       dessiner();
       const P = S.schema.perception;
-      fini(juste, "<p><b>" + (juste ? "Oui." : "Non.") + "</b> Le sujet voit l'image de l'" + P.oeil + " à " + P.cote + " : diplopie <b>" + c.diplopie + "</b>, donc " + c.nature +
+      fini(juste, "<p><b>" + (juste ? "Juste." : "Faux.") + "</b> Le sujet voit l'image de l'" + P.oeil + " à " + P.cote + " : diplopie <b>" + c.diplopie + "</b>, donc " + c.nature +
         " (loi de Desmarres). En position passive, l'" + dev + " tourne vers " + (c.exo ? "la tempe" : "le nez") + " : sa ligne de regard croise LR" + minus(c.fixateur).toUpperCase() + " <b>" + c.croisementLR + "</b> T.</p>" +
         "<p>Sur le schéma, l'angle est exagéré pour qu'on le voie : c'est permis, le schéma n'est pas à l'échelle.</p>");
     }
@@ -1539,6 +1887,12 @@
         cote = Math.sign(p.x - C.x); attendu = c.coteExteriorisation;
         if (Math.abs(p.x - C.x) < 4) { aideSchema("Droit devant, c'est T''" + minus(c.fixateur) + ". Où va l'autre ?"); return; }
       }
+      repondre(cote, attendu);
+    };
+    // La même réponse par deux boutons (doigt, clavier, lecteur d'écran) : à gauche ou à droite du repère
+    function repondre(cote, attendu) {
+      if (fait) return;
+      if (attendu === undefined) attendu = E.quoi === "image-devie" ? c.coteTprime : c.coteExteriorisation;
       fait = true;
       nettoyerGlisser();
       const juste = cote === attendu;
@@ -1546,11 +1900,13 @@
       dessiner();
       const d = minus(dev), cotePerçu = c.coteExteriorisation > 0 ? "droite" : "gauche";
       fini(juste, E.quoi === "image-devie"
-        ? "<p><b>" + (juste ? "Oui." : "Non.") + "</b> Le rayon issu de T passe par Q'" + d + " et tombe sur la rétine <b>" + c.retine + "</b> de l'" + dev + ", à côté de la fovéa : T'" + d + " ≠ f'" + d + ".</p>" +
+        ? "<p><b>" + (juste ? "Juste." : "Faux.") + "</b> Le rayon issu de T passe par Q'" + d + " et tombe sur la rétine <b>" + c.retine + "</b> de l'" + dev + ", à côté de la fovéa : T'" + d + " ≠ f'" + d + ".</p>" +
           "<p>C'est ce décalage, et lui seul, qui fait voir double.</p>"
-        : "<p><b>" + (juste ? "Oui." : "Non.") + "</b> T'" + d + " est en rétine " + c.retine + " : il est extériorisé du côté opposé, à <b>" + cotePerçu + "</b>. L'image de l'" + dev + " est vue " + (c.croisee ? "du côté de l'autre œil : diplopie croisée" : "de son propre côté : diplopie homonyme") + ".</p>" +
+        : "<p><b>" + (juste ? "Juste." : "Faux.") + "</b> T'" + d + " est en rétine " + c.retine + " : il est extériorisé du côté opposé, à <b>" + cotePerçu + "</b>. L'image de l'" + dev + " est vue " + (c.croisee ? "du côté de l'autre œil : diplopie croisée" : "de son propre côté : diplopie homonyme") + ".</p>" +
           "<p>Les extériorisations ne se dessinent que sur l'œil cyclope, jamais sur le couple.</p>");
-    };
+    }
+    const repere = E.quoi === "image-devie" ? "la fovéa f'" + minus(dev) : "T''" + minus(c.fixateur);
+    boutons([["1. À gauche de " + repere, () => repondre(-1), "secondaire choix-rayon"], ["2. À droite de " + repere, () => repondre(1), "secondaire choix-rayon"]]);
     svg.addEventListener("click", toucher);
     svg.classList.add("s-touche");
     nettoyerGlisser = () => { svg.removeEventListener("click", toucher); svg.classList.remove("s-touche"); nettoyerGlisser = () => {}; };
@@ -1575,13 +1931,23 @@
     nettoyerGlisser();
     S.faits.add("cote");
     dessiner();
-    const liste = melanger(TYPES_SCHEMA[S.schema.type].conclusions());
+    const liste = melangerEtape(TYPES_SCHEMA[S.schema.type].conclusions());
     const zone = boutons(liste.map((p, i) => [p.texte, () => choisir(i), "secondaire choix-rayon"]));
+    // Les mots qui changent d'une phrase à l'autre sont en gras : on compare des affirmations, pas des paragraphes
+    const mots = t => t.split(/\s+/);
+    const communs = mots(liste[0].texte).filter(m => liste.every(p => mots(p.texte).includes(m)));
+    const differents = t => mots(t).filter(m => !communs.includes(m));
+    zone.querySelectorAll(".choix-rayon").forEach((b, k) => {
+      // Un seul bloc de texte dans le bouton (le bouton est une boîte flexible : sans ce bloc, chaque mot en gras deviendrait une colonne)
+      b.innerHTML = "<span class=\"texte-choix\">" + (k + 1) + ". " + mots(liste[k].texte).map(m => communs.includes(m) ? echapper(m) : "<b>" + echapper(m) + "</b>").join(" ") + "</span>";
+    });
+    const essais = deuxEssais(liste.length);
     function choisir(i) {
+      if (essais.essai(!!liste[i].juste, i, null, "Ta phrase dit « " + echapper(mots(liste[i].texte).filter(m => !mots(liste.find(x => x.juste).texte).includes(m)).join(" ")) + " » : c'est ce point qui ne colle pas avec ton schéma. Vérifie-le sur le dessin.")) return;
       const p = liste[i], bon = liste.find(x => x.juste);
       zone.querySelectorAll("button").forEach((b, n) => { b.disabled = true; if (liste[n].juste) b.classList.add("bon"); else if (n === i) b.classList.add("mauvais"); });
-      fini(!!p.juste, "<p><b>" + (p.juste ? "C'est la bonne conclusion." : "Non.") + "</b> " + (p.juste ? (TYPES_SCHEMA[S.schema.type].bravo || "") : echapper(p.pourquoi)) + "</p>" +
-        (p.juste ? "" : "<p>À rédiger : " + echapper(bon.texte) + "</p>"));
+      fini(!!p.juste && !essais.rate(), "<p><b>" + (p.juste ? (essais.rate() ? "Juste au 2e essai : c'est la bonne conclusion." : "Juste : c'est la bonne conclusion.") : "Faux.") + "</b> " + (p.juste ? (TYPES_SCHEMA[S.schema.type].bravo || "") : echapper(p.pourquoi)) + "</p>" +
+        (p.juste ? "" : "<p>À rédiger : " + echapper(bon.texte) + "</p>"), false, !!p.juste && essais.rate());
     }
   }
 
@@ -1618,27 +1984,80 @@
   const dioptries = v => nb(v, 2, true) + " δ";
 
   // ---------- pointer (schémas autres que le couple) : toucher la bonne zone du dessin ----------
+  // Ce que veut dire chaque zone, pour expliquer un premier toucher faux sans donner la bonne réponse
+  const POURQUOI_ZONES = {
+    image: { devant: "Une image devant la rétine (sans accommoder), c'est un œil myope : trop convergent pour sa longueur.",
+             sur: "Une image sur la rétine sans accommoder, c'est un œil emmétrope.",
+             derriere: "Une image derrière la rétine (sans accommoder), c'est un œil hypermétrope : pas assez convergent pour sa longueur." },
+    remotum: { infini: "Un remotum à l'infini, c'est un œil emmétrope.",
+               devant: "Un remotum réel, devant l'œil, c'est un œil myope.",
+               derriere: "Un remotum virtuel, derrière l'œil, c'est un œil hypermétrope." }
+  };
+  const NOMS_ZONES = { sur: "sur la rétine", loin: "loin, au-delà du remotum", RP: "entre le remotum et le punctum", pres: "plus près que le punctum" };
   function pointerZones(E, fini) {
     const def = TYPES_SCHEMA[S.schema.type].pointer[E.quoi]();
     dessiner();
     $("jeu-actions").innerHTML = "";
     let fait = false;
+    const larges = [];
     const gz = el("g", { class: "s-zones" });
     def.zones.forEach(z => {
-      const gr = el("g", { class: "s-zone", tabindex: 0, role: "button", "aria-label": z.texte }, gz);
+      const gr = el("g", { class: "s-zone", tabindex: 0, role: "button", "aria-label": z.texte || NOMS_ZONES[z.cle] || z.cle }, gz);
       el("rect", { x: z.x, y: z.y, width: z.w, height: z.h, rx: 8, class: "s-zone-forme" }, gr);
+      // Zone à toucher élargie (au moins 52 × 52 unités, 44 px sur un téléphone), posée SOUS les zones dessinées :
+      // une petite zone voisine reste touchable sur son propre dessin
+      const hz = Math.max(z.h, 66), wz = Math.max(z.w, 66);
+      larges.push({ gr, z, aire: z.w * z.h, x: z.x + z.w / 2 - wz / 2, y: z.y + z.h / 2 - hz / 2, w: wz, h: hz, agir: () => choisir(z, gr) });
       if (z.texte) texte(z.x + z.w / 2, z.y + (z.haut ? 14 : z.h - 7), z.texte, "s-note centre", gr);
       const agir = () => choisir(z, gr);
       gr.addEventListener("click", agir);
       gr.addEventListener("keydown", ev => { if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); agir(); } });
     });
+    // Zones à toucher élargies, au-dessus des dessins : les plus petites en dernier (donc dessus), pour rester attrapables
+    const gl = el("g", { class: "s-zones-larges" });
+    // Les mêmes zones en boutons sous le dessin : une cible confortable au doigt et au clavier, même pour une zone étroite
+    const grs = [...gz.querySelectorAll(".s-zone")];
+    boutons(def.zones.map((z, k) => [(k + 1) + ". " + (z.texte || NOMS_ZONES[z.cle] || z.cle).replace(/^./, x => x.toUpperCase()), () => choisir(z, grs[k]), "secondaire choix-rayon"]));
+    // Une zone élargie s'arrête au bord des zones dessinées voisines : un toucher dans une zone dessinée compte toujours pour elle
+    larges.forEach(l => {
+      let g = l.x, d = l.x + l.w, h = l.y, b = l.y + l.h;
+      def.zones.forEach(o => {
+        if (o === l.z) return;
+        const chevaucheV = o.y < b && o.y + o.h > h, chevaucheH = o.x < d && o.x + o.w > g;
+        if (chevaucheV && o.x >= l.z.x + l.z.w) d = Math.min(d, o.x);
+        if (chevaucheV && o.x + o.w <= l.z.x) g = Math.max(g, o.x + o.w);
+        if (chevaucheH && o.y >= l.z.y + l.z.h) b = Math.min(b, o.y);
+        if (chevaucheH && o.y + o.h <= l.z.y) h = Math.max(h, o.y + o.h);
+      });
+      l.x = g; l.w = Math.max(0, d - g); l.y = h; l.h = Math.max(0, b - h);
+    });
+    larges.sort((a, b) => b.aire - a.aire).forEach(l => {
+      const r = el("rect", { x: l.x, y: l.y, width: l.w, height: l.h, class: "s-zone-touche-large", "aria-hidden": "true" }, gl);
+      r.addEventListener("click", l.agir); l.el = r;
+    });
+    let rate = false;
     function choisir(z, gr) {
       if (fait) return;
+      const juste0 = z.cle === def.bon;
+      if (gr.classList.contains("s-faux")) return;                       // zone déjà essayée : un 2e toucher ne compte pas
+      if (!juste0 && !rate && def.zones.length >= 3) {
+        rate = true;
+        gr.classList.add("s-faux"); gr.setAttribute("aria-disabled", "true"); gr.style.pointerEvents = "none";
+        const bz = [...document.querySelectorAll("#jeu-actions .choix-rayon")][def.zones.indexOf(z)]; if (bz) { bz.disabled = true; bz.classList.add("mauvais"); }
+        larges.filter(l => l.gr === gr).forEach(l => { if (l.el) l.el.style.pointerEvents = "none"; });
+        const autre = [...gz.querySelectorAll(".s-zone")].find(x => x !== gr); if (autre) autre.focus({ preventScroll: true });
+        const raison = z.pourquoi || (POURQUOI_ZONES[E.quoi] || {})[z.cle] || "";
+        retour("<p><b>Faux.</b> Ce n'est pas " + echapper(z.texte || NOMS_ZONES[z.cle] || "là") + "." + (raison ? " " + echapper(raison) + " Compare avec l'œil de l'énoncé." : "") + "</p><p>Encore un essai : touche une autre zone.</p>", "mal", "pensif", true);
+        if (window.Sons) Sons.faux();
+        montrerRetour(true);
+        return;
+      }
+      effacerRetour();
       fait = true;
-      const juste = z.cle === def.bon;
+      const juste = juste0 && !rate;
       S.faits.add(def.fait || E.quoi);
       dessiner();
-      fini(juste, "<p><b>" + (juste ? "Oui." : "Non.") + "</b> " + def.message + "</p>");
+      fini(juste, "<p><b>" + (juste0 ? (rate ? "Juste au 2e essai." : "Juste.") : "Faux.") + "</b> " + def.message + "</p>", false, juste0 && rate);
     }
     aideSchema(def.aide || "Touche la bonne zone du dessin.");
   }
@@ -1984,7 +2403,7 @@
   const GESTES = { rayon: gesteRayon, placer: gestePlacer, designer: gesteDesigner, relier: gesteRelier, faisceau: gesteFaisceau, calcul: gesteCalcul,
     legender: gesteLegender, regard: gesteRegard, pointer: gestePointer, conclure: gesteConclure };
   const CONSIGNES = {
-    rayon: E => "Que devient ce rayon après " + E.apres + " ?",
+    rayon: E => "Que devient ce rayon après " + (S && S.sys && S.sys.lentilles.length === 1 ? "la lentille" : E.apres) + " ?",
     placer: E => ({ image: "Place l'image après " + E.apres + ".", "image-diaphragme": "Place l'image de " + E.diaphragme + " vue depuis l'objet.", "foyer-image": "Place le foyer image du système.", "foyer-objet": "Place le foyer objet du système.", remotum: "Place le remotum R.", punctum: "Place le punctum proximum P.", "image-retine": "Place l'image B' formée par l'œil." }[E.quoi] || "Place le point."),
     designer: E => ({ "pupille-entree": "Touche la pupille d'entrée.", "lucarne-entree": "Touche la lucarne d'entrée.", "diaphragme-ouverture": "Touche le diaphragme d'ouverture.", "diaphragme-champ": "Touche le diaphragme de champ." }[E.quoi]),
     relier: E => "Touche les deux points qui donnent la limite du " + ({ "champ-total": "champ total", "champ-moyen": "champ moyen" }[E.quoi] || "champ de pleine lumière") + ".",
@@ -2008,16 +2427,38 @@
     $("ecran-niveaux").hidden = true;
     $("ecran-jeu").hidden = false;
     $("ecran-jeu").dataset.epreuve = N.epreuve;
-    $("jeu-niveau").textContent = "Niveau " + (liste.indexOf(N) + 1) + " / " + liste.length;
-    $("jeu-titre").textContent = N.titre;
+    const duChap = N.chapitre ? liste.filter(x => x.chapitre === N.chapitre) : null;
+    $("jeu-niveau").innerHTML = "";
+    const chap = document.createElement("span"); chap.className = "jeu-chapitre";
+    chap.textContent = duChap && duChap.length > 1 ? N.chapitre + " · " : "Niveau ";
+    if (duChap && duChap.length > 1) { chap.textContent = " · " + N.chapitre; $("jeu-niveau").append((duChap.indexOf(N) + 1) + " / " + duChap.length, chap); }
+    else $("jeu-niveau").append(chap, (liste.indexOf(N) + 1) + " / " + liste.length);
+    $("jeu-niveau").title = chap.textContent + (duChap && duChap.length > 1 ? (duChap.indexOf(N) + 1) + " / " + duChap.length : "");
+    $("jeu-titre").textContent = N.titre.replace(/ ([:;?!])/g, "\u00a0$1");
     // Schéma de l'examen : la situation de l'énoncé reste sous les yeux pendant toutes les étapes
     const situation = N.schema ? N.consigne : N.regle;
     $("jeu-regle").textContent = situation || "";
     $("jeu-regle").hidden = !situation;
     $("jeu-regle").classList.toggle("situation", !!N.schema);
+    // Au téléphone, une règle longue tient sur deux lignes, avec un bouton pour la lire en entier
+    const regle = $("jeu-regle"), longue = (situation || "").length > 140;
+    regle.classList.toggle("repliable", longue);
+    regle.classList.remove("ouverte");
+    let lire = $("lire-regle");
+    if (!lire) {
+      lire = document.createElement("button");
+      lire.type = "button"; lire.id = "lire-regle"; lire.className = "lire-regle";
+      lire.setAttribute("aria-controls", "jeu-regle");
+      lire.onclick = () => { const o = regle.classList.toggle("ouverte"); lire.textContent = o ? "Replier la règle" : "Lire toute la règle"; lire.setAttribute("aria-expanded", String(o)); };
+      regle.after(lire);
+    }
+    lire.hidden = !longue; lire.textContent = "Lire toute la règle"; lire.setAttribute("aria-expanded", "false");
     ecrireTexteMath($("jeu-consigne"), N.consigne || "");          // fractions [[haut|bas]] et lignes (essentiel.js)
     effacerRetour();
-    etat = { erreurs: 0, indice: false };
+    $("jeu-consigne").hidden = false;
+    $("ecran-jeu").classList.remove("termine");
+    const av = $("annonce-verrou"); if (av) av.textContent = "";
+    etat = { erreurs: 0, corrigees: 0, indice: false, ratees: [], resultats: [], notes: [] };
     nettoyerGlisser();
     ouverture = true;                 // les rayons déjà donnés se tracent une fois, à l'ouverture du niveau
     if (N.defi) jouerDefi(N);
@@ -2027,7 +2468,20 @@
     // Pendant un niveau, le haut de la page (titre, onglets) s'efface : le dessin tient dans l'écran sans défiler
     const dejaEnJeu = document.querySelector("main").classList.contains("en-jeu");
     document.querySelector("main").classList.add("en-jeu");
-    if (!dejaEnJeu) window.scrollTo(0, 0);
+    document.body.classList.add("en-niveau");          // au téléphone, la barre d'onglets se range pendant un niveau
+    window.scrollTo(0, 0);
+    poserScene();
+    if (!$("rappel-consigne")) {
+      const r = document.createElement("button");
+      r.type = "button"; r.id = "rappel-consigne"; r.className = "rappel-consigne"; r.hidden = true;
+      r.setAttribute("aria-label", "Revoir la question");
+      r.onclick = () => { $("jeu-consigne").scrollIntoView({ block: "center" }); };
+      document.querySelector(".jeu-dessin").appendChild(r);
+      addEventListener("scroll", majRappel, { passive: true });
+      addEventListener("resize", () => { poserScene(); majRappel(); });
+    }
+    setTimeout(majRappel, 0);
+    cadrerEtape(false);
     // Clavier et lecteur d'écran : on repart du titre du niveau (le bouton qu'on vient d'activer a disparu)
     $("jeu-titre").tabIndex = -1;
     $("jeu-titre").focus({ preventScroll: true });
@@ -2039,63 +2493,209 @@
     if (!fil) return;
     fil.hidden = n < 2;
     fil.innerHTML = "";
+    const NOMS = { reussie: "juste", ratee: "ratée", corrigee: "juste au 2e essai", "en-cours": "en cours", faite: "faite" };
     for (let k = 0; k < n; k++) {
       const li = document.createElement("li");
       li.className = (classes && classes[k]) || (k < i ? "faite" : k === i ? "en-cours" : "");
+      li.title = "Étape " + (k + 1) + (NOMS[li.className] ? " : " + NOMS[li.className] : " : à venir");
+      const t = document.createElement("span"); t.className = "visuellement-cache"; t.textContent = li.title; li.appendChild(t);
       fil.appendChild(li);
     }
   }
   function etape(i) {
     const N = niveau, E = N.etapes[i], n = N.etapes.length;
-    filEtapes(n, i);
+    etat.cle = N.id + ":" + i;
+    // Au téléphone : la règle reste repliée sur deux lignes, le dessin d'abord
+    const lire = $("lire-regle");
+    if (lire && !lire.hidden && i > 0) { $("jeu-regle").classList.remove("ouverte"); lire.textContent = "Lire toute la règle"; lire.setAttribute("aria-expanded", "false"); }
+    filEtapes(n, i, etat.resultats.slice(0, i).concat(["en-cours"]));
     const consigne = E.texte || (CONSIGNES[E.action] ? CONSIGNES[E.action](E) : "");
     ecrireTexteMath($("jeu-consigne"), n > 1 ? "Étape " + (i + 1) + " sur " + n + " : " + consigne : (N.consigne || consigne));
     const geste = GESTES[E.action];
+    // Tes résultats des étapes d'avant, sous la consigne (utile pour un calcul)
+    let notes = $("jeu-notes");
+    if (!notes) { notes = document.createElement("details"); notes.id = "jeu-notes"; notes.className = "jeu-notes"; $("jeu-consigne").after(notes); }
+    notes.hidden = !etat.notes.length;
+    if (etat.notes.length) {
+      notes.innerHTML = "<summary>Tes résultats des étapes d'avant (" + etat.notes.length + ")</summary><ul>" + etat.notes.map(t => "<li>" + echapper(t) + "</li>").join("") + "</ul>";
+      notes.open = E.action === "calcul";
+    }
+    // Nouvelle étape : clavier et lecteur d'écran repartent de la consigne ; au téléphone, la consigne remonte en haut de l'écran
+    if (i > 0) {
+      $("jeu-consigne").tabIndex = -1;
+      $("jeu-consigne").focus({ preventScroll: true });
+    }
     // Si une étape « calcul » vient après, la valeur calculée ne doit pas être donnée avant
     S.calculApres = N.etapes.slice(i + 1).some(x => x.action === "calcul");
     if (!geste) { suite(); return; }
-    geste(E, (juste, message, indice) => {
+    geste(E, (juste, message, indice, corrige) => {
+      decollerEtiquettes();
+      // Les valeurs trouvées à cette étape (lignes « Par le calcul », tan u…) restent lisibles pour les étapes suivantes
+      try {
+        const tmp = document.createElement("div"); tmp.innerHTML = message || "";
+        if (E.action === "designer" || E.action === "relier") {
+          const p0 = tmp.querySelector("p");
+          if (p0) { const t = p0.textContent.replace(/^(Juste au 2e essai|Juste|Faux)\s?[.:]?\s*/, "").trim(); if (t) etat.notes.push("Étape " + (i + 1) + " : " + t.charAt(0).toUpperCase() + t.slice(1)); }
+        }
+        tmp.querySelectorAll(".verif").forEach(v => { const t = v.textContent.replace(/^(Par le calcul|Méthode|À retenir)\s?:\s?/, "").trim(); if (t && !/^Méthode/.test(v.textContent)) etat.notes.push("Étape " + (i + 1) + " : " + t); });
+      } catch (e) {}
       if (indice) etat.indice = true;
-      if (!juste) etat.erreurs++;
+      // Trois états, toujours dessinés pareil : juste (vert ✓), corrigé après une erreur (or, sans croix), faux (rouge ✕)
+      const ton = juste ? "bien" : corrige ? "corrige" : "mal";
+      if (!juste && !corrige) etat.essaisFaux = (etat.essaisFaux || 0) + 1;
+      if (!juste) { if (corrige) etat.corrigees++; else etat.erreurs++; if (!etat.ratees.includes(i + 1)) etat.ratees.push(i + 1); }
+      etat.resultats[i] = juste && !etat.ratees.includes(i + 1) ? "reussie" : corrige ? "corrigee" : "ratee";
       // Le son de l'étape. Si cette bonne réponse termine le niveau, on laisse la place au son de fin.
-      const termine = i + 1 >= n && !(n === 1 && !juste);
+      const termine = i + 1 >= n && !(n === 1 && !juste && !corrige);
       if (window.Sons && !(termine && juste)) Sons[juste ? "juste" : "faux"]();
-      if (n === 1 && !juste) {
+      if (n === 1 && !juste && !corrige) {
         // Niveau d'un seul geste : on recommence jusqu'à trouver
         retour(message, "mal");
-        boutons([["Réessayer", () => { effacerRetour(); nouvelleScene(N, N.systeme); etape(0); }]]);
+        boutons([["Réessayer", () => { effacerRetour(); nouvelleScene(N, N.systeme); etape(0); $("jeu-consigne").tabIndex = -1; $("jeu-consigne").focus({ preventScroll: true }); }]]);
+        focusAction(); montrerRetour();
         return;
       }
       if (i + 1 < n) {
-        retour(message, juste ? "bien" : "mal");
+        retour(message, ton);
         boutons([["Continuer", () => { effacerRetour(); if (S.zoom && N.etapes[i + 1].quoi !== "image-retine") { S.zoom = false; regler(N.vue ? { ...N.vue } : cadrageAuto(S.sys)); } etape(i + 1); }]]);
-      } else suite(message);
+        focusAction(); montrerRetour();
+      } else suite(message, ton);
     });
+    decollerEtiquettes();
+    cadrerEtape(i > 0);
     // Fin du niveau : le son de fin passe après celui de la dernière étape, s'il y en a un
-    function suite(message) { filEtapes(n, n); terminer((message || "") + (N.conclusion ? "<p>" + texteMathHTML(N.conclusion) + "</p>" : ""), true); }
+    function suite(message, ton) { filEtapes(n, n, etat.resultats); terminer(message || "", true, ton || "bien", N.conclusion ? texteMathHTML(N.conclusion) : ""); }
   }
 
+  // Au téléphone : la page défile juste assez pour que les boutons de l'étape sortent de sous la barre d'onglets,
+  // sans jamais faire passer la consigne au-dessus de l'écran
+  function cadrerEtape(doux) { cadrer($("jeu-consigne"), doux, false, true); }
+  // Fait défiler juste assez pour voir les boutons en bas, sans faire passer « haut » au-dessus de l'écran
+  // Au téléphone, le dessin reste fixé sous la barre « Les niveaux » : le texte et les boutons défilent dessous
+  function poserScene() {
+    const tete = document.querySelector(".jeu-tete"), entete = document.querySelector(".entete");
+    if (tete && entete) document.documentElement.style.setProperty("--sous-tete", (entete.offsetHeight + tete.offsetHeight) + "px");
+  }
+  function cadrerSousDessin(doux, depuisConsigne) {
+    poserScene();
+    const d = document.querySelector(".jeu-dessin"), fin = $("ecran-jeu").classList.contains("termine");
+    const plafond = parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--sous-tete")) + (fin ? 0 : d.offsetHeight) + 8;
+    const a = $("jeu-actions").getBoundingClientRect(), r = $("jeu-retour"), rr = r.innerHTML ? r.getBoundingClientRect() : null, c = $("jeu-consigne").getBoundingClientRect();
+    const haut = depuisConsigne ? c.top : Math.min(a.top, rr ? rr.top : Infinity), bas = Math.max(a.bottom, rr ? rr.bottom : 0);
+    let dy = Math.min(bas - (innerHeight - 12), haut - plafond);
+    if (haut < plafond) dy = haut - plafond;
+    // Tout tient (consigne, boutons, correction) : on garde la consigne en haut, sous le dessin
+    if (!depuisConsigne && bas - (c.top - plafond) <= innerHeight - 12) dy = c.top - plafond;
+    // nouvelle étape : la consigne juste sous le dessin (à l'ouverture du niveau, le titre) ; si les boutons tombent
+    // alors sous le bas de l'écran, on descend encore pour les montrer (le rappel de la question reste sous le dessin)
+    if (depuisConsigne) {
+      dy = (doux ? c.top : $("jeu-titre").getBoundingClientRect().top) - plafond;
+      if (a.bottom - dy > innerHeight - 12) dy = Math.min(a.bottom - (innerHeight - 12), a.top - plafond);
+    }
+    if (Math.abs(dy) > 4) scrollBy({ top: dy, behavior: doux && !sansMouvement() ? "smooth" : "auto" });
+    setTimeout(majRappel, 50);
+  }
+  // Rappel de la question, collé sous le dessin, quand la consigne est passée dessous (téléphone)
+  function majRappel() {
+    const r = $("rappel-consigne");
+    if (!r) return;
+    if (!etroit() || $("ecran-jeu").hidden || $("ecran-jeu").classList.contains("termine") || $("jeu-consigne").hidden) { r.hidden = true; return; }
+    const d = document.querySelector(".jeu-dessin").getBoundingClientRect(), c = $("jeu-consigne").getBoundingClientRect();
+    r.textContent = $("jeu-consigne").textContent;
+    r.hidden = !(c.bottom < d.bottom + 4);
+  }
+  function cadrer(haut, doux, partout, basSeulement) {
+    if (etroit() && document.body.classList.contains("en-niveau")) { cadrerSousDessin(doux, haut === $("jeu-consigne") && basSeulement === true && !$("jeu-retour").innerHTML); return; }
+    if ((!etroit() && !partout) || !haut) return;
+    const a = $("jeu-actions").getBoundingClientRect(), r = $("jeu-retour"), rr = r.innerHTML ? r.getBoundingClientRect() : null;
+    const actions = { bottom: Math.max(a.bottom, rr ? rr.bottom : 0) }, h = haut.getBoundingClientRect();
+    const tete = document.querySelector(".jeu-tete"), entete = document.querySelector(".entete");
+    const plafond = Math.max(entete ? entete.getBoundingClientRect().bottom : 0, tete && getComputedStyle(tete).position === "sticky" ? tete.getBoundingClientRect().bottom : 0) + 8;
+    // basSeulement : garder la dernière ligne de « haut » ; "milieu" : garder au moins la moitié basse du dessin (là où l'on rejoue)
+    const garde = basSeulement === "milieu" ? h.top + h.height * 0.45 : basSeulement ? h.bottom - 26 : h.top;
+    let dy = Math.min(actions.bottom - (innerHeight - 12), garde - plafond);
+    if (h.top < plafond && dy <= 4) dy = h.top - plafond;          // l'élément du haut est caché sous la barre : on remonte
+    if (Math.abs(dy) > 4) scrollBy({ top: dy, behavior: doux && !sansMouvement() ? "smooth" : "auto" });
+  }
   // Trois étoiles dessinées : les gagnées en or, les autres en creux
   function etoilesHTML(e, classe) {
     let h = '<span class="etoiles ' + (classe || "") + '" role="img" aria-label="' + e + " étoile" + (e > 1 ? "s" : "") + ' sur 3">';
     for (let k = 0; k < 3; k++) h += '<span class="ico i-etoile' + (k < e ? "" : " vide") + '" style="--n:' + k + '" aria-hidden="true"></span>';
     return h + "</span>";
   }
-  function etoilesDuNiveau() { return Math.max(1, 3 - etat.erreurs - (etat.indice ? 1 : 0)); }
-  function terminer(message, apresLeSon) {
+  // Une erreur coûte une étoile. Une étape juste au 2e essai coûte une demi-étoile dans un niveau de 3 étapes ou plus
+  // (deux corrections = une étoile) ; dans un niveau court, elle compte comme une erreur.
+  function etoilesDuNiveau() {
+    const n = niveau && niveau.etapes ? niveau.etapes.length : 0, k = etat.corrigees || 0;
+    // points : une erreur = 2, une réponse juste au 2e essai = 1 ; une étoile coûte 2 points (3-4 étapes) ou 4 points (5 étapes et plus)
+    const points = 2 * etat.erreurs + k;
+    const perdues = n >= 5 ? Math.floor(points / 4) : n >= 3 ? Math.floor(points / 2) : etat.erreurs + k;
+    return Math.max(1, 3 - perdues - (etat.indice ? 1 : 0));
+  }
+  // Ce que dit la fin d'un niveau, au-dessus de la dernière correction : les étoiles, et pourquoi pas trois
+  function bilanNiveau(etoiles) {
+    const n = niveau.etapes ? niveau.etapes.length : 0;
+    if (niveau.defi) return "";
+    const corr = etat.ratees.filter(k => etat.resultats[k - 1] === "corrigee"), faux = etat.ratees.filter(k => etat.resultats[k - 1] !== "corrigee");
+    const liste = t => t.length === 1 ? String(t[0]) : t.slice(0, -1).join(", ") + " et " + t[t.length - 1];
+    const morceaux = [];
+    if (n > 1 && faux.length) morceaux.push((faux.length === 1 ? "Étape ratée : " : "Étapes ratées : ") + liste(faux));
+    if (n > 1 && corr.length) morceaux.push((corr.length === 1 ? "juste au 2e essai : étape " : "justes au 2e essai : étapes ") + liste(corr));
+    const fx = Math.max(etat.essaisFaux || 0, etat.erreurs);
+    if (n <= 1 && etat.erreurs) morceaux.push(fx + " essai" + (fx > 1 ? "s" : "") + " raté" + (fx > 1 ? "s" : ""));
+    if (n <= 1 && etat.corrigees) morceaux.push("juste au 2e essai");
+    if (etat.indice) morceaux.push("un indice utilisé");
+    if (!morceaux.length) return n > 1 ? "Toutes les étapes justes du premier coup, sans indice." : "Juste du premier coup.";
+    const debut = morceaux.join(" · ").replace(/^./, x => x.toUpperCase()) + ".";
+    return etoiles === 3 ? debut : debut + " Rejoue pour les 3 étoiles.";
+  }
+  function terminer(message, apresLeSon, ton = "bien", conclusion = "") {
     const etoiles = etoilesDuNiveau();
     noterEtoiles(niveau.id, etoiles);
     window.compter?.("atelier-reussi-" + niveau.epreuve, "Niveau de l'Atelier réussi (" + niveau.epreuve + ")");     // statistiques anonymes (compter.js)
     if (window.Sons) Sons.fin([60, 60, 80, 100][etoiles], apresLeSon);     // 1, 2 ou 3 étoiles
     const liste = niveauxDe(niveau.epreuve), i = liste.indexOf(niveau);
     const suivant = liste[i + 1] && debloque(liste[i + 1]) ? liste[i + 1] : null;
-    const lien = niveau.theme ? '<p><a href="qcm.html#' + niveau.epreuve + "/" + encodeURIComponent(niveau.theme) + '">S\'entraîner au QCM : ' + echapper(niveau.theme) + " →</a></p>" : "";
+    const lien = niveau.theme ? '<p class="lien-qcm"><a href="qcm.html#' + niveau.epreuve + "/" + encodeURIComponent(niveau.theme) + '">S\'entraîner au QCM : ' + echapper(niveau.theme) + "</a></p>" : "";
     const copie = niveau.copie ? '<div class="sur-copie"><p><b>Sur ta copie, vérifie</b></p><ul>' + niveau.copie.map(t => "<li>" + echapper(t) + "</li>").join("") + "</ul></div>" : "";
-    retour(message + copie + lien + '<p class="etoiles-gagnees">' + etoilesHTML(etoiles) + "</p>", "bien", etoiles === 3 ? "clin-doeil" : "bouche-ouverte");
+    const bilan = bilanNiveau(etoiles);
+    // Ce que l'élève a trouvé, dit comme sur la copie : nature, sens et grandissement de la dernière image placée
+    let image = "";
+    try {
+      const r = S && S.revele ? [...S.revele].reverse().find(x => x.type === "image") : null;
+      if (r && S.ch && S.sys) {
+        const im = S.ch[r.k + 1], ob = S.ch[r.k], L = S.sys.lentilles[r.k];
+        if (im && ob && !im.infini && !ob.infini && Math.abs(ob.h) > 1e-9) {
+          const g = im.h / ob.h, reelle = im.x > L.x;
+          image = (ton === "mal" ? "L'image : " : "Image trouvée : ") + (reelle ? "réelle" : "virtuelle") + ", " + (g < 0 ? "renversée" : "droite") + ", γ\u00a0=\u00a0" + nb(g, 2, true) + ".";
+        }
+      }
+    } catch (e) { image = ""; }
+    // Avec des erreurs, la fin le dit : la dernière étape est juste, pas le niveau
+    if (etat.erreurs && ton === "bien") message = message.replace(/<b>Juste[.:]?( :)?<\/b> ?/, "<b>Dernière étape juste.</b> ");
+    // La carte de fin reste courte (étoiles, bilan, ce qu'il faut retenir) ; la dernière correction se rouvre au besoin
+    const derniere = message ? '<details class="fin-details"' + (ton === "mal" || (niveau.etapes && niveau.etapes.length === 1) ? " open" : "") + '><summary>' + (ton === "mal" ? "Pourquoi la dernière étape était fausse" : niveau.etapes && niveau.etapes.length === 1 ? "La correction" : "Revoir la dernière correction") + '</summary><div class="retour-etape ' + ton + '">' + message + "</div></details>" : "";
+    $("jeu-consigne").hidden = true;
+    $("ecran-jeu").classList.add("termine");
+    svg.querySelectorAll(".t-faux-trait, .t-candidat.t-faux, .t-faisceau-candidat.t-faux").forEach(x => x.remove());          // au téléphone, le dessin cesse d'être fixe : la carte de fin et ses boutons tiennent à l'écran
+    retour('<div class="fin-niveau' + (etoiles === 3 && !etat.erreurs && !etat.corrigees && !etat.indice ? ' parfait' : '') + '"><p class="fin-titre">' + (etoiles === 3 && !etat.erreurs && !etat.corrigees && !etat.indice ? "Niveau terminé sans faute" : "Niveau terminé") + '</p>' + etoilesHTML(etoiles, "etoiles-fin") + (bilan ? '<p class="fin-bilan">' + echapper(bilan) + "</p>" : "") +
+      (image ? '<p class="fin-image">' + echapper(image) + "</p>" : "") + (conclusion ? '<p class="fin-conclusion">' + conclusion + "</p>" : "") + "</div>",
+      "fin", etoiles === 3 ? "clin-doeil" : etoiles === 2 ? "bouche-ouverte" : "pensif");
     boutons([
       suivant ? ["Niveau suivant", () => ouvrir(suivant)] : ["Retour aux niveaux", afficherNiveaux],
       ["Rejouer", () => ouvrir(niveau), "secondaire"]
     ]);
+    // Les boutons de fin viennent juste sous les étoiles ; la dernière correction, la liste « Sur ta copie » et le lien
+    // vers le QCM passent dessous : on ne cherche pas « Niveau suivant » sous une longue correction
+    if (derniere || copie || lien) {
+      const suite = document.createElement("div");
+      suite.className = "fin-suite"; suite.id = "fin-suite";
+      suite.innerHTML = derniere + copie + lien;
+      if (ton === "mal") { $("jeu-actions").before(suite); suite.classList.add("avant"); } else $("jeu-actions").after(suite);
+    }
+    const zone = $("jeu-retour");
+    cadrer(zone, true, true);
+    focusAction();
   }
 
   // ---------------- Défi : une lentille, positions au hasard ----------------
@@ -2140,7 +2740,7 @@
       effacerRetour();
       nouvelleScene({ vue }, s.systeme);
       $("jeu-consigne").textContent = "Manche " + manche + " sur " + manches + " : construis l'image B' de l'objet AB. Touche deux points pour tracer un rayon, puis pose B' sur le croisement.";
-      const E = { action: "placer", quoi: "image", apres: "L", tolerance: 0.7 };
+      const E = { action: "placer", quoi: "image", apres: "L", tolerance: 0.7, unEssai: true };
       gestePlacer(E, juste => {
         S.anim = "doux";
         ["parallele", "O"].forEach(par => tracerRayon(Optique.versEspaceObjet(S.sys, Optique.rayonType(S.sys, 0, par)), xDepart(), S.vue.xmax, "", S.ch[1].x < 0));
@@ -2149,8 +2749,9 @@
         if (window.Sons) Sons[juste ? "juste" : "faux"]();
         resultats.push(juste ? "reussie" : "ratee");
         filEtapes(manches, manche, resultats);
-        retour(juste ? "<p><b>Exact !</b> " + reussies + " / " + manche + "</p>" : "<p><b>Raté.</b> L'image était là où se croisent les rayons.</p>", juste ? "bien" : "mal");
+        retour(juste ? "<p><b>Juste.</b> " + reussies + " / " + manche + "</p>" : "<p><b>Faux.</b> L'image était là où se croisent les rayons.</p>", juste ? "bien" : "mal");
         boutons([[manche < manches ? "Manche suivante" : "Voir mon résultat", suivante]]);
+        focusAction(); montrerRetour();
       });
     };
     suivante();
@@ -2164,6 +2765,8 @@
       const actif = b.dataset.epreuve === code;
       b.classList.toggle("actif", actif);
       b.setAttribute("aria-selected", actif);
+      b.tabIndex = actif ? 0 : -1;
+      b.setAttribute("aria-controls", "ecran-niveaux");
     });
     if (!sansAfficher) afficherNiveaux();
   }
@@ -2180,6 +2783,11 @@
       b.disabled = n === 0;
       b.textContent = a.nom + (n ? "" : " · bientôt");
       b.onclick = () => { history.replaceState(null, "", "#" + a.code); choisirAtelier(a.code); };
+      b.onkeydown = e => {
+        const tous = [...zone.querySelectorAll(".atelier:not(:disabled)")], k = tous.indexOf(b);
+        const cible = e.key === "ArrowRight" ? tous[(k + 1) % tous.length] : e.key === "ArrowLeft" ? tous[(k - 1 + tous.length) % tous.length] : null;
+        if (cible) { e.preventDefault(); cible.focus(); cible.click(); }
+      };
       zone.appendChild(b);
     });
   }
@@ -2223,10 +2831,22 @@
     else if (o.x !== undefined) { const hy = Math.max(7, Math.min(m - 4, Math.abs(o.h) / vue.hmax * (m - 4))) * (o.h < 0 ? -1 : 1), xo = x(o.x), c = o.h < 0 ? -1 : 1; trait(`M${xo} ${m} V${m - hy} M${xo - 2.500} ${m - hy + c * 3.500} L${xo} ${m - hy} L${xo + 2.500} ${m - hy + c * 3.500}`, "v-objet"); }
     return s;
   }
+  // Niveau verrouillé touché : on dit pourquoi, sous le niveau, un instant
+  function annoncerVerrou(b) {
+    const zone = b.querySelector(".niveau-etoiles");
+    zone.textContent = "Réussis d'abord le niveau d'avant";
+    zone.classList.add("verrou-dit");
+    let annonce = $("annonce-verrou");
+    if (!annonce) { annonce = document.createElement("p"); annonce.id = "annonce-verrou"; annonce.className = "visuellement-cache"; annonce.setAttribute("role", "status"); $("ecran-niveaux").appendChild(annonce); }
+    annonce.textContent = "Niveau verrouillé : réussis d'abord le niveau d'avant.";
+    clearTimeout(b.minuterie); b.minuterie = setTimeout(() => { zone.textContent = ""; zone.classList.remove("verrou-dit"); }, 3500);
+  }
   function afficherNiveaux() {
     nettoyerGlisser();
+    remettreActions();
     const quitte = !$("ecran-jeu").hidden && niveau ? niveau.id : null;      // on revient d'un niveau : le focus y retourne
     document.querySelector("main").classList.remove("en-jeu");
+    document.body.classList.remove("en-niveau");
     $("ecran-jeu").hidden = true;
     $("ecran-niveaux").hidden = false;
     $("ecran-niveaux").dataset.epreuve = atelier;
@@ -2283,16 +2903,17 @@
         const b = document.createElement("button");
         b.type = "button";
         b.className = "niveau" + (e ? " fait" : "") + (ouvert ? "" : " ferme") + (N.defi ? " defi" : "");
-        b.disabled = !ouvert;
+        if (!ouvert) b.setAttribute("aria-disabled", "true");
         b.innerHTML = '<span class="niveau-num"></span><span class="niveau-titre"></span><span class="niveau-etoiles"></span><span class="niveau-vignette" aria-hidden="true"></span>';
         b.querySelector(".niveau-num").textContent = ouvert ? n : "";
         b.querySelector(".niveau-titre").textContent = N.titre;
         if (e) b.querySelector(".niveau-etoiles").innerHTML = etoilesHTML(e);
         else b.querySelector(".niveau-etoiles").textContent = ouvert ? "À faire" : "";
         b.querySelector(".niveau-vignette").appendChild(vignette(N));
-        b.setAttribute("aria-label", "Niveau " + n + " : " + N.titre + (ouvert ? (e ? ", " + e + " étoiles sur 3" : ", à faire") : ", verrouillé"));
-        b.onclick = () => ouvrir(N);
-        if (N.id === quitte) setTimeout(() => b.focus({ preventScroll: true }), 0);
+        b.setAttribute("aria-label", "Niveau " + n + " : " + N.titre + (ouvert ? (e ? ", " + e + (e > 1 ? " étoiles" : " étoile") + " sur 3" : ", à faire") : ", verrouillé : réussis le niveau d'avant pour l'ouvrir"));
+        if (!ouvert) b.title = "Réussis le niveau d'avant pour l'ouvrir";
+        b.onclick = () => { if (ouvert) ouvrir(N); else annoncerVerrou(b); };
+        if (N.id === quitte) setTimeout(() => { b.scrollIntoView({ block: "center" }); b.focus({ preventScroll: true }); }, 0);   // retour à la liste : on retrouve le niveau quitté
         li.appendChild(b);
         ol.appendChild(li);
       });
@@ -2303,6 +2924,14 @@
     $("total-etoiles").setAttribute("aria-label", total + " étoiles sur " + liste.length * 3);
   }
 
+  // Clavier : 1, 2, 3… choisissent la proposition de ce numéro (rayon, faisceau, ouverture, conclusion)
+  document.addEventListener("keydown", e => {
+    if ($("ecran-jeu").hidden || e.ctrlKey || e.metaKey || e.altKey || /^(INPUT|TEXTAREA|SELECT)$/.test((e.target && e.target.tagName) || "")) return;
+    const n = parseInt(e.key, 10);
+    if (!(n >= 1 && n <= 9)) return;
+    const b = [...document.querySelectorAll("#jeu-actions .choix-rayon, #jeu-actions .etiquette-schema")][n - 1];
+    if (b && !b.disabled) { b.click(); b.focus(); e.preventDefault(); }
+  });
   $("retour-niveaux").onclick = () => { history.replaceState(null, "", "#" + atelier); afficherNiveaux(); };
   construireOnglets();
   // Adresses : #U42-5 (un niveau), #U43 (un onglet), #5 (ancienne adresse = U42-5)
@@ -2313,6 +2942,12 @@
   else if (demande && debloque(demande)) { choisirAtelier(demande.epreuve); ouvrir(demande); }
   else choisirAtelier(demande ? demande.epreuve : "U42");
 
+  // Bouton « précédent » du navigateur ou adresse changée à la main : on suit l'adresse
+  addEventListener("hashchange", () => {
+    const h2 = decodeURIComponent(location.hash.slice(1)), N2 = NIVEAUX.find(N => N.id === h2);
+    if (N2 && debloque(N2)) ouvrir(N2);
+    else if (ATELIERS.some(a => a.code === h2) && niveauxDe(h2).length) choisirAtelier(h2);
+  });
   // Pour les tests : on expose de quoi vérifier (aucun effet sur la page)
   window.__traces = { NIVEAUX, Optique, scene: () => S, schemas: TYPES_SCHEMA, ouvrir: id2 => ouvrir(NIVEAUX.find(N => N.id === id2)) };
 })();

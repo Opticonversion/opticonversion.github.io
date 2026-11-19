@@ -238,6 +238,34 @@ QUESTIONS.push(
     }
   },
 
+  {
+    id: "U43-144", epreuve: "U43", theme: "Chaîne des conjugués", session: "complément", difficulte: "moyen",
+    question: "Deux lentilles convergentes L₁ puis L₂. Un rayon issu de B passe par le foyer objet F₁ de L₁. Après L₂, ce rayon passe par :",
+    choix: ["Le foyer image F'₂ de L₂", "Le foyer objet F₂ de L₂", "Le centre O₂, sans être dévié", "Nulle part : il reste parallèle à l'axe"],
+    bonne: 0,
+    explication: "Un rayon qui passe par F₁ ressort de L₁ parallèle à l'axe. Pour L₂, c'est un rayon parallèle à l'axe : il ressort en passant par F'₂.\nCe rayon sert à passer de L₁ à L₂ sans calcul.",
+    indice: "Que devient, après L₁, un rayon qui passe par F₁ ? Et que fait L₂ d'un rayon de ce genre ?",
+    erreurs: { 3: { type: "notion", message: "Il ressort de L₁ parallèle à l'axe, mais L₂ le dévie : un rayon parallèle à l'axe ressort par le foyer image F'₂." } }
+  },
+  {
+    id: "U43-145", epreuve: "U43", theme: "Chaîne des conjugués", session: "complément", difficulte: "moyen",
+    question: "L₁ forme l'image B₁ après L₂ : pour L₂, B₁ est un objet virtuel. Quel rayon permet de construire facilement l'image B₂ ?",
+    choix: ["Un rayon qui part de B₁ et revient vers L₂", "Le rayon qui vise B₁ en passant par le centre O₂ : il traverse L₂ sans être dévié", "Aucun : on ne construit pas l'image d'un objet virtuel", "Le rayon qui part de B₁ parallèlement à l'axe"],
+    bonne: 1,
+    explication: "Avec un objet virtuel, les rayons arrivent sur L₂ en visant B₁. Le rayon qui vise B₁ en passant par O₂ n'est pas dévié : B₂ est sur ce rayon.\nDeuxième rayon utile : celui qui passe par F₂ en visant B₁, il ressort parallèle à l'axe. B₂ est au croisement des deux.",
+    indice: "Les rayons ne partent pas de B₁ : ils arrivent sur L₂ en le visant. Lequel de ces rayons n'est pas dévié ?",
+    erreurs: { 2: { type: "notion", message: "Un objet virtuel se construit comme un objet réel, avec les rayons qui le visent. Celui qui vise B₁ par O₂ n'est pas dévié." } }
+  },
+  {
+    id: "U43-146", epreuve: "U43", theme: "Chaîne des conjugués", session: "complément", difficulte: "moyen",
+    question: "Lunette afocale : B₁ est dans le plan focal commun F'ob = Foc. Que donne le rayon qui part de B₁ et passe par le centre de l'oculaire ?",
+    choix: ["La position de l'image finale B₂", "Le foyer image de l'oculaire", "La direction de tous les rayons qui sortent de l'oculaire", "Le bord du champ de pleine lumière"],
+    bonne: 2,
+    explication: "B₁ est dans le plan focal objet de l'oculaire : tous les rayons issus de B₁ ressortent parallèles entre eux. Le rayon qui passe par le centre n'est pas dévié, il donne donc leur direction commune.\nL'image finale B₂ est à l'infini, dans cette direction.",
+    indice: "Un point du plan focal objet donne des rayons émergents parallèles entre eux. Lequel est le plus simple à tracer ?",
+    erreurs: { 0: { type: "notion", message: "B₁ est au foyer objet de l'oculaire : l'image finale est à l'infini. Le rayon par le centre donne la direction de cette image à l'infini." } }
+  },
+
   // ---------- Vergences et focales ----------
   {
     id: "U43-007", epreuve: "U43", theme: "Vergences et focales", session: "2021", difficulte: "facile",
