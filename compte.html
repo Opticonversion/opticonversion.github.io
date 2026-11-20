@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Opticonversion">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
-<link rel="stylesheet" href="style.css?v=64b1e2da">
+<link rel="stylesheet" href="style.css?v=1e45fcd2">
 </head>
 <body data-rafraichir="oui">
 <header class="entete">
@@ -166,7 +166,7 @@
 <script src="questions-U5.js?v=86decd35"></script>
 <script src="questions-U3.js?v=9474d67d"></script>
 <script src="essentiel.js?v=ba6ab9a7"></script>
-<script src="rythme.js?v=0b9caab9"></script>
+<script src="rythme.js?v=a384940c"></script>
 <script>
   // ---------- Profil : gardé dans le navigateur, et en ligne si l'élève est connecté ----------
   const $ = id => document.getElementById(id);
@@ -227,7 +227,7 @@
       const li = document.createElement("li");
       li.dataset.epreuve = code;
       li.innerHTML = '<a><span class="record-theme"></span><small></small><b></b></a>';
-      li.querySelector("a").href = "qcm.html#" + code + (theme && theme !== "Tous" ? "/" + encodeURIComponent(theme) : "");
+      li.querySelector("a").href = "qcm.html#" + code + "/" + (!theme || theme === "Tous" ? "tous" : encodeURIComponent(theme));
       // L'examen blanc (clé « U5/examen ») : sa meilleure note sur 20
       const examen = theme === "examen";
       li.querySelector(".record-theme").textContent = !theme || theme === "Tous" ? "Toute l'épreuve" : examen ? "Examen blanc" : theme;

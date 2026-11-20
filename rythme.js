@@ -1189,7 +1189,7 @@ function preparerPremiersPas(el) {
     try { localStorage.setItem("accueil", "passe"); } catch (e) {}
     // Une matière choisie (ou venue d'un Short, ?matiere=U5) : le bouton principal de l'accueil mène à ses QCM
     const code = matiereSeance(form.querySelector('select[name="matiere"]').value), principale = document.getElementById("action-principale");
-    if (code && principale) { principale.textContent = "Les QCM " + deNomPlan(nomMatiereSeance(code)); principale.href = "qcm.html#" + code; }
+    if (code && principale) { principale.textContent = "Les QCM " + deNomPlan(nomMatiereSeance(code)); principale.href = "qcm.html#" + code + "/tous"; }
     delete document.documentElement.dataset.accueil;
     window.dispatchEvent(new Event("resize"));        // le banc d'optique était caché : il se recalcule
     window.scrollTo(0, 0);

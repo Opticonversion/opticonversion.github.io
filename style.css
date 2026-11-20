@@ -1142,6 +1142,13 @@ kbd.touche { display: inline-block; min-width: 1.9em; margin: 0 1px; padding: 0 
 /* La liste des cas : la zone n'est plus une carte (chaque cas est sa propre carte) */
 #zone.zone-liste { padding: 0; background: none; border: 0; }
 #zone.zone-liste .carte-cas { background: var(--carte); }
+/* Page d'une épreuve sans série lancée (qcm.html#U5) : un gros bouton pour toutes les questions */
+.depart-epreuve { margin-top: 18px; }
+.depart-tous { width: 100%; justify-content: center; margin-top: 0; min-height: 64px; padding: 14px 24px; }
+.depart-tous > span { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+.depart-tous b { font-size: 1.15rem; }
+.depart-tous small { font-weight: 400; font-size: 0.88rem; opacity: 0.85; }
+.depart-epreuve p { margin: 10px 0 0; text-align: center; }
 .carte-cas-info { margin: 0 0 12px; color: rgb(var(--accent-rgb)); font-size: 0.85rem; font-weight: 700; }
 .carte-cas .bouton { margin-top: 0; }
 

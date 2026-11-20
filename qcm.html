@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Opticonversion">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
-<link rel="stylesheet" href="style.css?v=64b1e2da">
+<link rel="stylesheet" href="style.css?v=1e45fcd2">
 </head>
 <body>
 <header class="entete">
@@ -122,7 +122,7 @@
 <script src="specificites-U5.js?v=43533990"></script>
 <script src="specificites-U3.js?v=3245f237"></script>
 <script src="essentiel.js?v=ba6ab9a7"></script>
-<script src="rythme.js?v=0b9caab9"></script>
+<script src="rythme.js?v=a384940c"></script>
 <!-- Examen blanc chronométré (#U5/examen) : avant le script de la page, qui l'ouvre dès le chargement -->
 <script src="examen.js?v=e04ac9f0"></script>
 <script>
@@ -280,15 +280,20 @@
       onglet = "selection";
       afficherThemes();
       demarrer(selection, { selection: true });
-    } else {
+    } else if (theme === "Tous" || themes.has(theme)) {
       onglet = "theme";
       afficherThemes();
       demarrer();
+    } else {
+      // qcm.html#U5 seul : la page de l'épreuve, dépliée ; rien ne démarre avant le choix de l'élève
+      onglet = "page";
+      afficherThemes();
+      afficherDepartEpreuve();
     }
     // Une adresse de thème, un cas, l'entraînement ou des questions choisies : la série est lancée, on replie
     // On arrive replié, même sur « Tous » (téléphone et ordinateur) : l'énoncé et les propositions dans le premier
     // écran ; « Thèmes et outils » déplie le titre, les liens et les thèmes. Pas pour la liste des cas.
-    if (onglet !== "examen") replierPage(!(onglet === "cas" && !serieSpeciale));
+    if (onglet !== "examen") replierPage(onglet !== "page" && !(onglet === "cas" && !serieSpeciale));
     if (defilerVersZone) {
       defilerVersZone = false;
       const replie = document.querySelector("main").classList.contains("serie-lancee");
@@ -434,7 +439,8 @@
   function choisirTheme(t) {
     themeChoisi = t;
     onglet = "theme";
-    const adresse = "#" + epreuveChoisie + (t === "Tous" ? "" : "/" + encodeURIComponent(t));
+    // « Tous » lancé a sa propre adresse (#U5/tous) : #U5 seul reste la page de l'épreuve, sans série
+    const adresse = "#" + epreuveChoisie + "/" + (t === "Tous" ? "tous" : encodeURIComponent(t));
     history.replaceState(null, "", adresse);
     afficherThemes();
     repriseAuChargement = true;              // le thème reprend où l'élève l'avait laissé (même onglet)
@@ -453,7 +459,8 @@
     const autres = tousThemes.filter(t => !estEssentiel(epreuveChoisie, t));
     // Replier seulement s'il reste au moins 2 essentiels devant et au moins 2 thèmes à cacher
     const replier = essentiels.length >= 2 && autres.length >= 2 && autresOuverts !== epreuveChoisie && !(onglet === "theme" && autres.includes(themeChoisi));
-    const themes = ["Tous", ...essentiels, ...(replier ? [] : autres)];
+    // Sur la page de l'épreuve, « Tous » est le gros bouton sous les thèmes (afficherDepartEpreuve)
+    const themes = [...(onglet === "page" ? [] : ["Tous"]), ...essentiels, ...(replier ? [] : autres)];
     const conteneur = document.getElementById("themes");
     conteneur.innerHTML = "";
     themes.forEach(t => {
@@ -529,6 +536,23 @@
       conteneur.scrollLeft += (ra.left - rc.left) - (rc.width - ra.width) / 2;
     }
     document.getElementById("legende-etoile").hidden = !essentiels.length || !autres.length;
+  }
+  // La page de l'épreuve sans série lancée (qcm.html#U5) : sous les thèmes, un gros bouton pour toutes les questions
+  function afficherDepartEpreuve() {
+    serieSpeciale = null;
+    serie = [];                                // plus de série en cours
+    numero = 0;
+    enRevue = null;
+    const qs = ordinairesDe(epreuveChoisie), bilan = bilanQuestions(qs);
+    zone.classList.add("zone-liste");          // pas de carte de question autour
+    zone.innerHTML = '<div class="depart-epreuve"><button type="button" class="bouton depart-tous"><span><b>Tous les thèmes</b><small></small></span></button>' +
+      '<p class="doux"></p></div>';
+    zone.querySelector(".depart-tous small").textContent = qs.length + " questions" + (bilan.faites ? " · " + bilan.faites + " faites" : "");
+    zone.querySelector(".depart-epreuve p").textContent = bilan.faites
+      ? "Ou choisis un thème. Celles que tu n'as jamais faites passent d'abord, puis tes erreurs."
+      : "Ou choisis un thème. Après chaque réponse, la correction explique le raisonnement.";
+    zone.querySelector(".depart-tous").onclick = () => { zone.classList.remove("zone-liste"); choisirTheme("Tous"); };
+    rejouerAnimation(zone);
   }
   // Une série d'entraînement : 10 questions, celles jamais faites d'abord (sur un thème, ou sur toute l'épreuve)
   function demarrerEntrainement() {
@@ -2534,6 +2558,7 @@
     else if (code === "erreurs-du-jour") ouvrirRevision("erreurs");
     else if (code === "seance") ouvrirRevision("seance", theme);
     else if (code === "premiers-pas") ouvrirRevision("premiers", theme);
+    else if (code && theme === "tous") ouvrirEpreuve(code, "Tous");    // toutes les questions de l'épreuve, lancées
     else if (code && theme === "examen") ouvrirEpreuve(code, null, { examen: true });
     else if (code && theme === "cas") ouvrirEpreuve(code, null, { cas: "liste" });
     else if (code && theme && theme.startsWith("cas:")) ouvrirEpreuve(code, null, { cas: theme.slice(4) });
