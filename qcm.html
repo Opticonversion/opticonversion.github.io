@@ -18,7 +18,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Opticonversion">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
-<link rel="stylesheet" href="style.css?v=1fae4c16">
+<link rel="stylesheet" href="style.css?v=7a49b9f9">
 </head>
 <body>
 <header class="entete">
@@ -126,7 +126,8 @@
 <script src="essentiel.js?v=ba6ab9a7"></script>
 <script src="rythme.js?v=a384940c"></script>
 <!-- Examen blanc chronométré (#U5/examen) : avant le script de la page, qui l'ouvre dès le chargement -->
-<script src="examen.js?v=e04ac9f0"></script>
+<script src="examen.js?v=ffcabd49"></script>
+<script src="calculette.js?v=443ce865"></script>
 <script>
   // ---------------- L'état du QCM ----------------
   let epreuveChoisie = null;   // ex. "U5"
@@ -944,6 +945,13 @@
         repondre({ juste: false, i: null, nsp: true }, null);
       };
       (zone.querySelector(".bouton-indice") || blocChoix).after(nsp);
+    }
+    // Calculette (calculette.js) : sous toute question qui a des chiffres ; la même pour toute la page
+    const calc = window.Calculette && Calculette.bouton(q);
+    if (calc) {
+      const apres = zone.querySelector(".bouton-nsp") || zone.querySelector(".bouton-indice") || zone.querySelector(".pose-regle") || blocChoix;
+      apres.after(calc);
+      Calculette.nouvelleQuestion();
     }
     const aide = document.createElement("p");
     aide.className = "raccourcis";

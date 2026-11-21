@@ -334,6 +334,9 @@ const Examen = (() => {
 
     if (q.type === "calcul") boite.appendChild(creerSaisieExamen(q));
     else boite.appendChild(creerChoixExamen(q));
+    // Calculette permise, comme au vrai BTS (calculette.js)
+    const calc = window.Calculette && Calculette.bouton(q);
+    if (calc) { boite.appendChild(calc); Calculette.nouvelleQuestion(); }
 
     zone.querySelector(".examen-prec").disabled = etat.numero === 0;
     zone.querySelector(".examen-suiv").innerHTML = etat.numero < questions.length - 1

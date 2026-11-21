@@ -2251,3 +2251,83 @@ html:has(body.en-examen) { scroll-padding-top: 150px; }
 }
 .fin-niveau.parfait .fin-titre { color: var(--or); }
 .fin-niveau.parfait .etoiles-fin .ico { width: 46px; height: 46px; }
+
+/* ---------- Calculette du QCM et de l'examen blanc (calculette.js), sur le modèle de la TI-83 Premium CE ---------- */
+.bouton-calculette { display: inline-flex; align-items: center; gap: 7px; min-height: 44px; margin: 10px 0 0; padding: 8px 15px; font: inherit; font-size: 0.9rem; color: var(--or-clair); background: transparent; border: 1px solid var(--bord-fort); border-radius: 999px; cursor: pointer; transition: background var(--vite), border-color var(--vite); }
+.bouton-calculette:hover { background: var(--or-fond); }
+.bouton-calculette[aria-expanded="true"] { background: var(--or-fond); border-color: rgba(217, 178, 111, 0.55); }
+.examen-question .bouton-calculette { margin-top: 14px; }
+.bouton-indice ~ .bouton-calculette { margin-top: 16px; }
+.bouton-indice + .bouton-nsp + .bouton-calculette { margin-left: 16px; }
+.calculette { position: fixed; right: 20px; bottom: 20px; z-index: 45; width: 340px; padding: 8px 10px 10px; color: var(--texte); background: var(--carte); border: 1px solid var(--bord-fort); border-radius: var(--rayon); box-shadow: var(--ombre); animation: net 320ms var(--sortie) both; }
+.calc-tete { display: flex; align-items: center; justify-content: space-between; gap: 8px; min-height: 40px; padding-left: 4px; cursor: grab; user-select: none; -webkit-user-select: none; touch-action: none; }
+.calc-titre { display: inline-flex; align-items: center; gap: 7px; color: var(--or-clair); font-size: 0.92rem; font-weight: 650; }
+.calc-deg { color: var(--doux); font-weight: 400; font-size: 0.82rem; }
+.calc-fermer { width: 40px; height: 40px; margin-right: -4px; font: inherit; font-size: 1.5rem; line-height: 1; color: var(--doux); background: none; border: 0; border-radius: 10px; cursor: pointer; }
+.calc-fermer:hover { color: var(--texte); background: var(--carte-survol); }
+/* L'écran : les calculs faits (calcul à gauche, résultat à droite), puis la ligne en cours, toujours en bas */
+.calc-ecran { display: flex; flex-direction: column; height: 196px; margin: 2px 0 8px; padding: 4px 10px 6px; overflow-y: auto; overscroll-behavior: contain; background: var(--fond); border: 1px solid var(--bord); border-radius: 10px; font-variant-numeric: tabular-nums; scrollbar-width: thin; }
+.calc-ecran:focus-visible { outline: 2px solid var(--or); outline-offset: 2px; }
+.calc-historique { flex: none; margin: auto 0 0; padding: 0; list-style: none; }
+.calc-entree { display: flex; flex-direction: column; padding: 2px 0 3px; border-bottom: 1px solid var(--bord); }
+.calc-h-calcul, .calc-h-res { max-width: 100%; min-height: 30px; padding: 2px 4px; font: inherit; color: var(--doux); background: none; border: 0; border-radius: 6px; cursor: pointer; overflow-x: auto; white-space: nowrap; scrollbar-width: none; }
+.calc-h-calcul { align-self: flex-start; text-align: left; font-size: 0.95rem; }
+.calc-h-res { align-self: flex-end; text-align: right; color: var(--texte); font-size: 1.05rem; font-weight: 650; }
+.calc-h-calcul:hover, .calc-h-res:hover { background: var(--carte-survol); }
+.calc-ligne { flex: none; display: block; min-height: 2.4em; padding: 6px 2px 2px; line-height: 1.6; overflow-x: auto; white-space: nowrap; font-size: 1.15rem; scrollbar-width: none; }
+.calc-ligne::-webkit-scrollbar, .calc-h-calcul::-webkit-scrollbar, .calc-h-res::-webkit-scrollbar { display: none; }
+.calc-message { flex: none; margin: 0; padding: 0 2px; color: var(--rouge); font-size: 0.92rem; font-weight: 600; }
+.calc-ecran sup { font-size: 0.68em; line-height: 0; vertical-align: 0.55em; }
+.calc-ferme { opacity: 0.45; }
+.calc-rep { font-size: 0.86em; color: var(--or-clair); }
+/* Fraction posée : le numérateur au-dessus de la barre, le dénominateur dessous */
+.calc-frac { display: inline-flex; flex-direction: column; align-items: center; vertical-align: middle; margin: 0 2px; font-size: 0.92em; line-height: 1.35; }
+.calc-num, .calc-den { display: block; min-width: 0.9em; padding: 0 3px; text-align: center; white-space: nowrap; }
+.calc-num { align-self: stretch; border-bottom: 1.5px solid currentColor; padding-bottom: 2px; }
+.calc-den { align-self: stretch; padding-top: 1px; }
+.calc-frac .calc-frac { font-size: 0.95em; }
+.calc-vide { display: inline-block; vertical-align: middle; min-width: 0.75em; height: 1.05em; text-align: center; line-height: 1; border: 1px dashed var(--tres-doux); border-radius: 2px; }
+.calc-ligne > .calc-vide:only-child { border: 0; }
+.calc-curseur { display: inline-block; width: 2px; height: 1.1em; margin: 0 -1px; vertical-align: middle; background: var(--or); animation: calc-clignote 1s steps(1) infinite; }
+@keyframes calc-clignote { 50% { opacity: 0; } }
+/* Les touches : 6 colonnes, comme une calculatrice */
+.calc-touches { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 5px; }
+.calc-touche { min-height: 44px; padding: 0 2px; font: inherit; font-size: 1.05rem; font-variant-numeric: tabular-nums; color: var(--texte); background: var(--carte-survol); border: 1px solid var(--bord); border-radius: 10px; cursor: pointer; transition: background var(--vite), transform var(--vite); touch-action: manipulation; }
+.calc-touche.calc-large { grid-column: span 2; }
+.calc-touche sup { font-size: 0.66em; }
+.calc-touche:hover { background: color-mix(in srgb, var(--carte-survol) 88%, white); }
+.calc-touche:active, .calc-touche.calc-appui { transform: scale(0.95); }
+.calc-touche.calc-fn, .calc-touche.calc-fl { font-size: 0.92rem; color: var(--or-clair); background: var(--fond-2); }
+.calc-touche.calc-op { font-size: 1.2rem; color: var(--or-clair); background: var(--fond-2); }
+.calc-touche.calc-efface { color: var(--rouge); background: var(--fond-2); }
+.calc-touche.calc-egal { color: var(--encre); background: var(--or); border-color: transparent; font-size: 1.25rem; font-weight: 700; }
+.calc-touche.calc-egal:hover { background: var(--or-clair); }
+.calc-touche:hover:not(.calc-egal) { border-color: var(--bord-fort); }
+.calc-touche .ico { width: 20px; height: 20px; vertical-align: -0.25em; }
+/* La touche fraction : deux petites cases l'une sur l'autre, séparées par une barre */
+.calc-t-frac { display: inline-flex; flex-direction: column; align-items: center; gap: 3px; vertical-align: middle; }
+.calc-t-frac i { display: block; width: 11px; height: 8px; border: 1.5px solid currentColor; border-radius: 1.5px; }
+.calc-t-frac i:first-child { position: relative; }
+.calc-t-frac i:first-child::after { content: ""; position: absolute; left: -4px; right: -4px; bottom: -3.5px; height: 1.5px; background: currentColor; }
+.calc-retour { display: inline-block; width: 22px; height: 22px; vertical-align: -0.3em; background: currentColor; -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 5h10a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H9l-6-7z'/%3E%3Cpath d='M12.5 9.5l5 5M17.5 9.5l-5 5'/%3E%3C/svg%3E") center / contain no-repeat; mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 5h10a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H9l-6-7z'/%3E%3Cpath d='M12.5 9.5l5 5M17.5 9.5l-5 5'/%3E%3C/svg%3E") center / contain no-repeat; }
+/* Ouverte : la page peut défiler jusqu'au-dessus de la calculette */
+html.calculette-ouverte body { padding-bottom: calc(var(--haut-calculette, 0px) + 24px); }
+/* Téléphone : posée en bas de l'écran, sur la barre d'onglets ; « Question suivante » et les cases restent au-dessus */
+@media (max-width: 720px) {
+  .calc-ecran { height: 116px; }
+  .calculette { left: 0; right: 0; bottom: 0; width: auto; padding: 4px 8px calc(8px + env(safe-area-inset-bottom)); border-width: 1px 0 0; border-radius: 18px 18px 0 0; }
+  .calc-tete { min-height: 30px; padding-left: 6px; cursor: default; }
+  .calc-titre .ico, .calc-nom { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  .calc-deg { font-size: 0.78rem; }
+  .calc-fermer { width: 44px; height: 30px; }
+  .calc-ecran { margin: 0 0 6px; padding: 2px 8px 4px; }
+  .calc-h-calcul, .calc-h-res { min-height: 26px; }
+  .calc-touches { gap: 4px; }
+  .calc-touche { min-height: 40px; }
+  html.calculette-ouverte { scroll-padding-bottom: calc(var(--haut-calculette, 0px) + 16px); }
+  html.calculette-ouverte body { padding-bottom: calc(var(--haut-calculette, 0px) + 16px + env(safe-area-inset-bottom)); }
+  html.calculette-ouverte #zone .bouton-suivant, html.calculette-ouverte #zone .bouton-retour { bottom: calc(var(--haut-calculette, 0px) + 12px); }
+  html.calculette-ouverte .pose-etape { scroll-margin-bottom: calc(var(--haut-calculette, 0px) + 16px); }
+}
+@media (max-width: 360px) { .calc-touche { font-size: 0.95rem; } .calc-touche.calc-fn, .calc-touche.calc-fl { font-size: 0.85rem; } }
+@media (prefers-reduced-motion: reduce) { .calculette, .calc-curseur { animation: none; } .calc-touche:active, .calc-touche.calc-appui { transform: none; } }
