@@ -18,7 +18,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Opticonversion">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
-<link rel="stylesheet" href="style.css?v=7a49b9f9">
+<link rel="stylesheet" href="style.css?v=229ef530">
 </head>
 <body>
 <header class="entete">
@@ -1086,7 +1086,7 @@
         const detailEtape = { calcul: res, reponse: e.reponse, erreurs: e.erreurs };
         if (!premiereErreur) premiereErreur = detailEtape;
         // Un piège prévu par l'étape (champ erreurs) : sa phrase dit ce que l'élève a calculé
-        const piege = res.etat === "faux" ? piegeDe(q, detailEtape) : null;
+        const piege = piegeDe(q, detailEtape);      // faux, mais aussi juste au signe ou à l'unité près (piège de signe)
         const motPiege = piege && piege.message ? piege.message : "";
         essais++;
         if (essais >= 2) { donner((motPiege ? motPiege + " " : "") + messageCalcul(e.reponse, res)); return; }
@@ -1239,7 +1239,7 @@
     // jauge « Essentiel » + révision espacée ; le détail range l'erreur par type dans « À revoir »
     // « Je ne sais pas » : erreur de notion. Un piège prévu (champ erreurs, essentiel.js) : sa phrase s'affiche sous le verdict.
     const detail = reponse.nsp ? {} : reponse.calcul ? { calcul: reponse.calcul } : reponse.erreurPose ? reponse.erreurPose : { choix: reponse.i };
-    if (!reponse.juste && !reponse.nsp && !reponse.pose && !(reponse.calcul && reponse.calcul.etat !== "faux")) reponse.piege = piegeDe(q, detail);
+    if (!reponse.juste && !reponse.nsp && !reponse.pose) reponse.piege = piegeDe(q, detail);   // y compris l'opposé de la réponse (piège de signe)
     const suite = noterReponse(q, reponse.juste, detail);
 
     // La barre avance dès qu'on a répondu

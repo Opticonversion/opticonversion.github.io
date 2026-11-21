@@ -793,10 +793,14 @@
       return best;
     }
     // Un rayon touché est prolongé en pointillés, des deux côtés
-    function prolonger(seg) {
+    function droiteDe(seg) {
       const m = (seg.y2 - seg.y1) / (seg.x2 - seg.x1);
-      const d = { x1: v.xmin, y1: seg.y1 + m * (v.xmin - seg.x1), x2: v.xmax, y2: seg.y1 + m * (v.xmax - seg.x1), pointille: true, rayon: seg.rayon };
-      if (prolonges.some(q => Math.abs(q.y1 - d.y1) < 1e-6 && Math.abs(q.y2 - d.y2) < 1e-6 && q.x1 === d.x1)) { dire("Ce rayon est déjà prolongé."); return; }
+      return { x1: v.xmin, y1: seg.y1 + m * (v.xmin - seg.x1), x2: v.xmax, y2: seg.y1 + m * (v.xmax - seg.x1), pointille: true, rayon: seg.rayon };
+    }
+    const dejaProlonge = seg => { const d = droiteDe(seg); return prolonges.some(q => Math.abs(q.y1 - d.y1) < 1e-6 && Math.abs(q.y2 - d.y2) < 1e-6 && q.x1 === d.x1); };
+    function prolonger(seg) {
+      const d = droiteDe(seg);
+      if (dejaProlonge(seg)) { dire("Ce rayon est déjà prolongé."); return; }
       prolonges.push(d); actes.push({ type: "prolonge", d });
       dire("Rayon prolongé en pointillés. Un croisement de pointillés donne une image virtuelle (ou un objet virtuel).");
       if (mode === "prolonger" && aides.length && prolonges.length >= aides.length) {
@@ -932,7 +936,13 @@
       if (!mode) return d;
       const k = doigt ? Math.max(1, parPixel()) : 1;
       if (mode === "placer") return d.quoi === "cible" ? d : d.quoi === "croisement" && !depart ? d : { quoi: "vide" };
-      if (mode === "prolonger") { const r = rayonPres(p, doigt ? Math.max(30, 34 * k) : 16); return r ? { quoi: "rayon", rayon: r } : { quoi: "rien" }; }
+      if (mode === "prolonger") {
+        // L'image virtuelle est souvent sur un rayon déjà tracé (celui qui passe par le centre) : un croisement
+        // touché, ou un rayon déjà prolongé, pose le point au lieu de prolonger (sans avoir à changer d'outil)
+        if (d.quoi === "cible" || (d.quoi === "croisement" && !depart)) return d;
+        const r = rayonPres(p, doigt ? Math.max(30, 34 * k) : 16);
+        return r && !dejaProlonge(r) ? { quoi: "rayon", rayon: r } : r ? { quoi: "vide" } : { quoi: "rien" };
+      }
       const cand = candidatPres(p, depart, doigt ? Math.max(30, 28 * k) : 24) || candidatPres(p, depart || { x: 0, y: 0 }, doigt ? Math.max(30, 28 * k) : 24);
       return cand ? { quoi: "point", cand } : { quoi: "rien" };
     }
@@ -1006,11 +1016,11 @@
         else dire("Pour tracer un rayon, glisse jusqu'à un autre point du dessin (ou touche les deux points l'un après l'autre).");
       }
       else if (a.quoi === "point" || (a.quoi === "croisement" && depart)) toucherPoint(a.cand);
-      else if (a.quoi === "croisement") poser(ecran(a.cand));                                    // le réticule se pose sur le croisement
+      else if (a.quoi === "croisement") { if (mode === "prolonger") choisirOutil("placer", false); poser(ecran(a.cand)); }   // le réticule se pose sur le croisement
       else if (a.quoi === "rayon") prolonger(a.rayon);
       else if (a.quoi === "rien") dire(mode === "prolonger" ? "Touche un rayon pour le prolonger en pointillés." : "Touche un point du dessin : B, un foyer, le centre de la lentille, un croisement, un point du quadrillage…");
       else if (depart) dire("Départ : " + depart.nom + ". Touche un point du dessin (un foyer, le centre de la lentille, un point du quadrillage…), ou retouche le départ pour l'annuler.");
-      else poser(a.p0);
+      else { if (mode === "prolonger") choisirOutil("placer", false); poser(a.p0); }
       redessiner();
     };
     const surAnnule = () => { appui = null; glisseDe = null; survol = null; survolRayon = null; svg.classList.remove("saisi"); svg.style.cursor = ""; apercu.setAttribute("visibility", "hidden"); viseur.setAttribute("visibility", "hidden"); };

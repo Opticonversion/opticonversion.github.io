@@ -111,6 +111,11 @@ main:has(#ecran-jeu:not([hidden])) .tete-compagnon, main:has(#ecran-fin:not([hid
   .tete-compagnon { width: 56px; }
 }
 .aide { font-size: 0.94rem; margin: 0 0 16px; }
+/* Accueil : ce qui distingue le site, en une ligne de texte simple sous la phrase d'accroche */
+.promesse { margin: 0 0 24px; color: var(--texte); font-size: 1.02rem; font-weight: 600; text-wrap: pretty; }
+.sous-titre:has(+ .promesse), .accroche:has(+ .promesse) { margin-bottom: 8px; }
+.tete-page > .promesse { grid-column: 1; margin-bottom: 16px; }
+@media (max-width: 600px) { .tete-page > .promesse { grid-column: 1 / -1; } }
 
 /* La ligne sous le titre (accueil seulement) : du texte simple, pas d'étiquette décorative */
 .marque { margin: 0 0 14px; color: var(--texte); font-size: 1.05rem; font-weight: 600; }
@@ -443,7 +448,7 @@ select option { background: var(--fond); }
 .hero-retour { padding-top: 16px; }
 .hero-retour h1 { font-size: clamp(2.2rem, 5vw + 0.6rem, 4rem); }
 .hero-retour .accroche { margin-bottom: 18px; }
-.hero-retour .marque, .hero-retour .accroche, .hero-retour .actions { display: none; }
+.hero-retour .marque, .hero-retour .accroche, .hero-retour .promesse, .hero-retour .actions { display: none; }
 .hero-retour .jour { margin-top: 18px; }
 /* La ligne d'action sous le titre d'un élève qui revient (séance passée, faite, 1er jour de retour) : des liens, pas d'or */
 .ligne-action { display: flex; flex-wrap: wrap; gap: 0 22px; margin: 2px 0 8px; }

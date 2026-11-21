@@ -13,7 +13,7 @@
 // =====================================================================
 
 // <versionner> (partie écrite par versionner.py, ne pas modifier à la main)
-const VERSION = "2ab9278b98";
+const VERSION = "24091e0308";
 const FICHIERS = [
   "appli.js?v=0724163c",
   "banc.js?v=7a80e12d",
@@ -177,12 +177,12 @@ const FICHIERS = [
   "specificites-U42.js?v=f64709f2",
   "specificites-U43.js?v=523c07db",
   "specificites-U5.js?v=43533990",
-  "style.css?v=7a49b9f9",
+  "style.css?v=229ef530",
   "traces-U42.js?v=67196cf4",
   "traces-U43.js?v=77abc155",
   "traces-U5.js?v=c4c5f919",
   "traces.html",
-  "traces.js?v=ea1c7ad8",
+  "traces.js?v=2fd8ea40",
   "videos.js?v=2da8e777",
   "vivant.js?v=ec7cf52b"
 ];
