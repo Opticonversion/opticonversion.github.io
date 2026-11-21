@@ -435,10 +435,29 @@ async function demarrer() {
   let effacerNavigateurDemande = false;
 
   const bSupprimer = document.getElementById("bouton-supprimer");
+  // La question « Supprimer ton compte ? » : une fenêtre aux couleurs du site (compte.html), « Garder mon compte » en premier
+  const fenetreSupprimer = document.getElementById("fenetre-supprimer");
+  if (fenetreSupprimer && !("closedBy" in HTMLDialogElement.prototype)) {
+    // Safari ne connaît pas closedby="any" : un toucher à côté de la fenêtre la ferme quand même (= garder le compte)
+    const dehors = e => { const r = fenetreSupprimer.getBoundingClientRect(); return e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom; };
+    let appuiDehors = false;
+    fenetreSupprimer.addEventListener("pointerdown", e => { appuiDehors = dehors(e); });
+    fenetreSupprimer.addEventListener("pointerup", e => { if (appuiDehors && dehors(e)) fenetreSupprimer.close(); });
+  }
+  function demanderSuppression() {
+    if (!fenetreSupprimer) return Promise.resolve(null);
+    fenetreSupprimer.returnValue = "";
+    document.getElementById("supprimer-navigateur").checked = false;
+    fenetreSupprimer.showModal();
+    return new Promise(fini => fenetreSupprimer.addEventListener("close", () => {
+      fini(fenetreSupprimer.returnValue === "supprimer" ? { navigateur: document.getElementById("supprimer-navigateur").checked } : null);
+    }, { once: true }));
+  }
   if (bSupprimer) bSupprimer.addEventListener("click", async () => {
     if (!utilisateur) return;
-    if (!confirm("Supprimer ton compte et ta progression en ligne ? C'est définitif.")) return;
-    effacerNavigateurDemande = confirm("Effacer aussi la progression gardée dans ce navigateur ?");
+    const choix = await demanderSuppression();
+    if (!choix) return;
+    effacerNavigateurDemande = choix.navigateur;
     if (estCompteEmail(utilisateur)) {
       formReauth.hidden = false;
       document.getElementById("champ-mdp-confirmer").focus();

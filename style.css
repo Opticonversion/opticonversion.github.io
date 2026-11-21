@@ -1012,6 +1012,10 @@ main.vue-specificites #lien-entrainement { display: none; }   /* le numéro est 
 .fenetre-situation h2 { margin: 0 0 10px; font-size: 1.3rem; }
 .fenetre-situation p { margin: 0 0 10px; line-height: 1.5; }
 .fenetre-situation .bouton { margin-top: 12px; }
+/* Fenêtre de confirmation (suppression du compte) : même cadre que « Revoir la situation » */
+.fenetre-confirmer .actions-compte { margin-top: 18px; }
+.case-confirmer { display: flex; flex-direction: row; align-items: flex-start; gap: 10px; margin: 6px 0 0; font-size: 0.95rem; line-height: 1.45; color: var(--texte); cursor: pointer; }
+.case-confirmer input { flex: none; width: 20px; height: 20px; margin: 2px 0 0; padding: 0; accent-color: var(--or); }
 .theme.theme-revoir { display: inline-flex; align-items: center; gap: 6px; color: var(--texte); }
 .theme.theme-revoir .ico { width: 16px; height: 16px; color: var(--or); }
 main.serie-lancee #zone { scroll-margin-top: calc(var(--haut-entete, 64px) + 70px); }
@@ -1186,6 +1190,9 @@ kbd.touche { display: inline-block; min-width: 1.9em; margin: 0 1px; padding: 0 
 .def-liste { list-style: none; margin: 8px 0 0; padding: 0; display: grid; }
 .def-liste > li, .def-face { min-width: 0; overflow-wrap: anywhere; }
 .def { padding: 18px 6px; border-top: 1px solid var(--bord); }
+/* Le navigateur ne dessine que les définitions à l'écran (les autres gardent leur hauteur, la page ne saute pas) */
+.def-liste > .def { content-visibility: auto; contain-intrinsic-size: auto 165px; }   /* hauteur moyenne d'une définition (sans ses marges intérieures), mesurée */
+@media (max-width: 720px) { .def-liste > .def { contain-intrinsic-size: auto 245px; } }
 .def-haut { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 6px 12px; }
 .def-terme { margin: 0; font-size: 1.36rem; }
 .def-texte { margin: 8px 0 10px; line-height: 1.6; max-width: 70ch; }

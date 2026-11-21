@@ -315,7 +315,7 @@
     $("ecran-exercice").hidden = true;
     $("ecran-revision").hidden = false;
     montrerCarte();
-    $("ecran-revision").scrollIntoView({ behavior: "smooth", block: "start" });
+    $("ecran-revision").scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
   }
   function montrerCarte() {
     const d = pile[0], revient = ratees.includes(d);
@@ -361,7 +361,7 @@
     const actions = $("def-fin-actions");
     actions.innerHTML = "";
     liste.forEach(([texte, classe, action]) => { const b = document.createElement("button"); b.type = "button"; b.className = "bouton " + classe; b.textContent = texte; b.onclick = action; actions.appendChild(b); });
-    $("ecran-fin").scrollIntoView({ behavior: "smooth", block: "start" });
+    $("ecran-fin").scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
   }
   function terminer() {
     oublierSeance(toutes[0].epreuve);      // tour fini : plus rien à reprendre
@@ -409,7 +409,7 @@
     $("ecran-revision").hidden = true;
     $("ecran-exercice").hidden = false;
     montrerQuestion();
-    $("ecran-exercice").scrollIntoView({ behavior: "smooth", block: "start" });
+    $("ecran-exercice").scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
   }
   function montrerQuestion() {
     const d = exo.questions[exo.rang];

@@ -11,12 +11,14 @@
 <link rel="preload" href="polices/bodoni-moda.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="polices/atkinson-hyperlegible-next.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="manifest" href="manifest.webmanifest">
+<!-- Pages du menu chargées d'avance quand le doigt ou la souris s'en approche (Chrome, Edge ; les autres l'ignorent). Seulement le HTML : aucun script n'y tourne, rien n'est compté. -->
+<script type="speculationrules">{"prefetch": [{"where": {"and": [{"href_matches": "/*"}, {"selector_matches": "nav a, .pied-liens a[href$='.html']"}]}, "eagerness": "moderate"}]}</script>
 <link rel="apple-touch-icon" href="img/icone-apple-180.png">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Opticonversion">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
-<link rel="stylesheet" href="style.css?v=1e45fcd2">
+<link rel="stylesheet" href="style.css?v=1fae4c16">
 </head>
 <body data-rafraichir="oui">
 <header class="entete">
@@ -142,6 +144,17 @@
         <button class="bouton secondaire" id="bouton-deconnexion">Se déconnecter</button>
         <button class="bouton danger" id="bouton-supprimer">Supprimer mon compte</button>
       </div>
+      <dialog id="fenetre-supprimer" class="fenetre-situation fenetre-confirmer" aria-labelledby="fenetre-supprimer-titre" closedby="any">
+        <form method="dialog">
+          <h2 id="fenetre-supprimer-titre">Supprimer ton compte ?</h2>
+          <p>Ton compte et ta progression en ligne seront supprimés. C'est définitif.</p>
+          <label class="case-confirmer"><input type="checkbox" id="supprimer-navigateur"> Effacer aussi la progression gardée dans ce navigateur</label>
+          <div class="actions-compte">
+            <button class="bouton secondaire" value="garder" autofocus>Garder mon compte</button>
+            <button class="bouton danger" value="supprimer">Supprimer mon compte</button>
+          </div>
+        </form>
+      </dialog>
       <form id="reauth" class="form-compte" hidden>
         <label for="champ-mdp-confirmer">Pour supprimer ton compte, confirme ton mot de passe</label>
         <input id="champ-mdp-confirmer" type="password" autocomplete="current-password" required>
@@ -304,7 +317,7 @@
 <script src="vivant.js?v=ec7cf52b" defer></script>
 <script src="appli.js?v=0724163c" defer></script>
 <script src="lettre.js?v=92532f67" defer></script>
-<script type="module" src="compte.js?v=c75295cc"></script>
+<script type="module" src="compte.js?v=f81bb76e"></script>
 <!-- Mesure d'audience anonyme, sans cookies (GoatCounter) -->
 <script data-goatcounter="https://opticonversion.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </body>

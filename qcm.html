@@ -11,12 +11,14 @@
 <link rel="preload" href="polices/bodoni-moda.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="polices/atkinson-hyperlegible-next.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="manifest" href="manifest.webmanifest">
+<!-- Pages du menu chargées d'avance quand le doigt ou la souris s'en approche (Chrome, Edge ; les autres l'ignorent). Seulement le HTML : aucun script n'y tourne, rien n'est compté. -->
+<script type="speculationrules">{"prefetch": [{"where": {"and": [{"href_matches": "/*"}, {"selector_matches": "nav a, .pied-liens a[href$='.html']"}]}, "eagerness": "moderate"}]}</script>
 <link rel="apple-touch-icon" href="img/icone-apple-180.png">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Opticonversion">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
-<link rel="stylesheet" href="style.css?v=1e45fcd2">
+<link rel="stylesheet" href="style.css?v=1fae4c16">
 </head>
 <body>
 <header class="entete">
@@ -1529,6 +1531,14 @@
     const d = document.createElement("dialog");
     d.className = "fenetre-situation";
     d.setAttribute("aria-label", "Situation du cas");
+    // Se ferme aussi d'un toucher à côté de la fenêtre (closedby) ; Safari ne le connaît pas : on vérifie la position du doigt
+    d.setAttribute("closedby", "any");
+    if (!("closedBy" in HTMLDialogElement.prototype)) {
+      const dehors = e => { const r = d.getBoundingClientRect(); return e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom; };
+      let appuiDehors = false;
+      d.addEventListener("pointerdown", e => { appuiDehors = dehors(e); });
+      d.addEventListener("pointerup", e => { if (appuiDehors && dehors(e)) d.close(); });
+    }
     const titre = document.createElement("h2");
     titre.textContent = cas.titre;
     d.appendChild(titre);
@@ -2595,7 +2605,7 @@
 <script src="vivant.js?v=ec7cf52b" defer></script>
 <script src="appli.js?v=0724163c" defer></script>
 <script src="sons.js?v=355500ef" defer></script>
-<script type="module" src="compte.js?v=c75295cc"></script>
+<script type="module" src="compte.js?v=f81bb76e"></script>
 <!-- Mesure d'audience anonyme, sans cookies (GoatCounter) -->
 <script data-goatcounter="https://opticonversion.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </body>
