@@ -2211,3 +2211,271 @@ QUESTIONS.push(
     indice: "La cliente remplace des lunettes qu'elle a déjà."
   }
 );
+
+QUESTIONS.push(
+  {
+    id: "U3-281", difficulte: "facile", epreuve: "U3", theme: "Prix et marges", session: "complément",
+    type: "calcul",
+    question: "Une monture est achetée 60 € HT. L'opticien applique un coefficient de 2,5 sur le prix d'achat HT pour obtenir le prix de vente HT, puis ajoute la TVA à 20 %. Calcule le prix de vente TTC.",
+    reponse: { valeur: 180, unite: "€", decimales: 0, tolerance: 0.5, signe: false },
+    erreurs: [
+      { valeur: 150, type: "ht-ttc", message: "150 € est le prix de vente HT. Il reste à ajouter la TVA de 20 % pour obtenir le prix TTC que paie le client." }
+    ],
+    explication: "Prix de vente HT = 60 × 2,5 = 150 €. Prix de vente TTC = 150 × 1,20 = 180 €.",
+    indice: "Applique d'abord le coefficient, puis la TVA."
+  },
+  {
+    id: "U3-282", difficulte: "moyen", epreuve: "U3", theme: "Prix et marges", session: "complément",
+    type: "calcul",
+    question: "Une monture est vendue 300 € TTC (TVA 20 %) et achetée 100 € HT. Calcule le coefficient multiplicateur appliqué au prix d'achat HT pour obtenir le prix de vente TTC.",
+    reponse: { valeur: 3, unite: "", decimales: 1, tolerance: 0.05, signe: false },
+    erreurs: [
+      { valeur: 2.5, type: "ht-ttc", message: "Tu as divisé le prix de vente HT (250 €) par l'achat. Ici le coefficient demandé part du prix de vente TTC : 300 ÷ 100." }
+    ],
+    explication: "Coefficient = prix de vente TTC ÷ prix d'achat HT = [[300|100]] = 3. Sur le prix de vente HT, le coefficient serait [[250|100]] = 2,5.",
+    indice: "Divise le prix payé par le client par le prix d'achat HT."
+  },
+  {
+    id: "U3-283", difficulte: "moyen", epreuve: "U3", theme: "Prix et marges", session: "complément",
+    type: "calcul",
+    question: "Un verre est acheté 120 € HT et vendu 200 € HT. Calcule le taux de marge, en pourcentage du prix d'achat HT (une décimale).",
+    reponse: { valeur: 66.7, unite: "%", decimales: 1, tolerance: 0.05, signe: false },
+    erreurs: [
+      { valeur: 40, type: "marque-marge", message: "40 % est le taux de marque (marge ÷ prix de vente). Le taux de marge se calcule sur le prix d'achat." }
+    ],
+    explication: "Marge = 200 − 120 = 80 €. Taux de marge = [[80|120]] = 66,7 %. (Le taux de marque vaut [[80|200]] = 40 %.)",
+    indice: "Le taux de marge compare la marge au prix d'achat."
+  },
+  {
+    id: "U3-284", difficulte: "difficile", epreuve: "U3", theme: "Prix et marges", session: "complément",
+    type: "calcul",
+    question: "Un opticien veut un taux de marque de 40 % sur une monture achetée 90 € HT. Calcule le prix de vente HT.",
+    reponse: { valeur: 150, unite: "€", decimales: 0, tolerance: 0.5, signe: false },
+    erreurs: [
+      { valeur: 126, type: "marque-marge", message: "Tu as ajouté 40 % au prix d'achat : c'est un taux de marge. Un taux de marque de 40 % se calcule sur le prix de vente." }
+    ],
+    explication: "Prix d'achat = prix de vente × (1 − taux de marque). Donc prix de vente HT = [[90|0,60]] = 150 €. Contrôle : marge = 60 €, soit 40 % de 150 €.",
+    indice: "Le prix d'achat représente 60 % du prix de vente."
+  },
+  {
+    id: "U3-285", difficulte: "moyen", epreuve: "U3", theme: "Prix et marges", session: "complément",
+    question: "Parmi le taux de marge et le taux de marque, lequel ne peut jamais dépasser 100 % ?",
+    choix: ["Le taux de marge", "Le taux de marque", "Aucun des deux", "Les deux peuvent le dépasser"],
+    bonne: 1,
+    explication: "Le taux de marque se calcule sur le prix de vente, et la marge est toujours plus petite que le prix de vente : il reste sous 100 %. Le taux de marge se calcule sur le prix d'achat et peut dépasser 100 % (par exemple 150 % si on vend 2,5 fois le prix d'achat).",
+    indice: "Compare le dénominateur de chaque taux à la marge."
+  },
+  {
+    id: "U3-286", difficulte: "moyen", epreuve: "U3", theme: "Prix et marges", session: "complément",
+    question: "Un opticien veut vendre une monture à un prix inférieur à son prix d'achat HT pour attirer des clients, hors période de soldes. Que dit la loi ?",
+    choix: ["C'est libre, chacun fixe ses prix", "La revente à perte est en principe interdite", "C'est permis si le prix reste au-dessus de la moitié du prix d'achat", "C'est permis avec une autorisation de la mairie"],
+    bonne: 1,
+    explication: "La revente à perte, c'est-à-dire sous le prix d'achat effectif, est interdite en principe. Il existe des exceptions, notamment les soldes, les produits démodés ou la fin de saison.",
+    indice: "Le droit protège la concurrence contre les prix cassés."
+  },
+  {
+    id: "U3-287", difficulte: "facile", epreuve: "U3", theme: "Prix et marges", session: "complément",
+    question: "Quelle est la durée légale des soldes d'hiver et d'été ?",
+    choix: ["2 semaines", "4 semaines", "6 semaines", "2 mois"],
+    bonne: 1,
+    explication: "Les soldes durent 4 semaines, deux fois par an (hiver et été). Les dates sont fixées au niveau national. Pendant cette période, le commerçant peut vendre à perte les produits qu'il a en stock depuis au moins un mois.",
+    indice: "Un mois environ, pas deux."
+  },
+  {
+    id: "U3-288", difficulte: "moyen", epreuve: "U3", theme: "Seuil de rentabilité", session: "complément",
+    type: "calcul",
+    question: "Un magasin réalise 350 000 € de chiffre d'affaires HT avec 245 000 € de charges variables et 84 000 € de charges fixes. Calcule son seuil de rentabilité.",
+    reponse: { valeur: 280000, unite: "€", decimales: 0, tolerance: 1, signe: false },
+    erreurs: [
+      { valeur: 120000, type: "notion", message: "Tu as divisé les charges fixes par le taux de charges variables (70 %). Il faut diviser par le taux de marge sur coût variable (30 %)." },
+      { valeur: 84000, type: "notion", message: "84 000 € sont les charges fixes. Le seuil est le chiffre d'affaires qui couvre ces charges : divise-les par le taux de marge sur coût variable." }
+    ],
+    explication: "Marge sur coût variable = 350 000 − 245 000 = 105 000 €, soit 30 % du CA. Seuil de rentabilité = [[84 000|0,30]] = 280 000 €.",
+    indice: "Calcule d'abord le taux de marge sur coût variable."
+  },
+  {
+    id: "U3-289", difficulte: "moyen", epreuve: "U3", theme: "Seuil de rentabilité", session: "complément",
+    type: "calcul",
+    question: "Le chiffre d'affaires annuel d'un magasin est de 400 000 € et son seuil de rentabilité de 300 000 €. En combien de mois atteint-il son seuil, en supposant des ventes régulières ?",
+    reponse: { valeur: 9, unite: "mois", decimales: 0, tolerance: 0.1, signe: false },
+    erreurs: [
+      { valeur: 16, type: "notion", message: "Tu as inversé le rapport (400 000 ÷ 300 000). Le point mort compare le seuil au chiffre d'affaires, pas l'inverse." },
+      { valeur: 0.75, type: "notion", message: "0,75 est le rapport seuil ÷ CA, pas une durée. Multiplie-le par 12 pour obtenir des mois." }
+    ],
+    explication: "Point mort = [[300 000|400 000]] × 12 = 0,75 × 12 = 9 mois, soit fin septembre.",
+    indice: "Quelle fraction de l'année faut-il pour atteindre le seuil ?"
+  },
+  {
+    id: "U3-290", difficulte: "moyen", epreuve: "U3", theme: "Seuil de rentabilité", session: "complément",
+    type: "calcul",
+    question: "Un magasin a un chiffre d'affaires de 500 000 € et un seuil de rentabilité de 400 000 €. Calcule sa marge de sécurité en pourcentage du chiffre d'affaires.",
+    reponse: { valeur: 20, unite: "%", decimales: 0, tolerance: 0.5, signe: false },
+    erreurs: [
+      { valeur: 25, type: "notion", message: "Tu as divisé la marge de sécurité par le seuil. Le pourcentage se calcule sur le chiffre d'affaires." },
+      { valeur: 100000, type: "notion", message: "100 000 € est la marge de sécurité en euros. La question demande un pourcentage du chiffre d'affaires." }
+    ],
+    explication: "Marge de sécurité = 500 000 − 400 000 = 100 000 €. En pourcentage : [[100 000|500 000]] = 20 % du CA.",
+    indice: "Commence par l'écart entre le CA et le seuil, en euros."
+  },
+  {
+    id: "U3-291", difficulte: "difficile", epreuve: "U3", theme: "Seuil de rentabilité", session: "complément",
+    type: "calcul",
+    question: "Un magasin a un chiffre d'affaires de 300 000 €, un taux de marge sur coût variable de 40 % et 96 000 € de charges fixes. Calcule son résultat.",
+    reponse: { valeur: 24000, unite: "€", decimales: 0, tolerance: 1, signe: true },
+    erreurs: [
+      { valeur: 120000, type: "notion", message: "120 000 € est la marge sur coût variable. Il faut en retirer les charges fixes pour obtenir le résultat." },
+      { valeur: 204000, type: "notion", message: "Tu as retiré les charges fixes du chiffre d'affaires. Le résultat part de la marge sur coût variable, pas du chiffre d'affaires." }
+    ],
+    explication: "Marge sur coût variable = 300 000 × 0,40 = 120 000 €. Résultat = 120 000 − 96 000 = 24 000 €.",
+    indice: "Résultat = marge sur coût variable moins charges fixes."
+  },
+  {
+    id: "U3-292", difficulte: "facile", epreuve: "U3", theme: "Seuil de rentabilité", session: "complément",
+    question: "Parmi ces charges d'un magasin d'optique, laquelle est une charge FIXE ?",
+    choix: ["L'achat des verres vendus", "Les commissions versées sur les ventes", "Le loyer du local", "L'emballage des lunettes vendues"],
+    bonne: 2,
+    explication: "Une charge fixe ne dépend pas du niveau d'activité : le loyer est le même que le magasin vende peu ou beaucoup. L'achat des verres, les commissions et les emballages augmentent avec les ventes : ce sont des charges variables.",
+    indice: "Une charge fixe se paie même si le magasin ne vend rien."
+  },
+  {
+    id: "U3-293", difficulte: "moyen", epreuve: "U3", theme: "Seuil de rentabilité", session: "complément",
+    question: "Que fait augmenter le taux de marge sur coût variable (par exemple en négociant de meilleurs prix d'achat) sur le seuil de rentabilité ?",
+    choix: ["Il le fait monter", "Il le fait baisser", "Il ne change rien", "Il supprime les charges fixes"],
+    bonne: 1,
+    explication: "Seuil = charges fixes ÷ taux de marge sur coût variable. Si le taux augmente et que les charges fixes ne changent pas, le seuil diminue : le magasin devient rentable plus vite.",
+    indice: "Le taux est au dénominateur de la formule du seuil."
+  },
+  {
+    id: "U3-294", difficulte: "facile", epreuve: "U3", theme: "Investissement et financement", session: "complément",
+    type: "calcul",
+    question: "Un équipement est acheté 18 000 € HT (21 600 € TTC) et amorti en linéaire sur 5 ans. Calcule l'annuité d'amortissement.",
+    reponse: { valeur: 3600, unite: "€", decimales: 0, tolerance: 1, signe: false },
+    erreurs: [
+      { valeur: 4320, type: "ht-ttc", message: "Tu as utilisé le prix TTC. Une entreprise récupère la TVA : l'équipement s'amortit sur sa valeur hors taxes." }
+    ],
+    explication: "Annuité d'amortissement linéaire = [[18 000|5]] = 3 600 € par an, calculée sur la valeur hors taxes.",
+    indice: "Divise la valeur d'origine HT par la durée d'utilisation."
+  },
+  {
+    id: "U3-295", difficulte: "facile", epreuve: "U3", theme: "Investissement et financement", session: "complément",
+    type: "calcul",
+    question: "Un matériel est amorti en linéaire sur 8 ans. Quel est son taux d'amortissement annuel ?",
+    reponse: { valeur: 12.5, unite: "%", decimales: 1, tolerance: 0.05, signe: false },
+    erreurs: [
+      { valeur: 8, type: "notion", message: "8 est la durée en années. Le taux est la part de la valeur amortie chaque année : 1 ÷ 8." }
+    ],
+    explication: "Taux d'amortissement linéaire = [[1|8]] = 0,125, soit 12,5 % par an.",
+    indice: "Chaque année, on amortit une fraction égale de la valeur."
+  },
+  {
+    id: "U3-296", difficulte: "moyen", epreuve: "U3", theme: "Investissement et financement", session: "complément",
+    type: "calcul",
+    question: "Un matériel acheté 24 000 € HT est amorti en linéaire sur 6 ans. Calcule sa valeur nette comptable après 4 ans.",
+    reponse: { valeur: 8000, unite: "€", decimales: 0, tolerance: 1, signe: false },
+    erreurs: [
+      { valeur: 16000, type: "notion", message: "16 000 € est le total des amortissements déjà pratiqués. La valeur nette comptable est ce qu'il reste : valeur d'origine moins amortissements." },
+      { valeur: 20000, type: "notion", message: "Tu n'as retiré qu'une annuité. Après 4 ans, il faut retirer 4 annuités." }
+    ],
+    explication: "Annuité = 24 000 ÷ 6 = 4 000 €. Amortissements cumulés après 4 ans = 4 × 4 000 = 16 000 €. Valeur nette comptable = 24 000 − 16 000 = 8 000 €.",
+    indice: "Calcule l'annuité, multiplie par 4, puis soustrais."
+  },
+  {
+    id: "U3-297", difficulte: "facile", epreuve: "U3", theme: "Investissement et financement", session: "complément",
+    type: "calcul",
+    question: "Un magasin emprunte 50 000 € à 4 % par an, remboursables en une seule fois à la fin. Calcule le montant des intérêts payés chaque année.",
+    reponse: { valeur: 2000, unite: "€", decimales: 0, tolerance: 1, signe: false },
+    erreurs: [
+      { valeur: 52000, type: "notion", message: "52 000 € est le capital plus une année d'intérêts. La question demande seulement les intérêts d'une année." }
+    ],
+    explication: "Intérêts annuels = 50 000 × 4 % = 2 000 €. Le capital de 50 000 € est remboursé à la fin.",
+    indice: "Applique le taux au capital emprunté."
+  },
+  {
+    id: "U3-298", difficulte: "moyen", epreuve: "U3", theme: "Investissement et financement", session: "complément",
+    question: "Quelle est la relation entre la trésorerie nette, le fonds de roulement net global (FRNG) et le besoin en fonds de roulement (BFR) ?",
+    choix: ["Trésorerie nette = FRNG + BFR", "Trésorerie nette = FRNG − BFR", "Trésorerie nette = BFR − FRNG", "Trésorerie nette = FRNG × BFR"],
+    bonne: 1,
+    erreurs: {
+      2: { type: "signe", message: "Tu as inversé les deux termes : un FRNG supérieur au BFR donne une trésorerie positive, donc c'est FRNG moins BFR." }
+    },
+    explication: "Trésorerie nette = FRNG − BFR. Si le fonds de roulement dépasse le besoin de financement du cycle d'exploitation, le magasin dispose de trésorerie. Sinon il est à découvert.",
+    indice: "Le fonds de roulement finance le besoin en fonds de roulement."
+  },
+  {
+    id: "U3-299", difficulte: "moyen", epreuve: "U3", theme: "Investissement et financement", session: "complément",
+    type: "calcul",
+    question: "Un magasin a 40 000 € de stock, 25 000 € de créances clients et 35 000 € de dettes fournisseurs. Calcule son besoin en fonds de roulement.",
+    reponse: { valeur: 30000, unite: "€", decimales: 0, tolerance: 1, signe: true },
+    erreurs: [
+      { valeur: 65000, type: "notion", message: "Tu n'as pas retiré les dettes fournisseurs. Elles financent une partie du cycle : on les soustrait." },
+      { valeur: 100000, type: "notion", message: "Tu as additionné les trois montants. Les dettes fournisseurs se soustraient." }
+    ],
+    explication: "BFR = stock + créances clients − dettes fournisseurs = 40 000 + 25 000 − 35 000 = 30 000 €.",
+    indice: "Ce que le magasin doit financer moins ce que ses fournisseurs lui avancent."
+  },
+  {
+    id: "U3-300", difficulte: "moyen", epreuve: "U3", theme: "Investissement et financement", session: "complément",
+    type: "calcul",
+    question: "Un magasin a un fonds de roulement net global de 45 000 € et un besoin en fonds de roulement de 30 000 €. Calcule sa trésorerie nette.",
+    reponse: { valeur: 15000, unite: "€", decimales: 0, tolerance: 1, signe: true },
+    erreurs: [
+      { valeur: -15000, type: "signe", message: "Tu as inversé la soustraction. Trésorerie nette = FRNG − BFR : ici le FRNG est le plus grand." },
+      { valeur: 75000, type: "notion", message: "Tu as additionné le FRNG et le BFR. La trésorerie nette est la différence entre les deux." }
+    ],
+    explication: "Trésorerie nette = FRNG − BFR = 45 000 − 30 000 = 15 000 €. Elle est positive : le magasin n'a pas besoin de découvert.",
+    indice: "Soustrais le besoin du fonds de roulement."
+  },
+  {
+    id: "U3-301", difficulte: "facile", epreuve: "U3", theme: "Analyse financière", session: "complément",
+    type: "calcul",
+    question: "Un magasin réalise un chiffre d'affaires de 300 000 € HT et un résultat net de 24 000 €. Calcule son taux de rentabilité commerciale (résultat ÷ chiffre d'affaires).",
+    reponse: { valeur: 8, unite: "%", decimales: 0, tolerance: 0.5, signe: false },
+    erreurs: [
+      { valeur: 12.5, type: "notion", message: "Tu as divisé le chiffre d'affaires par le résultat. Le résultat est au numérateur." }
+    ],
+    explication: "Rentabilité commerciale = [[24 000|300 000]] = 8 %. Sur 100 € de ventes HT, le magasin garde 8 € de résultat.",
+    indice: "Quelle part de chaque euro vendu reste en résultat ?"
+  },
+  {
+    id: "U3-302", difficulte: "difficile", epreuve: "U3", theme: "Analyse financière", session: "complément",
+    type: "calcul",
+    question: "Un magasin a vendu pour 400 000 € HT de marchandises. Il a acheté 220 000 € de marchandises dans l'année. Son stock est passé de 30 000 € à 40 000 €. Calcule sa marge commerciale.",
+    reponse: { valeur: 190000, unite: "€", decimales: 0, tolerance: 1, signe: false },
+    erreurs: [
+      { valeur: 180000, type: "notion", message: "Tu as oublié la variation de stock. Le coût d'achat des marchandises vendues se corrige de la variation de stock : un stock qui monte diminue ce coût." },
+      { valeur: 210000, type: "notion", message: "210 000 € est le coût d'achat des marchandises vendues. La marge commerciale se calcule en retirant ce coût des ventes." }
+    ],
+    explication: "Coût d'achat des marchandises vendues = achats + stock initial − stock final = 220 000 + 30 000 − 40 000 = 210 000 €. Marge commerciale = 400 000 − 210 000 = 190 000 €.",
+    indice: "Seules les marchandises vendues comptent : corrige les achats du stock."
+  },
+  {
+    id: "U3-303", difficulte: "moyen", epreuve: "U3", theme: "Analyse financière", session: "complément",
+    type: "calcul",
+    question: "Un magasin a un résultat net de 24 000 € et 18 000 € de dotations aux amortissements. Calcule sa capacité d'autofinancement (CAF), en ajoutant les dotations au résultat.",
+    reponse: { valeur: 42000, unite: "€", decimales: 0, tolerance: 1, signe: false },
+    erreurs: [
+      { valeur: 6000, type: "notion", message: "Tu as retiré les dotations. Ce sont des charges non décaissées : on les ajoute au résultat pour obtenir l'argent réellement dégagé." }
+    ],
+    explication: "CAF = résultat net + dotations aux amortissements = 24 000 + 18 000 = 42 000 €. Les dotations sont une charge qui ne sort pas de la caisse.",
+    indice: "Une dotation est une charge qui ne coûte pas d'argent sur le moment."
+  },
+  {
+    id: "U3-304", difficulte: "moyen", epreuve: "U3", theme: "Analyse financière", session: "complément",
+    type: "calcul",
+    question: "Un magasin a 80 000 € de dettes financières et 100 000 € de capitaux propres. Calcule son ratio d'endettement (dettes financières ÷ capitaux propres), en pourcentage.",
+    reponse: { valeur: 80, unite: "%", decimales: 0, tolerance: 0.5, signe: false },
+    erreurs: [
+      { valeur: 125, type: "notion", message: "Tu as divisé les capitaux propres par les dettes. Les dettes financières sont au numérateur." }
+    ],
+    explication: "Ratio d'endettement = [[80 000|100 000]] = 80 %. Plus il est élevé, plus le magasin dépend de ses emprunts.",
+    indice: "Compare ce que le magasin doit à ce que lui ont apporté ses propriétaires."
+  },
+  {
+    id: "U3-305", difficulte: "facile", epreuve: "U3", theme: "Analyse financière", session: "complément",
+    question: "Dans le bilan d'un magasin, où figurent les capitaux propres ?",
+    choix: ["À l'actif", "Au passif", "Dans le compte de résultat, côté charges", "Dans le compte de résultat, côté produits"],
+    bonne: 1,
+    explication: "Le passif du bilan regroupe les ressources du magasin : capitaux propres et dettes. L'actif regroupe ce que le magasin possède et ce qu'on lui doit : immobilisations, stocks, créances, trésorerie.",
+    indice: "Le passif dit d'où vient l'argent."
+  }
+);

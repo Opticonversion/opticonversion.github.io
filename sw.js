@@ -13,7 +13,7 @@
 // =====================================================================
 
 // <versionner> (partie écrite par versionner.py, ne pas modifier à la main)
-const VERSION = "e5b9d5b2ad";
+const VERSION = "3f473294a5";
 const FICHIERS = [
   "appli.js?v=0724163c",
   "atelier-calculatrice.js?v=6e07c21a",
@@ -266,9 +266,9 @@ const FICHIERS = [
   "qcm.html",
   "questions-U3.js?v=bb8b9248",
   "questions-U41.js?v=eb3779fb",
-  "questions-U42.js?v=3239dbfe",
-  "questions-U43.js?v=31d6b011",
-  "questions-U5.js?v=0041f408",
+  "questions-U42.js?v=9a7c5067",
+  "questions-U43.js?v=05ba6b8d",
+  "questions-U5.js?v=3c1e9d01",
   "rythme.js?v=8bba5e53",
   "sons.js?v=355500ef",
   "sons/faux.mp3",
