@@ -13,7 +13,7 @@
 // =====================================================================
 
 // <versionner> (partie écrite par versionner.py, ne pas modifier à la main)
-const VERSION = "9767dad052";
+const VERSION = "0c5f4c001a";
 const FICHIERS = [
   "appli.js?v=0724163c",
   "atelier-calculatrice.js?v=6e07c21a",
@@ -35,7 +35,7 @@ const FICHIERS = [
   "definitions.js?v=eb1e9b79",
   "entrainement-U3.js?v=5783bb52",
   "entrainement-U41.js?v=f3af2472",
-  "entrainement-U42.js?v=0310e3b2",
+  "entrainement-U42.js?v=b592846f",
   "entrainement-U43.js?v=201e28d1",
   "entrainement-U5.js?v=f1c1f10d",
   "epreuves.js?v=cc645427",
@@ -264,9 +264,9 @@ const FICHIERS = [
   "polices/bodoni-moda-italique.woff2",
   "polices/bodoni-moda.woff2",
   "qcm.html",
-  "questions-U3.js?v=246848d8",
+  "questions-U3.js?v=54de3ab1",
   "questions-U41.js?v=c5cd8533",
-  "questions-U42.js?v=110fcc22",
+  "questions-U42.js?v=bef9c0b0",
   "questions-U43.js?v=fe77cb97",
   "questions-U5.js?v=c804da39",
   "rythme.js?v=8bba5e53",
@@ -280,7 +280,7 @@ const FICHIERS = [
   "sons/juste.mp3",
   "specificites-U3.js?v=3245f237",
   "specificites-U41.js?v=3d591e09",
-  "specificites-U42.js?v=c76c29e7",
+  "specificites-U42.js?v=67573174",
   "specificites-U43.js?v=523c07db",
   "specificites-U5.js?v=43533990",
   "style.css?v=7d2c08a3",

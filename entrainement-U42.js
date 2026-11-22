@@ -203,6 +203,9 @@ QUESTIONS.push(
     type: "calcul",
     question: "Un bijoutier utilise une loupe de puissance P = 20 δ. La limite de résolution angulaire de son œil est 3 × 10⁻⁴ rad. Quel est le plus petit détail qu'il distingue sur l'objet, en µm ?",
     reponse: { valeur: 15, unite: "µm", decimales: 0, signe: false },
+    erreurs: [
+      { valeur: 1.5e-05, type: "unite", message: "Tu as laissé le résultat en mètres : 1,5 × 10⁻⁵ m = 15 µm. Convertis en micromètres (× 10⁶)." }
+    ],
     explication: "P = [[α'|y]], donc y = [[α'|P]]\nLe plus petit détail vu est celui dont l'image est vue sous la limite de résolution de l'œil : α' = ε = 3 × 10⁻⁴ rad.\ny = [[3 × 10⁻⁴|20]] = 1,5 × 10⁻⁵ m = 15 µm",
     indice: "La puissance relie l'angle de l'image à la taille de l'objet : P = [[α'|y]]. Convertis ensuite le résultat de mètres en micromètres."
   },
@@ -262,7 +265,8 @@ QUESTIONS.push(
     question: "Lentille mince divergente de f' = −50 mm. Un faisceau convergent la traverse et viendrait former l'image de l'objet 25 mm après la lentille (objet virtuel, OA = +25 mm). Calcule OA', avec son signe.",
     reponse: { valeur: 50, unite: "mm", decimales: 0, signe: true },
     erreurs: [
-      { valeur: -16.7, type: "signe", message: "Un objet virtuel est après la lentille : OA = +25 mm, pas −25 mm." }
+      { valeur: -16.7, type: "signe", message: "Un objet virtuel est après la lentille : OA = +25 mm, pas −25 mm." },
+      { valeur: 0.05, type: "unite", message: "Tu as laissé OA' en mètres : 0,05 m = 50 mm. Convertis en millimètres (× 1 000)." }
     ],
     explication: "Descartes : [[1|OA']] = [[1|f']] + [[1|OA]]\n[[1|OA']] = −[[1|50]] + [[1|25]] = −[[1|50]] + [[2|50]] = +[[1|50]]\nDonc OA' = +50 mm. Une lentille divergente peut donner une image réelle si l'objet est virtuel et plus proche que son foyer (25 mm < 50 mm).",
     indice: "Objet virtuel : OA = +25 mm. Garde le signe négatif de f' pour une divergente."
@@ -299,6 +303,9 @@ QUESTIONS.push(
     type: "calcul",
     question: "On taille une face sphérique convexe (tournée vers la lumière) entre l'air et un verre d'indice 1,5. Pour que ce dioptre ait une vergence de +12,5 δ, quel rayon de courbure faut-il ?",
     reponse: { valeur: 40, unite: "mm", decimales: 0, signe: false },
+    erreurs: [
+      { valeur: 0.04, type: "unite", message: "Tu as laissé R en mètres : 0,04 m = 40 mm. Convertis en millimètres (× 1 000)." }
+    ],
     explication: "V = [[n' − n|R]], donc R = [[n' − n|V]]\nR = [[1,5 − 1|12,5]] = 0,04 m = 40 mm\nPiège : donner la réponse en mètres (0,04) sans convertir.",
     indice: "V = [[n' − n|R]] avec R en mètres. Isole R, puis convertis en millimètres."
   },
@@ -316,7 +323,8 @@ QUESTIONS.push(
     question: "Un objectif de f' = +30 mm doit donner d'un objet réel une image réelle 5 fois plus grande et renversée (γ = −5). À quelle distance de la lentille faut-il placer l'objet ? Donne OA, avec son signe.",
     reponse: { valeur: -36, unite: "mm", decimales: 0, signe: true },
     erreurs: [
-      { valeur: 36, type: "signe", message: "L'objet est réel, avant la lentille : OA est négatif." }
+      { valeur: 36, type: "signe", message: "L'objet est réel, avant la lentille : OA est négatif." },
+      { valeur: -0.036, type: "unite", message: "Tu as laissé OA en mètres : −0,036 m = −36 mm. Convertis en millimètres (× 1 000)." }
     ],
     explication: "γ = [[OA'|OA]] = −5, donc OA' = −5 × OA\nDescartes : [[1|OA']] − [[1|OA]] = [[1|f']]\n−[[1|5 OA]] − [[1|OA]] = [[1|30]]\n−[[6|5 OA]] = [[1|30]]\nDonc OA = −[[6 × 30|5]] = −36 mm\nContrôle : OA' = +180 mm, et [[1|180]] + [[1|36]] = [[1|30]]. L'objet est juste au-delà du foyer objet (30 mm).",
     indice: "Remplace OA' par γ × OA dans la relation de Descartes, puis isole OA."
@@ -329,7 +337,8 @@ QUESTIONS.push(
     question: "Une loupe a une distance focale f' = 40 mm. Un observateur veut voir l'image virtuelle à 250 mm devant la loupe (OA' = −250 mm). À quelle distance de la loupe faut-il placer l'objet ? Donne OA, avec son signe, à 0,1 mm près.",
     reponse: { valeur: -34.5, unite: "mm", decimales: 1, signe: true },
     erreurs: [
-      { valeur: 34.5, type: "signe", message: "L'objet est avant la loupe : OA est négatif." }
+      { valeur: 34.5, type: "signe", message: "L'objet est avant la loupe : OA est négatif." },
+      { valeur: -0.0345, type: "unite", message: "Tu as laissé OA en mètres : −0,0345 m = −34,5 mm. Convertis en millimètres (× 1 000)." }
     ],
     explication: "OA' = −250 mm. Descartes : [[1|OA']] − [[1|OA]] = [[1|f']]\n[[1|OA]] = [[1|OA']] − [[1|f']] = −[[1|250]] − [[1|40]]\n[[1|OA]] = −[[4|1000]] − [[25|1000]] = −[[29|1000]]\nDonc OA = −[[1 000|29]] = −34,5 mm. L'objet est entre le foyer objet (40 mm) et la loupe : c'est ce qui donne une image virtuelle.",
     indice: "Isole 1/OA dans la relation de conjugaison avec OA' = −250 mm. Le signe moins sur OA' est important."
@@ -403,7 +412,8 @@ QUESTIONS.push(
     question: "Lunette de Kepler : f'ob = 200 mm, f'oc = 25 mm, réglée afocale. Un myope rapproche l'oculaire de l'objectif de 1 mm. Où se forme alors l'image donnée par l'oculaire ? Donne OA', avec son signe, depuis l'oculaire.",
     reponse: { valeur: -600, unite: "mm", decimales: 0, signe: true },
     erreurs: [
-      { valeur: 600, type: "signe", message: "L'image est virtuelle, avant l'oculaire : OA' est négatif." }
+      { valeur: 600, type: "signe", message: "L'image est virtuelle, avant l'oculaire : OA' est négatif." },
+      { valeur: -0.6, type: "unite", message: "Tu as laissé OA' en mètres : −0,6 m = −600 mm. Convertis en millimètres (× 1 000)." }
     ],
     explication: "L'image donnée par l'objectif reste au foyer image de l'objectif. Après déplacement, elle est à 25 − 1 = 24 mm avant l'oculaire : OA = −24 mm.\nDescartes : [[1|OA']] = [[1|f']] + [[1|OA]]\n[[1|OA']] = [[1|25]] − [[1|24]] = [[24|600]] − [[25|600]] = −[[1|600]]\nDonc OA' = −600 mm : image virtuelle, à 60 cm devant l'œil, de quoi corriger une myopie d'environ 1,7 δ.",
     indice: "L'objet de l'oculaire est maintenant à 24 mm de lui (avant). Applique Descartes à l'oculaire seul."
@@ -415,6 +425,9 @@ QUESTIONS.push(
     type: "calcul",
     question: "Deux lentilles minces accolées (distance nulle) ont pour vergences V₁ = +8 δ et V₂ = −3 δ. Calcule la distance focale image du doublet.",
     reponse: { valeur: 200, unite: "mm", decimales: 0, signe: true },
+    erreurs: [
+      { valeur: 0.2, type: "unite", message: "Tu as laissé f' en mètres : 0,2 m = 200 mm. Convertis en millimètres (× 1 000)." }
+    ],
     explication: "Lentilles accolées : les vergences s'ajoutent.\nV = V₁ + V₂ = 8 − 3 = +5 δ\nf' = [[1|V]] = [[1|5]] = 0,2 m = 200 mm\nLe doublet est convergent.",
     indice: "Lentilles accolées : les vergences s'additionnent avec leur signe. Convertis la focale en millimètres."
   },
@@ -513,6 +526,9 @@ QUESTIONS.push(
     type: "calcul",
     question: "Un microscope a un objectif d'ouverture numérique ON = 0,85. Pour λ = 510 nm, la plus petite distance séparable vaut d = 0,61 λ / ON. Calcule d.",
     reponse: { valeur: 366, unite: "nm", decimales: 0, signe: false },
+    erreurs: [
+      { valeur: 0.366, type: "unite", message: "Tu as donné des micromètres : 0,366 µm = 366 nm. Garde l'unité de λ, ici le nanomètre." }
+    ],
     explication: "d = [[0,61 × λ|ON]]\nd = [[0,61 × 510|0,85]] = [[311,1|0,85]] = 366 nm\nOn garde la même unité que λ : nanomètres, soit 0,37 µm.",
     indice: "Garde λ en nanomètres : le résultat sort dans la même unité."
   },
@@ -529,6 +545,9 @@ QUESTIONS.push(
     type: "calcul",
     question: "Un objectif de pupille D = 5 mm observe une scène à 25 m, en lumière de 500 nm. Quel est le plus petit écart séparable à cette distance, limité par la diffraction ? Donne la réponse à 0,01 mm près.",
     reponse: { valeur: 3.05, unite: "mm", decimales: 2, signe: false },
+    erreurs: [
+      { valeur: 0.00305, type: "unite", message: "Tu as laissé le résultat en mètres : 3,05 × 10⁻³ m = 3,05 mm. Convertis en millimètres (× 1 000)." }
+    ],
     explication: "α = [[1,22 × λ|D]] = [[1,22 × 500 × 10⁻⁹|5 × 10⁻³]] = 1,22 × 10⁻⁴ rad\nÀ 25 m : écart = α × L = 1,22 × 10⁻⁴ × 25 = 3,05 × 10⁻³ m = 3,05 mm.",
     indice: "Calcule d'abord l'angle limite, puis multiplie-le par la distance (petits angles)."
   },
@@ -576,6 +595,9 @@ QUESTIONS.push(
     type: "calcul",
     question: "Une couche antireflet d'indice 1,25 est optimisée pour λ = 600 nm. Épaisseur minimale : e = λ / (4n) = 120 nm. Quelle est l'épaisseur suivante (la deuxième plus petite) qui convient aussi ?",
     reponse: { valeur: 360, unite: "nm", decimales: 0, signe: false },
+    erreurs: [
+      { valeur: 0.36, type: "unite", message: "Tu as donné des micromètres : 0,36 µm = 360 nm. Garde l'unité de λ, ici le nanomètre." }
+    ],
     explication: "Condition : e = (2k + 1) × [[λ|4n]]\nk = 0 : e = [[600|4 × 1,25]] = 120 nm\nk = 1 : e = 3 × 120 = 360 nm\nCe n'est pas 240 nm ([[λ|2n]]) : cette épaisseur annule l'effet de la couche.",
     indice: "Les épaisseurs qui conviennent sont des multiples impairs de [[λ|4n]]."
   },
@@ -615,6 +637,9 @@ QUESTIONS.push(
     type: "calcul",
     question: "Fentes d'Young distantes de a = 0,4 mm, écran à D = 2 m, lumière de λ = 600 nm. Calcule l'interfrange i = λ D / a.",
     reponse: { valeur: 3, unite: "mm", decimales: 0, signe: false },
+    erreurs: [
+      { valeur: 0.003, type: "unite", message: "Tu as laissé le résultat en mètres : 3 × 10⁻³ m = 3 mm. Convertis en millimètres (× 1 000)." }
+    ],
     explication: "i = [[λ × D|a]]\ni = [[600 × 10⁻⁹ × 2|0,4 × 10⁻³]] = 3 × 10⁻³ m = 3 mm\nPiège : garder λ en nm et a en mm sans convertir donne 3 000 au lieu de 0,003 m, un résultat faux d'un facteur un million.",
     indice: "Convertis tout en mètres avant de calculer."
   },
@@ -811,6 +836,9 @@ QUESTIONS.push(
     type: "calcul",
     question: "Une loupe porte la mention « 4× » (grossissement commercial 4). Quelle est sa distance focale, à 0,1 mm près ?",
     reponse: { valeur: 62.5, unite: "mm", decimales: 1, signe: false },
+    erreurs: [
+      { valeur: 0.0625, type: "unite", message: "Tu as laissé f' en mètres : 0,0625 m = 62,5 mm. Convertis en millimètres (× 1 000)." }
+    ],
     explication: "Gc = [[250|f']] avec f' en mm, donc f' = [[250|Gc]] = [[250|4]] = 62,5 mm.",
     indice: "Le grossissement commercial d'une loupe est 250 divisé par f' en millimètres."
   },
@@ -843,6 +871,9 @@ QUESTIONS.push(
     type: "calcul",
     question: "À l'œil nu, à 25 cm, un opticien sépare des détails de 75 µm. Avec un microscope de grossissement commercial 250, quel est le plus petit détail séparé, en ne tenant compte que de l'acuité de l'œil ? Donne la réponse en micromètres, à 0,1 µm près.",
     reponse: { valeur: 0.3, unite: "µm", decimales: 1, signe: false },
+    erreurs: [
+      { valeur: 300, type: "unite", message: "Tu as donné des nanomètres : 300 nm = 0,3 µm. Convertis en micromètres (÷ 1 000)." }
+    ],
     explication: "Le microscope divise la taille du plus petit détail visible par son grossissement.\nd = [[75|250]] = 0,3 µm",
     indice: "Le grossissement divise la taille du plus petit détail séparé."
   }

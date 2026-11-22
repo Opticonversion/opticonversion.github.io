@@ -81,6 +81,21 @@
     <h2 id="titre-questions">Trois questions corrigées</h2>
     <p class="aide">Cherche d'abord ta réponse, puis ouvre la correction.</p>
     <article class="fiche-question">
+      <p class="fiche-info">Niveau facile</p>
+      <h3 class="fiche-enonce">Dans une expérience de fentes d'Young, on rapproche les deux fentes l'une de l'autre, sans rien changer d'autre. Que devient l'interfrange ?</h3>
+      <ol class="fiche-choix" type="A">
+        <li>Il augmente</li>
+        <li>Il diminue</li>
+        <li>Il reste le même</li>
+        <li>Il s'annule</li>
+      </ol>
+      <details class="fiche-reponse">
+        <summary>Voir la correction<span class="visuellement-cache"> de la question 1</span></summary>
+        <p><strong>Réponse A.</strong> Il augmente</p>
+        <p>L'interfrange vaut i <span class="frac-groupe">= <span class="frac" aria-hidden="true"><span class="frac-haut">λ × D</span><span class="frac-bas">a</span></span><span class="visuellement-cache">(λ × D) sur a</span></span> : il est inversement proportionnel à la distance a entre les fentes. Si a diminue, i augmente. Les franges s'écartent.</p>
+      </details>
+    </article>
+    <article class="fiche-question">
       <p class="fiche-info">Type BTS 2026 · Niveau moyen</p>
       <h3 class="fiche-enonce">Un réseau a 500 traits par mm. Éclairé en incidence normale, à quel angle voit-on la lumière de 600 nm dans l'ordre 1 ?</h3>
       <ol class="fiche-choix" type="A">
@@ -90,43 +105,23 @@
         <li>36,9°</li>
       </ol>
       <details class="fiche-reponse">
-        <summary>Voir la correction<span class="visuellement-cache"> de la question 1</span></summary>
+        <summary>Voir la correction<span class="visuellement-cache"> de la question 2</span></summary>
         <p><strong>Réponse C.</strong> 17,5°</p>
         <p>Pas a = 1/500 mm = 2 µm. Formule des réseaux : a × sin i' = k × λ → sin i' = 0,6 / 2 = 0,3 → i' ≈ 17,5°. (36,9° serait l'ordre 2.)</p>
         <figure class="schema"><img src="img/schemas/U42/reseau-500-traits-600nm.svg" alt="Le faisceau traverse le réseau : l'ordre 0 continue tout droit, les ordres ±1 partent à 17,5° de part et d'autre, les ordres ±2 à 36,9°." loading="lazy"></figure>
       </details>
     </article>
     <article class="fiche-question">
-      <p class="fiche-info">Type BTS 2025 · Niveau difficile</p>
-      <h3 class="fiche-enonce">Un film de savon d'indice 1,33 est éclairé en réflexion sous incidence nulle (δ = 2ne + λ/2). Épaisseur minimale pour renforcer au maximum λ = 532 nm ?</h3>
-      <ol class="fiche-choix" type="A">
-        <li>50 nm</li>
-        <li>100 nm</li>
-        <li>200 nm</li>
-        <li>400 nm</li>
-      </ol>
-      <details class="fiche-reponse">
-        <summary>Voir la correction<span class="visuellement-cache"> de la question 2</span></summary>
-        <p><strong>Réponse B.</strong> 100 nm</p>
-        <p>Maximum si δ = kλ : 2ne + λ/2 = λ (k = 1) → 2ne = λ/2 → e = λ / (4n) = 532 / 5,32 = 100 nm. C'est ce qui donne les couleurs irisées des bulles de savon ou des taches d'huile.</p>
-      </details>
-    </article>
-    <article class="fiche-question">
-      <p class="fiche-info">Type BTS 2026 · Niveau difficile</p>
-      <h3 class="fiche-enonce">Réseau de pas a = 2 µm, lumière blanche de 400 à 800 nm, incidence normale. Quel est l'ordre le plus élevé où le spectre est encore complet ?</h3>
-      <ol class="fiche-choix" type="A">
-        <li>4</li>
-        <li>5</li>
-        <li>1</li>
-        <li>2</li>
-      </ol>
+      <p class="fiche-info">Niveau moyen · Calcul</p>
+      <h3 class="fiche-enonce">Fentes d'Young distantes de a = 0,5 mm, écran à D = 1,5 m. On mesure un interfrange de 1,8 mm. Calcule la longueur d'onde de la lumière, en nanomètres.</h3>
+      <p class="aide">Réponse attendue en nm, arrondie à l'unité.</p>
       <details class="fiche-reponse">
         <summary>Voir la correction<span class="visuellement-cache"> de la question 3</span></summary>
-        <p><strong>Réponse D.</strong> 2</p>
-        <p>Il faut sin i' = kλ/a ≤ 1 pour TOUTES les couleurs, donc pour le rouge : k ≤ a / λ rouge = 2 / 0,8 = 2,5. L'ordre complet le plus élevé est k = 2.</p>
+        <p><strong>Réponse : 600 nm.</strong></p>
+        <p><span class="ligne-calcul avec-fraction">i <span class="frac-groupe">= <span class="frac" aria-hidden="true"><span class="frac-haut">λ × D</span><span class="frac-bas">a</span></span><span class="visuellement-cache">(λ × D) sur a</span></span>, donc λ <span class="frac-groupe">= <span class="frac" aria-hidden="true"><span class="frac-haut">i × a</span><span class="frac-bas">D</span></span><span class="visuellement-cache">(i × a) sur D</span></span></span><span class="ligne-calcul avec-fraction">λ <span class="frac-groupe">= <span class="frac" aria-hidden="true"><span class="frac-haut">1,8 × 10⁻³ × 0,5 × 10⁻³</span><span class="frac-bas">1,5</span></span><span class="visuellement-cache">(1,8 × 10⁻³ × 0,5 × 10⁻³) sur 1,5</span></span> = 6 × 10⁻⁷ m = 600 nm</span></p>
       </details>
     </article>
-    <p class="fiche-suite">Le QCM compte 4 questions sur ce thème. Chacune est corrigée et expliquée, et celles que tu rates reviennent toutes seules à 1, 3, 7, 14 et 30 jours.</p>
+    <p class="fiche-suite">Le QCM compte 8 questions sur ce thème. Chacune est corrigée et expliquée, et celles que tu rates reviennent toutes seules à 1, 3, 7, 14 et 30 jours.</p>
     <a class="bouton" href="qcm.html#U42/Interf%C3%A9rences%20et%20r%C3%A9seaux">Faire le QCM de ce thème</a>
   </div>
 

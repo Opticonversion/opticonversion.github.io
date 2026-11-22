@@ -1840,3 +1840,134 @@ QUESTIONS.push(
     explication: "Fin janvier : 6 000 + 38 000 − 41 500 = 2 500 €.\nFin février : 2 500 + 36 000 − 40 000 = −1 500 €."
   }
 );
+
+QUESTIONS.push(
+  {
+    id: "U3-244", difficulte: "facile", epreuve: "U3", theme: "Mercatique et communication", session: "complément",
+    question: "Un opticien répartit sa clientèle en groupes qui ont des attentes semblables (étudiants, actifs, seniors). Comment s'appelle cette démarche ?",
+    choix: ["La segmentation", "Le positionnement", "La fidélisation", "Le merchandising"],
+    bonne: 0,
+    explication: "La segmentation découpe le marché en groupes de clients aux attentes proches. Le positionnement, lui, est la place que le magasin veut occuper dans l'esprit des clients. La fidélisation vise à garder les clients, le merchandising organise la présentation des produits en magasin.",
+    indice: "Le mot cherché décrit un découpage de la clientèle en groupes."
+  },
+  {
+    id: "U3-245", difficulte: "moyen", epreuve: "U3", theme: "Mercatique et communication", session: "complément",
+    question: "Parmi ces critères de segmentation, lequel est un critère de COMPORTEMENT d'achat ?",
+    choix: ["La tranche d'âge du client", "La fréquence de renouvellement de ses lunettes", "Le quartier où il habite", "Son revenu mensuel"],
+    bonne: 1,
+    erreurs: {
+      0: { type: "notion", message: "L'âge est un critère démographique : il décrit la personne, pas la façon dont elle achète." },
+      2: { type: "notion", message: "Le lieu d'habitation est un critère géographique. Un critère de comportement décrit ce que le client fait quand il achète." },
+      3: { type: "notion", message: "Le revenu est un critère socio-économique. Un critère de comportement décrit les habitudes d'achat." }
+    },
+    explication: "Les critères de comportement décrivent les habitudes d'achat : fréquence de renouvellement, fidélité à un magasin, recherche de promotions. L'âge est démographique, le quartier géographique, le revenu socio-économique.",
+    indice: "Un critère de comportement décrit ce que fait le client, pas qui il est."
+  },
+  {
+    id: "U3-246", difficulte: "moyen", epreuve: "U3", theme: "Mercatique et communication", session: "complément",
+    question: "Que désigne le positionnement d'un magasin d'optique ?",
+    choix: ["Son emplacement dans la rue commerçante", "Le prix de sa monture la moins chère", "La place qu'il veut occuper dans l'esprit des clients par rapport à ses concurrents", "Le nombre de clients qu'il reçoit chaque jour"],
+    bonne: 2,
+    explication: "Le positionnement est l'image que le magasin veut donner par rapport à ses concurrents : par exemple prix bas, conseil haut de gamme ou spécialiste de l'enfant. L'emplacement relève de la distribution, pas du positionnement.",
+    indice: "Pense à l'image dans la tête du client, pas à un lieu ni à un chiffre."
+  },
+  {
+    id: "U3-247", difficulte: "moyen", epreuve: "U3", theme: "Mercatique et communication", session: "complément",
+    question: "Une monture se vend bien depuis deux ans, mais ses ventes n'augmentent plus et la concurrence propose des modèles très proches. Dans quelle phase de son cycle de vie se trouve-t-elle ?",
+    choix: ["Le lancement", "La croissance", "Le déclin", "La maturité"],
+    bonne: 3,
+    erreurs: {
+      1: { type: "notion", message: "En croissance, les ventes augmentent encore vite. Ici elles se stabilisent : c'est la maturité." },
+      2: { type: "notion", message: "En déclin, les ventes baissent. Ici elles restent élevées mais ne progressent plus." }
+    },
+    explication: "Les 4 phases sont le lancement, la croissance, la maturité puis le déclin. Quand les ventes se stabilisent à un niveau élevé et que la concurrence s'intensifie, le produit est en maturité.",
+    indice: "Les ventes ne montent plus, mais elles ne baissent pas non plus."
+  },
+  {
+    id: "U3-248", difficulte: "facile", epreuve: "U3", theme: "Mercatique et communication", session: "complément",
+    type: "calcul",
+    question: "Un magasin envoie 4 000 courriers à ses clients. 140 d'entre eux viennent en magasin avec le courrier. Calcule le taux de réponse.",
+    reponse: { valeur: 3.5, unite: "%", decimales: 1, tolerance: 0.05, signe: false },
+    erreurs: [
+      { valeur: 28.6, type: "notion", message: "Tu as divisé les courriers par les réponses. Le taux de réponse se calcule avec les réponses au numérateur : 140 sur 4 000." },
+      { valeur: 3.6, type: "notion", message: "Tu as divisé par 3 860, les courriers sans réponse. Le taux se calcule sur tous les courriers envoyés : 4 000." }
+    ],
+    explication: "Taux de réponse = [[140|4 000]] × 100 = 3,5 %.",
+    indice: "Réponses reçues divisées par courriers envoyés."
+  },
+  {
+    id: "U3-249", difficulte: "moyen", epreuve: "U3", theme: "Mercatique et communication", session: "complément",
+    type: "calcul",
+    question: "Une campagne de 1 800 € touche 600 personnes et amène 45 nouveaux clients. Calcule le coût d'acquisition d'un nouveau client.",
+    reponse: { valeur: 40, unite: "€", decimales: 0, tolerance: 0.5, signe: false },
+    erreurs: [
+      { valeur: 3, type: "notion", message: "C'est le coût par personne touchée (1 800 ÷ 600). Le coût d'acquisition se calcule par nouveau client : divise par 45." },
+      { valeur: 0.025, type: "notion", message: "Tu as divisé les clients par le budget. Il faut diviser le budget par le nombre de nouveaux clients." }
+    ],
+    explication: "Coût d'acquisition = [[1 800|45]] = 40 € par nouveau client. (Le coût par personne touchée serait 1 800 ÷ 600 = 3 €.)",
+    indice: "Le budget se partage entre les clients gagnés, pas entre les personnes touchées."
+  },
+  {
+    id: "U3-250", difficulte: "moyen", epreuve: "U3", theme: "Mercatique et communication", session: "complément",
+    type: "calcul",
+    question: "Un jour de semaine, 5 000 personnes passent devant le magasin, 400 y entrent et 120 achètent. Calcule le taux de transformation.",
+    reponse: { valeur: 30, unite: "%", decimales: 0, tolerance: 0.5, signe: false },
+    erreurs: [
+      { valeur: 2.4, type: "notion", message: "Tu as divisé les acheteurs par les passants. Le taux de transformation compare les acheteurs aux personnes entrées dans le magasin." },
+      { valeur: 8, type: "notion", message: "C'est le taux d'entrée (400 entrées sur 5 000 passants). Le taux de transformation, lui, part des entrées." }
+    ],
+    explication: "Taux de transformation = [[acheteurs|entrées]] = [[120|400]] = 30 %. Le taux d'entrée, lui, vaut [[400|5 000]] = 8 %.",
+    indice: "Combien de visiteurs entrés ressortent avec un achat ?"
+  },
+  {
+    id: "U3-251", difficulte: "difficile", epreuve: "U3", theme: "Mercatique et communication", session: "complément",
+    type: "calcul",
+    question: "Une action de communication coûte 1 500 € et génère 4 200 € de marge brute. Calcule sa rentabilité : (gain − coût) ÷ coût, en %.",
+    reponse: { valeur: 180, unite: "%", decimales: 0, tolerance: 0.5, signe: false },
+    erreurs: [
+      { valeur: 280, type: "notion", message: "Tu as divisé la marge par le coût (4 200 ÷ 1 500). Il faut d'abord retirer le coût de la marge pour obtenir le gain réel." },
+      { valeur: 2700, type: "notion", message: "2 700 € est le gain en euros (4 200 − 1 500). La question demande un pourcentage : divise-le par le coût." }
+    ],
+    explication: "Gain moins coût = 4 200 − 1 500 = 2 700 €. Rentabilité = [[2 700|1 500]] × 100 = 180 %. Chaque euro dépensé en a rapporté 1,80 de plus.",
+    indice: "Commence par le gain net, puis compare-le à la dépense."
+  },
+  {
+    id: "U3-252", difficulte: "difficile", epreuve: "U3", theme: "Mercatique et communication", session: "complément",
+    type: "calcul",
+    question: "Pour une promotion, une monture à 150 € TTC (TVA 20 %) est remise de 20 %. Son prix d'achat est de 50 € HT. Calcule le taux de marque après remise.",
+    reponse: { valeur: 50, unite: "%", decimales: 0, tolerance: 0.5, signe: false },
+    erreurs: [
+      { valeur: 100, type: "marque-marge", message: "100 % est le taux de marge (marge ÷ prix d'achat). Le taux de marque se calcule sur le prix de vente HT." },
+      { valeur: 58, type: "ht-ttc", message: "Tu as calculé la marge avec le prix TTC (120 − 50). La marge se calcule hors taxes : retire d'abord la TVA du prix remisé." }
+    ],
+    explication: "Prix remisé TTC = 150 × 0,80 = 120 €. Prix HT = 120 ÷ 1,2 = 100 €. Marge = 100 − 50 = 50 €. Taux de marque = [[50|100]] = 50 %. (Le taux de marge vaudrait 100 %.)",
+    indice: "Retire la TVA avant de calculer la marge, puis divise par le prix de vente HT."
+  },
+  {
+    id: "U3-253", difficulte: "moyen", epreuve: "U3", theme: "Mercatique et communication", session: "complément",
+    question: "Un opticien veut envoyer par e-mail une offre promotionnelle à des personnes qui ne sont pas encore ses clientes. Que doit-il faire avant ?",
+    choix: ["Obtenir leur accord préalable à recevoir ce type de message", "Rien : un e-mail est toujours autorisé", "Demander l'autorisation à la mairie", "Envoyer le message à moins de 100 personnes"],
+    bonne: 0,
+    explication: "Pour prospecter des particuliers par e-mail, il faut en principe leur consentement préalable, et chaque message doit proposer de se désinscrire facilement. Le fichier clients est protégé par le RGPD.",
+    indice: "Le droit protège les particuliers contre la prospection non souhaitée."
+  },
+  {
+    id: "U3-254", difficulte: "facile", epreuve: "U3", theme: "Mercatique et communication", session: "complément",
+    question: "Pourquoi un opticien a-t-il intérêt à fidéliser ses clients ?",
+    choix: ["Parce que la fidélisation est obligatoire pour un commerçant", "Parce que garder un client coûte en général moins cher que d'en conquérir un nouveau", "Parce qu'un client fidèle n'a plus besoin de conseil", "Parce que cela permet de ne plus faire de communication"],
+    bonne: 1,
+    explication: "Un client fidèle revient, recommande le magasin et coûte moins en communication qu'un nouveau client. La fidélisation n'est pas une obligation, et le conseil comme la communication restent nécessaires.",
+    indice: "Compare ce que coûte un nouveau client à ce que coûte un client déjà acquis."
+  },
+  {
+    id: "U3-255", difficulte: "moyen", epreuve: "U3", theme: "Mercatique et communication", session: "complément",
+    question: "Un magasin décide de s'adresser en priorité aux porteurs de verres progressifs de plus de 45 ans. Quelle étape de la démarche mercatique est-ce ?",
+    choix: ["La segmentation du marché", "Le choix du prix de vente", "Le ciblage : le choix du ou des segments visés", "Le suivi des ventes"],
+    bonne: 2,
+    erreurs: {
+      0: { type: "notion", message: "La segmentation découpe tout le marché en groupes. Ici le magasin choisit un groupe à viser : c'est le ciblage." }
+    },
+    explication: "On segmente le marché (découpage), puis on cible (choix des segments visés), puis on se positionne (image voulue). Choisir les porteurs de progressifs de plus de 45 ans, c'est cibler.",
+    indice: "Le magasin choisit un groupe parmi ceux qu'il a identifiés."
+  }
+);

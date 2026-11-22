@@ -95,6 +95,7 @@ QUESTIONS.push(
       "Objet réel : OA = −30 mm. Descartes : 1/OA' − 1/OA = 1/f', donc 1/OA' = 1/20 − 1/30."
     ],
     bonne: 2,
+    surLaCopie: "Objet réel : OA = −30 mm. Descartes : [[1|OA']] = [[1|f']] + [[1|OA]] = [[1|20]] − [[1|30]] = [[1|60]]\nDonc OA' = +60 mm : l'image est réelle, 60 mm après la lentille, comme demandé.",
     explication: "Dans un « Montrer que », la valeur est donnée : ce sont la méthode et la rédaction qui rapportent les points. Trois temps : la donnée avec son signe (objet réel, OA = −30 mm), la relation appliquée avec les chiffres (1/OA' = 1/20 − 1/30 = 1/60), la conclusion (OA' = +60 mm, image réelle). La copie qui part de OA = +30 mm trouve −1/60 puis écrit « 60 mm » : elle arrange le résultat, et le correcteur le voit. Citer Descartes sans calcul ne démontre rien. S'arrêter avant le résultat ne répond pas à la consigne.",
     indice: "Une démarche complète tient en trois temps : la donnée avec son signe, la relation appliquée avec les chiffres, puis une phrase de conclusion."
   },
@@ -119,6 +120,7 @@ QUESTIONS.push(
     erreurs: [
       { valeur: 24, type: "signe", message: "Tu as pris OA = +60 mm. Un objet réel est avant la lentille : OA = −60 mm." }
     ],
+    surLaCopie: "Objet réel : OA = −60 mm, f' = +40 mm.\nDescartes : [[1|OA']] = [[1|f']] + [[1|OA]] = [[1|40]] − [[1|60]] = [[1|120]]\nDonc OA' = +120 mm : l'image est réelle, 120 mm après la lentille.",
     explication: "Objet réel : OA = −60 mm.\nDescartes : [[1|OA']] = [[1|f']] + [[1|OA]]\n[[1|OA']] = [[1|40]] − [[1|60]]\n[[1|OA']] = [[3|120]] − [[2|120]] = [[1|120]]\nDonc OA' = +120 mm : l'image est réelle, 120 mm après la lentille.",
     indice: "Un objet réel placé devant la lentille a un OA négatif. Utilise la relation de conjugaison de Descartes, sans perdre les signes."
   },
@@ -131,6 +133,7 @@ QUESTIONS.push(
       { valeur: -0.2, type: "notion", message: "Tu as calculé OA / OA'. Le grandissement est OA' / OA : la position de l'image sur celle de l'objet." },
       { valeur: 5, type: "signe", message: "Tu as oublié le signe. L'image est renversée (OA' et OA de signes contraires) : γ est négatif." }
     ],
+    surLaCopie: "γ = [[OA'|OA]] = [[180|−36]] = −5\nL'image est renversée (γ < 0) et 5 fois plus grande que l'objet.",
     explication: "γ = [[OA'|OA]]\nγ = [[180|−36]] = −5\nL'image est 5 fois plus grande que l'objet, et renversée : c'est ce que dit le signe moins.",
     indice: "Le grandissement transversal est le rapport de la position de l'image à celle de l'objet, mesurées depuis le centre O. Garde les signes."
   },
@@ -464,6 +467,7 @@ QUESTIONS.push(
     type: "calcul",
     question: "Doublet de deux lentilles minces : f'₁ = 60 mm, f'₂ = 30 mm, séparées de e = 40 mm. Calcule sa distance focale image f'.",
     reponse: { valeur: 36, unite: "mm", decimales: 0, signe: true },
+    surLaCopie: "Gullstrand : f' = [[f'₁ × f'₂|f'₁ + f'₂ − e]] = [[60 × 30|60 + 30 − 40]] = [[1 800|50]] = 36 mm\nLe doublet est convergent, de distance focale image 36 mm.",
     explication: "Formule de Gullstrand : f' = [[f'₁ × f'₂|f'₁ + f'₂ − e]]\nf' = [[60 × 30|60 + 30 − 40]] = [[1 800|50]] = 36 mm\nLe doublet a une distance focale image de 36 mm.",
     indice: "Formule du doublet (Gullstrand) : le produit des deux focales, divisé par leur somme diminuée de l'écart e."
   },
@@ -523,6 +527,7 @@ QUESTIONS.push(
       "Droite par les bords du même côté, (0 ; 9) et (40 ; 5) : pente = (5 − 9)/40 = −0,1. L'équation de la droite est y = 9 − 0,1 x."
     ],
     bonne: 0,
+    surLaCopie: "Plan des champs (x = 60) au-delà du diaphragme (x = 40) : bords du même côté, (0 ; 9) et (40 ; 5). Pente = [[5 − 9|40]] = −0,1\nEn x = 60 : r = 9 − 0,1 × 60 = 3 mm\nLe champ de pleine lumière a bien un rayon de 3 mm.",
     explication: "Dans un « Montrer que », la valeur est donnée : les points sont pour la méthode, le calcul et la conclusion. Ici le plan des champs (x = 60) est au-delà du diaphragme (x = 40) : la droite de pleine lumière passe par les bords du même côté. Pente −0,1, donc en x = 60 : 9 − 6 = 3 mm. La droite par le centre de la pupille donne le champ moyen (7,5 mm). Lire la valeur sur le schéma ne démontre rien. S'arrêter à l'équation de la droite ne répond pas à la consigne.",
     indice: "Trois temps : quelle droite (et pourquoi celle-là), le calcul jusqu'au plan des champs, puis la phrase qui répond à la consigne."
   },
@@ -536,6 +541,7 @@ QUESTIONS.push(
       "Il n'y a pas d'erreur : la pleine lumière, c'est toujours les bords du même côté"
     ],
     bonne: 1,
+    surLaCopie: "Plan des champs entre la pupille et le diaphragme : bords opposés, (0 ; −2) et (100 ; 5). Pente = [[7|100]] = 0,07\nEn x = 80 : r = −2 + 0,07 × 80 = 3,6 mm\nLe champ de pleine lumière a un rayon de 3,6 mm (4,4 mm est le champ total).",
     explication: "Ici le plan des champs (x = 80) est ENTRE la pupille (x = 0) et le diaphragme de champ (x = 100). Les rayons se croisent dans ce plan avant d'atteindre le diaphragme : celui qui limite la pleine lumière joint les bords opposés, (0 ; −2) et (100 ; 5). Pente = 7/100 = 0,07, donc en x = 80 : −2 + 0,07 × 80 = 3,6 mm. Les 4,4 mm de la copie sont la limite du champ total. Méthode sûre : trace les deux droites qui s'appuient sur les bords ; celle qui donne le plus petit champ limite la pleine lumière. La règle « bords du même côté » vaut quand le plan des champs est en dehors de l'intervalle pupille-diaphragme, le cas le plus fréquent.",
     indice: "Regarde où se trouve le plan des champs par rapport à la pupille et au diaphragme de champ. Les rayons se croisent-ils avant d'atteindre le diaphragme ?",
     schema: "img/schemas/U42/champs-plan-entre-pupille-diaphragme.svg",
@@ -551,6 +557,7 @@ QUESTIONS.push(
       "La demi-diagonale du capteur vaut √(3² + 4²) = 5 mm et le rayon du champ de pleine lumière vaut 5,5 mm."
     ],
     bonne: 2,
+    surLaCopie: "Demi-diagonale du capteur : √(3² + 4²) = 5 mm. Rayon du champ de pleine lumière : 5,5 mm.\n5 mm < 5,5 mm : même les coins sont en pleine lumière, le capteur est éclairé uniformément.",
     explication: "On compare ce qui est comparable : la distance du centre à un coin (la demi-diagonale) et le RAYON du champ. √(3² + 4²) = 5 mm, plus petit que 5,5 mm : même les coins reçoivent toute la lumière. Comparer la diagonale entière (10 mm) au rayon est faux : il faudrait la comparer au diamètre (11 mm). Répondre « oui » sans chiffre ne justifie rien. Donner les deux chiffres sans conclure ne répond pas à la question.",
     indice: "Quel point du capteur est le plus éloigné du centre ? Compare cette distance au rayon du champ, sans oublier la phrase de conclusion."
   },
@@ -559,6 +566,7 @@ QUESTIONS.push(
     type: "calcul",
     question: "Dans l'espace d'étude : pupille de rayon 10 mm en x = 0, diaphragme de champ de rayon 6 mm en x = 40 mm, plan des champs en x = 60 mm. Calcule le rayon du champ de pleine lumière.",
     reponse: { valeur: 4, unite: "mm", decimales: 0, signe: false },
+    surLaCopie: "Plan des champs au-delà du diaphragme : bords du même côté, (0 ; 10) et (40 ; 6). Pente = [[6 − 10|40]] = −0,1\nEn x = 60 : r = 10 − 0,1 × 60 = 4 mm\nLe champ de pleine lumière a un rayon de 4 mm.",
     explication: "Le plan des champs (x = 60) est au-delà du diaphragme (x = 40) : on prend la droite par les bords du même côté, (0 ; 10) et (40 ; 6).\nPente = [[6 − 10|40]] = −0,1\nEn x = 60 : 10 − 0,1 × 60 = 4 mm.\nPour comparer : champ moyen 9 mm, champ total 14 mm.",
     indice: "Écris l'équation de la droite appuyée sur les deux bords du même côté, puis prolonge-la jusqu'au plan des champs."
   },
@@ -570,6 +578,7 @@ QUESTIONS.push(
     erreurs: [
       { valeur: 1.2, type: "notion", message: "C'est la demi-largeur du champ. La focale et le rayon donnent un demi-angle : double pour avoir la largeur." }
     ],
+    surLaCopie: "tan ω = [[4|100]] = 0,04. À 30 m, la demi-largeur vaut 30 × 0,04 = 1,2 m.\nLa largeur du champ de pleine lumière est 2 × 1,2 = 2,4 m.",
     explication: "tan ω = [[4|100]] = 0,04\nÀ 30 m : demi-largeur = 30 × 0,04 = 1,2 m\nLargeur = 2 × 1,2 = 2,4 m. Piège : ne pas oublier de doubler.",
     indice: "Le rayon du champ et la focale de l'objectif donnent la tangente du demi-champ. Reporte cet angle à 30 m. On demande une largeur, pas une demi-largeur."
   },
@@ -621,8 +630,10 @@ QUESTIONS.push(
     question: "Un objectif a une pupille d'entrée de diamètre 20 mm. Pour λ = 550 nm, la diffraction limite sa résolution à α = 1,22 λ / D. Calcule le plus petit détail qu'il sépare sur un objet situé à 50 m.",
     reponse: { valeur: 1.7, unite: "mm", decimales: 1, tolerance: 0.06, signe: false },
     erreurs: [
-      { valeur: 1.4, type: "notion", message: "Il manque le facteur 1,22 de la formule. α = 1,22 λ / D." }
+      { valeur: 1.4, type: "notion", message: "Il manque le facteur 1,22 de la formule. α = 1,22 λ / D." },
+      { valeur: 0.0017, type: "unite", message: "Tu as laissé le résultat en mètres : 1,7 × 10⁻³ m = 1,7 mm. Convertis en millimètres (× 1 000)." }
     ],
+    surLaCopie: "α = [[1,22 × λ|D]] = [[1,22 × 550 × 10⁻⁹|0,020]] ≈ 3,36 × 10⁻⁵ rad\nÀ 50 m : détail = α × 50 ≈ 1,7 mm.",
     explication: "Tout en mètres : α = [[1,22 × λ|D]]\nα = [[1,22 × 550 × 10⁻⁹|0,020]] ≈ 3,36 × 10⁻⁵ rad\nÀ 50 m : détail = α × 50 ≈ 1,68 × 10⁻³ m, soit environ 1,7 mm.\nPiège : les nanomètres et les millimètres doivent être convertis en mètres avant de diviser.",
     indice: "Calcule d'abord l'angle limite en radians, avec λ et D en mètres. Un angle petit multiplié par une distance donne une longueur."
   },
@@ -680,6 +691,7 @@ QUESTIONS.push(
       { valeur: 82, type: "notion", message: "Tu as compté 5 faces. Chaque lentille a deux faces : la lumière en traverse 10." },
       { valeur: 80, type: "notion", message: "Tu as retiré 4 % pour 5 faces. Chaque lentille a deux faces, et les transmissions se multiplient : 0,96 puissance 10." }
     ],
+    surLaCopie: "5 lentilles, donc 10 faces : T = 0,96¹⁰ ≈ 0,665\nLa transmission totale est d'environ 66 %.",
     explication: "5 lentilles = 10 faces. T totale = 0,96¹⁰ ≈ 0,665, soit environ 66 %. Piège : ce n'est pas 1 − 10 × 0,04 = 60 %, car les transmissions se multiplient.",
     indice: "Compte les faces traversées (combien par lentille ?). Les transmissions successives se multiplient, elles ne se soustraient pas."
   },
@@ -825,6 +837,7 @@ QUESTIONS.push(
       "Elles conviennent : elle sépare des détails de 2,4 mm, donc ceux de 5 mm (impossible à l'œil nu : 7,2 mm), et voit un chanteur en entier dans un champ de 2 m. Elle ne verra pas toute la scène d'un seul regard."
     ],
     bonne: 3,
+    surLaCopie: "Elle sépare des détails de 2,4 mm : ceux de 5 mm sont visibles (7,2 mm à l'œil nu).\nLe champ de 2 m montre un chanteur en entier, mais pas les 12 m de scène à la fois.\nLes jumelles conviennent, à condition de les déplacer sur la scène.",
     explication: "Une conclusion complète fait trois choses : elle répond à la question du client, elle s'appuie sur les chiffres trouvés et elle signale la limite de l'appareil. Ici : détails de 2,4 mm séparés, donc ceux de 5 mm aussi, alors qu'à l'œil nu elle s'arrête à 7,2 mm ; champ de 2 m, donc un chanteur en entier, mais pas les 12 m de scène à la fois. Écrire seulement « elles conviennent » ne rapporte pas les points. Aligner les chiffres sans conclure non plus. Et un petit champ n'empêche pas de voir les chanteurs : il oblige seulement à déplacer les jumelles.",
     indice: "Une bonne conclusion répond à la question du client, s'appuie sur les chiffres trouvés et signale la limite de l'appareil."
   }
@@ -842,10 +855,11 @@ QUESTIONS.push(
       { consigne: "Vergence de l'image [[1|OA']]", reponse: { valeur: 15, unite: "δ", decimales: 0, signe: true },
         aide: "Relation de conjugaison : [[1|OA']] = [[1|OA]] + V.", ligne: "[[1|OA']] = [[1|OA]] + V = −25 + 40 = +15 δ" },
       { consigne: "Position de l'image OA'", reponse: { valeur: 66.7, unite: "mm", decimales: 1, signe: true, tolerance: 0.1 },
-        aide: "OA' = [[1|15]] en mètres, puis convertis en millimètres.", ligne: "OA' = [[1|15]] = +0,0667 m = +66,7 mm" },
+        aide: "OA' = [[1|15]] en mètres, puis convertis en millimètres.", ligne: "OA' = [[1|15]] = +0,0667 m = +66,7 mm", erreurs: [{ valeur: 0.0667, type: "unite", message: "Tu as laissé OA' en mètres : 0,0667 m = 66,7 mm. Convertis en millimètres (× 1 000)." }] },
       { consigne: "Grandissement γ", reponse: { valeur: -1.67, unite: "", decimales: 2, signe: true, tolerance: 0.02 },
         aide: "γ = [[OA'|OA]], avec les signes. OA' et OA se prennent dans la même unité.", ligne: "γ = [[OA'|OA]] = [[+66,7|−40]] = −1,67", erreurs: [{ valeur: 1.67, type: "signe", message: "L'image est renversée (OA' et OA de signes contraires) : γ est négatif." }] }
     ],
+    surLaCopie: "Objet réel : OA = −40 mm, f' = +25 mm.\n[[1|OA']] = [[1|f']] + [[1|OA]] = [[1|25]] − [[1|40]] = [[3|200]], donc OA' = +66,7 mm\nγ = [[OA'|OA]] = [[66,7|−40]] = −1,67 : image réelle, renversée, 1,67 fois plus grande.",
     explication: "L'image est réelle (OA' > 0), renversée (γ < 0) et 1,67 fois plus grande que l'objet. Contrôle avec les vergences : γ = [[−25|+15]] = −1,67."
   },
   {
@@ -861,8 +875,9 @@ QUESTIONS.push(
       { consigne: "Vergence V du doublet", reponse: { valeur: 25, unite: "δ", decimales: 0, signe: true },
         aide: "V = V₁ + V₂ − e × V₁ × V₂ : additionne les deux vergences, puis retire le terme précédent.", ligne: "V = 12,5 + 25 − 12,5 = +25 δ" },
       { consigne: "Distance focale image f' du doublet", reponse: { valeur: 40, unite: "mm", decimales: 0, signe: true, tolerance: 0.5 },
-        aide: "f' = [[1|V]] en mètres, puis convertis en millimètres.", ligne: "f' = [[1|V]] = [[1|25]] = 0,040 m = 40 mm" }
+        aide: "f' = [[1|V]] en mètres, puis convertis en millimètres.", ligne: "f' = [[1|V]] = [[1|25]] = 0,040 m = 40 mm", erreurs: [{ valeur: 0.04, type: "unite", message: "Tu as laissé f' en mètres : 0,04 m = 40 mm. Convertis en millimètres (× 1 000)." }] }
     ],
+    surLaCopie: "V₁ = [[1|0,080]] = 12,5 δ et V₂ = [[1|0,040]] = 25 δ\nV = V₁ + V₂ − e × V₁ × V₂ = 12,5 + 25 − 0,040 × 12,5 × 25 = 25 δ\nf' = [[1|V]] = [[1|25]] = 0,040 m : le doublet a une distance focale image de 40 mm.",
     explication: "La même formule écrite avec les focales donne le même résultat : f' = [[f'₁ × f'₂|f'₁ + f'₂ − e]] = [[80 × 40|80 + 40 − 40]] = [[3 200|80]] = 40 mm."
   },
   {
@@ -878,6 +893,7 @@ QUESTIONS.push(
       { consigne: "Part de la lumière qui entre dans l'œil", reponse: { valeur: 44, unite: "%", decimales: 0, signe: false, tolerance: 1 },
         aide: "Le cercle oculaire (6 mm) est plus grand que la pupille (4 mm). Compare les surfaces : [[4²|6²]].", ligne: "[[4²|6²]] = [[16|36]] = 0,44, soit 44 %" }
     ],
+    surLaCopie: "G = −[[f'ob|f'oc]] = −[[240|30]] = −8 ; longueur = 240 + 30 = 270 mm\nCercle oculaire : D' = [[D|∣G∣]] = [[48|8]] = 6 mm, plus grand que la pupille de 4 mm.\nPart de la lumière reçue : [[4²|6²]] = 0,44, soit environ 44 %.",
     explication: "Le cercle oculaire dépasse la pupille de l'œil : environ 44 % de la lumière captée entre dans l'œil. Pour tout utiliser, il faudrait un cercle oculaire de 4 mm au plus, donc un grossissement d'au moins [[48|4]] = 12 (en valeur absolue)."
   },
   {
@@ -891,8 +907,9 @@ QUESTIONS.push(
       { consigne: "Grossissement commercial du microscope", reponse: { valeur: 160, unite: "", decimales: 0, signe: false },
         aide: "Les deux effets se multiplient. Prends le grandissement de l'objectif en valeur absolue.", ligne: "Gc = ∣γob∣ × Gc oculaire = 16 × 10 = 160" },
       { consigne: "Plus petit détail visible à travers le microscope", reponse: { valeur: 0.47, unite: "µm", decimales: 2, signe: false, tolerance: 0.01 },
-        aide: "À l'œil nu à 25 cm : 3 × 10⁻⁴ × 250 mm = 0,075 mm = 75 µm. Divise ensuite par le grossissement.", ligne: "d = [[75|160]] = 0,47 µm" }
+        aide: "À l'œil nu à 25 cm : 3 × 10⁻⁴ × 250 mm = 0,075 mm = 75 µm. Divise ensuite par le grossissement.", ligne: "d = [[75|160]] = 0,47 µm", erreurs: [{ valeur: 470, type: "unite", message: "Tu as donné des nanomètres : 470 nm = 0,47 µm. Convertis en micromètres (÷ 1 000)." }] }
     ],
+    surLaCopie: "γob = −[[Δ|f'ob]] = −[[160|10]] = −16 ; Gc de l'oculaire = [[250|25]] = 10\nGc du microscope = ∣γob∣ × Gc oculaire = 16 × 10 = 160\nPlus petit détail vu : [[75 µm|160]] ≈ 0,47 µm (75 µm à l'œil nu, à 25 cm).",
     explication: "À l'œil nu, le plus petit détail séparé à 25 cm vaut 75 µm. Le microscope divise cette taille par son grossissement : [[75|160]] ≈ 0,47 µm. Il faut aussi vérifier la limite due à la diffraction de l'objectif : la plus grande des deux limites l'emporte."
   },
   {
@@ -908,6 +925,7 @@ QUESTIONS.push(
       { consigne: "Rayon du champ total (bords opposés)", reponse: { valeur: 18, unite: "mm", decimales: 0, signe: false },
         aide: "La droite passe par (0 ; −8) et (20 ; 5) : pente = [[5 − (−8)|20]]. Prolonge-la jusqu'à x = 40.", ligne: "r = −8 + [[13|20]] × 40 = −8 + 26 = 18 mm" }
     ],
+    surLaCopie: "Plan des champs au-delà du diaphragme. Pleine lumière : pente [[5 − 8|20]] = −0,15, r = 8 − 0,15 × 40 = 2 mm\nChamp moyen : [[5|20]] × 40 = 10 mm\nChamp total : −8 + [[13|20]] × 40 = 18 mm.",
     explication: "Comme toujours, le champ de pleine lumière (2 mm) est plus petit que le champ moyen (10 mm), lui-même plus petit que le champ total (18 mm). Entre 2 et 18 mm, l'image s'assombrit peu à peu : c'est le vignettage."
   },
 
@@ -960,7 +978,8 @@ QUESTIONS.push(
     question: "Quelle est l'épaisseur minimale de la couche ?",
     reponse: { valeur: 110, unite: "nm", decimales: 0, signe: false, tolerance: 1 },
     erreurs: [
-      { valeur: 86, type: "notion", message: "Tu as pris l'indice du verre. L'épaisseur dépend de l'indice de la couche : e = λ / (4 n de la couche)." }
+      { valeur: 86, type: "notion", message: "Tu as pris l'indice du verre. L'épaisseur dépend de l'indice de la couche : e = λ / (4 n de la couche)." },
+      { valeur: 0.11, type: "unite", message: "Tu as donné des micromètres : 0,11 µm = 110 nm. Garde l'unité de λ, ici le nanomètre." }
     ],
     explication: "e = [[λ|4 × n]] avec n = indice de la couche\ne = [[550|4 × 1,25]] = [[550|5]] = 110 nm\nL'épaisseur est d'un quart de longueur d'onde dans la couche.",
     indice: "Épaisseur d'un quart de longueur d'onde dans la couche : utilise l'indice de la couche, pas celui du verre."
@@ -977,6 +996,7 @@ QUESTIONS.push(
       "Le filtre polarisant est inutile pour la pêche : seul le traitement antireflet compte, car le reflet de l'eau n'est pas polarisé"
     ],
     bonne: 2,
+    surLaCopie: "Tête droite, le filtre éteint presque tout le reflet ; penchée de 40°, 41 % passe encore.\nLe verre nu transmet 90 % de la lumière, l'antireflet limite cette perte.\nLes lunettes conviennent si le client garde la tête droite.",
     explication: "Une bonne conclusion répond à la question du client et s'appuie sur les chiffres trouvés. Elle dit sous quelle condition les lunettes conviennent (tête droite ; penchée de 40°, 41 % du reflet passe encore) et ce que le traitement apporte (le verre nu perd environ 10 % de la lumière).",
     indice: "Une bonne conclusion répond à la question du client, donne la condition qui compte, et s'appuie sur tes résultats."
   },
@@ -987,7 +1007,7 @@ QUESTIONS.push(
     question: "Un réseau porte 800 traits par millimètre. Il est éclairé en incidence normale par une lumière de longueur d'onde 600 nm. Étudie la lumière diffractée, étape par étape.",
     etapes: [
       { consigne: "Pas du réseau a (en µm)", reponse: { valeur: 1.25, unite: "µm", decimales: 2, signe: false },
-        aide: "Le pas est la distance entre deux traits : 1 mm = 1 000 µm, partagé en 800 traits.", ligne: "a = [[1 000 µm|800]] = 1,25 µm" },
+        aide: "Le pas est la distance entre deux traits : 1 mm = 1 000 µm, partagé en 800 traits.", ligne: "a = [[1 000 µm|800]] = 1,25 µm", erreurs: [{ valeur: 0.00125, type: "unite", message: "Tu as donné des millimètres : 0,00125 mm = 1,25 µm. Convertis en micromètres (× 1 000)." }] },
       { consigne: "sin i' à l'ordre 1", reponse: { valeur: 0.48, unite: "", decimales: 2, signe: false },
         aide: "Formule des réseaux en incidence normale : a × sin i' = k × λ. Garde λ et a dans la même unité (600 nm = 0,6 µm).", ligne: "sin i' = [[k × λ|a]] = [[1 × 0,6|1,25]] = 0,48" },
       { consigne: "Angle i' de l'ordre 1 (en degrés)", reponse: { valeur: 28.7, unite: "°", decimales: 1, signe: false, tolerance: 0.1 },
@@ -995,6 +1015,7 @@ QUESTIONS.push(
       { consigne: "Ordre le plus élevé qui existe", reponse: { valeur: 2, unite: "", decimales: 0, signe: false },
         aide: "Il faut sin i' ≤ 1, donc k ≤ [[a|λ]]. Garde la partie entière.", ligne: "k ≤ [[a|λ]] = [[1,25|0,6]] = 2,08, donc k = 2" }
     ],
+    surLaCopie: "a = [[1 000 µm|800]] = 1,25 µm ; sin i' = [[k × λ|a]] = [[0,6|1,25]] = 0,48, donc i' = 28,7° à l'ordre 1\nOrdre maximal : k ≤ [[a|λ]] = [[1,25|0,6]] = 2,08, donc k = 2.\nIl sort 5 faisceaux, les ordres −2 à +2.",
     explication: "Pas a = 1,25 µm. À l'ordre 1, sin i' = 0,48 et i' ≈ 28,7°. L'ordre 2 existe (sin i' = 0,96, soit 73,7°), l'ordre 3 n'existe pas (sin i' dépasserait 1). Il sort donc 5 faisceaux : les ordres −2 à +2."
   },
   {
@@ -1008,8 +1029,9 @@ QUESTIONS.push(
       { consigne: "Indice idéal de la couche antireflet", reponse: { valeur: 1.4, unite: "", decimales: 1, signe: false },
         aide: "L'indice idéal de la couche est la racine carrée de l'indice du verre.", ligne: "n = √1,96 = 1,4" },
       { consigne: "Épaisseur minimale de la couche (en nm)", reponse: { valeur: 100, unite: "nm", decimales: 0, signe: false, tolerance: 1 },
-        aide: "Un quart de longueur d'onde dans la couche : utilise l'indice de la couche, pas celui du verre.", ligne: "e = [[λ|4n]] = [[560|4 × 1,4]] = [[560|5,6]] = 100 nm" }
+        aide: "Un quart de longueur d'onde dans la couche : utilise l'indice de la couche, pas celui du verre.", ligne: "e = [[λ|4n]] = [[560|4 × 1,4]] = [[560|5,6]] = 100 nm", erreurs: [{ valeur: 0.1, type: "unite", message: "Tu as donné des micromètres : 0,1 µm = 100 nm. Garde l'unité de λ, ici le nanomètre." }] }
     ],
+    surLaCopie: "R = ([[1,96 − 1|1,96 + 1]])² = 0,105 ; T = (1 − 0,105)² = 0,80, soit 80 % pour le verre nu\nIndice idéal de la couche : √1,96 = 1,4\nÉpaisseur : e = [[λ|4n]] = [[560|4 × 1,4]] = 100 nm.",
     explication: "Le verre nu perd 20 % de la lumière sur ses deux faces. Une couche d'indice 1,4 et de 100 nm d'épaisseur supprime presque tous les reflets pour 560 nm, car les deux ondes réfléchies sont alors en opposition."
   },
   {
@@ -1025,6 +1047,7 @@ QUESTIONS.push(
       { consigne: "Éclairement sous la lampe, à la verticale (en lx)", reponse: { valeur: 133.3, unite: "lx", decimales: 1, signe: false, tolerance: 0.1 },
         aide: "À la verticale, d = 1,5 m et θ = 0°, donc cos θ = 1.", ligne: "E₀ = [[300|1,5²]] = [[300|2,25]] = 133,3 lx" }
     ],
+    surLaCopie: "d = √(1,5² + 2²) = 2,5 m ; cos θ = [[1,5|2,5]] = 0,6\nE = [[I × cos θ|d²]] = [[300 × 0,6|2,5²]] = 28,8 lx\nSous la lampe : E₀ = [[300|1,5²]] = 133,3 lx ; le point décalé en reçoit 22 %.",
     explication: "Le point décalé reçoit 28,8 lx, soit [[28,8|133,3]] = 22 % de l'éclairement sous la lampe : il est plus loin (d plus grand) et la lumière y arrive de biais (cos θ plus petit)."
   },
   {
@@ -1043,7 +1066,120 @@ QUESTIONS.push(
       { consigne: "Distance focale f'₂ de la lentille divergente (en mm)", reponse: { valeur: -166.7, unite: "mm", decimales: 1, signe: true, tolerance: 0.2 },
         aide: "f'₂ = [[1|V₂]] en mètres, puis convertis en millimètres. Garde le signe.", ligne: "f'₂ = [[1|−6]] = −0,1667 m = −166,7 mm" }
     ],
+    surLaCopie: "[[V₁|60]] + [[V₂|40]] = 0 donne V₁ = −1,5 × V₂ ; avec V₁ + V₂ = 3 : V₂ = −6 δ et V₁ = +9 δ\nf'₁ = [[1|9]] = 111 mm (convergente) et f'₂ = [[1|−6]] = −166,7 mm (divergente).\nContrôle : [[9|60]] + [[−6|40]] = 0,15 − 0,15 = 0, le doublet est achromatique.",
     explication: "Vérification : [[9|60]] + [[−6|40]] = 0,15 − 0,15 = 0, donc le doublet est achromatique, et V = 9 − 6 = +3 δ. La lentille convergente est en verre peu dispersif (ν = 60) et plus forte que la divergente, en verre très dispersif (ν = 40)."
+  },
+
+  // ---------- Questions de base en plus : Interférences et réseaux, Polarisation, Photométrie ----------
+  {
+    id: "U42-181", difficulte: "facile", epreuve: "U42", theme: "Interférences et réseaux", session: "complément",
+    question: "Dans une expérience de fentes d'Young, on rapproche les deux fentes l'une de l'autre, sans rien changer d'autre. Que devient l'interfrange ?",
+    choix: ["Il augmente", "Il diminue", "Il reste le même", "Il s'annule"],
+    bonne: 0,
+    explication: "L'interfrange vaut i = [[λ × D|a]] : il est inversement proportionnel à la distance a entre les fentes. Si a diminue, i augmente. Les franges s'écartent.",
+    indice: "Écris la formule de l'interfrange et regarde où se trouve a : au numérateur ou au dénominateur ?"
+  },
+  {
+    id: "U42-182", difficulte: "moyen", epreuve: "U42", theme: "Interférences et réseaux", session: "complément",
+    type: "calcul",
+    question: "Fentes d'Young distantes de a = 0,5 mm, écran à D = 1,5 m. On mesure un interfrange de 1,8 mm. Calcule la longueur d'onde de la lumière, en nanomètres.",
+    reponse: { valeur: 600, unite: "nm", decimales: 0, signe: false },
+    erreurs: [
+      { valeur: 0.6, type: "unite", message: "Tu as donné des micromètres : 0,6 µm = 600 nm. Convertis en nanomètres (× 1 000)." }
+    ],
+    explication: "i = [[λ × D|a]], donc λ = [[i × a|D]]\nλ = [[1,8 × 10⁻³ × 0,5 × 10⁻³|1,5]] = 6 × 10⁻⁷ m = 600 nm",
+    indice: "Isole λ dans la formule de l'interfrange. Convertis tout en mètres avant de calculer."
+  },
+  {
+    id: "U42-183", difficulte: "moyen", epreuve: "U42", theme: "Interférences et réseaux", session: "complément",
+    question: "Un réseau est éclairé en incidence normale par de la lumière blanche. Que voit-on dans la direction de l'ordre 0 ?",
+    choix: [
+      "De la lumière blanche : toutes les couleurs y sont, non déviées",
+      "Seulement du violet, la couleur la moins déviée",
+      "Seulement du rouge, la couleur la plus déviée",
+      "Rien : l'ordre 0 est toujours éteint"
+    ],
+    bonne: 0,
+    explication: "À l'ordre 0, k = 0 : a × sin i' = 0, donc i' = 0 pour toutes les longueurs d'onde. Toutes les couleurs partent dans la direction du faisceau incident et se superposent : on voit de la lumière blanche. Les spectres colorés apparaissent aux ordres 1, 2…, de part et d'autre.",
+    indice: "Dans la formule du réseau, que vaut sin i' quand k = 0 ? Dépend-il de la longueur d'onde ?"
+  },
+  {
+    id: "U42-184", difficulte: "difficile", epreuve: "U42", theme: "Interférences et réseaux", session: "complément",
+    type: "calcul",
+    question: "Un réseau de 500 traits par millimètre est éclairé par une lumière de 500 nm sous une incidence i = 30°. Formule : a × (sin i' − sin i) = k × λ. Calcule l'angle i' de l'ordre 1, en degrés, à 0,1° près.",
+    reponse: { valeur: 48.6, unite: "°", decimales: 1, signe: false, tolerance: 0.1 },
+    erreurs: [
+      { valeur: 14.5, type: "notion", message: "Tu as oublié sin i. En incidence oblique, a × (sin i' − sin i) = k × λ : on ajoute sin i = 0,5 au terme k × λ / a." }
+    ],
+    explication: "Pas a = [[1|500]] mm = 2 µm.\nsin i' = sin i + [[k × λ|a]] = 0,5 + [[0,5|2]] = 0,75\ni' = arcsin(0,75) = 48,6°",
+    indice: "Isole sin i' : il vaut sin i + kλ/a. Utilise ta calculatrice en degrés pour l'arcsinus."
+  },
+  {
+    id: "U42-185", difficulte: "facile", epreuve: "U42", theme: "Polarisation", session: "complément",
+    question: "Quel phénomène prouve que la lumière est une onde transversale ?",
+    choix: ["La polarisation", "La réfraction", "La réflexion", "La dispersion"],
+    bonne: 0,
+    explication: "Seule une onde transversale (qui vibre perpendiculairement à sa direction de propagation) peut être polarisée : une direction de vibration peut être privilégiée. La réfraction, la réflexion et la dispersion existent aussi pour des ondes longitudinales comme le son.",
+    indice: "Quel phénomène suppose qu'on puisse choisir la direction dans laquelle la lumière vibre ?"
+  },
+  {
+    id: "U42-186", difficulte: "moyen", epreuve: "U42", theme: "Polarisation", session: "complément",
+    type: "calcul",
+    question: "Une lumière polarisée rectilignement traverse un analyseur parfait. On mesure que 36 % de l'intensité ressort. Quel angle fait la direction de l'analyseur avec la polarisation de la lumière ? Donne-le en degrés, à 0,1° près.",
+    reponse: { valeur: 53.1, unite: "°", decimales: 1, signe: false, tolerance: 0.1 },
+    explication: "Loi de Malus : [[I|I₀]] = cos² θ = 0,36\ncos θ = √0,36 = 0,6\nθ = arccos(0,6) = 53,1°",
+    indice: "Résous cos² θ = 0,36 : prends la racine carrée, puis l'arccosinus."
+  },
+  {
+    id: "U42-187", difficulte: "moyen", epreuve: "U42", theme: "Polarisation", session: "complément",
+    question: "À l'incidence de Brewster, quel angle font entre eux le rayon réfléchi et le rayon réfracté ?",
+    choix: ["90°", "180°", "45°", "L'angle limite de réflexion totale"],
+    bonne: 0,
+    explication: "À l'incidence de Brewster, i + r = 90° : les rayons réfléchi et réfracté sont perpendiculaires. C'est ce qui donne la relation tan iB = n. Le rayon réfléchi est alors totalement polarisé.",
+    indice: "Pense à la relation entre l'angle d'incidence et l'angle de réfraction à Brewster."
+  },
+  {
+    id: "U42-188", difficulte: "difficile", epreuve: "U42", theme: "Polarisation", session: "complément",
+    type: "calcul",
+    question: "Un faisceau, dans l'eau (n₁ = 1,33), arrive sur une plaque de verre (n₂ = 1,5). Pour quel angle d'incidence le reflet sur le verre est-il totalement polarisé ? Formule : tan iB = [[n₂|n₁]]. Donne l'angle en degrés, à 0,1° près.",
+    reponse: { valeur: 48.4, unite: "°", decimales: 1, signe: false, tolerance: 0.1 },
+    erreurs: [
+      { valeur: 56.3, type: "notion", message: "Tu as pris l'angle de Brewster air et verre, tan iB = 1,5. Ici la lumière vient de l'eau : tan iB = n₂ / n₁ = 1,5 / 1,33." }
+    ],
+    explication: "tan iB = [[n₂|n₁]] = [[1,5|1,33]] = 1,128\niB = arctan(1,128) = 48,4°",
+    indice: "L'indice du milieu d'où vient la lumière n'est plus 1. Utilise le rapport des deux indices."
+  },
+  {
+    id: "U42-189", difficulte: "facile", epreuve: "U42", theme: "Photométrie", session: "complément",
+    question: "Quelle est l'unité de l'éclairement ?",
+    choix: ["Le lux (lm/m²)", "La candela", "Le lumen", "La candela par mètre carré"],
+    bonne: 0,
+    explication: "L'éclairement est un flux reçu par unité de surface : le lux, c'est un lumen par mètre carré. La candela mesure une intensité (flux par angle solide), le lumen un flux, la candela par mètre carré une luminance.",
+    indice: "L'éclairement se mesure sur une surface : quelle unité est un flux par mètre carré ?"
+  },
+  {
+    id: "U42-190", difficulte: "moyen", epreuve: "U42", theme: "Photométrie", session: "complément",
+    type: "calcul",
+    question: "Une lampe ponctuelle de 120 cd éclaire un plan en incidence normale. On mesure 30 lx. À quelle distance de la lampe se trouve le plan ?",
+    reponse: { valeur: 2, unite: "m", decimales: 0, signe: false },
+    explication: "E = [[I|d²]], donc d² = [[I|E]] = [[120|30]] = 4\nd = √4 = 2 m",
+    indice: "Isole d² dans la loi de Bouguer, puis prends la racine carrée."
+  },
+  {
+    id: "U42-191", difficulte: "moyen", epreuve: "U42", theme: "Photométrie", session: "complément",
+    question: "Une lampe ponctuelle donne 90 lx sur un plan à 2 m, en incidence normale. Quel éclairement donne-t-elle à 3 m ?",
+    choix: ["40 lx", "60 lx", "135 lx", "27 lx"],
+    bonne: 0,
+    explication: "E est inversement proportionnel au carré de la distance : E₂ = E₁ × ([[2|3]])² = 90 × [[4|9]] = 40 lx. 60 lx suppose que E varie comme 1/d. 135 lx suppose que E augmente avec la distance (90 × 3/2). 27 lx suppose que E varie comme 1/d³ (environ 26,7 lx).",
+    indice: "Loi de Bouguer : E est proportionnel à 1/d². Quel est le rapport des carrés des distances ?"
+  },
+  {
+    id: "U42-192", difficulte: "difficile", epreuve: "U42", theme: "Photométrie", session: "complément",
+    type: "calcul",
+    question: "Un spot envoie un flux de 600 lm, réparti uniformément dans un cône d'angle solide 0,5 sr. Quel éclairement donne-t-il à 2 m, en incidence normale ?",
+    reponse: { valeur: 300, unite: "lx", decimales: 0, signe: false },
+    explication: "Intensité : I = [[Φ|Ω]] = [[600|0,5]] = 1 200 cd\nÉclairement : E = [[I|d²]] = [[1 200|2²]] = 300 lx",
+    indice: "Calcule d'abord l'intensité (flux par angle solide), puis applique la loi de Bouguer."
   }
 );
 
