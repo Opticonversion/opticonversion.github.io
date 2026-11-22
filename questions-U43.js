@@ -3137,5 +3137,290 @@ QUESTIONS.push(
   "erreurs": [
     { "valeur": 5, "type": "notion", "message": "Tu n'as compté qu'une seule face. La lentille a deux faces courbes, qui s'ajoutent." }
   ]
+},
+{
+  "id": "U43-284", "epreuve": "U43", "theme": "Chaîne des conjugués", "session": "complément", "difficulte": "difficile",
+  "type": "pose",
+  "question": "Deux lentilles minces : L₁ (f'₁ = 100 mm), puis L₂ (f'₂ = 50 mm) placée 120 mm après L₁. Un objet réel est à 150 mm devant L₁. Trouve l'image finale et le grandissement total, étape par étape.",
+  "etapes": [
+    {
+      "consigne": "Position de l'image intermédiaire O₁A₁ (en mm)",
+      "reponse": { "valeur": 300, "unite": "mm", "decimales": 0, "signe": true },
+      "aide": "[[1|O₁A₁]] = [[1|f'₁]] + [[1|O₁A]], avec O₁A = −150 mm.",
+      "ligne": "[[1|O₁A₁]] = [[1|100]] − [[1|150]] = [[1|300]]\nO₁A₁ = +300 mm"
+    },
+    {
+      "consigne": "Position de A₁ par rapport à L₂, O₂A₁ (en mm)",
+      "reponse": { "valeur": 180, "unite": "mm", "decimales": 0, "signe": true },
+      "aide": "Distance de L₂ à A₁ dans le sens de la lumière : O₂A₁ = O₁A₁ − O₁O₂.",
+      "ligne": "O₂A₁ = 300 − 120 = +180 mm\nA₁ est après L₂ : objet virtuel pour L₂."
+    },
+    {
+      "consigne": "Position de l'image finale O₂A' (en mm, au dixième)",
+      "reponse": { "valeur": 39.1, "unite": "mm", "decimales": 1, "signe": true, "tolerance": 0.1 },
+      "aide": "[[1|O₂A']] = [[1|f'₂]] + [[1|O₂A₁]], avec O₂A₁ positif.",
+      "ligne": "[[1|O₂A']] = [[1|50]] + [[1|180]] = [[230|9 000]]\nO₂A' ≈ +39,1 mm"
+    },
+    {
+      "consigne": "Grandissement total γ (au centième)",
+      "reponse": { "valeur": -0.43, "unite": "", "decimales": 2, "signe": true, "tolerance": 0.015 },
+      "aide": "γ = γ₁ × γ₂, avec γ₁ = [[O₁A₁|O₁A]] et γ₂ = [[O₂A'|O₂A₁]].",
+      "ligne": "γ₁ = [[300|−150]] = −2      γ₂ = [[39,1|180]] ≈ +0,217\nγ ≈ −0,43"
+    }
+  ],
+  "explication": "L'image finale est réelle, à 39,1 mm après L₂. Le grandissement total vaut environ −0,43 : elle est renversée et réduite."
+},
+{
+  "id": "U43-285", "epreuve": "U43", "theme": "Chaîne des conjugués", "session": "complément", "difficulte": "moyen",
+  "question": "Dans une chaîne de deux lentilles, quand l'image A₁ donnée par L₁ est-elle un objet virtuel pour L₂ ?",
+  "choix": [
+    "Quand A₁ se trouve après L₂",
+    "Quand A₁ se trouve avant L₂",
+    "Quand A₁ est au foyer de L₁",
+    "Quand A₁ est une image virtuelle de L₁"
+  ],
+  "bonne": 0,
+  "explication": "Un objet est virtuel lorsque les rayons arrivant sur la lentille convergent vers un point situé après elle. Pour L₂, c'est le cas si A₁ est placé après L₂.",
+  "indice": "Un objet est réel s'il est avant la lentille. Et l'inverse ?"
+},
+{
+  "id": "U43-286", "epreuve": "U43", "theme": "Chaîne des conjugués", "session": "complément", "difficulte": "difficile",
+  "type": "calcul",
+  "question": "Une lentille divergente a une focale image de −50 mm. Un objet virtuel est situé à 25 mm après elle. Où se forme l'image (OA', en mm) ?",
+  "reponse": { "valeur": 50, "unite": "mm", "decimales": 0, "signe": true },
+  "explication": "OA = +25 mm (objet virtuel, après la lentille).\n[[1|OA']] = [[1|f']] + [[1|OA]] = [[1|−50]] + [[1|25]] = [[−1 + 2|50]] = [[1|50]]\nOA' = +50 mm : l'image est réelle, après la lentille.",
+  "indice": "Un objet virtuel a une position positive. Attention aussi au signe de f'.",
+  "erreurs": [
+    { "valeur": -50, "type": "signe", "message": "Un objet virtuel est après la lentille : OA est positif, ce qui change le signe du résultat." }
+  ]
+},
+{
+  "id": "U43-287", "epreuve": "U43", "theme": "Chaîne des conjugués", "session": "complément", "difficulte": "moyen",
+  "question": "Un objet réel est placé à une distance 2f' devant une lentille convergente. Quelle est son image ?",
+  "choix": [
+    "Réelle, renversée, de même taille, à 2f' après la lentille",
+    "Virtuelle, droite, agrandie",
+    "Réelle, droite, de même taille",
+    "À l'infini"
+  ],
+  "bonne": 0,
+  "explication": "[[1|OA']] = [[1|f']] − [[1|2f']] = [[1|2f']], donc OA' = +2f'. Le grandissement vaut [[2f'|−2f']] = −1 : image réelle, renversée, de même taille.",
+  "indice": "Applique la relation de conjugaison avec OA = −2f'."
+},
+{
+  "id": "U43-288", "epreuve": "U43", "theme": "Grossissement et photo", "session": "complément", "difficulte": "difficile",
+  "type": "calcul",
+  "question": "Une lunette astronomique afocale mesure 420 mm de long (distance objectif-oculaire) et a un grossissement de 20. Quelle est la focale de son objectif (en mm) ?",
+  "reponse": { "valeur": 400, "unite": "mm", "decimales": 0, "signe": false },
+  "explication": "Longueur : f'ob + f'oc = 420 mm. Grossissement : f'ob = 20 × f'oc.\n21 × f'oc = 420, donc f'oc = 20 mm et f'ob = 20 × 20 = 400 mm.",
+  "indice": "Deux équations : la somme des focales et leur rapport.",
+  "erreurs": [
+    { "valeur": 20, "type": "notion", "message": "20 mm est la focale de l'oculaire. On demande celle de l'objectif." }
+  ]
+},
+{
+  "id": "U43-289", "epreuve": "U43", "theme": "Étude des champs", "session": "complément", "difficulte": "moyen",
+  "question": "Dans un appareil photo, quel élément joue le rôle de lucarne ?",
+  "choix": [
+    "Le cadre du capteur",
+    "Le diaphragme de l'objectif",
+    "Le miroir du reflex",
+    "Le viseur"
+  ],
+  "bonne": 0,
+  "explication": "Le capteur (ou la pellicule) a des bords : il limite l'étendue de la scène photographiée, comme une lucarne. Le diaphragme de l'objectif, lui, joue le rôle de pupille.",
+  "indice": "Qui limite l'étendue de la scène ? Et qui limite la quantité de lumière ?",
+  "erreurs": {
+    "1": { "type": "notion", "message": "Le diaphragme de l'objectif règle la quantité de lumière : c'est la pupille, pas la lucarne." }
+  }
+},
+{
+  "id": "U43-290", "epreuve": "U43", "theme": "Étude des champs", "session": "complément", "difficulte": "difficile",
+  "question": "On ferme le diaphragme d'un objectif photo. Que devient l'éclairement sur les bords de l'image, par rapport au centre ?",
+  "choix": [
+    "Il devient plus uniforme : le vignetage diminue",
+    "Il devient moins uniforme : le vignetage augmente",
+    "Il ne change pas",
+    "Les bords deviennent noirs"
+  ],
+  "bonne": 0,
+  "explication": "Une pupille plus petite agrandit le champ de pleine lumière : une plus grande part de l'image est éclairée comme le centre. Le vignetage, c'est-à-dire l'assombrissement des bords, diminue.",
+  "indice": "Pense au lien entre taille de la pupille et champ de pleine lumière."
+},
+{
+  "id": "U43-291", "epreuve": "U43", "theme": "Étude des champs", "session": "complément", "difficulte": "moyen",
+  "type": "calcul",
+  "question": "Le cercle oculaire d'une lunette mesure 2,5 mm de diamètre et son grossissement est 24. Quel est le diamètre de l'objectif (en mm) ?",
+  "reponse": { "valeur": 60, "unite": "mm", "decimales": 0, "signe": false },
+  "explication": "Diamètre du cercle oculaire = [[D|G]], donc D = G × diamètre du cercle oculaire = 24 × 2,5 = 60 mm.",
+  "indice": "Le cercle oculaire est l'objectif divisé par le grossissement : inverse cette relation.",
+  "erreurs": [
+    { "valeur": 9.6, "type": "notion", "message": "Tu as divisé 24 par 2,5. L'objectif est plus grand que le cercle oculaire : il faut multiplier." }
+  ]
+},
+{
+  "id": "U43-292", "epreuve": "U43", "theme": "Œil astigmate", "session": "complément", "difficulte": "difficile",
+  "question": "Un astigmate porte l'ordonnance −1,00 (−2,00) à 180°. Quelles sont les réfractions de ses deux méridiens principaux ?",
+  "choix": [
+    "−1,00 δ pour le méridien 180° et −3,00 δ pour le méridien 90°",
+    "−1,00 δ pour le méridien 90° et −3,00 δ pour le méridien 180°",
+    "−2,00 δ et −3,00 δ",
+    "−1,00 δ et −2,00 δ"
+  ],
+  "bonne": 0,
+  "explication": "L'axe du cylindre est la direction où il n'a pas d'effet : le méridien à 180° garde la sphère, −1,00 δ. Le méridien perpendiculaire (90°) reçoit sphère + cylindre : −1,00 + (−2,00) = −3,00 δ.",
+  "indice": "Le cylindre n'agit pas le long de son axe. Dans quelle direction agit-il ?",
+  "erreurs": {
+    "1": { "type": "notion", "message": "Tu as inversé les méridiens : le cylindre n'agit pas dans la direction de son axe." }
+  }
+},
+{
+  "id": "U43-293", "epreuve": "U43", "theme": "Œil astigmate", "session": "complément", "difficulte": "moyen",
+  "type": "calcul",
+  "question": "Un astigmate a pour réfractions −2,00 δ et −5,00 δ dans ses deux méridiens. Quel écart (en cm) sépare ses deux remotums ?",
+  "reponse": { "valeur": 30, "unite": "cm", "decimales": 0, "signe": false },
+  "explication": "Remotum du premier méridien : [[1|2,00]] = 50 cm. Remotum du second : [[1|5,00]] = 20 cm.\nÉcart : 50 − 20 = 30 cm.",
+  "indice": "Calcule chaque remotum avec [[1|R]], puis fais la différence.",
+  "erreurs": [
+    { "valeur": 0.3, "type": "unite", "message": "0,3 est en mètres. Convertis en centimètres." }
+  ]
+},
+{
+  "id": "U43-294", "epreuve": "U43", "theme": "Œil astigmate", "session": "complément", "difficulte": "difficile",
+  "type": "calcul",
+  "question": "Un œil a pour réfractions principales −1,00 δ et −3,00 δ. Quelle réfraction correspond au cercle de moindre diffusion (en δ, au centième) ?",
+  "reponse": { "valeur": -2, "unite": "δ", "decimales": 2, "signe": true },
+  "explication": "Le cercle de moindre diffusion correspond à la moyenne des deux réfractions : [[−1,00 + (−3,00)|2]] = −2,00 δ. On l'appelle aussi sphère équivalente.",
+  "indice": "Le cercle de moindre diffusion est au milieu, en dioptries, des deux focales.",
+  "erreurs": [
+    { "valeur": -4, "type": "notion", "message": "Tu as additionné les deux réfractions. Il faut prendre leur moyenne." }
+  ]
+},
+{
+  "id": "U43-295", "epreuve": "U43", "theme": "Skiascopie", "session": "complément", "difficulte": "moyen",
+  "type": "calcul",
+  "question": "En skiascopie à 1 m, le méridien vertical d'un œil est neutralisé par un verre de +2,50 δ. Quelle est la réfraction de ce méridien (en δ, au centième) ?",
+  "reponse": { "valeur": 1.5, "unite": "δ", "decimales": 2, "signe": true },
+  "explication": "R = verre − [[1|d]] = +2,50 − [[1|1]] = +2,50 − 1,00 = +1,50 δ.",
+  "indice": "R = verre au point neutre − distance de travail en dioptries.",
+  "erreurs": [
+    { "valeur": 3.5, "type": "signe", "message": "Tu as ajouté la distance de travail. Elle se retranche." }
+  ]
+},
+{
+  "id": "U43-296", "epreuve": "U43", "theme": "Skiascopie", "session": "complément", "difficulte": "difficile",
+  "question": "Un même œil est examiné en skiascopie à 50 cm, puis à 1 m. De combien le verre du point neutre change-t-il ?",
+  "choix": [
+    "Il diminue de 1,00 δ",
+    "Il augmente de 1,00 δ",
+    "Il diminue de 0,50 δ",
+    "Il ne change pas"
+  ],
+  "bonne": 0,
+  "explication": "Verre au point neutre = R + [[1|d]]. À 50 cm : R + 2,00 δ. À 1 m : R + 1,00 δ. Le verre diminue donc de 1,00 δ quand on s'éloigne.",
+  "indice": "Écris le verre du point neutre avec la formule pour chaque distance, puis compare.",
+  "erreurs": {
+    "1": { "type": "signe", "message": "Compare 1/d aux deux distances et regarde dans quel sens il change quand on s'éloigne." }
+  }
+},
+{
+  "id": "U43-297", "epreuve": "U43", "theme": "Frontofocomètre", "session": "complément", "difficulte": "moyen",
+  "type": "calcul",
+  "question": "Au frontofocomètre, un verre montre un effet prismatique vertical de 1,0 Δ et un effet horizontal de 1,5 Δ. Quel est l'effet prismatique résultant (en Δ, au dixième) ?",
+  "reponse": { "valeur": 1.8, "unite": "Δ", "decimales": 1, "signe": false },
+  "explication": "Les deux effets sont perpendiculaires : P = √(1,0² + 1,5²) = √3,25 ≈ 1,8 Δ.",
+  "indice": "Deux effets perpendiculaires se composent comme les côtés d'un triangle rectangle.",
+  "erreurs": [
+    { "valeur": 2.5, "type": "notion", "message": "Tu as additionné les deux effets. Ils sont perpendiculaires : ils se composent avec le théorème de Pythagore." }
+  ]
+},
+{
+  "id": "U43-298", "epreuve": "U43", "theme": "Frontofocomètre", "session": "complément", "difficulte": "moyen",
+  "question": "Au frontofocomètre, comment repère-t-on le centre optique d'un verre ?",
+  "choix": [
+    "C'est le point où la mire est centrée sur le réticule, sans effet prismatique",
+    "C'est le point où la mire est la plus grosse",
+    "C'est toujours le centre géométrique du verre",
+    "C'est le point où la mire disparaît"
+  ],
+  "bonne": 0,
+  "explication": "Au centre optique, il n'y a pas d'effet prismatique : la mire reste centrée sur le réticule. On déplace le verre jusqu'à obtenir ce centrage.",
+  "indice": "Au centre optique, le verre ne dévie pas les rayons."
+},
+{
+  "id": "U43-299", "epreuve": "U43", "theme": "Œil et instrument", "session": "complément", "difficulte": "moyen",
+  "type": "calcul",
+  "question": "Une loupe de focale 50 mm est utilisée avec un objet placé à 40 mm devant elle. Où se forme l'image (OA', en mm) ?",
+  "reponse": { "valeur": -200, "unite": "mm", "decimales": 0, "signe": true },
+  "explication": "[[1|OA']] = [[1|50]] − [[1|40]] = [[4 − 5|200]] = [[−1|200]]\nOA' = −200 mm : l'image est virtuelle, à 200 mm devant la loupe.",
+  "indice": "Relation de conjugaison avec OA = −40 mm.",
+  "erreurs": [
+    { "valeur": 200, "type": "signe", "message": "L'objet est entre le foyer et la loupe : l'image est virtuelle, donc avant la loupe, avec une position négative." }
+  ]
+},
+{
+  "id": "U43-300", "epreuve": "U43", "theme": "Œil et instrument", "session": "complément", "difficulte": "moyen",
+  "question": "Par rapport au réglage pour un emmétrope, comment règle-t-on un oculaire pour un utilisateur hypermétrope ?",
+  "choix": [
+    "On l'éloigne de l'image intermédiaire",
+    "On le rapproche de l'image intermédiaire",
+    "On ne le déplace pas",
+    "On le remplace par un oculaire divergent"
+  ],
+  "bonne": 0,
+  "explication": "L'hypermétrope a son remotum derrière l'œil : l'image finale doit être virtuelle derrière l'œil, ce qui s'obtient en éloignant l'oculaire de l'image intermédiaire. C'est le contraire du myope.",
+  "indice": "Pense au contraire du réglage pour un myope."
+},
+{
+  "id": "U43-301", "epreuve": "U43", "theme": "Œil et instrument", "session": "complément", "difficulte": "moyen",
+  "type": "calcul",
+  "question": "Un myope de −2,50 δ regarde, sans lunettes, une image située à 25 cm devant son œil. Quelle accommodation lui faut-il (en δ, au centième) ?",
+  "reponse": { "valeur": 1.5, "unite": "δ", "decimales": 2, "signe": false },
+  "explication": "Vergence de l'image : [[1|0,25]] = 4,00 δ. Le remotum du myope est déjà à 40 cm (2,50 δ).\nAccommodation = 4,00 − 2,50 = 1,50 δ.",
+  "indice": "Compare la vergence de l'image à celle du remotum.",
+  "erreurs": [
+    { "valeur": 4, "type": "notion", "message": "Tu as ignoré la myopie, qui fournit déjà une partie de la puissance nécessaire." }
+  ]
+},
+{
+  "id": "U43-302", "epreuve": "U43", "theme": "Grossissement et photo", "session": "complément", "difficulte": "moyen",
+  "type": "calcul",
+  "question": "Dans un microscope, l'intervalle optique est de 160 mm et la focale de l'objectif de 8 mm. Quel est le grandissement de l'objectif (en valeur absolue) ?",
+  "reponse": { "valeur": 20, "unite": "", "decimales": 0, "signe": false },
+  "explication": "∣γ∣ = [[Δ|f'ob]] = [[160|8]] = 20.",
+  "indice": "Le grandissement de l'objectif est l'intervalle optique divisé par sa focale.",
+  "erreurs": [
+    { "valeur": 0.05, "type": "notion", "message": "Tu as divisé la focale par l'intervalle optique. C'est l'inverse." }
+  ]
+},
+{
+  "id": "U43-303", "epreuve": "U43", "theme": "Grossissement et photo", "session": "complément", "difficulte": "facile",
+  "type": "calcul",
+  "question": "Un objectif de focale 135 mm a une pupille d'entrée de 27 mm de diamètre. Quel est son nombre d'ouverture N (f/N) ?",
+  "reponse": { "valeur": 5, "unite": "", "decimales": 0, "signe": false },
+  "explication": "N = [[f'|d]] = [[135|27]] = 5. L'objectif est ouvert à f/5.",
+  "indice": "Nombre d'ouverture = focale divisée par le diamètre de la pupille d'entrée.",
+  "erreurs": [
+    { "valeur": 0.2, "type": "notion", "message": "Tu as divisé le diamètre par la focale. Le nombre d'ouverture est l'inverse." }
+  ]
+},
+{
+  "id": "U43-304", "epreuve": "U43", "theme": "Mécanismes de réglage", "session": "complément", "difficulte": "moyen",
+  "type": "calcul",
+  "question": "Une vis micrométrique a un pas de 0,5 mm et un tambour de 50 graduations. De combien (en mm) la vis avance-t-elle quand le tambour tourne d'une graduation ?",
+  "reponse": { "valeur": 0.01, "unite": "mm", "decimales": 2, "signe": false },
+  "explication": "Un tour complet (50 graduations) fait avancer la vis de 0,5 mm. Une graduation : [[0,5|50]] = 0,01 mm.",
+  "indice": "Divise l'avance d'un tour par le nombre de graduations.",
+  "erreurs": [
+    { "valeur": 0.5, "type": "notion", "message": "0,5 mm est l'avance d'un tour complet. Une graduation en représente une petite fraction." }
+  ]
+},
+{
+  "id": "U43-305", "epreuve": "U43", "theme": "Vergences et focales", "session": "complément", "difficulte": "facile",
+  "question": "Pour une lentille mince placée dans l'air, que vaut la distance focale objet f par rapport à la distance focale image f' ?",
+  "choix": ["f = −f'", "f = f'", "f = 2f'", "f = 1/f'"],
+  "bonne": 0,
+  "explication": "Dans l'air, le foyer objet et le foyer image sont symétriques par rapport à la lentille : f = −f'. Le foyer objet d'une lentille convergente est avant, son foyer image après.",
+  "indice": "Les deux foyers sont de part et d'autre de la lentille, à la même distance."
 }
 );
