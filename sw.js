@@ -13,7 +13,7 @@
 // =====================================================================
 
 // <versionner> (partie écrite par versionner.py, ne pas modifier à la main)
-const VERSION = "be154c5186";
+const VERSION = "8198f55dc2";
 const FICHIERS = [
   "appli.js?v=0724163c",
   "atelier-calculatrice.js?v=6e07c21a",
@@ -33,11 +33,11 @@ const FICHIERS = [
   "definitions-U5.js?v=aafeea8f",
   "definitions.html",
   "definitions.js?v=eb1e9b79",
-  "entrainement-U3.js?v=5783bb52",
-  "entrainement-U41.js?v=f3af2472",
-  "entrainement-U42.js?v=b592846f",
-  "entrainement-U43.js?v=201e28d1",
-  "entrainement-U5.js?v=f1c1f10d",
+  "entrainement-U3.js?v=8a9403ec",
+  "entrainement-U41.js?v=2ff5d7d1",
+  "entrainement-U42.js?v=b8336c15",
+  "entrainement-U43.js?v=07bcc848",
+  "entrainement-U5.js?v=069a3eeb",
   "epreuves.js?v=cc645427",
   "essentiel.html",
   "essentiel.js?v=7e8432f5",
@@ -264,11 +264,11 @@ const FICHIERS = [
   "polices/bodoni-moda-italique.woff2",
   "polices/bodoni-moda.woff2",
   "qcm.html",
-  "questions-U3.js?v=a72553e5",
-  "questions-U41.js?v=fe250b61",
-  "questions-U42.js?v=57336814",
-  "questions-U43.js?v=d0e7f2c6",
-  "questions-U5.js?v=75c9abec",
+  "questions-U3.js?v=db2bd6cb",
+  "questions-U41.js?v=7a11c243",
+  "questions-U42.js?v=49471ad6",
+  "questions-U43.js?v=ea60cae6",
+  "questions-U5.js?v=952a7f14",
   "rythme.js?v=8bba5e53",
   "sons.js?v=355500ef",
   "sons/faux.mp3",

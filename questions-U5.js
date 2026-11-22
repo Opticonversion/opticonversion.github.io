@@ -47,7 +47,7 @@ QUESTIONS.push(
     id: "U5-003", epreuve: "U5", theme: "Worth", session: "2023",
     difficulte: "facile",
     question: "Au test de Worth, le sujet voit 5 symboles. Que met-on en évidence ?",
-    choix: ["Une neutralisation", "Une diplopie : vision simultanée présente, mais pas de fusion", "Une vision binoculaire normale", "Une amblyopie"],
+    choix: ["Une neutralisation d'un œil : un seul filtre est perçu", "Une diplopie : vision simultanée présente, sans fusion des images", "Une vision binoculaire normale, avec fusion des deux images", "Une amblyopie profonde de l'un des deux yeux du sujet"],
     bonne: 1,
     explication: "Les marqueurs des deux yeux sont vus : le 1er degré (vision simultanée) est présent. L'élément fusionnel est vu double : le 2e degré (fusion) manque. Le sens de la diplopie (homonyme ou croisée) indique ensuite la phorie associée.",
     surLaCopie: "Je compte 5 symboles : les deux yeux voient leurs symboles (vision simultanée, 1er degré) mais l'élément fusionnel est vu double. La fusion (2e degré) manque : le sujet a une diplopie. Je précise ensuite le sens de la diplopie pour trouver la phorie.",
@@ -234,7 +234,7 @@ QUESTIONS.push(
     id: "U5-021", epreuve: "U5", theme: "Anisométropie", session: "2024",
     difficulte: "moyen",
     question: "Pourquoi un anisométrope équipé en lentilles ne voit-il plus double quand il regarde vers le haut ?",
-    choix: ["Les lentilles compensent la phorie", "La lentille suit l'œil : la ligne de regard reste centrée, pas d'effet prismatique différentiel", "Les lentilles augmentent les réserves fusionnelles", "Les lentilles suppriment l'anisométropie"],
+    choix: ["Les lentilles de contact compensent la phorie verticale du sujet", "La lentille suit l'œil : le regard reste centré, aucun prisme différentiel", "Les lentilles de contact augmentent les réserves fusionnelles du sujet", "Les lentilles de contact suppriment définitivement l'anisométropie"],
     bonne: 1,
     explication: "Vers le haut, les verres de puissances différentes créent un prisme vertical différent sur chaque œil (règle de Prentice), d'où une hyperphorie qui peut donner une diplopie. La lentille accompagne l'œil : le regard passe toujours par son centre, aucun prisme ne s'ajoute et le sujet ne voit plus double.",
     surLaCopie: "Vers le haut, les verres de puissances différentes créent un prisme vertical différent sur chaque œil (règle de Prentice), d'où une hyperphorie qui peut donner une diplopie. La lentille accompagne l'œil : le regard passe toujours par son centre, aucun prisme ne s'ajoute et le sujet ne voit plus double.",
@@ -244,7 +244,7 @@ QUESTIONS.push(
     id: "U5-022", epreuve: "U5", theme: "Anisométropie", session: "2023",
     difficulte: "facile",
     question: "Un enfant anisométrope non compensé développe une amblyopie fonctionnelle de l'œil le plus amétrope. Pourquoi ?",
-    choix: ["Une lésion de la rétine", "L'image floue de cet œil pendant la période de maturation visuelle", "Un glaucome congénital", "Une cataracte"],
+    choix: ["Une lésion organique de la rétine de cet œil, présente dès la naissance", "L'image floue de cet œil pendant la maturation visuelle de l'enfant", "Un glaucome congénital non dépisté, qui détruit le nerf optique", "Une cataracte congénitale qui opacifie le cristallin de cet œil"],
     bonne: 1,
     explication: "Amblyopie fonctionnelle = baisse d'acuité liée à la non-utilisation d'un œil pendant la période de maturation visuelle, sans lésion organique. Le cerveau privilégie l'image nette de l'autre œil. Si chaque œil est utilisé à son tour (un pour le loin, l'autre pour le près), l'amblyopie peut ne pas apparaître.",
     surLaCopie: "L'œil le plus amétrope donne une image floue pendant la période de maturation visuelle. Le cerveau privilégie l'image nette de l'autre œil et n'utilise plus le premier. Sans lésion organique, l'acuité de cet œil reste basse : c'est une amblyopie fonctionnelle.",
@@ -286,7 +286,7 @@ QUESTIONS.push(
     id: "U5-026", epreuve: "U5", theme: "Examen préliminaire", session: "2024",
     difficulte: "moyen",
     question: "Pourquoi myopise-t-on légèrement le sujet avant le cadran de Parent ?",
-    choix: ["Pour mesurer l'acuité", "Pour placer les deux focales en avant de la rétine et empêcher l'accommodation de fausser le test", "Pour mesurer la phorie", "Pour tester la vision des couleurs"],
+    choix: ["Pour mesurer l'acuité visuelle de chaque œil avant de commencer le test", "Pour placer les focales avant la rétine : l'accommodation ne fausse plus le test", "Pour mesurer la phorie du sujet avant de passer au cadran de lignes", "Pour tester la vision des couleurs avant l'examen du cylindre"],
     bonne: 1,
     explication: "Avec une défocalisation en avant de la rétine, la ligne la plus noire correspond toujours à la focale arrière, et accommoder ne ferait qu'aggraver le flou : le sujet n'a pas intérêt à accommoder.",
     surLaCopie: "On myopise légèrement pour placer les deux focales en avant de la rétine. L'accommodation ne ferait alors qu'augmenter le flou : le sujet n'a pas intérêt à accommoder, et la ligne la plus noire est bien la focale arrière.",
@@ -466,7 +466,7 @@ QUESTIONS.push(
     id: "U5-044", epreuve: "U5", theme: "Pathologie", session: "complément",
     difficulte: "facile",
     question: "Un sujet de 70 ans devient plus myope et peut de nouveau lire sans lunettes. Cela évoque :",
-    choix: ["Un glaucome", "Une cataracte nucléaire (myopie d'indice)", "Une DMLA", "Un décollement de rétine"],
+    choix: ["Un glaucome chronique à angle ouvert, avec une PIO élevée", "Une cataracte nucléaire : le cristallin plus dense rend l'œil plus myope", "Une DMLA, avec une atteinte de la vision centrale et des lignes déformées", "Un décollement de rétine, avec des éclairs et un voile dans le champ"],
     bonne: 1,
     explication: "La cataracte (opacification du cristallin) nucléaire augmente l'indice du cristallin : l'œil devient plus myope. Autres symptômes : baisse d'acuité, sensation de brouillard, photophobie (éblouissement), diplopie monoculaire, couleurs altérées.",
     indice: "Si le noyau du cristallin devient plus dense, sa puissance augmente. Un œil plus puissant devient plus… ? Et le presbyte retrouve sa vision de près."
@@ -497,7 +497,7 @@ QUESTIONS.push(
     etape: 2,
     contexte: "Sans lunettes, test de Worth à 40 cm, filtre rouge sur l'OD : il ne voit que 2 symboles rouges.",
     question: "Conclusion, et pourquoi cet œil-là ?",
-    choix: ["Neutralisation de l'OG, dont l'image est la plus floue à 40 cm", "Neutralisation de l'OD, l'œil le moins myope", "Diplopie : vision simultanée sans fusion", "Vision binoculaire normale avec dominance de l'OD"],
+    choix: ["Neutralisation de l'OG, dont l'image est la plus floue à 40 cm", "Neutralisation de l'OD, l'œil le moins myope des deux yeux du sujet", "Diplopie : vision simultanée sans fusion, avec cinq symboles perçus", "Vision binoculaire normale avec dominance de l'OD, quatre symboles perçus"],
     bonne: 0,
     explication: "Seul l'œil au filtre rouge (OD) voit : l'OG est neutralisé. Sans lunettes, l'OG très myope a son remotum plus près que 40 cm : son image est floue, et le cerveau supprime l'image la plus floue. Avec la compensation, les images s'équilibrent et la vision simultanée peut revenir.",
     indice: "Quel filtre est devant chaque œil ? Puis demande-toi lequel des deux yeux voit le plus flou à 40 cm sans lunettes."
@@ -555,7 +555,7 @@ QUESTIONS.push(
     cas: "CAS-U5-01",
     etape: 6,
     question: "Pourquoi lui proposer des lentilles de contact ?",
-    choix: ["La lentille, posée sur l'œil, réduit fortement l'aniséiconie de puissance et suit le regard : plus d'effet prismatique différentiel", "Les lentilles changent la longueur de l'œil et suppriment l'anisométropie", "Les lentilles compensent l'exophorie de près", "Les lentilles augmentent les réserves fusionnelles"],
+    choix: ["La lentille, posée sur l'œil, réduit l'aniséiconie et suit le regard : plus de prisme différentiel", "Les lentilles changent la longueur de l'œil et suppriment ainsi l'anisométropie du sujet", "Les lentilles compensent l'exophorie de près du sujet, par un effet prismatique propre", "Les lentilles augmentent les réserves fusionnelles du sujet, ce qui supprime la diplopie"],
     bonne: 0,
     explication: "L'aniséiconie induite dépend de la distance compensation-œil : de 15 mm en lunettes, elle passe à moins de 2 mm en lentilles et devient très faible. La lentille suit l'œil, donc le regard reste centré : plus de prisme différentiel. La fusion est facilitée, ce qui répond à la plainte.",
     indice: "De quoi dépend l'aniséiconie induite ? Et que devient le décentrement quand la compensation bouge avec l'œil ?"
@@ -630,7 +630,7 @@ QUESTIONS.push(
     cas: "CAS-U5-02",
     etape: 5,
     question: "Quel lien entre ces résultats et ses maux de tête en lecture ?",
-    choix: ["Sous-compensée, elle accommode trop ; la convergence accommodative la fait converger trop : compenser la sphère résiduelle devrait réduire l'ésophorie", "Elle est exophore : il faut des prismes base externe", "L'ésophorie vient d'une myopie non compensée : il faut ajouter du négatif", "Les maux de tête viennent d'une tropie : il faut l'orienter en orthoptie"],
+    choix: ["Sous-compensée, elle accommode trop et converge trop : compenser la sphère devrait réduire l'ésophorie", "Elle est exophore : il lui faut des prismes base externe pour soulager sa convergence en lecture", "L'ésophorie vient d'une myopie non compensée : il faut ajouter du négatif aux deux yeux", "Les maux de tête viennent d'une tropie intermittente : il faut l'orienter en orthoptie pour une rééducation"],
     bonne: 0,
     explication: "L'hypermétropie latente oblige à accommoder davantage (3,50 δ au lieu de 2,50 δ). L'accommodation entraîne de la convergence (convergence accommodative) : les yeux convergent trop, d'où l'ésophorie de près et la fatigue. Compenser les +1,00 manquants diminue l'accommodation, donc l'ésophorie.",
     indice: "Accommodation et convergence sont liées. Si elle accommode trop, que font ses yeux en convergence ?"
@@ -644,7 +644,7 @@ QUESTIONS.push(
     theme: "Masquage et phories",
     session: "complément",
     question: "Au démasquage de l'OG, mouvement temporo-nasal ; rien au masquage. Quelle rédaction est juste et complète ?",
-    choix: ["C'est une exophorie.", "Mouvement temporo-nasal au démasquage : c'est une ésophorie, puisque l'œil va vers le nez.", "Au démasquage, l'OG revient vers le nez, ce qui montre qu'il était dévié vers la tempe sous le cache.", "Rien au masquage : pas de tropie. Au démasquage, l'OG revient vers le nez : il était dévié vers la tempe, c'est une exophorie."],
+    choix: ["C'est une exophorie, puisque l'OG est dévié vers la tempe.", "Mouvement temporo-nasal au démasquage : c'est une ésophorie, puisque l'œil va vers le nez, au démasquage comme au masquage.", "Au démasquage, l'OG revient vers le nez, ce qui montre qu'il était dévié vers la tempe sous le cache, sans autre conclusion.", "Rien au masquage : pas de tropie. L'OG revient vers le nez au démasquage : dévié vers la tempe, c'est une exophorie."],
     bonne: 3,
     explication: "Une bonne rédaction donne l'argument ET la conclusion. « C'est une exophorie » seul n'a pas d'argument ; la phrase qui explique le mouvement sans conclure est incomplète ; celle qui conclut à une ésophorie se trompe de sens (l'œil revient vers le nez, il était parti vers la tempe).",
     surLaCopie: "Rien au masquage : il n'y a pas de tropie. Au démasquage l'OG revient vers le nez, il était donc parti vers la tempe sous le cache. Je conclus à une exophorie de l'OG.",
@@ -657,7 +657,7 @@ QUESTIONS.push(
     theme: "Lentilles",
     session: "complément",
     question: "BUT mesuré : 7 s. Quelle rédaction est juste et complète ?",
-    choix: ["La norme du BUT est de 10 à 20 s et le sujet est à 7 s.", "BUT de 7 s, sous la norme de 10 à 20 s : le film lacrymal est instable, une lentille souple hydrogel est déconseillée.", "Le BUT est trop court.", "BUT de 7 s : il est normal, car supérieur à 5 s."],
+    choix: ["La norme du BUT est de 10 à 20 s et le sujet est à 7 s, ce qui est donc un résultat à noter", "BUT de 7 s, sous la norme de 10 à 20 s : film instable, souple hydrogel déconseillée", "Le BUT est trop court, ce qui est un résultat à signaler dans le dossier de la cliente", "BUT de 7 s : il est normal, car supérieur à 5 s, donc aucune précaution pour la lentille"],
     bonne: 1,
     explication: "La rédaction attendue : valeur du sujet, norme, comparaison, conséquence. La phrase qui compare sans conclure est incomplète, « le BUT est trop court » conclut sans norme, et celle qui juge 7 s normal utilise une mauvaise norme (5 s concerne le film pré-lentille, pas le BUT).",
     surLaCopie: "Le BUT mesuré est de 7 s. La norme est de 10 à 20 s. Il est sous la norme : le film lacrymal est instable, ce qui contre-indique les lentilles souples hydrogel classiques (certains silicone-hydrogel restent possibles).",
@@ -670,7 +670,7 @@ QUESTIONS.push(
     theme: "Anisométropie",
     session: "complément",
     question: "OD −1,00, OG −6,00, anisométropie de puissance. Pourquoi conseiller des lentilles ? Quelle rédaction est juste et complète ?",
-    choix: ["Les lentilles corrigent l'anisométropie, car elles modifient la longueur de l'œil.", "L'aniséiconie induite dépend de la distance entre la compensation et l'œil, et la lentille est posée sur la cornée.", "L'aniséiconie induite dépend de la distance compensation-œil : la lentille, posée sur la cornée, la réduit fortement. Les lentilles sont donc conseillées.", "Les lentilles sont la meilleure solution pour un anisométrope."],
+    choix: ["Les lentilles corrigent l'anisométropie, car elles modifient la longueur de l'œil.", "L'aniséiconie induite dépend de la distance entre la compensation et l'œil, et la lentille est posée sur la cornée.", "L'aniséiconie induite dépend de la distance compensation-œil : la lentille posée sur la cornée la réduit. Je conseille donc des lentilles.", "Les lentilles sont la meilleure solution pour un anisométrope, quelle que soit la cause de l'anisométropie."],
     bonne: 2,
     explication: "La bonne rédaction relie la cause (distance compensation-œil) à l'effet (aniséiconie réduite) et conclut. La phrase qui explique sans conclure est incomplète, celle qui conclut sans argument n'est pas vraie pour une anisométropie axile, et celle qui parle de longueur de l'œil est fausse : une lentille ne change pas la longueur de l'œil.",
     surLaCopie: "L'aniséiconie induite par les lunettes dépend de la distance compensation-œil. En lentilles, cette distance est presque nulle : l'aniséiconie est beaucoup plus faible. Je conseille donc les lentilles, pour une anisométropie de puissance.",
@@ -683,7 +683,7 @@ QUESTIONS.push(
     theme: "Examen préliminaire",
     session: "complément",
     question: "Sujet légèrement myopisé : au cadran de Parent, la ligne 12h-6h est la plus noire. Quelle justification de l'axe du cylindre négatif est juste ?",
-    choix: ["Ligne 12h-6h : on prend le plus petit chiffre, 6 × 30 = 180°.", "La ligne la plus noire correspond à la focale arrière, qui est ici verticale.", "Sujet myopisé : les deux focales sont en avant de la rétine, la ligne la plus noire est la focale arrière, verticale. L'axe du cylindre négatif lui est perpendiculaire : 180°.", "L'axe du cylindre négatif est à 180°."],
+    choix: ["Sur la ligne 12h-6h, on prend le plus petit chiffre, 6 × 30 = 180°, ce qui donne l'axe cherché.", "La ligne la plus noire correspond à la focale arrière, qui est ici verticale, mais sans conclure sur l'axe.", "Sujet myopisé : la ligne la plus noire est la focale arrière, verticale. L'axe du cylindre négatif lui est perpendiculaire : 180°.", "L'axe du cylindre négatif est à 180°, sans justification de la ligne observée au cadran de Parent."],
     bonne: 2,
     explication: "La justification attendue s'appuie sur la focale arrière, puis conclut sur l'axe. Le calcul « × 30 » donne le bon chiffre mais n'est pas accepté comme justification ; la phrase qui s'arrête à la focale arrière n'a pas de conclusion ; celle qui donne seulement 180° n'a pas d'argument.",
     surLaCopie: "Le sujet est myopisé : les deux focales sont en avant de la rétine et la ligne vue la plus noire est parallèle à la focale arrière. Elle est verticale. L'axe du cylindre négatif est perpendiculaire à cette ligne : horizontal, soit 180°.",
@@ -829,7 +829,7 @@ QUESTIONS.push(
     theme: "Masquage et phories",
     session: "complément",
     question: "Au masquage de l'OD ou de l'OG, aucun mouvement. Au démasquage de l'OG, l'œil descend pour reprendre la fixation. Quelle rédaction est juste et complète ?",
-    choix: ["Pas de mouvement au masquage : pas de tropie. Au démasquage l'OG redescend, donc sous le cache il était remonté : hyperphorie de l'OG.", "Pas de mouvement au masquage, mais l'OG bouge au démasquage : hypertropie de l'OG.", "L'œil descend au démasquage, donc il était trop bas sous le cache : hypophorie de l'OG.", "Pas de tropie. L'OG descend au démasquage : c'est une hyperphorie de l'OD."],
+    choix: ["Pas de mouvement au masquage : pas de tropie. L'OG redescend au démasquage : il était remonté, hyperphorie de l'OG.", "Pas de mouvement au masquage, mais l'OG bouge au démasquage : hypertropie de l'OG, manifeste même sans cache.", "L'œil descend au démasquage, donc il était trop bas sous le cache : hypophorie de l'OG, qui reste latente.", "Pas de tropie. L'OG descend au démasquage : c'est une hyperphorie de l'OD, qui se révèle sous le cache."],
     bonne: 0,
     explication: "Pas de mouvement au masquage : pas de tropie. Le mouvement n'apparaît qu'au démasquage : c'est une phorie. L'œil revient en bas pour fixer, donc sous le cache il s'était dirigé vers le haut : hyperphorie de l'OG. La proposition qui conclut à une hyperphorie de l'OD désigne le mauvais œil ; celle qui parle d'hypertropie confond tropie et phorie ; celle qui parle d'hypophorie inverse le raisonnement.",
     indice: "Une bonne rédaction donne : le résultat du masquage, celui du démasquage, la conclusion, avec le bon sens."
@@ -853,7 +853,7 @@ QUESTIONS.push(
     theme: "Anisométropie",
     session: "complément",
     question: "Un anisométrope (OD −1,00, OG −5,00) porte des lunettes et voit double en lisant, pas de loin. Quelle justification est juste et complète ?",
-    choix: ["En lecture, le regard descend sous les centres optiques. Les deux verres n'ont pas la même puissance : les effets prismatiques verticaux diffèrent aux deux yeux, d'où une diplopie verticale.", "En lecture, les prismes sont égaux et de sens opposés, donc ils s'annulent et la diplopie est horizontale.", "En lecture, la distance verre-œil change et l'aniséiconie augmente, d'où la diplopie.", "En lecture, les deux yeux accommodent de façon différente, ce qui crée une diplopie verticale."],
+    choix: ["En lecture, le regard descend sous les centres optiques ; les verres ayant des puissances différentes, les prismes verticaux diffèrent : diplopie verticale", "En lecture, les prismes sont égaux et de sens opposés, donc ils s'annulent ; la diplopie est alors horizontale et présente de loin aussi", "En lecture, la distance verre-œil change et l'aniséiconie augmente, ce qui suffit à expliquer la diplopie qui n'existe pas de loin", "En lecture, les deux yeux accommodent de façon différente, ce qui crée une diplopie verticale seulement de près"],
     bonne: 0,
     explication: "Prentice : l'effet prismatique d'un verre vaut décentrement × puissance. En lecture le regard descend et traverse chaque verre loin de son centre optique, mais les deux verres n'ont pas la même puissance : les effets verticaux sont inégaux. La différence oblige les yeux à se désaligner verticalement : diplopie verticale, présente seulement en regard bas.",
     indice: "Le signe est « seulement en lecture ». Qu'est-ce qui change quand le regard descend, et pourquoi aux deux yeux de façon différente ?"
@@ -865,7 +865,7 @@ QUESTIONS.push(
     theme: "Examen préliminaire",
     session: "complément",
     question: "Un enfant de 9 ans a −2,50 à l'autoréfractomètre, mais ses acuités sont meilleures qu'attendu. Quelle justification est juste et complète pour ne pas commander −2,50 ?",
-    choix: ["L'enfant a de la myopie nocturne : il faut ajouter +0,50 sans autre mesure.", "L'appareil sous-estime la myopie : on commande une valeur plus forte.", "L'enfant accommode devant l'appareil : la myopie est surestimée. On contrôle par une mesure subjective avec brouillage et on confronte aux acuités.", "L'appareil est toujours exact chez l'enfant, mais la monture doit être ajustée."],
+    choix: ["L'enfant a de la myopie nocturne : il faut ajouter +0,50 sans autre mesure, et commander la valeur ainsi obtenue.", "L'appareil sous-estime la myopie : on commande donc une valeur de compensation plus forte que celle du ticket.", "L'enfant accommode devant l'appareil : myopie surestimée. Contrôle subjectif avec brouillage, puis confrontation aux acuités.", "L'appareil est toujours exact chez l'enfant, mais la monture doit être ajustée avant de commander les verres."],
     bonne: 2,
     explication: "Devant l'autoréfractomètre, le sujet accommode souvent (accommodation instrumentale), surtout un enfant : la myopie est surestimée. La valeur sert de point de départ, jamais de compensation finale. On la vérifie en subjectif, avec brouillage, et on confronte aux acuités.",
     indice: "Que fait l'œil d'un enfant quand il regarde dans l'appareil ?"
@@ -877,7 +877,7 @@ QUESTIONS.push(
     theme: "Réfraction",
     session: "complément",
     question: "En réfraction subjective, plusieurs sphères donnent la même meilleure acuité. Laquelle retient-on, et pourquoi ?",
-    choix: ["La plus négative, pour qu'il voie le plus net possible.", "La plus positive, car elle donne toujours une acuité de 10/10.", "La plus positive (ou la moins négative), pour ne pas faire accommoder le sujet.", "La plus négative, car elle relâche l'accommodation."],
+    choix: ["La plus négative, pour qu'il voie le plus net possible de loin.", "La plus positive, car elle donne toujours une acuité de 10/10 au sujet.", "La plus positive (ou la moins négative), pour ne pas faire accommoder.", "La plus négative, car elle relâche l'accommodation du sujet."],
     bonne: 2,
     explication: "On retient la sphère la plus convexe (ou la moins concave) qui donne la meilleure acuité. Une sphère plus négative ferait accommoder inutilement, d'où fatigue : surcorrection du myope, sous-correction de l'hypermétrope.",
     indice: "Une sphère trop négative oblige-t-elle l'œil à accommoder ?"
@@ -889,7 +889,7 @@ QUESTIONS.push(
     theme: "Lentilles",
     session: "complément",
     question: "Un client a un astigmatisme purement cornéen de 2 δ. Pourquoi une lentille rigide perméable au gaz le corrige-t-elle bien ? Quelle justification est juste et complète ?",
-    choix: ["La lentille rigide corrige aussi l'astigmatisme interne, qui disparaît avec le film de larmes.", "La lentille rigide épouse la cornée et en reproduit l'astigmatisme, qui est ensuite compensé par le verre.", "Le film de larmes a un indice très différent de celui de la cornée et annule l'astigmatisme par réfraction.", "Le film de larmes sous la lentille a un indice proche de celui de la cornée : il comble l'espace, et la face avant sphérique de la lentille remplace la surface cornéenne astigmate."],
+    choix: ["La lentille rigide corrige aussi l'astigmatisme interne, qui disparaît avec le film de larmes sous la lentille.", "La lentille rigide épouse la cornée et en reproduit l'astigmatisme, qui est ensuite compensé par le verre de lunettes.", "Le film de larmes a un indice très différent de celui de la cornée et annule l'astigmatisme par réfraction à sa surface.", "Le film de larmes, d'indice proche de la cornée, comble l'espace : la face avant sphérique remplace la cornée astigmate."],
     bonne: 3,
     explication: "Sous une lentille rigide, le ménisque de larmes a presque le même indice que la cornée : la surface astigmate de la cornée n'intervient presque plus, et la face avant sphérique de la lentille la remplace. Un astigmatisme purement cornéen est donc à peu près supprimé. Un astigmatisme interne, lui, reste.",
     indice: "Quel liquide comble l'espace entre lentille rigide et cornée ? Quel est son indice ?"
@@ -901,7 +901,7 @@ QUESTIONS.push(
     theme: "Pathologie",
     session: "complément",
     question: "Une cliente de 62 ans, hypermétrope, arrive avec un œil rouge, une douleur intense, des halos colorés autour des lumières, des nausées et une baisse de vue depuis 2 heures. Quelle conduite est juste et complète ?",
-    choix: ["Je refais la réfraction pour changer ses verres et je la revois dans une semaine.", "C'est une urgence : je l'adresse immédiatement à un ophtalmologiste ou aux urgences, sans refaire de lunettes ni lui annoncer un diagnostic.", "Je lui annonce un glaucome aigu, je lui propose des gouttes et un rendez-vous dans le mois.", "Je lui conseille du repos et des larmes artificielles avant de décider."],
+    choix: ["Je refais la réfraction pour changer ses verres et je la revois dans une semaine pour contrôler.", "Urgence : je l'adresse tout de suite à un ophtalmologiste ou aux urgences, sans lunettes ni diagnostic annoncé.", "Je lui annonce un glaucome aigu, je lui propose des gouttes et un rendez-vous dans le mois suivant.", "Je lui conseille du repos et des larmes artificielles avant de décider de la suite à donner."],
     bonne: 1,
     explication: "Douleur intense, œil rouge, halos, nausées et baisse de vue brutale chez un hypermétrope évoquent une crise de fermeture de l'angle (glaucome aigu). C'est une urgence : le nerf optique peut être atteint en quelques heures. L'opticien n'a ni à faire un diagnostic ni à proposer un traitement : il oriente tout de suite.",
     indice: "Signes brutaux et intenses : l'opticien a-t-il le temps d'équiper ? Peut-il prescrire un traitement ?"
@@ -913,7 +913,7 @@ QUESTIONS.push(
     theme: "Pathologie",
     session: "complément",
     question: "Un client de 55 ans, sans symptôme, présente un ancien compte rendu : pression intraoculaire de 26 mmHg aux deux yeux, jamais revue depuis. Quelle conduite est juste et complète ?",
-    choix: ["Je lui annonce un glaucome et je lui déconseille les lentilles.", "Je ne lui dis rien, car seul l'ophtalmologiste peut parler de pression.", "L'absence de symptôme suffit : je renouvelle la mesure dans un an.", "Je lui dis que la valeur relevée dépasse la norme, sans parler de glaucome, et je l'oriente vers l'ophtalmologiste pour un bilan du nerf optique et du champ visuel."],
+    choix: ["Je lui annonce un glaucome et je lui déconseille les lentilles de contact, par prudence.", "Je ne lui dis rien, car seul l'ophtalmologiste peut parler de pression intraoculaire à un client.", "L'absence de symptôme suffit à ne pas s'inquiéter : je renouvelle la mesure dans un an environ.", "Je lui dis que la valeur dépasse la norme, sans parler de glaucome, et je l'oriente vers l'ophtalmologiste pour un bilan."],
     bonne: 3,
     explication: "La norme est autour de 16 mmHg, avec un seuil à 21 mmHg. Une valeur de 26 mmHg est trop forte, mais seuls l'atteinte du nerf optique et celle du champ visuel font le glaucome : c'est à l'ophtalmologiste de les chercher. L'opticien relève la valeur, dit qu'elle sort de la norme et oriente, sans poser de diagnostic ni attendre.",
     indice: "Une valeur hors norme prouve-t-elle un glaucome ? Que doit faire l'opticien de ce qu'il lit dans le dossier ?"
@@ -1056,7 +1056,7 @@ QUESTIONS.push(
     etape: 9,
     contexte: "Sa dernière visite chez l'ophtalmologiste date de six ans.",
     question: "Que lui conseillez-vous en plus de ses lunettes ?",
-    choix: ["Un bilan chez l'ophtalmologiste (pression, fond d'œil), car la dernière visite est ancienne", "Un arrêt de la lecture sur écran, qui explique sa fatigue visuelle", "Des larmes artificielles chaque jour, parce que l'œil se fatigue en lecture", "Rien de plus : avec 10/10, ses yeux sont forcément en bonne santé"],
+    choix: ["Un bilan chez l'ophtalmologiste (pression, fond d'œil), la dernière visite étant ancienne", "Un arrêt de la lecture sur écran, qui explique sa fatigue visuelle en fin de journée", "Des larmes artificielles chaque jour, parce que l'œil se fatigue en lecture prolongée", "Rien de plus : avec 10/10, ses yeux sont forcément en bonne santé"],
     bonne: 0,
     explication: "Une bonne acuité ne dépiste ni un glaucome ni une atteinte de la rétine. Après six ans sans examen, l'opticien conseille un bilan complet chez l'ophtalmologiste, sans parler d'une maladie.",
     indice: "L'acuité centrale reste bonne dans les maladies silencieuses."
@@ -1070,7 +1070,7 @@ QUESTIONS.push(
     cas: "CAS-U5-04",
     etape: 1,
     question: "D'après l'histoire de cas et les acuités, quelle hypothèse faire ?",
-    choix: ["Une cataracte des deux yeux, qui expliquerait la baisse d'acuité", "Une myopie identique aux deux yeux, qui expliquerait la tête penchée", "Une simple fatigue d'enfant sans conséquence, qui passera avec l'âge", "Une baisse d'acuité de l'œil gauche évoquant une amblyopie, liée à une différence de réfraction ou à une déviation"],
+    choix: ["Une cataracte des deux yeux, qui expliquerait la baisse d'acuité et l'éblouissement", "Une myopie identique aux deux yeux, qui expliquerait la tête penchée de l'enfant", "Une simple fatigue d'enfant sans conséquence, qui passera avec l'âge et la croissance", "Une baisse d'acuité de l'OG évoquant une amblyopie, liée à une différence de réfraction ou une déviation"],
     bonne: 3,
     explication: "Une acuité de 3/10 à un seul œil, avec un œil droit à 10/10, une tête penchée et un enfant qui ne se plaint pas, évoquent une amblyopie fonctionnelle de l'œil gauche, souvent liée à une anisométropie ou à un strabisme.",
     indice: "Un seul œil est très en dessous, l'autre est parfait, et l'enfant ne se plaint de rien."
@@ -1084,7 +1084,7 @@ QUESTIONS.push(
     cas: "CAS-U5-04",
     etape: 2,
     question: "Pourquoi Léa ne se plaint-elle de rien ?",
-    choix: ["Les enfants ne sont jamais gênés par leur vue", "Son œil droit voit bien et masque la baisse de l'œil gauche", "L'acuité de 3/10 est normale à son âge", "Son œil gauche ne voit plus du tout"],
+    choix: ["Les enfants ne sont jamais gênés par leur vue, même quand elle baisse d'un œil", "Son œil droit voit bien et masque la baisse de l'œil gauche", "L'acuité de 3/10 est normale à son âge et ne gêne donc pas les activités", "Son œil gauche ne voit plus du tout et elle s'est adaptée"],
     bonne: 1,
     explication: "Avec les deux yeux ouverts, l'œil droit, à 10/10, assure la vision : l'enfant ne perçoit pas la baisse de l'œil gauche. C'est pourquoi une amblyopie est découverte tard si on ne teste pas chaque œil.",
     indice: "Que se passe-t-il quand les deux yeux regardent ensemble et qu'un seul voit bien ?"
@@ -1128,7 +1128,7 @@ QUESTIONS.push(
     cas: "CAS-U5-04",
     etape: 5,
     question: "Que conclure de cette aniséiconie, et quel équipement garder en première intention ?",
-    choix: ["3,6 % : fusion impossible puisque l'aniséiconie dépasse 3 %, il faut des lentilles tout de suite", "3,6 % : gêne possible, mais on garde les lunettes avec la correction prescrite ; les lentilles seraient l'alternative si la fusion est mal tolérée", "Moins de 3 % : aucune gêne possible, donc aucun contrôle à prévoir", "L'aniséiconie ne concerne que les myopes : on ne peut rien conclure pour une hypermétrope"],
+    choix: ["3,6 % : fusion impossible puisque l'aniséiconie dépasse 3 %, il faut des lentilles tout de suite", "3,6 % : gêne possible ; je garde les lunettes prescrites, les lentilles restant l'alternative si la fusion est mal tolérée", "Moins de 3 % : aucune gêne possible, donc aucun contrôle ni suivi particulier à prévoir", "L'aniséiconie ne concerne que les myopes : on ne peut rien conclure pour une hypermétrope"],
     bonne: 1,
     explication: "Entre 3 et 10 %, la fusion peut être gênée. Chez une enfant, on privilégie d'abord la correction complète en lunettes prescrite par l'ophtalmologiste. Si la tolérance est mauvaise, les lentilles peuvent réduire l'aniséiconie.",
     indice: "Compare 3,6 % aux trois zones : moins de 3, entre 3 et 10, plus de 10."
@@ -1158,7 +1158,7 @@ QUESTIONS.push(
     etape: 7,
     contexte: "Cover test à 5 m, sans correction : on masque l'OD, l'OG fait un mouvement naso-temporal pour prendre la fixation.",
     question: "Quelle est votre conclusion, et quel lien avec l'hypermétropie ?",
-    choix: ["Ésophorie de l'OD : il faut démasquer pour la voir", "Orthophorie : l'œil bouge toujours au masquage", "Ésotropie de l'OG : l'hypermétropie non corrigée fait accommoder et converger", "Exotropie de l'OG : l'hypermétropie fait diverger l'œil"],
+    choix: ["Ésophorie de l'OD : il faut démasquer pour la voir, car elle reste latente", "Orthophorie : l'œil bouge toujours au masquage chez un sujet sans défaut", "Ésotropie de l'OG : l'hypermétropie non corrigée fait accommoder et converger", "Exotropie de l'OG : l'hypermétropie fait diverger l'œil quand il accommode"],
     bonne: 2,
     explication: "Un mouvement de l'œil non masqué lors du masquage de l'autre œil signe une tropie. L'OG se déplace de dedans en dehors pour fixer : il était dévié vers le nez, c'est une ésotropie. Chez l'hypermétrope, l'accommodation fait converger : une hypermétropie forte non corrigée peut provoquer un strabisme convergent.",
     indice: "Masquage et mouvement : tropie. Le sens du mouvement donne l'inverse du sens de la déviation."
@@ -1172,7 +1172,7 @@ QUESTIONS.push(
     cas: "CAS-U5-04",
     etape: 8,
     question: "Quelle conduite à tenir de l'opticien est juste et complète ?",
-    choix: ["Remplacer la prescription par une correction mesurée à l'autoréfractomètre, plus précise chez l'enfant", "Équiper avec la correction prescrite, insister sur le port constant, et rappeler que l'occlusion et le suivi relèvent de l'ophtalmologiste et de l'orthoptiste", "Attendre qu'elle soit plus grande pour équiper, l'amblyopie se réglant avec l'âge", "Équiper avec une correction plus faible pour qu'elle s'habitue progressivement"],
+    choix: ["Remplacer la prescription par une correction mesurée à l'autoréfractomètre, plus précise chez l'enfant", "Équiper avec la correction prescrite, insister sur le port constant ; l'occlusion et le suivi relèvent de l'ophtalmologiste", "Attendre qu'elle soit plus grande pour équiper, l'amblyopie se réglant avec l'âge", "Équiper avec une correction plus faible pour qu'elle s'habitue progressivement à ses lunettes"],
     bonne: 1,
     explication: "L'amblyopie se traite d'autant mieux qu'elle est prise tôt : on équipe sans attendre, avec la correction prescrite. L'occlusion et le suivi sont du ressort de l'ophtalmologiste et de l'orthoptiste. L'opticien veille à la qualité du centrage et à la tenue de la monture.",
     indice: "Qui prescrit le traitement de l'amblyopie ? Que doit faire l'opticien de l'ordonnance ?"
@@ -1245,7 +1245,7 @@ QUESTIONS.push(
     etape: 5,
     contexte: "Plus tard, le BUT de l'œil gauche est de 6 s.",
     question: "Que conclure ?",
-    choix: ["Film lacrymal trop instable (norme : 10 à 20 s) : contre-indication aux lentilles souples hydrogel", "Dans la norme : aucune précaution", "Film trop stable : sécheresse inverse", "Le BUT ne dit rien sur le choix du matériau"],
+    choix: ["Film trop instable (norme : 10 à 20 s) : contre-indication aux souples hydrogel", "Dans la norme du BUT : aucune précaution particulière n'est à prendre pour l'adaptation", "Film trop stable : sécheresse inverse, qui contre-indique les lentilles rigides", "Le BUT ne dit rien sur le choix du matériau, qui ne dépend que de la kératométrie"],
     bonne: 0,
     explication: "Le BUT normal est de 10 à 20 s. Moins de 10 s signe un film instable : les lentilles souples hydrogel sont contre-indiquées (certaines silicone-hydrogel restent possibles), car elles se dessèchent vite et gênent la cornée.",
     indice: "Compare 6 s à la norme du BUT."
@@ -1259,7 +1259,7 @@ QUESTIONS.push(
     cas: "CAS-U5-05",
     etape: 6,
     question: "Quand pourra-t-elle remettre ses lentilles, et comment ?",
-    choix: ["Jamais : après une telle atteinte, plus aucune lentille n'est possible", "Dans trois jours, avec les mêmes lentilles, accompagnées d'un collyre", "Après guérison confirmée par l'ophtalmologiste, avec une paire neuve, un étui neuf et jamais la nuit", "Dès que la rougeur a disparu, avec les mêmes lentilles bien rincées"],
+    choix: ["Jamais : après une telle atteinte, plus aucune lentille n'est possible, quel que soit le matériau", "Dans trois jours, avec les mêmes lentilles, accompagnées d'un collyre prescrit par l'opticien", "Après guérison confirmée par l'ophtalmologiste, avec une paire neuve et un étui neuf, jamais la nuit", "Dès que la rougeur a disparu, avec les mêmes lentilles bien rincées à la solution d'entretien"],
     bonne: 2,
     explication: "On ne reprend les lentilles qu'après guérison, confirmée par l'ophtalmologiste. On repart avec une paire neuve et un étui neuf, et le port nocturne est abandonné. La conclusion « jamais » est trop forte : le médecin décidera.",
     indice: "Qui décide de la reprise ? Faut-il réutiliser la paire qui a pu être contaminée ?"
@@ -1273,7 +1273,7 @@ QUESTIONS.push(
     cas: "CAS-U5-05",
     etape: 7,
     question: "Quel conseil d'hygiène donnez-vous à la reprise ?",
-    choix: ["Rincer les lentilles à l'eau du robinet avant le port", "Se laver les mains et ne jamais rincer lentilles ou étui à l'eau du robinet", "Conserver les lentilles dans la salle de bain ouverte", "Compléter la solution de l'étui sans la renouveler"],
+    choix: ["Rincer les lentilles à l'eau du robinet avant le port, pour retirer les dépôts", "Se laver les mains et ne jamais rincer lentilles ou étui à l'eau du robinet", "Conserver les lentilles dans la salle de bain ouverte, à l'abri de la poussière", "Compléter la solution de l'étui sans la renouveler, pour économiser du produit"],
     bonne: 1,
     explication: "L'eau du robinet peut contenir des micro-organismes dangereux pour la cornée. Il faut se laver les mains, vider et renouveler la solution à chaque fois, et renouveler l'étui régulièrement.",
     indice: "Quel liquide ne doit jamais toucher les lentilles ?"
@@ -1374,7 +1374,7 @@ QUESTIONS.push(
     cas: "CAS-U5-06",
     etape: 6,
     question: "Quel astigmatisme interne en déduit-on, sachant que le cylindre total est de 2,00 (direct) ?",
-    choix: ["Environ 2,28 δ direct", "Aucun astigmatisme interne", "Environ 4,30 δ direct", "Environ 0,30 δ inverse, quasi négligeable"],
+    choix: ["Environ 2,28 δ direct, de même nature que l'astigmatisme cornéen", "Aucun astigmatisme interne : tout l'astigmatisme total vient de la cornée", "Environ 4,30 δ direct, qui s'ajoute à l'astigmatisme cornéen", "Environ 0,30 δ inverse, quasi négligeable"],
     bonne: 3,
     explication: "Astigmatisme total = cornéen + interne, donc interne = 2,00 − 2,28 ≈ −0,28 δ : un petit astigmatisme inverse. C'est physiologique. L'astigmatisme de M. K. est donc presque entièrement cornéen.",
     indice: "Interne = total − cornéen. Le signe donne le sens : positif direct, négatif inverse."
@@ -1415,7 +1415,7 @@ QUESTIONS.push(
     theme: "Pathologie",
     session: "complément",
     question: "Dans une DMLA avancée, quelle partie de la vision est atteinte ?",
-    choix: ["Toute la vision, de façon uniforme", "Seulement la vision des couleurs", "La vision périphérique, la vision centrale restant bonne", "La vision centrale (lecture, visages), la vision périphérique restant conservée"],
+    choix: ["Toute la vision, de façon uniforme, comme dans une cataracte", "Seulement la vision des couleurs, sans atteinte de l'acuité ni du champ", "La vision périphérique, la vision centrale restant bonne comme dans le glaucome", "La vision centrale (lecture, visages), la périphérique étant conservée"],
     bonne: 3,
     explication: "La DMLA atteint la macula, zone de la vision centrale : la lecture et la reconnaissance des visages deviennent difficiles. La vision périphérique reste conservée : le patient garde son autonomie pour se déplacer. C'est l'inverse du glaucome, qui atteint d'abord le champ visuel en dehors du centre, la vision centrale étant touchée en dernier.",
     indice: "La macula est le centre de la rétine. Que perd-on quand elle est atteinte ?"
@@ -1439,7 +1439,7 @@ QUESTIONS.push(
     theme: "Pathologie",
     session: "complément",
     question: "Un client a l'œil rouge, des sécrétions collantes au réveil, une vue normale et peu de douleur. Quelle conduite est juste ?",
-    choix: ["Je lui annonce un glaucome aigu", "Je lui conseille de continuer ses lentilles pour protéger l'œil", "Ces signes évoquent une conjonctivite : je conseille un avis médical (ou du pharmacien), de se laver souvent les mains et de ne pas porter ses lentilles", "Je l'adresse aux urgences, c'est un décollement de rétine"],
+    choix: ["Je lui annonce un glaucome aigu et je l'envoie aux urgences ophtalmologiques", "Je lui conseille de continuer ses lentilles pour protéger l'œil de la poussière et du vent", "Signes de conjonctivite : avis médical ou pharmacien, mains lavées souvent, lentilles arrêtées", "Je l'adresse aux urgences, car je pense à un décollement de rétine en cours d'évolution"],
     bonne: 2,
     explication: "Œil rouge avec sécrétions, sans douleur forte ni baisse de vue, évoque une conjonctivite. L'opticien ne pose pas de diagnostic : il conseille un avis médical ou du pharmacien, des mains lavées souvent, et l'arrêt des lentilles tant que l'œil est rouge. L'absence de douleur vive et de baisse de vue rend une urgence peu probable ; s'il apparaît une douleur ou une baisse de vue, il consulte sans attendre.",
     indice: "Quels signes manquent par rapport à une urgence : douleur, baisse de vue, halos ?"
@@ -1451,7 +1451,7 @@ QUESTIONS.push(
     theme: "Pathologie",
     session: "complément",
     question: "Un dépistage indique une PIO de 24 mmHg ; le client précise que sa cornée est épaisse (620 µm). Que peut-on en dire ?",
-    choix: ["L'épaisseur de la cornée n'a aucun effet sur la mesure", "La pression est normale car la cornée est épaisse", "La cornée épaisse peut faire surestimer la pression : l'ophtalmologiste interprète, et on oriente quand même", "La cornée épaisse fait sous-estimer la pression : elle est donc plus élevée encore"],
+    choix: ["L'épaisseur de la cornée n'a aucun effet sur la mesure de la pression", "La pression est normale car la cornée est épaisse : la mesure est faussée à la baisse", "Une cornée épaisse peut faire surestimer la pression ; l'ophtalmologiste interprète, on oriente quand même", "Une cornée épaisse fait sous-estimer la pression : elle est donc plus élevée encore"],
     bonne: 2,
     explication: "Les tonomètres sont étalonnés pour une cornée moyenne. Une cornée plus épaisse que la moyenne donne une pression apparente trop élevée. L'interprétation revient à l'ophtalmologiste, qui tient compte de l'épaisseur. Une valeur de 24 mmHg reste à orienter.",
     indice: "Une cornée épaisse résiste davantage à l'aplanation : la valeur lue est-elle trop forte ou trop faible ?"
@@ -1463,7 +1463,7 @@ QUESTIONS.push(
     theme: "Pathologie",
     session: "complément",
     question: "Un client voit double. La vision double persiste quand il ferme un œil. Quelle origine est la plus probable ?",
-    choix: ["Une paralysie d'un muscle oculomoteur", "Une phorie décompensée", "Un strabisme paralytique récent", "Une cause oculaire : cristallin, cornée ou astigmatisme irrégulier"],
+    choix: ["Une paralysie d'un muscle oculomoteur, qui dévie l'œil atteint", "Une phorie décompensée, qui se révèle quand la fusion est rompue", "Un strabisme paralytique récent, avec une déviation variable selon le regard", "Une cause oculaire : cristallin, cornée ou astigmatisme irrégulier"],
     bonne: 3,
     explication: "Une diplopie qui persiste avec un seul œil ouvert est monoculaire : elle vient de l'œil lui-même (cataracte, kératocône, astigmatisme irrégulier). Une diplopie binoculaire, qui disparaît en fermant un œil, vient d'un défaut d'alignement : paralysie, phorie décompensée, strabisme.",
     indice: "Ferme un œil : la diplopie reste. L'origine est-elle dans l'alignement des deux yeux ?"
@@ -1475,7 +1475,7 @@ QUESTIONS.push(
     theme: "Pathologie",
     session: "complément",
     question: "Les parents disent que l'œil d'un enfant de 6 ans dévie parfois. « Il grandira. » Que conseillez-vous ?",
-    choix: ["Un bilan rapide chez l'ophtalmologiste ou l'orthoptiste : un strabisme non traité peut entraîner une amblyopie", "Attendre ses dix ans, il rattrapera", "Des lunettes teintées pour reposer l'œil", "Rien, un strabisme intermittent est sans conséquence"],
+    choix: ["Un bilan rapide chez l'ophtalmologiste ou l'orthoptiste : risque d'amblyopie", "Attendre ses dix ans, puisqu'il rattrapera tout seul en grandissant", "Des lunettes teintées pour reposer l'œil dévié pendant la lecture", "Rien du tout : un strabisme intermittent est sans conséquence sur la vision"],
     bonne: 0,
     explication: "Un strabisme, même intermittent, peut conduire à une amblyopie de l'œil dévié, d'autant plus difficile à traiter que l'enfant est grand. On oriente sans attendre vers l'ophtalmologiste ou l'orthoptiste.",
     indice: "Que risque l'œil qui dévie s'il n'est pas utilisé ?"
@@ -1487,7 +1487,7 @@ QUESTIONS.push(
     theme: "Réfraction",
     session: "complément",
     question: "Pourquoi détermine-t-on la compensation de loin avant l'addition de près ?",
-    choix: ["On ne mesure jamais la vision de loin chez un presbyte", "L'addition se calcule à partir de la compensation de loin, qui doit donc être exacte d'abord", "L'addition est la même pour tous les presbytes de même âge", "La vision de près ne dépend pas de la vision de loin"],
+    choix: ["On ne mesure jamais la vision de loin chez un presbyte, seulement celle de près", "L'addition se calcule à partir de la compensation de loin, qui doit être exacte d'abord", "L'addition est la même pour tous les presbytes d'un même âge, quelle que soit leur réfraction", "La vision de près ne dépend pas de la vision de loin, donc l'ordre n'a pas d'importance"],
     bonne: 1,
     explication: "La compensation de près est la compensation de loin plus l'addition. Une erreur de loin se reporte donc sur la vision de près. On règle d'abord la vision de loin, puis on cherche l'addition selon l'amplitude et la distance de lecture.",
     indice: "La puissance de près est la somme de deux termes."
@@ -1547,7 +1547,7 @@ QUESTIONS.push(
     theme: "Lentilles",
     session: "complément",
     question: "Quel est l'avantage principal d'une lentille journalière jetable ?",
-    choix: ["Pas d'entretien : on la jette le soir, ce qui réduit le risque infectieux", "Elle se porte trente jours", "Elle se porte la nuit sans risque", "Elle corrige l'astigmatisme sans cylindre"],
+    choix: ["Pas d'entretien : on la jette le soir, d'où un moindre risque infectieux", "Elle se porte trente jours de suite sans interruption ni entretien particulier", "Elle se porte la nuit sans risque pour la cornée, même en continu", "Elle corrige l'astigmatisme sans cylindre, grâce à un matériau plus rigide"],
     bonne: 0,
     explication: "La lentille journalière est portée une journée puis jetée : pas de produit d'entretien, pas de dépôts accumulés, et moins de risques infectieux. Elle ne se porte jamais la nuit.",
     indice: "Qu'est-ce qui disparaît quand on jette la lentille chaque soir ?"
@@ -1559,7 +1559,7 @@ QUESTIONS.push(
     theme: "Lentilles",
     session: "complément",
     question: "On propose la monovision à un presbyte emmétrope. En quoi consiste-t-elle ?",
-    choix: ["Les deux yeux portent la même addition", "Un œil est occlus en permanence", "Un œil (le dominant) corrigé pour la vision de loin, l'autre pour la vision de près", "Les deux yeux sont corrigés pour la vision de loin seulement"],
+    choix: ["Les deux yeux portent la même addition de près, quelle que soit la distance", "Un œil est occlus en permanence pour supprimer toute gêne à la lecture", "Un œil (le dominant) corrigé de loin, l'autre de près", "Les deux yeux sont corrigés pour la vision de loin seulement, la lecture se faisant sans aide"],
     bonne: 2,
     explication: "Dans la monovision, l'œil dominant est corrigé pour la vision de loin, l'autre est corrigé pour la vision de près, ce qui le brouille un peu de loin. Cela se teste avant de commander : certains porteurs perdent un peu de vision binoculaire et de relief.",
     indice: "Chaque œil a un rôle différent."
@@ -1571,7 +1571,7 @@ QUESTIONS.push(
     theme: "Lentilles",
     session: "complément",
     question: "Quel est l'ordre logique d'une première adaptation en lentilles ?",
-    choix: ["Essai direct, puis kératométrie, puis examen préliminaire", "Examen préliminaire et kératométrie, choix des paramètres, essai, contrôle de l'adaptation, puis de la vision", "Choix de la lentille, commande, puis seulement la kératométrie", "Contrôle de la vision, puis choix de la couleur de la lentille"],
+    choix: ["Essai direct, puis kératométrie, puis examen préliminaire, puis commande des lentilles", "Examen préliminaire et kératométrie, paramètres, essai, contrôle de l'adaptation, puis de la vision", "Choix de la lentille, commande, puis seulement la kératométrie pour contrôle", "Contrôle de la vision, puis choix de la couleur de la lentille, puis commande"],
     bonne: 1,
     explication: "On commence par l'examen préliminaire et la kératométrie, qui donnent les paramètres de départ. On choisit une lentille d'essai, on contrôle l'adaptation (centrage, mouvement, fluorescéine pour une rigide), puis la vision et le confort, avant la commande finale.",
     indice: "On mesure avant de choisir, et on essaie avant de commander."
@@ -1583,7 +1583,7 @@ QUESTIONS.push(
     theme: "Worth",
     session: "complément",
     question: "Que mesure l'acuité stéréoscopique ?",
-    choix: ["L'écart entre les deux pupilles", "La phorie de près", "La plus petite lettre lue avec un seul œil", "La plus petite disparité entre les deux yeux qui donne encore une sensation de relief"],
+    choix: ["L'écart entre les deux pupilles, mesuré en millimètres au pupillomètre", "La phorie de près, mesurée à 40 cm avec une barre de prismes", "La plus petite lettre lue avec un seul œil, à 5 mètres", "La plus petite disparité entre les deux yeux donnant encore une sensation de relief"],
     bonne: 3,
     explication: "Le relief vient de la petite différence entre les images des deux yeux, la disparité. L'acuité stéréoscopique est la plus petite disparité perçue en relief, exprimée en secondes d'arc. Elle est d'environ 20 secondes, et normale jusqu'à 60.",
     indice: "Le relief nécessite deux yeux : qu'est-ce qui diffère entre leurs deux images ?"
@@ -1595,7 +1595,7 @@ QUESTIONS.push(
     theme: "Worth",
     session: "complément",
     question: "Un test de relief donne une acuité stéréoscopique de 200 secondes d'arc. Que conclure ?",
-    choix: ["Elle est excellente, car elle est élevée", "Elle est diminuée : la valeur normale va jusqu'à 60 secondes", "Elle est normale, la norme va jusqu'à 400", "Elle prouve un strabisme convergent"],
+    choix: ["Elle est excellente, car la valeur est élevée en secondes d'arc", "Elle est diminuée : la valeur normale va jusqu'à 60 secondes d'arc", "Elle est normale, car la norme va jusqu'à 400 secondes d'arc", "Elle prouve un strabisme convergent, qu'il faut orienter vers l'ophtalmologiste"],
     bonne: 1,
     explication: "Plus la valeur en secondes d'arc est petite, meilleure est l'acuité stéréoscopique. La norme va jusqu'à 60 secondes chez un sujet jeune : 200 secondes est une acuité diminuée. Elle peut venir d'une neutralisation partielle, d'une amblyopie ou d'une anisométropie. La valeur ne désigne pas à elle seule le type de déviation.",
     indice: "Une petite valeur de disparité détectée = une bonne vision du relief."
@@ -1607,7 +1607,7 @@ QUESTIONS.push(
     theme: "Worth",
     session: "complément",
     question: "Au Worth, un sujet ne voit que 3 symboles verts : un œil est neutralisé. Quelle conséquence a-t-on sur le relief ?",
-    choix: ["Relief absent ou très diminué : le relief fin demande la fusion des images des deux yeux", "Le relief est meilleur, car un seul œil travaille", "Le relief est inchangé, il vient de l'accommodation", "Le relief ne dépend que de la taille de la pupille"],
+    choix: ["Relief absent ou très diminué : le relief fin demande la fusion des deux yeux", "Le relief est meilleur, car un seul œil travaille et le cerveau est moins sollicité", "Le relief est inchangé, car il vient surtout de l'accommodation de l'œil restant", "Le relief ne dépend que de la taille de la pupille de chaque œil"],
     bonne: 0,
     explication: "La stéréoscopie exige que les deux yeux envoient des images fusionnables. Si un œil est neutralisé, il n'y a pas de fusion centrale, donc pas de relief fin. Le sujet juge les distances avec des indices monoculaires (taille, ombres, perspective).",
     indice: "Le relief vient-il d'un œil ou de la comparaison entre les deux ?"
@@ -1631,7 +1631,7 @@ QUESTIONS.push(
     theme: "Examen préliminaire",
     session: "complément",
     question: "À quoi sert le test de confrontation ?",
-    choix: ["À dépister grossièrement un déficit du champ en comparant celui du sujet à celui de l'examinateur", "À mesurer l'acuité en vision de près", "À mesurer la pression oculaire", "À contrôler l'axe d'un cylindre"],
+    choix: ["À dépister grossièrement un déficit du champ, en comparant le sien à celui de l'examinateur", "À mesurer l'acuité en vision de près avec un texte de petite taille, à 40 cm", "À mesurer la pression oculaire avec un instrument posé sur la cornée du sujet", "À contrôler l'axe d'un cylindre avec un cadran de lignes noires, comme le cadran de Parent"],
     bonne: 0,
     explication: "L'examinateur, face au sujet, compare ce que celui-ci perçoit à la périphérie avec son propre champ. C'est un dépistage rapide et approximatif : un déficit repéré doit être confirmé par un champ visuel (périmétrie) chez l'ophtalmologiste.",
     indice: "On compare deux champs de vision : lesquels ?"
@@ -1643,7 +1643,7 @@ QUESTIONS.push(
     theme: "Examen préliminaire",
     session: "complément",
     question: "Un client dit qu'il voit « comme dans un tunnel », avec un centre net et une périphérie qui disparaît. Que faites-vous ?",
-    choix: ["Je refais ses lunettes avec une addition plus forte", "Je lui conseille un verre teinté", "Je note un rétrécissement du champ, sans poser de diagnostic, et je l'oriente vers l'ophtalmologiste", "Je ne fais rien : il se plaint du centre, qui est net"],
+    choix: ["Je refais ses lunettes avec une addition plus forte pour mieux voir de près", "Je lui conseille un verre teinté pour atténuer l'éblouissement de la périphérie", "Je note un rétrécissement du champ, sans diagnostic, et je l'oriente vers l'ophtalmologiste", "Je ne fais rien : il se plaint du centre, qui est net, donc la vue est correcte"],
     bonne: 2,
     explication: "Un champ rétréci de la périphérie vers le centre, la vision centrale restant bonne longtemps, peut évoquer un glaucome avancé ou une atteinte de la rétine périphérique. L'opticien décrit ce qu'il constate et oriente, sans diagnostic. Les lunettes ne le corrigent pas.",
     indice: "Que perd-on quand le champ se rétrécit : le centre ou la périphérie ?"
@@ -1655,7 +1655,7 @@ QUESTIONS.push(
     theme: "Examen préliminaire",
     session: "complément",
     question: "Un porteur de verres de +10,00 δ se plaint d'un anneau où il ne voit plus rien, en périphérie de son champ, avec ses lunettes. Quelle en est la cause ?",
-    choix: ["Un glaucome à angle fermé", "Une cataracte débutante", "La distance pupillaire mal mesurée", "L'effet prismatique du bord du verre fortement convergent (scotome annulaire)"],
+    choix: ["Un glaucome à angle fermé, dont la crise est douloureuse et soudaine", "Une cataracte débutante qui opacifie le cristallin sur le bord", "Une distance pupillaire mal mesurée lors de la prise de mesures", "L'effet prismatique du bord d'un verre très convergent (scotome annulaire)"],
     bonne: 3,
     explication: "Un verre convergent fort a un bord épais : il dévie les rayons vers l'axe optique, et une zone annulaire du champ n'est plus vue par l'œil. Le porteur peut voir apparaître et disparaître des objets en périphérie. Un verre asphérique ou lenticulaire réduit ce défaut ; une lentille de contact le supprime.",
     indice: "Un verre convexe fort agit comme un prisme sur son bord."
@@ -1679,7 +1679,7 @@ QUESTIONS.push(
     theme: "Pathologie",
     session: "complément",
     question: "Un adulte dit que les couleurs sont devenues ternes d'un seul œil depuis quelques semaines. Quelle conduite est juste ?",
-    choix: ["Je lui conseille d'attendre un an", "Je lui explique que c'est du daltonisme, sans conséquence", "Je l'oriente vers l'ophtalmologiste : cela évoque une dyschromatopsie acquise, qui peut révéler une atteinte du nerf optique ou de la macula", "Je lui propose des verres teintés pour raviver les couleurs"],
+    choix: ["Je lui conseille d'attendre un an avant de consulter, si cela ne passe pas", "Je lui explique que c'est du daltonisme, sans conséquence, puisque cela touche un seul œil", "Je l'oriente vers l'ophtalmologiste : dyschromatopsie acquise, atteinte possible du nerf optique ou de la macula", "Je lui propose des verres teintés pour raviver les couleurs de l'œil atteint"],
     bonne: 2,
     explication: "Une perte récente de la vision des couleurs, sur un œil, n'est pas un daltonisme congénital, qui est présent depuis toujours et touche les deux yeux. Elle peut annoncer une atteinte du nerf optique ou de la macula : on oriente sans attendre, sans diagnostic.",
     indice: "Récent et un seul œil : est-ce plutôt congénital ou acquis ?"
@@ -1730,7 +1730,7 @@ QUESTIONS.push(
     id: "U5-213", epreuve: "U5", theme: "Lentilles", session: "2018",
     difficulte: "moyen",
     question: "Une cliente veut des lentilles. Rivière lacrymale : 0,15 mm. BUT : 12 s. Quelle conclusion est juste et complète ?",
-    choix: ["La quantité de larmes est insuffisante (rivière sous 0,2 mm) et la qualité est correcte (BUT dans la norme) : je déconseille la lentille souple hydrophile et je propose plutôt un silicone-hydrogel ou une rigide", "La qualité des larmes est insuffisante à cause du BUT : je déconseille toutes les lentilles", "Les deux mesures sont dans la norme : la lentille souple hydrophile convient", "La rivière est trop haute : je conseille de la réduire avant d'adapter"],
+    choix: ["Quantité de larmes insuffisante (rivière sous 0,2 mm), qualité correcte (BUT normal) : souple hydrophile déconseillée, silicone-hydrogel ou rigide proposés", "La qualité des larmes est insuffisante à cause du BUT : je déconseille toutes les lentilles de contact à cette cliente", "Les deux mesures sont dans la norme : la lentille souple hydrophile convient, sans précaution particulière à prendre", "La rivière est trop haute, ce qui gêne le port : je conseille de la réduire avant d'adapter une lentille"],
     bonne: 0,
     explication: "La rivière de 0,15 mm est sous 0,2 mm : la quantité de larmes est insuffisante pour une lentille souple hydrophile, qui a besoin de l'eau des larmes. Le BUT de 12 s est dans la norme (10 à 20 s) : la qualité est correcte. On se tourne vers un silicone-hydrogel ou une lentille rigide perméable aux gaz, mieux adaptés quand le film est fragile.",
     surLaCopie: "Rivière lacrymale de 0,15 mm : quantité de larmes insuffisante pour une lentille souple hydrophile. BUT de 12 s : qualité correcte. Je propose un silicone-hydrogel ou une lentille rigide perméable aux gaz.",
@@ -1759,7 +1759,7 @@ QUESTIONS.push(
     id: "U5-216", epreuve: "U5", theme: "Anisométropie", session: "complément",
     difficulte: "moyen",
     question: "Que dit la loi de Knapp pour une anisométropie purement AXILE ?",
-    choix: ["Les images rétiniennes ont la même taille si le verre est placé au foyer objet de l'œil, environ 15 mm devant la cornée", "Les images rétiniennes ont la même taille si le verre est posé sur la cornée", "Les images rétiniennes sont toujours de tailles différentes, quel que soit l'équipement", "Les images rétiniennes ont la même taille si le verre est placé le plus loin possible de l'œil"],
+    choix: ["Même taille d'images si le verre est au foyer objet de l'œil, environ 15 mm devant la cornée", "Les images rétiniennes ont la même taille si le verre est posé directement sur la cornée", "Les images rétiniennes sont toujours de tailles différentes, quel que soit l'équipement choisi", "Les images rétiniennes ont la même taille si le verre est placé le plus loin possible de l'œil"],
     bonne: 0,
     explication: "Loi de Knapp : dans une anisométropie axile, la compensation placée au foyer objet de l'œil, soit environ 15 mm devant la cornée, donne des images rétiniennes de même taille. C'est la position d'une lunette ordinaire : les lunettes conviennent. En lentilles, l'aniséiconie axile reste entière (environ 1,7 % par dioptrie).",
     indice: "Pense à la position d'un verre de lunettes ordinaire, et à ce que devient l'aniséiconie axile d'un œil trop long quand on rapproche la compensation de la cornée."
@@ -1768,7 +1768,7 @@ QUESTIONS.push(
     id: "U5-217", epreuve: "U5", theme: "Anisométropie", session: "complément",
     difficulte: "difficile",
     question: "Un sujet a une anisométropie purement axile : OD −1,00 et OG −5,00. Quelle rédaction est juste et complète pour choisir entre lunettes et lentilles ?",
-    choix: ["Les lunettes, placées près du foyer objet de l'œil, donnent des images rétiniennes presque égales (loi de Knapp) : je les garde. Les lentilles laisseraient environ 7 % d'aniséiconie axile", "Les lentilles sont toujours préférables, puisqu'elles réduisent toute aniséiconie", "Les lunettes aggravent l'aniséiconie, donc les lentilles sont indispensables", "Les deux équipements donnent exactement le même résultat"],
+    choix: ["Les lunettes, près du foyer objet de l'œil, donnent des images presque égales (Knapp) : je les garde ; les lentilles laisseraient environ 7 %", "Les lentilles sont toujours préférables, puisqu'elles réduisent toute aniséiconie quelle que soit la cause de l'anisométropie", "Les lunettes aggravent l'aniséiconie, donc les lentilles sont indispensables dans une anisométropie purement axile", "Les deux équipements donnent exactement le même résultat, à la distance verre-œil près, que l'anisométropie soit axile ou non"],
     bonne: 0,
     explication: "Anisométropie axile : l'œil le plus long forme une image plus grande. Le verre de lunettes, à 15 mm, la rapetisse presque exactement de ce qu'il faut (loi de Knapp) : l'aniséiconie totale reste faible. En lentilles, la compensation est contre la cornée : il resterait toute l'aniséiconie axile, soit environ 1,7 % × 4 ≈ 7 %. Pour l'anisométropie de puissance, c'est l'inverse : les lentilles sont à conseiller.",
     surLaCopie: "Anisométropie axile : la loi de Knapp donne des images égales avec un verre placé près du foyer objet de l'œil. Les lunettes conviennent. Les lentilles laisseraient environ 7 % d'aniséiconie axile, au-dessus de la limite de 3 %.",

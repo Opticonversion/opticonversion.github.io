@@ -378,7 +378,7 @@ QUESTIONS.push(
     session: "complément",
     entrainement: true,
     question: "Dans une cataracte sous-capsulaire postérieure (opacité au centre du cristallin), pourquoi la gêne est-elle plus forte en plein soleil qu'à la lumière douce ?",
-    choix: ["La lumière vive bloque l'accommodation", "La lumière vive augmente la pression intraoculaire", "La pupille se contracte et la lumière ne passe plus que par le centre opacifié", "La pupille se dilate et laisse entrer trop de lumière diffusée"],
+    choix: ["La lumière vive bloque l'accommodation et rend l'image floue de près", "La lumière vive augmente la pression intraoculaire et gêne la vision", "La pupille se contracte : la lumière ne passe que par le centre opacifié", "La pupille se dilate et laisse entrer trop de lumière diffusée par le cristallin"],
     bonne: 2,
     explication: "En lumière forte, la pupille se ferme (myosis) : le faisceau utile traverse presque uniquement la zone centrale opaque, et l'acuité chute. À la lumière douce ou à la tombée du jour, la pupille s'ouvre et une partie des rayons passe à côté de l'opacité.",
     indice: "Pense à ce que devient la taille de la pupille au soleil, et à la position de l'opacité."
@@ -404,7 +404,7 @@ QUESTIONS.push(
     session: "complément",
     entrainement: true,
     question: "Une lentille souple a une transmissibilité Dk/e. Le matériau a un Dk de 100 (en 10⁻¹¹) et la lentille 0,20 mm d'épaisseur centrale. Quelle est sa transmissibilité, et suffit-elle ?",
-    choix: ["Dk/e = 50 × 10⁻⁹ : suffisant même en port nocturne", "Dk/e = 5 × 10⁻⁹ : insuffisant même en port journalier", "Dk/e = 50 × 10⁻⁹ : suffisant en port journalier, insuffisant en port nocturne", "Dk/e = 500 × 10⁻⁹ : suffisant même en port nocturne"],
+    choix: ["Dk/e = 50 × 10⁻⁹ : suffisant même en port nocturne, sans réserve", "Dk/e = 5 × 10⁻⁹ : insuffisant même en port journalier, quel que soit le port", "Dk/e = 50 × 10⁻⁹ : suffisant de jour, insuffisant de nuit", "Dk/e = 500 × 10⁻⁹ : suffisant même en port nocturne, avec une large marge"],
     bonne: 2,
     explication: "Il faut passer l'épaisseur en cm : 0,20 mm = 0,02 cm.\nDk/e = [[Dk|e]] = [[100 × 10⁻¹¹|0,02]] = 50 × 10⁻⁹.\nC'est au-dessus de 35 (port journalier) mais en dessous de 125 (port nocturne). Garder l'épaisseur en mm donnerait 5 × 10⁻⁹, un facteur 10 de trop faible.",
     indice: "Convertis l'épaisseur en cm avant de diviser. Compare ensuite à 35 et à 125."
@@ -443,7 +443,7 @@ QUESTIONS.push(
     session: "complément",
     entrainement: true,
     question: "Pourquoi refait-on le test rouge-vert (bichrome) une fois le cylindre déterminé ?",
-    choix: ["Une fois l'astigmatisme compensé, l'image redevient un point : la comparaison des deux plages règle la sphère avec précision", "Le cylindre se règle uniquement avec des plages colorées", "Le filtre rouge masque l'astigmatisme", "Le test ne fonctionne qu'avec un œil dilaté"],
+    choix: ["Cylindre compensé, l'image redevient un point : les deux plages règlent la sphère avec précision", "Le cylindre se règle uniquement avec des plages colorées, sans autre test nécessaire", "Le filtre rouge masque l'astigmatisme et rend le test impossible avant le cylindre", "Le test ne fonctionne qu'avec un œil dilaté par un collyre mydriatique"],
     bonne: 0,
     explication: "Le bichrome compare la netteté du rouge et du vert grâce à l'aberration chromatique. Chez un astigmate non compensé, l'image est un intervalle de Sturm : le test ne peut placer que le cercle de moindre diffusion. Une fois le cylindre trouvé, le foyer est unique et le bichrome affine la sphère finale.",
     indice: "Le test repose sur la position d'un foyer. Que devient le foyer d'un œil astigmate non corrigé ?"
@@ -638,7 +638,7 @@ QUESTIONS.push(
     session: "complément",
     entrainement: true,
     question: "Un porteur de bifocaux anisométrope voit double en lisant. Quelle solution corrige l'effet prismatique vertical différentiel dans les segments de près ?",
-    choix: ["Une addition plus forte de 0,50 δ", "Rapprocher les verres des yeux", "Des verres d'indice plus élevé", "Un prisme de compensation (slab-off) dans les segments de près"],
+    choix: ["Une addition plus forte de 0,50 δ sur les deux segments de près", "Rapprocher les verres des yeux pour réduire le décentrement de lecture", "Des verres d'indice plus élevé, pour des verres plus fins et plus plats", "Un prisme de compensation (slab-off) dans les segments de près"],
     bonne: 3,
     explication: "En lecture, le regard descend et traverse chaque verre loin de son centre optique : l'effet prismatique vertical n'est pas le même aux deux yeux. Un prisme de compensation (slab-off) rétablit l'équilibre. Une autre solution est de prévoir une paire de lunettes de lecture à part.",
     indice: "Il s'agit de corriger un prisme vertical, pas une puissance."
@@ -664,7 +664,7 @@ QUESTIONS.push(
     session: "complément",
     entrainement: true,
     question: "Un client de 50 ans a une PIO de 24 mmHg aux deux yeux. Son ophtalmologiste ne trouve aucune lésion du nerf optique et son champ visuel est normal. De quoi s'agit-il ?",
-    choix: ["D'un glaucome avéré à traiter en urgence", "D'une cataracte débutante", "D'une hypertonie oculaire : facteur de risque à surveiller, sans glaucome", "D'une PIO normale, car la limite est à 30 mmHg"],
+    choix: ["D'un glaucome avéré, à traiter en urgence par un collyre hypotenseur", "D'une cataracte débutante, qui élève la pression à l'intérieur de l'œil", "D'une hypertonie oculaire : facteur de risque à surveiller, sans glaucome", "D'une PIO normale, car la limite de la norme est à 30 mmHg"],
     bonne: 2,
     explication: "Une PIO supérieure à 21 mmHg sans atteinte du nerf optique ni du champ visuel s'appelle une hypertonie oculaire. C'est un facteur de risque de glaucome, pas un glaucome : on surveille. Le glaucome se définit par l'atteinte du nerf optique et du champ.",
     indice: "Un chiffre de pression ne suffit pas à poser le diagnostic : que faut-il constater en plus ?"
@@ -677,7 +677,7 @@ QUESTIONS.push(
     session: "complément",
     entrainement: true,
     question: "Un homme de 20 ans voit son astigmatisme augmenter en un an, de façon irrégulière, et les mires du kératomètre sont déformées. Quelle pathologie évoquer, et quel équipement est souvent nécessaire ?",
-    choix: ["Une presbytie précoce ; une addition", "Un kératocône ; des lentilles rigides perméables au gaz", "Une cataracte ; des verres teintés", "Un glaucome ; des verres progressifs"],
+    choix: ["Une presbytie précoce ; on prescrit une addition de près", "Un kératocône ; lentilles rigides perméables aux gaz", "Une cataracte ; on prescrit des verres teintés contre l'éblouissement", "Un glaucome ; on prescrit des verres progressifs pour toutes distances"],
     bonne: 1,
     explication: "Un astigmatisme irrégulier qui progresse chez un jeune adulte, avec des mires déformées, évoque un kératocône (cornée qui s'amincit et se déforme en cône). Les lunettes corrigent mal cet astigmatisme irrégulier : une lentille rigide perméable au gaz, qui régularise la surface, est souvent nécessaire.",
     indice: "Astigmatisme irrégulier, mires déformées, sujet jeune : pense à la cornée."
@@ -690,7 +690,7 @@ QUESTIONS.push(
     session: "complément",
     entrainement: true,
     question: "Un diabétique de 45 ans lit 10/10 sans gêne. Pourquoi lui conseille-t-on tout de même un examen du fond d'œil chaque année ?",
-    choix: ["Parce que ses lunettes s'usent plus vite", "Parce que le diabète donne toujours une myopie", "Parce que son acuité est forcément trompeuse", "Parce que la rétinopathie diabétique peut évoluer longtemps sans baisse de vision"],
+    choix: ["Parce que ses lunettes s'usent plus vite quand on est diabétique", "Parce que le diabète donne toujours une myopie évolutive à surveiller", "Parce que son acuité de 10/10 est forcément trompeuse chez le diabétique", "Parce que la rétinopathie diabétique évolue longtemps sans baisse de vision"],
     bonne: 3,
     explication: "La rétinopathie diabétique atteint les petits vaisseaux de la rétine. Elle reste longtemps silencieuse : l'acuité peut être normale alors que les lésions progressent. Le dépistage régulier permet de traiter avant la baisse de vue.",
     indice: "Une bonne acuité prouve-t-elle que la rétine est saine ?"
@@ -703,7 +703,7 @@ QUESTIONS.push(
     session: "complément",
     entrainement: true,
     question: "Un enfant de 4 ans voit 2/10 avec son œil droit, bien corrigé, et 10/10 avec le gauche. Aucune lésion visible. Que conseillez-vous ?",
-    choix: ["Rien : un seul bon œil suffit", "Un avis rapide chez l'ophtalmologiste ou l'orthoptiste : une amblyopie se traite d'autant mieux qu'elle est prise tôt", "Un verre teinté sur l'œil droit", "Attendre ses 10 ans pour refaire le bilan"],
+    choix: ["Rien : un seul bon œil suffit à un enfant de cet âge pour bien voir", "Avis rapide ophtalmologiste ou orthoptiste : une amblyopie se traite d'autant mieux qu'elle est prise tôt", "Un verre teinté sur l'œil droit, pour reposer l'œil le moins performant", "Attendre ses 10 ans pour refaire le bilan, quand il saura mieux lire les lettres"],
     bonne: 1,
     explication: "Une acuité très basse d'un seul œil, sans lésion et malgré la correction, évoque une amblyopie fonctionnelle. Chez l'enfant, le système visuel est encore plastique : plus la prise en charge est précoce (correction, occlusion du bon œil), meilleur est le résultat.",
     indice: "Chez l'enfant, que se passe-t-il quand on attend ?"
@@ -729,7 +729,7 @@ QUESTIONS.push(
     session: "complément",
     entrainement: true,
     question: "Pourquoi une lentille souple sphérique ne corrige-t-elle pas l'astigmatisme cornéen ?",
-    choix: ["Parce que le matériau est trop épais", "Parce que le film lacrymal l'annule", "Parce qu'elle épouse la forme de la cornée et en garde l'astigmatisme", "Parce qu'elle bouge trop à chaque clignement"],
+    choix: ["Parce que le matériau est trop épais pour transmettre l'astigmatisme à la rétine", "Parce que le film lacrymal annule entièrement l'effet de la lentille sur la cornée", "Parce qu'elle épouse la cornée et en garde l'astigmatisme", "Parce qu'elle bouge trop à chaque clignement pour garder son axe aligné"],
     bonne: 2,
     explication: "Une lentille souple est flexible et prend la forme de la cornée : sa face avant reproduit l'astigmatisme cornéen. Il reste donc à compenser, avec une lentille torique. C'est l'inverse d'une lentille rigide, dont la face avant reste sphérique.",
     indice: "Souple ou rigide : quelle lentille garde sa forme sur une cornée astigmate ?"
@@ -742,7 +742,7 @@ QUESTIONS.push(
     session: "complément",
     entrainement: true,
     question: "Une porteuse de lentilles souples journalières a un œil rouge, douloureux et gêné par la lumière. Quel conseil lui donnez-vous ?",
-    choix: ["Retirer la lentille, ne pas la remettre et consulter rapidement un ophtalmologiste", "Remettre la lentille après l'avoir rincée", "Porter des lunettes teintées et attendre", "Mettre des larmes artificielles et garder la lentille"],
+    choix: ["Retirer la lentille, ne pas la remettre et consulter vite un ophtalmologiste", "Remettre la lentille après l'avoir rincée avec de la solution d'entretien", "Porter des lunettes teintées et attendre que la gêne à la lumière passe", "Mettre des larmes artificielles et garder la lentille pour protéger la cornée"],
     bonne: 0,
     explication: "Œil rouge, douleur et photophobie chez un porteur de lentilles peuvent annoncer une kératite infectieuse, qui menace la cornée. On retire la lentille, on ne la remet pas et on consulte vite.",
     indice: "Ces trois signes ensemble chez un porteur sont un signal d'alarme : que fait-on de la lentille ?"
@@ -833,7 +833,7 @@ QUESTIONS.push(
     session: "complément",
     entrainement: true,
     question: "Pour déterminer l'œil directeur, le sujet pointe un objet lointain à travers un petit trou formé avec ses deux mains, puis ferme un œil à la fois. Quel est l'œil directeur ?",
-    choix: ["Toujours l'œil droit", "L'œil pour lequel l'objet sort du trou", "L'œil qui cligne en premier", "L'œil pour lequel l'objet reste visible dans le trou"],
+    choix: ["Toujours l'œil droit, pour la grande majorité des sujets examinés", "L'œil pour lequel l'objet sort du trou lorsqu'on ferme l'autre œil", "L'œil qui cligne en premier lorsqu'on éclaire le sujet de face", "L'œil pour lequel l'objet reste visible dans le trou"],
     bonne: 3,
     explication: "L'œil directeur est celui qui pointe vers la cible. Quand on ferme l'autre œil, l'objet reste dans le trou. Si on ferme l'œil directeur, l'objet semble sauter hors du trou.",
     indice: "Fermer l'œil directeur change la direction apparente de la cible."
@@ -859,7 +859,7 @@ QUESTIONS.push(
     session: "complément",
     entrainement: true,
     question: "Pourquoi le masquage alterné, passé rapidement d'un œil à l'autre, ne distingue-t-il pas une phorie d'une tropie ?",
-    choix: ["Parce qu'il empêche la fusion des deux yeux et révèle la déviation totale", "Parce qu'il ne mesure que les déviations verticales", "Parce que le cache est posé trop près de l'œil", "Parce qu'il ne montre que l'œil dominant"],
+    choix: ["Parce qu'il empêche la fusion et révèle la déviation totale", "Parce qu'il ne mesure que les déviations verticales, jamais les horizontales", "Parce que le cache est posé trop près de l'œil pour juger le mouvement", "Parce qu'il ne montre que le mouvement de l'œil dominant, jamais de l'autre"],
     bonne: 0,
     explication: "En passant le cache d'un œil à l'autre sans laisser les deux yeux ouverts, on empêche la fusion : la déviation totale apparaît, qu'elle soit latente (phorie) ou manifeste (tropie). Pour les distinguer, il faut le masquage unilatéral.",
     indice: "Quand les deux yeux ne sont jamais ouverts ensemble, la fusion a-t-elle lieu ?"
@@ -963,7 +963,7 @@ QUESTIONS.push(
     session: "complément",
     entrainement: true,
     question: "Test de Worth, filtre rouge sur l'OD. À 5 m, le sujet ne voit que 3 symboles verts ; à 33 cm, il en voit 4. Quelle interprétation est la plus probable ?",
-    choix: ["Fusion normale dans tous les cas", "Neutralisation totale de l'OG", "Neutralisation centrale de l'OD, avec une fusion périphérique conservée", "Diplopie permanente"],
+    choix: ["Fusion normale dans tous les cas, de loin comme de près", "Neutralisation totale de l'OG à toutes les distances de test", "Neutralisation centrale de l'OD, avec fusion périphérique conservée", "Diplopie permanente, de loin comme de près, avec 5 symboles à chaque distance"],
     bonne: 2,
     explication: "Les 3 symboles verts correspondent à l'OG seul : l'OD est neutralisé à 5 m, quand le test est petit et tombe sur le centre. À 33 cm, le test est plus grand et déborde sur la périphérie, où la fusion reste possible : la zone de neutralisation est donc petite et centrale.",
     indice: "Plus le test est près, plus l'image est grande sur la rétine. Que dire de la zone neutralisée ?"
@@ -976,7 +976,7 @@ QUESTIONS.push(
     session: "complément",
     entrainement: true,
     question: "Quelle information le test de Worth ne donne-t-il pas ?",
-    choix: ["La neutralisation d'un œil", "L'existence d'une fusion", "La vision stéréoscopique (le relief)", "La présence d'une diplopie"],
+    choix: ["La neutralisation d'un œil, qui supprime une partie des symboles", "L'existence d'une fusion des deux images, avec une seule lumière blanche", "La vision stéréoscopique (le relief)", "La présence d'une diplopie, avec cinq symboles perçus au total"],
     bonne: 2,
     explication: "Le test de Worth montre si la fusion est possible, s'il y a une neutralisation ou une diplopie. Il ne dit rien du relief : l'acuité stéréoscopique se mesure avec d'autres tests, comme ceux à disparité.",
     indice: "Le Worth utilise des symboles colorés vus par chaque œil. Mesure-t-il une disparité fine ?"
