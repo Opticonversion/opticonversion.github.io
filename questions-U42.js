@@ -2334,6 +2334,645 @@ QUESTIONS.push(
     surLaCopie: "δ = 2 n e = 2 × 1,38 × 100 = 276 nm, soit environ λ / 2 pour λ ≈ 552 nm",
     explication: "δ = 2 n e = 2 × 1,38 × 100 = 276 nm.\nC'est environ une demi-longueur d'onde pour λ ≈ 552 nm : les deux rayons réfléchis sont en opposition de phase et s'annulent. Les deux réflexions subissent le même déphasage (n couche < n verre), il n'intervient donc pas.",
     indice: "Le rayon traverse la couche deux fois : aller et retour."
+  },
+
+  // ---------- Lot 5 du 22 nov. : photométrie, interférences, polarisation, champs ----------
+  {
+    id: "U42-289", difficulte: "facile", epreuve: "U42", theme: "Photométrie", session: "complément",
+    question: "Quelle est l'unité de l'intensité lumineuse d'une source ?",
+    choix: ["Le lumen (lm)", "Le lux (lx)", "La candela (cd)", "Le watt (W)"],
+    bonne: 2,
+    explication: "L'intensité lumineuse se mesure en candelas (cd) : c'est le flux émis par unité d'angle solide, 1 cd = 1 lm / sr.\nLe lumen mesure le flux, le lux l'éclairement (lm / m²), le watt une puissance énergétique.",
+    indice: "Intensité : flux par angle solide. Pense à l'unité de base du système photométrique."
+  },
+  {
+    id: "U42-290", difficulte: "facile", epreuve: "U42", theme: "Photométrie", session: "complément",
+    type: "calcul",
+    question: "Une lampe à LED consomme 10 W et émet un flux de 1 000 lm. Calcule son efficacité lumineuse, en lumens par watt.",
+    reponse: { valeur: 100, unite: "lm/W", decimales: 0, signe: false },
+    erreurs: [
+      { valeur: 0.01, type: "notion", message: "Tu as divisé la puissance par le flux. L'efficacité lumineuse est le flux par watt : Φ / P." }
+    ],
+    surLaCopie: "Efficacité = [[Φ|P]] = [[1 000|10]] = 100 lm/W",
+    explication: "Efficacité = [[Φ|P]] = [[1 000|10]] = 100 lm/W.\nUne lampe à incandescence fait environ 10 lm/W : la LED donne dix fois plus de lumière pour la même puissance.",
+    indice: "L'efficacité lumineuse est le flux obtenu pour chaque watt consommé."
+  },
+  {
+    id: "U42-291", difficulte: "facile", epreuve: "U42", theme: "Photométrie", session: "complément",
+    type: "calcul",
+    question: "Un flux de 600 lm éclaire uniformément une surface de 3 m². Calcule l'éclairement moyen.",
+    reponse: { valeur: 200, unite: "lx", decimales: 0, signe: false },
+    erreurs: [
+      { valeur: 1800, type: "notion", message: "Tu as multiplié le flux par la surface. L'éclairement est le flux reçu par unité de surface : E = Φ / S." }
+    ],
+    surLaCopie: "E = [[Φ|S]] = [[600|3]] = 200 lx",
+    explication: "E = [[Φ|S]] = [[600|3]] = 200 lx. Un lux est un lumen par mètre carré.",
+    indice: "L'éclairement est un flux reçu par unité de surface."
+  },
+  {
+    id: "U42-292", difficulte: "moyen", epreuve: "U42", theme: "Photométrie", session: "complément",
+    type: "calcul",
+    question: "Une source de 200 cd éclaire un plan en incidence normale. On veut un éclairement de 50 lx. À quelle distance faut-il placer le plan ?",
+    reponse: { valeur: 2, unite: "m", decimales: 0, signe: false },
+    erreurs: [
+      { valeur: 4, type: "notion", message: "Tu as oublié la racine carrée. De E = I / d², on tire d = √(I / E) = √4." }
+    ],
+    surLaCopie: "E = [[I|d²]] donc d² = [[I|E]] = [[200|50]] = 4, d = 2 m",
+    explication: "E = [[I|d²]], donc d² = [[I|E]] = [[200|50]] = 4. Donc d = √4 = 2 m.",
+    indice: "Isole d² dans la loi de Bouguer, puis prends la racine."
+  },
+  {
+    id: "U42-293", difficulte: "moyen", epreuve: "U42", theme: "Photométrie", session: "complément",
+    type: "pose",
+    question: "Deux lampes éclairent le même point en incidence normale : A (100 cd) à 1 m et B (200 cd) à 2 m. Calcule l'éclairement total en ce point, étape par étape.",
+    etapes: [
+      {
+        consigne: "Éclairement dû à la lampe A (en lx)",
+        reponse: { valeur: 100, unite: "lx", decimales: 0, signe: false },
+        aide: "E = I / d².",
+        ligne: "E_A = [[100|1²]] = 100 lx"
+      },
+      {
+        consigne: "Éclairement dû à la lampe B (en lx)",
+        reponse: { valeur: 50, unite: "lx", decimales: 0, signe: false },
+        aide: "E = I / d², avec d = 2 m.",
+        ligne: "E_B = [[200|2²]] = [[200|4]] = 50 lx"
+      },
+      {
+        consigne: "Éclairement total (en lx)",
+        reponse: { valeur: 150, unite: "lx", decimales: 0, signe: false },
+        aide: "Les éclairements de sources indépendantes s'additionnent.",
+        ligne: "E = 100 + 50 = 150 lx"
+      }
+    ],
+    explication: "E_A = [[100|1²]] = 100 lx. E_B = [[200|2²]] = 50 lx.\nLes éclairements s'additionnent : 100 + 50 = 150 lx."
+  },
+  {
+    id: "U42-294", difficulte: "moyen", epreuve: "U42", theme: "Photométrie", session: "complément",
+    question: "On passe d'une ouverture f/5,6 à f/4. Que devient la quantité de lumière reçue par le capteur ?",
+    choix: ["Elle est multipliée par 1,4", "Elle est à peu près doublée", "Elle est multipliée par 4", "Elle ne change pas"],
+    bonne: 1,
+    explication: "Le diamètre de la pupille est multiplié par 5,6 / 4 = 1,4, soit √2. Sa surface, donc la lumière reçue, est multipliée par 1,4² = 2.\nLa série des ouvertures (f/2,8 ; 4 ; 5,6 ; 8 ; 11…) est faite de pas de √2 : chaque cran double ou divise par deux la lumière.",
+    indice: "La lumière est proportionnelle à la surface de la pupille, donc au carré du diamètre.",
+    erreurs: {
+      0: { type: "notion", message: "1,4 est le rapport des diamètres. La lumière dépend de la surface, donc du carré : 1,4² = 2." }
+    }
+  },
+  {
+    id: "U42-295", difficulte: "facile", epreuve: "U42", theme: "Interférences et réseaux", session: "complément",
+    question: "Dans l'expérience des fentes d'Young, la frange centrale est équidistante des deux fentes. Quelle est la différence de marche en ce point et comment apparaît-il ?",
+    choix: ["δ = λ / 2, il est sombre", "δ = λ, il est sombre", "δ = λ / 2, il est brillant", "δ = 0, il est brillant"],
+    bonne: 3,
+    explication: "Au milieu, les deux trajets ont la même longueur : δ = 0. Les ondes arrivent en phase : interférence constructive, frange brillante (ordre 0).\nδ = λ / 2 donnerait une frange sombre.",
+    indice: "Les deux trajets sont de même longueur. Que vaut leur différence ?"
+  },
+  {
+    id: "U42-296", difficulte: "moyen", epreuve: "U42", theme: "Interférences et réseaux", session: "complément",
+    type: "calcul",
+    question: "Fentes d'Young distantes de a = 0,3 mm, écran à D = 2,4 m. On mesure un interfrange de 4 mm. Calcule la longueur d'onde de la lumière, en nanomètres.",
+    reponse: { valeur: 500, unite: "nm", decimales: 0, signe: false },
+    erreurs: [
+      { valeur: 0.0000005, type: "unite", message: "Tu as laissé le résultat en mètres : 5 × 10⁻⁷ m = 500 nm. Convertis en nanomètres (× 10⁹)." }
+    ],
+    surLaCopie: "i = [[λ × D|a]] donc λ = [[i × a|D]] = [[4 × 10⁻³ × 0,3 × 10⁻³|2,4]] = 5 × 10⁻⁷ m = 500 nm",
+    explication: "i = [[λ × D|a]], donc λ = [[i × a|D]].\nλ = [[4 × 10⁻³ × 0,3 × 10⁻³|2,4]] = 5 × 10⁻⁷ m = 500 nm.",
+    indice: "Isole λ dans la formule de l'interfrange et convertis tout en mètres."
+  },
+  {
+    id: "U42-297", difficulte: "moyen", epreuve: "U42", theme: "Interférences et réseaux", session: "complément",
+    type: "calcul",
+    question: "Un réseau a 300 traits par millimètre. Il est éclairé en incidence normale par une lumière de 600 nm. Calcule l'angle de déviation de l'ordre 2, en degrés (sin θ = p λ / a).",
+    reponse: { valeur: 21.1, unite: "°", decimales: 1, tolerance: 0.1, signe: false },
+    erreurs: [
+      { valeur: 10.4, type: "notion", message: "Tu as calculé l'ordre 1. Pour l'ordre 2, il faut p = 2 : sin θ = 2 λ / a." }
+    ],
+    surLaCopie: "a = [[1|300]] mm ≈ 3,33 µm\nsin θ = [[2 × λ|a]] = [[2 × 0,6|3,33]] = 0,36, donc θ ≈ 21,1°",
+    explication: "Le pas vaut a = [[1|300]] mm ≈ 3,33 µm.\nsin θ = [[2 × 0,6|3,33]] = 0,36, donc θ = arcsin(0,36) ≈ 21,1°.",
+    indice: "Pour l'ordre 2, le numérateur est 2 λ."
+  },
+  {
+    id: "U42-298", difficulte: "facile", epreuve: "U42", theme: "Interférences et réseaux", session: "complément",
+    type: "calcul",
+    question: "Un réseau porte 400 traits par millimètre. Calcule son pas a, en micromètres.",
+    reponse: { valeur: 2.5, unite: "µm", decimales: 1, signe: false },
+    erreurs: [
+      { valeur: 0.0025, type: "unite", message: "Tu as laissé le résultat en millimètres : 0,0025 mm = 2,5 µm. Convertis en micromètres (× 1 000)." }
+    ],
+    surLaCopie: "a = [[1|400]] mm = 0,0025 mm = 2,5 µm",
+    explication: "Le pas est l'inverse du nombre de traits par unité de longueur : a = [[1|400]] mm = 0,0025 mm = 2,5 µm.",
+    indice: "Le pas est la distance entre deux traits : l'inverse du nombre de traits par millimètre."
+  },
+  {
+    id: "U42-299", difficulte: "moyen", epreuve: "U42", theme: "Interférences et réseaux", session: "complément",
+    question: "Pourquoi deux lampes ordinaires placées côte à côte ne produisent-elles pas de franges d'interférence ?",
+    choix: ["Leur lumière est trop faible", "Leur lumière n'est pas de la lumière", "Leurs ondes ne sont pas cohérentes : leurs phases varient de façon indépendante", "Les franges existent, mais l'œil ne les voit pas"],
+    bonne: 2,
+    explication: "Pour obtenir des franges stables, il faut deux ondes cohérentes, de phase relative constante. Deux sources indépendantes ont des phases qui changent au hasard, très vite : les figures d'interférence se brouillent.\nDans l'expérience d'Young, les deux fentes sont éclairées par la même source : les deux ondes sont cohérentes.",
+    indice: "Pourquoi, dans l'expérience d'Young, éclaire-t-on les deux fentes avec la même source ?"
+  },
+  {
+    id: "U42-300", difficulte: "difficile", epreuve: "U42", theme: "Interférences et réseaux", session: "complément",
+    type: "pose",
+    question: "Un réseau a 400 traits par millimètre. Il est éclairé en incidence normale par une lumière de 600 nm. Étudie-le étape par étape.",
+    etapes: [
+      {
+        consigne: "Pas du réseau a (en µm)",
+        reponse: { valeur: 2.5, unite: "µm", decimales: 1, signe: false },
+        aide: "Le pas est l'inverse du nombre de traits par millimètre.",
+        ligne: "a = [[1|400]] mm = 2,5 µm"
+      },
+      {
+        consigne: "Angle de l'ordre 1, θ₁ (en degrés)",
+        reponse: { valeur: 13.9, unite: "°", decimales: 1, tolerance: 0.1, signe: false },
+        aide: "sin θ₁ = λ / a, avec λ et a dans la même unité.",
+        ligne: "sin θ₁ = [[0,6|2,5]] = 0,24, donc θ₁ ≈ 13,9°"
+      },
+      {
+        consigne: "Ordre le plus élevé observable",
+        reponse: { valeur: 4, unite: "", decimales: 0, signe: false },
+        aide: "sin θ ne peut pas dépasser 1 : p λ / a ≤ 1.",
+        ligne: "p ≤ [[a|λ]] = [[2,5|0,6]] ≈ 4,17, donc p = 4"
+      }
+    ],
+    explication: "a = [[1|400]] mm = 2,5 µm. sin θ₁ = [[0,6|2,5]] = 0,24, donc θ₁ ≈ 13,9°.\nOrdre maximal : p ≤ [[a|λ]] ≈ 4,17, donc l'ordre 4 est le plus élevé (de chaque côté de l'ordre 0)."
+  },
+  {
+    id: "U42-301", difficulte: "facile", epreuve: "U42", theme: "Polarisation", session: "complément",
+    question: "Peut-on polariser une onde sonore dans l'air ?",
+    choix: ["Oui, avec un filtre adapté", "Oui, mais seulement en incidence de Brewster", "Oui, comme la lumière", "Non, car c'est une onde longitudinale : elle n'a pas de direction de vibration transversale"],
+    bonne: 3,
+    explication: "La polarisation n'existe que pour les ondes transversales, où la vibration est perpendiculaire à la direction de propagation. Une onde sonore est longitudinale : la vibration est dans la direction de propagation.\nLe fait que la lumière se polarise prouve qu'elle est transversale.",
+    indice: "La polarisation décrit la direction de vibration, perpendiculaire à la propagation."
+  },
+  {
+    id: "U42-302", difficulte: "difficile", epreuve: "U42", theme: "Polarisation", session: "complément",
+    type: "calcul",
+    question: "Une lumière polarisée rectilignement traverse un analyseur parfait, et la moitié de l'intensité ressort. Quel angle fait l'axe de l'analyseur avec la direction de polarisation ? (I = I₀ cos² θ)",
+    reponse: { valeur: 45, unite: "°", decimales: 0, signe: false },
+    erreurs: [
+      { valeur: 60, type: "notion", message: "Tu as résolu cos θ = 0,5. La loi de Malus donne cos² θ = 0,5, donc cos θ ≈ 0,707 et θ = 45°." }
+    ],
+    surLaCopie: "cos² θ = [[I|I₀]] = 0,5 donc cos θ = √0,5 ≈ 0,707, θ = 45°",
+    explication: "cos² θ = [[I|I₀]] = 0,5, donc cos θ = √0,5 ≈ 0,707 et θ = 45°.",
+    indice: "Pense à prendre la racine carrée avant d'utiliser arccos."
+  },
+  {
+    id: "U42-303", difficulte: "moyen", epreuve: "U42", theme: "Polarisation", session: "complément",
+    question: "La lumière d'un écran LCD est polarisée rectilignement. Un client le regarde avec des lunettes polarisantes et les fait tourner lentement de 90° autour de l'axe de son regard. Que voit-il ?",
+    choix: ["L'écran reste identique", "L'écran passe de lumineux à presque noir", "L'écran change de couleur seulement", "L'écran devient flou"],
+    bonne: 1,
+    explication: "Quand l'axe du verre est parallèle à la polarisation de l'écran, la lumière passe. Après 90°, il est perpendiculaire et la lumière est arrêtée (loi de Malus : cos² 90° = 0) : l'écran paraît presque noir.\nC'est un défaut connu des lunettes polarisantes avec certains écrans : à tester en magasin.",
+    indice: "Pense à la loi de Malus avec un angle de 90°."
+  },
+  {
+    id: "U42-304", difficulte: "moyen", epreuve: "U42", theme: "Polarisation", session: "complément",
+    type: "calcul",
+    question: "La lumière se réfléchit sur une surface de verre d'indice 1,6, dans l'air. Calcule l'angle d'incidence de Brewster, mesuré depuis la normale (tan iB = n).",
+    reponse: { valeur: 58, unite: "°", decimales: 1, tolerance: 0.1, signe: false },
+    erreurs: [
+      { valeur: 32, type: "notion", message: "32° est l'angle avec la surface. L'angle d'incidence se mesure depuis la normale." }
+    ],
+    surLaCopie: "tan iB = n = 1,6, donc iB = arctan(1,6) ≈ 58,0°",
+    explication: "tan iB = n = 1,6, donc iB = arctan(1,6) ≈ 58,0°.",
+    indice: "Utilise arctan, en degrés."
+  },
+  {
+    id: "U42-305", difficulte: "difficile", epreuve: "U42", theme: "Polarisation", session: "complément",
+    type: "calcul",
+    question: "De la lumière naturelle traverse un polariseur parfait, puis un analyseur parfait dont l'axe fait 30° avec celui du polariseur. Quel pourcentage de l'intensité initiale ressort ?",
+    reponse: { valeur: 37.5, unite: "%", decimales: 1, signe: false, tolerance: 0.1 },
+    erreurs: [
+      { valeur: 75, type: "notion", message: "Tu as oublié que le premier polariseur arrête déjà la moitié de la lumière naturelle : I₁ = I₀ / 2." }
+    ],
+    surLaCopie: "Après le polariseur : I₁ = [[I₀|2]]\nAprès l'analyseur : I₂ = I₁ cos² 30° = [[I₀|2]] × 0,75 = 0,375 I₀, soit 37,5 %",
+    explication: "Après le polariseur : I₁ = I₀ / 2.\nAprès l'analyseur : I₂ = I₁ cos² 30° = 0,5 × 0,75 I₀ = 0,375 I₀, soit 37,5 %.",
+    indice: "Lumière naturelle : la moitié passe au premier polariseur, puis Malus pour le second."
+  },
+  {
+    id: "U42-306", difficulte: "facile", epreuve: "U42", theme: "Champs et diaphragmes", session: "complément",
+    question: "Qu'appelle-t-on la pupille de sortie d'un instrument ?",
+    choix: ["Le diaphragme de champ", "L'image du diaphragme d'ouverture donnée par la partie du système située après lui", "L'ouverture de l'œil", "L'image de l'objet"],
+    bonne: 1,
+    explication: "La pupille de sortie est l'image du diaphragme d'ouverture à travers la partie du système qui le suit. C'est aussi par là que sort tout le faisceau lumineux utile.\nLa pupille d'entrée, elle, est l'image du même diaphragme à travers la partie qui le précède.",
+    indice: "Pense à ce que devient le diaphragme d'ouverture vu depuis l'espace image."
+  },
+  {
+    id: "U42-307", difficulte: "moyen", epreuve: "U42", theme: "Champs et diaphragmes", session: "complément",
+    question: "Où doit-on placer la pupille de l'œil derrière l'oculaire d'une lunette ?",
+    choix: ["Contre l'oculaire, pour être le plus près possible", "Au foyer image de l'oculaire", "Au cercle oculaire, image de l'objectif par l'oculaire", "Le plus loin possible"],
+    bonne: 2,
+    explication: "Le cercle oculaire est l'image de l'objectif (le diaphragme d'ouverture) donnée par l'oculaire : tous les faisceaux y passent. En y plaçant la pupille de l'œil, on reçoit toute la lumière et tout le champ.\nPlus près ou plus loin, on perd de la lumière ou du champ.",
+    indice: "Tous les faisceaux issus de l'objectif passent par un même cercle derrière l'oculaire."
+  },
+  {
+    id: "U42-308", difficulte: "moyen", epreuve: "U42", theme: "Champs et diaphragmes", session: "complément",
+    type: "calcul",
+    question: "Dans un microscope, un diaphragme de champ de diamètre 20 mm est placé dans le plan de l'image intermédiaire. L'objectif a un grandissement γob = −40. Calcule le diamètre du champ observé sur l'objet.",
+    reponse: { valeur: 0.5, unite: "mm", decimales: 1, signe: false },
+    erreurs: [
+      { valeur: 800, type: "notion", message: "Tu as multiplié par γob. Le diaphragme est dans le plan de l'image : le champ sur l'objet est plus petit, divisé par |γob|." }
+    ],
+    surLaCopie: "Champ sur l'objet = [[20|40]] = 0,5 mm",
+    explication: "Le diaphragme est dans le plan de l'image intermédiaire, 40 fois plus grande que l'objet. Le champ sur l'objet est donc 40 fois plus petit : [[20|40]] = 0,5 mm.",
+    indice: "L'image est agrandie 40 fois : que vaut la taille correspondante sur l'objet ?"
+  },
+  {
+    id: "U42-309", difficulte: "moyen", epreuve: "U42", theme: "Champs et diaphragmes", session: "complément",
+    type: "calcul",
+    question: "Dans une lunette, un diaphragme de champ de rayon 6 mm est placé au foyer objet d'un oculaire de focale f'oc = 25 mm. Calcule le champ apparent total, c'est-à-dire l'angle sous lequel on voit les bords du diaphragme (tan θ' = rayon / f'oc).",
+    reponse: { valeur: 27, unite: "°", decimales: 0, tolerance: 0.5, signe: false },
+    erreurs: [
+      { valeur: 13.5, type: "notion", message: "Tu as calculé le demi-champ. Le champ total est 2 θ'." }
+    ],
+    surLaCopie: "tan θ' = [[6|25]] = 0,24, donc θ' ≈ 13,5°\nChamp apparent total = 2 θ' ≈ 27°",
+    explication: "tan θ' = [[6|25]] = 0,24, donc θ' = arctan(0,24) ≈ 13,5°.\nLe champ apparent total vaut 2 θ' ≈ 27°.",
+    indice: "Le rayon du diaphragme donne un demi-champ. Pense à doubler."
+  },
+  {
+    id: "U42-310", difficulte: "difficile", epreuve: "U42", theme: "Champs et diaphragmes", session: "complément",
+    type: "pose",
+    question: "Une lunette de Kepler a un objectif f'ob = 300 mm et un oculaire f'oc = 30 mm. Un diaphragme de champ de rayon 6 mm est placé dans le plan focal commun. Étudie les champs étape par étape.",
+    etapes: [
+      {
+        consigne: "Demi-champ dans l'espace objet, θ (en degrés)",
+        reponse: { valeur: 1.15, unite: "°", decimales: 2, tolerance: 0.01, signe: false },
+        aide: "tan θ = rayon / f'ob.",
+        ligne: "tan θ = [[6|300]] = 0,02, donc θ ≈ 1,15°"
+      },
+      {
+        consigne: "Champ total dans l'espace objet, 2θ (en degrés)",
+        reponse: { valeur: 2.29, unite: "°", decimales: 2, tolerance: 0.02, signe: false },
+        aide: "Le champ total est le double du demi-champ.",
+        ligne: "2 θ ≈ 2,29°"
+      },
+      {
+        consigne: "Champ apparent total dans l'espace image, 2θ' (en degrés)",
+        reponse: { valeur: 22.6, unite: "°", decimales: 1, tolerance: 0.2, signe: false },
+        aide: "tan θ' = rayon / f'oc.",
+        ligne: "tan θ' = [[6|30]] = 0,2, donc θ' ≈ 11,3° et 2 θ' ≈ 22,6°"
+      }
+    ],
+    explication: "Côté objet : tan θ = [[6|300]] = 0,02, θ ≈ 1,15°, champ 2,29°.\nCôté image : tan θ' = [[6|30]] = 0,2, θ' ≈ 11,3°, champ apparent 22,6°.\nLe rapport des tangentes est le grossissement : 0,2 / 0,02 = 10."
+  },
+  {
+    id: "U42-311", difficulte: "moyen", epreuve: "U42", theme: "Lunettes afocales", session: "complément",
+    type: "calcul",
+    question: "Le cercle oculaire d'une lunette mesure 5 mm. La pupille de l'œil de l'observateur mesure 4 mm et est placée au cercle oculaire. Quel pourcentage de la lumière sortant de la lunette entre dans l'œil ?",
+    reponse: { valeur: 64, unite: "%", decimales: 0, signe: false },
+    erreurs: [
+      { valeur: 80, type: "notion", message: "Tu as fait le rapport des diamètres. La lumière dépend de la surface : il faut le carré, (4/5)² = 0,64." }
+    ],
+    surLaCopie: "Rapport des surfaces = ([[4|5]])² = 0,64, soit 64 %",
+    explication: "La lumière qui entre dans l'œil est proportionnelle à la surface de sa pupille : ([[4|5]])² = 0,64, soit 64 %.\nL'œil ne reçoit donc que 64 % de ce que la lunette peut donner.",
+    indice: "Compare des surfaces, donc des carrés de diamètres."
+  },
+  {
+    id: "U42-312", difficulte: "moyen", epreuve: "U42", theme: "Photométrie", session: "complément",
+    question: "Un filtre gris ne laisse passer que 12,5 % de la lumière. Sans filtre, le temps de pose est 1/1000 s. Quel temps de pose garde la même exposition ?",
+    choix: ["1/500 s", "1/250 s", "1/60 s", "1/125 s"],
+    bonne: 3,
+    explication: "12,5 % = 1/8 de la lumière : il faut poser 8 fois plus longtemps. 8 × 1/1000 = 1/125 s.\n1/500 s compenserait un filtre à 50 %, 1/250 s un filtre à 25 %.",
+    indice: "Quelle fraction de la lumière passe ? Compense en multipliant le temps par l'inverse."
+  },
+  {
+    id: "U42-313", difficulte: "moyen", epreuve: "U42", theme: "Ouverture et résolution", session: "complément",
+    type: "calcul",
+    question: "Un appareil photo de focale 300 mm a des pixels de 6 µm. Calcule la taille, sur un objet situé à 100 m, que couvre un pixel du capteur (c'est la limite de résolution due au capteur).",
+    reponse: { valeur: 2, unite: "mm", decimales: 0, signe: false },
+    erreurs: [
+      { valeur: 0.002, type: "unite", message: "Tu as laissé le résultat en mètres : 2 × 10⁻³ m = 2 mm." }
+    ],
+    surLaCopie: "α = [[pixel|f']] = [[6 × 10⁻⁶|0,3]] = 2 × 10⁻⁵ rad\nDétail = α × distance = 2 × 10⁻⁵ × 100 = 2 × 10⁻³ m = 2 mm",
+    explication: "α = [[6 × 10⁻⁶|0,3]] = 2 × 10⁻⁵ rad.\nDétail = 2 × 10⁻⁵ × 100 = 2 × 10⁻³ m = 2 mm.",
+    indice: "Calcule l'angle correspondant à un pixel, puis multiplie par la distance."
+  },
+  {
+    id: "U42-314", difficulte: "difficile", epreuve: "U42", theme: "Doublets et achromatisme", session: "complément",
+    type: "calcul",
+    question: "On veut un doublet achromatique accolé de vergence totale +5 δ, avec un verre de ν₁ = 60 et un verre de ν₂ = 30. Calcule la vergence V₁ de la première lentille (V₁ / ν₁ + V₂ / ν₂ = 0 et V₁ + V₂ = 5).",
+    reponse: { valeur: 10, unite: "δ", decimales: 0, signe: true },
+    erreurs: [
+      { valeur: 5, type: "notion", message: "Tu as pris V₁ égale à la vergence totale. La seconde lentille a aussi une vergence : V₁ + V₂ = 5 avec V₂ ≠ 0." }
+    ],
+    surLaCopie: "V₂ = −V₁ × [[ν₂|ν₁]] = −[[V₁|2]]\nV₁ + V₂ = [[V₁|2]] = 5 donc V₁ = +10 δ (et V₂ = −5 δ)",
+    explication: "L'achromatisme donne V₂ = −V₁ × [[ν₂|ν₁]] = −[[V₁|2]].\nV₁ + V₂ = [[V₁|2]] = 5, donc V₁ = +10 δ et V₂ = −5 δ.",
+    indice: "Exprime V₂ en fonction de V₁ avec la condition d'achromatisme, puis reporte dans la somme."
+  },
+
+  // ---------- Lot 6 du 22 nov. : loupe, afocales, doublets, résolution, antireflet, conjugaison ----------
+  {
+    id: "U42-315", difficulte: "facile", epreuve: "U42", theme: "Loupe et microscope", session: "complément",
+    type: "calcul",
+    question: "Une loupe a une puissance P = +16 δ. Calcule son grossissement commercial.",
+    reponse: { valeur: 4, unite: "", decimales: 0, signe: false },
+    erreurs: [
+      { valeur: 16, type: "notion", message: "Tu as pris Gc égal à la puissance. Gc = 0,25 × P (distance conventionnelle 0,25 m)." }
+    ],
+    surLaCopie: "Gc = 0,25 × P = 0,25 × 16 = 4",
+    explication: "Gc = [[250 mm|f']] = 0,25 × P (avec P en dioptries).\nGc = 0,25 × 16 = 4. Une loupe de 16 δ a une focale de 62,5 mm.",
+    indice: "Gc = 0,25 × P, avec P en dioptries."
+  },
+  {
+    id: "U42-316", difficulte: "moyen", epreuve: "U42", theme: "Loupe et microscope", session: "complément",
+    question: "Un microscope donne d'un objet une image finale. Comment est-elle par rapport à l'objet ?",
+    choix: ["Droite et virtuelle", "Droite et réelle", "Renversée et réelle", "Renversée et virtuelle"],
+    bonne: 3,
+    explication: "L'objectif forme une image intermédiaire réelle et renversée. L'oculaire, utilisé comme une loupe, en donne une image virtuelle, qui garde ce sens : l'image finale est renversée et virtuelle.\nElle est virtuelle : l'œil la regarde comme s'il était devant un objet réel, mais on ne peut pas la recueillir sur un écran.",
+    indice: "L'objectif renverse l'image, l'oculaire fonctionne comme une loupe."
+  },
+  {
+    id: "U42-317", difficulte: "moyen", epreuve: "U42", theme: "Loupe et microscope", session: "complément",
+    type: "calcul",
+    question: "Un microscope a un objectif de focale f'ob = 6 mm, un intervalle optique Δ = 180 mm et un oculaire ×12,5. Calcule son grossissement commercial.",
+    reponse: { valeur: 375, unite: "", decimales: 0, signe: false },
+    erreurs: [
+      { valeur: 30, type: "notion", message: "30 est |γob| = Δ / f'ob. Il faut le multiplier par le grossissement de l'oculaire (12,5)." }
+    ],
+    surLaCopie: "|γob| = [[Δ|f'ob]] = [[180|6]] = 30\nGc = |γob| × Gc,oc = 30 × 12,5 = 375",
+    explication: "|γob| = [[180|6]] = 30. Gc = 30 × 12,5 = 375.",
+    indice: "Calcule le grandissement de l'objectif, puis multiplie par le grossissement de l'oculaire."
+  },
+  {
+    id: "U42-318", difficulte: "difficile", epreuve: "U42", theme: "Loupe et microscope", session: "complément",
+    type: "pose",
+    question: "On observe un objet de 2 mm avec une loupe de f' = +40 mm, placé à 30 mm devant elle (OA = −30 mm). Étudie l'image étape par étape.",
+    etapes: [
+      {
+        consigne: "Position de l'image, OA' (en mm)",
+        reponse: { valeur: -120, unite: "mm", decimales: 0, signe: true },
+        aide: "Descartes : [[1|OA']] = [[1|f']] + [[1|OA]].",
+        ligne: "[[1|OA']] = [[1|40]] − [[1|30]] = [[3|120]] − [[4|120]] = [[−1|120]]\nOA' = −120 mm (image virtuelle)",
+        erreurs: [{ valeur: 17.14, type: "signe", message: "Tu as pris OA = +30 mm. L'objet est réel, avant la loupe : OA = −30 mm." }]
+      },
+      {
+        consigne: "Grandissement γ",
+        reponse: { valeur: 4, unite: "", decimales: 0, signe: true },
+        aide: "γ = OA' / OA.",
+        ligne: "γ = [[−120|−30]] = +4 (image droite)"
+      },
+      {
+        consigne: "Taille de l'image A'B' (en mm)",
+        reponse: { valeur: 8, unite: "mm", decimales: 0, signe: true },
+        aide: "A'B' = γ × AB.",
+        ligne: "A'B' = 4 × 2 = +8 mm"
+      }
+    ],
+    explication: "[[1|OA']] = [[1|40]] − [[1|30]] = [[−1|120]], donc OA' = −120 mm : image virtuelle, du même côté que l'objet.\nγ = [[−120|−30]] = +4 : droite et 4 fois plus grande. A'B' = 4 × 2 = 8 mm."
+  },
+  {
+    id: "U42-319", difficulte: "moyen", epreuve: "U42", theme: "Lunettes afocales", session: "complément",
+    question: "Quel est un inconvénient de la lunette de Galilée par rapport à celle de Kepler ?",
+    choix: ["Son image est renversée", "Elle est plus longue", "Elle n'a pas d'image intermédiaire réelle : on ne peut pas y placer de réticule, et son champ est limité", "Elle ne peut pas être afocale"],
+    bonne: 2,
+    explication: "La lunette de Galilée a un oculaire divergent : il n'y a pas d'image intermédiaire réelle. On ne peut pas y placer de réticule ni de diaphragme de champ, et son champ est limité.\nSes atouts sont d'être courte et de donner une image droite.",
+    indice: "Une image intermédiaire réelle permet de placer un réticule : la lunette de Galilée n'en a pas."
+  },
+  {
+    id: "U42-320", difficulte: "moyen", epreuve: "U42", theme: "Lunettes afocales", session: "complément",
+    type: "calcul",
+    question: "Une lunette de Kepler a un grossissement G = −10 et un oculaire f'oc = +30 mm. Calcule sa longueur (distance entre l'objectif et l'oculaire).",
+    reponse: { valeur: 330, unite: "mm", decimales: 0, signe: false },
+    erreurs: [
+      { valeur: 270, type: "signe", message: "Tu as soustrait. Pour une lunette de Kepler, les deux focales sont positives : e = f'ob + f'oc." }
+    ],
+    surLaCopie: "f'ob = −G × f'oc = 10 × 30 = 300 mm\ne = f'ob + f'oc = 300 + 30 = 330 mm",
+    explication: "f'ob = −G × f'oc = 10 × 30 = 300 mm.\nLongueur : e = f'ob + f'oc = 300 + 30 = 330 mm.",
+    indice: "Trouve d'abord la focale de l'objectif avec le grossissement."
+  },
+  {
+    id: "U42-321", difficulte: "difficile", epreuve: "U42", theme: "Lunettes afocales", session: "complément",
+    type: "calcul",
+    question: "Une lunette de Galilée a un grossissement G = +3 et une longueur de 100 mm. Calcule la focale de son objectif.",
+    reponse: { valeur: 150, unite: "mm", decimales: 0, signe: false },
+    erreurs: [
+      { valeur: 50, type: "notion", message: "50 mm est la valeur absolue de f'oc. L'objectif est 3 fois plus long : f'ob = 3 × 50." }
+    ],
+    surLaCopie: "G = −[[f'ob|f'oc]] = +3 donc f'oc = −[[f'ob|3]]\ne = f'ob + f'oc = f'ob − [[f'ob|3]] = [[2 f'ob|3]] = 100 donc f'ob = 150 mm (et f'oc = −50 mm)",
+    explication: "G = +3 donne f'oc = −[[f'ob|3]].\nLongueur : e = f'ob + f'oc = [[2 f'ob|3]] = 100 mm, donc f'ob = 150 mm. L'oculaire est f'oc = −50 mm.",
+    indice: "Exprime f'oc en fonction de f'ob avec G, puis écris la longueur de la lunette."
+  },
+  {
+    id: "U42-322", difficulte: "facile", epreuve: "U42", theme: "Lunettes afocales", session: "complément",
+    type: "calcul",
+    question: "Un objet est vu à l'œil nu sous un angle de 0,5°. On l'observe avec une lunette de grossissement G = −8. Sous quel angle voit-on l'image, en valeur absolue ?",
+    reponse: { valeur: 4, unite: "°", decimales: 0, signe: false },
+    erreurs: [
+      { valeur: 0.0625, type: "notion", message: "Tu as divisé par G. Un grossissement multiplie l'angle : α' = |G| × α." }
+    ],
+    surLaCopie: "|α'| = |G| × α = 8 × 0,5° = 4°",
+    explication: "Le grossissement est le rapport des angles : |α'| = |G| × α = 8 × 0,5° = 4°. Le signe moins de G indique que l'image est renversée.",
+    indice: "Le grossissement est un rapport d'angles."
+  },
+  {
+    id: "U42-323", difficulte: "moyen", epreuve: "U42", theme: "Doublets et achromatisme", session: "complément",
+    type: "calcul",
+    question: "Deux lentilles minces accolées ont pour focales f'₁ = +100 mm et f'₂ = +50 mm. Calcule la distance focale image du système, en millimètres.",
+    reponse: { valeur: 33.3, unite: "mm", decimales: 1, tolerance: 0.1, signe: false },
+    erreurs: [
+      { valeur: 150, type: "notion", message: "Tu as additionné les focales. Ce sont les vergences qui s'ajoutent : V = [[1|f'₁]] + [[1|f'₂]]." }
+    ],
+    surLaCopie: "V = [[1|0,1]] + [[1|0,05]] = 10 + 20 = 30 δ\nf' = [[1|30]] ≈ 0,0333 m = 33,3 mm",
+    explication: "Vergences : [[1|0,1]] = 10 δ et [[1|0,05]] = 20 δ. V = 30 δ.\nf' = [[1|30]] ≈ 0,0333 m = 33,3 mm.",
+    indice: "Pour des lentilles accolées, ce sont les vergences qui s'ajoutent."
+  },
+  {
+    id: "U42-324", difficulte: "difficile", epreuve: "U42", theme: "Doublets et achromatisme", session: "complément",
+    type: "calcul",
+    question: "Un doublet est formé d'une lentille convergente de V₁ = +10 δ et d'une divergente de V₂ = −10 δ, séparées de e = 50 mm. Calcule sa vergence avec V = V₁ + V₂ − e V₁ V₂.",
+    reponse: { valeur: 5, unite: "δ", decimales: 0, signe: true },
+    erreurs: [
+      { valeur: 0, type: "notion", message: "Tu as retenu V₁ + V₂ et oublié le terme de séparation. Ici −e V₁ V₂ = −0,05 × 10 × (−10) = +5 δ." }
+    ],
+    surLaCopie: "V = V₁ + V₂ − e V₁ V₂ = 10 − 10 − 0,05 × 10 × (−10) = 0 + 5 = +5 δ",
+    explication: "e = 50 mm = 0,05 m.\nV = 10 − 10 − 0,05 × 10 × (−10) = 0 + 5 = +5 δ.\nAccolées, ces deux lentilles s'annuleraient ; séparées, le doublet reste convergent.",
+    indice: "Attention au signe de V₂ dans le produit V₁ V₂."
+  },
+  {
+    id: "U42-325", difficulte: "facile", epreuve: "U42", theme: "Doublets et achromatisme", session: "complément",
+    question: "Une lentille convergente en verre éclairée en lumière blanche. Pour quelle couleur le foyer image est-il le plus proche de la lentille ?",
+    choix: ["Le rouge", "Le vert", "Toutes les couleurs ont le même foyer", "Le bleu-violet"],
+    bonne: 3,
+    explication: "L'indice du verre est plus grand pour les courtes longueurs d'onde : le bleu-violet est plus dévié que le rouge, son foyer est plus proche de la lentille. C'est l'aberration chromatique.\nUn doublet achromatique la compense.",
+    indice: "L'indice du verre dépend de la longueur d'onde. Où est-il le plus grand ?"
+  },
+  {
+    id: "U42-326", difficulte: "moyen", epreuve: "U42", theme: "Ouverture et résolution", session: "complément",
+    type: "calcul",
+    question: "La pupille de l'œil a un diamètre de 2 mm en pleine lumière. Pour λ = 550 nm, calcule la limite de résolution due à la diffraction, α = 1,22 λ / D, en milliradians.",
+    reponse: { valeur: 0.34, unite: "mrad", decimales: 2, tolerance: 0.01, signe: false },
+    erreurs: [
+      { valeur: 0.275, type: "notion", message: "Il manque le facteur 1,22 de la formule. α = 1,22 λ / D." }
+    ],
+    surLaCopie: "α = [[1,22 × λ|D]] = [[1,22 × 550 × 10⁻⁹|2 × 10⁻³]] ≈ 3,4 × 10⁻⁴ rad ≈ 0,34 mrad",
+    explication: "α = [[1,22 × 550 × 10⁻⁹|2 × 10⁻³]] ≈ 3,36 × 10⁻⁴ rad ≈ 0,34 mrad.\nC'est l'ordre de grandeur de la résolution de l'œil.",
+    indice: "Convertis λ et D en mètres, puis exprime le résultat en milliradians (× 1 000)."
+  },
+  {
+    id: "U42-327", difficulte: "facile", epreuve: "U42", theme: "Ouverture et résolution", session: "complément",
+    question: "Pour séparer deux étoiles très proches, quel instrument faut-il choisir, à longueur d'onde égale ?",
+    choix: ["Un télescope de petit diamètre", "Un télescope de grand diamètre", "Un instrument de grande focale seulement", "Peu importe son diamètre"],
+    bonne: 1,
+    explication: "La limite de diffraction α = 1,22 λ / D diminue quand le diamètre D augmente. Pour séparer des étoiles proches, il faut un instrument de grande pupille d'entrée.\nLa focale agrandit l'image, mais ne change pas la limite de résolution due à la diffraction.",
+    indice: "α = 1,22 λ / D : regarde ce qui diminue α."
+  },
+  {
+    id: "U42-328", difficulte: "difficile", epreuve: "U42", theme: "Ouverture et résolution", session: "complément",
+    type: "calcul",
+    question: "Un objectif de diamètre D = 80 mm est utilisé à λ = 550 nm. L'œil a une limite de résolution de 3 × 10⁻⁴ rad. Calcule le grossissement utile (rapport entre la limite de l'œil et celle de la diffraction), arrondi à l'unité.",
+    reponse: { valeur: 36, unite: "", decimales: 0, tolerance: 1, signe: false },
+    erreurs: [
+      { valeur: 0.028, type: "notion", message: "Tu as fait le rapport à l'envers. Le grossissement utile est α de l'œil divisé par α de diffraction." }
+    ],
+    surLaCopie: "α = [[1,22 × 550 × 10⁻⁹|0,08]] ≈ 8,4 × 10⁻⁶ rad\nG utile = [[3 × 10⁻⁴|8,4 × 10⁻⁶]] ≈ 36",
+    explication: "Diffraction : α = [[1,22 × 550 × 10⁻⁹|0,08]] ≈ 8,4 × 10⁻⁶ rad.\nG utile = [[3 × 10⁻⁴|8,4 × 10⁻⁶]] ≈ 36.",
+    indice: "Calcule d'abord la limite due à la diffraction, puis le rapport avec celle de l'œil."
+  },
+  {
+    id: "U42-329", difficulte: "moyen", epreuve: "U42", theme: "Ouverture et résolution", session: "complément",
+    type: "calcul",
+    question: "Un objectif de 135 mm de focale est ouvert à f/2,8. Calcule le diamètre de sa pupille d'entrée, en millimètres (arrondi à l'unité).",
+    reponse: { valeur: 48, unite: "mm", decimales: 0, tolerance: 1, signe: false },
+    erreurs: [
+      { valeur: 378, type: "notion", message: "Tu as multiplié f' par N. D = f' / N." }
+    ],
+    surLaCopie: "D = [[f'|N]] = [[135|2,8]] ≈ 48 mm",
+    explication: "D = [[f'|N]] = [[135|2,8]] ≈ 48,2 mm.",
+    indice: "Le nombre d'ouverture est le rapport focale sur diamètre."
+  },
+  {
+    id: "U42-330", difficulte: "moyen", epreuve: "U42", theme: "Transmission et antireflet", session: "complément",
+    type: "calcul",
+    question: "Un instrument compte 3 lentilles minces non traitées. Chaque surface air-verre transmet 96 % de la lumière. Calcule la transmission totale, en pourcentage (arrondie au dixième).",
+    reponse: { valeur: 78.3, unite: "%", decimales: 1, tolerance: 0.1, signe: false },
+    erreurs: [
+      { valeur: 88.5, type: "notion", message: "Tu as compté 3 surfaces. Chaque lentille a 2 surfaces : 6 surfaces au total, soit 0,96⁶." }
+    ],
+    surLaCopie: "3 lentilles : 6 surfaces. T = 0,96⁶ ≈ 0,783, soit 78,3 %",
+    explication: "3 lentilles font 6 surfaces air-verre. T = 0,96⁶ ≈ 0,783, soit 78,3 %.",
+    indice: "Compte les surfaces, pas les lentilles."
+  },
+  {
+    id: "U42-331", difficulte: "moyen", epreuve: "U42", theme: "Transmission et antireflet", session: "complément",
+    type: "calcul",
+    question: "Une couche antireflet d'indice 1,38 est optimisée pour le bleu, λ = 480 nm. Calcule son épaisseur minimale, en nanomètres.",
+    reponse: { valeur: 87, unite: "nm", decimales: 0, tolerance: 1, signe: false },
+    erreurs: [
+      { valeur: 174, type: "notion", message: "Tu as pris une demi-onde (λ / 2n). L'épaisseur minimale est un quart d'onde : λ / 4n." }
+    ],
+    surLaCopie: "e = [[λ|4n]] = [[480|4 × 1,38]] ≈ 87 nm",
+    explication: "e = [[λ|4n]] = [[480|4 × 1,38]] ≈ 87 nm.",
+    indice: "L'épaisseur est le quart de la longueur d'onde dans la couche."
+  },
+  {
+    id: "U42-332", difficulte: "moyen", epreuve: "U42", theme: "Transmission et antireflet", session: "complément",
+    type: "calcul",
+    question: "Un verre a un indice n = 1,9. Calcule le pourcentage de lumière réfléchi par une face, en incidence normale : R = ((n − 1) / (n + 1))².",
+    reponse: { valeur: 9.6, unite: "%", decimales: 1, tolerance: 0.1, signe: false },
+    erreurs: [
+      { valeur: 90.4, type: "notion", message: "Tu as calculé la transmission T = 1 − R. La question demande la lumière réfléchie." }
+    ],
+    surLaCopie: "R = ([[n − 1|n + 1]])² = ([[0,9|2,9]])² ≈ 0,096, soit 9,6 %",
+    explication: "R = ([[0,9|2,9]])² ≈ 0,096, soit environ 9,6 % par face.\nUn verre d'indice 1,9 réfléchit plus du double d'un verre d'indice 1,5 (4 %) : l'antireflet y est très utile.",
+    indice: "Remplace n par 1,9, puis passe en pourcentage."
+  },
+  {
+    id: "U42-333", difficulte: "facile", epreuve: "U42", theme: "Conjugaison", session: "complément",
+    type: "calcul",
+    question: "Lentille mince convergente de f' = +30 mm. Un objet réel est à 90 mm devant elle. Calcule OA', avec son signe.",
+    reponse: { valeur: 45, unite: "mm", decimales: 0, signe: true },
+    erreurs: [
+      { valeur: 22.5, type: "signe", message: "Tu as pris OA = +90 mm. L'objet est réel, avant la lentille : OA = −90 mm." }
+    ],
+    surLaCopie: "OA = −90 mm\n[[1|OA']] = [[1|30]] + [[1|−90]] = [[3|90]] − [[1|90]] = [[2|90]]\nOA' = +45 mm",
+    explication: "OA = −90 mm. [[1|OA']] = [[1|30]] − [[1|90]] = [[2|90]], donc OA' = +45 mm : image réelle.",
+    indice: "Un objet réel est avant la lentille : OA est négatif."
+  },
+  {
+    id: "U42-334", difficulte: "moyen", epreuve: "U42", theme: "Conjugaison", session: "complément",
+    type: "calcul",
+    question: "Lentille mince divergente de f' = −30 mm. Un objet réel est à 60 mm devant elle. Calcule le grandissement γ (arrondi au centième).",
+    reponse: { valeur: 0.33, unite: "", decimales: 2, tolerance: 0.01, signe: true },
+    erreurs: [
+      { valeur: 3, type: "notion", message: "Tu as calculé OA / OA'. Le grandissement est OA' / OA." }
+    ],
+    surLaCopie: "[[1|OA']] = [[1|−30]] + [[1|−60]] = [[−3|60]], donc OA' = −20 mm\nγ = [[OA'|OA]] = [[−20|−60]] ≈ +0,33 (image droite, trois fois plus petite)",
+    explication: "[[1|OA']] = [[1|−30]] + [[1|−60]] = [[−3|60]], donc OA' = −20 mm.\nγ = [[−20|−60]] ≈ +0,33 : l'image est droite, virtuelle et trois fois plus petite.",
+    indice: "Trouve OA' d'abord, puis γ = OA' / OA."
+  },
+  {
+    id: "U42-335", difficulte: "facile", epreuve: "U42", theme: "Conjugaison", session: "complément",
+    question: "Où se trouve l'image d'un objet placé au foyer objet d'une lentille convergente ?",
+    choix: ["Au foyer image", "À l'infini", "Au centre optique", "À 2f' après la lentille"],
+    bonne: 1,
+    explication: "Les rayons issus du foyer objet ressortent parallèles entre eux : l'image est à l'infini.\nDescartes : [[1|OA']] = [[1|f']] + [[1|OA]] avec OA = −f' donne [[1|OA']] = 0.",
+    indice: "Que deviennent les rayons issus du foyer objet après la lentille ?"
+  },
+  {
+    id: "U42-336", difficulte: "difficile", epreuve: "U42", theme: "Conjugaison", session: "complément",
+    type: "calcul",
+    question: "On veut former sur un écran, placé à 100 mm d'une lentille de f' = +25 mm, l'image nette d'un objet. Où placer l'objet ? Calcule OA, avec son signe.",
+    reponse: { valeur: -33.3, unite: "mm", decimales: 1, tolerance: 0.1, signe: true },
+    erreurs: [
+      { valeur: 20, type: "notion", message: "Tu as ajouté 1/f' et 1/OA'. On retourne Descartes : [[1|OA]] = [[1|OA']] − [[1|f']]." }
+    ],
+    surLaCopie: "OA' = +100 mm\n[[1|OA]] = [[1|OA']] − [[1|f']] = [[1|100]] − [[1|25]] = [[−3|100]]\nOA ≈ −33,3 mm",
+    explication: "L'écran reçoit une image réelle : OA' = +100 mm.\n[[1|OA]] = [[1|100]] − [[1|25]] = [[−3|100]], donc OA ≈ −33,3 mm.\nL'objet est 33,3 mm avant la lentille.",
+    indice: "Retourne Descartes pour isoler 1/OA."
+  },
+  {
+    id: "U42-337", difficulte: "difficile", epreuve: "U42", theme: "Conjugaison", session: "complément",
+    type: "pose",
+    question: "L₁ (f'₁ = +50 mm), puis L₂ (f'₂ = +30 mm) placée 120 mm après L₁. Un objet réel est à 75 mm devant L₁. Étudie la chaîne étape par étape.",
+    etapes: [
+      {
+        consigne: "Position de l'image intermédiaire A₁ par rapport à L₁, O₁A₁ (en mm)",
+        reponse: { valeur: 150, unite: "mm", decimales: 0, signe: true },
+        aide: "Descartes pour L₁ : [[1|O₁A₁]] = [[1|f'₁]] + [[1|O₁A]].",
+        ligne: "[[1|O₁A₁]] = [[1|50]] − [[1|75]] = [[1|150]]\nO₁A₁ = +150 mm"
+      },
+      {
+        consigne: "Position de A₁ par rapport à L₂, O₂A₁ (en mm)",
+        reponse: { valeur: 30, unite: "mm", decimales: 0, signe: true },
+        aide: "A₁ est à 150 mm de L₁, et L₂ est à 120 mm de L₁.",
+        ligne: "O₂A₁ = 150 − 120 = +30 mm (objet virtuel pour L₂)",
+        erreurs: [{ valeur: -30, type: "signe", message: "A₁ est après L₂ : objet virtuel, O₂A₁ = +30 mm." }]
+      },
+      {
+        consigne: "Position de l'image finale par rapport à L₂, O₂A' (en mm)",
+        reponse: { valeur: 15, unite: "mm", decimales: 0, signe: true },
+        aide: "Descartes pour L₂ : [[1|O₂A']] = [[1|f'₂]] + [[1|O₂A₁]].",
+        ligne: "[[1|O₂A']] = [[1|30]] + [[1|30]] = [[2|30]]\nO₂A' = +15 mm"
+      }
+    ],
+    explication: "L₁ : [[1|O₁A₁]] = [[1|50]] − [[1|75]] = [[1|150]], O₁A₁ = +150 mm.\nA₁ est 30 mm après L₂ : objet virtuel, O₂A₁ = +30 mm.\nL₂ : [[1|O₂A']] = [[1|30]] + [[1|30]] = [[2|30]], O₂A' = +15 mm."
+  },
+  {
+    id: "U42-338", difficulte: "facile", epreuve: "U42", theme: "Conjugaison", session: "complément",
+    question: "Quel type de lentille mince a un foyer image virtuel, situé avant la lentille ?",
+    choix: ["Une lentille convergente", "Une lentille divergente", "Aucune lentille", "Toute lentille épaisse"],
+    bonne: 1,
+    explication: "Une lentille divergente a une distance focale image négative : son foyer image F' est avant la lentille, et il est virtuel (les rayons n'y passent pas, ils semblent en venir).\nLe foyer image d'une lentille convergente est réel, après la lentille.",
+    indice: "Regarde le signe de f' : un foyer image avant la lentille correspond à un f' négatif."
+  },
+  {
+    id: "U42-339", difficulte: "difficile", epreuve: "U42", theme: "Conjugaison", session: "complément",
+    type: "calcul",
+    question: "Un objet de 4 mm traverse deux lentilles. Le grandissement de la première vaut γ₁ = −3, celui de la seconde γ₂ = +0,5. Calcule la taille algébrique de l'image finale.",
+    reponse: { valeur: -6, unite: "mm", decimales: 0, signe: true },
+    erreurs: [
+      { valeur: 6, type: "signe", message: "Tu as oublié le signe. γ = γ₁ × γ₂ = −1,5 est négatif : l'image est renversée." }
+    ],
+    surLaCopie: "γ = γ₁ × γ₂ = (−3) × 0,5 = −1,5\nA'B' = γ × AB = −1,5 × 4 = −6 mm (image renversée)",
+    explication: "γ = (−3) × 0,5 = −1,5. A'B' = −1,5 × 4 = −6 mm : l'image est renversée et de 6 mm.",
+    indice: "Multiplie les grandissements, puis applique-les à la taille de l'objet, en gardant le signe."
+  },
+  {
+    id: "U42-340", difficulte: "facile", epreuve: "U42", theme: "Conjugaison", session: "complément",
+    question: "Une lentille convergente forme sur un écran l'image d'un objet réel. Comment est cette image par rapport à l'objet ?",
+    choix: ["Réelle, renversée", "Virtuelle, renversée", "Réelle, droite", "Virtuelle, droite"],
+    bonne: 0,
+    explication: "Une image qui se forme sur un écran est réelle. Pour une lentille convergente, une image réelle d'un objet réel est toujours renversée.\nUne image droite d'un objet réel, avec une convergente, est virtuelle (loupe) : on ne peut pas la recueillir sur un écran.",
+    indice: "Seule une image réelle peut se former sur un écran."
   }
 );
 
