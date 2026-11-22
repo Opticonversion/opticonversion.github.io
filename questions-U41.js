@@ -747,6 +747,76 @@ QUESTIONS.push(
     reponse: {"valeur": 30.94, "unite": "%", "decimales": 2, "signe": false},
     explication: "Une primitive de y est F(t) = 5t − 150 e^(−0,4t) car 60 ÷ (−0,4) = −150.\nValeur moyenne = [[1|5 − 0]] × (F(5) − F(0))\nF(5) − F(0) = (25 − 150 e^(−2)) − (−150) = 175 − 150 e^(−2) ≈ 154,70\nValeur moyenne = [[154,70|5]] ≈ 30,94\nL'humidité moyenne sur les 5 premières heures est d'environ 30,94 %.",
     indice: "Valeur moyenne = (1 ÷ longueur) × intégrale. La primitive de e^(−0,4t) est e^(−0,4t) ÷ (−0,4)."
+  },
+
+  // ---------- Mini-cas en cascade (CAS-U41-03) ----------
+  {
+    id: "U41-173", epreuve: "U41", theme: "Probabilités", session: "complément", type: "calcul",
+    difficulte: "facile",
+    cas: "CAS-U41-03",
+    etape: 1,
+    question: "Calcule la probabilité P(L1 ∩ D) qu'un verre soit traité par la ligne L1 et ait un défaut.",
+    reponse: {"valeur": 0.028, "unite": "", "decimales": 3, "signe": false},
+    explication: "Un chemin de l'arbre se multiplie : P(L1 ∩ D) = P(L1) × P_L1(D)\nP(L1 ∩ D) = 0,7 × 0,04 = 0,028\nPour comparer, P(L2 ∩ D) = 0,3 × 0,09 = 0,027.",
+    indice: "Suis le chemin de l'arbre : ligne L1, puis défaut. On multiplie les deux probabilités du chemin."
+  },
+  {
+    id: "U41-174", epreuve: "U41", theme: "Probabilités", session: "complément", type: "calcul",
+    difficulte: "moyen",
+    cas: "CAS-U41-03",
+    etape: 2,
+    contexte: "Un verre peut être traité par L1 ou par L2, et avoir un défaut dans les deux cas.",
+    question: "Calcule la probabilité P(D) qu'un verre pris au hasard ait un défaut.",
+    reponse: {"valeur": 0.055, "unite": "", "decimales": 3, "signe": false},
+    explication: "L1 et L2 forment une partition : d'après la formule des probabilités totales,\nP(D) = P(L1 ∩ D) + P(L2 ∩ D)\nP(D) = 0,7 × 0,04 + 0,3 × 0,09 = 0,028 + 0,027 = 0,055\nLa moyenne simple des taux (0,065) est une erreur : elle ignore les parts de chaque ligne.",
+    indice: "Additionne les deux chemins de l'arbre qui mènent à un verre avec défaut."
+  },
+  {
+    id: "U41-175", epreuve: "U41", theme: "Probabilités", session: "complément",
+    difficulte: "moyen",
+    cas: "CAS-U41-03",
+    etape: 3,
+    contexte: "On prend un verre au hasard : il a un défaut.",
+    question: "Quelle rédaction calcule correctement la probabilité qu'il ait été traité par L2 ?",
+    choix: ["P_D(L2) = P_L2(D) = 0,09, car la probabilité de L2 sachant D est la même que celle de D sachant L2.", "P_D(L2) = P(L2 ∩ D) = 0,3 × 0,09 = 0,027, car l'intersection donne directement la probabilité conditionnelle.", "On cherche P_D(L2) = P(L2 ∩ D) ÷ P(D) = 0,027 ÷ 0,055 ≈ 0,491, car le verre est connu comme défectueux.", "P_D(L2) = P(L2) = 0,3, car le fait que le verre ait un défaut ne change pas la ligne qui l'a traité."],
+    bonne: 2,
+    explication: "On divise la branche « L2 et défaut » par la probabilité d'avoir un défaut, P(D) = 0,055 :\nP_D(L2) = [[P(L2 ∩ D)|P(D)]] = [[0,027|0,055]] ≈ 0,491\nL2 traite 30 % des verres mais fournit près de la moitié des défauts. Confondre P_D(L2) et P_L2(D) est l'erreur classique, comme oublier de diviser par P(D).",
+    indice: "« Sachant D » : on se place parmi les verres défectueux. Par quoi faut-il diviser ?"
+  },
+  {
+    id: "U41-176", epreuve: "U41", theme: "Lois de probabilité", session: "complément",
+    difficulte: "difficile",
+    cas: "CAS-U41-03",
+    etape: 4,
+    contexte: "On prélève au hasard 40 verres dans la production, assez grande pour assimiler ce prélèvement à un tirage avec remise. X est le nombre de verres avec défaut parmi les 40.",
+    question: "Quelle rédaction justifie correctement que X suit une loi binomiale ?",
+    choix: ["X compte les verres avec défaut parmi les 40 verres prélevés, donc X suit la loi binomiale B(40 ; 0,09), car 0,09 est la probabilité d'un défaut.", "On répète 40 fois, de façon identique et indépendante, une épreuve à deux issues de probabilité 0,055 ; X compte les défauts, donc X suit B(40 ; 0,055).", "On répète 40 fois une épreuve à deux issues (défaut ou non) de probabilité 0,055, donc X suit la loi binomiale B(40 ; 0,055), sans autre précision.", "X compte les verres avec défaut : c'est une loi de Poisson de paramètre 2,2, car p est petit, donc X ne suit pas une loi binomiale."],
+    bonne: 1,
+    explication: "Une justification complète donne les conditions (40 épreuves identiques et indépendantes, deux issues), la probabilité du succès, ce que compte X, puis la conclusion avec ses paramètres. La probabilité à utiliser est celle d'un verre avec défaut au hasard, P(D) = 0,055, pas 0,09 (c'est le taux de L2 seulement). Écrire seulement « épreuve à deux issues » ne justifie pas l'indépendance. La loi de Poisson n'est qu'une approximation possible de B(40 ; 0,055) : elle ne remplace pas la justification.",
+    indice: "Une bonne justification a deux parties : les conditions (nombre, identiques, indépendantes, deux issues, probabilité), puis la conclusion avec les paramètres."
+  },
+  {
+    id: "U41-177", epreuve: "U41", theme: "Lois de probabilité", session: "complément", type: "calcul",
+    difficulte: "moyen",
+    cas: "CAS-U41-03",
+    etape: 5,
+    contexte: "Le diamètre X d'un verre fini, en mm, suit la loi normale d'espérance 70 et d'écart type 0,3. Un verre est conforme si son diamètre est compris entre 69,5 et 70,5.",
+    question: "À la calculatrice, calcule P(69,5 ≤ X ≤ 70,5), arrondie au millième.",
+    reponse: {"valeur": 0.904, "unite": "", "decimales": 3, "signe": false},
+    explication: "Avec la calculatrice (loi normale entre deux bornes), μ = 70 et σ = 0,3 :\nP(69,5 ≤ X ≤ 70,5) ≈ 0,9044, soit 0,904.\nContrôle : Z = [[X − 70|0,3]] va de [[69,5 − 70|0,3]] ≈ −1,667 à [[70,5 − 70|0,3]] ≈ +1,667, et la probabilité est un peu inférieure à 0,954 (±2σ).",
+    indice: "Borne basse 69,5, borne haute 70,5, puis μ = 70 et l'écart type 0,3 (pas la variance)."
+  },
+  {
+    id: "U41-178", epreuve: "U41", theme: "Estimation et tests", session: "complément",
+    difficulte: "difficile",
+    cas: "CAS-U41-03",
+    etape: 6,
+    contexte: "On contrôle le réglage de la ligne par un test bilatéral au seuil de 5 %. H0 : « le diamètre moyen vaut 70 mm ». Sous H0, la moyenne d'un échantillon de 25 verres suit la loi normale d'espérance 70 et d'écart type 0,06. On observe une moyenne de 70,15 mm.",
+    question: "Quelle conclusion est correctement rédigée ?",
+    choix: ["La zone d'acceptation est 70 ± 1,96 × 0,3, soit [69,412 ; 70,588]. 70,15 y est : on ne rejette pas H0, donc la ligne est réglée à coup sûr.", "70,15 est différent de 70, donc on rejette H0 : la ligne est déréglée avec certitude, sans qu'il soit besoin de calculer de zone.", "La zone d'acceptation est 70 ± 1,96 × 0,06, soit [69,882 ; 70,118]. 70,15 n'y est pas : on accepte H0 et la ligne est bien réglée.", "Zone d'acceptation : 70 ± 1,96 × 0,06 = [69,882 ; 70,118]. 70,15 n'y est pas : on rejette H0 au seuil de 5 % et on conclut que la ligne est déréglée."],
+    bonne: 3,
+    explication: "Sous H0, l'écart type de la moyenne est 0,06 (0,3 divisé par √25) : la zone d'acceptation est 70 ± 1,96 × 0,06 = [69,882 ; 70,118]. 70,15 est à l'extérieur : on rejette H0 au seuil de 5 %. Utiliser 0,3 (l'écart type d'un verre) donne une zone trop large. Dire « différent de 70 » ne suffit pas : il faut sortir de la zone. Écrire « avec certitude » est faux : le risque de se tromper est de 5 %. Accepter H0 en sortant de la zone est contradictoire.",
+    indice: "Calcule la zone 70 ± 1,96 × 0,06, compare avec 70,15, puis décide avec le seuil de 5 %."
   }
 
 );
@@ -766,4 +836,11 @@ CAS.push({
   titre: "Le séchage des verres teintés",
   contexte: "Un atelier de teinture fait sécher des verres organiques après le bain de couleur. y est le taux d'humidité d'un verre, en pourcentage, mesuré t heures après la sortie du bain (t = 0 à la sortie). L'humidité baisse vite au début, puis se stabilise.",
   annexe: { titre: "Humidité mesurée", colonnes: ["Heure t", "0", "1", "2", "3", "4", "5"], lignes: [["y (%)", "65,0", "45,2", "32,0", "23,1", "17,1", "13,1"]] }
+});
+
+CAS.push({
+  id: "CAS-U41-03",
+  epreuve: "U41",
+  titre: "Le contrôle qualité des verres",
+  contexte: "Un atelier de traitement antireflet utilise deux lignes. La ligne L1 traite 70 % des verres et la ligne L2 30 %. Parmi les verres traités par L1, 4 % ont un défaut (D) ; parmi ceux traités par L2, 9 % en ont un."
 });

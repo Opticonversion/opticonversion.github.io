@@ -1695,6 +1695,84 @@ QUESTIONS.push(
     bonne: 1,
     explication: "Les cônes, responsables de la vision des couleurs et de la précision, sont concentrés dans la fovéa. Les bâtonnets, sensibles à la lumière faible, dominent en périphérie : on y distingue mal les couleurs.",
     indice: "Quelles cellules voient les couleurs, et où sont-elles ?"
+  },
+
+  // ---------- Lentilles : Javal, larmes, fluorescéine ; Anisométropie : Knapp (ajout du 22 nov.) ----------
+  {
+    id: "U5-210", epreuve: "U5", theme: "Lentilles", session: "2018",
+    difficulte: "moyen",
+    question: "Avec l'ophtalmomètre de Javal, les mires sont affrontées dans le méridien le plus horizontal. On tourne l'appareil de 90° et les mires se CHEVAUCHENT. Que conclure ?",
+    choix: ["Le rayon vertical est plus petit que l'horizontal : astigmatisme cornéen direct", "Le rayon vertical est plus grand que l'horizontal : astigmatisme cornéen inverse", "La cornée n'est pas astigmate", "L'astigmatisme est interne et non cornéen"],
+    bonne: 0,
+    explication: "Mires affrontées en horizontal, puis rotation de 90° : si elles se chevauchent, le rayon du méridien vertical est plus petit que celui de l'horizontal. Le méridien vertical est le plus cambré : astigmatisme cornéen direct. Si elles s'écartaient, le rayon vertical serait plus grand : astigmatisme inverse. Si elles restaient affrontées, la cornée ne serait pas astigmate.",
+    indice: "Chevauchement = rayon plus petit dans le méridien observé, donc méridien plus cambré. Lequel est le plus cambré ici, le vertical ou l'horizontal ?"
+  },
+  {
+    id: "U5-211", epreuve: "U5", theme: "Lentilles", session: "2018",
+    difficulte: "moyen",
+    question: "Kératométrie : rayon de 7,70 mm à 0° et de 7,90 mm à 90°. Astigmatisme cornéen et compensateur en S (règle : 0,05 mm de toricité ≈ 0,30 δ) ?",
+    choix: ["Inverse de 1,20 δ, compensé par plan (−1,20) à 90°", "Direct de 1,20 δ, compensé par plan (−1,20) à 0°", "Inverse de 1,20 δ, compensé par plan (−1,20) à 0°", "Inverse de 0,60 δ, compensé par plan (−0,60) à 90°"],
+    bonne: 0,
+    explication: "Toricité : 7,90 − 7,70 = 0,20 mm, soit 4 × 0,05 mm, donc 4 × 0,30 = 1,20 δ. Le méridien horizontal (7,70 mm) a le plus petit rayon, il est le plus cambré : astigmatisme inverse. Le cylindre négatif compensateur a son axe le long du méridien le plus plat, ici le vertical : plan (−1,20) à 90°.",
+    surLaCopie: "Toricité 7,90 − 7,70 = 0,20 mm, soit 4 × 0,30 = 1,20 δ. Le méridien horizontal est le plus cambré : astigmatisme inverse. Compensateur : plan (−1,20) à 90°.",
+    indice: "Compte combien de fois 0,05 mm tient dans l'écart des rayons. Puis repère le méridien le plus cambré (le plus petit rayon) : l'axe du cylindre négatif est à l'opposé."
+  },
+  {
+    id: "U5-212", epreuve: "U5", theme: "Lentilles", session: "2018",
+    difficulte: "facile",
+    question: "Quel examen non invasif évalue la QUANTITÉ de larmes avant une adaptation en lentilles ?",
+    choix: ["La mesure de la hauteur de la rivière lacrymale", "Le Break-Up Time (BUT)", "L'observation du spéculaire sur le film lacrymal", "La fluoroscopie d'une lentille rigide"],
+    bonne: 0,
+    explication: "La rivière lacrymale est le bord de larmes qui longe la paupière inférieure : sa hauteur donne la quantité de larmes (norme de 0,2 à 0,4 mm ; au-dessous de 0,2 mm, c'est insuffisant pour une lentille souple hydrophile). Le BUT et le spéculaire jugent la QUALITÉ du film. La fluoroscopie contrôle l'adaptation d'une lentille rigide.",
+    indice: "Quantité ou qualité ? Un seul de ces examens mesure une hauteur de larmes."
+  },
+  {
+    id: "U5-213", epreuve: "U5", theme: "Lentilles", session: "2018",
+    difficulte: "moyen",
+    question: "Une cliente veut des lentilles. Rivière lacrymale : 0,15 mm. BUT : 12 s. Quelle conclusion est juste et complète ?",
+    choix: ["La quantité de larmes est insuffisante (rivière sous 0,2 mm) et la qualité est correcte (BUT dans la norme) : je déconseille la lentille souple hydrophile et je propose plutôt un silicone-hydrogel ou une rigide", "La qualité des larmes est insuffisante à cause du BUT : je déconseille toutes les lentilles", "Les deux mesures sont dans la norme : la lentille souple hydrophile convient", "La rivière est trop haute : je conseille de la réduire avant d'adapter"],
+    bonne: 0,
+    explication: "La rivière de 0,15 mm est sous 0,2 mm : la quantité de larmes est insuffisante pour une lentille souple hydrophile, qui a besoin de l'eau des larmes. Le BUT de 12 s est dans la norme (10 à 20 s) : la qualité est correcte. On se tourne vers un silicone-hydrogel ou une lentille rigide perméable aux gaz, mieux adaptés quand le film est fragile.",
+    surLaCopie: "Rivière lacrymale de 0,15 mm : quantité de larmes insuffisante pour une lentille souple hydrophile. BUT de 12 s : qualité correcte. Je propose un silicone-hydrogel ou une lentille rigide perméable aux gaz.",
+    indice: "Une valeur mesure la quantité, l'autre la qualité. Compare chacune à sa norme, puis conclus sur le type de lentille."
+  },
+  {
+    id: "U5-214", epreuve: "U5", theme: "Lentilles", session: "2018",
+    difficulte: "facile",
+    question: "Au contrôle à la fluorescéine, une lentille rigide montre un réservoir de colorant au centre, un appui en périphérie, et elle bouge très peu. L'adaptation est :",
+    choix: ["Serrée", "Plate", "Alignée", "Impossible à juger sans kératométrie"],
+    bonne: 0,
+    explication: "Réservoir de fluorescéine au centre (la lentille est décollée de la cornée à cet endroit), appui en périphérie et faible mobilité : adaptation serrée. La lentille est plus cambrée que la cornée. Pour la desserrer, on augmente le rayon de la face arrière (ro).",
+    indice: "Là où la fluorescéine s'accumule, la lentille est décollée de la cornée. Au centre ou en périphérie ?"
+  },
+  {
+    id: "U5-215", epreuve: "U5", theme: "Lentilles", session: "2018",
+    difficulte: "difficile",
+    question: "Une LRPG sphérique de ro = 7,80 mm et de vergence −3,00 δ compense parfaitement l'œil, mais l'adaptation est trop serrée. On augmente ro de 0,10 mm. Quels nouveaux paramètres ?",
+    choix: ["ro = 7,90 mm et −2,50 δ", "ro = 7,90 mm et −3,50 δ", "ro = 7,70 mm et −2,50 δ", "ro = 7,90 mm et −3,00 δ"],
+    bonne: 0,
+    explication: "Un ro plus grand donne une lentille plus plate : le ménisque de larmes devient plus divergent d'environ 0,50 δ (0,10 mm ≈ 0,50 δ). Pour que la compensation totale reste la même, la lentille doit être plus convergente de 0,50 δ : −3,00 + 0,50 = −2,50 δ. Le diamètre ne change pas. C'est l'inverse du cas d'une adaptation trop plate.",
+    surLaCopie: "Adaptation serrée : j'augmente ro de 0,10 mm, soit 7,90 mm. Le ménisque de larmes devient plus divergent de 0,50 δ, donc j'ajoute +0,50 δ à la lentille : −2,50 δ.",
+    indice: "Compensation totale = vergence de la lentille + vergence du ménisque de larmes. Si le ménisque perd 0,50 δ, que doit faire la lentille pour que le total ne bouge pas ?"
+  },
+  {
+    id: "U5-216", epreuve: "U5", theme: "Anisométropie", session: "complément",
+    difficulte: "moyen",
+    question: "Que dit la loi de Knapp pour une anisométropie purement AXILE ?",
+    choix: ["Les images rétiniennes ont la même taille si le verre est placé au foyer objet de l'œil, environ 15 mm devant la cornée", "Les images rétiniennes ont la même taille si le verre est posé sur la cornée", "Les images rétiniennes sont toujours de tailles différentes, quel que soit l'équipement", "Les images rétiniennes ont la même taille si le verre est placé le plus loin possible de l'œil"],
+    bonne: 0,
+    explication: "Loi de Knapp : dans une anisométropie axile, la compensation placée au foyer objet de l'œil, soit environ 15 mm devant la cornée, donne des images rétiniennes de même taille. C'est la position d'une lunette ordinaire : les lunettes conviennent. En lentilles, l'aniséiconie axile reste entière (environ 1,7 % par dioptrie).",
+    indice: "Pense à la position d'un verre de lunettes ordinaire, et à ce que devient l'aniséiconie axile d'un œil trop long quand on rapproche la compensation de la cornée."
+  },
+  {
+    id: "U5-217", epreuve: "U5", theme: "Anisométropie", session: "complément",
+    difficulte: "difficile",
+    question: "Un sujet a une anisométropie purement axile : OD −1,00 et OG −5,00. Quelle rédaction est juste et complète pour choisir entre lunettes et lentilles ?",
+    choix: ["Les lunettes, placées près du foyer objet de l'œil, donnent des images rétiniennes presque égales (loi de Knapp) : je les garde. Les lentilles laisseraient environ 7 % d'aniséiconie axile", "Les lentilles sont toujours préférables, puisqu'elles réduisent toute aniséiconie", "Les lunettes aggravent l'aniséiconie, donc les lentilles sont indispensables", "Les deux équipements donnent exactement le même résultat"],
+    bonne: 0,
+    explication: "Anisométropie axile : l'œil le plus long forme une image plus grande. Le verre de lunettes, à 15 mm, la rapetisse presque exactement de ce qu'il faut (loi de Knapp) : l'aniséiconie totale reste faible. En lentilles, la compensation est contre la cornée : il resterait toute l'aniséiconie axile, soit environ 1,7 % × 4 ≈ 7 %. Pour l'anisométropie de puissance, c'est l'inverse : les lentilles sont à conseiller.",
+    surLaCopie: "Anisométropie axile : la loi de Knapp donne des images égales avec un verre placé près du foyer objet de l'œil. Les lunettes conviennent. Les lentilles laisseraient environ 7 % d'aniséiconie axile, au-dessus de la limite de 3 %.",
+    indice: "Axile ou de puissance ? Dans l'axile, l'œil long agrandit l'image, et c'est le verre éloigné de la cornée qui compense."
   }
 );
 

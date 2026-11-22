@@ -917,5 +917,198 @@ QUESTIONS.push(
     bonne: 1,
     explication: "La ligne « n ← n + 1 » manque. La suite dépasse bien 350 (sa limite est 400), donc la boucle se termine, mais n reste à 0 et l'algorithme affiche 0. Corrigé : ajouter n ← n + 1 dans la boucle, ce qui donne n = 28 (u(27) ≈ 349,94 ≤ 350 et u(28) ≈ 352,4 > 350).",
     indice: "Que contient n à la fin ? Que fait la boucle sur n ?"
+  },
+  {
+    id: "U41-179", epreuve: "U41", theme: "Probabilités", session: "complément", entrainement: true, type: "calcul",
+    difficulte: "moyen",
+    contexte: "Une urne contient 12 verres de démonstration, dont 4 sont teintés. On en tire 2 successivement, sans remise.",
+    question: "Calcule la probabilité qu'aucun des deux verres tirés ne soit teinté, arrondie au millième.",
+    reponse: {"valeur": 0.424, "unite": "", "decimales": 3, "signe": false},
+    explication: "Premier verre non teinté : [[8|12]]. Il reste alors 11 verres dont 7 non teintés : [[7|11]].\nP = [[8|12]] × [[7|11]] = [[56|132]] ≈ 0,424\nAvec remise, on aurait obtenu ([[8|12]])² ≈ 0,444 : sans remise, la composition de l'urne change après le premier tirage.",
+    indice: "Après le premier tirage sans remise, combien de verres reste-t-il, et combien sont non teintés ?"
+  },
+  {
+    id: "U41-180", epreuve: "U41", theme: "Probabilités", session: "complément", entrainement: true,
+    difficulte: "difficile",
+    contexte: "On a P(A) = 0,3, P(B) = 0,4 et P(A ∩ B) = 0,15.",
+    question: "Quelle rédaction conclut correctement sur l'indépendance de A et B ?",
+    choix: ["P(A ∩ B) = 0,15 est inférieur à P(A) = 0,3 et à P(B) = 0,4, donc A et B sont indépendants.", "P(A) × P(B) = 0,3 × 0,4 = 0,12, différent de P(A ∩ B) = 0,15 : A et B ne sont pas indépendants.", "P(A) + P(B) = 0,7 est inférieur à 1, donc A et B sont indépendants, car leur somme ne dépasse pas 1.", "P(A ∩ B) = 0,15 est proche de P(A) × P(B) = 0,12, donc on peut considérer que A et B sont indépendants."],
+    bonne: 1,
+    explication: "A et B sont indépendants si et seulement si P(A ∩ B) = P(A) × P(B). Ici 0,3 × 0,4 = 0,12 et P(A ∩ B) = 0,15 : l'égalité est fausse, même de peu. Une intersection plus petite que chacun des deux événements, ou une somme inférieure à 1, n'a rien à voir avec l'indépendance. « Proche de » ne suffit pas : l'égalité doit être exacte.",
+    indice: "Compare P(A ∩ B) avec le produit P(A) × P(B). L'égalité est-elle exacte ?"
+  },
+  {
+    id: "U41-181", epreuve: "U41", theme: "Probabilités", session: "complément", entrainement: true, type: "calcul",
+    difficulte: "moyen",
+    contexte: "X suit la loi binomiale B(25 ; 0,08) : 25 verres sont prélevés, chacun étant défectueux avec la probabilité 0,08.",
+    question: "À la calculatrice, calcule P(X ≤ 1), arrondie au millième.",
+    reponse: {"valeur": 0.395, "unite": "", "decimales": 3, "signe": false},
+    explication: "On utilise la fonction de répartition binomiale : binomFRép(25 ; 0,08 ; 1) ≈ 0,3947, soit 0,395.\nCela revient à P(X = 0) + P(X = 1) = 0,92²⁵ + 25 × 0,08 × 0,92²⁴ ≈ 0,1244 + 0,2703.",
+    indice: "« Au plus 1 » est un cumul de P(X = 0) et P(X = 1) : utilise la fonction de répartition."
+  },
+  {
+    id: "U41-182", epreuve: "U41", theme: "Probabilités", session: "complément", entrainement: true,
+    difficulte: "difficile",
+    contexte: "X suit la loi binomiale B(10 ; 0,2).",
+    question: "Quelle est la probabilité d'avoir au moins un succès, arrondie au millième ?",
+    choix: ["0,8¹⁰ ≈ 0,107, qui est la probabilité de n'avoir aucun succès", "10 × 0,2 = 2, qui est l'espérance de X et pas une probabilité", "0,2 × 0,8⁹ ≈ 0,027, qui est la probabilité d'un succès au premier essai puis de 9 échecs", "1 − 0,8¹⁰ ≈ 0,893, en passant par le contraire « aucun succès »"],
+    bonne: 3,
+    explication: "« Au moins un » se calcule avec le contraire « aucun succès » : P(X ≥ 1) = 1 − P(X = 0) = 1 − 0,8¹⁰ ≈ 1 − 0,107 = 0,893. 0,107 est la probabilité du contraire. 2 est l'espérance, qui n'est pas une probabilité. 0,027 est la probabilité d'une suite précise de résultats, pas celle de P(X = 1).",
+    indice: "Passe par le contraire « aucun succès », dont la probabilité est 0,8 élevé à la puissance 10."
+  },
+  {
+    id: "U41-183", epreuve: "U41", theme: "Probabilités", session: "complément", entrainement: true, type: "calcul",
+    difficulte: "difficile",
+    contexte: "1 % des porteurs ont une anomalie. Le test est positif dans 90 % des cas chez une personne avec anomalie, et dans 5 % des cas chez une personne sans anomalie. Une personne a un test négatif.",
+    question: "Quelle est la probabilité qu'elle n'ait pas l'anomalie ? (arrondie au millième)",
+    reponse: {"valeur": 0.999, "unite": "", "decimales": 3, "signe": false},
+    explication: "P(test négatif et sans anomalie) = 0,99 × 0,95 = 0,9405\nP(test négatif et avec anomalie) = 0,01 × 0,10 = 0,001\nP(test négatif) = 0,9405 + 0,001 = 0,9415\nP(sans anomalie sachant négatif) = [[0,9405|0,9415]] ≈ 0,999\nUn test négatif est donc très rassurant ici.",
+    indice: "Calcule P(test négatif) avec les deux branches, puis divise la branche « sans anomalie et négatif » par ce total."
+  },
+  {
+    id: "U41-184", epreuve: "U41", theme: "Probabilités", session: "complément", entrainement: true,
+    difficulte: "moyen",
+    contexte: "X suit la loi binomiale B(60 ; 0,05).",
+    question: "Quel est l'écart type de X, arrondi au centième ?",
+    choix: ["60 × 0,05 × 0,95 = 2,85, qui est la variance et pas l'écart type", "√(60 × 0,05 × 0,95) = √2,85 ≈ 1,69, la racine de la variance", "60 × 0,05 = 3, qui est l'espérance et pas l'écart type", "√(60 × 0,05) = √3 ≈ 1,73, en oubliant le facteur 1 − p"],
+    bonne: 1,
+    explication: "L'écart type de B(n ; p) est σ = √(np(1 − p)) = √2,85 ≈ 1,69. 2,85 est la variance : il manque la racine carrée. 3 est l'espérance np. 1,73 oublie le facteur 0,95.",
+    indice: "Écart type = racine de np(1 − p). Fais attention à ne pas t'arrêter à la variance."
+  },
+  {
+    id: "U41-185", epreuve: "U41", theme: "Probabilités", session: "complément", entrainement: true, type: "calcul",
+    difficulte: "moyen",
+    contexte: "On a P(A) = 0,35, P(B) = 0,45 et P(A ∩ B) = 0,2.",
+    question: "Calcule la probabilité qu'aucun des deux événements ne se réalise, c'est-à-dire P(non A ∩ non B).",
+    reponse: {"valeur": 0.4, "unite": "", "decimales": 1, "signe": false},
+    explication: "P(A ∪ B) = P(A) + P(B) − P(A ∩ B) = 0,35 + 0,45 − 0,2 = 0,6\nL'événement « ni A ni B » est le contraire de A ∪ B :\nP(non A ∩ non B) = 1 − 0,6 = 0,4\nSans retrancher P(A ∩ B), on aurait obtenu 1 − 0,8 = 0,2.",
+    indice: "Calcule d'abord P(A ∪ B) sans compter deux fois l'intersection, puis passe au contraire."
+  },
+  {
+    id: "U41-186", epreuve: "U41", theme: "Probabilités", session: "complément", entrainement: true,
+    difficulte: "difficile",
+    contexte: "25 % des verres sont photochromiques (A). 80 % des verres photochromiques ont un traitement dur (B), contre 15 % des autres verres. Un élève cherche P(B).",
+    annexe: {"titre": "Copie de l'élève", "colonnes": ["Ligne", "Calcul"], "lignes": [["1", "P(A ∩ B) = 0,25 × 0,8 = 0,20."], ["2", "P(non A ∩ B) = 0,25 × 0,15 = 0,0375."], ["3", "P(B) = 0,20 + 0,0375 = 0,2375."]]},
+    question: "Dans ce calcul de probabilité, quelle est la première ligne fausse, et pourquoi ?",
+    choix: ["Ligne 1 : P(A ∩ B) = 0,25 + 0,8 − 0,25 × 0,8 = 0,85, car les deux événements peuvent se réaliser en même temps.", "Ligne 3 : il faut multiplier les deux probabilités et non les additionner, car P(B) est le produit des deux branches.", "Ligne 2 : la probabilité d'un verre non photochromique avec traitement est 0,8, car 80 % des verres ont le traitement.", "Ligne 2 : P(non A) vaut 0,75 et non 0,25 : P(non A ∩ B) = 0,75 × 0,15 = 0,1125, donc P(B) = 0,3125."],
+    bonne: 3,
+    explication: "La branche « non photochromique » commence par P(non A) = 1 − 0,25 = 0,75. Donc P(non A ∩ B) = 0,75 × 0,15 = 0,1125 et P(B) = 0,20 + 0,1125 = 0,3125. La copie utilise P(A) à la place de P(non A) : elle a recopié 0,25. La ligne 1 est juste (un chemin se multiplie) et deux chemins s'additionnent bien en ligne 3.",
+    indice: "Quelle est la probabilité de « non A » ? Compare les lignes 1 et 2 : le premier facteur est-il le bon ?"
+  },
+  {
+    id: "U41-187", epreuve: "U41", theme: "Probabilités", session: "complément", entrainement: true, type: "calcul",
+    difficulte: "moyen",
+    contexte: "X suit la loi binomiale B(8 ; 0,25).",
+    question: "Calcule P(X = 2), arrondie au millième.",
+    reponse: {"valeur": 0.311, "unite": "", "decimales": 3, "signe": false},
+    explication: "P(X = 2) = (2 parmi 8) × 0,25² × 0,75⁶ = 28 × 0,0625 × 0,17798 ≈ 0,3115, soit 0,311.\nÀ la calculatrice : binomFdp(8 ; 0,25 ; 2). Ne pas confondre avec P(X ≤ 2), qui vaut environ 0,679.",
+    indice: "« Exactement 2 » : utilise la probabilité en un point, pas la fonction de répartition."
+  },
+  {
+    id: "U41-188", epreuve: "U41", theme: "Probabilités", session: "complément", entrainement: true,
+    difficulte: "difficile",
+    contexte: "A et B sont deux événements incompatibles, avec P(A) = 0,3 et P(B) = 0,5.",
+    question: "Quelle rédaction décrit correctement P(A ∪ B) et l'indépendance de A et B ?",
+    choix: ["P(A ∪ B) = 0,3 + 0,5 = 0,8. Comme A et B sont incompatibles, ils sont indépendants : P(A ∩ B) = 0 = P(A) × P(B).", "P(A ∪ B) = 0,3 + 0,5 = 0,8. Mais P(A ∩ B) = 0 est différent de 0,3 × 0,5 = 0,15 : A et B ne sont pas indépendants.", "P(A ∪ B) = 0,3 + 0,5 − 0,15 = 0,65. A et B sont indépendants car P(A ∩ B) = P(A) × P(B) = 0,15.", "P(A ∪ B) = 0,3 × 0,5 = 0,15. A et B sont donc indépendants, puisque leur probabilité commune est le produit."],
+    bonne: 1,
+    explication: "Des événements incompatibles n'ont aucune issue commune : P(A ∩ B) = 0, donc P(A ∪ B) = 0,3 + 0,5 = 0,8. Comme P(A) × P(B) = 0,15 ≠ 0, A et B ne sont pas indépendants : incompatible et indépendant sont deux idées différentes (sauf si l'un des deux est impossible). Les autres rédactions confondent l'union avec l'intersection ou supposent à tort que P(A ∩ B) = 0,15.",
+    indice: "Incompatibles : aucune issue commune. Que vaut alors P(A ∩ B), et est-ce égal à P(A) × P(B) ?"
+  },
+  {
+    id: "U41-189", epreuve: "U41", theme: "Suites", session: "complément", entrainement: true, type: "calcul",
+    difficulte: "facile",
+    contexte: "On a u(n) = 12 + 5n.",
+    question: "Calcule la somme des 10 premiers termes, de u(0) à u(9).",
+    reponse: {"valeur": 345, "unite": "", "decimales": 0, "signe": false},
+    explication: "u(0) = 12 et u(9) = 12 + 45 = 57\nSomme d'une suite arithmétique : nombre de termes × [[premier terme + dernier terme|2]]\nS = 10 × [[12 + 57|2]] = 10 × 34,5 = 345",
+    indice: "Il y a 10 termes, de u(0) à u(9). Moyenne du premier et du dernier, fois le nombre de termes."
+  },
+  {
+    id: "U41-190", epreuve: "U41", theme: "Suites", session: "complément", entrainement: true,
+    difficulte: "moyen",
+    contexte: "Un magasin augmente ses prix de 3 % par an pendant 5 ans.",
+    question: "Quelle est la hausse globale sur les 5 ans, arrondie au dixième de pourcent ?",
+    choix: ["15 %, car 3 % × 5 donne 15 %", "Environ 3,1 %, car 1,03⁵ vaut 1,031", "Environ 16,0 %, car 1,03⁵ arrondi d'abord à 1,16", "Environ 15,9 %, avec 1,03⁵ ≈ 1,159"],
+    bonne: 3,
+    explication: "Les hausses se composent : le coefficient global est 1,03⁵ ≈ 1,1593, soit une hausse de 15,9 %. Additionner 5 × 3 % donne 15 %, mais les taux ne s'additionnent pas : chaque hausse s'applique au prix déjà augmenté.",
+    indice: "Calcule le coefficient multiplicateur global 1,03 puissance 5, puis retire 1."
+  },
+  {
+    id: "U41-191", epreuve: "U41", theme: "Suites", session: "complément", entrainement: true, type: "calcul",
+    difficulte: "difficile",
+    contexte: "Un plan d'épargne : u(0) = 1 000 € et u(n+1) = 1,02 u(n) + 100, n en années.",
+    question: "À la calculatrice, calcule u(5), arrondi à l'euro.",
+    reponse: {"valeur": 1624, "unite": "€", "decimales": 0, "signe": false},
+    explication: "On entre la suite dans le tableau de valeurs : u(1) = 1 120, u(2) = 1 242,4, u(3) = 1 367,25, u(4) = 1 494,59, u(5) ≈ 1 624,48.\nSoit 1 624 € arrondi à l'euro.\nPar la formule : ℓ = [[100|1 − 1,02]] = −5 000 et u(n) = 6 000 × 1,02ⁿ − 5 000, d'où u(5) ≈ 6 000 × 1,1041 − 5 000.",
+    indice: "Entre la relation de récurrence et u(0), puis lis la valeur du rang 5 dans le tableau."
+  },
+  {
+    id: "U41-192", epreuve: "U41", theme: "Suites", session: "complément", entrainement: true, type: "calcul",
+    difficulte: "moyen",
+    contexte: "On a v(n) = 3 × 2ⁿ.",
+    question: "À la calculatrice, trouve le plus petit rang n tel que v(n) > 1 000.",
+    reponse: {"valeur": 9, "unite": "", "decimales": 0, "signe": false},
+    explication: "Au tableau de valeurs : v(8) = 768 (encore inférieur à 1 000) et v(9) = 1 536 (supérieur).\nPar le calcul : 3 × 2ⁿ > 1 000 donne 2ⁿ > [[1 000|3]] ≈ 333,3, donc n > [[ln 333,3|ln 2]] ≈ 8,38.\nLe premier entier est n = 9.",
+    indice: "Fais défiler le tableau de valeurs, ou résous 2ⁿ > 333,3 avec le logarithme."
+  },
+  {
+    id: "U41-193", epreuve: "U41", theme: "Suites", session: "complément", entrainement: true,
+    difficulte: "difficile",
+    contexte: "Un élève calcule la somme des termes de u(0) à u(5) d'une suite géométrique de premier terme 4 et de raison 3.",
+    annexe: {"titre": "Copie de l'élève", "colonnes": ["Ligne", "Calcul"], "lignes": [["1", "Il y a 6 termes de u(0) à u(5)."], ["2", "S = u(0) × (1 − q⁵) / (1 − q)."], ["3", "S = 4 × (1 − 243) / (1 − 3) = 4 × 121 = 484."]]},
+    question: "Dans cette somme géométrique, quelle est la première ligne fausse, et pourquoi ?",
+    choix: ["Ligne 2 : il y a 6 termes, donc l'exposant est 6 et non 5 : S = 4 × (1 − 3⁶) ÷ (1 − 3) = 1 456.", "Ligne 1 : il y a 5 termes de u(0) à u(5), car on compte les rangs 1 à 5 et on ne compte pas u(0).", "Ligne 3 : (1 − 243) ÷ (1 − 3) = 121 est faux, il faut trouver −121, car un quotient de deux négatifs est négatif.", "Ligne 2 : la formule est S = u(0) × (1 − q) ÷ (1 − qⁿ), avec n = 6 : on inverse numérateur et dénominateur."],
+    bonne: 0,
+    explication: "De u(0) à u(5), il y a 6 termes : la somme est S = u(0) × [[1 − q⁶|1 − q]] = 4 × [[1 − 729|−2]] = 4 × 364 = 1 456. La copie a pris l'exposant 5 (le dernier rang) au lieu du nombre de termes, 6. La ligne 1 est juste, et (−242) ÷ (−2) = 121 est bien positif : l'erreur est dans l'exposant.",
+    indice: "Compte les termes de u(0) à u(5). L'exposant de q est le nombre de termes, pas le dernier rang."
+  },
+  {
+    id: "U41-194", epreuve: "U41", theme: "Suites", session: "complément", entrainement: true, type: "calcul",
+    difficulte: "moyen",
+    contexte: "On a u(0) = 30 et u(n+1) = 1,5 u(n) − 10.",
+    question: "Calcule u(3).",
+    reponse: {"valeur": 53.75, "unite": "", "decimales": 2, "signe": false},
+    explication: "u(1) = 1,5 × 30 − 10 = 35\nu(2) = 1,5 × 35 − 10 = 42,5\nu(3) = 1,5 × 42,5 − 10 = 53,75\nOn applique la relation de récurrence trois fois de suite, sans sauter d'étape.",
+    indice: "Calcule u(1), puis u(2), puis u(3) : chaque terme sert à calculer le suivant."
+  },
+  {
+    id: "U41-195", epreuve: "U41", theme: "Suites", session: "complément", entrainement: true,
+    difficulte: "moyen",
+    contexte: "On a u(0) = 100 et u(n+1) = 0,8 u(n) + 30.",
+    question: "Quel est le sens de variation de la suite ?",
+    choix: ["Décroissante : on multiplie par 0,8, qui est inférieur à 1", "Constante : 0,8 et 30 sont des valeurs fixes à chaque étape", "Croissante : sa limite est 150, au-dessus de u(0) = 100", "Alternée : elle passe au-dessus puis en dessous de 150 à chaque étape"],
+    bonne: 2,
+    explication: "La valeur qui ne bouge plus vérifie ℓ = 0,8 ℓ + 30, donc ℓ = [[30|0,2]] = 150. On a u(n+1) − u(n) = 0,2 × (150 − u(n)), positif tant que u(n) < 150 : la suite part de 100, sous 150, donc elle est croissante (u(1) = 110, u(2) = 118). Multiplier par 0,8 ne suffit pas à conclure : il faut aussi tenir compte du +30.",
+    indice: "Calcule la limite ℓ, puis regarde si u(0) est au-dessus ou en dessous d'elle."
+  },
+  {
+    id: "U41-196", epreuve: "U41", theme: "Suites", session: "complément", entrainement: true, type: "calcul",
+    difficulte: "difficile",
+    contexte: "Un lot de lentilles perd 15 % de sa valeur par an : u(n) = 5 000 × 0,85ⁿ, en euros.",
+    question: "Au bout de combien d'années la valeur passe-t-elle sous 1 000 € pour la première fois ?",
+    reponse: {"valeur": 10, "unite": "ans", "decimales": 0, "signe": false},
+    explication: "On veut 5 000 × 0,85ⁿ < 1 000, donc 0,85ⁿ < 0,2\nn > [[ln 0,2|ln 0,85]] ≈ 9,90\nLe premier entier est 10.\nContrôle : 0,85⁹ ≈ 0,2316 (encore au-dessus de 0,2) et 0,85¹⁰ ≈ 0,1969 (en dessous).",
+    indice: "Écris 0,85ⁿ < 0,2, puis utilise le logarithme ou le tableau. Attention au sens de l'inégalité avec ln 0,85."
+  },
+  {
+    id: "U41-197", epreuve: "U41", theme: "Suites", session: "complément", entrainement: true,
+    difficulte: "difficile",
+    contexte: "On a u(0) = 5 et u(n+1) = 0,7 u(n) + 6. On pose v(n) = u(n) − 20, et on a montré que (v(n)) est géométrique de raison 0,7.",
+    question: "Quelle est l'expression correcte de u(n) ?",
+    choix: ["u(n) = 20 − 15 × 0,7ⁿ, car u = v + 20", "u(n) = −15 × 0,7ⁿ, car v(0) = 5 − 20 = −15", "u(n) = 20 + 15 × 0,7ⁿ, car v(0) = 5 − 20 = 15", "u(n) = 20 − 15 × 0,7ⁿ⁺¹, car la suite commence à n = 1"],
+    bonne: 0,
+    explication: "v(0) = u(0) − 20 = 5 − 20 = −15, donc v(n) = −15 × 0,7ⁿ. On revient à u : u(n) = v(n) + 20 = 20 − 15 × 0,7ⁿ. Contrôle avec n = 1 : 20 − 10,5 = 9,5 = 0,7 × 5 + 6. Oublier d'ajouter 16 donne un résultat négatif, ce qui est absurde ici.",
+    indice: "v(0) vaut −15. Une fois v(n) trouvé, que faut-il faire pour revenir à u(n) ? Vérifie avec n = 0."
+  },
+  {
+    id: "U41-198", epreuve: "U41", theme: "Suites", session: "complément", entrainement: true,
+    difficulte: "moyen",
+    contexte: "Algorithme :",
+    annexe: {"titre": "Algorithme", "colonnes": ["Ligne", "Instruction"], "lignes": [["1", "S ← 0"], ["2", "Pour k de 1 à 4 :"], ["3", "    S ← S + 2^k"], ["4", "Fin Pour"], ["5", "Afficher S"]]},
+    question: "Quelle valeur de S l'algorithme affiche-t-il à la fin de cette boucle de sommes ?",
+    choix: ["15, car S = 1 + 2 + 4 + 8 en partant de k = 0", "31, car S = 1 + 2 + 4 + 8 + 16 en comptant 2⁰", "62, car S = 2 + 4 + 8 + 16 + 32 avec un tour de plus", "30, car S = 2 + 4 + 8 + 16 : le premier terme est 2¹"],
+    bonne: 3,
+    explication: "La boucle fait 4 tours : k = 1, 2, 3, 4. S devient 2, puis 6, puis 14, puis 30. Le terme 2⁰ = 1 n'est pas compté, car k commence à 1 ; 31 et 15 le comptent à tort, et 62 ajoute un cinquième tour qui n'existe pas.",
+    indice: "Écris S à la fin de chaque tour : k vaut 1, 2, 3 puis 4."
   }
 );
