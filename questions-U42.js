@@ -2036,6 +2036,304 @@ QUESTIONS.push(
       }
     ],
     explication: "[[1|OA]] = [[1|4 000]] − [[1|100]] = [[−39|4 000]], donc OA ≈ −102,6 mm : la diapositive est un peu avant le foyer objet.\nγ ≈ −39. L'image mesure 39 × 24 = 936 mm de haut, et elle est renversée : on place la diapositive à l'envers."
+  },
+
+  // ---------- Lot 4 du 22 nov. : loupe et microscope, afocales, doublets, ouverture, antireflet ----------
+  {
+    id: "U42-263", difficulte: "facile", epreuve: "U42", theme: "Loupe et microscope", session: "complément",
+    question: "Que compare le grossissement commercial Gc d'un instrument ?",
+    choix: ["La taille de l'image à la taille de l'objet", "La focale de l'instrument à la distance de 250 mm", "L'angle sous lequel on voit l'image dans l'instrument à l'angle sous lequel on voit l'objet, à l'œil nu, placé à 250 mm", "Le diamètre de l'objectif à celui de l'oculaire"],
+    bonne: 2,
+    explication: "Le grossissement commercial est un rapport d'angles : Gc = α' / α, où α' est l'angle sous lequel on voit l'image dans l'instrument et α celui sous lequel on verrait l'objet à l'œil nu, à la distance conventionnelle de 250 mm.\nLe rapport des tailles est le grandissement, pas le grossissement.",
+    indice: "Un grossissement compare des angles, pas des longueurs."
+  },
+  {
+    id: "U42-264", difficulte: "moyen", epreuve: "U42", theme: "Loupe et microscope", session: "complément",
+    type: "calcul",
+    question: "Un objet de 0,5 mm est vu à l'œil nu à 250 mm. On l'observe maintenant avec une loupe de grossissement commercial Gc = 8. Calcule l'angle sous lequel on voit l'image, en milliradians.",
+    reponse: { valeur: 16, unite: "mrad", decimales: 0, signe: false },
+    erreurs: [
+      { valeur: 2, type: "notion", message: "2 mrad est l'angle à l'œil nu. L'image dans la loupe est vue sous un angle Gc fois plus grand." }
+    ],
+    surLaCopie: "À l'œil nu : α = [[0,5|250]] = 2 × 10⁻³ rad = 2 mrad\nAvec la loupe : α' = Gc × α = 8 × 2 = 16 mrad",
+    explication: "À l'œil nu : α = [[0,5|250]] = 2 × 10⁻³ rad = 2 mrad.\nAvec la loupe : α' = Gc × α = 8 × 2 = 16 mrad.",
+    indice: "Calcule d'abord l'angle à l'œil nu (petit angle : taille divisée par distance), puis multiplie par Gc."
+  },
+  {
+    id: "U42-265", difficulte: "moyen", epreuve: "U42", theme: "Loupe et microscope", session: "complément",
+    type: "calcul",
+    question: "L'objectif d'un microscope a un grandissement γob = −40 pour un intervalle optique Δ = 160 mm. Calcule sa distance focale image.",
+    reponse: { valeur: 4, unite: "mm", decimales: 0, signe: false },
+    erreurs: [
+      { valeur: 6400, type: "notion", message: "Tu as multiplié Δ par γob. Le grandissement est γob = −Δ / f'ob : f'ob = Δ / |γob|." }
+    ],
+    surLaCopie: "γob = −[[Δ|f'ob]] donc f'ob = [[Δ|40]] = [[160|40]] = 4 mm",
+    explication: "γob = −[[Δ|f'ob]], donc f'ob = [[Δ|40]] = [[160|40]] = 4 mm.\nUn objectif à fort grandissement a une focale très courte.",
+    indice: "Le grandissement de l'objectif vaut Δ / f'ob en valeur absolue."
+  },
+  {
+    id: "U42-266", difficulte: "facile", epreuve: "U42", theme: "Loupe et microscope", session: "complément",
+    question: "Un microscope est équipé d'un objectif ×10 et d'un oculaire ×10. On passe à l'objectif ×40, en gardant le même oculaire. Quel est le nouveau grossissement commercial ?",
+    choix: ["50", "400", "4 000", "40"],
+    bonne: 1,
+    explication: "Gc = |γob| × Gc,oc. Avec l'objectif ×40 et l'oculaire ×10 : Gc = 40 × 10 = 400 (avant : 10 × 10 = 100).\n50 vient d'une addition, 4 000 d'une multiplication de trop.",
+    indice: "Les grossissements des deux étages se multiplient."
+  },
+  {
+    id: "U42-267", difficulte: "difficile", epreuve: "U42", theme: "Loupe et microscope", session: "complément",
+    type: "calcul",
+    question: "Une loupe a une focale f' = +40 mm. Un observateur accommode et regarde l'image à 250 mm devant la loupe (OA' = −250 mm). Où doit être l'objet ? Calcule OA, avec son signe.",
+    reponse: { valeur: -34.5, unite: "mm", decimales: 1, tolerance: 0.1, signe: true },
+    erreurs: [
+      { valeur: -40, type: "notion", message: "OA = −40 mm (objet au foyer) donne une image à l'infini, pour un œil au repos. Ici l'image est à 250 mm : l'objet est un peu plus près de la loupe." }
+    ],
+    surLaCopie: "[[1|OA]] = [[1|OA']] − [[1|f']] = [[1|−250]] − [[1|40]] = [[−29|1 000]]\nOA ≈ −34,5 mm",
+    explication: "[[1|OA]] = [[1|OA']] − [[1|f']] = [[−1|250]] − [[1|40]] = −0,004 − 0,025 = −0,029 mm⁻¹.\nOA ≈ −34,5 mm : l'objet est un peu plus près de la loupe que son foyer objet (−40 mm).",
+    indice: "Retourne Descartes pour isoler 1/OA, avec OA' négatif (image virtuelle)."
+  },
+  {
+    id: "U42-268", difficulte: "facile", epreuve: "U42", theme: "Lunettes afocales", session: "complément",
+    question: "Pourquoi ajoute-t-on souvent un prisme redresseur à une lunette de Kepler pour l'usage terrestre ?",
+    choix: ["Pour augmenter son grossissement", "Pour que l'image ne soit plus renversée", "Pour supprimer les couleurs parasites", "Pour la rendre afocale"],
+    bonne: 1,
+    explication: "La lunette de Kepler (objectif et oculaire convergents) donne une image renversée, gênante pour observer un paysage. Un prisme redresseur la remet à l'endroit.\nLa lunette est déjà afocale. Le prisme ne change ni le grossissement ni les couleurs.",
+    indice: "Le grossissement d'une lunette de Kepler est négatif. Qu'est-ce que ça signifie pour l'image ?"
+  },
+  {
+    id: "U42-269", difficulte: "facile", epreuve: "U42", theme: "Lunettes afocales", session: "complément",
+    type: "calcul",
+    question: "Une lunette de Kepler a un objectif f'ob = +400 mm et un oculaire f'oc = +20 mm. Calcule son grossissement G = −f'ob / f'oc, avec son signe.",
+    reponse: { valeur: -20, unite: "", decimales: 0, signe: true },
+    erreurs: [
+      { valeur: 20, type: "signe", message: "Tu as oublié le signe moins. Les deux lentilles sont convergentes : l'image est renversée, G est négatif." }
+    ],
+    surLaCopie: "G = −[[f'ob|f'oc]] = −[[400|20]] = −20\nG négatif : l'image est renversée.",
+    explication: "G = −[[f'ob|f'oc]] = −[[400|20]] = −20.\nLe signe moins indique une image renversée, comme toujours avec une lunette de Kepler.",
+    indice: "Applique la formule avec les signes : f'ob et f'oc sont positifs."
+  },
+  {
+    id: "U42-270", difficulte: "facile", epreuve: "U42", theme: "Lunettes afocales", session: "complément",
+    type: "calcul",
+    question: "Une lunette de Kepler a un objectif f'ob = +400 mm et un oculaire f'oc = +20 mm. Calcule la distance entre les deux lentilles pour qu'elle soit afocale.",
+    reponse: { valeur: 420, unite: "mm", decimales: 0, signe: false },
+    erreurs: [
+      { valeur: 380, type: "signe", message: "Tu as soustrait. Pour un oculaire convergent, f'oc est positif : e = f'ob + f'oc = 400 + 20." }
+    ],
+    surLaCopie: "Afocal : F'ob = Foc, donc e = f'ob + f'oc = 400 + 20 = 420 mm",
+    explication: "Une lunette afocale a le foyer image de l'objectif confondu avec le foyer objet de l'oculaire : e = f'ob + f'oc = 400 + 20 = 420 mm.",
+    indice: "Le foyer image de l'objectif et le foyer objet de l'oculaire coïncident."
+  },
+  {
+    id: "U42-271", difficulte: "moyen", epreuve: "U42", theme: "Lunettes afocales", session: "complément",
+    type: "calcul",
+    question: "Une lunette a un objectif de diamètre 60 mm. Son cercle oculaire (image de l'objectif par l'oculaire) mesure 4 mm. Calcule la valeur absolue de son grossissement.",
+    reponse: { valeur: 15, unite: "", decimales: 0, signe: false },
+    erreurs: [
+      { valeur: 0.067, type: "notion", message: "Tu as fait le rapport à l'envers. |G| = diamètre de l'objectif / diamètre du cercle oculaire." }
+    ],
+    surLaCopie: "|G| = [[D objectif|D cercle oculaire]] = [[60|4]] = 15",
+    explication: "|G| = [[D objectif|D cercle oculaire]] = [[60|4]] = 15.\nCe rapport est aussi celui des focales : f'ob / f'oc.",
+    indice: "Le rapport des diamètres est le même que le rapport des focales."
+  },
+  {
+    id: "U42-272", difficulte: "moyen", epreuve: "U42", theme: "Lunettes afocales", session: "complément",
+    type: "calcul",
+    question: "Une lunette de Kepler a un grossissement G = −16 et un oculaire de focale f'oc = +25 mm. Calcule la focale de son objectif.",
+    reponse: { valeur: 400, unite: "mm", decimales: 0, signe: false },
+    erreurs: [
+      { valeur: 1.56, type: "notion", message: "Tu as divisé f'oc par G. De G = −f'ob / f'oc, on tire f'ob = −G × f'oc = 16 × 25." }
+    ],
+    surLaCopie: "G = −[[f'ob|f'oc]] donc f'ob = −G × f'oc = 16 × 25 = 400 mm",
+    explication: "G = −[[f'ob|f'oc]], donc f'ob = −G × f'oc = 16 × 25 = 400 mm.",
+    indice: "Isole f'ob dans la formule du grossissement."
+  },
+  {
+    id: "U42-273", difficulte: "difficile", epreuve: "U42", theme: "Lunettes afocales", session: "complément",
+    type: "pose",
+    question: "Une lunette de Galilée a un objectif f'ob = +120 mm et un grossissement G = +4. Compare-la à une lunette de Kepler de même objectif et de même grossissement en valeur absolue, étape par étape.",
+    etapes: [
+      {
+        consigne: "Focale de l'oculaire de la lunette de Galilée, f'oc (en mm)",
+        reponse: { valeur: -30, unite: "mm", decimales: 0, signe: true },
+        aide: "G = −f'ob / f'oc, donc f'oc = −f'ob / G.",
+        ligne: "f'oc = −[[120|4]] = −30 mm",
+        erreurs: [{ valeur: 30, type: "signe", message: "G est positif (image droite) : l'oculaire est divergent, donc f'oc est négatif." }]
+      },
+      {
+        consigne: "Longueur de la lunette de Galilée, e = f'ob + f'oc (en mm)",
+        reponse: { valeur: 90, unite: "mm", decimales: 0, signe: false },
+        aide: "f'oc est négatif.",
+        ligne: "e = 120 + (−30) = 90 mm"
+      },
+      {
+        consigne: "Longueur de la lunette de Kepler de même |G| (en mm)",
+        reponse: { valeur: 150, unite: "mm", decimales: 0, signe: false },
+        aide: "Kepler : f'oc = +30 mm (G = −4).",
+        ligne: "e = 120 + 30 = 150 mm"
+      }
+    ],
+    explication: "Galilée : f'oc = −[[120|4]] = −30 mm, longueur 120 − 30 = 90 mm, image droite.\nKepler : f'oc = +30 mm, longueur 150 mm, image renversée.\nLa lunette de Galilée est plus courte de 60 mm."
+  },
+  {
+    id: "U42-274", difficulte: "moyen", epreuve: "U42", theme: "Doublets et achromatisme", session: "complément",
+    question: "Un oculaire est formé de deux lentilles convergentes, de même verre, séparées de e = (f'₁ + f'₂) / 2. Que peut-on dire de ses aberrations chromatiques ?",
+    choix: ["Elles sont doublées", "Elles sont réduites, car la séparation compense la dispersion du verre", "Elles sont supprimées pour toutes les longueurs d'onde", "Elles ne dépendent pas de la séparation"],
+    bonne: 1,
+    explication: "Avec cette séparation, la vergence du doublet varie très peu avec la longueur d'onde : le doublet est achromatique au premier ordre, même avec un seul verre. C'est le principe des oculaires de type Huygens.\nIl n'est pas parfait pour toutes les longueurs d'onde : on parle de réduction, pas de suppression.",
+    indice: "Pense aux oculaires de microscope, faits d'un seul type de verre."
+  },
+  {
+    id: "U42-275", difficulte: "moyen", epreuve: "U42", theme: "Doublets et achromatisme", session: "complément",
+    type: "calcul",
+    question: "Un doublet est formé de deux lentilles minces de vergences V₁ = +5 δ et V₂ = +8 δ, séparées de e = 40 mm dans l'air. Calcule sa vergence, avec V = V₁ + V₂ − e V₁ V₂.",
+    reponse: { valeur: 11.4, unite: "δ", decimales: 1, tolerance: 0.05, signe: true },
+    erreurs: [
+      { valeur: 13, type: "notion", message: "Tu as oublié le terme de séparation. V = V₁ + V₂ − e V₁ V₂, avec e en mètres." },
+      { valeur: -1587, type: "unite", message: "Tu as mis e = 40 au lieu de 0,04 m. Dans la formule, e est en mètres." }
+    ],
+    surLaCopie: "V = V₁ + V₂ − e V₁ V₂ = 5 + 8 − 0,04 × 5 × 8 = 13 − 1,6 = +11,4 δ",
+    explication: "e = 40 mm = 0,04 m.\nV = 5 + 8 − 0,04 × 5 × 8 = 13 − 1,6 = +11,4 δ.",
+    indice: "Convertis e en mètres avant de remplacer dans la formule."
+  },
+  {
+    id: "U42-276", difficulte: "difficile", epreuve: "U42", theme: "Doublets et achromatisme", session: "complément",
+    type: "calcul",
+    question: "Un téléobjectif est formé de L₁ (f'₁ = +80 mm) et L₂ (f'₂ = −40 mm), séparées de e = 50 mm. Calcule sa distance focale image, avec f' = f'₁ f'₂ / (f'₁ + f'₂ − e).",
+    reponse: { valeur: 320, unite: "mm", decimales: 0, signe: true },
+    erreurs: [
+      { valeur: -320, type: "signe", message: "Le dénominateur vaut 80 − 40 − 50 = −10, négatif, et le numérateur 80 × (−40) est négatif aussi : le quotient est positif." }
+    ],
+    surLaCopie: "f' = [[f'₁ × f'₂|f'₁ + f'₂ − e]] = [[80 × (−40)|80 − 40 − 50]] = [[−3 200|−10]] = +320 mm",
+    explication: "Numérateur : 80 × (−40) = −3 200. Dénominateur : 80 + (−40) − 50 = −10.\nf' = [[−3 200|−10]] = +320 mm.\nLe doublet est plus court que sa focale : le but d'un téléobjectif.",
+    indice: "Garde les signes de f'₂ et du dénominateur."
+  },
+  {
+    id: "U42-277", difficulte: "moyen", epreuve: "U42", theme: "Doublets et achromatisme", session: "complément",
+    question: "Dans un doublet achromatique accolé, on associe une lentille convergente à une lentille divergente. De quel verre est faite la lentille convergente, la plus forte en vergence ?",
+    choix: ["Du verre le plus dispersif (flint)", "Du verre le moins dispersif (crown)", "Peu importe", "Du verre d'indice le plus faible"],
+    bonne: 1,
+    explication: "La condition V₁ / ν₁ + V₂ / ν₂ = 0 impose que la lentille de plus forte vergence soit celle de plus grand ν : le verre le moins dispersif, le crown. La lentille divergente, plus faible, est en flint.\nAinsi le doublet reste convergent tout en compensant la dispersion.",
+    indice: "Pour que le doublet reste convergent, la plus forte vergence est portée par le verre qui disperse le moins."
+  },
+  {
+    id: "U42-278", difficulte: "moyen", epreuve: "U42", theme: "Doublets et achromatisme", session: "complément",
+    type: "calcul",
+    question: "Un verre a les indices nd = 1,517, nF = 1,523 et nC = 1,514. Calcule son nombre d'Abbe ν = (nd − 1) / (nF − nC), arrondi à l'unité.",
+    reponse: { valeur: 57, unite: "", decimales: 0, tolerance: 1, signe: false },
+    erreurs: [
+      { valeur: 0.0174, type: "notion", message: "Tu as fait le rapport à l'envers. ν = (nd − 1) / (nF − nC)." }
+    ],
+    surLaCopie: "ν = [[nd − 1|nF − nC]] = [[0,517|0,009]] ≈ 57",
+    explication: "nd − 1 = 0,517 et nF − nC = 1,523 − 1,514 = 0,009.\nν = [[0,517|0,009]] ≈ 57,4. C'est un verre peu dispersif, de type crown.",
+    indice: "Calcule la différence nF − nC, puis divise nd − 1 par elle."
+  },
+  {
+    id: "U42-279", difficulte: "facile", epreuve: "U42", theme: "Ouverture et résolution", session: "complément",
+    type: "calcul",
+    question: "Un objectif de focale f' = 200 mm a une pupille d'entrée de diamètre 25 mm. Calcule son nombre d'ouverture N (écrit f/N).",
+    reponse: { valeur: 8, unite: "", decimales: 0, signe: false },
+    erreurs: [
+      { valeur: 0.125, type: "notion", message: "Tu as fait le rapport à l'envers. N = f' / D." }
+    ],
+    surLaCopie: "N = [[f'|D]] = [[200|25]] = 8 : l'objectif est ouvert à f/8.",
+    explication: "N = [[f'|D]] = [[200|25]] = 8. L'objectif est ouvert à f/8.",
+    indice: "N est le rapport de la focale au diamètre de la pupille d'entrée."
+  },
+  {
+    id: "U42-280", difficulte: "difficile", epreuve: "U42", theme: "Ouverture et résolution", session: "complément",
+    question: "Les pixels d'un capteur sont plus petits que la tache de diffraction de l'objectif. Que se passe-t-il si on réduit encore la taille des pixels ?",
+    choix: ["La résolution de l'image augmente toujours", "La résolution ne progresse plus : elle est limitée par la diffraction de l'objectif", "L'image devient plus lumineuse", "La diffraction disparaît"],
+    bonne: 1,
+    explication: "La résolution de l'ensemble est limitée par le plus grand des deux : la taille des pixels ou la tache de diffraction. Quand les pixels sont déjà plus petits que cette tache, les rendre plus petits ne montre pas de détails de plus.\nIls captent même moins de lumière chacun.",
+    indice: "La résolution globale est limitée par le facteur le moins bon."
+  },
+  {
+    id: "U42-281", difficulte: "moyen", epreuve: "U42", theme: "Ouverture et résolution", session: "complément",
+    type: "calcul",
+    question: "L'œil sépare deux points si l'angle qui les sépare est au moins 3 × 10⁻⁴ rad. Calcule le plus petit détail qu'il distingue à 250 mm, en micromètres.",
+    reponse: { valeur: 75, unite: "µm", decimales: 0, signe: false },
+    erreurs: [
+      { valeur: 0.075, type: "unite", message: "Tu as laissé le résultat en millimètres : 0,075 mm = 75 µm. Convertis en micromètres (× 1 000)." }
+    ],
+    surLaCopie: "Détail = α × distance = 3 × 10⁻⁴ × 250 = 0,075 mm = 75 µm",
+    explication: "Détail = α × distance = 3 × 10⁻⁴ × 250 mm = 0,075 mm = 75 µm.",
+    indice: "Un petit angle en radians multiplié par la distance donne la taille du détail."
+  },
+  {
+    id: "U42-282", difficulte: "moyen", epreuve: "U42", theme: "Ouverture et résolution", session: "complément",
+    type: "calcul",
+    question: "L'œil seul distingue des détails de 75 µm à 250 mm. On regarde avec une loupe de grossissement commercial 5. Quel plus petit détail distingue-t-on ?",
+    reponse: { valeur: 15, unite: "µm", decimales: 0, signe: false },
+    erreurs: [
+      { valeur: 375, type: "notion", message: "Tu as multiplié par Gc. La loupe agrandit l'angle : le plus petit détail est divisé par Gc." }
+    ],
+    surLaCopie: "Avec l'instrument, l'angle est multiplié par Gc : détail = [[75|5]] = 15 µm",
+    explication: "La loupe multiplie les angles par Gc = 5 : le plus petit détail distingué est divisé par 5. 75 / 5 = 15 µm.\nCela vaut tant que la diffraction de la loupe ne limite pas encore la résolution.",
+    indice: "Un instrument qui grossit permet de voir des détails plus petits : divise."
+  },
+  {
+    id: "U42-283", difficulte: "difficile", epreuve: "U42", theme: "Ouverture et résolution", session: "complément",
+    type: "calcul",
+    question: "Un objectif de microscope a une ouverture numérique ON = 1,25. Pour λ = 500 nm, calcule la plus petite distance séparable ε = 0,61 λ / ON (objectif à immersion, d'où ON > 1), en micromètres.",
+    reponse: { valeur: 0.24, unite: "µm", decimales: 2, tolerance: 0.01, signe: false },
+    erreurs: [
+      { valeur: 0.49, type: "notion", message: "Tu as pris 1,22 au lieu de 0,61. Dans ε = 0,61 λ / ON, le facteur est 0,61." }
+    ],
+    surLaCopie: "ε = [[0,61 × λ|ON]] = [[0,61 × 500|1,25]] = 244 nm ≈ 0,24 µm",
+    explication: "ε = [[0,61 × λ|ON]] = [[0,61 × 500|1,25]] = 244 nm ≈ 0,24 µm.\nPlus l'ouverture numérique est grande, plus on sépare des détails fins.",
+    indice: "Garde λ en nanomètres, puis convertis en micromètres à la fin."
+  },
+  {
+    id: "U42-284", difficulte: "moyen", epreuve: "U42", theme: "Transmission et antireflet", session: "complément",
+    type: "calcul",
+    question: "Un instrument compte 4 lentilles minces, toutes traitées antireflet : chaque surface air-verre transmet 98 % de la lumière. Calcule la transmission totale, en pourcentage.",
+    reponse: { valeur: 85, unite: "%", decimales: 0, signe: false, tolerance: 1 },
+    erreurs: [
+      { valeur: 92, type: "notion", message: "Tu as compté 4 surfaces. Chaque lentille a 2 surfaces air-verre : 8 surfaces au total, soit 0,98⁸." }
+    ],
+    surLaCopie: "4 lentilles : 8 surfaces. T = 0,98⁸ ≈ 0,85, soit 85 %",
+    explication: "Une lentille a deux surfaces air-verre : 4 lentilles font 8 surfaces.\nT = 0,98⁸ ≈ 0,851, soit environ 85 %.",
+    indice: "Compte les surfaces, pas les lentilles."
+  },
+  {
+    id: "U42-285", difficulte: "moyen", epreuve: "U42", theme: "Transmission et antireflet", session: "complément",
+    question: "Pourquoi utilise-t-on souvent des traitements antireflet à plusieurs couches plutôt qu'à une seule ?",
+    choix: ["Pour que le verre soit plus épais", "Pour absorber plus de lumière", "Pour réduire les reflets sur un large domaine de longueurs d'onde", "Pour augmenter l'indice du verre"],
+    bonne: 2,
+    explication: "Une couche unique n'est optimale que pour une longueur d'onde. Avec plusieurs couches d'indices et d'épaisseurs différents, on annule les reflets sur presque tout le spectre visible : le reflet résiduel est faible et peu coloré.\nLe traitement ne doit pas absorber la lumière.",
+    indice: "Une seule couche n'est optimale que pour une longueur d'onde."
+  },
+  {
+    id: "U42-286", difficulte: "difficile", epreuve: "U42", theme: "Transmission et antireflet", session: "complément",
+    type: "calcul",
+    question: "Un verre a un indice de 1,5. Calcule l'indice idéal d'une couche antireflet monocouche, avec n couche = √n verre (arrondi au centième).",
+    reponse: { valeur: 1.22, unite: "", decimales: 2, tolerance: 0.01, signe: false },
+    erreurs: [
+      { valeur: 0.75, type: "notion", message: "Tu as divisé l'indice par 2. L'indice idéal de la couche est la racine carrée de l'indice du verre." }
+    ],
+    surLaCopie: "n couche = √n verre = √1,5 ≈ 1,22",
+    explication: "n couche = √1,5 ≈ 1,225.\nLe fluorure de magnésium (n = 1,38) est un compromis courant : son indice est un peu plus élevé que l'idéal, mais le matériau est solide.",
+    indice: "Pour annuler les reflets, les deux reflets doivent avoir la même intensité : l'indice de la couche est la racine de celui du verre."
+  },
+  {
+    id: "U42-287", difficulte: "moyen", epreuve: "U42", theme: "Transmission et antireflet", session: "complément",
+    question: "Pourquoi un traitement antireflet est-il particulièrement utile sur un verre de haut indice ?",
+    choix: ["Parce qu'un indice élevé fait réfléchir plus de lumière à chaque surface", "Parce que le verre est plus fragile", "Parce que le verre absorbe plus de lumière", "Parce que son indice diminue avec l'épaisseur"],
+    bonne: 0,
+    explication: "La réflexion R = ((n − 1) / (n + 1))² augmente avec l'indice : environ 4 % par face pour n = 1,5, plus de 6 % pour n = 1,7. Les reflets gênent donc plus, et le traitement antireflet apporte plus.",
+    indice: "Compare R pour n = 1,5 et pour n = 1,7."
+  },
+  {
+    id: "U42-288", difficulte: "difficile", epreuve: "U42", theme: "Transmission et antireflet", session: "complément",
+    type: "calcul",
+    question: "Une couche antireflet d'indice 1,38 a une épaisseur de 100 nm. Calcule la différence de marche entre les deux rayons réfléchis, avec δ = 2 n e (sans compter les déphasages à la réflexion).",
+    reponse: { valeur: 276, unite: "nm", decimales: 0, signe: false },
+    erreurs: [
+      { valeur: 138, type: "notion", message: "Tu as oublié l'aller-retour dans la couche : la différence de marche est δ = 2 n e, pas n e." }
+    ],
+    surLaCopie: "δ = 2 n e = 2 × 1,38 × 100 = 276 nm, soit environ λ / 2 pour λ ≈ 552 nm",
+    explication: "δ = 2 n e = 2 × 1,38 × 100 = 276 nm.\nC'est environ une demi-longueur d'onde pour λ ≈ 552 nm : les deux rayons réfléchis sont en opposition de phase et s'annulent. Les deux réflexions subissent le même déphasage (n couche < n verre), il n'intervient donc pas.",
+    indice: "Le rayon traverse la couche deux fois : aller et retour."
   }
 );
 
