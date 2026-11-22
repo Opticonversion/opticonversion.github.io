@@ -2397,5 +2397,242 @@ QUESTIONS.push(
   "erreurs": {
     "1": { "type": "signe", "message": "Positif signifie dans le sens de la lumière. Un objet réel est avant la lentille, donc de l'autre côté." }
   }
+},
+{
+  "id": "U43-218", "epreuve": "U43", "theme": "Liaisons mécaniques", "session": "complément", "difficulte": "facile",
+  "question": "Combien de degrés de liberté (mouvements relatifs possibles) une liaison glissière laisse-t-elle entre deux pièces ?",
+  "choix": ["Un", "Deux", "Trois", "Six"],
+  "bonne": 0,
+  "explication": "Une glissière n'autorise qu'une seule translation, suivant son axe. Il n'y a aucune rotation : un seul degré de liberté.",
+  "indice": "Compte les mouvements que la glissière laisse libres, rotations comprises."
+},
+{
+  "id": "U43-219", "epreuve": "U43", "theme": "Liaisons mécaniques", "session": "complément", "difficulte": "moyen",
+  "question": "Combien de degrés de liberté une liaison pivot glissant laisse-t-elle entre deux pièces ?",
+  "choix": ["Un", "Deux", "Trois", "Aucun"],
+  "bonne": 1,
+  "explication": "Un pivot glissant autorise une rotation autour de son axe et une translation le long du même axe, indépendantes l'une de l'autre : deux degrés de liberté.",
+  "indice": "Compte séparément la rotation possible et la translation possible."
+},
+{
+  "id": "U43-220", "epreuve": "U43", "theme": "Liaisons mécaniques", "session": "complément", "difficulte": "moyen",
+  "question": "Une liaison hélicoïdale (vis dans un écrou) laisse un seul degré de liberté. Pourquoi, alors que la vis tourne ET avance ?",
+  "choix": [
+    "La rotation et la translation sont liées entre elles par le pas",
+    "La vis ne peut que tourner, elle n'avance pas",
+    "La vis ne peut que glisser, elle ne tourne pas",
+    "Le pas supprime la rotation de l'écrou"
+  ],
+  "bonne": 0,
+  "explication": "Pour la vis, un tour correspond toujours à une avance égale au pas. On ne peut pas choisir la rotation et la translation séparément : il ne reste qu'un seul mouvement indépendant.",
+  "indice": "Peut-on faire avancer la vis sans qu'elle tourne, avec un écrou fixe ?"
+},
+{
+  "id": "U43-221", "epreuve": "U43", "theme": "Liaisons mécaniques", "session": "complément", "difficulte": "difficile",
+  "question": "Une bille repose sur un plan (liaison ponctuelle). Combien de degrés de liberté a-t-elle par rapport au plan ?",
+  "choix": ["Cinq", "Trois", "Un", "Six"],
+  "bonne": 0,
+  "explication": "La bille peut glisser dans deux directions du plan (deux translations) et tourner autour de trois axes (trois rotations). Elle ne peut pas traverser le plan : cinq degrés de liberté.",
+  "indice": "Un seul mouvement est supprimé : celui qui enfoncerait la bille dans le plan."
+},
+{
+  "id": "U43-222", "epreuve": "U43", "theme": "Liaisons mécaniques", "session": "complément", "difficulte": "facile",
+  "question": "Une bague de zoom tourne autour de l'axe optique Z sans se déplacer par rapport au tube. Quelle est la liaison ?",
+  "choix": ["Pivot d'axe Z", "Glissière d'axe Z", "Hélicoïdale d'axe Z", "Encastrement"],
+  "bonne": 0,
+  "explication": "La bague ne fait que tourner autour de Z : c'est une liaison pivot d'axe Z.",
+  "indice": "La bague tourne seulement. Quel mouvement est permis ?",
+  "erreurs": {
+    "2": { "type": "notion", "message": "Une liaison hélicoïdale ferait aussi avancer la bague le long de l'axe à chaque tour. Ici elle ne se déplace pas." }
+  }
+},
+{
+  "id": "U43-223", "epreuve": "U43", "theme": "Mécanismes de réglage", "session": "complément", "difficulte": "facile",
+  "type": "calcul",
+  "question": "Un système vis-écrou a un pas de 0,75 mm. De combien l'écrou avance-t-il après 8 tours de vis (en mm) ?",
+  "reponse": { "valeur": 6, "unite": "mm", "decimales": 0, "signe": false },
+  "explication": "Avance = nombre de tours × pas = 8 × 0,75 = 6 mm.",
+  "indice": "À chaque tour, l'écrou avance d'un pas.",
+  "erreurs": [
+    { "valeur": 10.7, "type": "notion", "message": "Tu as divisé le nombre de tours par le pas. Il faut les multiplier." }
+  ]
+},
+{
+  "id": "U43-224", "epreuve": "U43", "theme": "Mécanismes de réglage", "session": "complément", "difficulte": "moyen",
+  "type": "calcul",
+  "question": "Une bague de mise au point a un pas de 0,8 mm. Combien de tours faut-il pour déplacer un tube de 6 mm (au dixième) ?",
+  "reponse": { "valeur": 7.5, "unite": "tours", "decimales": 1, "signe": false },
+  "explication": "Nombre de tours = [[déplacement|pas]] = [[6|0,8]] = 7,5 tours.",
+  "indice": "Divise le déplacement par le pas.",
+  "erreurs": [
+    { "valeur": 4.8, "type": "notion", "message": "Tu as multiplié le déplacement par le pas. Il faut le diviser." }
+  ]
+},
+{
+  "id": "U43-225", "epreuve": "U43", "theme": "Mécanismes de réglage", "session": "complément", "difficulte": "facile",
+  "question": "Quel système transforme la rotation continue d'un arbre en une translation alternative d'un poussoir, selon un profil ?",
+  "choix": ["Came et poussoir", "Vis-écrou", "Engrenage", "Poulie-courroie"],
+  "bonne": 0,
+  "explication": "Une came tourne avec l'arbre, et son profil pousse un poussoir qui monte puis redescend : la rotation devient une translation alternative.",
+  "indice": "Un profil non circulaire pousse une pièce à chaque tour. Quel est le nom de cette pièce ?"
+},
+{
+  "id": "U43-226", "epreuve": "U43", "theme": "Mécanismes de réglage", "session": "complément", "difficulte": "moyen",
+  "type": "calcul",
+  "question": "Un pignon de 20 dents engrène sur une roue de 80 dents. Combien de tours fait la roue quand le pignon en fait 10 (au dixième) ?",
+  "reponse": { "valeur": 2.5, "unite": "tours", "decimales": 1, "signe": false },
+  "explication": "Les dents défilent à la même vitesse : 10 tours × 20 dents = 200 dents, soit [[200|80]] = 2,5 tours de roue. La grande roue tourne plus lentement.",
+  "indice": "Compte le nombre de dents qui passent, puis divise par le nombre de dents de la roue.",
+  "erreurs": [
+    { "valeur": 40, "type": "notion", "message": "Tu as inversé le rapport. La roue, qui a plus de dents, tourne moins que le pignon." }
+  ]
+},
+{
+  "id": "U43-227", "epreuve": "U43", "theme": "Œil et instrument", "session": "complément", "difficulte": "moyen",
+  "type": "calcul",
+  "question": "Un myope a une réfraction de −3,00 δ. À quelle distance devant son œil se trouve son remotum (en cm, au cm près) ?",
+  "reponse": { "valeur": 33, "unite": "cm", "decimales": 0, "signe": false, "tolerance": 0.5 },
+  "explication": "Remotum = [[1|R]] = [[1|3,00]] ≈ 0,333 m ≈ 33 cm devant l'œil.",
+  "indice": "Distance du remotum = [[1|R]] en mètres, puis convertis en cm.",
+  "erreurs": [
+    { "valeur": 0.33, "type": "unite", "message": "0,33 est en mètres. Convertis en centimètres." }
+  ]
+},
+{
+  "id": "U43-228", "epreuve": "U43", "theme": "Œil et instrument", "session": "complément", "difficulte": "difficile",
+  "type": "calcul",
+  "question": "Oculaire de focale 40 mm, l'œil restant à son foyer image. On le règle pour un myope de −2,50 δ, désaccommodé. De combien déplace-t-on l'oculaire par rapport au réglage emmétrope (en mm, au dixième) ?",
+  "reponse": { "valeur": 4, "unite": "mm", "decimales": 1, "signe": false },
+  "explication": "Déplacement = f'² × ∣R∣ = 0,040² × 2,50 = 0,004 m = 4,0 mm.\nPour un myope, on rapproche l'oculaire de l'image intermédiaire.",
+  "indice": "Déplacement = f'² × ∣R∣ avec f' en mètres, puis convertis en mm.",
+  "erreurs": [
+    { "valeur": 4000, "type": "unite", "message": "Tu as gardé f' en millimètres : f'² est alors en mm². Convertis f' en mètres avant de calculer." }
+  ]
+},
+{
+  "id": "U43-229", "epreuve": "U43", "theme": "Œil et instrument", "session": "complément", "difficulte": "facile",
+  "question": "Un myope de −5,00 δ, sans lunettes et sans accommoder, regarde dans un instrument. Où doit se trouver l'image finale pour qu'il la voie nette ?",
+  "choix": ["À 20 cm devant son œil", "À l'infini", "À 5 cm devant son œil", "À 5 m devant son œil"],
+  "bonne": 0,
+  "explication": "L'image finale doit être à son remotum : [[1|5,00]] = 0,20 m = 20 cm devant l'œil.",
+  "indice": "Pour voir sans accommoder, l'image est à son remotum, à [[1|R]] de l'œil."
+},
+{
+  "id": "U43-230", "epreuve": "U43", "theme": "Œil et instrument", "session": "complément", "difficulte": "difficile",
+  "type": "pose",
+  "question": "Un oculaire de focale 25 mm est réglé pour un hypermétrope de +4,00 δ désaccommodé, l'œil restant à son foyer image. Le pas de la bague de réglage est de 0,5 mm. Trouve le déplacement de l'oculaire et le nombre de tours de bague, étape par étape.",
+  "etapes": [
+    {
+      "consigne": "Déplacement de l'oculaire (en mm, au dixième)",
+      "reponse": { "valeur": 2.5, "unite": "mm", "decimales": 1, "signe": false },
+      "aide": "Déplacement = f'² × R, avec f' en mètres. Convertis le résultat en mm.",
+      "ligne": "0,025² × 4,00 = 0,0025 m = 2,5 mm"
+    },
+    {
+      "consigne": "Nombre de tours de bague",
+      "reponse": { "valeur": 5, "unite": "tours", "decimales": 0, "signe": false },
+      "aide": "Nombre de tours = déplacement divisé par le pas.",
+      "ligne": "[[2,5|0,5]] = 5 tours"
+    }
+  ],
+  "explication": "Il faut éloigner l'oculaire de l'image intermédiaire de 2,5 mm, soit 5 tours de bague au pas de 0,5 mm."
+},
+{
+  "id": "U43-231", "epreuve": "U43", "theme": "Vergences et focales", "session": "complément", "difficulte": "facile",
+  "type": "calcul",
+  "question": "Une lentille mince a une distance focale image de −250 mm. Quelle est sa vergence (en δ) ?",
+  "reponse": { "valeur": -4, "unite": "δ", "decimales": 2, "signe": true },
+  "explication": "D = [[1|f']] = [[1|−0,250]] = −4,00 δ. La lentille est divergente.",
+  "indice": "Convertis f' en mètres, puis prends l'inverse. Le signe de f' donne celui de D.",
+  "erreurs": [
+    { "valeur": 4, "type": "signe", "message": "Une focale image négative donne une vergence négative : la lentille est divergente." }
+  ]
+},
+{
+  "id": "U43-232", "epreuve": "U43", "theme": "Vergences et focales", "session": "complément", "difficulte": "moyen",
+  "type": "calcul",
+  "question": "Une lentille plan-convexe d'indice 1,6 a une face courbe de rayon 20 cm (l'autre est plane). Quelle est sa vergence (en δ, au centième) ?",
+  "reponse": { "valeur": 3, "unite": "δ", "decimales": 2, "signe": true },
+  "explication": "D = [[n − 1|R]] = [[0,6|0,20]] = +3,00 δ, avec R en mètres.",
+  "indice": "D = [[n − 1|R]] pour une face courbe et une face plane, R en mètres.",
+  "erreurs": [
+    { "valeur": 0.03, "type": "unite", "message": "Tu as laissé R en centimètres. Il faut le convertir en mètres." }
+  ]
+},
+{
+  "id": "U43-233", "epreuve": "U43", "theme": "Vergences et focales", "session": "complément", "difficulte": "difficile",
+  "question": "Deux lentilles minces de +10,00 δ chacune sont séparées de 5 cm. Quelle est la vergence du système ?",
+  "choix": ["+15,00 δ", "+20,00 δ", "+25,00 δ", "+5,00 δ"],
+  "bonne": 0,
+  "explication": "Formule de Gullstrand : D = D₁ + D₂ − e × D₁ × D₂ avec e en mètres.\nD = 10 + 10 − 0,05 × 10 × 10 = 20 − 5 = +15,00 δ.",
+  "indice": "Quand les lentilles ne sont pas accolées, l'écart e réduit la vergence totale.",
+  "erreurs": {
+    "1": { "type": "notion", "message": "Cette somme vaut pour des lentilles accolées. Ici l'écart de 5 cm diminue la vergence totale." }
+  }
+},
+{
+  "id": "U43-234", "epreuve": "U43", "theme": "Œil astigmate", "session": "complément", "difficulte": "moyen",
+  "question": "Entre les deux focales d'un œil astigmate, la tache de diffusion est un cercle de taille minimale. Comment l'appelle-t-on ?",
+  "choix": ["Le cercle de moindre diffusion", "Le cercle oculaire", "Le remotum", "Le punctum proximum"],
+  "bonne": 0,
+  "explication": "Entre les deux focales, la section du faisceau devient un cercle, le plus petit possible : le cercle de moindre diffusion. C'est là que l'image est la moins floue.",
+  "indice": "La tache la moins étalée est un cercle. Cherche son nom parmi les termes sur la diffusion."
+},
+{
+  "id": "U43-235", "epreuve": "U43", "theme": "Œil astigmate", "session": "complément", "difficulte": "facile",
+  "type": "calcul",
+  "question": "Les deux méridiens d'un œil ont pour réfractions −1,00 δ et −3,50 δ. Quel est son astigmatisme (écart entre les deux, en δ, au centième) ?",
+  "reponse": { "valeur": 2.5, "unite": "δ", "decimales": 2, "signe": false },
+  "explication": "Astigmatisme = écart des deux réfractions : 3,50 − 1,00 = 2,50 δ.",
+  "indice": "Soustrais les deux réfractions et garde la valeur positive.",
+  "erreurs": [
+    { "valeur": 4.5, "type": "notion", "message": "Tu as additionné les deux valeurs. L'astigmatisme est la différence entre les deux méridiens." }
+  ]
+},
+{
+  "id": "U43-236", "epreuve": "U43", "theme": "Grossissement et photo", "session": "complément", "difficulte": "moyen",
+  "type": "calcul",
+  "question": "Un télescope a une focale de 1 200 mm et un oculaire de 10 mm. On ajoute une lentille de Barlow qui double la focale. Quel est le grossissement final ?",
+  "reponse": { "valeur": 240, "unite": "", "decimales": 0, "signe": false },
+  "explication": "La focale devient 2 × 1 200 = 2 400 mm. G = [[2 400|10]] = 240.",
+  "indice": "Le Barlow double la focale du télescope. Calcule G avec la nouvelle focale.",
+  "erreurs": [
+    { "valeur": 120, "type": "notion", "message": "120 est le grossissement sans Barlow. La lentille double la focale, donc le grossissement." }
+  ]
+},
+{
+  "id": "U43-237", "epreuve": "U43", "theme": "Grossissement et photo", "session": "complément", "difficulte": "facile",
+  "type": "calcul",
+  "question": "Un objectif photo de focale 200 mm est ouvert à f/4. Quel est le diamètre de sa pupille d'entrée (en mm) ?",
+  "reponse": { "valeur": 50, "unite": "mm", "decimales": 0, "signe": false },
+  "explication": "N = [[f'|d]], donc d = [[f'|N]] = [[200|4]] = 50 mm.",
+  "indice": "Diamètre de la pupille = focale divisée par le nombre d'ouverture.",
+  "erreurs": [
+    { "valeur": 800, "type": "notion", "message": "Tu as multiplié la focale par le nombre d'ouverture. Le diamètre s'obtient en divisant." }
+  ]
+},
+{
+  "id": "U43-238", "epreuve": "U43", "theme": "Étude des champs", "session": "complément", "difficulte": "moyen",
+  "question": "Quand la lucarne n'est pas dans un plan conjugué de l'objet, que devient le bord du champ ?",
+  "choix": [
+    "Il est dégradé : un champ de contour apparaît",
+    "Il est parfaitement net",
+    "Le champ disparaît",
+    "Le champ devient infini"
+  ],
+  "bonne": 0,
+  "explication": "Si la lucarne n'est pas dans un plan conjugué de l'objet, elle coupe progressivement les faisceaux : l'éclairement diminue peu à peu entre le champ de pleine lumière et le champ total, ce qui donne un bord dégradé.",
+  "indice": "Un diaphragme situé dans un plan image coupe net. S'il en est éloigné, comment coupe-t-il les faisceaux ?"
+},
+{
+  "id": "U43-239", "epreuve": "U43", "theme": "Étude des champs", "session": "complément", "difficulte": "difficile",
+  "type": "calcul",
+  "question": "Une lunette afocale a un grossissement de 10. Le demi-champ côté objet est de 4,5°. Quel est le demi-champ côté image, vu par l'œil (en °, au dixième) ?",
+  "reponse": { "valeur": 38.2, "unite": "°", "decimales": 1, "signe": false, "tolerance": 0.1 },
+  "explication": "Pour une lunette afocale : tan θ' = G × tan θ.\ntan θ' = 10 × tan 4,5° = 10 × 0,0787 = 0,787\nθ' = arctan(0,787) ≈ 38,2°",
+  "indice": "G relie les tangentes des angles : tan θ' = G × tan θ.",
+  "erreurs": [
+    { "valeur": 45, "type": "notion", "message": "Tu as multiplié les angles. Le grossissement s'applique aux tangentes des angles." }
+  ]
 }
 );
