@@ -104,8 +104,18 @@ const ui = {
     dedans.hidden = !connecte;
     const qui = document.getElementById("compte-qui");
     if (qui && utilisateur) qui.textContent = utilisateur.email || "ton compte";
+    ui.sauvegarde(connecte);
+  },
+  // La ligne sous les chiffres du profil : où est gardée la progression
+  sauvegarde(connecte) {
+    const texte = document.getElementById("profil-sauvegarde-texte"), lien = document.getElementById("profil-sauvegarde-lien");
+    if (!texte || !lien) return;
+    texte.textContent = connecte ? "Sauvegardé en ligne : tu retrouves tout sur tes autres appareils." : "Tes réponses restent sur cet appareil.";
+    lien.hidden = connecte;
   }
 };
+// Avant que la connexion réponde : ce navigateur était-il synchronisé ? (évite d'afficher « sur cet appareil » à tort)
+ui.sauvegarde(!!lireTexte("compte-uid"));
 
 const icone = ajouterIcone();
 
@@ -255,6 +265,7 @@ async function demarrer() {
     if (icone) icone.classList.toggle("connecte", !!u);
     ui.montrer(!!u, u);
     if (u) {
+      ecrireTexte("compte-connu", "1");      // ce navigateur s'est déjà connecté : le formulaire s'ouvrira sur « J'ai un compte »
       ui.etat("Synchronisation…");
       try {
         await synchroniser();
@@ -284,6 +295,7 @@ async function demarrer() {
   if (bDeconnexion) bDeconnexion.addEventListener("click", async () => {
     await A.signOut(auth);
     ecrireTexte("compte-uid", null);
+    ui.sauvegarde(false);
     ui.etat("Tu es déconnecté. Ta progression reste gardée dans ce navigateur.");
   });
 
@@ -321,7 +333,11 @@ async function demarrer() {
     };
     document.getElementById("onglet-connexion").onclick = () => choisirOnglet(false);
     document.getElementById("onglet-inscription").onclick = () => choisirOnglet(true);
-    if (location.hash === "#creer-compte") choisirOnglet(true);   // venu de « Créer mon compte » (accueil, bilan)
+    // « Créer un compte » d'abord : venu de « Créer mon compte » (accueil, bilan, carte du profil),
+    // ou navigateur qui ne s'est jamais connecté. Sinon « J'ai un compte ».
+    if (location.hash === "#creer-compte" || lireTexte("compte-connu") !== "1") choisirOnglet(true);
+    const lienProfil = document.getElementById("profil-sauvegarde-lien");
+    if (lienProfil) lienProfil.addEventListener("click", () => choisirOnglet(true));
     document.getElementById("voir-mdp").onclick = () => {
       const visible = champMdp.type === "text";
       champMdp.type = visible ? "password" : "text";

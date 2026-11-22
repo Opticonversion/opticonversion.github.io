@@ -2494,3 +2494,11 @@ button.atc-onglet { min-height: 32px; cursor: pointer; }
 .sur-la-copie-invite { margin-bottom: 6px !important; color: var(--doux); font-size: 0.86rem; }
 .sur-la-copie-ligne { color: var(--texte); line-height: 1.55; }
 .sur-la-copie-ligne + .sur-la-copie-ligne { margin-top: 2px; }
+
+/* Profil : où est gardée la progression, avec le chemin vers la création du compte (compte.js, ui.sauvegarde) */
+.profil-sauvegarde { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 18px; margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--bord); }
+.profil-sauvegarde p { margin: 0; color: var(--doux); flex: 1 1 14em; }
+.profil-sauvegarde .bouton { flex: none; margin-top: 0; }
+.profil-sauvegarde .bouton[hidden] { display: none; }
+@media (max-width: 480px) { .profil-sauvegarde .bouton { flex: 1 1 100%; justify-content: center; text-align: center; padding-inline: 14px; white-space: nowrap; } }
+#creer-compte { scroll-margin-top: 84px; }

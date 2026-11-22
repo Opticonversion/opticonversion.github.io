@@ -22,6 +22,7 @@ const Coffre = (() => {
     "profil":               { efface: true,  synchro: true, quoi: "pseudo, année, personnage (profil)" },
     "attente":              { efface: true,  quoi: "changements pas encore envoyés en ligne" },
     "compte-uid":           { efface: true,  quoi: "compte avec lequel ce navigateur s'est synchronisé en dernier" },
+    "compte-connu":         { efface: true,  quoi: "ce navigateur s'est déjà connecté à un compte (formulaire sur « J'ai un compte »)" },
     "jours":                { efface: true,  quoi: "réponses données chaque jour (série de jours)" },
     "objectif":             { efface: true,  quoi: "objectif du jour (5, 10 ou 20)" },
     "objectif-choisi-le":   { efface: true,  quoi: "jour où l'objectif a été choisi" },
