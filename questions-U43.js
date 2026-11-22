@@ -2908,5 +2908,234 @@ QUESTIONS.push(
   "bonne": 0,
   "explication": "Le diamètre du cercle oculaire vaut le diamètre de l'objectif divisé par le grossissement. L'objectif ne change pas, le grossissement double : le cercle oculaire est divisé par 2.",
   "indice": "Diamètre du cercle oculaire = diamètre de l'objectif divisé par le grossissement."
+},
+{
+  "id": "U43-262", "epreuve": "U43", "theme": "Aberrations", "session": "complément", "difficulte": "facile",
+  "question": "Dans une lentille simple, les rayons qui passent près du bord convergent plus près de la lentille que ceux qui passent près de l'axe. Quelle aberration est en cause ?",
+  "choix": ["L'aberration sphérique", "L'aberration chromatique", "La coma", "La distorsion"],
+  "bonne": 0,
+  "explication": "Les rayons marginaux sont trop déviés : leur foyer est plus proche de la lentille que celui des rayons paraxiaux. C'est l'aberration sphérique : un point donne une tache.",
+  "indice": "L'aberration dépend ici de la distance du rayon à l'axe, pas de sa couleur."
+},
+{
+  "id": "U43-263", "epreuve": "U43", "theme": "Aberrations", "session": "complément", "difficulte": "facile",
+  "question": "Une lentille simple donne, sur les bords d'une image en lumière blanche, de fines franges colorées. Quelle aberration est en cause ?",
+  "choix": ["L'aberration chromatique", "L'aberration sphérique", "La distorsion", "La courbure de champ"],
+  "bonne": 0,
+  "explication": "L'indice du verre dépend de la longueur d'onde : chaque couleur est déviée différemment et a son propre foyer. C'est l'aberration chromatique.",
+  "indice": "Des couleurs qui se séparent signalent une dépendance à la longueur d'onde."
+},
+{
+  "id": "U43-264", "epreuve": "U43", "theme": "Aberrations", "session": "complément", "difficulte": "moyen",
+  "question": "Comment corrige-t-on l'aberration chromatique d'une lentille ?",
+  "choix": [
+    "Avec un doublet achromatique associant un verre crown et un verre flint",
+    "En fermant très fort le diaphragme seulement",
+    "En utilisant une lentille plus épaisse",
+    "En éclairant avec une lumière plus intense"
+  ],
+  "bonne": 0,
+  "explication": "Un verre convergent crown et un verre divergent flint, de dispersions différentes, compensent leurs aberrations chromatiques tout en gardant une vergence totale convergente : c'est le doublet achromatique.",
+  "indice": "On associe deux verres dont les dispersions se compensent."
+},
+{
+  "id": "U43-265", "epreuve": "U43", "theme": "Aberrations", "session": "complément", "difficulte": "moyen",
+  "question": "Une photo d'un mur de briques montre des lignes droites courbées vers l'extérieur, alors que l'image reste nette. Quelle aberration est en cause ?",
+  "choix": ["La distorsion", "L'aberration sphérique", "L'aberration chromatique", "La coma"],
+  "bonne": 0,
+  "explication": "La distorsion déforme l'image, car le grandissement varie avec la distance à l'axe, mais elle ne la rend pas floue. Les lignes droites deviennent courbes.",
+  "indice": "L'image est nette mais déformée. Quelle aberration ne fait que déformer ?"
+},
+{
+  "id": "U43-266", "epreuve": "U43", "theme": "Aberrations", "session": "complément", "difficulte": "moyen",
+  "question": "Un point lumineux situé hors de l'axe donne une tache en forme de comète. Quelle aberration est en cause ?",
+  "choix": ["La coma", "L'aberration sphérique", "La distorsion", "L'aberration chromatique"],
+  "bonne": 0,
+  "explication": "La coma affecte les points hors de l'axe : la tache s'étire en forme de comète.",
+  "indice": "Le nom de l'aberration rappelle la forme de la tache."
+},
+{
+  "id": "U43-267", "epreuve": "U43", "theme": "Aberrations", "session": "complément", "difficulte": "difficile",
+  "type": "calcul",
+  "question": "Un verre a pour indices nd = 1,523 (raie d), nF = 1,529 et nC = 1,520. Quel est son nombre d'Abbe V = (nd − 1) / (nF − nC) (au dixième) ?",
+  "reponse": { "valeur": 58.1, "unite": "", "decimales": 1, "signe": false, "tolerance": 0.1 },
+  "explication": "V = [[nd − 1|nF − nC]] = [[0,523|0,009]] ≈ 58,1.\nPlus V est grand, moins le verre disperse la lumière.",
+  "indice": "Calcule le numérateur et le dénominateur séparément avant de diviser.",
+  "erreurs": [
+    { "valeur": 0.0172, "type": "notion", "message": "Tu as inversé la fraction. Le nombre d'Abbe est (nd − 1) divisé par (nF − nC)." }
+  ]
+},
+{
+  "id": "U43-268", "epreuve": "U43", "theme": "Vergences et focales", "session": "complément", "difficulte": "facile",
+  "type": "calcul",
+  "question": "Un miroir sphérique concave a un rayon de courbure de 600 mm. Quelle est sa distance focale (en valeur absolue, en mm) ?",
+  "reponse": { "valeur": 300, "unite": "mm", "decimales": 0, "signe": false },
+  "explication": "Pour un miroir sphérique, le foyer est au milieu entre le sommet et le centre de courbure : ∣f∣ = [[R|2]] = [[600|2]] = 300 mm.",
+  "indice": "Le foyer d'un miroir sphérique est au milieu du rayon.",
+  "erreurs": [
+    { "valeur": 1200, "type": "notion", "message": "Tu as doublé le rayon. La focale d'un miroir est la moitié du rayon de courbure." }
+  ]
+},
+{
+  "id": "U43-269", "epreuve": "U43", "theme": "Vergences et focales", "session": "complément", "difficulte": "moyen",
+  "question": "Pourquoi les grands télescopes utilisent-ils un miroir comme objectif plutôt qu'une lentille ?",
+  "choix": [
+    "Un miroir n'a pas d'aberration chromatique et peut être soutenu par l'arrière",
+    "Un miroir grossit plus qu'une lentille",
+    "Un miroir ne forme jamais d'aberration",
+    "Une lentille ne peut pas former d'image réelle"
+  ],
+  "bonne": 0,
+  "explication": "La réflexion ne dépend pas de la longueur d'onde : pas d'aberration chromatique. De plus, un grand miroir peut être maintenu par toute sa face arrière, alors qu'une grande lentille ne peut être tenue que par les bords et se déforme.",
+  "indice": "Pense à la couleur de la lumière, et à la façon de tenir un grand objet optique."
+},
+{
+  "id": "U43-270", "epreuve": "U43", "theme": "Grossissement et photo", "session": "complément", "difficulte": "facile",
+  "type": "calcul",
+  "question": "Un télescope de Newton a un miroir de focale 900 mm et un oculaire de 25 mm. Quel est son grossissement ?",
+  "reponse": { "valeur": 36, "unite": "", "decimales": 0, "signe": false },
+  "explication": "G = [[f'ob|f'oc]] = [[900|25]] = 36.",
+  "indice": "G = focale de l'objectif divisée par la focale de l'oculaire.",
+  "erreurs": [
+    { "valeur": 22500, "type": "notion", "message": "Tu as multiplié les focales. Le grossissement est leur rapport." }
+  ]
+},
+{
+  "id": "U43-271", "epreuve": "U43", "theme": "Chaîne des conjugués", "session": "complément", "difficulte": "facile",
+  "question": "Dans un télescope de Newton, à quoi sert le petit miroir plan incliné à 45° ?",
+  "choix": [
+    "À dévier le faisceau vers un oculaire placé sur le côté du tube",
+    "À grossir l'image",
+    "À corriger l'aberration chromatique",
+    "À agrandir le champ de l'oculaire"
+  ],
+  "bonne": 0,
+  "explication": "Le miroir plan renvoie le faisceau convergent du grand miroir vers le côté du tube, où l'observateur peut placer l'oculaire sans gêner l'entrée de la lumière.",
+  "indice": "Où l'observateur placerait-il sa tête si le foyer restait sur l'axe, au milieu du tube ?"
+},
+{
+  "id": "U43-272", "epreuve": "U43", "theme": "Chaîne des conjugués", "session": "complément", "difficulte": "moyen",
+  "type": "calcul",
+  "question": "Un objet est placé au centre de courbure d'un miroir concave de rayon 600 mm. À quelle distance du miroir se forme son image (en mm) ?",
+  "reponse": { "valeur": 600, "unite": "mm", "decimales": 0, "signe": false },
+  "explication": "Un point situé au centre de courbure d'un miroir sphérique est son propre conjugué : l'image se forme au même endroit, à 600 mm du miroir (renversée, de même taille).",
+  "indice": "Les rayons issus du centre de courbure arrivent perpendiculaires au miroir et reviennent sur eux-mêmes.",
+  "erreurs": [
+    { "valeur": 300, "type": "notion", "message": "300 mm est la focale. Un objet au centre de courbure donne une image au centre de courbure." }
+  ]
+},
+{
+  "id": "U43-273", "epreuve": "U43", "theme": "Œil et instrument", "session": "complément", "difficulte": "moyen",
+  "question": "Un emmétrope presbyte, qui n'accommode plus du tout, regarde dans un microscope sans lunettes. Où l'image finale doit-elle se trouver pour qu'il la voie nette ?",
+  "choix": ["À l'infini", "À 25 cm devant l'œil", "À 10 cm devant l'œil", "Au foyer de l'oculaire"],
+  "bonne": 0,
+  "explication": "Son remotum est à l'infini et il n'accommode plus : seule une image à l'infini est nette pour lui.",
+  "indice": "Sans accommodation, l'œil emmétrope voit net à une seule distance. Laquelle ?"
+},
+{
+  "id": "U43-274", "epreuve": "U43", "theme": "Œil et instrument", "session": "complément", "difficulte": "moyen",
+  "type": "calcul",
+  "question": "L'œil réduit emmétrope a une vergence de 60 δ. Quelle distance sépare son centre optique de la rétine (en mm, au dixième) ?",
+  "reponse": { "valeur": 16.7, "unite": "mm", "decimales": 1, "signe": false, "tolerance": 0.1 },
+  "explication": "Œil emmétrope désaccommodé : la rétine est au foyer image.\nf' = [[1|60]] ≈ 0,0167 m = 16,7 mm.",
+  "indice": "Un emmétrope désaccommodé a sa rétine au foyer image de l'œil réduit.",
+  "erreurs": [
+    { "valeur": 0.0167, "type": "unite", "message": "0,0167 est en mètres. Convertis en millimètres." }
+  ]
+},
+{
+  "id": "U43-275", "epreuve": "U43", "theme": "Œil et instrument", "session": "complément", "difficulte": "difficile",
+  "type": "calcul",
+  "question": "Un œil réduit a une vergence de 60 δ et une longueur de 17,5 mm (centre optique à la rétine). Quelle est sa réfraction (en δ, au centième) ?",
+  "reponse": { "valeur": -2.86, "unite": "δ", "decimales": 2, "signe": true },
+  "explication": "La rétine est conjuguée du remotum : [[1|0,0175]] = 60 + R, avec R la vergence du remotum.\n57,14 = 60 + R donc R ≈ −2,86 δ.\nL'œil est myope : il est trop long.",
+  "indice": "Compare [[1|longueur]] à la vergence de 60 δ : l'œil est-il trop long ou trop court ?",
+  "erreurs": [
+    { "valeur": 2.86, "type": "signe", "message": "L'œil est plus long qu'un œil emmétrope : il est myope, donc sa réfraction est négative." }
+  ]
+},
+{
+  "id": "U43-276", "epreuve": "U43", "theme": "Œil et instrument", "session": "complément", "difficulte": "difficile",
+  "type": "calcul",
+  "question": "Un hypermétrope de +2,00 δ a une amplitude d'accommodation de 5,00 δ. À quelle distance minimale peut-il voir net, sans lunettes (en cm, au cm près) ?",
+  "reponse": { "valeur": 33, "unite": "cm", "decimales": 0, "signe": false, "tolerance": 0.5 },
+  "explication": "Pour voir à l'infini, il doit déjà accommoder de 2,00 δ. Il lui reste 5,00 − 2,00 = 3,00 δ pour se rapprocher.\nDistance minimale = [[1|3,00]] ≈ 0,33 m ≈ 33 cm.",
+  "indice": "Une partie de son amplitude sert déjà à compenser l'hypermétropie.",
+  "erreurs": [
+    { "valeur": 20, "type": "notion", "message": "Tu as utilisé toute l'amplitude de 5,00 δ. Une partie sert déjà à compenser l'hypermétropie." }
+  ]
+},
+{
+  "id": "U43-277", "epreuve": "U43", "theme": "Frontofocomètre", "session": "complément", "difficulte": "facile",
+  "type": "calcul",
+  "question": "Un prisme de 2 Δ dévie un rayon lumineux. De combien (en cm) le rayon est-il dévié à 1 m du prisme ?",
+  "reponse": { "valeur": 2, "unite": "cm", "decimales": 0, "signe": false },
+  "explication": "Une dioptrie prismatique (1 Δ) correspond à une déviation de 1 cm à 1 m. Un prisme de 2 Δ dévie le rayon de 2 cm à 1 m.",
+  "indice": "Par définition, 1 Δ dévie de 1 cm à 1 m.",
+  "erreurs": [
+    { "valeur": 200, "type": "unite", "message": "Tu as converti de travers : à 1 m, 1 Δ correspond à 1 cm de déviation." }
+  ]
+},
+{
+  "id": "U43-278", "epreuve": "U43", "theme": "Skiascopie", "session": "complément", "difficulte": "moyen",
+  "question": "Pourquoi réalise-t-on souvent la skiascopie d'un enfant sous cycloplégique ?",
+  "choix": [
+    "Pour supprimer son accommodation, qui fausserait la mesure",
+    "Pour agrandir sa pupille afin d'éclairer davantage",
+    "Pour rendre l'œil plus myope",
+    "Pour éviter qu'il cligne des yeux"
+  ],
+  "bonne": 0,
+  "explication": "Un enfant accommode beaucoup, ce qui masquerait une hypermétropie. Le cycloplégique paralyse le muscle ciliaire : l'accommodation est supprimée et la mesure donne la réfraction réelle.",
+  "indice": "Quel muscle perturbe la mesure, surtout chez l'enfant ?"
+},
+{
+  "id": "U43-279", "epreuve": "U43", "theme": "Liaisons mécaniques", "session": "complément", "difficulte": "facile",
+  "question": "Combien de degrés de liberté une liaison pivot laisse-t-elle entre deux pièces ?",
+  "choix": ["Un", "Deux", "Trois", "Aucun"],
+  "bonne": 0,
+  "explication": "Un pivot n'autorise que la rotation autour de son axe : un seul degré de liberté.",
+  "indice": "Compte les mouvements possibles de la pièce mobile."
+},
+{
+  "id": "U43-280", "epreuve": "U43", "theme": "Mécanismes de réglage", "session": "complément", "difficulte": "moyen",
+  "type": "calcul",
+  "question": "Une poulie de 20 mm de diamètre, entraînée à 300 tours par minute, entraîne par courroie une poulie de 60 mm. Quelle est la vitesse de la grande poulie (en tours par minute) ?",
+  "reponse": { "valeur": 100, "unite": "tr/min", "decimales": 0, "signe": false },
+  "explication": "La courroie avance à la même vitesse sur les deux poulies : 300 × 20 = N × 60.\nN = [[300 × 20|60]] = 100 tr/min. La grande poulie tourne plus lentement.",
+  "indice": "Le produit vitesse × diamètre est le même pour les deux poulies.",
+  "erreurs": [
+    { "valeur": 900, "type": "notion", "message": "Tu as inversé le rapport. La poulie la plus grande tourne moins vite." }
+  ]
+},
+{
+  "id": "U43-281", "epreuve": "U43", "theme": "Étude des champs", "session": "complément", "difficulte": "facile",
+  "question": "Quel est l'éclairement relatif au bord du champ de pleine lumière ?",
+  "choix": ["100 %", "50 %", "25 %", "0 %"],
+  "bonne": 0,
+  "explication": "Dans le champ de pleine lumière, tout le faisceau passe : l'éclairement est maximal, 100 %, jusqu'au bord de ce champ. Il décroît ensuite dans le champ de contour jusqu'à 0 % au bord du champ total.",
+  "indice": "Dans le champ de pleine lumière, quelle part du faisceau est coupée ?"
+},
+{
+  "id": "U43-282", "epreuve": "U43", "theme": "Grossissement et photo", "session": "complément", "difficulte": "moyen",
+  "type": "calcul",
+  "question": "Une lunette de Galilée a un objectif de focale +300 mm et un oculaire de focale −30 mm. Quel est son grossissement algébrique ?",
+  "reponse": { "valeur": 10, "unite": "", "decimales": 0, "signe": true },
+  "explication": "G = −[[f'ob|f'oc]] = −[[300|−30]] = +10.\nLe grossissement est positif : l'image est droite.",
+  "indice": "Le signe de G donne le sens de l'image. Un oculaire divergent donne une image droite.",
+  "erreurs": [
+    { "valeur": -10, "type": "signe", "message": "Avec un oculaire divergent, l'image est droite : le grossissement est positif." }
+  ]
+},
+{
+  "id": "U43-283", "epreuve": "U43", "theme": "Vergences et focales", "session": "complément", "difficulte": "moyen",
+  "type": "calcul",
+  "question": "Une lentille biconvexe symétrique, d'indice 1,5, a deux faces de rayon 10 cm. Quelle est sa vergence (en δ) ?",
+  "reponse": { "valeur": 10, "unite": "δ", "decimales": 0, "signe": true },
+  "explication": "D = (n − 1) × ([[1|R₁]] − [[1|R₂]]) avec R₁ = +0,10 m et R₂ = −0,10 m.\nD = 0,5 × (10 + 10) = +10 δ.",
+  "indice": "Chaque face apporte sa vergence : additionne l'effet des deux faces.",
+  "erreurs": [
+    { "valeur": 5, "type": "notion", "message": "Tu n'as compté qu'une seule face. La lentille a deux faces courbes, qui s'ajoutent." }
+  ]
 }
 );
