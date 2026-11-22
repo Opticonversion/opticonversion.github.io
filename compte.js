@@ -49,7 +49,26 @@ const AVATARS = [
   { id: "hibou", nom: "Archibald" },
   { id: "panda", nom: "Bambou" },
   { id: "lapin", nom: "Pompon" },
-  { id: "grenouille", nom: "Kiwi" }
+  { id: "grenouille", nom: "Kiwi" },
+  { id: "chien", nom: "Biscuit" },
+  { id: "koala", nom: "Margot" },
+  { id: "pingouin", nom: "Gaston" },
+  { id: "tigre", nom: "Paprika" },
+  { id: "lion", nom: "Léon" },
+  { id: "elephant", nom: "Ella" },
+  { id: "girafe", nom: "Zou" },
+  { id: "singe", nom: "Coco" },
+  { id: "souris", nom: "Mimi" },
+  { id: "herisson", nom: "Piquant" },
+  { id: "loup", nom: "Lou" },
+  { id: "raton", nom: "Filou" },
+  { id: "mouton", nom: "Flocon" },
+  { id: "cochon", nom: "Rosie" },
+  { id: "vache", nom: "Praline" },
+  { id: "ecureuil", nom: "Noisette" },
+  { id: "poussin", nom: "Piou" },
+  { id: "alpaga", nom: "Pelote" },
+  { id: "paresseux", nom: "Zen" }
 ];
 // Les expressions de DioSL (choqué, pensif, ravi, sérieux) ne se choisissent plus comme personnage :
 // elles servent aux réactions. Un ancien choix de l'une d'elles, ou d'un personnage retiré

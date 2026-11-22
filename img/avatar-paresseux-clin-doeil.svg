@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 440" width="800" height="880">
+  <path d="M55 440 Q60 345 200 330 Q340 345 345 440 Z" fill="#6b7a2e" stroke="#d9b26f" stroke-width="5" stroke-linejoin="round"/>
+  <path d="M140 336 Q200 368 260 336" fill="none" stroke="#d9b26f" stroke-width="10" stroke-linecap="round"/>
+  <ellipse cx="200" cy="214" rx="144" ry="134" fill="#a88660"/>
+  <ellipse cx="200" cy="230" rx="118" ry="92" fill="#e8d4b0"/><path d="M106 196 Q140 186 176 214 Q162 240 134 236 Q108 228 106 196 Z M294 196 Q260 186 224 214 Q238 240 266 236 Q292 228 294 196 Z" fill="#5a3e24"/><path d="M150 110 Q200 96 250 110" stroke="#8a6a46" stroke-width="6" fill="none" stroke-linecap="round"/><circle cx="150" cy="210" r="18" fill="#f4ecdc"/><circle cx="250" cy="210" r="18" fill="#5a3e24"/>
+  <circle cx="150" cy="210" r="12" fill="#1c120a"/>
+  <path d="M236 213 Q250 200 264 213" stroke="#1c120a" stroke-width="6" fill="none" stroke-linecap="round"/>
+  <circle cx="155" cy="204" r="4.3" fill="#fff"/>
+  
+  <ellipse cx="110" cy="268" rx="20" ry="12" fill="#f29a8e" opacity="0.5"/>
+  <ellipse cx="290" cy="268" rx="20" ry="12" fill="#f29a8e" opacity="0.5"/>
+  <polygon points="106 210 128 174 172 174 194 210 172 246 128 246" fill="#fff" fill-opacity="0.14" stroke="#c4b088" stroke-width="7" stroke-linejoin="round"/>
+  <polygon points="206 210 228 174 272 174 294 210 272 246 228 246" fill="#fff" fill-opacity="0.14" stroke="#c4b088" stroke-width="7" stroke-linejoin="round"/>
+  <path d="M194 206 Q200 198 206 206" fill="none" stroke="#c4b088" stroke-width="7" stroke-linecap="round"/>
+  <path d="M106 206 L66 196 M294 206 L334 196" stroke="#c4b088" stroke-width="7" stroke-linecap="round"/>
+  <path d="M124 222 L140 204" stroke="#fff" stroke-opacity="0.6" stroke-width="5" stroke-linecap="round"/>
+  <path d="M224 222 L240 204" stroke="#fff" stroke-opacity="0.6" stroke-width="5" stroke-linecap="round"/>
+  <ellipse cx="200" cy="262" rx="16" ry="11" fill="#2a1a10"/>
+  <path d="M176 290 Q188 304 200 288 Q212 304 224 290" stroke="#3a2616" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+
+</svg>

@@ -1834,7 +1834,7 @@ main.en-jeu .tete-page { display: none; }
 .profil-form { display: grid; grid-template-columns: minmax(0, 1fr); gap: 6px; }
 .profil-form label, .profil-form .label { color: var(--doux); font-size: 0.9rem; margin-top: 8px; }
 .profil-form input, .profil-form select { width: 100%; max-width: 380px; margin-top: 0; }
-.choix-avatar { display: grid; grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); gap: 14px 8px; max-width: 580px; }
+.choix-avatar { display: grid; grid-template-columns: repeat(auto-fill, minmax(72px, 1fr)); gap: 14px 8px; max-width: 580px; }
 .choix-avatar button { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 0; background: none; border: 0; cursor: pointer; color: var(--doux); font: inherit; font-size: 0.8rem; }
 .choix-avatar .rond { width: 68px; height: 68px; border-radius: 50%; overflow: hidden; background: rgba(255, 255, 255, 0.04); border: 2px solid var(--bord-fort); transition: border-color var(--vite), transform 320ms var(--sortie), box-shadow var(--vite); }
 .choix-avatar .rond img { width: 100%; height: 100%; object-fit: cover; object-position: center 20%; display: block; }
