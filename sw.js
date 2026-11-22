@@ -13,7 +13,7 @@
 // =====================================================================
 
 // <versionner> (partie écrite par versionner.py, ne pas modifier à la main)
-const VERSION = "ba4ff63c25";
+const VERSION = "d504d1eebf";
 const FICHIERS = [
   "appli.js?v=0724163c",
   "atelier-calculatrice.js?v=6e07c21a",
@@ -23,7 +23,7 @@ const FICHIERS = [
   "catalogue.js?v=2ee1a49e",
   "coffre.js?v=cc59b959",
   "compte.html",
-  "compte.js?v=4d73900c",
+  "compte.js?v=c05b4182",
   "compter.js?v=234d3f31",
   "confidentialite.html",
   "definitions-U3.js?v=9c9ef1e8",
@@ -282,7 +282,7 @@ const FICHIERS = [
   "specificites-U42.js?v=c76c29e7",
   "specificites-U43.js?v=523c07db",
   "specificites-U5.js?v=43533990",
-  "style.css?v=f18a0510",
+  "style.css?v=7d2c08a3",
   "traces-U42.js?v=6b6df119",
   "traces-U43.js?v=77abc155",
   "traces-U5.js?v=6c873d8a",

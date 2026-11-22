@@ -92,6 +92,15 @@ function majIcone(a) {
     a.classList.remove("avec-avatar");
   }
   a.title = p.pseudo ? "Profil de " + p.pseudo : "Mon profil";
+  // À côté de l'image, dans la barre du haut : « Créer ton compte », ou « Connecté : pseudo ».
+  // Avant la réponse de la connexion, compte-uid dit si ce navigateur était connecté.
+  const connecte = a.dataset.connecte ? a.dataset.connecte === "oui" : !!lireTexte("compte-uid");
+  const texte = document.createElement("span");
+  texte.className = "lien-compte-texte";
+  texte.textContent = connecte ? (p.pseudo ? "Connecté : " + p.pseudo : "Connecté") : "Créer ton compte";
+  a.appendChild(texte);
+  a.classList.add("avec-texte");
+  a.setAttribute("aria-label", connecte ? "Mon profil, " + texte.textContent : "Mon profil : créer ton compte");
 }
 // ---------- Ce que la page compte.html affiche ----------
 const ui = {
@@ -262,7 +271,7 @@ async function demarrer() {
 
   A.onAuthStateChanged(auth, async u => {
     utilisateur = u;
-    if (icone) icone.classList.toggle("connecte", !!u);
+    if (icone) { icone.classList.toggle("connecte", !!u); icone.dataset.connecte = u ? "oui" : "non"; majIcone(icone); }
     ui.montrer(!!u, u);
     if (u) {
       ecrireTexte("compte-connu", "1");      // ce navigateur s'est déjà connecté : le formulaire s'ouvrira sur « J'ai un compte »

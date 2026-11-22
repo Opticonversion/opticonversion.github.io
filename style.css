@@ -177,6 +177,17 @@ nav a.lien-compte img { width: 36px; height: 36px; border-radius: 50%; object-fi
 nav a.lien-compte.avec-avatar { width: 44px; height: 44px; min-height: 0; padding: 4px; border-radius: 50%; }
 nav a.lien-compte.connecte::after { content: ""; position: absolute; top: 3px; right: 3px; width: 8px; height: 8px; border-radius: 50%; background: var(--or); box-shadow: 0 0 0 2px var(--fond); }
 .entete nav a.lien-compte.actif { color: var(--or); background: transparent; outline: 2px solid var(--or); outline-offset: 0; }
+/* À côté de l'image : « Créer ton compte » ou « Connecté : pseudo » (compte.js, majIcone) */
+nav a.lien-compte.avec-texte, nav a.lien-compte.avec-texte.avec-avatar { width: auto; gap: 8px; padding: 4px 14px 4px 4px; border-radius: 999px; }
+nav a.lien-compte.avec-texte:not(.avec-avatar) { padding-left: 10px; }
+.lien-compte-texte { max-width: 11em; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 0.88rem; }
+nav a.lien-compte.avec-texte:not(.connecte) .lien-compte-texte { color: var(--or-clair); font-weight: 700; }
+nav a.lien-compte.avec-texte.connecte::after { content: none; }
+@media (min-width: 721px) and (max-width: 960px) {
+  .entete nav a:not(.lien-compte) { padding: 6px 9px; }
+  .lien-compte-texte { max-width: 6.6em; font-size: 0.74rem; line-height: 1.15; white-space: normal; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow-wrap: anywhere; }
+  nav a.lien-compte.avec-texte, nav a.lien-compte.avec-texte.avec-avatar { gap: 6px; padding-right: 10px; }
+}
 .compte-revoir { display: inline-grid; place-items: center; min-width: 19px; height: 19px; padding: 0 5px; margin-left: 6px; border-radius: 999px; font-size: 0.72rem; font-weight: 800; color: var(--encre); background: var(--or); font-variant-numeric: tabular-nums; }
 nav a.actif .compte-revoir { background: var(--encre); color: var(--or); }
 
@@ -212,6 +223,14 @@ nav a.actif .compte-revoir { background: var(--encre); color: var(--or); }
   .entete nav a.lien-compte::before { content: none; }
   .entete nav a.lien-compte svg { width: 22px; height: 22px; }
   .entete nav a.lien-compte img { width: 36px; height: 36px; }
+  .entete nav a.lien-compte.avec-texte, .entete nav a.lien-compte.avec-texte.avec-avatar { width: auto; max-width: calc(100vw - 230px); padding: 4px 14px 4px 4px; border-radius: 999px; }
+  .entete nav a.lien-compte.avec-texte:not(.avec-avatar) { padding-left: 11px; }
+  .entete nav a.lien-compte .lien-compte-texte { font-size: 0.82rem; }
+}
+/* Petit téléphone : le texte du profil passe sur deux lignes pour tenir à côté du logo */
+@media (max-width: 420px) {
+  .entete nav a.lien-compte.avec-texte, .entete nav a.lien-compte.avec-texte.avec-avatar { max-width: calc(100vw - 214px); gap: 5px; padding-right: 9px; }
+  .entete nav a.lien-compte .lien-compte-texte { font-size: 0.72rem; line-height: 1.15; white-space: normal; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow-wrap: anywhere; }
 }
 
 /* Pendant un niveau de l'Atelier, au téléphone : la barre d'onglets se range (« Les niveaux » ramène à la liste),
