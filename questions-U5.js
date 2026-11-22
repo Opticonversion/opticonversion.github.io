@@ -2237,6 +2237,620 @@ QUESTIONS.push(
     bonne: 0,
     explication: "Une lentille souple fait environ 14 mm de diamètre : elle recouvre la cornée et déborde un peu sur la sclère. Une lentille rigide est plus petite, 9 à 10 mm : elle repose sur la cornée seule et bouge à chaque clignement.",
     indice: "La souple recouvre toute la cornée. Laquelle est donc la plus grande ?"
+  },
+  // ---------- Lot 3 du 22 nov. : presbytie, réfraction, vision binoculaire, pathologie ----------
+  {
+    id: "U5-264", epreuve: "U5", theme: "Examen préliminaire", session: "2018",
+    difficulte: "difficile",
+    type: "pose",
+    question: "Un presbyte emmétrope a 1,50 δ d'amplitude d'accommodation. En vision de près, on lui met une addition de +1,50. Calcule, étape par étape, entre quelles distances il voit net avec ses verres de près.",
+    etapes: [
+      {
+        consigne: "Distance du remotum avec l'addition (en cm)",
+        reponse: { valeur: 66.7, unite: "cm", decimales: 1, signe: false, tolerance: 0.5 },
+        aide: "Sans accommoder, l'œil voit net l'objet dont le verre de près donne une image à l'infini : sa proximité vaut l'addition.",
+        ligne: "Proximité du remotum = +1,50 δ\nDistance = [[1|1,50]] ≈ 0,667 m = 66,7 cm"
+      },
+      {
+        consigne: "Distance du proximum avec l'addition (en cm)",
+        reponse: { valeur: 33.3, unite: "cm", decimales: 1, signe: false, tolerance: 0.5 },
+        aide: "À l'accommodation maximale, la proximité du proximum vaut l'addition plus l'amplitude.",
+        ligne: "Proximité du proximum = 1,50 + 1,50 = 3,00 δ\nDistance = [[1|3,00]] ≈ 0,333 m = 33,3 cm",
+        erreurs: [{ valeur: 66.7, type: "notion", message: "Tu as redonné la distance du remotum. Le proximum met en jeu l'accommodation maximale : addition plus amplitude, soit 3,00 δ." }]
+      }
+    ],
+    explication: "Avec l'addition, la zone de vision nette va de 66,7 cm (sans accommoder) à 33,3 cm (accommodation maximale). Elle est étroite : le presbyte doit ensuite changer de distance de lecture pour voir net plus près ou plus loin."
+  },
+  {
+    id: "U5-265", epreuve: "U5", theme: "Examen préliminaire", session: "2018",
+    difficulte: "moyen",
+    question: "Avec des verres à double foyer, quelle distance de vision reste mal servie chez un presbyte avancé ?",
+    choix: ["La distance intermédiaire, entre la zone de loin et la zone de près, où il voit flou ou sans confort", "Les verres à double foyer n'ont pas de zone de près", "L'addition est toujours trop forte pour la vision intermédiaire", "La zone de loin est trop petite pour voir à plus de 1 m"],
+    bonne: 0,
+    explication: "Un double foyer a deux puissances seulement. La zone de loin donne la vision nette jusqu'à une certaine distance, la zone de près commence plus près : entre les deux, par exemple à l'écran d'ordinateur ou au tableau de bord d'une voiture, la vue est floue ou inconfortable. Un progressif ou un trifocal comble ce trou.",
+    indice: "Dessine les deux parcours d'accommodation : que se passe-t-il entre la fin de l'un et le début de l'autre ?"
+  },
+  {
+    id: "U5-266", epreuve: "U5", theme: "Examen préliminaire", session: "complément",
+    difficulte: "facile",
+    question: "Quelle addition moyenne attend-on vers 50 ans pour un presbyte ?",
+    choix: ["Environ +1,50", "Environ +0,25", "Environ +3,50", "Environ +5,00"],
+    bonne: 0,
+    explication: "L'addition augmente avec l'âge, à mesure que l'amplitude diminue : environ +1,00 vers 45 ans, +1,50 vers 50 ans, +2,00 vers 55 ans et +2,50 vers 60 ans. Ce sont des ordres de grandeur : on détermine l'addition réelle par l'examen, selon la distance de travail.",
+    indice: "Une addition de +1,00 à 45 ans, qui augmente d'environ 0,50 tous les cinq ans."
+  },
+  {
+    id: "U5-267", epreuve: "U5", theme: "Examen préliminaire", session: "complément",
+    difficulte: "moyen",
+    question: "Un myope presbyte de −2,00, non compensé, lit sans difficulté à 50 cm. Pourquoi ?",
+    choix: ["Son remotum est à 50 cm : il voit net à cette distance sans accommoder", "Il accommode de 2,00 δ de plus que les autres", "La presbytie guérit la myopie", "Son proximum est à l'infini"],
+    bonne: 0,
+    explication: "Un myope de −2,00 a son remotum à 50 cm devant l'œil. À cette distance, il voit net sans accommoder du tout : la presbytie ne le gêne pas. Pour lire plus près, il lui faudrait accommoder, ce que la presbytie limite. C'est pourquoi un myope presbyte retire souvent ses lunettes pour lire.",
+    indice: "Un myope de −2,00 voit net à l'inverse de 2 dioptries, sans effort d'accommodation."
+  },
+  {
+    id: "U5-268", epreuve: "U5", theme: "Examen préliminaire", session: "complément",
+    difficulte: "facile",
+    type: "calcul",
+    question: "Un presbyte emmétrope, dont l'amplitude d'accommodation est nulle, porte une addition de +2,50. À quelle distance voit-il net ? Réponds en cm.",
+    reponse: {"valeur": 40, "unite": "cm", "decimales": 0, "signe": false},
+    erreurs: [{ valeur: 2.5, type: "unite", message: "2,5 est la proximité en dioptries. La distance en mètres est 1 divisé par 2,5 ; en centimètres, multiplie par 100." }],
+    explication: "Sans accommoder, il voit net l'objet dont le verre donne une image à l'infini, donc à la distance égale à l'inverse de l'addition : [[1|2,50]] = 0,40 m = 40 cm.",
+    indice: "Distance = 1 divisé par la proximité. Pense à convertir en centimètres à la fin."
+  },
+  {
+    id: "U5-269", epreuve: "U5", theme: "Examen préliminaire", session: "complément",
+    difficulte: "moyen",
+    question: "Où se situe la tache aveugle dans le champ visuel monoculaire ?",
+    choix: ["À environ 15° du côté temporal du point de fixation, légèrement sous l'horizontale", "Au centre, sur le point de fixation", "À environ 15° du côté nasal du point de fixation", "À 90° du côté temporal"],
+    bonne: 0,
+    explication: "La tache aveugle correspond à la papille, où le nerf optique quitte l'œil et où il n'y a pas de photorécepteurs. La papille est du côté nasal de la rétine, donc la tache aveugle est vue du côté temporal du champ, à environ 15° du point de fixation. Elle passe inaperçue : l'autre œil et le cerveau la comblent.",
+    indice: "La papille est du côté du nez sur la rétine. Le champ visuel est inversé par rapport à la rétine."
+  },
+  {
+    id: "U5-270", epreuve: "U5", theme: "Réfraction", session: "complément",
+    difficulte: "moyen",
+    question: "Pour vérifier la puissance du cylindre aux CCR, comment place-t-on les axes du CCR ?",
+    choix: ["Ses axes (points rouges et blancs) sur les axes du cylindre compensateur", "Son manche sur l'axe du cylindre compensateur", "Ses axes à 45° de ceux du cylindre compensateur", "Sans repère : n'importe quelle orientation convient"],
+    bonne: 0,
+    explication: "Pour la puissance, les points rouges du CCR (axe du cylindre négatif) sont placés sur l'axe du cylindre du compensateur : chaque face du CCR ajoute ou retire 0,50 de cylindre (±0,25 dans chaque méridien), sans changer l'équivalent sphérique ; on modifie ensuite le cylindre par pas de 0,25 selon la face préférée. Pour vérifier l'axe, c'est le manche du CCR qui est placé sur l'axe du compensateur, ses axes à 45°.",
+    indice: "Axe : manche sur l'axe. Puissance : ce sont les points rouges et blancs qui viennent sur les axes."
+  },
+  {
+    id: "U5-271", epreuve: "U5", theme: "Réfraction", session: "complément",
+    difficulte: "moyen",
+    question: "Transpose +1,00 (+2,00) 45° en cylindre négatif.",
+    choix: ["+3,00 (−2,00) 135°", "+3,00 (−2,00) 45°", "−1,00 (−2,00) 135°", "+3,00 (+2,00) 135°"],
+    bonne: 0,
+    explication: "Pour transposer : on additionne la sphère et le cylindre (1,00 + 2,00 = 3,00), on change le signe du cylindre (−2,00) et on tourne l'axe de 90° (45° + 90° = 135°). Le résultat est +3,00 (−2,00) 135°.",
+    erreurs: { 1: "notion" },
+    indice: "Trois gestes : sphère plus cylindre, signe du cylindre inversé, axe tourné de 90°."
+  },
+  {
+    id: "U5-272", epreuve: "U5", theme: "Réfraction", session: "complément",
+    difficulte: "moyen",
+    question: "Quel type d'astigmatisme correspond à la compensation −1,00 (+2,00) 90° ?",
+    choix: ["Mixte : un méridien est myope, l'autre hypermétrope", "Myopique composé", "Hypermétropique simple", "Myopique simple"],
+    bonne: 0,
+    explication: "Cylindre positif à 90° : le méridien porté par l'axe garde la sphère, −1,00, et le méridien perpendiculaire a −1,00 + 2,00 = +1,00. Les deux puissances sont de signes opposés : l'astigmatisme est mixte, un méridien myope et l'autre hypermétrope.",
+    indice: "Calcule la puissance de chaque méridien principal : sont-elles de même signe ?"
+  },
+  {
+    id: "U5-273", epreuve: "U5", theme: "Réfraction", session: "complément",
+    difficulte: "moyen",
+    question: "À quoi sert un collyre cycloplégique avant une réfraction chez un jeune enfant ?",
+    choix: ["À paralyser l'accommodation pour mesurer l'amétropie totale ; il est prescrit et utilisé par l'ophtalmologiste", "À dilater la pupille pour mieux voir le fond d'œil seulement", "À diminuer la pression intraoculaire", "À soulager les yeux fatigués après la lecture"],
+    bonne: 0,
+    explication: "Un enfant accommode beaucoup et sans s'en rendre compte : l'hypermétropie est cachée, la myopie surestimée. Le cycloplégique paralyse l'accommodation un temps, ce qui permet de mesurer l'amétropie totale. C'est un médicament : l'opticien ne l'utilise pas, il oriente vers l'ophtalmologiste.",
+    indice: "Le préfixe cyclo- renvoie au muscle ciliaire, qui commande l'accommodation."
+  },
+  {
+    id: "U5-274", epreuve: "U5", theme: "Réfraction", session: "complément",
+    difficulte: "facile",
+    type: "calcul",
+    question: "Un prisme de 4 Δ dévie un rayon lumineux. De combien (en cm) l'image d'un point est-elle déplacée sur un mur situé à 2,5 m ?",
+    reponse: {"valeur": 10, "unite": "cm", "decimales": 0, "signe": false},
+    erreurs: [{ valeur: 1.6, type: "notion", message: "1 Δ dévie de 1 cm à 1 m. À 2,5 m, la déviation est multipliée par 2,5, pas divisée : 4 × 2,5." }],
+    explication: "1 Δ dévie de 1 cm à 1 m. À 2,5 m, 4 Δ dévient de 4 × 2,5 = 10 cm.",
+    indice: "1 Δ vaut 1 cm à 1 m. Quand la distance augmente, la déviation augmente."
+  },
+  {
+    id: "U5-275", epreuve: "U5", theme: "Masquage et phories", session: "2022",
+    difficulte: "facile",
+    question: "Quel prisme mesure la réserve fusionnelle en divergence ?",
+    choix: ["Un prisme base interne", "Un prisme base externe", "Un prisme base supérieure", "Un prisme base inférieure"],
+    bonne: 0,
+    explication: "Un prisme base interne oblige les yeux à diverger pour garder la vision simple : on mesure ainsi la réserve en divergence. Un prisme base externe sollicite la convergence : réserve en convergence. Les prismes verticaux mesurent les réserves verticales.",
+    indice: "Pour diverger, les yeux doivent s'écarter : le prisme doit pousser l'image vers le nez ou vers la tempe ?"
+  },
+  {
+    id: "U5-276", epreuve: "U5", theme: "Masquage et phories", session: "complément",
+    difficulte: "moyen",
+    type: "calcul",
+    question: "L'écart pupillaire d'un sujet est de 62 mm et il fixe un objet placé à 50 cm. Calcule la convergence requise, en Δ.",
+    reponse: {"valeur": 12.4, "unite": "Δ", "decimales": 1, "signe": false},
+    erreurs: [{ valeur: 124, type: "unite", message: "L'écart doit être en centimètres : 62 mm = 6,2 cm. Puis divise par la distance en mètres." }],
+    explication: "Convergence totale (Δ) = écart pupillaire (cm) ÷ distance (m) = 6,2 ÷ 0,50 = 12,4 Δ. Chaque œil en fournit la moitié, 6,2 Δ.",
+    indice: "Écart pupillaire en cm, distance en m, puis le quotient."
+  },
+  {
+    id: "U5-277", epreuve: "U5", theme: "Masquage et phories", session: "complément",
+    difficulte: "facile",
+    question: "Quelle convergence, en mètres-angles, un sujet doit-il fournir pour fixer un objet à 40 cm ?",
+    choix: ["2,5 mètres-angles", "0,4 mètre-angle", "4 mètres-angles", "25 mètres-angles"],
+    bonne: 0,
+    explication: "Le mètre-angle est l'unité de convergence : c'est la proximité de l'objet, l'inverse de sa distance en mètres. À 40 cm, [[1|0,40]] = 2,5 mètres-angles. À cette distance, l'accommodation nécessaire vaut aussi 2,5 δ : le même nombre, ce qui montre le lien entre accommodation et convergence.",
+    indice: "Même calcul que la proximité d'un objet : 1 divisé par la distance en mètres."
+  },
+  {
+    id: "U5-278", epreuve: "U5", theme: "Masquage et phories", session: "2024",
+    difficulte: "moyen",
+    question: "Un cylindre de Maddox est placé avec ses stries VERTICALES. Que voit le sujet, et que mesure-t-on ?",
+    choix: ["Une barre horizontale : on mesure la phorie verticale", "Une barre verticale : on mesure la phorie horizontale", "Un point sans barre : on mesure l'acuité", "Deux barres croisées : on mesure l'aniséiconie"],
+    bonne: 0,
+    explication: "La barre vue est perpendiculaire aux stries. Des stries verticales donnent une barre horizontale, dont le décalage haut-bas mesure la phorie verticale. Avec des stries horizontales, la barre est verticale et on mesure la phorie horizontale.",
+    indice: "La barre est perpendiculaire aux stries. Une barre horizontale se décale en hauteur."
+  },
+  {
+    id: "U5-279", epreuve: "U5", theme: "Masquage et phories", session: "2020",
+    difficulte: "moyen",
+    question: "Pourquoi fait-on le masquage unilatéral avant le masquage alterné ?",
+    choix: ["Il distingue une tropie d'une phorie ; l'alterné révèle la déviation totale, les deux mêlées", "Il mesure la valeur de la phorie en Δ", "Il évalue l'acuité de chaque œil", "Il teste la vision des couleurs"],
+    bonne: 0,
+    explication: "Au masquage unilatéral, on voit si l'œil découvert bouge pour prendre la fixation : mouvement au masquage, tropie ; mouvement au démasquage seulement, phorie. Le masquage alterné rompt la fusion en permanence et montre la déviation totale (phorie et tropie ensemble) : il ne dit pas ce qui est latent et ce qui est manifeste.",
+    indice: "Un test qui ne rompt la fusion qu'un œil à la fois sépare le manifeste du latent."
+  },
+  {
+    id: "U5-280", epreuve: "U5", theme: "Masquage et phories", session: "complément",
+    difficulte: "moyen",
+    question: "Que recherche-t-on avec le test de Hirschberg ?",
+    choix: ["Une déviation manifeste (strabisme) d'après la position du reflet lumineux sur chaque cornée", "Une phorie mesurée en Δ avec des prismes", "La vision stéréoscopique", "La disparité de fixation"],
+    bonne: 0,
+    explication: "On éclaire les deux yeux avec une petite source lumineuse : chez un sujet qui fixe, les reflets cornéens sont symétriques. Si l'un des reflets est décalé, l'œil ne fixe pas la source : strabisme. Plus le décalage est grand, plus la déviation est importante. C'est un test rapide, utile chez l'enfant.",
+    indice: "Pas de prisme ni de cache : on regarde où tombe le reflet d'une lampe sur chaque cornée."
+  },
+  {
+    id: "U5-281", epreuve: "U5", theme: "Pathologie", session: "complément",
+    difficulte: "moyen",
+    question: "Un client se plaint d'être ébloui en lumière vive et lit moins bien en plein soleil que dans la pénombre. Quelle atteinte peut-on évoquer ?",
+    choix: ["Une cataracte sous-capsulaire postérieure", "Un glaucome aigu", "Un kératocône", "Une rétinopathie diabétique"],
+    bonne: 0,
+    explication: "Dans la cataracte sous-capsulaire postérieure, l'opacité se forme à l'arrière du cristallin, juste sous la capsule postérieure, au centre de l'axe. En lumière vive, la pupille se ferme et le client voit à travers l'opacité : il est ébloui. Dans la pénombre, la pupille s'ouvre et il voit mieux. L'opticien oriente vers l'ophtalmologiste.",
+    indice: "Quand la lumière augmente, la pupille se ferme. Que traverse alors le regard ?"
+  },
+  {
+    id: "U5-282", epreuve: "U5", theme: "Pathologie", session: "complément",
+    difficulte: "moyen",
+    question: "Un client de 70 ans voit soudain des lignes droites déformées et une tache au centre de son champ visuel, en quelques jours. Que faire ?",
+    choix: ["L'orienter sans attendre vers un ophtalmologiste : une DMLA humide s'aggrave vite et se traite", "Lui refaire des lunettes avec une addition plus forte", "Lui conseiller d'attendre trois mois", "Lui conseiller des larmes artificielles"],
+    bonne: 0,
+    explication: "Des lignes déformées et une tache centrale qui apparaissent en quelques jours évoquent une DMLA exsudative (humide), due à des néovaisseaux sous la macula. Elle s'aggrave vite et se traite d'autant mieux qu'elle est prise tôt : l'opticien oriente sans attendre, sans poser de diagnostic. Des lunettes n'y changent rien.",
+    indice: "Des lignes qui se tordent au centre et un début rapide : le délai compte."
+  },
+  {
+    id: "U5-283", epreuve: "U5", theme: "Pathologie", session: "complément",
+    difficulte: "facile",
+    question: "Un client diabétique n'a pas vu d'ophtalmologiste depuis trois ans. Que lui conseillez-vous en plus de ses lunettes ?",
+    choix: ["Un fond d'œil régulier, au moins une fois par an, pour dépister une rétinopathie diabétique", "Rien : le diabète ne touche pas les yeux", "Un contrôle tous les dix ans", "Des lentilles de contact pour mieux voir"],
+    bonne: 0,
+    explication: "Le diabète abîme les petits vaisseaux de la rétine : la rétinopathie diabétique est longtemps sans symptôme. Un fond d'œil au moins annuel permet de la dépister à temps. L'opticien le rappelle et oriente : une bonne acuité aux lunettes ne suffit pas à l'écarter.",
+    indice: "Une maladie longtemps silencieuse se dépiste par un examen régulier, pas par les symptômes."
+  },
+  {
+    id: "U5-284", epreuve: "U5", theme: "Pathologie", session: "complément",
+    difficulte: "moyen",
+    question: "Quels signes évoquent un décollement de rétine et imposent une consultation en urgence ?",
+    choix: ["Éclairs lumineux, apparition brutale de corps flottants, voile ou rideau dans le champ visuel", "Rougeur de l'œil avec sécrétions collantes au réveil", "Fatigue visuelle en fin de journée", "Gêne en lumière vive avec baisse progressive de la vue"],
+    bonne: 0,
+    explication: "Quand la rétine se décolle, le client voit des éclairs (photopsies), de nombreux points ou fils noirs (myodésopsies) et un voile ou un rideau qui progresse dans le champ visuel. C'est une urgence : plus la prise en charge est rapide, meilleure est la récupération. Les autres propositions évoquent une conjonctivite, une asthénopie et une cataracte.",
+    indice: "Un décollement s'annonce par des phénomènes lumineux et un voile qui avance."
+  },
+  {
+    id: "U5-285", epreuve: "U5", theme: "Pathologie", session: "2022",
+    difficulte: "moyen",
+    question: "Quelle différence fait-on entre un orgelet et un chalazion ?",
+    choix: ["L'orgelet est une infection douloureuse d'un follicule ou d'une glande du bord de la paupière ; le chalazion est une boule indolore due à une glande de Meibomius obstruée", "L'orgelet est indolore ; le chalazion est douloureux", "Les deux sont des atteintes de la cornée", "Il n'y a aucune différence"],
+    bonne: 0,
+    explication: "L'orgelet est une infection, rouge, chaude et douloureuse, à la racine d'un cil ou d'une glande du bord de la paupière. Le chalazion est une petite boule indolore à l'intérieur de la paupière, due à l'obstruction d'une glande de Meibomius. Dans les deux cas, l'opticien conseille un avis médical et ne pose pas de diagnostic.",
+    indice: "Douleur ou pas de douleur : un des deux est une infection récente."
+  },
+  // ---------- Lot 4 du 22 nov. : contactologie, binoculaire, acuité et couleurs, ergonomie, pathologie ----------
+  {
+    id: "U5-286", epreuve: "U5", theme: "Lentilles", session: "complément",
+    difficulte: "moyen",
+    question: "Une porteuse de lentilles souples a un œil très rouge, une douleur vive et une gêne à la lumière depuis ce matin. Que lui dites-vous ?",
+    choix: ["D'enlever ses lentilles, de ne pas les remettre et de consulter un ophtalmologiste sans attendre", "De continuer à porter ses lentilles en ajoutant des larmes artificielles", "D'attendre deux jours que la rougeur passe", "De changer de solution d'entretien et de remettre ses lentilles"],
+    bonne: 0,
+    explication: "Œil rouge, douleur vive et photophobie chez un porteur de lentilles : il faut penser à une kératite infectieuse, qui peut menacer la cornée en quelques heures. On enlève les lentilles, on ne les remet pas, et on consulte rapidement un ophtalmologiste. L'opticien ne pose pas de diagnostic.",
+    indice: "Une douleur vive sous une lentille n'est pas banale : que fait-on de la lentille, et à quelle vitesse consulte-t-on ?"
+  },
+  {
+    id: "U5-287", epreuve: "U5", theme: "Lentilles", session: "complément",
+    difficulte: "facile",
+    question: "Dans laquelle de ces situations reporte-t-on le port des lentilles ?",
+    choix: ["Une conjonctivite en cours avec œil rouge et sécrétions", "Une fatigue visuelle en fin de journée", "Une légère myopie stable", "Un astigmatisme de 0,50 δ"],
+    bonne: 0,
+    explication: "Un œil rouge avec sécrétions est une contre-indication temporaire : la lentille retiendrait les germes contre la cornée et aggraverait l'infection. On attend la guérison et l'avis médical avant de reprendre les lentilles. Les trois autres situations n'empêchent pas le port.",
+    indice: "Quelle situation peut s'aggraver si une lentille reste contre un œil infecté ?"
+  },
+  {
+    id: "U5-288", epreuve: "U5", theme: "Lentilles", session: "complément",
+    difficulte: "moyen",
+    question: "Comment mesure-t-on le Break-Up Time (BUT) ?",
+    choix: ["On instille de la fluorescéine, on observe sous lumière bleue et on chronomètre le temps entre un clignement et l'apparition de la première zone sombre", "On mesure la hauteur de larmes au bord de la paupière avec une règle", "On pose un papier buvard sous la paupière inférieure pendant 5 minutes", "On compte le nombre de clignements par minute"],
+    bonne: 0,
+    explication: "Après instillation de fluorescéine, le film lacrymal est vert sous lumière bleue. Le sujet cligne puis garde l'œil ouvert : on chronomètre le temps avant la première zone sombre (rupture du film). La norme est de 10 à 20 s. La hauteur de la rivière lacrymale mesure la quantité de larmes, pas la stabilité.",
+    indice: "Le BUT mesure la stabilité du film : il faut un colorant, une lumière adaptée et un chronomètre."
+  },
+  {
+    id: "U5-289", epreuve: "U5", theme: "Lentilles", session: "complément",
+    difficulte: "difficile",
+    question: "Un myope de −6,00 passe de ses lunettes à des lentilles de contact. Que devient son accommodation pour une même distance de lecture ?",
+    choix: ["Elle augmente : la lentille, posée sur l'œil, demande plus d'accommodation que le verre de lunettes", "Elle diminue", "Elle ne change pas", "Elle disparaît"],
+    bonne: 0,
+    explication: "Un verre divergent de lunettes, éloigné de l'œil, forme de l'objet proche une image un peu plus éloignée que ne le ferait une lentille posée sur la cornée : le myope en lunettes accommode un peu moins. En lentilles, son accommodation se rapproche de celle d'un emmétrope. L'effet croît avec la myopie. L'hypermétrope, lui, accommode moins en lentilles qu'en lunettes.",
+    indice: "Le verre de lunettes est loin de l'œil : il aide un peu le myope à lire. Que perd-il en passant aux lentilles ?"
+  },
+  {
+    id: "U5-290", epreuve: "U5", theme: "Masquage et phories", session: "2021",
+    difficulte: "moyen",
+    question: "Un étudiant a une forte exophorie de près, un punctum proximum de convergence éloigné, et se plaint de fatigue et de vision double en lecture. Quelle dysfonction évoquer ?",
+    choix: ["Une insuffisance de convergence", "Un excès de convergence", "Un glaucome", "Une amblyopie"],
+    bonne: 0,
+    explication: "L'exophorie de près forte demande un effort de convergence : si la réserve est insuffisante et le PPC éloigné, la lecture devient fatigante, avec flou et diplopie en fin de journée. C'est une insuffisance de convergence. L'excès de convergence est l'inverse : ésophorie de près et PPC très proche.",
+    indice: "Quel effort doit fournir l'étudiant pour lire de près avec une exophorie ?"
+  },
+  {
+    id: "U5-291", epreuve: "U5", theme: "Masquage et phories", session: "complément",
+    difficulte: "moyen",
+    question: "Qu'est-ce qu'un prisme de Fresnel et à quoi sert-il ?",
+    choix: ["Une membrane souple, collée sur le verre, qui donne un effet prismatique temporaire ou facile à ajuster ; la vision y est un peu dégradée", "Un prisme massif très épais, collé dans la monture", "Un verre teinté contre l'éblouissement", "Une lentille de contact multifocale"],
+    bonne: 0,
+    explication: "Le prisme de Fresnel est une fine membrane de petits prismes juxtaposés, collée à l'arrière du verre. Il est léger, peu coûteux et facile à modifier : on l'utilise pour un essai de prisme ou une diplopie récente. Il dégrade un peu le contraste et l'acuité, donc il convient surtout à un usage temporaire.",
+    indice: "Le mot clé est « membrane » : léger, ajustable, mais pas parfaitement transparent."
+  },
+  {
+    id: "U5-292", epreuve: "U5", theme: "Anisométropie", session: "complément",
+    difficulte: "moyen",
+    question: "Quel critère définit une amblyopie fonctionnelle ?",
+    choix: ["Une acuité inférieure d'au moins deux lignes à celle de l'autre œil, avec la meilleure compensation et sans lésion visible", "Une acuité inférieure à 10/10", "Une baisse d'acuité due à un glaucome", "Une vision double persistante"],
+    bonne: 0,
+    explication: "L'amblyopie est une baisse d'acuité d'un œil, d'au moins deux lignes par rapport à l'autre, qui persiste avec la meilleure compensation et sans lésion organique. Elle vient d'une mauvaise utilisation de l'œil pendant l'enfance (anisométropie, strabisme). C'est le critère de l'amblyopie d'un seul œil ; une amblyopie peut aussi toucher les deux yeux, par exemple après une forte amétropie non compensée dans l'enfance. Une acuité de 9/10 n'est pas une amblyopie, et la diplopie n'en est pas un signe.",
+    indice: "Elle compare un œil à l'autre, avec la meilleure compensation, et sans lésion."
+  },
+  {
+    id: "U5-293", epreuve: "U5", theme: "Masquage et phories", session: "complément",
+    difficulte: "facile",
+    question: "Comment appelle-t-on un strabisme où l'œil dévié est tourné vers le nez ?",
+    choix: ["Une ésotropie, ou strabisme convergent", "Une exotropie, ou strabisme divergent", "Une hypertropie", "Une exophorie"],
+    bonne: 0,
+    explication: "Strabisme convergent ou ésotropie : l'œil dévié part vers le nez. Strabisme divergent ou exotropie : il part vers la tempe. L'hypertropie est une déviation verticale. Le suffixe -tropie désigne une déviation manifeste, le suffixe -phorie une déviation latente.",
+    indice: "Éso se dit de ce qui va vers l'intérieur. Et -tropie ou -phorie : manifeste ou latent ?"
+  },
+  {
+    id: "U5-294", epreuve: "U5", theme: "Masquage et phories", session: "complément",
+    difficulte: "difficile",
+    type: "calcul",
+    question: "Un sujet a une exophorie de 8 Δ ; sa réserve opposée (prisme base temporale) donne un flou à 6 Δ. Avec la formule P = (2 × phorie − réserve opposée) ÷ 3, calcule le prisme minimal qui satisferait le critère de Sheard, en Δ.",
+    reponse: {"valeur": 3.3, "unite": "Δ", "decimales": 1, "signe": false, "tolerance": 0.1},
+    erreurs: [{ valeur: 10, type: "notion", message: "Tu as oublié de diviser par 3 : (2 × 8 − 6) ÷ 3." }],
+    explication: "P = (2 × 8 − 6) ÷ 3 = 10 ÷ 3 ≈ 3,3 Δ. Avec ce prisme base nasale, la réserve passe à environ 9,3 Δ et la phorie descend à environ 4,7 Δ : 9,3 est bien le double de 4,7, le critère de Sheard est respecté. Le prisme reste une solution de dernier recours, après l'entraînement visuel, et relève de la prescription.",
+    indice: "Numérateur : deux fois la phorie moins la réserve. Puis divise par trois."
+  },
+  {
+    id: "U5-295", epreuve: "U5", theme: "Examen préliminaire", session: "complément",
+    difficulte: "moyen",
+    question: "Qu'est-ce que l'anneau de Landolt ?",
+    choix: ["Un optotype en forme de C dont on repère l'orientation de l'ouverture", "Un test de vision des couleurs", "Un instrument qui mesure le rayon de courbure de la cornée", "Un test de relief"],
+    bonne: 0,
+    explication: "L'anneau de Landolt est un optotype : un anneau ouvert comme un C. Le sujet indique de quel côté est l'ouverture (haut, bas, gauche, droite). Pour 10/10, l'ouverture sous-tend 1 minute d'arc et l'anneau entier 5 minutes. C'est l'optotype de référence pour comparer les acuités.",
+    indice: "Un anneau avec une ouverture : le sujet doit dire de quel côté elle se trouve."
+  },
+  {
+    id: "U5-296", epreuve: "U5", theme: "Examen préliminaire", session: "complément",
+    difficulte: "difficile",
+    type: "calcul",
+    question: "Pour 10/10 à 5 m, l'ouverture d'un anneau de Landolt sous-tend 1 minute d'arc (environ 0,000291 rad). Quelle est la largeur de cette ouverture, en mm ?",
+    reponse: {"valeur": 1.45, "unite": "mm", "decimales": 2, "signe": false, "tolerance": 0.05},
+    erreurs: [{ valeur: 1.45e-3, type: "unite", message: "La distance est de 5 m, soit 5000 mm : le résultat est en millimètres, 0,000291 × 5000." }],
+    explication: "Pour un petit angle, largeur = angle (rad) × distance = 0,000291 × 5000 mm ≈ 1,45 mm. À 5 m, un optotype 10/10 a donc une ouverture d'environ 1,5 mm et un diamètre de 7,3 mm.",
+    indice: "Petit angle : taille = angle en radians × distance. Mets la distance en millimètres."
+  },
+  {
+    id: "U5-297", epreuve: "U5", theme: "Examen préliminaire", session: "complément",
+    difficulte: "moyen",
+    question: "Que signifie une deutéranopie ?",
+    choix: ["L'absence de cônes sensibles au vert : le sujet confond les rouges et les verts", "L'absence de cônes sensibles au rouge uniquement", "L'absence de cônes sensibles au bleu", "L'absence de bâtonnets"],
+    bonne: 0,
+    explication: "Il existe trois types de cônes, sensibles au rouge, au vert et au bleu. La protanopie est l'absence de cônes du rouge, la deutéranopie celle des cônes du vert, la tritanopie celle des cônes du bleu. Les deux premières donnent la confusion rouge-vert, la plus fréquente, surtout chez l'homme.",
+    indice: "Les préfixes proto-, deutéro-, trito- numérotent les cônes dans l'ordre : rouge, vert, bleu."
+  },
+  {
+    id: "U5-298", epreuve: "U5", theme: "Examen préliminaire", session: "complément",
+    difficulte: "facile",
+    question: "Que fait le sujet au test de Farnsworth D15 ?",
+    choix: ["Il classe 15 pastilles colorées dans l'ordre de leurs teintes", "Il lit un chiffre caché dans un fond de points", "Il désigne l'orientation d'un anneau", "Il suit une cible du regard"],
+    bonne: 0,
+    explication: "Le Farnsworth D15 est un test de classement : le sujet range 15 pastilles colorées pour faire une progression continue de teintes. Les erreurs dessinent un schéma qui oriente vers un type de dyschromatopsie. La lecture d'un chiffre dans des points de couleur est le principe des planches d'Ishihara.",
+    indice: "D15 : quinze pastilles à mettre en ordre."
+  },
+  {
+    id: "U5-299", epreuve: "U5", theme: "Pathologie", session: "complément",
+    difficulte: "moyen",
+    question: "Un client ne voit plus, avec les deux yeux, toute la moitié droite de son champ visuel. De quoi s'agit-il probablement et que faire ?",
+    choix: ["D'une hémianopsie latérale homonyme, qui évoque une atteinte des voies visuelles ou du cerveau : consultation médicale urgente", "D'une cataracte : on propose des lunettes teintées", "D'un glaucome aigu : on prescrit des gouttes", "D'une presbytie : on augmente l'addition"],
+    bonne: 0,
+    explication: "Perdre la même moitié du champ aux deux yeux est une hémianopsie latérale homonyme. Elle évoque une lésion des voies visuelles, au-delà du chiasma, par exemple un accident vasculaire cérébral. C'est une urgence médicale : l'opticien oriente sans attendre et ne pose pas de diagnostic.",
+    indice: "Même moitié aux deux yeux : le problème ne vient pas d'un seul œil."
+  },
+  {
+    id: "U5-300", epreuve: "U5", theme: "Examen préliminaire", session: "complément",
+    difficulte: "facile",
+    question: "Pour mesurer l'acuité d'un enfant de 3 ans qui ne sait pas encore lire, quel type d'optotype choisit-on ?",
+    choix: ["Des images ou des symboles simples, comme les planches de Pigassou", "Des lettres de l'alphabet", "Un test de Parinaud", "Un anneau de Landolt seulement, sans jeu"],
+    bonne: 0,
+    explication: "Un jeune enfant reconnaît des dessins avant de connaître les lettres : on utilise des images (planches de Pigassou) ou des symboles simples. Le Parinaud est un texte de près, qui suppose la lecture, et l'anneau de Landolt, abstrait, convient mal à un enfant de cet âge.",
+    indice: "Un enfant de 3 ans ne lit pas : quels optotypes reconnaît-il déjà ?"
+  },
+  {
+    id: "U5-301", epreuve: "U5", theme: "Pathologie", session: "complément",
+    difficulte: "facile",
+    question: "Que préconise la règle du « 20-20-20 » pour limiter la fatigue visuelle devant un écran ?",
+    choix: ["Toutes les 20 minutes, regarder pendant 20 secondes quelque chose situé à environ 6 m", "Regarder son écran 20 minutes, puis fermer les yeux 20 minutes", "Cligner des yeux 20 fois par minute", "Mettre l'écran à 20 cm des yeux"],
+    bonne: 0,
+    explication: "Toutes les 20 minutes, on regarde pendant 20 secondes un objet à environ 20 pieds, soit 6 m. Cela relâche l'accommodation et la convergence et permet de cligner normalement. Un écran trop proche (20 cm) fatigue davantage.",
+    indice: "Trois fois le chiffre 20 : un intervalle, une durée et une distance en pieds."
+  },
+  {
+    id: "U5-302", epreuve: "U5", theme: "Pathologie", session: "complément",
+    difficulte: "moyen",
+    question: "Quels conseils d'installation donne-t-on à un utilisateur d'écran qui se plaint de fatigue visuelle ?",
+    choix: ["Un écran à 50 à 70 cm, le haut de l'écran au niveau des yeux ou un peu en dessous, un éclairage sans reflets", "Un écran à 20 cm, dans une pièce sombre", "Un écran au-dessus du niveau des yeux, pour regarder vers le haut", "Un écran face à une fenêtre ensoleillée"],
+    bonne: 0,
+    explication: "L'écran se place à une distance de bras (50 à 70 cm), avec le haut au niveau des yeux ou un peu en dessous : le regard est légèrement abaissé, ce qui expose moins la surface de l'œil. On évite les reflets : la fenêtre se place sur le côté (écran perpendiculaire à la fenêtre), ni devant ni dans le dos, et on évite le contraste trop fort avec une pièce sombre.",
+    indice: "Pas trop près, regard un peu vers le bas, aucun reflet gênant."
+  },
+  {
+    id: "U5-303", epreuve: "U5", theme: "Pathologie", session: "complément",
+    difficulte: "moyen",
+    question: "Quelle différence y a-t-il entre une pinguécula et un ptérygion ?",
+    choix: ["La pinguécula est un petit épaississement jaunâtre de la conjonctive ; le ptérygion est une membrane qui peut gagner la cornée", "La pinguécula est dans la cornée, le ptérygion dans la paupière", "Les deux sont des infections", "La pinguécula touche la rétine"],
+    bonne: 0,
+    explication: "Les deux sont liés aux rayons UV, au vent et à la poussière. La pinguécula reste sur la conjonctive, à côté de la cornée, sous forme d'une petite plaque jaunâtre. Le ptérygion est un repli de conjonctive vascularisé qui peut avancer sur la cornée et gêner la vue ; il peut nécessiter une chirurgie. Un verre solaire protège.",
+    indice: "Un seul des deux envahit la cornée et peut gêner la vue."
+  },
+  {
+    id: "U5-304", epreuve: "U5", theme: "Pathologie", session: "complément",
+    difficulte: "moyen",
+    question: "Un jeune homme voit très mal à la tombée de la nuit et son champ visuel se rétrécit peu à peu en tunnel. Quelle maladie faut-il évoquer ?",
+    choix: ["Une rétinopathie pigmentaire", "Une cataracte sous-capsulaire", "Une presbytie", "Un chalazion"],
+    bonne: 0,
+    explication: "La rétinopathie pigmentaire est une maladie héréditaire des bâtonnets : elle donne d'abord une mauvaise vision nocturne (héméralopie), puis un rétrécissement progressif du champ visuel en tunnel. L'opticien oriente vers l'ophtalmologiste, sans poser de diagnostic ni promettre qu'une compensation y changera quelque chose.",
+    indice: "Les bâtonnets servent à la vision de nuit et en périphérie : que se passe-t-il quand ils disparaissent ?"
+  },
+  {
+    id: "U5-305", epreuve: "U5", theme: "Pathologie", session: "complément",
+    difficulte: "difficile",
+    question: "Un client a une PIO de 25 mmHg aux deux yeux, un nerf optique et un champ visuel normaux à l'examen de l'ophtalmologiste. Quel terme est exact ?",
+    choix: ["Une hypertonie oculaire : la pression est élevée, sans atteinte du nerf optique, donc ce n'est pas encore un glaucome", "Un glaucome aigu", "Une cataracte", "Un glaucome à pression normale"],
+    bonne: 0,
+    explication: "Une PIO supérieure à la norme (environ 21 mmHg) sans atteinte du nerf optique ni du champ visuel est une hypertonie oculaire : un facteur de risque de glaucome, mais pas un glaucome. Une surveillance régulière est nécessaire. Le glaucome à pression normale est l'inverse : atteinte du nerf avec une PIO normale.",
+    indice: "Un glaucome est une atteinte du nerf optique. Ici, le nerf est intact."
+  },
+  {
+    id: "U5-306", epreuve: "U5", theme: "Worth", session: "complément",
+    difficulte: "facile",
+    question: "Comment recherche-t-on l'œil dominant ?",
+    choix: ["Le sujet vise un objet éloigné à travers un petit trou (carte tenue bras tendus), les deux yeux ouverts, puis ferme un œil après l'autre : l'œil dominant est celui qui garde l'objet dans le trou", "Avec un cylindre de Maddox seulement", "Avec le cadran de Parent", "Avec un kératomètre"],
+    bonne: 0,
+    explication: "On demande au sujet de viser une cible lointaine à travers un petit trou (ou en alignant son doigt) avec les deux yeux ouverts. En fermant alternativement chaque œil, l'œil dominant est celui avec lequel la cible reste alignée. L'œil dominant n'est pas forcément l'œil le plus fort.",
+    indice: "Un petit trou et une cible : fermer un œil fait perdre l'alignement ou le garde."
+  },
+  // ---------- Lot 5 du 22 nov. : compléments sur tout le programme ----------
+  {
+    id: "U5-307", epreuve: "U5", theme: "Réfraction", session: "2018",
+    difficulte: "moyen",
+    question: "Avant l'équilibre bioculaire, on ajoute +0,50 aux deux yeux, puis on vérifie que l'acuité a baissé. Pourquoi ?",
+    choix: ["Pour brouiller les deux yeux et empêcher l'accommodation de fausser la comparaison", "Pour augmenter l'acuité des deux yeux", "Pour mesurer la phorie", "Pour tester la vision des couleurs"],
+    bonne: 0,
+    explication: "Le +0,50 place les images en avant de la rétine : accommoder ne ferait qu'ajouter du flou, donc le sujet relâche son accommodation. La chute d'acuité vérifie que le brouillage joue bien son rôle. On compare ensuite le flou des deux yeux, dissociés, pour égaliser leur état accommodatif.",
+    indice: "Plus de positif : l'image recule ou avance ? Et pourquoi vérifier que l'acuité chute ?"
+  },
+  {
+    id: "U5-308", epreuve: "U5", theme: "Réfraction", session: "complément",
+    difficulte: "moyen",
+    type: "pose",
+    question: "Un œil est compensé par −2,50 (+1,50) 30°. Transpose-le en cylindre négatif, puis calcule son équivalent sphérique, étape par étape.",
+    etapes: [
+      {
+        consigne: "Sphère après transposition en cylindre négatif (en δ)",
+        reponse: { valeur: -1, unite: "δ", decimales: 2, signe: true },
+        aide: "On additionne la sphère et le cylindre : −2,50 + 1,50. Le cylindre devient −1,50 et l'axe tourne de 90° (120°).",
+        ligne: "Sphère = −2,50 + 1,50 = −1,00 δ\nFormule : −1,00 (−1,50) 120°",
+        erreurs: [{ valeur: -4, type: "signe", message: "Tu as soustrait. On additionne la sphère et le cylindre en gardant leurs signes : −2,50 + 1,50." }]
+      },
+      {
+        consigne: "Équivalent sphérique (en δ)",
+        reponse: { valeur: -1.75, unite: "δ", decimales: 2, signe: true },
+        aide: "Équivalent sphérique = sphère + la moitié du cylindre, avec la formule transposée.",
+        ligne: "ES = −1,00 + [[−1,50|2]] = −1,75 δ",
+        erreurs: [{ valeur: -2.5, type: "notion", message: "Tu as repris la sphère de départ. L'équivalent sphérique vaut la sphère plus la moitié du cylindre." }]
+      }
+    ],
+    explication: "Transposition : −1,00 (−1,50) 120°. Équivalent sphérique : −1,00 + (−1,50 ÷ 2) = −1,75 δ. On trouve le même résultat avec la formule de départ : −2,50 + 1,50 ÷ 2 = −1,75 δ."
+  },
+  {
+    id: "U5-309", epreuve: "U5", theme: "Lentilles", session: "complément",
+    difficulte: "moyen",
+    question: "Comment une lentille souple torique reste-t-elle orientée sur l'œil ?",
+    choix: ["Par une stabilisation : bas de la lentille plus épais (prisme-ballast) ou bords tronqués, qui prennent appui sur les paupières", "Par un collage à la cornée", "Par une rotation libre : l'orientation n'a pas d'importance", "Par l'aimantation d'une pièce dans la lentille"],
+    bonne: 0,
+    explication: "Une lentille torique doit garder l'axe de son cylindre aligné avec celui de l'œil. On la stabilise avec une forme asymétrique : prisme-ballast (bas plus épais, qui tombe sous l'effet de la pesanteur), double troncature ou zones amincies qui s'appuient sur les paupières. On contrôle sur l'œil que le repère ne tourne pas trop.",
+    indice: "Pesanteur et paupières : une forme asymétrique évite que la lentille tourne."
+  },
+  {
+    id: "U5-310", epreuve: "U5", theme: "Lentilles", session: "complément",
+    difficulte: "facile",
+    question: "Pourquoi les lentilles rigides en PMMA ont-elles été abandonnées au profit des lentilles perméables aux gaz ?",
+    choix: ["Le PMMA ne laisse pas passer l'oxygène : la cornée ne respire que par les larmes", "Le PMMA est trop mou", "Le PMMA est trop transparent", "Le PMMA est toxique pour les larmes"],
+    bonne: 0,
+    explication: "Le PMMA (polyméthacrylate de méthyle) est un matériau rigide, mais imperméable à l'oxygène : l'oxygène n'arrivait à la cornée que par le renouvellement des larmes sous la lentille. Les matériaux perméables aux gaz laissent passer l'oxygène à travers la lentille, ce qui réduit fortement l'hypoxie.",
+    indice: "Le « perméable aux gaz » du sigle LRPG dit ce que le PMMA ne fait pas."
+  },
+  {
+    id: "U5-311", epreuve: "U5", theme: "Lentilles", session: "complément",
+    difficulte: "moyen",
+    question: "Une porteuse de lentilles souples se plaint d'yeux secs en fin de journée. Quelle conduite est adaptée ?",
+    choix: ["Contrôler les larmes (BUT, rivière lacrymale), proposer des larmes artificielles sans conservateur compatibles avec les lentilles, et envisager des lentilles journalières ou un matériau plus mouillable", "Lui conseiller de dormir avec ses lentilles pour les humidifier", "Lui conseiller de ne jamais cligner", "Lui conseiller des gouttes sans rapport avec les lentilles, à n'importe quelle fréquence"],
+    bonne: 0,
+    explication: "La sécheresse oculaire se gère d'abord en évaluant la quantité et la qualité des larmes. On propose des larmes artificielles compatibles avec les lentilles et sans conservateur, on réduit la durée de port et on envisage une lentille mieux adaptée : journalière, matériau mouillable. Dormir avec ses lentilles aggrave l'hypoxie et les risques d'infection.",
+    indice: "Mesurer d'abord, lubrifier ensuite avec un produit compatible, adapter la lentille si besoin."
+  },
+  {
+    id: "U5-312", epreuve: "U5", theme: "Anisométropie", session: "complément",
+    difficulte: "difficile",
+    type: "pose",
+    question: "Anisométropie purement axile : OD −2,00 et OG −5,00 (sphériques), verres à 15 mm de l'œil. Calcule l'aniséiconie totale en lunettes, étape par étape. On compte 1,7 % par dioptrie d'écart pour l'aniséiconie axile.",
+    etapes: [
+      {
+        consigne: "Aniséiconie axile (en %)",
+        reponse: { valeur: 5.1, unite: "%", decimales: 1, signe: false, tolerance: 0.1 },
+        aide: "Écart de 3 dioptries, à 1,7 % par dioptrie.",
+        ligne: "3 × 1,7 = 5,1 %, en faveur de l'OG (le plus long)"
+      },
+      {
+        consigne: "Aniséiconie induite par les lunettes (en %)",
+        reponse: { valeur: 4.5, unite: "%", decimales: 1, signe: false, tolerance: 0.1 },
+        aide: "Distance verre-œil en cm × différence des verres : 1,5 cm × 3 δ.",
+        ligne: "1,5 × 3 = 4,5 %, en faveur de l'OD (le moins myope)"
+      },
+      {
+        consigne: "Aniséiconie totale (en %)",
+        reponse: { valeur: 0.6, unite: "%", decimales: 1, signe: false, tolerance: 0.1 },
+        aide: "Les deux effets sont de sens contraires : fais la différence.",
+        ligne: "5,1 − 4,5 = 0,6 %",
+        erreurs: [{ valeur: 9.6, type: "notion", message: "Les deux aniséiconies s'opposent : l'axile favorise l'OG, l'induite l'OD. On les soustrait." }]
+      }
+    ],
+    explication: "Aniséiconie axile 5,1 %, induite 4,5 % en sens contraire : totale 0,6 %, très inférieure à 3 %. Les lunettes compensent presque l'aniséiconie d'une anisométropie axile, ce que dit la loi de Knapp."
+  },
+  {
+    id: "U5-313", epreuve: "U5", theme: "Masquage et phories", session: "complément",
+    difficulte: "moyen",
+    question: "Un sujet a une hyperphorie de l'OD (son OD est plus haut en position passive). Où place-t-on le prisme qui réaligne ses yeux ?",
+    choix: ["Base inférieure devant l'OD", "Base supérieure devant l'OD", "Base interne devant l'OD", "Base externe devant l'OG"],
+    bonne: 0,
+    explication: "En position passive, l'OD regarde plus haut que l'objet. Un prisme déplace l'image de l'objet vers son sommet : sommet en haut, donc base en bas devant l'OD, et l'objet apparaît là où l'œil regarde. On peut aussi placer un prisme base supérieure devant l'OG.",
+    indice: "Le sommet du prisme est du côté où l'œil est parti, comme pour une exophorie (base interne)."
+  },
+  {
+    id: "U5-314", epreuve: "U5", theme: "Pathologie", session: "complément",
+    difficulte: "moyen",
+    question: "Un client perd d'un seul coup la vue d'un œil, sans douleur. Que faites-vous ?",
+    choix: ["Je l'envoie immédiatement aux urgences ophtalmologiques, sans faire de nouvelles lunettes", "Je lui propose de refaire une réfraction demain", "Je lui conseille de se reposer et de revenir dans une semaine", "Je lui propose une lentille de contact"],
+    bonne: 0,
+    explication: "Une perte de vision brutale d'un œil, même indolore, est une urgence : elle peut venir d'une occlusion d'un vaisseau de la rétine, d'un décollement de rétine ou d'une atteinte du nerf optique. Le délai de prise en charge compte. L'opticien n'a pas à poser de diagnostic : il oriente sans attendre.",
+    indice: "Brutal et sans douleur ne veut pas dire sans gravité."
+  },
+  {
+    id: "U5-315", epreuve: "U5", theme: "Pathologie", session: "complément",
+    difficulte: "moyen",
+    question: "Un client de 60 ans voit depuis longtemps quelques points noirs mobiles, toujours les mêmes, sans éclair lumineux ni voile. Quelle conduite est juste ?",
+    choix: ["Ces corps flottants anciens et stables sont souvent bénins ; je lui conseille de consulter sans attendre si leur nombre augmente brutalement, ou si des éclairs ou un voile apparaissent", "Je pose le diagnostic de décollement de rétine", "Je lui annonce que ce n'est jamais grave", "Je lui conseille un collyre sans avis médical"],
+    bonne: 0,
+    explication: "Des corps flottants (myodésopsies) anciens, stables et sans signe associé sont fréquents et le plus souvent bénins. En revanche, une augmentation brutale, des éclairs lumineux ou un voile dans le champ évoquent un décollement de rétine : urgence. L'opticien rassure sans minimiser et donne la consigne de consulter.",
+    indice: "Ancien et stable, ou brutal et accompagné d'éclairs ? La conduite dépend de ce critère."
+  },
+  {
+    id: "U5-316", epreuve: "U5", theme: "Lentilles", session: "complément",
+    difficulte: "facile",
+    question: "Quel appareil cartographie l'ensemble de la surface de la cornée, du centre à la périphérie ?",
+    choix: ["Le topographe cornéen", "L'ophtalmomètre de Javal", "Le lensomètre", "L'autoréfractomètre"],
+    bonne: 0,
+    explication: "Le topographe cornéen analyse un grand nombre de points de la cornée et en donne une carte. L'ophtalmomètre de Javal ne mesure que deux rayons dans les méridiens principaux, sur une petite zone centrale. La topographie est indispensable pour un kératocône ou une orthokératologie.",
+    indice: "Une carte de toute la cornée n'est pas faite d'une seule mesure en deux méridiens."
+  },
+  {
+    id: "U5-317", epreuve: "U5", theme: "Lentilles", session: "complément",
+    difficulte: "moyen",
+    question: "Quel test de quantité des larmes utilise une bandelette graduée laissée cinq minutes sous la paupière inférieure ?",
+    choix: ["Le test de Schirmer", "Le BUT", "La mesure de la rivière lacrymale", "Le test à la fluorescéine"],
+    bonne: 0,
+    explication: "Le test de Schirmer place une bandelette de papier buvard sous la paupière inférieure et mesure la longueur humidifiée en cinq minutes : c'est un test quantitatif, invasif puisqu'il touche l'œil. La mesure de la hauteur de la rivière lacrymale est le test quantitatif non invasif. Le BUT et la fluorescéine jugent la qualité du film.",
+    indice: "Une bandelette, un temps, une longueur mouillée : quel test connais-tu qui fonctionne ainsi ?"
+  },
+  {
+    id: "U5-318", epreuve: "U5", theme: "Pathologie", session: "complément",
+    difficulte: "facile",
+    question: "Comment fonctionne un tonomètre à air, utilisé en dépistage ?",
+    choix: ["Il envoie un jet d'air sur la cornée, sans contact, et en déduit la pression intraoculaire", "Il mesure la pression avec une lentille posée sur l'œil", "Il mesure la pression en pinçant la paupière", "Il photographie le fond d'œil"],
+    bonne: 0,
+    explication: "Le tonomètre à air envoie une bouffée d'air sur la cornée et mesure la force nécessaire pour aplanir la cornée : c'est une mesure sans contact de la PIO, pratique en dépistage. Elle est faite par l'ophtalmologiste ou l'orthoptiste, pas par l'opticien. Elle reste approximative : une valeur élevée se confirme chez l'ophtalmologiste, avec la tonométrie à aplanation.",
+    indice: "Le mot « air » dit ce qui touche la cornée : pas d'instrument en contact."
+  },
+  {
+    id: "U5-319", epreuve: "U5", theme: "Worth", session: "complément",
+    difficulte: "moyen",
+    question: "Qu'est-ce qui permet au cerveau de percevoir le relief en vision binoculaire ?",
+    choix: ["Les petites différences horizontales entre les images des deux yeux (disparité binoculaire), à condition que la fusion soit possible", "Une accommodation plus forte", "Un œil qui voit plus gros que l'autre", "Les couleurs de l'image"],
+    bonne: 0,
+    explication: "Chaque œil voit la scène sous un angle légèrement différent : les images rétiniennes présentent une disparité horizontale. Le cerveau, après fusion, l'interprète en profondeur : c'est la vision stéréoscopique, 3e degré de la vision binoculaire. Sans fusion, ou avec un œil neutralisé, le relief fin disparaît.",
+    indice: "Deux yeux écartés voient la scène sous deux angles légèrement différents."
+  },
+  {
+    id: "U5-320", epreuve: "U5", theme: "Examen préliminaire", session: "complément",
+    difficulte: "moyen",
+    question: "Après une compensation optimale, un client n'atteint que 4/10 à un œil, alors que l'autre voit 10/10. Quelle conduite est adaptée ?",
+    choix: ["Chercher une cause : amblyopie fonctionnelle ou atteinte organique ; l'orienter vers l'ophtalmologiste pour un bilan", "Augmenter la sphère de plusieurs dioptries", "Conclure qu'il a un astigmatisme", "Ne rien dire, l'autre œil compense"],
+    bonne: 0,
+    explication: "Quand l'acuité plafonne bien en dessous de la normale malgré la meilleure compensation, ce n'est pas un problème d'optique : on pense à une amblyopie fonctionnelle (écart de plusieurs lignes entre les yeux) ou à une atteinte organique. L'opticien note la valeur et oriente vers l'ophtalmologiste pour le bilan.",
+    indice: "Si la compensation est la meilleure possible, la cause du flou n'est plus optique."
+  },
+  {
+    id: "U5-321", epreuve: "U5", theme: "Examen préliminaire", session: "complément",
+    difficulte: "facile",
+    question: "Quel est le réflexe pupillaire normal quand on éclaire un œil ?",
+    choix: ["La pupille se contracte (myosis) : c'est le réflexe photomoteur", "La pupille se dilate (mydriase)", "La pupille ne bouge pas", "La pupille change de couleur"],
+    bonne: 0,
+    explication: "À la lumière, la pupille se ferme (myosis) : c'est le réflexe photomoteur, direct pour l'œil éclairé et consensuel pour l'autre œil. Dans la pénombre, elle se dilate (mydriase). Une anomalie, par exemple une pupille qui ne réagit pas ou des pupilles de tailles différentes, appelle un avis médical.",
+    indice: "Pense à l'éblouissement : la pupille protège la rétine en se fermant."
+  },
+  {
+    id: "U5-322", epreuve: "U5", theme: "Lentilles", session: "2018",
+    difficulte: "difficile",
+    question: "Pourquoi l'acuité d'un fort myope augmente-t-elle souvent quand il passe des lunettes aux lentilles ? Quelle rédaction est juste et complète ?",
+    choix: ["Le verre divergent de lunettes rapetisse l'image rétinienne ; la lentille, posée sur la cornée, la rapetisse beaucoup moins. L'image plus grande permet de distinguer des détails plus fins, donc l'acuité augmente", "Les lentilles corrigent plus fort que les lunettes", "Les lentilles agrandissent la cornée", "Les lentilles réduisent la longueur de l'œil"],
+    bonne: 0,
+    explication: "Un verre divergent éloigné de l'œil rapetisse l'image rétinienne : à même objet, l'image est plus petite en lunettes qu'en lentilles. Comme l'acuité dépend de la taille de l'image sur la rétine, le myope en lentilles distingue des détails plus fins. La puissance de compensation est la même : c'est la taille de l'image qui change.",
+    surLaCopie: "Le verre divergent rapetisse l'image rétinienne ; la lentille, posée sur l'œil, beaucoup moins. L'image plus grande permet de séparer des détails plus fins : l'acuité augmente.",
+    indice: "La compensation est la même. Qu'est-ce qui change entre les lunettes et les lentilles ?"
+  },
+  {
+    id: "U5-323", epreuve: "U5", theme: "Anisométropie", session: "complément",
+    difficulte: "moyen",
+    question: "Comment un verre convergent et un verre divergent modifient-ils la taille de l'image rétinienne, par rapport à la même compensation en lentille de contact ?",
+    choix: ["Le verre convergent l'agrandit, le verre divergent la rapetisse", "Le verre convergent la rapetisse, le verre divergent l'agrandit", "Les deux l'agrandissent", "Aucun ne la modifie"],
+    bonne: 0,
+    explication: "Un verre convergent éloigné de l'œil donne un effet de loupe : l'image rétinienne est agrandie, ce qui explique l'effet de grossissement des yeux de l'hypermétrope derrière ses lunettes. Un verre divergent la rapetisse : les yeux du myope paraissent plus petits. Avec une lentille de contact, ces effets sont beaucoup plus faibles.",
+    indice: "Les yeux d'un hypermétrope paraissent grossis derrière leurs lunettes : le verre convergent fait loupe."
+  },
+  {
+    id: "U5-324", epreuve: "U5", theme: "Lentilles", session: "complément",
+    difficulte: "moyen",
+    question: "Pourquoi une lentille rigide perméable aux gaz donne-t-elle souvent une meilleure acuité qu'une lentille souple sur une cornée irrégulière ?",
+    choix: ["Sa face avant reste régulière et le ménisque de larmes comble les irrégularités de la cornée", "Elle est plus fine", "Elle est plus colorée", "Elle est plus molle et épouse chaque irrégularité"],
+    bonne: 0,
+    explication: "Une lentille rigide garde sa forme : sa face avant régulière remplace la surface de la cornée, et le film de larmes, qui a presque l'indice de la cornée, comble les irrégularités. Une souple épouse la cornée et en reproduit les défauts. C'est pourquoi on choisit souvent une lentille rigide pour un kératocône ou un astigmatisme irrégulier.",
+    indice: "Une souple épouse la cornée, défauts compris. Que fait une rigide de sa forme ?"
+  },
+  {
+    id: "U5-325", epreuve: "U5", theme: "Worth", session: "complément",
+    difficulte: "moyen",
+    question: "Qu'est-ce que l'aire de Panum ?",
+    choix: ["La petite zone de la rétine d'un œil dont les points peuvent être fusionnés avec un point de l'autre œil, malgré une légère disparité", "La zone de la macula où la vision est la plus fine", "Un test de vision des couleurs", "La zone du champ visuel masquée par la tache aveugle"],
+    bonne: 0,
+    explication: "À un point de la rétine d'un œil correspond, sur l'autre rétine, une petite zone, l'aire de Panum : si l'image de l'autre œil y tombe, les deux images fusionnent malgré leur légère disparité et la vision est simple. Au-delà de cette aire, c'est la diplopie. La disparité de fixation reste dans l'aire de Panum.",
+    indice: "La fusion tolère un petit décalage entre les deux images : où se trouve ce domaine de tolérance ?"
   }
 );
 
