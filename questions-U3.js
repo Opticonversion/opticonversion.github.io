@@ -1971,3 +1971,243 @@ QUESTIONS.push(
     indice: "Le magasin choisit un groupe parmi ceux qu'il a identifiés."
   }
 );
+
+QUESTIONS.push(
+  {
+    id: "U3-256", difficulte: "facile", epreuve: "U3", theme: "Droit du travail", session: "complément",
+    question: "Dans le cas général, quelle est la durée maximale d'un CDD, renouvellements compris ?",
+    choix: ["6 mois", "12 mois", "18 mois", "36 mois"],
+    bonne: 2,
+    explication: "Le CDD dure au maximum 18 mois, renouvellements compris, dans le cas général. Certains cas particuliers vont jusqu'à 24 mois. Un CDD ne peut jamais servir à pourvoir durablement un emploi lié à l'activité normale du magasin.",
+    indice: "La durée se compte en mois et dépasse un an."
+  },
+  {
+    id: "U3-257", difficulte: "moyen", epreuve: "U3", theme: "Droit du travail", session: "complément",
+    type: "calcul",
+    question: "Un opticien est embauché en CDD de 6 mois à 1 900 € brut par mois. À la fin du contrat, il a droit à l'indemnité de fin de contrat (10 % de la rémunération brute totale). Calcule-la.",
+    reponse: { valeur: 1140, unite: "€", decimales: 0, tolerance: 0.5, signe: false },
+    erreurs: [
+      { valeur: 190, type: "notion", message: "Tu as pris 10 % d'un seul mois. L'indemnité se calcule sur toute la rémunération brute du contrat : 6 mois." },
+      { valeur: 12540, type: "notion", message: "Tu as ajouté l'indemnité à la rémunération totale. La question demande seulement l'indemnité, soit 10 % de la rémunération." }
+    ],
+    explication: "Rémunération brute totale = 1 900 × 6 = 11 400 €. Indemnité de fin de contrat = 11 400 × 10 % = 1 140 €. Elle n'est pas due dans certains cas, par exemple si le salarié refuse un CDI ou si le CDD est un contrat saisonnier.",
+    indice: "Calcule d'abord ce que le salarié a gagné sur tout le contrat."
+  },
+  {
+    id: "U3-258", difficulte: "moyen", epreuve: "U3", theme: "Droit du travail", session: "complément",
+    question: "Quelle est la durée maximale de la période d'essai initiale d'un CADRE en CDI (hors accord de branche plus court) ?",
+    choix: ["1 mois", "2 mois", "3 mois", "4 mois"],
+    bonne: 3,
+    erreurs: {
+      1: { type: "notion", message: "2 mois est la durée pour les ouvriers et employés. Les cadres ont une période d'essai plus longue." },
+      2: { type: "notion", message: "3 mois est la durée pour les agents de maîtrise et techniciens. Pour les cadres, c'est plus long." }
+    },
+    explication: "Période d'essai initiale en CDI : 2 mois pour les employés et ouvriers, 3 mois pour les agents de maîtrise et techniciens, 4 mois pour les cadres. Ces durées sont des maximums légaux. Le renouvellement n'est possible que si un accord de branche étendu le prévoit.",
+    indice: "Plus le poste est élevé, plus la période d'essai est longue."
+  },
+  {
+    id: "U3-259", difficulte: "moyen", epreuve: "U3", theme: "Droit du travail", session: "complément",
+    type: "calcul",
+    question: "Une salariée a travaillé 8 mois dans l'année de référence. Combien de jours ouvrables de congés payés a-t-elle acquis ? (2,5 jours ouvrables par mois travaillé)",
+    reponse: { valeur: 20, unite: "jours", decimales: 0, tolerance: 0.5, signe: false },
+    erreurs: [
+      { valeur: 17, type: "notion", message: "Tu as compté en jours ouvrés (2,08 par mois). Ici on demande des jours ouvrables, à 2,5 par mois." },
+      { valeur: 24, type: "notion", message: "Tu as compté 3 jours par mois. Le droit est de 2,5 jours ouvrables par mois travaillé." }
+    ],
+    explication: "Jours ouvrables acquis = 2,5 × 8 = 20 jours. Sur une année complète : 2,5 × 12 = 30 jours ouvrables, soit 5 semaines. Les jours ouvrables vont du lundi au samedi.",
+    indice: "Multiplie le nombre de mois travaillés par le droit mensuel."
+  },
+  {
+    id: "U3-260", difficulte: "moyen", epreuve: "U3", theme: "Droit du travail", session: "complément",
+    question: "Pour un salarié à temps plein (35 h), quelle est la majoration légale des heures supplémentaires, à défaut d'accord d'entreprise ou de branche ?",
+    choix: ["10 % puis 20 %", "25 % pour les 8 premières heures, puis 50 %", "50 % dès la première heure", "Aucune majoration, seulement un repos compensateur"],
+    bonne: 1,
+    explication: "À défaut d'accord, les heures supplémentaires sont majorées de 25 % pour les 8 premières heures (de la 36e à la 43e), puis de 50 %. Un accord de branche peut fixer un taux différent, sans descendre sous 10 %.",
+    indice: "Deux paliers de majoration."
+  },
+  {
+    id: "U3-261", difficulte: "moyen", epreuve: "U3", theme: "Droit du travail", session: "complément",
+    type: "calcul",
+    question: "Un salarié à 35 h fait 6 heures supplémentaires dans la semaine. Son taux horaire brut est de 12 €. Les 6 heures sont majorées de 25 %. Calcule la rémunération brute de ces 6 heures.",
+    reponse: { valeur: 90, unite: "€", decimales: 0, tolerance: 0.5, signe: false },
+    erreurs: [
+      { valeur: 72, type: "notion", message: "Tu as payé les 6 heures au taux normal. Elles doivent être majorées de 25 %." },
+      { valeur: 108, type: "notion", message: "Tu as appliqué 50 %. Les 8 premières heures supplémentaires sont majorées de 25 %, et ici il n'y en a que 6." }
+    ],
+    explication: "Taux majoré = 12 × 1,25 = 15 € de l'heure. Rémunération = 6 × 15 = 90 €.",
+    indice: "Calcule le taux horaire majoré avant de multiplier par les heures."
+  },
+  {
+    id: "U3-262", difficulte: "moyen", epreuve: "U3", theme: "Droit du travail", session: "complément",
+    question: "Un opticien emploie trois salariés. Que dit la loi sur la complémentaire santé ?",
+    choix: ["L'employeur doit mettre en place une complémentaire santé collective et la financer au moins à 50 %", "Elle est facultative, l'employeur fait comme il veut", "Elle est obligatoire seulement pour les cadres", "L'employeur doit la financer à 100 %"],
+    bonne: 0,
+    explication: "Depuis 2016, tout employeur du secteur privé doit proposer à ses salariés une complémentaire santé collective, dont il finance au moins 50 % de la cotisation. Elle couvre au minimum un panier de soins défini par la loi, optique comprise.",
+    indice: "L'obligation concerne tous les salariés et le financement est partagé."
+  },
+  {
+    id: "U3-263", difficulte: "facile", epreuve: "U3", theme: "Droit du travail", session: "complément",
+    question: "Quand l'employeur doit-il faire la déclaration préalable à l'embauche (DPAE) ?",
+    choix: ["Dans les 30 jours après l'embauche", "Avant l'embauche, au plus tôt 8 jours avant", "À la fin de la période d'essai", "Seulement pour les CDI"],
+    bonne: 1,
+    explication: "La DPAE se fait avant la prise de poste, dans les 8 jours qui précèdent l'embauche, pour tout salarié (CDI, CDD, apprenti). Elle remplace plusieurs formalités auprès de l'URSSAF et de la médecine du travail.",
+    indice: "Le mot « préalable » donne la réponse."
+  },
+  {
+    id: "U3-264", difficulte: "moyen", epreuve: "U3", theme: "Droit des entreprises", session: "complément",
+    question: "Quelles règles s'appliquent au capital et au nombre d'associés d'une SARL ?",
+    choix: ["Capital minimum de 37 000 € et 2 associés minimum", "Capital librement fixé (1 € possible) et de 1 à 100 associés", "Capital minimum de 1 500 € et nombre d'associés illimité", "Pas de capital et un seul associé"],
+    bonne: 1,
+    explication: "Le capital d'une SARL est librement fixé, 1 € suffit. Elle compte de 1 à 100 associés (avec un seul associé, on parle d'EURL). Le minimum de 37 000 € est celui d'une société anonyme.",
+    indice: "Le capital n'a plus de minimum élevé depuis 2003."
+  },
+  {
+    id: "U3-265", difficulte: "moyen", epreuve: "U3", theme: "Droit des entreprises", session: "complément",
+    question: "Depuis 2022, un entrepreneur individuel a une dette professionnelle. Que peut saisir le créancier professionnel ?",
+    choix: ["Seulement les biens professionnels, sauf exceptions comme la fraude ou une garantie donnée sur ses biens personnels", "Tous ses biens, personnels compris", "Seulement sa résidence principale", "Rien : l'entrepreneur individuel n'a aucune dette personnelle"],
+    bonne: 0,
+    erreurs: {
+      1: { type: "notion", message: "C'était le cas avant 2022. Depuis, le patrimoine professionnel et le patrimoine personnel sont séparés par la loi." }
+    },
+    explication: "Depuis le 15 mai 2022, le patrimoine personnel de l'entrepreneur individuel est protégé : seuls ses biens professionnels répondent des dettes professionnelles. Des exceptions existent, par exemple en cas de fraude ou s'il a donné ses biens personnels en garantie.",
+    indice: "La loi a séparé deux patrimoines."
+  },
+  {
+    id: "U3-266", difficulte: "moyen", epreuve: "U3", theme: "Droit des entreprises", session: "complément",
+    question: "Quelle est la durée maximale d'un bail commercial dérogatoire (bail précaire), renouvellements compris ?",
+    choix: ["1 an", "3 ans", "6 ans", "9 ans"],
+    bonne: 1,
+    explication: "Le bail dérogatoire permet de tester un local sans le statut des baux commerciaux, pour 3 ans au maximum, renouvellements compris. Au-delà, le locataire bénéficie du bail commercial classique de 9 ans.",
+    indice: "Plus court que le bail classique de 9 ans."
+  },
+  {
+    id: "U3-267", difficulte: "moyen", epreuve: "U3", theme: "Droit des entreprises", session: "complément",
+    question: "À l'échéance de son bail commercial, le bailleur refuse de le renouveler sans motif grave. Que doit-il au locataire ?",
+    choix: ["Rien, il est libre de refuser", "Une indemnité d'éviction", "Un mois de loyer gratuit", "Le triple du dépôt de garantie"],
+    bonne: 1,
+    explication: "Le locataire a droit au renouvellement de son bail. Si le bailleur refuse sans motif grave, il doit payer une indemnité d'éviction, qui compense notamment la perte du fonds de commerce. Il peut refuser sans indemnité pour un motif grave, par exemple un loyer impayé répété.",
+    indice: "Le locataire est protégé car son fonds de commerce dépend du local."
+  },
+  {
+    id: "U3-268", difficulte: "facile", epreuve: "U3", theme: "Droit des entreprises", session: "complément",
+    question: "Un opticien dépose la marque de son magasin à l'INPI. Quelle est la durée de la protection ?",
+    choix: ["5 ans, non renouvelable", "10 ans, renouvelable indéfiniment", "20 ans", "À vie, sans formalité"],
+    bonne: 1,
+    explication: "L'enregistrement d'une marque à l'INPI protège pour 10 ans à partir du dépôt. Il peut être renouvelé autant de fois qu'on le souhaite en payant une redevance.",
+    indice: "Une période de dix ans que l'on peut prolonger."
+  },
+  {
+    id: "U3-269", difficulte: "moyen", epreuve: "U3", theme: "Droit des entreprises", session: "complément",
+    type: "calcul",
+    question: "Un opticien vend son magasin pour un prix de 180 000 €. Le chiffre d'affaires HT annuel moyen des trois dernières années est de 240 000 €. Quel pourcentage du chiffre d'affaires le prix représente-t-il ?",
+    reponse: { valeur: 75, unite: "%", decimales: 0, tolerance: 0.5, signe: false },
+    erreurs: [
+      { valeur: 133, type: "notion", message: "Tu as divisé le chiffre d'affaires par le prix. Il faut diviser le prix par le chiffre d'affaires." }
+    ],
+    explication: "Prix ÷ CA HT moyen = [[180 000|240 000]] = 0,75, soit 75 %. Ce pourcentage sert à juger si le prix demandé est cohérent avec les usages du secteur.",
+    indice: "Le prix est la partie, le chiffre d'affaires est le tout."
+  },
+  {
+    id: "U3-270", difficulte: "moyen", epreuve: "U3", theme: "Réglementation de l'opticien", session: "complément",
+    question: "Dans le dispositif 100 % Santé, quel est le prix de vente maximum d'une monture de classe A ?",
+    choix: ["30 €", "60 €", "100 €", "150 €"],
+    bonne: 0,
+    erreurs: {
+      2: { type: "notion", message: "100 € est le plafond de remboursement d'une monture de classe B par une complémentaire, pas le prix d'une monture de classe A." }
+    },
+    explication: "Une monture de classe A (100 % Santé) est vendue au maximum 30 €, et la prise en charge est totale pour les assurés ayant un contrat responsable. Les équipements de classe B ont des prix libres.",
+    indice: "Le prix est volontairement très bas pour que le reste à charge soit nul."
+  },
+  {
+    id: "U3-271", difficulte: "difficile", epreuve: "U3", theme: "Réglementation de l'opticien", session: "complément",
+    question: "Dans un contrat de complémentaire santé responsable, quel est le plafond de remboursement de la monture d'un équipement de classe B ?",
+    choix: ["30 €", "100 €", "150 €", "300 €"],
+    bonne: 1,
+    erreurs: {
+      0: { type: "notion", message: "30 € est le prix maximum d'une monture de classe A. Pour la classe B, le plafond de remboursement est plus élevé." }
+    },
+    explication: "Les contrats responsables limitent la prise en charge de la monture à 100 € pour la classe B, remboursement de la Sécurité sociale compris. Le client paie la différence si la monture est plus chère.",
+    indice: "Ce plafond protège contre les montures très chères remboursées sans limite."
+  },
+  {
+    id: "U3-272", difficulte: "moyen", epreuve: "U3", theme: "Réglementation de l'opticien", session: "complément",
+    question: "Pour un adulte dont la vue n'a pas évolué, quel délai minimum doit séparer deux équipements optiques pris en charge par un contrat responsable ?",
+    choix: ["Tous les 6 mois", "Tous les ans", "Tous les 2 ans", "Tous les 5 ans"],
+    bonne: 2,
+    erreurs: {
+      1: { type: "notion", message: "Un renouvellement annuel concerne les enfants de moins de 16 ans, ou les adultes dont la vue a évolué selon les cas prévus." }
+    },
+    explication: "Un adulte peut renouveler son équipement tous les 2 ans. Le délai est réduit à 1 an pour les enfants de moins de 16 ans, et dans certains cas pour les adultes dont la vue a évolué.",
+    indice: "Le rythme normal est lent pour un adulte."
+  },
+  {
+    id: "U3-273", difficulte: "difficile", epreuve: "U3", theme: "Réglementation de l'opticien", session: "complément",
+    question: "Un client de 50 ans présente une ordonnance de lunettes datée de 4 ans. L'opticien peut-il adapter la correction à partir de cette ordonnance ?",
+    choix: ["Oui, une ordonnance reste valable 5 ans à tout âge", "Non : à partir de 42 ans, une ordonnance de plus de 3 ans ne permet plus l'adaptation par l'opticien", "Oui, à condition d'en informer la mutuelle", "Oui, si le client signe une décharge"],
+    bonne: 1,
+    explication: "L'opticien ne peut adapter une prescription que si elle est récente : moins d'un an pour un enfant de moins de 16 ans, moins de 5 ans de 16 à 42 ans, moins de 3 ans au-delà de 42 ans. Ici, 4 ans pour un client de 50 ans : il faut une nouvelle ordonnance.",
+    indice: "Le délai de validité dépend de l'âge du client."
+  },
+  {
+    id: "U3-274", difficulte: "facile", epreuve: "U3", theme: "Réglementation de l'opticien", session: "complément",
+    question: "Comment sont classées les lunettes de correction au regard de la réglementation européenne ?",
+    choix: ["Ce sont des produits de consommation courante sans règle particulière", "Ce sont des dispositifs médicaux qui doivent porter le marquage CE", "Ce sont des médicaments", "Ce sont des accessoires de mode"],
+    bonne: 1,
+    explication: "Les montures et verres correcteurs sont des dispositifs médicaux : ils portent le marquage CE et sont soumis à la matériovigilance (signalement des incidents). L'opticien doit pouvoir justifier la conformité de ce qu'il vend.",
+    indice: "Les lunettes de correction corrigent un défaut de la vision."
+  },
+  {
+    id: "U3-275", difficulte: "facile", epreuve: "U3", theme: "Réglementation de l'opticien", session: "complément",
+    question: "Quelle est la durée de la garantie légale de conformité d'un équipement neuf acheté par un consommateur ?",
+    choix: ["6 mois", "1 an", "2 ans", "5 ans"],
+    bonne: 2,
+    explication: "La garantie légale de conformité s'applique pendant 2 ans à partir de la délivrance du bien neuf. Pendant cette durée, on présume que le défaut existait dès l'achat. Le vendeur doit réparer ou remplacer l'équipement. Elle est distincte de la garantie commerciale du fabricant.",
+    indice: "Deux ans, que le client n'a pas à payer en plus."
+  },
+  {
+    id: "U3-276", difficulte: "moyen", epreuve: "U3", theme: "Réglementation de l'opticien", session: "complément",
+    question: "Un client achète des lunettes en magasin et change d'avis 3 jours plus tard. Que dit la loi ?",
+    choix: ["Il a 14 jours pour se rétracter", "Il n'a pas de droit de rétractation légal pour un achat en magasin : le magasin peut reprendre l'équipement par geste commercial", "Il a 7 jours pour se rétracter", "Le remboursement est automatique sous 30 jours"],
+    bonne: 1,
+    explication: "Le droit de rétractation de 14 jours concerne les ventes à distance et hors établissement. Pour un achat en magasin, il n'existe pas : le magasin est libre de reprendre ou non l'équipement, et des verres correcteurs fabriqués sur mesure ne sont de toute façon pas repris.",
+    indice: "Le délai de 14 jours ne concerne pas les achats faits dans le magasin."
+  },
+  {
+    id: "U3-277", difficulte: "moyen", epreuve: "U3", theme: "Marché et zone de chalandise", session: "complément",
+    type: "calcul",
+    question: "Le marché net d'une zone est de 1 200 000 € HT. Un magasin y réalise 150 000 € HT de chiffre d'affaires. Calcule sa part de marché.",
+    reponse: { valeur: 12.5, unite: "%", decimales: 1, tolerance: 0.05, signe: false },
+    erreurs: [
+      { valeur: 8, type: "notion", message: "Tu as divisé le marché par le chiffre d'affaires du magasin. La part de marché est le chiffre d'affaires du magasin divisé par le marché." }
+    ],
+    explication: "Part de marché = [[150 000|1 200 000]] × 100 = 12,5 %.",
+    indice: "Ce que prend le magasin, rapporté au marché total de la zone."
+  },
+  {
+    id: "U3-278", difficulte: "moyen", epreuve: "U3", theme: "Marché et zone de chalandise", session: "complément",
+    question: "Dans le diagnostic d'un magasin, une équipe de trois opticiens diplômés et un atelier de montage sur place sont :",
+    choix: ["Une force", "Une opportunité", "Une menace", "Une faiblesse"],
+    bonne: 0,
+    erreurs: {
+      1: { type: "notion", message: "Une opportunité vient de l'extérieur (marché, loi, concurrence). Ici, ce sont des moyens propres au magasin : c'est interne." }
+    },
+    explication: "Les forces et les faiblesses sont internes au magasin (équipe, atelier, stock). Les opportunités et les menaces sont externes (marché, concurrents, réglementation). Une équipe qualifiée et un atelier sont des atouts propres : des forces.",
+    indice: "Interne ou externe au magasin ?"
+  },
+  {
+    id: "U3-279", difficulte: "facile", epreuve: "U3", theme: "Marché et zone de chalandise", session: "complément",
+    question: "Dans une zone de chalandise, que désigne la zone primaire ?",
+    choix: ["La zone proche du magasin d'où vient la majorité de la clientèle (plus de la moitié)", "La zone la plus éloignée, où l'on trouve les clients occasionnels", "La zone où se trouvent les concurrents", "La zone où le magasin ne vend rien"],
+    bonne: 0,
+    explication: "La zone primaire est la plus proche du magasin : elle rassemble la majorité des clients (selon les manuels, 60 à 80 % environ). Viennent ensuite la zone secondaire, plus éloignée, puis la zone tertiaire, d'où viennent quelques clients occasionnels.",
+    indice: "« Primaire » veut dire la première, la plus importante."
+  },
+  {
+    id: "U3-280", difficulte: "facile", epreuve: "U3", theme: "Marché et zone de chalandise", session: "complément",
+    question: "Une cliente change ses lunettes parce que sa vue a évolué et que ses verres sont rayés. De quel type de marché s'agit-il ?",
+    choix: ["Le marché de premier équipement", "Le marché de renouvellement", "Le marché de la seconde paire", "Le marché de l'exportation"],
+    bonne: 1,
+    explication: "Le marché de renouvellement concerne les porteurs qui remplacent un équipement usé ou inadapté. C'est la plus grosse part du marché de l'optique. Le premier équipement concerne un client qui n'a jamais porté de lunettes.",
+    indice: "La cliente remplace des lunettes qu'elle a déjà."
+  }
+);
