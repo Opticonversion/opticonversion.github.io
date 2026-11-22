@@ -28,6 +28,7 @@ QUESTIONS.push(
     choix: ["Neutralisation de l'OG", "Neutralisation de l'OD", "Diplopie", "Vision binoculaire normale"],
     bonne: 0,
     explication: "Seul l'œil au filtre rouge (OD) perçoit : il voit son marqueur monoculaire rouge et l'élément fusionnel blanc, qui lui paraît rouge. Les marqueurs verts de l'OG manquent : pas de vision simultanée (1er degré), donc pas de fusion (2e degré). L'OG est neutralisé.",
+    surLaCopie: "Le sujet ne voit que les 2 symboles rouges : seul l'œil droit, au filtre rouge, transmet une image. L'œil gauche est neutralisé. Il y a neutralisation de l'OG, donc pas de vision simultanée.",
     indice: "Commence par te demander quel filtre est devant chaque œil, et quels symboles chacun peut voir à travers le sien. Quel œil manque à l'appel ?",
     schema: "img/schemas/U5/worth-neutralisation-og.svg",
     schemaTexte: "Test de Worth : l'œil au filtre rouge voit le losange et le rond en rouge, l'œil au filtre vert voit les deux croix et le rond en vert. Le sujet ne voit que les 2 symboles rouges."
@@ -39,6 +40,7 @@ QUESTIONS.push(
     choix: ["Neutralisation de l'OG", "Neutralisation de l'OD", "Diplopie croisée", "Dominance de l'OD"],
     bonne: 1,
     explication: "Seul l'œil au filtre vert (OG) perçoit : ses 2 marqueurs verts plus l'élément fusionnel blanc, vu vert (le filtre ne laisse passer que sa couleur). L'OD est neutralisé. Piège classique : l'élément fusionnel prend toujours la couleur du filtre de l'œil qui voit.",
+    surLaCopie: "Le sujet ne voit que les 3 symboles verts : seul l'œil gauche, au filtre vert, transmet une image. L'œil droit est neutralisé. Il y a neutralisation de l'OD, donc pas de vision simultanée (1er degré absent).",
     indice: "L'élément fusionnel blanc prend la couleur du filtre de l'œil qui le voit. Si tout est vert, quel œil voit, et lequel ne transmet rien ?"
   },
   {
@@ -48,6 +50,7 @@ QUESTIONS.push(
     choix: ["Une neutralisation", "Une diplopie : vision simultanée présente, mais pas de fusion", "Une vision binoculaire normale", "Une amblyopie"],
     bonne: 1,
     explication: "Les marqueurs des deux yeux sont vus : le 1er degré (vision simultanée) est présent. L'élément fusionnel est vu double : le 2e degré (fusion) manque. Le sens de la diplopie (homonyme ou croisée) indique ensuite la phorie associée.",
+    surLaCopie: "Je compte 5 symboles : les deux yeux voient leurs symboles (vision simultanée, 1er degré) mais l'élément fusionnel est vu double. La fusion (2e degré) manque : le sujet a une diplopie. Je précise ensuite le sens de la diplopie pour trouver la phorie.",
     indice: "Compte les symboles de chaque œil : 2 pour l'un, 3 pour l'autre. Si les deux yeux voient mais que l'élément commun apparaît deux fois, quel degré manque ?"
   },
   {
@@ -57,6 +60,7 @@ QUESTIONS.push(
     choix: ["Neutralisation de l'OG", "Diplopie homonyme", "Vision binoculaire avec dominance de l'OD", "Vision binoculaire avec dominance de l'OG"],
     bonne: 2,
     explication: "4 symboles = vision simultanée et fusion. L'élément fusionnel prend la couleur de l'œil dominant : rosé = l'œil au filtre rouge, l'OD.",
+    surLaCopie: "Je compte 4 symboles : vision simultanée et fusion. L'élément fusionnel est rosé, couleur du filtre rouge : l'œil droit domine. La vision est binoculaire avec dominance de l'OD.",
     indice: "4 symboles : les deux yeux travaillent ensemble. La couleur prise par l'élément fusionnel indique quel œil l'emporte."
   },
   {
@@ -66,6 +70,7 @@ QUESTIONS.push(
     choix: ["Diplopie croisée, exophorie associée", "Diplopie homonyme, ésophorie associée", "Diplopie croisée, ésophorie associée", "Diplopie homonyme, exophorie associée"],
     bonne: 1,
     explication: "L'image de l'OD (rouge) est du côté de l'OD (à droite) : diplopie homonyme. Loi de Desmarres : homonyme = éso, croisée = exo. C'est donc une ésophorie associée.",
+    surLaCopie: "5 symboles : vision simultanée sans fusion, diplopie. Les rouges, vus par l'OD, sont du côté de l'OD (à droite) : la diplopie est homonyme. D'après la loi de Desmarres, une diplopie homonyme traduit une ésophorie.",
     indice: "Regarde de quel côté se trouve l'image de l'OD (rouge) par rapport à l'OD. Puis applique la loi de Desmarres pour passer de la diplopie à la phorie.",
     schema: "img/schemas/U5/worth-diplopie-homonyme.svg",
     schemaTexte: "Perception du sujet : les symboles rouges de l'OD sont à droite des verts de l'OG, diplopie homonyme. Vue de dessus : les lignes de regard passives se croisent en avant du test, ésophorie."
@@ -79,6 +84,7 @@ QUESTIONS.push(
     choix: ["Exophorie", "Ésophorie", "Exotropie", "Ésotropie"],
     bonne: 0,
     explication: "Aucun mouvement au masquage = pas de tropie. Mouvement au démasquage = phorie dissociée (supérieure à 3 Δ, sinon on ne la voit pas). L'œil revient vers le nez (temporo-nasal) : sous le cache, il était parti vers l'extérieur. C'est une exophorie.",
+    surLaCopie: "Aucun mouvement au masquage : pas de tropie. Un mouvement au seul démasquage signe une phorie. L'œil revient vers le nez, donc sous le cache il était parti vers la tempe. Je conclus à une exophorie.",
     indice: "Mouvement au masquage ou au démasquage : l'un signe une tropie, l'autre une phorie. Ensuite, si l'œil revient vers le nez, où était-il sous le cache ?",
     schema: "img/schemas/U5/cover-test-exophorie.svg",
     schemaTexte: "Sujet vu de face, OD à gauche de l'image. On masque l'OD : l'OG ne bouge pas. Sous le cache, l'OD part vers la tempe. Au démasquage, il revient vers le nez : exophorie."
@@ -99,6 +105,7 @@ QUESTIONS.push(
     choix: ["Ésophorie OG", "Ésotropie OG", "Exotropie OG", "Exophorie OG"],
     bonne: 1,
     explication: "Au masquage, si l'œil NON masqué bouge, il ne fixait pas : la déviation est manifeste (tropie). Il part vers la tempe pour fixer : il était dévié vers le nez. C'est une ésotropie (strabisme convergent) de l'OG.",
+    surLaCopie: "Au masquage de l'OD, l'OG non masqué bouge pour fixer : il ne fixait pas, c'est une tropie. Il va vers la tempe : il était dévié vers le nez. Je conclus à une ésotropie de l'OG.",
     indice: "Ici c'est l'œil NON masqué qui bouge. Pourquoi bougerait-il s'il fixait déjà le test ? Et s'il part vers la tempe, de quel côté était-il dévié ?"
   },
   {
@@ -137,7 +144,8 @@ QUESTIONS.push(
     question: "Maddox sur l'OD (barre verticale). Le sujet voit la barre rouge à GAUCHE du point lumineux. Conclusion ?",
     choix: ["Ésophorie", "Exophorie", "Orthophorie", "Hyperphorie droite"],
     bonne: 1,
-    explication: "L'image de l'OD est vue à gauche, du côté opposé à l'OD : diplopie croisée. En position passive, les lignes de regard se croisent en arrière du point de fixation : c'est une exophorie.",
+    explication: "L'image de l'OD est vue à gauche, du côté opposé à l'OD : diplopie croisée. Sans fusion, les deux lignes de regard se croiseraient derrière le point visé : c'est une exophorie.",
+    surLaCopie: "La barre de l'OD est vue à gauche, du côté opposé à l'OD : la diplopie est croisée. D'après la loi de Desmarres, c'est une exophorie.",
     indice: "L'image de l'OD est-elle du côté de l'OD ou du côté opposé ? Diplopie homonyme ou croisée, puis loi de Desmarres."
   },
   {
@@ -175,7 +183,8 @@ QUESTIONS.push(
     question: "Anisométropie de puissance : OD −0,50 et OG −5,50 (sphériques), verres à 14 mm de l'œil. Estimation de l'aniséiconie en lunettes ?",
     choix: ["Environ 1,4 %", "Environ 5 %", "Environ 7 %", "Environ 14 %"],
     bonne: 2,
-    explication: "Anisométropie de puissance : les deux yeux ont la même longueur, l'aniséiconie axile est nulle. Aniséiconie induite ≈ distance verre-œil (cm) × différence des verres = 1,4 × 5 = 7 %, en faveur de l'OD (le moins myope voit plus gros). Repères : moins de 3 % = pas de gêne ; 3 à 10 % = gêne possible de la fusion ; plus de 10 % = fusion le plus souvent impossible.",
+    explication: "Anisométropie de puissance : les deux yeux ont la même longueur, l'aniséiconie axile est nulle. Aniséiconie induite ≈ distance verre-œil (en cm) × différence des verres = 1,4 × 5 ≈ 7 %, en faveur de l'OD (le moins myope voit plus gros). Repères : moins de 3 % = pas de gêne ; 3 à 10 % = gêne possible de la fusion ; plus de 10 % = fusion le plus souvent impossible.",
+    surLaCopie: "L'anisométropie est de puissance, donc l'aniséiconie axile est nulle. Aniséiconie induite ≈ distance verre-œil (en cm) × différence des verres = 1,4 × 5 ≈ 7 %, en faveur de l'OD. Elle est entre 3 et 10 % : la fusion peut être gênée.",
     indice: "Aniséiconie induite ≈ distance verre-œil en cm × différence de puissance des verres. Convertis bien 14 mm en cm.",
     schema: "img/schemas/U5/aniseiconie-7-pourcent.svg",
     schemaTexte: "Images rétiniennes : celle de l'OD est plus grande que celle de l'OG. Calcul 1,4 × 5 = 7 %, placé sur une jauge : moins de 3 % pas de gêne, 3 à 10 % gêne possible, plus de 10 % fusion difficile."
@@ -186,7 +195,8 @@ QUESTIONS.push(
     question: "Pour une anisométropie de PUISSANCE, quel équipement réduit le plus l'aniséiconie ?",
     choix: ["Des lunettes à 15 mm", "Des lentilles de contact", "Des lunettes à 25 mm", "Aucun équipement"],
     bonne: 1,
-    explication: "L'aniséiconie induite dépend de la distance compensation-œil. En lentilles, cette distance passe d'environ 15 mm à moins de 2 mm : l'aniséiconie devient beaucoup plus faible. (Pour une anisométropie AXILE, la loi de Knapp favorise au contraire les lunettes placées au foyer objet de l'œil.)",
+    explication: "L'aniséiconie induite dépend de la distance compensation-œil. En lentilles, cette distance passe d'environ 1,5 cm à quelques dixièmes de millimètre : l'aniséiconie devient beaucoup plus faible. Les lentilles sont donc l'équipement à conseiller. (Pour une anisométropie AXILE, la loi de Knapp favorise au contraire les lunettes placées au foyer objet de l'œil.)",
+    surLaCopie: "Les lentilles de contact sont placées presque contre la cornée : la distance compensation-œil passe d'environ 1,5 cm à quelques dixièmes de millimètre. L'aniséiconie induite, proportionnelle à cette distance, devient beaucoup plus faible. Les lentilles sont donc l'équipement à conseiller.",
     indice: "L'aniséiconie induite dépend de la distance entre la compensation et l'œil. Quel équipement rend cette distance la plus petite ?"
   },
   {
@@ -196,6 +206,7 @@ QUESTIONS.push(
     choix: ["Environ 1 %", "Environ 7,5 %", "Environ 8,5 %", "Environ 16 %"],
     bonne: 0,
     explication: "Anisométropie axile : les deux aniséiconies s'opposent. Axile ≈ 1,7 % par dioptrie de différence = 5 × 1,7 = 8,5 % en faveur de l'OG (le plus long, le plus myope). Induite par les lunettes ≈ LH (cm) × différence des verres = 1,5 × 5 = 7,5 % en faveur de l'OD (le moins myope). Totale ≈ 8,5 − 7,5 = 1 % (raccourci : environ 0,2 % par dioptrie avec LH = 15 mm). En lunettes, l'aniséiconie est donc presque compensée ; en lentilles, l'induite disparaît et il resterait 8,5 %.",
+    surLaCopie: "Les aniséiconies axile et induite s'opposent. Axile : environ 1,7 % par dioptrie, soit 8,5 % en faveur de l'OG. Induite : distance verre-œil 1,5 cm × 5 ≈ 7,5 % en faveur de l'OD. Totale : environ 1 %, les lunettes compensent presque tout.",
     indice: "Deux effets s'opposent : l'œil le plus long fait une image plus grande, et les lunettes en font une plus petite. Estime les deux, puis compare-les."
   },
   {
@@ -225,7 +236,8 @@ QUESTIONS.push(
     question: "Pourquoi un anisométrope équipé en lentilles ne voit-il plus double quand il regarde vers le haut ?",
     choix: ["Les lentilles compensent la phorie", "La lentille suit l'œil : la ligne de regard reste centrée, pas d'effet prismatique différentiel", "Les lentilles augmentent les réserves fusionnelles", "Les lentilles suppriment l'anisométropie"],
     bonne: 1,
-    explication: "En lunettes, regarder hors du centre optique crée un prisme différent sur chaque œil, donc une phorie induite. La lentille suit le globe dans ses mouvements et reste centrée sur la cornée : pas d'effet prismatique, donc pas de phorie induite.",
+    explication: "Vers le haut, les verres de puissances différentes créent un prisme vertical différent sur chaque œil (règle de Prentice), d'où une hyperphorie qui peut donner une diplopie. La lentille accompagne l'œil : le regard passe toujours par son centre, aucun prisme ne s'ajoute et le sujet ne voit plus double.",
+    surLaCopie: "Vers le haut, les verres de puissances différentes créent un prisme vertical différent sur chaque œil (règle de Prentice), d'où une hyperphorie qui peut donner une diplopie. La lentille accompagne l'œil : le regard passe toujours par son centre, aucun prisme ne s'ajoute et le sujet ne voit plus double.",
     indice: "En lunettes, l'effet prismatique vient de l'écart entre la ligne de regard et le centre optique. Que devient cet écart si la compensation bouge avec l'œil ?"
   },
   {
@@ -235,6 +247,7 @@ QUESTIONS.push(
     choix: ["Une lésion de la rétine", "L'image floue de cet œil pendant la période de maturation visuelle", "Un glaucome congénital", "Une cataracte"],
     bonne: 1,
     explication: "Amblyopie fonctionnelle = baisse d'acuité liée à la non-utilisation d'un œil pendant la période de maturation visuelle, sans lésion organique. Le cerveau privilégie l'image nette de l'autre œil. Si chaque œil est utilisé à son tour (un pour le loin, l'autre pour le près), l'amblyopie peut ne pas apparaître.",
+    surLaCopie: "L'œil le plus amétrope donne une image floue pendant la période de maturation visuelle. Le cerveau privilégie l'image nette de l'autre œil et n'utilise plus le premier. Sans lésion organique, l'acuité de cet œil reste basse : c'est une amblyopie fonctionnelle.",
     indice: "Fonctionnelle veut dire sans lésion. Pense à ce que le cerveau reçoit de chaque œil pendant l'enfance, quand le système visuel se construit."
   },
 
@@ -263,7 +276,8 @@ QUESTIONS.push(
     question: "Au cadran de Parent (sujet légèrement myopisé), la ligne 3h-9h est vue la plus noire. Axe du cylindre négatif compensateur ?",
     choix: ["30°", "90°", "180°", "120°"],
     bonne: 1,
-    explication: "Sujet myopisé : la ligne la plus noire correspond à la focale arrière, la plus proche de la rétine. Elle est horizontale (0°-180°). L'axe du cylindre négatif est perpendiculaire à la direction vue la plus noire : 90°. À l'examen, le « calcul » avec les chiffres du cadran (×30) n'est pas accepté comme justification.",
+    explication: "Sujet myopisé : les deux focales sont en avant de la rétine, et la ligne vue la plus noire est parallèle à la focale arrière, la plus proche de la rétine. Elle est horizontale (0°-180°). L'axe du cylindre négatif est perpendiculaire à la direction vue la plus noire : 90°. À l'examen, le « calcul » avec les chiffres du cadran (×30) n'est pas accepté comme justification.",
+    surLaCopie: "Le sujet est légèrement myopisé : les deux focales sont en avant de la rétine. La ligne vue la plus noire est parallèle à la focale arrière, la plus proche de la rétine. Elle est horizontale. L'axe du cylindre négatif est perpendiculaire : 90°.",
     indice: "Sujet myopisé : la ligne la plus noire correspond à la focale arrière. L'axe du cylindre négatif est perpendiculaire à cette ligne.",
     schema: "img/schemas/U5/cadran-parent-3-9.svg",
     schemaTexte: "Cadran de Parent : la ligne 3h-9h, horizontale, est la plus noire. C'est la focale arrière ; l'axe du cylindre négatif est perpendiculaire, à 90°."
@@ -275,6 +289,7 @@ QUESTIONS.push(
     choix: ["Pour mesurer l'acuité", "Pour placer les deux focales en avant de la rétine et empêcher l'accommodation de fausser le test", "Pour mesurer la phorie", "Pour tester la vision des couleurs"],
     bonne: 1,
     explication: "Avec une défocalisation en avant de la rétine, la ligne la plus noire correspond toujours à la focale arrière, et accommoder ne ferait qu'aggraver le flou : le sujet n'a pas intérêt à accommoder.",
+    surLaCopie: "On myopise légèrement pour placer les deux focales en avant de la rétine. L'accommodation ne ferait alors qu'augmenter le flou : le sujet n'a pas intérêt à accommoder, et la ligne la plus noire est bien la focale arrière.",
     indice: "Si les deux focales sont en avant de la rétine, que se passerait-il si le sujet accommodait : plus net ou plus flou ?"
   },
   {
@@ -346,6 +361,7 @@ QUESTIONS.push(
     choix: ["Pour relâcher l'accommodation", "Pour mesurer l'astigmatisme", "Pour tester la vision des couleurs", "Pour stimuler la convergence"],
     bonne: 0,
     explication: "En ajoutant du positif, l'image passe en avant de la rétine : accommoder ne ferait qu'augmenter le flou, le sujet relâche son accommodation. Indispensable pour ne pas sous-compenser un hypermétrope ni surcompenser un myope.",
+    surLaCopie: "Le brouillage place l'image en avant de la rétine. Accommoder aggraverait le flou : le sujet relâche son accommodation. Cela évite de sous-compenser un hypermétrope ou de surcompenser un myope.",
     indice: "Le brouillage ajoute du positif : l'image passe devant la rétine. Que gagnerait le sujet à accommoder dans ce cas ?"
   },
 
@@ -374,7 +390,8 @@ QUESTIONS.push(
     question: "Un œil a 1,00 δ d'astigmatisme cornéen direct mais aucun astigmatisme total. Son astigmatisme interne est :",
     choix: ["Nul", "1,00 δ direct", "1,00 δ inverse", "2,00 δ direct"],
     bonne: 2,
-    explication: "Astigmatisme total = cornéen (+) interne. Pour un total nul, l'interne compense exactement le cornéen : 1,00 δ inverse (compensé par plan (−1,00) 90°). C'est la situation physiologique : cornée directe, interne inverse.",
+    explication: "Astigmatisme total = cornéen (+) interne. Pour un total nul, l'interne compense exactement le cornéen : 1,00 δ inverse (compensé par plan (−1,00) 90°). Le sens est habituel (cornée directe, interne inverse), mais 1,00 δ d'interne dépasse la valeur courante, d'environ 0,50 δ.",
+    surLaCopie: "L'astigmatisme total est la somme du cornéen et de l'interne. Le total est nul : l'interne compense exactement le cornéen, il vaut donc 1,00 δ inverse. Le sens est habituel (cornée directe, interne inverse), mais 1,00 δ dépasse la valeur courante, d'environ 0,50 δ.",
     indice: "Astigmatisme total = cornéen (+) interne. Si le total est nul, l'interne doit annuler le cornéen : même valeur, et quelle nature ?"
   },
   {
@@ -407,10 +424,11 @@ QUESTIONS.push(
   {
     id: "U5-040", epreuve: "U5", theme: "Lentilles", session: "2020",
     difficulte: "moyen",
-    question: "À la fluorescéine, une LRPG montre beaucoup de fluorescéine en périphérie, très peu au centre, et bouge trop. L'adaptation est :",
+    question: "Au contrôle à la fluorescéine, une LRPG laisse passer beaucoup de colorant sur le bord et presque pas au milieu, et elle se déplace trop à chaque clignement. L'adaptation est :",
     choix: ["Serrée", "Alignée", "Plate", "Parfaite"],
     bonne: 2,
     explication: "Appui central (peu de fluorescéine au centre) + forte mobilité = adaptation plate. On resserre en diminuant le rayon de la face arrière (ro).",
+    surLaCopie: "Peu de fluorescéine au centre signe un appui central, et la lentille bouge trop : l'adaptation est plate. Pour la resserrer, on diminue le rayon de la face arrière (ro).",
     indice: "La fluorescéine s'accumule là où la lentille est décollée de la cornée. Peu au centre = appui au centre : compare le rayon de la lentille à celui de la cornée.",
     schema: "img/schemas/U5/fluo-lrpg-plate.svg",
     schemaTexte: "Trois images de fluorescéine sous lentille rigide : alignée (film régulier), plate (centre sombre, périphérie verte, appui central) et serrée (réservoir vert au centre). Profil sous chaque image."
@@ -628,7 +646,8 @@ QUESTIONS.push(
     question: "Au démasquage de l'OG, mouvement temporo-nasal ; rien au masquage. Quelle rédaction est juste et complète ?",
     choix: ["C'est une exophorie.", "Mouvement temporo-nasal au démasquage : c'est une ésophorie, puisque l'œil va vers le nez.", "Au démasquage, l'OG revient vers le nez, ce qui montre qu'il était dévié vers la tempe sous le cache.", "Rien au masquage : pas de tropie. Au démasquage, l'OG revient vers le nez : il était dévié vers la tempe, c'est une exophorie."],
     bonne: 3,
-    explication: "Une bonne rédaction donne l'argument ET la conclusion. « C'est une exophorie » n'a pas d'argument ; la troisième proposition explique sans conclure ; la deuxième se trompe de sens (l'œil revient vers le nez, il était parti vers la tempe).",
+    explication: "Une bonne rédaction donne l'argument ET la conclusion. « C'est une exophorie » seul n'a pas d'argument ; la phrase qui explique le mouvement sans conclure est incomplète ; celle qui conclut à une ésophorie se trompe de sens (l'œil revient vers le nez, il était parti vers la tempe).",
+    surLaCopie: "Rien au masquage : il n'y a pas de tropie. Au démasquage l'OG revient vers le nez, il était donc parti vers la tempe sous le cache. Je conclus à une exophorie de l'OG.",
     indice: "Cherche la phrase qui a les deux : l'observation interprétée (où était l'œil sous le cache) et le mot de conclusion."
   },
   {
@@ -640,7 +659,8 @@ QUESTIONS.push(
     question: "BUT mesuré : 7 s. Quelle rédaction est juste et complète ?",
     choix: ["La norme du BUT est de 10 à 20 s et le sujet est à 7 s.", "BUT de 7 s, sous la norme de 10 à 20 s : le film lacrymal est instable, une lentille souple hydrogel est déconseillée.", "Le BUT est trop court.", "BUT de 7 s : il est normal, car supérieur à 5 s."],
     bonne: 1,
-    explication: "La rédaction attendue : valeur du sujet, norme, comparaison, conséquence. La première compare sans conclure, la troisième conclut sans norme, la dernière utilise une mauvaise norme (5 s concerne le film pré-lentille, pas le BUT).",
+    explication: "La rédaction attendue : valeur du sujet, norme, comparaison, conséquence. La phrase qui compare sans conclure est incomplète, « le BUT est trop court » conclut sans norme, et celle qui juge 7 s normal utilise une mauvaise norme (5 s concerne le film pré-lentille, pas le BUT).",
+    surLaCopie: "Le BUT mesuré est de 7 s. La norme est de 10 à 20 s. Il est sous la norme : le film lacrymal est instable, ce qui contre-indique les lentilles souples hydrogel classiques (certains silicone-hydrogel restent possibles).",
     indice: "Une bonne réponse « dans / hors norme » suit toujours 3 temps : la valeur, la norme, la conclusion."
   },
   {
@@ -652,7 +672,8 @@ QUESTIONS.push(
     question: "OD −1,00, OG −6,00, anisométropie de puissance. Pourquoi conseiller des lentilles ? Quelle rédaction est juste et complète ?",
     choix: ["Les lentilles corrigent l'anisométropie, car elles modifient la longueur de l'œil.", "L'aniséiconie induite dépend de la distance entre la compensation et l'œil, et la lentille est posée sur la cornée.", "L'aniséiconie induite dépend de la distance compensation-œil : la lentille, posée sur la cornée, la réduit fortement. Les lentilles sont donc conseillées.", "Les lentilles sont la meilleure solution pour un anisométrope."],
     bonne: 2,
-    explication: "La bonne rédaction relie la cause (distance compensation-œil) à l'effet (aniséiconie réduite) et conclut. La deuxième explique sans conclure, la quatrième conclut sans argument (et ce n'est pas vrai pour une anisométropie axile), la première est fausse.",
+    explication: "La bonne rédaction relie la cause (distance compensation-œil) à l'effet (aniséiconie réduite) et conclut. La phrase qui explique sans conclure est incomplète, celle qui conclut sans argument n'est pas vraie pour une anisométropie axile, et celle qui parle de longueur de l'œil est fausse : une lentille ne change pas la longueur de l'œil.",
+    surLaCopie: "L'aniséiconie induite par les lunettes dépend de la distance compensation-œil. En lentilles, cette distance est presque nulle : l'aniséiconie est beaucoup plus faible. Je conseille donc les lentilles, pour une anisométropie de puissance.",
     indice: "Cherche l'argument (de quoi dépend l'aniséiconie induite) suivi d'une conclusion claire."
   },
   {
@@ -664,7 +685,8 @@ QUESTIONS.push(
     question: "Sujet légèrement myopisé : au cadran de Parent, la ligne 12h-6h est la plus noire. Quelle justification de l'axe du cylindre négatif est juste ?",
     choix: ["Ligne 12h-6h : on prend le plus petit chiffre, 6 × 30 = 180°.", "La ligne la plus noire correspond à la focale arrière, qui est ici verticale.", "Sujet myopisé : les deux focales sont en avant de la rétine, la ligne la plus noire est la focale arrière, verticale. L'axe du cylindre négatif lui est perpendiculaire : 180°.", "L'axe du cylindre négatif est à 180°."],
     bonne: 2,
-    explication: "La justification attendue s'appuie sur la focale arrière, puis conclut sur l'axe. Le calcul « × 30 » donne le bon chiffre mais n'est pas accepté comme justification ; la deuxième n'a pas de conclusion ; la dernière n'a pas d'argument.",
+    explication: "La justification attendue s'appuie sur la focale arrière, puis conclut sur l'axe. Le calcul « × 30 » donne le bon chiffre mais n'est pas accepté comme justification ; la phrase qui s'arrête à la focale arrière n'a pas de conclusion ; celle qui donne seulement 180° n'a pas d'argument.",
+    surLaCopie: "Le sujet est myopisé : les deux focales sont en avant de la rétine et la ligne vue la plus noire est parallèle à la focale arrière. Elle est verticale. L'axe du cylindre négatif est perpendiculaire à cette ligne : horizontal, soit 180°.",
     indice: "Le correcteur veut la focale arrière dans le raisonnement, pas un calcul avec les chiffres du cadran. Et une conclusion chiffrée."
   },
 
@@ -1385,6 +1407,294 @@ QUESTIONS.push(
     bonne: 2,
     explication: "Le BUT est dans la norme de 10 à 20 s. Il n'y a pas de contre-indication aux lentilles sur ce test. Le choix se fera sur l'astigmatisme et sur la tolérance, notamment pour le sport.",
     indice: "Compare 12 s à la norme du BUT."
+  },
+  {
+    id: "U5-186",
+    difficulte: "facile",
+    epreuve: "U5",
+    theme: "Pathologie",
+    session: "complément",
+    question: "Dans une DMLA avancée, quelle partie de la vision est atteinte ?",
+    choix: ["Toute la vision, de façon uniforme", "Seulement la vision des couleurs", "La vision périphérique, la vision centrale restant bonne", "La vision centrale (lecture, visages), la vision périphérique restant conservée"],
+    bonne: 3,
+    explication: "La DMLA atteint la macula, zone de la vision centrale : la lecture et la reconnaissance des visages deviennent difficiles. La vision périphérique reste conservée : le patient garde son autonomie pour se déplacer. C'est l'inverse du glaucome, qui atteint d'abord le champ visuel en dehors du centre, la vision centrale étant touchée en dernier.",
+    indice: "La macula est le centre de la rétine. Que perd-on quand elle est atteinte ?"
+  },
+  {
+    id: "U5-187",
+    difficulte: "facile",
+    epreuve: "U5",
+    theme: "Pathologie",
+    session: "complément",
+    question: "Parmi ces clients, lequel est le plus exposé à un décollement de rétine ?",
+    choix: ["Un hypermétrope de +1,00", "Un emmétrope de 20 ans", "Un myope fort de −9,00", "Un presbyte de 45 ans sans antécédent"],
+    bonne: 2,
+    explication: "Un œil très myope est long et sa rétine est étirée et fragilisée en périphérie : le risque de déchirure puis de décollement est plus élevé. Un traumatisme ou une chirurgie de la cataracte augmentent aussi le risque.",
+    indice: "Pense à la longueur de l'œil et à la rétine qui s'étire."
+  },
+  {
+    id: "U5-188",
+    difficulte: "moyen",
+    epreuve: "U5",
+    theme: "Pathologie",
+    session: "complément",
+    question: "Un client a l'œil rouge, des sécrétions collantes au réveil, une vue normale et peu de douleur. Quelle conduite est juste ?",
+    choix: ["Je lui annonce un glaucome aigu", "Je lui conseille de continuer ses lentilles pour protéger l'œil", "Ces signes évoquent une conjonctivite : je conseille un avis médical (ou du pharmacien), de se laver souvent les mains et de ne pas porter ses lentilles", "Je l'adresse aux urgences, c'est un décollement de rétine"],
+    bonne: 2,
+    explication: "Œil rouge avec sécrétions, sans douleur forte ni baisse de vue, évoque une conjonctivite. L'opticien ne pose pas de diagnostic : il conseille un avis médical ou du pharmacien, des mains lavées souvent, et l'arrêt des lentilles tant que l'œil est rouge. L'absence de douleur vive et de baisse de vue rend une urgence peu probable ; s'il apparaît une douleur ou une baisse de vue, il consulte sans attendre.",
+    indice: "Quels signes manquent par rapport à une urgence : douleur, baisse de vue, halos ?"
+  },
+  {
+    id: "U5-189",
+    difficulte: "difficile",
+    epreuve: "U5",
+    theme: "Pathologie",
+    session: "complément",
+    question: "Un dépistage indique une PIO de 24 mmHg ; le client précise que sa cornée est épaisse (620 µm). Que peut-on en dire ?",
+    choix: ["L'épaisseur de la cornée n'a aucun effet sur la mesure", "La pression est normale car la cornée est épaisse", "La cornée épaisse peut faire surestimer la pression : l'ophtalmologiste interprète, et on oriente quand même", "La cornée épaisse fait sous-estimer la pression : elle est donc plus élevée encore"],
+    bonne: 2,
+    explication: "Les tonomètres sont étalonnés pour une cornée moyenne. Une cornée plus épaisse que la moyenne donne une pression apparente trop élevée. L'interprétation revient à l'ophtalmologiste, qui tient compte de l'épaisseur. Une valeur de 24 mmHg reste à orienter.",
+    indice: "Une cornée épaisse résiste davantage à l'aplanation : la valeur lue est-elle trop forte ou trop faible ?"
+  },
+  {
+    id: "U5-190",
+    difficulte: "difficile",
+    epreuve: "U5",
+    theme: "Pathologie",
+    session: "complément",
+    question: "Un client voit double. La vision double persiste quand il ferme un œil. Quelle origine est la plus probable ?",
+    choix: ["Une paralysie d'un muscle oculomoteur", "Une phorie décompensée", "Un strabisme paralytique récent", "Une cause oculaire : cristallin, cornée ou astigmatisme irrégulier"],
+    bonne: 3,
+    explication: "Une diplopie qui persiste avec un seul œil ouvert est monoculaire : elle vient de l'œil lui-même (cataracte, kératocône, astigmatisme irrégulier). Une diplopie binoculaire, qui disparaît en fermant un œil, vient d'un défaut d'alignement : paralysie, phorie décompensée, strabisme.",
+    indice: "Ferme un œil : la diplopie reste. L'origine est-elle dans l'alignement des deux yeux ?"
+  },
+  {
+    id: "U5-191",
+    difficulte: "facile",
+    epreuve: "U5",
+    theme: "Pathologie",
+    session: "complément",
+    question: "Les parents disent que l'œil d'un enfant de 6 ans dévie parfois. « Il grandira. » Que conseillez-vous ?",
+    choix: ["Un bilan rapide chez l'ophtalmologiste ou l'orthoptiste : un strabisme non traité peut entraîner une amblyopie", "Attendre ses dix ans, il rattrapera", "Des lunettes teintées pour reposer l'œil", "Rien, un strabisme intermittent est sans conséquence"],
+    bonne: 0,
+    explication: "Un strabisme, même intermittent, peut conduire à une amblyopie de l'œil dévié, d'autant plus difficile à traiter que l'enfant est grand. On oriente sans attendre vers l'ophtalmologiste ou l'orthoptiste.",
+    indice: "Que risque l'œil qui dévie s'il n'est pas utilisé ?"
+  },
+  {
+    id: "U5-192",
+    difficulte: "moyen",
+    epreuve: "U5",
+    theme: "Réfraction",
+    session: "complément",
+    question: "Pourquoi détermine-t-on la compensation de loin avant l'addition de près ?",
+    choix: ["On ne mesure jamais la vision de loin chez un presbyte", "L'addition se calcule à partir de la compensation de loin, qui doit donc être exacte d'abord", "L'addition est la même pour tous les presbytes de même âge", "La vision de près ne dépend pas de la vision de loin"],
+    bonne: 1,
+    explication: "La compensation de près est la compensation de loin plus l'addition. Une erreur de loin se reporte donc sur la vision de près. On règle d'abord la vision de loin, puis on cherche l'addition selon l'amplitude et la distance de lecture.",
+    indice: "La puissance de près est la somme de deux termes."
+  },
+  {
+    id: "U5-193",
+    difficulte: "moyen",
+    epreuve: "U5",
+    theme: "Réfraction",
+    session: "complément",
+    question: "Quel est le but de l'équilibre binoculaire en fin de réfraction subjective ?",
+    choix: ["Mesurer l'acuité de chaque œil séparément", "Rendre l'œil gauche plus fort que l'œil droit", "Déterminer l'axe du cylindre", "Égaliser l'état accommodatif des deux yeux"],
+    bonne: 3,
+    explication: "L'équilibre binoculaire (par brouillage alterné ou dissociation) vérifie que les deux yeux sont brouillés de la même façon : les deux yeux travaillent avec la même accommodation et le même confort. Il se fait après la détermination monoculaire de chaque œil.",
+    indice: "Les deux yeux regardent ensemble : que doit-on égaliser avant de conclure ?"
+  },
+  {
+    id: "U5-194",
+    difficulte: "facile",
+    epreuve: "U5",
+    theme: "Réfraction",
+    session: "complément",
+    type: "calcul",
+    question: "Calcule l'équivalent sphérique de −2,00 (−1,50) 90°.",
+    reponse: {"valeur": -2.75, "unite": "δ", "decimales": 2, "signe": true},
+    explication: "Équivalent sphérique = S + [[C|2]]\n= −2,00 + [[−1,50|2]]\n= −2,00 − 0,75\n= −2,75 δ.",
+    indice: "Équivalent sphérique = S + [[C|2]]. L'axe ne compte pas."
+  },
+  {
+    id: "U5-195",
+    difficulte: "moyen",
+    epreuve: "U5",
+    theme: "Réfraction",
+    session: "complément",
+    question: "Transpose +2,00 (−1,00) 90° en cylindre positif.",
+    choix: ["+1,00 (+1,00) 90°", "+3,00 (+1,00) 180°", "+1,00 (+1,00) 180°", "+2,00 (+1,00) 180°"],
+    bonne: 2,
+    explication: "Nouvelle sphère = +2,00 + (−1,00) = +1,00. Le cylindre change de signe : +1,00. L'axe tourne de 90° : 90° + 90° = 180°. Vérification : méridiens +2,00 et +1,00 dans les deux écritures.",
+    indice: "Sphère + cylindre, cylindre de signe opposé, axe ± 90°."
+  },
+  {
+    id: "U5-196",
+    difficulte: "moyen",
+    epreuve: "U5",
+    theme: "Lentilles",
+    session: "complément",
+    type: "calcul",
+    question: "Un myope porte −6,50 en lunettes, verres à 12 mm de la cornée. Calcule la puissance de la lentille de contact équivalente.",
+    reponse: {"valeur": -6.03, "unite": "δ", "decimales": 2, "signe": true, "tolerance": 0.1},
+    explication: "P(lentille) = [[P|1 − d·P]]\n= [[−6,50|1 − 0,012 × (−6,50)]]\n= [[−6,50|1,078]]\n≈ −6,03 δ.\nUn verre divergent devient plus faible en lentille.",
+    indice: "P(lentille) = [[P|1 − d·P]], avec d = 0,012 m."
+  },
+  {
+    id: "U5-197",
+    difficulte: "facile",
+    epreuve: "U5",
+    theme: "Lentilles",
+    session: "complément",
+    question: "Quel est l'avantage principal d'une lentille journalière jetable ?",
+    choix: ["Pas d'entretien : on la jette le soir, ce qui réduit le risque infectieux", "Elle se porte trente jours", "Elle se porte la nuit sans risque", "Elle corrige l'astigmatisme sans cylindre"],
+    bonne: 0,
+    explication: "La lentille journalière est portée une journée puis jetée : pas de produit d'entretien, pas de dépôts accumulés, et moins de risques infectieux. Elle ne se porte jamais la nuit.",
+    indice: "Qu'est-ce qui disparaît quand on jette la lentille chaque soir ?"
+  },
+  {
+    id: "U5-198",
+    difficulte: "moyen",
+    epreuve: "U5",
+    theme: "Lentilles",
+    session: "complément",
+    question: "On propose la monovision à un presbyte emmétrope. En quoi consiste-t-elle ?",
+    choix: ["Les deux yeux portent la même addition", "Un œil est occlus en permanence", "Un œil (le dominant) corrigé pour la vision de loin, l'autre pour la vision de près", "Les deux yeux sont corrigés pour la vision de loin seulement"],
+    bonne: 2,
+    explication: "Dans la monovision, l'œil dominant est corrigé pour la vision de loin, l'autre est corrigé pour la vision de près, ce qui le brouille un peu de loin. Cela se teste avant de commander : certains porteurs perdent un peu de vision binoculaire et de relief.",
+    indice: "Chaque œil a un rôle différent."
+  },
+  {
+    id: "U5-199",
+    difficulte: "facile",
+    epreuve: "U5",
+    theme: "Lentilles",
+    session: "complément",
+    question: "Quel est l'ordre logique d'une première adaptation en lentilles ?",
+    choix: ["Essai direct, puis kératométrie, puis examen préliminaire", "Examen préliminaire et kératométrie, choix des paramètres, essai, contrôle de l'adaptation, puis de la vision", "Choix de la lentille, commande, puis seulement la kératométrie", "Contrôle de la vision, puis choix de la couleur de la lentille"],
+    bonne: 1,
+    explication: "On commence par l'examen préliminaire et la kératométrie, qui donnent les paramètres de départ. On choisit une lentille d'essai, on contrôle l'adaptation (centrage, mouvement, fluorescéine pour une rigide), puis la vision et le confort, avant la commande finale.",
+    indice: "On mesure avant de choisir, et on essaie avant de commander."
+  },
+  {
+    id: "U5-200",
+    difficulte: "facile",
+    epreuve: "U5",
+    theme: "Worth",
+    session: "complément",
+    question: "Que mesure l'acuité stéréoscopique ?",
+    choix: ["L'écart entre les deux pupilles", "La phorie de près", "La plus petite lettre lue avec un seul œil", "La plus petite disparité entre les deux yeux qui donne encore une sensation de relief"],
+    bonne: 3,
+    explication: "Le relief vient de la petite différence entre les images des deux yeux, la disparité. L'acuité stéréoscopique est la plus petite disparité perçue en relief, exprimée en secondes d'arc. Elle est d'environ 20 secondes, et normale jusqu'à 60.",
+    indice: "Le relief nécessite deux yeux : qu'est-ce qui diffère entre leurs deux images ?"
+  },
+  {
+    id: "U5-201",
+    difficulte: "moyen",
+    epreuve: "U5",
+    theme: "Worth",
+    session: "complément",
+    question: "Un test de relief donne une acuité stéréoscopique de 200 secondes d'arc. Que conclure ?",
+    choix: ["Elle est excellente, car elle est élevée", "Elle est diminuée : la valeur normale va jusqu'à 60 secondes", "Elle est normale, la norme va jusqu'à 400", "Elle prouve un strabisme convergent"],
+    bonne: 1,
+    explication: "Plus la valeur en secondes d'arc est petite, meilleure est l'acuité stéréoscopique. La norme va jusqu'à 60 secondes chez un sujet jeune : 200 secondes est une acuité diminuée. Elle peut venir d'une neutralisation partielle, d'une amblyopie ou d'une anisométropie. La valeur ne désigne pas à elle seule le type de déviation.",
+    indice: "Une petite valeur de disparité détectée = une bonne vision du relief."
+  },
+  {
+    id: "U5-202",
+    difficulte: "moyen",
+    epreuve: "U5",
+    theme: "Worth",
+    session: "complément",
+    question: "Au Worth, un sujet ne voit que 3 symboles verts : un œil est neutralisé. Quelle conséquence a-t-on sur le relief ?",
+    choix: ["Relief absent ou très diminué : le relief fin demande la fusion des images des deux yeux", "Le relief est meilleur, car un seul œil travaille", "Le relief est inchangé, il vient de l'accommodation", "Le relief ne dépend que de la taille de la pupille"],
+    bonne: 0,
+    explication: "La stéréoscopie exige que les deux yeux envoient des images fusionnables. Si un œil est neutralisé, il n'y a pas de fusion centrale, donc pas de relief fin. Le sujet juge les distances avec des indices monoculaires (taille, ombres, perspective).",
+    indice: "Le relief vient-il d'un œil ou de la comparaison entre les deux ?"
+  },
+  {
+    id: "U5-203",
+    difficulte: "moyen",
+    epreuve: "U5",
+    theme: "Examen préliminaire",
+    session: "complément",
+    question: "Quelle est la partie du champ visuel monoculaire la plus étendue ?",
+    choix: ["Le bas, environ 90°", "Le côté nasal, environ 90°", "Le haut, environ 90°", "Le côté temporal, environ 90°"],
+    bonne: 3,
+    explication: "Le nez limite le côté nasal (environ 60°) et l'arcade sourcilière le haut (environ 50 à 60°). Du côté temporal, rien ne gêne : le champ monoculaire y atteint environ 90°. Le bas atteint environ 70°. Les côtés temporaux des deux yeux donnent au champ des deux yeux sa largeur totale, environ 180°.",
+    indice: "Quel côté est libre de toute gêne anatomique ?"
+  },
+  {
+    id: "U5-204",
+    difficulte: "moyen",
+    epreuve: "U5",
+    theme: "Examen préliminaire",
+    session: "complément",
+    question: "À quoi sert le test de confrontation ?",
+    choix: ["À dépister grossièrement un déficit du champ en comparant celui du sujet à celui de l'examinateur", "À mesurer l'acuité en vision de près", "À mesurer la pression oculaire", "À contrôler l'axe d'un cylindre"],
+    bonne: 0,
+    explication: "L'examinateur, face au sujet, compare ce que celui-ci perçoit à la périphérie avec son propre champ. C'est un dépistage rapide et approximatif : un déficit repéré doit être confirmé par un champ visuel (périmétrie) chez l'ophtalmologiste.",
+    indice: "On compare deux champs de vision : lesquels ?"
+  },
+  {
+    id: "U5-205",
+    difficulte: "moyen",
+    epreuve: "U5",
+    theme: "Examen préliminaire",
+    session: "complément",
+    question: "Un client dit qu'il voit « comme dans un tunnel », avec un centre net et une périphérie qui disparaît. Que faites-vous ?",
+    choix: ["Je refais ses lunettes avec une addition plus forte", "Je lui conseille un verre teinté", "Je note un rétrécissement du champ, sans poser de diagnostic, et je l'oriente vers l'ophtalmologiste", "Je ne fais rien : il se plaint du centre, qui est net"],
+    bonne: 2,
+    explication: "Un champ rétréci de la périphérie vers le centre, la vision centrale restant bonne longtemps, peut évoquer un glaucome avancé ou une atteinte de la rétine périphérique. L'opticien décrit ce qu'il constate et oriente, sans diagnostic. Les lunettes ne le corrigent pas.",
+    indice: "Que perd-on quand le champ se rétrécit : le centre ou la périphérie ?"
+  },
+  {
+    id: "U5-206",
+    difficulte: "difficile",
+    epreuve: "U5",
+    theme: "Examen préliminaire",
+    session: "complément",
+    question: "Un porteur de verres de +10,00 δ se plaint d'un anneau où il ne voit plus rien, en périphérie de son champ, avec ses lunettes. Quelle en est la cause ?",
+    choix: ["Un glaucome à angle fermé", "Une cataracte débutante", "La distance pupillaire mal mesurée", "L'effet prismatique du bord du verre fortement convergent (scotome annulaire)"],
+    bonne: 3,
+    explication: "Un verre convergent fort a un bord épais : il dévie les rayons vers l'axe optique, et une zone annulaire du champ n'est plus vue par l'œil. Le porteur peut voir apparaître et disparaître des objets en périphérie. Un verre asphérique ou lenticulaire réduit ce défaut ; une lentille de contact le supprime.",
+    indice: "Un verre convexe fort agit comme un prisme sur son bord."
+  },
+  {
+    id: "U5-207",
+    difficulte: "facile",
+    epreuve: "U5",
+    theme: "Pathologie",
+    session: "complément",
+    question: "Qui est le plus souvent atteint par le daltonisme congénital rouge-vert ?",
+    choix: ["Tous les sujets à partir de 60 ans", "Seulement les enfants de moins de 5 ans", "Les garçons et les hommes", "Les filles et les femmes"],
+    bonne: 2,
+    explication: "La dyschromatopsie rouge-vert congénitale est transmise par le chromosome X de façon récessive : elle touche beaucoup plus souvent les garçons que les filles. Elle est présente dès la naissance, stable et touche les deux yeux de la même façon.",
+    indice: "Transmission liée au chromosome X : qui a un seul X ?"
+  },
+  {
+    id: "U5-208",
+    difficulte: "moyen",
+    epreuve: "U5",
+    theme: "Pathologie",
+    session: "complément",
+    question: "Un adulte dit que les couleurs sont devenues ternes d'un seul œil depuis quelques semaines. Quelle conduite est juste ?",
+    choix: ["Je lui conseille d'attendre un an", "Je lui explique que c'est du daltonisme, sans conséquence", "Je l'oriente vers l'ophtalmologiste : cela évoque une dyschromatopsie acquise, qui peut révéler une atteinte du nerf optique ou de la macula", "Je lui propose des verres teintés pour raviver les couleurs"],
+    bonne: 2,
+    explication: "Une perte récente de la vision des couleurs, sur un œil, n'est pas un daltonisme congénital, qui est présent depuis toujours et touche les deux yeux. Elle peut annoncer une atteinte du nerf optique ou de la macula : on oriente sans attendre, sans diagnostic.",
+    indice: "Récent et un seul œil : est-ce plutôt congénital ou acquis ?"
+  },
+  {
+    id: "U5-209",
+    difficulte: "moyen",
+    epreuve: "U5",
+    theme: "Examen préliminaire",
+    session: "complément",
+    question: "Pourquoi la vision des couleurs est-elle moins bonne en périphérie du champ ?",
+    choix: ["Parce que les bâtonnets sont concentrés dans la fovéa", "Parce que les cônes sont rares en périphérie de la rétine", "Parce que la pupille est trop petite", "Parce que le cristallin est plus épais en périphérie"],
+    bonne: 1,
+    explication: "Les cônes, responsables de la vision des couleurs et de la précision, sont concentrés dans la fovéa. Les bâtonnets, sensibles à la lumière faible, dominent en périphérie : on y distingue mal les couleurs.",
+    indice: "Quelles cellules voient les couleurs, et où sont-elles ?"
   }
 );
 

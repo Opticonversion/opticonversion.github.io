@@ -28,7 +28,7 @@
   // Les tiroirs : trois seulement, pour qu'une définition soit acquise vite (deux bonnes réponses, sur deux jours).
   // Tiroir 1 : à revoir tout de suite. Tiroir 2 : revient demain. Tiroir 3 : acquis, repasse au bout de 3 jours.
   // Pour changer le rythme, il suffit de changer « jours » (ou d'ajouter un tiroir à la liste).
-  const TIROIRS = [null, { nom: "à revoir", jours: 0 }, { nom: "demain", jours: 1 }, { nom: "acquis", jours: 3 }];
+  const TIROIRS = [null, { nom: "à revoir", jours: 0 }, { nom: "sues une fois", jours: 1 }, { nom: "acquises", jours: 3 }];
   const DERNIER = TIROIRS.length - 1;
   // Le tiroir d'une carte (0 = pas encore vue). Les anciennes notes n'ont pas de tiroir : sue = 2, à revoir = 1.
   const tiroirDe = etat => (!etat ? 0 : etat.b >= 1 ? Math.min(DERNIER, etat.b) : etat.s ? 2 : 1);
@@ -103,8 +103,8 @@
     const tombee = Array.isArray(d.sessions) && d.sessions.length > 0;
     const s = document.createElement("span");
     s.className = "def-badge " + (tombee ? "tombee" : "probable");
-    s.textContent = tombee ? "★ Tombée en " + d.sessions.slice().sort().join(", ") : "Probable";
-    s.title = tombee ? "Déjà demandée à l'écrit du BTS" : "Pas encore demandée, mais au programme";
+    s.textContent = tombee ? "★ Tombée en " + d.sessions.slice().sort().join(", ") : "Pas encore tombée";
+    s.title = tombee ? "Déjà demandée à l'écrit du BTS" : "Au programme, mais pas encore demandée à l'écrit du BTS";
     return s;
   }
 
@@ -114,7 +114,8 @@
     if (!Array.isArray(d.utilise) || !d.utilise.length) return null;
     const p = document.createElement("span");
     p.className = "def-utilise";
-    p.textContent = "Utilisée dans " + (d.utilise.length > 1 ? "les sujets " : "le sujet ") + d.utilise.slice().sort().join(", ");
+    p.textContent = "Sert dans " + (d.utilise.length > 1 ? "les sujets " : "le sujet ") + d.utilise.slice().sort().join(", ");
+    p.title = "La notion sert dans le sujet, sans qu'on demande de la définir";
     return p;
   }
 
@@ -215,7 +216,7 @@
       if (etat) {
         const e = document.createElement("span");
         e.className = "def-etat " + (etat.s ? "sue" : "arevoir");
-        e.textContent = etat.s ? "✓ Sue · tiroir " + tiroirDe(etat) : "↻ À revoir · tiroir 1";
+        e.textContent = ["", "À revoir", "Sue une fois", "Acquise"][tiroirDe(etat)];
         li.querySelector(".def-bas").appendChild(e);
       }
       liste.appendChild(li);
@@ -230,7 +231,7 @@
       zone.appendChild(creerBarreProgression(bilan, {
         titre: "Ta révision",
         detail: bilan.faites === 0 ? "Pas encore révisées : lance le mode révision !"
-          : dues + " à voir aujourd'hui" + (nouvelles ? ", dont " + nouvelles + " pas encore vue" + (nouvelles > 1 ? "s" : "") : "") + (defs.length - dues ? " · " + (defs.length - dues) + " au repos dans " + (defs.length - dues > 1 ? "leurs tiroirs" : "son tiroir") : "")
+          : dues + " à voir aujourd'hui" + (nouvelles ? ", dont " + nouvelles + " pas encore vue" + (nouvelles > 1 ? "s" : "") : "") + (defs.length - dues ? " · " + (defs.length - dues) + " déjà sue" + (defs.length - dues > 1 ? "s" : "") + ", à revoir plus tard" : "")
       }));
     }
     // Les tiroirs : combien de cartes dans chacun (parmi celles affichées)
@@ -239,7 +240,7 @@
       rangee.className = "tiroirs";
       rangee.setAttribute("role", "img");
       const comptes = TIROIRS.slice(1).map((t, i) => defs.filter(d => tiroirDe(m[d.id]) === i + 1).length);
-      rangee.setAttribute("aria-label", "Tes tiroirs : " + comptes.map((n, i) => n + " dans le tiroir " + (i + 1) + " (" + TIROIRS[i + 1].nom + ")").join(", "));
+      rangee.setAttribute("aria-label", "Où en sont ces définitions : " + comptes.map((n, i) => n + " " + TIROIRS[i + 1].nom).join(", "));
       comptes.forEach((n, i) => {
         const t = document.createElement("div");
         t.className = "tiroir" + (n ? "" : " vide") + (i === 0 && n ? " a-revoir" : "");
@@ -267,8 +268,8 @@
     $("def-reviser-tout").hidden = n === defs.length;
     $("def-reviser-tout").textContent = "Tout réviser (" + defs.length + ")";
     $("def-repos").hidden = !choix.repos;
-    $("def-repos").textContent = choix.toutAuRepos ? "Tout est au repos dans les tiroirs : rien à voir aujourd'hui, mais tu peux quand même faire un tour."
-      : choix.repos + (choix.repos > 1 ? " cartes sont" : " carte est") + " au repos dans " + (choix.repos > 1 ? "leurs tiroirs" : "son tiroir") + " : " + (choix.repos > 1 ? "elles reviendront" : "elle reviendra") + " le moment venu.";
+    $("def-repos").textContent = choix.toutAuRepos ? "Tu sais déjà tout pour aujourd'hui : rien à revoir, mais tu peux quand même faire un tour."
+      : choix.repos + (choix.repos > 1 ? " définitions déjà sues ne sont pas dans ce tour : elles reviendront" : " définition déjà sue n'est pas dans ce tour : elle reviendra") + " plus tard, pour vérifier.";
   }
   // Ce que le bouton doré fait réviser, dans l'ordre : les « à savoir par cœur » à voir aujourd'hui ; sinon toutes
   // les cartes à voir aujourd'hui ; et si tout est au repos, un tour libre (les « à savoir par cœur », ou tout).
@@ -318,6 +319,7 @@
   }
 
   function lancerRevision(defs, reprise) {
+    annulable = null;
     if (reprise) {
       // On reprend là où l'élève s'était arrêté : même pile, même carte
       pile = reprise.pile; toutes = reprise.toutes; sues1 = reprise.sues1; ratees = reprise.ratees;
@@ -353,10 +355,37 @@
     $("def-actions-recto").hidden = false;
     $("def-actions-verso").hidden = true;
     $("def-retourner").focus({ preventScroll: true });
+    montrerAnnuler(!!annulable);
+  }
+  // ----- Annuler la dernière réponse (« Je savais » ou « À revoir » touché trop vite) -----
+  let annulable = null;      // { pile, toutes, sues1, ratees, id, avant } : l'état juste avant la réponse
+  function montrerAnnuler(oui) {
+    const d = oui && annulable ? DEFS.find(x => x.id === annulable.id) : null;
+    $("def-annuler").hidden = !d;
+    if (d) $("def-annuler-terme").textContent = d.terme;
+    $("def-annuler-fin").hidden = true;
+  }
+  function annulerReponse() {
+    if (!annulable) return;
+    const a = annulable;
+    annulable = null;
+    // La mémoire de la carte redevient ce qu'elle était (ou rien, si elle n'avait jamais été vue)
+    const m = lireMemoire();
+    if (a.avant) m[a.id] = a.avant; else delete m[a.id];
+    try { localStorage.setItem("definitions", JSON.stringify(m)); } catch (e) {}
+    pile = a.pile; toutes = a.toutes; sues1 = a.sues1; ratees = a.ratees;
+    garderSeance();
+    $("ecran-fin").hidden = true;
+    $("ecran-revision").hidden = false;
+    montrerCarte();
+    retourner();                        // la carte revient retournée : l'élève choisit à nouveau
+    $("def-annonce").textContent = "Réponse annulée. " + $("def-annonce").textContent;
   }
   function retourner() {
     if ($("ecran-revision").hidden || $("def-carte").classList.contains("retournee")) return;
     $("def-carte").classList.add("retournee");
+    montrerAnnuler(false);              // la carte suivante est retournée : on ne peut plus annuler la précédente
+    annulable = null;
     $("def-annonce").textContent = pile[0].terme + " : " + texteMathLu(pile[0].definition) + (pile[0].explication ? " Pour comprendre : " + texteMathLu(pile[0].explication) : "");
     $("def-actions-recto").hidden = true;
     $("def-actions-verso").hidden = false;
@@ -364,6 +393,8 @@
   }
   function repondre(savait) {
     if (!$("def-carte").classList.contains("retournee")) return;
+    // Ce qu'il faut pour annuler cette réponse : la révision et la mémoire de cette carte, telles qu'avant
+    annulable = { pile: pile.slice(), toutes: toutes.slice(), sues1, ratees: ratees.slice(), id: pile[0].id, avant: lireMemoire()[pile[0].id] };
     const d = pile.shift();
     noter(d.id, savait);
     if (savait) { if (!ratees.includes(d)) sues1++; }
@@ -406,18 +437,21 @@
     if (window.Sons) Sons.fin(Math.round((sues1 / total) * 100));
     $("def-fin-titre").textContent = parfait ? (total > 1 ? "Toutes sues du premier coup" : "Sue du premier coup") : sues1 + " / " + total + " sues du premier coup";
     $("def-fin-texte").textContent = (parfait
-      ? (total > 1 ? "Elles montent d'un tiroir et se reposent : tu les reverras le moment venu." : "Elle monte d'un tiroir et se repose : tu la reverras le moment venu.")
+      ? (total > 1 ? "Elles reviendront plus tard, pour vérifier que tu les sais toujours." : "Elle reviendra plus tard, pour vérifier que tu la sais toujours.")
       : (n > 1 ? "Les " + n + " autres sont revenues" : "L'autre est revenue") + " quelques cartes plus loin, jusqu'à ce que tu " + (n > 1 ? "les" : "la") + " saches. Tu " + (n > 1 ? "les" : "la") + " reverras demain.")
       + " Vérifie maintenant avec l'exercice : pour chaque terme, retrouve la bonne définition parmi quatre cartes.";
     listeFin(n > 1 ? "Les " + n + " qui sont revenues :" : "Celle qui est revenue :", ratees);
     if (typeof montrerCompagnon === "function") montrerCompagnon($("def-fin-compagnon"), parfait ? "choque" : sues1 / total >= 0.6 ? "bouche-ouverte" : "pensif");
     const nbQuestions = nbExercice();
+    $("def-annuler").hidden = true;
+    $("def-annuler-fin").hidden = !annulable;
     boutonsFin([
       ["Faire l'exercice (" + nbQuestions + (nbQuestions > 1 ? " questions)" : " question)"), "", lancerExercice],
       ["Retour à la liste", "secondaire", retourListe]
     ]);
   }
   function retourListe() {
+    annulable = null;
     $("ecran-revision").hidden = true;
     $("ecran-exercice").hidden = true;
     $("ecran-fin").hidden = true;
@@ -435,6 +469,8 @@
   const nbExercice = () => Math.min(NB_EXERCICE[toutes[0].epreuve] || NB_EXERCICE_AUTRE, toutes.length);
   let exo = null;       // { questions: [définitions], rang, justes, ratees: [définitions], repondu }
   function lancerExercice() {
+    annulable = null;
+    $("def-annuler-fin").hidden = true;
     // S'il y a plus de cartes que de questions : d'abord celles qui ont dû revenir, puis les « à savoir par cœur », puis le reste
     const sues = toutes.filter(d => !ratees.includes(d));
     const autres = melanger(sues.filter(parCoeur)).concat(melanger(sues.filter(d => !parCoeur(d))));
@@ -494,7 +530,7 @@
     }
     if (window.Sons) Sons[juste ? "juste" : "faux"]();
     $("exo-retour").className = "exo-retour " + (juste ? "bien" : "mal");
-    $("exo-retour").textContent = juste ? "C'est la bonne définition." : "Ce n'est pas celle-là : la bonne est entourée en vert. Cette carte retourne dans le tiroir 1.";
+    $("exo-retour").textContent = juste ? "C'est la bonne définition." : "Ce n'est pas celle-là : la bonne est entourée en vert. Cette définition repasse dans « à revoir ».";
     $("exo-explication").hidden = !d.explication;
     ecrireTexteMath($("exo-explication"), d.explication ? "Pour comprendre : " + d.explication : "");
     const dernier = exo.rang + 1 >= exo.questions.length;
@@ -526,8 +562,8 @@
     if (window.Sons) Sons.fin(Math.round((justes / total) * 100), true);
     $("def-fin-titre").textContent = "Exercice : " + justes + " / " + total;
     $("def-fin-texte").textContent = justes === total
-      ? "Tu as retrouvé chaque définition parmi les quatre cartes. Les tiroirs feront revenir ces cartes au bon moment."
-      : (aRevoir.length > 1 ? "Les " + aRevoir.length + " définitions ratées sont retournées" : "La définition ratée est retournée") + " dans le tiroir 1 : refais un tour avec " + (aRevoir.length > 1 ? "elles" : "elle") + " pour " + (aRevoir.length > 1 ? "les" : "la") + " fixer.";
+      ? "Tu as retrouvé chaque définition parmi les quatre cartes. Elles reviendront plus tard, pour vérifier que tu les sais toujours."
+      : (aRevoir.length > 1 ? "Les " + aRevoir.length + " définitions ratées repassent" : "La définition ratée repasse") + " dans « à revoir » : refais un tour avec " + (aRevoir.length > 1 ? "elles" : "elle") + " pour " + (aRevoir.length > 1 ? "les" : "la") + " fixer.";
     listeFin(aRevoir.length > 1 ? "Les " + aRevoir.length + " ratées :" : "La définition ratée :", aRevoir);
     if (typeof montrerCompagnon === "function") montrerCompagnon($("def-fin-compagnon"), justes === total ? "clin-doeil" : justes / total >= 0.6 ? "bouche-ouverte" : "pensif");
     exo = null;
@@ -567,6 +603,8 @@
   $("def-retourner").onclick = retourner;
   $("def-savais").onclick = () => repondre(true);
   $("def-arevoir").onclick = () => repondre(false);
+  $("def-annuler").onclick = annulerReponse;
+  $("def-annuler-fin").onclick = annulerReponse;
   $("def-arreter").onclick = retourListe;
   $("exo-arreter").onclick = retourListe;
   $("exo-suivant").onclick = questionSuivante;
@@ -580,11 +618,13 @@
       if (b) { e.preventDefault(); b.click(); }
       return;
     }
+    if (e.key === "Backspace" && annulable && !$("ecran-fin").hidden) { e.preventDefault(); annulerReponse(); return; }
     if ($("ecran-revision").hidden) return;
     if (e.key === " " || e.key === "Enter") {
       if (!$("def-carte").classList.contains("retournee")) { e.preventDefault(); retourner(); }
     } else if (e.key === "ArrowRight") { e.preventDefault(); repondre(true); }
     else if (e.key === "ArrowLeft") { e.preventDefault(); repondre(false); }
+    else if (e.key === "Backspace" && annulable) { e.preventDefault(); annulerReponse(); }
   });
 
   if (!epreuvesAvecDefs.length) {

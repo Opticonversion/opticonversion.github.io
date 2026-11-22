@@ -310,13 +310,14 @@ const Optique = (function () {
     if (!sch || sch.type !== "couple-oculaire") return null;
     const p = sch.perception || {}, cote = { droite: 1, gauche: -1 };
     if (!["OD", "OG"].includes(sch.fixateur) || !["OD", "OG"].includes(p.oeil) || !cote[p.cote]) return null;
-    if (!(sch.distance > 0) || !(p.ecart > 0)) return null;
+    // Le Worth ne donne pas d'écart mesurable : perception.ecart est alors absent, et la valeur aussi
+    if (!(sch.distance > 0) || (p.ecart !== undefined && !(p.ecart > 0))) return null;
     const devie = sch.fixateur === "OD" ? "OG" : "OD";
     const tempeDe = oeil => (oeil === "OD" ? 1 : -1);               // côté de la tempe de chaque œil, vu de dessus
     // Croisée : l'image d'un œil est vue du côté de l'autre œil
     const croisee = cote[p.cote] !== tempeDe(p.oeil);
     const exo = croisee;
-    const valeur = p.ecart / (sch.distance / 100);
+    const valeur = p.ecart ? p.ecart / (sch.distance / 100) : null;
     const s = tempeDe(devie);
     return {
       fixateur: sch.fixateur, devie, croisee, exo,
@@ -386,9 +387,56 @@ const Optique = (function () {
       tourneLePlus: sch.OD === sch.OG ? null : (sch.OD > sch.OG ? "OD" : "OG")
     };
   }
+  // ---------- Convergence requise pour fixer un point en VP (vue de dessus) ----------
+  // schema = { type: "convergence", distance (cm, de la ligne des centres de rotation à T), ecart (mm, écart pupillaire) }
+  // C (Δ) = écart (cm) / distance (m) ; chaque œil tourne de la moitié, vers le nez. En mètres-angles : 1 / distance (m).
+  function convergence(sch) {
+    if (!sch || !(sch.distance > 0) || !(sch.ecart > 0)) return null;
+    const total = (sch.ecart / 10) / (sch.distance / 100);
+    return { distance: sch.distance, ecart: sch.ecart, total, parOeil: total / 2, MA: 100 / sch.distance,
+      degres: 2 * Math.atan((sch.ecart / 20) / sch.distance) * 180 / Math.PI, rotation: "nez" };
+  }
+  // ---------- Prismes de même base devant les deux yeux (vue de dessus) ----------
+  // schema = { type: "prismes-couple", distance (cm), prisme (Δ devant chaque œil), base: "interne" | "externe" }
+  // Un prisme dévie la lumière vers sa base ; l'image est vue vers le sommet ; pour garder T' sur la fovéa,
+  // l'œil tourne vers le sommet. Base interne : chaque œil tourne vers la tempe, le couple diverge.
+  function prismesCouple(sch) {
+    if (!sch || !(sch.distance > 0) || !(sch.prisme > 0) || !["interne", "externe"].includes(sch.base)) return null;
+    const bi = sch.base === "interne";
+    return { distance: sch.distance, prisme: sch.prisme, base: sch.base, total: 2 * sch.prisme,
+      lumiere: bi ? "nez" : "tempe",                                // côté où part la lumière après le prisme (vers la base)
+      retine: bi ? "nasale" : "temporale",                          // où tomberait T' si l'œil ne bougeait pas
+      image: bi ? "tempe" : "nez",                                  // côté où l'image est vue (vers le sommet)
+      rotation: bi ? "tempe" : "nez",                               // côté où chaque œil tourne pour garder la vision simple
+      effort: bi ? "divergence" : "convergence" };
+  }
+  // ---------- Décalage d'un test vu à travers un prisme horizontal devant un œil ----------
+  // schema = { type: "prisme-dissociateur", distance (cm), prisme (Δ), base: "externe" | "interne", oeil: "OD" | "OG" }
+  // L'autre œil fixe. Décalage (cm) = prisme (Δ) × distance (m), vers le sommet du prisme.
+  // cotes : +1 = vers la droite du dessin (la droite du sujet), −1 = vers la gauche.
+  function prismeDissociateur(sch) {
+    if (!sch || !(sch.distance > 0) || !(sch.prisme > 0) || !["interne", "externe"].includes(sch.base) || !["OD", "OG"].includes(sch.oeil)) return null;
+    const tempe = sch.oeil === "OD" ? 1 : -1, coteBase = sch.base === "externe" ? tempe : -tempe;
+    return { distance: sch.distance, prisme: sch.prisme, base: sch.base, oeil: sch.oeil, fixateur: sch.oeil === "OD" ? "OG" : "OD",
+      decalage: sch.prisme * sch.distance / 100,                    // cm
+      coteBase,                                                     // côté de la base sur le dessin
+      lumiere: sch.base === "externe" ? "tempe" : "nez",            // la lumière part vers la base
+      retine: sch.base === "externe" ? "temporale" : "nasale",      // où tombe T' (l'œil ne bouge pas)
+      coteImage: -coteBase,                                         // l'image est vue vers le sommet
+      effort: sch.base === "externe" ? "convergence" : "divergence" };   // ce qu'il faudrait pour fusionner
+  }
+  // ---------- Brouillage : un verre convexe devant chaque œil emmétrope, objet éloigné ----------
+  // schema = { type: "brouillage", verre (δ, > 0) } : l'œil brouillé se comporte comme un myope de −verre.
+  function brouillage(sch) {
+    if (!sch || !(sch.verre > 0) || sch.verre > 4) return null;
+    const R = -sch.verre;                                           // amétropie résiduelle de l'œil + verre
+    const fp = 1336 / 60, fpB = 1336 / (60 + sch.verre);            // œil réduit de 60 δ (n' = 1,336), en mm
+    return { verre: sch.verre, R, defocalisation: sch.verre, HR: 100 / R, image: "devant", avance: fp - fpB };   // HR en cm, avance en mm
+  }
   function schema(sch) {
     const f = { "couple-oculaire": coupleOculaire, "oeil-reduit": oeilReduit, "parcours": parcoursAccommodation,
-      "image-retinienne": imageRetinienne, "aniseiconie": aniseiconie, "prisme-vertical": prismeVertical }[sch && sch.type];
+      "image-retinienne": imageRetinienne, "aniseiconie": aniseiconie, "prisme-vertical": prismeVertical,
+      "convergence": convergence, "prismes-couple": prismesCouple, "prisme-dissociateur": prismeDissociateur, "brouillage": brouillage }[sch && sch.type];
     return f ? f(sch) : null;
   }
   // Grandeurs des étapes « calcul » d'un schéma (unités : phorie Δ, HR et HP cm, écarts %, prismes Δ)
@@ -401,12 +449,17 @@ const Optique = (function () {
       "parcours": { remotum: c.HR, punctum: c.HP },
       "image-retinienne": { "ecart-taille": c.ecart },
       "aniseiconie": { aniseiconie: c.valeur },
-      "prisme-vertical": { "prisme-od": c.OD && c.OD.effet, "prisme-og": c.OG && c.OG.effet, "difference-prismatique": c.difference }
+      "prisme-vertical": { "prisme-od": c.OD && c.OD.effet, "prisme-og": c.OG && c.OG.effet, "difference-prismatique": c.difference },
+      "convergence": { convergence: c.total },
+      "prismes-couple": { "prisme-total": c.total },
+      "prisme-dissociateur": { decalage: c.decalage },
+      "brouillage": { defocalisation: c.defocalisation, remotum: c.HR }
     }[sch.type][g];
     return typeof v === "number" && isFinite(v) ? v : null;
   }
 
   return { preparer, conjuguer, chaine, indexLentille, versEspaceObjet, parcours, pentesApres, rayonType, penteApres,
     foyerImage, foyerObjet, lentilleOeil, remotum, punctum, retine, imageOeil, imageDiaphragme, imagesDiaphragmes, imageDiaphragmeDans, imagesDans, planDesChamps, pupilleEntree, lucarneEntree, champ, faisceau, grandeur,
-    coupleOculaire, oeilReduit, parcoursAccommodation, imageRetinienne, aniseiconie, prismeVertical, schema, grandeurSchema };
+    coupleOculaire, oeilReduit, parcoursAccommodation, imageRetinienne, aniseiconie, prismeVertical,
+    convergence, prismesCouple, prismeDissociateur, brouillage, schema, grandeurSchema };
 })();

@@ -650,5 +650,272 @@ QUESTIONS.push(
     reponse: {"valeur": 6, "unite": "cm", "decimales": 0, "signe": false},
     explication: "Division harmonique : [[CA|CB]] = [[DA|DB]]\nIci [[CA|CB]] = [[3|9]] = [[1|3]]\nD est du côté de A, donc DB = DA + 12.\n[[DA|DA + 12]] = [[1|3]]\n3 DA = DA + 12, donc DA = 6 cm\nContrôle : [[6|18]] = [[1|3]].",
     indice: "Écris le rapport CA / CB, puis le même rapport DA / DB en notant DA = x et DB = x + 12."
+  },
+  {
+    id: "U41-147", epreuve: "U41", theme: "Statistique", session: "complément", entrainement: true,
+    difficulte: "moyen",
+    contexte: "Le chiffre d'affaires mensuel d'un magasin (en k€) suit la droite de régression y = 1,8x + 22, où x est le rang du mois (x = 0 pour janvier).",
+    question: "Quelle prévision cette droite donne-t-elle pour décembre ?",
+    choix: ["43,6 k€", "21,6 k€", "41,8 k€", "23,8 k€"],
+    bonne: 2,
+    explication: "Décembre est le douzième mois, donc x = 11 (janvier a le rang 0).\ny = 1,8 × 11 + 22 = 19,8 + 22 = 41,8 k€\nLe rang 12 donnerait 43,6 k€ : c'est l'erreur de départ classique. 21,6 vient de 1,8 × 12 sans la constante, et 23,8 de 1,8 + 22.",
+    indice: "Quel rang a décembre quand janvier a le rang 0 ? Remplace ensuite x dans l'équation."
+  },
+  {
+    id: "U41-148", epreuve: "U41", theme: "Statistique", session: "complément", entrainement: true, type: "calcul",
+    difficulte: "moyen",
+    contexte: "Série de 5 mesures : x = 2 ; 4 ; 6 ; 8 ; 10 et y = 11 ; 13 ; 18 ; 20 ; 23. La droite de régression de y en x est y = ax + b avec a = 1,55.",
+    question: "La droite passe par le point moyen G. Calcule b sans refaire la régression, arrondi au dixième.",
+    reponse: {"valeur": 7.7, "unite": "", "decimales": 1, "signe": false},
+    explication: "Moyennes : x̄ = [[2 + 4 + 6 + 8 + 10|5]] = 6 et ȳ = [[11 + 13 + 18 + 20 + 23|5]] = 17\nLa droite passe par G(6 ; 17) : 17 = 1,55 × 6 + b\nb = 17 − 9,3 = 7,7\nLa calculatrice donne bien b = 7,7.",
+    indice: "Calcule les deux moyennes, puis remplace x et y par ces moyennes dans y = ax + b."
+  },
+  {
+    id: "U41-149", epreuve: "U41", theme: "Statistique", session: "complément", entrainement: true,
+    difficulte: "difficile",
+    contexte: "Un ajustement exponentiel donne z = ln y = 0,15x + 2,3, où x est le rang de l'année.",
+    question: "De quel pourcentage y augmente-t-il en moyenne quand x augmente de 1 ?",
+    choix: ["Environ 16,2 %", "15 %", "150 %", "Environ 10 %"],
+    bonne: 0,
+    explication: "Quand x augmente de 1, z augmente de 0,15, donc y est multiplié par e^(0,15) ≈ 1,1618.\nTaux de variation : 1,1618 − 1 = 0,1618, soit environ 16,2 %.\nLe coefficient 0,15 n'est pas un taux : on ne peut pas lire directement 15 %. Dire 150 % confond 0,15 et 1,5, et 10 % ne correspond à aucun calcul : seul e^(0,15) − 1 donne le taux.",
+    indice: "Passe de z à y avec l'exponentielle : y est multiplié par e^(0,15) à chaque pas."
+  },
+  {
+    id: "U41-150", epreuve: "U41", theme: "Statistique", session: "complément", entrainement: true,
+    difficulte: "difficile",
+    contexte: "Sur douze mois, le nombre de lunettes de soleil vendues et le nombre de glaces vendues dans la même ville ont un coefficient de corrélation r ≈ 0,96.",
+    question: "Que peut-on conclure de ce coefficient de corrélation ? Choisis la rédaction correcte.",
+    choix: ["Comme r est proche de 1, les ventes de lunettes de soleil sont la cause des ventes de glaces, et on peut donc le démontrer avec ce seul coefficient.", "Comme r est proche de 1, les deux grandeurs sont indépendantes : l'une ne dépend pas de l'autre, et aucun lien n'existe entre ces deux séries de ventes.", "Comme r est proche de 1, la droite d'ajustement est exacte, et chaque point du nuage se trouve exactement sur la droite de régression : il n'y a aucune erreur.", "Les deux grandeurs varient presque ensemble, mais cela ne prouve pas que l'une cause l'autre : une cause commune, comme la chaleur, peut expliquer les deux."],
+    bonne: 3,
+    explication: "Un r proche de 1 montre une liaison linéaire forte entre les deux séries, pas une relation de cause à effet. Ici, la chaleur augmente les deux ventes à la fois. Dire que r démontre la cause est faux. Dire « indépendantes » est faux aussi : r proche de 1 indique le contraire. Et r proche de 1 ne veut pas dire que les points sont exactement alignés.",
+    indice: "Une forte corrélation prouve-t-elle qu'une variable en provoque une autre ? Cherche une troisième variable qui agit sur les deux."
+  },
+  {
+    id: "U41-151", epreuve: "U41", theme: "Statistique", session: "complément", entrainement: true,
+    difficulte: "difficile",
+    contexte: "Un nuage de points (x ; y) est courbé. Le coefficient de corrélation est r ≈ 0,93 pour (x ; y) et r ≈ 0,998 pour (x ; z) avec z = ln y.",
+    question: "Quel ajustement faut-il retenir ? Choisis la conclusion correctement rédigée.",
+    choix: ["Comme 0,93 est déjà proche de 1, l'ajustement affine de y en x est parfait, donc le changement de variable est inutile ici et on peut simplement l'ignorer sans rien perdre.", "Le plus grand |r| est toujours celui du couple de départ (x ; y), car on garde les variables d'origine et non les variables transformées par le logarithme : on garde donc la droite de y en x.", "Le nuage est courbé et |r| passe de 0,93 à 0,998 après le changement de variable : l'ajustement affine de z en x est plus adapté que celui de y en x.", "On choisit l'ajustement dont le r est le plus proche de 0, car il contient moins de corrélation parasite entre les points du nuage observé : ici, c'est celui de y en x."],
+    bonne: 2,
+    explication: "Quand le nuage est courbé, un r de 0,93 ne suffit pas à valider l'ajustement affine, et on compare avec celui obtenu après changement de variable : 0,998 est plus proche de 1. Il faut aussi regarder la forme du nuage, pas seulement r. Choisir le r le plus proche de 0 est absurde. Dire que le r de départ est toujours le plus grand est faux.",
+    indice: "Compare les deux |r|, puis regarde la forme du nuage : lequel des deux ajustements suit le mieux les points ?"
+  },
+  {
+    id: "U41-152", epreuve: "U41", theme: "Statistique", session: "complément", entrainement: true, type: "calcul",
+    difficulte: "moyen",
+    contexte: "Série (x ; y) : (1 ; 2,1), (2 ; 3,4), (3 ; 5,0), (4 ; 4,6), (5 ; 7,2), (6 ; 8,1).",
+    question: "À la calculatrice, donne le coefficient de corrélation linéaire r, arrondi au millième.",
+    reponse: {"valeur": 0.969, "unite": "", "decimales": 3, "signe": false},
+    explication: "Liste L1 : 1 ; 2 ; 3 ; 4 ; 5 ; 6 et liste L2 : 2,1 ; 3,4 ; 5,0 ; 4,6 ; 7,2 ; 8,1.\nRégression linéaire y = ax + b : a ≈ 1,171 et b ≈ 0,967, avec r ≈ 0,9694, soit 0,969.\nSi r n'apparaît pas, active l'affichage des diagnostics (CorrelAff sur TI).",
+    indice: "Entre les deux listes, lance la régression linéaire de y en x et lis r, pas r²."
+  },
+  {
+    id: "U41-153", epreuve: "U41", theme: "Statistique", session: "complément", entrainement: true,
+    difficulte: "difficile",
+    contexte: "Un nuage de 10 points est presque aligné, sauf un point très éloigné des autres (probablement une erreur de saisie).",
+    question: "Quelle rédaction décrit correctement son effet et la bonne conduite ?",
+    choix: ["Ce point peut tirer la droite vers lui et faire baisser |r| : on vérifie la mesure, puis on décide de le garder ou de l'écarter en le justifiant.", "Ce point n'a aucun effet sur la droite, car les neuf autres points suffisent à la déterminer : on garde la droite telle quelle sans rien vérifier du tout.", "Ce point fait toujours monter |r| vers 1 : on le garde pour obtenir la meilleure corrélation possible, sans aucune autre vérification de la mesure.", "Ce point doit toujours être supprimé sans rien dire, car un seul point faux rend le coefficient r impossible à calculer avec la calculatrice."],
+    bonne: 0,
+    explication: "La droite des moindres carrés est sensible aux points éloignés : un seul point peut la dévier et, en général, faire baisser |r|. La bonne conduite est de vérifier la mesure puis de justifier le choix. Supprimer en silence ou garder pour « arranger » r est malhonnête. Dire qu'il n'a aucun effet est faux.",
+    indice: "Les moindres carrés pèsent beaucoup les grands écarts. Que faut-il faire d'un point suspect ?"
+  },
+  {
+    id: "U41-154", epreuve: "U41", theme: "Statistique", session: "complément", entrainement: true, type: "calcul",
+    difficulte: "difficile",
+    contexte: "Une droite d'ajustement donne les ventes y = 3,2x + 41,5, où x est le rang de l'année.",
+    question: "À partir de quel rang entier x les ventes prévues atteignent-elles au moins 100 ?",
+    reponse: {"valeur": 19, "unite": "", "decimales": 0, "signe": false},
+    explication: "On résout 3,2 x + 41,5 ≥ 100, donc 3,2 x ≥ 58,5\nx ≥ [[100 − 41,5|3,2]] = [[58,5|3,2]] ≈ 18,28\nLe rang doit être entier : on arrondit par excès, donc x = 19.\nContrôle : y(18) = 99,1 (trop bas) et y(19) = 102,3.",
+    indice: "Résous l'inéquation, puis prends le premier entier qui convient : attention au sens de l'arrondi."
+  },
+  {
+    id: "U41-155", epreuve: "U41", theme: "Division harmonique", session: "complément", entrainement: true,
+    difficulte: "difficile",
+    contexte: "Sur une droite graduée : A(0), B(12), C(8).",
+    question: "Quelle est l'abscisse de D pour que (A, B ; C, D) soit une division harmonique ?",
+    choix: ["16", "20", "24", "32"],
+    bonne: 2,
+    explication: "On cherche D tel que [[CA|CB]] = [[DA|DB]] en distances. CA = 8 et CB = 4, donc [[CA|CB]] = 2.\nC est à l'intérieur de [AB], D est à l'extérieur, du côté de B (rapport plus grand que 1). Si DB = y, alors DA = 12 + y.\n[[12 + y|y]] = 2, donc 12 + y = 2y et y = 12. D = 12 + 12 = 24.\nContrôle : DA = 24 et DB = 12, rapport 2.",
+    indice: "Calcule le rapport CA ÷ CB. D est du côté de B si ce rapport dépasse 1."
+  },
+  {
+    id: "U41-156", epreuve: "U41", theme: "Division harmonique", session: "complément", entrainement: true, type: "calcul",
+    difficulte: "moyen",
+    contexte: "Sur une droite graduée : A(0), B(10), D(−15).",
+    question: "Quelle est l'abscisse de C, entre A et B, pour que (A, B ; C, D) soit une division harmonique ? (arrondie au centième)",
+    reponse: {"valeur": 3.75, "unite": "", "decimales": 2, "signe": false},
+    explication: "DA = 15 et DB = 25, donc [[DA|DB]] = [[15|25]] = [[3|5]]\nC est à l'intérieur de [AB] : posons AC = x et CB = 10 − x, avec [[x|10 − x]] = [[3|5]]\n5x = 3 (10 − x), donc 8x = 30 et x = 3,75\nC a pour abscisse 3,75.",
+    indice: "Calcule d'abord le rapport DA ÷ DB, puis écris le même rapport avec AC = x et CB = 10 − x."
+  },
+  {
+    id: "U41-157", epreuve: "U41", theme: "Division harmonique", session: "complément", entrainement: true,
+    difficulte: "difficile",
+    contexte: "Sur une droite graduée : A(0), B(6), C(−3).",
+    question: "Quelle est l'abscisse de D, à l'intérieur de [AB], pour que (A, B ; C, D) soit une division harmonique ?",
+    choix: ["1,5", "−1,5", "9", "2"],
+    bonne: 0,
+    explication: "C est à l'extérieur de [AB] : CA = 3 et CB = 9, donc [[CA|CB]] = [[1|3]].\nD est donc à l'intérieur de [AB], avec [[DA|DB]] = [[1|3]]. Si DA = x, alors DB = 6 − x.\n[[x|6 − x]] = [[1|3]], donc 3x = 6 − x et x = 1,5.\nD a pour abscisse 1,5. Le point −1,5 serait à l'extérieur de [AB], de l'autre côté de A.",
+    indice: "Si C est à l'extérieur de [AB], où doit se trouver D ? Pose DA = x et DB = 6 − x."
+  },
+  {
+    id: "U41-158", epreuve: "U41", theme: "Division harmonique", session: "complément", entrainement: true,
+    difficulte: "difficile",
+    contexte: "Sur une droite graduée : A(0), B(9), C(3), D(−9).",
+    question: "Quelle rédaction détermine correctement si (A, B ; C, D) est une division harmonique ?",
+    choix: ["Non : CA/CB = −1/2 et DA/DB = 1/2 sont des valeurs différentes, donc ce n'est pas une division harmonique.", "Non : C et D ne sont pas symétriques par rapport au milieu de [AB], donc ce n'est pas une division harmonique.", "Oui : D est le symétrique de C par rapport à A, donc la division est harmonique.", "Oui : en mesures algébriques, CA/CB = (−3)/6 = −1/2 et DA/DB = 9/18 = 1/2, donc CA/CB = −DA/DB."],
+    bonne: 3,
+    explication: "En mesures algébriques, la condition est CA/CB = −DA/DB. Ici −1/2 = −(1/2) : la condition est vérifiée. Dire que −1/2 et 1/2 sont « différents » oublie le signe de la condition. Un symétrique par rapport au milieu n'est pas la condition, et le symétrique de C par rapport à A serait −3, pas −9.",
+    indice: "Calcule les deux rapports avec leur signe, puis compare CA/CB avec le contraire de DA/DB."
+  },
+  {
+    id: "U41-159", epreuve: "U41", theme: "Division harmonique", session: "complément", entrainement: true, type: "calcul",
+    difficulte: "moyen",
+    contexte: "AB = 15 cm. Le point C est sur [AB] avec AC = 9 cm. Le point D est sur la droite (AB), à l'extérieur de [AB], tel que (A, B ; C, D) soit une division harmonique.",
+    question: "Calcule DB, en cm.",
+    reponse: {"valeur": 30, "unite": "cm", "decimales": 0, "signe": false},
+    explication: "CA = 9 et CB = 6, donc [[CA|CB]] = [[9|6]] = [[3|2]] : ce rapport dépasse 1, donc D est du côté de B.\nPosons DB = y et DA = y + 15 : [[y + 15|y]] = [[3|2]]\n2 (y + 15) = 3y, donc 2y + 30 = 3y et y = 30\nDB = 30 cm. Contrôle : DA = 45 et [[45|30]] = [[3|2]].",
+    indice: "Calcule CA ÷ CB. Si ce rapport est plus grand que 1, D est du côté de B : pose DB = y et DA = y + 15."
+  },
+  {
+    id: "U41-160", epreuve: "U41", theme: "Division harmonique", session: "complément", entrainement: true,
+    difficulte: "moyen",
+    contexte: "(A, B ; C, D) est une division harmonique.",
+    question: "Que peut-on dire de (A, B ; D, C), où l'on a échangé C et D ?",
+    choix: ["Ce n'est plus une division harmonique : il faudrait aussi échanger A et B pour que la condition reste vraie.", "C'est aussi une division harmonique : la condition ne change pas quand on échange C et D.", "Ce n'est plus une division harmonique, car le rapport devient son inverse et la condition n'est plus vérifiée.", "On ne peut rien dire sans connaître les abscisses des quatre points A, B, C et D sur la droite graduée."],
+    bonne: 1,
+    explication: "La condition s'écrit CA/CB = −DA/DB. Échanger C et D donne DA/DB = −CA/CB, qui est exactement la même égalité. La division reste donc harmonique : C et D jouent des rôles symétriques. Les abscisses sont inutiles ici : l'égalité est la même quelles que soient les positions, et les autres réponses inventent une condition qui n'existe pas.",
+    indice: "Écris la condition de départ, puis écris-la en échangeant C et D. Est-ce la même égalité ?"
+  },
+  {
+    id: "U41-161", epreuve: "U41", theme: "Équations différentielles", session: "complément", entrainement: true,
+    difficulte: "moyen",
+    contexte: "Un élève résout l'équation différentielle 3y' + 12y = 24.",
+    annexe: {"titre": "Copie de l'élève", "colonnes": ["Ligne", "Calcul"], "lignes": [["1", "Solution constante : 12c = 24, donc c = 2."], ["2", "Sans second membre : 3y' + 12y = 0, donc y = k e^(−(3/12)t) = k e^(−0,25t)."], ["3", "Solutions de l'équation : y(t) = k e^(−0,25t) + 2."]]},
+    question: "Dans cette résolution d'équation différentielle, quelle est la première ligne fausse, et pourquoi ?",
+    choix: ["Ligne 2 : l'exposant est −b/a = −12/3 = −4, pas −a/b : les solutions sans second membre sont k e^(−4t).", "Ligne 1 : la constante vaut c = 24 ÷ 3 = 8, car on divise par le coefficient de y', pas par celui de y.", "Ligne 3 : il faut soustraire la constante 2 et non l'ajouter, car la solution générale est k e^(−0,25t) − 2.", "Il n'y a aucune erreur : la copie est correcte du début à la fin, et la solution proposée vérifie l'équation."],
+    bonne: 0,
+    explication: "Pour a y' + b y = c, les solutions sans second membre sont k e^(−(b/a)t). Ici b/a = [[12|3]] = 4, donc k e^(−4t), et la solution constante vaut [[24|12]] = 2. La solution correcte est y(t) = k e^(−4t) + 2. La ligne 1 est juste : on divise par b = 12, le coefficient de y. La ligne 3 est cohérente avec la ligne 2 et ajoute bien la constante : seule l'erreur d'exposant en ligne 2 est à corriger.",
+    indice: "Vérifie l'exposant : c'est −b/a, avec a devant y' et b devant y. Teste ensuite la solution dans l'équation."
+  },
+  {
+    id: "U41-162", epreuve: "U41", theme: "Fonctions", session: "complément", entrainement: true,
+    difficulte: "difficile",
+    contexte: "Un élève dérive f(t) = (2t + 1) e^(−t).",
+    annexe: {"titre": "Copie de l'élève", "colonnes": ["Ligne", "Calcul"], "lignes": [["1", "u = 2t + 1, u' = 2 ; v = e^(−t), v' = e^(−t)."], ["2", "f'(t) = u'v + uv' = 2 e^(−t) + (2t + 1) e^(−t)."], ["3", "f'(t) = (2t + 3) e^(−t) > 0, donc f est croissante sur [0 ; +∞[."]]},
+    question: "Dans cette dérivation, quelle est la première ligne fausse, et pourquoi ?",
+    choix: ["Ligne 2 : la formule du produit est (uv)' = u'v − uv' : il faut un signe moins entre les deux termes de la dérivée.", "Ligne 3 : la factorisation donne 2 + 2t + 1 = 2t + 1 et non 2t + 3, car il faut regrouper les termes semblables.", "Ligne 1 : u' = 2t, car on dérive 2t + 1 en gardant la variable t à la puissance un devant le coefficient 2.", "Ligne 1 : la dérivée de e^(−t) est −e^(−t) (on multiplie par −1), pas e^(−t)."],
+    bonne: 3,
+    explication: "Avec v = e^(−t), on a v' = −e^(−t). Donc f'(t) = 2 e^(−t) − (2t + 1) e^(−t) = (1 − 2t) e^(−t), qui change de signe en t = 0,5 : f n'est pas croissante sur [0 ; +∞[. La formule du produit (uv)' = u'v + uv' est juste, la factorisation de la ligne 3 est cohérente avec la ligne 2, et u' = 2 est bien la dérivée de 2t + 1.",
+    indice: "Dérive chaque morceau séparément et vérifie la dérivée de e^(−t) : que vaut le facteur devant l'exponentielle ?"
+  },
+  {
+    id: "U41-163", epreuve: "U41", theme: "Suites", session: "complément", entrainement: true,
+    difficulte: "moyen",
+    contexte: "On a u(n+1) = 0,6 u(n) + 20 et u(0) = 10. Un élève cherche l'expression de u(n).",
+    annexe: {"titre": "Copie de l'élève", "colonnes": ["Ligne", "Calcul"], "lignes": [["1", "ℓ = 0,6 ℓ + 20, donc 0,4 ℓ = 20 et ℓ = 50. On pose v(n) = u(n) − 50."], ["2", "v(n+1) = 0,6 u(n) − 30 = 0,6 v(n) : (v(n)) est géométrique de raison 0,6."], ["3", "v(0) = 10 − 50 = −40, donc v(n) = −40 × 0,6ⁿ."], ["4", "Donc u(n) = −40 × 0,6ⁿ."]]},
+    question: "Dans cette étude de suite, quelle est la première ligne fausse, et pourquoi ?",
+    choix: ["Ligne 3 : v(0) = 10 − 50 = 40 et non −40, car la valeur absolue d'une différence est toujours positive.", "Ligne 2 : la raison de (v(n)) est 0,4, car 1 − 0,6 = 0,4 : la raison est le complément du coefficient 0,6.", "Ligne 4 : on a oublié d'ajouter ℓ = 50 : u(n) = v(n) + 50 = 50 − 40 × 0,6ⁿ.", "Ligne 1 : ℓ = 20 ÷ 0,6 ≈ 33,3, car on divise la constante par le coefficient de u(n) sans rien soustraire."],
+    bonne: 2,
+    explication: "On revient de v à u avec u(n) = v(n) + ℓ = v(n) + 50. Donc u(n) = 50 − 40 × 0,6ⁿ. Contrôle : n = 0 donne 50 − 40 = 10 = u(0), et la copie donnait −40, qui ne vérifie pas u(0) = 10. Les lignes 1 à 3 sont justes : ℓ = [[20|0,4]] = 50, la raison est bien 0,6 et v(0) = −40 (le signe compte).",
+    indice: "Vérifie ton résultat avec n = 0 : retrouves-tu u(0) = 10 ?"
+  },
+  {
+    id: "U41-164", epreuve: "U41", theme: "Estimation et tests", session: "complément", entrainement: true,
+    difficulte: "difficile",
+    contexte: "Sur 200 clients, 90 sont satisfaits. Un élève calcule l'intervalle de confiance à 95 % de la proportion.",
+    annexe: {"titre": "Copie de l'élève", "colonnes": ["Ligne", "Calcul"], "lignes": [["1", "f = 90/200 = 0,45."], ["2", "Écart type de la fréquence : f(1 − f)/n = 0,45 × 0,55 / 200 ≈ 0,0012."], ["3", "1,96 × 0,0012 ≈ 0,0024."], ["4", "Intervalle : [0,45 − 0,0024 ; 0,45 + 0,0024] = [0,448 ; 0,452]."]]},
+    question: "Dans ce calcul d'intervalle de confiance, quelle est la première ligne fausse, et pourquoi ?",
+    choix: ["Ligne 1 : f est la proportion de clients mécontents, donc f = 110/200 = 0,55 et non 90/200 = 0,45.", "Ligne 2 : il manque la racine carrée : il faut √0,0012375 ≈ 0,0352 pour la demi-largeur.", "Ligne 3 : pour un niveau de confiance de 95 %, il faut multiplier par 2,58 et non par 1,96, car 2,58 est plus sûr.", "Ligne 4 : l'intervalle doit être [f − 0,0024 ; f + 0,0048], car la demi-largeur est asymétrique autour de f."],
+    bonne: 1,
+    explication: "La demi-largeur est 1,96 √([[f(1 − f)|n]]) : sans la racine, l'élève obtient un intervalle de largeur 0,5 point, anormalement étroit.\nf(1 − f)/n = [[0,45 × 0,55|200]] = 0,0012375 → √0,0012375 ≈ 0,0352\nDemi-largeur = 1,96 × 0,0352 ≈ 0,069 → intervalle [0,381 ; 0,519]. Les lignes 1, 3 et 4 sont justes : f = 0,45 compte les satisfaits, 1,96 est le coefficient de 95 %, et l'intervalle est symétrique.",
+    indice: "Un intervalle de confiance sur 200 personnes aussi étroit est suspect. Relis la formule : que manque-t-il avant de multiplier par 1,96 ?"
+  },
+  {
+    id: "U41-165", epreuve: "U41", theme: "Probabilités", session: "complément", entrainement: true,
+    difficulte: "moyen",
+    contexte: "30 % des verres sont photochromiques (A). 80 % des verres photochromiques ont un antireflet (B), contre 20 % des autres verres. Un élève cherche la probabilité qu'un verre avec antireflet soit photochromique.",
+    annexe: {"titre": "Copie de l'élève", "colonnes": ["Ligne", "Calcul"], "lignes": [["1", "P(A ∩ B) = 0,3 × 0,8 = 0,24."], ["2", "P(non A ∩ B) = 0,2."], ["3", "P(B) = 0,24 + 0,2 = 0,44."], ["4", "P_B(A) = 0,24 / 0,44 ≈ 0,545."]]},
+    question: "Dans ce calcul de probabilité conditionnelle, quelle est la première ligne fausse, et pourquoi ?",
+    choix: ["Ligne 2 : on a oublié de multiplier par P(non A) = 0,7 : P(non A ∩ B) = 0,7 × 0,2 = 0,14.", "Ligne 1 : P(A ∩ B) = 0,3 + 0,8 − 0,3 × 0,8 = 0,86, car on cherche la probabilité d'au moins l'un des deux événements.", "Ligne 3 : il faut multiplier les deux probabilités et non les additionner, car P(B) est le produit des deux branches.", "Ligne 4 : il faut diviser par P(A) = 0,3 et non par P(B), car la condition porte sur les verres photochromiques."],
+    bonne: 0,
+    explication: "La branche « non photochromique et antireflet » se calcule comme les autres : P(non A) × P_nonA(B) = 0,7 × 0,2 = 0,14.\nP(B) = 0,24 + 0,14 = 0,38\nP_B(A) = [[P(A ∩ B)|P(B)]] = [[0,24|0,38]] ≈ 0,632\nLes lignes 1, 3 et 4 sont justes : un chemin se multiplie, deux chemins s'additionnent, et on divise par P(B) car on sait que le verre a un antireflet.",
+    indice: "Chaque branche de l'arbre est un produit. Compare les lignes 1 et 2 : ont-elles la même forme ?"
+  },
+  {
+    id: "U41-166", epreuve: "U41", theme: "Calcul intégral", session: "complément", entrainement: true,
+    difficulte: "difficile",
+    contexte: "Un élève calcule I = ∫ de 0 à 2 de (3 − e^(−x)) dx.",
+    annexe: {"titre": "Copie de l'élève", "colonnes": ["Ligne", "Calcul"], "lignes": [["1", "Une primitive de 3 − e^(−x) est F(x) = 3x − e^(−x)."], ["2", "F(2) = 6 − e^(−2) et F(0) = 0 − 1 = −1."], ["3", "I = F(2) − F(0) = 6 − e^(−2) + 1 = 7 − e^(−2)."]]},
+    question: "Dans ce calcul d'intégrale, quelle est la première ligne fausse, et pourquoi ?",
+    choix: ["Ligne 2 : F(0) = 0 − 1 vaut +1, car le calcul d'une primitive en 0 donne toujours une valeur positive pour l'exponentielle.", "Ligne 3 : il faut calculer F(0) − F(2) et non F(2) − F(0), car la borne 0 est celle qui est écrite en bas de l'intégrale.", "Ligne 1 : la primitive de 3 est 3, car la primitive d'une constante est la constante elle-même, sans le facteur x.", "Ligne 1 : la primitive de −e^(−x) est +e^(−x), pas −e^(−x) : F(x) = 3x + e^(−x)."],
+    bonne: 3,
+    explication: "On dérive F pour vérifier : (3x − e^(−x))' = 3 + e^(−x), ce qui n'est pas 3 − e^(−x). La bonne primitive est F(x) = 3x + e^(−x), puisque (e^(−x))' = −e^(−x).\nF(2) = 6 + e^(−2) et F(0) = 0 + 1 = 1\nI = F(2) − F(0) = 5 + e^(−2) ≈ 5,135\nLa formule F(b) − F(a) de la ligne 3 est juste, et la primitive d'une constante 3 est 3x.",
+    indice: "Dérive la primitive proposée : retrouves-tu la fonction de départ ? Fais attention au signe de la dérivée de e^(−x)."
+  },
+  {
+    id: "U41-167", epreuve: "U41", theme: "Suites", session: "complément", entrainement: true,
+    difficulte: "moyen",
+    contexte: "Algorithme :",
+    annexe: {"titre": "Algorithme", "colonnes": ["Ligne", "Instruction"], "lignes": [["1", "n ← 0 ; u ← 100"], ["2", "Tant que u < 200 :"], ["3", "    u ← 1,2 × u"], ["4", "    n ← n + 1"], ["5", "Fin Tant que"]]},
+    question: "Quelles sont les valeurs de n et de u à la fin de l'algorithme ?",
+    choix: ["n = 3 et u ≈ 172,8, car la boucle s'arrête dès que u est proche de 200", "n = 4 et u = 200, car la boucle s'arrête exactement quand u atteint 200", "n = 4 et u ≈ 207,36, car la boucle s'arrête dès que u dépasse 200", "n = 5 et u ≈ 248,83, car il faut un tour de plus après avoir dépassé 200"],
+    bonne: 2,
+    explication: "À chaque tour, u est multiplié par 1,2 : 120 (n = 1), 144 (n = 2), 172,8 (n = 3), 207,36 (n = 4). À la fin du tour 3, u = 172,8 est encore inférieur à 200 : la boucle continue. À la fin du tour 4, u = 207,36 n'est plus inférieur à 200 : la boucle s'arrête. u n'a aucune raison de valoir exactement 200 : c'est 100 × 1,2⁴ = 207,36.",
+    indice: "Fais un tableau tour par tour : n, u, et le test u < 200 à la fin de chaque tour."
+  },
+  {
+    id: "U41-168", epreuve: "U41", theme: "Suites", session: "complément", entrainement: true,
+    difficulte: "difficile",
+    contexte: "On veut afficher le plus petit rang n tel que 500 × 0,9ⁿ < 100.",
+    annexe: {"titre": "Algorithme", "colonnes": ["Ligne", "Instruction"], "lignes": [["1", "n ← 0 ; u ← 500"], ["2", "Tant que … :"], ["3", "    u ← 0,9 × u"], ["4", "    n ← n + 1"], ["5", "Fin Tant que"], ["6", "Afficher n"]]},
+    question: "Quelle condition faut-il écrire à la ligne 2, et quelle valeur l'algorithme affiche-t-il ?",
+    choix: ["u ≥ 100, et l'algorithme affiche 15, car u vaut encore 102,95 à ce rang", "u ≥ 100, et l'algorithme affiche 16, car la boucle s'arrête au premier u sous 100", "u < 100, et l'algorithme affiche 0, car la boucle ne s'exécute pas du tout", "u ≥ 100, et l'algorithme affiche 17, car il faut un tour de plus après avoir franchi le seuil"],
+    bonne: 1,
+    explication: "On continue tant que le seuil n'est pas atteint, donc la condition est u ≥ 100. Avec u < 100, la boucle ne s'exécute jamais (500 n'est pas inférieur à 100) et l'algorithme affiche 0.\nn = 15 : 500 × 0,9¹⁵ ≈ 102,95 ≥ 100 → la boucle continue\nn = 16 : 500 × 0,9¹⁶ ≈ 92,65 < 100 → elle s'arrête\nL'algorithme affiche 16. Contrôle par le calcul : n > [[ln 0,2|ln 0,9]] ≈ 15,28.",
+    indice: "La boucle tourne tant qu'on n'a pas atteint le but. Fais ensuite défiler les rangs autour de 15 et 16."
+  },
+  {
+    id: "U41-169", epreuve: "U41", theme: "Fonctions", session: "complément", entrainement: true,
+    difficulte: "moyen",
+    contexte: "La température d'un verre, en °C, est f(t) = 20 + 60 e^(−0,5t), t en minutes (f(3) ≈ 33,4 et f(4) ≈ 28,1).",
+    annexe: {"titre": "Algorithme", "colonnes": ["Ligne", "Instruction"], "lignes": [["1", "t ← 0"], ["2", "Tant que 20 + 60 × exp(−0,5 × t) > 30 :"], ["3", "    t ← t + 1"], ["4", "Fin Tant que"], ["5", "Afficher t"]]},
+    question: "Quelle valeur l'algorithme affiche-t-il, et comment s'interprète-t-elle ?",
+    choix: ["4 : c'est le premier instant entier où la température est inférieure ou égale à 30 °C", "3 : c'est le dernier instant entier où la température est supérieure à 30 °C, juste avant de repasser sous le seuil", "3,58 : c'est l'instant exact où la température atteint 30 °C, calculé avec le logarithme pendant la boucle", "5 : c'est le premier instant entier où la température est strictement inférieure à 28 °C, après le seuil"],
+    bonne: 0,
+    explication: "L'algorithme teste des instants entiers : f(0) = 80, f(1) ≈ 56,4, f(2) ≈ 42,1, f(3) ≈ 33,4 : tous supérieurs à 30, la boucle continue. f(4) ≈ 28,1 ≤ 30 : la boucle s'arrête avec t = 4. L'algorithme donne donc un entier : 4 minutes. Il ne donne pas la valeur exacte t = 2 ln 6 ≈ 3,58, qu'on obtient en résolvant l'inéquation avec le logarithme.",
+    indice: "La boucle teste seulement t = 0, 1, 2… Calcule f pour chaque entier et regarde quand le test devient faux."
+  },
+  {
+    id: "U41-170", epreuve: "U41", theme: "Probabilités", session: "complément", entrainement: true,
+    difficulte: "moyen",
+    contexte: "La fonction alea() renvoie un nombre au hasard entre 0 et 1.",
+    annexe: {"titre": "Algorithme", "colonnes": ["Ligne", "Instruction"], "lignes": [["1", "c ← 0"], ["2", "Pour i de 1 à 1000 :"], ["3", "    Si alea() < 0,3 alors c ← c + 1"], ["4", "Fin Pour"], ["5", "Afficher c / 1000"]]},
+    question: "Que représente la valeur affichée ?",
+    choix: ["La probabilité exacte de l'événement, qui vaut toujours 0,3 à chaque exécution, quel que soit le nombre de tirages", "Le nombre de fois où alea() est inférieur à 0,3, qui vaut environ 300 et non une valeur proche de 0,3", "La probabilité qu'un tirage de plus soit inférieur à 0,3, qui augmente à chaque tirage grâce à la loi des grands nombres", "Une fréquence d'un événement de probabilité 0,3 : proche de 0,3, mais variable d'une exécution à l'autre"],
+    bonne: 3,
+    explication: "c compte les tirages inférieurs à 0,3 : c / 1000 est la fréquence observée sur 1000 tirages. Elle se rapproche de 0,3 quand le nombre de tirages augmente, mais elle varie d'une exécution à l'autre (0,287 ; 0,312…). La probabilité 0,3 est un fait du modèle, pas un résultat de la simulation.",
+    indice: "Que compte c ? Que devient c divisé par le nombre de tirages ? Deux exécutions donnent-elles exactement le même nombre ?"
+  },
+  {
+    id: "U41-171", epreuve: "U41", theme: "Suites", session: "complément", entrainement: true,
+    difficulte: "facile",
+    contexte: "Algorithme :",
+    annexe: {"titre": "Algorithme", "colonnes": ["Ligne", "Instruction"], "lignes": [["1", "u ← 5"], ["2", "Pour k de 1 à 3 :"], ["3", "    u ← 2 × u − 1"], ["4", "Fin Pour"], ["5", "Afficher u"]]},
+    question: "Quelle valeur l'algorithme affiche-t-il ?",
+    choix: ["17", "9", "33", "65"],
+    bonne: 2,
+    explication: "Tour 1 : u = 2 × 5 − 1 = 9\nTour 2 : u = 2 × 9 − 1 = 17\nTour 3 : u = 2 × 17 − 1 = 33\nLa boucle « Pour k de 1 à 3 » fait 3 tours : l'algorithme affiche 33. 17 est la valeur après 2 tours seulement, 9 après 1 tour, et 65 après 4 tours.",
+    indice: "Compte les tours : « de 1 à 3 » fait trois passages. Écris u à la fin de chaque tour."
+  },
+  {
+    id: "U41-172", epreuve: "U41", theme: "Suites", session: "complément", entrainement: true,
+    difficulte: "difficile",
+    contexte: "On veut afficher le plus petit rang n tel que u(n) > 350, avec u(0) = 200 et u(n+1) = 0,95 u(n) + 20 (la limite de la suite est 400).",
+    annexe: {"titre": "Algorithme (ne donne pas le bon résultat)", "colonnes": ["Ligne", "Instruction"], "lignes": [["1", "n ← 0 ; u ← 200"], ["2", "Tant que u ≤ 350 :"], ["3", "    u ← 0,95 × u + 20"], ["4", "Fin Tant que"], ["5", "Afficher n"]]},
+    question: "Quel est le défaut de cet algorithme ?",
+    choix: ["La boucle ne s'arrête jamais, car la suite se rapproche de 400 sans jamais atteindre 350 et reste donc au-dessus de la condition", "n n'augmente jamais dans la boucle : l'algorithme s'arrête bien, mais affiche toujours 0 au lieu du rang", "La condition devrait être u < 350, sinon l'algorithme s'arrête trop tôt et affiche un rang trop petit d'une unité", "u doit être initialisé à 350 et non à 200, sinon l'algorithme compte des rangs qui précèdent le début de la suite"],
+    bonne: 1,
+    explication: "La ligne « n ← n + 1 » manque. La suite dépasse bien 350 (sa limite est 400), donc la boucle se termine, mais n reste à 0 et l'algorithme affiche 0. Corrigé : ajouter n ← n + 1 dans la boucle, ce qui donne n = 28 (u(27) ≈ 349,94 ≤ 350 et u(28) ≈ 352,4 > 350).",
+    indice: "Que contient n à la fin ? Que fait la boucle sur n ?"
   }
 );

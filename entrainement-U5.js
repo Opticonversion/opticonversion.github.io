@@ -133,7 +133,7 @@ QUESTIONS.push(
     question: "Quelle est la formule d'un cylindre croisé ±0,25 dont l'axe du cylindre négatif est à 45° ?",
     choix: ["+0,25 (−0,50) 135°", "+0,25 (−0,50) 45°", "0,00 (−0,50) 45°", "+0,50 (−0,25) 45°"],
     bonne: 1,
-    explication: "Le CCR ±0,25 vaut +0,25 (−0,50) à l'axe du cylindre négatif : sphère +0,25, cylindre −0,50, axe 45°. Le premier choix place l'axe sur le cylindre positif, le troisième oublie la sphère, le quatrième inverse sphère et cylindre.",
+    explication: "Le CCR ±0,25 vaut +0,25 (−0,50) à l'axe du cylindre négatif : sphère +0,25, cylindre −0,50, axe 45°. Les erreurs possibles : placer l'axe sur le cylindre positif, oublier la sphère, ou inverser sphère et cylindre.",
     indice: "Sphère = la valeur positive du CCR, cylindre = deux fois la valeur négative, axe = celui des points rouges."
   },
   {

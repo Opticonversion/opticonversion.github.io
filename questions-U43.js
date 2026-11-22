@@ -1446,3 +1446,353 @@ QUESTIONS.push(
   "schemaTexte": "Un faisceau parallèle de 80 mm de large traverse un objectif convergent puis un oculaire divergent, et ressort parallèle avec 20 mm de large. Les rayons de l'objectif visent un point situé derrière l'oculaire."
 }
 );
+
+// ---------- Thèmes à renforcer : aberrations, skiascopie, frontofocomètre ----------
+QUESTIONS.push(
+{
+  "id": "U43-162",
+  "epreuve": "U43",
+  "theme": "Aberrations",
+  "session": "complément",
+  "difficulte": "moyen",
+  "question": "Des rayons parallèles à l'axe traversent une lentille sphérique : ceux du bord coupent l'axe plus près de la lentille que ceux du centre. Quelle aberration est en cause, et quelle parade simple existe ?",
+  "choix": [
+    "Aberration chromatique : accoler un crown et un flint",
+    "Coma : ne photographier que des objets sur l'axe",
+    "Aberration sphérique : diaphragmer pour n'utiliser que le centre de la lentille",
+    "Distorsion : placer le diaphragme devant la lentille"
+  ],
+  "bonne": 2,
+  "explication": "Une surface sphérique dévie trop les rayons du bord : ils convergent avant ceux du centre. C'est l'aberration sphérique.\nEn diaphragmant, on ne garde que les rayons proches de l'axe (conditions de Gauss), au prix d'une image moins lumineuse. Le doublet crown-flint, lui, corrige les couleurs.",
+  "indice": "Les rayons du bord et ceux du centre ont la même couleur : le défaut vient-il de la couleur ou de la forme de la surface ?",
+  "erreurs": {
+    "0": {
+      "type": "notion",
+      "message": "L'aberration chromatique sépare les couleurs. Ici tous les rayons ont la même couleur : le défaut vient de la forme sphérique de la surface."
+    }
+  }
+},
+{
+  "id": "U43-163",
+  "epreuve": "U43",
+  "theme": "Aberrations",
+  "session": "complément",
+  "difficulte": "moyen",
+  "question": "Une lentille convergente en verre est éclairée en lumière blanche par un point de l'axe. Où converge le bleu par rapport au rouge ?",
+  "choix": [
+    "Le rouge converge plus près de la lentille",
+    "Le bleu converge plus près de la lentille",
+    "Les deux couleurs convergent au même point : seule la netteté change",
+    "Le bleu converge plus loin, car il est plus énergétique"
+  ],
+  "bonne": 1,
+  "explication": "L'indice du verre est plus grand pour le bleu que pour le rouge. La vergence V = [[n − 1|R]] augmente avec n : la focale du bleu est donc plus courte, et il converge plus près de la lentille.\nC'est l'aberration chromatique longitudinale.",
+  "indice": "Le verre dévie davantage le bleu. Une déviation plus forte donne-t-elle une focale plus courte ou plus longue ?",
+  "erreurs": {
+    "0": {
+      "type": "notion",
+      "message": "L'indice du verre est plus élevé pour le bleu que pour le rouge. Une vergence plus forte donne une focale plus courte."
+    }
+  }
+},
+{
+  "id": "U43-164",
+  "epreuve": "U43",
+  "theme": "Aberrations",
+  "session": "complément",
+  "difficulte": "moyen",
+  "type": "calcul",
+  "question": "Une lentille plan-convexe a une face courbe de rayon 50 mm. Son indice vaut 1,530 pour le bleu et 1,510 pour le rouge. Quelle est la différence de vergence entre le bleu et le rouge (en δ, au centième) ?",
+  "reponse": {
+    "valeur": 0.4,
+    "unite": "δ",
+    "decimales": 2,
+    "signe": false
+  },
+  "explication": "V = [[n − 1|R]], avec R = 0,050 m\nV_bleu = [[0,530|0,050]] = 10,6 δ      V_rouge = [[0,510|0,050]] = 10,2 δ\nÉcart : 10,6 − 10,2 = 0,40 δ\nLe bleu est plus convergent que le rouge.",
+  "indice": "Calcule la vergence pour chaque couleur avec V = [[n − 1|R]], R en mètres, puis fais la différence.",
+  "erreurs": [
+    {
+      "valeur": 10.6,
+      "type": "notion",
+      "message": "10,6 δ est la vergence du bleu seul. La question demande l'écart entre le bleu et le rouge."
+    }
+  ]
+},
+{
+  "id": "U43-165",
+  "epreuve": "U43",
+  "theme": "Aberrations",
+  "session": "complément",
+  "difficulte": "difficile",
+  "question": "Pourquoi un télescope utilise-t-il un miroir parabolique plutôt que sphérique pour observer une étoile sur l'axe ?",
+  "choix": [
+    "La parabole focalise en un seul point tous les rayons parallèles à l'axe : elle n'a pas d'aberration sphérique",
+    "Elle supprime aussi la coma pour les étoiles hors de l'axe",
+    "Parce qu'un miroir sphérique souffre d'aberration chromatique",
+    "Elle donne une image droite, ce que le miroir sphérique ne fait pas"
+  ],
+  "bonne": 0,
+  "explication": "Un miroir sphérique focalise les rayons du bord ailleurs que ceux du centre (aberration sphérique). La parabole renvoie tous les rayons parallèles à l'axe vers un même foyer.\nElle n'est parfaite que sur l'axe : hors axe, la coma subsiste. Aucun miroir n'a d'aberration chromatique.",
+  "indice": "Que fait un miroir sphérique des rayons parallèles venus du bord ? Et la parabole est-elle parfaite hors de l'axe ?",
+  "erreurs": {
+    "1": {
+      "type": "notion",
+      "message": "La parabole est parfaite sur l'axe seulement : hors de l'axe, la coma subsiste."
+    },
+    "2": {
+      "type": "notion",
+      "message": "Un miroir réfléchit toutes les couleurs de la même façon : il n'a pas d'aberration chromatique, qu'il soit sphérique ou parabolique."
+    }
+  }
+},
+{
+  "id": "U43-166",
+  "epreuve": "U43",
+  "theme": "Aberrations",
+  "session": "complément",
+  "difficulte": "moyen",
+  "question": "Un objectif photographie un mur plat. Le centre est net, les bords sont flous, alors que le capteur est plat. Quelle aberration est en cause ?",
+  "choix": [
+    "La distorsion : les lignes droites deviennent courbes",
+    "L'aberration chromatique : les couleurs ne convergent pas au même point",
+    "La coma : l'image d'un point hors de l'axe devient une comète",
+    "La courbure de champ : l'image nette d'un plan se forme sur une surface courbe"
+  ],
+  "bonne": 3,
+  "explication": "Avec la courbure de champ, l'image nette d'un objet plat se forme sur une surface courbe. Un capteur plat ne peut en recevoir qu'une partie nette : le centre, ou les bords.\nLa distorsion déforme les lignes sans rendre l'image floue.",
+  "indice": "Le défaut dépend de la distance au centre de l'image, et touche la netteté, pas la forme des lignes.",
+  "erreurs": {
+    "0": {
+      "type": "notion",
+      "message": "La distorsion déforme les lignes mais ne rend pas l'image floue. Ici, c'est la netteté qui change entre le centre et le bord."
+    }
+  }
+},
+{
+  "id": "U43-167",
+  "epreuve": "U43",
+  "theme": "Skiascopie",
+  "session": "complément",
+  "difficulte": "moyen",
+  "question": "En skiascopie à 1 m avec un faisceau divergent (miroir plan), on examine un myope de −3 δ. Quel est le mouvement du reflet, et quel verre le neutralise ?",
+  "choix": [
+    "Mouvement inverse, verre de −2,00 δ",
+    "Mouvement direct, verre de +4,00 δ",
+    "Mouvement direct, verre de −2,00 δ",
+    "Mouvement inverse, verre de −4,00 δ"
+  ],
+  "bonne": 0,
+  "explication": "La distance de travail de 1 m vaut [[1|d]] = 1 δ. Le remotum du myope est à [[1|3]] m = 33 cm : plus près que l'examinateur, donc mouvement inverse.\nVerre neutralisant = R + [[1|d]] = −3 + 1 = −2,00 δ\nAvec −3 − 1 = −4 δ, on retrancherait la distance de travail au lieu de l'ajouter.",
+  "indice": "Où est le remotum de ce myope par rapport à l'examinateur ? Puis R = verre − [[1|d]], donc verre = R + [[1|d]].",
+  "erreurs": {
+    "3": {
+      "type": "signe",
+      "message": "Tu as retranché la distance de travail. R = verre − 1/d, donc le verre vaut R + 1/d."
+    },
+    "1": {
+      "type": "notion",
+      "message": "Compare la position du remotum à celle de l'examinateur : ce myope voit net plus près que lui. Et un myope se neutralise avec un verre négatif."
+    }
+  }
+},
+{
+  "id": "U43-168",
+  "epreuve": "U43",
+  "theme": "Skiascopie",
+  "session": "complément",
+  "difficulte": "difficile",
+  "type": "pose",
+  "question": "En skiascopie à 50 cm, le méridien horizontal d'un œil est neutralisé par −0,50 δ et le méridien vertical par −1,50 δ. Trouve l'ordonnance en cylindre négatif, étape par étape.",
+  "etapes": [
+    {
+      "consigne": "Réfraction du méridien horizontal R_H (en δ, au centième)",
+      "reponse": {
+        "valeur": -2.5,
+        "unite": "δ",
+        "decimales": 2,
+        "signe": true
+      },
+      "aide": "R = verre de point neutre − [[1|d]], avec d = 0,5 m.",
+      "ligne": "R_H = −0,50 − [[1|0,5]] = −0,50 − 2,00 = −2,50 δ",
+      "erreurs": [
+        {
+          "valeur": 1.5,
+          "type": "signe",
+          "message": "Tu as ajouté la distance de travail. Elle se retranche : R = verre − 1/d."
+        }
+      ]
+    },
+    {
+      "consigne": "Réfraction du méridien vertical R_V (en δ, au centième)",
+      "reponse": {
+        "valeur": -3.5,
+        "unite": "δ",
+        "decimales": 2,
+        "signe": true
+      },
+      "aide": "Même formule avec le verre du méridien vertical.",
+      "ligne": "R_V = −1,50 − [[1|0,5]] = −1,50 − 2,00 = −3,50 δ",
+      "erreurs": [
+        {
+          "valeur": 0.5,
+          "type": "signe",
+          "message": "Tu as ajouté la distance de travail. Elle se retranche : R = verre − 1/d."
+        }
+      ]
+    },
+    {
+      "consigne": "Cylindre C (en δ, au centième)",
+      "reponse": {
+        "valeur": -1,
+        "unite": "δ",
+        "decimales": 2,
+        "signe": true
+      },
+      "aide": "Le cylindre est l'écart entre les deux méridiens : C = R_V − R_H.",
+      "ligne": "C = R_V − R_H = −3,50 − (−2,50) = −1,00 δ"
+    },
+    {
+      "consigne": "Sphère S en cylindre négatif (en δ, au centième)",
+      "reponse": {
+        "valeur": -2.5,
+        "unite": "δ",
+        "decimales": 2,
+        "signe": true
+      },
+      "aide": "En cylindre négatif, la sphère est la réfraction du méridien le moins myope.",
+      "ligne": "S = R_H = −2,50 δ\nOrdonnance : −2,50 (−1,00) à 180°"
+    }
+  ],
+  "explication": "Le méridien vertical est le plus myope : le cylindre agit dans le méridien vertical, son axe est donc horizontal (180°). Ordonnance : −2,50 (−1,00) à 180°."
+},
+{
+  "id": "U43-169",
+  "epreuve": "U43",
+  "theme": "Skiascopie",
+  "session": "complément",
+  "difficulte": "moyen",
+  "question": "En skiascopie, quand le point neutre est atteint, que voit l'examinateur dans la pupille ?",
+  "choix": [
+    "Toute la pupille est éclairée d'un coup, sans mouvement apparent du reflet",
+    "Le reflet se déplace très vite dans le même sens que le skiascope",
+    "Le reflet se déplace très vite en sens inverse du skiascope",
+    "La pupille reste noire quelle que soit la position du skiascope"
+  ],
+  "bonne": 0,
+  "explication": "Au point neutre, le remotum de l'œil est exactement sur l'examinateur : la lumière revenant de la rétine éclaire toute la pupille en même temps, et le reflet ne se déplace plus. Plus on s'en approche, plus le reflet est vif et rapide, puis il se fige.",
+  "indice": "Au point neutre, le sens du mouvement s'inverse : que voit-on juste au moment du changement de sens ?",
+  "erreurs": {
+    "1": {
+      "type": "notion",
+      "message": "Un mouvement très vif annonce que le point neutre est proche, mais il n'est pas encore atteint : il reste un mouvement. Au point neutre, il n'y en a plus."
+    }
+  }
+},
+{
+  "id": "U43-170",
+  "epreuve": "U43",
+  "theme": "Skiascopie",
+  "session": "complément",
+  "difficulte": "moyen",
+  "type": "calcul",
+  "question": "En skiascopie à 80 cm, le point neutre est obtenu avec un verre de −1,75 δ. Quelle est la réfraction de l'œil (en δ, au centième) ?",
+  "reponse": {
+    "valeur": -3,
+    "unite": "δ",
+    "decimales": 2,
+    "signe": true
+  },
+  "explication": "Distance de travail : [[1|d]] = [[1|0,8]] = 1,25 δ\nR = verre − [[1|d]] = −1,75 − 1,25 = −3,00 δ\nL'œil est myope de 3 dioptries.",
+  "indice": "R = verre au point neutre − [[1|d]], avec d en mètres.",
+  "erreurs": [
+    {
+      "valeur": -0.5,
+      "type": "signe",
+      "message": "Tu as ajouté la distance de travail. Elle se retranche : R = verre − 1/d."
+    }
+  ]
+},
+{
+  "id": "U43-171",
+  "epreuve": "U43",
+  "theme": "Frontofocomètre",
+  "session": "complément",
+  "difficulte": "difficile",
+  "question": "Au frontofocomètre, le centre optique d'un verre de +3,00 δ est à 5 mm du point de mesure, du côté temporal. Quel effet prismatique mesure-t-on au point de mesure ?",
+  "choix": [
+    "1,5 Δ, base nasale",
+    "15 Δ, base temporale",
+    "0,6 Δ, base temporale",
+    "1,5 Δ, base temporale"
+  ],
+  "bonne": 3,
+  "explication": "Prentice : P = c × D = 0,5 × 3,00 = 1,5 Δ.\nUn verre convergent équivaut à deux prismes base contre base : en un point décalé du centre optique, la base du prisme est tournée vers le centre optique, donc temporale ici.",
+  "indice": "Un verre convergent est fait de deux prismes accolés : vers où sont leurs bases ? Pense aussi à convertir les mm en cm.",
+  "erreurs": {
+    "0": {
+      "type": "notion",
+      "message": "Pense à un verre convergent comme deux prismes accolés par leur base : vers où la base est-elle tournée ?"
+    },
+    "2": {
+      "type": "notion",
+      "message": "Tu as divisé 3 par 5. Il faut multiplier le décentrement en cm par la puissance : 0,5 × 3,00."
+    },
+    "1": {
+      "type": "unite",
+      "message": "Tu as oublié de convertir les 5 mm en 0,5 cm avant de multiplier."
+    }
+  }
+},
+{
+  "id": "U43-172",
+  "epreuve": "U43",
+  "theme": "Frontofocomètre",
+  "session": "complément",
+  "difficulte": "difficile",
+  "question": "Au frontofocomètre, le centre optique d'un verre de −4,00 δ est à 3 mm du point de mesure, du côté temporal. Quel effet prismatique mesure-t-on au point de mesure ?",
+  "choix": [
+    "1,2 Δ, base nasale",
+    "1,2 Δ, base temporale",
+    "12 Δ, base nasale",
+    "0,75 Δ, base nasale"
+  ],
+  "bonne": 0,
+  "explication": "Prentice : P = c × ∣D∣ = 0,3 × 4,00 = 1,2 Δ.\nUn verre divergent équivaut à deux prismes sommet contre sommet : la base du prisme est tournée à l'opposé du centre optique, donc nasale ici. C'est l'inverse d'un verre convergent.",
+  "indice": "Un verre divergent est fait de deux prismes accolés par leur sommet : où sont leurs bases par rapport au centre optique ?",
+  "erreurs": {
+    "1": {
+      "type": "notion",
+      "message": "Pour un verre divergent, la base du prisme est tournée à l'opposé du centre optique, pas vers lui."
+    },
+    "3": {
+      "type": "notion",
+      "message": "Tu as divisé 3 par 4. Il faut multiplier le décentrement en cm par la puissance : 0,3 × 4,00."
+    }
+  }
+},
+{
+  "id": "U43-173",
+  "epreuve": "U43",
+  "theme": "Frontofocomètre",
+  "session": "complément",
+  "difficulte": "moyen",
+  "type": "calcul",
+  "question": "Un verre de +2,50 δ doit présenter un effet prismatique de 1,0 Δ. De combien faut-il le décentrer (en mm) ?",
+  "reponse": {
+    "valeur": 4,
+    "unite": "mm",
+    "decimales": 0,
+    "signe": false
+  },
+  "explication": "Règle de Prentice : P = c × D, donc c = [[P|D]] = [[1,0|2,5]] = 0,4 cm = 4 mm",
+  "indice": "c (cm) = [[P|D]]. Pense à convertir le résultat en mm.",
+  "erreurs": [
+    {
+      "valeur": 0.4,
+      "type": "unite",
+      "message": "0,4 est en centimètres. Convertis en millimètres : 0,4 cm = 4 mm."
+    }
+  ]
+}
+);

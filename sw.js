@@ -13,7 +13,7 @@
 // =====================================================================
 
 // <versionner> (partie écrite par versionner.py, ne pas modifier à la main)
-const VERSION = "b44a65f0dd";
+const VERSION = "d943bba450";
 const FICHIERS = [
   "appli.js?v=0724163c",
   "atelier-calculatrice.js?v=6e07c21a",
@@ -30,16 +30,16 @@ const FICHIERS = [
   "definitions-U43.js?v=135a6649",
   "definitions-U5.js?v=6f883a4c",
   "definitions.html",
-  "definitions.js?v=575e9bbb",
+  "definitions.js?v=eb1e9b79",
   "entrainement-U3.js?v=5783bb52",
-  "entrainement-U41.js?v=26e8d700",
+  "entrainement-U41.js?v=83ad44b4",
   "entrainement-U42.js?v=0310e3b2",
   "entrainement-U43.js?v=201e28d1",
-  "entrainement-U5.js?v=98511033",
+  "entrainement-U5.js?v=f1c1f10d",
   "epreuves.js?v=cc645427",
   "essentiel.html",
   "essentiel.js?v=ba6ab9a7",
-  "examen.js?v=9962fce9",
+  "examen.js?v=0226b4d4",
   "img/avatar-chat-bouche-ouverte.svg",
   "img/avatar-chat-choque.svg",
   "img/avatar-chat-clin-doeil.svg",
@@ -161,7 +161,7 @@ const FICHIERS = [
   "manifest.webmanifest",
   "mentions-legales.html",
   "notions.html",
-  "optique.js?v=32ec2adc",
+  "optique.js?v=968042ca",
   "polices/atkinson-hyperlegible-next.woff2",
   "polices/bodoni-moda-italique.woff2",
   "polices/bodoni-moda.woff2",
@@ -169,8 +169,8 @@ const FICHIERS = [
   "questions-U3.js?v=246848d8",
   "questions-U41.js?v=01b8417d",
   "questions-U42.js?v=110fcc22",
-  "questions-U43.js?v=13cf11e5",
-  "questions-U5.js?v=86decd35",
+  "questions-U43.js?v=fe77cb97",
+  "questions-U5.js?v=c4dda2f9",
   "rythme.js?v=a384940c",
   "sons.js?v=355500ef",
   "sons/faux.mp3",
@@ -185,12 +185,12 @@ const FICHIERS = [
   "specificites-U42.js?v=c76c29e7",
   "specificites-U43.js?v=523c07db",
   "specificites-U5.js?v=43533990",
-  "style.css?v=0bd07ae1",
+  "style.css?v=194f35eb",
   "traces-U42.js?v=6b6df119",
   "traces-U43.js?v=77abc155",
-  "traces-U5.js?v=c4c5f919",
+  "traces-U5.js?v=6c873d8a",
   "traces.html",
-  "traces.js?v=209568d4",
+  "traces.js?v=98c01e37",
   "videos.js?v=2da8e777",
   "vivant.js?v=0b03b85f"
 ];

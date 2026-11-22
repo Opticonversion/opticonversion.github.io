@@ -1315,6 +1315,7 @@ kbd.touche { display: inline-block; min-width: 1.9em; margin: 0 1px; padding: 0 
 .def-savais { background: var(--vert); }
 .def-savais:hover { background: #74e0ad; }
 .def-revision .raccourcis { text-align: center; }
+.def-annuler { margin: 4px auto 0; text-align: center; }
 .def-fin { text-align: center; }
 .def-fin-compagnon { width: 120px; height: auto; margin: 0 auto 8px; display: block; animation: saute 800ms var(--rebond) both; }
 #def-fin-titre { color: var(--or-clair); outline: none; }
@@ -2485,3 +2486,11 @@ button.atc-onglet { min-height: 32px; cursor: pointer; }
 .atc-actions .bouton { margin: 0; }
 @media (max-width: 720px) { .bouton-atc { margin: 0 10px 12px; } .atc { margin: 0 8px 14px; } .atc-machine { max-width: none; padding: 10px 8px; } .atc-touche { min-height: 36px; } }
 @media (prefers-reduced-motion: reduce) { .atc-touche.atc-appui, .atc-touche:active { transform: none; } }
+
+/* « Sur la copie » (creerSurLaCopie, examen.js) : la rédaction modèle, dans la correction du QCM et de l'examen blanc */
+.sur-la-copie { display: block; width: 100%; margin: 10px 0; padding: 10px 14px; border-left: 3px solid rgb(var(--accent-rgb)); background: rgba(var(--accent-rgb), 0.08); border-radius: 0 10px 10px 0; }
+.sur-la-copie p { margin: 0; }
+.sur-la-copie-titre { font-weight: 700; color: rgb(var(--accent-rgb)); }
+.sur-la-copie-invite { margin-bottom: 6px !important; color: var(--doux); font-size: 0.86rem; }
+.sur-la-copie-ligne { color: var(--texte); line-height: 1.55; }
+.sur-la-copie-ligne + .sur-la-copie-ligne { margin-top: 2px; }

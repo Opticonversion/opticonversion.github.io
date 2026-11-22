@@ -18,7 +18,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Opticonversion">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
-<link rel="stylesheet" href="style.css?v=0bd07ae1">
+<link rel="stylesheet" href="style.css?v=194f35eb">
 </head>
 <body>
 <header class="entete">
@@ -104,20 +104,20 @@
 <script src="epreuves.js?v=cc645427"></script>
 <script src="questions-U41.js?v=01b8417d"></script>
 <script src="questions-U42.js?v=110fcc22"></script>
-<script src="questions-U43.js?v=13cf11e5"></script>
-<script src="questions-U5.js?v=86decd35"></script>
+<script src="questions-U43.js?v=fe77cb97"></script>
+<script src="questions-U5.js?v=c4dda2f9"></script>
 <script src="questions-U3.js?v=246848d8"></script>
 <!-- Questions d'entraînement (mêmes notions, autres chiffres) : chargées ici seulement, hors Essentiel -->
-<script src="entrainement-U41.js?v=26e8d700"></script>
+<script src="entrainement-U41.js?v=83ad44b4"></script>
 <script src="entrainement-U42.js?v=0310e3b2"></script>
 <script src="entrainement-U43.js?v=201e28d1"></script>
-<script src="entrainement-U5.js?v=98511033"></script>
+<script src="entrainement-U5.js?v=f1c1f10d"></script>
 <script src="entrainement-U3.js?v=5783bb52"></script>
 <!-- Fiches « Spécificités » (facultatives : la page marche sans elles) -->
 <!-- Niveaux de l'Atelier (pour compter niveaux et étoiles sur la page de l'épreuve) -->
 <script src="traces-U42.js?v=6b6df119"></script>
 <script src="traces-U43.js?v=77abc155"></script>
-<script src="traces-U5.js?v=c4c5f919"></script>
+<script src="traces-U5.js?v=6c873d8a"></script>
 <script src="specificites-U41.js?v=3d591e09"></script>
 <script src="specificites-U42.js?v=c76c29e7"></script>
 <script src="specificites-U43.js?v=523c07db"></script>
@@ -126,7 +126,7 @@
 <script src="essentiel.js?v=ba6ab9a7"></script>
 <script src="rythme.js?v=a384940c"></script>
 <!-- Examen blanc chronométré (#U5/examen) : avant le script de la page, qui l'ouvre dès le chargement -->
-<script src="examen.js?v=9962fce9"></script>
+<script src="examen.js?v=0226b4d4"></script>
 <script src="calculette.js?v=6fb79d1d"></script>
 <script src="atelier-calculatrice.js?v=6e07c21a"></script>
 <script>
@@ -1382,6 +1382,9 @@
         : "Elle reviendra " + (suite.jours === 1 ? "demain" : "dans " + suite.jours + " jours") + " dans «\u00a0À revoir\u00a0».";
       expl.appendChild(info);
     }
+    // « Sur la copie » (examen.js) : la rédaction modèle, juste avant l'explication, que la réponse soit juste ou non
+    const copieModele = creerSurLaCopie(q);
+    if (copieModele) expl.querySelector(":scope > span").before(copieModele);
     zone.appendChild(expl);
 
     // En cas d'erreur : un bouton pour voir le Short du thème, seulement s'il existe (videos.js)
@@ -1605,6 +1608,7 @@
       morceaux.push(copie.textContent);
     });
     morceaux.push(texteMathLu(q.explication));
+    if (q.surLaCopie) morceaux.push("Sur la copie : " + texteMathLu(q.surLaCopie.replace(/\n/g, " ")));
     clearTimeout(minuteurAnnonce);
     minuteurAnnonce = setTimeout(() => { zoneAnnonce.textContent = morceaux.join(" "); }, 120);
   }

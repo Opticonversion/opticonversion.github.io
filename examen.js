@@ -33,6 +33,29 @@ const POIDS_EXAMEN = {
 };
 const POIDS_THEME_RARE = 0.2;   // un thème absent des fréquences : il sort de temps en temps
 
+// « Sur la copie » (champ facultatif surLaCopie d'une question) : 2 à 3 lignes de rédaction modèle, celles qu'on écrirait
+// sur la copie du BTS. Montré dans la correction du QCM (qcm.html) et dans celle de l'examen blanc, même quand la réponse est juste :
+// les corrigés notent la justification. Un retour à la ligne (\n) dans le texte = une nouvelle ligne.
+function creerSurLaCopie(q) {
+  if (!q || typeof q.surLaCopie !== "string" || !q.surLaCopie.trim()) return null;
+  const bloc = document.createElement("div");
+  bloc.className = "sur-la-copie";
+  const titre = document.createElement("p");
+  titre.className = "sur-la-copie-titre";
+  titre.textContent = "Sur la copie";
+  const invite = document.createElement("p");
+  invite.className = "sur-la-copie-invite";
+  invite.textContent = "Compare avec ce que tu aurais écrit : le jury note la justification.";
+  bloc.append(titre, invite);
+  q.surLaCopie.split("\n").filter(l => l.trim()).forEach(l => {
+    const p = document.createElement("p");
+    p.className = "sur-la-copie-ligne";
+    ecrireTexteMath(p, l.trim());
+    bloc.appendChild(p);
+  });
+  return bloc;
+}
+
 const Examen = (() => {
   const CLE_EN_COURS = "examen-en-cours", CLE_DERNIER = "examen-dernier";
   const SEUIL_FORT = 0.75, SEUIL_FAIBLE = 0.5;
@@ -688,6 +711,8 @@ const Examen = (() => {
     if (q.type === "calcul") bonne.textContent = l.calcul ? messageCalcul(q.reponse, l.calcul) : "La bonne valeur est " + ecrireNombre(q.reponse.valeur, q.reponse.decimales === undefined ? 2 : q.reponse.decimales, q.reponse.signe !== false) + (q.reponse.unite ? " " + q.reponse.unite : "") + ".";
     else ecrireTexteMath(bonne, "Bonne réponse : " + q.choix[q.bonne]);
     li.appendChild(bonne);
+    const copieModele = creerSurLaCopie(q);
+    if (copieModele) li.appendChild(copieModele);
     const expl = el("span", "doux");
     ecrireTexteMath(expl, q.explication);
     li.appendChild(expl);

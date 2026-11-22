@@ -81,6 +81,136 @@ TRACES.push(
     ]
   },
 
+  // ==================================================================
+  //  PLUS LOIN AVEC LE COUPLE OCULAIRE (22 nov. 2026) : Worth, prisme
+  //  dissociateur, convergence, prismes devant les deux yeux, brouillage.
+  //  Contenu : notes/coordination/atelier-couple-oculaire.md
+  // ==================================================================
+
+  // ---------- 12. Le Worth vu de dessus ----------
+  {
+    id: "U5-12", epreuve: "U5", chapitre: "Plus loin avec le couple oculaire",
+    titre: "Le Worth vu de dessus",
+    consigne: "Lanterne de Worth à 33 cm : filtre rouge devant l'OD, filtre vert devant l'OG. L'OD fixe. Le sujet voit 5 symboles, les rouges à gauche des verts.",
+    theme: "Worth",
+    schema: {
+      type: "couple-oculaire", distance: 33, fixateur: "OD",
+      dissociateur: { nom: "Filtre vert (lanterne de Worth)", court: "Filtre vert", oeil: "OG" },
+      filtres: { OD: "rouge", OG: "vert" },
+      perception: { oeil: "OG", cote: "droite", image: "symboles verts", repere: "symboles rouges" }
+    },
+    etapes: [
+      { action: "legender", texte: "Légende le schéma : touche une étiquette, puis l'endroit où elle va. Chaque filtre va devant son œil." },
+      { action: "regard", texte: "Les filtres dissocient : l'OG, derrière le filtre vert, part en position passive. Fais pivoter sa ligne de regard." },
+      { action: "pointer", quoi: "image-devie", texte: "Le rayon issu de T entre dans l'OG par Q'g. Touche le fond de l'œil là où se forme T'g." },
+      { action: "pointer", quoi: "exteriorisation", texte: "Sur l'œil cyclope, l'OD fixe : T''d est droit devant. Touche le côté où le sujet extériorise T''g." },
+      { action: "conclure", texte: "Le Worth ne mesure pas l'écart. Choisis la conclusion que tu rédigerais sous ton schéma." }
+    ],
+    copie: [
+      "« Vue de dessus » et « VP 33 cm » écrits",
+      "Filtre rouge devant l'OD, filtre vert devant l'OG",
+      "L'œil fixateur nommé, le même sur le couple et sur l'œil cyclope",
+      "LRD et LRG qui se croisent derrière T",
+      "Les extériorisations seulement sur l'œil cyclope",
+      "Une conclusion rédigée : 5 symboles, diplopie croisée, exophorie"
+    ]
+  },
+
+  // ---------- 13. Le décalage avec un prisme dissociateur ----------
+  {
+    id: "U5-13", epreuve: "U5", chapitre: "Plus loin avec le couple oculaire",
+    titre: "Le décalage dû à un prisme",
+    consigne: "Test de lignes à 40 cm. Prisme de 4 Δ base externe devant l'OD, l'OG fixe. Le sujet ne fusionne pas : il voit le test en double.",
+    theme: "Masquage et phories",
+    schema: { type: "prisme-dissociateur", distance: 40, prisme: 4, base: "externe", oeil: "OD" },
+    etapes: [
+      { action: "legender", texte: "Légende le schéma : le prisme devant le bon œil, sa base, puis l'œil fixateur." },
+      { action: "pointer", quoi: "deviation", texte: "Le rayon issu de T traverse le prisme. Après le prisme, part-il vers le nez ou vers la tempe de l'OD ?" },
+      { action: "pointer", quoi: "exteriorisation", texte: "Sur l'œil cyclope, l'OG fixe : T''g est droit devant. De quel côté le sujet voit-il le test de l'OD ?" },
+      { action: "calcul", grandeur: "decalage", decimales: 1, texte: "Calcule le décalage entre les deux lignes vues, en cm (test à 40 cm)." },
+      { action: "conclure" }
+    ],
+    copie: [
+      "« Vue de dessus » et la distance du test (VP, 40 cm) écrites",
+      "Le prisme dessiné devant l'OD, avec sa base et sa valeur",
+      "L'œil fixateur nommé",
+      "Le rayon dévié vers la base, T' à côté de la fovéa",
+      "Les extériorisations seulement sur l'œil cyclope, décalage coté en cm",
+      "Une conclusion rédigée : côté du décalage, valeur, calcul"
+    ]
+  },
+
+  // ---------- 14. La convergence requise en lecture ----------
+  {
+    id: "U5-14", epreuve: "U5", chapitre: "Plus loin avec le couple oculaire",
+    titre: "La convergence en lecture",
+    consigne: "Lecture à 40 cm, écart pupillaire de 64 mm. Sujet emmétrope sans verre : les deux yeux fixent T, sur la médiane.",
+    theme: "Examen préliminaire",
+    schema: { type: "convergence", distance: 40, ecart: 64 },
+    etapes: [
+      { action: "legender", texte: "Légende le schéma : le titre, les centres de rotation, puis les deux cotes." },
+      { action: "pointer", quoi: "rotation", texte: "Les yeux regardent encore droit devant. Pour fixer T, de quel côté tourne l'OD ?" },
+      { action: "calcul", grandeur: "convergence", decimales: 0, texte: "Calcule la convergence requise du couple, en Δ." },
+      { action: "conclure" }
+    ],
+    copie: [
+      "« Vue de dessus » et « VP 40 cm » écrits",
+      "Q'g et Q'd, l'écart pupillaire coté",
+      "La distance de T à la ligne des centres cotée",
+      "LRG et LRD fléchées vers T, l'angle de chaque œil noté",
+      "Le calcul de la convergence en Δ",
+      "Une conclusion rédigée : total, part de chaque œil, sens"
+    ]
+  },
+
+  // ---------- 15. Des prismes base interne devant les deux yeux ----------
+  {
+    id: "U5-15", epreuve: "U5", chapitre: "Plus loin avec le couple oculaire",
+    titre: "Des prismes devant les deux yeux",
+    consigne: "Test à 5 m. Prisme de 3 Δ base interne devant chaque œil. Le sujet, orthophorique, garde la vision simple.",
+    theme: "Masquage et phories",
+    schema: { type: "prismes-couple", distance: 500, prisme: 3, base: "interne" },
+    etapes: [
+      { action: "legender", texte: "Légende le schéma : le titre, puis la base de chaque prisme." },
+      { action: "pointer", quoi: "deviation", texte: "Après le prisme de l'OD, le rayon issu de T part-il vers le nez ou vers la tempe ?" },
+      { action: "pointer", quoi: "rotation", texte: "Pour ramener T' sur la fovéa, de quel côté tourne l'OD ?" },
+      { action: "calcul", grandeur: "prisme-total", decimales: 0, texte: "Quel prisme total, en Δ, le couple doit-il compenser ?" },
+      { action: "conclure" }
+    ],
+    copie: [
+      "« Vue de dessus » et « VL 5 m » écrits",
+      "Chaque prisme dessiné devant son œil, avec sa base et sa valeur",
+      "Les rayons fléchés, déviés vers la base",
+      "Les lignes de regard après rotation, vers le sommet",
+      "Le prisme total calculé",
+      "Une conclusion rédigée : divergence demandée, réserve sollicitée"
+    ]
+  },
+
+  // ---------- 16. Le brouillage de +1,00 vu de dessus ----------
+  {
+    id: "U5-16", epreuve: "U5", chapitre: "Plus loin avec le couple oculaire",
+    titre: "Le brouillage vu de dessus",
+    consigne: "Équilibre bioculaire de loin : sujet emmétrope, un verre de +1,00 δ devant chaque œil. Il n'accommode pas. Objet éloigné T∞.",
+    theme: "Réfraction",
+    schema: { type: "brouillage", verre: 1 },
+    etapes: [
+      { action: "legender", texte: "Légende le schéma : le titre, le verre de chaque œil, l'état accommodatif." },
+      { action: "pointer", quoi: "image", texte: "Sur l'OD, où se forme l'image T'd de l'objet éloigné ?" },
+      { action: "calcul", grandeur: "defocalisation", decimales: 2, texte: "De combien de dioptries l'image est-elle défocalisée ?" },
+      { action: "calcul", grandeur: "remotum", decimales: 0, texte: "L'œil brouillé voit net en R. Calcule HR en cm, avec son signe." },
+      { action: "conclure" }
+    ],
+    copie: [
+      "« Vue de dessus » et « VL » écrits",
+      "Le verre de chaque œil noté avec sa vergence",
+      "T' marqué en avant de la rétine, sur chaque œil",
+      "La défocalisation cotée en dioptries",
+      "L'état accommodatif noté : Acc = 0",
+      "Une conclusion rédigée : pourquoi accommoder empirerait le flou"
+    ]
+  },
+
   // ---------- 7. L'œil réduit hypermétrope ----------
   {
     id: "U5-7", epreuve: "U5", chapitre: "L'œil amétrope",
