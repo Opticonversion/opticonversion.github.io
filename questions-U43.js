@@ -1794,5 +1794,306 @@ QUESTIONS.push(
       "message": "0,4 est en centimètres. Convertis en millimètres : 0,4 cm = 4 mm."
     }
   ]
+},
+{
+  "id": "U43-174", "epreuve": "U43", "theme": "Œil astigmate", "session": "complément", "difficulte": "facile",
+  "question": "Un œil astigmate regarde un point lumineux sans que l'instrument ne corrige quoi que ce soit. Quelle image ce point donne-t-il ?",
+  "choix": [
+    "Un seul point image, comme pour un œil sphérique",
+    "Deux petites lignes perpendiculaires entre elles, situées à deux distances différentes",
+    "Deux points images alignés sur l'axe",
+    "Un cercle parfait, quelle que soit la distance"
+  ],
+  "bonne": 1,
+  "explication": "Les deux méridiens principaux d'un œil astigmate n'ont pas la même réfraction. Chacun fait converger les rayons à une distance différente, et chaque focale est une petite ligne perpendiculaire au méridien qui la forme.",
+  "indice": "Les deux méridiens ont deux réfractions différentes : combien de distances de convergence cela fait-il ?"
+},
+{
+  "id": "U43-175", "epreuve": "U43", "theme": "Œil astigmate", "session": "complément", "difficulte": "moyen",
+  "question": "Un astigmate a pour réfraction −2,00 δ dans le méridien 0° et −4,00 δ dans le méridien 90°. Désaccommodé et sans lunettes, il regarde une image finale située à 50 cm devant son œil. Que voit-il ?",
+  "choix": [
+    "Le méridien 90° est net, le méridien 0° est flou",
+    "Le méridien 0° est net, le méridien 90° est flou",
+    "Les deux méridiens sont nets",
+    "Aucun méridien n'est net"
+  ],
+  "bonne": 1,
+  "explication": "Le remotum d'un méridien de réfraction R est à [[1|R]] devant l'œil.\nMéridien 0° : [[1|2,00]] = 0,50 m = 50 cm, c'est la position de l'image : il est net.\nMéridien 90° : [[1|4,00]] = 0,25 m = 25 cm : l'image est trop loin pour lui, il est flou.",
+  "indice": "Pour chaque méridien, calcule la distance du remotum avec [[1|R]] et compare à 50 cm.",
+  "erreurs": {
+    "0": {
+      "type": "notion",
+      "message": "Le remotum du méridien à −4,00 δ est à 25 cm, pas à 50 cm. Calcule [[1|R]] pour chacun des deux méridiens."
+    }
+  }
+},
+{
+  "id": "U43-176", "epreuve": "U43", "theme": "Œil astigmate", "session": "complément", "difficulte": "moyen",
+  "type": "calcul",
+  "question": "Un œil astigmate a pour réfractions −1,50 δ (méridien 0°) et −4,00 δ (méridien 90°). À quelle distance devant l'œil se trouve le remotum du méridien 90° (en cm) ?",
+  "reponse": { "valeur": 25, "unite": "cm", "decimales": 0, "signe": false },
+  "explication": "Remotum = [[1|R]] = [[1|4,00]] = 0,25 m = 25 cm devant l'œil.",
+  "indice": "Distance du remotum = [[1|R]] en mètres, puis convertis en cm. Attention au bon méridien.",
+  "erreurs": [
+    { "valeur": 66.7, "type": "notion", "message": "Tu as calculé le remotum de l'autre méridien (−1,50 δ). Relis lequel on te demande." },
+    { "valeur": 0.25, "type": "unite", "message": "0,25 est en mètres. Convertis en centimètres : 0,25 m = 25 cm." }
+  ]
+},
+{
+  "id": "U43-177", "epreuve": "U43", "theme": "Œil astigmate", "session": "complément", "difficulte": "difficile",
+  "question": "Un astigmate observe sans ses lunettes dans un microscope. Pourquoi ne peut-il pas obtenir une image nette dans les deux méridiens en déplaçant seulement l'oculaire ?",
+  "choix": [
+    "Déplacer l'oculaire change la vergence de l'image finale de la même quantité dans les deux méridiens, mais l'écart entre les deux remotums reste",
+    "Déplacer l'oculaire n'a aucun effet sur la position de l'image finale",
+    "L'accommodation de l'astigmate est nulle",
+    "Le microscope inverse l'image, ce qui empêche la mise au point"
+  ],
+  "bonne": 0,
+  "explication": "L'œil astigmate a deux remotums différents. Déplacer l'oculaire décale l'image finale d'un seul bloc : on peut rendre un méridien net, mais pas les deux, puisque l'écart entre leurs réfractions ne change pas. Il faut donc garder les lunettes ou les lentilles.",
+  "indice": "Un déplacement de l'oculaire agit sur une seule position d'image finale. Les remotums de l'œil sont-ils à la même distance ?"
+},
+{
+  "id": "U43-178", "epreuve": "U43", "theme": "Œil astigmate", "session": "complément", "difficulte": "moyen",
+  "type": "pose",
+  "question": "Un œil astigmate a pour réfractions −2,50 δ (méridien 0°) et −4,00 δ (méridien 90°). Trouve la position de ses deux remotums, puis l'écart entre eux, étape par étape.",
+  "etapes": [
+    {
+      "consigne": "Position du remotum du méridien 0°, HR (en mm)",
+      "reponse": { "valeur": -400, "unite": "mm", "decimales": 0, "signe": true },
+      "aide": "HR = [[1|R]] avec R en δ, puis en mm. Le remotum d'un myope est devant l'œil : le signe est négatif.",
+      "ligne": "HR = [[1|−2,50]] = −0,40 m = −400 mm"
+    },
+    {
+      "consigne": "Position du remotum du méridien 90°, HR (en mm)",
+      "reponse": { "valeur": -250, "unite": "mm", "decimales": 0, "signe": true },
+      "aide": "Même calcul avec R = −4,00 δ.",
+      "ligne": "HR = [[1|−4,00]] = −0,25 m = −250 mm"
+    },
+    {
+      "consigne": "Écart entre les deux remotums (en mm)",
+      "reponse": { "valeur": 150, "unite": "mm", "decimales": 0, "signe": false },
+      "aide": "Soustrais les deux positions et garde la valeur positive.",
+      "ligne": "400 − 250 = 150 mm"
+    }
+  ],
+  "explication": "Les deux remotums sont à 400 mm et 250 mm devant l'œil, soit 150 mm d'écart : l'image finale ne peut pas être nette dans les deux méridiens à la fois."
+},
+{
+  "id": "U43-179", "epreuve": "U43", "theme": "Vergences et focales", "session": "complément", "difficulte": "facile",
+  "type": "calcul",
+  "question": "Une lentille mince a une distance focale image f' = 40 mm. Quelle est sa vergence (en δ) ?",
+  "reponse": { "valeur": 25, "unite": "δ", "decimales": 0, "signe": true },
+  "explication": "D = [[1|f']] avec f' en mètres.\nD = [[1|0,040]] = +25 δ",
+  "indice": "Convertis d'abord 40 mm en mètres, puis prends l'inverse.",
+  "erreurs": [
+    { "valeur": 0.025, "type": "unite", "message": "Tu as pris f' en millimètres. Il faut la convertir en mètres avant de prendre l'inverse." }
+  ]
+},
+{
+  "id": "U43-180", "epreuve": "U43", "theme": "Vergences et focales", "session": "complément", "difficulte": "moyen",
+  "question": "Deux lentilles minces accolées ont pour vergences +6,00 δ et −2,50 δ. Quelle est la vergence du doublet ?",
+  "choix": [
+    "+8,50 δ",
+    "+3,50 δ",
+    "−3,50 δ",
+    "+1,40 δ"
+  ],
+  "bonne": 1,
+  "explication": "Pour des lentilles minces accolées, les vergences s'ajoutent algébriquement.\nD = 6,00 + (−2,50) = +3,50 δ",
+  "indice": "Les vergences de lentilles accolées s'ajoutent, avec leur signe.",
+  "erreurs": {
+    "0": { "type": "signe", "message": "Tu as ajouté les deux valeurs sans tenir compte du signe. Une lentille divergente retranche sa vergence." },
+    "2": { "type": "signe", "message": "Le doublet est dominé par la lentille convergente, la plus forte des deux. Revois le signe du résultat." }
+  }
+},
+{
+  "id": "U43-181", "epreuve": "U43", "theme": "Vergences et focales", "session": "complément", "difficulte": "moyen",
+  "type": "calcul",
+  "question": "Une lentille mince a une vergence de −8,00 δ. Quelle est sa distance focale image f' (en mm) ?",
+  "reponse": { "valeur": -125, "unite": "mm", "decimales": 0, "signe": true },
+  "explication": "f' = [[1|D]] = [[1|−8,00]] = −0,125 m = −125 mm\nLa lentille est divergente : la focale image est négative.",
+  "indice": "f' = [[1|D]] en mètres, puis convertis en mm. Le signe de D donne celui de f'.",
+  "erreurs": [
+    { "valeur": 125, "type": "signe", "message": "Une lentille de vergence négative est divergente : sa focale image est négative." }
+  ]
+},
+{
+  "id": "U43-182", "epreuve": "U43", "theme": "Vergences et focales", "session": "complément", "difficulte": "facile",
+  "question": "On utilise comme loupe une lentille de focale image 100 mm. À quelle distance de la lentille faut-il placer l'objet pour que l'image soit à l'infini ?",
+  "choix": [
+    "50 mm",
+    "100 mm",
+    "200 mm",
+    "10 mm"
+  ],
+  "bonne": 1,
+  "explication": "Pour avoir une image à l'infini, l'objet doit être au foyer objet de la lentille, à une distance égale à sa focale : 100 mm.",
+  "indice": "Un objet au foyer objet a son image à l'infini. À quelle distance est ce foyer ?",
+  "erreurs": {
+    "0": { "type": "notion", "message": "50 mm place l'objet entre le foyer et la lentille : l'image est virtuelle mais pas à l'infini." }
+  }
+},
+{
+  "id": "U43-183", "epreuve": "U43", "theme": "Mécanismes de réglage", "session": "complément", "difficulte": "facile",
+  "type": "calcul",
+  "question": "Un système vis-écrou a un pas de 0,5 mm. De combien de millimètres l'écrou avance-t-il après 6 tours de vis ?",
+  "reponse": { "valeur": 3, "unite": "mm", "decimales": 0, "signe": false },
+  "explication": "À chaque tour, l'écrou avance d'un pas : 6 × 0,5 = 3 mm.",
+  "indice": "Un tour de vis déplace l'écrou d'une longueur égale au pas.",
+  "erreurs": [
+    { "valeur": 12, "type": "notion", "message": "Tu as divisé 6 par 0,5. Il faut multiplier le nombre de tours par le pas." }
+  ]
+},
+{
+  "id": "U43-184", "epreuve": "U43", "theme": "Mécanismes de réglage", "session": "complément", "difficulte": "moyen",
+  "type": "calcul",
+  "question": "Une bague de mise au point a un pas de 0,6 mm. Combien de tours faut-il pour déplacer l'oculaire de 2,7 mm (au dixième) ?",
+  "reponse": { "valeur": 4.5, "unite": "tours", "decimales": 1, "signe": false },
+  "explication": "Nombre de tours = [[déplacement|pas]] = [[2,7|0,6]] = 4,5 tours.",
+  "indice": "Nombre de tours = déplacement divisé par le pas.",
+  "erreurs": [
+    { "valeur": 1.6, "type": "notion", "message": "Tu as multiplié le déplacement par le pas. Il faut diviser le déplacement par le pas." }
+  ]
+},
+{
+  "id": "U43-185", "epreuve": "U43", "theme": "Mécanismes de réglage", "session": "complément", "difficulte": "moyen",
+  "type": "calcul",
+  "question": "Un pignon de 20 dents engrène sur une crémaillère dont les dents sont espacées de 1,5 mm. De combien de millimètres la crémaillère avance-t-elle quand le pignon fait un demi-tour ?",
+  "reponse": { "valeur": 15, "unite": "mm", "decimales": 0, "signe": false },
+  "explication": "Un tour de pignon fait avancer la crémaillère de 20 × 1,5 = 30 mm.\nUn demi-tour : [[30|2]] = 15 mm.",
+  "indice": "Calcule d'abord le déplacement pour un tour complet, puis prends la moitié.",
+  "erreurs": [
+    { "valeur": 30, "type": "notion", "message": "30 mm correspond à un tour complet. L'énoncé parle d'un demi-tour." }
+  ]
+},
+{
+  "id": "U43-186", "epreuve": "U43", "theme": "Mécanismes de réglage", "session": "complément", "difficulte": "facile",
+  "question": "Pourquoi utilise-t-on une vis à pas fin pour une mise au point précise ?",
+  "choix": [
+    "Un tour de vis déplace très peu l'élément, donc le réglage est précis",
+    "Un tour de vis déplace beaucoup l'élément, donc le réglage est rapide",
+    "Elle supprime tout frottement",
+    "Elle fait tourner l'élément optique sur lui-même"
+  ],
+  "bonne": 0,
+  "explication": "Le déplacement par tour est égal au pas. Avec un pas fin, un tour déplace peu l'élément : on règle plus finement, au prix de plus de tours pour une même course.",
+  "indice": "Que vaut le déplacement de l'écrou pour un tour de vis, quand le pas est petit ?"
+},
+{
+  "id": "U43-187", "epreuve": "U43", "theme": "Liaisons mécaniques", "session": "complément", "difficulte": "moyen",
+  "question": "Une liaison rotule (sphérique) relie deux pièces. Quels mouvements relatifs autorise-t-elle ?",
+  "choix": [
+    "Trois rotations, aucune translation",
+    "Une seule rotation",
+    "Une rotation et une translation",
+    "Trois translations, aucune rotation"
+  ],
+  "bonne": 0,
+  "explication": "Une rotule laisse les deux pièces tourner l'une par rapport à l'autre autour de trois axes, sans aucun glissement : trois rotations, zéro translation.",
+  "indice": "Pense à une sphère dans une cavité : elle tourne dans toutes les directions, mais ne glisse pas."
+},
+{
+  "id": "U43-188", "epreuve": "U43", "theme": "Liaisons mécaniques", "session": "complément", "difficulte": "facile",
+  "question": "Deux pièces sont reliées par une liaison encastrement. Combien de mouvements relatifs sont possibles ?",
+  "choix": [
+    "Aucun",
+    "Une rotation",
+    "Une translation",
+    "Une rotation et une translation"
+  ],
+  "bonne": 0,
+  "explication": "Un encastrement supprime tous les mouvements relatifs : les deux pièces forment un seul bloc.",
+  "indice": "Un encastrement fige complètement une pièce par rapport à l'autre."
+},
+{
+  "id": "U43-189", "epreuve": "U43", "theme": "Liaisons mécaniques", "session": "complément", "difficulte": "difficile",
+  "question": "Une pièce a une face plane qui repose sur la face plane d'une autre pièce (appui plan). Quels mouvements relatifs sont possibles ?",
+  "choix": [
+    "Deux translations dans le plan de contact et une rotation autour de la normale à ce plan",
+    "Une seule translation perpendiculaire au plan",
+    "Trois rotations, aucune translation",
+    "Une translation et deux rotations"
+  ],
+  "bonne": 0,
+  "explication": "La pièce peut glisser dans toutes les directions du plan de contact (deux translations) et tourner sur elle-même autour de l'axe perpendiculaire à ce plan (une rotation). Elle ne peut ni décoller ni basculer.",
+  "indice": "Pose un livre à plat sur une table : comment peut-il bouger sans quitter la table ni basculer ?"
+},
+{
+  "id": "U43-190", "epreuve": "U43", "theme": "Étude des champs", "session": "complément", "difficulte": "facile",
+  "question": "Dans l'espace d'étude, quel diaphragme détermine la taille du champ de l'instrument ?",
+  "choix": [
+    "La pupille",
+    "La lucarne",
+    "L'objet",
+    "Le diaphragme le plus grand"
+  ],
+  "bonne": 1,
+  "explication": "La pupille limite le faisceau issu d'un point de l'axe, c'est-à-dire la quantité de lumière. La lucarne limite l'étendue de l'objet visible : c'est elle qui fixe le champ.",
+  "indice": "Un diaphragme limite la lumière, l'autre limite l'étendue de ce qu'on voit. Lequel est lequel ?",
+  "erreurs": {
+    "0": { "type": "notion", "message": "La pupille règle la quantité de lumière qui passe, pas l'étendue du champ." }
+  }
+},
+{
+  "id": "U43-191", "epreuve": "U43", "theme": "Étude des champs", "session": "complément", "difficulte": "difficile",
+  "question": "On agrandit la pupille d'un instrument sans toucher à la lucarne. Que deviennent les champs ?",
+  "choix": [
+    "Le champ de pleine lumière diminue et le champ total augmente",
+    "Les deux champs augmentent",
+    "Les deux champs diminuent",
+    "Rien ne change"
+  ],
+  "bonne": 0,
+  "explication": "Avec une pupille plus grande, il faut que le faisceau entier passe la lucarne pour que le point soit en pleine lumière : ce champ diminue. À l'inverse, il suffit qu'un seul rayon passe pour qu'un point soit vu : le champ total augmente. Le champ de contour s'élargit donc, puisque le champ total grandit alors que celui de pleine lumière diminue.",
+  "indice": "Pour être en pleine lumière, tout le faisceau doit passer. Plus la pupille est grande, plus c'est difficile."
+},
+{
+  "id": "U43-192", "epreuve": "U43", "theme": "Étude des champs", "session": "complément", "difficulte": "moyen",
+  "type": "calcul",
+  "question": "Dans l'espace d'étude, une lucarne de 24 mm de diamètre est à 80 mm du centre de la pupille. Quel est le demi-champ angulaire (en °, au dixième) ?",
+  "reponse": { "valeur": 8.5, "unite": "°", "decimales": 1, "signe": false, "tolerance": 0.1 },
+  "explication": "Le demi-champ θ vérifie tan θ = [[12|80]] = 0,15 (rayon de la lucarne sur la distance).\nθ = arctan(0,15) ≈ 8,5°",
+  "indice": "Rayon de la lucarne divisé par la distance donne la tangente du demi-champ.",
+  "erreurs": [
+    { "valeur": 0.15, "type": "notion", "message": "0,15 est la tangente du demi-champ. Il reste à retrouver l'angle avec la touche arctan de la calculatrice." }
+  ]
+},
+{
+  "id": "U43-193", "epreuve": "U43", "theme": "Œil et instrument", "session": "complément", "difficulte": "moyen",
+  "question": "Un hypermétrope de +3,00 δ, sans lunettes, regarde dans un instrument réglé pour un emmétrope (image finale à l'infini). Que doit-il faire pour voir net ?",
+  "choix": [
+    "Accommoder de 3,00 δ",
+    "Ne pas accommoder du tout",
+    "Accommoder de 0,33 δ",
+    "Rien : un hypermétrope voit toujours net à l'infini"
+  ],
+  "bonne": 0,
+  "explication": "Son remotum est derrière l'œil : désaccommodé, il ne voit pas net une image à l'infini. Il compense en accommodant de 3,00 δ, s'il en est capable.",
+  "indice": "Un hypermétrope doit déjà fournir de la puissance en plus pour voir à l'infini. Combien ?",
+  "erreurs": {
+    "2": { "type": "unite", "message": "0,33 est une distance en mètres (1 ÷ 3), pas une accommodation en dioptries." }
+  }
+},
+{
+  "id": "U43-194", "epreuve": "U43", "theme": "Œil et instrument", "session": "complément", "difficulte": "difficile",
+  "type": "calcul",
+  "question": "Oculaire de focale 20 mm, l'œil restant à son foyer image. On le règle pour un hypermétrope de +2,00 δ, désaccommodé. De combien déplace-t-on l'oculaire par rapport au réglage emmétrope (en mm, au dixième) ?",
+  "reponse": { "valeur": 0.8, "unite": "mm", "decimales": 1, "signe": false },
+  "explication": "Déplacement = f'² × R = 0,020² × 2,00 = 0,0008 m = 0,8 mm.\nPour un hypermétrope, on éloigne l'oculaire de l'image intermédiaire (l'inverse du myope).",
+  "indice": "Déplacement = f'² × R avec f' en mètres, puis convertis en mm.",
+  "erreurs": [
+    { "valeur": 800, "type": "unite", "message": "Tu as gardé f' en millimètres : f'² est en mm². Convertis f' en mètres avant de calculer." }
+  ]
+},
+{
+  "id": "U43-195", "epreuve": "U43", "theme": "Œil et instrument", "session": "complément", "difficulte": "moyen",
+  "type": "calcul",
+  "question": "Un emmétrope observe dans un instrument dont l'image finale est à 40 cm devant son œil. Quelle accommodation lui faut-il (en δ, au centième) ?",
+  "reponse": { "valeur": 2.5, "unite": "δ", "decimales": 2, "signe": false },
+  "explication": "Accommodation = [[1|d]] = [[1|0,40]] = 2,50 δ, avec d en mètres. Un emmétrope désaccommodé voit net à l'infini : tout rapprochement demande de l'accommodation.",
+  "indice": "L'accommodation est l'inverse de la distance de l'image, en mètres.",
+  "erreurs": [
+    { "valeur": 0.4, "type": "notion", "message": "0,4 est la distance en mètres. L'accommodation est son inverse : [[1|d]]." }
+  ]
 }
 );

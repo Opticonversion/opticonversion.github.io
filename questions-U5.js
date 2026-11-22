@@ -1784,6 +1784,225 @@ QUESTIONS.push(
     indice: "Un appui central chasse la fluorescéine du centre. Cherche l'image où le centre est sombre et le bord brillant.",
     schema: "img/schemas/U5/fluo-lrpg-trois-images.svg",
     schemaTexte: "Trois images de fluorescéine sous une lentille rigide. Image 1 : réservoir vert au centre, bord sombre. Image 2 : film vert régulier partout. Image 3 : centre sombre, anneau vert épais en périphérie."
+  },
+  // ---------- Lot du 22 nov. : réfraction, Worth, pathologie, phories ----------
+  {
+    id: "U5-219", epreuve: "U5", theme: "Réfraction", session: "complément",
+    difficulte: "facile",
+    question: "Dans une réfraction subjective monoculaire, quel est l'ordre habituel des étapes ?",
+    choix: ["Sphère au brouillard, axe du cylindre, puissance du cylindre, puis affinage de la sphère", "Puissance du cylindre, sphère, axe du cylindre, puis équilibre bioculaire", "Axe du cylindre, puis addition de près, puis sphère", "Équilibre bioculaire, puis sphère, puis axe du cylindre"],
+    bonne: 0,
+    explication: "On part d'une sphère brouillée, on débrouille jusqu'à la meilleure acuité, puis on affine le cylindre aux CCR : l'axe d'abord, la puissance ensuite. On reprend alors la sphère. L'équilibre bioculaire vient après la détermination de chaque œil.",
+    indice: "Le cylindre se règle avec le cylindre croisé : l'axe doit être juste avant de chercher la puissance."
+  },
+  {
+    id: "U5-220", epreuve: "U5", theme: "Réfraction", session: "2018",
+    difficulte: "moyen",
+    question: "Pendant le débrouillage de la méthode du brouillard, quel indice évoque un relâchement de l'accommodation ?",
+    choix: ["L'acuité remonte plus vite que ce que la règle de Swaine prévoit pour chaque pas de 0,25 δ", "L'acuité ne change plus malgré les verres ajoutés", "Le sujet dit voir double", "Le sujet préfère la lettre noire sur fond rouge"],
+    bonne: 0,
+    explication: "Quand le sujet relâche son accommodation, l'image recule vers la rétine d'un seul coup : l'acuité progresse plus vite que la progression attendue par la règle de Swaine. Un palier, où l'acuité ne progresse plus malgré le verre ajouté, indique en revanche la sphère de meilleure acuité atteinte.",
+    indice: "Relâcher l'accommodation, c'est gagner du net sans verre en plus : l'acuité fait un saut."
+  },
+  {
+    id: "U5-221", epreuve: "U5", theme: "Réfraction", session: "2018",
+    difficulte: "moyen",
+    question: "Vérification de l'axe : le compensateur a son axe à 20° et le manche du CCR est posé sur 20°. L'axe du cylindre négatif du CCR est à 65° dans une position, à 155° dans l'autre. Le sujet préfère la position à 65°. Que faire ?",
+    choix: ["Tourner l'axe du compensateur vers 65°, par petits pas (par exemple à 25°), puis recommencer", "Tourner l'axe du compensateur vers 155°, par petits pas", "Ne rien changer : l'axe est correct", "Ajouter −0,25 de cylindre"],
+    bonne: 0,
+    explication: "Le sujet voit mieux quand l'axe du cylindre négatif du CCR est plus proche de l'axe exact. On tourne donc l'axe du compensateur vers l'axe du cylindre négatif du CCR dans la position préférée. On recommence jusqu'à ce que les deux positions donnent la même impression.",
+    indice: "La position préférée est celle où le cylindre négatif du CCR est du côté de l'axe exact. Va dans cette direction."
+  },
+  {
+    id: "U5-222", epreuve: "U5", theme: "Réfraction", session: "2018",
+    difficulte: "moyen",
+    question: "Quel est le but de l'équilibre binoculaire, qui suit l'équilibre bioculaire ?",
+    choix: ["Chercher, sans dissociation, la compensation la plus convergente qui donne la meilleure acuité à deux yeux, accommodation relâchée", "Dissocier les deux yeux pour égaliser leur état accommodatif", "Mesurer la phorie de loin", "Déterminer l'addition de près"],
+    bonne: 0,
+    explication: "L'équilibre binoculaire se fait les deux yeux ouverts, sans dissociation : on essaie des sphères par pas de 0,25 δ et on garde la plus convergente qui donne la meilleure acuité binoculaire. C'est l'équilibre bioculaire qui dissocie les yeux (prismes ou filtres polarisés) pour égaliser leur accommodation.",
+    indice: "Bioculaire = dissociation. Binoculaire = les deux yeux ensemble, sans rien pour les séparer."
+  },
+  {
+    id: "U5-223", epreuve: "U5", theme: "Réfraction", session: "complément",
+    difficulte: "facile",
+    question: "Le cylindre négatif compensateur d'un œil est à 80°. De quel astigmatisme s'agit-il ?",
+    choix: ["Inverse", "Direct", "Oblique à 45°", "Mixte"],
+    bonne: 0,
+    explication: "Direct : cylindre négatif d'axe 0° ± 30°. Inverse : cylindre négatif d'axe proche de 90°. Un axe à 80° est proche de 90° : astigmatisme inverse. Un axe à 30° ou 150° pourrait se dire direct ou oblique.",
+    indice: "Compare l'axe à 0° et à 90°. Dans lequel des deux intervalles tombe 80° ?"
+  },
+  {
+    id: "U5-224", epreuve: "U5", theme: "Réfraction", session: "complément",
+    difficulte: "moyen",
+    type: "pose",
+    question: "Un myope porte −6,00 en lunettes, à 12 mm de la cornée. Calcule la lentille de contact équivalente, à la main, étape par étape.",
+    etapes: [
+      {
+        consigne: "Dénominateur 1 − d·P (d en mètres, P en dioptries)",
+        reponse: { valeur: 1.072, unite: "", decimales: 3, signe: false },
+        aide: "d = 0,012 m et P = −6,00 δ. Le produit d·P est négatif, donc 1 − d·P est plus grand que 1.",
+        ligne: "d·P = 0,012 × (−6,00) = −0,072\n1 − d·P = 1 + 0,072 = 1,072",
+        erreurs: [{ valeur: 0.928, type: "signe", message: "Pour un verre divergent, d·P est négatif : 1 − d·P = 1 + 0,072 = 1,072, pas 0,928." }]
+      },
+      {
+        consigne: "Puissance de la lentille de contact (en δ)",
+        reponse: { valeur: -5.6, unite: "δ", decimales: 2, signe: true },
+        aide: "P' = P divisé par 1 − d·P. Un verre divergent est moins fort en lentille.",
+        ligne: "P' = [[−6,00|1,072]] ≈ −5,60 δ",
+        erreurs: [{ valeur: -6.47, type: "signe", message: "Tu as divisé par 0,928. Pour un myope, le dénominateur est 1,072 : la lentille est un peu moins forte, −5,60 δ." }]
+      }
+    ],
+    explication: "Formule de conversion : P' = [[P|1 − d·P]]. Pour un myope, le dénominateur dépasse 1 : la lentille est moins divergente que le verre, −5,60 δ. À l'inverse, un hypermétrope a besoin d'une lentille plus convergente que son verre."
+  },
+  {
+    id: "U5-225", epreuve: "U5", theme: "Réfraction", session: "complément",
+    difficulte: "facile",
+    type: "calcul",
+    question: "Un myope sans astigmatisme a son remotum à 40 cm devant l'œil. Quelle compensation, placée au niveau de l'œil, le rend emmétrope ?",
+    reponse: {"valeur": -2.5, "unite": "δ", "decimales": 2, "signe": true},
+    erreurs: [{ valeur: 2.5, type: "signe", message: "Le remotum est réel, devant l'œil : le myope a besoin d'un verre divergent, donc une valeur négative." }],
+    explication: "Il faut que le verre donne, d'un objet à l'infini, une image au remotum, à 40 cm devant l'œil : sa vergence vaut −[[1|0,40]] = −2,50 δ.",
+    indice: "Le verre doit renvoyer l'infini au remotum. Convertis 40 cm en mètres et mets le signe du verre divergent."
+  },
+  {
+    id: "U5-226", epreuve: "U5", theme: "Examen préliminaire", session: "complément",
+    difficulte: "facile",
+    question: "Un œil a une acuité de 4/10. Quel est son angle minimal de résolution ?",
+    choix: ["2,5 minutes d'arc", "4 minutes d'arc", "0,4 minute d'arc", "25 minutes d'arc"],
+    bonne: 0,
+    explication: "L'acuité décimale est l'inverse de l'angle minimal de résolution en minutes d'arc : 10/10 correspond à 1'. Donc 4/10 = 0,4 correspond à 1 / 0,4 = 2,5'.",
+    indice: "Acuité décimale = 1 divisé par l'angle en minutes d'arc. Renverse la relation."
+  },
+  {
+    id: "U5-227", epreuve: "U5", theme: "Worth", session: "2024",
+    difficulte: "facile",
+    question: "Quels degrés de la vision binoculaire le test de Worth permet-il d'évaluer ?",
+    choix: ["La vision simultanée et la fusion", "La fusion et la vision stéréoscopique", "Seulement la vision stéréoscopique", "Seulement l'acuité de chaque œil"],
+    bonne: 0,
+    explication: "Au Worth, chaque œil voit des symboles de couleur différente : on teste si les deux images sont perçues en même temps (1er degré, vision simultanée) et si elles fusionnent (2e degré, fusion). La perception du relief, 3e degré, se teste avec un test de stéréoscopie.",
+    indice: "Pense aux trois degrés dans l'ordre : simultanée, fusion, stéréoscopie. Le Worth s'arrête avant le relief."
+  },
+  {
+    id: "U5-228", epreuve: "U5", theme: "Worth", session: "2023",
+    difficulte: "facile",
+    question: "Quelle est la composition de la lanterne de Worth, et combien de symboles voit un sujet qui fusionne ?",
+    choix: ["1 rouge, 2 verts, 1 blanc : 4 symboles", "2 rouges, 3 verts : 5 symboles", "1 rouge, 1 vert, 2 blancs : 4 symboles", "2 rouges, 2 verts : 4 symboles"],
+    bonne: 0,
+    explication: "La lanterne a 4 lumières : un rouge, deux verts et un blanc. Le sujet porte un filtre rouge sur un œil et vert sur l'autre. S'il fusionne, il voit 4 symboles, la lumière blanche prenant une teinte liée à l'œil dominant. À 5 symboles, il y a diplopie : 2 rouges et 3 verts.",
+    indice: "Le blanc est vu par les deux yeux et le sujet qui fusionne le voit une seule fois."
+  },
+  {
+    id: "U5-229", epreuve: "U5", theme: "Worth", session: "2024",
+    difficulte: "moyen",
+    question: "Pourquoi réalise-t-on le test de Worth de loin ET de près ?",
+    choix: ["La phorie et l'état de fusion peuvent changer avec la distance : le résultat n'est pas forcément le même", "Parce que les filtres changent de couleur avec la distance", "Parce que la vision simultanée n'existe que de près", "Parce qu'un seul résultat suffit pour toutes les distances"],
+    bonne: 0,
+    explication: "La convergence demandée et l'accommodation dépendent de la distance : une exophorie de près est normale, et un sujet peut fusionner de loin et neutraliser de près, ou l'inverse. On fait donc le test aux deux distances, avec la compensation portée.",
+    indice: "Pense à la prise d'exophorie de loin vers près : ce qui change avec la distance change aussi le résultat."
+  },
+  {
+    id: "U5-230", epreuve: "U5", theme: "Worth", session: "complément",
+    difficulte: "moyen",
+    question: "Quel test de relief utilise des lunettes à filtres rouge et vert (anaglyphes) ?",
+    choix: ["Le TNO", "Le Titmus", "Le Lang", "Le Mallett"],
+    bonne: 0,
+    explication: "Le TNO présente des images composées de points rouges et verts, vues avec des lunettes rouge-vert : sans fusion, il n'y a pas de relief. Le Titmus utilise des lunettes polarisées. Le Lang se lit sans lunettes. Le Mallett n'est pas un test de relief : il met en évidence la disparité de fixation.",
+    indice: "Un seul de ces tests porte le sigle d'un institut néerlandais : il sépare les yeux par des couleurs."
+  },
+  {
+    id: "U5-231", epreuve: "U5", theme: "Masquage et phories", session: "2021",
+    difficulte: "moyen",
+    question: "Que met en évidence le test de Mallett ?",
+    choix: ["La disparité de fixation, c'est-à-dire un léger décalage de fixation alors que la vision reste simple", "La stéréoacuité", "La diplopie croisée", "La neutralisation totale d'un œil"],
+    bonne: 0,
+    explication: "Au test de Mallett, la vision binoculaire est conservée : deux lignes verticales sont vues chacune par un œil, avec un élément fusionnel. Si elles paraissent décalées, c'est une disparité de fixation : l'image tombe un peu à côté de la fovéa, mais dans l'aire de Panum. Le prisme qui les aligne est la phorie associée.",
+    indice: "Le test garde un élément fusionnel : la vision reste simple. Que décèle-t-il quand même ?"
+  },
+  {
+    id: "U5-232", epreuve: "U5", theme: "Pathologie", session: "2018",
+    difficulte: "moyen",
+    question: "Quelle définition du glaucome est juste et complète ?",
+    choix: ["Atteinte progressive du nerf optique, souvent associée à une PIO élevée, qui détruit peu à peu le champ visuel, d'abord en périphérie", "Augmentation de la pression de l'œil, rien d'autre", "Opacification du cristallin avec baisse d'acuité", "Atteinte de la macula avec perte de la vision centrale"],
+    bonne: 0,
+    explication: "Le glaucome est une atteinte du nerf optique (dégénérescence des axones des cellules ganglionnaires), fréquemment associée à une PIO élevée. Il détruit le champ visuel, d'abord en périphérie ; la vision centrale n'est touchée que tard. Décrire le glaucome seulement par la hausse de la PIO est incomplet : un glaucome peut exister avec une PIO normale.",
+    surLaCopie: "Le glaucome est une atteinte du nerf optique, souvent associée à une PIO élevée. Elle détruit peu à peu le champ visuel, en commençant par la périphérie.",
+    indice: "Le glaucome est d'abord une maladie du nerf optique, la pression n'est qu'un facteur. Et le champ visuel part par les bords."
+  },
+  {
+    id: "U5-233", epreuve: "U5", theme: "Pathologie", session: "2018",
+    difficulte: "moyen",
+    question: "Un client de 60 ans, sans aucune douleur, perd peu à peu son champ visuel périphérique. Sa PIO est élevée. Quel type de glaucome est le plus probable ?",
+    choix: ["Le glaucome chronique à angle ouvert (GCAO)", "Le glaucome aigu par fermeture de l'angle (GAFA)", "Un glaucome néovasculaire", "Une cataracte"],
+    bonne: 0,
+    explication: "Le glaucome chronique à angle ouvert évolue sans douleur : le client ne remarque rien pendant des années. Le glaucome aigu par fermeture de l'angle est une urgence douloureuse : œil rouge, halos, nausées. L'absence de douleur et le caractère progressif orientent vers l'angle ouvert.",
+    surLaCopie: "L'absence de douleur et la perte progressive du champ périphérique orientent vers un glaucome chronique à angle ouvert. Le glaucome aigu par fermeture de l'angle est douloureux.",
+    indice: "Une maladie qui ne fait pas mal et dure des années : chronique ou aigu ?"
+  },
+  {
+    id: "U5-234", epreuve: "U5", theme: "Pathologie", session: "2018",
+    difficulte: "moyen",
+    question: "Quel signe observé en biomicroscopie évoque une hypoxie cornéenne chez un porteur de lentilles ?",
+    choix: ["Un œdème de la cornée ou des néovaisseaux", "Une cornée plus plate de 0,10 mm", "Un BUT de 15 s", "Une rivière lacrymale de 0,3 mm"],
+    bonne: 0,
+    explication: "L'hypoxie est un apport insuffisant d'oxygène à la cornée. Elle se voit en biomicroscopie par un œdème (plis, stries), une rougeur limbique ou, si elle dure, des néovaisseaux. Les trois autres propositions sont des valeurs normales ou une mesure sans lien avec l'oxygène.",
+    indice: "Une cornée privée d'oxygène gonfle, et finit par appeler de nouveaux vaisseaux."
+  },
+  {
+    id: "U5-235", epreuve: "U5", theme: "Pathologie", session: "complément",
+    difficulte: "moyen",
+    question: "Un jeune de 20 ans voit de plus en plus flou, avec un astigmatisme irrégulier qui augmente et une myopie qui progresse. Quelle maladie faut-il évoquer ?",
+    choix: ["Un kératocône : amincissement et bombement progressif de la cornée", "Une cataracte nucléaire", "Une DMLA", "Un glaucome à angle ouvert"],
+    bonne: 0,
+    explication: "Le kératocône est un amincissement progressif de la cornée, qui prend la forme d'un cône. Il apparaît souvent à l'adolescence ou chez le jeune adulte et donne un astigmatisme irrégulier, une myopie croissante et une baisse d'acuité mal corrigée par les lunettes. Les lentilles rigides compensent souvent mieux. L'opticien oriente vers l'ophtalmologiste pour un bilan et une topographie.",
+    indice: "Pense à la cornée : une cornée qui se déforme chez le jeune, et que les lunettes corrigent mal."
+  },
+  {
+    id: "U5-236", epreuve: "U5", theme: "Masquage et phories", session: "2022",
+    difficulte: "moyen",
+    question: "Un sujet a une exophorie de près de 6 Δ. Sa réserve en convergence (prismes base externe) donne un flou à 10 Δ. Le critère de Sheard est-il respecté ?",
+    choix: ["Non : la réserve opposée devrait être d'au moins 12 Δ", "Oui : 10 Δ dépasse 6 Δ", "Oui : une réserve de 10 Δ suffit toujours", "Non : il faudrait au moins 18 Δ"],
+    bonne: 0,
+    explication: "Sheard : la réserve opposée à la phorie doit valoir au moins deux fois la phorie. L'exophorie est compensée par la convergence, donc la réserve opposée est la réserve en convergence (base externe). 2 × 6 = 12 Δ. Avec 10 Δ, le critère n'est pas respecté : risque d'inconfort en vision de près.",
+    erreurs: { 1: "notion" },
+    indice: "Sheard demande deux fois la phorie. Quelle réserve est opposée à une exophorie : en convergence ou en divergence ?"
+  },
+  {
+    id: "U5-237", epreuve: "U5", theme: "Masquage et phories", session: "2019",
+    difficulte: "moyen",
+    question: "Chez un sujet non presbyte, le bris du punctum proximum de convergence se fait à 12 cm du canthus externe. Que conclure ?",
+    choix: ["La convergence est insuffisante : la norme est un bris à 8 cm au plus", "La convergence est normale", "La convergence est excessive", "On ne peut rien dire sans mesurer la phorie"],
+    bonne: 0,
+    explication: "Chez un sujet non presbyte, le bris du PPC doit se faire à 8 cm au plus du canthus externe (5 cm de la racine du nez). Un bris à 12 cm est trop loin : insuffisance de convergence, qui peut gêner la lecture. Le recouvrement doit aussi revenir à moins de 6 cm du bris.",
+    indice: "Un bon PPC converge de très près. Compare 12 cm à la limite de 8 cm."
+  },
+  {
+    id: "U5-238", epreuve: "U5", theme: "Masquage et phories", session: "2021",
+    difficulte: "facile",
+    type: "calcul",
+    question: "Un sujet a 1 Δ d'exophorie de loin et 7 Δ d'exophorie de près. Calcule la variation de sa phorie, c'est-à-dire son jeu phorique, en Δ.",
+    reponse: {"valeur": 6, "unite": "Δ", "decimales": 0, "signe": false},
+    erreurs: [{ valeur: 8, type: "notion", message: "Tu as additionné les deux phories. Le jeu phorique est la variation entre loin et près : on soustrait." }],
+    explication: "Jeu phorique = phorie de près − phorie de loin = 7 − 1 = 6 Δ d'exophorie en plus. C'est dans la norme, prise d'exophorie de 4 à 6 Δ.",
+    indice: "Le jeu phorique mesure ce que la phorie change de loin à près."
+  },
+  {
+    id: "U5-239", epreuve: "U5", theme: "Masquage et phories", session: "2022",
+    difficulte: "moyen",
+    question: "On augmente peu à peu un prisme base externe devant les deux yeux. Dans quel ordre le sujet décrit-il ce qu'il voit, puis que se passe-t-il en diminuant le prisme ?",
+    choix: ["Vision nette, flou, bris (vision double) ; en diminuant : recouvrement (la vision redevient simple)", "Vision nette, bris, flou ; en diminuant : disparition", "Flou, vision nette, bris ; en diminuant : flou", "Vision nette, recouvrement, bris ; en diminuant : flou"],
+    bonne: 0,
+    explication: "En augmentant le prisme base externe, le sujet converge d'abord sans changer son accommodation. Quand cette réserve est épuisée, il converge en accommodant : c'est le flou, la vision reste simple. Au-delà, la fusion casse : c'est le bris, il voit double. En diminuant le prisme, la vision redevient simple : c'est le recouvrement. Le flou sert au critère de Sheard ; s'il n'y a pas de flou, on prend le bris.",
+    indice: "Le flou précède le bris. Et le recouvrement est le retour à la vision simple en diminuant."
+  },
+  {
+    id: "U5-240", epreuve: "U5", theme: "Examen préliminaire", session: "complément",
+    difficulte: "facile",
+    type: "calcul",
+    question: "Un emmétrope non presbyte voit net jusqu'à 12,5 cm devant l'œil. Calcule son amplitude d'accommodation.",
+    reponse: {"valeur": 8, "unite": "δ", "decimales": 2, "signe": false},
+    erreurs: [{ valeur: 12.5, type: "notion", message: "12,5 est la distance en centimètres. L'amplitude est la proximité du proximum : 1 divisé par 0,125 m." }],
+    explication: "Pour un emmétrope, le remotum est à l'infini. L'amplitude vaut la proximité du proximum : [[1|0,125 m]] = 8,00 δ.",
+    indice: "Amplitude = proximité du proximum moins proximité du remotum. Le remotum d'un emmétrope est à l'infini."
   }
 );
 
