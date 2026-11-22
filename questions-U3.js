@@ -2479,3 +2479,188 @@ QUESTIONS.push(
     indice: "Le passif dit d'où vient l'argent."
   }
 );
+
+QUESTIONS.push(
+  {
+    id: "U3-306", difficulte: "facile", epreuve: "U3", theme: "Réglementation de l'opticien", session: "complément",
+    question: "Qui peut exercer la profession d'opticien-lunetier ?",
+    choix: ["Toute personne, sans condition", "Une personne titulaire du BTS opticien-lunetier ou d'un titre reconnu équivalent", "Seulement un médecin", "Toute personne ayant cinq ans d'expérience, même sans diplôme"],
+    bonne: 1,
+    explication: "L'exercice de la profession d'opticien-lunetier est réglementé : il faut un diplôme, par exemple le BTS opticien-lunetier, ou une qualification reconnue équivalente. Le magasin doit employer du personnel ainsi qualifié.",
+    indice: "Le BTS que tu prépares est justement cette condition."
+  },
+  {
+    id: "U3-307", difficulte: "moyen", epreuve: "U3", theme: "Réglementation de l'opticien", session: "complément",
+    question: "Un client n'a jamais porté de lentilles de contact. Que lui faut-il pour la première délivrance ?",
+    choix: ["Rien, l'opticien décide seul", "Une ordonnance médicale", "Une simple demande écrite du client", "Une autorisation de sa mutuelle"],
+    bonne: 1,
+    explication: "La première délivrance de lentilles de contact se fait sur ordonnance médicale. Ensuite, l'opticien peut les renouveler dans les conditions prévues par la réglementation, notamment la durée de validité de l'ordonnance.",
+    indice: "Pour une première adaptation, un médecin doit avoir examiné le client."
+  },
+  {
+    id: "U3-308", difficulte: "facile", epreuve: "U3", theme: "Réglementation de l'opticien", session: "complément",
+    question: "Comment le prix d'une monture exposée en vitrine doit-il être indiqué au consommateur ?",
+    choix: ["Hors taxes uniquement", "Toutes taxes comprises (TTC)", "Sur demande seulement", "Après négociation avec le client"],
+    bonne: 1,
+    erreurs: {
+      0: { type: "ht-ttc", message: "Un consommateur paie la TVA : le prix affiché doit être le prix qu'il paiera réellement, toutes taxes comprises." }
+    },
+    explication: "L'information sur les prix est obligatoire pour les consommateurs, et le prix affiché est le prix toutes taxes comprises, c'est-à-dire celui que le client paiera.",
+    indice: "Le client doit voir le prix réellement payé."
+  },
+  {
+    id: "U3-309", difficulte: "moyen", epreuve: "U3", theme: "Réglementation de l'opticien", session: "complément",
+    question: "À qui signale-t-on un incident grave lié à un dispositif médical, comme une monture ou un verre défectueux ayant blessé un client ?",
+    choix: ["À la mairie", "À l'ANSM, dans le cadre de la matériovigilance", "À l'INPI", "À l'URSSAF"],
+    bonne: 1,
+    explication: "Les incidents graves liés aux dispositifs médicaux sont signalés à l'ANSM (Agence nationale de sécurité du médicament et des produits de santé) : c'est la matériovigilance. L'INPI s'occupe des marques et brevets, l'URSSAF des cotisations.",
+    indice: "Une agence nationale s'occupe de la sécurité des produits de santé."
+  },
+  {
+    id: "U3-310", difficulte: "difficile", epreuve: "U3", theme: "Réglementation de l'opticien", session: "complément",
+    question: "Un client découvre un défaut caché dans sa monture, présent dès l'achat. Il peut agir en garantie des vices cachés pendant 2 ans à compter de :",
+    choix: ["La date de l'achat", "La découverte du vice", "La fin de la garantie commerciale", "La fin de sa période de port"],
+    bonne: 1,
+    erreurs: {
+      0: { type: "notion", message: "Pour la garantie légale de conformité, 2 ans courent depuis la délivrance. Pour les vices cachés, le délai de 2 ans court depuis la découverte du défaut." }
+    },
+    explication: "Pour les vices cachés, l'action doit être engagée dans les 2 ans suivant la découverte du vice. À ne pas confondre avec la garantie légale de conformité, qui dure 2 ans à partir de la délivrance du bien.",
+    indice: "Un vice caché ne se voit pas à l'achat."
+  },
+  {
+    id: "U3-311", difficulte: "facile", epreuve: "U3", theme: "Droit du travail", session: "complément",
+    question: "Quel contrat de travail doit obligatoirement être écrit ?",
+    choix: ["Aucun contrat n'a à être écrit", "Le CDD", "Le CDI à temps plein uniquement", "Le CDI, mais pas le CDD"],
+    bonne: 1,
+    explication: "Le CDD doit être établi par écrit, et remis au salarié dans les 2 jours ouvrables suivant l'embauche. Sans écrit, il peut être requalifié en CDI. Le contrat à temps partiel doit aussi être écrit.",
+    indice: "Un contrat limité dans le temps doit pouvoir être prouvé."
+  },
+  {
+    id: "U3-312", difficulte: "facile", epreuve: "U3", theme: "Droit du travail", session: "complément",
+    question: "Quelle est la durée légale hebdomadaire du travail à temps plein ?",
+    choix: ["32 heures", "35 heures", "39 heures", "40 heures"],
+    bonne: 1,
+    erreurs: {
+      2: { type: "notion", message: "39 heures était l'ancienne durée légale. Elle est de 35 heures aujourd'hui : au-delà, ce sont des heures supplémentaires." }
+    },
+    explication: "La durée légale du travail est de 35 heures par semaine. Les heures effectuées au-delà sont des heures supplémentaires, majorées.",
+    indice: "Les heures supplémentaires commencent à la 36e heure."
+  },
+  {
+    id: "U3-313", difficulte: "facile", epreuve: "U3", theme: "Droit du travail", session: "complément",
+    question: "Que représente le SMIC ?",
+    choix: ["Un salaire maximum", "Le salaire minimum légal, revalorisé régulièrement", "Le salaire moyen des opticiens", "Une prime versée par l'État"],
+    bonne: 1,
+    explication: "Le SMIC est le salaire minimum interprofessionnel de croissance : un employeur ne peut pas verser moins, sauf cas particuliers prévus par la loi. Il est revalorisé chaque année et à certaines conditions en cours d'année.",
+    indice: "Le mot « minimum » est dans son nom."
+  },
+  {
+    id: "U3-314", difficulte: "moyen", epreuve: "U3", theme: "Droit du travail", session: "complément",
+    question: "Quelle est en principe la durée d'un contrat d'apprentissage ?",
+    choix: ["1 à 6 mois", "6 mois à 3 ans", "Exactement 5 ans", "Elle n'est pas limitée"],
+    bonne: 1,
+    explication: "Le contrat d'apprentissage dure en principe de 6 mois à 3 ans, selon le diplôme préparé. Certaines situations permettent de dépasser 3 ans, par exemple pour un apprenti reconnu travailleur handicapé.",
+    indice: "Il couvre la durée d'une formation, qui dure plusieurs années."
+  },
+  {
+    id: "U3-315", difficulte: "facile", epreuve: "U3", theme: "Droit des entreprises", session: "complément",
+    question: "Qui dirige une SAS ?",
+    choix: ["Un gérant, obligatoirement associé majoritaire", "Un président, désigné selon les statuts", "Un conseil d'administration obligatoire", "Le tribunal de commerce"],
+    bonne: 1,
+    explication: "Une SAS est dirigée par un président, personne physique ou morale, désigné par les statuts. La SARL, elle, est dirigée par un gérant. Les statuts d'une SAS laissent une grande liberté d'organisation.",
+    indice: "Gérant pour la SARL, un autre mot pour la SAS."
+  },
+  {
+    id: "U3-316", difficulte: "moyen", epreuve: "U3", theme: "Droit des entreprises", session: "complément",
+    question: "À partir de quel moment une société a-t-elle la personnalité morale ?",
+    choix: ["De la signature des statuts", "De son immatriculation au registre du commerce et des sociétés (RCS)", "De l'ouverture du magasin au public", "De sa première vente"],
+    bonne: 1,
+    explication: "La société acquiert la personnalité morale à son immatriculation au RCS. Avant, elle n'existe pas encore juridiquement : les actes passés pour elle engagent leurs auteurs, sous réserve de reprise.",
+    indice: "C'est le moment où elle reçoit son numéro d'identité officiel."
+  },
+  {
+    id: "U3-317", difficulte: "moyen", epreuve: "U3", theme: "Droit des entreprises", session: "complément",
+    question: "Quel est le régime fiscal par défaut d'une EURL dont l'associé unique est une personne physique ?",
+    choix: ["L'impôt sur les sociétés, obligatoire", "L'impôt sur le revenu, avec option possible pour l'impôt sur les sociétés", "Seulement la TVA", "Aucun impôt la première année"],
+    bonne: 1,
+    explication: "L'EURL est par défaut soumise à l'impôt sur le revenu : le bénéfice est imposé chez l'associé. Elle peut opter pour l'impôt sur les sociétés. La SASU fonctionne à l'inverse : IS par défaut, option possible pour l'IR.",
+    indice: "Le bénéfice est imposé à titre personnel, sauf option."
+  },
+  {
+    id: "U3-318", difficulte: "facile", epreuve: "U3", theme: "Mercatique et communication", session: "complément",
+    question: "Lequel de ces moyens sert à fidéliser les clients d'un magasin d'optique ?",
+    choix: ["Une carte de fidélité qui donne des avantages à chaque achat", "Une annonce pour attirer des inconnus", "Le niveau du loyer", "Une étude de la zone de chalandise"],
+    bonne: 0,
+    explication: "Fidéliser, c'est inciter les clients existants à revenir : carte de fidélité, rappel de renouvellement, offre aux anciens clients. Une annonce vise de nouveaux clients, le loyer est une charge et l'étude de zone sert à analyser le marché.",
+    indice: "Il s'adresse à des clients qui sont déjà venus."
+  },
+  {
+    id: "U3-319", difficulte: "facile", epreuve: "U3", theme: "Mercatique et communication", session: "complément",
+    question: "Comment s'appelle l'ensemble des techniques qui mettent les produits en valeur dans le magasin (vitrine, présentation des montures, éclairage, parcours client) ?",
+    choix: ["Le merchandising", "La segmentation", "Le positionnement", "La prospection"],
+    bonne: 0,
+    explication: "Le merchandising organise la présentation des produits en magasin pour faciliter le choix et déclencher l'achat. La segmentation découpe le marché, le positionnement fixe l'image voulue, la prospection cherche de nouveaux clients.",
+    indice: "Il s'agit de la mise en scène des produits dans le point de vente."
+  },
+  {
+    id: "U3-320", difficulte: "facile", epreuve: "U3", theme: "Mercatique et communication", session: "complément",
+    type: "calcul",
+    question: "Un magasin réalise 48 000 € HT de chiffre d'affaires en un mois avec 320 ventes. Calcule le panier moyen HT.",
+    reponse: { valeur: 150, unite: "€", decimales: 0, tolerance: 0.5, signe: false },
+    erreurs: [
+      { valeur: 0.0067, type: "notion", message: "Tu as divisé le nombre de ventes par le chiffre d'affaires. Le panier moyen se calcule avec le chiffre d'affaires au numérateur." }
+    ],
+    explication: "Panier moyen = [[48 000|320]] = 150 € par vente.",
+    indice: "Chiffre d'affaires divisé par nombre de ventes."
+  },
+  {
+    id: "U3-321", difficulte: "moyen", epreuve: "U3", theme: "Mercatique et communication", session: "complément",
+    type: "calcul",
+    question: "Sur 250 clients de l'an dernier, 180 sont revenus acheter cette année. Calcule le taux de fidélisation.",
+    reponse: { valeur: 72, unite: "%", decimales: 0, tolerance: 0.5, signe: false },
+    erreurs: [
+      { valeur: 28, type: "notion", message: "28 % est la part des clients perdus (70 sur 250). Le taux de fidélisation est la part de ceux qui sont revenus." },
+      { valeur: 139, type: "notion", message: "Tu as divisé les 250 clients par les 180 revenus. Le taux se calcule avec les clients revenus au numérateur." }
+    ],
+    explication: "Taux de fidélisation = [[180|250]] = 72 %. Les 70 clients non revenus représentent 28 % de perte.",
+    indice: "Compare ceux qui sont revenus à ceux de l'an dernier."
+  },
+  {
+    id: "U3-322", difficulte: "moyen", epreuve: "U3", theme: "Marché et zone de chalandise", session: "complément",
+    question: "Une zone a un indice de disparité de la consommation (IDC) de 110. Que cela signifie-t-il ?",
+    choix: ["Les habitants de la zone consomment, en moyenne, 10 % de plus que la moyenne nationale", "Les habitants consomment 10 % de moins que la moyenne nationale", "La zone compte 110 habitants", "Le magasin gagnera 10 % de plus"],
+    bonne: 0,
+    explication: "L'IDC compare la consommation d'une zone à la moyenne nationale, fixée à 100. Un IDC de 110 indique une consommation supérieure de 10 % ; un IDC de 90 une consommation inférieure de 10 %.",
+    indice: "La moyenne nationale vaut 100."
+  },
+  {
+    id: "U3-323", difficulte: "moyen", epreuve: "U3", theme: "Marché et zone de chalandise", session: "complément",
+    type: "calcul",
+    question: "Une zone compte 30 000 habitants et 12 magasins d'optique. Combien y a-t-il de magasins pour 10 000 habitants ?",
+    reponse: { valeur: 4, unite: "magasins", decimales: 1, tolerance: 0.05, signe: false },
+    erreurs: [
+      { valeur: 2500, type: "notion", message: "2 500 est le nombre d'habitants par magasin. La question demande le nombre de magasins pour 10 000 habitants." }
+    ],
+    explication: "Densité = [[12 × 10 000|30 000]] = 4 magasins pour 10 000 habitants. Une densité élevée indique une forte concurrence.",
+    indice: "Ramène le nombre de magasins à 10 000 habitants."
+  },
+  {
+    id: "U3-324", difficulte: "moyen", epreuve: "U3", theme: "Analyse financière", session: "complément",
+    type: "calcul",
+    question: "Le résultat d'un magasin passe de 20 000 € à 26 000 €. Calcule l'évolution du résultat en pourcentage.",
+    reponse: { valeur: 30, unite: "%", decimales: 0, tolerance: 0.5, signe: true },
+    erreurs: [
+      { valeur: 23.1, type: "notion", message: "Tu as divisé l'écart par le nouveau résultat. L'évolution se calcule par rapport à la valeur de départ : 20 000 €." }
+    ],
+    explication: "Évolution = [[26 000 − 20 000|20 000]] = [[6 000|20 000]] = +30 %.",
+    indice: "On compare l'écart à la valeur de départ."
+  },
+  {
+    id: "U3-325", difficulte: "facile", epreuve: "U3", theme: "Analyse financière", session: "complément",
+    question: "Que présente le compte de résultat d'un magasin ?",
+    choix: ["Les produits et les charges de l'exercice", "Ce que le magasin possède à la fin de l'année", "Les dettes du magasin à la fin de l'année", "Le plan de trésorerie des mois à venir"],
+    bonne: 0,
+    explication: "Le compte de résultat récapitule les produits (ventes) et les charges d'un exercice ; leur différence donne le résultat. Le bilan, lui, décrit à une date donnée ce que le magasin possède (actif) et ce qu'il doit (passif).",
+    indice: "Il parle de ce qui s'est passé pendant l'année, pas d'une photo à une date."
+  }
+);
