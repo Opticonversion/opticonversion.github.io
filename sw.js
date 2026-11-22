@@ -13,7 +13,7 @@
 // =====================================================================
 
 // <versionner> (partie écrite par versionner.py, ne pas modifier à la main)
-const VERSION = "d504d1eebf";
+const VERSION = "6deb5efad4";
 const FICHIERS = [
   "appli.js?v=0724163c",
   "atelier-calculatrice.js?v=6e07c21a",
@@ -40,7 +40,7 @@ const FICHIERS = [
   "entrainement-U5.js?v=f1c1f10d",
   "epreuves.js?v=cc645427",
   "essentiel.html",
-  "essentiel.js?v=2639296f",
+  "essentiel.js?v=7e8432f5",
   "examen.js?v=1b5b3813",
   "img/avatar-alpaga-bouche-ouverte.svg",
   "img/avatar-alpaga-choque.svg",

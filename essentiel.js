@@ -474,7 +474,10 @@ function lireNombre(texte) {
 function ecrireNombre(v, decimales, avecSigne) {
   const d = decimales === undefined ? 2 : decimales;
   let t = (Math.round(Math.abs(v) * 10 ** d) / 10 ** d).toFixed(d).replace(".", ",");
-  t = t.replace(/\B(?=(\d{3})+(?!\d))/g, " ").replace(/ (?=\d*,)/g, m => m);
+  // Espace fine des milliers dans la partie entière seulement (« 0,9996 » et non « 0,9 996 »)
+  const virgule = t.indexOf(",");
+  const entier = virgule < 0 ? t : t.slice(0, virgule), reste = virgule < 0 ? "" : t.slice(virgule);
+  t = entier.replace(/\B(?=(\d{3})+(?!\d))/g, " ") + reste;
   if (v < 0 && Number(t.replace(",", ".").replace(/ /g, "")) !== 0) return "−" + t;
   return (avecSigne && v > 0 ? "+" : "") + t;
 }
