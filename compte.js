@@ -22,18 +22,8 @@ const VERSION_SDK = "10.12.2";
 const SDK = "https://www.gstatic.com/firebasejs/" + VERSION_SDK + "/";
 
 // ---------- Petits outils pour le navigateur ----------
-function lire(cle) {
-  try { return JSON.parse(localStorage.getItem(cle) || "{}"); } catch (e) { return {}; }
-}
-function ecrire(cle, valeur) {
-  try { localStorage.setItem(cle, JSON.stringify(valeur)); } catch (e) {}
-}
-function lireTexte(cle) {
-  try { return localStorage.getItem(cle); } catch (e) { return null; }
-}
-function ecrireTexte(cle, valeur) {
-  try { valeur === null ? localStorage.removeItem(cle) : localStorage.setItem(cle, valeur); } catch (e) {}
-}
+// Tout passe par le coffre (coffre.js, chargé avant) : jamais de plantage si le stockage est bloqué.
+const lire = Coffre.lireJson, ecrire = Coffre.ecrireJson, lireTexte = Coffre.lireTexte, ecrireTexte = Coffre.ecrireTexte;
 
 // ---------- Icône du compte dans le menu ----------
 const ICONE = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8.5" r="4" fill="none" stroke="currentColor" stroke-width="2"/><path d="M4 20.5c1.4-4 4.4-6 8-6s6.6 2 8 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>';
@@ -140,20 +130,6 @@ if (!FIREBASE_CONFIG) {
   lancer();
 }
 
-// Réponses aux questions : pour chaque question, la réponse la plus récente gagne (heure de réponse).
-// Une réponse sans heure (anciennes données) ne remplace pas une réponse datée.
-function fusionnerReponses(progression, temps, progAttente, tempsAttente) {
-  tempsAttente = tempsAttente || {};
-  for (const [cle, val] of Object.entries(progAttente || {})) {
-    const tLocal = tempsAttente[cle] || 0;
-    if (tLocal >= (temps[cle] || 0)) {
-      progression[cle] = val;
-      if (tLocal) temps[cle] = tLocal;
-    }
-  }
-  return { progression, temps };
-}
-
 // Lettre des nouveautés (lettre.js) : inscription d'une adresse e-mail, sans compte.
 // Un document par inscription (les doublons sont retirés au moment d'envoyer) : un refus est toujours une vraie erreur.
 // Garde-fou : 3 inscriptions par jour au plus depuis ce navigateur (protège le quota gratuit de Firebase).
@@ -204,65 +180,23 @@ async function demarrer() {
   let utilisateur = null;
   let minuterie = null;
 
-  // Fusionne la progression en ligne et les changements de ce navigateur.
-  // Les réponses récentes de ce navigateur gagnent ; pour les records, on garde le meilleur.
+  // Fusionne la progression en ligne et les changements de ce navigateur : tout le calcul est dans
+  // Coffre.synchroniser (coffre.js, testé par notes/tests/tester-coffre.js). Ici, seulement l'accès à Firestore :
+  // une transaction qui lit eleves/<uid>, demande au coffre les champs à écrire, et les écrit avec l'heure (maj).
   async function synchroniser() {
     if (!utilisateur) return;
-    const uid = utilisateur.uid;
-    const premiereFois = lireTexte("compte-uid") !== uid;
-    const attente = premiereFois
-      ? { progression: lire("progression"), "progression-t": lire("progression-t"), records: lire("records"), profil: lire("profil"), revisions: lire("revisions") }
-      : lire("attente");
-    const envoye = JSON.stringify(attente);
-    const ref = F.doc(db, "eleves", uid);
-
-    const fusion = await F.runTransaction(db, async t => {
+    const ref = F.doc(db, "eleves", utilisateur.uid);
+    const transaction = miseAJour => F.runTransaction(db, async t => {
       const snap = await t.get(ref);
-      const enLigne = snap.exists() ? snap.data() : {};
-      // Réponses : pour chaque question, la plus récente gagne (heure de réponse).
-      // Une réponse sans heure (anciennes données) ne remplace pas une réponse datée.
-      const { progression, temps } = fusionnerReponses(
-        JSON.parse(enLigne.progression || "{}"), JSON.parse(enLigne.progressionT || "{}"),
-        attente.progression, attente["progression-t"]);
-      const records = JSON.parse(enLigne.records || "{}");
-      for (const [cle, val] of Object.entries(attente.records || {})) {
-        if (records[cle] === undefined || val > records[cle]) records[cle] = val;
-      }
-      const profil = Object.assign({}, enLigne.profil || {}, attente.profil || {});
-      // Révision espacée : pour chaque question, on garde la version la plus récente (champ t)
-      const revisions = JSON.parse(enLigne.revisions || "{}");
-      for (const [cle, val] of Object.entries(attente.revisions || {})) {
-        if (!revisions[cle] || (val && val.t >= (revisions[cle].t || 0))) revisions[cle] = val;
-      }
-      // Anciennes données repérées par l'énoncé → identifiants stables des questions
-      if (typeof window.migrerAnciennesCles === "function") window.migrerAnciennesCles(progression, temps, revisions);
-      t.set(ref, {
-        progression: JSON.stringify(progression),
-        progressionT: JSON.stringify(temps),
-        records: JSON.stringify(records),
-        revisions: JSON.stringify(revisions),
-        profil,
-        maj: F.serverTimestamp()
-      });
-      return { progression, temps, records, profil, revisions, nouveau: !snap.exists() };
+      t.set(ref, Object.assign(miseAJour(snap.exists() ? snap.data() : null), { maj: F.serverTimestamp() }));
+      return { nouveau: !snap.exists() };
     });
-    if (fusion.nouveau) window.compter?.("compte-cree", "Compte créé");     // statistiques anonymes (compter.js)
-
-    const avant = JSON.stringify([lire("progression"), lire("records"), lire("profil"), lire("revisions")]);
-    ecrire("revisions", fusion.revisions);
+    const r = await Coffre.synchroniser(utilisateur.uid, transaction, window.migrerAnciennesCles);
+    if (r.nouveau) window.compter?.("compte-cree", "Compte créé");     // statistiques anonymes (compter.js)
     majCompteurRevision();
-    ecrire("progression", fusion.progression);
-    ecrire("progression-t", fusion.temps);
-    ecrire("records", fusion.records);
-    ecrire("profil", fusion.profil);
     if (icone) majIcone(icone);
-    ecrireTexte("compte-uid", uid);
-    // On n'efface l'attente que si rien n'a bougé pendant l'envoi
-    if (JSON.stringify(lire("attente")) === envoye || premiereFois) ecrire("attente", {});
-
     // Si un autre appareil a apporté du nouveau, on rafraîchit les pages qui l'affichent
-    const apres = JSON.stringify([fusion.progression, fusion.records, fusion.profil, fusion.revisions]);
-    if (avant !== apres && document.body.dataset.rafraichir === "oui") rafraichirPage();
+    if (r.change && document.body.dataset.rafraichir === "oui") rafraichirPage();
   }
 
   // Recharge la page pour montrer la progression à jour, sauf si l'élève est en train d'écrire :
@@ -428,7 +362,7 @@ async function demarrer() {
     await A.deleteUser(auth.currentUser);
     ecrireTexte("compte-uid", null);
     ecrire("attente", {});
-    if (effacerNavigateur) ["progression", "progression-t", "records", "attente", "profil", "revisions", "jours", "plan", "erreurs-types"].forEach(c => ecrireTexte(c, null));
+    if (effacerNavigateur) Coffre.effacerTravail();     // tout le travail de l'élève (liste dans coffre.js), ses réglages restent
     if (formReauth) formReauth.hidden = true;
     ui.etat("Ton compte et ta progression en ligne ont été supprimés.");
   }

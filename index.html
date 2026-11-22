@@ -241,13 +241,15 @@
 
 <!-- On charge les épreuves et les questions pour afficher les cartes et les chiffres exacts -->
 <script src="epreuves.js?v=cc645427"></script>
+<script src="catalogue.js?v=2ee1a49e"></script>
 <script src="questions-U41.js?v=01b8417d"></script>
 <script src="questions-U42.js?v=110fcc22"></script>
 <script src="questions-U43.js?v=fe77cb97"></script>
-<script src="questions-U5.js?v=c4dda2f9"></script>
+<script src="questions-U5.js?v=b4e72b62"></script>
 <script src="questions-U3.js?v=246848d8"></script>
-<script src="essentiel.js?v=ba6ab9a7"></script>
-<script src="rythme.js?v=a384940c"></script>
+<script src="coffre.js?v=314b94c4"></script>
+<script src="essentiel.js?v=2639296f"></script>
+<script src="rythme.js?v=8bba5e53"></script>
 <script>
   // L'examen blanc des outils : le bouton ouvre ou referme le choix des 5 matières
   {
@@ -269,9 +271,8 @@
   { const p = lireProfil(); if (p.pseudo) document.getElementById("salut").textContent = "Content de te revoir, " + p.pseudo; }
   if (typeof QUESTIONS !== "undefined") {
     // Un seul total partout : les questions de « Tous » (comme la page QCM et les cartes), les cas pratiques à part
-    const listeCasP = typeof CAS !== "undefined" ? CAS : [];
-    const base = QUESTIONS.filter(q => !q.entrainement && !(q.cas && listeCasP.some(c => c.id === q.cas)));
-    const nbCasP = listeCasP.filter(c => QUESTIONS.some(q => q.cas === c.id)).length;
+    const base = Catalogue.ordinaires();
+    const nbCasP = Catalogue.cas().length;
     document.getElementById("nb-questions").textContent = base.length + " questions et " + nbCasP + " cas pratiques";
     document.getElementById("outil-qcm").textContent = base.length + " questions corrigées et expliquées, et " + nbCasP + " cas pratiques.";
     document.getElementById("nb-epreuves").textContent = EPREUVES.length;
@@ -306,13 +307,13 @@
 
     // Élève qui revient : le haut de page propose directement la suite
     {
-      const deja = bilanQuestions(QUESTIONS).faites;
+      const deja = bilanQuestions(base).faites;            // même total que les barres : hors cas
       if (deja > 0) {
         const principale = document.getElementById("action-principale");
         const secondaire = document.getElementById("action-secondaire");
         const prochaine = ESSENTIEL.find(n => !etatNotion(n.epreuve, n.theme).maitrisee);
         const lienNotion = n => "qcm.html#" + n.epreuve + "/" + encodeURIComponent(n.theme);
-        document.getElementById("accroche").textContent = "Tu as déjà fait " + deja + " question" + (deja > 1 ? "s" : "") + " sur " + QUESTIONS.length +
+        document.getElementById("accroche").textContent = "Tu as déjà fait " + deja + " question" + (deja > 1 ? "s" : "") + " sur " + base.length +
           (dues > 0 ? ", et " + dues + (dues > 1 ? " sont à revoir" : " est à revoir") + " aujourd'hui." : ".");
         // Élève qui a déjà commencé : sa progression remonte juste sous le haut de page,
         // et la présentation du site ne sert plus qu'aux nouveaux venus.
@@ -387,10 +388,9 @@
     // Le nombre de questions est celui de « Tous » sur la page QCM ; les cas pratiques sont comptés en cas.
     const liste = document.getElementById("liste-epreuves");
     const ORDRE = ["U5", "U3", "U42", "U43", "U41"], rang = e => (ORDRE.includes(e.code) ? ORDRE.indexOf(e.code) : ORDRE.length);
-    const listeCas = typeof CAS !== "undefined" ? CAS : [];
     EPREUVES.slice().sort((x, y) => rang(x) - rang(y)).forEach(e => {
-      const ordinaires = QUESTIONS.filter(q => q.epreuve === e.code && !q.entrainement && !(q.cas && listeCas.some(c => c.id === q.cas)));
-      const nb = ordinaires.length, nbCas = listeCas.filter(c => c.epreuve === e.code && QUESTIONS.some(q => q.cas === c.id)).length;
+      const ordinaires = Catalogue.ordinaires(e.code);
+      const nb = ordinaires.length, nbCas = Catalogue.cas(e.code).length;
       const a = document.createElement("a");
       a.className = "epreuve";
       a.dataset.epreuve = e.code;
@@ -413,7 +413,7 @@
 <script src="vivant.js?v=0b03b85f" defer></script>
 <script src="appli.js?v=0724163c" defer></script>
 <script src="lettre.js?v=92532f67" defer></script>
-<script type="module" src="compte.js?v=f81bb76e"></script>
+<script type="module" src="compte.js?v=7b665935"></script>
 <!-- Mesure d'audience anonyme, sans cookies (GoatCounter) -->
 <script data-goatcounter="https://opticonversion.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </body>

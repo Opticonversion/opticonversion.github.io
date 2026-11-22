@@ -62,7 +62,10 @@ const estEssentiel = (epreuve, theme) => ESSENTIEL.some(n => n.epreuve === epreu
 // Questions « d'entraînement » (entrainement: true, fichiers entrainement-<épreuve>.js chargés par qcm.html seulement) :
 // les mêmes notions avec d'autres chiffres, pour s'entraîner plus. Elles ne comptent NI dans l'Essentiel, NI dans
 // « Tous les QCM », NI dans la révision espacée : seulement dans leur propre compteur, sur la page de l'épreuve.
-const questionsDeBase = () => (typeof QUESTIONS === "undefined" ? [] : QUESTIONS.filter(q => !q.entrainement));
+// Les questions des cas pratiques sont comptées à part (en cas), jamais dans un total de questions ni dans la
+// maîtrise d'une notion (décision de David, 2026-11-22). La règle vit dans catalogue.js ; calculateurs.html
+// charge ce fichier sans les questions, d'où la garde.
+const questionsOrdinaires = (epreuve, theme) => (typeof Catalogue === "undefined" ? [] : Catalogue.ordinaires(epreuve, theme));
 
 // ---------------- La progression de l'élève ----------------
 // Elle est gardée dans le navigateur de l'élève. S'il se connecte (compte.js),
@@ -102,25 +105,15 @@ function migrerAnciennesCles(prog, temps, revs) {
   return change;
 }
 
+// Les données copiées dans le compte en ligne passent toutes par le coffre (coffre.js, chargé avant) :
+// lecture sans plantage, liste des clés, fusion entre appareils.
 // Note un changement pas encore envoyé en ligne, puis prévient compte.js
-function marquerEnAttente(type, cle, valeur) {
-  try {
-    const attente = JSON.parse(localStorage.getItem("attente") || "{}");
-    attente[type] = attente[type] || {};
-    attente[type][cle] = valeur;
-    localStorage.setItem("attente", JSON.stringify(attente));
-  } catch (e) {}
-  window.dispatchEvent(new Event("progression-modifiee"));
-}
+function marquerEnAttente(type, cle, valeur) { Coffre.marquerEnAttente(type, cle, valeur); }
 
-function lireProgression() {
-  try { return JSON.parse(localStorage.getItem("progression") || "{}"); } catch (e) { return {}; }
-}
+function lireProgression() { return Coffre.lireJson("progression"); }
 // Heure de la dernière réponse à chaque question : sert à garder la plus récente
 // quand deux appareils ont répondu à la même question.
-function lireTempsReponses() {
-  try { return JSON.parse(localStorage.getItem("progression-t") || "{}"); } catch (e) { return {}; }
-}
+function lireTempsReponses() { return Coffre.lireJson("progression-t"); }
 // detail (facultatif) = { calcul: résultat de corrigerCalcul } ou { choix: numéro dans q.choix } :
 // sert à ranger l'erreur par type dans « À revoir » (typeErreur, plus bas).
 function noterReponse(q, juste, detail) {
@@ -128,10 +121,8 @@ function noterReponse(q, juste, detail) {
   const p = lireProgression(), t = lireTempsReponses();
   p[id] = juste ? 1 : 0;
   t[id] = maintenant;
-  try {
-    localStorage.setItem("progression", JSON.stringify(p));
-    localStorage.setItem("progression-t", JSON.stringify(t));
-  } catch (e) {}
+  Coffre.ecrireJson("progression", p);
+  Coffre.ecrireJson("progression-t", t);
   noterTypeErreur(q, juste, detail);
   marquerEnAttente("progression-t", id, maintenant);
   marquerEnAttente("progression", id, juste ? 1 : 0);
@@ -164,18 +155,17 @@ function compterJour(juste) {
 // dans ce navigateur et dans ce qui attend d'être envoyé en ligne.
 (function () {
   try {
-    const p = lireProgression(), t = lireTempsReponses();
-    const r = JSON.parse(localStorage.getItem("revisions") || "{}");
+    const p = lireProgression(), t = lireTempsReponses(), r = lireRevisions();
     if (migrerAnciennesCles(p, t, r)) {
-      localStorage.setItem("progression", JSON.stringify(p));
-      localStorage.setItem("progression-t", JSON.stringify(t));
-      localStorage.setItem("revisions", JSON.stringify(r));
+      Coffre.ecrireJson("progression", p);
+      Coffre.ecrireJson("progression-t", t);
+      Coffre.ecrireJson("revisions", r);
     }
-    const at = JSON.parse(localStorage.getItem("attente") || "{}");
+    const at = Coffre.lireJson("attente");
     const ap = at.progression || {}, att = at["progression-t"] || {}, ar = at.revisions || {};
     if (migrerAnciennesCles(ap, att, ar)) {
       at.progression = ap; at["progression-t"] = att; at.revisions = ar;
-      localStorage.setItem("attente", JSON.stringify(at));
+      Coffre.ecrireJson("attente", at);
     }
   } catch (e) {}
 })();
@@ -192,13 +182,11 @@ function jourLocal(decalage) {
   d.setDate(d.getDate() + (decalage || 0));
   return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
 }
-function lireRevisions() {
-  try { return JSON.parse(localStorage.getItem("revisions") || "{}"); } catch (e) { return {}; }
-}
+function lireRevisions() { return Coffre.lireJson("revisions"); }
 function ecrireRevision(id, entree) {
   const r = lireRevisions();
   r[id] = entree;
-  try { localStorage.setItem("revisions", JSON.stringify(r)); } catch (e) {}
+  Coffre.ecrireJson("revisions", r);
   marquerEnAttente("revisions", id, entree);
 }
 
@@ -333,11 +321,9 @@ function prochaineRevision() {
 }
 
 // Profil de l'élève (pseudo, année, avatar) : visible par lui seul
-function lireProfil() {
-  try { return JSON.parse(localStorage.getItem("profil") || "{}"); } catch (e) { return {}; }
-}
+function lireProfil() { return Coffre.lireJson("profil"); }
 function enregistrerProfil(p) {
-  try { localStorage.setItem("profil", JSON.stringify(p)); } catch (e) {}
+  Coffre.ecrireJson("profil", p);
   for (const [cle, val] of Object.entries(p)) marquerEnAttente("profil", cle, val);
 }
 
@@ -345,7 +331,7 @@ function enregistrerProfil(p) {
 // ont été réussies à la dernière tentative.
 function etatNotion(epreuve, theme) {
   const p = lireProgression();
-  const qs = questionsDeBase().filter(q => q.epreuve === epreuve && q.theme === theme);
+  const qs = questionsOrdinaires(epreuve, theme);
   const reussies = qs.filter(q => p[idQuestion(q)] === 1).length;
   const tentees = qs.filter(q => idQuestion(q) in p).length;
   return {
@@ -367,13 +353,13 @@ function bilanQuestions(qs) {
   });
   return { total: qs.length, faites, reussies };
 }
-const questionsEssentielles = () => questionsDeBase().filter(q => estEssentiel(q.epreuve, q.theme));
+const questionsEssentielles = () => questionsOrdinaires().filter(q => estEssentiel(q.epreuve, q.theme));
 
 // Les trois grandes mesures : l'essentiel et tous les QCM (questions FAITES),
 // et le niveau de maîtrise (questions RÉUSSIES à la dernière tentative, sur tout le site).
 function bilansGeneraux() {
   const essentiel = bilanQuestions(questionsEssentielles());
-  const qcm = bilanQuestions(questionsDeBase());
+  const qcm = bilanQuestions(questionsOrdinaires());
   // Pour la maîtrise, la barre ne montre que les réussies : « faites » = « réussies »
   const maitrise = { total: qcm.total, faites: qcm.reussies, reussies: qcm.reussies };
   return { essentiel, qcm, maitrise };

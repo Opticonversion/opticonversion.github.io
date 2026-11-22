@@ -162,7 +162,7 @@ function calculerExamen() {
   // réparties sur les jours qui restent, en gardant un jour de pause par semaine.
   const ecrites = (typeof EPREUVES === "undefined" ? [] : EPREUVES).filter(e => !/CCF/.test(e.detail || "")).map(e => e.code);
   const prog = typeof lireProgression === "function" ? lireProgression() : {};
-  const qs = (typeof QUESTIONS === "undefined" ? [] : QUESTIONS).filter(q => !q.entrainement && ecrites.includes(q.epreuve));
+  const qs = (typeof Catalogue === "undefined" ? [] : Catalogue.ordinaires()).filter(q => ecrites.includes(q.epreuve));      // hors cas, comme partout
   const reste = qs.filter(q => prog[idQuestion(q)] !== 1).length;
   const joursDeTravail = Math.max(1, jours - Math.floor(jours / 7));
   return {
@@ -269,7 +269,7 @@ function questionsSeance(taille, matiere) {
   };
   const parDifficulte = liste => melangerListe(liste).sort((a, b) => rangDifficulte(a) - rangDifficulte(b));
   const deLaMatiere = q => !matiere || q.epreuve === matiere;
-  const base = QUESTIONS.filter(q => !q.entrainement && !q.cas && deLaMatiere(q));
+  const base = Catalogue.ordinaires(matiere || undefined);
   prendre(melangerListe(questionsARevoir().filter(deLaMatiere)));
   const jamais = base.filter(q => prog[idQuestion(q)] === undefined);
   // « Mon plan » (pas de matière choisie) : les thèmes de la semaine, celui du jour d'abord (voir planDeLaSemaine).
@@ -339,7 +339,7 @@ function phraseComposition(c) {
 function questionsPremiersPas(matiere) {
   if (typeof QUESTIONS === "undefined" || typeof ESSENTIEL === "undefined") return [];
   const prog = lireProgression();
-  const faciles = QUESTIONS.filter(q => (!matiere || q.epreuve === matiere) && !q.entrainement && !q.cas && !q.type && q.difficulte === "facile" && prog[idQuestion(q)] === undefined);
+  const faciles = Catalogue.ordinaires(matiere || undefined).filter(q => !q.type && q.difficulte === "facile" && prog[idQuestion(q)] === undefined);
   const choisies = [], epreuves = new Set(), notions = new Set();
   const prendre = n => {
     const q = melangerListe(faciles.filter(x => x.epreuve === n.epreuve && x.theme === n.theme))[0];
@@ -1265,12 +1265,11 @@ function erreursExamenRecentes(prog) {
   return erreurs;
 }
 
-// Un bilan par thème (questions hors entraînement, cas compris, comme etatNotion)
+// Un bilan par thème (questions ordinaires : hors entraînement et hors cas, comme etatNotion)
 function statsThemesPlan() {
   const prog = lireProgression(), dues = new Set(questionsARevoir().map(idQuestion));
   const erreurs = erreursExamenRecentes(prog), themes = new Map();
-  QUESTIONS.forEach(q => {
-    if (q.entrainement) return;
+  Catalogue.ordinaires().forEach(q => {
     const k = q.epreuve + "/" + q.theme;
     let s = themes.get(k);
     if (!s) {
@@ -1391,7 +1390,7 @@ function epreuveExamenPlan() {
     if (code) return { code, enCours: true };
   } catch (e) {}
   let records = {};
-  try { records = JSON.parse(localStorage.getItem("records") || "{}") || {}; } catch (e) {}
+  records = Coffre.lireJson("records");
   const derniere = derniereCopieExamen();
   let codes = Object.keys(PLAN_EXAMEN_SECOURS);
   if (derniere && codes.length > 1) codes = codes.filter(c => c !== derniere.epreuve);

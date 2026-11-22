@@ -86,7 +86,7 @@ const Examen = (() => {
     return copie.slice(0, n);
   }
   function meilleureNote(code) {
-    const r = lire("records")[code + "/examen"];
+    const r = Coffre.lireJson("records")[code + "/examen"];
     return typeof r === "number" ? r : null;
   }
 

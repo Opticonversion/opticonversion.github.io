@@ -102,10 +102,11 @@
 
 <script src="videos.js?v=2da8e777"></script>
 <script src="epreuves.js?v=cc645427"></script>
+<script src="catalogue.js?v=2ee1a49e"></script>
 <script src="questions-U41.js?v=01b8417d"></script>
 <script src="questions-U42.js?v=110fcc22"></script>
 <script src="questions-U43.js?v=fe77cb97"></script>
-<script src="questions-U5.js?v=c4dda2f9"></script>
+<script src="questions-U5.js?v=b4e72b62"></script>
 <script src="questions-U3.js?v=246848d8"></script>
 <!-- Questions d'entraînement (mêmes notions, autres chiffres) : chargées ici seulement, hors Essentiel -->
 <script src="entrainement-U41.js?v=83ad44b4"></script>
@@ -123,10 +124,11 @@
 <script src="specificites-U43.js?v=523c07db"></script>
 <script src="specificites-U5.js?v=43533990"></script>
 <script src="specificites-U3.js?v=3245f237"></script>
-<script src="essentiel.js?v=ba6ab9a7"></script>
-<script src="rythme.js?v=a384940c"></script>
+<script src="coffre.js?v=314b94c4"></script>
+<script src="essentiel.js?v=2639296f"></script>
+<script src="rythme.js?v=8bba5e53"></script>
 <!-- Examen blanc chronométré (#U5/examen) : avant le script de la page, qui l'ouvre dès le chargement -->
-<script src="examen.js?v=0226b4d4"></script>
+<script src="examen.js?v=1b5b3813"></script>
 <script src="calculette.js?v=6fb79d1d"></script>
 <script src="atelier-calculatrice.js?v=6e07c21a"></script>
 <script>
@@ -150,23 +152,23 @@
     return copie;
   }
 
-  // Les questions de base d'une épreuve. Les questions d'entraînement (entrainement: true) sont à part :
-  // elles ne sortent ni dans les séries par thème, ni dans les compteurs, ni dans l'Essentiel.
-  const questionsDe = code => QUESTIONS.filter(q => q.epreuve === code && !q.entrainement);
-  const entrainementDe = (code, theme) => QUESTIONS.filter(q => q.epreuve === code && q.entrainement && (!theme || q.theme === theme));
+  // Quelles questions comptent où : catalogue.js (un seul endroit pour tout le site). Ces noms courts restent
+  // ceux de la page (examen.js s'en sert aussi : questionsDe, ordinairesDe).
+  // Les questions d'entraînement (entrainement: true) sont à part : ni séries par thème, ni compteurs, ni Essentiel.
+  const questionsDe = code => Catalogue.base(code);
+  const entrainementDe = (code, theme) => Catalogue.entrainement(code, theme);
   const TAILLE_ENTRAINEMENT = 10;      // une série d'entraînement = 10 questions, les jamais faites d'abord
   let themeEntrainement = null;        // thème de la série d'entraînement en cours (null = toute l'épreuve)
 
   // ---------------- Cas pratiques ----------------
   // Un cas (CAS, déclaré dans questions-XX.js) regroupe des questions qui portent cas + etape.
   // Ses questions ne sortent pas dans les séries ordinaires : seulement dans le cas, dans l'ordre.
-  const listeCas = () => (typeof CAS !== "undefined" ? CAS : []);
-  const casParId = id => listeCas().find(c => c.id === id);
-  const questionsDuCas = id => QUESTIONS.filter(q => q.cas === id).sort((a, b) => a.etape - b.etape);
-  const casDe = code => listeCas().filter(c => c.epreuve === code && questionsDuCas(c.id).length > 0);
-  const dansUnCas = q => !!(q.cas && casParId(q.cas));
-  const ordinairesDe = code => questionsDe(code).filter(q => !dansUnCas(q));
-  const questionsDesCas = code => casDe(code).flatMap(c => questionsDuCas(c.id));
+  const casParId = Catalogue.casParId;
+  const questionsDuCas = Catalogue.questionsDuCas;
+  const casDe = code => Catalogue.cas(code);
+  const dansUnCas = Catalogue.dansUnCas;
+  const ordinairesDe = code => Catalogue.ordinaires(code);
+  const questionsDesCas = code => Catalogue.questionsDesCas(code);
   let onglet = "theme";        // "theme", "cas" (liste des cas ou un cas), "entrainement", "selection" (questions choisies) ou "examen" (examen.js)
   let defilerVersZone = false; // après un lien des Spécificités : descendre jusqu'aux questions
 
@@ -620,7 +622,7 @@
   // Les cas d'une épreuve : faits = terminés au moins une fois (record), réussis = record d'au moins 80 %
   function bilanDesCas(code) {
     let records = {};
-    try { records = JSON.parse(localStorage.getItem("records") || "{}") || {}; } catch (e) {}
+    records = Coffre.lireJson("records");
     const cas = casDe(code);
     const faits = cas.filter(c => records[code + "/" + c.id] !== undefined);
     return { total: cas.length, faites: faits.length, reussies: faits.filter(c => records[code + "/" + c.id] >= 80).length };
@@ -1797,8 +1799,7 @@
     numero = 0;
     replierPage(false);
     const liste = casDe(epreuveChoisie);
-    let records = {};
-    try { records = JSON.parse(localStorage.getItem("records") || "{}"); } catch (e) {}
+    const records = Coffre.lireJson("records");
     zone.classList.add("zone-liste");          // la liste des cas n'est pas dans une carte : chaque cas est sa carte
     zone.innerHTML = '<h2 class="titre-cas">Cas pratiques</h2>' +
       '<p class="doux intro-cas">Un client, une situation, plusieurs questions à la suite comme dans le sujet. Le contexte reste affiché jusqu\'à la fin.</p>' +
@@ -2392,11 +2393,11 @@
   // Records : le meilleur score de l'élève par thème, gardé dans son navigateur
   function enregistrerRecord(cle, pourcent) {
     let records = {};
-    try { records = JSON.parse(localStorage.getItem("records") || "{}"); } catch (e) {}
+    records = Coffre.lireJson("records");
     const ancien = records[cle];
     if (ancien === undefined || pourcent > ancien) {
       records[cle] = pourcent;
-      try { localStorage.setItem("records", JSON.stringify(records)); } catch (e) {}
+      Coffre.ecrireJson("records", records);
       marquerEnAttente("records", cle, pourcent);
     }
     return { ancien, nouveau: ancien !== undefined && pourcent > ancien };
@@ -2708,7 +2709,7 @@
 <script src="vivant.js?v=0b03b85f" defer></script>
 <script src="appli.js?v=0724163c" defer></script>
 <script src="sons.js?v=355500ef" defer></script>
-<script type="module" src="compte.js?v=f81bb76e"></script>
+<script type="module" src="compte.js?v=7b665935"></script>
 <!-- Mesure d'audience anonyme, sans cookies (GoatCounter) -->
 <script data-goatcounter="https://opticonversion.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </body>

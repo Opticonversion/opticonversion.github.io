@@ -1498,10 +1498,10 @@ QUESTIONS.push(
     epreuve: "U5",
     theme: "Réfraction",
     session: "complément",
-    question: "Quel est le but de l'équilibre binoculaire en fin de réfraction subjective ?",
+    question: "Quel est le but de l'équilibre bioculaire en fin de réfraction subjective ?",
     choix: ["Mesurer l'acuité de chaque œil séparément", "Rendre l'œil gauche plus fort que l'œil droit", "Déterminer l'axe du cylindre", "Égaliser l'état accommodatif des deux yeux"],
     bonne: 3,
-    explication: "L'équilibre binoculaire (par brouillage alterné ou dissociation) vérifie que les deux yeux sont brouillés de la même façon : les deux yeux travaillent avec la même accommodation et le même confort. Il se fait après la détermination monoculaire de chaque œil.",
+    explication: "L'équilibre bioculaire dissocie les deux yeux (par prismes ou filtres polarisés) et vérifie qu'ils sont brouillés de la même façon : les deux yeux travaillent avec la même accommodation. Il se fait après la détermination monoculaire de chaque œil. L'équilibre binoculaire, lui, vient ensuite, sans dissociation : on cherche la compensation la plus convergente qui donne la meilleure acuité à deux yeux.",
     indice: "Les deux yeux regardent ensemble : que doit-on égaliser avant de conclure ?"
   },
   {
