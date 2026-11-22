@@ -22,6 +22,7 @@
   let dernier = null;              // dernier résultat (touche Rép)
   let erreur = "";
   let panneau = null, boutonOuvrant = null;
+  let repliee = false;             // téléphone : touches repliées, seul l'écran reste
 
   // ---------- Calcul ----------
   function Faute(message) { this.message = message; }
@@ -384,13 +385,16 @@
     panneau.id = "calculette";
     panneau.hidden = true;
     panneau.setAttribute("aria-label", "Calculette");
+    if (document.getElementById("ecran-jeu")) panneau.classList.add("calc-atelier");   // Atelier : à gauche sur grand écran (la consigne et « Valider » sont à droite)
     panneau.innerHTML =
       '<div class="calc-tete"><span class="calc-titre"><span class="ico i-calcul" aria-hidden="true"></span> <span class="calc-nom">Calculette</span> <span class="calc-deg">degrés</span></span>' +
-      '<button type="button" class="calc-fermer" aria-label="Fermer la calculette"><span aria-hidden="true">×</span></button></div>' +
+      '<span class="calc-boutons-tete"><button type="button" class="calc-replier" aria-expanded="true" aria-controls="calc-touches"><span class="ico i-droite" aria-hidden="true"></span> <span class="calc-replier-texte">Replier les touches</span></button>' +
+      '<button type="button" class="calc-fermer" aria-label="Fermer la calculette"><span aria-hidden="true">×</span></button></span></div>' +
       '<div class="calc-ecran" tabindex="0" aria-label="Écran de la calculette. Tu peux taper ton calcul au clavier ; les calculs faits restent au-dessus, touche-les pour les reprendre.">' +
       '<ol class="calc-historique"></ol><div class="calc-ligne" aria-hidden="true"></div><p class="calc-message" hidden></p></div>' +
       '<p class="visuellement-cache calc-annonce" role="status"></p>' +
-      '<div class="calc-touches"></div>';
+      '<div class="calc-touches" id="calc-touches"></div>' +
+      '<p class="calc-aide">Au clavier : chiffres et signes, <kbd>F</kbd> fraction, <kbd>A</kbd> Rép, <kbd>←</kbd> <kbd>→</kbd> dans la fraction, <kbd>Entrée</kbd> pour =, <kbd>Échap</kbd> ferme.</p>';
     const grille = panneau.querySelector(".calc-touches");
     TOUCHES.forEach(([cle, texte, lu, classe, large]) => {
       const b = document.createElement("button");
@@ -408,6 +412,11 @@
       majAffichage(b.dataset.cle === "=");
     });
     panneau.querySelector(".calc-fermer").onclick = () => fermer(true);
+    // Téléphone : replier les touches pour revoir le haut de l'énoncé ; l'écran et ses résultats restent
+    panneau.querySelector(".calc-replier").onclick = () => replier(!repliee);
+    panneau.querySelector(".calc-ecran").addEventListener("click", e => {
+      if (repliee && !e.target.closest("button")) replier(false);   // toucher l'écran ressort les touches
+    });
     // Clavier : seulement quand la calculette a le focus (les raccourcis A B C D du QCM restent libres ailleurs)
     panneau.addEventListener("keydown", e => {
       if (e.ctrlKey || e.metaKey || e.altKey) return;
@@ -445,7 +454,7 @@
     });
     document.body.appendChild(panneau);
     // Plus aucune question avec des chiffres à l'écran (bilan, liste des thèmes…) : la calculette se range
-    const zone = document.getElementById("zone");
+    const zone = zoneQuestion();
     if (zone) new MutationObserver(() => {
       if (!panneau.hidden && !document.querySelector(".bouton-calculette")) fermer(false);
     }).observe(zone, { childList: true, subtree: true });
@@ -459,6 +468,19 @@
     });
   }
 
+  function replier(oui) {
+    repliee = oui;
+    panneau.classList.toggle("calc-repliee", oui);
+    const b = panneau.querySelector(".calc-replier");
+    b.setAttribute("aria-expanded", oui ? "false" : "true");
+    b.querySelector(".calc-replier-texte").textContent = oui ? "Afficher les touches" : "Replier les touches";
+    noterHauteur();
+    if (!oui) requestAnimationFrame(() => degager(false));
+  }
+
+  // Là où s'affiche la question : le QCM et l'examen blanc (#zone), ou un niveau de l'Atelier des tracés (#ecran-jeu)
+  function zoneQuestion() { return document.getElementById("zone") || document.getElementById("ecran-jeu"); }
+
   function noterHauteur() {
     const h = panneau && !panneau.hidden ? panneau.offsetHeight : 0;
     document.documentElement.style.setProperty("--haut-calculette", h + "px");
@@ -468,17 +490,24 @@
   // Nouvelle question (force) : le QCM est peut-être en train de remonter la page ; on vise une position absolue.
   function degager(force) {
     if (!panneau || panneau.hidden) return;
-    const zone = document.getElementById("zone");
+    const zone = zoneQuestion();
     if (!zone) return;
     const champ = zone.querySelector("input:not(:disabled)");       // calcul à taper, étape en cours d'un calcul posé
     const cible = champ ? champ.closest("form") || champ : zone.querySelector(".choix");
     if (!cible) return;
     // Place de la calculette sans son animation d'arrivée (offsetTop ignore le petit glissement en cours)
-    const r = cible.getBoundingClientRect(), p = { top: panneau.offsetTop, left: panneau.offsetLeft, right: panneau.offsetLeft + panneau.offsetWidth };
+    let r = cible.getBoundingClientRect();
+    // Atelier des tracés : la case et « Valider » suffisent (les données et l'aide sous la case peuvent passer sous la calculette)
+    const valider = champ && champ.closest(".saisie-calcul") && champ.form.querySelector('[type="submit"]');
+    if (valider) {
+      const a = champ.getBoundingClientRect(), b = valider.getBoundingClientRect();
+      r = { top: Math.min(a.top, b.top), bottom: Math.max(a.bottom, b.bottom), left: Math.min(a.left, b.left), right: Math.max(a.right, b.right) };
+    }
+    const p = { top: panneau.offsetTop, left: panneau.offsetLeft, right: panneau.offsetLeft + panneau.offsetWidth };
     if (r.right < p.left || r.left > p.right) return;               // ordinateur : la calculette est à côté, rien ne bouge
     // Haut de l'écran occupé : l'en-tête et la ligne de la série, collés en haut
     let haut = 0;
-    [document.querySelector(".entete"), document.getElementById("barre-serie")].forEach(x => {
+    [document.querySelector(".entete"), document.getElementById("barre-serie"), document.querySelector(".jeu-tete")].forEach(x => {
       if (x && !x.hidden && getComputedStyle(x).position !== "static") haut = Math.max(haut, x.getBoundingClientRect().bottom);
     });
     haut += 8;

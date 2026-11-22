@@ -24,7 +24,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Opticonversion">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
-<link rel="stylesheet" href="style.css?v=229ef530">
+<link rel="stylesheet" href="style.css?v=0bd07ae1">
 </head>
 <body data-rafraichir="oui">
 
@@ -172,10 +172,36 @@
       <span class="outil-texte"><b>Définitions</b><span>À réciter en cartes, avec celles déjà tombées au BTS.</span></span>
       <span class="fleche" aria-hidden="true">→</span>
     </a>
-    <a class="outil" href="traces.html">
-      <span class="outil-icone" aria-hidden="true"><span class="ico i-crayon"></span></span>
-      <span class="outil-texte"><b>Atelier des tracés</b><span>Construis l'image d'une lentille, niveau par niveau.</span></span>
-      <span class="fleche" aria-hidden="true">→</span>
+    <!-- L'Atelier sur toute la largeur, avec un tracé corrigé qui se dessine quand on arrive dessus (vivant.js ;
+         sans vivant.js ou animations coupées, le dessin est déjà fini). Calcul : f' = 60, OA = −100, OA' = 150, γ = −1,5. -->
+    <a class="outil outil-atelier" href="traces.html">
+      <span class="outil-tete">
+        <span class="outil-icone" aria-hidden="true"><span class="ico i-crayon"></span></span>
+        <span class="outil-texte"><b>Atelier des tracés</b><span>Construis l'image d'une lentille, niveau par niveau. Le site vérifie chaque rayon et calcule la bonne réponse.</span></span>
+      </span>
+      <span class="apercu-trace" id="apercu-trace">
+        <svg class="trace" viewBox="40 20 360 125" aria-hidden="true" focusable="false">
+          <line class="t-axe" x1="50" y1="75" x2="390" y2="75"/>
+          <line class="t-lentille" x1="200" y1="30" x2="200" y2="130"/>
+          <path class="t-lentille" d="M193 37 L200 30 L207 37 M193 123 L200 130 L207 123" fill="none"/>
+          <line class="t-foyer" x1="140" y1="71" x2="140" y2="79"/><line class="t-foyer" x1="260" y1="71" x2="260" y2="79"/>
+          <text class="t-label repere" x="135" y="93">F</text><text class="t-label repere" x="255" y="93">F'</text>
+          <line class="t-objet" x1="100" y1="75" x2="100" y2="48"/>
+          <path class="t-pointe" d="M100 44 L95 53 L105 53 Z"/>
+          <text class="t-label" x="86" y="45">B</text><text class="t-label" x="94" y="93">A</text>
+          <g class="t-rayon">
+            <line x1="100" y1="45" x2="200" y2="45" style="--l:100;--t:0.2s"/>
+            <line x1="200" y1="45" x2="350" y2="120" style="--l:168;--t:0.85s"/>
+            <line x1="100" y1="45" x2="350" y2="120" style="--l:262;--t:1.6s"/>
+            <line x1="100" y1="45" x2="200" y2="120" style="--l:125;--t:2.3s"/>
+            <line x1="200" y1="120" x2="350" y2="120" style="--l:150;--t:2.8s"/>
+          </g>
+          <g class="t-image"><line x1="350" y1="75" x2="350" y2="117" style="--l:42;--t:3.2s"/></g>
+          <path class="t-pointe image" d="M350 122 L345 113 L355 113 Z"/>
+          <text class="t-label image" x="358" y="70">A'</text><text class="t-label image" x="358" y="130">B'</text>
+        </svg>
+        <span class="apercu-legende">Niveau corrigé : les trois rayons utiles donnent l'image A'B'.</span>
+      </span>
     </a>
     <a class="outil" href="calculateurs.html">
       <span class="outil-icone" aria-hidden="true"><span class="ico i-calcul"></span></span>
@@ -215,11 +241,11 @@
 
 <!-- On charge les épreuves et les questions pour afficher les cartes et les chiffres exacts -->
 <script src="epreuves.js?v=cc645427"></script>
-<script src="questions-U41.js?v=ff216be0"></script>
-<script src="questions-U42.js?v=a0b309c4"></script>
-<script src="questions-U43.js?v=7b120a2f"></script>
+<script src="questions-U41.js?v=01b8417d"></script>
+<script src="questions-U42.js?v=110fcc22"></script>
+<script src="questions-U43.js?v=13cf11e5"></script>
 <script src="questions-U5.js?v=86decd35"></script>
-<script src="questions-U3.js?v=9474d67d"></script>
+<script src="questions-U3.js?v=246848d8"></script>
 <script src="essentiel.js?v=ba6ab9a7"></script>
 <script src="rythme.js?v=a384940c"></script>
 <script>
@@ -383,8 +409,8 @@
   }
 </script>
 <script src="banc.js?v=7a80e12d" defer></script>
-<script src="compter.js?v=920cbd98" defer></script>
-<script src="vivant.js?v=ec7cf52b" defer></script>
+<script src="compter.js?v=234d3f31" defer></script>
+<script src="vivant.js?v=0b03b85f" defer></script>
 <script src="appli.js?v=0724163c" defer></script>
 <script src="lettre.js?v=92532f67" defer></script>
 <script type="module" src="compte.js?v=f81bb76e"></script>

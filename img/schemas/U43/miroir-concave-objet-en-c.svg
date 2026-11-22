@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 300" role="img" aria-labelledby="t">
+  <title id="t">Miroir concave, objet AB placé au centre de courbure C, deux rayons réfléchis</title>
+  <style>
+    :root { background: #0f1219; color-scheme: dark; }
+    text { font-family: -apple-system, "Segoe UI", Roboto, sans-serif; font-size: 16px; fill: #e7e9ee; }
+    .p { font-size: 14px; fill: #aab2c0; }
+    .g { font-weight: 700; }
+    .r { fill: none; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
+  </style>
+  <defs>
+    <pattern id="grille" width="18" height="18" patternUnits="userSpaceOnUse"><path d="M18 0 L0 0 L0 18" fill="none" stroke="#ffffff" stroke-opacity=".045"/></pattern>
+    <marker id="mg" markerUnits="userSpaceOnUse" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#aab2c0"/></marker>
+    <marker id="mo" markerUnits="userSpaceOnUse" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="12" markerHeight="12" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#f0c674"/></marker>
+  </defs>
+  <rect x="0" y="0" width="480" height="300" fill="url(#grille)"/>
+  <line x1="8.0" y1="150.0" x2="472.0" y2="150.0" stroke="#5b6270" stroke-width="1.5" />
+  <polyline points="367.0,40.0 370.2,44.9 373.2,49.9 376.0,55.0 378.7,60.2 381.2,65.4 383.6,70.7 385.8,76.1 387.9,81.5 389.8,87.0 391.6,92.6 393.2,98.2 394.6,103.8 395.9,109.5 397.0,115.2 397.9,121.0 398.6,126.8 399.2,132.6 399.7,138.4 399.9,144.2 400.0,150.0 399.9,155.8 399.7,161.6 399.2,167.4 398.6,173.2 397.9,179.0 397.0,184.8 395.9,190.5 394.6,196.2 393.2,201.8 391.6,207.4 389.8,213.0 387.9,218.5 385.8,223.9 383.6,229.3 381.2,234.6 378.7,239.8 376.0,245.0 373.2,250.1 370.2,255.1 367.0,260.0" fill="none" stroke="#e7e9ee" stroke-width="3.4"/>
+  <text x="404.0" y="288.0" text-anchor="end" class="p">miroir</text>
+  <circle cx="400" cy="150" r="3.5" fill="#aab2c0"/>
+  <text x="400.0" y="172.0" text-anchor="middle" class="g" style="fill:#aab2c0">S</text>
+  <circle cx="200" cy="150" r="3.5" fill="#aab2c0"/>
+  <text x="192.0" y="172.0" text-anchor="end" class="g" style="fill:#aab2c0">C = A</text>
+  <circle cx="300" cy="150" r="3.5" fill="#aab2c0"/>
+  <text x="300.0" y="190.0" text-anchor="middle" class="g" style="fill:#aab2c0">F</text>
+  <line x1="200.0" y1="150.0" x2="200.0" y2="110.0" stroke="#6fd3c4" stroke-width="3.4" marker-end="url(#mg)"/>
+  <text x="188.0" y="108.0" text-anchor="middle" class="g" style="fill:#6fd3c4">B</text>
+  <line x1="200.0" y1="110.0" x2="396.0" y2="110.0" stroke="#f0c674" stroke-width="2.4" />
+  <line x1="396.0" y1="110.0" x2="200.0" y2="190.0" stroke="#f0c674" stroke-width="2.4" />
+  <line x1="200.0" y1="110.0" x2="400.0" y2="150.0" stroke="#f0c674" stroke-width="2.4" />
+  <line x1="400.0" y1="150.0" x2="200.0" y2="190.0" stroke="#f0c674" stroke-width="2.4" />
+  <line x1="200.0" y1="150.0" x2="200.0" y2="190.0" stroke="#6fd3c4" stroke-width="3.4" stroke-dasharray="4 4"/>
+  <text x="188.0" y="206.0" text-anchor="middle" class="g" style="fill:#6fd3c4">B'</text>
+</svg>

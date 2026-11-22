@@ -283,7 +283,7 @@ input, select, textarea {
   background: var(--fond-2); border: 1px solid rgba(255, 255, 255, 0.42); border-radius: 12px;
   transition: border-color var(--vite), box-shadow var(--vite);
 }
-input::placeholder, textarea::placeholder { color: #8d96a8; opacity: 1; }
+input::placeholder, textarea::placeholder { color: var(--tres-doux); opacity: 1; }
 input:focus, select:focus, textarea:focus { outline: none; border-color: var(--or); box-shadow: 0 0 0 3px var(--or-fond); }
 select option { background: var(--fond); }
 
@@ -439,6 +439,20 @@ select option { background: var(--fond); }
 .outil-vedette .outil-icone { width: 54px; height: 54px; margin: 0; border-radius: 50%; color: var(--encre); background: var(--or); }
 .outil-vedette b { font-size: clamp(1.6rem, 2.6vw + 0.9rem, 2.3rem); }
 .outil-vedette .outil-texte > span:last-child { font-size: 1rem; }
+/* Atelier des tracés sur l'accueil : toute la largeur, texte à gauche, tracé corrigé à droite (dessous au téléphone).
+   Le dessin se fait une fois quand la carte arrive à l'écran (vivant.js pose .apercu-pret puis .dessine) :
+   rayons l'un après l'autre, puis l'image A'B' mise au point. Sans vivant.js ou animations coupées : dessin déjà fini. */
+.outil-atelier { grid-column: 1 / -1; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); align-items: center; gap: 12px 28px; }
+.outil-tete { display: flex; align-items: flex-start; gap: 16px; min-width: 0; }
+.apercu-trace { display: block; border: 1px solid var(--bord); border-radius: var(--rayon); background: var(--carte); padding: 6px 8px 0; }
+.apercu-legende { display: block; padding: 0 6px 10px; color: var(--doux); font-size: 0.84rem; line-height: 1.4; }
+@media (max-width: 720px) { .outil-atelier { grid-template-columns: minmax(0, 1fr); } }
+.apercu-pret .t-rayon line, .apercu-pret .t-image line { stroke-dasharray: var(--l) var(--l); stroke-dashoffset: var(--l); }
+.apercu-pret .t-pointe.image, .apercu-pret .t-label.image { opacity: 0; }
+.apercu-pret.dessine .t-rayon line, .apercu-pret.dessine .t-image line { animation: apercu-trait 700ms ease-out var(--t) forwards; }
+.apercu-pret.dessine .t-pointe.image, .apercu-pret.dessine .t-label.image { animation: apercu-net 500ms ease-out 3.3s forwards; }
+@keyframes apercu-trait { to { stroke-dashoffset: 0; } }
+@keyframes apercu-net { from { opacity: 0; filter: blur(3px); } to { opacity: 1; filter: none; } }
 
 /* Qui fait le site : un petit paragraphe signé, en bas de l'accueil */
 .qui { max-width: 62ch; margin: 56px 0 0; padding-top: 20px; border-top: 1px solid var(--bord); color: var(--doux); font-size: 0.97rem; }
@@ -1186,7 +1200,17 @@ kbd.touche { display: inline-block; min-width: 1.9em; margin: 0 1px; padding: 0 
 .def-recherche input:focus { box-shadow: none; }
 .def-themes { margin: 0; }
 .def-outils .bouton { margin: 0; justify-self: start; }
+/* Recherche et filtres : sous le bouton de révision, juste au-dessus de la liste qu'ils trient */
+.def-tri { display: grid; gap: 14px; margin-top: 26px; }
+.def-tri > * { min-width: 0; }
+.def-effacer { margin: 0 0 8px; }
+.def-themes .theme:disabled { opacity: 0.45; cursor: default; }
+.def-groupe-nom { margin: 0; font: inherit; color: inherit; }
 .def-filtres { display: flex; flex-wrap: wrap; gap: 14px 30px; }
+/* Filtres : éteint = point gris, allumé = point or sur piste dorée (la position seule ne suffisait pas) */
+.def-filtres .interrupteur-point { background: var(--doux); transition: transform 420ms var(--sortie), background var(--vite); }
+.def-filtres .interrupteur[aria-checked="true"] { background: var(--or-fond); border-color: var(--or); }
+.def-filtres .interrupteur[aria-checked="true"] .interrupteur-point { background: var(--or); }
 .def-boutons { display: flex; flex-wrap: wrap; gap: 10px; }
 /* Une révision en pause dans cette matière : le bloc qui propose de la reprendre */
 .def-reprise { padding: 16px 18px; border-radius: var(--rayon); background: var(--or-fond); border: 1px solid rgba(217, 178, 111, 0.45); }
@@ -1245,7 +1269,13 @@ kbd.touche { display: inline-block; min-width: 1.9em; margin: 0 1px; padding: 0 
 .exo-retour { min-height: 1.6em; margin: 0 0 12px; font-weight: 650; }
 .exo-retour.bien { color: var(--vert); }
 .exo-retour.mal { color: var(--rouge); }
-@media (max-width: 700px) { .exo-choix { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 700px) {
+  .exo-choix { grid-template-columns: minmax(0, 1fr); gap: 8px; }
+  /* Cartes plus serrées : les quatre choix et le verdict tiennent mieux au-dessus de la barre d'onglets */
+  .exo-carte { min-height: 0; padding: 12px 14px; gap: 10px; font-size: 0.95rem; line-height: 1.45; }
+  .exo-lettre { width: 26px; height: 26px; }
+  .exo-terme { margin-bottom: 12px; }
+}
 .def-theme { font-size: 0.8rem; color: var(--doux); }
 .def mark { background: rgba(217, 178, 111, 0.36); color: inherit; border-radius: 3px; padding: 0 1px; }
 .def-badge { display: inline-block; padding: 3px 11px; border-radius: 999px; font-size: 0.78rem; font-weight: 700; white-space: nowrap; }
@@ -1277,7 +1307,7 @@ kbd.touche { display: inline-block; min-width: 1.9em; margin: 0 1px; padding: 0 
 .def-carte.retournee .def-verso { transform: rotateY(0); }
 .def-carte-theme { font-size: 0.92rem; font-weight: 700; color: var(--or); }
 .def-carte-terme { margin: 0; font-family: var(--titre); font-size: clamp(1.8rem, 5vw + 0.5rem, 2.9rem); font-weight: 500; line-height: 1.12; }
-.def-carte-terme.petit { font-size: 1.3rem; font-style: italic; color: var(--or-clair); }
+.def-carte-terme.petit { font-size: 1.3rem; color: var(--or-clair); }
 .def-carte-definition { margin: 0; font-size: 1.06rem; line-height: 1.6; max-width: 58ch; }
 .def-recto .aide { margin: 0; }
 .def-actions { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
@@ -1286,7 +1316,11 @@ kbd.touche { display: inline-block; min-width: 1.9em; margin: 0 1px; padding: 0 
 .def-savais:hover { background: #74e0ad; }
 .def-revision .raccourcis { text-align: center; }
 .def-fin { text-align: center; }
-.def-fin-compagnon { width: 120px; height: auto; margin: 0 auto 8px; display: block; filter: drop-shadow(0 10px 12px rgba(0, 0, 0, 0.45)); animation: saute 800ms var(--rebond) both; }
+.def-fin-compagnon { width: 120px; height: auto; margin: 0 auto 8px; display: block; animation: saute 800ms var(--rebond) both; }
+#def-fin-titre { color: var(--or-clair); outline: none; }
+.def-fin-liste { max-width: 34em; margin: 14px auto 0; text-align: left; padding: 14px 18px; border: 1px solid var(--bord-fort); border-radius: var(--rayon); }
+.def-fin-liste-titre { margin: 0 0 6px; font-weight: 650; }
+.def-fin-liste ul { margin: 0; padding-left: 1.2em; display: grid; gap: 4px; }
 .def-fin .bilan-actions { margin-top: 14px; }
 @media (max-width: 520px) {
   .def-epreuves { gap: 6px; }
@@ -1662,6 +1696,27 @@ main.en-jeu .tete-page { display: none; }
 .saisie-aide { flex-basis: 100%; margin: 0; color: var(--doux); font-size: 0.88rem; }
 /* Dans le QCM, la consigne d'arrondi passe AU-DESSUS de la case : le clavier du téléphone ne la cache plus */
 .saisie-qcm > .saisie-aide { order: -1; }
+/* Rédaction libre (Éco) : la case de texte, puis la réponse modèle et la grille que l'élève coche lui-même */
+.saisie-redaction { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; width: 100%; }
+.saisie-redaction > .saisie-aide { order: 0; }
+.redaction-consigne { margin: 0; font-weight: 700; }
+.redaction-case { display: block; flex: none; width: 100%; margin: 0; }
+.redaction-case textarea { width: 100%; min-height: 8.5em; margin: 0; font-size: 1rem; line-height: 1.5; resize: vertical; }
+.redaction-case textarea[readonly] { color: var(--doux); }
+.saisie-redaction .bouton { margin: 0; }
+.saisie-redaction .bouton:disabled { color: var(--doux); background: transparent; box-shadow: inset 0 0 0 1px var(--bord); opacity: 1; }
+.saisie-qcm.saisie-redaction.juste input, .saisie-qcm.saisie-redaction.faux input { background: none; }
+.redaction-modele { width: 100%; padding: 12px 14px; border-left: 3px solid rgb(var(--accent-rgb)); background: rgba(var(--accent-rgb), 0.08); border-radius: 0 10px 10px 0; }
+.redaction-modele h3 { margin: 0 0 6px; font-size: 1rem; }
+.redaction-modele p, .redaction-modele ul { margin: 0 0 4px; }
+.redaction-modele h3 + ul { padding-left: 1.2em; }
+.redaction-grille { width: 100%; margin: 4px 0 0; padding: 0; border: 0; }
+.redaction-grille legend { padding: 0; margin-bottom: 4px; font-weight: 700; color: var(--texte); }
+.redaction-grille label { display: flex; flex-direction: row; align-items: flex-start; gap: 12px; padding: 9px 2px; min-height: 44px; cursor: pointer; font-size: 0.97rem; color: var(--texte); border-top: 1px solid var(--bord); }
+.redaction-grille label:first-of-type { border-top: 0; }
+.redaction-grille input { flex: none; width: 22px; height: 22px; margin: 1px 0 0; accent-color: rgb(var(--accent-rgb)); cursor: pointer; }
+.redaction-grille input:disabled + span { color: var(--doux); }
+.redaction-grille input:checked:disabled + span { color: var(--texte); }
 .pose-regle { margin: 12px 0 0; max-width: 36em; text-wrap: pretty; }
 /* « Quelle unité ? » (essentiel.js, ajouterAideUnite) : sous la case d'un calcul, s'ouvre en encadré comme l'indice */
 .bouton-unite { min-height: 44px; margin: -6px 0 0; padding: 8px 2px; font: inherit; font-size: 0.9rem; color: var(--or); background: none; border: 0; cursor: pointer; text-decoration: underline; text-decoration-style: dotted; text-underline-offset: 4px; }
@@ -2262,6 +2317,7 @@ html:has(body.en-examen) { scroll-padding-top: 150px; }
 .bouton-calculette:hover { background: var(--or-fond); }
 .bouton-calculette[aria-expanded="true"] { background: var(--or-fond); border-color: rgba(217, 178, 111, 0.55); }
 .examen-question .bouton-calculette { margin-top: 14px; }
+.saisie-calcul .bouton-calculette { margin: 0; }
 .bouton-indice ~ .bouton-calculette { margin-top: 16px; }
 .bouton-indice + .bouton-nsp + .bouton-calculette { margin-left: 16px; }
 .calculette { position: fixed; right: 20px; bottom: 20px; z-index: 45; width: 340px; padding: 8px 10px 10px; color: var(--texte); background: var(--carte); border: 1px solid var(--bord-fort); border-radius: var(--rayon); box-shadow: var(--ombre); animation: net 320ms var(--sortie) both; }
@@ -2270,6 +2326,14 @@ html:has(body.en-examen) { scroll-padding-top: 150px; }
 .calc-deg { color: var(--doux); font-weight: 400; font-size: 0.82rem; }
 .calc-fermer { width: 40px; height: 40px; margin-right: -4px; font: inherit; font-size: 1.5rem; line-height: 1; color: var(--doux); background: none; border: 0; border-radius: 10px; cursor: pointer; }
 .calc-fermer:hover { color: var(--texte); background: var(--carte-survol); }
+.calc-boutons-tete { display: inline-flex; align-items: center; gap: 2px; }
+.calc-replier { display: none; align-items: center; gap: 5px; min-height: 36px; padding: 0 10px; font: inherit; font-size: 0.84rem; color: var(--or-clair); background: none; border: 1px solid var(--bord); border-radius: 999px; cursor: pointer; }
+.calc-replier .ico { width: 15px; height: 15px; transform: rotate(90deg); transition: transform var(--vite); }
+.calc-repliee .calc-replier .ico { transform: rotate(-90deg); }
+/* Ordinateur : les raccourcis du clavier, en petit sous les touches */
+.calc-aide { margin: 8px 2px 0; color: var(--doux); font-size: 0.78rem; line-height: 1.5; }
+.calc-aide kbd { display: inline-block; min-width: 1.5em; padding: 0 4px; font: inherit; font-size: 0.95em; text-align: center; color: var(--texte); background: var(--fond-2); border: 1px solid var(--bord); border-radius: 4px; }
+@media (hover: none), (max-width: 720px) { .calc-aide { display: none; } }
 /* L'écran : les calculs faits (calcul à gauche, résultat à droite), puis la ligne en cours, toujours en bas */
 .calc-ecran { display: flex; flex-direction: column; height: 196px; margin: 2px 0 8px; padding: 4px 10px 6px; overflow-y: auto; overscroll-behavior: contain; background: var(--fond); border: 1px solid var(--bord); border-radius: 10px; font-variant-numeric: tabular-nums; scrollbar-width: thin; }
 .calc-ecran:focus-visible { outline: 2px solid var(--or); outline-offset: 2px; }
@@ -2291,8 +2355,8 @@ html:has(body.en-examen) { scroll-padding-top: 150px; }
 .calc-num { align-self: stretch; border-bottom: 1.5px solid currentColor; padding-bottom: 2px; }
 .calc-den { align-self: stretch; padding-top: 1px; }
 .calc-frac .calc-frac { font-size: 0.95em; }
-.calc-vide { display: inline-block; vertical-align: middle; min-width: 0.75em; height: 1.05em; text-align: center; line-height: 1; border: 1px dashed var(--tres-doux); border-radius: 2px; }
-.calc-ligne > .calc-vide:only-child { border: 0; }
+.calculette .calc-vide { margin: 0; font-size: inherit; display: inline-block; vertical-align: middle; min-width: 0.75em; height: 1.05em; text-align: center; line-height: 1; border: 1px dashed var(--tres-doux); border-radius: 2px; }
+.calculette .calc-ligne > .calc-vide:only-child { border: 0; }
 .calc-curseur { display: inline-block; width: 2px; height: 1.1em; margin: 0 -1px; vertical-align: middle; background: var(--or); animation: calc-clignote 1s steps(1) infinite; }
 @keyframes calc-clignote { 50% { opacity: 0; } }
 /* Les touches : 6 colonnes, comme une calculatrice */
@@ -2315,6 +2379,8 @@ html:has(body.en-examen) { scroll-padding-top: 150px; }
 .calc-t-frac i:first-child { position: relative; }
 .calc-t-frac i:first-child::after { content: ""; position: absolute; left: -4px; right: -4px; bottom: -3.5px; height: 1.5px; background: currentColor; }
 .calc-retour { display: inline-block; width: 22px; height: 22px; vertical-align: -0.3em; background: currentColor; -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 5h10a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H9l-6-7z'/%3E%3Cpath d='M12.5 9.5l5 5M17.5 9.5l-5 5'/%3E%3C/svg%3E") center / contain no-repeat; mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 5h10a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H9l-6-7z'/%3E%3Cpath d='M12.5 9.5l5 5M17.5 9.5l-5 5'/%3E%3C/svg%3E") center / contain no-repeat; }
+/* Atelier des tracés, grand écran : la consigne, la case et « Valider » sont dans la colonne de droite, la calculette se pose à gauche sur le dessin */
+@media (min-width: 1000px) { .calculette.calc-atelier { right: auto; left: 20px; } }
 /* Ouverte : la page peut défiler jusqu'au-dessus de la calculette */
 html.calculette-ouverte body { padding-bottom: calc(var(--haut-calculette, 0px) + 24px); }
 /* Téléphone : posée en bas de l'écran, sur la barre d'onglets ; « Question suivante » et les cases restent au-dessus */
@@ -2324,7 +2390,11 @@ html.calculette-ouverte body { padding-bottom: calc(var(--haut-calculette, 0px) 
   .calc-tete { min-height: 30px; padding-left: 6px; cursor: default; }
   .calc-titre .ico, .calc-nom { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
   .calc-deg { font-size: 0.78rem; }
-  .calc-fermer { width: 44px; height: 30px; }
+  .calc-fermer { width: 44px; height: 36px; }
+  .calc-replier { display: inline-flex; }
+  /* Touches repliées : seul l'écran reste, plus bas, pour revoir le haut de l'énoncé */
+  .calc-repliee .calc-touches { display: none; }
+  .calc-repliee .calc-ecran { height: 84px; margin-bottom: 0; cursor: pointer; }
   .calc-ecran { margin: 0 0 6px; padding: 2px 8px 4px; }
   .calc-h-calcul, .calc-h-res { min-height: 26px; }
   .calc-touches { gap: 4px; }
@@ -2335,4 +2405,83 @@ html.calculette-ouverte body { padding-bottom: calc(var(--haut-calculette, 0px) 
   html.calculette-ouverte .pose-etape { scroll-margin-bottom: calc(var(--haut-calculette, 0px) + 16px); }
 }
 @media (max-width: 360px) { .calc-touche { font-size: 0.95rem; } .calc-touche.calc-fn, .calc-touche.calc-fl { font-size: 0.85rem; } }
-@media (prefers-reduced-motion: reduce) { .calculette, .calc-curseur { animation: none; } .calc-touche:active, .calc-touche.calc-appui { transform: none; } }
+@media (prefers-reduced-motion: reduce) { .calculette, .calc-curseur { animation: none; } .calc-touche:active, .calc-touche.calc-appui { transform: none; } .calc-replier .ico { transition: none; } }
+
+/* ---------- Atelier calculatrice (atelier-calculatrice.js) : s'entraîner aux touches, dans le Guide calculatrice de Maths ---------- */
+.bouton-atc { margin: 0 14px 12px; }
+.atc { margin: 0 14px 14px; }
+.atc-enonce { margin: 0 0 8px; padding: 10px 12px; border-radius: 10px; background: var(--fond-2); border: 1px solid var(--bord); font-size: 0.95rem; line-height: 1.55; }
+.atc-question { margin: 0 0 6px; font-weight: 700; }
+.atc-question:empty { display: none; }
+.atc-but { margin: 0 0 6px; font-weight: 700; color: rgb(var(--accent-rgb)); line-height: 1.45; }
+.atc-but:focus { outline: none; }
+.atc-message { min-height: 1.5em; margin: -4px 4px 8px; font-size: 0.88rem; line-height: 1.4; color: var(--doux); }
+.atc-message.mal { color: var(--rouge); font-weight: 600; }
+/* La calculatrice : un écran simplifié, puis le clavier */
+.atc-machine { max-width: 340px; margin: 0 0 12px; padding: 12px 10px 12px; border-radius: 22px 22px 30px 30px; background: var(--fond-2); border: 1px solid var(--bord-fort); }
+.atc-ecran { min-height: 150px; margin: 0 4px 12px; padding: 8px 10px; border-radius: 8px; background: var(--fond); border: 1px solid var(--bord); font-size: 0.92rem; line-height: 1.45; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+.atc-l { display: flex; gap: 10px; }
+.atc-d { margin-left: auto; font-weight: 650; }
+.atc-titre { margin: 0 0 4px; font-weight: 700; color: rgb(var(--accent-rgb)); }
+.atc-note { margin-top: 6px; color: var(--doux); font-size: 0.8rem; }
+.atc-onglets { display: flex; gap: 4px; margin: 0 0 4px; }
+.atc-onglet { padding: 2px 8px; font: inherit; font-size: 0.85rem; color: var(--doux); background: none; border: 1px solid transparent; border-radius: 4px; }
+button.atc-onglet { min-height: 32px; cursor: pointer; }
+.atc-onglet.actif { color: var(--encre); background: rgb(var(--accent-rgb)); font-weight: 700; }
+.atc-menu { display: flex; flex-direction: column; }
+.atc-menu.atc-grille { display: grid; grid-template-columns: repeat(var(--cols), minmax(0, 1fr)); gap: 4px; }
+.atc-item { min-height: 32px; padding: 2px 8px; font: inherit; font-size: 0.9rem; text-align: left; color: var(--texte); background: none; border: 0; border-radius: 4px; cursor: pointer; }
+.atc-grille .atc-item { min-height: 40px; text-align: center; font-size: 0.78rem; border: 1px solid var(--bord); }
+.atc-item.actif { color: var(--encre); background: rgb(var(--accent-rgb)); }
+.atc-item:hover:not(.actif) { background: var(--carte-survol); }
+.atc-suite { color: var(--doux); cursor: default; }
+.atc-table { border-collapse: collapse; font-size: 0.85rem; }
+.atc-table th, .atc-table td { min-width: 4.5em; padding: 1px 8px; text-align: right; border: 1px solid var(--bord); }
+.atc-table th { color: rgb(var(--accent-rgb)); }
+.atc-champ { display: flex; align-items: center; gap: 8px; margin: 4px 0; }
+.atc-champ span { min-width: 6.5em; }
+.atc-champ input { width: 7em; min-height: 36px; padding: 4px 8px; font: inherit; color: var(--texte); background: var(--fond-2); border: 1px solid var(--bord-fort); border-radius: 6px; }
+.atc-champ input:focus { outline: 2px solid var(--or); outline-offset: 1px; }
+/* Le clavier : une grille par rangée, le pavé de flèches à part */
+.atc-clavier { display: grid; gap: 6px; }
+.atc-rang { display: grid; grid-template-columns: repeat(var(--cols), minmax(0, 1fr)); gap: 5px; }
+.atc-touche { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 38px; padding: 1px 2px; font: inherit; font-size: 0.8rem; line-height: 1.1; color: var(--texte); background: var(--carte); border: 1px solid var(--bord); border-radius: 8px; cursor: pointer; touch-action: manipulation; transition: transform var(--vite); }
+.atc-touche:hover { border-color: var(--bord-fort); }
+.atc-touche.atc-appui, .atc-touche:active { transform: scale(0.94); }
+.atc-sec { display: block; margin-bottom: 1px; font-size: 0.66rem; color: rgb(var(--accent-rgb)); }
+.atc-touche.atc-plate { min-height: 28px; font-size: 0.72rem; border-radius: 6px; }
+.atc-touche.atc-chiffre { background: var(--carte-survol); font-size: 0.95rem; }
+.atc-touche.atc-op { font-size: 1rem; }
+.atc-touche.atc-seconde { color: var(--encre); background: rgb(var(--accent-rgb)); border-color: transparent; font-weight: 700; }
+.atc-touche.atc-alpha { color: var(--vert); }
+.atc-touche.atc-entrer { color: var(--encre); background: var(--or); border-color: transparent; font-weight: 700; }
+.atc-touche.atc-montre { outline: 3px solid var(--or); outline-offset: 2px; }
+.atc-touche sup { font-size: 0.7em; }
+.atc-touche .calc-retour { width: 18px; height: 18px; }
+.atc-boite { display: inline-block; width: 18px; height: 18px; background: currentColor; -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linejoin='round'%3E%3Crect x='3' y='8' width='18' height='12' rx='2'/%3E%3Cpath d='M9 8V5.5h6V8M3 13h18'/%3E%3C/svg%3E") center / contain no-repeat; mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linejoin='round'%3E%3Crect x='3' y='8' width='18' height='12' rx='2'/%3E%3Cpath d='M9 8V5.5h6V8M3 13h18'/%3E%3C/svg%3E") center / contain no-repeat; }
+.atc-fleches { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); grid-template-rows: repeat(3, 1fr); gap: 2px; grid-column: 4 / 6; grid-row: 1 / 3; }
+.atc-numworks .atc-fleches { grid-column: 1 / 3; }
+.atc-fleche { min-height: 24px; border-radius: 6px; }
+.atc-fleche:nth-child(1) { grid-column: 2; grid-row: 1; }
+.atc-fleche:nth-child(2) { grid-column: 1; grid-row: 2; }
+.atc-fleche:nth-child(3) { grid-column: 3; grid-row: 2; }
+.atc-fleche:nth-child(4) { grid-column: 2; grid-row: 3; }
+.atc-fleche .ico { width: 16px; height: 16px; }
+.atc-haut { transform: rotate(-90deg); }
+.atc-bas { transform: rotate(90deg); }
+/* Recopier le résultat */
+.atc-reponses { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+.atc-reponses .saisie-ligne { flex: 0 1 15em; display: flex; align-items: center; gap: 8px; margin: 0; }
+.atc-nom { white-space: nowrap; font-weight: 650; }
+.atc-reponses .bouton { margin: 0; }
+.atc-correction { flex-basis: 100%; }
+.atc-correction p { margin: 4px 0; }
+.atc-correction .bien { color: var(--vert); font-weight: 650; }
+.atc-correction .mal { color: var(--rouge); font-weight: 650; }
+.atc-bilan { margin: 12px 0 8px; font-weight: 650; }
+.atc-fin > .bouton { margin: 10px 8px 0 0; }
+.atc-avertir { margin: -4px 0 12px; color: var(--doux); font-size: 0.8rem; }
+.atc-actions { margin-top: 12px; }
+.atc-actions .bouton { margin: 0; }
+@media (max-width: 720px) { .bouton-atc { margin: 0 10px 12px; } .atc { margin: 0 8px 14px; } .atc-machine { max-width: none; padding: 10px 8px; } .atc-touche { min-height: 36px; } }
+@media (prefers-reduced-motion: reduce) { .atc-touche.atc-appui, .atc-touche:active { transform: none; } }

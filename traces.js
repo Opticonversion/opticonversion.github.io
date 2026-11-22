@@ -226,7 +226,7 @@
       const x0 = 8, y0 = H / 2 - 44;
       const dx = 64, dy = -o.s * dx * S.sy / S.sx;
       el("line", { x1: x0, y1: y0, x2: x0 + dx, y2: y0 + dy, class: "t-objet fin", "marker-end": "url(#pointe)" });
-      texte(x0, y0 - 11, "B à l'infini, α = " + nb(o.angle, 1) + "°", "petit");
+      texte(x0, y0 - 11, "B à l'infini, α = " + nb(Math.abs(o.angle), 1) + "°", "petit");   // la flèche montre le sens
     } else if (o.x !== undefined) {
       el("line", { x1: X(o.x), y1: H / 2, x2: X(o.x), y2: Y(o.h), class: "t-objet", "marker-end": "url(#pointe)" });
       etiquetteAxe(X(o.x), H / 2 + 20, "A", "centre point");
@@ -1479,7 +1479,11 @@
     }
     form.querySelector(".saisie-aide").textContent = "Arrondi " + (rep.decimales === 0 ? "à l'unité" : "à " + nb(10 ** -rep.decimales, rep.decimales)) + (rep.signe ? " · n'oublie pas le signe" : "") + ".";
     ajouterAideUnite(form, rep, $("jeu-consigne").textContent, { seulementSiUtile: true });   // « Quelle unité ? » (essentiel.js), seulement si l'unité piège
+    // La calculette du site (calculette.js), comme dans le QCM : elle garde ses calculs d'une étape à l'autre
+    const calc = window.Calculette && Calculette.bouton({ type: "calcul" });
+    if (calc) form.querySelector(".saisie-retour").before(calc);
     zone.appendChild(form);
+    if (calc) Calculette.nouvelleQuestion();
     const champ = form.querySelector("input");
     // Le clavier « décimal » de l'iPhone n'a pas de signe moins : clavier normal si la réponse a un signe
     champ.inputMode = rep.signe ? "text" : "decimal";

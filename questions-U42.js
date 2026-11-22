@@ -82,8 +82,8 @@ QUESTIONS.push(
     question: "On veut tailler une lentille mince équiconvexe (deux faces de même rayon R) d'indice n = 1,5 et de distance focale f' = 100 mm. Quelle valeur de R ?",
     choix: ["100 mm", "150 mm", "200 mm", "50 mm"],
     bonne: 0,
-    explication: "1/f' = (n − 1) × (1/R1 − 1/R2) avec R1 = +R et R2 = −R, donc 1/f' = (n − 1) × 2/R. D'où R = 2 × (n − 1) × f' = 2 × 0,5 × 100 = 100 mm.",
-    indice: "Utilise la formule des opticiens 1/f' = (n − 1)(1/R1 − 1/R2). Pour une lentille équiconvexe, attention au signe de R2 : la deuxième face est bombée dans l'autre sens."
+    explication: "1/f' = (n − 1) × (1/R₁ − 1/R₂) avec R₁ = +R et R₂ = −R, donc 1/f' = (n − 1) × 2/R. D'où R = 2 × (n − 1) × f' = 2 × 0,5 × 100 = 100 mm.",
+    indice: "Utilise la formule des opticiens 1/f' = (n − 1)(1/R₁ − 1/R₂). Pour une lentille équiconvexe, attention au signe de R₂ : la deuxième face est bombée dans l'autre sens."
   },
   {
     id: "U42-043", difficulte: "moyen", epreuve: "U42", theme: "Conjugaison", session: "2021 et 2024",
@@ -128,7 +128,8 @@ QUESTIONS.push(
     question: "Un objectif donne d'un objet placé à OA = −36 mm une image à OA' = +180 mm. Calcule le grandissement transversal, avec son signe.",
     reponse: { valeur: -5, unite: "", decimales: 0, signe: true },
     erreurs: [
-      { valeur: -0.2, type: "notion", message: "Tu as calculé OA / OA'. Le grandissement est OA' / OA : la position de l'image sur celle de l'objet." }
+      { valeur: -0.2, type: "notion", message: "Tu as calculé OA / OA'. Le grandissement est OA' / OA : la position de l'image sur celle de l'objet." },
+      { valeur: 5, type: "signe", message: "Tu as oublié le signe. L'image est renversée (OA' et OA de signes contraires) : γ est négatif." }
     ],
     explication: "γ = [[OA'|OA]]\nγ = [[180|−36]] = −5\nL'image est 5 fois plus grande que l'objet, et renversée : c'est ce que dit le signe moins.",
     indice: "Le grandissement transversal est le rapport de la position de l'image à celle de l'objet, mesurées depuis le centre O. Garde les signes."
@@ -167,76 +168,78 @@ QUESTIONS.push(
   {
     id: "U42-145", difficulte: "moyen", epreuve: "U42", theme: "Conjugaison", session: "complément",
     type: "calcul",
-    question: "L1 (f'1 = +20 mm), puis L2 (f'2 = +30 mm) placée 100 mm après L1. Un objet réel est à 30 mm devant L1. Calcule O2A', la position de l'image finale par rapport à L2, avec son signe.",
+    question: "L₁ (f'₁ = +20 mm), puis L₂ (f'₂ = +30 mm) placée 100 mm après L₁. Un objet réel est à 30 mm devant L₁. Calcule O₂A', la position de l'image finale par rapport à L₂, avec son signe.",
     reponse: { valeur: 120, unite: "mm", decimales: 0, signe: true },
     erreurs: [
-      { valeur: 17.1, type: "signe", message: "Tu as pris O2A1 = +40 mm. A1 est 40 mm avant L2 : c'est un objet réel, O2A1 = −40 mm." }
+      { valeur: 17.1, type: "signe", message: "Tu as pris O₂A₁ = +40 mm. A₁ est 40 mm avant L₂ : c'est un objet réel, O₂A₁ = −40 mm." }
     ],
-    explication: "L1 : [[1|O1A1]] = [[1|20]] + [[1|−30]] = [[3|60]] − [[2|60]] = [[1|60]], donc O1A1 = +60 mm.\nL2 est à 100 mm de L1 : O2A1 = 60 − 100 = −40 mm. A1 est avant L2 : objet réel, plus loin que F2.\nL2 : [[1|O2A']] = [[1|30]] + [[1|−40]] = [[4|120]] − [[3|120]] = [[1|120]]\nDonc O2A' = +120 mm : image réelle, 120 mm après L2.\nChaîne : A → A1 (objet réel pour L2) → A'.",
-    indice: "Trouve A1 avec L1, puis compte sa position depuis L2, dans le sens de la lumière."
+    explication: "L₁ : [[1|O₁A₁]] = [[1|20]] + [[1|−30]] = [[3|60]] − [[2|60]] = [[1|60]], donc O₁A₁ = +60 mm.\nL₂ est à 100 mm de L₁ : O₂A₁ = 60 − 100 = −40 mm. A₁ est avant L₂ : objet réel, plus loin que F₂.\nL₂ : [[1|O₂A']] = [[1|30]] + [[1|−40]] = [[4|120]] − [[3|120]] = [[1|120]]\nDonc O₂A' = +120 mm : image réelle, 120 mm après L₂.\nChaîne : A → A₁ (objet réel pour L₂) → A'.",
+    indice: "Trouve A₁ avec L₁, puis compte sa position depuis L₂, dans le sens de la lumière."
   },
   {
     id: "U42-146", difficulte: "moyen", epreuve: "U42", theme: "Conjugaison", session: "complément",
     type: "calcul",
-    question: "L1 (f'1 = +20 mm), puis L2 (f'2 = +30 mm) placée 100 mm après L1. Un objet réel est à 30 mm devant L1. L1 en donne une image à O1A1 = +60 mm, et L2 une image finale à O2A' = +120 mm. Calcule le grandissement total γ, avec son signe.",
+    question: "L₁ (f'₁ = +20 mm), puis L₂ (f'₂ = +30 mm) placée 100 mm après L₁. Un objet réel est à 30 mm devant L₁. L₁ en donne une image à O₁A₁ = +60 mm, et L₂ une image finale à O₂A' = +120 mm. Calcule le grandissement total γ, avec son signe.",
     reponse: { valeur: 6, unite: "", decimales: 0, signe: true },
     erreurs: [
-      { valeur: -5, type: "notion", message: "Tu as additionné les grandissements. Ils se multiplient : γ = (−2) × (−3) = +6." }
+      { valeur: -5, type: "notion", message: "Tu as additionné les grandissements. Ils se multiplient : γ = (−2) × (−3) = +6." },
+      { valeur: -6, type: "signe", message: "Chaque lentille renverse l'image : deux grandissements négatifs, leur produit est positif." }
     ],
-    explication: "γ1 = [[O1A1|O1A]] = [[60|−30]] = −2\nPour L2, l'objet est en O2A1 = 60 − 100 = −40 mm.\nγ2 = [[O2A'|O2A1]] = [[120|−40]] = −3\nγ = γ1 × γ2 = (−2) × (−3) = +6\nL'image finale est droite et 6 fois plus grande : chaque lentille la renverse une fois.",
-    indice: "Calcule γ1, puis γ2 avec la position de A1 comptée depuis L2, puis multiplie."
+    explication: "γ₁ = [[O₁A₁|O₁A]] = [[60|−30]] = −2\nPour L₂, l'objet est en O₂A₁ = 60 − 100 = −40 mm.\nγ₂ = [[O₂A'|O₂A₁]] = [[120|−40]] = −3\nγ = γ₁ × γ₂ = (−2) × (−3) = +6\nL'image finale est droite et 6 fois plus grande : chaque lentille la renverse une fois.",
+    indice: "Calcule γ₁, puis γ₂ avec la position de A₁ comptée depuis L₂, puis multiplie."
   },
   {
     id: "U42-147", difficulte: "difficile", epreuve: "U42", theme: "Conjugaison", session: "complément",
     type: "pose",
-    question: "Un viseur : objectif L1 (f'1 = +40 mm), puis oculaire L2 (f'2 = +25 mm) placé 145 mm après L1. Il est réglé pour un œil emmétrope qui n'accommode pas. Où est l'objet visé ? Remonte la chaîne des images, étape par étape.",
+    question: "Un viseur : objectif L₁ (f'₁ = +40 mm), puis oculaire L₂ (f'₂ = +25 mm) placé 145 mm après L₁. Il est réglé pour un œil emmétrope qui n'accommode pas. Où est l'objet visé ? Remonte la chaîne des images, étape par étape.",
     etapes: [
       {
-        consigne: "Position de l'image intermédiaire par rapport à l'oculaire, O2A1 (en mm)",
+        consigne: "Position de l'image intermédiaire par rapport à l'oculaire, O₂A₁ (en mm)",
         reponse: { valeur: -25, unite: "mm", decimales: 0, signe: true },
-        aide: "Emmétrope sans accommoder : A' est à l'infini, donc A1 est au foyer objet de l'oculaire, avant lui.",
-        ligne: "A' à l'infini, donc A1 = F2\nO2A1 = −f'2 = −25 mm"
+        aide: "Emmétrope sans accommoder : A' est à l'infini, donc A₁ est au foyer objet de l'oculaire, avant lui.",
+        ligne: "A' à l'infini, donc A₁ = F₂\nO₂A₁ = −f'₂ = −25 mm",
+        erreurs: [{ valeur: 25, type: "signe", message: "Le foyer objet F₂ est avant l'oculaire : O₂A₁ est négatif, O₂A₁ = −f'₂ = −25 mm." }]
       },
       {
-        consigne: "Position de l'image intermédiaire par rapport à l'objectif, O1A1 (en mm)",
+        consigne: "Position de l'image intermédiaire par rapport à l'objectif, O₁A₁ (en mm)",
         reponse: { valeur: 120, unite: "mm", decimales: 0, signe: true },
-        aide: "A1 est 25 mm avant L2, et L2 est 145 mm après L1.",
-        ligne: "O1A1 = O1O2 + O2A1 = 145 − 25 = +120 mm",
-        erreurs: [{ valeur: 170, type: "signe", message: "A1 est avant L2 : O1A1 = 145 − 25 = 120 mm, pas 145 + 25." }]
+        aide: "A₁ est 25 mm avant L₂, et L₂ est 145 mm après L₁.",
+        ligne: "O₁A₁ = O₁O₂ + O₂A₁ = 145 − 25 = +120 mm",
+        erreurs: [{ valeur: 170, type: "signe", message: "A₁ est avant L₂ : O₁A₁ = 145 − 25 = 120 mm, pas 145 + 25." }]
       },
       {
-        consigne: "Position de l'objet par rapport à l'objectif, O1A (en mm)",
+        consigne: "Position de l'objet par rapport à l'objectif, O₁A (en mm)",
         reponse: { valeur: -60, unite: "mm", decimales: 0, signe: true },
-        aide: "Descartes, retournée : [[1|O1A]] = [[1|O1A1]] − [[1|f'1]].",
-        ligne: "[[1|O1A]] = [[1|120]] − [[1|40]] = [[1|120]] − [[3|120]] = [[−2|120]]\nDonc O1A = −60 mm",
+        aide: "Descartes, retournée : [[1|O₁A]] = [[1|O₁A₁]] − [[1|f'₁]].",
+        ligne: "[[1|O₁A]] = [[1|120]] − [[1|40]] = [[1|120]] − [[3|120]] = [[−2|120]]\nDonc O₁A = −60 mm",
         erreurs: [{ valeur: 30, type: "notion", message: "Tu as ajouté les deux termes. De 1/OA' − 1/OA = 1/f', on tire 1/OA = 1/OA' − 1/f' = 1/120 − 1/40." }]
       },
       {
-        consigne: "Grandissement de l'objectif γ1",
+        consigne: "Grandissement de l'objectif γ₁",
         reponse: { valeur: -2, unite: "", decimales: 0, signe: true },
-        aide: "γ1 = [[O1A1|O1A]], avec les signes.",
-        ligne: "γ1 = [[120|−60]] = −2"
+        aide: "γ₁ = [[O₁A₁|O₁A]], avec les signes.",
+        ligne: "γ₁ = [[120|−60]] = −2"
       }
     ],
-    explication: "Chaîne : A (60 mm devant L1) → A1 = F2 (120 mm après L1) → A' à l'infini → A'' = F'œil. L'objectif donne une image intermédiaire renversée, deux fois plus grande."
+    explication: "Chaîne : A (60 mm devant L₁) → A₁ = F₂ (120 mm après L₁) → A' à l'infini → A'' = F'œil. L'objectif donne une image intermédiaire renversée, deux fois plus grande."
   },
   {
     id: "U42-148", difficulte: "facile", epreuve: "U42", theme: "Conjugaison", session: "complément",
-    question: "Une source ponctuelle S est placée au foyer objet d'une lentille convergente L1. Une lentille convergente L2 est placée plus loin, sur le même axe. Où se forme l'image finale S'' ?",
-    choix: ["À l'infini", "Au foyer objet de L2", "Au foyer image de L2", "Entre L1 et L2"],
+    question: "Une source ponctuelle S est placée au foyer objet d'une lentille convergente L₁. Une lentille convergente L₂ est placée plus loin, sur le même axe. Où se forme l'image finale S'' ?",
+    choix: ["À l'infini", "Au foyer objet de L₂", "Au foyer image de L₂", "Entre L₁ et L₂"],
     bonne: 2,
-    explication: "S = F1 : L1 en donne une image S' à l'infini (faisceau parallèle).\nPour L2, l'objet S' est à l'infini : son image S'' est au foyer image de L2.\nChaîne : S = F1 → S' à l'infini → S'' = F'2. C'est vrai quelle que soit la distance entre les deux lentilles.",
-    indice: "Écris la chaîne : que donne L1 d'un point placé à son foyer objet ? Que fait L2 d'un objet à l'infini ?",
+    explication: "S = F₁ : L₁ en donne une image S' à l'infini (faisceau parallèle).\nPour L₂, l'objet S' est à l'infini : son image S'' est au foyer image de L₂.\nChaîne : S = F₁ → S' à l'infini → S'' = F'₂. C'est vrai quelle que soit la distance entre les deux lentilles.",
+    indice: "Écris la chaîne : que donne L₁ d'un point placé à son foyer objet ? Que fait L₂ d'un objet à l'infini ?",
     erreurs: {
-      0: { type: "notion", message: "S' est à l'infini, mais L2 le reprend : un objet à l'infini donne son image au foyer image de L2." }
+      0: { type: "notion", message: "S' est à l'infini, mais L₂ le reprend : un objet à l'infini donne son image au foyer image de L₂." }
     }
   },
   {
     id: "U42-149", difficulte: "difficile", epreuve: "U42", theme: "Conjugaison", session: "complément",
-    question: "Un objectif seul formerait une image réelle A1. On place entre l'objectif et A1 une lame de verre à faces parallèles, d'épaisseur 6 mm et d'indice 1,5. Où se forme maintenant l'image ?",
+    question: "Un objectif seul formerait une image réelle A₁. On place entre l'objectif et A₁ une lame de verre à faces parallèles, d'épaisseur 6 mm et d'indice 1,5. Où se forme maintenant l'image ?",
     choix: ["2 mm plus près de l'objectif", "2 mm plus loin de l'objectif", "4 mm plus loin de l'objectif", "Au même endroit : une lame n'a pas de vergence"],
     bonne: 1,
-    explication: "La lame est un élément de plus dans la chaîne : A → A1 (objectif seul) → A2 (après la lame).\nElle n'a pas de vergence, mais elle décale l'image dans le sens de la lumière de e × (1 − [[1|n]]).\nDécalage = 6 × (1 − [[1|1,5]]) = 6 × [[1|3]] = 2 mm.\nL'image se forme 2 mm plus loin de l'objectif.",
+    explication: "La lame est un élément de plus dans la chaîne : A → A₁ (objectif seul) → A₂ (après la lame).\nElle n'a pas de vergence, mais elle décale l'image dans le sens de la lumière de e × (1 − [[1|n]]).\nDécalage = 6 × (1 − [[1|1,5]]) = 6 × [[1|3]] = 2 mm.\nL'image se forme 2 mm plus loin de l'objectif.",
     indice: "Une lame à faces parallèles décale l'image de e × (1 − 1/n). Dans quel sens, pour un faisceau qui converge ?",
     erreurs: {
       0: { type: "notion", message: "La lame décale l'image dans le sens de la lumière, donc en l'éloignant de l'objectif." },
@@ -247,20 +250,21 @@ QUESTIONS.push(
   {
     id: "U42-150", difficulte: "difficile", epreuve: "U42", theme: "Conjugaison", session: "complément",
     type: "calcul",
-    question: "Un objet AB de 5 mm est placé 30 mm devant L1 (f'1 = +20 mm). L2 (f'2 = +40 mm) est placée 80 mm après L1. Calcule la taille de l'image finale A'B', en mm, avec son signe.",
+    question: "Un objet AB de 5 mm est placé 30 mm devant L₁ (f'₁ = +20 mm). L₂ (f'₂ = +40 mm) est placée 80 mm après L₁. Calcule la taille de l'image finale A'B', en mm, avec son signe.",
     reponse: { valeur: -20, unite: "mm", decimales: 0, signe: true },
     erreurs: [
-      { valeur: -10, type: "notion", message: "−10 mm est la taille de A1B1, l'image intermédiaire. Il reste à passer par L2 (γ2 = +2) : A'B' = (−4) × 5 = −20 mm." }
+      { valeur: -10, type: "notion", message: "−10 mm est la taille de A₁B₁, l'image intermédiaire. Il reste à passer par L₂ (γ₂ = +2) : A'B' = (−4) × 5 = −20 mm." },
+      { valeur: 20, type: "signe", message: "L'image finale est renversée (γ = −4) : A'B' est négatif." }
     ],
-    explication: "L1 : [[1|O1A1]] = [[1|20]] + [[1|−30]] = [[3|60]] − [[2|60]] = [[1|60]], O1A1 = +60 mm, γ1 = [[60|−30]] = −2.\nO2A1 = 60 − 80 = −20 mm : objet réel, entre F2 et L2.\nL2 : [[1|O2A']] = [[1|40]] + [[1|−20]] = [[1|40]] − [[2|40]] = [[−1|40]], O2A' = −40 mm, γ2 = [[−40|−20]] = +2.\nγ = (−2) × 2 = −4, donc A'B' = −4 × 5 = −20 mm.\nL'image finale est virtuelle, renversée, 4 fois plus grande.",
-    indice: "Calcule γ1 puis γ2, multiplie-les, puis multiplie par la taille de l'objet."
+    explication: "L₁ : [[1|O₁A₁]] = [[1|20]] + [[1|−30]] = [[3|60]] − [[2|60]] = [[1|60]], O₁A₁ = +60 mm, γ₁ = [[60|−30]] = −2.\nO₂A₁ = 60 − 80 = −20 mm : objet réel, entre F₂ et L₂.\nL₂ : [[1|O₂A']] = [[1|40]] + [[1|−20]] = [[1|40]] − [[2|40]] = [[−1|40]], O₂A' = −40 mm, γ₂ = [[−40|−20]] = +2.\nγ = (−2) × 2 = −4, donc A'B' = −4 × 5 = −20 mm.\nL'image finale est virtuelle, renversée, 4 fois plus grande.",
+    indice: "Calcule γ₁ puis γ₂, multiplie-les, puis multiplie par la taille de l'objet."
   },
   {
     id: "U42-151", difficulte: "moyen", epreuve: "U42", theme: "Conjugaison", session: "complément",
-    question: "Dans un microscope, l'objectif donne une image intermédiaire réelle avec γ1 = −10. L'oculaire, utilisé comme une loupe, en donne une image virtuelle avec γ2 = +6. L'image finale est :",
+    question: "Dans un microscope, l'objectif donne une image intermédiaire réelle avec γ₁ = −10. L'oculaire, utilisé comme une loupe, en donne une image virtuelle avec γ₂ = +6. L'image finale est :",
     choix: ["Virtuelle, droite, 60 fois plus grande", "Réelle, renversée, 60 fois plus grande", "Virtuelle, renversée, 16 fois plus grande", "Virtuelle, renversée, 60 fois plus grande"],
     bonne: 3,
-    explication: "γ = γ1 × γ2 = (−10) × 6 = −60.\nγ = −60 : l'image est renversée et 60 fois plus grande.\nElle est virtuelle, car c'est l'image virtuelle donnée par l'oculaire.\nUne image peut être virtuelle et renversée : le renversement vient de l'objectif.",
+    explication: "γ = γ₁ × γ₂ = (−10) × 6 = −60.\nγ = −60 : l'image est renversée et 60 fois plus grande.\nElle est virtuelle, car c'est l'image virtuelle donnée par l'oculaire.\nUne image peut être virtuelle et renversée : le renversement vient de l'objectif.",
     indice: "Multiplie les grandissements. Le sens de l'image se lit sur le signe de γ.",
     erreurs: {
       0: { type: "signe", message: "Une image virtuelle peut être renversée. Le sens vient du signe de γ = (−10) × 6 = −60 : l'image est renversée." },
@@ -272,51 +276,52 @@ QUESTIONS.push(
     question: "Une lunette de Kepler est réglée afocale (F'ob = Foc). On vise maintenant un objet assez proche. Pour qu'un œil emmétrope le voie net sans accommoder, que faut-il faire ?",
     choix: ["Rapprocher l'oculaire de l'objectif", "Éloigner l'oculaire de l'objectif", "Rien : une lunette afocale donne toujours une image à l'infini", "Accommoder, aucun réglage ne suffit"],
     bonne: 1,
-    explication: "Objet proche : son image A1 par l'objectif ne se forme plus en F'ob mais un peu plus loin, après F'ob.\nPour que l'image finale reparte à l'infini, il faut A1 = Foc : on déplace l'oculaire pour amener son foyer objet sur A1, donc on l'éloigne de l'objectif.\nChaîne : A proche → A1 après F'ob → réglage A1 = Foc → A' à l'infini.",
+    explication: "Objet proche : son image A₁ par l'objectif ne se forme plus en F'ob mais un peu plus loin, après F'ob.\nPour que l'image finale reparte à l'infini, il faut A₁ = Foc : on déplace l'oculaire pour amener son foyer objet sur A₁, donc on l'éloigne de l'objectif.\nChaîne : A proche → A₁ après F'ob → réglage A₁ = Foc → A' à l'infini.",
     indice: "Plus l'objet se rapproche d'une lentille convergente, plus son image s'en éloigne.",
     erreurs: {
-      0: { type: "notion", message: "Un objet qui se rapproche donne une image A1 qui s'éloigne de l'objectif. L'oculaire doit suivre A1, donc s'éloigner." },
-      2: { type: "notion", message: "Une lunette afocale est réglée pour un objet à l'infini. Pour un objet proche, A1 n'est plus en F'ob : il faut la régler à nouveau." }
+      0: { type: "notion", message: "Un objet qui se rapproche donne une image A₁ qui s'éloigne de l'objectif. L'oculaire doit suivre A₁, donc s'éloigner." },
+      2: { type: "notion", message: "Une lunette afocale est réglée pour un objet à l'infini. Pour un objet proche, A₁ n'est plus en F'ob : il faut la régler à nouveau." }
     }
   },
   {
     id: "U42-153", difficulte: "facile", epreuve: "U42", theme: "Conjugaison", session: "2026",
     type: "calcul",
-    question: "L'objet est à l'infini. L1 (f'1 = +80 mm) en donne une image A1. L2 est placée 50 mm après L1. Calcule O2A1, la position de A1 par rapport à L2, avec son signe.",
+    question: "L'objet est à l'infini. L₁ (f'₁ = +80 mm) en donne une image A₁. L₂ est placée 50 mm après L₁. Calcule O₂A₁, la position de A₁ par rapport à L₂, avec son signe.",
     reponse: { valeur: 30, unite: "mm", decimales: 0, signe: true },
     erreurs: [
-      { valeur: 130, type: "notion", message: "Tu as ajouté les distances. A1 est à 80 mm de L1 et L2 à 50 mm : O2A1 = 80 − 50 = +30 mm." }
+      { valeur: 130, type: "notion", message: "Tu as ajouté les distances. A₁ est à 80 mm de L₁ et L₂ à 50 mm : O₂A₁ = 80 − 50 = +30 mm." },
+      { valeur: -30, type: "signe", message: "A₁ est après L₂ (80 mm après L₁, L₂ à 50 mm) : O₂A₁ est positif, +30 mm." }
     ],
-    explication: "Objet à l'infini : A1 = F'1, donc O1A1 = +80 mm.\nO2A1 = O2O1 + O1A1 = −50 + 80 = +30 mm.\nPositif : A1 est 30 mm après L2. Pour L2, c'est un objet virtuel (la lumière converge vers A1 mais rencontre L2 avant).\nChaîne : A à l'infini → A1 = F'1, qui sert d'objet virtuel à L2.",
-    indice: "Un objet à l'infini donne son image au foyer image. Mesure ensuite depuis L2, dans le sens de la lumière."
+    explication: "Objet à l'infini : A₁ = F'₁, donc O₁A₁ = +80 mm.\nO₂A₁ = O₂O₁ + O₁A₁ = −50 + 80 = +30 mm.\nPositif : A₁ est 30 mm après L₂. Pour L₂, c'est un objet virtuel (la lumière converge vers A₁ mais rencontre L₂ avant).\nChaîne : A à l'infini → A₁ = F'₁, qui sert d'objet virtuel à L₂.",
+    indice: "Un objet à l'infini donne son image au foyer image. Mesure ensuite depuis L₂, dans le sens de la lumière."
   },
 
   {
     id: "U42-154", difficulte: "difficile", epreuve: "U42", theme: "Conjugaison", session: "complément",
-    question: "Dans une chaîne de deux lentilles, un rayon sorti de L1 arrive sur L2 incliné, sans passer par aucun foyer. Comment tracer sa suite après L2 (convergente) ?",
-    choix: ["Il ressort en passant par le foyer image F'2", "Il ressort par le point où le rayon qui lui est parallèle, passant par O2, coupe le plan focal image de L2", "Il continue tout droit", "Il ressort parallèle à l'axe"],
+    question: "Dans une chaîne de deux lentilles, un rayon sorti de L₁ arrive sur L₂ incliné, sans passer par aucun foyer. Comment tracer sa suite après L₂ (convergente) ?",
+    choix: ["Il ressort en passant par le foyer image F'₂", "Il ressort par le point où le rayon qui lui est parallèle, passant par O₂, coupe le plan focal image de L₂", "Il continue tout droit", "Il ressort parallèle à l'axe"],
     bonne: 1,
-    explication: "Des rayons parallèles entre eux convergent en un même point du plan focal image : un foyer image secondaire.\nOn trace le rayon parallèle au rayon donné qui passe par O2 (il n'est pas dévié). Il coupe le plan focal image en ce foyer secondaire, et le rayon donné ressort en passant par ce point.\nF'2 ne vaut que pour un rayon parallèle à l'axe.",
+    explication: "Des rayons parallèles entre eux convergent en un même point du plan focal image : un foyer image secondaire.\nOn trace le rayon parallèle au rayon donné qui passe par O₂ (il n'est pas dévié). Il coupe le plan focal image en ce foyer secondaire, et le rayon donné ressort en passant par ce point.\nF'₂ ne vaut que pour un rayon parallèle à l'axe.",
     indice: "Des rayons parallèles entre eux convergent tous au même point du plan focal image. Lequel d'entre eux est facile à tracer ?",
-    erreurs: { 0: { type: "notion", message: "Seuls les rayons parallèles à l'axe ressortent par F'2. Un rayon incliné ressort par un foyer secondaire du plan focal image." } }
+    erreurs: { 0: { type: "notion", message: "Seuls les rayons parallèles à l'axe ressortent par F'₂. Un rayon incliné ressort par un foyer secondaire du plan focal image." } }
   },
   {
     id: "U42-155", difficulte: "moyen", epreuve: "U42", theme: "Conjugaison", session: "complément",
-    question: "L1 est divergente : elle donne d'un objet réel une image A1B1 virtuelle, entre l'objet et L1. L2 est placée après L1. Pour L2, A1B1 est :",
-    choix: ["Un objet réel : la lumière semble venir de A1B1, qui est avant L2", "Un objet virtuel, puisque A1B1 est une image virtuelle", "Inutilisable : seule une image réelle peut servir d'objet", "Un objet à l'infini"],
+    question: "L₁ est divergente : elle donne d'un objet réel une image A₁B₁ virtuelle, entre l'objet et L₁. L₂ est placée après L₁. Pour L₂, A₁B₁ est :",
+    choix: ["Un objet réel : la lumière semble venir de A₁B₁, qui est avant L₂", "Un objet virtuel, puisque A₁B₁ est une image virtuelle", "Inutilisable : seule une image réelle peut servir d'objet", "Un objet à l'infini"],
     bonne: 0,
-    explication: "Après L1, les rayons s'écartent comme s'ils venaient de A1B1. Ils arrivent sur L2 en venant de ce point, situé avant L2 : c'est un objet réel pour L2.\nRéel ou virtuel se décide pour chaque lentille, selon la place de l'objet par rapport à elle. Une image virtuelle pour L1 peut très bien être un objet réel pour L2.",
-    indice: "Regarde où se trouve A1B1 par rapport à L2, et dans quel sens arrive la lumière.",
-    erreurs: { 1: { type: "notion", message: "La nature de A1 pour L2 dépend de sa place par rapport à L2. A1B1 est avant L2 : c'est un objet réel pour elle." } }
+    explication: "Après L₁, les rayons s'écartent comme s'ils venaient de A₁B₁. Ils arrivent sur L₂ en venant de ce point, situé avant L₂ : c'est un objet réel pour L₂.\nRéel ou virtuel se décide pour chaque lentille, selon la place de l'objet par rapport à elle. Une image virtuelle pour L₁ peut très bien être un objet réel pour L₂.",
+    indice: "Regarde où se trouve A₁B₁ par rapport à L₂, et dans quel sens arrive la lumière.",
+    erreurs: { 1: { type: "notion", message: "La nature de A₁ pour L₂ dépend de sa place par rapport à L₂. A₁B₁ est avant L₂ : c'est un objet réel pour elle." } }
   },
   {
     id: "U42-156", difficulte: "moyen", epreuve: "U42", theme: "Conjugaison", session: "complément",
-    question: "B est dans le plan focal objet de L1 : les rayons issus de B sortent de L1 parallèles entre eux, inclinés. Où L2 (convergente) forme-t-elle B2 ?",
-    choix: ["Sur l'axe, au foyer image F'2", "Dans le plan focal objet de L2", "À l'infini", "Dans le plan focal image de L2, sur le rayon qui passe par O2 sans être dévié"],
+    question: "B est dans le plan focal objet de L₁ : les rayons issus de B sortent de L₁ parallèles entre eux, inclinés. Où L₂ (convergente) forme-t-elle B₂ ?",
+    choix: ["Sur l'axe, au foyer image F'₂", "Dans le plan focal objet de L₂", "À l'infini", "Dans le plan focal image de L₂, sur le rayon qui passe par O₂ sans être dévié"],
     bonne: 3,
-    explication: "Pour L2, B1 est à l'infini dans une direction inclinée. Ces rayons convergent dans le plan focal image de L2, au point où le coupe celui d'entre eux qui passe par O2.\nChaîne : B dans le plan focal objet de L1 → B1 à l'infini → B2 dans le plan focal image de L2.\nSur l'axe en F'2, ce ne serait vrai que pour un faisceau parallèle à l'axe.",
+    explication: "Pour L₂, B₁ est à l'infini dans une direction inclinée. Ces rayons convergent dans le plan focal image de L₂, au point où le coupe celui d'entre eux qui passe par O₂.\nChaîne : B dans le plan focal objet de L₁ → B₁ à l'infini → B₂ dans le plan focal image de L₂.\nSur l'axe en F'₂, ce ne serait vrai que pour un faisceau parallèle à l'axe.",
     indice: "Un faisceau parallèle incliné converge dans le plan focal image, mais pas forcément sur l'axe. Quel rayon du faisceau est facile à suivre ?",
-    erreurs: { 0: { type: "notion", message: "Le faisceau est incliné : il converge dans le plan focal image, mais hors de l'axe, sur le rayon qui passe par O2." } }
+    erreurs: { 0: { type: "notion", message: "Le faisceau est incliné : il converge dans le plan focal image, mais hors de l'axe, sur le rayon qui passe par O₂." } }
   },
 
   // ---------- Loupe et microscope ----------
@@ -374,13 +379,13 @@ QUESTIONS.push(
   },
   {
     id: "U42-013", difficulte: "moyen", epreuve: "U42", theme: "Lunettes afocales", session: "2018",
-    question: "Lunette de Galilée afocale : objectif convergent f'1 = 90 mm, oculaire divergent f'2 = −30 mm. Quelle distance entre les deux lentilles ?",
+    question: "Lunette de Galilée afocale : objectif convergent f'₁ = 90 mm, oculaire divergent f'₂ = −30 mm. Quelle distance entre les deux lentilles ?",
     choix: ["120 mm", "30 mm", "60 mm", "90 mm"],
     bonne: 2,
-    explication: "Comme pour Kepler, F'1 = F2, donc O1O2 = f'1 + f'2 = 90 + (−30) = 60 mm. La Galilée est plus courte. G = −f'1/f'2 = 3, positif : l'image est droite, pas besoin de redresseur.",
+    explication: "Comme pour Kepler, F'₁ = F₂, donc O₁O₂ = f'₁ + f'₂ = 90 + (−30) = 60 mm. La Galilée est plus courte. G = −f'₁/f'₂ = 3, positif : l'image est droite, pas besoin de redresseur.",
     indice: "Comme pour Kepler, le foyer image de l'objectif est confondu avec le foyer objet de l'oculaire. Mais ici l'oculaire est divergent : garde le signe de sa focale.",
     schema: "img/schemas/U42/galilee-afocale-90-30.svg",
-    schemaTexte: "Lunette de Galilée : les rayons parallèles visent le foyer F'1, confondu avec le foyer objet F2 de l'oculaire divergent, et ressortent parallèles. L'oculaire est à 90 − 30 = 60 mm de l'objectif."
+    schemaTexte: "Lunette de Galilée : les rayons parallèles visent le foyer F'₁, confondu avec le foyer objet F₂ de l'oculaire divergent, et ressortent parallèles. L'oculaire est à 90 − 30 = 60 mm de l'objectif."
   },
   {
     id: "U42-014", difficulte: "facile", epreuve: "U42", theme: "Lunettes afocales", session: "2023",
@@ -404,7 +409,8 @@ QUESTIONS.push(
     question: "Lunette de Kepler afocale : objectif de f'ob = 200 mm, oculaire de f'oc = 25 mm. Calcule son grossissement, avec son signe.",
     reponse: { valeur: -8, unite: "", decimales: 0, signe: true },
     erreurs: [
-      { valeur: -0.125, type: "notion", message: "Tu as divisé la focale de l'oculaire par celle de l'objectif. C'est l'inverse : focale de l'objectif sur focale de l'oculaire." }
+      { valeur: -0.125, type: "notion", message: "Tu as divisé la focale de l'oculaire par celle de l'objectif. C'est l'inverse : focale de l'objectif sur focale de l'oculaire." },
+      { valeur: 8, type: "signe", message: "Une lunette de Kepler renverse l'image : G = −f'ob / f'oc est négatif." }
     ],
     explication: "G = −[[f'ob|f'oc]] = −[[200|25]] = −8\nLe signe moins indique une image renversée : c'est le cas de toute lunette de Kepler sans redresseur.",
     indice: "Pour une lunette afocale, le grossissement est le rapport des deux focales. Demande-toi si l'image d'une lunette de Kepler est droite ou renversée."
@@ -413,21 +419,21 @@ QUESTIONS.push(
   // ---------- Doublets et achromatisme ----------
   {
     id: "U42-016", difficulte: "moyen", epreuve: "U42", theme: "Doublets et achromatisme", session: "2025",
-    question: "Un oculaire est formé de deux lentilles minces convergentes de f'1 = f'2 = 40 mm, séparées de e = 30 mm. Quelle est sa distance focale image ?",
+    question: "Un oculaire est formé de deux lentilles minces convergentes de f'₁ = f'₂ = 40 mm, séparées de e = 30 mm. Quelle est sa distance focale image ?",
     choix: ["20 mm", "32 mm", "40 mm", "80 mm"],
     bonne: 1,
-    explication: "Formule du doublet : f' = f'1 × f'2 / (f'1 + f'2 − e) = 40 × 40 / (40 + 40 − 30) = 1 600 / 50 = 32 mm. (Ou en vergences : V = V1 + V2 − e·V1·V2.)",
-    indice: "Formule du doublet (Gullstrand) : f' = f'1·f'2 / (f'1 + f'2 − e). Remplace avec les valeurs en mm, sans te tromper dans le dénominateur.",
+    explication: "Formule du doublet : f' = f'₁ × f'₂ / (f'₁ + f'₂ − e) = 40 × 40 / (40 + 40 − 30) = 1 600 / 50 = 32 mm. (Ou en vergences : V = V₁ + V₂ − e·V₁·V₂.)",
+    indice: "Formule du doublet (Gullstrand) : f' = f'₁·f'₂ / (f'₁ + f'₂ − e). Remplace avec les valeurs en mm, sans te tromper dans le dénominateur.",
     schema: "img/schemas/U42/doublet-40-40-e30.svg",
-    schemaTexte: "Un rayon parallèle traverse L1, se dirige vers F'1, puis L2 le fait couper l'axe en F', 8 mm après L2. En prolongeant les rayons, on trouve le plan principal H', et f' = H'F' = 32 mm."
+    schemaTexte: "Un rayon parallèle traverse L₁, se dirige vers F'₁, puis L₂ le fait couper l'axe en F', 8 mm après L₂. En prolongeant les rayons, on trouve le plan principal H', et f' = H'F' = 32 mm."
   },
   {
     id: "U42-017", difficulte: "moyen", epreuve: "U42", theme: "Doublets et achromatisme", session: "2026",
     question: "Un doublet a pour symbole (3 ; 2 ; 1) avec a = 10 mm. Quelle est sa distance focale image ?",
     choix: ["60 mm", "7,5 mm", "15 mm", "20 mm"],
     bonne: 2,
-    explication: "Symbole (m ; n ; p) : f'1 = m·a = 30 mm, e = n·a = 20 mm, f'2 = p·a = 10 mm. f' = 30 × 10 / (30 + 10 − 20) = 300 / 20 = 15 mm.",
-    indice: "Le symbole (m ; n ; p) donne, dans l'ordre, f'1, l'écart e et f'2 en multiples de a. Calcule les trois longueurs, puis applique la formule du doublet."
+    explication: "Symbole (m ; n ; p) : f'₁ = m·a = 30 mm, e = n·a = 20 mm, f'₂ = p·a = 10 mm. f' = 30 × 10 / (30 + 10 − 20) = 300 / 20 = 15 mm.",
+    indice: "Le symbole (m ; n ; p) donne, dans l'ordre, f'₁, l'écart e et f'₂ en multiples de a. Calcule les trois longueurs, puis applique la formule du doublet."
   },
   {
     id: "U42-018", difficulte: "facile", epreuve: "U42", theme: "Doublets et achromatisme", session: "2026",
@@ -439,10 +445,10 @@ QUESTIONS.push(
   },
   {
     id: "U42-019", difficulte: "difficile", epreuve: "U42", theme: "Doublets et achromatisme", session: "2019",
-    question: "On veut un doublet achromatique accolé de vergence V = +2 δ, avec un verre de nombre d'Abbe ν1 = 60 et un verre ν2 = 30. Quelles vergences V1 et V2 ?",
-    choix: ["V1 = +4 δ ; V2 = −2 δ", "V1 = −2 δ ; V2 = +4 δ", "V1 = +3 δ ; V2 = −1 δ", "V1 = +1 δ ; V2 = +1 δ"],
+    question: "On veut un doublet achromatique accolé de vergence V = +2 δ, avec un verre de nombre d'Abbe ν₁ = 60 et un verre ν₂ = 30. Quelles vergences V₁ et V₂ ?",
+    choix: ["V₁ = +4 δ ; V₂ = −2 δ", "V₁ = −2 δ ; V₂ = +4 δ", "V₁ = +3 δ ; V₂ = −1 δ", "V₁ = +1 δ ; V₂ = +1 δ"],
     bonne: 0,
-    explication: "Deux conditions : V1 + V2 = 2 et V1/ν1 + V2/ν2 = 0 (achromatisme). V1/60 = −V2/30 → V1 = −2·V2. Donc −2V2 + V2 = 2 → V2 = −2 δ et V1 = +4 δ. La lentille convergente est dans le verre le moins dispersif (ν le plus grand).",
+    explication: "Deux conditions : V₁ + V₂ = 2 et V₁/ν₁ + V₂/ν₂ = 0 (achromatisme). V₁/60 = −V₂/30 → V₁ = −2·V₂. Donc −2V₂ + V₂ = 2 → V₂ = −2 δ et V₁ = +4 δ. La lentille convergente est dans le verre le moins dispersif (ν le plus grand).",
     indice: "Deux équations : les vergences s'additionnent (lentilles accolées), et la somme V/ν doit être nulle pour supprimer le chromatisme. Résous ce petit système."
   },
   {
@@ -456,9 +462,9 @@ QUESTIONS.push(
   {
     id: "U42-059", difficulte: "moyen", epreuve: "U42", theme: "Doublets et achromatisme", session: "2025 et 2026",
     type: "calcul",
-    question: "Doublet de deux lentilles minces : f'1 = 60 mm, f'2 = 30 mm, séparées de e = 40 mm. Calcule sa distance focale image f'.",
+    question: "Doublet de deux lentilles minces : f'₁ = 60 mm, f'₂ = 30 mm, séparées de e = 40 mm. Calcule sa distance focale image f'.",
     reponse: { valeur: 36, unite: "mm", decimales: 0, signe: true },
-    explication: "Formule de Gullstrand : f' = [[f'1 × f'2|f'1 + f'2 − e]]\nf' = [[60 × 30|60 + 30 − 40]] = [[1 800|50]] = 36 mm\nLe doublet a une distance focale image de 36 mm.",
+    explication: "Formule de Gullstrand : f' = [[f'₁ × f'₂|f'₁ + f'₂ − e]]\nf' = [[60 × 30|60 + 30 − 40]] = [[1 800|50]] = 36 mm\nLe doublet a une distance focale image de 36 mm.",
     indice: "Formule du doublet (Gullstrand) : le produit des deux focales, divisé par leur somme diminuée de l'écart e."
   },
 
@@ -742,7 +748,7 @@ QUESTIONS.push(
     question: "On ajoute un filtre gris neutre qui transmet 25 % de la lumière. Sans filtre, le temps de pose était 1/500 s. Quel temps de pose garde la même exposition ?",
     choix: ["1/2 000 s", "1/500 s", "1/250 s", "1/125 s"],
     bonne: 3,
-    explication: "Exposition = E × t constante. Avec le filtre, E2 = 0,25 × E1, donc t2 = t1 / 0,25 = 4 × t1 = 4/500 = 1/125 s. Le temps de pose augmente.",
+    explication: "Exposition = E × t constante. Avec le filtre, E₂ = 0,25 × E₁, donc t₂ = t₁ / 0,25 = 4 × t₁ = 4/500 = 1/125 s. Le temps de pose augmente.",
     indice: "Pour garder la même exposition, le produit éclairement × temps de pose doit rester constant. Si le filtre retire de la lumière, le temps doit compenser."
   },
 
@@ -752,13 +758,13 @@ QUESTIONS.push(
     cas: "CAS-U42-01", etape: 1,
     question: "La scène, à 24 m, est considérée comme à l'infini. Quelle chaîne des images est juste ?",
     choix: [
-      "AB à l'infini → A1B1 en F'1, confondu avec F2 → A'B' à l'infini",
-      "AB à l'infini → A1B1 en F'1, confondu avec F'2 → A'B' à l'infini",
-      "AB à l'infini → A1B1 à l'infini → A'B' en F'2",
-      "AB en F1 → A1B1 à l'infini → A'B' en F'2"
+      "AB à l'infini → A₁B₁ en F'₁, confondu avec F₂ → A'B' à l'infini",
+      "AB à l'infini → A₁B₁ en F'₁, confondu avec F'₂ → A'B' à l'infini",
+      "AB à l'infini → A₁B₁ à l'infini → A'B' en F'₂",
+      "AB en F₁ → A₁B₁ à l'infini → A'B' en F'₂"
     ],
     bonne: 0,
-    explication: "L'objet est à l'infini : son image par l'objectif se forme dans le plan focal image, en F'1. La cliente est emmétrope et n'accommode pas : l'image finale doit être à l'infini. Pour cela, A1B1 doit se trouver au foyer OBJET de l'oculaire, F2. Donc F'1 = F2 : les jumelles sont afocales, et la distance entre les lentilles vaut f'1 + f'2 = 120 − 40 = 80 mm, comme sur la notice. Piège : pour une lentille divergente, F2 est après la lentille et F'2 avant.",
+    explication: "L'objet est à l'infini : son image par l'objectif se forme dans le plan focal image, en F'₁. La cliente est emmétrope et n'accommode pas : l'image finale doit être à l'infini. Pour cela, A₁B₁ doit se trouver au foyer OBJET de l'oculaire, F₂. Donc F'₁ = F₂ : les jumelles sont afocales, et la distance entre les lentilles vaut f'₁ + f'₂ = 120 − 40 = 80 mm, comme sur la notice. Piège : pour une lentille divergente, F₂ est après la lentille et F'₂ avant.",
     indice: "Deux questions à te poser : où se forme l'image d'un objet à l'infini ? Et où doit se trouver un objet pour que l'oculaire renvoie son image à l'infini ?"
   },
   {
@@ -772,13 +778,13 @@ QUESTIONS.push(
       "G = +1/3 : la scène paraît 3 fois plus petite"
     ],
     bonne: 1,
-    explication: "Pour une lunette afocale : G = −f'1 / f'2 = −120 / (−40) = +3. C'est bien le « 3× » de la notice. Le signe + veut dire que l'image est droite : pas besoin de prismes pour la redresser, c'est pour cela que des jumelles de théâtre sont si courtes. Avec deux lentilles convergentes (lunette de Kepler), G serait négatif et l'image renversée. Le « 2 » vient de la formule de la loupe (Gc = P/4), qui ne s'applique pas à une lunette.",
-    indice: "Pour une lunette afocale, le grossissement est le rapport des deux focales, avec un signe moins devant. Garde le signe de f'2 : l'oculaire est divergent."
+    explication: "Pour une lunette afocale : G = −f'₁ / f'₂ = −120 / (−40) = +3. C'est bien le « 3× » de la notice. Le signe + veut dire que l'image est droite : pas besoin de prismes pour la redresser, c'est pour cela que des jumelles de théâtre sont si courtes. Avec deux lentilles convergentes (lunette de Kepler), G serait négatif et l'image renversée. Le « 2 » vient de la formule de la loupe (Gc = P/4), qui ne s'applique pas à une lunette.",
+    indice: "Pour une lunette afocale, le grossissement est le rapport des deux focales, avec un signe moins devant. Garde le signe de f'₂ : l'oculaire est divergent."
   },
   {
     id: "U42-050", difficulte: "difficile", epreuve: "U42", theme: "Champs et diaphragmes", session: "2018",
     cas: "CAS-U42-01", etape: 3,
-    contexte: "La monture de l'objectif (rayon 20 mm) est le diaphragme d'ouverture. La monture de l'oculaire (rayon 10 mm), 80 mm plus loin, est le diaphragme de champ. Le plan des champs est celui de l'image intermédiaire A1B1, à 120 mm de l'objectif.",
+    contexte: "La monture de l'objectif (rayon 20 mm) est le diaphragme d'ouverture. La monture de l'oculaire (rayon 10 mm), 80 mm plus loin, est le diaphragme de champ. Le plan des champs est celui de l'image intermédiaire A₁B₁, à 120 mm de l'objectif.",
     question: "Quel est le rayon du champ de pleine lumière dans le plan de l'image intermédiaire ?",
     choix: ["10 mm", "15 mm", "5 mm", "25 mm"],
     bonne: 2,
@@ -832,39 +838,39 @@ QUESTIONS.push(
       { consigne: "Vergence de la lentille V", reponse: { valeur: 40, unite: "δ", decimales: 0, signe: true },
         aide: "V = [[1|f']] avec f' en mètres : 25 mm = 0,025 m.", ligne: "V = [[1|f']] = [[1|0,025]] = +40 δ" },
       { consigne: "Vergence de l'objet [[1|OA]]", reponse: { valeur: -25, unite: "δ", decimales: 0, signe: true },
-        aide: "L'objet est réel, avant la lentille : OA est négatif. OA = −40 mm = −0,040 m.", ligne: "[[1|OA]] = [[1|−0,040]] = −25 δ" },
+        aide: "L'objet est réel, avant la lentille : OA est négatif. OA = −40 mm = −0,040 m.", ligne: "[[1|OA]] = [[1|−0,040]] = −25 δ", erreurs: [{ valeur: 25, type: "signe", message: "L'objet est réel, avant la lentille : OA est négatif, donc [[1|OA]] est négatif." }] },
       { consigne: "Vergence de l'image [[1|OA']]", reponse: { valeur: 15, unite: "δ", decimales: 0, signe: true },
         aide: "Relation de conjugaison : [[1|OA']] = [[1|OA]] + V.", ligne: "[[1|OA']] = [[1|OA]] + V = −25 + 40 = +15 δ" },
       { consigne: "Position de l'image OA'", reponse: { valeur: 66.7, unite: "mm", decimales: 1, signe: true, tolerance: 0.1 },
         aide: "OA' = [[1|15]] en mètres, puis convertis en millimètres.", ligne: "OA' = [[1|15]] = +0,0667 m = +66,7 mm" },
       { consigne: "Grandissement γ", reponse: { valeur: -1.67, unite: "", decimales: 2, signe: true, tolerance: 0.02 },
-        aide: "γ = [[OA'|OA]], avec les signes. OA' et OA se prennent dans la même unité.", ligne: "γ = [[OA'|OA]] = [[+66,7|−40]] = −1,67" }
+        aide: "γ = [[OA'|OA]], avec les signes. OA' et OA se prennent dans la même unité.", ligne: "γ = [[OA'|OA]] = [[+66,7|−40]] = −1,67", erreurs: [{ valeur: 1.67, type: "signe", message: "L'image est renversée (OA' et OA de signes contraires) : γ est négatif." }] }
     ],
     explication: "L'image est réelle (OA' > 0), renversée (γ < 0) et 1,67 fois plus grande que l'objet. Contrôle avec les vergences : γ = [[−25|+15]] = −1,67."
   },
   {
     id: "U42-140", difficulte: "moyen", epreuve: "U42", theme: "Doublets et achromatisme", session: "complément", type: "pose",
-    question: "Un doublet est formé de deux lentilles minces convergentes : f'1 = +80 mm et f'2 = +40 mm, séparées de e = 40 mm. Calcule sa distance focale image, étape par étape, avec V = V1 + V2 − e × V1 × V2.",
+    question: "Un doublet est formé de deux lentilles minces convergentes : f'₁ = +80 mm et f'₂ = +40 mm, séparées de e = 40 mm. Calcule sa distance focale image, étape par étape, avec V = V₁ + V₂ − e × V₁ × V₂.",
     etapes: [
-      { consigne: "Vergence V1 de la 1re lentille", reponse: { valeur: 12.5, unite: "δ", decimales: 1, signe: true },
-        aide: "V1 = [[1|f'1]] avec f'1 en mètres : 80 mm = 0,080 m.", ligne: "V1 = [[1|0,080]] = +12,5 δ" },
-      { consigne: "Vergence V2 de la 2e lentille", reponse: { valeur: 25, unite: "δ", decimales: 0, signe: true },
-        aide: "V2 = [[1|f'2]] avec f'2 en mètres : 40 mm = 0,040 m.", ligne: "V2 = [[1|0,040]] = +25 δ" },
-      { consigne: "Le terme e × V1 × V2", reponse: { valeur: 12.5, unite: "δ", decimales: 1, signe: false },
-        aide: "Mets l'écart e en mètres : 40 mm = 0,040 m. Multiplie ensuite 0,040 par 12,5 et par 25.", ligne: "e × V1 × V2 = 0,040 × 12,5 × 25 = 12,5 δ" },
+      { consigne: "Vergence V₁ de la 1re lentille", reponse: { valeur: 12.5, unite: "δ", decimales: 1, signe: true },
+        aide: "V₁ = [[1|f'₁]] avec f'₁ en mètres : 80 mm = 0,080 m.", ligne: "V₁ = [[1|0,080]] = +12,5 δ" },
+      { consigne: "Vergence V₂ de la 2e lentille", reponse: { valeur: 25, unite: "δ", decimales: 0, signe: true },
+        aide: "V₂ = [[1|f'₂]] avec f'₂ en mètres : 40 mm = 0,040 m.", ligne: "V₂ = [[1|0,040]] = +25 δ" },
+      { consigne: "Le terme e × V₁ × V₂", reponse: { valeur: 12.5, unite: "δ", decimales: 1, signe: false },
+        aide: "Mets l'écart e en mètres : 40 mm = 0,040 m. Multiplie ensuite 0,040 par 12,5 et par 25.", ligne: "e × V₁ × V₂ = 0,040 × 12,5 × 25 = 12,5 δ" },
       { consigne: "Vergence V du doublet", reponse: { valeur: 25, unite: "δ", decimales: 0, signe: true },
-        aide: "V = V1 + V2 − e × V1 × V2 : additionne les deux vergences, puis retire le terme précédent.", ligne: "V = 12,5 + 25 − 12,5 = +25 δ" },
+        aide: "V = V₁ + V₂ − e × V₁ × V₂ : additionne les deux vergences, puis retire le terme précédent.", ligne: "V = 12,5 + 25 − 12,5 = +25 δ" },
       { consigne: "Distance focale image f' du doublet", reponse: { valeur: 40, unite: "mm", decimales: 0, signe: true, tolerance: 0.5 },
         aide: "f' = [[1|V]] en mètres, puis convertis en millimètres.", ligne: "f' = [[1|V]] = [[1|25]] = 0,040 m = 40 mm" }
     ],
-    explication: "La même formule écrite avec les focales donne le même résultat : f' = [[f'1 × f'2|f'1 + f'2 − e]] = [[80 × 40|80 + 40 − 40]] = [[3 200|80]] = 40 mm."
+    explication: "La même formule écrite avec les focales donne le même résultat : f' = [[f'₁ × f'₂|f'₁ + f'₂ − e]] = [[80 × 40|80 + 40 − 40]] = [[3 200|80]] = 40 mm."
   },
   {
     id: "U42-141", difficulte: "moyen", epreuve: "U42", theme: "Lunettes afocales", session: "complément", type: "pose",
     question: "Lunette de Kepler afocale : objectif de f'ob = 240 mm et de diamètre 48 mm, oculaire de f'oc = 30 mm. L'œil de l'observateur a une pupille de 4 mm. Étudie la lunette étape par étape.",
     etapes: [
       { consigne: "Grossissement G", reponse: { valeur: -8, unite: "", decimales: 0, signe: true },
-        aide: "G = −[[f'ob|f'oc]]. Le signe moins : une lunette de Kepler renverse l'image.", ligne: "G = −[[f'ob|f'oc]] = −[[240|30]] = −8" },
+        aide: "G = −[[f'ob|f'oc]]. Le signe moins : une lunette de Kepler renverse l'image.", ligne: "G = −[[f'ob|f'oc]] = −[[240|30]] = −8", erreurs: [{ valeur: 8, type: "signe", message: "Une lunette de Kepler renverse l'image : G = −[[f'ob|f'oc]] est négatif." }] },
       { consigne: "Longueur de la lunette", reponse: { valeur: 270, unite: "mm", decimales: 0, signe: false },
         aide: "Une lunette afocale a ses foyers confondus : longueur = f'ob + f'oc.", ligne: "L = f'ob + f'oc = 240 + 30 = 270 mm" },
       { consigne: "Diamètre du cercle oculaire D'", reponse: { valeur: 6, unite: "mm", decimales: 0, signe: false },
@@ -879,7 +885,7 @@ QUESTIONS.push(
     question: "Un microscope a un objectif de focale f'ob = 10 mm, un intervalle optique Δ = 160 mm et un oculaire de focale f'oc = 25 mm. L'œil sépare deux points vus sous 3 × 10⁻⁴ rad. Étudie le microscope étape par étape.",
     etapes: [
       { consigne: "Grandissement de l'objectif γob", reponse: { valeur: -16, unite: "", decimales: 0, signe: true },
-        aide: "γob = −[[Δ|f'ob]] : l'objectif d'un microscope donne une image intermédiaire renversée.", ligne: "γob = −[[Δ|f'ob]] = −[[160|10]] = −16" },
+        aide: "γob = −[[Δ|f'ob]] : l'objectif d'un microscope donne une image intermédiaire renversée.", ligne: "γob = −[[Δ|f'ob]] = −[[160|10]] = −16", erreurs: [{ valeur: 16, type: "signe", message: "L'objectif d'un microscope donne une image intermédiaire renversée : γob est négatif." }] },
       { consigne: "Grossissement commercial de l'oculaire Gc", reponse: { valeur: 10, unite: "", decimales: 0, signe: false },
         aide: "Gc oculaire = [[250|f'oc]], avec f'oc en millimètres.", ligne: "Gc = [[250|f'oc]] = [[250|25]] = 10" },
       { consigne: "Grossissement commercial du microscope", reponse: { valeur: 160, unite: "", decimales: 0, signe: false },
@@ -894,7 +900,7 @@ QUESTIONS.push(
     question: "Dans l'espace d'étude : pupille de rayon 8 mm en x = 0, diaphragme de champ de rayon 5 mm en x = 20 mm, plan des champs en x = 40 mm. Calcule les trois rayons de champ, étape par étape.",
     etapes: [
       { consigne: "Pente de la droite de pleine lumière (bords du même côté)", reponse: { valeur: -0.15, unite: "", decimales: 2, signe: true },
-        aide: "La droite passe par (0 ; 8) et (20 ; 5) : pente = [[y2 − y1|x2 − x1]].", ligne: "pente = [[5 − 8|20 − 0]] = −0,15" },
+        aide: "La droite passe par (0 ; 8) et (20 ; 5) : pente = [[y₂ − y₁|x₂ − x₁]].", ligne: "pente = [[5 − 8|20 − 0]] = −0,15", erreurs: [{ valeur: 0.15, type: "signe", message: "La droite descend de (0 ; 8) à (20 ; 5) : sa pente est négative." }] },
       { consigne: "Rayon du champ de pleine lumière", reponse: { valeur: 2, unite: "mm", decimales: 0, signe: false },
         aide: "En x = 40 : rayon = 8 + pente × 40.", ligne: "r = 8 − 0,15 × 40 = 2 mm" },
       { consigne: "Rayon du champ moyen (droite par le centre de la pupille)", reponse: { valeur: 10, unite: "mm", decimales: 0, signe: false },
@@ -903,6 +909,141 @@ QUESTIONS.push(
         aide: "La droite passe par (0 ; −8) et (20 ; 5) : pente = [[5 − (−8)|20]]. Prolonge-la jusqu'à x = 40.", ligne: "r = −8 + [[13|20]] × 40 = −8 + 26 = 18 mm" }
     ],
     explication: "Comme toujours, le champ de pleine lumière (2 mm) est plus petit que le champ moyen (10 mm), lui-même plus petit que le champ total (18 mm). Entre 2 et 18 mm, l'image s'assombrit peu à peu : c'est le vignettage."
+  },
+
+  // ---------- Mini-sujet : lunettes de pêche (5 étapes, déclaré par CAS.push en bas du fichier) ----------
+  {
+    id: "U42-157", difficulte: "moyen", epreuve: "U42", theme: "Polarisation", session: "complément",
+    cas: "CAS-U42-02", etape: 1,
+    question: "Le soleil est bas : son reflet arrive dans l'œil du client après avoir rebondi sur l'étang sous une incidence de 53° (tan 53,1° = 1,33). Pourquoi des verres polarisants atténuent-ils bien ce reflet ?",
+    choix: [
+      "Le reflet est polarisé verticalement : un filtre horizontal l'éteint",
+      "Un reflet n'est jamais polarisé : le filtre fait seulement l'effet d'un verre teinté",
+      "Près de l'incidence de Brewster, le reflet est presque totalement polarisé horizontalement : un filtre vertical l'éteint presque",
+      "À 53° c'est l'angle limite : il n'y a plus de rayon réfracté, donc plus de reflet à éteindre"
+    ],
+    bonne: 2,
+    explication: "À l'incidence de Brewster, tan iB = n = 1,33, donc iB = 53,1° : la lumière réfléchie par l'eau est totalement polarisée, parallèlement à la surface (donc horizontale). Un filtre dont la direction de transmission est verticale l'arrête. L'angle limite de l'eau (48,8°) est un autre phénomène et il concerne la lumière qui sort de l'eau.",
+    indice: "Quel angle d'incidence donne une lumière réfléchie totalement polarisée ? Dans quelle direction ?"
+  },
+  {
+    id: "U42-158", difficulte: "difficile", epreuve: "U42", theme: "Polarisation", session: "complément",
+    cas: "CAS-U42-02", etape: 2,
+    type: "calcul",
+    contexte: "Le reflet est totalement polarisé horizontalement. Le filtre est parfait, et sa direction de transmission est verticale quand le client tient la tête droite. Il penche la tête de 40° : la direction du filtre fait alors 40° avec la verticale.",
+    question: "Quel pourcentage du reflet traverse encore le filtre ? Arrondis à l'unité.",
+    reponse: { valeur: 41, unite: "%", decimales: 0, signe: false, tolerance: 1 },
+    erreurs: [
+      { valeur: 59, type: "notion", message: "Tu as pris 40° comme angle avec le reflet. Le reflet est horizontal et le filtre est à 40° de la verticale : l'angle entre eux est 50°." }
+    ],
+    explication: "Le reflet est horizontal, le filtre à 40° de la verticale : l'angle θ entre la polarisation et la direction du filtre est 90° − 40° = 50°.\nLoi de Malus : I = I₀ × cos² θ = I₀ × cos² 50° = I₀ × 0,413\nIl passe environ 41 % du reflet. Tête droite (θ = 90°), il n'en passerait presque plus.",
+    indice: "Quel angle y a-t-il entre la direction du reflet et la direction du filtre ? Loi de Malus : I = I₀ × cos² θ."
+  },
+  {
+    id: "U42-159", difficulte: "moyen", epreuve: "U42", theme: "Transmission et antireflet", session: "complément",
+    cas: "CAS-U42-02", etape: 3,
+    type: "calcul",
+    contexte: "Les verres sont minéraux, d'indice n = 1,6, dans l'air, non traités. On néglige l'absorption. Chaque face réfléchit R = ([[n − 1|n + 1]])².",
+    question: "Quel pourcentage de la lumière traverse un verre non traité (ses deux faces) ? Arrondis à l'unité.",
+    reponse: { valeur: 90, unite: "%", decimales: 0, signe: false, tolerance: 1 },
+    erreurs: [
+      { valeur: 95, type: "notion", message: "Tu n'as compté qu'une face. Un verre a deux faces : la transmission se multiplie pour chacune." }
+    ],
+    explication: "R = ([[1,6 − 1|1,6 + 1]])² = ([[0,6|2,6]])² = 0,053, soit 5,3 % par face\nTransmission d'une face : 1 − 0,053 = 0,947\nDeux faces : T = 0,947² = 0,896, soit environ 90 %.",
+    indice: "Calcule R pour une face, puis la transmission 1 − R. Combien de faces la lumière traverse-t-elle ?"
+  },
+  {
+    id: "U42-160", difficulte: "moyen", epreuve: "U42", theme: "Transmission et antireflet", session: "complément",
+    cas: "CAS-U42-02", etape: 4,
+    type: "calcul",
+    contexte: "L'indice idéal d'une couche antireflet est √n du verre = √1,6 ≈ 1,26. Le fabricant utilise une couche d'indice 1,25, optimisée pour le vert, λ = 550 nm.",
+    question: "Quelle est l'épaisseur minimale de la couche ?",
+    reponse: { valeur: 110, unite: "nm", decimales: 0, signe: false, tolerance: 1 },
+    erreurs: [
+      { valeur: 86, type: "notion", message: "Tu as pris l'indice du verre. L'épaisseur dépend de l'indice de la couche : e = λ / (4 n de la couche)." }
+    ],
+    explication: "e = [[λ|4 × n]] avec n = indice de la couche\ne = [[550|4 × 1,25]] = [[550|5]] = 110 nm\nL'épaisseur est d'un quart de longueur d'onde dans la couche.",
+    indice: "Épaisseur d'un quart de longueur d'onde dans la couche : utilise l'indice de la couche, pas celui du verre."
+  },
+  {
+    id: "U42-161", difficulte: "difficile", epreuve: "U42", theme: "Polarisation", session: "complément",
+    cas: "CAS-U42-02", etape: 5,
+    contexte: "Résultats : tête droite le filtre éteint presque tout le reflet ; tête penchée de 40°, 41 % du reflet passe. Le verre non traité transmet 90 % de la lumière ; le traitement antireflet réduit les reflets sur ses faces.",
+    question: "Quelle conclusion donnes-tu au client ?",
+    choix: [
+      "Elles ne lui conviennent pas : un verre non traité perd déjà 10 % de la lumière, et le filtre ne sert qu'à moitié",
+      "Elles lui conviennent sans condition : le filtre éteint le reflet quelle que soit l'orientation de sa tête, et le verre transmet 90 %",
+      "Elles lui conviennent s'il garde la tête droite : le filtre éteint alors presque tout le reflet (penchée de 40°, 41 % passe encore) et l'antireflet limite la perte de 10 %",
+      "Le filtre polarisant est inutile pour la pêche : seul le traitement antireflet compte, car le reflet de l'eau n'est pas polarisé"
+    ],
+    bonne: 2,
+    explication: "Une bonne conclusion répond à la question du client et s'appuie sur les chiffres trouvés. Elle dit sous quelle condition les lunettes conviennent (tête droite ; penchée de 40°, 41 % du reflet passe encore) et ce que le traitement apporte (le verre nu perd environ 10 % de la lumière).",
+    indice: "Une bonne conclusion répond à la question du client, donne la condition qui compte, et s'appuie sur tes résultats."
+  },
+
+  // ---------- Calculs posés : optique physique et doublet achromatique ----------
+  {
+    id: "U42-162", difficulte: "moyen", epreuve: "U42", theme: "Interférences et réseaux", session: "complément", type: "pose",
+    question: "Un réseau porte 800 traits par millimètre. Il est éclairé en incidence normale par une lumière de longueur d'onde 600 nm. Étudie la lumière diffractée, étape par étape.",
+    etapes: [
+      { consigne: "Pas du réseau a (en µm)", reponse: { valeur: 1.25, unite: "µm", decimales: 2, signe: false },
+        aide: "Le pas est la distance entre deux traits : 1 mm = 1 000 µm, partagé en 800 traits.", ligne: "a = [[1 000 µm|800]] = 1,25 µm" },
+      { consigne: "sin i' à l'ordre 1", reponse: { valeur: 0.48, unite: "", decimales: 2, signe: false },
+        aide: "Formule des réseaux en incidence normale : a × sin i' = k × λ. Garde λ et a dans la même unité (600 nm = 0,6 µm).", ligne: "sin i' = [[k × λ|a]] = [[1 × 0,6|1,25]] = 0,48" },
+      { consigne: "Angle i' de l'ordre 1 (en degrés)", reponse: { valeur: 28.7, unite: "°", decimales: 1, signe: false, tolerance: 0.1 },
+        aide: "i' est l'angle dont le sinus vaut 0,48 : utilise la touche arcsin (sin⁻¹) de ta calculatrice en mode degrés.", ligne: "i' = arcsin(0,48) = 28,7°" },
+      { consigne: "Ordre le plus élevé qui existe", reponse: { valeur: 2, unite: "", decimales: 0, signe: false },
+        aide: "Il faut sin i' ≤ 1, donc k ≤ [[a|λ]]. Garde la partie entière.", ligne: "k ≤ [[a|λ]] = [[1,25|0,6]] = 2,08, donc k = 2" }
+    ],
+    explication: "Pas a = 1,25 µm. À l'ordre 1, sin i' = 0,48 et i' ≈ 28,7°. L'ordre 2 existe (sin i' = 0,96, soit 73,7°), l'ordre 3 n'existe pas (sin i' dépasserait 1). Il sort donc 5 faisceaux : les ordres −2 à +2."
+  },
+  {
+    id: "U42-163", difficulte: "moyen", epreuve: "U42", theme: "Transmission et antireflet", session: "complément", type: "pose",
+    question: "Un verre d'indice 1,96 est utilisé dans l'air. On veut le traiter antireflet pour le vert, λ = 560 nm. Étudie le verre nu puis le traitement, étape par étape.",
+    etapes: [
+      { consigne: "Réflexion R d'une face nue (en %)", reponse: { valeur: 10.5, unite: "%", decimales: 1, signe: false, tolerance: 0.1 },
+        aide: "R = ([[n − 1|n + 1]])² pour un dioptre air et verre. Multiplie ensuite par 100 pour avoir des pourcentages.", ligne: "R = ([[1,96 − 1|1,96 + 1]])² = ([[0,96|2,96]])² = 0,105, soit 10,5 %" },
+      { consigne: "Transmission T des deux faces nues (en %)", reponse: { valeur: 80, unite: "%", decimales: 0, signe: false, tolerance: 1 },
+        aide: "Une face laisse passer 1 − R. Le verre a deux faces : les transmissions se multiplient.", ligne: "T = (1 − 0,105)² = 0,895² = 0,80, soit 80 %" },
+      { consigne: "Indice idéal de la couche antireflet", reponse: { valeur: 1.4, unite: "", decimales: 1, signe: false },
+        aide: "L'indice idéal de la couche est la racine carrée de l'indice du verre.", ligne: "n = √1,96 = 1,4" },
+      { consigne: "Épaisseur minimale de la couche (en nm)", reponse: { valeur: 100, unite: "nm", decimales: 0, signe: false, tolerance: 1 },
+        aide: "Un quart de longueur d'onde dans la couche : utilise l'indice de la couche, pas celui du verre.", ligne: "e = [[λ|4n]] = [[560|4 × 1,4]] = [[560|5,6]] = 100 nm" }
+    ],
+    explication: "Le verre nu perd 20 % de la lumière sur ses deux faces. Une couche d'indice 1,4 et de 100 nm d'épaisseur supprime presque tous les reflets pour 560 nm, car les deux ondes réfléchies sont alors en opposition."
+  },
+  {
+    id: "U42-164", difficulte: "moyen", epreuve: "U42", theme: "Photométrie", session: "complément", type: "pose",
+    question: "Une lampe ponctuelle de 300 cd est suspendue à 1,5 m au-dessus d'une table. Un point de la table est à 2 m de la verticale de la lampe. Calcule son éclairement, avec E = [[I × cos θ|d²]] (θ : angle entre la normale à la table et la direction de la lampe), étape par étape.",
+    etapes: [
+      { consigne: "Distance d de la lampe au point (en m)", reponse: { valeur: 2.5, unite: "m", decimales: 1, signe: false },
+        aide: "Le point, la verticale de la lampe et la lampe forment un triangle rectangle : théorème de Pythagore.", ligne: "d = √(1,5² + 2²) = √6,25 = 2,5 m" },
+      { consigne: "cos θ", reponse: { valeur: 0.6, unite: "", decimales: 1, signe: false },
+        aide: "La normale à la table est verticale : cos θ = [[hauteur|d]].", ligne: "cos θ = [[1,5|2,5]] = 0,6" },
+      { consigne: "Éclairement E au point (en lx)", reponse: { valeur: 28.8, unite: "lx", decimales: 1, signe: false, tolerance: 0.1 },
+        aide: "E = [[I × cos θ|d²]], avec d en mètres.", ligne: "E = [[300 × 0,6|2,5²]] = [[180|6,25]] = 28,8 lx" },
+      { consigne: "Éclairement sous la lampe, à la verticale (en lx)", reponse: { valeur: 133.3, unite: "lx", decimales: 1, signe: false, tolerance: 0.1 },
+        aide: "À la verticale, d = 1,5 m et θ = 0°, donc cos θ = 1.", ligne: "E₀ = [[300|1,5²]] = [[300|2,25]] = 133,3 lx" }
+    ],
+    explication: "Le point décalé reçoit 28,8 lx, soit [[28,8|133,3]] = 22 % de l'éclairement sous la lampe : il est plus loin (d plus grand) et la lumière y arrive de biais (cos θ plus petit)."
+  },
+  {
+    id: "U42-165", difficulte: "difficile", epreuve: "U42", theme: "Doublets et achromatisme", session: "complément", type: "pose",
+    question: "On veut un doublet achromatique accolé de vergence totale V = +3 δ avec deux verres de nombres d'Abbe ν₁ = 60 et ν₂ = 40. Trouve les deux lentilles, étape par étape. Condition d'achromatisme : [[V₁|ν₁]] + [[V₂|ν₂]] = 0.",
+    etapes: [
+      { consigne: "Rapport [[∣V₁∣|∣V₂∣]]", reponse: { valeur: 1.5, unite: "", decimales: 1, signe: false },
+        aide: "De [[V₁|ν₁]] = −[[V₂|ν₂]], on tire V₁ = −[[ν₁|ν₂]] × V₂.", ligne: "∣V₁∣ = [[ν₁|ν₂]] × ∣V₂∣ = [[60|40]] × ∣V₂∣, donc V₁ = −1,5 × V₂" },
+      { consigne: "Vergence V₂ de la lentille divergente (en δ)", reponse: { valeur: -6, unite: "δ", decimales: 0, signe: true },
+        aide: "V₁ + V₂ = 3 avec V₁ = −1,5 × V₂ : remplace et isole V₂.", ligne: "−1,5 V₂ + V₂ = 3, soit −0,5 V₂ = 3, donc V₂ = −6 δ",
+        erreurs: [{ valeur: 6, type: "signe", message: "La lentille la plus dispersive est divergente : sa vergence est négative, V₂ = −6 δ." }] },
+      { consigne: "Vergence V₁ de la lentille convergente (en δ)", reponse: { valeur: 9, unite: "δ", decimales: 0, signe: true },
+        aide: "V₁ = V − V₂ : attention au signe de V₂.", ligne: "V₁ = 3 − (−6) = +9 δ" },
+      { consigne: "Distance focale f'₁ de la lentille convergente (en mm)", reponse: { valeur: 111, unite: "mm", decimales: 0, signe: true, tolerance: 1 },
+        aide: "f'₁ = [[1|V₁]] en mètres, puis convertis en millimètres.", ligne: "f'₁ = [[1|9]] = 0,111 m = 111 mm" },
+      { consigne: "Distance focale f'₂ de la lentille divergente (en mm)", reponse: { valeur: -166.7, unite: "mm", decimales: 1, signe: true, tolerance: 0.2 },
+        aide: "f'₂ = [[1|V₂]] en mètres, puis convertis en millimètres. Garde le signe.", ligne: "f'₂ = [[1|−6]] = −0,1667 m = −166,7 mm" }
+    ],
+    explication: "Vérification : [[9|60]] + [[−6|40]] = 0,15 − 0,15 = 0, donc le doublet est achromatique, et V = 9 − 6 = +3 δ. La lentille convergente est en verre peu dispersif (ν = 60) et plus forte que la divergente, en verre très dispersif (ν = 40)."
   }
 );
 
@@ -912,5 +1053,15 @@ CAS.push({
   epreuve: "U42",
   titre: "Des jumelles de théâtre pour une abonnée de l'opéra",
   contexte: "Une cliente abonnée à l'opéra veut mieux voir les chanteurs depuis sa place au balcon, à 24 m de la scène. Tu lui proposes des jumelles de théâtre : une lunette de Galilée, faite d'un objectif convergent et d'un oculaire divergent, sans prisme. Elle est emmétrope et regarde sans accommoder.",
-  annexe: { titre: "Notice des jumelles", colonnes: ["Caractéristique", "Valeur"], lignes: [["Grossissement", "3×"], ["Objectif (convergent)", "f'1 = +120 mm, diamètre 40 mm"], ["Oculaire (divergent)", "f'2 = −40 mm, diamètre 20 mm"], ["Distance entre les lentilles", "80 mm"]] }
+  annexe: { titre: "Notice des jumelles", colonnes: ["Caractéristique", "Valeur"], lignes: [["Grossissement", "3×"], ["Objectif (convergent)", "f'₁ = +120 mm, diamètre 40 mm"], ["Oculaire (divergent)", "f'₂ = −40 mm, diamètre 20 mm"], ["Distance entre les lentilles", "80 mm"]] }
+});
+
+
+// ---------- Mini-sujet (cas pratique) : ses questions portent cas: "CAS-U42-02" et etape: 1 à 5 ----------
+CAS.push({
+  id: "CAS-U42-02",
+  epreuve: "U42",
+  titre: "Des lunettes de pêche pour un client",
+  contexte: "Un client passe ses week-ends à pêcher sur un étang. Le reflet du soleil sur l'eau (indice 1,33) le gêne. Tu lui proposes des lunettes solaires polarisantes, avec des verres minéraux d'indice 1,6 traités antireflet.",
+  annexe: { titre: "Notice des lunettes", colonnes: ["Caractéristique", "Valeur"], lignes: [["Verres", "minéraux, indice 1,6"], ["Filtre polarisant", "parfait, direction verticale (tête droite)"], ["Traitement", "antireflet monocouche, optimisé à 550 nm"]] }
 });

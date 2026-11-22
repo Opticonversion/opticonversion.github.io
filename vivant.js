@@ -5,6 +5,7 @@
 //  2. Étincelles : une bonne réponse fait jaillir quelques grains d'or.
 //  3. Personnages : un clic sur le compagnon le fait sauter.
 //  4. Calculateurs : le résultat se « met au point » à chaque calcul.
+//  5. Accueil : le tracé corrigé de la carte de l'Atelier se dessine quand il arrive à l'écran.
 // (Retirés le 2026-11-12 parce qu'ils faisaient « site fait par une IA » :
 //  la lumière qui suivait le pointeur et les compteurs de l'accueil.)
 // Tout est coupé si l'élève a désactivé les animations dans son système.
@@ -90,5 +91,13 @@
         zone.classList.add("neuf");
       }).observe(zone, { childList: true });
     });
+  }
+  // ---------------- 5. Accueil : le tracé de l'Atelier se dessine une fois ----------------
+  const apercu = document.getElementById("apercu-trace");
+  if (apercu && !calme && "IntersectionObserver" in window) {
+    apercu.classList.add("apercu-pret");
+    new IntersectionObserver((vus, o) => {
+      if (vus.some(v => v.isIntersecting)) { apercu.classList.add("dessine"); o.disconnect(); }
+    }, { threshold: 0.5 }).observe(apercu);
   }
 })();

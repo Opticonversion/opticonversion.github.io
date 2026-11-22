@@ -69,6 +69,7 @@ QUESTIONS.push(
     type: "calcul",
     question: "Zone de chalandise : 20 000 habitants, 60 % de porteurs de lunettes, panier moyen 450 € TTC, renouvellement tous les 3 ans. Calcule le marché potentiel annuel.",
     reponse: { valeur: 1800000, unite: "€ TTC", decimales: 0, tolerance: 1, signe: false },
+    erreurs: [ { valeur: 5400000, type: "notion", message: "Tu as oublié de ramener à une année : ce chiffre couvre les 3 ans du cycle de renouvellement. Divise-le par 3." } ],
     explication: "Porteurs = 20 000 × 0,60 = 12 000\nDépense sur 3 ans = 12 000 × 450 = 5 400 000 €\nPar an : [[5 400 000|3]] = 1 800 000 € TTC.",
     indice: "Nombre de porteurs × panier moyen donne la dépense d'un cycle complet. Ramène-la à une seule année."
   },
@@ -77,6 +78,7 @@ QUESTIONS.push(
     type: "calcul",
     question: "Marché potentiel : 600 000 € TTC. Indice de disparité de la consommation (IDC) : 85. Évasion commerciale : 15 %. Calcule le marché net de l'évasion commerciale.",
     reponse: { valeur: 433500, unite: "€ TTC", decimales: 0, tolerance: 1, signe: false },
+    erreurs: [ { valeur: 420000, type: "notion", message: "Tu as additionné les deux retraits (IDC et évasion). Ils se multiplient l'un après l'autre." } ],
     explication: "IDC 85 : 600 000 × 0,85 = 510 000 €. Évasion de 15 % : 510 000 × (1 − 0,15) = 510 000 × 0,85 = 433 500 € TTC. On enchaîne les multiplications ; retirer 30 % d'un coup (420 000 €) est faux.",
     indice: "Applique l'IDC, puis l'évasion sur le résultat obtenu. Chaque correction est une multiplication."
   },
@@ -104,6 +106,7 @@ QUESTIONS.push(
     type: "calcul",
     question: "Chiffre d'affaires HT : 600 000 €. Charges variables : 270 000 €. Charges fixes : 220 000 €. Calcule le seuil de rentabilité.",
     reponse: { valeur: 400000, unite: "€ HT", decimales: 0, tolerance: 1, signe: false },
+    erreurs: [ { valeur: 121000, type: "notion", message: "Tu as multiplié les charges fixes par le taux. Un seuil de rentabilité se calcule en divisant." }, { valeur: 488889, type: "notion", message: "Tu as divisé par le taux de charges variables. Il faut diviser par le taux de marge sur coût variable." } ],
     explication: "Marge sur coût variable = 600 000 − 270 000 = 330 000 €\nTaux de MCV = [[330 000|600 000]] = 0,55, soit 55 %\nSeuil de rentabilité = [[charges fixes|taux de MCV]] = [[220 000|0,55]] = 400 000 € HT.",
     indice: "Calcule la marge sur coût variable et son taux, puis divise les charges fixes par ce taux."
   },
@@ -112,6 +115,7 @@ QUESTIONS.push(
     type: "calcul",
     question: "SR = 180 000 €, CA annuel = 240 000 €, le magasin est ouvert 312 jours par an. Au bout de combien de jours d'ouverture le point mort est-il atteint ?",
     reponse: { valeur: 234, unite: "jours", decimales: 0, tolerance: 1, signe: false },
+    erreurs: [ { valeur: 9, type: "mois", message: "Tu as donné des mois. La question demande des jours d'ouverture : multiplie la fraction du CA par 312." } ],
     explication: "Point mort = [[SR|CA]] × jours d'ouverture = [[180 000|240 000]] × 312 = 0,75 × 312 = 234 jours\nLe magasin ne gagne de l'argent qu'après ces 234 jours : il en reste 78.",
     indice: "Quelle fraction du CA annuel représente le seuil ? Applique-la au nombre de jours d'ouverture."
   },
@@ -181,6 +185,7 @@ QUESTIONS.push(
     type: "calcul",
     question: "Un autoréfractomètre est acheté et mis en service le 1er juillet pour 24 000 € HT, amorti en linéaire sur 8 ans. Calcule la dotation de la 1re année (exercice civil).",
     reponse: { valeur: 1500, unite: "€", decimales: 0, tolerance: 1, signe: false },
+    erreurs: [ { valeur: 3000, type: "notion", message: "Tu as pris l'annuité pleine. La 1re année, ne compte que les mois depuis la mise en service." } ],
     explication: "Annuité pleine = [[24 000|8]] = 3 000 €\nDe juillet à décembre : 6 mois, soit 3 000 × [[6|12]] = 1 500 €\nLes années suivantes : 3 000 €, et la dernière année recevra les 1 500 € restants.",
     indice: "Annuité pleine = [[valeur|durée]]. La 1re année, ne compte que les mois depuis la mise en service."
   },
@@ -189,6 +194,7 @@ QUESTIONS.push(
     type: "calcul",
     question: "Emprunt de 50 000 € sur 5 ans à 6 %, remboursé par annuités constantes de 11 869,82 €. Calcule les intérêts de la 2e année.",
     reponse: { valeur: 2467.81, unite: "€", decimales: 2, tolerance: 0.02, signe: false },
+    erreurs: [ { valeur: 3000, type: "notion", message: "Tu as calculé les intérêts sur le capital de départ. Ils se calculent sur le capital restant dû après la 1re annuité." } ],
     explication: "Année 1 : intérêts = 50 000 × 6 % = 3 000 € ; capital remboursé = 11 869,82 − 3 000 = 8 869,82 € ; capital restant dû = 50 000 − 8 869,82 = 41 130,18 €. Année 2 : intérêts = 41 130,18 × 6 % = 2 467,81 €.",
     indice: "Les intérêts se calculent sur le capital restant dû. Commence par ce qui reste dû après la 1re annuité."
   },
@@ -207,6 +213,7 @@ QUESTIONS.push(
     type: "calcul",
     question: "Salaire brut mensuel : 1 900 €. Cotisations salariales : 21 % du brut. Calcule le salaire net.",
     reponse: { valeur: 1501, unite: "€", decimales: 0, tolerance: 1, signe: false },
+    erreurs: [ { valeur: 399, type: "brut-net", message: "C'est le montant des cotisations salariales. Le salaire net est le brut moins ces cotisations." } ],
     explication: "Net = brut − cotisations salariales = 1 900 × (1 − 0,21) = 1 900 × 0,79 = 1 501 €. Les cotisations patronales ne changent pas le net : elles s'ajoutent au brut pour donner le coût employeur.",
     indice: "Le net s'obtient en retirant du brut les cotisations salariales, et seulement elles."
   },
@@ -215,7 +222,7 @@ QUESTIONS.push(
     question: "Un opticien embauche un technicien en CDI. Quelle est la durée maximale légale de sa période d'essai, hors renouvellement ?",
     choix: ["1 mois", "2 mois", "3 mois", "4 mois"],
     bonne: 2,
-    explication: "Code du travail (L1221-19) : 2 mois pour les ouvriers et employés, 3 mois pour les agents de maîtrise et techniciens, 4 mois pour les cadres. Un seul renouvellement est possible, à condition qu'un accord de branche étendu le prévoie et que le contrat l'écrive. Une durée plus courte peut être fixée par la convention collective ou le contrat.",
+    explication: "Code du travail (L1221-19) : 2 mois pour les ouvriers et employés, 3 mois pour les agents de maîtrise et techniciens, 4 mois pour les cadres. Un seul renouvellement est possible, renouvellement compris 4, 6 ou 8 mois au plus, et seulement si un accord de branche étendu le prévoit, si le contrat l'écrit et si le salarié l'accepte par écrit. Une durée plus courte peut être fixée par la convention collective ou le contrat.",
     indice: "La durée maximale dépend de la catégorie du salarié : employé, technicien ou agent de maîtrise, cadre."
   },
   {
@@ -260,6 +267,7 @@ QUESTIONS.push(
     type: "calcul",
     question: "Un magasin réalise 40 000 € HT de CA en montures (taux de marque 65 %) et 60 000 € HT en verres (taux de marque 75 %). Quel est son taux de marque global ?",
     reponse: { valeur: 71, unite: "%", decimales: 0, tolerance: 0.5, signe: false },
+    erreurs: [ { valeur: 70, type: "notion", message: "Tu as fait la moyenne simple des deux taux. Additionne plutôt les marges en euros, puis divise par le CA total." } ],
     explication: "On additionne les marges, on ne fait pas la moyenne des taux. Marge montures = 40 000 × 0,65 = 26 000 €. Marge verres = 60 000 × 0,75 = 45 000 €. Marge totale = 71 000 € pour 100 000 € de CA : taux de marque global = 71 %. La moyenne simple (70 %) oublie que les verres pèsent plus lourd dans le CA.",
     indice: "Calcule la marge de chaque famille en euros, additionne, puis divise par le CA total."
   },
@@ -268,6 +276,7 @@ QUESTIONS.push(
     type: "calcul",
     question: "Un fournisseur propose des verres à 200 € HT le catalogue, avec 15 % de remise, puis 2 % d'escompte pour règlement comptant (calculé sur le prix remisé). Quel est le coût d'achat net HT (au centime près) ?",
     reponse: { valeur: 166.6, unite: "€ HT", decimales: 2, tolerance: 0.02, signe: false },
+    erreurs: [ { valeur: 166, type: "notion", message: "Tu as additionné remise et escompte (15 % + 2 %). L'escompte s'applique sur le prix déjà remisé." } ],
     explication: "Remise : 200 × 0,85 = 170 €. Escompte sur le prix remisé : 170 × 0,98 = 166,60 €. Ne pas additionner les deux taux (17 % donnerait 166 €) : l'escompte s'applique après la remise. C'est ce coût d'achat net qui sert de base au calcul de la marge.",
     indice: "Enchaîne les deux réductions l'une après l'autre : × 0,85 puis × 0,98."
   },
@@ -303,6 +312,7 @@ QUESTIONS.push(
     type: "calcul",
     question: "Le CA d'un magasin progresse de 10 % sur un an, alors que le marché local progresse de 6 %. De combien augmente sa part de marché, en pourcentage de sa part initiale (arrondi à 0,1 %) ?",
     reponse: { valeur: 3.8, unite: "%", decimales: 1, tolerance: 0.05, signe: false },
+    erreurs: [ { valeur: 4, type: "notion", message: "Tu as retranché 6 de 10. L'évolution de la part de marché est relative : divise 1,10 par 1,06." } ],
     explication: "Part de marché = [[CA magasin|CA marché]]\n[[nouvelle part|ancienne part]] = [[1,10|1,06]] = 1,0377, soit une hausse relative de 3,8 %.\nLe magasin gagne des parts de marché, mais l'écart n'est pas 10 − 6 = 4 points. Exemple : 10 % de part de marché passerait à 10,38 %.",
     indice: "Le CA est multiplié par 1,10 et le marché par 1,06. Divise l'un par l'autre."
   },
@@ -387,6 +397,7 @@ QUESTIONS.push(
     type: "calcul",
     question: "Un magasin a un CA de 400 000 € HT, des charges variables de 160 000 € et des charges fixes de 180 000 €. Si son CA augmente de 10 % (charges fixes inchangées), de combien augmente son résultat, en pourcentage ?",
     reponse: { valeur: 40, unite: "%", decimales: 0, tolerance: 0.5, signe: false },
+    erreurs: [ { valeur: 10, type: "notion", message: "Le résultat ne varie pas comme le CA, car les charges fixes ne bougent pas. Calcule le résultat avant et après la hausse (les charges variables suivent le CA), puis compare." } ],
     explication: "Marge sur coût variable = 400 000 − 160 000 = 240 000 €\nRésultat = 240 000 − 180 000 = 60 000 €\nAvec +10 % de CA, les charges variables suivent : MCV = 264 000 €, résultat = 264 000 − 180 000 = 84 000 €\nHausse du résultat = [[84 000 − 60 000|60 000]] = [[24 000|60 000]] = 40 %\nC'est l'effet de levier : les charges fixes ne bougent pas, donc chaque euro de MCV supplémentaire va au résultat. Le levier est ici de [[240 000|60 000]] = 4.",
     indice: "Recalcule le résultat avec 10 % de CA en plus, en gardant les charges fixes."
   },
@@ -395,6 +406,7 @@ QUESTIONS.push(
     type: "calcul",
     question: "Une ligne de montures se vend 150 € HT pièce, pour un coût variable de 60 € par monture. Ses charges fixes sont de 45 000 € par an. Combien de montures faut-il vendre pour atteindre le seuil de rentabilité ?",
     reponse: { valeur: 500, unite: "montures", decimales: 0, tolerance: 0.5, signe: false },
+    erreurs: [ { valeur: 300, type: "notion", message: "Tu as divisé par le prix de vente. Il faut diviser par la marge sur coût variable de chaque monture (prix moins coût variable)." }, { valeur: 750, type: "notion", message: "Tu as divisé par le coût variable. Il faut diviser par la marge de chaque monture : prix moins coût variable." } ],
     explication: "Marge sur coût variable unitaire = 150 − 60 = 90 €\nSeuil en quantités = [[charges fixes|MCV unitaire]] = [[45 000|90]] = 500 montures\nEn euros : 500 × 150 = 75 000 € de CA.",
     indice: "Chaque monture vendue couvre une part des charges fixes égale à son prix moins son coût variable."
   },
@@ -403,6 +415,7 @@ QUESTIONS.push(
     type: "calcul",
     question: "Un magasin a 72 000 € de charges fixes et un taux de marge sur coût variable de 45 %. Quel CA HT doit-il réaliser pour dégager un résultat de 18 000 € ?",
     reponse: { valeur: 200000, unite: "€ HT", decimales: 0, tolerance: 1, signe: false },
+    erreurs: [ { valeur: 160000, type: "notion", message: "Tu as oublié le résultat voulu. Il faut couvrir les charges fixes ET le résultat : additionne-les avant de diviser." }, { valeur: 163636, type: "notion", message: "Tu as divisé par le taux de charges variables. Il faut diviser par le taux de marge sur coût variable." } ],
     explication: "La marge sur coût variable doit couvrir les charges fixes et le résultat voulu : 72 000 + 18 000 = 90 000 €\nCA = [[90 000|0,45]] = 200 000 € HT\nLe seuil de rentabilité seul serait [[72 000|0,45]] = 160 000 € : le résultat visé demande 40 000 € de CA en plus.",
     indice: "Remplace les charges fixes par charges fixes + résultat souhaité dans la formule du seuil."
   },
@@ -447,6 +460,7 @@ QUESTIONS.push(
     type: "calcul",
     question: "Un magasin dégage un résultat net de 28 000 €. Ses dotations aux amortissements sont de 12 000 € (aucune cession d'actif cette année). Quelle est sa capacité d'autofinancement (CAF) ?",
     reponse: { valeur: 40000, unite: "€", decimales: 0, tolerance: 1, signe: false },
+    erreurs: [ { valeur: 16000, type: "notion", message: "Tu as retiré les dotations. Elles ne sortent pas d'argent : on les ajoute au résultat net." } ],
     explication: "La CAF mesure les ressources que l'activité a dégagées et qui peuvent financer l'entreprise. Les dotations aux amortissements sont une charge qui ne sort pas d'argent : on les rajoute au résultat. CAF = 28 000 + 12 000 = 40 000 €.",
     indice: "Une charge « calculée » comme l'amortissement n'est pas décaissée : elle se rajoute au résultat."
   },
@@ -471,6 +485,7 @@ QUESTIONS.push(
     type: "calcul",
     question: "Un magasin a une marge commerciale de 250 000 €, des autres achats et charges externes de 90 000 €, des impôts et taxes de 10 000 € et des charges de personnel de 120 000 €. Quel est son excédent brut d'exploitation (EBE) ?",
     reponse: { valeur: 30000, unite: "€", decimales: 0, tolerance: 1, signe: true },
+    erreurs: [ { valeur: 40000, type: "notion", message: "Tu as oublié les impôts et taxes (10 000 €). EBE = valeur ajoutée − impôts et taxes − charges de personnel." } ],
     explication: "Valeur ajoutée = marge commerciale − autres achats et charges externes = 250 000 − 90 000 = 160 000 €. EBE = valeur ajoutée − impôts et taxes − charges de personnel = 160 000 − 10 000 − 120 000 = 30 000 €. L'EBE mesure ce que l'exploitation dégage avant amortissements, frais financiers et impôt sur les bénéfices.",
     indice: "Passe par la valeur ajoutée, puis retire impôts, taxes et personnel."
   },
@@ -497,6 +512,7 @@ QUESTIONS.push(
     type: "calcul",
     question: "Un matériel d'atelier acheté 30 000 € HT le 1er janvier N est amorti en linéaire sur 5 ans. Quelle est sa valeur nette comptable au 31 décembre N+2 ?",
     reponse: { valeur: 12000, unite: "€", decimales: 0, tolerance: 1, signe: false },
+    erreurs: [ { valeur: 18000, type: "notion", message: "C'est l'amortissement cumulé. La valeur nette comptable est la valeur d'achat moins ce cumul." } ],
     explication: "Annuité = [[30 000|5]] = 6 000 €\nAu 31 décembre N+2, trois années ont été amorties : 3 × 6 000 = 18 000 €\nVNC = 30 000 − 18 000 = 12 000 €\nLa VNC est la valeur du bien qui reste à amortir.",
     indice: "Compte les années entières amorties : N, N+1 et N+2."
   },
@@ -513,6 +529,7 @@ QUESTIONS.push(
     type: "calcul",
     question: "Un investissement de 45 000 € rapporte des flux nets de trésorerie de 15 000 € la 1re année, 18 000 € la 2e et 20 000 € la 3e. Quel est son délai de récupération, en années (réparti régulièrement dans l'année) ?",
     reponse: { valeur: 2.6, unite: "ans", decimales: 1, tolerance: 0.05, signe: false },
+    erreurs: [ { valeur: 0.6, type: "notion", message: "Tu as seulement calculé la fraction de la dernière année. Ajoute les années entières déjà écoulées." } ],
     explication: "Cumul des flux : 15 000 après 1 an, 33 000 après 2 ans, 53 000 après 3 ans. L'investissement (45 000 €) est récupéré pendant la 3e année.\nIl manque 45 000 − 33 000 = 12 000 € au début de cette année, où l'on gagne 20 000 € :\n[[12 000|20 000]] = 0,6 an\nDélai = 2 + 0,6 = 2,6 ans.",
     indice: "Cumule les flux année par année jusqu'à dépasser 45 000 €, puis prends une fraction de la dernière année."
   },
@@ -529,6 +546,7 @@ QUESTIONS.push(
     type: "calcul",
     question: "Budget de trésorerie d'un mois : solde initial 8 000 € ; encaissements 60 000 € TTC ; décaissements : achats 24 000 € TTC, salaires 18 000 €, loyer 4 000 €, TVA à reverser 5 000 €, remboursement d'emprunt 2 500 €. Quel est le solde de fin de mois ?",
     reponse: { valeur: 14500, unite: "€", decimales: 0, tolerance: 1, signe: true },
+    erreurs: [ { valeur: 19500, type: "notion", message: "Tu as oublié la TVA à reverser : c'est un décaissement, comme les achats et les salaires." } ],
     explication: "Décaissements = 24 000 + 18 000 + 4 000 + 5 000 + 2 500 = 53 500 €. Solde final = 8 000 + 60 000 − 53 500 = 14 500 €. Dans un budget de trésorerie, tout est en TTC (la TVA reversée à l'État est un décaissement) et seuls les flux d'argent comptent : pas d'amortissements, mais bien le remboursement du capital.",
     indice: "Solde initial + encaissements − tous les décaissements, TVA reversée comprise."
   },
@@ -548,6 +566,7 @@ QUESTIONS.push(
     type: "calcul",
     question: "Un salarié à 35 h payé 12 € brut de l'heure travaille 41 h une semaine (aucun accord d'entreprise, majoration légale). Quel montant brut reçoit-il pour ses 6 heures supplémentaires ?",
     reponse: { valeur: 90, unite: "€", decimales: 0, tolerance: 0.5, signe: false },
+    erreurs: [ { valeur: 72, type: "notion", message: "Tu as payé les heures supplémentaires sans majoration. Les 8 premières heures sup. sont majorées de 25 % : 12 × 1,25 = 15 € l'heure." }, { valeur: 615, type: "notion", message: "Tu as majoré toutes les heures. Seules les heures au-delà de 35 h sont supplémentaires." } ],
     explication: "Les heures supplémentaires sont celles au-delà de 35 h : ici 6 h. À défaut d'accord, la majoration légale est de 25 % pour les 8 premières heures (de la 36e à la 43e) : 12 × 1,25 = 15 € l'heure. 6 × 15 = 90 € brut. Au-delà de la 43e heure, la majoration est de 50 %.",
     indice: "Chaque heure supplémentaire est payée 12 € majorés de 25 %."
   },
@@ -556,6 +575,7 @@ QUESTIONS.push(
     type: "calcul",
     question: "Un CDD d'accroissement d'activité dure 6 mois, avec un salaire brut de 2 000 € par mois. Il n'est pas suivi d'un CDI. Quelle indemnité de fin de contrat (10 %) l'employeur doit-il verser ?",
     reponse: { valeur: 1200, unite: "€ brut", decimales: 0, tolerance: 1, signe: false },
+    erreurs: [ { valeur: 200, type: "notion", message: "L'indemnité est de 10 % de tout le brut versé pendant le CDD, pas d'un seul mois." } ],
     explication: "L'indemnité de fin de contrat (dite « de précarité ») est de 10 % de la rémunération brute totale versée pendant le CDD : 6 × 2 000 = 12 000 €, donc 1 200 €. Elle n'est pas due dans certains cas, par exemple si le salarié refuse un CDI équivalent ou si le CDD est un contrat saisonnier ou étudiant d'été.",
     indice: "10 % de tout le brut versé pendant le contrat, pas d'un seul mois."
   },

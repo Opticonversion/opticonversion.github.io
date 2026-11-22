@@ -149,7 +149,10 @@ QUESTIONS.push(
     question: "Un viseur a un objectif L₁ et une lentille de redressement L₂. L₁ donne de l'objet une image A₁B₁ avec γ₁ = −3. Pour L₂, A₁B₁ est à O₂A₁ = −60 mm, et L₂ en donne une image A₂B₂ à O₂A₂ = +90 mm. Calcule le grandissement total γ, avec son signe.",
     reponse: { valeur: 4.5, unite: "", decimales: 1, signe: true, tolerance: 0.05 },
     explication: "γ₂ = [[O₂A₂|O₂A₁]] = [[90|−60]] = −1,5\nγ = γ₁ × γ₂ = (−3) × (−1,5) = +4,5\nL'image finale est droite et 4,5 fois plus grande. Deux renversements de suite redonnent une image droite : c'est le rôle de L₂.",
-    indice: "Calcule γ₂ avec ses signes, puis multiplie les deux grandissements."
+    indice: "Calcule γ₂ avec ses signes, puis multiplie les deux grandissements.",
+    erreurs: [
+      { valeur: -4.5, type: "signe", message: "Tu as pris O₂A₁ = +60 mm. A₁B₁ est avant L₂ : O₂A₁ = −60 mm, donc γ₂ = −1,5 et γ = +4,5." }
+    ]
   },
   {
     id: "U43-138", epreuve: "U43", theme: "Chaîne des conjugués", session: "complément", difficulte: "facile",
@@ -193,7 +196,8 @@ QUESTIONS.push(
         consigne: "Position de A₁ par rapport au foyer objet de l'oculaire, Foc A₁ (en mm)",
         reponse: { valeur: 4, unite: "mm", decimales: 0, signe: true },
         aide: "Newton avec l'oculaire : x·x' = −f'oc², avec x' = −100 mm et f'oc = 20 mm.",
-        ligne: "x = [[−f'oc²|x']] = [[−400|−100]] = +4 mm\nA₁ est 4 mm après Foc, donc à 20 − 4 = 16 mm avant l'oculaire."
+        ligne: "x = [[−f'oc²|x']] = [[−400|−100]] = +4 mm\nA₁ est 4 mm après Foc, donc à 20 − 4 = 16 mm avant l'oculaire.",
+        erreurs: [{ valeur: -4, type: "signe", message: "Le remotum du myope est devant l'œil : x' = −100 mm. Avec x' = +100 mm, on trouverait x = −4 mm, ce qui est faux." }]
       },
       {
         consigne: "Distance entre l'objectif et l'oculaire O₁O₂ (en mm)",
@@ -982,3 +986,463 @@ CAS.push({
   contexte: "Un client te montre son appareil reflex. L'objectif, assimilé à une lentille mince de focale 50 mm, est réglé sur l'infini. Un miroir plan incliné à 45°, placé 30 mm après l'objectif, renvoie la lumière vers le haut sur un verre dépoli. On regarde le dépoli à travers une loupe de focale 40 mm.",
   annexe: { titre: "Données", colonnes: ["Élément", "Valeur"], lignes: [["Focale de l'objectif", "f'obj = 50 mm"], ["Distance objectif-miroir", "30 mm"], ["Focale de la loupe", "f'lou = 40 mm"], ["Mise au point de l'objectif", "sur l'infini"]] }
 });
+
+// ---------- Cas pratiques : lunette de terrain et télescope ----------
+CAS.push({
+  "id": "CAS-U43-03",
+  "epreuve": "U43",
+  "titre": "La lunette de terrain",
+  "contexte": "Un client veut une lunette de terrain pour observer les oiseaux. L'objectif est une lentille mince de focale 600 mm et de diamètre 60 mm. L'oculaire est une lentille mince de focale 20 mm.",
+  "annexe": {
+    "titre": "Données",
+    "colonnes": [
+      "Élément",
+      "Valeur"
+    ],
+    "lignes": [
+      [
+        "Focale de l'objectif",
+        "f'obj = 600 mm"
+      ],
+      [
+        "Diamètre de l'objectif",
+        "60 mm"
+      ],
+      [
+        "Focale de l'oculaire",
+        "f'oc = 20 mm"
+      ]
+    ]
+  }
+});
+CAS.push({
+  "id": "CAS-U43-04",
+  "epreuve": "U43",
+  "titre": "Le télescope de Newton",
+  "contexte": "Un client te montre son télescope de Newton. Le miroir principal est concave, de focale 800 mm. Un petit miroir plan à 45° renvoie la lumière sur le côté, vers un oculaire de focale 25 mm.",
+  "annexe": {
+    "titre": "Données",
+    "colonnes": [
+      "Élément",
+      "Valeur"
+    ],
+    "lignes": [
+      [
+        "Focale du miroir principal",
+        "f = 800 mm"
+      ],
+      [
+        "Focale de l'oculaire",
+        "f'oc = 25 mm"
+      ],
+      [
+        "Diaphragme de champ",
+        "diamètre 24 mm"
+      ]
+    ]
+  }
+});
+QUESTIONS.push(
+{
+  "id": "U43-147",
+  "epreuve": "U43",
+  "theme": "Grossissement et photo",
+  "session": "complément",
+  "difficulte": "facile",
+  "cas": "CAS-U43-03",
+  "etape": 1,
+  "type": "calcul",
+  "question": "Pour un œil emmétrope qui n'accommode pas, quel est le grossissement de la lunette, en valeur absolue ?",
+  "reponse": {
+    "valeur": 30,
+    "unite": "",
+    "decimales": 0,
+    "signe": false
+  },
+  "explication": "Lunette afocale : G = [[f'obj|f'oc]] = [[600|20]] = 30\nL'image est 30 fois plus grande que l'objet vu à l'œil nu, sous un angle 30 fois plus grand.",
+  "indice": "Pour une lunette afocale, G est le rapport de la focale de l'objectif à celle de l'oculaire.",
+  "erreurs": [
+    {
+      "valeur": 0.03,
+      "type": "notion",
+      "message": "Tu as inversé le rapport. G = f'obj / f'oc : la grande focale, celle de l'objectif, est au numérateur."
+    }
+  ]
+},
+{
+  "id": "U43-148",
+  "epreuve": "U43",
+  "theme": "Chaîne des conjugués",
+  "session": "complément",
+  "difficulte": "moyen",
+  "cas": "CAS-U43-03",
+  "etape": 2,
+  "contexte": "Le client est emmétrope. Il n'accommode pas.",
+  "question": "Pour un œil emmétrope qui n'accommode pas, où se forme l'image intermédiaire A₁ d'un oiseau très éloigné, et quelle distance sépare les deux lentilles ?",
+  "choix": [
+    "A₁ = F'obj = Foc, distance 580 mm",
+    "A₁ = F'obj, distance 600 mm (l'oculaire est collé au foyer)",
+    "A₁ = F'obj = Foc, distance 620 mm",
+    "A₁ sur l'oculaire, distance 600 mm"
+  ],
+  "bonne": 2,
+  "explication": "Objet à l'infini : l'objectif forme A₁ = F'obj. L'image finale doit être à l'infini, donc A₁ au foyer objet de l'oculaire : F'obj = Foc.\nDistance entre les lentilles : 600 + 20 = 620 mm. Avec 600 − 20 = 580 mm, on décrirait une lunette de Galilée.",
+  "indice": "Pour que l'oculaire donne une image à l'infini, où doit être son objet ? Additionne alors les deux focales.",
+  "erreurs": {
+    "0": {
+      "type": "notion",
+      "message": "Les deux foyers sont confondus, mais un oculaire convergent se place après l'image, pas avant. 580 mm vaut pour un oculaire divergent."
+    },
+    "3": {
+      "type": "notion",
+      "message": "L'image intermédiaire n'est pas sur l'oculaire : elle est au foyer objet de l'oculaire, 20 mm avant lui."
+    }
+  }
+},
+{
+  "id": "U43-149",
+  "epreuve": "U43",
+  "theme": "Grossissement et photo",
+  "session": "complément",
+  "difficulte": "moyen",
+  "cas": "CAS-U43-03",
+  "etape": 3,
+  "type": "calcul",
+  "question": "Quel est le diamètre du cercle oculaire (pupille de sortie), en mm ?",
+  "reponse": {
+    "valeur": 2,
+    "unite": "mm",
+    "decimales": 0,
+    "signe": false
+  },
+  "explication": "Cercle oculaire : d = [[D|G]] = [[60|30]] = 2 mm\nC'est le diamètre du faisceau qui sort de l'oculaire, plus petit que la pupille de l'œil le jour : tout passe.",
+  "indice": "Le diamètre du cercle oculaire est le diamètre de l'objectif divisé par le grossissement."
+},
+{
+  "id": "U43-150",
+  "epreuve": "U43",
+  "theme": "Œil et instrument",
+  "session": "complément",
+  "difficulte": "difficile",
+  "cas": "CAS-U43-03",
+  "etape": 4,
+  "contexte": "Le client suivant est myope de −4 δ et enlève ses lunettes.",
+  "type": "calcul",
+  "question": "Le client suivant est myope de −4 δ et enlève ses lunettes. Il règle la lunette sans accommoder, l'œil au foyer image de l'oculaire. Calcule x = Foc A₁ (en mm, avec son signe), la position de l'image intermédiaire par rapport au foyer objet de l'oculaire.",
+  "reponse": {
+    "valeur": 1.6,
+    "unite": "mm",
+    "decimales": 1,
+    "signe": true
+  },
+  "explication": "Remotum : HR = [[1|R]] = [[1|−4]] = −0,25 m = −250 mm, donc x' = F'oc A' = −250 mm\nNewton : x = [[−f'oc²|x']] = [[−400|−250]] = +1,6 mm\nPositif : A₁ est 1,6 mm après Foc. On rapproche l'oculaire de l'objectif de 1,6 mm.",
+  "indice": "L'œil est au foyer image de l'oculaire : x' = HR, négatif pour un myope. Puis Newton : x · x' = −f'².",
+  "erreurs": [
+    {
+      "valeur": -1.6,
+      "type": "signe",
+      "message": "Tu as pris x' = +250 mm. Le remotum d'un myope est devant l'œil : x' = −250 mm, donc x = +1,6 mm."
+    }
+  ]
+},
+{
+  "id": "U43-151",
+  "epreuve": "U43",
+  "theme": "Mécanismes de réglage",
+  "session": "complément",
+  "difficulte": "moyen",
+  "cas": "CAS-U43-03",
+  "etape": 5,
+  "question": "Le réglage se fait avec une bague filetée de pas 0,8 mm. Quelle est la liaison entre la bague et l'oculaire, et combien de tours pour le déplacement de l'étape précédente ?",
+  "choix": [
+    "Hélicoïdale, 2 tours",
+    "Hélicoïdale, 0,5 tour",
+    "Pivot glissant, 2 tours",
+    "Glissière, 2 tours"
+  ],
+  "bonne": 0,
+  "explication": "La bague tourne et l'oculaire avance en même temps, les deux mouvements sont liés par le filetage : liaison hélicoïdale.\nNombre de tours = [[course|pas]] = [[1,6|0,8]] = 2 tours. Le rapport inversé, [[0,8|1,6]] = 0,5 tour, est une erreur de division.",
+  "indice": "Les mouvements sont-ils indépendants ou liés ? Un tour fait avancer d'un pas.",
+  "erreurs": {
+    "1": {
+      "type": "notion",
+      "message": "Tu as divisé le pas par la course. Le nombre de tours est la course divisée par le pas."
+    }
+  }
+},
+{
+  "id": "U43-152",
+  "epreuve": "U43",
+  "theme": "Chaîne des conjugués",
+  "session": "complément",
+  "difficulte": "moyen",
+  "cas": "CAS-U43-04",
+  "etape": 1,
+  "question": "Sans tenir compte du miroir plan, où le miroir principal forme-t-il l'image A₁ d'une étoile ?",
+  "choix": [
+    "À 1 600 mm devant le miroir, au centre de courbure",
+    "Au foyer, à 800 mm devant le miroir",
+    "À 800 mm derrière le miroir",
+    "À l'infini"
+  ],
+  "bonne": 1,
+  "explication": "Un miroir concave de focale 800 mm renvoie la lumière vers l'avant : une étoile, à l'infini, donne son image au foyer, 800 mm devant le miroir. Le centre de courbure est à 1 600 mm, il ne sert pas ici.",
+  "indice": "Un faisceau parallèle converge au foyer, pas au centre de courbure.",
+  "erreurs": {
+    "0": {
+      "type": "notion",
+      "message": "Le centre de courbure est à 1 600 mm, mais l'image d'un objet à l'infini se forme au foyer, à mi-chemin (f = R/2)."
+    }
+  }
+},
+{
+  "id": "U43-153",
+  "epreuve": "U43",
+  "theme": "Chaîne des conjugués",
+  "session": "complément",
+  "difficulte": "moyen",
+  "cas": "CAS-U43-04",
+  "etape": 2,
+  "question": "Que change le miroir plan de renvoi ?",
+  "choix": [
+    "Il replie le trajet : l'image est symétrique, de même taille, à la même distance parcourue",
+    "Il double la focale du télescope",
+    "Il agrandit l'image, car il est incliné à 45°",
+    "Il déplace le foyer 800 mm plus loin"
+  ],
+  "bonne": 0,
+  "explication": "Un miroir plan donne d'un objet une image symétrique, de même taille (γ = +1). Il plie le faisceau pour sortir l'oculaire sur le côté, mais ne change ni la focale, ni la distance parcourue par la lumière.",
+  "indice": "Que vaut le grandissement d'un miroir plan ?",
+  "erreurs": {
+    "1": {
+      "type": "notion",
+      "message": "Un miroir plan a un grandissement de +1 : il ne peut pas changer la focale du télescope."
+    }
+  }
+},
+{
+  "id": "U43-154",
+  "epreuve": "U43",
+  "theme": "Grossissement et photo",
+  "session": "complément",
+  "difficulte": "moyen",
+  "cas": "CAS-U43-04",
+  "etape": 3,
+  "type": "calcul",
+  "question": "Quel est le grossissement du télescope, en valeur absolue ?",
+  "reponse": {
+    "valeur": 32,
+    "unite": "",
+    "decimales": 0,
+    "signe": false
+  },
+  "explication": "Comme pour une lunette afocale : G = [[f'miroir|f'oc]] = [[800|25]] = 32\nLe miroir plan ne change rien au calcul.",
+  "indice": "Même formule qu'une lunette : focale de l'objectif (ici le miroir) sur focale de l'oculaire."
+},
+{
+  "id": "U43-155",
+  "epreuve": "U43",
+  "theme": "Étude des champs",
+  "session": "complément",
+  "difficulte": "difficile",
+  "cas": "CAS-U43-04",
+  "etape": 4,
+  "type": "calcul",
+  "question": "Un diaphragme de champ de 24 mm de diamètre est placé dans le plan de l'image A₁. Quel est le champ réel total de l'instrument, en degrés ?",
+  "reponse": {
+    "valeur": 1.7,
+    "unite": "°",
+    "decimales": 1,
+    "signe": false
+  },
+  "explication": "Le diaphragme de champ est la lucarne : son rayon (12 mm) est vu depuis le miroir sous un demi-angle tel que\ntan α = [[12|800]] = 0,015, soit α = 0,86°\nChamp réel total : 2α ≈ 1,7°.",
+  "indice": "Demi-champ : tan α = rayon de la lucarne sur focale du miroir. Pense à doubler, et à prendre le rayon, pas le diamètre.",
+  "erreurs": [
+    {
+      "valeur": 3.4,
+      "type": "notion",
+      "message": "Tu as pris le diamètre de 24 mm au lieu du rayon de 12 mm. Le demi-champ se calcule avec le rayon."
+    }
+  ]
+},
+{
+  "id": "U43-156",
+  "epreuve": "U43",
+  "theme": "Mécanismes de réglage",
+  "session": "complément",
+  "difficulte": "moyen",
+  "cas": "CAS-U43-04",
+  "etape": 5,
+  "question": "La mise au point se fait par une molette dont le pignon a 16 dents, sur une crémaillère dont les dents sont espacées de 1,5 mm. De combien le tube de l'oculaire avance-t-il pour un tour, et quel est le mouvement utile ?",
+  "choix": [
+    "1,5 mm, translation du tube suivant son axe",
+    "24 mm, rotation de la molette",
+    "16 mm, translation du tube suivant son axe",
+    "24 mm, translation du tube suivant son axe"
+  ],
+  "bonne": 3,
+  "explication": "Un tour de molette fait défiler les 16 dents : 16 × 1,5 = 24 mm. Le mouvement utile est celui de l'élément optique, ici la translation du tube suivant son axe, pas la rotation de la molette.",
+  "indice": "Un tour de pignon = toutes ses dents devant la crémaillère. Quel est le mouvement qui sert à régler l'optique ?",
+  "erreurs": {
+    "1": {
+      "type": "notion",
+      "message": "Le mouvement utile est celui de l'élément optique (le tube qui coulisse), pas celui de la molette qu'on tourne."
+    },
+    "0": {
+      "type": "notion",
+      "message": "1,5 mm est l'espacement de deux dents. Pour un tour complet, il faut compter toutes les dents du pignon."
+    }
+  }
+}
+);
+
+// ---------- Questions à lire sur un schéma (schémas : notes/schemas-U43/generer-lot3.py) ----------
+QUESTIONS.push(
+{
+  "id": "U43-157",
+  "epreuve": "U43",
+  "theme": "Chaîne des conjugués",
+  "session": "complément",
+  "difficulte": "moyen",
+  "question": "Une lentille mince convergente de focale 40 mm donne de l'objet AB, placé à 60 mm devant elle, l'image dessinée (graduations tous les 20 mm à partir de O). Où se trouve l'image A'B', et de quelle nature est-elle ?",
+  "choix": [
+    "OA' = +60 mm, image réelle et renversée",
+    "OA' = −120 mm, image virtuelle et droite",
+    "OA' = +120 mm, image réelle et renversée",
+    "OA' = +40 mm, image réelle et renversée"
+  ],
+  "bonne": 2,
+  "explication": "Lecture : les deux rayons se croisent en B', dont le pied A' est en face de la graduation 120. Donc OA' = +120 mm : après la lentille, les rayons se croisent vraiment, l'image est réelle et renversée.\nVérification par le calcul :\n[[1|OA']] = [[1|f']] + [[1|OA]] = [[1|40]] + [[1|−60]] = [[3|120]] − [[2|120]] = [[1|120]]\nGrandissement : γ = [[OA'|OA]] = [[120|−60]] = −2, donc renversée et deux fois plus grande.",
+  "indice": "L'image est à l'endroit où les rayons issus de B se recoupent. Lis la graduation en face du pied de cette image.",
+  "erreurs": {
+    "0": {
+      "type": "notion",
+      "message": "Tu as lu la position de l'objet. L'image est là où les deux rayons se recoupent, en face d'une autre graduation."
+    },
+    "1": {
+      "type": "notion",
+      "message": "Les rayons se croisent vraiment après la lentille : l'image est réelle, donc OA' est positif."
+    }
+  },
+  "schemaQuestion": "img/schemas/U43/lentille-image-lue-120mm.svg",
+  "schema": "img/schemas/U43/lentille-image-lue-120mm-correction.svg",
+  "schemaTexte": "Lentille convergente de focale 40 mm, objet AB à 60 mm avant la lentille. Deux rayons issus de B se croisent en B', sous l'axe, après la lentille. Graduations tous les 20 mm à partir de O."
+},
+{
+  "id": "U43-158",
+  "epreuve": "U43",
+  "theme": "Étude des champs",
+  "session": "complément",
+  "difficulte": "difficile",
+  "question": "Les trois diaphragmes du schéma sont déjà ramenés dans l'espace d'étude (rayon, et distance au plan des champs dont A est le centre). Quelle est la lucarne ?",
+  "choix": [
+    "[D₁]",
+    "[D₃], le plus grand",
+    "[D₂]",
+    "Il n'y a pas de lucarne ici"
+  ],
+  "bonne": 0,
+  "explication": "Étape 1, la pupille : on compare les angles depuis A, centre du plan des champs.\n[D₁] : [[10|40]] = 0,25      [D₂] : [[15|90]] = 0,17      [D₃] : [[30|150]] = 0,20\n[D₂] est vu sous le plus petit angle : c'est la pupille.\nÉtape 2, la lucarne : on compare les angles depuis le centre de la pupille, à 90 mm de A.\n[D₁] est à 50 mm : [[10|50]] = 0,20      [D₃] est à 60 mm : [[30|60]] = 0,50\n[D₁] est vu sous le plus petit angle : c'est la lucarne.",
+  "indice": "Trouve d'abord la pupille depuis A. Cherche ensuite la lucarne parmi les deux autres, mais depuis le centre de la pupille.",
+  "erreurs": {
+    "2": {
+      "type": "notion",
+      "message": "[D₂] est vu sous le plus petit angle depuis A : c'est un autre rôle. La lucarne se cherche ensuite parmi les autres, depuis le centre de la pupille."
+    },
+    "1": {
+      "type": "notion",
+      "message": "Compare les angles, pas les tailles : un diaphragme plus grand mais plus éloigné peut être vu sous un angle plus petit."
+    }
+  },
+  "schemaQuestion": "img/schemas/U43/champs-lucarne-trois-diaphragmes.svg",
+  "schemaTexte": "Depuis le point A du plan des champs : [D₁] de rayon 10 mm à 40 mm, [D₂] de rayon 15 mm à 90 mm, [D₃] de rayon 30 mm à 150 mm."
+},
+{
+  "id": "U43-159",
+  "epreuve": "U43",
+  "theme": "Liaisons mécaniques",
+  "session": "complément",
+  "difficulte": "moyen",
+  "question": "D'après le schéma, quelle est la liaison entre le tube et le support ?",
+  "choix": [
+    "Pivot glissant d'axe Z",
+    "Pivot d'axe Z",
+    "Hélicoïdale d'axe Z",
+    "Glissière d'axe Z"
+  ],
+  "bonne": 3,
+  "explication": "La clavette, fixée au support, est engagée dans la rainure du tube : elle interdit la rotation. Il ne reste que la translation suivant Z : liaison glissière d'axe Z, 1 degré de liberté.\nSans la clavette, le tube pourrait aussi tourner : ce serait un pivot glissant (2 degrés de liberté).",
+  "indice": "Que fait une clavette dans une rainure ? Compte ensuite les mouvements qui restent.",
+  "erreurs": {
+    "0": {
+      "type": "notion",
+      "message": "Une clavette dans une rainure empêche le tube de tourner : il ne reste qu'un seul mouvement."
+    },
+    "2": {
+      "type": "notion",
+      "message": "Il n'y a pas de filetage ici, et la rotation est bloquée par la clavette."
+    }
+  },
+  "schemaQuestion": "img/schemas/U43/liaison-tube-clavette.svg",
+  "schemaTexte": "Un tube guidé dans un support : une clavette fixée au support est engagée dans une rainure creusée le long du tube, d'axe Z. Coupe transversale et coupe longitudinale."
+},
+{
+  "id": "U43-160",
+  "epreuve": "U43",
+  "theme": "Chaîne des conjugués",
+  "session": "complément",
+  "difficulte": "moyen",
+  "question": "Un objet AB est placé au centre de courbure C d'un miroir concave. D'après le tracé, quelle est son image ?",
+  "choix": [
+    "Réelle, renversée, plus petite, entre F et C",
+    "Réelle, renversée, de même taille, en C",
+    "Virtuelle, droite, derrière le miroir",
+    "Réelle, droite, de même taille, en C"
+  ],
+  "bonne": 1,
+  "explication": "Les deux rayons réfléchis se recoupent en B', sous l'axe, à la verticale de C et à la même distance de l'axe que B : l'image est en C, de même taille que l'objet, renversée (γ = −1).\nVérification, avec les distances comptées positivement devant le miroir, SA = SC = R :\n[[1|SA']] + [[1|SA]] = [[2|R]], donc [[1|SA']] = [[2|R]] − [[1|R]] = [[1|R]]\nDonc SA' = R : A' est en C.",
+  "indice": "Regarde où les deux rayons réfléchis se recoupent, puis compare la hauteur de B' à celle de B.",
+  "erreurs": {
+    "0": {
+      "type": "notion",
+      "message": "Mesure la hauteur de B' sur le schéma et compare-la à celle de B."
+    },
+    "2": {
+      "type": "notion",
+      "message": "Les rayons réfléchis se croisent vraiment, devant le miroir : l'image est réelle."
+    }
+  },
+  "schemaQuestion": "img/schemas/U43/miroir-concave-objet-en-c.svg",
+  "schema": "img/schemas/U43/miroir-concave-objet-en-c-correction.svg",
+  "schemaTexte": "Miroir concave de sommet S, de foyer F et de centre de courbure C. L'objet AB est en C. Un rayon parallèle à l'axe repart vers F, un rayon visant S repart symétrique par rapport à l'axe ; ils se recoupent en B', sous l'axe."
+},
+{
+  "id": "U43-161",
+  "epreuve": "U43",
+  "theme": "Grossissement et photo",
+  "session": "complément",
+  "difficulte": "difficile",
+  "question": "Un faisceau parallèle de 80 mm de large entre dans l'instrument dessiné et en ressort avec 20 mm de large. De quel instrument s'agit-il, et quel est son grossissement en valeur absolue ?",
+  "choix": [
+    "Lunette de Galilée (oculaire divergent), ∣G∣ = 4",
+    "Lunette astronomique (oculaire convergent), ∣G∣ = 4",
+    "Lunette de Galilée (oculaire divergent), ∣G∣ = 0,25",
+    "Télescope à miroir, ∣G∣ = 4"
+  ],
+  "bonne": 0,
+  "explication": "L'oculaire est divergent et les rayons venus de l'objectif ne se croisent pas avant lui : ils visent le foyer F'obj, situé derrière l'oculaire. C'est une lunette de Galilée, qui donne une image droite.\nGrossissement : ∣G∣ = [[largeur entrante|largeur sortante]] = [[80|20]] = 4\nUne lunette astronomique aurait un oculaire convergent, après le point de croisement.",
+  "indice": "Où vont les rayons après l'objectif : se croisent-ils avant l'oculaire ? Compare ensuite la largeur du faisceau avant et après l'instrument.",
+  "erreurs": {
+    "1": {
+      "type": "notion",
+      "message": "Dans une lunette astronomique, les rayons se croisent avant l'oculaire, qui est convergent. Ici l'oculaire est divergent."
+    },
+    "2": {
+      "type": "notion",
+      "message": "Tu as pris le rapport inversé. Le faisceau est resserré, l'instrument grossit : ∣G∣ = largeur entrante ÷ largeur sortante."
+    }
+  },
+  "schemaQuestion": "img/schemas/U43/lunette-galilee-faisceau.svg",
+  "schemaTexte": "Un faisceau parallèle de 80 mm de large traverse un objectif convergent puis un oculaire divergent, et ressort parallèle avec 20 mm de large. Les rayons de l'objectif visent un point situé derrière l'oculaire."
+}
+);

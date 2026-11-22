@@ -371,5 +371,23 @@ TRACES.push(
       { action: "relier", quoi: "champ-total", texte: "Champ total : touche les deux bords qui le limitent." }
     ],
     conclusion: "Pour supprimer le champ de contour, il faudrait un diaphragme de champ dans le plan de A₁B₁, de rayon égal à celui de la pleine lumière. Le champ objet s'en déduit en divisant par |γ| de l'objectif."
+  },
+  {
+    // Même piège que U42-19 (sujet 2025), sur une lunette : objet à l'infini, plan des champs = plan focal de l'objectif
+    // angle négatif : B₁ au-dessus de l'axe, sinon la flèche A₁B₁ cache F'₁ (confondu avec F₂, lunette afocale)
+    id: "U42-26", epreuve: "U42", chapitre: "Champs", titre: "Lunette de Kepler : le champ entre les deux lentilles",
+    regle: "Dans une lunette, l'objectif est la pupille et la monture de l'oculaire la lucarne. Entre les deux lentilles, le plan des champs est le plan focal image de l'objectif, où se forme B₁ : il est ENTRE la pupille et la lucarne. La pleine lumière s'appuie donc sur les bords opposés, le champ total sur les bords du même côté.",
+    consigne: "Objectif Ob (f' = 200 mm, rayon 15 mm), oculaire Oc (f' = 40 mm, rayon 6 mm) 240 mm après Ob : la lunette est afocale. L'objet est à l'infini. Étudie le champ entre Ob et Oc.",
+    theme: "Champs et diaphragmes",
+    systeme: { objet: { infini: true, angle: -1 }, elements: [{ type: "lentille", nom: "Ob", x: 0, f: 200, rayon: 15 }, { type: "lentille", nom: "Oc", x: 240, f: 40, rayon: 6 }] },
+    espaceChamps: { apres: "Ob", pupille: "Ob", lucarne: "Oc" },
+    vue: { xmin: -30, xmax: 270, hmax: 18, carreauX: 20, carreauY: 2 },
+    etapes: [
+      { action: "placer", quoi: "image", apres: "Ob", rayons: ["O", "F"], texte: "L'objet est à l'infini : B₁ se forme dans le plan focal image de l'objectif. C'est le plan des champs. Place B₁." },
+      { action: "relier", quoi: "champ-pleine-lumiere", texte: "Touche les deux bords qui donnent la limite du champ de pleine lumière dans le plan de B₁. Ce plan est-il entre Ob et Oc ?" },
+      { action: "calcul", grandeur: "rayon-champ", decimales: 1, unite: "mm", signe: false, texte: "Calcule le rayon du champ de pleine lumière dans le plan focal de l'objectif (Thalès entre le bord bas de Ob et le bord haut de Oc)." },
+      { action: "relier", quoi: "champ-total", texte: "Champ total : touche les deux bords qui le limitent." }
+    ],
+    conclusion: "Pleine lumière : 2,5 mm dans le plan focal, soit un champ objet de 2,5 / 200 rad, environ 0,72°. Le champ total va jusqu'à 7,5 mm. Un diaphragme de champ de rayon 2,5 mm placé dans ce plan supprimerait le champ de contour."
   }
 );

@@ -277,7 +277,7 @@ QUESTIONS.push(
     question: "En CDI, quelle est la durée maximale de la période d'essai d'un EMPLOYÉ fixée par le Code du travail (hors renouvellement) ?",
     choix: ["1 mois", "2 mois", "3 mois", "4 mois"],
     bonne: 1,
-    explication: "Code du travail (L1221-19) : 2 mois pour les ouvriers et employés, 3 mois pour les agents de maîtrise et techniciens, 4 mois pour les cadres. Un seul renouvellement possible si un accord de branche étendu le prévoit et s'il est écrit dans le contrat. Intérêt pour les deux : l'employeur juge les compétences, le salarié juge le poste, et chacun peut rompre simplement.",
+    explication: "Code du travail (L1221-19) : 2 mois pour les ouvriers et employés, 3 mois pour les agents de maîtrise et techniciens, 4 mois pour les cadres. Un seul renouvellement est possible, renouvellement compris 4, 6 ou 8 mois au plus, et seulement si un accord de branche étendu le prévoit, si le contrat l'écrit et si le salarié l'accepte par écrit. Intérêt pour les deux : l'employeur juge les compétences, le salarié juge le poste, et chacun peut rompre simplement.",
     indice: "Le Code du travail fixe trois durées selon la catégorie : ouvriers et employés, agents de maîtrise et techniciens, cadres."
   },
   {
@@ -355,7 +355,7 @@ QUESTIONS.push(
     question: "Avant de réaliser une réfraction pour adapter une ordonnance, que doit dire l'opticien au client ?",
     choix: ["Que l'examen est remboursé par la Sécurité sociale", "Que la réfraction pratiquée n'est pas un acte médical", "Qu'il doit revenir dans 3 mois", "Qu'il n'a pas le droit de vendre de lentilles"],
     bonne: 1,
-    explication: "Le Code de la santé publique (décret du 12 octobre 2016 relatif à la délivrance des verres correcteurs et à l'exercice de la profession d'opticien-lunetier) oblige l'opticien à informer la personne que la réfraction qu'il pratique n'est pas un acte médical : elle ne remplace pas une consultation chez l'ophtalmologiste.",
+    explication: "L'article L4362-10 du Code de la santé publique oblige l'opticien à informer la personne que la réfraction qu'il pratique n'est pas un acte médical : elle ne remplace pas une consultation chez l'ophtalmologiste.",
     indice: "Le décret de 2016 encadre la réfraction faite par l'opticien. Qu'est-ce qui la distingue d'une consultation chez l'ophtalmologiste ?"
   },
   {
@@ -640,6 +640,7 @@ QUESTIONS.push(
     type: "calcul",
     question: "Emprunt de 24 000 € sur 4 ans à 4 %, annuités constantes de 6 611,76 €. Calcule les intérêts de la 2e année.",
     reponse: { valeur: 733.93, unite: "€", decimales: 2, tolerance: 0.02, signe: false },
+    erreurs: [ { valeur: 960, type: "notion", message: "Tu as calculé les intérêts sur le capital de départ. Ils se calculent sur le capital restant dû après la 1re annuité." } ],
     explication: "Année 1 : intérêts = 24 000 × 4 % = 960 € ; capital remboursé = 6 611,76 − 960 = 5 651,76 € ; reste dû = 24 000 − 5 651,76 = 18 348,24 €. Année 2 : intérêts = 18 348,24 × 4 % = 733,93 €.",
     indice: "Les intérêts se calculent sur le capital restant dû. Commence par trouver ce qui reste dû après la 1re annuité."
   },
@@ -1073,6 +1074,7 @@ QUESTIONS.push(
     cas: "CAS-U3-05", etape: 4, type: "calcul",
     question: "Calcule les intérêts de la 1re année de cet emprunt.",
     reponse: { valeur: 8800, unite: "€", decimales: 0, tolerance: 1, signe: false },
+    erreurs: [ { valeur: 27124, type: "notion", message: "Tu as donné l'annuité entière. Elle contient aussi du capital remboursé : les intérêts, c'est 4 % du capital restant dû." } ],
     explication: "Intérêts de l'année 1 = capital restant dû × taux = 220 000 × 4 % = 8 800 €\nCapital remboursé la 1re année = 27 124 − 8 800 = 18 324 €. Seuls les intérêts sont une charge ; le capital remboursé ne l'est pas.",
     indice: "Les intérêts se calculent sur le capital restant dû, ici le capital entier."
   },
@@ -1322,5 +1324,519 @@ QUESTIONS.push(
     bonne: 2,
     explication: "Un équipement dure plusieurs années : le financer par un découvert (ressource de court terme) est risqué, et le payer comptant provoque un découvert de 10 200 € en mars. L'emprunt à 5 ans adapte la ressource à la durée du bien et garde la trésorerie. Reporter sans étudier n'est pas un conseil argumenté.",
     indice: "Un bien qui dure plusieurs années se finance par une ressource qui dure aussi."
+  }
+);
+
+// ==============================================================
+//  DOSSIERS LONGS (suite) : droit et tableau de bord, CAS-U3-08 à CAS-U3-12
+// ==============================================================
+
+CAS.push({
+  id: "CAS-U3-08",
+  epreuve: "U3",
+  titre: "Optique Delmas : rompre un CDI d'un commun accord",
+  contexte: "Optique Delmas est une SARL dirigée par Mme Delmas. M. Bastien, opticien salarié en CDI, veut quitter le magasin pour monter son propre projet. Mme Delmas et lui envisagent une rupture conventionnelle. Tu prépares le dossier.",
+  annexe: { titre: "Annexe 1 : le salarié et le calendrier", colonnes: ["", "Information"], lignes: [["Ancienneté à la date de rupture prévue", "6 ans et 3 mois"], ["Salaire brut mensuel (stable depuis 12 mois)", "2 400 €"], ["Primes", "aucune"], ["Indemnité proposée par la gérante", "3 000 €"], ["Signature de la convention", "le 2 mars"]] }
+});
+QUESTIONS.push(
+  {
+    id: "U3-194", difficulte: "facile", epreuve: "U3", theme: "Droit du travail", session: "complément",
+    cas: "CAS-U3-08", etape: 1,
+    question: "Pourquoi M. Bastien préfère-t-il une rupture conventionnelle à une démission ?",
+    choix: ["Elle permet à la gérante de l'imposer sans son accord.", "Elle supprime toute formalité et tout délai.", "Elle lui ouvre en principe droit à l'allocation chômage et à une indemnité de rupture, alors qu'une démission n'ouvre en général aucun de ces droits.", "Elle lui garantit de garder son salaire pendant le chômage."],
+    bonne: 2,
+    explication: "La rupture conventionnelle est un accord entre les deux parties : personne ne peut l'imposer. Elle suit une procédure (entretien, convention, délai de rétractation, homologation) et ouvre, sous conditions, droit à l'allocation chômage et à une indemnité d'au moins le montant de l'indemnité légale de licenciement. La démission ne les ouvre en général pas.",
+    indice: "Une rupture d'un commun accord et une démission n'ont pas les mêmes conséquences sur les droits du salarié."
+  },
+  {
+    id: "U3-195", difficulte: "facile", epreuve: "U3", theme: "Droit du travail", session: "complément",
+    cas: "CAS-U3-08", etape: 2, type: "calcul",
+    question: "Exprime l'ancienneté de M. Bastien en années (6 ans et 3 mois).",
+    reponse: { valeur: 6.25, unite: "ans", decimales: 2, tolerance: 0.01, signe: false },
+    explication: "Ancienneté = 6 + [[3|12]] = 6 + 0,25 = 6,25 ans\nLes mois comptent proportionnellement dans le calcul de l'indemnité.",
+    indice: "3 mois, c'est 3/12 d'année."
+  },
+  {
+    id: "U3-196", difficulte: "moyen", epreuve: "U3", theme: "Droit du travail", session: "complément",
+    cas: "CAS-U3-08", etape: 3, type: "calcul",
+    question: "Calcule l'indemnité légale de licenciement de M. Bastien, sachant qu'elle vaut un quart de mois de salaire par année d'ancienneté (jusqu'à 10 ans).",
+    reponse: { valeur: 3750, unite: "€", decimales: 0, tolerance: 1, signe: false },
+    erreurs: [ { valeur: 5000, type: "notion", message: "Tu as pris un tiers de mois par année. Jusqu'à 10 ans d'ancienneté, c'est un quart de mois." }, { valeur: 3600, type: "notion", message: "Tu as compté seulement les années entières. Les 3 mois comptent au prorata (6,25 ans)." } ],
+    explication: "Indemnité = ancienneté × [[1|4]] × salaire mensuel\n= 6,25 × [[1|4]] × 2 400 = 1,5625 × 2 400 = 3 750 €\nC'est le plancher de l'indemnité de rupture conventionnelle.",
+    indice: "Ancienneté en années, multipliée par un quart, multipliée par le salaire mensuel."
+  },
+  {
+    id: "U3-197", difficulte: "moyen", epreuve: "U3", theme: "Droit du travail", session: "complément",
+    cas: "CAS-U3-08", etape: 4,
+    question: "La gérante propose 3 000 € d'indemnité de rupture. Que lui répondre ?",
+    choix: ["Impossible : l'indemnité ne peut pas être inférieure à l'indemnité légale de licenciement, ici 3 750 €.", "Possible : le montant est libre entre les deux parties.", "Possible : l'indemnité est toujours de 1 mois de salaire, soit 2 400 €.", "Impossible : l'indemnité est toujours de 6 mois de salaire."],
+    bonne: 0,
+    explication: "L'indemnité spécifique de rupture conventionnelle ne peut pas être inférieure à l'indemnité légale de licenciement. Ici, 3 000 € est inférieur à 3 750 € : l'administration refuserait l'homologation. Les parties peuvent négocier un montant supérieur, jamais inférieur.",
+    indice: "Compare 3 000 € au plancher calculé à l'étape précédente."
+  },
+  {
+    id: "U3-198", difficulte: "difficile", epreuve: "U3", theme: "Droit du travail", session: "complément",
+    cas: "CAS-U3-08", etape: 5, type: "calcul",
+    question: "Calcule l'indemnité légale si M. Bastien avait 12 ans d'ancienneté : un quart de mois par année jusqu'à 10 ans, puis un tiers de mois par année au-delà. Salaire de 2 400 €.",
+    reponse: { valeur: 7600, unite: "€", decimales: 0, tolerance: 1, signe: false },
+    erreurs: [ { valeur: 7200, type: "notion", message: "Tu as gardé le quart de mois pour les 12 années. Au-delà de 10 ans, c'est un tiers de mois par année." } ],
+    explication: "10 premières années : 10 × [[1|4]] = 2,5 mois\n2 années suivantes : 2 × [[1|3]] = 0,667 mois\nTotal = 3,1667 mois × 2 400 = 7 600 €\nAu-delà de 10 ans, chaque année compte davantage.",
+    indice: "Deux tranches : jusqu'à 10 ans au quart, puis au tiers."
+  },
+  {
+    id: "U3-199", difficulte: "moyen", epreuve: "U3", theme: "Droit du travail", session: "complément",
+    cas: "CAS-U3-08", etape: 6,
+    question: "La convention est signée le mardi 2 mars. Jusqu'à quelle date chaque partie peut-elle se rétracter ?",
+    choix: ["Jusqu'au mercredi 17 mars : 15 jours calendaires, qui commencent le lendemain de la signature.", "Jusqu'au 9 mars : 7 jours.", "Jusqu'au 16 mars : 15 jours, en comptant le jour de la signature.", "Jusqu'au 2 avril : un mois."],
+    bonne: 0,
+    explication: "Le délai de rétractation est de 15 jours calendaires (week-ends compris). Il commence le lendemain de la signature : du 3 au 17 mars inclus. La rétractation se fait par lettre, remise en main propre contre décharge ou envoyée en recommandé.",
+    indice: "Les jours sont calendaires : tous les jours comptent. On commence à compter le lendemain."
+  },
+  {
+    id: "U3-200", difficulte: "moyen", epreuve: "U3", theme: "Droit du travail", session: "complément",
+    cas: "CAS-U3-08", etape: 7,
+    question: "Après la fin du délai de rétractation, qui doit valider la convention ?",
+    choix: ["Le conseil de prud'hommes, qui dispose de 2 mois.", "L'administration (la DREETS), qui dispose de 15 jours ouvrables ; sans réponse, la convention est réputée homologuée.", "Personne : la convention s'applique dès la fin de la rétractation.", "L'inspection du travail, qui dispose d'un an."],
+    bonne: 1,
+    explication: "Une des parties envoie la demande d'homologation à l'administration (la DREETS), qui a 15 jours ouvrables pour répondre. Son silence vaut accord. Le contrat ne prend fin qu'après l'homologation : jusque-là, M. Bastien reste salarié.",
+    indice: "Le contrat ne prend pas fin tout de suite : une administration doit valider."
+  },
+  {
+    id: "U3-201", difficulte: "difficile", epreuve: "U3", theme: "Droit du travail", session: "complément",
+    cas: "CAS-U3-08", etape: 8,
+    question: "Que conseilles-tu à Mme Delmas ?",
+    choix: ["Accepter la rupture conventionnelle avec une indemnité d'au moins 3 750 €, tenir un entretien, signer la convention, laisser passer les 15 jours de rétractation, puis demander l'homologation : le contrat ne prendra fin qu'après.", "Maintenir 3 000 € : c'est le montant que le magasin peut payer.", "Faire signer à M. Bastien une démission, plus simple et moins chère.", "Le licencier pour faute grave, pour ne payer aucune indemnité."],
+    bonne: 0,
+    explication: "Le conseil reprend les chiffres (3 750 € minimum, contre 3 000 € proposés) et la procédure complète : entretien, convention, 15 jours de rétractation, homologation. Les autres choix ne respectent pas le plancher légal ou imposeraient un motif que rien n'établit : un faux licenciement pour faute grave serait contesté et coûterait plus cher.",
+    indice: "Il faut le montant minimum et les étapes dans l'ordre."
+  }
+);
+CAS.push({
+  id: "CAS-U3-09",
+  epreuve: "U3",
+  titre: "Optique Garance : licencier un salarié",
+  contexte: "Optique Garance est une SARL dirigée par Mme Garance. Un monteur-vendeur en CDI arrive régulièrement en retard : 12 retards en 3 mois, malgré un avertissement écrit reçu il y a 2 mois. La gérante envisage de le licencier. Tu l'aides à qualifier la situation, à respecter la procédure et à chiffrer le coût.",
+  annexe: { titre: "Annexe 1 : le salarié et les faits", colonnes: ["", "Information"], lignes: [["Ancienneté à la fin du préavis", "3 ans et 9 mois"], ["Salaire brut mensuel", "2 100 €"], ["Retards constatés par le pointage", "12 en 3 mois"], ["Avertissement écrit", "remis il y a 2 mois"], ["Préavis prévu par une convention plus favorable", "aucun : préavis légal"]] }
+});
+QUESTIONS.push(
+  {
+    id: "U3-202", difficulte: "moyen", epreuve: "U3", theme: "Droit du travail", session: "complément",
+    cas: "CAS-U3-09", etape: 1,
+    question: "Quelle qualification est la plus prudente pour des retards répétés après un avertissement, sans conséquence grave sur l'activité ?",
+    choix: ["Une cause réelle et sérieuse : les retards justifient le licenciement, mais ils ne rendent pas impossible le maintien du salarié pendant le préavis ; préavis et indemnité de licenciement sont dus.", "Une faute grave : pas de préavis et pas d'indemnité de licenciement.", "Une faute lourde : elle suppose seulement un retard de plus de 10 minutes.", "Un motif économique : le salarié est trop souvent absent."],
+    bonne: 0,
+    explication: "La faute grave rend impossible le maintien du salarié, même pendant le préavis ; elle est appréciée strictement. La faute lourde suppose l'intention de nuire à l'employeur. Des retards répétés, après un avertissement mais sans conséquence grave, sont le plus souvent traités comme une cause réelle et sérieuse. Un motif économique n'a rien à voir avec le comportement d'un salarié.",
+    indice: "Se demander si le maintien du salarié pendant le préavis est impossible."
+  },
+  {
+    id: "U3-203", difficulte: "moyen", epreuve: "U3", theme: "Droit du travail", session: "complément",
+    cas: "CAS-U3-09", etape: 2,
+    question: "La convocation à l'entretien préalable est remise en main propre le lundi 3 (aucun jour férié). Quel est le premier jour possible pour l'entretien ?",
+    choix: ["Le mardi 11.", "Le lundi 10.", "Le jeudi 6.", "Le vendredi 7."],
+    bonne: 0,
+    explication: "Le jour de la remise et celui de l'entretien ne comptent pas. Du mardi 4 au samedi 8, cela fait 5 jours ouvrables (tous les jours sauf le dimanche et les jours fériés). Un délai qui se termine un samedi est reporté au premier jour ouvrable suivant, donc au lundi 10 : l'entretien peut avoir lieu au plus tôt le mardi 11 (Cour de cassation, 10 juillet 2019).",
+    indice: "Compte les jours ouvrables à partir du lendemain, samedi inclus, dimanche exclu."
+  },
+  {
+    id: "U3-204", difficulte: "facile", epreuve: "U3", theme: "Droit du travail", session: "complément",
+    cas: "CAS-U3-09", etape: 3, type: "calcul",
+    question: "Le salarié a plus de 2 ans d'ancienneté : le préavis légal est de 2 mois. S'il en est dispensé, quelle indemnité compensatrice brute faut-il lui verser ?",
+    reponse: { valeur: 4200, unite: "€ brut", decimales: 0, tolerance: 1, signe: false },
+    explication: "Indemnité compensatrice = 2 mois × 2 100 = 4 200 € brut\nElle remplace le salaire que le salarié aurait perçu s'il avait travaillé pendant le préavis.",
+    indice: "Le salaire de 2 mois."
+  },
+  {
+    id: "U3-205", difficulte: "moyen", epreuve: "U3", theme: "Droit du travail", session: "complément",
+    cas: "CAS-U3-09", etape: 4, type: "calcul",
+    question: "Calcule l'indemnité légale de licenciement (un quart de mois de salaire par année d'ancienneté), à 0,01 € près.",
+    reponse: { valeur: 1968.75, unite: "€", decimales: 2, tolerance: 0.02, signe: false },
+    erreurs: [ { valeur: 1575, type: "notion", message: "Tu as compté 3 années entières. Les 9 mois comptent au prorata (3,75 ans)." } ],
+    explication: "Ancienneté = 3 + [[9|12]] = 3,75 ans\nIndemnité = 3,75 × [[1|4]] × 2 100 = 0,9375 × 2 100 = 1 968,75 €",
+    indice: "Ancienneté en années, multipliée par un quart de mois de salaire."
+  },
+  {
+    id: "U3-206", difficulte: "moyen", epreuve: "U3", theme: "Droit du travail", session: "complément",
+    cas: "CAS-U3-09", etape: 5, type: "calcul",
+    question: "Calcule le coût brut total du licenciement si le salarié est dispensé de son préavis (indemnité compensatrice + indemnité de licenciement), hors cotisations et congés payés.",
+    reponse: { valeur: 6168.75, unite: "€ brut", decimales: 2, tolerance: 0.02, signe: false },
+    explication: "Coût brut = 4 200 + 1 968,75 = 6 168,75 €\nLes cotisations patronales sur l'indemnité compensatrice s'ajoutent à ce chiffre.",
+    indice: "Additionne les deux montants des étapes précédentes."
+  },
+  {
+    id: "U3-207", difficulte: "moyen", epreuve: "U3", theme: "Droit du travail", session: "complément",
+    cas: "CAS-U3-09", etape: 6,
+    question: "Que doit contenir la lettre de licenciement ?",
+    choix: ["Les faits reprochés, précis et datés : le nombre de retards, leurs dates et l'avertissement déjà remis.", "Seulement le mot « faute ».", "Une proposition de rupture conventionnelle.", "L'accord préalable de l'inspection du travail."],
+    bonne: 0,
+    explication: "La lettre, envoyée en recommandé avec avis de réception, doit énoncer le ou les motifs de façon précise et vérifiable : c'est elle qui fixe les limites du litige. « Faute » seul est trop vague. L'accord de l'inspection du travail ne concerne que certains salariés protégés.",
+    indice: "Un juge doit pouvoir vérifier les faits cités."
+  },
+  {
+    id: "U3-208", difficulte: "facile", epreuve: "U3", theme: "Droit du travail", session: "complément",
+    cas: "CAS-U3-09", etape: 7,
+    question: "Combien de temps faut-il attendre au minimum, après l'entretien préalable, avant d'envoyer la lettre de licenciement ?",
+    choix: ["Au moins 2 jours ouvrables.", "Aucun délai.", "Au moins 15 jours.", "Au moins 5 jours calendaires."],
+    bonne: 0,
+    explication: "La lettre ne peut pas être envoyée moins de 2 jours ouvrables après l'entretien. Pour un licenciement disciplinaire, elle doit aussi partir dans le mois qui suit l'entretien. La réflexion est ainsi encadrée dans les deux sens.",
+    indice: "Un petit nombre de jours ouvrables, pas des semaines."
+  },
+  {
+    id: "U3-209", difficulte: "moyen", epreuve: "U3", theme: "Droit du travail", session: "complément",
+    cas: "CAS-U3-09", etape: 8,
+    question: "Le salarié veut contester son licenciement. De combien de temps dispose-t-il pour saisir le conseil de prud'hommes ?",
+    choix: ["12 mois à compter de la notification du licenciement.", "3 mois.", "2 ans.", "5 ans."],
+    bonne: 0,
+    explication: "Depuis 2017, le salarié dispose de 12 mois à partir de la notification du licenciement pour contester sa rupture devant le conseil de prud'hommes. L'employeur garde donc ses preuves (pointage, avertissement) au moins aussi longtemps.",
+    indice: "Une année, à partir de la lettre."
+  },
+  {
+    id: "U3-210", difficulte: "difficile", epreuve: "U3", theme: "Droit du travail", session: "complément",
+    cas: "CAS-U3-09", etape: 9,
+    question: "Que conseilles-tu à Mme Garance ?",
+    choix: ["Respecter la procédure à la lettre (convocation, entretien, lettre motivée avec les dates), garder le pointage et l'avertissement comme preuves, et prévoir environ 6 169 € brut si le préavis n'est pas effectué (4 200 € d'indemnité compensatrice et 1 969 € d'indemnité de licenciement). Une rupture conventionnelle reste possible si le salarié est d'accord.", "Le licencier tout de suite par SMS pour faute grave.", "Ne rien faire : un salarié de plus de 3 ans ne peut jamais être licencié.", "Le licencier sans entretien : la procédure est facultative."],
+    bonne: 0,
+    explication: "Le bon conseil appuie la décision sur des preuves, chiffre le coût (4 200 + 1 968,75 = 6 168,75 € brut) et propose une alternative. Les autres choix ignorent la procédure ou inventent des règles : un licenciement mal fait peut coûter bien plus cher en prud'hommes.",
+    indice: "Procédure, preuves, coût chiffré et alternative."
+  }
+);
+CAS.push({
+  id: "CAS-U3-10",
+  epreuve: "U3",
+  titre: "Optique Sorel : choisir sa société",
+  contexte: "Mme Sorel et M. Imbert, deux opticiens, créent un magasin ensemble. Mme Sorel sera associée sans travailler dans le magasin ; M. Imbert en sera le gérant. Ils hésitent entre une SARL et une SAS. Tu les conseilles sur le statut du dirigeant, la responsabilité, les décisions et le coût social.",
+  annexe: { titre: "Annexe 1 : le projet de société", colonnes: ["", "Information"], lignes: [["Capital", "30 000 €"], ["Apport de Mme Sorel", "12 000 €"], ["Apport de M. Imbert", "18 000 €"], ["Dirigeant", "M. Imbert"], ["Rémunération nette envisagée du dirigeant", "24 000 € par an"], ["Majorité fixée par les statuts pour les modifier", "3/4 des parts (la loi impose au moins les 2/3)"]] }
+});
+QUESTIONS.push(
+  {
+    id: "U3-211", difficulte: "facile", epreuve: "U3", theme: "Droit des entreprises", session: "complément",
+    cas: "CAS-U3-10", etape: 1, type: "calcul",
+    question: "Quel pourcentage du capital M. Imbert détient-il ?",
+    reponse: { valeur: 60, unite: "%", decimales: 0, tolerance: 0.5, signe: false },
+    explication: "Part de M. Imbert = [[18 000|30 000]] × 100 = 60 %\nMme Sorel détient les 40 % restants : [[12 000|30 000]] = 40 %.",
+    indice: "Son apport divisé par le capital total."
+  },
+  {
+    id: "U3-212", difficulte: "moyen", epreuve: "U3", theme: "Droit des entreprises", session: "complément",
+    cas: "CAS-U3-10", etape: 2,
+    question: "M. Imbert est gérant d'une SARL et détient 60 % des parts. Quel est son statut social ?",
+    choix: ["Gérant majoritaire (plus de 50 % des parts) : travailleur non salarié, affilié au régime des indépendants.", "Assimilé salarié, affilié au régime général.", "Salarié avec un contrat de travail classique.", "Aucun statut : un gérant n'est pas protégé socialement."],
+    bonne: 0,
+    explication: "Le gérant de SARL qui détient plus de la moitié des parts (seul ou avec sa famille) est majoritaire : il relève du régime des travailleurs non salariés. Un gérant minoritaire ou égalitaire serait assimilé salarié. Le président de SAS, lui, est toujours assimilé salarié.",
+    indice: "Plus de la moitié des parts : gérant majoritaire."
+  },
+  {
+    id: "U3-213", difficulte: "facile", epreuve: "U3", theme: "Droit des entreprises", session: "complément",
+    cas: "CAS-U3-10", etape: 3,
+    question: "Mme Sorel craint de perdre ses biens personnels si le magasin a des dettes. Que lui répondre ?",
+    choix: ["Dans une SARL comme dans une SAS, elle ne répond des dettes qu'à hauteur de ses apports, sauf si elle se porte caution personnelle auprès de la banque.", "Elle répond indéfiniment de toutes les dettes de la société.", "Elle répond des dettes à hauteur du double de son apport.", "Elle ne répond jamais de rien, même si elle cautionne un prêt."],
+    bonne: 0,
+    explication: "Dans une société à responsabilité limitée (SARL, SAS), les associés ne perdent que leurs apports. La limite saute si un associé donne sa caution personnelle à la banque : il s'engage alors sur ses biens pour cette dette.",
+    indice: "Le mot « limitée » dans SARL."
+  },
+  {
+    id: "U3-214", difficulte: "moyen", epreuve: "U3", theme: "Droit des entreprises", session: "complément",
+    cas: "CAS-U3-10", etape: 4, type: "calcul",
+    annexe: { titre: "Annexe 2 : cotisations (taux simplifiés, en % de la rémunération nette)", colonnes: ["", "Taux"], lignes: [["Gérant majoritaire de SARL (non salarié)", "45 %"], ["Président de SAS (assimilé salarié)", "80 %"]] },
+    question: "Calcule l'écart annuel de cotisations sociales entre un président de SAS (assimilé salarié) et un gérant majoritaire de SARL (travailleur non salarié), pour 24 000 € de rémunération nette.",
+    reponse: { valeur: 8400, unite: "€", decimales: 0, tolerance: 1, signe: false },
+    explication: "Cotisations SARL = 24 000 × 0,45 = 10 800 €\nCotisations SAS = 24 000 × 0,80 = 19 200 €\nÉcart = 19 200 − 10 800 = 8 400 € par an\nCes taux sont simplifiés pour l'exercice.",
+    indice: "Calcule les deux montants de cotisations, puis fais la différence."
+  },
+  {
+    id: "U3-215", difficulte: "moyen", epreuve: "U3", theme: "Droit des entreprises", session: "complément",
+    cas: "CAS-U3-10", etape: 5,
+    question: "Commente ce résultat : quel commentaire est le mieux rédigé ?",
+    choix: ["Le gérant majoritaire de SARL coûte 8 400 € de cotisations de moins par an que le président de SAS pour la même rémunération. En contrepartie, sa protection sociale est un peu moindre. L'assimilé salarié est proche du régime général, mais sans assurance chômage.", "La SAS coûte moins cher, car le président est assimilé salarié.", "Les deux statuts coûtent exactement la même chose.", "Le gérant de SARL a droit à l'assurance chômage, le président de SAS non."],
+    bonne: 0,
+    explication: "Écart = 19 200 − 10 800 = 8 400 € en faveur de la SARL. Le bon commentaire donne le chiffre, le sens de l'écart et la contrepartie (protection sociale). Aucun des deux dirigeants n'a droit à l'assurance chômage : ni l'assimilé salarié, ni le non-salarié.",
+    indice: "Chiffre, sens de l'écart, contrepartie."
+  },
+  {
+    id: "U3-216", difficulte: "difficile", epreuve: "U3", theme: "Droit des entreprises", session: "complément",
+    cas: "CAS-U3-10", etape: 6,
+    question: "M. Imbert détient 60 % des parts de la SARL. Que peut-il décider seul en assemblée ?",
+    choix: ["Les décisions ordinaires (approbation des comptes, par exemple) à la majorité de plus de 50 % des parts, mais pas une modification des statuts, qui demande ici les trois quarts des parts (majorité fixée par les statuts).", "Toutes les décisions, y compris la modification des statuts.", "Aucune décision : l'unanimité est toujours exigée.", "Seulement la nomination des commissaires aux comptes."],
+    bonne: 0,
+    explication: "En SARL, les décisions ordinaires se prennent à la majorité absolue des parts (plus de 50 %). Les modifications des statuts exigent au moins les deux tiers des parts des associés présents ou représentés (article L223-30 du Code de commerce) ; les statuts peuvent fixer plus : ici, les trois quarts. Avec 60 %, M. Imbert gouverne le quotidien mais ne peut pas modifier seul les statuts ; il lui faut l'accord de Mme Sorel.",
+    indice: "Deux niveaux de majorité : décisions ordinaires et modification des statuts."
+  },
+  {
+    id: "U3-217", difficulte: "difficile", epreuve: "U3", theme: "Droit des entreprises", session: "complément",
+    cas: "CAS-U3-10", etape: 7, type: "calcul",
+    question: "M. Imbert voudrait détenir 75 % des parts (la majorité des statuts pour les modifier) en ajoutant un apport (le capital augmente d'autant). Quel apport supplémentaire lui faut-il ?",
+    reponse: { valeur: 18000, unite: "€", decimales: 0, tolerance: 1, signe: false },
+    erreurs: [ { valeur: 4500, type: "notion", message: "Tu as oublié que l'apport augmente aussi le capital total : la part se calcule sur le nouveau capital." } ],
+    explication: "Soit x l'apport en plus : [[18 000 + x|30 000 + x]] = 0,75\n18 000 + x = 22 500 + 0,75 x\n0,25 x = 4 500, donc x = [[4 500|0,25]] = 18 000 €\nCe n'est pas 4 500 € : l'apport augmente aussi le capital total.",
+    indice: "Pose l'équation : sa part après apport doit valoir 0,75."
+  },
+  {
+    id: "U3-218", difficulte: "difficile", epreuve: "U3", theme: "Droit des entreprises", session: "complément",
+    cas: "CAS-U3-10", etape: 8,
+    question: "Que conseilles-tu à Mme Sorel et à M. Imbert ?",
+    choix: ["La SARL : cadre légal clair, cotisations du gérant plus faibles (8 400 € de moins par an dans nos hypothèses) et responsabilité limitée aux apports. Il faut prévoir un pacte d'associés, car avec 60 % des parts M. Imbert ne peut pas modifier seul les statuts (75 % nécessaires selon les statuts).", "La SAS, car son président est un salarié comme les autres.", "La SARL, car aucun associé ne répond jamais des dettes.", "Aucune société : l'entreprise individuelle est toujours plus avantageuse."],
+    bonne: 0,
+    explication: "Le conseil s'appuie sur les chiffres (écart de cotisations, majorités) et ne cache pas les limites. Les autres choix affirment des règles fausses (« salarié comme les autres », « jamais de dettes ») ou écartent l'analyse sans comparaison.",
+    indice: "Reprends statut social, coût, responsabilité et majorités."
+  }
+);
+CAS.push({
+  id: "CAS-U3-11",
+  epreuve: "U3",
+  titre: "Optique Lagrange : rejoindre une franchise",
+  contexte: "M. Lagrange, opticien indépendant, se voit proposer d'entrer dans le réseau de franchise « Vision Plus ». Il réalise 400 000 € HT de chiffre d'affaires avec un taux de marge sur coût variable de 60 % et 200 000 € de charges fixes. Tu compares sa situation actuelle à celle qu'il aurait dans le réseau.",
+  annexe: { titre: "Annexe 1 : magasin actuel et conditions du réseau", colonnes: ["", "Information"], lignes: [["CA actuel", "400 000 € HT"], ["Taux de marge sur coût variable actuel", "60 %"], ["Charges fixes actuelles", "200 000 €"], ["Droit d'entrée du réseau", "20 000 € HT, amorti sur 5 ans"], ["Redevance d'enseigne", "4 % du CA HT"], ["Redevance de publicité", "1 % du CA HT"], ["CA prévu avec l'enseigne", "+ 15 %"], ["Taux de marge sur coût variable avant redevances (achats groupés)", "63 %"], ["Signature du contrat prévue", "le 30 mars"]] }
+});
+QUESTIONS.push(
+  {
+    id: "U3-219", difficulte: "moyen", epreuve: "U3", theme: "Mercatique et communication", session: "complément",
+    cas: "CAS-U3-11", etape: 1,
+    question: "Le contrat de franchise doit être signé le 30 mars. À quelle date au plus tard M. Lagrange doit-il avoir reçu le document d'information précontractuelle ?",
+    choix: ["Le 10 mars, soit 20 jours avant la signature.", "Le 20 mars, soit 10 jours avant.", "Le 28 mars, soit 2 jours avant.", "Le 15 mars, soit 15 jours avant."],
+    bonne: 0,
+    explication: "La loi Doubin (article L330-3 du Code de commerce) impose de remettre le document d'information précontractuelle au moins 20 jours avant la signature du contrat ou le versement d'une somme. 30 mars − 20 jours = 10 mars. Ce délai laisse le temps d'étudier les comptes du réseau et les conditions de sortie.",
+    indice: "20 jours de réflexion avant la signature."
+  },
+  {
+    id: "U3-220", difficulte: "facile", epreuve: "U3", theme: "Seuil de rentabilité", session: "complément",
+    cas: "CAS-U3-11", etape: 2, type: "calcul",
+    question: "Calcule le résultat actuel du magasin (avant franchise).",
+    reponse: { valeur: 40000, unite: "€", decimales: 0, tolerance: 1, signe: true },
+    explication: "Marge sur coût variable = 400 000 × 0,60 = 240 000 €\nRésultat = 240 000 − 200 000 = 40 000 €",
+    indice: "MCV moins charges fixes."
+  },
+  {
+    id: "U3-221", difficulte: "facile", epreuve: "U3", theme: "Seuil de rentabilité", session: "complément",
+    cas: "CAS-U3-11", etape: 3, type: "calcul",
+    question: "Calcule le CA prévu avec l'enseigne.",
+    reponse: { valeur: 460000, unite: "€ HT", decimales: 0, tolerance: 1, signe: false },
+    explication: "CA prévu = 400 000 × 1,15 = 460 000 € HT",
+    indice: "Une hausse de 15 % : multiplie par 1,15."
+  },
+  {
+    id: "U3-222", difficulte: "moyen", epreuve: "U3", theme: "Seuil de rentabilité", session: "complément",
+    cas: "CAS-U3-11", etape: 4, type: "calcul",
+    question: "Calcule le total des redevances annuelles (enseigne et publicité) sur le CA prévu.",
+    reponse: { valeur: 23000, unite: "€", decimales: 0, tolerance: 1, signe: false },
+    explication: "Taux total des redevances = 4 % + 1 % = 5 %\nRedevances = 460 000 × 0,05 = 23 000 €\nElles sont proportionnelles au CA : ce sont des charges variables.",
+    indice: "Additionne les deux pourcentages, puis applique-les au CA prévu."
+  },
+  {
+    id: "U3-223", difficulte: "moyen", epreuve: "U3", theme: "Seuil de rentabilité", session: "complément",
+    cas: "CAS-U3-11", etape: 5, type: "calcul",
+    question: "Calcule le taux de marge sur coût variable une fois les redevances payées.",
+    reponse: { valeur: 58, unite: "%", decimales: 0, tolerance: 0.5, signe: false },
+    explication: "Taux de MCV net = 63 % − 5 % = 58 %\nLes redevances s'ajoutent aux charges variables : elles réduisent le taux de MCV de 5 points.",
+    indice: "Les redevances sont variables : retire-les du taux."
+  },
+  {
+    id: "U3-224", difficulte: "moyen", epreuve: "U3", theme: "Investissement et financement", session: "complément",
+    cas: "CAS-U3-11", etape: 6, type: "calcul",
+    question: "Calcule les charges fixes avec la franchise (charges actuelles + amortissement annuel du droit d'entrée).",
+    reponse: { valeur: 204000, unite: "€", decimales: 0, tolerance: 1, signe: false },
+    erreurs: [ { valeur: 220000, type: "notion", message: "Tu as ajouté tout le droit d'entrée. Il est amorti sur 5 ans : 20 000 divisés par 5 par an." } ],
+    explication: "Amortissement du droit d'entrée = [[20 000|5]] = 4 000 € par an\nCharges fixes = 200 000 + 4 000 = 204 000 €",
+    indice: "Le droit d'entrée est amorti sur 5 ans."
+  },
+  {
+    id: "U3-225", difficulte: "difficile", epreuve: "U3", theme: "Seuil de rentabilité", session: "complément",
+    cas: "CAS-U3-11", etape: 7, type: "calcul",
+    question: "Calcule le résultat prévisionnel avec la franchise.",
+    reponse: { valeur: 62800, unite: "€", decimales: 0, tolerance: 1, signe: true },
+    erreurs: [ { valeur: 85800, type: "notion", message: "Tu as oublié les redevances (5 % du CA) : utilise le taux de marge sur coût variable net de 58 %." } ],
+    explication: "MCV = 460 000 × 0,58 = 266 800 €\nRésultat = 266 800 − 204 000 = 62 800 €\nContre 40 000 € aujourd'hui : + 22 800 €, soit + 57 %.",
+    indice: "MCV avec le taux net, moins les nouvelles charges fixes."
+  },
+  {
+    id: "U3-226", difficulte: "difficile", epreuve: "U3", theme: "Seuil de rentabilité", session: "complément",
+    cas: "CAS-U3-11", etape: 8, type: "calcul",
+    question: "Quel CA minimal faut-il avec la franchise pour retrouver le résultat actuel de 40 000 € ? (à l'euro près)",
+    reponse: { valeur: 420690, unite: "€ HT", decimales: 0, tolerance: 1, signe: false },
+    erreurs: [ { valeur: 387302, type: "notion", message: "Tu as oublié les redevances (5 % du CA) : utilise le taux de marge sur coût variable net de 58 %." } ],
+    explication: "Il faut une MCV de 204 000 + 40 000 = 244 000 €\nCA = [[244 000|0,58]] = 420 689,66 €, soit 420 690 € HT\nC'est + 5,2 % par rapport au CA actuel : [[420 690 − 400 000|400 000]].",
+    indice: "Charges fixes plus résultat voulu, divisés par le taux de MCV net."
+  },
+  {
+    id: "U3-227", difficulte: "difficile", epreuve: "U3", theme: "Seuil de rentabilité", session: "complément",
+    cas: "CAS-U3-11", etape: 9,
+    question: "Commente la comparaison avant et après la franchise : quel commentaire est le mieux rédigé ?",
+    choix: ["Avec le réseau, le résultat passerait de 40 000 € à 62 800 € (+ 57 %), grâce à + 15 % de CA, mais cette hausse repose sur une hypothèse. Le taux de marge net baisse à 58 % et les charges fixes montent à 204 000 € : le CA doit dépasser 420 690 € pour faire mieux qu'aujourd'hui.", "La franchise est toujours plus rentable : le taux de marge passe de 60 % à 63 %.", "Le résultat augmente de 22 800 €, donc la franchise est sans risque.", "Les redevances de 5 % sont négligeables : elles ne changent rien au résultat."],
+    bonne: 0,
+    explication: "Un bon commentaire chiffre l'écart (62 800 − 40 000 = 22 800 €), explique son origine (+ 15 % de CA) et rappelle la condition (CA minimal de 420 690 €). Le 63 % est un taux avant redevances. Une franchise n'est jamais sans risque : elle ajoute des charges fixes et une dépendance au réseau.",
+    indice: "Chiffre, origine de l'écart, condition de réussite."
+  },
+  {
+    id: "U3-228", difficulte: "difficile", epreuve: "U3", theme: "Seuil de rentabilité", session: "complément",
+    cas: "CAS-U3-11", etape: 10,
+    question: "Que conseilles-tu à M. Lagrange ?",
+    choix: ["Rejoindre le réseau seulement s'il est sûr de faire au moins 5,2 % de CA en plus (420 690 €) : à CA constant (400 000 €), le résultat tomberait à 28 000 €, soit 12 000 € de moins qu'aujourd'hui. Il doit aussi lire les clauses de sortie (durée, non-concurrence après le contrat) dans le document d'information.", "Rejoindre le réseau : l'enseigne garantit toujours une hausse de CA de 15 %.", "Refuser : un franchisé ne peut jamais gagner plus qu'un indépendant.", "Rejoindre le réseau sans lire les clauses de sortie : elles sont standard."],
+    bonne: 0,
+    explication: "À 400 000 € : 400 000 × 0,58 = 232 000 €, moins 204 000 € de charges fixes = 28 000 €, soit 12 000 € de moins qu'aujourd'hui. La franchise est rentable seulement au-delà de 420 690 €. Aucun réseau ne garantit un CA, et les clauses de sortie engagent le franchisé après la fin du contrat.",
+    indice: "À quel CA la franchise devient-elle intéressante, et que se passe-t-il en dessous ?"
+  }
+);
+CAS.push({
+  id: "CAS-U3-12",
+  epreuve: "U3",
+  titre: "Optique Reflets : le tableau de bord complet",
+  contexte: "Optique Reflets est une SARL dirigée par Mme Chauvin. Elle te demande un tableau de bord de son exercice : marges, soldes de gestion, capacité d'autofinancement, bilan fonctionnel et seuil de rentabilité, puis un avis global.",
+  annexe: { titre: "Annexe 1 : compte de résultat de l'exercice (en €)", colonnes: ["", "Montant (€)"], lignes: [["Ventes de marchandises", "600 000"], ["Achats de marchandises", "228 000"], ["Stock initial de marchandises", "36 000"], ["Stock final de marchandises", "30 000"], ["Autres achats et charges externes", "110 000"], ["Impôts et taxes", "12 000"], ["Charges de personnel", "190 000"], ["Dotations aux amortissements", "28 000"], ["Charges financières", "7 000"], ["Impôt sur les bénéfices", "5 000"]] }
+});
+QUESTIONS.push(
+  {
+    id: "U3-229", difficulte: "moyen", epreuve: "U3", theme: "Prix et marges", session: "complément",
+    cas: "CAS-U3-12", etape: 1, type: "calcul",
+    question: "Calcule le taux de marque commercial (marge commerciale / ventes HT).",
+    reponse: { valeur: 61, unite: "%", decimales: 0, tolerance: 0.5, signe: false },
+    erreurs: [ { valeur: 156.4, type: "marque-marge" } ],
+    explication: "Coût d'achat des marchandises vendues = 228 000 + 36 000 − 30 000 = 234 000 €\nMarge commerciale = 600 000 − 234 000 = 366 000 €\nTaux de marque = [[366 000|600 000]] × 100 = 61 %",
+    indice: "Commence par le coût d'achat des marchandises vendues, puis la marge."
+  },
+  {
+    id: "U3-230", difficulte: "moyen", epreuve: "U3", theme: "Analyse financière", session: "complément",
+    cas: "CAS-U3-12", etape: 2, type: "calcul",
+    question: "Calcule l'excédent brut d'exploitation (EBE) d'Optique Reflets.",
+    reponse: { valeur: 54000, unite: "€", decimales: 0, tolerance: 1, signe: true },
+    explication: "Valeur ajoutée = 366 000 − 110 000 = 256 000 €\nEBE = 256 000 − 12 000 − 190 000 = 54 000 €",
+    indice: "Marge commerciale moins charges externes, impôts, taxes et personnel."
+  },
+  {
+    id: "U3-231", difficulte: "moyen", epreuve: "U3", theme: "Analyse financière", session: "complément",
+    cas: "CAS-U3-12", etape: 3, type: "calcul",
+    question: "Calcule le résultat net.",
+    reponse: { valeur: 14000, unite: "€", decimales: 0, tolerance: 1, signe: true },
+    explication: "Résultat d'exploitation = 54 000 − 28 000 = 26 000 €\nRésultat courant avant impôts = 26 000 − 7 000 = 19 000 €\nRésultat net = 19 000 − 5 000 = 14 000 €",
+    indice: "Retire de l'EBE les dotations, les charges financières, puis l'impôt."
+  },
+  {
+    id: "U3-232", difficulte: "moyen", epreuve: "U3", theme: "Analyse financière", session: "complément",
+    cas: "CAS-U3-12", etape: 4, type: "calcul",
+    question: "Calcule la capacité d'autofinancement (CAF) d'Optique Reflets.",
+    reponse: { valeur: 42000, unite: "€", decimales: 0, tolerance: 1, signe: false },
+    erreurs: [ { valeur: 14000, type: "notion", message: "C'est le résultat net. La CAF s'obtient en ajoutant les dotations aux amortissements, qui ne sortent pas d'argent." } ],
+    explication: "CAF = résultat net + dotations aux amortissements = 14 000 + 28 000 = 42 000 €",
+    indice: "Les dotations ne sortent pas d'argent : rajoute-les au résultat net."
+  },
+  {
+    id: "U3-233", difficulte: "facile", epreuve: "U3", theme: "Analyse financière", session: "complément",
+    cas: "CAS-U3-12", etape: 5, type: "calcul",
+    annexe: { titre: "Annexe 2 : bilan fonctionnel (en €)", colonnes: ["", "Montant (€)"], lignes: [["Emplois stables", "260 000"], ["Ressources stables", "290 000"], ["Stocks", "30 000"], ["Créances clients", "12 000"], ["Dettes fournisseurs", "42 000"], ["Dettes fiscales et sociales", "20 000"], ["Trésorerie active", "52 000"], ["Concours bancaires courants", "2 000"]] },
+    question: "Calcule le fonds de roulement net global (FRNG) d'Optique Reflets.",
+    reponse: { valeur: 30000, unite: "€", decimales: 0, tolerance: 1, signe: true },
+    explication: "FRNG = ressources stables − emplois stables = 290 000 − 260 000 = 30 000 €",
+    indice: "Ressources stables moins emplois stables."
+  },
+  {
+    id: "U3-234", difficulte: "moyen", epreuve: "U3", theme: "Analyse financière", session: "complément",
+    cas: "CAS-U3-12", etape: 6, type: "calcul",
+    question: "Calcule le besoin en fonds de roulement (BFR), avec son signe.",
+    reponse: { valeur: -20000, unite: "€", decimales: 0, tolerance: 1, signe: true },
+    explication: "BFR = (stocks + créances clients) − (dettes fournisseurs + dettes fiscales et sociales)\n= (30 000 + 12 000) − (42 000 + 20 000) = 42 000 − 62 000 = −20 000 €\nUn BFR négatif : les dettes d'exploitation financent plus que les stocks et créances.",
+    indice: "Actif circulant d'exploitation moins dettes d'exploitation : le résultat peut être négatif."
+  },
+  {
+    id: "U3-235", difficulte: "moyen", epreuve: "U3", theme: "Analyse financière", session: "complément",
+    cas: "CAS-U3-12", etape: 7, type: "calcul",
+    question: "Calcule la trésorerie nette, avec son signe.",
+    reponse: { valeur: 50000, unite: "€", decimales: 0, tolerance: 1, signe: true },
+    explication: "Trésorerie nette = FRNG − BFR = 30 000 − (−20 000) = 50 000 €\nVérification : trésorerie active − concours bancaires = 52 000 − 2 000 = 50 000 €",
+    indice: "Soustraire un nombre négatif revient à ajouter."
+  },
+  {
+    id: "U3-236", difficulte: "difficile", epreuve: "U3", theme: "Seuil de rentabilité", session: "complément",
+    cas: "CAS-U3-12", etape: 8, type: "calcul",
+    annexe: { titre: "Annexe 3 : répartition des charges (en €)", colonnes: ["", "Montant (€)"], lignes: [["Charges variables : coût d'achat des marchandises vendues", "234 000"], ["Charges variables : frais de paiement et commissions", "18 000"], ["Charges fixes (autres charges externes hors frais de paiement : 92 000 ; impôts et taxes ; personnel ; dotations ; charges financières)", "329 000"]] },
+    question: "Calcule le seuil de rentabilité du magasin, à l'euro près.",
+    reponse: { valeur: 567241, unite: "€ HT", decimales: 0, tolerance: 1, signe: false },
+    erreurs: [ { valeur: 190820, type: "notion", message: "Tu as multiplié les charges fixes par le taux. Un seuil de rentabilité se calcule en divisant." }, { valeur: 783333, type: "notion", message: "Tu as divisé par le taux de charges variables. Il faut diviser par le taux de marge sur coût variable." } ],
+    explication: "Marge sur coût variable = 600 000 − 252 000 = 348 000 €\nTaux de MCV = [[348 000|600 000]] = 0,58, soit 58 %\nSeuil de rentabilité = [[329 000|0,58]] = 567 241 € HT",
+    indice: "Taux de MCV d'abord, puis charges fixes divisées par ce taux."
+  },
+  {
+    id: "U3-237", difficulte: "difficile", epreuve: "U3", theme: "Analyse financière", session: "complément",
+    cas: "CAS-U3-12", etape: 9,
+    question: "Donne un avis global sur le magasin : quel commentaire est le mieux rédigé ?",
+    choix: ["La trésorerie est confortable (50 000 € avec un BFR de −20 000 €) et la CAF de 42 000 € donne de quoi financer investissements et remboursements. Mais la rentabilité est fragile : le seuil de 567 241 € représente 94,5 % du CA, la marge de sécurité n'est que de 32 759 € (5,5 % du CA) et le résultat net de 14 000 € ne représente que 2,3 % du CA.", "Le magasin est solide : sa trésorerie est de 50 000 €.", "Le magasin est en danger : son BFR est négatif.", "La marge de sécurité est de 14 000 €, soit le résultat net."],
+    bonne: 0,
+    explication: "Marge de sécurité = 600 000 − 567 241 = 32 759 €, soit [[32 759|600 000]] = 5,5 % du CA\nRésultat net sur CA = [[14 000|600 000]] = 2,3 %\nUn bon avis global distingue la solidité financière (trésorerie) de la rentabilité (seuil). Un BFR négatif n'est pas un danger ; marge de sécurité et résultat net sont deux choses différentes.",
+    indice: "Sépare ce qui va bien (trésorerie) de ce qui est fragile (seuil, résultat)."
+  },
+  {
+    id: "U3-238", difficulte: "difficile", epreuve: "U3", theme: "Seuil de rentabilité", session: "complément",
+    cas: "CAS-U3-12", etape: 10,
+    question: "Que conseilles-tu à Mme Chauvin ?",
+    choix: ["Réduire le seuil en agissant sur les charges fixes, surtout le personnel (190 000 €, soit 31,7 % du CA) : 20 000 € de charges en moins ramèneraient le seuil à 532 759 € et la marge de sécurité à 11,2 % du CA. La trésorerie permet de patienter, pas d'investir à l'aveugle.", "Placer les 50 000 € de trésorerie pour augmenter la marge de sécurité.", "Augmenter les prix de 20 % sans tenir compte de la clientèle.", "Ne rien changer : le résultat net est positif."],
+    bonne: 0,
+    explication: "Charges fixes après économie = 329 000 − 20 000 = 309 000 €\nNouveau seuil = [[309 000|0,58]] = 532 759 €\nMarge de sécurité = 600 000 − 532 759 = 67 241 €, soit 11,2 % du CA.\nPlacer la trésorerie ne change pas le seuil. Une hausse de prix sans analyse peut faire fuir les clients. Rester à 5,5 % de marge de sécurité est risqué.",
+    indice: "Quel levier fait baisser le seuil le plus directement ?"
+  }
+);
+
+QUESTIONS.push(
+  {
+    id: "U3-239", difficulte: "moyen", epreuve: "U3", theme: "Prix et marges", session: "complément", type: "redaction",
+    question: "Une monture est vendue 240 € TTC (TVA 20 %). Son prix d'achat est de 80 € HT.",
+    consigne: "En 2 phrases, commentez la marge de l'opticien et dites si vous la jugez suffisante pour une monture de ce type.",
+    modele: "Le prix de vente HT est de 200 € pour un achat à 80 €, soit une marge brute de 120 € et un taux de marque de 60 %. Une monture se vend en général avec un coefficient proche de 2,5 à 3 sur le prix d'achat HT : ici le coefficient est de 2,5 en HT (3 si l'on part du prix TTC), la marge est correcte, et on peut garder ce prix sans remise forte.",
+    grille: [
+      "Le prix de vente HT (200 €) ou la marge brute (120 €) est cité.",
+      "Le taux de marque (60 %) ou le taux de marge (150 %) est donné, sans confondre les deux.",
+      "Le sens est dit : sur 100 € de vente HT, 60 € restent après l'achat de la monture.",
+      "Un conseil est donné : garder le prix, ou limiter la remise."
+    ],
+    explication: "Prix de vente HT = 240 / 1,2 = 200 €. Marge brute = 200 − 80 = 120 €.\nTaux de marge = 120 / 80 = 150 % (sur le prix d'achat). Taux de marque = 120 / 200 = 60 % (sur le prix de vente HT)."
+  },
+  {
+    id: "U3-240", difficulte: "difficile", epreuve: "U3", theme: "Seuil de rentabilité", session: "complément", type: "redaction",
+    question: "Un magasin a un chiffre d'affaires annuel de 300 000 € HT, des charges variables de 180 000 € et des charges fixes de 96 000 €.",
+    consigne: "En 2 phrases, indiquez à partir de quand le magasin devient rentable et ce que cela dit de sa situation.",
+    modele: "Le seuil de rentabilité est de 240 000 € de chiffre d'affaires, atteint au bout de 9,6 mois, donc vers mi-septembre. Le magasin dégage 60 000 € de marge de sécurité, soit 20 % du CA : il peut perdre un cinquième de ses ventes sans être déficitaire, mais il doit surveiller ses charges fixes.",
+    grille: [
+      "Le seuil (240 000 €) est cité.",
+      "Il est comparé au CA réel (300 000 €) ou donné en mois (9,6).",
+      "Le sens est dit : avant ce seuil le magasin perd de l'argent, après il en gagne ; la marge de sécurité est de 20 %.",
+      "Un conseil est donné : baisser les charges fixes, ou augmenter le taux de marge sur coût variable (prix ou achats)."
+    ],
+    explication: "Marge sur coût variable = 300 000 − 180 000 = 120 000 €, soit 40 % du CA.\nSeuil de rentabilité = 96 000 / 0,40 = 240 000 €.\nPoint mort = 240 000 / 300 000 × 12 = 9,6 mois, soit mi-septembre environ.\nMarge de sécurité = 300 000 − 240 000 = 60 000 €, soit 20 % du CA."
+  },
+  {
+    id: "U3-241", difficulte: "facile", epreuve: "U3", theme: "Analyse financière", session: "complément", type: "redaction",
+    question: "Le chiffre d'affaires d'un magasin est passé de 280 000 € en 2025 à 308 000 € en 2026.",
+    consigne: "En 2 phrases, commentez l'évolution du chiffre d'affaires.",
+    modele: "Le chiffre d'affaires passe de 280 000 € à 308 000 €, soit une hausse de 28 000 € et de 10 %. C'est une bonne progression, mais il faut vérifier que les charges n'ont pas augmenté aussi vite pour que le résultat suive.",
+    grille: [
+      "Les deux chiffres ou la hausse de 28 000 € sont cités.",
+      "Le taux (+10 %) est calculé par rapport à 2025.",
+      "Le sens est dit : le magasin vend plus.",
+      "Un conseil est donné : contrôler les charges, ou chercher ce qui a fait la hausse."
+    ],
+    explication: "Variation = (308 000 − 280 000) / 280 000 = 28 000 / 280 000 = +10 %."
+  },
+  {
+    id: "U3-242", difficulte: "difficile", epreuve: "U3", theme: "Mercatique et communication", session: "complément", type: "redaction",
+    question: "Voici la fréquentation et le chiffre d'affaires d'un magasin sur deux mois.",
+    annexe: { titre: "Fréquentation", colonnes: ["", "Mars", "Avril"], lignes: [["Clients", "400", "340"], ["Chiffre d'affaires HT", "62 000 €", "59 500 €"]] },
+    consigne: "En 2 phrases, expliquez ce qui s'est passé entre mars et avril et ce que vous feriez.",
+    modele: "Le magasin a perdu 15 % de clients (400 à 340) et son chiffre d'affaires ne baisse que de 4 %, car le panier moyen monte de 155 € à 175 € (+12,9 %) et compense en partie. Les clients présents achètent plus, donc le problème est la fréquentation : je lancerais une action pour faire revenir du monde, par exemple un rappel aux porteurs dont l'équipement a plus de 2 ans.",
+    grille: [
+      "Un chiffre du tableau est cité (clients, CA ou panier moyen).",
+      "Mars et avril sont comparés avec un taux ou un écart.",
+      "Le sens est dit : moins de clients, mais un panier plus élevé.",
+      "Un conseil précis sur la fréquentation est donné."
+    ],
+    explication: "Panier moyen : mars 62 000 / 400 = 155 €, avril 59 500 / 340 = 175 €, soit +12,9 %.\nClients : (340 − 400) / 400 = −15 %. Chiffre d'affaires : (59 500 − 62 000) / 62 000 = −4,0 %."
+  },
+  {
+    id: "U3-243", difficulte: "moyen", epreuve: "U3", theme: "Investissement et financement", session: "complément", type: "redaction",
+    question: "Tableau de trésorerie d'un magasin. Trésorerie au 1er janvier : 6 000 €.",
+    annexe: { titre: "Trésorerie (en €)", colonnes: ["", "Janvier", "Février"], lignes: [["Encaissements", "38 000", "36 000"], ["Décaissements", "41 500", "40 000"]] },
+    consigne: "En 2 phrases, commentez la trésorerie et dites ce que le gérant doit faire.",
+    modele: "La trésorerie passe de 6 000 € à 2 500 € fin janvier, puis à −1 500 € fin février : les décaissements dépassent les encaissements deux mois de suite (−3 500 € puis −4 000 €). Le compte sera à découvert en février, donc le gérant doit négocier un délai avec ses fournisseurs ou une autorisation de découvert avant cette date.",
+    grille: [
+      "Un solde (2 500 € ou −1 500 €) est cité.",
+      "Encaissements et décaissements sont comparés, ou les deux mois.",
+      "Le sens est dit : la trésorerie devient négative en février.",
+      "Un conseil est donné : délai fournisseur, découvert, ou accélérer les encaissements."
+    ],
+    explication: "Fin janvier : 6 000 + 38 000 − 41 500 = 2 500 €.\nFin février : 2 500 + 36 000 − 40 000 = −1 500 €."
   }
 );

@@ -89,7 +89,7 @@ const Examen = (() => {
     const cas = tirer(casDe(code), format.cas || 0);
     const qCas = cas.flatMap(c => questionsDuCas(c.id));
     const reste = Math.max(0, format.questions - qCas.length);
-    const pool = ordinairesDe(code).filter(q => q.type !== "pose");   // le calcul posé (étape par étape) reste hors examen
+    const pool = ordinairesDe(code).filter(q => q.type !== "pose" && q.type !== "redaction");   // le calcul posé (étape par étape) et la rédaction libre (grille cochée par l'élève) restent hors examen
     const poids = poidsThemes(code);
     const themes = [...new Set(pool.map(q => q.theme))].map(t => ({
       t, w: (poids[t] || POIDS_THEME_RARE) * (0.85 + Math.random() * 0.3),

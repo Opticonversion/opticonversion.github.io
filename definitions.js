@@ -72,6 +72,15 @@
   }
 
   const defsEpreuve = () => DEFS.filter(d => d.epreuve === epreuve);
+  // Les définitions de la matière qui passent la recherche et les filtres, tous thèmes confondus
+  function defsFiltrees() {
+    const q = simplifier(recherche.trim());
+    return defsEpreuve().filter(d =>
+      (!tombeesSeules || (Array.isArray(d.sessions) && d.sessions.length > 0)) &&
+      (!parCoeurSeules || parCoeur(d)) &&
+      (!q || simplifier(d.terme + " " + d.definition + " " + (d.explication || "") + " " + d.theme).includes(q)));
+  }
+  const filtresActifs = () => !!recherche.trim() || tombeesSeules || parCoeurSeules;
   function defsAffichees() {
     const q = simplifier(recherche.trim());
     const defs = defsEpreuve().filter(d =>
@@ -119,8 +128,8 @@
       b.type = "button";
       b.className = "def-epreuve" + (e.code === epreuve ? " actif" : "");
       b.dataset.epreuve = e.code;
-      b.setAttribute("role", "tab");
-      b.setAttribute("aria-selected", e.code === epreuve);
+      b.setAttribute("aria-pressed", e.code === epreuve);
+      b.setAttribute("aria-label", e.nom + (n ? ", " + n + " définitions" : ", bientôt"));
       b.disabled = n === 0;
       b.innerHTML = '<b></b><span></span>';
       b.querySelector("b").textContent = e.court || e.code;
@@ -141,15 +150,22 @@
     zone.innerHTML = "";
     const themes = ["Tous", ...new Set(defsEpreuve().map(d => d.theme))];
     if (!themes.includes(theme)) theme = "Tous";
+    // Les nombres suivent la recherche et les filtres : un thème à 0 est grisé (sauf celui où l'élève se trouve)
+    const filtrees = defsFiltrees();
     themes.forEach(t => {
       const b = document.createElement("button");
       b.type = "button";
       b.className = "theme" + (t === theme ? " actif" : "");
-      const n = t === "Tous" ? defsEpreuve().length : defsEpreuve().filter(d => d.theme === t).length;
+      b.setAttribute("aria-pressed", t === theme);
+      const n = t === "Tous" ? filtrees.length : filtrees.filter(d => d.theme === t).length;
       b.textContent = t + " (" + n + ")";
+      b.disabled = n === 0 && t !== theme;
       b.onclick = () => { theme = t; majAdresse(); toutAfficher(); };
       zone.appendChild(b);
     });
+    // Sur téléphone les thèmes défilent sur une ligne : on y amène le thème choisi (sans faire bouger la page)
+    const actif = zone.querySelector(".actif");
+    if (actif && zone.scrollWidth > zone.clientWidth) zone.scrollLeft = Math.max(0, actif.offsetLeft - zone.offsetLeft - (zone.clientWidth - actif.offsetWidth) / 2);
   }
   function majAdresse() {
     history.replaceState(null, "", "#" + epreuve + (theme === "Tous" ? "" : "/" + encodeURIComponent(theme)));
@@ -169,7 +185,7 @@
     const titreGroupe = (nom, nombre) => {
       const li = document.createElement("li");
       li.className = "def-groupe";
-      li.innerHTML = '<span class="def-groupe-nom"></span><span class="def-groupe-nb"></span>';
+      li.innerHTML = '<h2 class="def-groupe-nom"></h2><span class="def-groupe-nb"></span>';
       li.querySelector(".def-groupe-nom").textContent = nom;
       li.querySelector(".def-groupe-nb").textContent = nombre;
       liste.appendChild(li);
@@ -179,7 +195,8 @@
       if (deuxGroupes && rang === nbCoeur) titreGroupe("Les autres définitions", defs.length - nbCoeur);
       const li = document.createElement("li");
       li.className = "def" + (parCoeur(d) ? " par-coeur" : "");
-      li.innerHTML = '<div class="def-haut"><h2 class="def-terme"></h2></div><p class="def-texte"></p><div class="def-bas"><span class="def-theme"></span></div>';
+      // Le terme est un titre de niveau 3 quand la liste a ses deux groupes (titres de niveau 2), sinon de niveau 2
+      li.innerHTML = '<div class="def-haut"><h' + (deuxGroupes ? 3 : 2) + ' class="def-terme"></h' + (deuxGroupes ? 3 : 2) + '></div><p class="def-texte"></p><div class="def-bas"><span class="def-theme"></span></div>';
       // L'explication : sous la phrase à réciter, plus petite et plus discrète (elle aide à comprendre, on ne la récite pas)
       if (d.explication) {
         const ex = document.createElement("p");
@@ -243,7 +260,9 @@
     // Le bouton doré ne prend que les cartes « à voir » (nouvelles, tiroir 1, ou repos fini) : c'est le principe des
     // tiroirs. « Tout réviser » reprend tout, cartes au repos comprises.
     const choix = paquetPropose(defs, m, maintenant), n = choix.cartes.length;
-    $("def-reviser").disabled = defs.length === 0;
+    // Aucune définition : pas de bouton de révision, mais un bouton pour tout effacer
+    $("def-reviser").hidden = defs.length === 0;
+    $("def-effacer").hidden = !(defs.length === 0 && (filtresActifs() || theme !== "Tous"));
     $("def-reviser").innerHTML = icone + "Réviser " + (choix.parCoeur ? (n > 1 ? "les " + n : "la définition") + " à savoir par cœur" : n > 1 ? "ces " + n + " définitions" : "cette définition");
     $("def-reviser-tout").hidden = n === defs.length;
     $("def-reviser-tout").textContent = "Tout réviser (" + defs.length + ")";
@@ -361,7 +380,22 @@
     const actions = $("def-fin-actions");
     actions.innerHTML = "";
     liste.forEach(([texte, classe, action]) => { const b = document.createElement("button"); b.type = "button"; b.className = "bouton " + classe; b.textContent = texte; b.onclick = action; actions.appendChild(b); });
+    // Le focus va sur le titre du résultat (lu par les lecteurs d'écran), Tab mène ensuite aux boutons
+    $("def-fin-titre").focus({ preventScroll: true });
     $("ecran-fin").scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
+  }
+  // Sous le résultat : les termes à retravailler, pour que l'élève sache lesquels (rien si la liste est vide)
+  function listeFin(titre, defs) {
+    const zone = $("def-fin-liste");
+    zone.replaceChildren();
+    zone.hidden = !defs.length;
+    if (!defs.length) return;
+    const p = document.createElement("p");
+    p.className = "def-fin-liste-titre";
+    p.textContent = titre;
+    const ul = document.createElement("ul");
+    defs.forEach(d => { const li = document.createElement("li"); li.textContent = d.terme; ul.appendChild(li); });
+    zone.append(p, ul);
   }
   function terminer() {
     oublierSeance(toutes[0].epreuve);      // tour fini : plus rien à reprendre
@@ -375,6 +409,7 @@
       ? (total > 1 ? "Elles montent d'un tiroir et se reposent : tu les reverras le moment venu." : "Elle monte d'un tiroir et se repose : tu la reverras le moment venu.")
       : (n > 1 ? "Les " + n + " autres sont revenues" : "L'autre est revenue") + " quelques cartes plus loin, jusqu'à ce que tu " + (n > 1 ? "les" : "la") + " saches. Tu " + (n > 1 ? "les" : "la") + " reverras demain.")
       + " Vérifie maintenant avec l'exercice : pour chaque terme, retrouve la bonne définition parmi quatre cartes.";
+    listeFin(n > 1 ? "Les " + n + " qui sont revenues :" : "Celle qui est revenue :", ratees);
     if (typeof montrerCompagnon === "function") montrerCompagnon($("def-fin-compagnon"), parfait ? "choque" : sues1 / total >= 0.6 ? "bouche-ouverte" : "pensif");
     const nbQuestions = nbExercice();
     boutonsFin([
@@ -466,6 +501,17 @@
     $("exo-suivant").textContent = dernier ? "Voir mon résultat" : "Question suivante";
     $("exo-suivant").hidden = false;
     $("exo-suivant").focus({ preventScroll: true });
+    montrerRetour();
+  }
+  // Après une réponse, descend juste ce qu'il faut pour voir le verdict et « Question suivante » au-dessus de la
+  // barre d'onglets du téléphone (comme la correction du QCM). Rien ne bouge s'ils sont déjà visibles.
+  function montrerRetour() {
+    const bas = $("exo-suivant").getBoundingClientRect().bottom + 16;
+    const limite = window.innerHeight - (matchMedia("(max-width: 720px)").matches ? 96 : 0);
+    if (bas <= limite) return;
+    const haut = $("exo-retour").getBoundingClientRect().top - 80;      // jamais au-delà du haut du verdict (sous l'en-tête)
+    const dy = Math.min(bas - limite, Math.max(0, haut));
+    if (dy > 0) window.scrollBy({ top: dy, behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
   }
   function questionSuivante() {
     if (!exo || !exo.repondu) return;
@@ -482,6 +528,7 @@
     $("def-fin-texte").textContent = justes === total
       ? "Tu as retrouvé chaque définition parmi les quatre cartes. Les tiroirs feront revenir ces cartes au bon moment."
       : (aRevoir.length > 1 ? "Les " + aRevoir.length + " définitions ratées sont retournées" : "La définition ratée est retournée") + " dans le tiroir 1 : refais un tour avec " + (aRevoir.length > 1 ? "elles" : "elle") + " pour " + (aRevoir.length > 1 ? "les" : "la") + " fixer.";
+    listeFin(aRevoir.length > 1 ? "Les " + aRevoir.length + " ratées :" : "La définition ratée :", aRevoir);
     if (typeof montrerCompagnon === "function") montrerCompagnon($("def-fin-compagnon"), justes === total ? "clin-doeil" : justes / total >= 0.6 ? "bouche-ouverte" : "pensif");
     exo = null;
     boutonsFin(aRevoir.length
@@ -490,20 +537,23 @@
   }
 
   // ---------------- Branchements ----------------
-  $("def-recherche").addEventListener("input", e => { recherche = e.target.value; afficherListe(); });
-  $("def-tombees").addEventListener("click", () => {
-    tombeesSeules = !tombeesSeules;
+  $("def-recherche").addEventListener("input", e => { recherche = e.target.value; afficherThemes(); afficherListe(); });
+  function poserFiltres() {
     $("def-tombees").setAttribute("aria-checked", tombeesSeules);
     $("def-tombees-texte").classList.toggle("actif", tombeesSeules);
-    afficherListe();
-  });
-  $("def-tombees-texte").addEventListener("click", () => $("def-tombees").click());
-  $("def-coeur").addEventListener("click", () => {
-    parCoeurSeules = !parCoeurSeules;
     $("def-coeur").setAttribute("aria-checked", parCoeurSeules);
     $("def-coeur-texte").classList.toggle("actif", parCoeurSeules);
-    afficherListe();
-  });
+    afficherThemes(); afficherListe();
+  }
+  $("def-tombees").addEventListener("click", () => { tombeesSeules = !tombeesSeules; poserFiltres(); });
+  $("def-tombees-texte").addEventListener("click", () => $("def-tombees").click());
+  $("def-coeur").addEventListener("click", () => { parCoeurSeules = !parCoeurSeules; poserFiltres(); });
+  // « Effacer la recherche et les filtres » : tout revient à la liste complète de la matière
+  $("def-effacer").onclick = () => {
+    recherche = ""; $("def-recherche").value = ""; tombeesSeules = parCoeurSeules = false; theme = "Tous";
+    majAdresse(); poserFiltres();
+    $("def-reviser").focus({ preventScroll: true });
+  };
   $("def-coeur-texte").addEventListener("click", () => $("def-coeur").click());
   // Bouton doré : les cartes à voir aujourd'hui (voir paquetPropose)
   $("def-reviser").onclick = () => {

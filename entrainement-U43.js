@@ -22,7 +22,10 @@ QUESTIONS.push(
     "signe": true
   },
   "explication": "Relation de conjugaison :\n[[1|OA']] = [[1|f']] + [[1|OA]] = [[1|30]] + [[1|−40]]\n[[1|OA']] = [[4|120]] − [[3|120]] = [[1|120]]\nDonc OA' = +120 mm. Positif : l'image est réelle, après l'objectif.\nGrandissement : γ = [[OA'|OA]] = [[120|−40]] = −3\nImage renversée, 3 fois plus grande.",
-  "indice": "La préparation est un objet réel avant la lentille : OA = −40 mm. Applique [[1|OA']] = [[1|f']] + [[1|OA]], puis inverse."
+  "indice": "La préparation est un objet réel avant la lentille : OA = −40 mm. Applique [[1|OA']] = [[1|f']] + [[1|OA]], puis inverse.",
+    "erreurs": [
+      { "valeur": 17, "type": "signe", "message": "Tu as pris OA = +40 mm. La préparation est un objet réel, avant la lentille : OA = −40 mm." }
+    ]
 },
 {
   "id": "U43-052",
@@ -112,7 +115,10 @@ QUESTIONS.push(
     "signe": true
   },
   "explication": "R = [[1|HR]] = [[1|−0,160]] = −6,25 δ\nRemotum réel devant l'œil, donc R négatif : l'œil est myope.",
-  "indice": "R = [[1|HR]], avec HR en mètres et son signe : le remotum est devant l'œil."
+  "indice": "R = [[1|HR]], avec HR en mètres et son signe : le remotum est devant l'œil.",
+    "erreurs": [
+      { "valeur": 6.25, "type": "signe", "message": "Le remotum est devant l'œil : HR = −160 mm, donc R est négatif. Un œil myope a une réfraction négative." }
+    ]
 },
 {
   "id": "U43-057",
@@ -420,7 +426,10 @@ QUESTIONS.push(
     "signe": true
   },
   "explication": "R = verre de point neutre − [[1|d]] = +4 − [[1|0,4]] = +4 − 2,5 = +1,5 δ\nL'œil est hypermétrope de 1,5 δ.",
-  "indice": "On retire la vergence liée à la distance de travail : [[1|d]], avec d en mètres."
+  "indice": "On retire la vergence liée à la distance de travail : [[1|d]], avec d en mètres.",
+    "erreurs": [
+      { "valeur": 6.5, "type": "signe", "message": "Tu as ajouté 1/d. La distance de travail se retranche : R = verre de point neutre − 1/d." }
+    ]
 },
 {
   "id": "U43-074",
@@ -474,6 +483,9 @@ QUESTIONS.push(
     "signe": true
   },
   "explication": "L₁ : [[1|O₁A₁]] = [[1|100]] + [[1|−150]] = [[3|300]] − [[2|300]] = [[1|300]]\nL'image intermédiaire est à +300 mm de L₁, soit 150 mm après L₂. Pour L₂, c'est un objet virtuel : O₂A₁ = +150 mm.\nL₂ : [[1|O₂A']] = [[1|50]] + [[1|150]] = [[3|150]] + [[1|150]] = [[4|150]]\nDonc O₂A' = +37,5 mm.\nTraiter A₁ comme un objet réel (O₂A₁ = −150 mm) donnerait +75 mm, faux.",
+    "erreurs": [
+      { "valeur": 75, "type": "signe", "message": "Tu as pris O₂A₁ = −150 mm. A₁ est après L₂ : c'est un objet virtuel, O₂A₁ = +150 mm." }
+    ],
   "indice": "Deux conjugaisons à la suite. Calcule A₁ avec L₁, puis repère-le par rapport à L₂ : il est après L₂ ou avant ?"
 },
 {
@@ -690,7 +702,10 @@ QUESTIONS.push(
     "signe": true
   },
   "explication": "Les deux verres cumulés donnent −3,00 + 0,50 = −2,50 δ.\nRéfraction de l'œil = verre au point neutre − [[1|d]] = −2,50 − 2,00 = −4,50 δ\nOublier la distance de travail donnerait −2,50 δ, ne pas ajouter les lunettes −2,00 δ.",
-  "indice": "Additionne d'abord tous les verres devant l'œil, puis retranche la distance de travail [[1|d]]."
+  "indice": "Additionne d'abord tous les verres devant l'œil, puis retranche la distance de travail [[1|d]].",
+    "erreurs": [
+      { "valeur": -0.5, "type": "signe", "message": "Tu as ajouté 1/d. La distance de travail se retranche : R = verre de point neutre − 1/d." }
+    ]
 },
 {
   "id": "U43-089",
@@ -1123,7 +1138,10 @@ QUESTIONS.push(
     "signe": true
   },
   "explication": "[[1|OA]] = [[1|OA']] − V = [[1|0,1]] − 25 = 10 − 25 = −15\nDonc OA = [[1|−15]] = −0,0667 m = −66,7 mm\nL'objet est à 66,7 mm devant la lentille, entre le foyer (40 mm) et 2f'. Le signe négatif indique un objet réel.",
-  "indice": "[[1|OA']] − [[1|OA]] = V. Isole [[1|OA]], avec les distances en mètres."
+  "indice": "[[1|OA']] − [[1|OA]] = V. Isole [[1|OA]], avec les distances en mètres.",
+    "erreurs": [
+      { "valeur": 28.6, "type": "signe", "message": "Tu as écrit 1/OA = 1/OA' + V. Il faut retrancher la vergence, et OA sort négatif (objet réel, avant la lentille)." }
+    ]
 },
 {
   "id": "U43-113",

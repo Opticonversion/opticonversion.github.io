@@ -32,4 +32,14 @@
       envoyer(nom, titre, 0);
     } catch (e) {}
   };
+
+  // Arrivée par le lien court d'un Short (s/<code>/index.html, generer-liens-courts.py) : la page de
+  // redirection a noté le code dans la mémoire de l'onglet ; on le compte une fois, puis on l'efface.
+  try {
+    const short = sessionStorage.getItem("short");
+    if (short !== null) {
+      sessionStorage.removeItem("short");
+      if (/^[a-z0-9]{2,12}$/.test(short)) window.compter("short-" + short, "Arrivée par le Short " + short);
+    }
+  } catch (e) {}
 })();

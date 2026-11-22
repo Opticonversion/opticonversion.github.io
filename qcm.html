@@ -18,7 +18,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Opticonversion">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
-<link rel="stylesheet" href="style.css?v=229ef530">
+<link rel="stylesheet" href="style.css?v=0bd07ae1">
 </head>
 <body>
 <header class="entete">
@@ -102,32 +102,33 @@
 
 <script src="videos.js?v=2da8e777"></script>
 <script src="epreuves.js?v=cc645427"></script>
-<script src="questions-U41.js?v=ff216be0"></script>
-<script src="questions-U42.js?v=a0b309c4"></script>
-<script src="questions-U43.js?v=7b120a2f"></script>
+<script src="questions-U41.js?v=01b8417d"></script>
+<script src="questions-U42.js?v=110fcc22"></script>
+<script src="questions-U43.js?v=13cf11e5"></script>
 <script src="questions-U5.js?v=86decd35"></script>
-<script src="questions-U3.js?v=9474d67d"></script>
+<script src="questions-U3.js?v=246848d8"></script>
 <!-- Questions d'entraînement (mêmes notions, autres chiffres) : chargées ici seulement, hors Essentiel -->
-<script src="entrainement-U41.js?v=1b78bba4"></script>
-<script src="entrainement-U42.js?v=06b93d7d"></script>
-<script src="entrainement-U43.js?v=d79f0f72"></script>
+<script src="entrainement-U41.js?v=26e8d700"></script>
+<script src="entrainement-U42.js?v=0310e3b2"></script>
+<script src="entrainement-U43.js?v=201e28d1"></script>
 <script src="entrainement-U5.js?v=98511033"></script>
-<script src="entrainement-U3.js?v=f3ed3fea"></script>
+<script src="entrainement-U3.js?v=5783bb52"></script>
 <!-- Fiches « Spécificités » (facultatives : la page marche sans elles) -->
 <!-- Niveaux de l'Atelier (pour compter niveaux et étoiles sur la page de l'épreuve) -->
-<script src="traces-U42.js?v=67196cf4"></script>
+<script src="traces-U42.js?v=6b6df119"></script>
 <script src="traces-U43.js?v=77abc155"></script>
 <script src="traces-U5.js?v=c4c5f919"></script>
 <script src="specificites-U41.js?v=3d591e09"></script>
-<script src="specificites-U42.js?v=f64709f2"></script>
+<script src="specificites-U42.js?v=c76c29e7"></script>
 <script src="specificites-U43.js?v=523c07db"></script>
 <script src="specificites-U5.js?v=43533990"></script>
 <script src="specificites-U3.js?v=3245f237"></script>
 <script src="essentiel.js?v=ba6ab9a7"></script>
 <script src="rythme.js?v=a384940c"></script>
 <!-- Examen blanc chronométré (#U5/examen) : avant le script de la page, qui l'ouvre dès le chargement -->
-<script src="examen.js?v=ffcabd49"></script>
-<script src="calculette.js?v=443ce865"></script>
+<script src="examen.js?v=9962fce9"></script>
+<script src="calculette.js?v=6fb79d1d"></script>
+<script src="atelier-calculatrice.js?v=6e07c21a"></script>
 <script>
   // ---------------- L'état du QCM ----------------
   let epreuveChoisie = null;   // ex. "U5"
@@ -446,6 +447,7 @@
     const adresse = "#" + epreuveChoisie + "/" + (t === "Tous" ? "tous" : encodeURIComponent(t));
     history.replaceState(null, "", adresse);
     afficherThemes();
+    afficherMiseEnAvant(epreuveChoisie);     // le lien du chapitre de l'Atelier suit le thème choisi
     repriseAuChargement = true;              // le thème reprend où l'élève l'avait laissé (même onglet)
     demarrer();
     repriseAuChargement = false;
@@ -895,6 +897,7 @@
     let blocChoix = zone.querySelector(".choix");
     if (q.type === "calcul") blocChoix = creerSaisie(q, blocChoix);
     if (q.type === "pose") blocChoix = creerPose(q, blocChoix);
+    if (q.type === "redaction") blocChoix = creerRedaction(q, blocChoix);
     if (q.choixSchemas) blocChoix.classList.add("choix-images");
     (q.reponses || []).forEach((r, i) => {
       const b = document.createElement("button");
@@ -957,7 +960,7 @@
     aide.className = "raccourcis";
     aide.innerHTML = q.type === "calcul" || q.type === "pose" ?'Astuce : tape ta réponse puis <kbd>Entrée</kbd>, et encore <kbd>Entrée</kbd> pour continuer.'
       : 'Astuce : réponds avec les touches <kbd>A</kbd> <kbd>B</kbd> <kbd>C</kbd> <kbd>D</kbd> (<kbd>?</kbd> si tu ne sais pas), puis <kbd>Entrée</kbd> pour continuer. <kbd>←</kbd> revoit la question précédente.';
-    if (numero === 0) zone.appendChild(aide);     // l'astuce clavier : à la première question seulement (et cachée au doigt)
+    if (numero === 0 && q.type !== "redaction") zone.appendChild(aide);     // l'astuce clavier : à la première question seulement (et cachée au doigt)
     annulerChoix();
     majBarreSerie();
     if (onglet === "cas") majProgressionEpreuve();
@@ -970,6 +973,67 @@
     document.getElementById("annonce-correction").textContent = "";
     sauverPosition(numero);
     rejouerAnimation(zone);
+  }
+
+  // Question « rédaction libre » (type: "redaction", Éco) : l'élève écrit sa réponse, voit la réponse modèle,
+  // puis coche lui-même la grille (4 points). Pas de note automatique sur le texte, qui n'est gardé nulle part.
+  // Juste à partir de 3 points cochés sur 4 (choix de David, 22 nov. 2026).
+  const REDACTION_SEUIL = 3;
+  function creerRedaction(q, place) {
+    const form = document.createElement("form");
+    form.className = "saisie-redaction saisie-qcm";
+    form.innerHTML = '<p class="redaction-consigne"></p>' +
+      '<label class="redaction-case"><span class="visuellement-cache">Ta réponse</span><textarea rows="5" autocomplete="off" aria-describedby="redaction-aide"></textarea></label>' +
+      '<p class="saisie-aide" id="redaction-aide">Écris ta réponse comme sur la copie, puis compare-la à la réponse modèle.</p>' +
+      '<button class="bouton" type="submit" disabled>Voir la réponse modèle</button>';
+    ecrireTexteMath(form.querySelector(".redaction-consigne"), q.consigne);
+    const champ = form.querySelector("textarea"), bouton = form.querySelector("button");
+    champ.oninput = () => { bouton.disabled = !champ.value.trim(); };
+    form.onsubmit = e => {
+      e.preventDefault();
+      if (!champ.value.trim() || form.querySelector(".redaction-modele")) return;
+      champ.readOnly = true;
+      bouton.remove();
+      form.querySelector(".saisie-aide").remove();
+      zone.querySelectorAll(".bouton-nsp, .bouton-indice").forEach(x => x.remove());
+      const modele = document.createElement("div");
+      modele.className = "redaction-modele";
+      modele.innerHTML = "<h3>Réponse modèle</h3><p></p>";
+      ecrireTexteMath(modele.querySelector("p"), q.modele);
+      const grille = document.createElement("fieldset");
+      grille.className = "redaction-grille";
+      grille.innerHTML = "<legend>Qu'est-ce qui se trouve dans ta réponse ?</legend>";
+      q.grille.forEach((point, i) => {
+        const l = document.createElement("label");
+        l.innerHTML = '<input type="checkbox"><span></span>';
+        l.querySelector("input").value = i;
+        ecrireTexteMath(l.querySelector("span"), point);
+        grille.appendChild(l);
+      });
+      const valider = document.createElement("button");
+      valider.type = "button";
+      valider.className = "bouton";
+      valider.textContent = "Valider ma grille";
+      const regle = document.createElement("p");
+      regle.className = "saisie-aide";
+      regle.textContent = "Coche honnêtement : " + REDACTION_SEUIL + " points sur " + q.grille.length + " suffisent pour que la question compte juste.";
+      valider.onclick = () => {
+        const coches = [...grille.querySelectorAll("input")].filter(x => x.checked).map(x => +x.value);
+        grille.querySelectorAll("input").forEach(x => { x.disabled = true; });
+        valider.remove();
+        regle.remove();
+        const juste = coches.length >= REDACTION_SEUIL;
+        form.classList.add(juste ? "juste" : "faux");
+        repondre({ juste, i: null, redaction: { coches, n: coches.length, sur: q.grille.length } }, null);
+      };
+      form.append(modele, grille, regle, valider);
+      rejouerAnimation(modele);
+      modele.scrollIntoView({ behavior: mouvementDoux(), block: "start" });
+      grille.querySelector("input").focus({ preventScroll: true });
+      annoncer("Réponse modèle affichée. Coche ce qui se trouve dans ta réponse, puis valide ta grille.");
+    };
+    place.replaceWith(form);
+    return form;
   }
 
   // Question « calcul » : une case où taper la valeur, l'unité à droite, l'arrondi demandé dessous.
@@ -1271,6 +1335,15 @@
       (expl.querySelector(".ta-reponse") || expl.querySelector(".expl-tete")).after(mot);
     }
     ecrireTexteMath(expl.querySelector("span"), q.explication);   // calcul posé : une étape par ligne, vraies fractions
+    if (q.type === "redaction" && reponse.nsp) {
+      // « Je ne sais pas » : la réponse modèle et ce que la grille attend, dans la correction
+      const m = document.createElement("div");
+      m.className = "redaction-modele";
+      m.innerHTML = "<p></p><h3>Ce qu'on attend</h3><ul></ul>";      // le titre de la correction dit déjà « Réponse modèle »
+      ecrireTexteMath(m.querySelector("p"), q.modele);
+      q.grille.forEach(point => { const li = document.createElement("li"); ecrireTexteMath(li, point); m.querySelector("ul").appendChild(li); });
+      expl.querySelector("span").before(m);
+    }
     if (reponse.pose) {
       // Calcul posé : l'étape où l'élève bloque, ou celle où il a eu besoin de l'aide
       const msg = document.createElement("p");
@@ -1471,11 +1544,13 @@
   // « Bonne réponse », « Faux · réponse B : Plate », « Faux · réponse : 65,7 mm », « Faux · bloqué à l'étape 2 »…
   function titreDeCorrection(reponse, q) {
     if (reponse.nsp) {
+      if (q.type === "redaction") return "Réponse modèle";
       if (q.reponses) return "Réponse : " + "ABCD"[q.reponses.findIndex(r => r.juste)];
       const r = q.reponse;
       return "Réponse : " + ecrireNombre(r.valeur, r.decimales === undefined ? 2 : r.decimales, r.signe !== false) + (r.unite ? " " + r.unite : "");
     }
     if (reponse.piege && reponse.piege.message) return "Faux · piège connu";
+    if (reponse.redaction) return (reponse.juste ? "Juste" : "À retravailler") + " · " + reponse.redaction.n + (reponse.redaction.n > 1 ? " points" : " point") + " sur " + reponse.redaction.sur;
     if (reponse.juste) {
       if (reponse.pose && reponse.pose.etats.includes("aide")) return "Juste, avec l'aide";
       return serieEnCours >= 3 ? "Bonne réponse · " + serieEnCours + " d'affilée" : "Bonne réponse";
@@ -1496,6 +1571,7 @@
   // Ce que l'élève a répondu, pour la correction et la liste des erreurs du bilan
   function maReponseDe(reponse, q) {
     if (reponse.nsp) return "";
+    if (reponse.redaction) return reponse.redaction.n + " point" + (reponse.redaction.n > 1 ? "s" : "") + " sur " + reponse.redaction.sur + " dans ta grille";
     if (reponse.texteChoisi !== undefined) return reponse.lettre + (reponse.texteChoisi ? " : " + reponse.texteChoisi : "");
     if (reponse.calcul && reponse.calcul.valeur !== undefined) {
       const r = q.reponse || {}, v = reponse.calcul.valeur;
@@ -1750,6 +1826,7 @@
   // ---------------- Autour du QCM : une seule ligne discrète en haut de l'épreuve ----------------
   // Atelier des tracés, Examen blanc, Spécificités (le bouton « Son » est ajouté au bout par sons.js).
   // Les cas pratiques ont leur pastille parmi les thèmes. Rien ne passe avant la première question.
+  const CHAPITRES_DU_THEME = { U42: { "Conjugaison": "Chaîne des images" }, U43: { "Chaîne des conjugués": "Chaîne des images" } };
   function afficherMiseEnAvant(code) {
     const zoneMA = document.getElementById("mise-en-avant");
     zoneMA.innerHTML = "";
@@ -1777,6 +1854,17 @@
       if (code !== "U5") a.querySelector(".lien-avant-mot").insertAdjacentHTML("beforeend", '<span class="mot-long"> des tracés</span>');
       a.href = "traces.html#" + code;
       a.setAttribute("aria-label", a.querySelector(".lien-avant-mot").textContent + " : " + gagnees + " étoiles sur " + niveaux.length * 3);
+    }
+    // Un thème qui a son chapitre à l'Atelier (Conjugaison, Chaîne des conjugués → « Chaîne des images ») :
+    // le lien ouvre le premier niveau du chapitre pas encore réussi (il est forcément ouvert), sinon le premier
+    const chapitre = (CHAPITRES_DU_THEME[code] || {})[themeChoisi];
+    const duChapitre = chapitre ? niveaux.filter(N => N.chapitre === chapitre) : [];
+    if (duChapitre.length) {
+      const g = duChapitre.reduce((t, N) => t + (etoiles[N.id] || 0), 0);
+      const suivant = duChapitre.find(N => !etoiles[N.id]) || duChapitre[0];
+      const a = lien("i-crayon", chapitre, "★ " + g + "/" + duChapitre.length * 3);
+      a.href = "traces.html#" + suivant.id;
+      a.setAttribute("aria-label", chapitre + ", chapitre de l'Atelier des tracés : " + g + " étoiles sur " + duChapitre.length * 3);
     }
     // L'examen blanc (examen.js), sur toutes les épreuves
     if (typeof Examen !== "undefined" && Examen.existe(code)) {
@@ -2146,6 +2234,9 @@
             r.appendChild(texteAvecTouches(fiche.remarque));
             det.appendChild(r);
           }
+          // Atelier calculatrice (atelier-calculatrice.js) : s'entraîner aux touches, pour les tâches et modèles qui ont un exercice
+          const atc = window.AtelierCalculatrice && AtelierCalculatrice.bouton(tache.id, modele, ol);
+          if (atc) det.appendChild(atc);
         }
         const liens = lienSpec(code, null, tache.questions);
         if (liens) det.appendChild(liens);
@@ -2537,8 +2628,8 @@
         li.innerHTML = "<strong></strong><span class='erreur-tienne'></span><span class='erreur-reponse'></span><span class='doux'></span>";
         ecrireTexteMath(li.querySelector("strong"), q.question);
         if (q.nsp) li.querySelector(".erreur-tienne").textContent = "✕ Tu as répondu « Je ne sais pas »";
-        else if (q.maReponse) ecrireTexteMath(li.querySelector(".erreur-tienne"), "✕ " + (q.type === "calcul" ? "Tu as tapé " : q.type === "pose" ? "Tu as " : "Ta réponse : ") + q.maReponse); else li.querySelector(".erreur-tienne").remove();
-        ecrireTexteMath(li.querySelector(".erreur-reponse"), "✓ " + (q.type === "pose" ? q.etapes[q.etapes.length - 1].ligne
+        else if (q.maReponse) ecrireTexteMath(li.querySelector(".erreur-tienne"), "✕ " + (q.type === "calcul" ? "Tu as tapé " : q.type === "pose" ? "Tu as " : q.type === "redaction" ? "" : "Ta réponse : ") + q.maReponse); else li.querySelector(".erreur-tienne").remove();
+        ecrireTexteMath(li.querySelector(".erreur-reponse"), "✓ " + (q.type === "redaction" ? q.modele : q.type === "pose" ? q.etapes[q.etapes.length - 1].ligne
           : q.type === "calcul"
           ? ecrireNombre(q.reponse.valeur, q.reponse.decimales === undefined ? 2 : q.reponse.decimales, q.reponse.signe !== false) + (q.reponse.unite ? " " + q.reponse.unite : "")
           : q.choix[q.bonne]));
@@ -2609,8 +2700,8 @@
   repriseAuChargement = false;
   pageChargee = true;
 </script>
-<script src="compter.js?v=920cbd98" defer></script>
-<script src="vivant.js?v=ec7cf52b" defer></script>
+<script src="compter.js?v=234d3f31" defer></script>
+<script src="vivant.js?v=0b03b85f" defer></script>
 <script src="appli.js?v=0724163c" defer></script>
 <script src="sons.js?v=355500ef" defer></script>
 <script type="module" src="compte.js?v=f81bb76e"></script>

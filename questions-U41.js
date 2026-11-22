@@ -679,6 +679,74 @@ QUESTIONS.push(
     bonne: 1,
     explication: "H0 est l'hypothèse de référence, celle qu'on teste : une valeur précise, p = 0,9. H1 est ce qu'on soupçonne : p < 0,9, d'où un test unilatéral. Mettre l'inégalité dans H0 inverse les rôles. Porter les hypothèses sur f, la fréquence de l'échantillon, est faux : elles portent sur p, la proportion de toute la production. Choisir « p ≠ 0,9 » dans H0 et un test bilatéral ne correspond pas au soupçon, qui est seulement une proportion plus basse.",
     indice: "H0 contient l'égalité. H1 est ce que tu soupçonnes. Les hypothèses portent sur la proportion de toute la production, pas sur l'échantillon."
+  },
+
+  // ---------- Mini-cas en cascade (CAS-U41-02) ----------
+  {
+    id: "U41-141", epreuve: "U41", theme: "Statistique", session: "complément",
+    difficulte: "moyen",
+    cas: "CAS-U41-02",
+    etape: 1,
+    question: "Le nuage (t ; y) descend vite puis se tasse vers une valeur proche de 5. On pose z = ln(y − 5). Pourquoi ce changement de variable est-il adapté ?",
+    choix: ["Si y − 5 décroît comme une exponentielle, alors z = ln(y − 5) est une fonction affine de t : on peut ajuster z en t par une droite.", "Parce que le logarithme transforme tout nuage qui descend en une droite, quelle que soit la forme de la courbe : il suffit alors de faire la régression.", "Parce que y − 5 est négatif pour toutes les mesures, et que le logarithme permet de rendre ces valeurs positives avant la régression.", "Parce que la droite z = at + b donne ensuite y = at + b, ce qui permet de lire directement la vitesse de séchage sur la droite."],
+    bonne: 0,
+    explication: "Quand y − 5 = k e^(at), on a ln(y − 5) = ln k + at : z est affine en t. C'est ce qui rend l'ajustement par une droite possible. Le logarithme ne redresse pas n'importe quelle courbe. Ici y − 5 est positif (y vaut au moins 13 sur les mesures), et y n'est pas égal à at + b : il faut revenir de z à y avec l'exponentielle.",
+    indice: "Que devient ln(k e^(at)) ? Cherche une expression de la forme (coefficient) × t + (constante)."
+  },
+  {
+    id: "U41-142", epreuve: "U41", theme: "Statistique", session: "complément", type: "calcul",
+    difficulte: "facile",
+    cas: "CAS-U41-02",
+    etape: 2,
+    contexte: "On calcule z = ln(y − 5) pour chaque mesure.",
+    annexe: {"titre": "Série (t ; z)", "colonnes": ["t", "0", "1", "2", "3", "4", "5"], "lignes": [["z", "4,09", "3,69", "3,30", "2,90", "2,49", "2,09"]]},
+    question: "À la calculatrice, donne le coefficient a de la droite de régression de z en t (z = at + b), arrondi à 10⁻². Garde le signe.",
+    reponse: {"valeur": -0.4, "unite": "", "decimales": 2, "signe": true},
+    explication: "Régression linéaire de z en t (moindres carrés) : a ≈ −0,40 et b ≈ 4,09, avec r ≈ −1. Le signe − veut dire que z diminue quand t augmente : le verre sèche.",
+    indice: "Saisis t et z dans deux listes, puis lance la régression linéaire de type ax + b. Garde le signe de a."
+  },
+  {
+    id: "U41-143", epreuve: "U41", theme: "Équations différentielles", session: "complément",
+    difficulte: "difficile",
+    cas: "CAS-U41-02",
+    etape: 3,
+    contexte: "On retient la modélisation y(t) = 5 + 60 e^(−0,4t) (car e^4,09 ≈ 60) et l'équation différentielle (E) : y' + 0,4y = 2.",
+    question: "Quelle rédaction démontre correctement que y est solution de (E) ?",
+    choix: ["y(0) = 5 + 60 = 65 et y(1) = 5 + 60 e^(−0,4) ≈ 45,2 : ces valeurs sont proches du tableau de mesures, donc y est solution de (E).", "y'(t) = 60 e^(−0,4t), donc y' + 0,4y = 60 e^(−0,4t) + 0,4 × (5 + 60 e^(−0,4t)) = 2 + 84 e^(−0,4t), ce qui est proche de 2 : y est solution de (E).", "y'(t) = 60 × (−0,4) e^(−0,4t) = −24 e^(−0,4t). Donc y' + 0,4y = −24 e^(−0,4t) + 2 + 24 e^(−0,4t) = 2 pour tout t : y vérifie (E).", "La solution constante de (E) est 2 ÷ 0,4 = 5. Comme y(t) tend vers 5 quand t tend vers +∞, la fonction y est donc solution de (E)."],
+    bonne: 2,
+    explication: "Pour montrer qu'une fonction est solution, on la dérive, on remplace dans l'équation et on trouve le second membre pour tout t. Ici, les termes en exponentielle se compensent et il reste 2. Comparer deux valeurs avec des mesures ne prouve rien. Une dérivée mal calculée (le facteur −0,4 oublié) laisse un reste en exponentielle : ce n'est pas 2. Avoir la bonne limite ne suffit pas non plus : beaucoup de fonctions tendent vers 5.",
+    indice: "Dérive y, remplace y' et y dans y' + 0,4y, puis vérifie que tout ce qui dépend de t disparaît."
+  },
+  {
+    id: "U41-144", epreuve: "U41", theme: "Fonctions", session: "complément",
+    difficulte: "moyen",
+    cas: "CAS-U41-02",
+    etape: 4,
+    question: "Quelle rédaction donne correctement le sens de variation de y et sa limite en +∞ ?",
+    choix: ["y'(t) = −24 e^(−0,4t) est négative, donc y est décroissante. Comme −0,4 < 0, on dit que e^(−0,4t) tend vers +∞ quand t tend vers +∞, donc y(t) tend vers +∞.", "y'(t) = −24 e^(−0,4t) < 0, car une exponentielle est strictement positive : y est décroissante. Comme −0,4 < 0, e^(−0,4t) tend vers 0, donc lim y(t) = 5.", "y(0) = 65 et y(5) ≈ 13,1 : y décroît sur [0 ; 5]. Comme e^(−0,4t) tend vers 0, lim y(t) = 0 : le verre finit par être totalement sec, sans humidité.", "y'(t) = −24 e^(−0,4t) < 0 : y est décroissante. La limite est 60, car c'est le coefficient devant l'exponentielle, et il ne change pas quand t grandit."],
+    bonne: 1,
+    explication: "Le signe de y' est justifié (une exponentielle est strictement positive), puis la limite : −0,4 < 0, donc e^(−0,4t) tend vers 0 et y tend vers 5. Avec un exposant négatif, l'exponentielle ne tend jamais vers +∞. Comparer deux valeurs ne donne pas le sens de variation sur tout l'intervalle, et il ne faut pas oublier la constante 5 dans la limite. Le coefficient 60 n'est pas la limite : c'est la valeur de y(0) − 5.",
+    indice: "Deux temps : le signe de y' avec sa justification, puis la limite de l'exponentielle, sans oublier la constante 5."
+  },
+  {
+    id: "U41-145", epreuve: "U41", theme: "Fonctions", session: "complément", type: "calcul",
+    difficulte: "moyen",
+    cas: "CAS-U41-02",
+    etape: 5,
+    question: "À partir de quel instant le verre a-t-il une humidité inférieure ou égale à 10 % ? Donne la plus petite valeur de t, arrondie au centième (valeur exacte : t = ln 12 ÷ 0,4).",
+    reponse: {"valeur": 6.21, "unite": "h", "decimales": 2, "signe": false},
+    explication: "y(t) ≤ 10 équivaut à 5 + 60 e^(−0,4t) ≤ 10\nsoit 60 e^(−0,4t) ≤ 5, donc e^(−0,4t) ≤ [[5|60]] = [[1|12]]\nAvec le logarithme : −0,4 t ≤ −ln 12\nDiviser par −0,4 change le sens : t ≥ [[ln 12|0,4]] ≈ [[2,4849|0,4]] ≈ 6,21\nLe verre est à 10 % ou moins à partir de 6,21 h.",
+    indice: "Isole l'exponentielle, applique ln, puis attention au sens de l'inégalité quand tu divises par −0,4."
+  },
+  {
+    id: "U41-146", epreuve: "U41", theme: "Calcul intégral", session: "complément", type: "calcul",
+    difficulte: "difficile",
+    cas: "CAS-U41-02",
+    etape: 6,
+    question: "Calcule la valeur moyenne de y sur [0 ; 5], arrondie au centième.",
+    reponse: {"valeur": 30.94, "unite": "%", "decimales": 2, "signe": false},
+    explication: "Une primitive de y est F(t) = 5t − 150 e^(−0,4t) car 60 ÷ (−0,4) = −150.\nValeur moyenne = [[1|5 − 0]] × (F(5) − F(0))\nF(5) − F(0) = (25 − 150 e^(−2)) − (−150) = 175 − 150 e^(−2) ≈ 154,70\nValeur moyenne = [[154,70|5]] ≈ 30,94\nL'humidité moyenne sur les 5 premières heures est d'environ 30,94 %.",
+    indice: "Valeur moyenne = (1 ÷ longueur) × intégrale. La primitive de e^(−0,4t) est e^(−0,4t) ÷ (−0,4)."
   }
 
 );
@@ -690,4 +758,12 @@ CAS.push({
   titre: "Les ventes d'une nouvelle monture",
   contexte: "Un magasin d'optique lance un nouveau modèle de monture. N est le nombre de montures vendues pendant le mois de rang t (t = 0 pour le premier mois), exprimé en dizaines. Les ventes montent vite au début, puis ralentissent.",
   annexe: { titre: "Ventes relevées", colonnes: ["Mois t", "0", "1", "2", "3", "4", "5"], lignes: [["N (dizaines)", "10,0", "21,3", "27,2", "34,1", "37,6", "41,2"]] }
+});
+
+CAS.push({
+  id: "CAS-U41-02",
+  epreuve: "U41",
+  titre: "Le séchage des verres teintés",
+  contexte: "Un atelier de teinture fait sécher des verres organiques après le bain de couleur. y est le taux d'humidité d'un verre, en pourcentage, mesuré t heures après la sortie du bain (t = 0 à la sortie). L'humidité baisse vite au début, puis se stabilise.",
+  annexe: { titre: "Humidité mesurée", colonnes: ["Heure t", "0", "1", "2", "3", "4", "5"], lignes: [["y (%)", "65,0", "45,2", "32,0", "23,1", "17,1", "13,1"]] }
 });

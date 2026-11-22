@@ -18,7 +18,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Opticonversion">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
-<link rel="stylesheet" href="style.css?v=229ef530">
+<link rel="stylesheet" href="style.css?v=0bd07ae1">
 </head>
 <body>
 <header class="entete">
@@ -40,15 +40,33 @@
   <!-- Le haut de la page : le titre, sa phrase, et le compagnon de l'élève qui dépasse de derrière le premier bloc -->
   <div class="tete-page">
     <h1 class="apparait">Définitions</h1>
-    <p class="sous-titre apparait" style="--d:2">Les définitions à savoir réciter à l'écrit, épreuve par épreuve. Celles marquées « À savoir par cœur » passent en premier ; le badge « Tombée » donne les années où la définition a été demandée au BTS. En révision, une carte pas sue revient jusqu'à ce que tu la saches, et une carte sue se range dans un tiroir : elle revient le lendemain, puis elle est acquise.</p>
+    <p class="sous-titre apparait" style="--d:2">Les définitions à réciter à l'écrit, épreuve par épreuve. En cartes, une définition pas sue revient jusqu'à ce que tu la saches ; une définition sue se repose dans son tiroir et revient le lendemain.</p>
     <img class="tete-compagnon apparait" style="--d:3" data-pose="pensif" src="img/nounours-pensif.svg" alt="" width="120" height="132">
   </div>
 
-  <div class="def-epreuves apparait" style="--d:3" id="def-epreuves" role="tablist" aria-label="Épreuve"></div>
+  <div class="def-epreuves apparait" style="--d:3" id="def-epreuves" role="group" aria-label="Épreuve"></div>
 
-  <!-- La liste -->
+  <!-- La liste : d'abord le thème, la révision et son bouton ; puis la recherche et les filtres, juste au-dessus de la liste qu'ils trient -->
   <div id="ecran-liste">
     <section class="def-outils apparait" style="--d:4">
+      <div class="themes def-themes" id="def-themes" role="group" aria-label="Thème"></div>
+      <div id="def-progression"></div>
+      <!-- Une révision quittée en cours de route (changement de matière, « Arrêter ») : on peut la reprendre -->
+      <div class="def-reprise" id="def-reprise" hidden>
+        <p id="def-reprise-texte"></p>
+        <div class="def-boutons">
+          <button class="bouton" type="button" id="def-reprendre"><span class="ico i-cartes" aria-hidden="true"></span> Reprendre ma révision</button>
+          <button class="bouton secondaire" type="button" id="def-abandonner">L'abandonner</button>
+        </div>
+      </div>
+      <div class="def-boutons">
+        <button class="bouton" type="button" id="def-reviser"><span class="ico i-cartes" aria-hidden="true"></span> Réviser ces définitions</button>
+        <button class="bouton secondaire" type="button" id="def-reviser-tout" hidden>Tout réviser</button>
+      </div>
+      <p class="aide def-repos" id="def-repos" hidden></p>
+    </section>
+
+    <div class="def-tri apparait" style="--d:5">
       <label class="def-recherche">
         <span class="visuellement-cache">Chercher une définition</span>
         <span class="ico i-loupe" aria-hidden="true"></span>
@@ -68,24 +86,10 @@
           <span class="interrupteur-texte" id="def-tombees-texte">Déjà tombées seulement</span>
         </div>
       </div>
-      <div class="themes def-themes" id="def-themes"></div>
-      <div id="def-progression"></div>
-      <!-- Une révision quittée en cours de route (changement de matière, « Arrêter ») : on peut la reprendre -->
-      <div class="def-reprise" id="def-reprise" hidden>
-        <p id="def-reprise-texte"></p>
-        <div class="def-boutons">
-          <button class="bouton" type="button" id="def-reprendre"><span class="ico i-cartes" aria-hidden="true"></span> Reprendre ma révision</button>
-          <button class="bouton secondaire" type="button" id="def-abandonner">L'abandonner</button>
-        </div>
-      </div>
-      <div class="def-boutons">
-        <button class="bouton" type="button" id="def-reviser"><span class="ico i-cartes" aria-hidden="true"></span> Réviser ces définitions</button>
-        <button class="bouton secondaire" type="button" id="def-reviser-tout" hidden>Tout réviser</button>
-      </div>
-      <p class="aide def-repos" id="def-repos" hidden></p>
-    </section>
+    </div>
 
     <p class="aide" id="def-compte" role="status" aria-live="polite"></p>
+    <button class="bouton secondaire def-effacer" type="button" id="def-effacer" hidden>Effacer la recherche et les filtres</button>
     <ul class="def-liste" id="def-liste"></ul>
   </div>
 
@@ -120,8 +124,8 @@
       <button class="bouton" type="button" id="def-retourner">Retourner la carte</button>
     </div>
     <div class="def-actions" id="def-actions-verso" hidden>
-      <button class="bouton def-savais" type="button" id="def-savais">✓ Je savais</button>
-      <button class="bouton secondaire def-arevoir" type="button" id="def-arevoir">↻ À revoir</button>
+      <button class="bouton def-savais" type="button" id="def-savais"><span class="ico i-valide" aria-hidden="true"></span> Je savais</button>
+      <button class="bouton secondaire def-arevoir" type="button" id="def-arevoir"><span class="ico i-annuler" aria-hidden="true"></span> À revoir</button>
     </div>
     <p class="raccourcis">Astuce : <kbd>Espace</kbd> pour retourner, puis <kbd>→</kbd> je savais ou <kbd>←</kbd> à revoir. Une carte « à revoir » revient quelques cartes plus loin.</p>
   </section>
@@ -146,8 +150,9 @@
 
   <section id="ecran-fin" hidden class="def-fin">
     <img class="def-fin-compagnon" id="def-fin-compagnon" src="img/nounours-clin-doeil.svg" alt="" width="110" height="121">
-    <h2 id="def-fin-titre"></h2>
+    <h2 id="def-fin-titre" tabindex="-1"></h2>
     <p class="aide" id="def-fin-texte"></p>
+    <div class="def-fin-liste" id="def-fin-liste" hidden></div>
     <div class="bilan-actions" id="def-fin-actions"></div>
   </section>
 </main>
@@ -156,14 +161,14 @@
 
 <script src="epreuves.js?v=cc645427"></script>
 <script src="definitions-U41.js?v=6d18ab79"></script>
-<script src="definitions-U42.js?v=e3abf8c3"></script>
+<script src="definitions-U42.js?v=32483ce5"></script>
 <script src="definitions-U43.js?v=135a6649"></script>
 <script src="definitions-U5.js?v=6f883a4c"></script>
-<script src="definitions-U3.js?v=4e970ea2"></script>
+<script src="definitions-U3.js?v=9c9ef1e8"></script>
 <script src="essentiel.js?v=ba6ab9a7"></script>
-<script src="definitions.js?v=30dfc195"></script>
-<script src="compter.js?v=920cbd98" defer></script>
-<script src="vivant.js?v=ec7cf52b" defer></script>
+<script src="definitions.js?v=575e9bbb"></script>
+<script src="compter.js?v=234d3f31" defer></script>
+<script src="vivant.js?v=0b03b85f" defer></script>
 <script src="appli.js?v=0724163c" defer></script>
 <script src="sons.js?v=355500ef" defer></script>
 <script type="module" src="compte.js?v=f81bb76e"></script>
