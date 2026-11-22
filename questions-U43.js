@@ -2095,5 +2095,307 @@ QUESTIONS.push(
   "erreurs": [
     { "valeur": 0.4, "type": "notion", "message": "0,4 est la distance en mètres. L'accommodation est son inverse : [[1|d]]." }
   ]
+},
+{
+  "id": "U43-196", "epreuve": "U43", "theme": "Grossissement et photo", "session": "complément", "difficulte": "facile",
+  "type": "calcul",
+  "question": "Une lunette afocale a un objectif de focale 800 mm et un oculaire de focale 25 mm. Quel est son grossissement (en valeur absolue) ?",
+  "reponse": { "valeur": 32, "unite": "", "decimales": 0, "signe": false },
+  "explication": "G = [[f'ob|f'oc]] = [[800|25]] = 32. La lunette grossit 32 fois.",
+  "indice": "G = focale de l'objectif divisée par focale de l'oculaire.",
+  "erreurs": [
+    { "valeur": 0.03125, "type": "notion", "message": "Tu as divisé la focale de l'oculaire par celle de l'objectif. Le grossissement est le rapport inverse." }
+  ]
+},
+{
+  "id": "U43-197", "epreuve": "U43", "theme": "Grossissement et photo", "session": "complément", "difficulte": "facile",
+  "type": "calcul",
+  "question": "Un microscope porte un objectif ×40 et un oculaire ×15. Quel est son grossissement commercial ?",
+  "reponse": { "valeur": 600, "unite": "", "decimales": 0, "signe": false },
+  "explication": "Les grossissements de l'objectif et de l'oculaire se multiplient : 40 × 15 = 600.",
+  "indice": "Les deux grossissements se combinent : additionne-t-on ou multiplie-t-on ?",
+  "erreurs": [
+    { "valeur": 55, "type": "notion", "message": "Tu as additionné les deux grossissements. Dans un microscope, ils se multiplient." }
+  ]
+},
+{
+  "id": "U43-198", "epreuve": "U43", "theme": "Grossissement et photo", "session": "complément", "difficulte": "moyen",
+  "type": "calcul",
+  "question": "Un objectif photo de focale 50 mm est ouvert à f/2,8. Quel est le diamètre de sa pupille d'entrée (en mm, au dixième) ?",
+  "reponse": { "valeur": 17.9, "unite": "mm", "decimales": 1, "signe": false, "tolerance": 0.1 },
+  "explication": "Le nombre d'ouverture est N = [[f'|d]], donc d = [[f'|N]] = [[50|2,8]] ≈ 17,9 mm.",
+  "indice": "Le nombre d'ouverture est la focale divisée par le diamètre de la pupille d'entrée.",
+  "erreurs": [
+    { "valeur": 140, "type": "notion", "message": "Tu as multiplié la focale par le nombre d'ouverture. Le diamètre s'obtient en divisant." }
+  ]
+},
+{
+  "id": "U43-199", "epreuve": "U43", "theme": "Grossissement et photo", "session": "complément", "difficulte": "moyen",
+  "question": "On passe d'une ouverture f/4 à f/8 avec le même objectif. Que devient l'éclairement reçu par le capteur ?",
+  "choix": [
+    "Il est divisé par 2",
+    "Il est divisé par 4",
+    "Il est divisé par 8",
+    "Il ne change pas"
+  ],
+  "bonne": 1,
+  "explication": "À focale fixe, passer de f/4 à f/8 divise par 2 le diamètre de la pupille d'entrée. La lumière collectée dépend de sa surface, donc du carré du diamètre : l'éclairement est divisé par 2² = 4.",
+  "indice": "La lumière reçue dépend de la surface de la pupille, pas de son diamètre.",
+  "erreurs": {
+    "0": { "type": "notion", "message": "L'éclairement dépend de la surface de la pupille, donc du carré de son diamètre, pas du diamètre lui-même." }
+  }
+},
+{
+  "id": "U43-200", "epreuve": "U43", "theme": "Grossissement et photo", "session": "complément", "difficulte": "difficile",
+  "type": "calcul",
+  "question": "Un objectif photo de focale 50 mm photographie une personne de 2 m de haut, à 10 m de la lentille. Quelle est la taille de l'image sur le capteur (en mm, au mm près) ?",
+  "reponse": { "valeur": 10, "unite": "mm", "decimales": 0, "signe": false, "tolerance": 0.5 },
+  "explication": "[[1|OA']] = [[1|f']] + [[1|OA]] = [[1|50]] − [[1|10 000]] (en mm) donne OA' ≈ 50,25 mm.\nγ = [[OA'|OA]] ≈ −0,005\nTaille de l'image : 2 000 × 0,005 ≈ 10 mm. L'image est renversée.",
+  "indice": "Cherche d'abord la position de l'image, puis le grandissement, puis multiplie par la taille de l'objet. Garde tout en mm.",
+  "erreurs": [
+    { "valeur": 0.01, "type": "unite", "message": "0,01 est un résultat en mètres. Convertis-le en millimètres." }
+  ]
+},
+{
+  "id": "U43-201", "epreuve": "U43", "theme": "Grossissement et photo", "session": "complément", "difficulte": "moyen",
+  "question": "On ferme le diaphragme d'un objectif photo, de f/2 à f/8. Que devient la profondeur de champ ?",
+  "choix": [
+    "Elle augmente",
+    "Elle diminue",
+    "Elle ne change pas",
+    "Elle devient nulle"
+  ],
+  "bonne": 0,
+  "explication": "Un diaphragme plus fermé réduit la pupille et donc l'ouverture du faisceau. Les taches de flou sont plus petites : une plus grande plage de distances reste nette.",
+  "indice": "Un faisceau plus étroit donne-t-il une tache de flou plus grande ou plus petite ?",
+  "erreurs": {
+    "1": { "type": "notion", "message": "C'est l'inverse : un faisceau plus étroit donne des taches de flou plus petites, donc plus de distances paraissent nettes." }
+  }
+},
+{
+  "id": "U43-202", "epreuve": "U43", "theme": "Chaîne des conjugués", "session": "complément", "difficulte": "moyen",
+  "type": "calcul",
+  "question": "Une lentille divergente a une focale image f' = −100 mm. Un objet réel est à 100 mm devant elle. Où se forme l'image (OA', en mm) ?",
+  "reponse": { "valeur": -50, "unite": "mm", "decimales": 0, "signe": true },
+  "explication": "[[1|OA']] = [[1|f']] + [[1|OA]] = [[1|−100]] + [[1|−100]] = [[−2|100]]\nOA' = −50 mm : l'image est virtuelle, à 50 mm avant la lentille.",
+  "indice": "Un objet réel est avant la lentille : OA est négatif. f' l'est aussi ici.",
+  "erreurs": [
+    { "valeur": 50, "type": "signe", "message": "Une lentille divergente donne d'un objet réel une image virtuelle, située avant la lentille : OA' est négatif." }
+  ]
+},
+{
+  "id": "U43-203", "epreuve": "U43", "theme": "Chaîne des conjugués", "session": "complément", "difficulte": "moyen",
+  "type": "pose",
+  "question": "Une lentille mince de focale image 100 mm donne l'image d'un objet AB de 10 mm de haut, placé à 150 mm devant elle. Trouve la position de l'image, le grandissement et la taille de l'image, étape par étape.",
+  "etapes": [
+    {
+      "consigne": "Position de l'image OA' (en mm)",
+      "reponse": { "valeur": 300, "unite": "mm", "decimales": 0, "signe": true },
+      "aide": "[[1|OA']] = [[1|f']] + [[1|OA]], avec OA = −150 mm (objet réel, avant la lentille).",
+      "ligne": "[[1|OA']] = [[1|100]] − [[1|150]] = [[3|300]] − [[2|300]] = [[1|300]]\nOA' = +300 mm"
+    },
+    {
+      "consigne": "Grandissement γ",
+      "reponse": { "valeur": -2, "unite": "", "decimales": 0, "signe": true },
+      "aide": "γ = [[OA'|OA]], avec les valeurs algébriques.",
+      "ligne": "γ = [[300|−150]] = −2"
+    },
+    {
+      "consigne": "Taille algébrique de l'image A'B' (en mm)",
+      "reponse": { "valeur": -20, "unite": "mm", "decimales": 0, "signe": true },
+      "aide": "A'B' = γ × AB.",
+      "ligne": "A'B' = −2 × 10 = −20 mm"
+    }
+  ],
+  "explication": "L'image est réelle, à 300 mm après la lentille, renversée et deux fois plus grande que l'objet (20 mm de haut)."
+},
+{
+  "id": "U43-204", "epreuve": "U43", "theme": "Chaîne des conjugués", "session": "complément", "difficulte": "moyen",
+  "type": "calcul",
+  "question": "Une lunette astronomique afocale a un objectif de focale 500 mm et un oculaire convergent de focale 25 mm. Quelle distance sépare l'objectif de l'oculaire (en mm) ?",
+  "reponse": { "valeur": 525, "unite": "mm", "decimales": 0, "signe": false },
+  "explication": "Une lunette afocale a le foyer image de l'objectif confondu avec le foyer objet de l'oculaire. Avec deux lentilles convergentes : e = f'ob + f'oc = 500 + 25 = 525 mm.",
+  "indice": "Les deux foyers se confondent : la distance entre les lentilles est la somme des deux focales.",
+  "erreurs": [
+    { "valeur": 475, "type": "notion", "message": "La différence des focales correspond à une lunette de Galilée, dont l'oculaire est divergent. Ici l'oculaire est convergent." }
+  ]
+},
+{
+  "id": "U43-205", "epreuve": "U43", "theme": "Chaîne des conjugués", "session": "complément", "difficulte": "moyen",
+  "question": "Une lunette de Galilée a un objectif convergent et un oculaire divergent. Quelle est la particularité de l'image finale ?",
+  "choix": [
+    "Elle est droite",
+    "Elle est renversée",
+    "Elle est réelle",
+    "Elle est plus petite que l'objet vu à l'œil nu"
+  ],
+  "bonne": 0,
+  "explication": "Dans une lunette de Galilée, le grossissement est positif : l'image est droite. C'est pourquoi on l'utilise en jumelles de théâtre, alors que la lunette astronomique de Képler donne une image renversée.",
+  "indice": "Le grossissement d'une lunette de Galilée est positif.",
+  "erreurs": {
+    "1": { "type": "notion", "message": "L'image renversée est celle de la lunette astronomique, dont l'oculaire est convergent." }
+  }
+},
+{
+  "id": "U43-206", "epreuve": "U43", "theme": "Chaîne des conjugués", "session": "complément", "difficulte": "moyen",
+  "type": "calcul",
+  "question": "Un objectif de microscope a une focale de 8 mm. La préparation est placée à 8,5 mm devant lui. À quelle distance après l'objectif se forme l'image intermédiaire (en mm) ?",
+  "reponse": { "valeur": 136, "unite": "mm", "decimales": 0, "signe": true },
+  "explication": "[[1|OA']] = [[1|f']] + [[1|OA]] = [[1|8]] − [[1|8,5]] = [[0,5|68]]\nOA' = +136 mm. L'image est réelle, bien plus loin que l'objectif.",
+  "indice": "Relation de conjugaison avec OA = −8,5 mm. Fais bien attention au signe.",
+  "erreurs": [
+    { "valeur": -136, "type": "signe", "message": "L'objet est un peu plus loin que le foyer objet : l'image est réelle, donc après l'objectif, avec une distance positive." }
+  ]
+},
+{
+  "id": "U43-207", "epreuve": "U43", "theme": "Étude des champs", "session": "complément", "difficulte": "moyen",
+  "question": "Pour profiter de toute la lumière qui sort d'une lunette, où faut-il placer la pupille de l'œil ?",
+  "choix": [
+    "Sur le cercle oculaire, image de l'objectif donnée par l'oculaire",
+    "Sur le foyer objet de l'oculaire",
+    "Contre la lentille de l'objectif",
+    "Dans le plan de l'image intermédiaire"
+  ],
+  "bonne": 0,
+  "explication": "Tous les faisceaux issus de l'instrument passent par le cercle oculaire, qui est l'image de l'objectif (la pupille) donnée par l'oculaire. L'œil placé à cet endroit reçoit toute la lumière et voit tout le champ.",
+  "indice": "Où l'ensemble des faisceaux sortants se resserre-t-il le plus ?"
+},
+{
+  "id": "U43-208", "epreuve": "U43", "theme": "Étude des champs", "session": "complément", "difficulte": "moyen",
+  "type": "calcul",
+  "question": "Une lunette a un objectif de 80 mm de diamètre et un grossissement de 20. Quel est le diamètre de son cercle oculaire (en mm) ?",
+  "reponse": { "valeur": 4, "unite": "mm", "decimales": 0, "signe": false },
+  "explication": "Le diamètre du cercle oculaire est celui de l'objectif divisé par le grossissement : [[80|20]] = 4 mm.",
+  "indice": "Diamètre du cercle oculaire = diamètre de l'objectif divisé par le grossissement.",
+  "erreurs": [
+    { "valeur": 1600, "type": "notion", "message": "Tu as multiplié les deux nombres. Le cercle oculaire est plus petit que l'objectif : il faut diviser." }
+  ]
+},
+{
+  "id": "U43-209", "epreuve": "U43", "theme": "Étude des champs", "session": "complément", "difficulte": "moyen",
+  "question": "Le cercle oculaire d'une lunette mesure 8 mm, la pupille de l'œil de l'utilisateur 3 mm. Que se passe-t-il ?",
+  "choix": [
+    "Une partie de la lumière sortant de l'instrument n'entre pas dans l'œil",
+    "L'image devient plus nette",
+    "Le champ de l'instrument augmente",
+    "Toute la lumière entre dans l'œil"
+  ],
+  "bonne": 0,
+  "explication": "La pupille de l'œil, plus petite que le cercle oculaire, arrête une partie du faisceau : l'œil devient la pupille du système et on perd de la lumière. Il vaut mieux un cercle oculaire plus petit que la pupille de l'œil.",
+  "indice": "Compare les deux diamètres : lequel laisse passer le moins de lumière ?",
+  "erreurs": {
+    "3": { "type": "notion", "message": "Le faisceau sortant est plus large que la pupille de l'œil : il ne peut pas entrer en entier." }
+  }
+},
+{
+  "id": "U43-210", "epreuve": "U43", "theme": "Skiascopie", "session": "complément", "difficulte": "moyen",
+  "type": "calcul",
+  "question": "En skiascopie à 1 m, le point neutre est obtenu avec un verre de +1,50 δ. Quelle est la réfraction de l'œil (en δ, au centième) ?",
+  "reponse": { "valeur": 0.5, "unite": "δ", "decimales": 2, "signe": true },
+  "explication": "Distance de travail : [[1|d]] = [[1|1]] = 1,00 δ\nR = verre − [[1|d]] = +1,50 − 1,00 = +0,50 δ",
+  "indice": "R = verre au point neutre − [[1|d]], avec d en mètres.",
+  "erreurs": [
+    { "valeur": 2.5, "type": "signe", "message": "Tu as ajouté la distance de travail. Elle se retranche : R = verre − 1/d." }
+  ]
+},
+{
+  "id": "U43-211", "epreuve": "U43", "theme": "Skiascopie", "session": "complément", "difficulte": "difficile",
+  "question": "En skiascopie à 1 m avec un faisceau divergent (miroir plan), le reflet se déplace dans le même sens que le skiascope. Que peut-on conclure ?",
+  "choix": [
+    "Hypermétropie, emmétropie ou myopie de moins de 1 δ",
+    "Myopie de plus de 1 δ",
+    "Le point neutre est atteint",
+    "L'œil est astigmate"
+  ],
+  "bonne": 0,
+  "explication": "À 1 m, la distance de travail vaut 1 δ. Un mouvement dans le même sens que le skiascope indique que le remotum de l'œil est au-delà de l'examinateur : l'œil est hypermétrope, emmétrope ou myope de moins de 1 δ. Un mouvement en sens inverse indique une myopie de plus de 1 δ.",
+  "indice": "Compare la réfraction de l'œil à la distance de travail, 1 δ à 1 m. Un mouvement inverse annonce une myopie plus forte que cette valeur.",
+  "erreurs": {
+    "1": { "type": "notion", "message": "Une myopie de plus de 1 δ donne un mouvement en sens inverse du skiascope, pas dans le même sens." }
+  }
+},
+{
+  "id": "U43-212", "epreuve": "U43", "theme": "Skiascopie", "session": "complément", "difficulte": "moyen",
+  "type": "calcul",
+  "question": "En skiascopie à 2 m, le point neutre est obtenu avec un verre de −2,00 δ. Quelle est la réfraction de l'œil (en δ, au centième) ?",
+  "reponse": { "valeur": -2.5, "unite": "δ", "decimales": 2, "signe": true },
+  "explication": "Distance de travail : [[1|d]] = [[1|2]] = 0,50 δ\nR = verre − [[1|d]] = −2,00 − 0,50 = −2,50 δ",
+  "indice": "R = verre au point neutre − [[1|d]], avec d en mètres.",
+  "erreurs": [
+    { "valeur": -1.5, "type": "signe", "message": "Tu as ajouté la distance de travail. Elle se retranche : R = verre − 1/d." }
+  ]
+},
+{
+  "id": "U43-213", "epreuve": "U43", "theme": "Skiascopie", "session": "complément", "difficulte": "facile",
+  "question": "En skiascopie à 50 cm, on examine un œil emmétrope. Quel verre donne le point neutre ?",
+  "choix": [
+    "Aucun verre",
+    "+2,00 δ",
+    "−2,00 δ",
+    "+0,50 δ"
+  ],
+  "bonne": 1,
+  "explication": "Distance de travail : [[1|0,5]] = 2,00 δ. Pour un œil de réfraction R, le verre du point neutre vaut R + 2,00 δ. Un emmétrope (R = 0) demande donc +2,00 δ.",
+  "indice": "Verre au point neutre = réfraction + [[1|d]]. Que vaut la réfraction d'un emmétrope ?",
+  "erreurs": {
+    "0": { "type": "notion", "message": "Un emmétrope ne renvoie pas la lumière vers l'examinateur à 50 cm : il faut un verre qui compense la distance de travail." }
+  }
+},
+{
+  "id": "U43-214", "epreuve": "U43", "theme": "Frontofocomètre", "session": "complément", "difficulte": "facile",
+  "question": "Au frontofocomètre, pourquoi règle-t-on d'abord l'oculaire sur sa propre vue avant de mesurer un verre ?",
+  "choix": [
+    "Pour que la mesure ne dépende ni de l'amétropie ni de l'accommodation de l'opérateur",
+    "Pour grossir davantage la mire",
+    "Pour éclairer le verre plus fortement",
+    "Pour changer la longueur d'onde utilisée"
+  ],
+  "bonne": 0,
+  "explication": "Sans ce réglage, l'opérateur compenserait sans le savoir en accommodant, ou n'accommoderait pas assez : la puissance lue serait fausse. Réglé, l'oculaire est conjugué avec le plan où la mire doit être vue nette.",
+  "indice": "Que se passe-t-il sur la mesure si l'opérateur accommode ou est amétrope ?"
+},
+{
+  "id": "U43-215", "epreuve": "U43", "theme": "Frontofocomètre", "session": "complément", "difficulte": "moyen",
+  "type": "calcul",
+  "question": "Au frontofocomètre, un verre de −3,00 δ est décentré de 6 mm verticalement. Quel effet prismatique vertical mesure-t-on (en Δ, au dixième) ?",
+  "reponse": { "valeur": 1.8, "unite": "Δ", "decimales": 1, "signe": false },
+  "explication": "Règle de Prentice : P = c × ∣D∣ avec c en cm.\nP = 0,6 × 3,00 = 1,8 Δ",
+  "indice": "Convertis 6 mm en cm, puis multiplie par la valeur absolue de la puissance.",
+  "erreurs": [
+    { "valeur": 18, "type": "unite", "message": "Tu as multiplié par 6 mm. Il faut convertir le décentrement en centimètres : 0,6 cm." }
+  ]
+},
+{
+  "id": "U43-216", "epreuve": "U43", "theme": "Frontofocomètre", "session": "complément", "difficulte": "moyen",
+  "question": "Un verre est noté +2,00 (−1,50) à 90°. Quelles sont ses deux puissances principales ?",
+  "choix": [
+    "+2,00 δ et +3,50 δ",
+    "+2,00 δ et +0,50 δ",
+    "+0,50 δ et −1,50 δ",
+    "+2,00 δ et −1,50 δ"
+  ],
+  "bonne": 1,
+  "explication": "La sphère (+2,00 δ) est la puissance du méridien situé selon l'axe du cylindre (90°). Le méridien perpendiculaire a la puissance sphère + cylindre : +2,00 + (−1,50) = +0,50 δ.",
+  "indice": "Une puissance est la sphère seule, l'autre est sphère + cylindre. Fais attention au signe du cylindre.",
+  "erreurs": {
+    "0": { "type": "signe", "message": "Le cylindre est négatif : il retranche de la sphère. Il ne s'ajoute pas." },
+    "3": { "type": "notion", "message": "−1,50 est le cylindre seul. La puissance du second méridien est sphère + cylindre." }
+  }
+},
+{
+  "id": "U43-217", "epreuve": "U43", "theme": "Chaîne des conjugués", "session": "complément", "difficulte": "facile",
+  "question": "Dans une chaîne des conjugués, la lumière allant de gauche à droite, quel est le signe de la distance algébrique OA d'un objet réel placé devant une lentille ?",
+  "choix": [
+    "Négatif",
+    "Positif",
+    "Nul",
+    "Cela dépend de la lentille"
+  ],
+  "bonne": 0,
+  "explication": "On compte positif dans le sens de la lumière. Un objet réel est avant la lentille, à contre-sens de la lumière : OA est négatif. Un objet virtuel est après la lentille : OA est positif.",
+  "indice": "Un objet réel est du côté d'où vient la lumière. Dans quel sens compte-t-on positivement ?",
+  "erreurs": {
+    "1": { "type": "signe", "message": "Positif signifie dans le sens de la lumière. Un objet réel est avant la lentille, donc de l'autre côté." }
+  }
 }
 );
