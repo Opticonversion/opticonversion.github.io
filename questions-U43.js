@@ -2634,5 +2634,279 @@ QUESTIONS.push(
   "erreurs": [
     { "valeur": 45, "type": "notion", "message": "Tu as multiplié les angles. Le grossissement s'applique aux tangentes des angles." }
   ]
+},
+{
+  "id": "U43-240", "epreuve": "U43", "theme": "Chaîne des conjugués", "session": "complément", "difficulte": "difficile",
+  "type": "calcul",
+  "question": "Deux lentilles minces : L₁ (f'₁ = 50 mm) puis L₂ (f'₂ = 100 mm) placée 200 mm après L₁. Un objet est à l'infini sur l'axe. Où se forme l'image finale (O₂A', en mm) ?",
+  "reponse": { "valeur": 300, "unite": "mm", "decimales": 0, "signe": true },
+  "explication": "L'objet est à l'infini : son image par L₁ est au foyer image, O₁A₁ = +50 mm.\nPour L₂ : O₂A₁ = 50 − 200 = −150 mm (objet réel).\n[[1|O₂A']] = [[1|100]] + [[1|−150]] = [[3|300]] − [[2|300]] = [[1|300]]\nO₂A' = +300 mm.",
+  "indice": "Image par L₁ au foyer image, puis position de cette image par rapport à L₂ : c'est le nouvel objet.",
+  "erreurs": [
+    { "valeur": -300, "type": "signe", "message": "L'image finale est réelle, après L₂ : sa position est positive." }
+  ]
+},
+{
+  "id": "U43-241", "epreuve": "U43", "theme": "Chaîne des conjugués", "session": "complément", "difficulte": "facile",
+  "question": "Où se forme l'image d'un objet situé à l'infini, donnée par une lentille mince convergente ?",
+  "choix": ["Dans le plan focal image", "Dans le plan focal objet", "Sur la lentille", "À l'infini"],
+  "bonne": 0,
+  "explication": "Les rayons issus d'un objet à l'infini arrivent parallèles entre eux. Ils convergent dans le plan focal image de la lentille.",
+  "indice": "Des rayons parallèles convergent là où se trouve le foyer image."
+},
+{
+  "id": "U43-242", "epreuve": "U43", "theme": "Chaîne des conjugués", "session": "complément", "difficulte": "facile",
+  "type": "calcul",
+  "question": "Une lentille de focale image 40 mm donne l'image d'un objet situé à 60 mm devant elle. Quel est le grandissement γ ?",
+  "reponse": { "valeur": -2, "unite": "", "decimales": 0, "signe": true },
+  "explication": "[[1|OA']] = [[1|40]] − [[1|60]] = [[1|120]], donc OA' = +120 mm.\nγ = [[OA'|OA]] = [[120|−60]] = −2. L'image est renversée et deux fois plus grande.",
+  "indice": "Trouve d'abord OA', puis γ = [[OA'|OA]] avec OA = −60 mm.",
+  "erreurs": [
+    { "valeur": 2, "type": "signe", "message": "L'image réelle d'un objet réel est renversée : le grandissement est négatif." }
+  ]
+},
+{
+  "id": "U43-243", "epreuve": "U43", "theme": "Chaîne des conjugués", "session": "complément", "difficulte": "moyen",
+  "question": "Un projecteur forme sur un écran éloigné une image nette de la diapositive. Où est la diapositive par rapport à l'objectif ?",
+  "choix": [
+    "Un peu plus loin que le foyer objet",
+    "Au foyer image",
+    "Entre le foyer objet et la lentille",
+    "À l'infini"
+  ],
+  "bonne": 0,
+  "explication": "Pour avoir une image réelle et lointaine, l'objet doit être juste au-delà du foyer objet : plus il s'en approche, plus l'image s'éloigne. Entre le foyer et la lentille, l'image serait virtuelle et ne pourrait pas se former sur un écran.",
+  "indice": "Image réelle et lointaine : l'objet est presque, mais pas tout à fait, au foyer objet.",
+  "erreurs": {
+    "2": { "type": "notion", "message": "Entre le foyer et la lentille, l'image est virtuelle : on ne peut pas la projeter sur un écran." }
+  }
+},
+{
+  "id": "U43-244", "epreuve": "U43", "theme": "Chaîne des conjugués", "session": "complément", "difficulte": "difficile",
+  "type": "calcul",
+  "question": "Un projecteur a un objectif de focale 100 mm. L'écran est à 5 m de l'objectif. À quelle distance de l'objectif doit-on placer la diapositive (en mm, au dixième) ?",
+  "reponse": { "valeur": 102, "unite": "mm", "decimales": 1, "signe": false, "tolerance": 0.1 },
+  "explication": "[[1|OA]] = [[1|OA']] − [[1|f']] = [[1|5 000]] − [[1|100]] (en mm) = −[[49|5 000]]\nOA ≈ −102,0 mm : la diapositive est à 102,0 mm devant l'objectif, un peu après le foyer objet.",
+  "indice": "Relation de conjugaison avec OA' = +5 000 mm. Garde les mm partout.",
+  "erreurs": [
+    { "valeur": 100, "type": "notion", "message": "100 mm est la focale : à cette distance, l'image serait à l'infini. La diapositive est un peu plus loin." }
+  ]
+},
+{
+  "id": "U43-245", "epreuve": "U43", "theme": "Chaîne des conjugués", "session": "complément", "difficulte": "moyen",
+  "type": "pose",
+  "question": "Un objectif de microscope de focale 10 mm est placé à 10,5 mm d'un objet de 0,1 mm de haut. Trouve la position de l'image intermédiaire, le grandissement, puis la taille de l'image intermédiaire, étape par étape.",
+  "etapes": [
+    {
+      "consigne": "Position de l'image intermédiaire O₁A₁ (en mm)",
+      "reponse": { "valeur": 210, "unite": "mm", "decimales": 0, "signe": true },
+      "aide": "[[1|O₁A₁]] = [[1|f']] + [[1|OA]], avec OA = −10,5 mm.",
+      "ligne": "[[1|O₁A₁]] = [[1|10]] − [[1|10,5]] = [[0,5|105]]\nO₁A₁ = +210 mm"
+    },
+    {
+      "consigne": "Grandissement γ₁",
+      "reponse": { "valeur": -20, "unite": "", "decimales": 0, "signe": true },
+      "aide": "γ₁ = [[O₁A₁|OA]].",
+      "ligne": "γ₁ = [[210|−10,5]] = −20"
+    },
+    {
+      "consigne": "Taille algébrique de l'image intermédiaire (en mm)",
+      "reponse": { "valeur": -2, "unite": "mm", "decimales": 0, "signe": true },
+      "aide": "A₁B₁ = γ₁ × AB, avec AB = 0,1 mm.",
+      "ligne": "A₁B₁ = −20 × 0,1 = −2 mm"
+    }
+  ],
+  "explication": "L'image intermédiaire est réelle, renversée, vingt fois plus grande que l'objet : 2 mm de haut, à 210 mm après l'objectif."
+},
+{
+  "id": "U43-246", "epreuve": "U43", "theme": "Skiascopie", "session": "complément", "difficulte": "moyen",
+  "type": "calcul",
+  "question": "En skiascopie à 40 cm, le point neutre est obtenu avec un verre de +4,00 δ. Quelle est la réfraction de l'œil (en δ, au centième) ?",
+  "reponse": { "valeur": 1.5, "unite": "δ", "decimales": 2, "signe": true },
+  "explication": "Distance de travail : [[1|d]] = [[1|0,4]] = 2,50 δ\nR = verre − [[1|d]] = 4,00 − 2,50 = +1,50 δ",
+  "indice": "R = verre au point neutre − [[1|d]], avec d en mètres.",
+  "erreurs": [
+    { "valeur": 6.5, "type": "signe", "message": "Tu as ajouté la distance de travail. Elle se retranche : R = verre − 1/d." }
+  ]
+},
+{
+  "id": "U43-247", "epreuve": "U43", "theme": "Skiascopie", "session": "complément", "difficulte": "moyen",
+  "question": "En skiascopie avec un faisceau divergent (miroir plan), le reflet se déplace en sens inverse du skiascope. Que fait-on pour atteindre le point neutre ?",
+  "choix": [
+    "On ajoute des verres divergents",
+    "On ajoute des verres convergents",
+    "On éloigne l'examinateur sans changer de verre",
+    "On ferme le diaphragme"
+  ],
+  "bonne": 0,
+  "explication": "Le mouvement inverse indique que l'œil est plus myope que la distance de travail ne le compense. On ajoute donc des verres divergents jusqu'à ce que le mouvement s'arrête.",
+  "indice": "Le mouvement inverse annonce une myopie : quel type de verre neutralise une myopie ?",
+  "erreurs": {
+    "1": { "type": "notion", "message": "Des verres convergents conviennent pour un mouvement dans le même sens que le skiascope, pas pour un mouvement inverse." }
+  }
+},
+{
+  "id": "U43-248", "epreuve": "U43", "theme": "Skiascopie", "session": "complément", "difficulte": "difficile",
+  "type": "calcul",
+  "question": "Un œil de réfraction −2,00 δ est examiné en skiascopie à 1 m. Quel verre donne le point neutre (en δ, au centième) ?",
+  "reponse": { "valeur": -1, "unite": "δ", "decimales": 2, "signe": true },
+  "explication": "Verre au point neutre = R + [[1|d]] = −2,00 + [[1|1]] = −2,00 + 1,00 = −1,00 δ.",
+  "indice": "Verre au point neutre = réfraction de l'œil + distance de travail en dioptries.",
+  "erreurs": [
+    { "valeur": -2, "type": "notion", "message": "Tu as oublié que le verre du point neutre dépend aussi de la distance de travail." }
+  ]
+},
+{
+  "id": "U43-249", "epreuve": "U43", "theme": "Skiascopie", "session": "complément", "difficulte": "facile",
+  "question": "À quelle puissance (en dioptries) correspond une distance de travail de 50 cm en skiascopie ?",
+  "choix": ["2,00 δ", "0,50 δ", "5,00 δ", "1,00 δ"],
+  "bonne": 0,
+  "explication": "[[1|d]] = [[1|0,5]] = 2,00 δ, avec d en mètres.",
+  "indice": "La distance de travail en dioptries est l'inverse de la distance en mètres.",
+  "erreurs": {
+    "1": { "type": "unite", "message": "0,50 est la distance en mètres, pas son inverse." }
+  }
+},
+{
+  "id": "U43-250", "epreuve": "U43", "theme": "Frontofocomètre", "session": "complément", "difficulte": "facile",
+  "type": "calcul",
+  "question": "Au frontofocomètre, le centre optique d'un verre de +6,00 δ est à 2 mm du point de mesure. Quel effet prismatique mesure-t-on (en Δ, au dixième) ?",
+  "reponse": { "valeur": 1.2, "unite": "Δ", "decimales": 1, "signe": false },
+  "explication": "Règle de Prentice : P = c × D avec c en cm.\nP = 0,2 × 6,00 = 1,2 Δ",
+  "indice": "Convertis 2 mm en cm, puis multiplie par la puissance.",
+  "erreurs": [
+    { "valeur": 12, "type": "unite", "message": "Tu as multiplié par 2 mm. Convertis le décentrement en centimètres." }
+  ]
+},
+{
+  "id": "U43-251", "epreuve": "U43", "theme": "Frontofocomètre", "session": "complément", "difficulte": "moyen",
+  "type": "calcul",
+  "question": "Un verre de −4,00 δ doit produire un effet prismatique de 2,0 Δ. De combien faut-il le décentrer (en mm) ?",
+  "reponse": { "valeur": 5, "unite": "mm", "decimales": 0, "signe": false },
+  "explication": "c = [[P|∣D∣]] = [[2,0|4,00]] = 0,5 cm = 5 mm",
+  "indice": "c (cm) = [[P|∣D∣]], puis convertis en mm.",
+  "erreurs": [
+    { "valeur": 0.5, "type": "unite", "message": "0,5 est en centimètres. Convertis en millimètres." }
+  ]
+},
+{
+  "id": "U43-252", "epreuve": "U43", "theme": "Frontofocomètre", "session": "complément", "difficulte": "difficile",
+  "question": "Au frontofocomètre, quelle face du verre pose-t-on contre l'appui, et que mesure-t-on ?",
+  "choix": [
+    "La face arrière : on mesure la puissance frontale image",
+    "La face avant : on mesure la puissance frontale objet",
+    "La face avant : on mesure la puissance frontale image",
+    "Peu importe la face : la mesure est la même"
+  ],
+  "bonne": 0,
+  "explication": "Le verre est posé par sa face arrière (côté œil) contre l'appui. On mesure alors la puissance frontale image, qui est celle qui compte pour le porteur.",
+  "indice": "La mesure se rapporte à la face tournée vers l'œil du porteur."
+},
+{
+  "id": "U43-253", "epreuve": "U43", "theme": "Frontofocomètre", "session": "complément", "difficulte": "moyen",
+  "question": "Au frontofocomètre, la mire d'un verre cylindrique n'est nette que pour deux positions différentes de la molette. Pourquoi ?",
+  "choix": [
+    "Chaque méridien principal a sa propre puissance",
+    "Le verre est mal centré",
+    "La lumière n'est pas assez intense",
+    "L'oculaire est mal réglé"
+  ],
+  "bonne": 0,
+  "explication": "Un verre cylindrique a deux puissances principales différentes. Il faut deux réglages pour rendre nettes les lignes de la mire dans chacune des deux directions : leur différence donne le cylindre.",
+  "indice": "Un verre cylindrique n'a pas la même puissance dans toutes les directions."
+},
+{
+  "id": "U43-254", "epreuve": "U43", "theme": "Étude des champs", "session": "complément", "difficulte": "moyen",
+  "question": "Où se trouve le diaphragme de champ d'un oculaire de microscope ?",
+  "choix": [
+    "Dans le plan de l'image intermédiaire, au foyer objet de l'oculaire",
+    "Contre l'objectif",
+    "Au foyer image de l'oculaire",
+    "Sur l'œil de l'utilisateur"
+  ],
+  "bonne": 0,
+  "explication": "Le diaphragme de champ est placé là où se forme l'image intermédiaire, au foyer objet de l'oculaire. Il découpe un bord net dans l'image que l'œil voit.",
+  "indice": "Un diaphragme de champ se place dans un plan image."
+},
+{
+  "id": "U43-255", "epreuve": "U43", "theme": "Étude des champs", "session": "complément", "difficulte": "moyen",
+  "type": "calcul",
+  "question": "Dans l'espace d'étude, une lucarne de 18 mm de diamètre est à 120 mm du centre de la pupille. Quel est le demi-champ angulaire (en °, au dixième) ?",
+  "reponse": { "valeur": 4.3, "unite": "°", "decimales": 1, "signe": false, "tolerance": 0.1 },
+  "explication": "tan θ = [[9|120]] = 0,075 (rayon de la lucarne sur la distance).\nθ = arctan(0,075) ≈ 4,3°",
+  "indice": "Rayon de la lucarne divisé par la distance donne la tangente du demi-champ.",
+  "erreurs": [
+    { "valeur": 0.075, "type": "notion", "message": "0,075 est la tangente de l'angle. Il reste à retrouver l'angle avec la touche arctan." }
+  ]
+},
+{
+  "id": "U43-256", "epreuve": "U43", "theme": "Étude des champs", "session": "complément", "difficulte": "moyen",
+  "question": "Comment obtient-on la pupille d'entrée d'un instrument ?",
+  "choix": [
+    "C'est l'image du diaphragme d'ouverture par la partie du système qui le précède",
+    "C'est le diaphragme le plus proche de l'objet",
+    "C'est l'image de la lucarne dans l'espace image",
+    "C'est toujours le bord de la première lentille"
+  ],
+  "bonne": 0,
+  "explication": "On ramène chaque diaphragme dans l'espace objet à travers ce qui le précède. Celui dont l'image limite le plus le faisceau issu de l'axe est le diaphragme d'ouverture, et son image est la pupille d'entrée.",
+  "indice": "La pupille est une image : image de quoi, à travers quoi ?"
+},
+{
+  "id": "U43-257", "epreuve": "U43", "theme": "Étude des champs", "session": "complément", "difficulte": "difficile",
+  "question": "La lucarne étant fixe, comment agrandit-on le champ de pleine lumière ?",
+  "choix": [
+    "En réduisant la pupille",
+    "En agrandissant la pupille",
+    "En éclairant plus fort l'objet",
+    "Ce n'est pas possible"
+  ],
+  "bonne": 0,
+  "explication": "Pour qu'un point soit en pleine lumière, tout son faisceau doit traverser la lucarne. Avec une pupille plus petite, le faisceau est plus étroit : plus de points remplissent cette condition.",
+  "indice": "Un faisceau plus étroit traverse-t-il plus facilement la lucarne ?",
+  "erreurs": {
+    "1": { "type": "notion", "message": "Une pupille plus grande donne un faisceau plus large, qui est plus vite coupé par la lucarne : le champ de pleine lumière diminue." }
+  }
+},
+{
+  "id": "U43-258", "epreuve": "U43", "theme": "Grossissement et photo", "session": "complément", "difficulte": "facile",
+  "type": "calcul",
+  "question": "Une loupe a une focale de 25 mm. Quel est son grossissement commercial (distance de référence 250 mm) ?",
+  "reponse": { "valeur": 10, "unite": "", "decimales": 0, "signe": false },
+  "explication": "G = [[250|f']] = [[250|25]] = 10.",
+  "indice": "G = [[250 mm|f']] avec f' en mm.",
+  "erreurs": [
+    { "valeur": 0.1, "type": "notion", "message": "Tu as divisé la focale par 250. Le grossissement s'obtient en divisant 250 par la focale." }
+  ]
+},
+{
+  "id": "U43-259", "epreuve": "U43", "theme": "Grossissement et photo", "session": "complément", "difficulte": "moyen",
+  "type": "calcul",
+  "question": "À f/4, un temps de pose de 1/500 s donne la bonne exposition. À f/8, on veut la même exposition. Quel temps de pose faut-il, écrit sous la forme 1/x s ? Donne x.",
+  "reponse": { "valeur": 125, "unite": "", "decimales": 0, "signe": false },
+  "explication": "Passer de f/4 à f/8 divise l'éclairement par 4. Il faut donc poser 4 fois plus longtemps : [[4|500]] = [[1|125]] s.",
+  "indice": "f/8 laisse passer quatre fois moins de lumière que f/4 : le temps de pose doit compenser.",
+  "erreurs": [
+    { "valeur": 2000, "type": "notion", "message": "Tu as raccourci le temps de pose. Avec moins de lumière, il faut poser plus longtemps." }
+  ]
+},
+{
+  "id": "U43-260", "epreuve": "U43", "theme": "Grossissement et photo", "session": "complément", "difficulte": "moyen",
+  "type": "calcul",
+  "question": "Un appareil photo a un capteur de 36 mm de large et un objectif de focale 50 mm. Quel est son angle de champ total en largeur (en °, au dixième) ?",
+  "reponse": { "valeur": 39.6, "unite": "°", "decimales": 1, "signe": false, "tolerance": 0.1 },
+  "explication": "Demi-champ : tan θ = [[18|50]] = 0,36, donc θ ≈ 19,8°.\nAngle de champ total : 2 × 19,8 ≈ 39,6°.",
+  "indice": "Prends la moitié de la largeur du capteur pour trouver la tangente du demi-champ, puis double l'angle.",
+  "erreurs": [
+    { "valeur": 19.8, "type": "notion", "message": "19,8° est le demi-champ. L'angle de champ total est le double." }
+  ]
+},
+{
+  "id": "U43-261", "epreuve": "U43", "theme": "Grossissement et photo", "session": "complément", "difficulte": "facile",
+  "question": "On double le grossissement d'une lunette en changeant d'oculaire, sans toucher à l'objectif. Que devient le diamètre du cercle oculaire ?",
+  "choix": ["Il est divisé par 2", "Il est multiplié par 2", "Il ne change pas", "Il est divisé par 4"],
+  "bonne": 0,
+  "explication": "Le diamètre du cercle oculaire vaut le diamètre de l'objectif divisé par le grossissement. L'objectif ne change pas, le grossissement double : le cercle oculaire est divisé par 2.",
+  "indice": "Diamètre du cercle oculaire = diamètre de l'objectif divisé par le grossissement."
 }
 );
