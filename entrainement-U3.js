@@ -94,7 +94,7 @@ QUESTIONS.push(
   {
     id: "U3-075", difficulte: "facile", epreuve: "U3", theme: "Marché et zone de chalandise", session: "2023", entrainement: true,
     question: "Un opticien veut développer un rayon basse vision. Lequel de ces éléments est une OPPORTUNITÉ ?",
-    choix: ["Une enseigne nationale vient d'ouvrir à 500 m du magasin", "Le local actuel est trop petit pour installer un rayon", "Une résidence pour personnes âgées ouvre à côté du magasin", "Le gérant n'a pas de formation en basse vision"],
+    choix: ["Une enseigne nationale vient d'ouvrir à 500 mètres du magasin", "Le local actuel est trop petit pour installer un rayon", "Une résidence pour personnes âgées ouvre à côté du magasin", "Le gérant n'a pas de formation en basse vision"],
     bonne: 2,
     explication: "Une opportunité vient de l'extérieur et favorise le projet : ici, une clientèle plus âgée qui s'installe près du magasin. L'enseigne nationale est une menace (extérieure et défavorable). Le local trop petit et le manque de formation sont des faiblesses : ils sont internes au magasin.",
     indice: "Opportunités et menaces viennent de l'extérieur du magasin. Cherche ce qui est extérieur ET favorable."
@@ -173,7 +173,7 @@ QUESTIONS.push(
   {
     id: "U3-084", difficulte: "facile", epreuve: "U3", theme: "Analyse financière", session: "2024", entrainement: true,
     question: "Dettes financières : 84 000 €. Capitaux propres : 70 000 €. Que dire du ratio d'endettement ?",
-    choix: ["1,2 : les banques ont prêté plus que les propriétaires n'ont apporté, un nouvel emprunt sera difficile", "0,83 : le magasin peut encore emprunter facilement", "1,2 : le ratio est bon car supérieur à 1", "1,2 % : l'endettement est négligeable"],
+    choix: ["1,2 : les banques ont prêté plus que les propriétaires n'ont apporté, un nouvel emprunt sera difficile", "0,83 : le magasin peut encore emprunter facilement, car les banques ont prêté moins que les propriétaires n'ont apporté, et un nouvel emprunt serait accordé sans difficulté", "1,2 : le ratio est bon car supérieur à 1", "1,2 % : l'endettement est négligeable"],
     bonne: 0,
     explication: "Ratio d'endettement = [[dettes financières|capitaux propres]] = [[84 000|70 000]] = 1,2\nAu-dessus de 1, les dettes bancaires dépassent les capitaux propres : le magasin est déjà très endetté et la banque hésitera à prêter davantage. 0,83 = [[70 000|84 000]] est le calcul à l'envers. Le ratio n'est pas un pourcentage.",
     indice: "Calcule dettes financières sur capitaux propres, puis compare le résultat au repère de 1."
@@ -201,7 +201,7 @@ QUESTIONS.push(
   {
     id: "U3-087", difficulte: "facile", epreuve: "U3", theme: "Investissement et financement", session: "2024", entrainement: true,
     question: "Quel est un avantage du crédit-bail pour financer un véhicule de tournée ?",
-    choix: ["Pas de grosse sortie d'argent à l'achat et pas de dette bancaire au bilan", "Le véhicule appartient au magasin dès la signature et peut être amorti", "Le coût total est toujours inférieur à celui d'un emprunt", "Les loyers n'ont aucune incidence sur le résultat"],
+    choix: ["Pas de grosse sortie d'argent à l'achat et pas de dette bancaire au bilan", "Le véhicule appartient au magasin dès la signature et peut être amorti comme un achat", "Le coût total est toujours inférieur à celui d'un emprunt", "Les loyers n'ont aucune incidence sur le résultat"],
     bonne: 0,
     explication: "En crédit-bail, le magasin loue le véhicule avec une option d'achat : pas de grosse dépense initiale et pas d'emprunt au bilan. Mais le bien n'est pas à l'actif (pas d'amortissement), le coût total est en général supérieur à celui d'un emprunt, et les loyers sont des charges externes qui baissent la valeur ajoutée.",
     indice: "Pense à ce que le magasin paie le jour de la signature, et à ce qui apparaît ou non au bilan."
@@ -319,7 +319,7 @@ QUESTIONS.push(
   {
     id: "U3-100", difficulte: "moyen", epreuve: "U3", theme: "Marché et zone de chalandise", session: "complément", entrainement: true,
     question: "Dans un diagnostic SWOT d'un magasin d'optique, lequel de ces éléments est une FAIBLESSE ?",
-    choix: ["Le magasin est dans une rue secondaire, sans passage piéton", "Une enseigne discount ouvre à 800 m", "La population de la zone vieillit", "L'équipe compte un opticien spécialisé en basse vision"],
+    choix: ["Le magasin est dans une rue secondaire, sans passage piéton", "Une enseigne discount ouvre à 800 m", "La population de la zone vieillit", "L'équipe compte un opticien très bien formé et spécialisé en basse vision"],
     bonne: 0,
     explication: "Forces et faiblesses sont internes au magasin (son emplacement, son équipe, ses moyens). Menaces et opportunités viennent de l'environnement. L'emplacement peu visible est une faiblesse interne. Le discount voisin est une menace, le vieillissement de la population une opportunité (besoins de correction en hausse), l'opticien spécialisé une force.",
     indice: "Demande-toi si l'élément dépend du magasin (interne) ou de son environnement (externe), puis s'il est favorable ou non."
@@ -475,7 +475,7 @@ QUESTIONS.push(
   {
     id: "U3-118", difficulte: "difficile", epreuve: "U3", theme: "Analyse financière", session: "complément", entrainement: true,
     question: "Un magasin a un FRNG de 15 000 € et un BFR de −10 000 €. Quel commentaire est le plus juste ?",
-    choix: ["Trésorerie nette de 25 000 € : les dettes d'exploitation financent plus que les stocks et créances", "Trésorerie nette de 5 000 € : situation fragile", "Trésorerie nette de −25 000 € : le magasin est en difficulté", "Un BFR négatif est impossible dans une entreprise"],
+    choix: ["Trésorerie nette de 25 000 € : les dettes d'exploitation financent plus que les stocks et créances", "Trésorerie nette de 5 000 € : situation fragile", "Trésorerie nette de −25 000 € : le magasin est en difficulté parce que son BFR est négatif et qu'il finance son exploitation par du découvert bancaire", "Un BFR négatif est impossible dans une entreprise"],
     bonne: 0,
     explication: "Trésorerie nette = FRNG − BFR = 15 000 − (−10 000) = 25 000 €. Un BFR négatif signifie que les dettes d'exploitation (fournisseurs, dettes fiscales et sociales) dépassent les stocks et créances : le cycle d'exploitation dégage de la trésorerie. C'est possible, par exemple si les clients paient comptant et les fournisseurs à 60 jours. À surveiller : cette trésorerie dépend du crédit des fournisseurs.",
     indice: "Soustraire un nombre négatif, c'est additionner. Le BFR négatif veut dire que l'exploitation apporte de l'argent."
@@ -500,7 +500,7 @@ QUESTIONS.push(
   {
     id: "U3-121", difficulte: "moyen", epreuve: "U3", theme: "Analyse financière", session: "complément", entrainement: true,
     question: "Un magasin a une trésorerie nette négative parce que son BFR est trop élevé. Quelle mesure améliore directement son BFR ?",
-    choix: ["Réduire les stocks de montures qui tournent peu", "Accorder plus de temps de paiement aux clients", "Payer les fournisseurs à la commande", "Augmenter les stocks de sécurité"],
+    choix: ["Réduire les stocks de montures qui tournent peu", "Accorder plus de temps de paiement aux clients fidèles", "Payer les fournisseurs à la commande", "Augmenter les stocks de sécurité"],
     bonne: 0,
     explication: "BFR = stocks + créances clients − dettes d'exploitation. Baisser les stocks dormants ou relancer les paiements en retard le diminue. À l'inverse, allonger le crédit aux clients, payer plus tôt les fournisseurs ou stocker davantage augmentent le BFR et aggravent la trésorerie.",
     indice: "Le BFR monte avec les stocks et les créances, et baisse avec les dettes d'exploitation."
@@ -553,7 +553,7 @@ QUESTIONS.push(
   {
     id: "U3-127", difficulte: "moyen", epreuve: "U3", theme: "Investissement et financement", session: "complément", entrainement: true,
     question: "Un magasin achète un appareil 24 000 € HT (TVA 20 %). Quel traitement est correct ?",
-    choix: ["Amortissement calculé sur 24 000 € HT ; la TVA de 4 800 € est récupérable", "Amortissement calculé sur 28 800 € TTC ; la TVA n'est pas récupérable", "Amortissement sur 24 000 € HT ; la TVA est une charge du magasin", "Pas d'amortissement : l'appareil est une charge de l'année"],
+    choix: ["Amortissement calculé sur 24 000 € HT ; la TVA de 4 800 € est récupérable", "Amortissement calculé sur 28 800 € TTC ; la TVA n'est pas récupérable", "Amortissement sur 24 000 € HT ; la TVA est une charge du magasin", "Pas d'amortissement : l'appareil est une charge à passer en totalité l'année de l'achat"],
     bonne: 0,
     erreurs: { 1: "ht-ttc", 2: "ht-ttc" },
     explication: "Pour une entreprise assujettie, la TVA sur un investissement est déductible : elle se récupère sur la TVA collectée. La valeur à amortir est donc le prix HT (24 000 €). En trésorerie, le magasin paie quand même 28 800 € TTC à l'achat et récupère les 4 800 € de TVA ensuite : c'est une avance de TVA à financer.",
@@ -624,7 +624,7 @@ QUESTIONS.push(
   {
     id: "U3-135", difficulte: "moyen", epreuve: "U3", theme: "Droit des entreprises", session: "complément", entrainement: true,
     question: "Depuis 2022, un entrepreneur individuel (non société) a un patrimoine professionnel séparé de son patrimoine personnel. Quelle est la conséquence en principe ?",
-    choix: ["Les créanciers professionnels ne peuvent saisir que le patrimoine professionnel", "Tous ses biens répondent des dettes de l'entreprise", "Sa résidence principale est saisissable à tout moment par ses fournisseurs", "Il n'a plus aucune dette personnelle"],
+    choix: ["Les créanciers professionnels ne peuvent saisir que le patrimoine professionnel", "Tous ses biens répondent des dettes de l'entreprise", "Sa résidence principale est saisissable à tout moment par ses fournisseurs et ses banquiers", "Il n'a plus aucune dette personnelle"],
     bonne: 0,
     explication: "Depuis la loi de 2022, le patrimoine professionnel (biens utiles à l'activité) et le patrimoine personnel sont séparés automatiquement : les créanciers professionnels sont limités au premier. Il existe des exceptions : fraude, faute grave de gestion, garantie personnelle donnée au banquier, ou certaines dettes fiscales ou sociales. Auparavant, sauf choix de l'EIRL ou déclaration d'insaisissabilité, seule la résidence principale était protégée de plein droit.",
     indice: "Séparer deux patrimoines, c'est limiter la poursuite des créanciers à l'un d'eux."
@@ -648,7 +648,7 @@ QUESTIONS.push(
   {
     id: "U3-138", difficulte: "difficile", epreuve: "U3", theme: "Droit des entreprises", session: "complément", entrainement: true,
     question: "Un opticien vend son fonds de commerce. Après la publication de la vente dans un journal d'annonces légales et au BODACC, qui dispose d'un délai de 10 jours pour faire opposition au paiement du prix ?",
-    choix: ["Les créanciers du vendeur", "Les clients du magasin", "Le propriétaire des murs", "Les salariés du magasin"],
+    choix: ["Les créanciers du vendeur", "Les clients habituels du magasin", "Le propriétaire des murs", "Les salariés du magasin"],
     bonne: 0,
     explication: "La vente d'un fonds de commerce doit être publiée. Dans les 10 jours qui suivent la publication au BODACC, les créanciers du vendeur peuvent faire opposition entre les mains de l'acquéreur, pour être payés sur le prix avant que le vendeur ne reçoive son argent. L'acquéreur garde donc le prix pendant ce délai. Cela protège ceux à qui le vendeur doit de l'argent.",
     indice: "Celui qui peut perdre de l'argent quand le vendeur encaisse et part."
@@ -666,7 +666,7 @@ QUESTIONS.push(
   {
     id: "U3-140", difficulte: "moyen", epreuve: "U3", theme: "Réglementation de l'opticien", session: "complément", entrainement: true,
     question: "Un client regrette le lendemain l'achat de lunettes qu'il a commandées dans votre magasin. A-t-il un droit légal de rétractation ?",
-    choix: ["Non, il n'y a pas de délai légal de rétractation pour un achat en magasin", "Oui, 14 jours comme pour tout achat", "Oui, 7 jours pour des lunettes de vue", "Oui, 48 heures pour un produit de santé"],
+    choix: ["Non, il n'y a pas de délai légal de rétractation pour un achat en magasin", "Oui, 14 jours comme pour tout achat de produit de consommation, qu'il soit fait en magasin ou à distance", "Oui, 7 jours pour des lunettes de vue", "Oui, 48 heures pour un produit de santé"],
     bonne: 0,
     explication: "Le délai de rétractation de 14 jours concerne la vente à distance (internet, téléphone) et le démarchage hors établissement. Un achat réalisé en magasin n'en a pas : le client ne peut annuler que si le magasin l'a prévu (reprise commerciale) ou s'il y a un défaut. En outre, des verres correcteurs faits sur mesure sont exclus du droit de rétractation même à distance.",
     indice: "Le droit de rétractation protège celui qui achète sans voir le produit ni le vendeur."

@@ -241,7 +241,7 @@ QUESTIONS.push(
   {
     id: "U3-025", difficulte: "facile", epreuve: "U3", theme: "Investissement et financement", session: "2023",
     question: "Pourquoi les dotations aux amortissements n'apparaissent-elles pas dans le budget de trésorerie ?",
-    choix: ["Parce qu'elles ne sont payées que l'année suivante", "Parce qu'elles sont réglées directement par la banque", "Parce qu'elles ne sont pas déductibles du bénéfice", "Parce que c'est une charge calculée, sans sortie d'argent"],
+    choix: ["Parce qu'elles ne sont payées que l'année suivante", "Parce qu'elles sont réglées directement par la banque", "Parce qu'elles ne sont pas déductibles du bénéfice imposable", "Parce que c'est une charge calculée, sans sortie d'argent"],
     bonne: 3,
     explication: "L'argent est sorti une seule fois, le jour de l'achat (c'est ce décaissement qui figure dans le budget). La dotation étale ensuite ce coût sur la durée d'utilisation. Elle baisse le résultat, donc l'impôt (effet fiscal), sans toucher à la trésorerie.",
     indice: "Demande-toi quand l'argent sort vraiment de la banque : le jour de l'achat, ou chaque année de la dotation ?"
@@ -333,7 +333,7 @@ QUESTIONS.push(
   {
     id: "U3-036", difficulte: "moyen", epreuve: "U3", theme: "Droit des entreprises", session: "2023",
     question: "Bail commercial « classique » d'un magasin d'optique : quelle affirmation est juste ?",
-    choix: ["Il dure 1 an et se renouvelle automatiquement chaque année", "9 ans minimum ; congé et révision du loyer possibles tous les 3 ans", "Le propriétaire peut augmenter le loyer librement chaque mois", "Le locataire ne peut jamais partir avant la fin des 9 ans"],
+    choix: ["Il dure 1 an et se renouvelle automatiquement chaque année", "9 ans minimum ; congé et révision du loyer possibles tous les 3 ans", "Le propriétaire peut augmenter le loyer librement chaque mois, sans limite", "Le locataire ne peut jamais partir avant la fin des 9 ans"],
     bonne: 1,
     explication: "C'est le bail « 3-6-9 » : au moins 9 ans, le locataire peut donner congé à la fin de chaque période de 3 ans (6 mois avant), et le loyer peut être révisé tous les 3 ans. Il existe aussi un bail dérogatoire de 3 ans maximum, pour tester une activité.",
     indice: "Pense au surnom du bail commercial : « 3-6-9 ». Que se passe-t-il à chaque échéance de 3 ans ?",
@@ -343,7 +343,7 @@ QUESTIONS.push(
   {
     id: "U3-037", difficulte: "facile", epreuve: "U3", theme: "Droit des entreprises", session: "2018",
     question: "Un magasin change d'enseigne. Comment protéger efficacement le nouveau nom ?",
-    choix: ["En le déposant comme marque à l'INPI, protection de 10 ans renouvelable", "Il est protégé dans toute la France dès qu'il est sur la vitrine", "En l'inscrivant au registre du commerce : protection de 5 ans", "En le déposant à la mairie"],
+    choix: ["En le déposant comme marque à l'INPI, protection de 10 ans renouvelable", "Il est protégé dans toute la France dès qu'il est affiché sur la vitrine du magasin", "En l'inscrivant au registre du commerce : protection de 5 ans", "En le déposant à la mairie"],
     bonne: 0,
     explication: "Avant le dépôt, on vérifie que le nom n'est pas déjà pris (recherche d'antériorité). Puis dépôt de marque à l'INPI, dans les classes de produits et services voulues. La protection dure 10 ans et se renouvelle sans limite. Intérêt : empêcher un concurrent d'utiliser le nom et valoriser le fonds.",
     indice: "Afficher un nom sur la vitrine ne donne pas de droit exclusif partout. Quelle démarche officielle le donne, et pour combien de temps ?"
@@ -353,7 +353,7 @@ QUESTIONS.push(
   {
     id: "U3-038", difficulte: "moyen", epreuve: "U3", theme: "Réglementation de l'opticien", session: "2019",
     question: "Avant de réaliser une réfraction pour adapter une ordonnance, que doit dire l'opticien au client ?",
-    choix: ["Que l'examen est remboursé par la Sécurité sociale", "Que la réfraction pratiquée n'est pas un acte médical", "Qu'il doit revenir dans 3 mois", "Qu'il n'a pas le droit de vendre de lentilles"],
+    choix: ["Que l'examen est remboursé par la Sécurité sociale et la mutuelle", "Que la réfraction pratiquée n'est pas un acte médical", "Qu'il doit revenir dans 3 mois", "Qu'il n'a pas le droit de vendre de lentilles"],
     bonne: 1,
     explication: "L'article L4362-10 du Code de la santé publique oblige l'opticien à informer la personne que la réfraction qu'il pratique n'est pas un acte médical : elle ne remplace pas une consultation chez l'ophtalmologiste.",
     indice: "Le décret de 2016 encadre la réfraction faite par l'opticien. Qu'est-ce qui la distingue d'une consultation chez l'ophtalmologiste ?"
@@ -369,7 +369,7 @@ QUESTIONS.push(
   {
     id: "U3-040", difficulte: "moyen", epreuve: "U3", theme: "Réglementation de l'opticien", session: "complément",
     question: "Depuis la réforme « 100 % Santé », que doit faire l'opticien pour tout équipement de lunettes ?",
-    choix: ["Ne vendre que des équipements de classe A, sans reste à charge", "Proposer au moins une offre de classe A dans un devis normalisé", "Facturer les verres au prix fixé par la complémentaire santé", "Refuser les clients qui n'ont pas de complémentaire santé"],
+    choix: ["Ne vendre que des équipements de classe A, sans aucun reste à charge", "Proposer au moins une offre de classe A dans un devis normalisé", "Facturer les verres au prix fixé par la complémentaire santé", "Refuser les clients qui n'ont pas de complémentaire santé"],
     bonne: 1,
     explication: "Depuis 2020, l'opticien doit présenter une offre « 100 % Santé » (classe A : prix plafonnés, remboursée intégralement avec un contrat responsable) dans un devis normalisé, à côté des offres à tarifs libres (classe B). Le client reste libre de choisir. La réforme fait suite aux plafonds de remboursement des contrats responsables (2015).",
     indice: "Le client garde le choix, mais l'opticien a une obligation de proposer. Pense au panier de classe A et au devis."
@@ -425,7 +425,7 @@ QUESTIONS.push(
     question: "Commente ce seuil de rentabilité : quel commentaire est le plus juste ?",
     choix: [
       "Le magasin est rentable.",
-      "Le magasin perd de l'argent, car son seuil de rentabilité est inférieur à son chiffre d'affaires.",
+      "Le magasin perd de l'argent, car son seuil de rentabilité est inférieur à son chiffre d'affaires : il n'a atteint son seuil qu'en fin d'année et la marge de sécurité de 60 000 € est trop faible pour compter.",
       "Le seuil est atteint fin octobre : le magasin est rentable, avec une marge de sécurité de 60 000 €, soit 1/6 de son CA ; une baisse des ventes de plus de 17 % le ferait passer en perte.",
       "Le magasin devrait passer en SASU pour mieux protéger la gérante."
     ],
@@ -450,7 +450,7 @@ QUESTIONS.push(
     question: "Que conseilles-tu à la gérante ?",
     choix: [
       "Embaucher : 45 000 € de chiffre d'affaires en plus couvrent largement les 36 000 € que coûte le poste.",
-      "Ne pas embaucher tout de suite, c'est trop risqué.",
+      "Embaucher à temps plein dès maintenant : même si 45 000 € de CA ne couvrent pas tout à fait le coût du poste, une embauche est toujours rentable à moyen terme, et la gérante doit passer en SASU pour que le salarié soit mieux protégé.",
       "Passer en SASU avant d'embaucher, pour que la gérante soit assimilée salariée.",
       "Pas d'embauche à temps plein pour l'instant : 45 000 € de CA n'apportent que 27 000 € de marge, le résultat baisserait de 9 000 €. Il faudrait 60 000 € de CA en plus ; commencer par un temps partiel et suivre les ventes du samedi."
     ],
@@ -470,7 +470,7 @@ QUESTIONS.push(
     },
     question: "Commente le FRNG et le BFR de ce magasin : quel commentaire est le plus juste ?",
     choix: [
-      "Le FRNG est positif, donc la trésorerie du magasin est forcément positive.",
+      "Le FRNG est positif, donc la trésorerie du magasin est forcément positive : il n'y a aucune action à prévoir, car le BFR peut dépasser le fonds de roulement sans conséquence sur le compte en banque.",
       "Le FRNG ne couvre pas le BFR : il manque 15 000 €, financés par du découvert. Il faut renforcer les ressources stables (apport, emprunt à long terme) ou réduire le BFR (stock, délais clients).",
       "La situation de trésorerie est tendue.",
       "Le magasin devrait baisser son taux de marque pour attirer des clients."
@@ -492,7 +492,7 @@ QUESTIONS.push(
       "La trésorerie est positive.",
       "Le bail commercial peut être révisé tous les 3 ans.",
       "Le FRNG couvre largement le BFR : l'équilibre est assuré et 60 000 € sont disponibles. Une partie de cet argent dort : le magasin peut autofinancer la meuleuse sans emprunter, en gardant une réserve.",
-      "La trésorerie est positive, donc le magasin est forcément rentable."
+      "La trésorerie est positive, donc le magasin est forcément rentable : 60 000 € sont disponibles, il faut les garder en réserve et ne surtout pas financer la meuleuse sans emprunter, quelle que soit la situation du magasin."
     ],
     bonne: 2,
     explication: "TN = 90 000 − 30 000 = 60 000 € : équilibre financier solide. Mais trop de trésorerie qui dort, c'est de l'argent qui ne rapporte rien : ici, elle peut financer les 30 000 € de la meuleuse en gardant 30 000 € de réserve. Le 4e choix confond trésorerie (de l'argent disponible) et rentabilité (un bénéfice) ; le 1er est vrai sans argument ; le 2e hors sujet.",
@@ -508,7 +508,7 @@ QUESTIONS.push(
     },
     question: "Commente le ratio d'endettement : quel commentaire est le plus juste ?",
     choix: [
-      "Le magasin est très endetté.",
+      "Le magasin est très endetté : un ratio de 1,5 signifie que les dettes bancaires représentent 150 % du chiffre d'affaires. Il doit rembourser une partie de ses emprunts avant toute nouvelle demande, et la banque refusera tout prêt dans les 5 prochaines années.",
       "Le ratio vaut 1,5 % : la banque prêtera sans difficulté.",
       "Le magasin devrait proposer un service d'optique à domicile.",
       "Le ratio vaut 1,5 : les dettes bancaires dépassent de moitié les capitaux propres. Un nouvel emprunt sera difficile ; mieux vaut d'abord renforcer les capitaux propres (mise en réserve, apport) ou financer autrement (autofinancement, crédit-bail)."
@@ -530,7 +530,7 @@ QUESTIONS.push(
       "Le taux de marque est 8 points sous la moyenne : le magasin garde moins de marge par vente que ses concurrents. Il doit revoir ses prix d'achat (centrale, fournisseurs) ou son coefficient, sans casser son positionnement.",
       "Avec 52 % de taux de marque, le magasin vend à perte 48 % de ses équipements.",
       "La TVA sur les lunettes est de 20 %.",
-      "Le taux de marque est un peu faible."
+      "Le taux de marque est un peu faible : il faudrait baisser les prix de vente de 8 points pour attirer davantage de clients, sans toucher aux prix d'achat, ce qui rétablirait mécaniquement la rentabilité du magasin, sans autre action."
     ],
     bonne: 0,
     explication: "52 % contre 60 % : sur un équipement à 300 € HT, le magasin garde 156 € de marge au lieu de 180 €. Le bon commentaire chiffre l'écart, l'explique et propose des leviers (acheter moins cher, ajuster les prix). 48 % est la part du coût d'achat dans le prix HT, pas une vente à perte ; « un peu faible » est vrai sans argument ; la TVA est hors sujet.",
@@ -726,7 +726,7 @@ QUESTIONS.push(
     cas: "CAS-U3-02", etape: 5,
     question: "Commente la situation financière du magasin : quel commentaire est le plus juste ?",
     choix: [
-      "La situation financière est correcte.",
+      "La situation financière est correcte : le FRNG de 25 000 € couvre le BFR de 20 000 €, mais le stock de 72 000 € est faible et l'endettement de 0,61 montre que le magasin ne peut plus emprunter du tout. Il faut renoncer à tout investissement.",
       "Équilibre assuré mais serré : le FRNG (25 000 €) couvre le BFR (20 000 €) et laisse 5 000 € de trésorerie. Le stock (72 000 €) pèse lourd dans le BFR. L'endettement (0,61) reste sous 1 : le magasin peut encore emprunter.",
       "La trésorerie est négative, car les concours bancaires sont de 4 000 €.",
       "Le magasin devrait déposer sa marque à l'INPI."
@@ -742,7 +742,7 @@ QUESTIONS.push(
     question: "Que conseilles-tu au gérant ?",
     choix: [
       "Le payer comptant, puisque la trésorerie est positive.",
-      "Emprunter.",
+      "Renoncer à l'achat : un bien durable se finance par une ressource durable, mais payé comptant il ferait tomber la trésorerie à −25 000 €, et avec un emprunt le ratio d'endettement passerait au-dessus de 1, donc la banque refusera.",
       "L'emprunter sur 5 ans : un bien durable se finance par une ressource durable. Payé comptant, il ferait tomber la trésorerie à −25 000 €. Avec l'emprunt, le ratio d'endettement passe à 0,79, toujours sous 1. En parallèle, alléger le stock pour réduire le BFR.",
       "Changer d'enseigne pour attirer de nouveaux clients."
     ],
@@ -755,7 +755,7 @@ QUESTIONS.push(
   {
     id: "U3-141", difficulte: "difficile", epreuve: "U3", theme: "Seuil de rentabilité", session: "complément",
     question: "Un magasin réalise 300 000 € HT de CA avec un seuil de rentabilité de 225 000 € HT. Quel commentaire est le mieux rédigé ?",
-    choix: ["Le seuil de rentabilité est de 225 000 €, donc le magasin est rentable.", "Le seuil est inférieur au CA de 75 000 € : le magasin dégage donc 75 000 € de bénéfice.", "Le seuil représente 75 % du CA : le magasin est rentable avec une marge de sécurité de 75 000 €, soit 25 % du CA. Une baisse du CA de plus de 25 % le ferait passer en perte.", "Le magasin perd de l'argent tant qu'il n'a pas atteint un CA de 300 000 €."],
+    choix: ["Le seuil de rentabilité est de 225 000 €, donc le magasin est rentable.", "Le seuil est inférieur au CA de 75 000 € : le magasin dégage donc 75 000 € de bénéfice.", "Le seuil représente 75 % du CA : le magasin est rentable avec une marge de sécurité de 75 000 €, soit 25 % du CA. Une baisse du CA de plus de 25 % le ferait passer en perte.", "Le magasin perd de l'argent tant qu'il n'a pas atteint un CA de 300 000 € : le seuil de rentabilité est le chiffre d'affaires réalisé sur l'année, donc aucune marge de sécurité n'existe."],
     bonne: 2,
     explication: "Un bon commentaire compare le seuil au CA, chiffre la marge de sécurité et conclut.\nMarge de sécurité = 300 000 − 225 000 = 75 000 €\nIndice de sécurité = [[75 000|300 000]] = 25 %\nLe 1er choix est vrai mais sans argument ni chiffre. Le 2e confond marge de sécurité et bénéfice : le bénéfice vaut la marge de sécurité × le taux de marge sur coût variable, pas 75 000 €. Le 4e prend le CA actuel pour le seuil.",
     indice: "Un commentaire complet contient un chiffre, une comparaison et une conclusion."
@@ -763,7 +763,7 @@ QUESTIONS.push(
   {
     id: "U3-142", difficulte: "difficile", epreuve: "U3", theme: "Seuil de rentabilité", session: "complément",
     question: "Un poste d'opticien supplémentaire coûte 30 000 € par an à l'employeur. Le taux de marge sur coût variable du magasin est de 60 %. Quel conseil est le mieux justifié ?",
-    choix: ["Embaucher seulement si le magasin peut réaliser au moins 50 000 € de CA en plus : à 60 %, ce CA apporte 30 000 € de marge, qui couvrent le coût du poste.", "Embaucher : 30 000 € est un petit coût au regard du CA du magasin.", "Embaucher si le magasin peut réaliser 30 000 € de CA en plus, qui paieront le salaire.", "Embaucher si le magasin peut réaliser 18 000 € de CA en plus, soit 30 000 × 0,60."],
+    choix: ["Embaucher seulement si le magasin peut réaliser au moins 50 000 € de CA en plus : à 60 %, ce CA apporte 30 000 € de marge, qui couvrent le coût du poste.", "Embaucher : 30 000 € est un petit coût au regard du CA du magasin.", "Embaucher si le magasin peut réaliser 30 000 € de CA en plus, qui paieront le salaire : à 60 % de taux de marge, ce CA suffit pour couvrir le coût annuel du poste, qui est aussi de 30 000 €.", "Embaucher si le magasin peut réaliser 18 000 € de CA en plus, soit 30 000 × 0,60."],
     bonne: 0,
     explication: "Ce n'est pas le CA qui paie un salaire, c'est la marge qu'il apporte.\nCA nécessaire = [[coût du poste|taux de MCV]] = [[30 000|0,60]] = 50 000 €\nVérification : 50 000 × 0,60 = 30 000 €. Le 2e choix ne chiffre rien. Le 3e compare un CA à un coût. Le 4e multiplie au lieu de diviser.",
     indice: "Combien de CA faut-il pour que la marge égale 30 000 € ?"
@@ -771,7 +771,7 @@ QUESTIONS.push(
   {
     id: "U3-143", difficulte: "moyen", epreuve: "U3", theme: "Analyse financière", session: "complément",
     question: "Un magasin a un FRNG de 40 000 € et un BFR de 55 000 €. Quel commentaire est le mieux rédigé ?",
-    choix: ["Le FRNG est positif, donc la situation financière est saine.", "La trésorerie nette est de 95 000 € : le magasin a une large réserve.", "La trésorerie nette est de 15 000 € : elle est positive, il n'y a aucun souci.", "La trésorerie nette est de 40 000 − 55 000 = −15 000 € : le FRNG ne couvre pas le BFR, le magasin dépend d'un découvert. Il peut réduire ses stocks ou négocier des délais de paiement avec ses fournisseurs."],
+    choix: ["Le FRNG est positif, donc la situation financière est saine : le BFR de 55 000 € n'a pas d'importance, puisque le fonds de roulement de 40 000 € reste positif.", "La trésorerie nette est de 95 000 € : le magasin a une large réserve.", "La trésorerie nette est de 15 000 € : elle est positive, il n'y a aucun souci.", "La trésorerie nette est de 40 000 − 55 000 = −15 000 € : le FRNG ne couvre pas le BFR, le magasin dépend d'un découvert. Il peut réduire ses stocks ou négocier des délais de paiement avec ses fournisseurs."],
     bonne: 3,
     explication: "Trésorerie nette = FRNG − BFR = 40 000 − 55 000 = −15 000 €\nUn FRNG positif ne suffit pas : il faut qu'il couvre le BFR. Le 2e choix additionne au lieu de soustraire, le 3e oublie le signe. Le bon commentaire donne le calcul, dit ce que le résultat signifie et propose une action.",
     indice: "Soustrais le BFR du FRNG, et regarde le signe."
@@ -779,7 +779,7 @@ QUESTIONS.push(
   {
     id: "U3-144", difficulte: "moyen", epreuve: "U3", theme: "Analyse financière", session: "complément",
     question: "Un magasin a 96 000 € de dettes financières et 120 000 € de capitaux propres. Quel commentaire est le mieux justifié ?",
-    choix: ["Le ratio d'endettement est de 80 % : c'est trop élevé, la banque refusera tout prêt.", "Le ratio d'endettement est de 0,8, inférieur à 1 : les dettes bancaires restent inférieures aux capitaux propres, le magasin peut encore emprunter, sous réserve que sa CAF couvre les remboursements.", "Le ratio d'endettement est de 1,25 : le magasin est très endetté.", "Le ratio d'endettement est de 0,8, inférieur à 1 : le magasin est sans dette."],
+    choix: ["Le ratio d'endettement est de 80 % : c'est trop élevé, la banque refusera tout prêt tant que le magasin n'aura pas remboursé la totalité de ses dettes bancaires, et il ne pourra plus investir pendant plusieurs années.", "Le ratio d'endettement est de 0,8, inférieur à 1 : les dettes bancaires restent inférieures aux capitaux propres, le magasin peut encore emprunter, sous réserve que sa CAF couvre les remboursements.", "Le ratio d'endettement est de 1,25 : le magasin est très endetté.", "Le ratio d'endettement est de 0,8, inférieur à 1 : le magasin est sans dette."],
     bonne: 1,
     explication: "Ratio d'endettement = [[dettes financières|capitaux propres]] = [[96 000|120 000]] = 0,8\nSous 1, les dettes bancaires sont inférieures aux capitaux propres. Le 1er choix donne le bon chiffre (0,8 = 80 %) mais en tire une conclusion fausse : sous 1, l'emprunt reste possible. Le 3e inverse la division ([[120 000|96 000]] = 1,25). Le 4e confond « inférieur à 1 » et « pas de dette ».",
     indice: "Divise les dettes par les capitaux propres, compare à 1, puis pense à la capacité de rembourser."
@@ -787,7 +787,7 @@ QUESTIONS.push(
   {
     id: "U3-145", difficulte: "moyen", epreuve: "U3", theme: "Prix et marges", session: "complément",
     question: "Le taux de marque d'un magasin passe de 62 % à 58 % en un an. Quel commentaire est le mieux rédigé ?",
-    choix: ["Le taux de marque baisse de 4 %, ce qui est négligeable : aucune action n'est nécessaire.", "Le magasin vend moins cher, il attirera donc plus de clients : c'est forcément bon pour le résultat.", "Le taux de marque baisse de 4 points : sur 100 € de vente HT, il reste 58 € au lieu de 62 € pour payer les charges. À CA égal, le résultat diminue : il faut revoir les prix ou négocier les achats.", "Le taux de marque est passé de 62 % à 58 %, donc le taux de marge a augmenté."],
+    choix: ["Le taux de marque baisse de 4 %, ce qui est négligeable : aucune action n'est nécessaire.", "Le magasin vend moins cher, il attirera donc plus de clients : c'est forcément bon pour le résultat, car la hausse des ventes compensera toujours la baisse du taux de marque, quel que soit le niveau des charges.", "Le taux de marque baisse de 4 points : sur 100 € de vente HT, il reste 58 € au lieu de 62 € pour payer les charges. À CA égal, le résultat diminue : il faut revoir les prix ou négocier les achats.", "Le taux de marque est passé de 62 % à 58 %, donc le taux de marge a augmenté."],
     bonne: 2,
     explication: "Un écart entre deux taux se dit en points : 62 − 58 = 4 points. Ici, 4 points de taux de marque, c'est 4 € de moins par tranche de 100 € de ventes HT. Le 1er choix parle de 4 % et minimise sans chiffrer. Le 2e est un pari sans calcul. Le 4e est faux : taux de marque et taux de marge baissent ou montent ensemble.",
     indice: "Un écart entre deux pourcentages se compte en points. Dis ce que ça change par 100 € de vente."
@@ -795,7 +795,7 @@ QUESTIONS.push(
   {
     id: "U3-146", difficulte: "difficile", epreuve: "U3", theme: "Investissement et financement", session: "complément",
     question: "Un magasin finance un équipement de 30 000 € par un emprunt de 5 ans à 5 % (annuité constante de 6 929 €). Sa CAF est de 14 000 € par an. Quel conseil est le mieux justifié ?",
-    choix: ["Je conseille l'emprunt : l'annuité de 6 929 € représente environ la moitié de la CAF, le magasin peut la rembourser, et il garde sa trésorerie pour son exploitation.", "Je conseille de payer comptant : un emprunt coûte toujours plus cher.", "Je déconseille l'emprunt : l'annuité de 6 929 € dépasse la CAF.", "Je conseille l'emprunt : l'annuité est une charge de 6 929 € qui améliore le résultat."],
+    choix: ["Je conseille l'emprunt : l'annuité de 6 929 € représente environ la moitié de la CAF, le magasin peut la rembourser, et il garde sa trésorerie pour son exploitation.", "Je conseille de payer comptant : un emprunt coûte toujours plus cher, et même si l'annuité de 6 929 € représente la moitié de la CAF, le magasin ne doit jamais s'endetter pour acheter du matériel.", "Je déconseille l'emprunt : l'annuité de 6 929 € dépasse la CAF.", "Je conseille l'emprunt : l'annuité est une charge de 6 929 € qui améliore le résultat."],
     bonne: 0,
     explication: "Part de la CAF consacrée au remboursement = [[annuité|CAF]] = [[6 929|14 000]] ≈ 49,5 %\nLa CAF couvre l'annuité avec de la marge. Le 2e choix est un principe sans calcul : payer comptant viderait la trésorerie. Le 3e est faux (6 929 est inférieur à 14 000). Le 4e est absurde : une charge diminue le résultat, et seuls les intérêts sont des charges, pas le capital remboursé.",
     indice: "Compare l'annuité à la CAF, puis pense à la trésorerie."
@@ -803,7 +803,7 @@ QUESTIONS.push(
   {
     id: "U3-147", difficulte: "moyen", epreuve: "U3", theme: "Droit des entreprises", session: "complément",
     question: "Une opticienne a signé un bail commercial de 9 ans. Après 4 ans, elle veut quitter le local. Quelle réponse est la mieux justifiée ?",
-    choix: ["Elle peut partir à tout moment, il suffit de prévenir le propriétaire.", "Elle peut partir tout de suite, car un bail commercial dure 4 ans au maximum.", "Elle ne peut jamais partir avant la fin des 9 ans.", "Elle ne peut pas partir à 4 ans : le locataire peut donner congé à la fin de chaque période de 3 ans, donc à 6 ans, avec un préavis de 6 mois. Avant, elle reste tenue de payer le loyer, sauf accord du propriétaire ou cession du bail."],
+    choix: ["Elle peut partir à tout moment, il suffit de prévenir le propriétaire.", "Elle peut partir tout de suite, car un bail commercial dure 4 ans au maximum.", "Elle ne peut jamais partir avant la fin des 9 ans, sauf accord écrit du propriétaire ; la loi interdit au locataire de donner congé à la fin d'une période triennale et elle reste redevable du loyer jusqu'en 2031, même en cas de cession du bail.", "Elle ne peut pas partir à 4 ans : le locataire peut donner congé à la fin de chaque période de 3 ans, donc à 6 ans, avec un préavis de 6 mois. Avant, elle reste tenue de payer le loyer, sauf accord du propriétaire ou cession du bail."],
     bonne: 3,
     explication: "Le bail commercial de 9 ans est dit « 3-6-9 » : le locataire peut donner congé à la fin de la 3e et de la 6e année (et à la fin de la 9e), en prévenant 6 mois avant. À 4 ans, la prochaine échéance est à 6 ans. Le 3e choix oublie la faculté triennale, le 1er l'étend à tout moment.",
     indice: "Les échéances du bail commercial tombent tous les 3 ans."
@@ -811,7 +811,7 @@ QUESTIONS.push(
   {
     id: "U3-148", difficulte: "moyen", epreuve: "U3", theme: "Mercatique et communication", session: "complément",
     question: "Avec 800 visiteurs par mois, un magasin passe d'un taux de transformation de 25 % à 30 % après une formation de l'équipe. Quel commentaire est le mieux justifié ?",
-    choix: ["Le taux a augmenté de 5 %, donc les ventes ont augmenté de 5 %.", "Le taux de transformation passe de 25 % à 30 % : avec 800 visiteurs, cela fait 240 ventes au lieu de 200, soit 40 de plus par mois. La formation est efficace : je conseille de la prolonger et de suivre aussi le panier moyen.", "Le taux a augmenté, donc il y a plus de visiteurs.", "Un taux de transformation de 30 % signifie que 30 clients ont acheté."],
+    choix: ["Le taux a augmenté de 5 %, donc les ventes ont augmenté de 5 % : avec 800 visiteurs, cela fait 840 ventes au lieu de 800 par mois. La formation est efficace mais il vaut mieux l'arrêter pour économiser son coût. Il faut aussi suivre le nombre de visiteurs.", "Le taux de transformation passe de 25 % à 30 % : avec 800 visiteurs, cela fait 240 ventes au lieu de 200, soit 40 de plus par mois. La formation est efficace : je conseille de la prolonger et de suivre aussi le panier moyen.", "Le taux a augmenté, donc il y a plus de visiteurs.", "Un taux de transformation de 30 % signifie que 30 clients ont acheté."],
     bonne: 1,
     explication: "Ventes avant = 800 × 0,25 = 200\nVentes après = 800 × 0,30 = 240\nHausse = [[240 − 200|200]] = 20 % de ventes en plus, pour une hausse de 5 points du taux. Le 1er choix confond points et pourcentage. Le 3e déduit le trafic du taux, alors que le taux est un rapport ventes sur visiteurs. Le 4e oublie que le taux se rapporte aux 800 visiteurs.",
     indice: "Applique chaque taux aux 800 visiteurs, puis compare les ventes."
@@ -887,7 +887,7 @@ QUESTIONS.push(
     id: "U3-154", difficulte: "moyen", epreuve: "U3", theme: "Seuil de rentabilité", session: "complément",
     cas: "CAS-U3-03", etape: 6,
     question: "Commente le seuil de rentabilité du magasin : quel commentaire est le mieux rédigé ?",
-    choix: ["Le seuil de rentabilité est de 360 000 €, donc le magasin est rentable.", "Le seuil de 360 000 € représente 75 % du CA : le point mort tombe fin septembre. La marge de sécurité est de 120 000 €, soit 25 % du CA : le magasin est rentable et peut supporter une baisse de CA de 25 % avant de perdre de l'argent.", "Le seuil est inférieur au CA de 120 000 € : le magasin dégage donc 120 000 € de bénéfice.", "Le seuil représente 75 % du CA, ce qui est très élevé : le magasin est en danger."],
+    choix: ["Le seuil de rentabilité est de 360 000 €, donc le magasin est rentable : il atteint son seuil dès le mois de mars, et la marge de sécurité de 120 000 € permet d'investir sans aucun risque.", "Le seuil de 360 000 € représente 75 % du CA : le point mort tombe fin septembre. La marge de sécurité est de 120 000 €, soit 25 % du CA : le magasin est rentable et peut supporter une baisse de CA de 25 % avant de perdre de l'argent.", "Le seuil est inférieur au CA de 120 000 € : le magasin dégage donc 120 000 € de bénéfice.", "Le seuil représente 75 % du CA, ce qui est très élevé : le magasin est en danger."],
     bonne: 1,
     explication: "Marge de sécurité = 480 000 − 360 000 = 120 000 €\nIndice de sécurité = [[120 000|480 000]] = 25 %\nLe 1er choix est vrai mais sans chiffre ni comparaison. Le 3e confond marge de sécurité et bénéfice : le résultat actuel est de 288 000 − 216 000 = 72 000 €. Le 4e interprète à tort : 75 % laisse 25 % de marge de sécurité.",
     indice: "Un bon commentaire compare le seuil au CA, chiffre la marge de sécurité et conclut."
@@ -910,7 +910,7 @@ QUESTIONS.push(
     cas: "CAS-U3-03", etape: 8,
     contexte: "Selon la gérante, l'embauche ferait gagner 40 000 € de CA par an.",
     question: "Que conseilles-tu à Mme Vidal au sujet de l'embauche ?",
-    choix: ["Embaucher : le CA augmentera et le magasin sera plus rentable.", "Embaucher : le nouveau seuil de 415 000 € reste inférieur au CA de 520 000 €, donc la situation s'améliore.", "Ne pas embaucher : un salarié coûte toujours plus qu'il ne rapporte.", "Ne pas embaucher dans ces conditions : les 40 000 € de CA en plus apportent 24 000 € de marge, pour un coût de 33 000 €, donc le résultat baisse de 9 000 € (de 72 000 € à 63 000 €). Il faudrait 55 000 € de CA en plus pour couvrir le poste."],
+    choix: ["Embaucher : le CA augmentera et le magasin sera plus rentable.", "Embaucher : le nouveau seuil de 415 000 € reste inférieur au CA de 520 000 €, donc la situation s'améliore, et les 40 000 € de CA en plus couvrent largement le coût de 33 000 € du poste, qui augmente le résultat de 7 000 €, sans aucun risque pour le magasin.", "Ne pas embaucher : un salarié coûte toujours plus qu'il ne rapporte.", "Ne pas embaucher dans ces conditions : les 40 000 € de CA en plus apportent 24 000 € de marge, pour un coût de 33 000 €, donc le résultat baisse de 9 000 € (de 72 000 € à 63 000 €). Il faudrait 55 000 € de CA en plus pour couvrir le poste."],
     bonne: 3,
     explication: "Marge apportée = 40 000 × 0,60 = 24 000 €, pour un coût de 33 000 €\nRésultat actuel = 480 000 × 0,60 − 216 000 = 72 000 €\nRésultat avec l'embauche = 520 000 × 0,60 − 249 000 = 63 000 €\nCA nécessaire pour couvrir le poste = [[33 000|0,60]] = 55 000 €\nLe 2e choix compare le seuil au CA sans regarder le résultat, qui baisse tout de même. Le 1er ne chiffre rien et le 3e est une règle générale fausse.",
     indice: "Compare la marge que rapporte le CA en plus au coût du poste."
@@ -1007,7 +1007,7 @@ QUESTIONS.push(
     id: "U3-164", difficulte: "difficile", epreuve: "U3", theme: "Analyse financière", session: "complément",
     cas: "CAS-U3-04", etape: 8,
     question: "Commente la situation actuelle du magasin : quel commentaire est le mieux rédigé ?",
-    choix: ["La CAF est égale au résultat net, soit 35 000 €, donc elle ne couvre pas les annuités.", "L'EBE est de 73 000 €, donc le magasin est rentable.", "L'EBE de 73 000 € représente environ 14 % du CA. La CAF de 59 000 € couvre plus de 3 fois l'annuité actuelle (18 000 €) et les dettes se rembourseraient en 2,5 ans de CAF : le magasin est sain et peut envisager un nouvel emprunt.", "Le résultat net de 35 000 € est faible comparé aux ventes : le magasin ne peut pas emprunter."],
+    choix: ["La CAF est égale au résultat net, soit 35 000 €, donc elle ne couvre pas les annuités : l'EBE de 73 000 € ne change rien, car les amortissements représentent une sortie d'argent et le magasin ne peut pas emprunter. Il faut renoncer à toute demande de prêt.", "L'EBE est de 73 000 €, donc le magasin est rentable.", "L'EBE de 73 000 € représente environ 14 % du CA. La CAF de 59 000 € couvre plus de 3 fois l'annuité actuelle (18 000 €) et les dettes se rembourseraient en 2,5 ans de CAF : le magasin est sain et peut envisager un nouvel emprunt.", "Le résultat net de 35 000 € est faible comparé aux ventes : le magasin ne peut pas emprunter."],
     bonne: 2,
     explication: "EBE sur CA = [[73 000|520 000]] ≈ 14 %\nCAF sur annuité = [[59 000|18 000]] ≈ 3,3\nLa CAF s'obtient en ajoutant les dotations au résultat net : 35 000 + 24 000. Le 2e choix ne chiffre presque rien et le 4e conclut sans regarder la CAF. Le bon commentaire donne les chiffres, les compare et conclut.",
     indice: "Compare la CAF à l'annuité, puis regarde en combien d'années les dettes se rembourseraient."
@@ -1025,7 +1025,7 @@ QUESTIONS.push(
     id: "U3-166", difficulte: "difficile", epreuve: "U3", theme: "Investissement et financement", session: "complément",
     cas: "CAS-U3-04", etape: 10,
     question: "Que conseilles-tu à M. Garnier pour son projet d'emprunt ?",
-    choix: ["Emprunter les 120 000 € : la CAF de 59 000 € est supérieure à chaque annuité.", "La CAF permet de rembourser : les deux annuités (18 000 + 20 738 = 38 738 €) représentent environ 66 % de la CAF. Mais le ratio d'endettement passerait de 0,83 à 1,5, au-dessus de 1 : la banque hésitera. Je conseille de réduire l'emprunt en apportant des fonds propres ou en négociant un autofinancement partiel.", "Ne pas ouvrir le deuxième point de vente : un emprunt supplémentaire est toujours risqué.", "Emprunter, mais sur 3 ans pour rembourser vite."],
+    choix: ["Emprunter les 120 000 € : la CAF de 59 000 € est supérieure à chaque annuité, et le ratio d'endettement qui passerait à 1,5 n'a aucune importance pour la banque puisque l'emprunt est garanti par la CAF seule.", "La CAF permet de rembourser : les deux annuités (18 000 + 20 738 = 38 738 €) représentent environ 66 % de la CAF. Mais le ratio d'endettement passerait de 0,83 à 1,5, au-dessus de 1 : la banque hésitera. Je conseille de réduire l'emprunt en apportant des fonds propres ou en négociant un autofinancement partiel.", "Ne pas ouvrir le deuxième point de vente : un emprunt supplémentaire est toujours risqué.", "Emprunter, mais sur 3 ans pour rembourser vite."],
     bonne: 1,
     explication: "Annuités cumulées = 18 000 + 20 738 = 38 738 €\nPart de la CAF = [[38 738|59 000]] ≈ 66 %\nRatio d'endettement = 1,5 : au-dessus de 1, la banque trouvera le magasin très endetté.\nLe 1er choix ignore le ratio et compare la CAF à chaque annuité séparément : il faut les additionner. Le 3e refuse sans calcul. Le 4e augmenterait fortement les annuités.",
     indice: "Regarde à la fois la capacité de remboursement (CAF) et le niveau d'endettement (ratio)."
@@ -1091,7 +1091,7 @@ QUESTIONS.push(
     id: "U3-172", difficulte: "moyen", epreuve: "U3", theme: "Droit du travail", session: "complément",
     cas: "CAS-U3-05", etape: 6,
     question: "Quelle est la conséquence de la vente du magasin pour le salarié en place ?",
-    choix: ["Son contrat prend fin à la vente : il doit être réembauché s'il le souhaite.", "M. Lemaire doit le licencier avant la vente, avec une indemnité.", "Son contrat continue automatiquement avec Mme Roche, aux mêmes conditions et avec ses 4 ans d'ancienneté : elle ne peut pas le refuser ni le modifier sans l'accord du salarié.", "Mme Roche peut choisir de le garder ou non, sans conséquence."],
+    choix: ["Son contrat prend fin à la vente : il doit être réembauché s'il le souhaite, mais Mme Roche n'est pas obligée de reprendre son ancienneté ni ses conditions de travail, et M. Lemaire n'a rien à lui verser.", "M. Lemaire doit le licencier avant la vente, avec une indemnité.", "Son contrat continue automatiquement avec Mme Roche, aux mêmes conditions et avec ses 4 ans d'ancienneté : elle ne peut pas le refuser ni le modifier sans l'accord du salarié.", "Mme Roche peut choisir de le garder ou non, sans conséquence."],
     bonne: 2,
     explication: "Quand l'entreprise change d'employeur (vente, fusion), les contrats de travail en cours passent de plein droit au nouvel employeur (Code du travail, article L1224-1). Le salarié garde son ancienneté et ses conditions. Les trois autres choix imaginent une rupture ou un choix de l'acheteur, que la loi ne prévoit pas.",
     indice: "Le contrat suit l'entreprise, pas son ancien propriétaire."
@@ -1100,7 +1100,7 @@ QUESTIONS.push(
     id: "U3-173", difficulte: "difficile", epreuve: "U3", theme: "Droit des entreprises", session: "complément",
     cas: "CAS-U3-05", etape: 7,
     question: "M. Lemaire ouvre un magasin d'optique à 2 km, 6 mois après la vente. Que peut faire Mme Roche ?",
-    choix: ["La clause est valable tant qu'elle reste limitée et proportionnée (ici 5 ans et 5 km, que le juge apprécie) : la contrepartie est le prix du fonds. Mme Roche peut agir en justice pour faire cesser la concurrence et obtenir des dommages et intérêts.", "Rien : une clause de non-concurrence est nulle sans contrepartie financière versée à M. Lemaire.", "Rien : un vendeur garde toujours le droit de se réinstaller.", "Elle peut seulement baisser ses prix pour résister."],
+    choix: ["La clause est valable tant qu'elle reste limitée et proportionnée (ici 5 ans et 5 km, que le juge apprécie) : la contrepartie est le prix du fonds. Mme Roche peut agir en justice pour faire cesser la concurrence et obtenir des dommages et intérêts.", "Rien : une clause de non-concurrence est nulle sans contrepartie financière versée à M. Lemaire, donc Mme Roche ne peut pas l'invoquer et ne peut engager aucune action, même si le magasin ouvre dans le périmètre fixé et dans les 5 ans prévus au contrat.", "Rien : un vendeur garde toujours le droit de se réinstaller.", "Elle peut seulement baisser ses prix pour résister."],
     bonne: 0,
     explication: "Dans une vente de fonds de commerce, le vendeur s'engage à ne pas détourner la clientèle vendue. Cette clause est valable si sa durée, son périmètre et son activité sont limités et proportionnés ; la contrepartie est le prix payé. Il ne faut pas confondre avec la clause de non-concurrence d'un salarié, qui exige une contrepartie financière propre.",
     indice: "Pense à ce que Mme Roche a payé : la clientèle."
@@ -1109,7 +1109,7 @@ QUESTIONS.push(
     id: "U3-174", difficulte: "moyen", epreuve: "U3", theme: "Droit des entreprises", session: "complément",
     cas: "CAS-U3-05", etape: 8,
     question: "Que devient le bail commercial signé en 2022 par M. Lemaire ?",
-    choix: ["Le bail s'arrête à la vente : Mme Roche doit négocier un nouveau bail de 9 ans.", "Le bail est cédé avec le fonds : Mme Roche le reprend aux conditions actuelles, pour la durée restant à courir (jusqu'en 2031). Le bailleur ne peut pas interdire la cession à l'acquéreur du fonds.", "Le propriétaire peut refuser librement et imposer un nouveau loyer.", "Le bail devient un bail précaire de 3 ans."],
+    choix: ["Le bail s'arrête à la vente : Mme Roche doit négocier un nouveau bail de 9 ans avec le propriétaire, aux conditions du marché, et M. Lemaire doit remettre les clés du local à la date de la cession.", "Le bail est cédé avec le fonds : Mme Roche le reprend aux conditions actuelles, pour la durée restant à courir (jusqu'en 2031). Le bailleur ne peut pas interdire la cession à l'acquéreur du fonds.", "Le propriétaire peut refuser librement et imposer un nouveau loyer.", "Le bail devient un bail précaire de 3 ans."],
     bonne: 1,
     explication: "Le droit au bail fait partie du fonds de commerce : il est cédé avec lui. Un bail de 9 ans signé en 2022 court jusqu'en 2031. Le bailleur doit être informé et peut vérifier la cession, mais ne peut pas la refuser pour imposer de nouvelles conditions.",
     indice: "Le droit au bail est un des éléments du fonds de commerce."
@@ -1118,7 +1118,7 @@ QUESTIONS.push(
     id: "U3-175", difficulte: "difficile", epreuve: "U3", theme: "Investissement et financement", session: "complément",
     cas: "CAS-U3-05", etape: 9,
     question: "Que conseilles-tu à Mme Roche ?",
-    choix: ["Acheter en soignant le financement : l'annuité de 27 124 € représente environ 56,5 % de la CAF prévisionnelle, possible mais serrée. Je conseille d'allonger l'emprunt à 12 ans ou d'augmenter l'apport pour garder de la marge, et de vérifier le CA du magasin sur 3 ans.", "Acheter sans condition : l'annuité de 27 124 € est inférieure à la CAF de 48 000 €.", "Acheter : le fonds vaut 287 000 €, moins que son CA annuel de 410 000 €.", "Ne pas acheter : un emprunt de 220 000 € est trop élevé pour une opticienne salariée."],
+    choix: ["Acheter en soignant le financement : l'annuité de 27 124 € représente environ 56,5 % de la CAF prévisionnelle, possible mais serrée. Je conseille d'allonger l'emprunt à 12 ans ou d'augmenter l'apport pour garder de la marge, et de vérifier le CA du magasin sur 3 ans.", "Acheter sans condition : l'annuité de 27 124 € est inférieure à la CAF de 48 000 €, donc aucune précaution n'est nécessaire, ni sur la durée de l'emprunt ni sur le chiffre d'affaires réel du magasin des trois dernières années.", "Acheter : le fonds vaut 287 000 €, moins que son CA annuel de 410 000 €.", "Ne pas acheter : un emprunt de 220 000 € est trop élevé pour une opticienne salariée."],
     bonne: 0,
     explication: "Annuité sur CAF = [[27 124|48 000]] = 56,5 %\nLe projet est possible mais serré : une baisse de CA suffirait à fragiliser le remboursement.\nLe 2e choix ne regarde que la CAF sans marge de sécurité. Le 3e compare à tort un prix de vente et un CA. Le 4e refuse sans argument chiffré.",
     indice: "Compare l'annuité à la CAF, puis cherche comment garder de la marge."
@@ -1178,7 +1178,7 @@ QUESTIONS.push(
     id: "U3-180", difficulte: "moyen", epreuve: "U3", theme: "Marché et zone de chalandise", session: "complément",
     cas: "CAS-U3-06", etape: 5,
     question: "Commente la concurrence dans la commune : quel commentaire est le mieux rédigé ?",
-    choix: ["La commune compte 2,8 magasins pour 10 000 habitants, un peu moins que les 3 du département : la zone est un peu moins dense que la moyenne, donc la concurrence reste modérée. Avec l'ouverture du 6e magasin, la densité passerait à 3,3, au-dessus de la référence : il faudra se différencier.", "Il y a 5 magasins : la concurrence est trop forte, il ne faut pas ouvrir.", "2,8 est inférieur à 3 : la zone est plus concurrentielle que la moyenne.", "La densité est de 2,8 % : le marché est presque vide."],
+    choix: ["La commune compte 2,8 magasins pour 10 000 habitants, un peu moins que les 3 du département : la zone est un peu moins dense que la moyenne, donc la concurrence reste modérée. Avec l'ouverture du 6e magasin, la densité passerait à 3,3, au-dessus de la référence : il faudra se différencier.", "Il y a 5 magasins pour 10 000 habitants, donc la concurrence est trop forte : l'ouverture d'un 6e magasin ferait passer la densité bien au-dessus de la moyenne du département, il ne faut donc pas ouvrir et abandonner le projet.", "2,8 est inférieur à 3 : la zone est plus concurrentielle que la moyenne.", "La densité est de 2,8 % : le marché est presque vide."],
     bonne: 0,
     explication: "Une densité se compare à une référence : 2,8 contre 3, soit un peu moins dense que la moyenne. Le 2e choix compte les magasins sans les rapporter à la population. Le 3e inverse le sens de la comparaison (moins de magasins, donc moins de concurrence). Le 4e prend la densité pour un pourcentage.",
     indice: "Compare 2,8 à la référence de 3, puis dis ce que cela signifie pour un nouvel entrant."
@@ -1220,7 +1220,7 @@ QUESTIONS.push(
     id: "U3-184", difficulte: "difficile", epreuve: "U3", theme: "Seuil de rentabilité", session: "complément",
     cas: "CAS-U3-06", etape: 9,
     question: "Commente la rentabilité prévue du point de vente : quel commentaire est le mieux rédigé ?",
-    choix: ["Le seuil de rentabilité est de 120 000 €, donc le projet est rentable.", "Le seuil est inférieur au CA de 47 223 € : le projet dégage donc 47 223 € de bénéfice.", "Le seuil de 120 000 € HT représente 72 % du CA prévu (167 223 €) : le point mort est atteint au bout d'environ 8,6 mois d'activité (septembre si le magasin ouvre le 1er janvier). La marge de sécurité est de 47 223 €, soit 28 % du CA : le projet est rentable si le CA prévu est atteint.", "Le seuil représente 72 % du CA : le projet est trop risqué pour être lancé."],
+    choix: ["Le seuil de rentabilité est de 120 000 € HT, soit 72 % du CA prévu : le point mort est atteint au bout de 8,6 mois et le projet est rentable, mais il dégage 167 223 € de bénéfice dès la première année d'activité.", "Le seuil est inférieur au CA de 47 223 € : le projet dégage donc 47 223 € de bénéfice.", "Le seuil de 120 000 € HT représente 72 % du CA prévu (167 223 €) : le point mort est atteint au bout d'environ 8,6 mois d'activité (septembre si le magasin ouvre le 1er janvier). La marge de sécurité est de 47 223 €, soit 28 % du CA : le projet est rentable si le CA prévu est atteint.", "Le seuil représente 72 % du CA : le projet est trop risqué pour être lancé."],
     bonne: 2,
     explication: "Point mort = [[120 000|167 223]] × 12 ≈ 8,6 mois\nMarge de sécurité = 167 223 − 120 000 = 47 223 €, soit [[47 223|167 223]] = 28 %\nLe 1er choix ne chiffre rien. Le 2e confond marge de sécurité et bénéfice. Le 4e conclut sans comparer à un repère.",
     indice: "Compare le seuil au CA prévu : marge de sécurité, date du point mort, conclusion."
@@ -1229,7 +1229,7 @@ QUESTIONS.push(
     id: "U3-185", difficulte: "difficile", epreuve: "U3", theme: "Seuil de rentabilité", session: "complément",
     cas: "CAS-U3-06", etape: 10,
     question: "Que conseilles-tu à M. Perrin ?",
-    choix: ["Ouvrir : le CA prévu de 167 223 € dépasse le seuil de 120 000 €.", "Ouvrir seulement si le magasin peut atteindre plus de 8,6 % de part de marché : à 8 %, le CA serait de 111 482 € HT, en dessous du seuil de 120 000 €, donc en perte. Je conseille de préparer un plan de communication pour viser les 12 % prévus, et de suivre la part de marché chaque trimestre.", "Ne pas ouvrir : il y a déjà 5 magasins dans la commune.", "Ouvrir, car 12 % de part de marché est un objectif facile à atteindre."],
+    choix: ["Ouvrir : le CA prévu de 167 223 € dépasse le seuil de 120 000 €.", "Ouvrir seulement si le magasin peut atteindre plus de 8,6 % de part de marché : à 8 %, le CA serait de 111 482 € HT, en dessous du seuil de 120 000 €, donc en perte. Je conseille de préparer un plan de communication pour viser les 12 % prévus, et de suivre la part de marché chaque trimestre.", "Ne pas ouvrir : il y a déjà 5 magasins dans la commune et la concurrence est trop forte. Même avec 12 % de part de marché, le CA de 167 223 € resterait en dessous du seuil de 120 000 €, donc le projet est perdu d'avance quelles que soient les actions menées.", "Ouvrir, car 12 % de part de marché est un objectif facile à atteindre."],
     bonne: 1,
     explication: "Part de marché minimale = [[120 000 × 1,2|1 672 229]] = [[144 000|1 672 229]] ≈ 8,6 %\nÀ 8 % : 1 672 229 × 0,08 = 133 778 € TTC, soit [[133 778|1,2]] = 111 482 € HT, en dessous du seuil.\nLe 1er choix ne regarde que l'hypothèse la plus favorable. Le 3e refuse sans comparer avec la densité de la zone. Le 4e promet sans argument.",
     indice: "À quelle part de marché le CA égale-t-il le seuil de 120 000 € ?"
@@ -1303,7 +1303,7 @@ QUESTIONS.push(
     id: "U3-191", difficulte: "moyen", epreuve: "U3", theme: "Investissement et financement", session: "complément",
     cas: "CAS-U3-07", etape: 6,
     question: "Commente l'évolution de la trésorerie : quel commentaire est le mieux rédigé ?",
-    choix: ["La trésorerie est négative en mars.", "Le solde passe de +25 500 € fin février à −10 200 € fin mars : l'équipement est payé d'un seul coup (43 200 € TTC) alors que ses effets sur le CA seront étalés. Le magasin sera à découvert en mars alors que son exploitation dégage de la trésorerie chaque mois ; la TVA de 7 200 € payée sur l'équipement sera récupérée ensuite.", "Le magasin est en difficulté : son exploitation perd de l'argent chaque mois.", "Le solde de −10 200 € vient des amortissements de l'équipement."],
+    choix: ["La trésorerie est négative en mars : le solde passe de +25 500 € à −10 200 € parce que l'exploitation perd de l'argent chaque mois, et la TVA de 7 200 € payée sur l'équipement ne sera jamais récupérée par le magasin.", "Le solde passe de +25 500 € fin février à −10 200 € fin mars : l'équipement est payé d'un seul coup (43 200 € TTC) alors que ses effets sur le CA seront étalés. Le magasin sera à découvert en mars alors que son exploitation dégage de la trésorerie chaque mois ; la TVA de 7 200 € payée sur l'équipement sera récupérée ensuite.", "Le magasin est en difficulté : son exploitation perd de l'argent chaque mois.", "Le solde de −10 200 € vient des amortissements de l'équipement."],
     bonne: 1,
     explication: "Janvier : +6 000 €. Février : +4 500 €. L'exploitation dégage donc de la trésorerie chaque mois ; le trou de mars vient de l'achat de 43 200 € TTC. Le 1er choix est vrai sans aucun argument. Le 3e est faux. Le 4e aussi : l'amortissement est une charge calculée, sans sortie d'argent.",
     indice: "Regarde les soldes mois par mois : d'où vient la chute de mars ?"
@@ -1320,7 +1320,7 @@ QUESTIONS.push(
     id: "U3-193", difficulte: "difficile", epreuve: "U3", theme: "Investissement et financement", session: "complément",
     cas: "CAS-U3-07", etape: 8,
     question: "Comment la gérante devrait-elle financer l'équipement ?",
-    choix: ["Comptant, puisque l'exploitation dégage de la trésorerie chaque mois.", "Par un découvert bancaire, car l'équipement ne servira que quelques mois.", "Par un emprunt sur 5 ans : un bien durable se finance par une ressource durable. Avec 36 000 € empruntés en mars, le solde de mars serait de +25 800 € avant la 1re mensualité. La TVA de 7 200 € payée sur l'équipement sera récupérée ensuite.", "En reportant l'achat d'un an sans étudier d'autre solution."],
+    choix: ["Comptant, puisque l'exploitation dégage de la trésorerie chaque mois : le solde de mars serait certes négatif, mais la TVA de 7 200 € payée sur l'équipement sera récupérée ensuite, donc aucun financement extérieur n'est utile. Cette option est la plus simple.", "Par un découvert bancaire, car l'équipement ne servira que quelques mois.", "Par un emprunt sur 5 ans : un bien durable se finance par une ressource durable. Avec 36 000 € empruntés en mars, le solde de mars serait de +25 800 € avant la 1re mensualité. La TVA de 7 200 € payée sur l'équipement sera récupérée ensuite.", "En reportant l'achat d'un an sans étudier d'autre solution."],
     bonne: 2,
     explication: "Un équipement dure plusieurs années : le financer par un découvert (ressource de court terme) est risqué, et le payer comptant provoque un découvert de 10 200 € en mars. L'emprunt à 5 ans adapte la ressource à la durée du bien et garde la trésorerie. Reporter sans étudier n'est pas un conseil argumenté.",
     indice: "Un bien qui dure plusieurs années se finance par une ressource qui dure aussi."
@@ -1343,7 +1343,7 @@ QUESTIONS.push(
     id: "U3-194", difficulte: "facile", epreuve: "U3", theme: "Droit du travail", session: "complément",
     cas: "CAS-U3-08", etape: 1,
     question: "Pourquoi M. Bastien préfère-t-il une rupture conventionnelle à une démission ?",
-    choix: ["Elle permet à la gérante de l'imposer sans son accord.", "Elle supprime toute formalité et tout délai.", "Elle lui ouvre en principe droit à l'allocation chômage et à une indemnité de rupture, alors qu'une démission n'ouvre en général aucun de ces droits.", "Elle lui garantit de garder son salaire pendant le chômage."],
+    choix: ["Elle permet à la gérante d'imposer la rupture au salarié sans son accord et d'éviter ainsi tout risque de contestation ultérieure devant le conseil de prud'hommes.", "Elle supprime toute formalité et tout délai.", "Elle lui ouvre en principe droit à l'allocation chômage et à une indemnité de rupture, alors qu'une démission n'ouvre en général aucun de ces droits.", "Elle lui garantit de garder son salaire pendant le chômage."],
     bonne: 2,
     explication: "La rupture conventionnelle est un accord entre les deux parties : personne ne peut l'imposer. Elle suit une procédure (entretien, convention, délai de rétractation, homologation) et ouvre, sous conditions, droit à l'allocation chômage et à une indemnité d'au moins le montant de l'indemnité légale de licenciement. La démission ne les ouvre en général pas.",
     indice: "Une rupture d'un commun accord et une démission n'ont pas les mêmes conséquences sur les droits du salarié."
@@ -1396,7 +1396,7 @@ QUESTIONS.push(
     id: "U3-200", difficulte: "moyen", epreuve: "U3", theme: "Droit du travail", session: "complément",
     cas: "CAS-U3-08", etape: 7,
     question: "Après la fin du délai de rétractation, qui doit valider la convention ?",
-    choix: ["Le conseil de prud'hommes, qui dispose de 2 mois.", "L'administration (la DREETS), qui dispose de 15 jours ouvrables ; sans réponse, la convention est réputée homologuée.", "Personne : la convention s'applique dès la fin de la rétractation.", "L'inspection du travail, qui dispose d'un an."],
+    choix: ["Le conseil de prud'hommes, qui dispose de 2 mois pour valider ; sans réponse dans ce délai, la convention est réputée refusée.", "L'administration (la DREETS), qui dispose de 15 jours ouvrables ; sans réponse, la convention est réputée homologuée.", "Personne : la convention s'applique dès la fin de la rétractation.", "L'inspection du travail, qui dispose d'un an."],
     bonne: 1,
     explication: "Une des parties envoie la demande d'homologation à l'administration (la DREETS), qui a 15 jours ouvrables pour répondre. Son silence vaut accord. Le contrat ne prend fin qu'après l'homologation : jusque-là, M. Bastien reste salarié.",
     indice: "Le contrat ne prend pas fin tout de suite : une administration doit valider."
@@ -1405,7 +1405,7 @@ QUESTIONS.push(
     id: "U3-201", difficulte: "difficile", epreuve: "U3", theme: "Droit du travail", session: "complément",
     cas: "CAS-U3-08", etape: 8,
     question: "Que conseilles-tu à Mme Delmas ?",
-    choix: ["Accepter la rupture conventionnelle avec une indemnité d'au moins 3 750 €, tenir un entretien, signer la convention, laisser passer les 15 jours de rétractation, puis demander l'homologation : le contrat ne prendra fin qu'après.", "Maintenir 3 000 € : c'est le montant que le magasin peut payer.", "Faire signer à M. Bastien une démission, plus simple et moins chère.", "Le licencier pour faute grave, pour ne payer aucune indemnité."],
+    choix: ["Accepter la rupture conventionnelle avec une indemnité d'au moins 3 750 €, tenir un entretien, signer la convention, laisser passer les 15 jours de rétractation, puis demander l'homologation : le contrat ne prendra fin qu'après.", "Maintenir 3 000 € : c'est le montant que le magasin peut payer.", "Faire signer à M. Bastien une démission, plus simple et moins chère : aucune indemnité n'est due, aucun délai de rétractation ne s'applique, et il pourrait quand même toucher l'allocation chômage dès la fin du contrat sans condition.", "Le licencier pour faute grave, pour ne payer aucune indemnité."],
     bonne: 0,
     explication: "Le conseil reprend les chiffres (3 750 € minimum, contre 3 000 € proposés) et la procédure complète : entretien, convention, 15 jours de rétractation, homologation. Les autres choix ne respectent pas le plancher légal ou imposeraient un motif que rien n'établit : un faux licenciement pour faute grave serait contesté et coûterait plus cher.",
     indice: "Il faut le montant minimum et les étapes dans l'ordre."
@@ -1423,7 +1423,7 @@ QUESTIONS.push(
     id: "U3-202", difficulte: "moyen", epreuve: "U3", theme: "Droit du travail", session: "complément",
     cas: "CAS-U3-09", etape: 1,
     question: "Quelle qualification est la plus prudente pour des retards répétés après un avertissement, sans conséquence grave sur l'activité ?",
-    choix: ["Une cause réelle et sérieuse : les retards justifient le licenciement, mais ils ne rendent pas impossible le maintien du salarié pendant le préavis ; préavis et indemnité de licenciement sont dus.", "Une faute grave : pas de préavis et pas d'indemnité de licenciement.", "Une faute lourde : elle suppose seulement un retard de plus de 10 minutes.", "Un motif économique : le salarié est trop souvent absent."],
+    choix: ["Une cause réelle et sérieuse : les retards justifient le licenciement, mais ils ne rendent pas impossible le maintien du salarié pendant le préavis ; préavis et indemnité de licenciement sont dus.", "Une faute grave : pas de préavis et pas d'indemnité de licenciement, puisque les retards répétés rendent impossible le maintien du salarié dans l'entreprise, même pendant la durée du préavis. Le salarié peut être licencié sans délai.", "Une faute lourde : elle suppose seulement un retard de plus de 10 minutes.", "Un motif économique : le salarié est trop souvent absent."],
     bonne: 0,
     explication: "La faute grave rend impossible le maintien du salarié, même pendant le préavis ; elle est appréciée strictement. La faute lourde suppose l'intention de nuire à l'employeur. Des retards répétés, après un avertissement mais sans conséquence grave, sont le plus souvent traités comme une cause réelle et sérieuse. Un motif économique n'a rien à voir avec le comportement d'un salarié.",
     indice: "Se demander si le maintien du salarié pendant le préavis est impossible."
@@ -1466,7 +1466,7 @@ QUESTIONS.push(
     id: "U3-207", difficulte: "moyen", epreuve: "U3", theme: "Droit du travail", session: "complément",
     cas: "CAS-U3-09", etape: 6,
     question: "Que doit contenir la lettre de licenciement ?",
-    choix: ["Les faits reprochés, précis et datés : le nombre de retards, leurs dates et l'avertissement déjà remis.", "Seulement le mot « faute ».", "Une proposition de rupture conventionnelle.", "L'accord préalable de l'inspection du travail."],
+    choix: ["Les faits reprochés, précis et datés : le nombre de retards, leurs dates et l'avertissement déjà remis.", "Seulement le mot « faute » et la date du licenciement, car la lettre n'a pas à détailler les faits reprochés ni à rappeler l'avertissement déjà remis au salarié.", "Une proposition de rupture conventionnelle.", "L'accord préalable de l'inspection du travail."],
     bonne: 0,
     explication: "La lettre, envoyée en recommandé avec avis de réception, doit énoncer le ou les motifs de façon précise et vérifiable : c'est elle qui fixe les limites du litige. « Faute » seul est trop vague. L'accord de l'inspection du travail ne concerne que certains salariés protégés.",
     indice: "Un juge doit pouvoir vérifier les faits cités."
@@ -1484,7 +1484,7 @@ QUESTIONS.push(
     id: "U3-209", difficulte: "moyen", epreuve: "U3", theme: "Droit du travail", session: "complément",
     cas: "CAS-U3-09", etape: 8,
     question: "Le salarié veut contester son licenciement. De combien de temps dispose-t-il pour saisir le conseil de prud'hommes ?",
-    choix: ["12 mois à compter de la notification du licenciement.", "3 mois.", "2 ans.", "5 ans."],
+    choix: ["12 mois à compter de la notification du licenciement.", "3 mois à compter de la date de l'entretien préalable, faute de quoi son action est irrecevable.", "2 ans.", "5 ans."],
     bonne: 0,
     explication: "Depuis 2017, le salarié dispose de 12 mois à partir de la notification du licenciement pour contester sa rupture devant le conseil de prud'hommes. L'employeur garde donc ses preuves (pointage, avertissement) au moins aussi longtemps.",
     indice: "Une année, à partir de la lettre."
@@ -1493,7 +1493,7 @@ QUESTIONS.push(
     id: "U3-210", difficulte: "difficile", epreuve: "U3", theme: "Droit du travail", session: "complément",
     cas: "CAS-U3-09", etape: 9,
     question: "Que conseilles-tu à Mme Garance ?",
-    choix: ["Respecter la procédure à la lettre (convocation, entretien, lettre motivée avec les dates), garder le pointage et l'avertissement comme preuves, et prévoir environ 6 169 € brut si le préavis n'est pas effectué (4 200 € d'indemnité compensatrice et 1 969 € d'indemnité de licenciement). Une rupture conventionnelle reste possible si le salarié est d'accord.", "Le licencier tout de suite par SMS pour faute grave.", "Ne rien faire : un salarié de plus de 3 ans ne peut jamais être licencié.", "Le licencier sans entretien : la procédure est facultative."],
+    choix: ["Respecter la procédure à la lettre (convocation, entretien, lettre motivée avec les dates), garder le pointage et l'avertissement comme preuves, et prévoir environ 6 169 € brut si le préavis n'est pas effectué (4 200 € d'indemnité compensatrice et 1 969 € d'indemnité de licenciement). Une rupture conventionnelle reste possible si le salarié est d'accord.", "Le licencier tout de suite par SMS pour faute grave, sans convocation ni entretien préalable, puisque des retards répétés suffisent à justifier une rupture immédiate. Aucun préavis ni aucune indemnité n'est dû dans ce cas, et l'avertissement déjà remis n'a aucune importance dans la décision.", "Ne rien faire : un salarié de plus de 3 ans ne peut jamais être licencié.", "Le licencier sans entretien : la procédure est facultative."],
     bonne: 0,
     explication: "Le bon conseil appuie la décision sur des preuves, chiffre le coût (4 200 + 1 968,75 = 6 168,75 € brut) et propose une alternative. Les autres choix ignorent la procédure ou inventent des règles : un licenciement mal fait peut coûter bien plus cher en prud'hommes.",
     indice: "Procédure, preuves, coût chiffré et alternative."
@@ -1519,7 +1519,7 @@ QUESTIONS.push(
     id: "U3-212", difficulte: "moyen", epreuve: "U3", theme: "Droit des entreprises", session: "complément",
     cas: "CAS-U3-10", etape: 2,
     question: "M. Imbert est gérant d'une SARL et détient 60 % des parts. Quel est son statut social ?",
-    choix: ["Gérant majoritaire (plus de 50 % des parts) : travailleur non salarié, affilié au régime des indépendants.", "Assimilé salarié, affilié au régime général.", "Salarié avec un contrat de travail classique.", "Aucun statut : un gérant n'est pas protégé socialement."],
+    choix: ["Gérant majoritaire (plus de 50 % des parts) : travailleur non salarié, affilié au régime des indépendants.", "Assimilé salarié, affilié au régime général de la Sécurité sociale, comme le président d'une SAS, puisqu'il détient plus de la moitié des parts.", "Salarié avec un contrat de travail classique.", "Aucun statut : un gérant n'est pas protégé socialement."],
     bonne: 0,
     explication: "Le gérant de SARL qui détient plus de la moitié des parts (seul ou avec sa famille) est majoritaire : il relève du régime des travailleurs non salariés. Un gérant minoritaire ou égalitaire serait assimilé salarié. Le président de SAS, lui, est toujours assimilé salarié.",
     indice: "Plus de la moitié des parts : gérant majoritaire."
@@ -1528,7 +1528,7 @@ QUESTIONS.push(
     id: "U3-213", difficulte: "facile", epreuve: "U3", theme: "Droit des entreprises", session: "complément",
     cas: "CAS-U3-10", etape: 3,
     question: "Mme Sorel craint de perdre ses biens personnels si le magasin a des dettes. Que lui répondre ?",
-    choix: ["Dans une SARL comme dans une SAS, elle ne répond des dettes qu'à hauteur de ses apports, sauf si elle se porte caution personnelle auprès de la banque.", "Elle répond indéfiniment de toutes les dettes de la société.", "Elle répond des dettes à hauteur du double de son apport.", "Elle ne répond jamais de rien, même si elle cautionne un prêt."],
+    choix: ["Dans une SARL comme dans une SAS, elle ne répond des dettes qu'à hauteur de ses apports, sauf si elle se porte caution personnelle auprès de la banque.", "Elle répond indéfiniment de toutes les dettes de la société, sur l'ensemble de ses biens personnels, y compris sa résidence principale et ses économies, dès que la société ne peut plus payer ses créanciers.", "Elle répond des dettes à hauteur du double de son apport.", "Elle ne répond jamais de rien, même si elle cautionne un prêt."],
     bonne: 0,
     explication: "Dans une société à responsabilité limitée (SARL, SAS), les associés ne perdent que leurs apports. La limite saute si un associé donne sa caution personnelle à la banque : il s'engage alors sur ses biens pour cette dette.",
     indice: "Le mot « limitée » dans SARL."
@@ -1546,7 +1546,7 @@ QUESTIONS.push(
     id: "U3-215", difficulte: "moyen", epreuve: "U3", theme: "Droit des entreprises", session: "complément",
     cas: "CAS-U3-10", etape: 5,
     question: "Commente ce résultat : quel commentaire est le mieux rédigé ?",
-    choix: ["Le gérant majoritaire de SARL coûte 8 400 € de cotisations de moins par an que le président de SAS pour la même rémunération. En contrepartie, sa protection sociale est un peu moindre. L'assimilé salarié est proche du régime général, mais sans assurance chômage.", "La SAS coûte moins cher, car le président est assimilé salarié.", "Les deux statuts coûtent exactement la même chose.", "Le gérant de SARL a droit à l'assurance chômage, le président de SAS non."],
+    choix: ["Le gérant majoritaire de SARL coûte 8 400 € de cotisations de moins par an que le président de SAS pour la même rémunération. En contrepartie, sa protection sociale est un peu moindre. L'assimilé salarié est proche du régime général, mais sans assurance chômage.", "La SAS coûte moins cher, car le président est assimilé salarié et ses cotisations sont plus faibles que celles d'un gérant majoritaire de SARL. En contrepartie, sa protection sociale est moindre, notamment sans assurance chômage.", "Les deux statuts coûtent exactement la même chose.", "Le gérant de SARL a droit à l'assurance chômage, le président de SAS non."],
     bonne: 0,
     explication: "Écart = 19 200 − 10 800 = 8 400 € en faveur de la SARL. Le bon commentaire donne le chiffre, le sens de l'écart et la contrepartie (protection sociale). Aucun des deux dirigeants n'a droit à l'assurance chômage : ni l'assimilé salarié, ni le non-salarié.",
     indice: "Chiffre, sens de l'écart, contrepartie."
@@ -1555,7 +1555,7 @@ QUESTIONS.push(
     id: "U3-216", difficulte: "difficile", epreuve: "U3", theme: "Droit des entreprises", session: "complément",
     cas: "CAS-U3-10", etape: 6,
     question: "M. Imbert détient 60 % des parts de la SARL. Que peut-il décider seul en assemblée ?",
-    choix: ["Les décisions ordinaires (approbation des comptes, par exemple) à la majorité de plus de 50 % des parts, mais pas une modification des statuts, qui demande ici les trois quarts des parts (majorité fixée par les statuts).", "Toutes les décisions, y compris la modification des statuts.", "Aucune décision : l'unanimité est toujours exigée.", "Seulement la nomination des commissaires aux comptes."],
+    choix: ["Les décisions ordinaires (approbation des comptes, par exemple) à la majorité de plus de 50 % des parts, mais pas une modification des statuts, qui demande ici les trois quarts des parts (majorité fixée par les statuts).", "Toutes les décisions, y compris la modification des statuts, car avec 60 % des parts il détient la majorité absolue ; les statuts ne peuvent pas prévoir une majorité plus élevée pour les décisions extraordinaires. Il peut aussi nommer seul le gérant.", "Aucune décision : l'unanimité est toujours exigée.", "Seulement la nomination des commissaires aux comptes."],
     bonne: 0,
     explication: "En SARL, les décisions ordinaires se prennent à la majorité absolue des parts (plus de 50 %). Les modifications des statuts exigent au moins les deux tiers des parts des associés présents ou représentés (article L223-30 du Code de commerce) ; les statuts peuvent fixer plus : ici, les trois quarts. Avec 60 %, M. Imbert gouverne le quotidien mais ne peut pas modifier seul les statuts ; il lui faut l'accord de Mme Sorel.",
     indice: "Deux niveaux de majorité : décisions ordinaires et modification des statuts."
@@ -1573,7 +1573,7 @@ QUESTIONS.push(
     id: "U3-218", difficulte: "difficile", epreuve: "U3", theme: "Droit des entreprises", session: "complément",
     cas: "CAS-U3-10", etape: 8,
     question: "Que conseilles-tu à Mme Sorel et à M. Imbert ?",
-    choix: ["La SARL : cadre légal clair, cotisations du gérant plus faibles (8 400 € de moins par an dans nos hypothèses) et responsabilité limitée aux apports. Il faut prévoir un pacte d'associés, car avec 60 % des parts M. Imbert ne peut pas modifier seul les statuts (75 % nécessaires selon les statuts).", "La SAS, car son président est un salarié comme les autres.", "La SARL, car aucun associé ne répond jamais des dettes.", "Aucune société : l'entreprise individuelle est toujours plus avantageuse."],
+    choix: ["La SARL : cadre légal clair, cotisations du gérant plus faibles (8 400 € de moins par an dans nos hypothèses) et responsabilité limitée aux apports. Il faut prévoir un pacte d'associés, car avec 60 % des parts M. Imbert ne peut pas modifier seul les statuts (75 % nécessaires selon les statuts).", "La SAS, car son président est un salarié comme les autres et bénéficie du régime général. La responsabilité des associés y est illimitée, mais les cotisations sociales sont plus faibles et aucun pacte d'associés n'est nécessaire.", "La SARL, car aucun associé ne répond jamais des dettes.", "Aucune société : l'entreprise individuelle est toujours plus avantageuse."],
     bonne: 0,
     explication: "Le conseil s'appuie sur les chiffres (écart de cotisations, majorités) et ne cache pas les limites. Les autres choix affirment des règles fausses (« salarié comme les autres », « jamais de dettes ») ou écartent l'analyse sans comparaison.",
     indice: "Reprends statut social, coût, responsabilité et majorités."
@@ -1659,7 +1659,7 @@ QUESTIONS.push(
     id: "U3-227", difficulte: "difficile", epreuve: "U3", theme: "Seuil de rentabilité", session: "complément",
     cas: "CAS-U3-11", etape: 9,
     question: "Commente la comparaison avant et après la franchise : quel commentaire est le mieux rédigé ?",
-    choix: ["Avec le réseau, le résultat passerait de 40 000 € à 62 800 € (+ 57 %), grâce à + 15 % de CA, mais cette hausse repose sur une hypothèse. Le taux de marge net baisse à 58 % et les charges fixes montent à 204 000 € : le CA doit dépasser 420 690 € pour faire mieux qu'aujourd'hui.", "La franchise est toujours plus rentable : le taux de marge passe de 60 % à 63 %.", "Le résultat augmente de 22 800 €, donc la franchise est sans risque.", "Les redevances de 5 % sont négligeables : elles ne changent rien au résultat."],
+    choix: ["Avec le réseau, le résultat passerait de 40 000 € à 62 800 € (+ 57 %), grâce à + 15 % de CA, mais cette hausse repose sur une hypothèse. Le taux de marge net baisse à 58 % et les charges fixes montent à 204 000 € : le CA doit dépasser 420 690 € pour faire mieux qu'aujourd'hui.", "La franchise est toujours plus rentable : le taux de marge passe de 60 % à 63 %, le résultat augmente de 22 800 € et cette hausse est certaine puisque l'enseigne garantit un chiffre d'affaires supérieur de 15 % chaque année.", "Le résultat augmente de 22 800 €, donc la franchise est sans risque.", "Les redevances de 5 % sont négligeables : elles ne changent rien au résultat."],
     bonne: 0,
     explication: "Un bon commentaire chiffre l'écart (62 800 − 40 000 = 22 800 €), explique son origine (+ 15 % de CA) et rappelle la condition (CA minimal de 420 690 €). Le 63 % est un taux avant redevances. Une franchise n'est jamais sans risque : elle ajoute des charges fixes et une dépendance au réseau.",
     indice: "Chiffre, origine de l'écart, condition de réussite."
@@ -1668,7 +1668,7 @@ QUESTIONS.push(
     id: "U3-228", difficulte: "difficile", epreuve: "U3", theme: "Seuil de rentabilité", session: "complément",
     cas: "CAS-U3-11", etape: 10,
     question: "Que conseilles-tu à M. Lagrange ?",
-    choix: ["Rejoindre le réseau seulement s'il est sûr de faire au moins 5,2 % de CA en plus (420 690 €) : à CA constant (400 000 €), le résultat tomberait à 28 000 €, soit 12 000 € de moins qu'aujourd'hui. Il doit aussi lire les clauses de sortie (durée, non-concurrence après le contrat) dans le document d'information.", "Rejoindre le réseau : l'enseigne garantit toujours une hausse de CA de 15 %.", "Refuser : un franchisé ne peut jamais gagner plus qu'un indépendant.", "Rejoindre le réseau sans lire les clauses de sortie : elles sont standard."],
+    choix: ["Rejoindre le réseau seulement s'il est sûr de faire au moins 5,2 % de CA en plus (420 690 €) : à CA constant (400 000 €), le résultat tomberait à 28 000 €, soit 12 000 € de moins qu'aujourd'hui. Il doit aussi lire les clauses de sortie (durée, non-concurrence après le contrat) dans le document d'information.", "Rejoindre le réseau : l'enseigne garantit toujours une hausse de CA de 15 %, qui ferait passer le résultat de 40 000 € à 62 800 €, et les clauses de sortie du contrat (durée, non-concurrence) n'ont pas besoin d'être étudiées avant la signature.", "Refuser : un franchisé ne peut jamais gagner plus qu'un indépendant.", "Rejoindre le réseau sans lire les clauses de sortie : elles sont standard."],
     bonne: 0,
     explication: "À 400 000 € : 400 000 × 0,58 = 232 000 €, moins 204 000 € de charges fixes = 28 000 €, soit 12 000 € de moins qu'aujourd'hui. La franchise est rentable seulement au-delà de 420 690 €. Aucun réseau ne garantit un CA, et les clauses de sortie engagent le franchisé après la fin du contrat.",
     indice: "À quel CA la franchise devient-elle intéressante, et que se passe-t-il en dessous ?"
@@ -1755,7 +1755,7 @@ QUESTIONS.push(
     id: "U3-237", difficulte: "difficile", epreuve: "U3", theme: "Analyse financière", session: "complément",
     cas: "CAS-U3-12", etape: 9,
     question: "Donne un avis global sur le magasin : quel commentaire est le mieux rédigé ?",
-    choix: ["La trésorerie est confortable (50 000 € avec un BFR de −20 000 €) et la CAF de 42 000 € donne de quoi financer investissements et remboursements. Mais la rentabilité est fragile : le seuil de 567 241 € représente 94,5 % du CA, la marge de sécurité n'est que de 32 759 € (5,5 % du CA) et le résultat net de 14 000 € ne représente que 2,3 % du CA.", "Le magasin est solide : sa trésorerie est de 50 000 €.", "Le magasin est en danger : son BFR est négatif.", "La marge de sécurité est de 14 000 €, soit le résultat net."],
+    choix: ["La trésorerie est confortable (50 000 € avec un BFR de −20 000 €) et la CAF de 42 000 € donne de quoi financer investissements et remboursements. Mais la rentabilité est fragile : le seuil de 567 241 € représente 94,5 % du CA, la marge de sécurité n'est que de 32 759 € (5,5 % du CA) et le résultat net de 14 000 € ne représente que 2,3 % du CA.", "Le magasin est solide : sa trésorerie de 50 000 € et son BFR négatif de −20 000 € le mettent à l'abri de tout problème. Le seuil de rentabilité de 567 241 € est déjà dépassé de loin et le résultat net de 14 000 € confirme une très bonne rentabilité, sans aucune action à prévoir pour l'année suivante.", "Le magasin est en danger : son BFR est négatif.", "La marge de sécurité est de 14 000 €, soit le résultat net."],
     bonne: 0,
     explication: "Marge de sécurité = 600 000 − 567 241 = 32 759 €, soit [[32 759|600 000]] = 5,5 % du CA\nRésultat net sur CA = [[14 000|600 000]] = 2,3 %\nUn bon avis global distingue la solidité financière (trésorerie) de la rentabilité (seuil). Un BFR négatif n'est pas un danger ; marge de sécurité et résultat net sont deux choses différentes.",
     indice: "Sépare ce qui va bien (trésorerie) de ce qui est fragile (seuil, résultat)."
@@ -1764,7 +1764,7 @@ QUESTIONS.push(
     id: "U3-238", difficulte: "difficile", epreuve: "U3", theme: "Seuil de rentabilité", session: "complément",
     cas: "CAS-U3-12", etape: 10,
     question: "Que conseilles-tu à Mme Chauvin ?",
-    choix: ["Réduire le seuil en agissant sur les charges fixes, surtout le personnel (190 000 €, soit 31,7 % du CA) : 20 000 € de charges en moins ramèneraient le seuil à 532 759 € et la marge de sécurité à 11,2 % du CA. La trésorerie permet de patienter, pas d'investir à l'aveugle.", "Placer les 50 000 € de trésorerie pour augmenter la marge de sécurité.", "Augmenter les prix de 20 % sans tenir compte de la clientèle.", "Ne rien changer : le résultat net est positif."],
+    choix: ["Réduire le seuil en agissant sur les charges fixes, surtout le personnel (190 000 €, soit 31,7 % du CA) : 20 000 € de charges en moins ramèneraient le seuil à 532 759 € et la marge de sécurité à 11,2 % du CA. La trésorerie permet de patienter, pas d'investir à l'aveugle.", "Placer les 50 000 € de trésorerie pour augmenter la marge de sécurité.", "Augmenter les prix de 20 % sans tenir compte de la clientèle : le seuil de rentabilité baisserait immédiatement, la marge de sécurité passerait à plus de 25 % du CA, et les clients actuels continueraient à acheter au même rythme.", "Ne rien changer : le résultat net est positif."],
     bonne: 0,
     explication: "Charges fixes après économie = 329 000 − 20 000 = 309 000 €\nNouveau seuil = [[309 000|0,58]] = 532 759 €\nMarge de sécurité = 600 000 − 532 759 = 67 241 €, soit 11,2 % du CA.\nPlacer la trésorerie ne change pas le seuil. Une hausse de prix sans analyse peut faire fuir les clients. Rester à 5,5 % de marge de sécurité est risqué.",
     indice: "Quel levier fait baisser le seuil le plus directement ?"
@@ -1853,7 +1853,7 @@ QUESTIONS.push(
   {
     id: "U3-245", difficulte: "moyen", epreuve: "U3", theme: "Mercatique et communication", session: "complément",
     question: "Parmi ces critères de segmentation, lequel est un critère de COMPORTEMENT d'achat ?",
-    choix: ["La tranche d'âge du client", "La fréquence de renouvellement de ses lunettes", "Le quartier où il habite", "Son revenu mensuel"],
+    choix: ["La tranche d'âge du client, comparée à celle de la population de la zone de chalandise", "La fréquence de renouvellement de ses lunettes", "Le quartier où il habite, à proximité ou non du magasin et de ses concurrents", "Son revenu mensuel, déclaré lors de la création de son dossier client"],
     bonne: 1,
     erreurs: {
       0: { type: "notion", message: "L'âge est un critère démographique : il décrit la personne, pas la façon dont elle achète." },
@@ -1866,7 +1866,7 @@ QUESTIONS.push(
   {
     id: "U3-246", difficulte: "moyen", epreuve: "U3", theme: "Mercatique et communication", session: "complément",
     question: "Que désigne le positionnement d'un magasin d'optique ?",
-    choix: ["Son emplacement dans la rue commerçante", "Le prix de sa monture la moins chère", "La place qu'il veut occuper dans l'esprit des clients par rapport à ses concurrents", "Le nombre de clients qu'il reçoit chaque jour"],
+    choix: ["Son emplacement dans la rue commerçante et la visibilité de sa vitrine vis-à-vis des passants", "Le prix de sa monture la moins chère", "La place qu'il veut occuper dans l'esprit des clients par rapport à ses concurrents", "Le nombre de clients qu'il reçoit chaque jour"],
     bonne: 2,
     explication: "Le positionnement est l'image que le magasin veut donner par rapport à ses concurrents : par exemple prix bas, conseil haut de gamme ou spécialiste de l'enfant. L'emplacement relève de la distribution, pas du positionnement.",
     indice: "Pense à l'image dans la tête du client, pas à un lieu ni à un chiffre."
@@ -1962,7 +1962,7 @@ QUESTIONS.push(
   {
     id: "U3-255", difficulte: "moyen", epreuve: "U3", theme: "Mercatique et communication", session: "complément",
     question: "Un magasin décide de s'adresser en priorité aux porteurs de verres progressifs de plus de 45 ans. Quelle étape de la démarche mercatique est-ce ?",
-    choix: ["La segmentation du marché", "Le choix du prix de vente", "Le ciblage : le choix du ou des segments visés", "Le suivi des ventes"],
+    choix: ["La segmentation du marché", "Le choix du prix de vente des produits et des services du magasin à destination de ces clients", "Le ciblage : le choix du ou des segments visés", "Le suivi des ventes"],
     bonne: 2,
     erreurs: {
       0: { type: "notion", message: "La segmentation découpe tout le marché en groupes. Ici le magasin choisit un groupe à viser : c'est le ciblage." }
@@ -2040,7 +2040,7 @@ QUESTIONS.push(
   {
     id: "U3-262", difficulte: "moyen", epreuve: "U3", theme: "Droit du travail", session: "complément",
     question: "Un opticien emploie trois salariés. Que dit la loi sur la complémentaire santé ?",
-    choix: ["L'employeur doit mettre en place une complémentaire santé collective et la financer au moins à 50 %", "Elle est facultative, l'employeur fait comme il veut", "Elle est obligatoire seulement pour les cadres", "L'employeur doit la financer à 100 %"],
+    choix: ["L'employeur doit mettre en place une complémentaire santé collective et la financer au moins à 50 %", "Elle est facultative, l'employeur fait comme il veut, sauf s'il emploie plus de dix salariés : en dessous de ce seuil, aucune complémentaire santé n'est exigée", "Elle est obligatoire seulement pour les cadres", "L'employeur doit la financer à 100 %"],
     bonne: 0,
     explication: "Depuis 2016, tout employeur du secteur privé doit proposer à ses salariés une complémentaire santé collective, dont il finance au moins 50 % de la cotisation. Elle couvre au minimum un panier de soins défini par la loi, optique comprise.",
     indice: "L'obligation concerne tous les salariés et le financement est partagé."
@@ -2056,7 +2056,7 @@ QUESTIONS.push(
   {
     id: "U3-264", difficulte: "moyen", epreuve: "U3", theme: "Droit des entreprises", session: "complément",
     question: "Quelles règles s'appliquent au capital et au nombre d'associés d'une SARL ?",
-    choix: ["Capital minimum de 37 000 € et 2 associés minimum", "Capital librement fixé (1 € possible) et de 1 à 100 associés", "Capital minimum de 1 500 € et nombre d'associés illimité", "Pas de capital et un seul associé"],
+    choix: ["Capital minimum de 37 000 € et 2 associés minimum", "Capital librement fixé (1 € possible) et de 1 à 100 associés", "Capital minimum de 1 500 € et nombre d'associés illimité, comme en SA", "Pas de capital et un seul associé"],
     bonne: 1,
     explication: "Le capital d'une SARL est librement fixé, 1 € suffit. Elle compte de 1 à 100 associés (avec un seul associé, on parle d'EURL). Le minimum de 37 000 € est celui d'une société anonyme.",
     indice: "Le capital n'a plus de minimum élevé depuis 2003."
@@ -2064,7 +2064,7 @@ QUESTIONS.push(
   {
     id: "U3-265", difficulte: "moyen", epreuve: "U3", theme: "Droit des entreprises", session: "complément",
     question: "Depuis 2022, un entrepreneur individuel a une dette professionnelle. Que peut saisir le créancier professionnel ?",
-    choix: ["Seulement les biens professionnels, sauf exceptions comme la fraude ou une garantie donnée sur ses biens personnels", "Tous ses biens, personnels compris", "Seulement sa résidence principale", "Rien : l'entrepreneur individuel n'a aucune dette personnelle"],
+    choix: ["Seulement les biens professionnels, sauf exceptions comme la fraude ou une garantie donnée sur ses biens personnels", "Tous ses biens, personnels compris, car la loi ne protège le patrimoine personnel que de l'entrepreneur individuel qui a choisi de créer une société", "Seulement sa résidence principale", "Rien : l'entrepreneur individuel n'a aucune dette personnelle"],
     bonne: 0,
     erreurs: {
       1: { type: "notion", message: "C'était le cas avant 2022. Depuis, le patrimoine professionnel et le patrimoine personnel sont séparés par la loi." }
@@ -2143,7 +2143,7 @@ QUESTIONS.push(
   {
     id: "U3-273", difficulte: "difficile", epreuve: "U3", theme: "Réglementation de l'opticien", session: "complément",
     question: "Un client de 50 ans présente une ordonnance de lunettes datée de 4 ans. L'opticien peut-il adapter la correction à partir de cette ordonnance ?",
-    choix: ["Oui, une ordonnance reste valable 5 ans à tout âge", "Non : à partir de 42 ans, une ordonnance de plus de 3 ans ne permet plus l'adaptation par l'opticien", "Oui, à condition d'en informer la mutuelle", "Oui, si le client signe une décharge"],
+    choix: ["Oui, une ordonnance reste valable 5 ans à tout âge, et l'opticien peut donc adapter la correction à partir de cette ordonnance sans autre condition", "Non : à partir de 42 ans, une ordonnance de plus de 3 ans ne permet plus l'adaptation par l'opticien", "Oui, à condition d'en informer la mutuelle", "Oui, si le client signe une décharge"],
     bonne: 1,
     explication: "L'opticien ne peut adapter une prescription que si elle est récente : moins d'un an pour un enfant de moins de 16 ans, moins de 5 ans de 16 à 42 ans, moins de 3 ans au-delà de 42 ans. Ici, 4 ans pour un client de 50 ans : il faut une nouvelle ordonnance.",
     indice: "Le délai de validité dépend de l'âge du client."
@@ -2167,7 +2167,7 @@ QUESTIONS.push(
   {
     id: "U3-276", difficulte: "moyen", epreuve: "U3", theme: "Réglementation de l'opticien", session: "complément",
     question: "Un client achète des lunettes en magasin et change d'avis 3 jours plus tard. Que dit la loi ?",
-    choix: ["Il a 14 jours pour se rétracter", "Il n'a pas de droit de rétractation légal pour un achat en magasin : le magasin peut reprendre l'équipement par geste commercial", "Il a 7 jours pour se rétracter", "Le remboursement est automatique sous 30 jours"],
+    choix: ["Il a 14 jours pour se rétracter, comme pour tout achat de produit de consommation, qu'il soit fait en magasin ou à distance, et le magasin doit alors le rembourser intégralement", "Il n'a pas de droit de rétractation légal pour un achat en magasin : le magasin peut reprendre l'équipement par geste commercial", "Il a 7 jours pour se rétracter", "Le remboursement est automatique sous 30 jours"],
     bonne: 1,
     explication: "Le droit de rétractation de 14 jours concerne les ventes à distance et hors établissement. Pour un achat en magasin, il n'existe pas : le magasin est libre de reprendre ou non l'équipement, et des verres correcteurs fabriqués sur mesure ne sont de toute façon pas repris.",
     indice: "Le délai de 14 jours ne concerne pas les achats faits dans le magasin."
@@ -2511,7 +2511,7 @@ QUESTIONS.push(
   {
     id: "U3-309", difficulte: "moyen", epreuve: "U3", theme: "Réglementation de l'opticien", session: "complément",
     question: "À qui signale-t-on un incident grave lié à un dispositif médical, comme une monture ou un verre défectueux ayant blessé un client ?",
-    choix: ["À la mairie", "À l'ANSM, dans le cadre de la matériovigilance", "À l'INPI", "À l'URSSAF"],
+    choix: ["À la mairie de la commune où se trouve le magasin, qui transmet ensuite à la préfecture", "À l'ANSM, dans le cadre de la matériovigilance", "À l'INPI", "À l'URSSAF"],
     bonne: 1,
     explication: "Les incidents graves liés aux dispositifs médicaux sont signalés à l'ANSM (Agence nationale de sécurité du médicament et des produits de santé) : c'est la matériovigilance. L'INPI s'occupe des marques et brevets, l'URSSAF des cotisations.",
     indice: "Une agence nationale s'occupe de la sécurité des produits de santé."
@@ -2549,7 +2549,7 @@ QUESTIONS.push(
   {
     id: "U3-313", difficulte: "facile", epreuve: "U3", theme: "Droit du travail", session: "complément",
     question: "Que représente le SMIC ?",
-    choix: ["Un salaire maximum", "Le salaire minimum légal, revalorisé régulièrement", "Le salaire moyen des opticiens", "Une prime versée par l'État"],
+    choix: ["Un salaire maximum que l'employeur n'a pas le droit de dépasser pour un salarié à temps plein", "Le salaire minimum légal, revalorisé régulièrement", "Le salaire moyen des opticiens", "Une prime versée par l'État"],
     bonne: 1,
     explication: "Le SMIC est le salaire minimum interprofessionnel de croissance : un employeur ne peut pas verser moins, sauf cas particuliers prévus par la loi. Il est revalorisé chaque année et à certaines conditions en cours d'année.",
     indice: "Le mot « minimum » est dans son nom."
@@ -2573,7 +2573,7 @@ QUESTIONS.push(
   {
     id: "U3-316", difficulte: "moyen", epreuve: "U3", theme: "Droit des entreprises", session: "complément",
     question: "À partir de quel moment une société a-t-elle la personnalité morale ?",
-    choix: ["De la signature des statuts", "De son immatriculation au registre du commerce et des sociétés (RCS)", "De l'ouverture du magasin au public", "De sa première vente"],
+    choix: ["De la signature des statuts par les associés, dès que la société a été constituée devant notaire", "De son immatriculation au registre du commerce et des sociétés (RCS)", "De l'ouverture du magasin au public", "De sa première vente"],
     bonne: 1,
     explication: "La société acquiert la personnalité morale à son immatriculation au RCS. Avant, elle n'existe pas encore juridiquement : les actes passés pour elle engagent leurs auteurs, sous réserve de reprise.",
     indice: "C'est le moment où elle reçoit son numéro d'identité officiel."
@@ -2581,7 +2581,7 @@ QUESTIONS.push(
   {
     id: "U3-317", difficulte: "moyen", epreuve: "U3", theme: "Droit des entreprises", session: "complément",
     question: "Quel est le régime fiscal par défaut d'une EURL dont l'associé unique est une personne physique ?",
-    choix: ["L'impôt sur les sociétés, obligatoire", "L'impôt sur le revenu, avec option possible pour l'impôt sur les sociétés", "Seulement la TVA", "Aucun impôt la première année"],
+    choix: ["L'impôt sur les sociétés, obligatoire dès la création, sans possibilité d'opter pour l'impôt sur le revenu", "L'impôt sur le revenu, avec option possible pour l'impôt sur les sociétés", "Seulement la TVA", "Aucun impôt la première année"],
     bonne: 1,
     explication: "L'EURL est par défaut soumise à l'impôt sur le revenu : le bénéfice est imposé chez l'associé. Elle peut opter pour l'impôt sur les sociétés. La SASU fonctionne à l'inverse : IS par défaut, option possible pour l'IR.",
     indice: "Le bénéfice est imposé à titre personnel, sauf option."
@@ -2589,7 +2589,7 @@ QUESTIONS.push(
   {
     id: "U3-318", difficulte: "facile", epreuve: "U3", theme: "Mercatique et communication", session: "complément",
     question: "Lequel de ces moyens sert à fidéliser les clients d'un magasin d'optique ?",
-    choix: ["Une carte de fidélité qui donne des avantages à chaque achat", "Une annonce pour attirer des inconnus", "Le niveau du loyer", "Une étude de la zone de chalandise"],
+    choix: ["Une carte de fidélité qui donne des avantages à chaque achat", "Une annonce dans la presse locale pour attirer des personnes qui ne sont jamais venues au magasin", "Le niveau du loyer du magasin comparé à celui des autres commerces de la rue", "Une étude de la zone de chalandise"],
     bonne: 0,
     explication: "Fidéliser, c'est inciter les clients existants à revenir : carte de fidélité, rappel de renouvellement, offre aux anciens clients. Une annonce vise de nouveaux clients, le loyer est une charge et l'étude de zone sert à analyser le marché.",
     indice: "Il s'adresse à des clients qui sont déjà venus."

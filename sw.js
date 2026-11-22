@@ -13,7 +13,7 @@
 // =====================================================================
 
 // <versionner> (partie écrite par versionner.py, ne pas modifier à la main)
-const VERSION = "8198f55dc2";
+const VERSION = "36992227e6";
 const FICHIERS = [
   "appli.js?v=0724163c",
   "atelier-calculatrice.js?v=6e07c21a",
@@ -264,7 +264,7 @@ const FICHIERS = [
   "polices/bodoni-moda-italique.woff2",
   "polices/bodoni-moda.woff2",
   "qcm.html",
-  "questions-U3.js?v=db2bd6cb",
+  "questions-U3.js?v=60f0103f",
   "questions-U41.js?v=7a11c243",
   "questions-U42.js?v=49471ad6",
   "questions-U43.js?v=ea60cae6",
