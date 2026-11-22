@@ -13,7 +13,7 @@
 // =====================================================================
 
 // <versionner> (partie écrite par versionner.py, ne pas modifier à la main)
-const VERSION = "2f1f478b80";
+const VERSION = "9767dad052";
 const FICHIERS = [
   "appli.js?v=0724163c",
   "atelier-calculatrice.js?v=6e07c21a",
@@ -245,6 +245,7 @@ const FICHIERS = [
   "img/schemas/U5/cover-choix-juste.svg",
   "img/schemas/U5/cover-test-exophorie.svg",
   "img/schemas/U5/fluo-lrpg-plate.svg",
+  "img/schemas/U5/fluo-lrpg-trois-images.svg",
   "img/schemas/U5/prentice-od1-og4.svg",
   "img/schemas/U5/prisme-choix-faux-base.svg",
   "img/schemas/U5/prisme-choix-faux-dessus.svg",
@@ -267,7 +268,7 @@ const FICHIERS = [
   "questions-U41.js?v=c5cd8533",
   "questions-U42.js?v=110fcc22",
   "questions-U43.js?v=fe77cb97",
-  "questions-U5.js?v=ea89a13d",
+  "questions-U5.js?v=c804da39",
   "rythme.js?v=8bba5e53",
   "sons.js?v=355500ef",
   "sons/faux.mp3",

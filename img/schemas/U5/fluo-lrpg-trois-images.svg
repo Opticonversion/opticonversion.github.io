@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 190" role="img" aria-labelledby="t d">
+  <title id="t">Trois images de fluorescéine sous une lentille rigide</title>
+  <desc id="d">Image 1 : réservoir vert au centre, bord sombre. Image 2 : film vert régulier partout. Image 3 : centre sombre, anneau vert épais en périphérie.</desc>
+  <style>
+    :root { background: #0f1219; color-scheme: dark; }
+    text { font-family: -apple-system, "Segoe UI", Roboto, sans-serif; font-size: 24px; font-weight: 700; fill: #f3dcae; }
+  </style>
+  <defs>
+    <radialGradient id="a"><stop offset="0" stop-color="#7dff9a" stop-opacity=".8"/><stop offset=".5" stop-color="#7dff9a" stop-opacity=".4"/><stop offset=".78" stop-color="#7dff9a" stop-opacity="0"/><stop offset="1" stop-color="#7dff9a" stop-opacity=".45"/></radialGradient>
+    <radialGradient id="b"><stop offset="0" stop-color="#7dff9a" stop-opacity=".28"/><stop offset=".85" stop-color="#7dff9a" stop-opacity=".3"/><stop offset="1" stop-color="#7dff9a" stop-opacity=".6"/></radialGradient>
+    <radialGradient id="c"><stop offset="0" stop-color="#7dff9a" stop-opacity="0"/><stop offset=".35" stop-color="#7dff9a" stop-opacity=".03"/><stop offset=".75" stop-color="#7dff9a" stop-opacity=".5"/><stop offset="1" stop-color="#7dff9a" stop-opacity=".9"/></radialGradient>
+  </defs>
+  <rect width="480" height="190" fill="#0f1219"/>
+  <circle cx="85" cy="92" r="62" fill="url(#a)" stroke="#9ec5ff" stroke-width="2"/>
+  <circle cx="240" cy="92" r="62" fill="url(#b)" stroke="#9ec5ff" stroke-width="2"/>
+  <circle cx="395" cy="92" r="62" fill="url(#c)" stroke="#9ec5ff" stroke-width="2"/>
+  <text x="85" y="178" text-anchor="middle">1</text>
+  <text x="240" y="178" text-anchor="middle">2</text>
+  <text x="395" y="178" text-anchor="middle">3</text>
+</svg>

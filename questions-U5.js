@@ -1773,6 +1773,17 @@ QUESTIONS.push(
     explication: "Anisométropie axile : l'œil le plus long forme une image plus grande. Le verre de lunettes, à 15 mm, la rapetisse presque exactement de ce qu'il faut (loi de Knapp) : l'aniséiconie totale reste faible. En lentilles, la compensation est contre la cornée : il resterait toute l'aniséiconie axile, soit environ 1,7 % × 4 ≈ 7 %. Pour l'anisométropie de puissance, c'est l'inverse : les lentilles sont à conseiller.",
     surLaCopie: "Anisométropie axile : la loi de Knapp donne des images égales avec un verre placé près du foyer objet de l'œil. Les lunettes conviennent. Les lentilles laisseraient environ 7 % d'aniséiconie axile, au-dessus de la limite de 3 %.",
     indice: "Axile ou de puissance ? Dans l'axile, l'œil long agrandit l'image, et c'est le verre éloigné de la cornée qui compense."
+  },
+  {
+    id: "U5-218", epreuve: "U5", theme: "Lentilles", session: "2018",
+    difficulte: "moyen",
+    question: "Une lentille rigide appuie sur le centre de la cornée et se déplace beaucoup à chaque clignement. Quelle image de fluorescéine observez-vous ?",
+    choix: ["L'image 1", "L'image 2", "L'image 3", "Aucune : la fluorescéine ne renseigne pas sur l'adaptation"],
+    bonne: 2,
+    explication: "Appui central : peu de fluorescéine au centre (zone sombre), colorant abondant en périphérie, lentille mobile : adaptation PLATE, image 3. L'image 1 (réservoir vert au centre, bord sombre) est une adaptation serrée. L'image 2 (film régulier) est une adaptation alignée. Pour resserrer une lentille plate, on diminue ro.",
+    indice: "Un appui central chasse la fluorescéine du centre. Cherche l'image où le centre est sombre et le bord brillant.",
+    schema: "img/schemas/U5/fluo-lrpg-trois-images.svg",
+    schemaTexte: "Trois images de fluorescéine sous une lentille rigide. Image 1 : réservoir vert au centre, bord sombre. Image 2 : film vert régulier partout. Image 3 : centre sombre, anneau vert épais en périphérie."
   }
 );
 
