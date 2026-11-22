@@ -163,10 +163,10 @@ QUESTIONS.push(
     id: "U42-080", difficulte: "moyen", epreuve: "U42", theme: "Champs et diaphragmes", session: "complément", entrainement: true,
     question: "Un capteur mesure 12 × 16 mm. Le rayon du champ de pleine lumière image est 9,5 mm. Le capteur est-il éclairé uniformément ?",
     choix: [
-      "Non : la demi-diagonale (10 mm) dépasse 9,5 mm, les coins sont assombris",
-      "Oui : 9,5 mm dépasse la demi-largeur (8 mm)",
-      "Oui : 9,5 mm dépasse la demi-hauteur (6 mm)",
-      "Non : il faudrait un rayon d'au moins 16 mm"
+      "Non : la demi-diagonale (10 mm) dépasse 9,5 mm, coins assombris",
+      "Oui : 9,5 mm dépasse la demi-largeur (8 mm) du capteur",
+      "Oui : 9,5 mm dépasse la demi-hauteur (6 mm) du capteur",
+      "Non : il faudrait un rayon d'au moins 16 mm pour éclairer les coins"
     ],
     bonne: 0,
     explication: "Ce sont les coins qui sortent en premier. Demi-diagonale = √(6² + 8²) = √100 = 10 mm. Comme 10 > 9,5, les coins ne sont pas dans le champ de pleine lumière : vignettage. Comparer au bord (demi-largeur ou demi-hauteur) est trop optimiste. Un rayon de 16 mm serait bien plus que nécessaire.",
@@ -381,7 +381,7 @@ QUESTIONS.push(
     id: "U42-102", difficulte: "difficile", epreuve: "U42", theme: "Lunettes afocales", session: "complément", entrainement: true,
     question: "Un client myope retire ses lunettes et regarde dans des jumelles de type Kepler réglées pour un œil emmétrope. L'image est floue. Que doit-il faire ?",
     choix: [
-      "Rapprocher l'oculaire de l'objectif (raccourcir les jumelles)",
+      "Rapprocher l'oculaire de l'objectif (raccourcir)",
       "Éloigner l'oculaire de l'objectif (allonger les jumelles)",
       "Rien : une lunette afocale convient à tous les yeux",
       "Retourner les jumelles"
@@ -451,7 +451,7 @@ QUESTIONS.push(
     id: "U42-109", difficulte: "difficile", epreuve: "U42", theme: "Doublets et achromatisme", session: "complément", entrainement: true,
     question: "Dans un doublet achromatique accolé convergent, où place-t-on le verre qui disperse le plus (nombre d'Abbe le plus faible) ?",
     choix: [
-      "Dans la lentille divergente, qui a la plus petite vergence en valeur absolue",
+      "Dans la lentille divergente, la moins forte en vergence absolue",
       "Dans la lentille convergente, qui est alors la plus forte",
       "Dans la lentille divergente, avec la même vergence en valeur absolue",
       "Peu importe : seul le doublet compte"
@@ -466,10 +466,10 @@ QUESTIONS.push(
     id: "U42-110", difficulte: "moyen", epreuve: "U42", theme: "Champs et diaphragmes", session: "complément", entrainement: true,
     question: "Dans un système, le diaphragme de champ se trouve exactement dans le plan des champs. Que peut-on dire du champ de pleine lumière, du champ moyen et du champ total ?",
     choix: [
-      "Ils ont le même rayon, celui du diaphragme de champ : le bord est net",
-      "Le champ total est plus grand : le bord est très flou",
+      "Ils ont le même rayon, celui du diaphragme de champ",
+      "Le champ total est plus grand : le bord est très flou et progressif",
       "Le champ de pleine lumière est nul",
-      "On ne peut rien dire sans connaître la pupille"
+      "On ne peut rien dire sans connaître la pupille d'entrée"
     ],
     bonne: 0,
     explication: "Toutes les droites (bords du même côté, centre, bords opposés) passent par le bord du diaphragme de champ quand le plan des champs est le sien : les trois champs valent son rayon et le vignettage disparaît. C'est pourquoi on place ce diaphragme dans un plan où se forme une image intermédiaire : le bord de l'image est net.",
@@ -581,10 +581,10 @@ QUESTIONS.push(
     id: "U42-122", difficulte: "moyen", epreuve: "U42", theme: "Transmission et antireflet", session: "complément", entrainement: true,
     question: "Un verre traité antireflet a été optimisé pour le milieu du spectre visible (vert, vers 550 nm). Il garde pourtant un reflet résiduel de couleur pourpre. Pourquoi ?",
     choix: [
-      "Le vert est le mieux éliminé : il reste surtout le rouge et le bleu, dont le mélange paraît pourpre",
-      "Le traitement ajoute un colorant pourpre dans le verre",
-      "Le pourpre est la couleur du reflet du verre nu",
-      "Le traitement ne marche que pour le pourpre"
+      "Le vert est éliminé : reste le mélange rouge et bleu, pourpre",
+      "Le traitement ajoute un colorant pourpre dans la couche de verre",
+      "Le pourpre est la couleur du reflet du verre nu, sans traitement",
+      "Le traitement ne marche que pour la couleur pourpre du spectre"
     ],
     bonne: 0,
     explication: "L'épaisseur λ/(4n) n'est exacte que pour une longueur d'onde. Le vert est presque entièrement supprimé, les extrémités du spectre (rouge, bleu-violet) le sont moins bien : la lumière réfléchie résiduelle est un mélange de ces deux couleurs, d'où le reflet pourpre ou violet.",
@@ -605,10 +605,10 @@ QUESTIONS.push(
     id: "U42-124", difficulte: "difficile", epreuve: "U42", theme: "Transmission et antireflet", session: "complément", entrainement: true,
     question: "Une couche d'indice intermédiaire est optimisée pour une longueur d'onde λ avec l'épaisseur λ/(4n). Si on la fabrique par erreur avec l'épaisseur λ/(2n), que se passe-t-il pour cette longueur d'onde ?",
     choix: [
-      "Le traitement est sans effet : on retrouve la réflexion du verre nu",
-      "Les reflets disparaissent complètement",
-      "Le reflet est doublé",
-      "Rien ne change, le traitement marche toujours"
+      "Le traitement est sans effet, comme sur le verre nu",
+      "Les reflets disparaissent complètement, quel que soit l'indice",
+      "Le reflet est doublé par rapport au verre nu",
+      "Rien ne change, le traitement marche toujours comme prévu"
     ],
     bonne: 0,
     explication: "Avec e = λ/(2n), la différence de marche aller-retour dans la couche vaut une longueur d'onde entière : les deux ondes réfléchies se retrouvent comme si la couche n'existait pas. La réflexion est celle du verre nu. L'effet antireflet demande un quart d'onde, qui donne une demi-longueur d'onde de retard.",
@@ -671,8 +671,8 @@ QUESTIONS.push(
     id: "U42-131", difficulte: "moyen", epreuve: "U42", theme: "Interférences et réseaux", session: "complément", entrainement: true,
     question: "Un réseau étale la lumière blanche à l'ordre 1. Quelle couleur est la plus déviée, et en quoi est-ce différent d'un prisme ?",
     choix: [
-      "Le rouge est le plus dévié, alors que le prisme dévie le plus le violet",
-      "Le violet est le plus dévié, comme avec un prisme",
+      "Le rouge est le plus dévié (l'inverse d'un prisme)",
+      "Le violet est le plus dévié, comme avec un prisme en verre",
       "Toutes les couleurs sont déviées pareillement",
       "Le vert est le plus dévié, au centre du spectre"
     ],

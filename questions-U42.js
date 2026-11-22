@@ -47,7 +47,7 @@ QUESTIONS.push(
   {
     id: "U42-003", difficulte: "moyen", epreuve: "U42", theme: "Conjugaison", session: "complément",
     question: "Lentille mince divergente (f' < 0), objet réel AB placé avant la lentille. Quel tracé de l'image est juste ?",
-    choix: ["Le rayon parallèle converge vers F, comme avec une lentille convergente", "Les rayons sont justes mais l'image est placée réelle et renversée derrière la lentille", "Tracé juste : le rayon parallèle ressort en semblant venir de F', le rayon par O n'est pas dévié", "Le rayon passant par O est dévié"],
+    choix: ["Le rayon parallèle converge vers F, comme avec une lentille convergente", "Les rayons sont justes mais l'image est placée réelle et renversée derrière la lentille", "Tracé juste : rayon parallèle ressortant comme venu de F', rayon par O non dévié", "Le rayon passant par O est dévié"],
     choixSchemas: ["img/schemas/U42/trace-div-faux-converge.svg", "img/schemas/U42/trace-div-faux-image-reelle.svg", "img/schemas/U42/trace-div-juste.svg", "img/schemas/U42/trace-div-faux-centre-devie.svg"],
     bonne: 2,
     explication: "Pour une lentille divergente, le foyer image F' est AVANT la lentille. Un rayon parallèle à l'axe ressort en s'écartant, comme s'il venait de F' : on prolonge ce rayon en pointillés vers l'arrière. Le rayon qui passe par O n'est pas dévié. L'image est au croisement du prolongement et de ce rayon : virtuelle, droite, plus petite que l'objet, entre F' et la lentille. Les pièges : faire converger le rayon vers F, placer l'image derrière la lentille, ou dévier le rayon qui passe par O.",
@@ -72,7 +72,7 @@ QUESTIONS.push(
   {
     id: "U42-006", difficulte: "moyen", epreuve: "U42", theme: "Conjugaison", session: "2024",
     question: "Un observateur emmétrope qui n'accommode pas regarde dans un instrument (objectif + oculaire). Où doit se trouver l'image intermédiaire donnée par l'objectif ?",
-    choix: ["Au centre optique de l'oculaire", "À 25 cm de l'œil", "Au foyer image de l'objectif, toujours", "Dans le plan focal objet de l'oculaire"],
+    choix: ["Au centre optique de l'oculaire", "À 25 cm de l'œil", "Au foyer image de l'objectif, quel que soit l'œil de l'observateur", "Dans le plan focal objet de l'oculaire"],
     bonne: 3,
     explication: "Emmétrope sans accommoder = il voit net à l'infini. L'image finale doit donc être à l'infini, et pour cela l'objet de l'oculaire (l'image intermédiaire) doit être dans son plan focal objet Foc. Cette phrase revient dans presque tous les sujets.",
     indice: "Un emmétrope qui n'accommode pas voit net à l'infini. Où doit être un objet pour que l'oculaire en donne une image à l'infini ?"
@@ -90,9 +90,9 @@ QUESTIONS.push(
     question: "Consigne du sujet : « Montrer que l'image se forme à 60 mm après la lentille. » Lentille mince convergente de f' = +20 mm, objet réel placé à 30 mm devant elle. Quelle démarche est juste ?",
     choix: [
       "OA = +30 mm. Descartes : 1/OA' = 1/OA − 1/f' = 1/30 − 1/20 = −1/60. Donc l'image est à 60 mm de la lentille.",
-      "D'après la relation de conjugaison de Descartes, on trouve directement OA' = +60 mm.",
-      "Objet réel : OA = −30 mm. Descartes : 1/OA' = 1/f' + 1/OA = 1/20 − 1/30 = 1/60. Donc OA' = +60 mm : l'image est réelle, 60 mm après la lentille.",
-      "Objet réel : OA = −30 mm. Descartes : 1/OA' − 1/OA = 1/f', donc 1/OA' = 1/20 − 1/30."
+      "D'après la relation de conjugaison de Descartes, on trouve directement OA' = +60 mm, sans détailler les signes ni le calcul.",
+      "Objet réel : OA = −30 mm. Descartes : 1/OA' = 1/20 − 1/30 = 1/60, donc OA' = +60 mm (image réelle).",
+      "Objet réel : OA = −30 mm. Descartes : 1/OA' − 1/OA = 1/f', donc 1/OA' = 1/20 − 1/30, ce qu'on calcule ensuite."
     ],
     bonne: 2,
     surLaCopie: "Objet réel : OA = −30 mm. Descartes : [[1|OA']] = [[1|f']] + [[1|OA]] = [[1|20]] − [[1|30]] = [[1|60]]\nDonc OA' = +60 mm : l'image est réelle, 60 mm après la lentille, comme demandé.",
@@ -158,7 +158,7 @@ QUESTIONS.push(
       "A = Fob → A₁ à l'infini → A' = F'oc",
       "A, un peu plus loin que Fob → A₁ = F'oc → A' à l'infini",
       "A, un peu plus loin que Fob → A₁ = Foc → A' à l'infini → A'' = F'œil",
-      "A, entre Fob et l'objectif → A₁ = Foc → A' à l'infini → A'' = F'œil"
+      "A, entre Fob et l'objectif → A₁ = Foc → A' à l'infini → A'' = F'œil, sans accommoder"
     ],
     bonne: 2,
     explication: "On part de la fin. Emmétrope sans accommoder : A' à l'infini, donc A₁ au foyer objet de l'oculaire, A₁ = Foc. L'œil en donne l'image A'' = F'œil, sur la rétine.\nL'objectif doit donner une image A₁ réelle et agrandie : l'objet est un peu plus loin que Fob.\nEntre Fob et l'objectif, l'image serait virtuelle ; en Fob, elle partirait à l'infini.",
@@ -302,7 +302,7 @@ QUESTIONS.push(
   {
     id: "U42-154", difficulte: "difficile", epreuve: "U42", theme: "Conjugaison", session: "complément",
     question: "Dans une chaîne de deux lentilles, un rayon sorti de L₁ arrive sur L₂ incliné, sans passer par aucun foyer. Comment tracer sa suite après L₂ (convergente) ?",
-    choix: ["Il ressort en passant par le foyer image F'₂", "Il ressort par le point où le rayon qui lui est parallèle, passant par O₂, coupe le plan focal image de L₂", "Il continue tout droit", "Il ressort parallèle à l'axe"],
+    choix: ["Il ressort en passant par le foyer image F'₂ de la seconde lentille", "Il ressort vers le point où le rayon parallèle passant par O₂ coupe le plan focal image", "Il continue tout droit, comme s'il ne rencontrait pas L₂", "Il ressort parallèle à l'axe optique, comme un rayon issu du foyer objet"],
     bonne: 1,
     explication: "Des rayons parallèles entre eux convergent en un même point du plan focal image : un foyer image secondaire.\nOn trace le rayon parallèle au rayon donné qui passe par O₂ (il n'est pas dévié). Il coupe le plan focal image en ce foyer secondaire, et le rayon donné ressort en passant par ce point.\nF'₂ ne vaut que pour un rayon parallèle à l'axe.",
     indice: "Des rayons parallèles entre eux convergent tous au même point du plan focal image. Lequel d'entre eux est facile à tracer ?",
@@ -311,7 +311,7 @@ QUESTIONS.push(
   {
     id: "U42-155", difficulte: "moyen", epreuve: "U42", theme: "Conjugaison", session: "complément",
     question: "L₁ est divergente : elle donne d'un objet réel une image A₁B₁ virtuelle, entre l'objet et L₁. L₂ est placée après L₁. Pour L₂, A₁B₁ est :",
-    choix: ["Un objet réel : la lumière semble venir de A₁B₁, qui est avant L₂", "Un objet virtuel, puisque A₁B₁ est une image virtuelle", "Inutilisable : seule une image réelle peut servir d'objet", "Un objet à l'infini"],
+    choix: ["Un objet réel : la lumière semble venir de A₁B₁, avant L₂", "Un objet virtuel, puisque A₁B₁ est une image virtuelle", "Inutilisable : seule une image réelle peut servir d'objet à L₂", "Un objet à l'infini"],
     bonne: 0,
     explication: "Après L₁, les rayons s'écartent comme s'ils venaient de A₁B₁. Ils arrivent sur L₂ en venant de ce point, situé avant L₂ : c'est un objet réel pour L₂.\nRéel ou virtuel se décide pour chaque lentille, selon la place de l'objet par rapport à elle. Une image virtuelle pour L₁ peut très bien être un objet réel pour L₂.",
     indice: "Regarde où se trouve A₁B₁ par rapport à L₂, et dans quel sens arrive la lumière.",
@@ -320,7 +320,7 @@ QUESTIONS.push(
   {
     id: "U42-156", difficulte: "moyen", epreuve: "U42", theme: "Conjugaison", session: "complément",
     question: "B est dans le plan focal objet de L₁ : les rayons issus de B sortent de L₁ parallèles entre eux, inclinés. Où L₂ (convergente) forme-t-elle B₂ ?",
-    choix: ["Sur l'axe, au foyer image F'₂", "Dans le plan focal objet de L₂", "À l'infini", "Dans le plan focal image de L₂, sur le rayon qui passe par O₂ sans être dévié"],
+    choix: ["Sur l'axe, au foyer image F'₂ de la lentille L₂", "Dans le plan focal objet de L₂, sur le rayon par O₂", "À l'infini, dans la direction des rayons sortants", "Dans le plan focal image de L₂, sur le rayon par O₂"],
     bonne: 3,
     explication: "Pour L₂, B₁ est à l'infini dans une direction inclinée. Ces rayons convergent dans le plan focal image de L₂, au point où le coupe celui d'entre eux qui passe par O₂.\nChaîne : B dans le plan focal objet de L₁ → B₁ à l'infini → B₂ dans le plan focal image de L₂.\nSur l'axe en F'₂, ce ne serait vrai que pour un faisceau parallèle à l'axe.",
     indice: "Un faisceau parallèle incliné converge dans le plan focal image, mais pas forcément sur l'axe. Quel rayon du faisceau est facile à suivre ?",
@@ -441,7 +441,7 @@ QUESTIONS.push(
   {
     id: "U42-018", difficulte: "facile", epreuve: "U42", theme: "Doublets et achromatisme", session: "2026",
     question: "Un téléobjectif associe une lentille convergente puis une divergente. Quel est son principal intérêt par rapport à une lentille unique de même focale ?",
-    choix: ["Il supprime la diffraction", "Il redresse l'image", "Il donne une image plus lumineuse", "Il est plus court : la distance 1re lentille → foyer image est inférieure à la focale"],
+    choix: ["Il supprime la diffraction de l'objectif", "Il redresse l'image sans la renverser", "Il donne une image plus lumineuse qu'une lentille seule", "Il est plus court : le foyer image est plus près que la focale"],
     bonne: 3,
     explication: "Le plan principal image est rejeté en avant de la première lentille. On obtient une grande focale f' dans un tube nettement plus court que f' : c'est tout l'intérêt du téléobjectif, il est moins encombrant.",
     indice: "Compare la longueur du tube (de la première lentille au capteur) à la focale de l'objectif. Qu'est-ce que le photographe y gagne ?"
@@ -476,7 +476,7 @@ QUESTIONS.push(
   {
     id: "U42-021", difficulte: "moyen", epreuve: "U42", theme: "Champs et diaphragmes", session: "2022",
     question: "Qu'appelle-t-on la pupille d'entrée d'un système optique ?",
-    choix: ["La pupille de l'œil de l'observateur", "La première lentille du système", "L'image du diaphragme d'ouverture par la partie du système placée avant lui", "L'image du diaphragme de champ par tout le système"],
+    choix: ["La pupille de l'œil de l'observateur", "La première lentille du système", "L'image du diaphragme d'ouverture par la partie du système avant lui", "L'image du diaphragme de champ par l'ensemble des lentilles de l'instrument"],
     bonne: 2,
     explication: "La pupille d'entrée est l'image du diaphragme d'ouverture « vue depuis l'objet », à travers les lentilles qui le précèdent. La pupille de sortie est son image par les lentilles qui le suivent.",
     indice: "Il y a deux diaphragmes importants : celui d'ouverture (la lumière) et celui de champ (l'étendue). La pupille d'entrée, c'est l'un des deux « vu depuis l'objet »."
@@ -494,7 +494,7 @@ QUESTIONS.push(
   {
     id: "U42-023", difficulte: "moyen", epreuve: "U42", theme: "Champs et diaphragmes", session: "2024",
     question: "Un fabricant place un diaphragme dans le plan de l'image intermédiaire (plan des champs), avec un diamètre égal (ou très légèrement inférieur) au champ de pleine lumière. À quoi sert-il ?",
-    choix: ["À supprimer le champ de contour : bord du champ net, éclairement uniforme", "À réduire la diffraction", "À redresser l'image", "À augmenter la luminosité"],
+    choix: ["À supprimer le champ de contour : bord du champ net", "À réduire la diffraction due au diaphragme d'ouverture", "À redresser l'image donnée par l'instrument", "À augmenter la luminosité de l'image dans le champ"],
     bonne: 0,
     explication: "Le champ de contour est la zone du bord où l'éclairement baisse progressivement (vignettage). Un diaphragme dans le plan des champs le coupe net : on ne voit que la zone de pleine lumière, avec un bord franc.",
     indice: "Au bord du champ, l'éclairement baisse peu à peu : c'est le champ de contour. Un diaphragme placé net dans le plan de l'image agit sur ce bord."
@@ -502,7 +502,7 @@ QUESTIONS.push(
   {
     id: "U42-024", difficulte: "moyen", epreuve: "U42", theme: "Champs et diaphragmes", session: "2026",
     question: "Un capteur photo mesure 18 × 24 mm. Le rayon du champ de pleine lumière image est 14 mm. Le capteur est-il éclairé uniformément ?",
-    choix: ["Oui, car 14 mm > 12 mm (demi-largeur)", "Non, la demi-diagonale (15 mm) dépasse 14 mm : coins assombris", "Non, il faudrait 24 mm", "Oui, car 14 mm > 9 mm (demi-hauteur)"],
+    choix: ["Oui, car 14 mm dépasse 12 mm (la demi-largeur du capteur)", "Non : demi-diagonale 15 mm > 14 mm, coins assombris", "Non, il faudrait 24 mm", "Oui, car 14 mm dépasse 9 mm (la demi-hauteur du capteur)"],
     bonne: 1,
     explication: "Il faut comparer la DEMI-DIAGONALE : √(18² + 24²) = √900 = 30 mm, la moitié = 15 mm. Comme 15 > 14 mm, les coins sortent du champ de pleine lumière : vignettage.",
     indice: "Un rectangle n'est entièrement dans un cercle que si ses quatre coins y sont. Quelle est la distance entre le centre du capteur et un coin ?",
@@ -521,7 +521,7 @@ QUESTIONS.push(
     id: "U42-045", difficulte: "difficile", epreuve: "U42", theme: "Champs et diaphragmes", session: "2022 et 2023",
     question: "Consigne du sujet : « Montrer que le rayon du champ de pleine lumière vaut 3 mm. » Pupille de rayon 9 mm en x = 0, diaphragme de champ de rayon 5 mm en x = 40 mm, plan des champs en x = 60 mm. Quelle démarche est juste ?",
     choix: [
-      "Droite par les bords du même côté, (0 ; 9) et (40 ; 5) : pente = (5 − 9)/40 = −0,1. En x = 60 : 9 − 0,1 × 60 = 3 mm. Le rayon du champ de pleine lumière vaut bien 3 mm.",
+      "Droite par les bords du même côté, (0 ; 9) et (40 ; 5) : pente = (5 − 9)/40 = −0,1. En x = 60 : 9 − 0,1 × 60 = 3 mm : le champ de pleine lumière est bien de 3 mm.",
       "Droite par le centre de la pupille (0 ; 0) et le bord du diaphragme (40 ; 5) : pente = 5/40 = 0,125. En x = 60 : 0,125 × 60 = 7,5 mm. Le rayon du champ vaut 7,5 mm.",
       "Sur le schéma, le rayon tracé arrive à 3 mm de l'axe dans le plan des champs. Le rayon du champ de pleine lumière vaut donc bien 3 mm.",
       "Droite par les bords du même côté, (0 ; 9) et (40 ; 5) : pente = (5 − 9)/40 = −0,1. L'équation de la droite est y = 9 − 0,1 x."
@@ -536,9 +536,9 @@ QUESTIONS.push(
     question: "Copie d'un élève : « Pupille de rayon 2 mm en x = 0, diaphragme de champ de rayon 5 mm en x = 100 mm, plan des champs en x = 80 mm. Pleine lumière : bords du même côté, (0 ; 2) et (100 ; 5). En x = 80 : 2 + 0,03 × 80 = 4,4 mm. » Où est l'erreur ?",
     choix: [
       "Il fallait passer par le centre de la pupille : on trouve 4 mm",
-      "Le plan des champs est entre la pupille et le diaphragme : il fallait les bords opposés, on trouve 3,6 mm",
+      "Le plan des champs est entre la pupille et le diaphragme : il fallait les bords opposés, soit 3,6 mm",
       "Le calcul est faux : 2 + 0,03 × 80 = 4,8 mm",
-      "Il n'y a pas d'erreur : la pleine lumière, c'est toujours les bords du même côté"
+      "Il n'y a pas d'erreur : pour la pleine lumière, on prend toujours les bords du même côté, quelle que soit la position"
     ],
     bonne: 1,
     surLaCopie: "Plan des champs entre la pupille et le diaphragme : bords opposés, (0 ; −2) et (100 ; 5). Pente = [[7|100]] = 0,07\nEn x = 80 : r = −2 + 0,07 × 80 = 3,6 mm\nLe champ de pleine lumière a un rayon de 3,6 mm (4,4 mm est le champ total).",
@@ -553,7 +553,7 @@ QUESTIONS.push(
     choix: [
       "Diagonale du capteur : √(6² + 8²) = 10 mm. Elle est plus grande que le rayon du champ (5,5 mm) : les coins sont assombris, le capteur n'est pas éclairé uniformément.",
       "Oui : le capteur est entièrement dans le champ de pleine lumière, il est donc éclairé uniformément.",
-      "Demi-diagonale du capteur : √(3² + 4²) = 5 mm. Elle est plus petite que le rayon du champ (5,5 mm) : même les coins sont en pleine lumière, le capteur est éclairé uniformément.",
+      "Demi-diagonale du capteur : √(3² + 4²) = 5 mm, plus petite que le rayon du champ (5,5 mm) : même les coins sont en pleine lumière, éclairement uniforme.",
       "La demi-diagonale du capteur vaut √(3² + 4²) = 5 mm et le rayon du champ de pleine lumière vaut 5,5 mm."
     ],
     bonne: 2,
@@ -658,7 +658,7 @@ QUESTIONS.push(
   {
     id: "U42-033", difficulte: "facile", epreuve: "U42", theme: "Transmission et antireflet", session: "2024",
     question: "Quel est le principe d'un traitement antireflet monocouche ?",
-    choix: ["Augmenter l'indice du verre", "Absorber la lumière réfléchie", "Faire interférer de façon destructive les deux ondes réfléchies (sur la couche et sur le verre)", "Polariser la lumière réfléchie"],
+    choix: ["Augmenter l'indice du verre afin qu'il réfléchisse moins de lumière", "Absorber la lumière réfléchie", "Faire interférer destructivement les deux ondes réfléchies", "Polariser la lumière réfléchie"],
     bonne: 2,
     explication: "Les ondes réfléchies sur la face avant de la couche et sur le verre doivent être en opposition de phase (différence de marche λ/2) et de même intensité. Elles s'annulent : la lumière n'est plus réfléchie, elle est transmise.",
     indice: "Un antireflet est une couche très mince. Deux reflets se forment : un sur la couche, un sur le verre. Que peuvent faire deux ondes qui se superposent ?"
@@ -833,8 +833,8 @@ QUESTIONS.push(
     choix: [
       "Le grossissement vaut 3, le champ de pleine lumière 2 m et le plus petit détail séparé 2,4 mm.",
       "Ces jumelles conviennent à ce qu'elle veut faire.",
-      "Elles ne conviennent pas : le champ de 2 m est plus petit que la scène de 12 m, elle ne verra donc pas les chanteurs.",
-      "Elles conviennent : elle sépare des détails de 2,4 mm, donc ceux de 5 mm (impossible à l'œil nu : 7,2 mm), et voit un chanteur en entier dans un champ de 2 m. Elle ne verra pas toute la scène d'un seul regard."
+      "Elles ne conviennent pas : le champ de 2 m est plus petit que la scène de 12 m, elle ne verra donc pas les chanteurs, et le grossissement de 3 ne suffit pas.",
+      "Elles conviennent : détails de 2,4 mm séparés (7,2 mm à l'œil nu), un chanteur entier dans un champ de 2 m. Mais pas toute la scène d'un seul regard."
     ],
     bonne: 3,
     surLaCopie: "Elle sépare des détails de 2,4 mm : ceux de 5 mm sont visibles (7,2 mm à l'œil nu).\nLe champ de 2 m montre un chanteur en entier, mais pas les 12 m de scène à la fois.\nLes jumelles conviennent, à condition de les déplacer sur la scène.",
@@ -935,9 +935,9 @@ QUESTIONS.push(
     cas: "CAS-U42-02", etape: 1,
     question: "Le soleil est bas : son reflet arrive dans l'œil du client après avoir rebondi sur l'étang sous une incidence de 53° (tan 53,1° = 1,33). Pourquoi des verres polarisants atténuent-ils bien ce reflet ?",
     choix: [
-      "Le reflet est polarisé verticalement : un filtre horizontal l'éteint",
+      "Le reflet est polarisé verticalement : un filtre horizontal, qui laisse passer cette direction, l'éteint donc complètement",
       "Un reflet n'est jamais polarisé : le filtre fait seulement l'effet d'un verre teinté",
-      "Près de l'incidence de Brewster, le reflet est presque totalement polarisé horizontalement : un filtre vertical l'éteint presque",
+      "Près de l'incidence de Brewster, le reflet est presque totalement polarisé horizontalement : un filtre vertical l'éteint",
       "À 53° c'est l'angle limite : il n'y a plus de rayon réfracté, donc plus de reflet à éteindre"
     ],
     bonne: 2,
@@ -991,8 +991,8 @@ QUESTIONS.push(
     question: "Quelle conclusion donnes-tu au client ?",
     choix: [
       "Elles ne lui conviennent pas : un verre non traité perd déjà 10 % de la lumière, et le filtre ne sert qu'à moitié",
-      "Elles lui conviennent sans condition : le filtre éteint le reflet quelle que soit l'orientation de sa tête, et le verre transmet 90 %",
-      "Elles lui conviennent s'il garde la tête droite : le filtre éteint alors presque tout le reflet (penchée de 40°, 41 % passe encore) et l'antireflet limite la perte de 10 %",
+      "Elles lui conviennent sans condition : le filtre éteint le reflet quelle que soit l'orientation de sa tête, et le verre transmet 90 % de la lumière incidente",
+      "Elles lui conviennent s'il garde la tête droite : le filtre éteint presque tout le reflet (penchée de 40°, 41 % passe encore) et l'antireflet limite la perte",
       "Le filtre polarisant est inutile pour la pêche : seul le traitement antireflet compte, car le reflet de l'eau n'est pas polarisé"
     ],
     bonne: 2,
@@ -1094,9 +1094,9 @@ QUESTIONS.push(
     id: "U42-183", difficulte: "moyen", epreuve: "U42", theme: "Interférences et réseaux", session: "complément",
     question: "Un réseau est éclairé en incidence normale par de la lumière blanche. Que voit-on dans la direction de l'ordre 0 ?",
     choix: [
-      "De la lumière blanche : toutes les couleurs y sont, non déviées",
-      "Seulement du violet, la couleur la moins déviée",
-      "Seulement du rouge, la couleur la plus déviée",
+      "De la lumière blanche : toutes les couleurs, non déviées",
+      "Seulement du violet, la couleur la moins déviée par le réseau",
+      "Seulement du rouge, la couleur la plus déviée par le réseau",
       "Rien : l'ordre 0 est toujours éteint"
     ],
     bonne: 0,
@@ -1284,7 +1284,7 @@ QUESTIONS.push(
   {
     id: "U42-200", difficulte: "moyen", epreuve: "U42", theme: "Ouverture et résolution", session: "complément",
     question: "On ferme le diaphragme d'un objectif de f/2 à f/8. Que devient la limite de résolution due à la diffraction ?",
-    choix: ["Elle s'améliore : l'angle α diminue", "Elle se dégrade : l'angle α augmente, car D diminue", "Elle ne change pas, seul l'éclairement change", "Elle se dégrade parce que la focale augmente"],
+    choix: ["Elle s'améliore : l'angle α diminue", "Elle se dégrade : α augmente, car D diminue", "Elle ne change pas, seul l'éclairement change", "Elle se dégrade parce que la focale augmente"],
     bonne: 1,
     explication: "α = 1,22 λ / D. En fermant le diaphragme, la pupille d'entrée D diminue (D = f' / N) : α augmente, donc les petits détails se mélangent.\nLa focale ne change pas quand on ferme le diaphragme.\nFermer sert à gagner de la profondeur de champ et à réduire les aberrations, au prix de la diffraction.",
     indice: "Écris α = 1,22 λ / D et regarde ce que devient D quand N grandit.",
@@ -1342,7 +1342,7 @@ QUESTIONS.push(
   {
     id: "U42-205", difficulte: "facile", epreuve: "U42", theme: "Doublets et achromatisme", session: "complément",
     question: "Un verre crown a un nombre d'Abbe ν = 60, un verre flint ν = 30. Lequel disperse le plus la lumière ?",
-    choix: ["Le crown, car son ν est le plus grand", "Les deux dispersent autant", "Le flint, car son ν est le plus petit", "On ne peut pas savoir sans l'indice"],
+    choix: ["Le crown, car son ν est le plus grand", "Les deux dispersent exactement autant", "Le flint, car son ν est le plus petit", "On ne peut pas savoir sans connaître l'indice"],
     bonne: 2,
     explication: "Le nombre d'Abbe mesure l'inverse de la dispersion : ν petit, dispersion forte.\nLe flint (ν = 30) disperse donc plus que le crown (ν = 60). C'est pour cela qu'on associe les deux dans un doublet achromatique.",
     indice: "ν = (nd − 1) / (nF − nC) : la dispersion est au dénominateur.",
@@ -1366,7 +1366,7 @@ QUESTIONS.push(
   {
     id: "U42-207", difficulte: "moyen", epreuve: "U42", theme: "Doublets et achromatisme", session: "complément",
     question: "Pourquoi un oculaire est-il souvent un doublet de deux lentilles plutôt qu'une lentille unique ?",
-    choix: ["Pour doubler le grossissement de l'objectif", "Pour réduire les aberrations, dont les aberrations chromatiques, et élargir le champ", "Pour supprimer la diffraction", "Pour que l'image soit toujours réelle"],
+    choix: ["Pour doubler le grossissement de l'objectif et celui de l'oculaire à la fois", "Pour réduire les aberrations (dont chromatiques) et élargir le champ", "Pour supprimer la diffraction", "Pour que l'image donnée par l'oculaire soit toujours réelle"],
     bonne: 1,
     explication: "Une lentille simple donne des images colorées et déformées sur les bords. Un doublet bien choisi (séparation adaptée, verres différents) réduit les aberrations et élargit le champ.\nIl ne supprime pas la diffraction, qui dépend du diamètre de la pupille. Le grossissement de l'objectif ne change pas.",
     indice: "Pense à ce que gagne un système à plusieurs lentilles par rapport à une lentille simple."
@@ -1387,7 +1387,7 @@ QUESTIONS.push(
   {
     id: "U42-209", difficulte: "moyen", epreuve: "U42", theme: "Transmission et antireflet", session: "complément",
     question: "Un verre à traitement antireflet monocouche présente un léger reflet coloré. Quelle en est la cause ?",
-    choix: ["La couche absorbe certaines couleurs", "Le verre est teinté dans la masse", "L'indice de la couche est égal à celui du verre", "La couche est calculée pour une longueur d'onde : les autres sont un peu moins bien annulées"],
+    choix: ["La couche absorbe certaines couleurs du spectre, ce qui laisse un reflet coloré", "Le verre est teinté dans la masse et renvoie une couleur dominante", "L'indice de la couche est égal à celui du verre, ce qui supprime l'interférence", "Une seule longueur d'onde est bien annulée : les autres le sont moins"],
     bonne: 3,
     explication: "L'épaisseur λ / (4n) est choisie pour une seule longueur d'onde, en général vers 550 nm (vert-jaune). Les extrémités du spectre, violet et rouge, sont un peu moins bien éteintes : le reflet résiduel est coloré.\nLa couche ne sert pas à absorber : elle fait interférer destructivement les deux reflets.",
     indice: "L'annulation des reflets par interférences dépend de la longueur d'onde."
@@ -1685,7 +1685,7 @@ QUESTIONS.push(
   {
     id: "U42-233", difficulte: "facile", epreuve: "U42", theme: "Champs et diaphragmes", session: "complément",
     question: "Quel diaphragme limite la quantité de lumière qui arrive d'un point de l'objet situé sur l'axe ?",
-    choix: ["Le diaphragme de champ", "Le diaphragme d'ouverture", "Le plan des champs", "Le capteur"],
+    choix: ["Le diaphragme de champ, placé dans l'image intermédiaire", "Le diaphragme d'ouverture", "Le plan des champs", "Le capteur"],
     bonne: 1,
     explication: "Le diaphragme d'ouverture limite le faisceau issu d'un point de l'axe. Son image dans l'espace objet est la pupille d'entrée.\nLe diaphragme de champ limite plutôt la taille de la zone de l'objet qu'on voit.",
     indice: "Un diaphragme règle la lumière reçue, l'autre la taille de ce qu'on voit."
@@ -1693,7 +1693,7 @@ QUESTIONS.push(
   {
     id: "U42-234", difficulte: "moyen", epreuve: "U42", theme: "Champs et diaphragmes", session: "complément",
     question: "Qu'appelle-t-on le vignettage ?",
-    choix: ["Une déformation des lignes droites en bord de champ", "Un assombrissement progressif vers le bord du champ, car une partie du faisceau est coupée", "Une coloration des bords de l'image", "La diffraction par le diaphragme"],
+    choix: ["Une déformation des lignes droites en bord de champ, surtout avec un grand angle", "Un assombrissement progressif vers le bord du champ (faisceau en partie coupé)", "Une coloration des bords de l'image", "La diffraction par le diaphragme"],
     bonne: 1,
     explication: "Vers le bord du champ, des diaphragmes ou des montures coupent une partie du faisceau : l'éclairement baisse progressivement. C'est le vignettage.\nLa déformation est la distorsion, la coloration vient du chromatisme.",
     indice: "Pense à ce qui se passe dans la zone entre le champ de pleine lumière et le champ de contour."
@@ -1725,7 +1725,7 @@ QUESTIONS.push(
   {
     id: "U42-237", difficulte: "facile", epreuve: "U42", theme: "Champs et diaphragmes", session: "complément",
     question: "Que dit-on de l'éclairement de l'image dans le champ de pleine lumière ?",
-    choix: ["Il diminue vers les bords, sans jamais s'annuler", "Il est nul au centre et maximal sur les bords", "Il est uniforme : le faisceau de chaque point n'est pas coupé", "Il est la moitié de celui du centre"],
+    choix: ["Il diminue vers les bords, sans jamais s'annuler", "Il est nul au centre et maximal sur les bords", "Il est uniforme : aucun faisceau n'est coupé", "Il est la moitié de celui du centre, partout dans le champ"],
     bonne: 2,
     explication: "Dans le champ de pleine lumière, tout le faisceau de chaque point passe : l'éclairement est uniforme.\nEntre le champ de pleine lumière et le champ de contour, il décroît : c'est le vignettage. Au-delà, il est nul.",
     indice: "Pleine lumière veut dire que rien n'est coupé."
@@ -1782,7 +1782,7 @@ QUESTIONS.push(
   {
     id: "U42-242", difficulte: "moyen", epreuve: "U42", theme: "Conjugaison", session: "complément",
     question: "Qu'est-ce qu'un objet virtuel pour une lentille ?",
-    choix: ["Un objet très petit", "Un point vers lequel convergent les rayons qui arrivent sur la lentille, situé après elle", "Un objet placé au foyer objet", "L'image donnée par la lentille elle-même"],
+    choix: ["Un objet très petit", "Un point vers lequel convergent les rayons incidents, situé après la lentille", "Un objet placé au foyer objet de la lentille", "L'image donnée par la lentille elle-même, quelle que soit sa position"],
     bonne: 1,
     explication: "Un objet est virtuel quand les rayons incidents convergent vers un point situé après la lentille, sans y arriver : OA est positif.\nCela arrive dans une chaîne de lentilles, quand l'image d'une première lentille se forme après la seconde.",
     indice: "Réel : les rayons divergent à partir du point. Virtuel : ils convergent vers lui."
@@ -1870,7 +1870,7 @@ QUESTIONS.push(
   {
     id: "U42-249", difficulte: "moyen", epreuve: "U42", theme: "Conjugaison", session: "complément",
     question: "Une lentille convergente en verre, utilisée dans l'air, est plongée dans l'eau. Que devient sa vergence ?",
-    choix: ["Elle augmente", "Elle diminue : l'eau a un indice plus proche de celui du verre", "Elle ne change pas", "Elle change de signe"],
+    choix: ["Elle augmente, car l'eau est plus réfringente que l'air", "Elle diminue, l'eau étant d'indice proche du verre", "Elle ne change pas : la lentille reste la même", "Elle change de signe : la lentille devient divergente"],
     bonne: 1,
     explication: "La vergence dépend de l'écart d'indice entre le verre et le milieu : V = (n_verre / n_milieu − 1) × (…). Dans l'eau (n ≈ 1,33), cet écart est plus faible que dans l'air : la lentille est moins convergente.\nElle ne change de signe que si le milieu a un indice supérieur à celui du verre.",
     indice: "Ce qui compte, c'est le rapport des indices entre le verre et le milieu qui l'entoure."
@@ -1937,7 +1937,7 @@ QUESTIONS.push(
   {
     id: "U42-254", difficulte: "moyen", epreuve: "U42", theme: "Conjugaison", session: "complément",
     question: "Un objet réel est placé à 2f' avant une lentille convergente. Où est l'image, et comment est-elle ?",
-    choix: ["À 2f' après la lentille, réelle, renversée, de même taille", "À 2f' avant la lentille, virtuelle, droite, de même taille", "Au foyer image, réelle et plus petite", "À l'infini"],
+    choix: ["À 2f' après la lentille, réelle, renversée, de même taille", "À 2f' avant la lentille, virtuelle, droite, de même taille que l'objet", "Au foyer image, réelle et plus petite que l'objet", "À l'infini"],
     bonne: 0,
     explication: "Descartes avec OA = −2f' : [[1|OA']] = [[1|f']] − [[1|2f']] = [[1|2f']], donc OA' = +2f'.\nγ = OA' / OA = −1 : image de même taille, renversée. L'image est réelle (après la lentille).",
     indice: "Applique Descartes avec OA = −2f'."
@@ -1965,7 +1965,7 @@ QUESTIONS.push(
   {
     id: "U42-257", difficulte: "moyen", epreuve: "U42", theme: "Conjugaison", session: "complément",
     question: "Dans une chaîne de deux lentilles L₁ puis L₂, l'image A₁ donnée par L₁ se forme 20 mm après L₂. Pour L₂, que représente A₁ ?",
-    choix: ["Un objet réel, avec O₂A₁ = −20 mm", "Une image virtuelle", "Un objet virtuel, avec O₂A₁ = +20 mm", "Un objet à l'infini"],
+    choix: ["Un objet réel, avec O₂A₁ = −20 mm (A₁ avant L₂)", "Une image virtuelle", "Un objet virtuel, avec O₂A₁ = +20 mm", "Un objet à l'infini, avec O₂A₁ infini"],
     bonne: 2,
     explication: "Pour L₂, A₁ est l'objet. Il se trouve après L₂ : les rayons qui arrivent sur L₂ convergent vers lui sans l'atteindre. C'est un objet virtuel, O₂A₁ = +20 mm.\nUn objet réel serait avant L₂.",
     indice: "Compte la position de A₁ depuis L₂, dans le sens de la lumière."
@@ -1985,7 +1985,7 @@ QUESTIONS.push(
   {
     id: "U42-259", difficulte: "moyen", epreuve: "U42", theme: "Conjugaison", session: "complément",
     question: "Dans quelles conditions (conditions de Gauss) la lentille mince donne-t-elle une image nette d'un point ?",
-    choix: ["Pour des rayons inclinés de plus de 45° sur l'axe", "Pour toutes les couleurs à la fois", "Pour des rayons proches de l'axe et peu inclinés sur lui", "Seulement pour un objet à l'infini"],
+    choix: ["Pour des rayons inclinés de plus de 45° sur l'axe", "Pour toutes les couleurs à la fois, sans aberration chromatique", "Pour des rayons proches de l'axe et peu inclinés", "Seulement pour un objet à l'infini"],
     bonne: 2,
     explication: "Les formules de conjugaison supposent des rayons peu inclinés et proches de l'axe : ce sont les conditions de Gauss.\nHors de ces conditions, les aberrations apparaissent. Pour les couleurs, il y a en plus le chromatisme, qui ne dépend pas des conditions de Gauss.",
     indice: "Les formules de Descartes sont des approximations valables près de l'axe."
@@ -2005,7 +2005,7 @@ QUESTIONS.push(
   {
     id: "U42-261", difficulte: "facile", epreuve: "U42", theme: "Conjugaison", session: "complément",
     question: "Une lentille donne d'un objet une image de grandissement γ = −0,5. Que peut-on dire de cette image ?",
-    choix: ["Droite et deux fois plus grande", "Droite et deux fois plus petite", "Renversée et deux fois plus grande", "Renversée et deux fois plus petite"],
+    choix: ["Droite et deux fois plus grande", "Droite et deux fois plus petite", "Renversée et deux fois plus grande que l'objet", "Renversée et deux fois plus petite"],
     bonne: 3,
     explication: "Le signe de γ donne le sens : négatif, l'image est renversée. La valeur absolue donne la taille : 0,5, l'image est deux fois plus petite que l'objet.",
     indice: "Le signe donne le sens de l'image, la valeur absolue sa taille."
@@ -2042,7 +2042,7 @@ QUESTIONS.push(
   {
     id: "U42-263", difficulte: "facile", epreuve: "U42", theme: "Loupe et microscope", session: "complément",
     question: "Que compare le grossissement commercial Gc d'un instrument ?",
-    choix: ["La taille de l'image à la taille de l'objet", "La focale de l'instrument à la distance de 250 mm", "L'angle sous lequel on voit l'image dans l'instrument à l'angle sous lequel on voit l'objet, à l'œil nu, placé à 250 mm", "Le diamètre de l'objectif à celui de l'oculaire"],
+    choix: ["La taille de l'image à la taille de l'objet, mesurées toutes deux sur l'écran", "La focale de l'instrument à la distance conventionnelle de 250 mm de l'œil", "L'angle de l'image à celui de l'objet vu à 250 mm à l'œil nu", "Le diamètre de l'objectif à celui de l'oculaire, en millimètres"],
     bonne: 2,
     explication: "Le grossissement commercial est un rapport d'angles : Gc = α' / α, où α' est l'angle sous lequel on voit l'image dans l'instrument et α celui sous lequel on verrait l'objet à l'œil nu, à la distance conventionnelle de 250 mm.\nLe rapport des tailles est le grandissement, pas le grossissement.",
     indice: "Un grossissement compare des angles, pas des longueurs."
@@ -2094,7 +2094,7 @@ QUESTIONS.push(
   {
     id: "U42-268", difficulte: "facile", epreuve: "U42", theme: "Lunettes afocales", session: "complément",
     question: "Pourquoi ajoute-t-on souvent un prisme redresseur à une lunette de Kepler pour l'usage terrestre ?",
-    choix: ["Pour augmenter son grossissement", "Pour que l'image ne soit plus renversée", "Pour supprimer les couleurs parasites", "Pour la rendre afocale"],
+    choix: ["Pour augmenter son grossissement", "Pour que l'image ne soit plus renversée", "Pour supprimer les couleurs parasites et les reflets", "Pour la rendre afocale"],
     bonne: 1,
     explication: "La lunette de Kepler (objectif et oculaire convergents) donne une image renversée, gênante pour observer un paysage. Un prisme redresseur la remet à l'endroit.\nLa lunette est déjà afocale. Le prisme ne change ni le grossissement ni les couleurs.",
     indice: "Le grossissement d'une lunette de Kepler est négatif. Qu'est-ce que ça signifie pour l'image ?"
@@ -2177,7 +2177,7 @@ QUESTIONS.push(
   {
     id: "U42-274", difficulte: "moyen", epreuve: "U42", theme: "Doublets et achromatisme", session: "complément",
     question: "Un oculaire est formé de deux lentilles convergentes, de même verre, séparées de e = (f'₁ + f'₂) / 2. Que peut-on dire de ses aberrations chromatiques ?",
-    choix: ["Elles sont doublées", "Elles sont réduites, car la séparation compense la dispersion du verre", "Elles sont supprimées pour toutes les longueurs d'onde", "Elles ne dépendent pas de la séparation"],
+    choix: ["Elles sont doublées", "Elles sont réduites, la séparation compense la dispersion", "Elles sont supprimées pour toutes les longueurs d'onde, sans exception", "Elles ne dépendent pas de la séparation"],
     bonne: 1,
     explication: "Avec cette séparation, la vergence du doublet varie très peu avec la longueur d'onde : le doublet est achromatique au premier ordre, même avec un seul verre. C'est le principe des oculaires de type Huygens.\nIl n'est pas parfait pour toutes les longueurs d'onde : on parle de réduction, pas de suppression.",
     indice: "Pense aux oculaires de microscope, faits d'un seul type de verre."
@@ -2210,7 +2210,7 @@ QUESTIONS.push(
   {
     id: "U42-277", difficulte: "moyen", epreuve: "U42", theme: "Doublets et achromatisme", session: "complément",
     question: "Dans un doublet achromatique accolé, on associe une lentille convergente à une lentille divergente. De quel verre est faite la lentille convergente, la plus forte en vergence ?",
-    choix: ["Du verre le plus dispersif (flint)", "Du verre le moins dispersif (crown)", "Peu importe", "Du verre d'indice le plus faible"],
+    choix: ["Du verre le plus dispersif (flint), car il disperse davantage", "Du verre le moins dispersif (crown)", "Peu importe", "Du verre d'indice le plus faible"],
     bonne: 1,
     explication: "La condition V₁ / ν₁ + V₂ / ν₂ = 0 impose que la lentille de plus forte vergence soit celle de plus grand ν : le verre le moins dispersif, le crown. La lentille divergente, plus faible, est en flint.\nAinsi le doublet reste convergent tout en compensant la dispersion.",
     indice: "Pour que le doublet reste convergent, la plus forte vergence est portée par le verre qui disperse le moins."
@@ -2242,7 +2242,7 @@ QUESTIONS.push(
   {
     id: "U42-280", difficulte: "difficile", epreuve: "U42", theme: "Ouverture et résolution", session: "complément",
     question: "Les pixels d'un capteur sont plus petits que la tache de diffraction de l'objectif. Que se passe-t-il si on réduit encore la taille des pixels ?",
-    choix: ["La résolution de l'image augmente toujours", "La résolution ne progresse plus : elle est limitée par la diffraction de l'objectif", "L'image devient plus lumineuse", "La diffraction disparaît"],
+    choix: ["La résolution de l'image augmente toujours, car il y a plus de pixels par millimètre", "La résolution ne progresse plus : la diffraction de l'objectif la limite", "L'image devient plus lumineuse", "La diffraction disparaît"],
     bonne: 1,
     explication: "La résolution de l'ensemble est limitée par le plus grand des deux : la taille des pixels ou la tache de diffraction. Quand les pixels sont déjà plus petits que cette tache, les rendre plus petits ne montre pas de détails de plus.\nIls captent même moins de lumière chacun.",
     indice: "La résolution globale est limitée par le facteur le moins bon."
@@ -2298,7 +2298,7 @@ QUESTIONS.push(
   {
     id: "U42-285", difficulte: "moyen", epreuve: "U42", theme: "Transmission et antireflet", session: "complément",
     question: "Pourquoi utilise-t-on souvent des traitements antireflet à plusieurs couches plutôt qu'à une seule ?",
-    choix: ["Pour que le verre soit plus épais", "Pour absorber plus de lumière", "Pour réduire les reflets sur un large domaine de longueurs d'onde", "Pour augmenter l'indice du verre"],
+    choix: ["Pour que le verre soit plus épais et plus résistant", "Pour absorber plus de lumière", "Pour réduire les reflets sur presque tout le spectre", "Pour augmenter l'indice du verre et réduire son poids"],
     bonne: 2,
     explication: "Une couche unique n'est optimale que pour une longueur d'onde. Avec plusieurs couches d'indices et d'épaisseurs différents, on annule les reflets sur presque tout le spectre visible : le reflet résiduel est faible et peu coloré.\nLe traitement ne doit pas absorber la lumière.",
     indice: "Une seule couche n'est optimale que pour une longueur d'onde."
@@ -2318,7 +2318,7 @@ QUESTIONS.push(
   {
     id: "U42-287", difficulte: "moyen", epreuve: "U42", theme: "Transmission et antireflet", session: "complément",
     question: "Pourquoi un traitement antireflet est-il particulièrement utile sur un verre de haut indice ?",
-    choix: ["Parce qu'un indice élevé fait réfléchir plus de lumière à chaque surface", "Parce que le verre est plus fragile", "Parce que le verre absorbe plus de lumière", "Parce que son indice diminue avec l'épaisseur"],
+    choix: ["Parce qu'un indice élevé réfléchit plus de lumière par face", "Parce que le verre est plus fragile et se raye plus facilement", "Parce que le verre absorbe plus de lumière", "Parce que son indice diminue avec l'épaisseur"],
     bonne: 0,
     explication: "La réflexion R = ((n − 1) / (n + 1))² augmente avec l'indice : environ 4 % par face pour n = 1,5, plus de 6 % pour n = 1,7. Les reflets gênent donc plus, et le traitement antireflet apporte plus.",
     indice: "Compare R pour n = 1,5 et pour n = 1,7."
@@ -2465,7 +2465,7 @@ QUESTIONS.push(
   {
     id: "U42-299", difficulte: "moyen", epreuve: "U42", theme: "Interférences et réseaux", session: "complément",
     question: "Pourquoi deux lampes ordinaires placées côte à côte ne produisent-elles pas de franges d'interférence ?",
-    choix: ["Leur lumière est trop faible", "Leur lumière n'est pas de la lumière", "Leurs ondes ne sont pas cohérentes : leurs phases varient de façon indépendante", "Les franges existent, mais l'œil ne les voit pas"],
+    choix: ["Leur lumière est trop faible pour qu'on puisse les voir", "Leur lumière n'est pas de la lumière", "Leurs ondes ne sont pas cohérentes : leurs phases varient indépendamment", "Les franges existent bien, mais elles sont trop fines pour que l'œil les voie"],
     bonne: 2,
     explication: "Pour obtenir des franges stables, il faut deux ondes cohérentes, de phase relative constante. Deux sources indépendantes ont des phases qui changent au hasard, très vite : les figures d'interférence se brouillent.\nDans l'expérience d'Young, les deux fentes sont éclairées par la même source : les deux ondes sont cohérentes.",
     indice: "Pourquoi, dans l'expérience d'Young, éclaire-t-on les deux fentes avec la même source ?"
@@ -2499,7 +2499,7 @@ QUESTIONS.push(
   {
     id: "U42-301", difficulte: "facile", epreuve: "U42", theme: "Polarisation", session: "complément",
     question: "Peut-on polariser une onde sonore dans l'air ?",
-    choix: ["Oui, avec un filtre adapté", "Oui, mais seulement en incidence de Brewster", "Oui, comme la lumière", "Non, car c'est une onde longitudinale : elle n'a pas de direction de vibration transversale"],
+    choix: ["Oui, avec un filtre adapté", "Oui, mais seulement lorsqu'elle arrive en incidence de Brewster sur une paroi", "Oui, comme la lumière", "Non : onde longitudinale, sans direction de vibration transversale"],
     bonne: 3,
     explication: "La polarisation n'existe que pour les ondes transversales, où la vibration est perpendiculaire à la direction de propagation. Une onde sonore est longitudinale : la vibration est dans la direction de propagation.\nLe fait que la lumière se polarise prouve qu'elle est transversale.",
     indice: "La polarisation décrit la direction de vibration, perpendiculaire à la propagation."
@@ -2519,7 +2519,7 @@ QUESTIONS.push(
   {
     id: "U42-303", difficulte: "moyen", epreuve: "U42", theme: "Polarisation", session: "complément",
     question: "La lumière d'un écran LCD est polarisée rectilignement. Un client le regarde avec des lunettes polarisantes et les fait tourner lentement de 90° autour de l'axe de son regard. Que voit-il ?",
-    choix: ["L'écran reste identique", "L'écran passe de lumineux à presque noir", "L'écran change de couleur seulement", "L'écran devient flou"],
+    choix: ["L'écran reste identique, quelle que soit la rotation", "L'écran passe de lumineux à presque noir", "L'écran change de couleur seulement", "L'écran devient flou"],
     bonne: 1,
     explication: "Quand l'axe du verre est parallèle à la polarisation de l'écran, la lumière passe. Après 90°, il est perpendiculaire et la lumière est arrêtée (loi de Malus : cos² 90° = 0) : l'écran paraît presque noir.\nC'est un défaut connu des lunettes polarisantes avec certains écrans : à tester en magasin.",
     indice: "Pense à la loi de Malus avec un angle de 90°."
@@ -2551,7 +2551,7 @@ QUESTIONS.push(
   {
     id: "U42-306", difficulte: "facile", epreuve: "U42", theme: "Champs et diaphragmes", session: "complément",
     question: "Qu'appelle-t-on la pupille de sortie d'un instrument ?",
-    choix: ["Le diaphragme de champ", "L'image du diaphragme d'ouverture donnée par la partie du système située après lui", "L'ouverture de l'œil", "L'image de l'objet"],
+    choix: ["Le diaphragme de champ, qui limite la taille de l'objet vu", "L'image du diaphragme d'ouverture par la partie qui le suit", "L'ouverture de l'œil de l'observateur placé derrière l'oculaire", "L'image de l'objet donnée par tout le système optique"],
     bonne: 1,
     explication: "La pupille de sortie est l'image du diaphragme d'ouverture à travers la partie du système qui le suit. C'est aussi par là que sort tout le faisceau lumineux utile.\nLa pupille d'entrée, elle, est l'image du même diaphragme à travers la partie qui le précède.",
     indice: "Pense à ce que devient le diaphragme d'ouverture vu depuis l'espace image."
@@ -2559,7 +2559,7 @@ QUESTIONS.push(
   {
     id: "U42-307", difficulte: "moyen", epreuve: "U42", theme: "Champs et diaphragmes", session: "complément",
     question: "Où doit-on placer la pupille de l'œil derrière l'oculaire d'une lunette ?",
-    choix: ["Contre l'oculaire, pour être le plus près possible", "Au foyer image de l'oculaire", "Au cercle oculaire, image de l'objectif par l'oculaire", "Le plus loin possible"],
+    choix: ["Contre l'oculaire, pour être le plus près possible", "Au foyer image de l'oculaire, du côté de l'œil", "Au cercle oculaire, derrière l'oculaire", "Le plus loin possible de l'oculaire"],
     bonne: 2,
     explication: "Le cercle oculaire est l'image de l'objectif (le diaphragme d'ouverture) donnée par l'oculaire : tous les faisceaux y passent. En y plaçant la pupille de l'œil, on reçoit toute la lumière et tout le champ.\nPlus près ou plus loin, on perd de la lumière ou du champ.",
     indice: "Tous les faisceaux issus de l'objectif passent par un même cercle derrière l'oculaire."
@@ -2722,7 +2722,7 @@ QUESTIONS.push(
   {
     id: "U42-319", difficulte: "moyen", epreuve: "U42", theme: "Lunettes afocales", session: "complément",
     question: "Quel est un inconvénient de la lunette de Galilée par rapport à celle de Kepler ?",
-    choix: ["Son image est renversée", "Elle est plus longue", "Elle n'a pas d'image intermédiaire réelle : on ne peut pas y placer de réticule, et son champ est limité", "Elle ne peut pas être afocale"],
+    choix: ["Son image est renversée par rapport à l'objet, ce qui gêne l'usage", "Elle est plus longue que la lunette de Kepler de même grossissement", "Pas d'image intermédiaire réelle : pas de réticule, champ limité", "Elle ne peut pas être afocale, car son oculaire est divergent"],
     bonne: 2,
     explication: "La lunette de Galilée a un oculaire divergent : il n'y a pas d'image intermédiaire réelle. On ne peut pas y placer de réticule ni de diaphragme de champ, et son champ est limité.\nSes atouts sont d'être courte et de donner une image droite.",
     indice: "Une image intermédiaire réelle permet de placer un réticule : la lunette de Galilée n'en a pas."

@@ -32,7 +32,7 @@ QUESTIONS.push(
   {
     id: "U43-002", epreuve: "U43", theme: "Chaîne des conjugués", session: "2017", difficulte: "moyen",
     question: "Une lunette est réglée pour un œil emmétrope qui n'accommode pas. Où se trouve l'image intermédiaire d'une étoile donnée par l'objectif ?",
-    choix: ["Au foyer objet de l'objectif", "Au foyer image de l'objectif, confondu avec le foyer objet de l'oculaire", "Au foyer image de l'oculaire", "Sur la rétine"],
+    choix: ["Au foyer objet de l'objectif, du côté de l'étoile observée","Au foyer image de l'objectif (aussi foyer objet de l'oculaire)","Au foyer image de l'oculaire, du côté de l'œil de l'observateur","Sur la rétine"],
     bonne: 1,
     explication: "Objet à l'infini → image au foyer image F'obj. Pour que l'image finale soit à l'infini (emmétrope désaccommodé), cette image doit être au foyer objet de l'oculaire : F'obj = Foc. C'est un système afocal.",
     indice: "Une étoile est à l'infini : où l'objectif en forme-t-il l'image ? Et où doit se trouver l'objet de l'oculaire pour que l'image finale reparte à l'infini ?"
@@ -40,7 +40,7 @@ QUESTIONS.push(
   {
     id: "U43-003", epreuve: "U43", theme: "Chaîne des conjugués", session: "complément", difficulte: "difficile",
     question: "Lunette réglée pour un œil emmétrope qui n'accommode pas. On vise une étoile B située hors de l'axe (faisceau incident incliné). Quel tracé est juste ?",
-    choix: ["Tracé juste : image B₁ dans le plan F'obj = Foc, faisceau émergent parallèle et incliné", "Les rayons convergent sur l'axe, au foyer image de l'objectif", "Le faisceau émergent ressort parallèle à l'axe", "Le faisceau émergent converge : F'obj et Foc ne sont pas confondus"],
+    choix: ["Tracé juste : B₁ dans le plan F'obj = Foc, faisceau émergent parallèle et incliné","Les rayons convergent sur l'axe, au foyer image de l'objectif, comme pour un objet sur l'axe","Le faisceau émergent ressort parallèle à l'axe optique, sans inclinaison, quelle que soit la hauteur de B","Le faisceau émergent converge : F'obj et Foc ne sont pas confondus dans une lunette afocale"],
     choixSchemas: ["img/schemas/U43/lunette-trace-juste.svg", "img/schemas/U43/lunette-trace-faux-image-sur-axe.svg", "img/schemas/U43/lunette-trace-faux-parallele-axe.svg", "img/schemas/U43/lunette-trace-faux-foyers-separes.svg"],
     bonne: 0,
     explication: "Un faisceau parallèle incliné converge dans le plan focal image de l'objectif, mais hors de l'axe : c'est l'image B₁. Lunette afocale : ce plan est aussi le plan focal objet de l'oculaire, donc le faisceau ressort parallèle, incliné dans la direction qui va de B₁ au centre de l'oculaire. Les pièges : faire converger un faisceau incliné sur l'axe (c'est seulement le cas d'un faisceau parallèle à l'axe), faire ressortir les rayons parallèles à l'axe, ou séparer F'obj et Foc (le faisceau converge alors au lieu d'être parallèle).",
@@ -57,7 +57,7 @@ QUESTIONS.push(
   {
     id: "U43-005", epreuve: "U43", theme: "Chaîne des conjugués", session: "2023", difficulte: "facile",
     question: "Un miroir plan (miroir d'un reflex, miroir de renvoi d'un télescope) donne d'un objet réel une image :",
-    choix: ["Réelle, renversée, de même taille", "Virtuelle, symétrique par rapport au miroir, de même taille", "Virtuelle, agrandie", "Réelle, à l'infini"],
+    choix: ["Réelle, renversée, de même taille, comme avec une lentille convergente","Virtuelle, symétrique par rapport au miroir, de même taille","Virtuelle, agrandie, située derrière le miroir à une distance double","Réelle, à l'infini, quelle que soit la position de l'objet"],
     bonne: 1,
     explication: "Le miroir plan a une vergence nulle : l'image est symétrique de l'objet par rapport au miroir et de même taille. Il ne fait que renvoyer la lumière dans une autre direction.",
     indice: "Pense à ton reflet dans une glace : où semble-t-il se trouver, et a-t-il changé de taille ?"
@@ -65,7 +65,7 @@ QUESTIONS.push(
   {
     id: "U43-006", epreuve: "U43", theme: "Chaîne des conjugués", session: "2018", difficulte: "moyen",
     question: "Microscope réglé pour un emmétrope qui n'accommode pas. Où est placée la préparation par rapport à l'objectif ?",
-    choix: ["Exactement au foyer objet de l'objectif", "Un peu au-delà du foyer objet (plus loin de l'objectif que F)", "Entre le foyer objet et l'objectif", "À l'infini, très loin de l'objectif"],
+    choix: ["Exactement au foyer objet de l'objectif, comme on le ferait pour une loupe","Un peu au-delà du foyer objet (plus loin de l'objectif que F)","Entre le foyer objet et l'objectif","À l'infini, très loin de l'objectif"],
     bonne: 1,
     explication: "L'objectif doit donner une image réelle et agrandie, située au foyer objet de l'oculaire. Pour une image réelle agrandie, l'objet est placé un peu plus loin que le foyer objet (entre F et 2F). Au foyer même, l'image partirait à l'infini ; entre F et l'objectif, l'image serait virtuelle.",
     indice: "L'objectif doit donner une image réelle et agrandie. Où placer l'objet par rapport à F pour obtenir ça avec une lentille convergente ?",
@@ -99,7 +99,7 @@ QUESTIONS.push(
     cas: "CAS-U43-02", etape: 2,
     contexte: "Le photographe est emmétrope et n'accommode pas. Il regarde le dépoli à travers la loupe.",
     question: "On note A₁ l'image du paysage par l'objectif, A₂ son image par le miroir, A' son image par la loupe. Quelle chaîne est juste ?",
-    choix: ["A₁ = F'obj → A₂ = A₁ (le miroir ne déplace pas l'image) → A' à l'infini", "A₁ = F'obj → A₂ sur le dépoli = F'lou → A' à l'infini", "A₁ = Fobj → A₂ sur le dépoli = Flou → A' sur le remotum", "A₁ = F'obj → A₂ symétrique de A₁ par le miroir, sur le dépoli = Flou → A' à l'infini"],
+    choix: ["A₁ = F'obj → A₂ = A₁ (le miroir ne déplace pas l'image) → A' à l'infini","A₁ = F'obj → A₂ sur le dépoli = F'lou → A' à l'infini","A₁ = Fobj → A₂ sur le dépoli = Flou → A' sur le remotum","A₁ = F'obj → A₂ symétrique de A₁, sur le dépoli = Flou → A' à l'infini"],
     bonne: 3,
     explication: "Objet à l'infini : l'objectif vise A₁ = F'obj. Le miroir coupe la lumière avant ce point : A₁ est un objet virtuel pour le miroir, qui en donne A₂, symétrique de A₁ par rapport à lui. A₂ est réel, sur le dépoli.\nEmmétrope sans accommoder : A' doit être à l'infini, donc A₂ au foyer objet de la loupe.\nChaîne : A∞ → A₁ = F'obj → A₂ sur le dépoli = Flou → A' à l'infini.",
     indice: "Pour que la loupe donne une image à l'infini, où doit se trouver son objet ?",
@@ -224,7 +224,7 @@ QUESTIONS.push(
   {
     id: "U43-142", epreuve: "U43", theme: "Chaîne des conjugués", session: "complément", difficulte: "moyen",
     question: "Un projecteur de diapositives : lampe, condenseur, diapositive, objectif, écran. Pour que l'écran soit éclairé de façon régulière, où le condenseur doit-il former l'image du filament de la lampe ?",
-    choix: ["Dans le plan de l'objectif (sur sa pupille)", "Sur la diapositive", "Sur l'écran", "À l'infini"],
+    choix: ["Dans le plan de l'objectif (sur sa pupille)","Sur la diapositive, dans le plan de l'objet à projeter","Sur l'écran, dans le plan où l'image se forme","À l'infini, très loin derrière l'écran"],
     bonne: 0,
     explication: "Il y a deux chaînes à écrire. Celle de l'objet : diapositive → (objectif) → image nette sur l'écran. Celle de la source : filament → (condenseur) → image dans l'objectif.\nAinsi toute la lumière passe dans l'objectif, et le filament n'est net ni sur la diapositive ni sur l'écran : l'éclairage est régulier.\nSi l'image du filament tombait sur la diapositive, on verrait le filament sur l'écran.",
     indice: "Le filament ne doit pas se voir sur l'écran. Et toute la lumière doit entrer dans l'objectif."
@@ -232,7 +232,7 @@ QUESTIONS.push(
   {
     id: "U43-143", epreuve: "U43", theme: "Chaîne des conjugués", session: "complément", difficulte: "moyen",
     question: "L₁ (f'₁ = +40 mm), puis L₂ (f'₂ = +30 mm) placée 150 mm après L₁. Un objet réel est à 60 mm devant L₁. Où se forme l'image finale ?",
-    choix: ["À 60 mm après L₂", "À l'infini : A₁ est au foyer objet de L₂", "Au foyer image de L₂, 30 mm après elle", "À 15 mm après L₂"],
+    choix: ["À 60 mm après L₂, là où l'image réelle se forme sur un écran placé derrière","À l'infini : A₁ est au foyer objet de L₂","Au foyer image de L₂, 30 mm après elle, à la sortie du système","À 15 mm après L₂, pour un observateur placé juste derrière"],
     bonne: 1,
     explication: "L₁ : [[1|O₁A₁]] = [[1|40]] + [[1|−60]] = [[3|120]] − [[2|120]] = [[1|120]], donc O₁A₁ = +120 mm.\nO₂A₁ = 120 − 150 = −30 mm : A₁ est 30 mm avant L₂, exactement à son foyer objet F₂.\nL'image finale est à l'infini. Chaîne : A → A₁ = F₂ → A' à l'infini.\nIci, A₁ tombe sur F₂ : on conclut sans calculer O₂A'.",
     indice: "Calcule O₁A₁, puis compare la position de A₁ à celle du foyer objet de L₂.",
@@ -254,7 +254,7 @@ QUESTIONS.push(
   {
     id: "U43-145", epreuve: "U43", theme: "Chaîne des conjugués", session: "complément", difficulte: "moyen",
     question: "L₁ forme l'image B₁ après L₂ : pour L₂, B₁ est un objet virtuel. Quel rayon permet de construire facilement l'image B₂ ?",
-    choix: ["Un rayon qui part de B₁ et revient vers L₂", "Le rayon qui vise B₁ en passant par le centre O₂ : il traverse L₂ sans être dévié", "Aucun : on ne construit pas l'image d'un objet virtuel", "Le rayon qui part de B₁ parallèlement à l'axe"],
+    choix: ["Un rayon qui part de B₁ et revient vers L₂, en sens inverse de la lumière","Le rayon qui vise B₁ en passant par le centre O₂ : il n'est pas dévié","Aucun : on ne construit pas l'image d'un objet virtuel avec des rayons","Le rayon qui part de B₁ parallèlement à l'axe"],
     bonne: 1,
     explication: "Avec un objet virtuel, les rayons arrivent sur L₂ en visant B₁. Le rayon qui vise B₁ en passant par O₂ n'est pas dévié : B₂ est sur ce rayon.\nDeuxième rayon utile : celui qui passe par F₂ en visant B₁, il ressort parallèle à l'axe. B₂ est au croisement des deux.",
     indice: "Les rayons ne partent pas de B₁ : ils arrivent sur L₂ en le visant. Lequel de ces rayons n'est pas dévié ?",
@@ -324,7 +324,7 @@ QUESTIONS.push(
   {
     id: "U43-013", epreuve: "U43", theme: "Œil et instrument", session: "2023", difficulte: "moyen",
     question: "Le même myope (−4,00 δ), sans lunettes, regarde dans un instrument réglé pour un emmétrope (image finale à l'infini). Que se passe-t-il ?",
-    choix: ["Il voit net en accommodant de 4 δ", "Il voit net sans accommoder", "Il ne peut pas voir net : l'image est au-delà de son remotum", "Il voit net en accommodant de 0,25 δ"],
+    choix: ["Il voit net en accommodant de 4 δ, comme pour un objet rapproché","Il voit net sans accommoder, comme un emmétrope","Il ne voit pas net : l'image est au-delà de son remotum","Il voit net en accommodant de 0,25 δ"],
     bonne: 2,
     explication: "L'accommodation sert uniquement à voir plus près que le remotum. Une image à l'infini est plus loin que son remotum (25 cm) : flou impossible à rattraper. Il faut régler l'oculaire ou garder ses lunettes.",
     indice: "Où est le remotum d'un myope de −4 δ ? L'accommodation permet-elle de voir plus loin que lui, ou seulement plus près ?"
@@ -332,7 +332,7 @@ QUESTIONS.push(
   {
     id: "U43-014", epreuve: "U43", theme: "Œil et instrument", session: "2021", difficulte: "moyen",
     question: "Par rapport au réglage pour un emmétrope, comment faut-il déplacer l'oculaire pour un utilisateur myope ?",
-    choix: ["L'éloigner de l'image intermédiaire", "Le rapprocher de l'image intermédiaire (vers l'objectif)", "Le tourner de 90°", "Ne pas le bouger"],
+    choix: ["L'éloigner de l'image intermédiaire, vers l'œil de l'observateur","Le rapprocher de l'image intermédiaire (vers l'objectif)","Le tourner de 90° autour de l'axe optique","Ne pas le bouger : l'œil compense seul"],
     bonne: 1,
     explication: "Le myope doit recevoir une image virtuelle à distance finie (sur son remotum). Pour cela, l'image intermédiaire doit se trouver entre le foyer objet et l'oculaire, donc on rapproche l'oculaire de cette image.",
     indice: "Le myope a besoin d'une image virtuelle à distance finie, pas à l'infini. Où doit alors se trouver l'image intermédiaire par rapport au foyer objet de l'oculaire ?"
@@ -352,7 +352,7 @@ QUESTIONS.push(
   {
     id: "U43-016", epreuve: "U43", theme: "Étude des champs", session: "2022", difficulte: "moyen",
     question: "Dans l'espace d'étude, comment identifie-t-on la pupille ?",
-    choix: ["Le plus grand des diaphragmes, une fois conjugués dans l'espace d'étude", "Celui (ou son conjugué) vu sous le plus petit angle depuis le centre du plan des champs", "Toujours la monture de l'objectif, quel que soit l'instrument", "Le diaphragme le plus proche de l'œil de l'observateur"],
+    choix: ["Le plus grand des diaphragmes, une fois conjugués dans l'espace d'étude, car il laisse passer le plus de lumière","Celui (ou son conjugué) vu sous le plus petit angle depuis le centre du plan des champs","Toujours la monture de l'objectif, quel que soit l'instrument étudié et son réglage","Le diaphragme le plus proche de l'œil de l'observateur, dans le plan des champs"],
     bonne: 1,
     explication: "On conjugue d'abord tous les diaphragmes dans l'espace d'étude. Depuis le point axial du plan des champs, celui qu'on voit sous le plus petit angle limite l'ouverture : c'est la pupille. Les autres jouent le rôle de lucarnes.",
     indice: "Place-toi au centre du plan des champs et regarde chaque diaphragme : lequel limite le plus l'ouverture du faisceau ?",
@@ -362,7 +362,7 @@ QUESTIONS.push(
   {
     id: "U43-017", epreuve: "U43", theme: "Étude des champs", session: "2019", difficulte: "facile",
     question: "Qu'est-ce que le champ de pleine lumière ?",
-    choix: ["La zone où l'image est la plus nette, au centre du champ", "La zone où chaque faisceau remplit toute la pupille, sans être coupé", "La zone où l'éclairement vaut la moitié du maximum", "Tout ce que l'on voit dans l'instrument, même faiblement"],
+    choix: ["La zone où l'image est la plus nette, au centre du champ, là où l'aberration est minimale","La zone où chaque faisceau remplit toute la pupille, sans être coupé","La zone où l'éclairement vaut la moitié du maximum","Tout ce que l'on voit dans l'instrument, même faiblement éclairé en bordure"],
     bonne: 1,
     explication: "Dans le champ de pleine lumière, la lucarne ne coupe aucun faisceau : chaque point utilise toute la pupille. L'éclairement y est maximal et uniforme.",
     indice: "Pense au faisceau issu d'un point du champ : dans cette zone, est-il coupé par la lucarne ou passe-t-il en entier ?",
@@ -382,7 +382,7 @@ QUESTIONS.push(
   {
     id: "U43-019", epreuve: "U43", theme: "Étude des champs", session: "2021", difficulte: "moyen",
     question: "Comment supprimer le champ de contour d'un instrument ?",
-    choix: ["En fermant davantage la pupille de l'instrument", "En plaçant un diaphragme dans le plan d'une image réelle", "En prenant un oculaire de plus grand diamètre", "En éloignant l'œil du cercle oculaire"],
+    choix: ["En fermant davantage la pupille de l'instrument pour limiter les faisceaux","En plaçant un diaphragme dans le plan d'une image réelle","En prenant un oculaire de plus grand diamètre pour élargir le champ","En éloignant l'œil du cercle oculaire"],
     bonne: 1,
     explication: "Un diaphragme placé dans un plan où se forme une image réelle coupe le champ net, sans dégradé : champ total = champ de pleine lumière. C'est le diaphragme de champ des oculaires.",
     indice: "Le contour vient d'une lucarne qui coupe les faisceaux progressivement. Où placer un diaphragme pour couper le champ net, sans dégradé ?"
@@ -442,7 +442,7 @@ QUESTIONS.push(
   {
     id: "U43-026", epreuve: "U43", theme: "Liaisons mécaniques", session: "2022", difficulte: "moyen",
     question: "Lors d'une mise au point, on tourne une molette. Quel est le « mouvement utile » demandé pour l'élément optique ?",
-    choix: ["La rotation de la molette", "La translation de l'élément optique suivant l'axe optique", "Une rotation de la lentille sur elle-même", "Aucun mouvement"],
+    choix: ["La rotation de la molette autour de son propre axe de manœuvre","La translation de l'élément optique suivant l'axe optique","Une rotation de la lentille sur elle-même autour de l'axe optique","Aucun mouvement"],
     bonne: 1,
     explication: "Ce qui change la mise au point, c'est la position de la lentille sur l'axe optique : une translation. La rotation de la molette n'est que le moyen de la produire.",
     indice: "Ne confonds pas ce que fait ta main et ce que fait la lentille. Qu'est-ce qui change la mise au point ?"
@@ -502,7 +502,7 @@ QUESTIONS.push(
   {
     id: "U43-033", epreuve: "U43", theme: "Grossissement et photo", session: "2020", difficulte: "moyen",
     question: "On monte un multiplicateur ×2 sur cet objectif (100 mm, f/4). Résultat ?",
-    choix: ["200 mm, f/4, même luminosité", "200 mm, f/8, luminosité divisée par 4", "50 mm, f/2, luminosité ×4", "200 mm, f/8, luminosité divisée par 2"],
+    choix: ["200 mm, f/4, même luminosité qu'avant le multiplicateur","200 mm, f/8, luminosité divisée par 4","50 mm, f/2, luminosité ×4 par rapport à l'objectif seul","200 mm, f/8, luminosité divisée par 2 seulement"],
     bonne: 1,
     explication: "La focale double (200 mm) mais la pupille d'entrée ne change pas :\nN = [[200|25]] = 8\nL'éclairement varie comme [[1|N²]] : ([[8|4]])² = 4, donc 4 fois moins de lumière.",
     indice: "La focale change, mais la pupille d'entrée de l'objectif, elle, reste la même. Et l'éclairement varie comme [[1|N²]]."
@@ -512,7 +512,7 @@ QUESTIONS.push(
   {
     id: "U43-034", epreuve: "U43", theme: "Œil astigmate", session: "2021", difficulte: "difficile",
     question: "Un astigmate regarde un point dans un instrument. La tache de diffusion sur sa rétine est un petit segment horizontal. Cela signifie que :",
-    choix: ["Le méridien horizontal est net sur la rétine", "Le méridien vertical est mis au point sur la rétine, le méridien horizontal ne l'est pas", "Aucun méridien n'est mis au point", "L'œil n'est pas astigmate"],
+    choix: ["Le méridien horizontal est net sur la rétine","Le méridien vertical est net sur la rétine, le méridien horizontal ne l'est pas","Aucun méridien n'est mis au point : la tache est un cercle parfait sur la rétine","L'œil n'est pas astigmate"],
     bonne: 1,
     explication: "Les rayons du méridien vertical convergent en un point dans ce plan, mais ceux du méridien horizontal restent étalés : on obtient une focale horizontale. Une focale horizontale sur la rétine signifie que c'est le méridien vertical qui est net.",
     indice: "Les rayons d'un méridien qui convergent sur la rétine donnent une focale perpendiculaire à ce méridien. Une focale horizontale vient donc de quel méridien ?"
@@ -520,7 +520,7 @@ QUESTIONS.push(
   {
     id: "U43-035", epreuve: "U43", theme: "Œil astigmate", session: "2022", difficulte: "moyen",
     question: "Un client astigmate veut utiliser un télescope sans ses lunettes. Que lui conseiller ?",
-    choix: ["Régler l'oculaire : cela compense toute l'amétropie", "Garder ses lunettes ou ses lentilles pendant l'observation", "Fermer l'œil le plus astigmate pendant l'observation", "Prendre un objectif de plus grande focale"],
+    choix: ["Régler l'oculaire : cela compense toute l'amétropie, y compris l'astigmatisme","Garder ses lunettes ou ses lentilles pendant l'observation","Fermer l'œil le plus astigmate pendant l'observation, sans changer le reste","Prendre un objectif de plus grande focale"],
     bonne: 1,
     explication: "Le réglage de l'oculaire déplace l'image, comme une sphère : il ne compense que la partie sphérique de l'amétropie. Pour l'astigmatisme, il faut garder sa compensation.",
     indice: "Régler l'oculaire déplace l'image comme le ferait un verre sphérique. Peut-il compenser un cylindre ?"
@@ -550,7 +550,7 @@ QUESTIONS.push(
   {
     id: "U43-038", epreuve: "U43", theme: "Frontofocomètre", session: "2019", difficulte: "facile",
     question: "Au frontofocomètre, la puissance frontale image d'un verre se mesure en lumière verte (raie e du mercure). Pourquoi impose-t-on une couleur précise ?",
-    choix: ["Pour ne pas éblouir l'opticien pendant la mesure", "C'est la longueur d'onde de référence (raie e, 546 nm) pour mesurer les puissances", "Pour contrôler l'efficacité des traitements antireflet", "Pour bien voir la mire à travers les verres teintés"],
+    choix: ["Pour ne pas éblouir l'opticien pendant la mesure, car la lumière blanche est trop vive","C'est la longueur d'onde de référence (raie e, 546 nm)","Pour contrôler l'efficacité des traitements antireflet sur le verre","Pour bien voir la mire à travers les verres teintés"],
     bonne: 1,
     explication: "La vergence d'un verre change un peu avec la couleur de la lumière (dispersion). En mesurant à la longueur d'onde de référence (raie e, 546,07 nm), on évite les écarts dus au chromatisme et on mesure la valeur exacte annoncée par le fabricant.",
     indice: "La vergence d'un verre change-t-elle avec la couleur de la lumière ? Pense à la dispersion."
@@ -651,7 +651,7 @@ QUESTIONS.push(
     id: "U43-045", epreuve: "U43", theme: "Étude des champs", session: "complément", difficulte: "moyen",
     cas: "CAS-U43-01", etape: 4,
     question: "Avec la monture de l'oculaire comme lucarne, le bord de l'image est dégradé. Où placer un diaphragme pour obtenir un bord net ?",
-    choix: ["Dans le plan de A₁B₁, au foyer objet de l'oculaire", "Contre l'objectif", "Contre l'oculaire", "Au foyer image de l'oculaire"],
+    choix: ["Dans le plan de A₁B₁, au foyer objet de l'oculaire","Contre l'objectif, au plus près de la préparation observée","Contre l'oculaire, au plus près de l'œil de l'utilisateur","Au foyer image de l'oculaire"],
     bonne: 0,
     explication: "Un diaphragme placé dans le plan d'une image réelle (ici A₁B₁, plan des champs) coupe le champ net : il supprime le champ de contour. C'est le diaphragme de champ des oculaires. Contre l'objectif, il réduirait la lumière (c'est la pupille) sans rendre le bord net.",
     indice: "Le champ de contour disparaît quand le diaphragme est dans un plan où se forme une image réelle. Lequel, ici ?"
@@ -1204,12 +1204,7 @@ QUESTIONS.push(
   "cas": "CAS-U43-04",
   "etape": 2,
   "question": "Que change le miroir plan de renvoi ?",
-  "choix": [
-    "Il replie le trajet : l'image est symétrique, de même taille, à la même distance parcourue",
-    "Il double la focale du télescope",
-    "Il agrandit l'image, car il est incliné à 45°",
-    "Il déplace le foyer 800 mm plus loin"
-  ],
+  "choix": ["Il replie le trajet : image symétrique, même taille, même distance parcourue","Il double la focale du télescope grâce à son inclinaison","Il agrandit l'image, car il est incliné à 45°","Il déplace le foyer 800 mm plus loin, ce qui allonge la focale effective du télescope"],
   "bonne": 0,
   "explication": "Un miroir plan donne d'un objet une image symétrique, de même taille (γ = +1). Il plie le faisceau pour sortir l'oculaire sur le côté, mais ne change ni la focale, ni la distance parcourue par la lumière.",
   "indice": "Que vaut le grandissement d'un miroir plan ?",
@@ -1673,12 +1668,7 @@ QUESTIONS.push(
   "session": "complément",
   "difficulte": "moyen",
   "question": "En skiascopie, quand le point neutre est atteint, que voit l'examinateur dans la pupille ?",
-  "choix": [
-    "Toute la pupille est éclairée d'un coup, sans mouvement apparent du reflet",
-    "Le reflet se déplace très vite dans le même sens que le skiascope",
-    "Le reflet se déplace très vite en sens inverse du skiascope",
-    "La pupille reste noire quelle que soit la position du skiascope"
-  ],
+  "choix": ["Toute la pupille est éclairée d'un coup, sans mouvement apparent du reflet","Le reflet se déplace très vite dans le même sens que le skiascope, puis s'arrête net","Le reflet se déplace très vite en sens inverse du skiascope, comme pour une forte myopie","La pupille reste noire quelle que soit la position du skiascope"],
   "bonne": 0,
   "explication": "Au point neutre, le remotum de l'œil est exactement sur l'examinateur : la lumière revenant de la rétine éclaire toute la pupille en même temps, et le reflet ne se déplace plus. Plus on s'en approche, plus le reflet est vif et rapide, puis il se fige.",
   "indice": "Au point neutre, le sens du mouvement s'inverse : que voit-on juste au moment du changement de sens ?",
@@ -1798,12 +1788,7 @@ QUESTIONS.push(
 {
   "id": "U43-174", "epreuve": "U43", "theme": "Œil astigmate", "session": "complément", "difficulte": "facile",
   "question": "Un œil astigmate regarde un point lumineux sans que l'instrument ne corrige quoi que ce soit. Quelle image ce point donne-t-il ?",
-  "choix": [
-    "Un seul point image, comme pour un œil sphérique",
-    "Deux petites lignes perpendiculaires entre elles, situées à deux distances différentes",
-    "Deux points images alignés sur l'axe",
-    "Un cercle parfait, quelle que soit la distance"
-  ],
+  "choix": ["Un seul point image net, comme pour un œil sphérique bien corrigé","Deux petites lignes perpendiculaires, situées à deux distances différentes","Deux points images alignés sur l'axe, à deux distances différentes","Un cercle parfait, quelle que soit la distance, comme pour un œil sans défaut"],
   "bonne": 1,
   "explication": "Les deux méridiens principaux d'un œil astigmate n'ont pas la même réfraction. Chacun fait converger les rayons à une distance différente, et chaque focale est une petite ligne perpendiculaire au méridien qui la forme.",
   "indice": "Les deux méridiens ont deux réfractions différentes : combien de distances de convergence cela fait-il ?"
@@ -1969,12 +1954,7 @@ QUESTIONS.push(
 {
   "id": "U43-186", "epreuve": "U43", "theme": "Mécanismes de réglage", "session": "complément", "difficulte": "facile",
   "question": "Pourquoi utilise-t-on une vis à pas fin pour une mise au point précise ?",
-  "choix": [
-    "Un tour de vis déplace très peu l'élément, donc le réglage est précis",
-    "Un tour de vis déplace beaucoup l'élément, donc le réglage est rapide",
-    "Elle supprime tout frottement",
-    "Elle fait tourner l'élément optique sur lui-même"
-  ],
+  "choix": ["Un tour de vis déplace très peu l'élément : réglage précis","Un tour de vis déplace beaucoup l'élément, donc le réglage est plus rapide","Elle supprime tout frottement","Elle fait tourner l'élément optique sur lui-même"],
   "bonne": 0,
   "explication": "Le déplacement par tour est égal au pas. Avec un pas fin, un tour déplace peu l'élément : on règle plus finement, au prix de plus de tours pour une même course.",
   "indice": "Que vaut le déplacement de l'écrou pour un tour de vis, quand le pas est petit ?"
@@ -2008,12 +1988,7 @@ QUESTIONS.push(
 {
   "id": "U43-189", "epreuve": "U43", "theme": "Liaisons mécaniques", "session": "complément", "difficulte": "difficile",
   "question": "Une pièce a une face plane qui repose sur la face plane d'une autre pièce (appui plan). Quels mouvements relatifs sont possibles ?",
-  "choix": [
-    "Deux translations dans le plan de contact et une rotation autour de la normale à ce plan",
-    "Une seule translation perpendiculaire au plan",
-    "Trois rotations, aucune translation",
-    "Une translation et deux rotations"
-  ],
+  "choix": ["Deux translations dans le plan et une rotation autour de la normale","Une seule translation, perpendiculaire au plan de contact, et aucune rotation","Trois rotations, aucune translation","Une translation et deux rotations"],
   "bonne": 0,
   "explication": "La pièce peut glisser dans toutes les directions du plan de contact (deux translations) et tourner sur elle-même autour de l'axe perpendiculaire à ce plan (une rotation). Elle ne peut ni décoller ni basculer.",
   "indice": "Pose un livre à plat sur une table : comment peut-il bouger sans quitter la table ni basculer ?"
@@ -2037,12 +2012,7 @@ QUESTIONS.push(
 {
   "id": "U43-191", "epreuve": "U43", "theme": "Étude des champs", "session": "complément", "difficulte": "difficile",
   "question": "On agrandit la pupille d'un instrument sans toucher à la lucarne. Que deviennent les champs ?",
-  "choix": [
-    "Le champ de pleine lumière diminue et le champ total augmente",
-    "Les deux champs augmentent",
-    "Les deux champs diminuent",
-    "Rien ne change"
-  ],
+  "choix": ["Le champ de pleine lumière diminue et le champ total augmente","Les deux champs augmentent, car la pupille laisse passer plus de lumière","Les deux champs diminuent","Rien ne change"],
   "bonne": 0,
   "explication": "Avec une pupille plus grande, il faut que le faisceau entier passe la lucarne pour que le point soit en pleine lumière : ce champ diminue. À l'inverse, il suffit qu'un seul rayon passe pour qu'un point soit vu : le champ total augmente. Le champ de contour s'élargit donc, puisque le champ total grandit alors que celui de pleine lumière diminue.",
   "indice": "Pour être en pleine lumière, tout le faisceau doit passer. Plus la pupille est grande, plus c'est difficile."
@@ -2250,12 +2220,7 @@ QUESTIONS.push(
 {
   "id": "U43-207", "epreuve": "U43", "theme": "Étude des champs", "session": "complément", "difficulte": "moyen",
   "question": "Pour profiter de toute la lumière qui sort d'une lunette, où faut-il placer la pupille de l'œil ?",
-  "choix": [
-    "Sur le cercle oculaire, image de l'objectif donnée par l'oculaire",
-    "Sur le foyer objet de l'oculaire",
-    "Contre la lentille de l'objectif",
-    "Dans le plan de l'image intermédiaire"
-  ],
+  "choix": ["Sur le cercle oculaire, image de l'objectif donnée par l'oculaire","Sur le foyer objet de l'oculaire, là où se forme l'image intermédiaire","Contre la lentille de l'objectif","Dans le plan de l'image intermédiaire"],
   "bonne": 0,
   "explication": "Tous les faisceaux issus de l'instrument passent par le cercle oculaire, qui est l'image de l'objectif (la pupille) donnée par l'oculaire. L'œil placé à cet endroit reçoit toute la lumière et voit tout le champ.",
   "indice": "Où l'ensemble des faisceaux sortants se resserre-t-il le plus ?"
@@ -2274,12 +2239,7 @@ QUESTIONS.push(
 {
   "id": "U43-209", "epreuve": "U43", "theme": "Étude des champs", "session": "complément", "difficulte": "moyen",
   "question": "Le cercle oculaire d'une lunette mesure 8 mm, la pupille de l'œil de l'utilisateur 3 mm. Que se passe-t-il ?",
-  "choix": [
-    "Une partie de la lumière sortant de l'instrument n'entre pas dans l'œil",
-    "L'image devient plus nette",
-    "Le champ de l'instrument augmente",
-    "Toute la lumière entre dans l'œil"
-  ],
+  "choix": ["Une partie de la lumière sortant de l'instrument n'entre pas dans l'œil","L'image devient plus nette, car l'œil ne reçoit que les rayons les mieux corrigés","Le champ de l'instrument augmente","Toute la lumière entre dans l'œil"],
   "bonne": 0,
   "explication": "La pupille de l'œil, plus petite que le cercle oculaire, arrête une partie du faisceau : l'œil devient la pupille du système et on perd de la lumière. Il vaut mieux un cercle oculaire plus petit que la pupille de l'œil.",
   "indice": "Compare les deux diamètres : lequel laisse passer le moins de lumière ?",
@@ -2301,12 +2261,7 @@ QUESTIONS.push(
 {
   "id": "U43-211", "epreuve": "U43", "theme": "Skiascopie", "session": "complément", "difficulte": "difficile",
   "question": "En skiascopie à 1 m avec un faisceau divergent (miroir plan), le reflet se déplace dans le même sens que le skiascope. Que peut-on conclure ?",
-  "choix": [
-    "Hypermétropie, emmétropie ou myopie de moins de 1 δ",
-    "Myopie de plus de 1 δ",
-    "Le point neutre est atteint",
-    "L'œil est astigmate"
-  ],
+  "choix": ["Hypermétropie, emmétropie ou myopie de moins de 1 δ","Myopie de plus de 1 δ, l'œil étant plus myope que la distance de travail","Le point neutre est atteint","L'œil est astigmate"],
   "bonne": 0,
   "explication": "À 1 m, la distance de travail vaut 1 δ. Un mouvement dans le même sens que le skiascope indique que le remotum de l'œil est au-delà de l'examinateur : l'œil est hypermétrope, emmétrope ou myope de moins de 1 δ. Un mouvement en sens inverse indique une myopie de plus de 1 δ.",
   "indice": "Compare la réfraction de l'œil à la distance de travail, 1 δ à 1 m. Un mouvement inverse annonce une myopie plus forte que cette valeur.",
@@ -2344,12 +2299,7 @@ QUESTIONS.push(
 {
   "id": "U43-214", "epreuve": "U43", "theme": "Frontofocomètre", "session": "complément", "difficulte": "facile",
   "question": "Au frontofocomètre, pourquoi règle-t-on d'abord l'oculaire sur sa propre vue avant de mesurer un verre ?",
-  "choix": [
-    "Pour que la mesure ne dépende ni de l'amétropie ni de l'accommodation de l'opérateur",
-    "Pour grossir davantage la mire",
-    "Pour éclairer le verre plus fortement",
-    "Pour changer la longueur d'onde utilisée"
-  ],
+  "choix": ["Pour que la mesure ne dépende pas de la vue de l'opérateur","Pour grossir davantage la mire et la distinguer plus facilement","Pour éclairer le verre plus fortement","Pour changer la longueur d'onde utilisée"],
   "bonne": 0,
   "explication": "Sans ce réglage, l'opérateur compenserait sans le savoir en accommodant, ou n'accommoderait pas assez : la puissance lue serait fausse. Réglé, l'oculaire est conjugué avec le plan où la mire doit être vue nette.",
   "indice": "Que se passe-t-il sur la mesure si l'opérateur accommode ou est amétrope ?"
@@ -2417,12 +2367,7 @@ QUESTIONS.push(
 {
   "id": "U43-220", "epreuve": "U43", "theme": "Liaisons mécaniques", "session": "complément", "difficulte": "moyen",
   "question": "Une liaison hélicoïdale (vis dans un écrou) laisse un seul degré de liberté. Pourquoi, alors que la vis tourne ET avance ?",
-  "choix": [
-    "La rotation et la translation sont liées entre elles par le pas",
-    "La vis ne peut que tourner, elle n'avance pas",
-    "La vis ne peut que glisser, elle ne tourne pas",
-    "Le pas supprime la rotation de l'écrou"
-  ],
+  "choix": ["La rotation et la translation sont liées entre elles par le pas","La vis ne peut que tourner sur place, elle n'avance pas dans l'écrou","La vis ne peut que glisser, elle ne tourne pas","Le pas supprime la rotation de l'écrou"],
   "bonne": 0,
   "explication": "Pour la vis, un tour correspond toujours à une avance égale au pas. On ne peut pas choisir la rotation et la translation séparément : il ne reste qu'un seul mouvement indépendant.",
   "indice": "Peut-on faire avancer la vis sans qu'elle tourne, avec un écrou fixe ?"
@@ -2614,12 +2559,7 @@ QUESTIONS.push(
 {
   "id": "U43-238", "epreuve": "U43", "theme": "Étude des champs", "session": "complément", "difficulte": "moyen",
   "question": "Quand la lucarne n'est pas dans un plan conjugué de l'objet, que devient le bord du champ ?",
-  "choix": [
-    "Il est dégradé : un champ de contour apparaît",
-    "Il est parfaitement net",
-    "Le champ disparaît",
-    "Le champ devient infini"
-  ],
+  "choix": ["Il est dégradé : un champ de contour apparaît","Il est parfaitement net, comme dans un plan conjugué de l'objet","Le champ disparaît","Le champ devient infini"],
   "bonne": 0,
   "explication": "Si la lucarne n'est pas dans un plan conjugué de l'objet, elle coupe progressivement les faisceaux : l'éclairement diminue peu à peu entre le champ de pleine lumière et le champ total, ce qui donne un bord dégradé.",
   "indice": "Un diaphragme situé dans un plan image coupe net. S'il en est éloigné, comment coupe-t-il les faisceaux ?"
@@ -2668,12 +2608,7 @@ QUESTIONS.push(
 {
   "id": "U43-243", "epreuve": "U43", "theme": "Chaîne des conjugués", "session": "complément", "difficulte": "moyen",
   "question": "Un projecteur forme sur un écran éloigné une image nette de la diapositive. Où est la diapositive par rapport à l'objectif ?",
-  "choix": [
-    "Un peu plus loin que le foyer objet",
-    "Au foyer image",
-    "Entre le foyer objet et la lentille",
-    "À l'infini"
-  ],
+  "choix": ["Un peu plus loin que le foyer objet","Au foyer image","Entre le foyer objet et la lentille","À l'infini, très loin de l'objectif du projecteur"],
   "bonne": 0,
   "explication": "Pour avoir une image réelle et lointaine, l'objet doit être juste au-delà du foyer objet : plus il s'en approche, plus l'image s'éloigne. Entre le foyer et la lentille, l'image serait virtuelle et ne pourrait pas se former sur un écran.",
   "indice": "Image réelle et lointaine : l'objet est presque, mais pas tout à fait, au foyer objet.",
@@ -2792,12 +2727,7 @@ QUESTIONS.push(
 {
   "id": "U43-252", "epreuve": "U43", "theme": "Frontofocomètre", "session": "complément", "difficulte": "difficile",
   "question": "Au frontofocomètre, quelle face du verre pose-t-on contre l'appui, et que mesure-t-on ?",
-  "choix": [
-    "La face arrière : on mesure la puissance frontale image",
-    "La face avant : on mesure la puissance frontale objet",
-    "La face avant : on mesure la puissance frontale image",
-    "Peu importe la face : la mesure est la même"
-  ],
+  "choix": ["La face arrière : on mesure la puissance frontale image","La face avant : on mesure la puissance frontale objet du verre","La face avant : on mesure la puissance frontale image du verre","Peu importe la face : la mesure est la même"],
   "bonne": 0,
   "explication": "Le verre est posé par sa face arrière (côté œil) contre l'appui. On mesure alors la puissance frontale image, qui est celle qui compte pour le porteur.",
   "indice": "La mesure se rapporte à la face tournée vers l'œil du porteur."
@@ -2805,12 +2735,7 @@ QUESTIONS.push(
 {
   "id": "U43-253", "epreuve": "U43", "theme": "Frontofocomètre", "session": "complément", "difficulte": "moyen",
   "question": "Au frontofocomètre, la mire d'un verre cylindrique n'est nette que pour deux positions différentes de la molette. Pourquoi ?",
-  "choix": [
-    "Chaque méridien principal a sa propre puissance",
-    "Le verre est mal centré",
-    "La lumière n'est pas assez intense",
-    "L'oculaire est mal réglé"
-  ],
+  "choix": ["Chaque méridien principal a sa propre puissance","Le verre est mal centré sur le support du frontofocomètre","La lumière n'est pas assez intense","L'oculaire est mal réglé"],
   "bonne": 0,
   "explication": "Un verre cylindrique a deux puissances principales différentes. Il faut deux réglages pour rendre nettes les lignes de la mire dans chacune des deux directions : leur différence donne le cylindre.",
   "indice": "Un verre cylindrique n'a pas la même puissance dans toutes les directions."
@@ -2818,12 +2743,7 @@ QUESTIONS.push(
 {
   "id": "U43-254", "epreuve": "U43", "theme": "Étude des champs", "session": "complément", "difficulte": "moyen",
   "question": "Où se trouve le diaphragme de champ d'un oculaire de microscope ?",
-  "choix": [
-    "Dans le plan de l'image intermédiaire, au foyer objet de l'oculaire",
-    "Contre l'objectif",
-    "Au foyer image de l'oculaire",
-    "Sur l'œil de l'utilisateur"
-  ],
+  "choix": ["Dans le plan de l'image intermédiaire, au foyer objet de l'oculaire","Contre l'objectif, au plus près de la préparation, pour limiter le champ de vision","Au foyer image de l'oculaire","Sur l'œil de l'utilisateur"],
   "bonne": 0,
   "explication": "Le diaphragme de champ est placé là où se forme l'image intermédiaire, au foyer objet de l'oculaire. Il découpe un bord net dans l'image que l'œil voit.",
   "indice": "Un diaphragme de champ se place dans un plan image."
@@ -2842,12 +2762,7 @@ QUESTIONS.push(
 {
   "id": "U43-256", "epreuve": "U43", "theme": "Étude des champs", "session": "complément", "difficulte": "moyen",
   "question": "Comment obtient-on la pupille d'entrée d'un instrument ?",
-  "choix": [
-    "C'est l'image du diaphragme d'ouverture par la partie du système qui le précède",
-    "C'est le diaphragme le plus proche de l'objet",
-    "C'est l'image de la lucarne dans l'espace image",
-    "C'est toujours le bord de la première lentille"
-  ],
+  "choix": ["L'image du diaphragme d'ouverture par la partie du système qui le précède","C'est le diaphragme le plus proche de l'objet, quelle que soit sa taille réelle","C'est l'image de la lucarne dans l'espace image","C'est toujours le bord de la première lentille"],
   "bonne": 0,
   "explication": "On ramène chaque diaphragme dans l'espace objet à travers ce qui le précède. Celui dont l'image limite le plus le faisceau issu de l'axe est le diaphragme d'ouverture, et son image est la pupille d'entrée.",
   "indice": "La pupille est une image : image de quoi, à travers quoi ?"
@@ -2928,12 +2843,7 @@ QUESTIONS.push(
 {
   "id": "U43-264", "epreuve": "U43", "theme": "Aberrations", "session": "complément", "difficulte": "moyen",
   "question": "Comment corrige-t-on l'aberration chromatique d'une lentille ?",
-  "choix": [
-    "Avec un doublet achromatique associant un verre crown et un verre flint",
-    "En fermant très fort le diaphragme seulement",
-    "En utilisant une lentille plus épaisse",
-    "En éclairant avec une lumière plus intense"
-  ],
+  "choix": ["Avec un doublet achromatique crown + flint","En fermant très fort le diaphragme seulement, sans changer de lentille","En utilisant une lentille plus épaisse","En éclairant avec une lumière plus intense"],
   "bonne": 0,
   "explication": "Un verre convergent crown et un verre divergent flint, de dispersions différentes, compensent leurs aberrations chromatiques tout en gardant une vergence totale convergente : c'est le doublet achromatique.",
   "indice": "On associe deux verres dont les dispersions se compensent."
@@ -2979,12 +2889,7 @@ QUESTIONS.push(
 {
   "id": "U43-269", "epreuve": "U43", "theme": "Vergences et focales", "session": "complément", "difficulte": "moyen",
   "question": "Pourquoi les grands télescopes utilisent-ils un miroir comme objectif plutôt qu'une lentille ?",
-  "choix": [
-    "Un miroir n'a pas d'aberration chromatique et peut être soutenu par l'arrière",
-    "Un miroir grossit plus qu'une lentille",
-    "Un miroir ne forme jamais d'aberration",
-    "Une lentille ne peut pas former d'image réelle"
-  ],
+  "choix": ["Pas d'aberration chromatique, et il se soutient par l'arrière","Un miroir grossit plus qu'une lentille de même diamètre","Un miroir ne forme jamais d'aberration","Une lentille ne peut pas former d'image réelle d'un objet lointain"],
   "bonne": 0,
   "explication": "La réflexion ne dépend pas de la longueur d'onde : pas d'aberration chromatique. De plus, un grand miroir peut être maintenu par toute sa face arrière, alors qu'une grande lentille ne peut être tenue que par les bords et se déforme.",
   "indice": "Pense à la couleur de la lumière, et à la façon de tenir un grand objet optique."
@@ -3003,12 +2908,7 @@ QUESTIONS.push(
 {
   "id": "U43-271", "epreuve": "U43", "theme": "Chaîne des conjugués", "session": "complément", "difficulte": "facile",
   "question": "Dans un télescope de Newton, à quoi sert le petit miroir plan incliné à 45° ?",
-  "choix": [
-    "À dévier le faisceau vers un oculaire placé sur le côté du tube",
-    "À grossir l'image",
-    "À corriger l'aberration chromatique",
-    "À agrandir le champ de l'oculaire"
-  ],
+  "choix": ["À dévier le faisceau vers un oculaire placé sur le côté du tube","À grossir l'image avant qu'elle n'atteigne l'oculaire du télescope","À corriger l'aberration chromatique","À agrandir le champ de l'oculaire"],
   "bonne": 0,
   "explication": "Le miroir plan renvoie le faisceau convergent du grand miroir vers le côté du tube, où l'observateur peut placer l'oculaire sans gêner l'entrée de la lumière.",
   "indice": "Où l'observateur placerait-il sa tête si le foyer restait sur l'axe, au milieu du tube ?"
@@ -3079,12 +2979,7 @@ QUESTIONS.push(
 {
   "id": "U43-278", "epreuve": "U43", "theme": "Skiascopie", "session": "complément", "difficulte": "moyen",
   "question": "Pourquoi réalise-t-on souvent la skiascopie d'un enfant sous cycloplégique ?",
-  "choix": [
-    "Pour supprimer son accommodation, qui fausserait la mesure",
-    "Pour agrandir sa pupille afin d'éclairer davantage",
-    "Pour rendre l'œil plus myope",
-    "Pour éviter qu'il cligne des yeux"
-  ],
+  "choix": ["Pour supprimer son accommodation, qui fausserait la mesure","Pour agrandir sa pupille afin d'éclairer davantage le fond d'œil","Pour rendre l'œil plus myope","Pour éviter qu'il cligne des yeux"],
   "bonne": 0,
   "explication": "Un enfant accommode beaucoup, ce qui masquerait une hypermétropie. Le cycloplégique paralyse le muscle ciliaire : l'accommodation est supprimée et la mesure donne la réfraction réelle.",
   "indice": "Quel muscle perturbe la mesure, surtout chez l'enfant ?"
@@ -3197,12 +3092,7 @@ QUESTIONS.push(
 {
   "id": "U43-287", "epreuve": "U43", "theme": "Chaîne des conjugués", "session": "complément", "difficulte": "moyen",
   "question": "Un objet réel est placé à une distance 2f' devant une lentille convergente. Quelle est son image ?",
-  "choix": [
-    "Réelle, renversée, de même taille, à 2f' après la lentille",
-    "Virtuelle, droite, agrandie",
-    "Réelle, droite, de même taille",
-    "À l'infini"
-  ],
+  "choix": ["Réelle, renversée, de même taille","Virtuelle, droite, agrandie, du même côté que l'objet","Réelle, droite, de même taille","À l'infini"],
   "bonne": 0,
   "explication": "[[1|OA']] = [[1|f']] − [[1|2f']] = [[1|2f']], donc OA' = +2f'. Le grandissement vaut [[2f'|−2f']] = −1 : image réelle, renversée, de même taille.",
   "indice": "Applique la relation de conjugaison avec OA = −2f'."
@@ -3261,12 +3151,7 @@ QUESTIONS.push(
 {
   "id": "U43-292", "epreuve": "U43", "theme": "Œil astigmate", "session": "complément", "difficulte": "difficile",
   "question": "Un astigmate porte l'ordonnance −1,00 (−2,00) à 180°. Quelles sont les réfractions de ses deux méridiens principaux ?",
-  "choix": [
-    "−1,00 δ pour le méridien 180° et −3,00 δ pour le méridien 90°",
-    "−1,00 δ pour le méridien 90° et −3,00 δ pour le méridien 180°",
-    "−2,00 δ et −3,00 δ",
-    "−1,00 δ et −2,00 δ"
-  ],
+  "choix": ["−1,00 δ pour le méridien 180° et −3,00 δ pour le méridien 90°","−1,00 δ pour le méridien 90° et −3,00 δ pour le méridien 180°","−2,00 δ pour chaque méridien, le cylindre étant réparti également","−1,00 δ et −2,00 δ"],
   "bonne": 0,
   "explication": "L'axe du cylindre est la direction où il n'a pas d'effet : le méridien à 180° garde la sphère, −1,00 δ. Le méridien perpendiculaire (90°) reçoit sphère + cylindre : −1,00 + (−2,00) = −3,00 δ.",
   "indice": "Le cylindre n'agit pas le long de son axe. Dans quelle direction agit-il ?",
@@ -3337,12 +3222,7 @@ QUESTIONS.push(
 {
   "id": "U43-298", "epreuve": "U43", "theme": "Frontofocomètre", "session": "complément", "difficulte": "moyen",
   "question": "Au frontofocomètre, comment repère-t-on le centre optique d'un verre ?",
-  "choix": [
-    "C'est le point où la mire est centrée sur le réticule, sans effet prismatique",
-    "C'est le point où la mire est la plus grosse",
-    "C'est toujours le centre géométrique du verre",
-    "C'est le point où la mire disparaît"
-  ],
+  "choix": ["C'est le point où la mire est centrée, sans effet prismatique","C'est le point où la mire apparaît la plus grosse et la plus nette","C'est toujours le centre géométrique du verre","C'est le point où la mire disparaît"],
   "bonne": 0,
   "explication": "Au centre optique, il n'y a pas d'effet prismatique : la mire reste centrée sur le réticule. On déplace le verre jusqu'à obtenir ce centrage.",
   "indice": "Au centre optique, le verre ne dévie pas les rayons."
@@ -3589,12 +3469,7 @@ QUESTIONS.push(
 {
   "id": "U43-319", "epreuve": "U43", "theme": "Étude des champs", "session": "complément", "difficulte": "moyen",
   "question": "Quand la lucarne est exactement dans un plan conjugué de l'objet, comment sont le champ de pleine lumière et le champ total ?",
-  "choix": [
-    "Ils sont confondus : il n'y a pas de champ de contour",
-    "Le champ de pleine lumière est nul",
-    "Le champ total est infini",
-    "Ils sont toujours très différents"
-  ],
+  "choix": ["Ils sont confondus : il n'y a pas de champ de contour","Le champ de pleine lumière est nul, seul le champ total existe","Le champ total est infini","Ils sont toujours très différents"],
   "bonne": 0,
   "explication": "Dans un plan image, le diaphragme coupe net tous les faisceaux en même temps : le bord du champ est net, le champ de pleine lumière et le champ total coïncident, il n'y a pas de zone de contour.",
   "indice": "Un bord net signifie qu'il n'y a pas de zone intermédiaire dégradée."
@@ -3602,12 +3477,7 @@ QUESTIONS.push(
 {
   "id": "U43-320", "epreuve": "U43", "theme": "Étude des champs", "session": "complément", "difficulte": "moyen",
   "question": "Que gagne-t-on en agrandissant la pupille d'entrée d'un instrument ?",
-  "choix": [
-    "Plus de lumière et un meilleur pouvoir de résolution",
-    "Un champ de pleine lumière plus grand",
-    "Un grossissement plus fort",
-    "Un cercle oculaire plus petit"
-  ],
+  "choix": ["Plus de lumière et un meilleur pouvoir de résolution","Un champ de pleine lumière plus grand, donc des bords mieux éclairés","Un grossissement plus fort","Un cercle oculaire plus petit"],
   "bonne": 0,
   "explication": "Une pupille plus grande collecte plus de lumière et diminue l'effet de la diffraction, donc améliore la résolution. En revanche, le champ de pleine lumière diminue et le cercle oculaire s'agrandit.",
   "indice": "Plus de surface collectrice donne plus de lumière. Pense aussi à la diffraction.",

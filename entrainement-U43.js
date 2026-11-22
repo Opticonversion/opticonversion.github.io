@@ -568,12 +568,7 @@ QUESTIONS.push(
   "entrainement": true,
   "difficulte": "moyen",
   "question": "Une lentille divergente de vergence −4 δ reçoit un faisceau parallèle à son axe. Où se trouve son foyer image F' ?",
-  "choix": [
-    "À 250 mm avant la lentille (F' est virtuel)",
-    "À 250 mm après la lentille",
-    "À 400 mm avant la lentille",
-    "Il n'y a pas de foyer image"
-  ],
+  "choix": ["À 250 mm avant la lentille (F' est virtuel)","À 250 mm après la lentille, comme pour une lentille convergente","À 400 mm avant la lentille","Il n'y a pas de foyer image"],
   "bonne": 0,
   "explication": "f' = [[1|V]] = [[1|−4]] = −0,25 m = −250 mm\nLe signe négatif place F' avant la lentille, du côté d'où arrive la lumière : les rayons émergents divergent et semblent venir de ce point. C'est un foyer virtuel, mais il existe bien.",
   "indice": "f' = [[1|V]], puis regarde le signe : positif = après la lentille, négatif = avant."
@@ -658,12 +653,7 @@ QUESTIONS.push(
   "entrainement": true,
   "difficulte": "difficile",
   "question": "Dans l'espace d'étude, un point du plan des champs voit une pupille circulaire de rayon 5 mm, à 200 mm du plan des champs, et un diaphragme de rayon 14 mm placé entre les deux, à 80 mm du plan des champs. On ferme l'iris pour réduire la pupille à un rayon de 2 mm, sans rien changer d'autre. Que deviennent les champs ?",
-  "choix": [
-    "Les deux champs grandissent",
-    "Le champ de pleine lumière grandit, le champ total diminue : le champ de contour rétrécit",
-    "Les deux champs diminuent",
-    "Rien ne change : les champs ne dépendent pas de la pupille"
-  ],
+  "choix": ["Les deux champs grandissent, puisque la pupille laisse passer moins de lumière","Le champ de pleine lumière grandit, le champ total diminue","Les deux champs diminuent","Rien ne change : les champs ne dépendent pas de la pupille"],
   "bonne": 1,
   "explication": "Pupille de 5 mm : pleine lumière 20 mm, champ total 26,7 mm. Pupille de 2 mm : 0,6·y + 0,8 ≤ 14 donne 22 mm, et 0,6·y − 0,8 ≤ 14 donne 24,7 mm. Une pupille plus petite rend le faisceau plus fin, donc moins facile à arrêter en partie : le champ de contour (la zone entre les deux) se resserre.",
   "indice": "Compare avec la pupille de 5 mm : un faisceau plus fin est-il plus ou moins facilement coupé par le diaphragme ?"
@@ -769,12 +759,7 @@ QUESTIONS.push(
   "entrainement": true,
   "difficulte": "moyen",
   "question": "Pourquoi pose-t-on le verre face arrière contre la butée du frontofocomètre ?",
-  "choix": [
-    "Parce que la puissance frontale image se mesure à partir du sommet de la face arrière",
-    "Pour ne pas rayer la face avant, plus courbe",
-    "Pour annuler l'effet prismatique",
-    "Pour que l'axe du cylindre soit lu dans le bon sens"
-  ],
+  "choix": ["Parce que la puissance frontale image se mesure depuis la face arrière","Pour ne pas rayer la face avant, qui est plus courbe et donc plus fragile","Pour annuler l'effet prismatique","Pour que l'axe du cylindre soit lu dans le bon sens"],
   "bonne": 0,
   "explication": "Le frontofocomètre donne la puissance frontale image, c'est-à-dire la vergence mesurée depuis le sommet de la face arrière du verre. Pour des verres épais ou forts, la différence avec la face avant est mesurable : le sens de pose compte.",
   "indice": "Une puissance frontale image se rapporte à un point précis du verre. Lequel ?"
@@ -1205,12 +1190,7 @@ QUESTIONS.push(
   "entrainement": true,
   "difficulte": "moyen",
   "question": "Où faut-il placer l'œil pour profiter de toute la lumière et de tout le champ d'une lunette ?",
-  "choix": [
-    "Contre l'oculaire",
-    "Au cercle oculaire (pupille de sortie)",
-    "Au foyer objet de l'oculaire",
-    "Sur l'image intermédiaire"
-  ],
+  "choix": ["Contre l'oculaire, au plus près de la lentille de l'oculaire","Au cercle oculaire (pupille de sortie)","Au foyer objet de l'oculaire, dans le plan de l'image intermédiaire","Sur l'image intermédiaire"],
   "bonne": 1,
   "explication": "Tous les rayons qui traversent l'instrument passent par le cercle oculaire, image de la pupille par la partie du système qui la suit. Placé là, l'œil reçoit toute la lumière et voit tout le champ. Trop près ou trop loin, la pupille de l'œil coupe une partie du faisceau.",
   "indice": "Où est le plus étroit du faisceau qui sort de l'oculaire ?"
@@ -1367,12 +1347,7 @@ QUESTIONS.push(
   "entrainement": true,
   "difficulte": "moyen",
   "question": "Pourquoi un miroir ne présente-t-il pas d'aberration chromatique ?",
-  "choix": [
-    "Parce que la réflexion ne dépend pas de la longueur d'onde",
-    "Parce qu'il est toujours parabolique",
-    "Parce qu'il ne réfléchit que la lumière verte",
-    "Parce qu'il est exempt de toute aberration"
-  ],
+  "choix": ["Parce que la réflexion ne dépend pas de la longueur d'onde","Parce qu'il est toujours parabolique","Parce qu'il ne réfléchit que la lumière verte","Parce qu'il est exempt de toute aberration, quelle que soit sa forme"],
   "bonne": 0,
   "explication": "L'aberration chromatique vient de la dispersion : l'indice du verre change avec la couleur, donc la réfraction aussi. Un miroir réfléchit toutes les couleurs de la même manière. C'est pourquoi les grands télescopes en utilisent. Il garde en revanche l'aberration sphérique s'il est sphérique.",
   "indice": "Quel phénomène physique cause l'aberration chromatique : la réflexion ou la réfraction ?"

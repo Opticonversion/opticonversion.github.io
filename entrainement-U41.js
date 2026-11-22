@@ -104,7 +104,7 @@ QUESTIONS.push(
     id: "U41-069", epreuve: "U41", theme: "Statistique", session: "complément", entrainement: true,
     difficulte: "moyen",
     question: "Après le changement de variable z = ln(y − 10), la calculatrice donne r ≈ −0,991 pour la série (x ; z). Que conclure ?",
-    choix: ["L'ajustement affine de z en x est pertinent, car |r| est très proche de 1", "L'ajustement affine de z en x n'est pas pertinent, car r est négatif", "L'ajustement affine de z en x est pertinent, car r est proche de 0", "Impossible de conclure sans tracer le nuage de points"],
+    choix: ["L'ajustement affine de z en x est pertinent, car |r| est très proche de 1", "L'ajustement affine de z en x n'est pas pertinent, car le coefficient r est négatif", "L'ajustement affine de z en x est pertinent, car r est proche de 0", "Impossible de conclure sans tracer d'abord le nuage de points et la droite"],
     bonne: 0,
     explication: "C'est la valeur absolue de r qui compte : |r| = 0,991 est très proche de 1, donc les points (x ; z) sont presque alignés. Le signe − indique seulement que z diminue quand x augmente.",
     indice: "Regarde la valeur absolue de r : de quelle valeur doit-elle être proche pour que les points soient alignés ?"
@@ -217,7 +217,7 @@ QUESTIONS.push(
     id: "U41-082", epreuve: "U41", theme: "Estimation et tests", session: "complément", entrainement: true,
     difficulte: "difficile",
     question: "Test bilatéral à 5 % : H0 « le diamètre moyen vaut 25 mm ». Sous H0, la moyenne d'un échantillon de 100 pièces suit la loi normale de moyenne 25 et d'écart type 0,1. Un échantillon donne 25,15 mm. Quelle est la conclusion ?",
-    choix: ["On ne rejette pas H0, car 25,15 est dans l'intervalle [24,804 ; 25,196]", "On rejette H0, car 25,15 est différent de 25", "On rejette H0, car 25,15 est dans la région de rejet", "On ne peut pas conclure sans connaître l'écart type de la population"],
+    choix: ["On ne rejette pas H0, car 25,15 est dans l'intervalle [24,804 ; 25,196]", "On rejette H0, car 25,15 est différent de 25, la valeur annoncée par le fabricant", "On rejette H0, car 25,15 est dans la région de rejet du test bilatéral", "On ne peut pas conclure sans connaître l'écart type de la population"],
     bonne: 0,
     explication: "On rejette H0 si la moyenne observée sort de 25 ± 1,96 × 0,1 = 25 ± 0,196, soit [24,804 ; 25,196]. Ici 25,15 est dans cet intervalle : on ne rejette pas H0 au seuil de 5 %. Être différent de 25 ne suffit pas, il faut sortir de l'intervalle.",
     indice: "Calcule d'abord la zone 25 ± 1,96 × 0,1, puis regarde si la moyenne observée tombe dedans ou dans la région de rejet."
@@ -243,7 +243,7 @@ QUESTIONS.push(
     id: "U41-085", epreuve: "U41", theme: "Suites", session: "complément", entrainement: true,
     difficulte: "moyen",
     question: "On a u(0) = 100 et u(n+1) = 0,5 u(n) + 40. Sans calculer de termes, que peut-on dire du sens de variation de la suite ?",
-    choix: ["Elle est décroissante, car elle part au-dessus de sa limite 80", "Elle est croissante, car on ajoute 40 à chaque étape", "Elle est constante, car 0,5 et 40 sont fixes", "Elle alterne au-dessus puis en dessous de 80"],
+    choix: ["Elle est décroissante, car elle part au-dessus de sa limite 80", "Elle est croissante, car on ajoute 40 à chaque étape à la valeur précédente", "Elle est constante, car les coefficients 0,5 et 40 sont fixes", "Elle alterne au-dessus puis en dessous de 80 à chaque étape"],
     bonne: 0,
     explication: "La valeur qui ne bouge plus vérifie ℓ = 0,5 ℓ + 40, donc ℓ = 80. Comme 0 < 0,5 < 1, la suite se rapproche de 80 sans la dépasser. Elle part de 100, au-dessus de 80, donc elle décroît : u(1) = 90, u(2) = 85, u(3) = 82,5. Ajouter 40 ne rend pas la suite croissante, car on multiplie aussi par 0,5.",
     indice: "Cherche d'abord la valeur ℓ qui ne bouge plus. La suite s'en rapproche : par le haut ou par le bas ?"
@@ -457,7 +457,7 @@ QUESTIONS.push(
     id: "U41-110", epreuve: "U41", theme: "Suites", session: "complément", entrainement: true,
     difficulte: "difficile",
     question: "On a u(0) = 0 et u(n+1) = −0,5 u(n) + 9. Les premiers termes sont 0 ; 9 ; 4,5 ; 6,75 ; 5,625. Que peut-on dire de cette suite ?",
-    choix: ["Elle converge vers 18", "Elle diverge, car elle n'est pas monotone", "Elle converge vers 4,5", "Elle converge vers 6 en oscillant autour de 6"],
+    choix: ["Elle converge vers 18 sans osciller", "Elle diverge, car elle n'est pas monotone", "Elle converge vers 4,5 en restant au-dessus", "Elle converge vers 6 en oscillant"],
     bonne: 3,
     explication: "La valeur fixe vérifie ℓ = −0,5 ℓ + 9, donc 1,5 ℓ = 9 et ℓ = 6. Comme |−0,5| < 1, la suite converge vers 6. La raison est négative, donc les termes passent alternativement au-dessus et en dessous de 6. Ne pas être monotone n'empêche pas de converger.",
     indice: "Résous ℓ = −0,5 ℓ + 9. Une raison négative fait alterner les termes de part et d'autre de la limite."
@@ -553,7 +553,7 @@ QUESTIONS.push(
     id: "U41-121", epreuve: "U41", theme: "Statistique", session: "complément", entrainement: true,
     difficulte: "moyen",
     question: "Les ventes d'un modèle suivent la droite y = −4,2x + 130, avec x le nombre d'années depuis 2020. Pourquoi la prévision pour 2060 n'a-t-elle pas de sens ?",
-    choix: ["Elle donne une valeur négative (−38) : la droite n'est valable que près de la période observée", "Elle donne 130 ventes, ce qui est trop élevé", "On ne peut prévoir qu'avec une droite croissante", "Le coefficient −4,2 est trop petit pour être utilisé"],
+    choix: ["Elle donne une valeur négative (−38) : la droite n'est valable que près de la période observée", "Elle donne 130 ventes, ce qui est trop élevé pour un magasin de cette taille", "On ne peut prévoir qu'avec une droite croissante, jamais avec une droite décroissante", "Le coefficient −4,2 est trop petit pour être utilisé dans une prévision fiable"],
     bonne: 0,
     explication: "Pour 2060, x = 40 et y = −4,2 × 40 + 130 = −38 ventes, ce qui est impossible. Une droite d'ajustement décrit bien les données observées, pas un avenir lointain : on évite l'extrapolation loin de la zone d'étude.",
     indice: "Calcule la valeur pour 2060. Le résultat est-il possible pour un nombre de ventes ?"
@@ -629,7 +629,7 @@ QUESTIONS.push(
     id: "U41-130", epreuve: "U41", theme: "Estimation et tests", session: "complément", entrainement: true,
     difficulte: "difficile",
     question: "Test bilatéral à 5 % sur H0 « μ = 25 mm ». Sous H0, la moyenne d'un échantillon suit une loi normale d'espérance 25 et d'écart type 0,12. L'échantillon observé a pour moyenne 25,30 mm. Quelle conclusion est correcte ?",
-    choix: ["On ne rejette pas H0, car 25,30 est proche de 25", "On rejette H0 : cela prouve que μ = 25,30", "On rejette H0 avec certitude", "On rejette H0 au risque de 5 %, car 25,30 sort de [24,765 ; 25,235]"],
+    choix: ["On ne rejette pas H0, car 25,30 est proche de la valeur 25 annoncée", "On rejette H0 : cela prouve que la moyenne μ vaut exactement 25,30", "On rejette H0 avec certitude, sans aucun risque d'erreur", "On rejette H0 au risque de 5 %, car 25,30 sort de [24,765 ; 25,235]"],
     bonne: 3,
     explication: "Zone d'acceptation : 25 ± 1,96 × 0,12 = 25 ± 0,235, soit [24,765 ; 25,235]. 25,30 est à l'extérieur : on rejette H0 au risque de 5 % de se tromper. Rejeter H0 ne prouve pas que μ vaut 25,30, et ne donne jamais de certitude.",
     indice: "Calcule la zone 25 ± 1,96 × 0,12. Si la moyenne observée est dehors, qu'en conclure et avec quel risque ?"
