@@ -3422,5 +3422,259 @@ QUESTIONS.push(
   "bonne": 0,
   "explication": "Dans l'air, le foyer objet et le foyer image sont symétriques par rapport à la lentille : f = −f'. Le foyer objet d'une lentille convergente est avant, son foyer image après.",
   "indice": "Les deux foyers sont de part et d'autre de la lentille, à la même distance."
+},
+{
+  "id": "U43-306", "epreuve": "U43", "theme": "Chaîne des conjugués", "session": "complément", "difficulte": "moyen",
+  "type": "pose",
+  "question": "Une loupe de focale 40 mm est placée à 30 mm d'un objet de 5 mm de haut. Trouve la position de l'image, le grandissement et la taille de l'image, étape par étape.",
+  "etapes": [
+    {
+      "consigne": "Position de l'image OA' (en mm)",
+      "reponse": { "valeur": -120, "unite": "mm", "decimales": 0, "signe": true },
+      "aide": "[[1|OA']] = [[1|f']] + [[1|OA]], avec OA = −30 mm.",
+      "ligne": "[[1|OA']] = [[1|40]] − [[1|30]] = [[3 − 4|120]] = [[−1|120]]\nOA' = −120 mm"
+    },
+    {
+      "consigne": "Grandissement γ",
+      "reponse": { "valeur": 4, "unite": "", "decimales": 0, "signe": true },
+      "aide": "γ = [[OA'|OA]], avec les valeurs algébriques.",
+      "ligne": "γ = [[−120|−30]] = +4"
+    },
+    {
+      "consigne": "Taille algébrique de l'image A'B' (en mm)",
+      "reponse": { "valeur": 20, "unite": "mm", "decimales": 0, "signe": true },
+      "aide": "A'B' = γ × AB.",
+      "ligne": "A'B' = 4 × 5 = +20 mm"
+    }
+  ],
+  "explication": "L'image est virtuelle, à 120 mm devant la loupe, droite et quatre fois plus grande que l'objet (20 mm de haut)."
+},
+{
+  "id": "U43-307", "epreuve": "U43", "theme": "Chaîne des conjugués", "session": "complément", "difficulte": "moyen",
+  "type": "calcul",
+  "question": "Une lentille convergente a une focale image de 60 mm. Un objet virtuel est situé à 60 mm après elle. Où se forme l'image (OA', en mm) ?",
+  "reponse": { "valeur": 30, "unite": "mm", "decimales": 0, "signe": true },
+  "explication": "OA = +60 mm (objet virtuel).\n[[1|OA']] = [[1|60]] + [[1|60]] = [[2|60]] = [[1|30]]\nOA' = +30 mm : l'image est réelle, plus proche que le foyer.",
+  "indice": "Un objet virtuel a une position positive : applique la relation avec OA = +60 mm.",
+  "erreurs": [
+    { "valeur": -30, "type": "signe", "message": "Un objet virtuel donne ici une image réelle, après la lentille : la position est positive." }
+  ]
+},
+{
+  "id": "U43-308", "epreuve": "U43", "theme": "Chaîne des conjugués", "session": "complément", "difficulte": "facile",
+  "question": "Un rayon passe par le centre optique d'une lentille mince. Que devient-il ?",
+  "choix": ["Il n'est pas dévié", "Il passe par le foyer image", "Il ressort parallèle à l'axe", "Il est réfléchi"],
+  "bonne": 0,
+  "explication": "Au centre optique d'une lentille mince, les deux faces sont parallèles : le rayon traverse sans être dévié. C'est l'un des trois rayons utiles pour construire une image.",
+  "indice": "Au centre, la lentille mince est équivalente à une lame à faces parallèles très mince."
+},
+{
+  "id": "U43-309", "epreuve": "U43", "theme": "Chaîne des conjugués", "session": "complément", "difficulte": "facile",
+  "question": "Un rayon arrive parallèle à l'axe sur une lentille mince convergente. Par où passe-t-il après la lentille ?",
+  "choix": ["Par le foyer image", "Par le foyer objet", "Par le centre optique sans déviation", "Il reste parallèle à l'axe"],
+  "bonne": 0,
+  "explication": "Les rayons parallèles à l'axe convergent au foyer image : c'est la définition du foyer image.",
+  "indice": "C'est la définition même du foyer image."
+},
+{
+  "id": "U43-310", "epreuve": "U43", "theme": "Œil et instrument", "session": "complément", "difficulte": "moyen",
+  "type": "calcul",
+  "question": "Un emmétrope presbyte a une amplitude d'accommodation de 1,50 δ. À quelle distance minimale peut-il voir net (en cm, au cm près) ?",
+  "reponse": { "valeur": 67, "unite": "cm", "decimales": 0, "signe": false, "tolerance": 0.5 },
+  "explication": "Distance minimale = [[1|A]] = [[1|1,50]] ≈ 0,667 m ≈ 67 cm.",
+  "indice": "Le punctum proximum d'un emmétrope est à [[1|A]] de l'œil, A en dioptries.",
+  "erreurs": [
+    { "valeur": 0.67, "type": "unite", "message": "0,67 est en mètres. Convertis en centimètres." }
+  ]
+},
+{
+  "id": "U43-311", "epreuve": "U43", "theme": "Œil et instrument", "session": "complément", "difficulte": "difficile",
+  "type": "calcul",
+  "question": "Un myope de −3,00 δ accommode de 1,00 δ, sans lunettes. À quelle distance devant son œil se trouve le point qu'il voit net (en cm) ?",
+  "reponse": { "valeur": 25, "unite": "cm", "decimales": 0, "signe": false },
+  "explication": "Sans accommoder, il voit net à son remotum, de vergence −3,00 δ. En accommodant de 1,00 δ, la vergence du point vu devient −3,00 − 1,00 = −4,00 δ.\nDistance : [[1|4,00]] = 0,25 m = 25 cm.",
+  "indice": "L'accommodation rapproche le point vu : sa vergence devient plus négative.",
+  "erreurs": [
+    { "valeur": 50, "type": "notion", "message": "Accommoder rapproche le point vu du remotum, il ne l'éloigne pas." }
+  ]
+},
+{
+  "id": "U43-312", "epreuve": "U43", "theme": "Œil et instrument", "session": "complément", "difficulte": "difficile",
+  "type": "calcul",
+  "question": "Un œil réduit a une vergence de 60 δ et une longueur de 16 mm (centre optique à la rétine). Quelle est sa réfraction (en δ, au centième) ?",
+  "reponse": { "valeur": 2.5, "unite": "δ", "decimales": 2, "signe": true },
+  "explication": "La rétine est conjuguée du remotum : [[1|0,016]] = 62,5 = 60 + R, donc R = +2,50 δ.\nL'œil est trop court : il est hypermétrope.",
+  "indice": "Compare [[1|longueur]] à la vergence de 60 δ : l'œil est-il trop long ou trop court ?",
+  "erreurs": [
+    { "valeur": -2.5, "type": "signe", "message": "L'œil est plus court qu'un œil emmétrope : il est hypermétrope, donc sa réfraction est positive." }
+  ]
+},
+{
+  "id": "U43-313", "epreuve": "U43", "theme": "Skiascopie", "session": "complément", "difficulte": "moyen",
+  "question": "En skiascopie, le reflet dans la pupille est lent, terne et étroit. Que signifie cet aspect ?",
+  "choix": [
+    "Le point neutre est encore loin",
+    "Le point neutre est atteint",
+    "L'œil est emmétrope",
+    "L'examinateur est trop près"
+  ],
+  "bonne": 0,
+  "explication": "Plus on approche du point neutre, plus le reflet devient rapide, vif et large. Un reflet lent, terne et étroit indique qu'on est encore loin du verre qui neutralise.",
+  "indice": "Rappelle-toi à quoi ressemble le reflet quand on s'approche du point neutre.",
+  "erreurs": {
+    "1": { "type": "notion", "message": "Au point neutre, il n'y a plus de mouvement, et toute la pupille est éclairée. Ce n'est pas un reflet étroit et lent." }
+  }
+},
+{
+  "id": "U43-314", "epreuve": "U43", "theme": "Skiascopie", "session": "complément", "difficulte": "facile",
+  "type": "calcul",
+  "question": "En skiascopie à 50 cm, le point neutre est obtenu avec un verre de −0,50 δ. Quelle est la réfraction de l'œil (en δ, au centième) ?",
+  "reponse": { "valeur": -2.5, "unite": "δ", "decimales": 2, "signe": true },
+  "explication": "Distance de travail : [[1|0,5]] = 2,00 δ\nR = verre − [[1|d]] = −0,50 − 2,00 = −2,50 δ",
+  "indice": "R = verre au point neutre − [[1|d]], avec d en mètres.",
+  "erreurs": [
+    { "valeur": 1.5, "type": "signe", "message": "Tu as ajouté la distance de travail. Elle se retranche : R = verre − 1/d." }
+  ]
+},
+{
+  "id": "U43-315", "epreuve": "U43", "theme": "Frontofocomètre", "session": "complément", "difficulte": "moyen",
+  "type": "calcul",
+  "question": "Au frontofocomètre, un verre de +8,00 δ est décentré de 3 mm. Quel effet prismatique mesure-t-on (en Δ, au dixième) ?",
+  "reponse": { "valeur": 2.4, "unite": "Δ", "decimales": 1, "signe": false },
+  "explication": "Règle de Prentice : P = c × D avec c en cm.\nP = 0,3 × 8,00 = 2,4 Δ",
+  "indice": "Convertis 3 mm en cm, puis multiplie par la puissance.",
+  "erreurs": [
+    { "valeur": 24, "type": "unite", "message": "Tu as multiplié par 3 mm. Convertis le décentrement en centimètres." }
+  ]
+},
+{
+  "id": "U43-316", "epreuve": "U43", "theme": "Frontofocomètre", "session": "complément", "difficulte": "difficile",
+  "question": "Au frontofocomètre, le centre optique d'un verre de −2,00 δ est à 4 mm du point de mesure, du côté nasal. Quel effet prismatique mesure-t-on au point de mesure ?",
+  "choix": [
+    "0,8 Δ, base temporale",
+    "0,8 Δ, base nasale",
+    "8 Δ, base temporale",
+    "0,5 Δ, base temporale"
+  ],
+  "bonne": 0,
+  "explication": "Prentice : P = 0,4 × 2,00 = 0,8 Δ.\nPour un verre divergent, la base du prisme est tournée à l'opposé du centre optique. Le centre optique est du côté nasal : la base est temporale.",
+  "indice": "Un verre divergent est fait de deux prismes accolés par leur sommet. Où est la base par rapport au centre optique ?",
+  "erreurs": {
+    "1": { "type": "notion", "message": "Pour un verre divergent, la base est tournée à l'opposé du centre optique, pas vers lui." },
+    "2": { "type": "unite", "message": "Tu as oublié de convertir 4 mm en 0,4 cm avant de multiplier." }
+  }
+},
+{
+  "id": "U43-317", "epreuve": "U43", "theme": "Mécanismes de réglage", "session": "complément", "difficulte": "facile",
+  "type": "calcul",
+  "question": "Un pignon de 15 dents engrène sur une roue de 45 dents. Le pignon tourne à 90 tours par minute. À quelle vitesse tourne la roue (en tr/min) ?",
+  "reponse": { "valeur": 30, "unite": "tr/min", "decimales": 0, "signe": false },
+  "explication": "Les dents défilent à la même vitesse : 90 × 15 = N × 45.\nN = [[90 × 15|45]] = 30 tr/min. La roue a plus de dents : elle tourne plus lentement.",
+  "indice": "Le nombre de dents qui passent par minute est le même pour les deux pièces.",
+  "erreurs": [
+    { "valeur": 270, "type": "notion", "message": "Tu as inversé le rapport. La roue, qui a plus de dents, tourne moins vite." }
+  ]
+},
+{
+  "id": "U43-318", "epreuve": "U43", "theme": "Étude des champs", "session": "complément", "difficulte": "difficile",
+  "type": "calcul",
+  "question": "Dans l'espace d'étude, la lucarne est à 100 mm du centre de la pupille et le demi-champ angulaire doit être de 6°. Quel diamètre doit avoir la lucarne (en mm, au dixième) ?",
+  "reponse": { "valeur": 21, "unite": "mm", "decimales": 1, "signe": false, "tolerance": 0.1 },
+  "explication": "Rayon de la lucarne = 100 × tan 6° ≈ 10,5 mm.\nDiamètre = 2 × 10,5 ≈ 21,0 mm.",
+  "indice": "Le rayon de la lucarne est la distance multipliée par la tangente du demi-champ. N'oublie pas le diamètre.",
+  "erreurs": [
+    { "valeur": 10.5, "type": "notion", "message": "10,5 mm est le rayon de la lucarne. On demande son diamètre." }
+  ]
+},
+{
+  "id": "U43-319", "epreuve": "U43", "theme": "Étude des champs", "session": "complément", "difficulte": "moyen",
+  "question": "Quand la lucarne est exactement dans un plan conjugué de l'objet, comment sont le champ de pleine lumière et le champ total ?",
+  "choix": [
+    "Ils sont confondus : il n'y a pas de champ de contour",
+    "Le champ de pleine lumière est nul",
+    "Le champ total est infini",
+    "Ils sont toujours très différents"
+  ],
+  "bonne": 0,
+  "explication": "Dans un plan image, le diaphragme coupe net tous les faisceaux en même temps : le bord du champ est net, le champ de pleine lumière et le champ total coïncident, il n'y a pas de zone de contour.",
+  "indice": "Un bord net signifie qu'il n'y a pas de zone intermédiaire dégradée."
+},
+{
+  "id": "U43-320", "epreuve": "U43", "theme": "Étude des champs", "session": "complément", "difficulte": "moyen",
+  "question": "Que gagne-t-on en agrandissant la pupille d'entrée d'un instrument ?",
+  "choix": [
+    "Plus de lumière et un meilleur pouvoir de résolution",
+    "Un champ de pleine lumière plus grand",
+    "Un grossissement plus fort",
+    "Un cercle oculaire plus petit"
+  ],
+  "bonne": 0,
+  "explication": "Une pupille plus grande collecte plus de lumière et diminue l'effet de la diffraction, donc améliore la résolution. En revanche, le champ de pleine lumière diminue et le cercle oculaire s'agrandit.",
+  "indice": "Plus de surface collectrice donne plus de lumière. Pense aussi à la diffraction.",
+  "erreurs": {
+    "1": { "type": "notion", "message": "C'est l'inverse : une pupille plus grande réduit le champ de pleine lumière." }
+  }
+},
+{
+  "id": "U43-321", "epreuve": "U43", "theme": "Grossissement et photo", "session": "complément", "difficulte": "moyen",
+  "type": "calcul",
+  "question": "À f/2, un temps de pose de 1/800 s donne la bonne exposition. À f/4, on veut la même exposition. Quel temps de pose faut-il, écrit 1/x s ? Donne x.",
+  "reponse": { "valeur": 200, "unite": "", "decimales": 0, "signe": false },
+  "explication": "Passer de f/2 à f/4 divise l'éclairement par 4. Il faut poser 4 fois plus longtemps : [[4|800]] = [[1|200]] s.",
+  "indice": "Un diaphragme deux fois plus petit en diamètre laisse passer quatre fois moins de lumière.",
+  "erreurs": [
+    { "valeur": 3200, "type": "notion", "message": "Tu as raccourci le temps de pose. Avec moins de lumière, il faut poser plus longtemps." }
+  ]
+},
+{
+  "id": "U43-322", "epreuve": "U43", "theme": "Grossissement et photo", "session": "complément", "difficulte": "facile",
+  "type": "calcul",
+  "question": "Une loupe a une focale de 20 mm. Quel est son grossissement commercial (distance de référence 250 mm), au dixième ?",
+  "reponse": { "valeur": 12.5, "unite": "", "decimales": 1, "signe": false },
+  "explication": "G = [[250|f']] = [[250|20]] = 12,5.",
+  "indice": "G = 250 mm divisé par la focale en mm.",
+  "erreurs": [
+    { "valeur": 0.08, "type": "notion", "message": "Tu as divisé la focale par 250. C'est l'inverse." }
+  ]
+},
+{
+  "id": "U43-323", "epreuve": "U43", "theme": "Grossissement et photo", "session": "complément", "difficulte": "difficile",
+  "type": "calcul",
+  "question": "Un objectif de focale 200 mm photographie une cible de 1 m de haut située à 20 m de la lentille. Quelle est la hauteur de l'image sur le capteur (en mm, au mm près) ?",
+  "reponse": { "valeur": 10, "unite": "mm", "decimales": 0, "signe": false, "tolerance": 0.5 },
+  "explication": "[[1|OA']] = [[1|200]] − [[1|20 000]] (en mm) donne OA' ≈ 202 mm.\nγ = [[OA'|OA]] ≈ −0,0101, donc la hauteur est 1 000 × 0,0101 ≈ 10 mm. L'image est renversée.",
+  "indice": "Cherche OA', puis le grandissement, puis multiplie par la hauteur de l'objet. Garde les mm.",
+  "erreurs": [
+    { "valeur": 0.01, "type": "unite", "message": "0,01 est un résultat en mètres. Convertis-le en millimètres." }
+  ]
+},
+{
+  "id": "U43-324", "epreuve": "U43", "theme": "Vergences et focales", "session": "complément", "difficulte": "facile",
+  "question": "Une lentille mince de vergence +4,00 δ forme l'image d'un objet situé à l'infini. Où est cette image ?",
+  "choix": [
+    "À 25 cm après la lentille",
+    "À 4 cm après la lentille",
+    "À l'infini",
+    "À 25 cm avant la lentille"
+  ],
+  "bonne": 0,
+  "explication": "L'image d'un objet à l'infini est au foyer image : f' = [[1|4,00]] = 0,25 m = 25 cm après la lentille convergente.",
+  "indice": "Un objet à l'infini donne une image au foyer image, à f' = [[1|D]].",
+  "erreurs": {
+    "1": { "type": "unite", "message": "4 est la vergence en dioptries, pas une distance en cm. La focale est l'inverse de la vergence." }
+  }
+},
+{
+  "id": "U43-325", "epreuve": "U43", "theme": "Œil astigmate", "session": "complément", "difficulte": "moyen",
+  "question": "Un œil a pour réfractions principales −1,00 δ et +1,00 δ. Comment nomme-t-on cet astigmatisme ?",
+  "choix": [
+    "Mixte",
+    "Myopique simple",
+    "Myopique composé",
+    "Hypermétropique composé"
+  ],
+  "bonne": 0,
+  "explication": "Un méridien est myope (−1,00 δ), l'autre hypermétrope (+1,00 δ) : l'astigmatisme est mixte. Dans les autres cas, les deux méridiens sont du même côté (ou l'un est emmétrope).",
+  "indice": "Regarde les signes des deux réfractions principales."
 }
 );
