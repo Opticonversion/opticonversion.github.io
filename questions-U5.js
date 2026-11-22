@@ -2003,6 +2003,240 @@ QUESTIONS.push(
     erreurs: [{ valeur: 12.5, type: "notion", message: "12,5 est la distance en centimètres. L'amplitude est la proximité du proximum : 1 divisé par 0,125 m." }],
     explication: "Pour un emmétrope, le remotum est à l'infini. L'amplitude vaut la proximité du proximum : [[1|0,125 m]] = 8,00 δ.",
     indice: "Amplitude = proximité du proximum moins proximité du remotum. Le remotum d'un emmétrope est à l'infini."
+  },
+  // ---------- Lot 2 du 22 nov. : lentilles, examen préliminaire, anisométropie, rédactions ----------
+  {
+    id: "U5-241", epreuve: "U5", theme: "Lentilles", session: "2018",
+    difficulte: "moyen",
+    question: "Pourquoi une lentille rigide perméable aux gaz limite-t-elle le risque d'hypoxie ?",
+    choix: ["Elle est petite et bouge à chaque clignement, les larmes circulent derrière elle, et son Dk/e est élevé", "Elle est hydrophile : l'eau qu'elle contient apporte l'oxygène", "Elle couvre toute la cornée et la protège de l'air", "Elle est collée à la cornée, sans larmes dessous"],
+    bonne: 0,
+    explication: "Une LRPG a un petit diamètre : une partie de la cornée reste exposée à l'air. Elle bouge à chaque clignement, ce qui renouvelle les larmes sous la lentille, et son matériau a un Dk/e élevé. Une lentille souple hydrophile, elle, dépend de l'eau qu'elle contient pour laisser passer l'oxygène.",
+    indice: "Pense à la taille de la lentille, à ce qui se passe à chaque clignement, et au matériau."
+  },
+  {
+    id: "U5-242", epreuve: "U5", theme: "Lentilles", session: "2018",
+    difficulte: "facile",
+    question: "Quelle conséquence visuelle peut avoir une hypoxie cornéenne prolongée ?",
+    choix: ["Une vision floue avec des halos autour des lumières", "Une diplopie verticale", "Un rétrécissement du champ visuel périphérique", "Une meilleure vision de près"],
+    bonne: 0,
+    explication: "Une cornée privée d'oxygène gonfle (œdème) et perd de sa transparence : la vision devient floue, avec des halos autour des lumières et un éblouissement. Le champ visuel périphérique et la diplopie ne dépendent pas de l'oxygénation de la cornée.",
+    indice: "Une cornée qui gonfle n'est plus parfaitement transparente. Qu'est-ce que cela fait à l'image ?"
+  },
+  {
+    id: "U5-243", epreuve: "U5", theme: "Lentilles", session: "2018",
+    difficulte: "facile",
+    question: "Sur la fiche de commande d'une lentille rigide, que désignent ro et ΦT ?",
+    choix: ["ro : rayon de la zone optique postérieure (face interne) ; ΦT : diamètre total", "ro : rayon de la face antérieure ; ΦT : épaisseur", "ro : diamètre de la zone optique ; ΦT : rayon total", "ro : puissance de la lentille ; ΦT : transmissibilité"],
+    bonne: 0,
+    explication: "ro est le rayon de courbure de la face postérieure, celle qui regarde la cornée : il fixe la cambrure de la lentille. ΦT est le diamètre total. La vergence de la lentille se note D'f, la transmissibilité Dk/e.",
+    indice: "ro : le rayon de la zone optique de la face arrière, celle qui touche les larmes et la cornée."
+  },
+  {
+    id: "U5-244", epreuve: "U5", theme: "Lentilles", session: "complément",
+    difficulte: "moyen",
+    question: "Pour une première lentille rigide, quel ro d'essai choisit-on en général ?",
+    choix: ["Un ro proche du rayon cornéen le plus plat relevé à la kératométrie", "Un ro égal au rayon le plus cambré moins 1 mm", "Un ro choisi sans kératométrie, au hasard", "Un ro égal au diamètre total divisé par deux"],
+    bonne: 0,
+    explication: "On cherche une adaptation alignée : la face postérieure de la lentille épouse la cornée. On part donc d'un ro voisin du rayon du méridien le plus plat de la kératométrie, puis on ajuste après la fluorescéine : plat, on diminue ro ; serré, on l'augmente.",
+    indice: "La kératométrie donne les rayons cornéens. Lequel des deux sert de point de départ ?"
+  },
+  {
+    id: "U5-245", epreuve: "U5", theme: "Lentilles", session: "2018",
+    difficulte: "moyen",
+    type: "calcul",
+    question: "Compensation de l'œil en S : −5,00 sphérique. Le ménisque de larmes sous la lentille rigide a une vergence de +0,50 δ. Quelle est la puissance D'f de la LRPG ?",
+    reponse: {"valeur": -5.5, "unite": "δ", "decimales": 2, "signe": true},
+    erreurs: [{ valeur: -4.5, type: "notion", message: "La compensation totale est la somme de la lentille et du ménisque de larmes. Il faut donc retrancher le ménisque : −5,00 − 0,50." }],
+    explication: "Compensation totale en S = D'f (lentille) + vergence du ménisque. Donc D'f = −5,00 − 0,50 = −5,50 δ. Le ménisque convergent ajoute de la puissance : la lentille doit être plus divergente.",
+    indice: "Le ménisque de larmes fait partie de la compensation. Ce qu'il apporte, la lentille n'a plus à le fournir."
+  },
+  {
+    id: "U5-246", epreuve: "U5", theme: "Lentilles", session: "2017",
+    difficulte: "moyen",
+    question: "Quel mode de compensation de la presbytie en lentilles se fait surtout en lentille rigide ?",
+    choix: ["La vision alternée", "La monovision", "La vision simultanée", "L'orthokératologie"],
+    bonne: 0,
+    explication: "En vision alternée, le regard passe d'une zone de la lentille à l'autre (loin, près) : la lentille doit glisser, ce qui est possible avec une rigide. En vision simultanée, plusieurs zones de puissance sont devant la pupille et le cerveau choisit l'image nette. En monovision, un œil est pour le loin, l'autre pour le près.",
+    indice: "Le mot « alternée » dit que le regard change de zone. Quelle lentille peut bouger sur l'œil pour cela ?"
+  },
+  {
+    id: "U5-247", epreuve: "U5", theme: "Lentilles", session: "2023",
+    difficulte: "moyen",
+    question: "Quel est le principe de l'orthokératologie ?",
+    choix: ["Une lentille rigide de géométrie inversée, portée la nuit, aplatit le centre de la cornée : la myopie est réduite le jour", "Une lentille souple portée la journée qui cache la myopie", "Une opération au laser qui modifie définitivement la cornée", "Un verre progressif porté seulement le soir"],
+    bonne: 0,
+    explication: "La lentille d'orthokératologie est rigide et de géométrie inversée. Portée la nuit, elle aplatit temporairement le centre de la cornée. Le jour, la myopie est réduite ou annulée sans équipement. L'effet est réversible : il faut continuer à porter les lentilles.",
+    indice: "Le mot clé est « nocturne » : l'équipement agit pendant le sommeil, pas pendant la journée."
+  },
+  {
+    id: "U5-248", epreuve: "U5", theme: "Lentilles", session: "2021",
+    difficulte: "moyen",
+    question: "Quel est un inconvénient du silicone-hydrogel par rapport à un hydrogel classique ?",
+    choix: ["Sa mouillabilité est plus faible et les dépôts lipidiques sont plus fréquents", "Il laisse moins passer l'oxygène", "Il est toujours contre-indiqué en port journalier", "Il ne peut pas se porter la nuit"],
+    bonne: 0,
+    explication: "Le silicone donne au matériau une très grande transmissibilité à l'oxygène, mais il est moins mouillable et attire plus les dépôts lipidiques. C'est pourquoi on soigne l'entretien et la mouillabilité de surface. L'avantage est le Dk/e élevé, qui permet aussi le port prolongé.",
+    indice: "L'avantage du silicone est l'oxygène. Son défaut vient de sa surface, plus grasse qu'une surface d'hydrogel."
+  },
+  {
+    id: "U5-249", epreuve: "U5", theme: "Lentilles", session: "complément",
+    difficulte: "facile",
+    question: "Comment observe-t-on la fluorescéine sous une lentille rigide ?",
+    choix: ["Avec une lumière bleue (filtre cobalt) et un filtre jaune devant l'observateur", "Avec une lumière rouge seule", "Avec une lumière blanche seule, sans filtre", "Avec une lumière polarisée verticale"],
+    bonne: 0,
+    explication: "La fluorescéine devient fluorescente sous une lumière bleue : on éclaire au biomicroscope avec un filtre cobalt. Un filtre jaune, placé devant l'observateur, augmente le contraste de l'image verte. On regarde ensuite la répartition du colorant sous la lentille.",
+    indice: "La fluorescéine « s'allume » sous une couleur froide. Et un filtre jaune améliore le contraste."
+  },
+  {
+    id: "U5-250", epreuve: "U5", theme: "Lentilles", session: "2018",
+    difficulte: "difficile",
+    question: "Un client a un astigmatisme total de 1,75 δ, d'origine presque entièrement cornéenne, et veut des lentilles souples. Quelle rédaction est juste et complète ?",
+    choix: ["Une souple suit la forme de la cornée, donc les larmes ne corrigent rien : il reste 1,75 δ d'astigmatisme, au-delà de 0,75 δ. Une souple torique s'impose", "Une souple sphérique épouse la cornée et annule son astigmatisme : je choisis une souple sphérique", "L'astigmatisme de 1,75 δ ne se compense pas en lentilles : je refuse l'adaptation", "Je choisis une souple torique, car c'est toujours le meilleur choix"],
+    bonne: 0,
+    explication: "Une lentille souple épouse la cornée et en garde la forme : le film de larmes ne compense rien. L'astigmatisme résiduel reste égal à l'astigmatisme total, 1,75 δ, au-delà de la limite d'environ 0,75 δ. Il faut une souple torique. Sous une rigide sphérique, le ménisque de larmes aurait compensé presque tout.",
+    surLaCopie: "Une souple suit la cornée : les larmes ne compensent rien. Il reste 1,75 δ d'astigmatisme, supérieur à 0,75 δ. Je choisis une souple torique.",
+    indice: "Une souple épouse la cornée. Que reste-t-il de l'astigmatisme sous une souple sphérique, et de quelle limite faut-il le comparer ?"
+  },
+  {
+    id: "U5-251", epreuve: "U5", theme: "Examen préliminaire", session: "2018",
+    difficulte: "facile",
+    question: "Quels éléments de l'histoire de cas font suspecter une forte myopie ?",
+    choix: ["Il ne lit pas les panneaux, tient son téléphone à 15 cm de ses yeux, porte des lunettes depuis l'école primaire et son frère est très myope", "Bonne vue de loin mais fatigue en lecture en fin de journée, mal de tête au travail sur écran", "Vue qui baisse de loin et de près avec des halos et des nausées, œil rouge et douloureux", "Vue de près qui s'améliore avec l'âge, sans lunettes"],
+    bonne: 0,
+    explication: "Le myope fort voit flou de loin, mieux de près (son remotum est proche), se rapproche des objets, a souvent porté ses lunettes tôt, et un parent très myope augmente le risque. La deuxième réponse évoque plutôt une hypermétropie ou un défaut de convergence, la troisième une urgence de type glaucome aigu.",
+    indice: "Le myope voit mieux de près : son remotum est devant l'œil."
+  },
+  {
+    id: "U5-252", epreuve: "U5", theme: "Examen préliminaire", session: "2018",
+    difficulte: "moyen",
+    question: "Pourquoi un suivi régulier chez l'ophtalmologiste est-il recommandé pour un fort myope ? Quelle rédaction est juste et complète ?",
+    choix: ["L'œil du fort myope est plus long que la normale : sa rétine étirée s'amincit, d'où plus de déchirures, de décollements et de glaucome. Un suivi régulier les repère tôt", "Parce que les verres d'un fort myope s'usent vite", "Parce qu'un fort myope devient forcément aveugle", "Parce que l'opticien n'a pas le droit de contrôler un fort myope"],
+    bonne: 0,
+    explication: "Un œil très myope est plus long que la normale. Sa rétine, étirée, s'amincit : déchirure et décollement, atteinte de la macula et glaucome sont plus fréquents. Un fond d'œil régulier les repère tôt. L'opticien conseille ce suivi sans poser de diagnostic.",
+    surLaCopie: "L'œil très myope est plus long : sa rétine étirée s'amincit. Les décollements de rétine et le glaucome sont plus fréquents, d'où un suivi régulier.",
+    indice: "Cherche la cause (la forme de l'œil), la conséquence (quelles structures) et l'utilité du suivi."
+  },
+  {
+    id: "U5-253", epreuve: "U5", theme: "Examen préliminaire", session: "2018",
+    difficulte: "facile",
+    question: "Que mesure le test de Parinaud ?",
+    choix: ["L'acuité visuelle de près", "La phorie de près", "Le champ visuel", "La vision des couleurs"],
+    bonne: 0,
+    explication: "Le test de Parinaud est une échelle de textes de tailles croissantes, lue à 40 cm, qui mesure l'acuité de près. Parinaud 2 correspond au petit texte lu normalement par un œil sans presbytie à 40 cm. Il sert à régler l'addition.",
+    indice: "On le lit à 40 cm, avec des textes de plus en plus petits."
+  },
+  {
+    id: "U5-254", epreuve: "U5", theme: "Examen préliminaire", session: "2018",
+    difficulte: "difficile",
+    type: "pose",
+    question: "Un presbyte lit à 33 cm (3,00 δ). Avec sa compensation de loin, il ne lit pas le texte de référence ; il le lit dès qu'on ajoute +2,00 aux deux yeux. On garde la moitié de son amplitude en réserve. Calcule l'addition à essayer, étape par étape.",
+    etapes: [
+      {
+        consigne: "Amplitude maximale apparente (en δ)",
+        reponse: { valeur: 1, unite: "δ", decimales: 2, signe: false },
+        aide: "L'accommodation requise à 33 cm est de 3,00 δ. Le sujet n'en fournit que ce qui reste quand on retire le verre positif qui l'aidait.",
+        ligne: "Amplitude = requise − verre ajouté = 3,00 − 2,00 = 1,00 δ",
+        erreurs: [{ valeur: 5, type: "signe", message: "Tu as additionné les deux. Le verre positif aide le sujet : il fournit une partie de l'accommodation requise, on la retire." }]
+      },
+      {
+        consigne: "Accommodation de confort (en δ)",
+        reponse: { valeur: 0.5, unite: "δ", decimales: 2, signe: false },
+        aide: "Le sujet garde la moitié de son amplitude en réserve : il n'utilise que l'autre moitié.",
+        ligne: "Confort = 1,00 ÷ 2 = 0,50 δ"
+      },
+      {
+        consigne: "Addition à essayer (en δ)",
+        reponse: { valeur: 2.5, unite: "δ", decimales: 2, signe: true },
+        aide: "L'addition apporte ce que l'accommodation de confort ne fournit pas.",
+        ligne: "Addition = 3,00 − 0,50 = +2,50 δ",
+        erreurs: [{ valeur: 3.5, type: "signe", message: "L'accommodation de confort se retire de l'accommodation requise : 3,00 − 0,50, pas 3,00 + 0,50." }]
+      }
+    ],
+    explication: "Amplitude apparente 1,00 δ, confort 0,50 δ, addition 3,00 − 0,50 = +2,50 δ. On l'essaie à la distance de travail, puis on contrôle que la lecture est confortable."
+  },
+  {
+    id: "U5-255", epreuve: "U5", theme: "Pathologie", session: "complément",
+    difficulte: "moyen",
+    question: "À quoi sert la grille d'Amsler ?",
+    choix: ["À repérer des déformations ou des trous dans la vision centrale (métamorphopsies, scotome), notamment dans la DMLA", "À mesurer la pression intraoculaire", "À dépister la cataracte", "À mesurer la phorie verticale"],
+    bonne: 0,
+    explication: "Le client regarde, un œil après l'autre, une grille de lignes droites avec un point au centre. Si des lignes paraissent ondulées, cassées ou si une zone disparaît, la macula est peut-être atteinte : on oriente vers l'ophtalmologiste, sans poser de diagnostic.",
+    indice: "Une grille de lignes droites : que révèle-t-elle quand les lignes paraissent tordues ?"
+  },
+  {
+    id: "U5-256", epreuve: "U5", theme: "Examen préliminaire", session: "complément",
+    difficulte: "facile",
+    question: "Quel test dépiste une anomalie de la vision des couleurs ?",
+    choix: ["Les planches d'Ishihara", "La grille d'Amsler", "Le cadran de Parent", "Le test de Mallett"],
+    bonne: 0,
+    explication: "Les planches d'Ishihara cachent un chiffre dans un fond de points colorés : il est lu normalement par un sujet à vision des couleurs normale, et mal lu en cas de dyschromatopsie rouge-vert. Amsler explore la macula, Parent l'astigmatisme, Mallett la disparité de fixation.",
+    indice: "Un seul de ces tests est fait de points de couleur."
+  },
+  {
+    id: "U5-257", epreuve: "U5", theme: "Anisométropie", session: "2017",
+    difficulte: "facile",
+    question: "À partir de quelle différence de réfraction entre les deux yeux parle-t-on d'anisométropie ?",
+    choix: ["Environ 1 δ", "Environ 0,12 δ", "Environ 5 δ", "Dès qu'il y a une différence d'acuité"],
+    bonne: 0,
+    explication: "Une différence de réfraction de l'ordre de 1 δ entre les deux yeux est considérée comme notable : c'est l'anisométropie. Elle est axile si la longueur des yeux diffère, de puissance (ou de vergence) si ce sont les vergences. Une différence d'acuité n'est pas une définition de l'anisométropie.",
+    indice: "Retiens une valeur d'une dioptrie, pas un détail de quelques centièmes."
+  },
+  {
+    id: "U5-258", epreuve: "U5", theme: "Anisométropie", session: "2024",
+    difficulte: "facile",
+    type: "calcul",
+    question: "Le regard passe à 4 mm du centre optique d'un verre de +3,00. Calcule l'effet prismatique en Δ.",
+    reponse: {"valeur": 1.2, "unite": "Δ", "decimales": 1, "signe": false},
+    erreurs: [{ valeur: 12, type: "unite", message: "Prentice demande le décentrement en centimètres : 4 mm = 0,4 cm. P = 0,4 × 3,00 = 1,2 Δ." }],
+    explication: "Prentice : P (Δ) = décentrement (cm) × |D| = 0,4 × 3,00 = 1,2 Δ.",
+    indice: "Convertis les millimètres en centimètres avant de multiplier par la puissance."
+  },
+  {
+    id: "U5-259", epreuve: "U5", theme: "Anisométropie", session: "2024",
+    difficulte: "difficile",
+    question: "Verre de −4,00 dont le centre optique est décalé de 5 mm vers le nez par rapport à la pupille. Quel effet prismatique le sujet subit-il ?",
+    choix: ["2 Δ, base temporale", "2 Δ, base nasale", "20 Δ, base temporale", "0,2 Δ, base temporale"],
+    bonne: 0,
+    explication: "La pupille est à 5 mm du centre optique, du côté temporal. Prentice : P = 0,5 × 4,00 = 2 Δ. Un verre divergent se comporte comme deux prismes accolés par leur sommet au centre optique : leur base est tournée vers l'extérieur, donc ici vers la tempe : base temporale.",
+    indice: "Un verre divergent a des bases vers l'extérieur. Où passe le regard par rapport au centre optique ?"
+  },
+  {
+    id: "U5-260", epreuve: "U5", theme: "Anisométropie", session: "2018",
+    difficulte: "moyen",
+    question: "Un anisométrope porte des verres progressifs et subit en lecture un prisme vertical différentiel gênant. Quelle solution est adaptée ?",
+    choix: ["Des lunettes dédiées à la vision de près, ou un prisme vertical compensateur, ou un progressif court qui diminue la différence", "Des verres teintés", "Des verres à indice plus élevé, sans autre changement", "Un traitement anti-reflets plus performant"],
+    bonne: 0,
+    explication: "En lecture le regard descend et traverse chaque verre loin de son centre optique : la différence de puissance crée un prisme vertical différentiel. On peut la réduire par une paire de lunettes pour la vision de près centrée sur le regard, un prisme vertical compensateur sur un verre, ou un progressif court, dont la zone de près est plus haute. Le reste n'agit pas sur l'effet prismatique.",
+    indice: "Le défaut vient d'un décentrement entre le regard et le centre optique : il faut le réduire ou le compenser."
+  },
+  {
+    id: "U5-261", epreuve: "U5", theme: "Anisométropie", session: "2018",
+    difficulte: "moyen",
+    contexte: "Il porte les mêmes verres depuis 6 ans ; les gênes sont apparues il y a 2 mois.",
+    question: "Un client présente une aniséiconie de 1,8 %. Pourquoi ne peut-elle pas expliquer ses gênes ? Quelle rédaction est juste et complète ?",
+    choix: ["1,8 % reste sous le seuil d'environ 3 % où la fusion devient difficile ; et une gêne due aux verres serait apparue dès leur premier port, pas six ans après", "Parce que 1,8 % est supérieur à 3 %", "Parce qu'une aniséiconie ne gêne jamais", "Parce que 1,8 % est une valeur trop précise pour être vraie"],
+    bonne: 0,
+    explication: "Sous environ 3 %, l'aniséiconie ne gêne pas la fusion. Surtout, des verres portés depuis six ans sans souci ne peuvent pas être la cause d'une gêne qui date de deux mois : elle aurait été sentie dès le premier port. À partir de 3 %, la fusion peut être gênée.",
+    surLaCopie: "1,8 % est inférieur à 3 % : l'aniséiconie ne gêne pas la fusion. Les mêmes verres sont bien portés depuis six ans : elle n'explique pas la gêne récente.",
+    indice: "Compare 2,25 % à la limite de gêne, puis demande-toi quand la gêne aurait dû apparaître."
+  },
+  {
+    id: "U5-262", epreuve: "U5", theme: "Anisométropie", session: "complément",
+    difficulte: "moyen",
+    question: "Dans une anisométropie axile, sans aucune compensation, quel œil forme l'image rétinienne la plus grande ?",
+    choix: ["L'œil le plus long, donc le plus myope", "L'œil le plus court, donc le plus hypermétrope", "Les deux ont la même taille", "L'œil dominant, quelle que soit sa longueur"],
+    bonne: 0,
+    explication: "Plus l'œil est long, plus la rétine est loin du cristallin : l'image rétinienne est plus grande. L'œil axile le plus long, le plus myope, voit plus gros sans compensation. Les lunettes placées au foyer objet de l'œil ramènent les deux images à la même taille (loi de Knapp).",
+    indice: "Une rétine plus éloignée du cristallin reçoit une image agrandie."
+  },
+  {
+    id: "U5-263", epreuve: "U5", theme: "Lentilles", session: "complément",
+    difficulte: "facile",
+    question: "Quels sont les ordres de grandeur des diamètres totaux d'une lentille souple et d'une lentille rigide ?",
+    choix: ["Souple : environ 14 mm ; rigide : environ 9 à 10 mm", "Souple : environ 9 mm ; rigide : environ 14 mm", "Souple : environ 20 mm ; rigide : environ 12 mm", "Souple et rigide : environ 5 mm"],
+    bonne: 0,
+    explication: "Une lentille souple fait environ 14 mm de diamètre : elle recouvre la cornée et déborde un peu sur la sclère. Une lentille rigide est plus petite, 9 à 10 mm : elle repose sur la cornée seule et bouge à chaque clignement.",
+    indice: "La souple recouvre toute la cornée. Laquelle est donc la plus grande ?"
   }
 );
 
