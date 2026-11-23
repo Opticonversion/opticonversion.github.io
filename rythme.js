@@ -642,8 +642,8 @@ const DECOUVERTES = [
   { id: "definitions", quand: s => s.jour >= 4, titre: "Les définitions à réciter", lien: "definitions.html", bouton: "Réciter",
     invite: "Aujourd'hui, essaie les définitions à réciter", icone: "i-cartes",
     texte: "Celles des sujets officiels, en cartes à retourner. Les définitions à savoir par cœur viennent en premier." },
-  { id: "calculs", quand: s => s.joursActifs >= 6, titre: "Les calculateurs", lien: "calculateurs.html", bouton: "Ouvrir les calculs",
-    invite: "Aujourd'hui, essaie les calculateurs", icone: "i-calcul",
+  { id: "calculs", quand: s => s.joursActifs >= 6, titre: "Les outils de calcul", lien: "calculateurs.html", bouton: "Ouvrir les outils",
+    invite: "Aujourd'hui, essaie les outils de calcul", icone: "i-calcul",
     texte: "Transposition, verre-œil, Prentice : le calcul est détaillé, pour vérifier le tien." }
 ];
 function lireDecouverte() {
