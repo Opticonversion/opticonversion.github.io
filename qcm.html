@@ -18,7 +18,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Opticonversion">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
-<link rel="stylesheet" href="style.css?v=7d2c08a3">
+<link rel="stylesheet" href="style.css?v=652dbbb3">
 </head>
 <body>
 <header class="entete">
@@ -101,13 +101,19 @@
 <!-- On charge d'abord les questions et les vidéos, puis le moteur qui les affiche -->
 
 <script src="videos.js?v=2da8e777"></script>
-<script src="epreuves.js?v=cc645427"></script>
-<script src="catalogue.js?v=2ee1a49e"></script>
+<script src="epreuves.js?v=d49a38a4"></script>
+<script src="catalogue.js?v=c675bf30"></script>
 <script src="questions-U41.js?v=7a11c243"></script>
 <script src="questions-U42.js?v=49471ad6"></script>
 <script src="questions-U43.js?v=ea60cae6"></script>
 <script src="questions-U5.js?v=952a7f14"></script>
 <script src="questions-U3.js?v=60f0103f"></script>
+<!-- Sujets blancs (#U5/sujet) : un fichier par épreuve, après les questions ; un fichier absent ne casse rien -->
+<script src="sujets-U5.js?v=146772d3"></script>
+<script src="sujets-U3.js?v=f1429d02"></script>
+<script src="sujets-U42.js?v=e0c72a21"></script>
+<script src="sujets-U43.js?v=a9434843"></script>
+<script src="sujets-U41.js?v=85599410"></script>
 <!-- Questions d'entraînement (mêmes notions, autres chiffres) : chargées ici seulement, hors Essentiel -->
 <script src="entrainement-U41.js?v=2ff5d7d1"></script>
 <script src="entrainement-U42.js?v=b8336c15"></script>
@@ -124,12 +130,12 @@
 <script src="specificites-U43.js?v=523c07db"></script>
 <script src="specificites-U5.js?v=43533990"></script>
 <script src="specificites-U3.js?v=3245f237"></script>
-<script src="coffre.js?v=cc59b959"></script>
+<script src="coffre.js?v=768a24fb"></script>
 <script src="essentiel.js?v=7e8432f5"></script>
 <script src="rythme.js?v=8bba5e53"></script>
 <!-- Examen blanc chronométré (#U5/examen) : avant le script de la page, qui l'ouvre dès le chargement -->
-<script src="examen.js?v=1b5b3813"></script>
-<script src="calculette.js?v=6fb79d1d"></script>
+<script src="examen.js?v=07617f9d"></script>
+<script src="calculette.js?v=481476d2"></script>
 <script src="atelier-calculatrice.js?v=6e07c21a"></script>
 <script>
   // ---------------- L'état du QCM ----------------
@@ -273,6 +279,11 @@
       replierPage(false);
       document.getElementById("legende-etoile").hidden = true;
       Examen.ouvrir(code);
+    } else if (special && special.sujet && typeof Examen !== "undefined" && Examen.existeSujet(code)) {
+      onglet = "examen";                     // sujet blanc (examen.js) : comme l'examen blanc, la page ne montre plus que lui
+      replierPage(false);
+      document.getElementById("legende-etoile").hidden = true;
+      if (!Examen.ouvrirSujet(code, special.sujet === true ? null : special.sujet)) Examen.ouvrirSujet(code, null);   // id inconnu : le premier sujet
     } else if (entr && entrainementDe(code, entr === "tous" ? null : entr).length) {
       onglet = "entrainement";
       themeEntrainement = entr === "tous" ? null : entr;
@@ -1710,6 +1721,8 @@
         const cellule = document.createElement(i === 0 ? "th" : "td");
         if (i === 0) cellule.scope = "row";
         cellule.textContent = v;
+        // Une phrase (fiche d'un client, d'une entreprise) : elle passe à la ligne, alignée à gauche
+        if (i > 0 && String(v).length > 30) cellule.className = "annexe-long";
         tr.appendChild(cellule);
       });
     });
@@ -1721,6 +1734,11 @@
   // Ce qu'on sait avant de répondre : pour un cas, son contexte, son annexe et ce que les étapes
   // précédentes ont apporté (la nouvelle information de l'étape en cours est mise en avant).
   function creerContexte(q) {
+    // Une question d'un sujet blanc (revue dans « À revoir ») : la situation de départ et sa partie (examen.js)
+    if (q.sujet && typeof creerContexteSujet === "function") {
+      const c = creerContexteSujet(q, { tete: "Sujet blanc · partie " + q.partie });
+      if (c) return c;
+    }
     const cas = q.cas && casParId(q.cas);
     if (!cas && !q.contexte && !q.annexe) return null;
     const boite = document.createElement("div");
@@ -1878,6 +1896,15 @@
       const resume = document.createElement("span");
       resume.className = "visuellement-cache";
       resume.textContent = " : " + Examen.resume(code);
+      a.appendChild(resume);
+    }
+    // Le sujet blanc (examen.js), seulement sur une épreuve qui a un sujet (sujets-XX.js)
+    if (typeof Examen !== "undefined" && Examen.existeSujet(code)) {
+      const a = lien("i-dossier", "Sujet blanc");
+      a.href = "#" + code + "/sujet";
+      const resume = document.createElement("span");
+      resume.className = "visuellement-cache";
+      resume.textContent = " : " + Examen.resumeSujet(code);
       a.appendChild(resume);
     }
     // Les Spécificités : ce bouton est leur seul accès (le bloc replié n'est plus affiché sans lui)
@@ -2383,7 +2410,7 @@
   // (Les images du nounours sont dans le dossier img/.)
   function palierDe(pourcent) {
     if (pourcent === 100) return { nom: "or", titre: "Sans faute !", sous: "Même " + nomCompagnon() + " n'en revient pas.", nounours: "choque", confettis: 160 };
-    if (pourcent >= 80) return { nom: "or", titre: "Très bien", sous: "Le thème est presque acquis. Relis les quelques erreurs ci-dessous.", nounours: "clin-doeil", confettis: 90 };
+    if (pourcent >= 80) return { nom: "or", titre: "Très bien", sous: "Le thème est presque maîtrisé. Relis les quelques erreurs ci-dessous.", nounours: "clin-doeil", confettis: 90 };
     if (pourcent >= 60) return { nom: "argent", titre: "Plus de la moitié", sous: "Relis tes erreurs, puis refais la série : ça devrait passer.", nounours: "bouche-ouverte", confettis: 0 };
     if (pourcent >= 50) return { nom: "bronze", titre: "Les bases sont là", sous: "Relis l'explication de chaque erreur avant de refaire la série.", nounours: "pensif", confettis: 0 };
     // Moins de la moitié : aucun ton de victoire (pas de confettis, pas de son de fin, compagnon pensif)
@@ -2659,7 +2686,8 @@
   // qcm.html#U5/entrainement : questions d'entraînement de l'épreuve ; #U5/entrainement:Worth : celles d'un thème ;
   // qcm.html#U5/cas : les cas pratiques ; #U5/cas:CAS-U5-01 : un cas ;
   // #U5/questions:U5-012,U5-020 : une petite série de questions choisies (liens des pièges) ;
-  // qcm.html#U5/examen : l'examen blanc chronométré (examen.js).
+  // qcm.html#U5/examen : l'examen blanc chronométré (examen.js) ;
+  // qcm.html#U5/sujet : le sujet blanc de l'épreuve (examen.js), #U5/sujet:SUJET-U5-01 : un sujet précis.
   function selonAdresse() {
     repriseAuChargement = true;              // une série ouverte par son adresse reprend où l'élève en était
     try { ouvrirSelonAdresse(); } finally { repriseAuChargement = false; }
@@ -2674,6 +2702,8 @@
     else if (code === "premiers-pas") ouvrirRevision("premiers", theme);
     else if (code && theme === "tous") ouvrirEpreuve(code, "Tous");    // toutes les questions de l'épreuve, lancées
     else if (code && theme === "examen") ouvrirEpreuve(code, null, { examen: true });
+    else if (code && theme === "sujet") ouvrirEpreuve(code, null, { sujet: true });
+    else if (code && theme && theme.startsWith("sujet:")) ouvrirEpreuve(code, null, { sujet: theme.slice(6) });
     else if (code && theme === "cas") ouvrirEpreuve(code, null, { cas: "liste" });
     else if (code && theme && theme.startsWith("cas:")) ouvrirEpreuve(code, null, { cas: theme.slice(4) });
     else if (code && theme && theme.startsWith("questions:")) ouvrirEpreuve(code, null, { questions: theme.slice(10).split(",") });

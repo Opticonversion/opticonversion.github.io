@@ -24,7 +24,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Opticonversion">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
-<link rel="stylesheet" href="style.css?v=7d2c08a3">
+<link rel="stylesheet" href="style.css?v=652dbbb3">
 </head>
 <body data-rafraichir="oui">
 
@@ -208,19 +208,20 @@
       <span class="outil-texte"><b>Calculateurs</b><span>Transposition, verre-œil, Prentice, avec le détail.</span></span>
       <span class="fleche" aria-hidden="true">→</span>
     </a>
-    <!-- L'examen blanc : un clic présente les 5 matières, chacune mène à son examen (examen.js, qcm.html#U5/examen) -->
+    <!-- Le sujet blanc (à la place de l'examen blanc, choix de David le 23 nov. 2026) : un clic présente les matières
+         qui ont un sujet, chacune mène à son sujet (examen.js, qcm.html#U5/sujet). Durée et matières sans sujet : script plus bas. -->
     <div class="outil-examen">
       <button class="outil" type="button" id="examen-ouvrir" aria-expanded="false" aria-controls="examen-matieres">
         <span class="outil-icone" aria-hidden="true"><span class="ico i-chrono"></span></span>
-        <span class="outil-texte"><b>Examen blanc</b><span>Une copie chronométrée comme le jour de l'examen, notée sur 20. Choisis ta matière.</span></span>
+        <span class="outil-texte"><b>Sujet blanc</b><span>Un sujet construit comme celui du BTS : une situation, des documents, des parties notées sur 20. Choisis ta matière.</span></span>
         <span class="fleche" aria-hidden="true">→</span>
       </button>
       <div class="examen-matieres" id="examen-matieres" hidden>
-        <a class="jour-matiere" data-epreuve="U5" href="qcm.html#U5/examen">Vision<small>50 min</small></a>
-        <a class="jour-matiere" data-epreuve="U3" href="qcm.html#U3/examen">Éco<small>50 min</small></a>
-        <a class="jour-matiere" data-epreuve="U42" href="qcm.html#U42/examen">OGP<small>40 min</small></a>
-        <a class="jour-matiere" data-epreuve="U43" href="qcm.html#U43/examen">ETSO<small>40 min</small></a>
-        <a class="jour-matiere" data-epreuve="U41" href="qcm.html#U41/examen">Maths<small>30 min</small></a>
+        <a class="jour-matiere" data-epreuve="U5" href="qcm.html#U5/sujet">Vision<small></small></a>
+        <a class="jour-matiere" data-epreuve="U3" href="qcm.html#U3/sujet">Éco<small></small></a>
+        <a class="jour-matiere" data-epreuve="U42" href="qcm.html#U42/sujet">OGP<small></small></a>
+        <a class="jour-matiere" data-epreuve="U43" href="qcm.html#U43/sujet">ETSO<small></small></a>
+        <a class="jour-matiere" data-epreuve="U41" href="qcm.html#U41/sujet">Maths<small></small></a>
       </div>
     </div>
   </div>
@@ -240,20 +241,37 @@
 <footer><span class="pied-marque"><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="13" fill="none" stroke="#d9b26f" stroke-width="2.5"/><circle cx="16" cy="16" r="5.5" fill="#d9b26f"/><circle cx="18.5" cy="13.5" r="1.6" fill="#0b0d12"/></svg>Opticonversion</span><span>© 2026</span><span class="pied-liens"><a href="notions.html">Notions</a> <span aria-hidden="true">·</span> <a href="confidentialite.html">Confidentialité</a> <span aria-hidden="true">·</span> <a href="mentions-legales.html">Mentions légales</a> <span aria-hidden="true">·</span> <a href="mailto:opticonversion.bts@gmail.com">Contact</a></span></footer>
 
 <!-- On charge les épreuves et les questions pour afficher les cartes et les chiffres exacts -->
-<script src="epreuves.js?v=cc645427"></script>
-<script src="catalogue.js?v=2ee1a49e"></script>
+<script src="epreuves.js?v=d49a38a4"></script>
+<script src="catalogue.js?v=c675bf30"></script>
 <script src="questions-U41.js?v=7a11c243"></script>
 <script src="questions-U42.js?v=49471ad6"></script>
 <script src="questions-U43.js?v=ea60cae6"></script>
 <script src="questions-U5.js?v=952a7f14"></script>
 <script src="questions-U3.js?v=60f0103f"></script>
-<script src="coffre.js?v=cc59b959"></script>
+<!-- Sujets blancs : leurs questions ratées comptent dans « À revoir » comme sur qcm.html (un fichier absent ne casse rien) -->
+<script src="sujets-U5.js?v=146772d3"></script>
+<script src="sujets-U3.js?v=f1429d02"></script>
+<script src="sujets-U42.js?v=e0c72a21"></script>
+<script src="sujets-U43.js?v=a9434843"></script>
+<script src="sujets-U41.js?v=85599410"></script>
+<script src="coffre.js?v=768a24fb"></script>
 <script src="essentiel.js?v=7e8432f5"></script>
 <script src="rythme.js?v=8bba5e53"></script>
 <script>
-  // L'examen blanc des outils : le bouton ouvre ou referme le choix des 5 matières
+  // Le sujet blanc des outils : le bouton ouvre ou referme le choix des matières
   {
     const b = document.getElementById("examen-ouvrir"), choix = document.getElementById("examen-matieres");
+    // Une matière sans sujet est retirée ; la durée suit la règle de examen.js (minutesSujet) :
+    // 2 min par QCM, 3 min par calcul, arrondi aux 5 minutes au-dessus
+    choix.querySelectorAll("a[data-epreuve]").forEach(a => {
+      const s = Catalogue.sujets(a.dataset.epreuve)[0];
+      if (!s) { a.remove(); return; }
+      const qs = Catalogue.questionsDuSujet(s.id);
+      const min = Math.ceil(qs.reduce((t, q) => t + (q.type === "calcul" || q.type === "pose" ? 3 : 2), 0) / 5) * 5;
+      const h = Math.floor(min / 60), m = min % 60;
+      a.querySelector("small").textContent = h ? h + " h" + (m ? " " + String(m).padStart(2, "0") : "") : m + " min";
+    });
+    if (!choix.querySelector("a")) b.closest(".outil-examen").remove();
     b.addEventListener("click", () => {
       const ouvert = choix.hidden;
       choix.hidden = !ouvert;

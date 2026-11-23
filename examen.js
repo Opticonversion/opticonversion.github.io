@@ -11,6 +11,14 @@
 // Meilleure note : records["U5/examen"] en pourcentage (synchronisé avec le compte comme les autres records).
 // Dernière copie corrigée : localStorage « examen-dernier » (ce navigateur seulement).
 //
+// Sujet blanc (qcm.html#U5/sujet, ou #U5/sujet:SUJET-U5-01) : le même déroulé (minuteur, grille, rendu, reprise),
+// mais un sujet écrit d'avance (SUJETS, fichiers sujets-XX.js) : situation de départ et documents toujours affichés,
+// parties A, B, C… notées (total 20), questions dans l'ordre du sujet, calculs posés compris. Durée : 2 min par QCM,
+// 3 min par calcul, arrondie aux 5 minutes. Dans une partie, un calcul compte double (un calcul posé : chaque case juste
+// rapporte sa part). Note = somme des parties, au dixième. Meilleure note : records["U5/SUJET-U5-01"] en pourcentage
+// (note × 5). En cours : localStorage « sujet-en-cours », dernière copie : « sujet-dernier » (une entrée par sujet).
+// Format : notes/coordination/sujet-blanc.md.
+//
 // Pour ajouter un autre format (ex. un examen complet plus long) : une entrée de plus dans FORMATS_EXAMEN,
 // puis Examen.ouvrir(code, "complet"). Le reste (tirage, minuteur, bilan) ne change pas.
 const FORMATS_EXAMEN = {
@@ -56,8 +64,88 @@ function creerSurLaCopie(q) {
   return bloc;
 }
 
+// Ce qu'on sait avant de répondre à une question d'un sujet blanc : la situation de départ et ses documents
+// (dépliés, l'élève peut les replier), la partie (titre, points, documents), ce qu'ont apporté les questions
+// précédentes de la partie, puis ce que la question ajoute. Sert au sujet (examen.js) et à « À revoir » (qcm.html).
+// options : repliee (situation repliée au départ), auPliage(ouverte) (l'élève a déplié ou replié), points (montrer
+// les points de la partie), tete (petite ligne au-dessus, ex. « Sujet blanc · partie B »).
+function creerContexteSujet(q, options) {
+  options = options || {};
+  const s = q && q.sujet && typeof Catalogue !== "undefined" ? Catalogue.sujetParId(q.sujet) : null;
+  if (!s) return null;
+  const partie = (s.parties || []).find(p => p.lettre === q.partie);
+  const boite = document.createElement("div");
+  boite.className = "contexte contexte-sujet";
+  const texte = (t, classe, parent) => {
+    const p = document.createElement("p");
+    if (classe) p.className = classe;
+    p.textContent = t;
+    (parent || boite).appendChild(p);
+    return p;
+  };
+  const annexe = (a, parent) => { const f = creerAnnexe(a); if (f) (parent || boite).appendChild(f); };
+  if (options.tete) texte(options.tete, "contexte-tete");
+  const det = document.createElement("details");
+  det.className = "contexte-situation sujet-situation";
+  det.open = !options.repliee;
+  const resume = document.createElement("summary");
+  resume.append(document.createTextNode("Situation de départ · "));
+  const nom = document.createElement("span");
+  nom.textContent = s.titre;
+  resume.appendChild(nom);
+  det.appendChild(resume);
+  if (s.contexte) texte(s.contexte, "", det);
+  annexe(s.annexe, det);
+  // « toggle » part aussi, plus tard, pour l'ouverture faite ici : seul un geste de l'élève compte
+  const auDepart = det.open;
+  let touche = false;
+  det.addEventListener("toggle", () => {
+    if (!touche && det.open === auDepart) return;
+    touche = true;
+    if (options.auPliage) options.auPliage(det.open);
+  });
+  boite.appendChild(det);
+  if (partie) {
+    const bloc = document.createElement("div");
+    bloc.className = "sujet-partie";
+    bloc.setAttribute("role", "group");
+    bloc.setAttribute("aria-label", "Partie " + partie.lettre + " : " + partie.titre);
+    const t = document.createElement("p");
+    t.className = "sujet-partie-titre";
+    t.innerHTML = "<b></b> <span></span>";
+    t.querySelector("b").textContent = "Partie " + partie.lettre + " · " + partie.titre;
+    if (options.points) t.querySelector("span").textContent = String(partie.points).replace(".", ",") + (partie.points > 1 ? " points" : " point");
+    else t.querySelector("span").remove();
+    bloc.appendChild(t);
+    if (partie.contexte) texte(partie.contexte, "", bloc);
+    annexe(partie.annexe, bloc);
+    boite.appendChild(bloc);
+  }
+  // Ce qu'ont apporté les questions précédentes de la même partie (replié), puis ce que cette question ajoute
+  const blocQuestion = (x, nouveau) => {
+    const bloc = document.createElement("div");
+    bloc.className = "contexte-etape" + (nouveau ? " nouveau" : "");
+    if (x.contexte) texte(x.contexte, "", bloc);
+    annexe(x.annexe, bloc);
+    return bloc;
+  };
+  const avant = Catalogue.questionsDuSujet(s.id).filter(x => x.partie === q.partie && x.etape < q.etape && (x.contexte || x.annexe));
+  if (avant.length) {
+    const d = document.createElement("details");
+    d.className = "contexte-avant";
+    const r = document.createElement("summary");
+    r.textContent = avant.length > 1 ? "Ce qu'ont apporté les questions précédentes de la partie" : "Ce qu'a apporté la question précédente de la partie";
+    d.appendChild(r);
+    avant.forEach(x => d.appendChild(blocQuestion(x, false)));
+    boite.appendChild(d);
+  }
+  if (q.contexte || q.annexe) boite.appendChild(blocQuestion(q, true));
+  return boite;
+}
+
 const Examen = (() => {
   const CLE_EN_COURS = "examen-en-cours", CLE_DERNIER = "examen-dernier";
+  const CLE_SUJET_EN_COURS = "sujet-en-cours", CLE_SUJET_DERNIER = "sujet-dernier";
   const SEUIL_FORT = 0.75, SEUIL_FAIBLE = 0.5;
   const ANNONCES = [[600, "Il reste 10 minutes."], [300, "Il reste 5 minutes."], [60, "Il reste 1 minute."]];
 
@@ -69,7 +157,8 @@ const Examen = (() => {
   // ---------- Petits outils ----------
   const lire = cle => { try { return JSON.parse(localStorage.getItem(cle) || "{}") || {}; } catch (e) { return {}; } };
   const ecrire = (cle, val) => { try { localStorage.setItem(cle, JSON.stringify(val)); } catch (e) {} };
-  const points = q => (q.type === "calcul" ? 2 : 1);
+  const estCalcul = q => q.type === "calcul" || q.type === "pose";
+  const points = q => (estCalcul(q) ? 2 : 1);
   const parId = id => QUESTIONS.find(q => q.id === id);
   const formatDe = (code, nomFormat) => { const f = FORMATS_EXAMEN[nomFormat || "blanc"]; return f && f[code] ? f[code] : null; };
   const noteDe = pourcent => ecrireNombre(pourcent / 5, Number.isInteger(pourcent / 5) ? 0 : 1);
@@ -157,11 +246,20 @@ const Examen = (() => {
       duree: format.minutes * 60, restant: format.minutes * 60, numero: 0, debut: Date.now() };
   }
 
+  // Un examen est rangé sous son épreuve (« examen-en-cours ».U5), un sujet sous son id (« sujet-en-cours ».SUJET-U5-01)
+  const rangement = e => (e.sujet ? [CLE_SUJET_EN_COURS, e.sujet] : [CLE_EN_COURS, e.epreuve]);
   function sauver() {
     if (!etat) return;
-    const tous = lire(CLE_EN_COURS);
-    tous[etat.epreuve] = etat;
-    ecrire(CLE_EN_COURS, tous);
+    const [cle, place] = rangement(etat);
+    const tous = lire(cle);
+    tous[place] = etat;
+    ecrire(cle, tous);
+  }
+  function oublier(e) {
+    const [cle, place] = rangement(e);
+    const tous = lire(cle);
+    delete tous[place];
+    ecrire(cle, tous);
   }
   function enCours(code) {
     const e = lire(CLE_EN_COURS)[code];
@@ -173,14 +271,14 @@ const Examen = (() => {
     delete tous[code];
     ecrire(CLE_EN_COURS, tous);
   }
-  const repondue = id => {
-    const r = etat.reponses[id];
-    return !!r && (r.i !== undefined || (typeof r.texte === "string" && r.texte.trim() !== ""));
-  };
+  // Une réponse donnée : une proposition choisie, une valeur tapée, ou au moins une case d'un calcul posé
+  const aRepondu = r => !!r && (r.i !== undefined || (typeof r.texte === "string" && r.texte.trim() !== "") ||
+    (Array.isArray(r.etapes) && r.etapes.some(t => typeof t === "string" && t.trim() !== "")));
+  const repondue = id => aRepondu(etat.reponses[id]);
 
   // ---------- La page autour de l'examen ----------
   // Pendant l'examen (et sur son écran d'accueil) : seulement l'examen. Ni thèmes, ni Shorts, ni Spécificités.
-  function preparerPage(code) {
+  function preparerPage(code, nom) {
     ["themes", "mise-en-avant", "specificites", "titre-echauffement", "progression-epreuve", "lien-entrainement", "lien-atelier"].forEach(id => {
       const x = document.getElementById(id);
       if (x) x.hidden = true;
@@ -190,8 +288,7 @@ const Examen = (() => {
     dispo.classList.add("vue-qcm");
     document.querySelector(".vues").hidden = true;
     vuesCachees = true;
-    const f = FORMATS_EXAMEN.blanc;
-    document.getElementById("sous-titre").textContent = code + " · " + f.nom;
+    document.getElementById("sous-titre").textContent = code + " · " + (nom || FORMATS_EXAMEN.blanc.nom);
   }
 
   // Quitter l'examen (autre page du QCM) : le minuteur s'arrête, l'examen reste gardé
@@ -199,7 +296,7 @@ const Examen = (() => {
     arreterMinuteur();
     if (etat) sauver();
     etat = null;
-    document.body.classList.remove("en-examen");
+    document.body.classList.remove("en-examen", "en-sujet");
     const themes = document.getElementById("themes");
     if (themes) themes.hidden = false;
     if (vuesCachees && typeof appliquerVue === "function") {
@@ -248,7 +345,7 @@ const Examen = (() => {
     if (meilleure !== null) bloc.appendChild(el("p", "examen-meilleure", "Ta meilleure note : " + noteDe(meilleure) + " / 20"));
     const actions = el("div", "bilan-actions examen-actions");
     if (garde) {
-      const nbRep = garde.ids.filter(id => { const r = garde.reponses[id]; return r && (r.i !== undefined || (r.texte || "").trim()); }).length;
+      const nbRep = garde.ids.filter(id => aRepondu(garde.reponses[id])).length;
       const reprendre = el("button", "bouton", "Reprendre l'examen");
       reprendre.onclick = () => demarrer(garde);
       const nouveau = el("button", "bouton secondaire", "Recommencer un nouvel examen");
@@ -278,10 +375,17 @@ const Examen = (() => {
   function demarrer(e) {
     etat = e;
     questions = etat.ids.map(parId);
-    if (questions.some(q => !q)) { oublierEnCours(etat.epreuve); ouvrir(etat.epreuve); return; }
+    if (questions.some(q => !q)) {
+      const e2 = etat;
+      etat = null;
+      oublier(e2);
+      if (e2.sujet) ouvrirSujet(e2.epreuve, e2.sujet); else ouvrir(e2.epreuve);
+      return;
+    }
     etat.numero = Math.min(Math.max(0, etat.numero || 0), questions.length - 1);
     sauver();
     document.body.classList.add("en-examen");
+    document.body.classList.toggle("en-sujet", !!etat.sujet);
     const zone = document.getElementById("zone");
     zone.innerHTML =
       '<div class="examen-barre">' +
@@ -304,14 +408,31 @@ const Examen = (() => {
       if (etat.numero < questions.length - 1) aller(etat.numero + 1); else demanderRendre();
     };
     const ol = zone.querySelector(".examen-grille ol");
-    questions.forEach((q, i) => {
+    const caseDe = i => {
       const li = el("li");
       const b = el("button", "examen-case", String(i + 1));
       b.type = "button";
       b.onclick = () => aller(i);
       li.appendChild(b);
-      ol.appendChild(li);
-    });
+      return li;
+    };
+    if (etat.sujet) {
+      // Sujet blanc : les numéros rangés par partie, pour passer d'une partie à l'autre comme sur une copie
+      const sujet = Catalogue.sujetParId(etat.sujet);
+      zone.querySelector(".examen-grille-titre").textContent = "Les parties du sujet";
+      const grille = el("div", "sujet-grille");
+      sujet.parties.forEach(p => {
+        const groupe = el("div", "sujet-grille-partie");
+        groupe.appendChild(el("p", "sujet-grille-nom", "Partie " + p.lettre + " · " + pointsTexte(p.points)));
+        const liste = el("ol");
+        liste.setAttribute("role", "list");
+        liste.setAttribute("aria-label", "Partie " + p.lettre + " : " + p.titre);
+        questions.forEach((q, i) => { if (q.partie === p.lettre) liste.appendChild(caseDe(i)); });
+        groupe.appendChild(liste);
+        grille.appendChild(groupe);
+      });
+      ol.replaceWith(grille);
+    } else questions.forEach((q, i) => ol.appendChild(caseDe(i)));
     lancerMinuteur();
     afficher(true);        // le bouton cliqué a disparu : le focus va au titre de la question
   }
@@ -332,7 +453,8 @@ const Examen = (() => {
     const tete = el("div", "examen-tete");
     const titre = el("h2", "examen-numero", "Question " + (etat.numero + 1) + " / " + questions.length);
     titre.tabIndex = -1;
-    const pts = el("span", "examen-points", points(q) > 1 ? "2 points" : "1 point");
+    // Sujet blanc : les points sont ceux de la partie (dite au-dessus) ; ici, seulement « compte double » pour un calcul
+    const pts = el("span", "examen-points", etat.sujet ? (estCalcul(q) ? "calcul, compte double" : "") : points(q) > 1 ? "2 points" : "1 point");
     const marque = el("button", "examen-marquer");
     marque.type = "button";
     marque.innerHTML = '<span class="ico i-drapeau" aria-hidden="true"></span> <span>À revoir</span>';
@@ -346,7 +468,11 @@ const Examen = (() => {
     tete.append(titre, pts, marque);
     boite.appendChild(tete);
 
-    const contexte = creerContexte(q);       // cas pratique : tout son contexte jusqu'à cette étape (qcm.html)
+    // Sujet blanc : situation de départ, documents, la partie et ce que ses questions précédentes ont apporté.
+    // La situation est dépliée à la première question, puis tient en une ligne (comme un cas pratique à partir de
+    // l'étape 2) pour laisser la question dans le premier écran ; dès que l'élève la déplie ou la replie, son choix est gardé.
+    // Cas pratique : tout son contexte jusqu'à cette étape (qcm.html)
+    const contexte = etat.sujet ? creerContexteSujet(q, { points: true, repliee: etat.situationRepliee === undefined ? etat.numero > 0 : etat.situationRepliee, auPliage: ouverte => { etat.situationRepliee = !ouverte; sauver(); } }) : creerContexte(q);
     if (contexte) boite.appendChild(contexte);
     const niveau = creerDifficulte(q);
     if (niveau) boite.appendChild(niveau);
@@ -356,6 +482,7 @@ const Examen = (() => {
     if (q.schemaQuestion) boite.appendChild(creerSchema(q.schemaQuestion, q.schemaTexte));
 
     if (q.type === "calcul") boite.appendChild(creerSaisieExamen(q));
+    else if (q.type === "pose") boite.appendChild(creerPoseExamen(q));
     else boite.appendChild(creerChoixExamen(q));
     // Calculette permise, comme au vrai BTS (calculette.js)
     const calc = window.Calculette && Calculette.bouton(q);
@@ -433,6 +560,51 @@ const Examen = (() => {
     return form;
   }
 
+  // Calcul posé (sujet blanc) : une case par étape, toutes ouvertes ; aucune correction avant la fin.
+  // Chaque case juste rapporte sa part des points de la question.
+  function creerPoseExamen(q) {
+    const bloc = el("div", "sujet-pose");
+    const ol = el("ol", "pose-liste sujet-pose-liste");
+    const textes = () => (etat.reponses[q.id] && Array.isArray(etat.reponses[q.id].etapes) ? etat.reponses[q.id].etapes : []);
+    q.etapes.forEach((e, k) => {
+      const li = el("li", "pose-etape");
+      const tete = el("p", "pose-tete");
+      tete.append(el("span", "pose-num", String(k + 1)), el("span", "pose-consigne"));
+      tete.querySelector(".pose-num").setAttribute("aria-hidden", "true");
+      ecrireTexteMath(tete.querySelector(".pose-consigne"), e.consigne);
+      const form = el("form", "saisie-calcul saisie-qcm");
+      const idAide = "sujet-pose-aide-" + k;
+      form.innerHTML = '<label class="saisie-ligne"><span class="visuellement-cache"></span><input type="text" autocomplete="off" spellcheck="false" enterkeyhint="next"><span class="saisie-unite" aria-hidden="true"></span></label><p class="saisie-aide"></p>';
+      form.querySelector(".visuellement-cache").textContent = "Étape " + (k + 1) + " : " + texteMathLu(e.consigne) + (e.reponse.unite ? ", en " + e.reponse.unite : "");
+      form.querySelector(".saisie-unite").textContent = e.reponse.unite || "";
+      const dec = e.reponse.decimales === undefined ? 2 : e.reponse.decimales;
+      const aide = form.querySelector(".saisie-aide");
+      aide.id = idAide;
+      aide.textContent = "Arrondi " + (dec === 0 ? "à l'unité" : "à " + ecrireNombre(10 ** -dec, dec) + " près") + (e.reponse.signe !== false ? " · avec son signe" : "");
+      const champ = form.querySelector("input");
+      champ.setAttribute("aria-describedby", idAide);
+      champ.inputMode = e.reponse.signe === false ? "decimal" : "text";
+      champ.value = textes()[k] || "";
+      champ.oninput = () => {
+        const t = q.etapes.map((_, j) => (j === k ? champ.value.slice(0, 40) : textes()[j] || ""));
+        if (t.some(x => x.trim())) etat.reponses[q.id] = { etapes: t }; else delete etat.reponses[q.id];
+        sauver();
+        majGrille();
+      };
+      // Entrée : case suivante, puis question suivante
+      form.onsubmit = ev => {
+        ev.preventDefault();
+        const suivant = ol.querySelectorAll("input")[k + 1];
+        if (suivant) suivant.focus();
+        else if (etat.numero < questions.length - 1) aller(etat.numero + 1); else demanderRendre();
+      };
+      li.append(tete, form);
+      ol.appendChild(li);
+    });
+    bloc.append(ol, el("p", "examen-aide-choix", "Calcul posé : remplis chaque case. Chaque case juste rapporte sa part des points, même si une autre est fausse."));
+    return bloc;
+  }
+
   function majGrille() {
     const zone = document.getElementById("zone");
     const cases = zone.querySelectorAll(".examen-case");
@@ -499,7 +671,7 @@ const Examen = (() => {
     const oui = el("button", "bouton", "Rendre ma copie");
     oui.type = "button";
     oui.onclick = () => rendre(false);
-    const non = el("button", "bouton secondaire", "Continuer l'examen");
+    const non = el("button", "bouton secondaire", etat.sujet ? "Continuer le sujet" : "Continuer l'examen");
     non.type = "button";
     non.onclick = () => { boite.hidden = true; zone.querySelector(".examen-rendre").focus(); };
     actions.append(oui, non);
@@ -513,6 +685,21 @@ const Examen = (() => {
     return e.ids.map(id => {
       const q = parId(id), r = e.reponses[id];
       let juste = false, calcul = null;
+      if (q.type === "pose") {
+        // Chaque case est corrigée seule ; la question est juste si toutes ses cases le sont
+        const textes = r && Array.isArray(r.etapes) ? r.etapes : [];
+        const cases = q.etapes.map((et, k) => {
+          const t = typeof textes[k] === "string" ? textes[k] : "";
+          return { texte: t, res: t.trim() ? corrigerCalcul(et.reponse, t) : { etat: "vide" } };
+        });
+        const justes = cases.filter(c => c.res.etat === "juste").length;
+        const vide = cases.every(c => c.res.etat === "vide");
+        juste = justes === q.etapes.length;
+        // Pour l'enregistrement : la première case fausse (son piège éventuel dit le type d'erreur)
+        const k = cases.findIndex(c => c.res.etat !== "juste" && c.res.etat !== "vide");
+        const detailPose = k >= 0 ? { calcul: cases[k].res, reponse: q.etapes[k].reponse, erreurs: q.etapes[k].erreurs } : {};
+        return { q, r, juste, vide, calcul: null, cases, justes, detailPose, pts: points(q) * justes / q.etapes.length, max: points(q) };
+      }
       if (q.type === "calcul") {
         if (r && typeof r.texte === "string" && r.texte.trim()) { calcul = corrigerCalcul(q.reponse, r.texte); juste = calcul.etat === "juste"; }
       } else juste = !!r && r.i === q.bonne;
@@ -521,15 +708,23 @@ const Examen = (() => {
     });
   }
 
+  // L'enregistrement de chaque réponse donnée (Essentiel, « À revoir ») ; une question laissée vide n'est pas enregistrée
+  function enregistrerReponses(lignes) {
+    lignes.forEach(l => {
+      if (l.vide) return;
+      noterReponse(l.q, l.juste, l.q.type === "pose" ? l.detailPose : l.calcul ? { calcul: l.calcul } : { choix: l.r && l.r.i });
+    });
+  }
+
   function rendre(auto) {
     if (!etat) return;
     arreterMinuteur();
     const e = etat;
     etat = null;
-    document.body.classList.remove("en-examen");
+    document.body.classList.remove("en-examen", "en-sujet");
+    if (e.sujet) { rendreSujet(e, auto); return; }
     const lignes = corriger(e);
-    // Les réponses données comptent dans la progression (Essentiel, « À revoir ») ; les questions laissées vides, non
-    lignes.forEach(l => { if (!l.vide) noterReponse(l.q, l.juste, l.calcul ? { calcul: l.calcul } : { choix: l.r && l.r.i }); });
+    enregistrerReponses(lignes);
     const total = lignes.reduce((s, l) => s + l.max, 0), obtenus = lignes.reduce((s, l) => s + l.pts, 0);
     const pourcent = total ? Math.round(obtenus / total * 100) : 0;
     const record = enregistrerRecord(e.epreuve + "/examen", pourcent);    // qcm.html : garde le meilleur, synchronisé
@@ -538,7 +733,7 @@ const Examen = (() => {
     const derniers = lire(CLE_DERNIER);
     derniers[e.epreuve] = copie;
     ecrire(CLE_DERNIER, derniers);
-    oublierEnCours(e.epreuve);
+    oublier(e);
     if (window.Sons) Sons.fin(pourcent);
     // Statistiques anonymes (compter.js) : la note seulement en 3 tranches larges, jamais la note exacte
     const note = pourcent / 5, tranche = note < 8 ? ["moins-de-8", "moins de 8"] : note <= 12 ? ["8-a-12", "de 8 à 12"] : ["plus-de-12", "plus de 12"];
@@ -557,10 +752,11 @@ const Examen = (() => {
 
   function afficherResultat(copie, fraiche, record) {
     const code = copie.epreuve;
+    const sujet = copie.sujet ? noterSujet(copie) : null;     // sujet blanc : note par partie
     fermer();
-    preparerPage(code);
+    preparerPage(code, sujet ? "Sujet blanc" : null);
     const zone = document.getElementById("zone");
-    const lignes = corriger(copie);
+    const lignes = sujet ? sujet.lignes : corriger(copie);
     const total = lignes.reduce((s, l) => s + l.max, 0), obtenus = lignes.reduce((s, l) => s + l.pts, 0);
     const pourcent = copie.pourcent;
     const note = pourcent / 5;
@@ -580,14 +776,15 @@ const Examen = (() => {
     const vides = lignes.filter(l => l.vide).length;
     zone.querySelector(".bilan-sous").textContent =
       (copie.auto ? "Temps écoulé : ta copie a été rendue. " : "") +
-      ecrireNombre(obtenus, 0) + (obtenus > 1 ? " points sur " : " point sur ") + total + ", soit " + noteDe(pourcent) + " / 20." +
+      (sujet ? sujet.s.titre + " : " + noteDe(pourcent) + " / 20."
+        : ecrireNombre(obtenus, 0) + (obtenus > 1 ? " points sur " : " point sur ") + total + ", soit " + noteDe(pourcent) + " / 20.") +
       (vides ? " " + vides + (vides > 1 ? " questions laissées sans réponse." : " question laissée sans réponse.") : "");
     const stats = zone.querySelector(".bilan-stats");
     const medaille = (t, c) => stats.appendChild(el("span", "medaille " + (c || ""), t));
     if (copie.utilise) medaille("Temps utilisé : " + minutesTexte(copie.utilise) + " sur " + minutesTexte(copie.duree));
     if (fraiche && record && record.nouveau) medaille("Nouvelle meilleure note (avant : " + noteDe(record.ancien) + " / 20)", "or");
     else {
-      const m = meilleureNote(code);
+      const m = sujet ? meilleureNoteSujet(sujet.s) : meilleureNote(code);
       if (m !== null && m > pourcent) medaille("Ta meilleure note : " + noteDe(m) + " / 20");
     }
     if (!fraiche) medaille("Copie du " + new Date(copie.date).toLocaleDateString("fr-FR", { day: "numeric", month: "long" }));
@@ -595,8 +792,10 @@ const Examen = (() => {
 
     const actions = zone.querySelector(".bilan-actions");
     const bouton = (texte, classe, action) => { const b = el("button", "bouton " + (classe || ""), texte); b.type = "button"; b.onclick = action; actions.appendChild(b); };
-    bouton("Faire un nouvel examen", "", () => { oublierEnCours(code); demarrer(nouvelEtat(code, copie.format)); });
+    if (sujet) bouton("Refaire le sujet", "", () => { oublier(copie); demarrer(nouvelEtatSujet(sujet.s)); });
+    else bouton("Faire un nouvel examen", "", () => { oublierEnCours(code); demarrer(nouvelEtat(code, copie.format)); });
     bouton("Retour à l'épreuve", "secondaire", () => { location.hash = code; });
+    if (sujet) zone.appendChild(creerBilanParties(sujet, code));
 
     // Bilan par thème : à retravailler d'abord, puis en bonne voie, puis les points forts
     const parTheme = {};
@@ -610,6 +809,7 @@ const Examen = (() => {
       ["Tes points forts", t => t.pts / t.max >= SEUIL_FORT, "fort"]
     ];
     const bilan = el("div", "examen-themes");
+    if (sujet) bilan.hidden = true;            // sujet blanc : le bilan par partie (au-dessus) le remplace
     bilan.setAttribute("aria-labelledby", "examen-themes-titre");
     const hb = el("h3", "", "Bilan par thème");
     hb.id = "examen-themes-titre";
@@ -697,11 +897,46 @@ const Examen = (() => {
     const li = el("li", l.juste ? "juste" : l.vide ? "vide" : "faux");
     const tete = el("p", "examen-copie-tete");
     const cas = q.cas && casParId(q.cas);
-    tete.textContent = "Question " + numero + " · " + q.theme + (cas ? " · cas « " + cas.titre + " », étape " + q.etape : "") + " · " +
+    if (copie.sujet) {
+      // Sujet blanc : la partie, et juste / fausse (les points sont comptés par partie, dans le bilan)
+      tete.textContent = "Question " + numero + " · partie " + q.partie + " · " + q.theme + " · " +
+        (q.type === "pose" ? (l.vide ? "sans réponse" : l.justes + (l.justes > 1 ? " cases justes sur " : " case juste sur ") + q.etapes.length)
+          : l.juste ? "juste" : l.vide ? "sans réponse" : "fausse");
+    } else tete.textContent = "Question " + numero + " · " + q.theme + (cas ? " · cas « " + cas.titre + " », étape " + q.etape : "") + " · " +
       (l.juste ? l.max + (l.max > 1 ? " points" : " point") : "0 / " + l.max);
     const enonce = el("strong");
     ecrireTexteMath(enonce, q.question);
     li.append(tete, enonce);
+    if (q.type === "pose") {
+      // Calcul posé : chaque case, ta valeur et la ligne de calcul attendue
+      const ol = el("ol", "sujet-pose-correction");
+      ol.setAttribute("role", "list");
+      q.etapes.forEach((et, k) => {
+        const c = l.cases[k];
+        const item = el("li", c.res.etat === "juste" ? "juste" : c.res.etat === "vide" ? "vide" : "faux");
+        const consigne = el("span", "sujet-pose-consigne");
+        ecrireTexteMath(consigne, et.consigne);
+        item.appendChild(consigne);
+        const ta = el("span", "sujet-pose-ta");
+        ta.textContent = c.res.etat === "vide" ? "Pas de réponse" : (c.res.etat === "juste" ? "Juste : " : "Ta réponse : ") + c.texte.trim() + (et.reponse.unite ? " " + et.reponse.unite : "");
+        item.appendChild(ta);
+        if (c.res.etat !== "juste" && c.res.etat !== "vide") {
+          const piege = piegeDe(q, { calcul: c.res, reponse: et.reponse, erreurs: et.erreurs });
+          if (piege && piege.message) item.appendChild(el("span", "sujet-pose-piege", piege.message));
+        }
+        const ligne = el("span", "sujet-pose-ligne");
+        ecrireTexteMath(ligne, et.ligne || "");
+        item.appendChild(ligne);
+        ol.appendChild(item);
+      });
+      li.appendChild(ol);
+      const copieModele = creerSurLaCopie(q);
+      if (copieModele) li.appendChild(copieModele);
+      const expl = el("span", "doux");
+      ecrireTexteMath(expl, q.explication);
+      li.appendChild(expl);
+      return li;
+    }
     const ta = el("span", "examen-ta-reponse");
     if (l.vide) ta.textContent = "Pas de réponse";
     else if (q.type === "calcul") ta.textContent = "Ta réponse : " + l.r.texte.trim() + (q.reponse.unite ? " " + q.reponse.unite : "");
@@ -720,6 +955,188 @@ const Examen = (() => {
     return li;
   }
 
+  // ======================= Sujet blanc =======================
+  const pointsTexte = n => ecrireNombre(n, Number.isInteger(n) ? 0 : 1) + (n > 1 ? " points" : " point");
+  const noteTexte = n => ecrireNombre(n, Number.isInteger(n) ? 0 : 1);
+  const dureeTexte = minutes => {
+    const h = Math.floor(minutes / 60), m = minutes % 60;
+    return h ? h + " h" + (m ? " " + String(m).padStart(2, "0") : "") : m + " min";
+  };
+  // 2 min par QCM, 3 min par calcul (à taper ou posé), arrondi aux 5 minutes au-dessus (40 questions ≈ 1 h 30)
+  const minutesSujet = qs => Math.ceil(qs.reduce((t, q) => t + (estCalcul(q) ? 3 : 2), 0) / 5) * 5;
+  // Le sujet demandé (#U5/sujet:SUJET-U5-01), ou le premier de l'épreuve (#U5/sujet)
+  const sujetDe = (code, id) => {
+    const liste = Catalogue.sujets(code);
+    return (id ? liste.find(x => x.id === id) : liste[0]) || null;
+  };
+  const memesQuestions = (e, s) => !!e && Array.isArray(e.ids) && e.ids.join() === Catalogue.questionsDuSujet(s.id).map(q => q.id).join();
+  function meilleureNoteSujet(s) {
+    const r = Coffre.lireJson("records")[s.epreuve + "/" + s.id];
+    return typeof r === "number" ? r : null;
+  }
+  // Le sujet commencé (une question ajoutée ou retirée depuis : on ne reprend pas)
+  function enCoursSujet(s) {
+    const e = lire(CLE_SUJET_EN_COURS)[s.id];
+    return memesQuestions(e, s) ? e : null;
+  }
+  function nouvelEtatSujet(s) {
+    const qs = Catalogue.questionsDuSujet(s.id);
+    const minutes = minutesSujet(qs);
+    window.compter?.("sujet-commence-" + s.epreuve, "Sujet blanc commencé (" + s.epreuve + ")");     // statistiques anonymes (compter.js)
+    const ordres = {};
+    qs.forEach(q => { if (Array.isArray(q.choix)) ordres[q.id] = tirer(q.choix.map((_, i) => i), q.choix.length); });
+    return { v: 1, sujet: s.id, epreuve: s.epreuve, ids: qs.map(q => q.id), ordres, reponses: {}, marques: {},
+      duree: minutes * 60, restant: minutes * 60, numero: 0, debut: Date.now() };
+  }
+
+  // La note : chaque partie vaut ses points × (points obtenus / points possibles), un calcul comptant double ;
+  // chaque partie est arrondie au dixième, la note est leur somme (ce que montre le bilan s'additionne)
+  function noterSujet(copie) {
+    const s = Catalogue.sujetParId(copie.sujet);
+    const lignes = corriger(copie);
+    const parties = s.parties.map(p => {
+      const ls = lignes.filter(l => l.q.partie === p.lettre);
+      const pts = ls.reduce((t, l) => t + l.pts, 0), max = ls.reduce((t, l) => t + l.max, 0);
+      return { p, lignes: ls, pts, max, note: max ? Math.round(p.points * pts / max * 10) / 10 : 0 };
+    });
+    const note = Math.round(parties.reduce((t, x) => t + x.note, 0) * 10) / 10;
+    return { s, lignes, parties, note, pourcent: Math.round(note * 50) / 10 };     // le record garde note × 5 (pourcentage)
+  }
+
+  // ---------- Écran 1 : présentation du sujet ----------
+  function ouvrirSujet(code, id) {
+    const s = sujetDe(code, id);
+    if (!s) return false;
+    fermer();
+    preparerPage(code, "Sujet blanc");
+    const zone = document.getElementById("zone");
+    const qs = Catalogue.questionsDuSujet(s.id);
+    const garde = enCoursSujet(s), meilleure = meilleureNoteSujet(s);
+    const dernier = lire(CLE_SUJET_DERNIER)[s.id];
+    const minutes = minutesSujet(qs);
+    zone.innerHTML = "";
+    const bloc = el("div", "examen-accueil sujet-accueil");
+    bloc.append(el("h2", "titre-cas", "Sujet blanc"), el("p", "sujet-titre", s.titre));
+    const compte = (n, un, plusieurs) => n + " " + (n > 1 ? plusieurs : un);
+    const nbQcm = qs.filter(q => !estCalcul(q)).length, nbCalc = qs.filter(q => q.type === "calcul").length, nbPose = qs.filter(q => q.type === "pose").length;
+    const morceaux = [nbQcm ? compte(nbQcm, "QCM", "QCM") : "", nbCalc ? compte(nbCalc, "calcul à taper", "calculs à taper") : "", nbPose ? compte(nbPose, "calcul posé", "calculs posés") : ""].filter(Boolean);
+    const liste = morceaux.length > 1 ? morceaux.slice(0, -1).join(", ") + " et " + morceaux[morceaux.length - 1] : morceaux.join("");
+    bloc.appendChild(el("p", "examen-intro",
+      qs.length + " questions en " + dureeTexte(minutes) + " : " + liste + ". Un sujet construit comme celui du BTS : une situation de départ, des documents et " +
+      s.parties.length + " parties notées sur 20."));
+    // Le barème, partie par partie
+    const hb = el("h3", "sujet-bareme-titre", "Barème");
+    hb.id = "sujet-bareme-titre";
+    const bareme = el("ol", "sujet-bareme");
+    bareme.setAttribute("role", "list");       // sans puces, Safari ne l'annoncerait plus comme une liste
+    bareme.setAttribute("aria-labelledby", "sujet-bareme-titre");
+    s.parties.forEach(p => {
+      const li = el("li");
+      li.append(el("b", "", "Partie " + p.lettre), el("span", "sujet-bareme-nom", p.titre), el("span", "sujet-bareme-points", pointsTexte(p.points)));
+      bareme.appendChild(li);
+    });
+    bloc.append(hb, bareme);
+    const regles = el("ul", "examen-regles");
+    [
+      "Aucune correction avant la fin, comme le jour de l'examen. Tu passes librement d'une partie à l'autre et tu peux changer tes réponses.",
+      "Dans une partie, un calcul compte double par rapport à un QCM. Une erreur ne retire rien : réponds à tout.",
+      nbPose ? "Un calcul posé se remplit case par case : chaque case juste rapporte sa part des points." : "",
+      "À la fin du temps, ta copie est rendue toute seule.",
+      "Si tu fermes la page, le sujet t'attend avec le temps qui restait."
+    ].filter(Boolean).forEach(t => regles.appendChild(el("li", "", t)));
+    bloc.appendChild(regles);
+    if (nbCalc || nbPose) bloc.appendChild(el("p", "examen-calculatrice", "Sors ta calculatrice et une feuille de brouillon."));
+    if (meilleure !== null) bloc.appendChild(el("p", "examen-meilleure", "Ta meilleure note : " + noteDe(meilleure) + " / 20"));
+    const actions = el("div", "bilan-actions examen-actions");
+    if (garde) {
+      const nbRep = garde.ids.filter(x => aRepondu(garde.reponses[x])).length;
+      const reprendre = el("button", "bouton", "Reprendre le sujet");
+      reprendre.onclick = () => demarrer(garde);
+      const nouveau = el("button", "bouton secondaire", "Recommencer le sujet à zéro");
+      nouveau.onclick = () => { oublier(garde); demarrer(nouvelEtatSujet(s)); };
+      actions.append(reprendre, nouveau);
+      bloc.insertBefore(el("p", "examen-garde", "Ton sujet est en cours : " + nbRep + " réponse" + (nbRep > 1 ? "s" : "") + " sur " + garde.ids.length + ", il reste " + minutesTexte(garde.restant) + "."), hb);
+    } else {
+      const go = el("button", "bouton", "Commencer le sujet");
+      go.onclick = () => demarrer(nouvelEtatSujet(s));
+      actions.appendChild(go);
+    }
+    if (dernier && memesQuestions(dernier, s)) {
+      const revoir = el("button", "bouton secondaire", "Revoir ma dernière copie");
+      revoir.onclick = () => afficherResultat(dernier, false);
+      actions.appendChild(revoir);
+    }
+    bloc.appendChild(actions);
+    const retour = el("a", "examen-retour", "Retour aux questions de l'épreuve");
+    retour.href = "#" + code;
+    bloc.appendChild(retour);
+    zone.appendChild(bloc);
+    rejouerAnimation(zone);
+    return true;
+  }
+
+  // ---------- Rendre le sujet ----------
+  function rendreSujet(e, auto) {
+    const n = noterSujet(e);
+    enregistrerReponses(n.lignes);
+    const record = enregistrerRecord(e.epreuve + "/" + e.sujet, n.pourcent);    // qcm.html : garde le meilleur, synchronisé
+    const copie = { v: 1, sujet: e.sujet, epreuve: e.epreuve, ids: e.ids, ordres: e.ordres, reponses: e.reponses,
+      pourcent: n.pourcent, duree: e.duree, utilise: e.duree - Math.max(0, e.restant), date: Date.now(), auto: !!auto };
+    const derniers = lire(CLE_SUJET_DERNIER);
+    derniers[e.sujet] = copie;
+    ecrire(CLE_SUJET_DERNIER, derniers);
+    oublier(e);
+    if (window.Sons) Sons.fin(n.pourcent);
+    // Statistiques anonymes (compter.js) : la note seulement en 3 tranches larges, jamais la note exacte
+    const tranche = n.note < 8 ? ["moins-de-8", "moins de 8"] : n.note <= 12 ? ["8-a-12", "de 8 à 12"] : ["plus-de-12", "plus de 12"];
+    window.compter?.("sujet-rendu-" + e.epreuve + "-" + tranche[0], "Sujet blanc rendu (" + e.epreuve + ", note " + tranche[1] + ")");
+    afficherResultat(copie, true, record);
+  }
+
+  // ---------- Bilan partie par partie, avec un lien vers chaque thème raté ----------
+  function creerBilanParties(n, code) {
+    const bilan = el("section", "examen-themes sujet-bilan");
+    bilan.setAttribute("aria-labelledby", "sujet-bilan-titre");
+    const h = el("h3", "", "Bilan par partie");
+    h.id = "sujet-bilan-titre";
+    bilan.appendChild(h);
+    const ul = el("ul", "examen-liste-themes");
+    n.parties.forEach(x => {
+      const part = x.max ? x.pts / x.max : 0;
+      const classe = part < SEUIL_FAIBLE ? "faible" : part >= SEUIL_FORT ? "fort" : "moyen";
+      const li = el("li", "examen-theme " + classe);
+      const haut = el("p", "examen-theme-haut");
+      haut.append(el("b", "", "Partie " + x.p.lettre + " · " + x.p.titre), el("span", "", noteTexte(x.note) + " / " + pointsTexte(x.p.points)));
+      const barre = el("span", "examen-theme-barre");
+      barre.setAttribute("aria-hidden", "true");
+      barre.appendChild(el("span")).style.width = Math.round(part * 100) + "%";
+      li.append(haut, barre);
+      // Les thèmes des questions ratées ou laissées vides dans cette partie
+      const themes = [...new Set(x.lignes.filter(l => !l.juste).map(l => l.q.theme))].filter(t => ordinairesDe(code).some(q => q.theme === t));
+      if (themes.length) {
+        const liens = el("p", "examen-theme-liens");
+        themes.forEach(t => {
+          const a = el("a", "", "Refaire le QCM : " + t);
+          a.href = "#" + code + "/" + encodeURIComponent(t);
+          liens.appendChild(a);
+        });
+        li.appendChild(liens);
+      }
+      ul.appendChild(li);
+    });
+    bilan.appendChild(ul);
+    return bilan;
+  }
+
+  // Ce que dit le lien « Sujet blanc » aux lecteurs d'écran : « 40 questions · 1 h 35 · meilleure note 13,5 / 20 »
+  function resumeSujet(code) {
+    const s = sujetDe(code);
+    if (!s) return null;
+    const qs = Catalogue.questionsDuSujet(s.id), garde = enCoursSujet(s), m = meilleureNoteSujet(s);
+    return qs.length + " questions · " + dureeTexte(minutesSujet(qs)) +
+      (garde ? " · en cours, il reste " + minutesTexte(garde.restant) : m !== null ? " · meilleure note " + noteDe(m) + " / 20" : "");
+  }
+
   // Ce que la carte de la page de l'épreuve affiche : « 25 questions · 50 min · meilleure note 13,5 / 20 »
   function resume(code) {
     const f = formatDe(code);
@@ -730,6 +1147,8 @@ const Examen = (() => {
   }
 
   return { ouvrir, fermer, resume, existe: code => !!formatDe(code),
+    ouvrirSujet, resumeSujet, existeSujet: code => typeof Catalogue !== "undefined" && Catalogue.sujets(code).length > 0,
     // Pour les tests (navigateur) : composer un examen sans l'afficher, finir l'examen en cours
-    __composer: code => composer(code, formatDe(code)), __etat: () => etat, __rendre: () => rendre(false), __poids: poidsThemes };
+    __composer: code => composer(code, formatDe(code)), __etat: () => etat, __rendre: () => rendre(false), __poids: poidsThemes,
+    __noterSujet: noterSujet, __minutesSujet: minutesSujet, __aller: i => aller(i) };
 })();

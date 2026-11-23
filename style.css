@@ -1170,6 +1170,7 @@ kbd.touche { display: inline-block; min-width: 1.9em; margin: 0 1px; padding: 0 
 .annexe th, .annexe td { padding: 7px 10px; text-align: center; border-top: 1px solid var(--bord); white-space: nowrap; }
 .annexe thead th { border-top: 0; color: var(--doux); font-size: 0.8rem; font-weight: 700; background: rgba(255, 255, 255, 0.03); }
 .annexe tbody th { text-align: left; font-weight: 600; color: var(--doux); }
+.annexe td.annexe-long { min-width: 14em; text-align: left; white-space: normal; text-wrap: pretty; }
 
 /* Cas pratiques */
 .theme.theme-cas .compte-theme { margin-left: -2px; }
@@ -2225,6 +2226,46 @@ html:has(body.en-examen) { scroll-padding-top: 150px; }
   .examen-compte { display: none; }      /* la grille des numéros le montre déjà : la barre tient sur une ligne */
   .examen-rendre { padding: 8px 12px; font-size: 0.88rem; }
 }
+
+/* ---------- Sujet blanc (examen.js, qcm.html#U5/sujet) : mêmes écrans que l'examen blanc, plus ceci ---------- */
+/* Présentation : le titre du sujet et le barème partie par partie */
+.sujet-titre { margin: -4px 0 12px; color: var(--or-clair); font-weight: 700; font-size: 1.05rem; }
+.sujet-bareme-titre { margin: 18px 0 6px; font-family: var(--corps); font-size: 1rem; font-weight: 700; }
+.sujet-bareme { list-style: none; margin: 0 0 18px; padding: 0; border-top: 1px solid var(--bord); }
+.sujet-bareme li { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: baseline; gap: 2px 12px; padding: 8px 2px; border-bottom: 1px solid var(--bord); }
+.sujet-bareme b { color: rgb(var(--accent-rgb)); white-space: nowrap; }
+.sujet-bareme-points { color: var(--doux); white-space: nowrap; font-variant-numeric: lining-nums tabular-nums; }
+/* Pendant le sujet : la situation de départ (repliable) et la partie en cours */
+.sujet-situation > summary span { text-decoration: none; }
+/* Un chevron dit que la situation se replie et se déplie (le summary en flex n'a plus sa flèche) */
+.sujet-situation > summary::after, .contexte-sujet .contexte-avant > summary::after { content: ""; flex: none; width: 8px; height: 8px; margin: -4px 4px 0 auto; border: solid rgb(var(--accent-rgb)); border-width: 0 2px 2px 0; transform: rotate(45deg); }
+.sujet-situation[open] > summary::after, .contexte-sujet .contexte-avant[open] > summary::after { margin-top: 4px; transform: rotate(-135deg); }
+.sujet-situation[open] > summary { margin-bottom: 2px; }
+.sujet-partie { margin-top: 10px; padding-top: 10px; border-top: 1px solid rgba(var(--accent-rgb), 0.45); }
+.sujet-partie p { margin: 0 0 6px; }
+.sujet-partie-titre { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2px 12px; }
+.sujet-partie-titre b { color: rgb(var(--accent-rgb)); }
+.sujet-partie-titre span { color: var(--doux); font-size: 0.9rem; font-variant-numeric: lining-nums tabular-nums; }
+.contexte-sujet .contexte-etape p { margin: 0 0 4px; }
+/* Calcul posé : toutes les cases ouvertes, sans correction avant la fin */
+.sujet-pose-liste { margin-top: 4px; }
+.sujet-pose-liste .saisie-calcul { margin: 0; }
+.sujet-pose-liste .saisie-aide { margin: 6px 0 0; }
+/* La grille des numéros, rangée par partie */
+.sujet-grille { display: grid; gap: 12px; }
+.sujet-grille-nom { margin: 0 0 6px; color: var(--doux); font-size: 0.86rem; font-weight: 700; font-variant-numeric: lining-nums tabular-nums; }
+.sujet-grille ol { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(44px, 1fr)); gap: 6px; }
+/* Correction d'un calcul posé : chaque case */
+.sujet-pose-correction { list-style: none; margin: 8px 0; padding: 0; display: grid; gap: 8px; }
+.sujet-pose-correction li { padding: 8px 12px; border-radius: 10px; border: 1px solid var(--bord); }
+.sujet-pose-correction li.juste { border-color: rgba(95, 211, 154, 0.35); }
+.sujet-pose-correction li.faux { border-color: rgba(255, 122, 122, 0.45); }
+.sujet-pose-correction span { display: block; }
+.sujet-pose-consigne { font-weight: 700; }
+.sujet-pose-ta { color: var(--doux); font-size: 0.94rem; }
+.sujet-pose-correction li.faux .sujet-pose-ta { color: var(--rouge); }
+.sujet-pose-ligne { margin-top: 2px; font-variant-numeric: tabular-nums; }
+.sujet-pose-piege { margin: 2px 0; font-size: 0.94rem; }
 
 /* ---------- Plan de révision (rythme.js, creerLignePlan) : « Cette semaine : … » et « Pourquoi ces thèmes ? » ---------- */
 /* Sur la carte du jour (accueil, profil) : une ligne sous la semaine ; sur l'écran du jour : juste au-dessus des choix */

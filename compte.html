@@ -18,7 +18,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Opticonversion">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
-<link rel="stylesheet" href="style.css?v=7d2c08a3">
+<link rel="stylesheet" href="style.css?v=652dbbb3">
 </head>
 <body data-rafraichir="oui">
 <header class="entete">
@@ -178,14 +178,20 @@
 
 <footer><span class="pied-marque"><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="13" fill="none" stroke="#d9b26f" stroke-width="2.5"/><circle cx="16" cy="16" r="5.5" fill="#d9b26f"/><circle cx="18.5" cy="13.5" r="1.6" fill="#0b0d12"/></svg>Opticonversion</span><span>© 2026</span><span class="pied-liens"><a href="notions.html">Notions</a> <span aria-hidden="true">·</span> <a href="confidentialite.html">Confidentialité</a> <span aria-hidden="true">·</span> <a href="mentions-legales.html">Mentions légales</a> <span aria-hidden="true">·</span> <a href="mailto:opticonversion.bts@gmail.com">Contact</a></span></footer>
 
-<script src="epreuves.js?v=cc645427"></script>
-<script src="catalogue.js?v=2ee1a49e"></script>
+<script src="epreuves.js?v=d49a38a4"></script>
+<script src="catalogue.js?v=c675bf30"></script>
 <script src="questions-U41.js?v=7a11c243"></script>
 <script src="questions-U42.js?v=49471ad6"></script>
 <script src="questions-U43.js?v=ea60cae6"></script>
 <script src="questions-U5.js?v=952a7f14"></script>
 <script src="questions-U3.js?v=60f0103f"></script>
-<script src="coffre.js?v=cc59b959"></script>
+<!-- Sujets blancs : leurs questions ratées comptent dans « À revoir » comme sur qcm.html (un fichier absent ne casse rien) -->
+<script src="sujets-U5.js?v=146772d3"></script>
+<script src="sujets-U3.js?v=f1429d02"></script>
+<script src="sujets-U42.js?v=e0c72a21"></script>
+<script src="sujets-U43.js?v=a9434843"></script>
+<script src="sujets-U41.js?v=85599410"></script>
+<script src="coffre.js?v=768a24fb"></script>
 <script src="essentiel.js?v=7e8432f5"></script>
 <script src="rythme.js?v=8bba5e53"></script>
 <script>
@@ -249,11 +255,13 @@
       li.dataset.epreuve = code;
       li.innerHTML = '<a><span class="record-theme"></span><small></small><b></b></a>';
       li.querySelector("a").href = "qcm.html#" + code + "/" + (!theme || theme === "Tous" ? "tous" : encodeURIComponent(theme));
-      // L'examen blanc (clé « U5/examen ») : sa meilleure note sur 20
-      const examen = theme === "examen";
-      li.querySelector(".record-theme").textContent = !theme || theme === "Tous" ? "Toute l'épreuve" : examen ? "Examen blanc" : theme;
+      // L'examen blanc (clé « U5/examen ») et un sujet blanc (clé « U5/SUJET-U5-01 ») : leur meilleure note sur 20
+      const examen = theme === "examen", sujet = /^SUJET-/.test(theme || "");
+      if (sujet) li.querySelector("a").href = "qcm.html#" + code + "/sujet:" + encodeURIComponent(theme);
+      li.querySelector(".record-theme").textContent = !theme || theme === "Tous" ? "Toute l'épreuve" : examen ? "Examen blanc"
+        : sujet ? "Sujet blanc " + Number(theme.split("-").pop()) : theme;
       li.querySelector("small").textContent = e.court || e.nom;
-      li.querySelector("b").textContent = examen ? String(Math.round(val / 5 * 10) / 10).replace(".", ",") + " / 20" : val + " %";
+      li.querySelector("b").textContent = examen || sujet ? String(Math.round(val / 5 * 10) / 10).replace(".", ",") + " / 20" : val + " %";
       if (val === 100) li.classList.add("parfait");
       $("profil-records").appendChild(li);
     });

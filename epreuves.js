@@ -28,6 +28,12 @@ const SPECIFICITES = [];
 // leurs questions portent cas: "CAS-U5-01" et etape: 1, 2, 3…
 const CAS = [];
 
+// Sujets blancs : un sujet écrit d'avance, construit comme la vraie épreuve (situation de départ, documents,
+// parties A, B, C… notées sur 20). Chaque fichier sujets-XX.js (chargé après les questions) fait SUJETS.push
+// et QUESTIONS.push de ses questions, qui portent sujet: "SUJET-U5-01", partie: "A" et etape: 1, 2, 3…
+// Format : notes/coordination/sujet-blanc.md. Ces questions ne sortent que dans leur sujet (et dans « À revoir »).
+const SUJETS = [];
+
 // Niveaux de l'Atelier des tracés : chaque fichier traces-XX.js (chargé par traces.html)
 // ajoute ses niveaux ici. Format : notes/coordination/etape2-formats.md.
 const TRACES = [];

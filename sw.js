@@ -13,15 +13,15 @@
 // =====================================================================
 
 // <versionner> (partie écrite par versionner.py, ne pas modifier à la main)
-const VERSION = "36992227e6";
+const VERSION = "bb0d92f4e6";
 const FICHIERS = [
   "appli.js?v=0724163c",
   "atelier-calculatrice.js?v=6e07c21a",
   "banc.js?v=7a80e12d",
   "calculateurs.html",
-  "calculette.js?v=6fb79d1d",
-  "catalogue.js?v=2ee1a49e",
-  "coffre.js?v=cc59b959",
+  "calculette.js?v=481476d2",
+  "catalogue.js?v=c675bf30",
+  "coffre.js?v=768a24fb",
   "compte.html",
   "compte.js?v=c05b4182",
   "compter.js?v=234d3f31",
@@ -38,10 +38,10 @@ const FICHIERS = [
   "entrainement-U42.js?v=b8336c15",
   "entrainement-U43.js?v=07bcc848",
   "entrainement-U5.js?v=069a3eeb",
-  "epreuves.js?v=cc645427",
+  "epreuves.js?v=d49a38a4",
   "essentiel.html",
   "essentiel.js?v=7e8432f5",
-  "examen.js?v=1b5b3813",
+  "examen.js?v=07617f9d",
   "img/avatar-alpaga-bouche-ouverte.svg",
   "img/avatar-alpaga-choque.svg",
   "img/avatar-alpaga-clin-doeil.svg",
@@ -283,7 +283,12 @@ const FICHIERS = [
   "specificites-U42.js?v=67573174",
   "specificites-U43.js?v=523c07db",
   "specificites-U5.js?v=43533990",
-  "style.css?v=7d2c08a3",
+  "style.css?v=652dbbb3",
+  "sujets-U3.js?v=f1429d02",
+  "sujets-U41.js?v=85599410",
+  "sujets-U42.js?v=e0c72a21",
+  "sujets-U43.js?v=a9434843",
+  "sujets-U5.js?v=146772d3",
   "traces-U42.js?v=6b6df119",
   "traces-U43.js?v=77abc155",
   "traces-U5.js?v=6c873d8a",

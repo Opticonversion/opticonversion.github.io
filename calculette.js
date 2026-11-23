@@ -554,6 +554,13 @@
       // le contexte des étapes précédentes du même cas reste affiché
       if (typeof QUESTIONS !== "undefined") QUESTIONS.forEach(x => { if (x.cas === q.cas && x.etape < q.etape) morceaux.push(x.contexte, x.annexe && JSON.stringify(x.annexe)); });
     }
+    // Sujet blanc : sa situation de départ, ses documents et ceux de la partie restent affichés
+    if (q.sujet && typeof SUJETS !== "undefined") {
+      const s = SUJETS.find(x => x && x.id === q.sujet);
+      const p = s && (s.parties || []).find(x => x.lettre === q.partie);
+      if (s) morceaux.push(s.contexte, s.annexe && JSON.stringify(s.annexe));
+      if (p) morceaux.push(p.contexte, p.annexe && JSON.stringify(p.annexe));
+    }
     return /\d/.test(morceaux.filter(Boolean).join(" ").replace(/\[\[|\]\]/g, ""));
   }
 
