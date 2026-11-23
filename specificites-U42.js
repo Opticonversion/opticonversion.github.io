@@ -86,8 +86,8 @@ SPECIFICITES.push({
       type: "formules",
       titre: "Le formulaire",
       lignes: [
-        { nom: "Relation de conjugaison (Descartes)", formule: "1/OA' − 1/OA = 1/f'", exemple: "f' = 50 mm et OA = −75 mm : OA' = +150 mm", rappelee: false },
-        { nom: "Grandissement transversal", formule: "γ = A'B' / AB = OA' / OA", exemple: "OA' = +150 mm et OA = −75 mm : γ = −2 (image renversée, 2 fois plus grande)", rappelee: false },
+        { nom: "Relation de conjugaison (Descartes)", formule: "1/OA' − 1/OA = 1/f'", exemple: "f' = 50 mm et OA = −75 mm : OA' = +150 mm", rappelee: false, calculer: "conjugaison" },
+        { nom: "Grandissement transversal", formule: "γ = A'B' / AB = OA' / OA", exemple: "OA' = +150 mm et OA = −75 mm : γ = −2 (image renversée, 2 fois plus grande)", rappelee: false, calculer: "conjugaison" },
         { nom: "Relation de Newton", formule: "FA × F'A' = −f'²", exemple: "f' = 50 mm et FA = −2 500 mm : F'A' = +1 mm", rappelee: false },
         { nom: "Vergence (f' en mètres, V en dioptries)", formule: "V = 1 / f'", exemple: "f' = 50 mm : V = 20 δ", rappelee: false },
         { nom: "Lentille mince (formule des opticiens)", formule: "1/f' = (n − 1) × (1/R₁ − 1/R₂)", exemple: "équiconvexe, n = 1,5 et R = 100 mm : f' = 100 mm", rappelee: false },
@@ -129,10 +129,10 @@ SPECIFICITES.push({
       type: "formules",
       titre: "Les signes en exemples",
       lignes: [
-        { nom: "Objet réel, lentille convergente", formule: "1/OA' − 1/OA = 1/f' avec OA < 0 et f' > 0", exemple: "f' = +40 mm et OA = −60 mm : OA' = +120 mm (image réelle)", rappelee: false },
-        { nom: "Lentille divergente, objet réel", formule: "f' < 0 et OA < 0", exemple: "f' = −60 mm et OA = −120 mm : OA' = −40 mm (image virtuelle, droite, plus petite)", rappelee: false },
-        { nom: "Objet virtuel, lentille divergente", formule: "f' < 0 et OA > 0", exemple: "f' = −50 mm et OA = +25 mm : OA' = +50 mm (image réelle)", rappelee: false },
-        { nom: "Grandissement d'une lentille mince et son signe", formule: "γ = OA' / OA", exemple: "OA' = +120 mm et OA = −60 mm : γ = −2 (renversée, 2 fois plus grande)", rappelee: false },
+        { nom: "Objet réel, lentille convergente", formule: "1/OA' − 1/OA = 1/f' avec OA < 0 et f' > 0", exemple: "f' = +40 mm et OA = −60 mm : OA' = +120 mm (image réelle)", rappelee: false, calculer: "conjugaison" },
+        { nom: "Lentille divergente, objet réel", formule: "f' < 0 et OA < 0", exemple: "f' = −60 mm et OA = −120 mm : OA' = −40 mm (image virtuelle, droite, plus petite)", rappelee: false, calculer: "conjugaison" },
+        { nom: "Objet virtuel, lentille divergente", formule: "f' < 0 et OA > 0", exemple: "f' = −50 mm et OA = +25 mm : OA' = +50 mm (image réelle)", rappelee: false, calculer: "conjugaison" },
+        { nom: "Grandissement d'une lentille mince et son signe", formule: "γ = OA' / OA", exemple: "OA' = +120 mm et OA = −60 mm : γ = −2 (renversée, 2 fois plus grande)", rappelee: false, calculer: "conjugaison" },
         { nom: "Vergence (f' en mètres)", formule: "V = 1 / f'", exemple: "f' = −50 mm = −0,05 m : V = −20 δ", rappelee: false },
         { nom: "Dioptre sphérique (R algébrique)", formule: "V = (n' − n) / R", exemple: "air vers verre 1,5 : R = +50 mm donne +10 δ ; R = −50 mm donne −10 δ", rappelee: false }
       ]

@@ -59,7 +59,7 @@ SPECIFICITES.push({
         { nom: "Réfraction axiale", formule: "R = 1/HR (HR en m, avec son signe)", exemple: "HR = −125 mm : R = −8 δ (myope)", rappelee: false },
         { nom: "Réglage d'un oculaire (Newton)", formule: "x · x' = −f'²", exemple: "f' = 25 mm, x' = −250 mm : x = +2,5 mm", rappelee: false },
         { nom: "Grossissement d'une lunette afocale", formule: "G = f'objectif / f'oculaire", exemple: "600 / 20 = 30", rappelee: true },
-        { nom: "Règle de Prentice", formule: "P (Δ) = décentrement (cm) × D (δ)", exemple: "0,5 cm × 4 δ = 2 Δ", rappelee: true }
+        { nom: "Règle de Prentice", formule: "P (Δ) = décentrement (cm) × D (δ)", exemple: "0,5 cm × 4 δ = 2 Δ", rappelee: true, calculer: "prentice" }
       ]
     },
     {
@@ -100,9 +100,9 @@ SPECIFICITES.push({
       type: "formules",
       titre: "À relire la veille : formules du réglage",
       lignes: [
-        { nom: "Remotum", formule: "HR = [[1|R]]", exemple: "R = −4 δ : HR = −0,25 m = −250 mm", rappelee: false },
+        { nom: "Remotum", formule: "HR = [[1|R]]", exemple: "R = −4 δ : HR = −0,25 m = −250 mm", rappelee: false, calculer: "accommodation" },
         { nom: "Réglage de l'oculaire", formule: "x · x' = −f'²", exemple: "f' = 25 mm, x' = −250 mm : x = [[−625|−250]] = +2,5 mm (on rapproche)", rappelee: false },
-        { nom: "Accommodation pour une image à d devant l'œil", formule: "A = [[1|d]] + R", exemple: "R = −4 δ, d = 0,20 m : A = 5 − 4 = 1 δ", rappelee: false }
+        { nom: "Accommodation pour une image à d devant l'œil", formule: "A = [[1|d]] + R", exemple: "R = −4 δ, d = 0,20 m : A = 5 − 4 = 1 δ", rappelee: false, calculer: "accommodation" }
       ]
     },
     {

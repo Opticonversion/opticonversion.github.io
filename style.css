@@ -2562,3 +2562,29 @@ button.atc-onglet { min-height: 32px; cursor: pointer; }
 .profil-sauvegarde .bouton[hidden] { display: none; }
 @media (max-width: 480px) { .profil-sauvegarde .bouton { flex: 1 1 100%; justify-content: center; text-align: center; padding-inline: 14px; white-space: nowrap; } }
 #creer-compte { scroll-margin-top: 84px; }
+
+/* ---------- Page Calculs : sommaire, parties, calculateurs (calculateurs.html, calculateurs.js) ---------- */
+.sommaire-calculs { position: relative; margin-bottom: 8px; padding: 18px 22px; background: var(--carte); border: 1px solid var(--bord); border-radius: var(--rayon); line-height: 1.9; }
+.sommaire-calculs p { margin: 0; }
+.sommaire-calculs p + p { margin-top: 6px; }
+.sommaire-calculs b { margin-right: 8px; color: var(--texte); }
+.sommaire-calculs a { white-space: nowrap; }
+.partie-calculs { margin: 40px 0 14px; color: var(--or-clair); font-size: clamp(1.55rem, 2.2vw + 1rem, 2.1rem); }
+.calculateur, .sous-calcul, .partie-calculs { scroll-margin-top: calc(var(--haut-entete, 64px) + 16px); }
+.calculateur > h3 { margin: 0 0 8px; font-size: 1.45rem; }
+.sous-calcul { margin-top: 22px; padding-top: 18px; border-top: 1px solid var(--bord); }
+.sous-calcul h4 { margin: 0 0 12px; font-size: 1.05rem; color: var(--texte); }
+.sous-calcul .aide { margin-top: -6px; }
+.calculateur .aide a { color: var(--or); }
+.calculateur .resultat .calcul b { color: var(--texte); font-weight: 700; }
+.calculateur .resultat strong { overflow-wrap: anywhere; }
+@media (max-width: 600px) {
+  .sommaire-calculs { padding: 14px 16px; }
+  .sommaire-calculs b { display: block; margin: 0; }
+  .partie-calculs { margin-top: 32px; }
+}
+/* Page Calculs : lien « Questions pour t'entraîner » sous chaque calculateur, lien « Calculer » sous une formule des Spécificités */
+.calculateur .lien-entrainement { margin: 12px 0 0; }
+.calculateur .lien-entrainement a { display: inline-block; padding: 10px 0; }
+@media (max-width: 600px) { .sommaire-calculs a { white-space: normal; } }
+.spec-formules .formule-calculer { flex-basis: 100%; margin: 0; }

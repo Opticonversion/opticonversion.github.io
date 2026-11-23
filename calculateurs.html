@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Calculateurs d'optique gratuits avec le détail du calcul : transposition, compensation de distance verre-œil, règle de Prentice.">
+<meta name="description" content="Calculateurs gratuits du BTS Opticien-Lunetier, avec le détail du calcul : transposition, distance verre-œil, Prentice, puissance dans un méridien, prismes, prix et marges.">
 <title>Calculateurs optique · Opticonversion</title>
 
 <meta name="theme-color" content="#13171f">
@@ -19,7 +19,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Opticonversion">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
-<link rel="stylesheet" href="style.css?v=652dbbb3">
+<link rel="stylesheet" href="style.css?v=da4d250b">
 </head>
 
 <!-- ============================================================
@@ -45,14 +45,23 @@
 <main>
   <!-- Le haut de la page : le titre, sa phrase, et le compagnon de l'élève qui dépasse de derrière le premier bloc -->
   <div class="tete-page">
-    <h1 class="apparait">Calculateurs d'optique</h1>
-    <p class="sous-titre apparait" style="--d:2">Transposition, distance verre-œil, règle de Prentice : le résultat avec le détail du calcul, pour vérifier tes exercices.</p>
+    <h1 class="apparait">Calculateurs</h1>
+    <p class="sous-titre apparait" style="--d:2">Le résultat avec le détail du calcul, ligne par ligne, pour vérifier tes exercices.</p>
     <img class="tete-compagnon apparait" style="--d:3" data-pose="bouche-fermee" src="img/nounours-bouche-fermee.svg" alt="" width="120" height="132">
   </div>
 
-  <!-- ---------- Calculateur 1 : Transposition ---------- -->
-  <section class="apparait" style="--d:3">
-    <h2>1. Transposition de formule</h2>
+  <!-- Sommaire : chaque calculateur a son adresse (calculateurs.html#prismes) -->
+  <nav class="sommaire-calculs apparait" style="--d:3" aria-label="Sommaire des calculateurs">
+    <p><b>Vision et lentilles</b> <a href="#transposition">Transposition</a> · <a href="#verre-oeil">Distance verre-œil</a> · <a href="#prentice">Prentice</a> · <a href="#meridien">Méridien et équivalent sphérique</a> · <a href="#prismes">Prismes</a> · <a href="#keratometrie">Kératométrie</a> · <a href="#accommodation">Accommodation et addition</a> · <a href="#acuite">Acuité</a> · <a href="#aniseiconie">Aniséiconie</a></p>
+    <p><b>Optique</b> <a href="#conjugaison">Conjugaison d'une lentille mince</a></p>
+    <p><b>Économie-gestion</b> <a href="#marges">Prix et marges</a> · <a href="#seuil">Seuil de rentabilité et point mort</a></p>
+  </nav>
+
+  <h2 class="partie-calculs" id="vision">Vision et lentilles</h2>
+
+  <!-- ---------- Transposition ---------- -->
+  <section class="calculateur apparait" style="--d:4" id="transposition">
+    <h3>Transposition de formule</h3>
     <p class="aide">Passe d'un cylindre positif à négatif (ou l'inverse).</p>
     <div class="champs">
       <label>Sphère (D)<input id="t-sph" inputmode="text" placeholder="-2,00"></label>
@@ -60,11 +69,12 @@
       <label>Axe (°)<input id="t-axe" inputmode="numeric" placeholder="90"></label>
     </div>
     <div class="resultat" id="t-res" role="status">Remplis les trois champs.</div>
+    <p class="aide lien-entrainement"><a href="qcm.html#U5/R%C3%A9fraction">Questions pour t'entraîner : Réfraction (Vision)</a></p>
   </section>
 
-  <!-- ---------- Calculateur 2 : Distance verre-œil ---------- -->
-  <section class="apparait" style="--d:4">
-    <h2>2. Compensation de distance verre-œil</h2>
+  <!-- ---------- Distance verre-œil ---------- -->
+  <section class="calculateur apparait" style="--d:5" id="verre-oeil">
+    <h3>Compensation de distance verre-œil</h3>
     <p class="aide">Convertit une correction lunettes en lentilles (ou l'inverse).</p>
     <div class="champs">
       <label>Sphère (D)<input id="v-sph" inputmode="text" placeholder="-6,00"></label>
@@ -79,12 +89,13 @@
       </label>
     </div>
     <div class="resultat" id="v-res" role="status">Remplis la sphère.</div>
+    <p class="aide lien-entrainement"><a href="qcm.html#U5/Lentilles">Questions pour t'entraîner : Lentilles (Vision)</a></p>
   </section>
 
-  <!-- ---------- Calculateur 3 : Prentice ---------- -->
-  <section class="apparait" style="--d:5">
-    <h2>3. Effet prismatique (règle de Prentice)</h2>
-    <p class="aide">Prisme induit quand l'œil regarde à côté du centre optique (verre sphérique).</p>
+  <!-- ---------- Prentice ---------- -->
+  <section class="calculateur apparait" style="--d:6" id="prentice">
+    <h3>Effet prismatique (règle de Prentice)</h3>
+    <p class="aide">Prisme induit quand l'œil regarde à côté du centre optique (verre sphérique). Pour un verre torique, prends la puissance du méridien concerné (<a href="#meridien">calcul du méridien</a>).</p>
     <div class="champs">
       <label>Puissance (D)<input id="p-puis" inputmode="text" placeholder="+4,00"></label>
       <label>Décentrement (mm)<input id="p-dec" inputmode="decimal" placeholder="5"></label>
@@ -98,6 +109,222 @@
       </label>
     </div>
     <div class="resultat" id="p-res" role="status">Remplis la puissance et le décentrement.</div>
+    <p class="aide lien-entrainement"><a href="qcm.html#U5/Anisom%C3%A9tropie">Questions pour t'entraîner : Anisométropie (Vision)</a></p>
+  </section>
+
+  <!-- ---------- Méridien et équivalent sphérique (calculateurs.js) ---------- -->
+  <section class="calculateur apparait" style="--d:7" id="meridien">
+    <h3>Puissance dans un méridien et équivalent sphérique</h3>
+    <p class="aide">Cylindre en − ou en +, les deux marchent (<a href="#transposition">transposition</a>). Sans angle, tu as les deux méridiens principaux.</p>
+    <div class="champs">
+      <label>Sphère (D)<input id="m-sph" inputmode="text" placeholder="+4,00"></label>
+      <label>Cylindre (D)<input id="m-cyl" inputmode="text" placeholder="-2,00"></label>
+      <label>Axe (°)<input id="m-axe" inputmode="numeric" placeholder="180"></label>
+      <label>Méridien voulu (°)<input id="m-angle" inputmode="numeric" placeholder="90"></label>
+    </div>
+    <div class="resultat" id="m-res" role="status">Remplis la sphère, le cylindre et l'axe.</div>
+    <p class="aide lien-entrainement"><a href="qcm.html#U5/R%C3%A9fraction">Questions pour t'entraîner : Réfraction (Vision)</a></p>
+  </section>
+
+  <!-- ---------- Prismes (calculateurs.js) : composer, décomposer, décentrement ---------- -->
+  <section class="calculateur apparait" style="--d:8" id="prismes">
+    <h3>Prismes</h3>
+    <p class="aide">Les prismes se tapent sans signe : la base donne le sens. Repère TABO, porteur vu de face, notation 360° : OD 0° = base nasale (interne), OG 0° = base temporale (externe), 90° = base supérieure.</p>
+
+    <div class="sous-calcul" id="prismes-composer">
+      <h4>Composer : horizontal + vertical</h4>
+      <div class="champs">
+        <label>Œil
+          <select id="pc-oeil"><option value="OD">OD</option><option value="OG">OG</option></select>
+        </label>
+        <label>Prisme horizontal (Δ)<input id="pc-h" inputmode="decimal" placeholder="2"></label>
+        <label>Base
+          <select id="pc-bh"><option value="nasale">nasale</option><option value="temporale">temporale</option></select>
+        </label>
+        <label>Prisme vertical (Δ)<input id="pc-v" inputmode="decimal" placeholder="0,6"></label>
+        <label>Base
+          <select id="pc-bv"><option value="supérieure">supérieure</option><option value="inférieure">inférieure</option></select>
+        </label>
+      </div>
+      <div class="resultat" id="pc-res" role="status">Remplis les deux prismes (0 s'il n'y en a pas).</div>
+    </div>
+
+    <div class="sous-calcul" id="prismes-decomposer">
+      <h4>Décomposer un prisme</h4>
+      <div class="champs">
+        <label>Œil
+          <select id="pd-oeil"><option value="OD">OD</option><option value="OG">OG</option></select>
+        </label>
+        <label>Prisme (Δ)<input id="pd-p" inputmode="decimal" placeholder="3"></label>
+        <label>Base, notation 360° (°)<input id="pd-base" inputmode="numeric" placeholder="45"></label>
+      </div>
+      <div class="resultat" id="pd-res" role="status">Remplis le prisme et l'orientation de sa base.</div>
+    </div>
+
+    <div class="sous-calcul" id="decentrement">
+      <h4>Décentrement pour un prisme voulu</h4>
+      <p class="aide">La règle de Prentice à l'envers : c (cm) = P / F.</p>
+      <div class="champs">
+        <label>Prisme voulu (Δ)<input id="pe-p" inputmode="decimal" placeholder="2"></label>
+        <label>Base voulue
+          <select id="pe-base">
+            <option value="nasale">nasale</option>
+            <option value="temporale">temporale</option>
+            <option value="supérieure">supérieure</option>
+            <option value="inférieure">inférieure</option>
+          </select>
+        </label>
+        <label>Puissance dans ce méridien (D)<input id="pe-f" inputmode="text" placeholder="+5,00"></label>
+      </div>
+      <div class="resultat" id="pe-res" role="status">Remplis le prisme voulu et la puissance du verre.</div>
+    </div>
+    <p class="aide lien-entrainement"><a href="qcm.html#U43/Frontofocom%C3%A8tre">Questions pour t'entraîner : Frontofocomètre (ETSO)</a></p>
+  </section>
+
+  <!-- ---------- Kératométrie (calculateurs-2.js) ---------- -->
+  <section class="calculateur apparait" style="--d:9" id="keratometrie">
+    <h3>Kératométrie</h3>
+    <p class="aide">K (δ) = 337,5 / r (mm), indice d'étalonnage 1,3375. Le second rayon est mesuré à 90° du premier.</p>
+    <div class="champs">
+      <label>Premier rayon (mm)<input id="k-r1" inputmode="decimal" placeholder="7,90"></label>
+      <label>Son axe (°)<input id="k-axe" inputmode="numeric" placeholder="180"></label>
+      <label><span>Second rayon, <span id="k-axe2">à 90° du premier</span> (mm)</span><input id="k-r2" inputmode="decimal" placeholder="7,50"></label>
+    </div>
+    <div class="sous-calcul" id="keratometrie-lentilles">
+      <h4>Passage en lentilles (facultatif)</h4>
+      <p class="aide">Tape la correction en lunettes : astigmatisme interne, puis résiduel en lentille souple ou rigide sphérique.</p>
+      <div class="champs">
+        <label>Sphère (D)<input id="k-sph" inputmode="text" placeholder="-4,00"></label>
+        <label>Cylindre (D)<input id="k-cyl" inputmode="text" placeholder="0" value="0"></label>
+        <label>Axe (°)<input id="k-axel" inputmode="numeric" placeholder="180" value="180"></label>
+        <label>Distance verre-œil (mm)<input id="k-dvo" inputmode="decimal" value="12"></label>
+      </div>
+    </div>
+    <div class="resultat" id="k-res" role="status">Remplis les deux rayons et l'axe du premier.</div>
+    <p class="aide lien-entrainement"><a href="qcm.html#U5/Lentilles">Questions pour t'entraîner : Lentilles (Vision)</a></p>
+  </section>
+
+  <!-- ---------- Accommodation (calculateurs-2.js) ---------- -->
+  <section class="calculateur apparait" style="--d:10" id="accommodation">
+    <h3>Accommodation et addition</h3>
+    <p class="aide">R est l'amétropie, écrite comme sa compensation de loin (myope de −2 : R = −2 ; emmétrope : 0). Distances comptées depuis l'œil. Le sujet garde la moitié de son amplitude en réserve.</p>
+    <div class="champs">
+      <label>Amétropie R (D)<input id="a-r" inputmode="text" placeholder="+0,75"></label>
+      <label>Amplitude (D)<input id="a-amp" inputmode="decimal" placeholder="2"></label>
+      <label>Distance de lecture (cm)<input id="a-dist" inputmode="decimal" value="40"></label>
+    </div>
+    <div class="resultat" id="a-res" role="status">Remplis l'amétropie, l'amplitude et la distance de lecture.</div>
+    <p class="aide lien-entrainement"><a href="qcm.html#U5/Examen%20pr%C3%A9liminaire">Questions pour t'entraîner : Examen préliminaire (Vision)</a></p>
+  </section>
+
+  <!-- ---------- Acuité (calculateurs-2.js) ---------- -->
+  <section class="calculateur apparait" style="--d:11" id="acuite">
+    <h3>Acuité visuelle</h3>
+    <p class="aide">Passe des dixièmes au logMAR et à l'échelle de Snellen (6/… en mètres, 20/… en pieds).</p>
+    <div class="champs">
+      <label>Acuité<input id="av-val" inputmode="text" placeholder="5"></label>
+      <label>Écrite en…
+        <select id="av-unite">
+          <option value="dixiemes">dixièmes (5 pour 5/10)</option>
+          <option value="decimale">décimale (0,5)</option>
+          <option value="logmar">logMAR</option>
+          <option value="snellen6">Snellen 6/…</option>
+          <option value="snellen20">Snellen 20/…</option>
+        </select>
+      </label>
+    </div>
+    <div class="resultat" id="av-res" role="status">Tape une acuité.</div>
+    <p class="aide lien-entrainement"><a href="qcm.html#U5/Examen%20pr%C3%A9liminaire">Questions pour t'entraîner : Examen préliminaire (Vision)</a></p>
+  </section>
+
+  <!-- ---------- Aniséiconie (calculateurs-2.js) ---------- -->
+  <section class="calculateur apparait" style="--d:12" id="aniseiconie">
+    <h3>Aniséiconie en lunettes</h3>
+    <p class="aide">Estimation du BTS : induite ≈ distance verre-œil (cm) × différence des puissances, en % ; axile ≈ 1,7 % par dioptrie. Pour un verre torique, prends l'équivalent sphérique (<a href="#meridien">calcul</a>).</p>
+    <div class="champs">
+      <label>Puissance OD (D)<input id="an-od" inputmode="text" placeholder="+0,50"></label>
+      <label>Puissance OG (D)<input id="an-og" inputmode="text" placeholder="+4,50"></label>
+      <label>Distance verre-œil (mm)<input id="an-dvo" inputmode="decimal" value="12"></label>
+      <label>Anisométropie
+        <select id="an-type">
+          <option value="puissance">de puissance</option>
+          <option value="axile">axile</option>
+        </select>
+      </label>
+    </div>
+    <div class="resultat" id="an-res" role="status">Remplis les deux puissances et la distance verre-œil.</div>
+    <p class="aide lien-entrainement"><a href="qcm.html#U5/Anisom%C3%A9tropie">Questions pour t'entraîner : Anisométropie (Vision)</a></p>
+  </section>
+
+  <h2 class="partie-calculs" id="optique">Optique</h2>
+
+  <!-- ---------- Conjugaison d'une lentille mince (calculateurs-2.js, optique.js) ---------- -->
+  <section class="calculateur apparait" style="--d:13" id="conjugaison">
+    <h3>Conjugaison d'une lentille mince</h3>
+    <p class="aide">Valeurs algébriques en mm, la lumière va de gauche à droite : OA est négatif pour un objet réel, positif pour un objet virtuel. Pour plusieurs lentilles, va dans l'<a href="traces.html">Atelier des tracés</a>.</p>
+    <div class="champs">
+      <label>Je connais…
+        <select id="c-connu">
+          <option value="f">la focale f'</option>
+          <option value="V">la vergence V</option>
+        </select>
+      </label>
+      <label><span id="c-valeur-nom">Focale f' (mm)</span><input id="c-valeur" inputmode="text" placeholder="+40"></label>
+      <label>OA (mm)<input id="c-oa" inputmode="text" placeholder="-60"></label>
+      <label>Taille AB (mm, facultatif)<input id="c-ab" inputmode="text" placeholder="10"></label>
+    </div>
+    <div class="resultat" id="c-res" role="status">Remplis la focale et OA.</div>
+    <p class="aide lien-entrainement"><a href="qcm.html#U42/Conjugaison">Questions pour t'entraîner : Conjugaison (OGP)</a></p>
+  </section>
+
+  <h2 class="partie-calculs" id="eco">Économie-gestion</h2>
+
+  <!-- ---------- Prix et marges (calculateurs.js) ---------- -->
+  <section class="calculateur apparait" style="--d:9" id="marges">
+    <h3>Prix et marges</h3>
+    <p class="aide">HT et TTC, marge brute, taux de marque, taux de marge, coefficient multiplicateur. Sans coût d'achat, tu as seulement le passage HT ↔ TTC.</p>
+    <div class="champs">
+      <label>Coût d'achat HT (€)<input id="e-achat" inputmode="decimal" placeholder="60"></label>
+      <label>Je connais…
+        <select id="e-connu">
+          <option value="pvttc">le prix de vente TTC</option>
+          <option value="pvht">le prix de vente HT</option>
+          <option value="marque">le taux de marque voulu</option>
+          <option value="marge">le taux de marge voulu</option>
+          <option value="coefttc">le coefficient TTC</option>
+          <option value="coefht">le coefficient HT</option>
+        </select>
+      </label>
+      <label><span id="e-valeur-nom">Prix de vente TTC (€)</span><input id="e-valeur" inputmode="decimal" placeholder="180"></label>
+      <label>TVA (%)<input id="e-tva" inputmode="decimal" value="20"></label>
+    </div>
+    <div class="resultat" id="e-res" role="status">Remplis la valeur connue et la TVA.</div>
+    <p class="aide lien-entrainement"><a href="qcm.html#U3/Prix%20et%20marges">Questions pour t'entraîner : Prix et marges (Éco)</a></p>
+  </section>
+
+  <!-- ---------- Seuil de rentabilité et point mort (calculateurs-2.js) ---------- -->
+  <section class="calculateur apparait" style="--d:14" id="seuil">
+    <h3>Seuil de rentabilité et point mort</h3>
+    <p class="aide">Tout en HT. SR = charges fixes / taux de marge sur coût variable ; point mort = SR / CA × 12 mois, ventes régulières sur l'année.</p>
+    <div class="champs">
+      <label>Chiffre d'affaires HT (€)<input id="s-ca" inputmode="decimal" placeholder="420000"></label>
+      <label>Je connais…
+        <select id="s-connu">
+          <option value="cv">les charges variables</option>
+          <option value="taux">le taux de MCV</option>
+        </select>
+      </label>
+      <label><span id="s-valeur-nom">Charges variables (€)</span><input id="s-valeur" inputmode="decimal" placeholder="147000"></label>
+      <label>Charges fixes (€)<input id="s-cf" inputmode="decimal" placeholder="189000"></label>
+      <label>Point mort en…
+        <select id="s-base">
+          <option value="mois">mois (× 12)</option>
+          <option value="jours">jours (× 360)</option>
+        </select>
+      </label>
+    </div>
+    <div class="resultat" id="s-res" role="status">Remplis le CA HT, les charges variables et les charges fixes.</div>
+    <p class="aide lien-entrainement"><a href="qcm.html#U3/Seuil%20de%20rentabilit%C3%A9">Questions pour t'entraîner : Seuil de rentabilité (Éco)</a></p>
   </section>
 </main>
 
@@ -254,6 +481,9 @@
   brancher(["v-sph", "v-cyl", "v-axe", "v-dvo", "v-sens"], calculVerreOeil);
   brancher(["p-puis", "p-dec", "p-dir"], calculPrentice);
 </script>
+<script src="calculateurs.js?v=bf2e2c5b"></script>
+<script src="optique.js?v=968042ca"></script>
+<script src="calculateurs-2.js?v=7d95813a"></script>
 <!-- Pour afficher le compagnon choisi par l'élève en haut de la page -->
 <script src="coffre.js?v=768a24fb"></script>
 <script src="essentiel.js?v=7e8432f5"></script>

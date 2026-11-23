@@ -18,7 +18,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Opticonversion">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
-<link rel="stylesheet" href="style.css?v=652dbbb3">
+<link rel="stylesheet" href="style.css?v=da4d250b">
 </head>
 <body>
 <header class="entete">
@@ -126,10 +126,10 @@
 <script src="traces-U43.js?v=77abc155"></script>
 <script src="traces-U5.js?v=6c873d8a"></script>
 <script src="specificites-U41.js?v=3d591e09"></script>
-<script src="specificites-U42.js?v=67573174"></script>
-<script src="specificites-U43.js?v=523c07db"></script>
+<script src="specificites-U42.js?v=33080df6"></script>
+<script src="specificites-U43.js?v=d64dab99"></script>
 <script src="specificites-U5.js?v=43533990"></script>
-<script src="specificites-U3.js?v=3245f237"></script>
+<script src="specificites-U3.js?v=719774fd"></script>
 <script src="coffre.js?v=768a24fb"></script>
 <script src="essentiel.js?v=7e8432f5"></script>
 <script src="rythme.js?v=8bba5e53"></script>
@@ -2148,6 +2148,14 @@
           li.appendChild(el("span", "formule-nom", l.nom));
           li.appendChild(el("span", "formule", l.formule));
           if (l.exemple) li.appendChild(el("span", "formule-exemple", "Ex. : " + l.exemple));
+          if (l.calculer) {                                   // lien vers le calculateur de la page Calculs
+            const p = el("p", "spec-liens formule-calculer");
+            const a = el("a", "", "Calculer");
+            a.href = "calculateurs.html#" + l.calculer;
+            a.setAttribute("aria-label", "Calculer : " + l.nom);
+            p.appendChild(a);
+            li.appendChild(p);
+          }
           ul.appendChild(li);
         });
         bloc.appendChild(ul);
