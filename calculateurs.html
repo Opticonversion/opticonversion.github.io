@@ -19,7 +19,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Opticonversion">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
-<link rel="stylesheet" href="style.css?v=da4d250b">
+<link rel="stylesheet" href="style.css?v=3c4f9543">
 </head>
 
 <!-- ============================================================
@@ -42,7 +42,7 @@
     <a href="calculateurs.html" class="actif">Calculs</a>
   </nav>
 </header>
-<main>
+<main class="vaste page-calculs">
   <!-- Le haut de la page : le titre, sa phrase, et le compagnon de l'élève qui dépasse de derrière le premier bloc -->
   <div class="tete-page">
     <h1 class="apparait">Calculateurs</h1>
@@ -50,13 +50,33 @@
     <img class="tete-compagnon apparait" style="--d:3" data-pose="bouche-fermee" src="img/nounours-bouche-fermee.svg" alt="" width="120" height="132">
   </div>
 
-  <!-- Sommaire : chaque calculateur a son adresse (calculateurs.html#prismes) -->
-  <nav class="sommaire-calculs apparait" style="--d:3" aria-label="Sommaire des calculateurs">
-    <p><b>Vision et lentilles</b> <a href="#transposition">Transposition</a> · <a href="#verre-oeil">Distance verre-œil</a> · <a href="#prentice">Prentice</a> · <a href="#meridien">Méridien et équivalent sphérique</a> · <a href="#prismes">Prismes</a> · <a href="#keratometrie">Kératométrie</a> · <a href="#accommodation">Accommodation et addition</a> · <a href="#acuite">Acuité</a> · <a href="#aniseiconie">Aniséiconie</a></p>
-    <p><b>Optique</b> <a href="#conjugaison">Conjugaison d'une lentille mince</a></p>
-    <p><b>Économie-gestion</b> <a href="#marges">Prix et marges</a> · <a href="#seuil">Seuil de rentabilité et point mort</a></p>
+  <!-- Sommaire : chaque calculateur a son adresse (calculateurs.html#prismes).
+       Ordinateur : colonne fixe à gauche, le calculateur à l'écran en or. Téléphone : une rangée qu'on fait glisser, collée sous l'en-tête. -->
+  <nav class="sommaire-calculs" aria-label="Sommaire des calculateurs">
+    <p class="sommaire-partie">Vision et lentilles</p>
+    <ul>
+      <li><a href="#transposition">Transposition</a></li>
+      <li><a href="#verre-oeil">Distance verre-œil</a></li>
+      <li><a href="#prentice">Prentice</a></li>
+      <li><a href="#meridien">Méridien</a></li>
+      <li><a href="#prismes">Prismes</a></li>
+      <li><a href="#keratometrie">Kératométrie</a></li>
+      <li><a href="#accommodation">Accommodation</a></li>
+      <li><a href="#acuite">Acuité</a></li>
+      <li><a href="#aniseiconie">Aniséiconie</a></li>
+    </ul>
+    <p class="sommaire-partie">Optique</p>
+    <ul>
+      <li><a href="#conjugaison">Conjugaison</a></li>
+    </ul>
+    <p class="sommaire-partie">Économie-gestion</p>
+    <ul>
+      <li><a href="#marges">Prix et marges</a></li>
+      <li><a href="#seuil">Seuil de rentabilité</a></li>
+    </ul>
   </nav>
 
+  <div class="calculs-contenu">
   <h2 class="partie-calculs" id="vision">Vision et lentilles</h2>
 
   <!-- ---------- Transposition ---------- -->
@@ -326,6 +346,7 @@
     <div class="resultat" id="s-res" role="status">Remplis le CA HT, les charges variables et les charges fixes.</div>
     <p class="aide lien-entrainement"><a href="qcm.html#U3/Seuil%20de%20rentabilit%C3%A9">Questions pour t'entraîner : Seuil de rentabilité (Éco)</a></p>
   </section>
+  </div>
 </main>
 
 <footer><span class="pied-marque"><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="13" fill="none" stroke="#d9b26f" stroke-width="2.5"/><circle cx="16" cy="16" r="5.5" fill="#d9b26f"/><circle cx="18.5" cy="13.5" r="1.6" fill="#0b0d12"/></svg>Opticonversion</span><span>© 2026</span><span class="pied-liens"><a href="notions.html">Notions</a> <span aria-hidden="true">·</span> <a href="confidentialite.html">Confidentialité</a> <span aria-hidden="true">·</span> <a href="mentions-legales.html">Mentions légales</a> <span aria-hidden="true">·</span> <a href="mailto:opticonversion.bts@gmail.com">Contact</a></span></footer>
@@ -339,8 +360,8 @@
 
   // Lit un champ et renvoie un nombre (accepte "−2,50" avec virgule).
   // Renvoie null si le champ est vide ou n'est pas un nombre.
-  function lireNombre(id) {
-    const texte = document.getElementById(id).value.trim().replace(",", ".");
+  function lireChamp(id) {
+    const texte = document.getElementById(id).value.trim().replace(/\s/g, "").replace(/[−–]/g, "-").replace(",", ".");
     if (texte === "") return null;
     const n = Number(texte);
     return isNaN(n) ? null : n;
@@ -354,8 +375,8 @@
   // Affiche une puissance à la française : +1,50 / -2,25
   function formatD(x) {
     if (Math.abs(x) < 0.001) x = 0;           // évite d'afficher "-0,00"
-    const signe = x >= 0 ? "+" : "";
-    return signe + x.toFixed(2).replace(".", ",");
+    // Vrai signe moins (−), comme les autres calculateurs : le trait d'union est presque invisible en Bodoni
+    return (x >= 0 ? "+" : "−") + Math.abs(x).toFixed(2).replace(".", ",");
   }
 
   // Garde un axe entre 1° et 180° (0° s'écrit 180° par convention).
@@ -367,9 +388,9 @@
   // --- Calculateur 1 : Transposition ---
   // Règle : nouvelle sphère = S + C ; nouveau cylindre = -C ; axe ± 90°
   function calculTransposition() {
-    const s = lireNombre("t-sph");
-    const c = lireNombre("t-cyl");
-    const a = lireNombre("t-axe");
+    const s = lireChamp("t-sph");
+    const c = lireChamp("t-cyl");
+    const a = lireChamp("t-axe");
     const zone = document.getElementById("t-res");
 
     if (s === null || c === null || a === null) {
@@ -396,10 +417,10 @@
   // d est positif quand on rapproche le verre de l'œil (lunettes → lentilles).
   // Pour un verre torique, on calcule chaque méridien séparément.
   function calculVerreOeil() {
-    const s = lireNombre("v-sph");
-    const c = lireNombre("v-cyl") ?? 0;
-    const a = lireNombre("v-axe") ?? 180;
-    const dvo = lireNombre("v-dvo");
+    const s = lireChamp("v-sph");
+    const c = lireChamp("v-cyl") ?? 0;
+    const a = lireChamp("v-axe") ?? 180;
+    const dvo = lireChamp("v-dvo");
     const sens = document.getElementById("v-sens").value;
     const zone = document.getElementById("v-res");
 
@@ -441,8 +462,8 @@
   // Verre convexe (+) : la base est tournée VERS le centre optique.
   // Verre concave (−) : la base est tournée vers le bord, du côté du point regardé.
   function calculPrentice() {
-    const F = lireNombre("p-puis");
-    const decMm = lireNombre("p-dec");
+    const F = lireChamp("p-puis");
+    const decMm = lireChamp("p-dec");
     const dir = document.getElementById("p-dir").value;
     const zone = document.getElementById("p-res");
 
@@ -484,6 +505,36 @@
 <script src="calculateurs.js?v=bf2e2c5b"></script>
 <script src="optique.js?v=968042ca"></script>
 <script src="calculateurs-2.js?v=7d95813a"></script>
+<script>
+  // Sommaire : le calculateur qui occupe l'écran est mis en or (aria-current), et sur téléphone
+  // la rangée du sommaire glisse pour le garder visible.
+  {
+    const liens = [...document.querySelectorAll(".sommaire-calculs a")];
+    const cibles = liens.map(a => document.getElementById(a.hash.slice(1))).filter(Boolean);
+    let actif = null;
+    const marquer = id => {
+      if (id === actif) return;
+      actif = id;
+      liens.forEach(a => {
+        const oui = a.hash === "#" + id;
+        if (oui) a.setAttribute("aria-current", "true"); else a.removeAttribute("aria-current");
+        if (oui && matchMedia("(max-width: 999px)").matches) {
+          const rangee = a.closest(".sommaire-calculs");
+          rangee.scrollTo({ left: a.offsetLeft - 16, behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+        }
+      });
+    };
+    if ("IntersectionObserver" in window && cibles.length) {
+      const visibles = new Set();
+      const obs = new IntersectionObserver(entrees => {
+        entrees.forEach(e => e.isIntersecting ? visibles.add(e.target) : visibles.delete(e.target));
+        const premier = cibles.find(c => visibles.has(c));
+        if (premier) marquer(premier.id);
+      }, { rootMargin: "-30% 0px -60% 0px" });
+      cibles.forEach(c => obs.observe(c));
+    }
+  }
+</script>
 <!-- Pour afficher le compagnon choisi par l'élève en haut de la page -->
 <script src="coffre.js?v=768a24fb"></script>
 <script src="essentiel.js?v=7e8432f5"></script>

@@ -2563,28 +2563,96 @@ button.atc-onglet { min-height: 32px; cursor: pointer; }
 @media (max-width: 480px) { .profil-sauvegarde .bouton { flex: 1 1 100%; justify-content: center; text-align: center; padding-inline: 14px; white-space: nowrap; } }
 #creer-compte { scroll-margin-top: 84px; }
 
-/* ---------- Page Calculs : sommaire, parties, calculateurs (calculateurs.html, calculateurs.js) ---------- */
-.sommaire-calculs { position: relative; margin-bottom: 8px; padding: 18px 22px; background: var(--carte); border: 1px solid var(--bord); border-radius: var(--rayon); line-height: 1.9; }
-.sommaire-calculs p { margin: 0; }
-.sommaire-calculs p + p { margin-top: 6px; }
-.sommaire-calculs b { margin-right: 8px; color: var(--texte); }
-.sommaire-calculs a { white-space: nowrap; }
+/* ---------- Page Calculs : sommaire, parties, calculateurs (calculateurs.html, calculateurs.js, calculateurs-2.js) ----------
+   Retouche du 23 nov. 2026 : sommaire en colonne fixe (ordinateur) ou rangée à glisser (téléphone),
+   cases côte à côte comme sur une ordonnance, résultat à côté des cases sur grand écran. */
 .partie-calculs { margin: 40px 0 14px; color: var(--or-clair); font-size: clamp(1.55rem, 2.2vw + 1rem, 2.1rem); }
-.calculateur, .sous-calcul, .partie-calculs { scroll-margin-top: calc(var(--haut-entete, 64px) + 16px); }
-.calculateur > h3 { margin: 0 0 8px; font-size: 1.45rem; }
-.sous-calcul { margin-top: 22px; padding-top: 18px; border-top: 1px solid var(--bord); }
-.sous-calcul h4 { margin: 0 0 12px; font-size: 1.05rem; color: var(--texte); }
-.sous-calcul .aide { margin-top: -6px; }
+.calculs-contenu > .partie-calculs:first-child { margin-top: 8px; }
+.calculateur, .sous-calcul, .partie-calculs { scroll-margin-top: calc(var(--haut-entete, 64px) + 72px); }
+.calculateur { padding: 22px 22px 14px; }
+.calculateur > h3 { margin: 0 0 6px; font-size: 1.38rem; line-height: 1.2; text-wrap: balance; }
+.calculateur > .aide, .sous-calcul > .aide { margin: 0 0 14px; max-width: 68ch; }
+.sous-calcul { margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--bord); }
+.sous-calcul h4 { margin: 0 0 10px; font-size: 1.05rem; color: var(--texte); }
 .calculateur .aide a { color: var(--or); }
+
+/* Les cases : côte à côte, alignées par le bas même si un intitulé passe sur deux lignes */
+.calculateur .champs { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 5.6rem), 1fr)); gap: 12px; align-items: end; }
+.calculateur .champs label { min-width: 0; line-height: 1.3; }
+.calculateur .champs label:has(select) { grid-column: span 2; }
+.calculateur .champs input, .calculateur .champs select { width: 100%; min-width: 0; min-height: 48px; font-variant-numeric: tabular-nums; }
+.calculateur .champs select { padding-left: 12px; padding-right: 6px; }
+
+/* Le résultat : vide, il reste discret ; rempli, il prend l'or.
+   Passe Impeccable du 23 nov. 2026 : la ligne principale est dans la police du texte, pas en Bodoni,
+   dont les traits fins effaçaient « − », « + » et « = » (« −0,50 (−1,50) » se lisait « 0,50 (1,50) »). */
+.calculateur .resultat { margin-top: 14px; }
+.calculateur .resultat:not(:has(strong)) { background: var(--fond-2); border-color: var(--bord); color: var(--doux); font-size: 0.95rem; }
 .calculateur .resultat .calcul b { color: var(--texte); font-weight: 700; }
-.calculateur .resultat strong { overflow-wrap: anywhere; }
-@media (max-width: 600px) {
-  .sommaire-calculs { padding: 14px 16px; }
-  .sommaire-calculs b { display: block; margin: 0; }
+.calculateur .resultat strong {
+  font-family: var(--corps); font-weight: 750; font-size: clamp(1.22rem, 0.6vw + 1.1rem, 1.5rem); line-height: 1.3;
+  letter-spacing: 0; font-variant-numeric: lining-nums tabular-nums; text-wrap: pretty; overflow-wrap: anywhere;
+}
+.calculateur .resultat .calcul { margin-top: 10px; line-height: 1.5; font-variant-numeric: tabular-nums; }
+
+/* « Questions pour t'entraîner » : discret, en bas de la carte */
+.calculateur .lien-entrainement { margin: 6px 0 0; font-size: 0.88rem; }
+.calculateur .lien-entrainement a { display: inline-block; padding: 10px 0; color: var(--doux); text-underline-offset: 3px; }
+.calculateur .lien-entrainement a:hover { color: var(--or-clair); }
+
+/* Sommaire */
+.sommaire-calculs ul { margin: 0; padding: 0; list-style: none; }
+.sommaire-calculs a { display: block; text-decoration: none; color: var(--doux); transition: color var(--vite), background-color var(--vite); }
+.sommaire-calculs a:hover { color: var(--texte); }
+.sommaire-calculs a[aria-current] { color: var(--or-clair); background: var(--or-fond); }
+.sommaire-calculs a:focus-visible { outline: 2px solid var(--or); outline-offset: 2px; }
+.sommaire-partie { margin: 0; color: var(--texte); font-weight: 700; font-size: 0.86rem; }
+
+/* Téléphone et tablette : une rangée qu'on fait glisser, collée sous l'en-tête */
+@media (max-width: 999px) {
+  .sommaire-calculs {
+    position: sticky; top: var(--haut-entete, 64px); z-index: 6;
+    display: flex; gap: 8px; margin: 0 -18px 6px; padding: 10px 18px;    overflow-x: auto; overscroll-behavior-x: contain; scrollbar-width: none;
+    background: var(--fond); border-bottom: 1px solid var(--bord);
+  }
+  .sommaire-calculs::-webkit-scrollbar { display: none; }
+  .sommaire-calculs ul { display: contents; }
+  .sommaire-partie { display: none; }
+  .sommaire-calculs a { flex: none; display: inline-flex; align-items: center; min-height: 40px; padding: 0 15px; white-space: nowrap; font-size: 0.92rem; border: 1px solid var(--bord-fort); border-radius: 999px; }
+  .sommaire-calculs a[aria-current] { border-color: transparent; }
   .partie-calculs { margin-top: 32px; }
 }
-/* Page Calculs : lien « Questions pour t'entraîner » sous chaque calculateur, lien « Calculer » sous une formule des Spécificités */
-.calculateur .lien-entrainement { margin: 12px 0 0; }
-.calculateur .lien-entrainement a { display: inline-block; padding: 10px 0; }
-@media (max-width: 600px) { .sommaire-calculs a { white-space: normal; } }
+/* Petit téléphone : la rangée colle aux bords (main y a 16 px de marge, pas 18), et les cartes
+   laissent plus de place aux cases */
+@media (max-width: 520px) {
+  .sommaire-calculs { margin-inline: -16px; padding-inline: 16px; }
+  .calculateur { padding: 18px 14px 10px; }
+  .calculateur .champs { gap: 10px; }
+}
+
+/* Prismes, « Composer » : chaque prisme sur la même ligne que sa base (l'œil seul au-dessus) */
+#prismes-composer .champs { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+#prismes-composer .champs label { grid-column: auto; }
+#prismes-composer .champs label:has(#pc-h, #pc-v) { grid-column: 1; }
+
+/* Grand écran : sommaire en colonne fixe à gauche ; dans chaque calculateur, les cases en une rangée
+   (comme sur une ordonnance) et le résultat dessous, sur toute la largeur, pour que le détail
+   se lise sans être coupé au milieu d'un calcul (choix de David, 23 nov. 2026) */
+@media (min-width: 1000px) {
+  main.page-calculs { display: grid; grid-template-columns: 200px minmax(0, 1fr); column-gap: 48px; align-items: start; }
+  main.page-calculs > .tete-page { grid-column: 1 / -1; }
+  .sommaire-calculs { position: sticky; top: calc(var(--haut-entete, 64px) + 24px); max-height: calc(100vh - var(--haut-entete, 64px) - 48px); overflow-y: auto; padding-top: 6px; }
+  .sommaire-partie { margin: 18px 0 6px 12px; }
+  .sommaire-partie:first-child { margin-top: 0; }
+  .sommaire-calculs a { padding: 7px 12px; border-radius: 10px; font-size: 0.95rem; line-height: 1.3; }
+  .calculs-contenu { min-width: 0; }
+
+  .calculateur .champs { grid-template-columns: repeat(auto-fill, minmax(8.2rem, 1fr)); }
+  .calculateur .resultat { padding: 18px 22px; }
+  /* Œil (OD/OG) : une case simple ; les autres menus gardent deux cases, pour ne pas couper leur texte */
+  .calculateur .champs label:has(#pc-oeil, #pd-oeil) { grid-column: auto; }
+  #prismes-composer .champs { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+  #prismes-composer .champs label:has(#pc-h, #pc-v) { grid-column: auto; }
+  .calculateur > .lien-entrainement { margin-top: 10px; }
+}
 .spec-formules .formule-calculer { flex-basis: 100%; margin: 0; }
