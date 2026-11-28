@@ -4,7 +4,7 @@
 // Chargé après essentiel.js sur l'accueil, le profil et le QCM. Rien n'est envoyé en ligne :
 // - localStorage « objectif » : 5, 10 ou 20 questions par jour, choisi par l'élève (cet appareil) ;
 // - localStorage « jours » : { "AAAA-MM-JJ": { n, ok, j } } écrit par noterReponse (essentiel.js) :
-//   n = réponses données ce jour-là sur cet appareil, ok = objectif atteint ce jour-là,
+//   n = réponses données ce jour-là sur cet appareil (les autres appareils du compte : « jours-autres », coffre.js), ok = objectif atteint ce jour-là,
 //   j = réponses justes (depuis le 2026-11-14 ; avant, recalculé depuis « progression ») ;
 // - localStorage « rappel » : heure du rappel quotidien mis dans l'agenda (fichier .ics fait sur l'appareil) ;
 // - localStorage « invitation-compte », « decouverte », « invitation-jour », « accueil » : la proposition de compte,
@@ -51,6 +51,8 @@ function lireObjectif() {
 }
 function choisirObjectif(n) {
   try { localStorage.setItem("objectif", String(n)); } catch (e) {}
+  // L'heure du choix : entre deux appareils, l'objectif choisi le plus récemment gagne (coffre.js)
+  try { localStorage.setItem("objectif-t", String(Date.now())); } catch (e) {}
 }
 
 // Dates du calendrier de l'appareil (midi : pas de surprise au changement d'heure)
@@ -69,7 +71,7 @@ function rythmeLundi(d) {
   return l;
 }
 
-// Réponses de chaque jour : le plus grand des deux comptes (mémo de cet appareil, progression-t).
+// Réponses de chaque jour : le plus grand des deux comptes (mémo de tous les appareils du compte, progression-t).
 // justes : réponses justes ce jour-là (mémo « j », ou à défaut les questions dont la dernière réponse,
 // donnée ce jour-là, est juste). Elles ne changent rien à la série : elles disent le résultat à côté.
 function reponsesParJour() {
@@ -83,8 +85,9 @@ function reponsesParJour() {
     compte[k] = (compte[k] || 0) + 1;
     if (p[id] === 1) justesT[k] = (justesT[k] || 0) + 1;
   }
+  // Mémo des réponses par jour, tous appareils réunis (ce navigateur + les autres appareils du compte, coffre.js)
   let memo = {};
-  try { memo = JSON.parse(localStorage.getItem("jours") || "{}") || {}; } catch (e) {}
+  try { memo = typeof Coffre !== "undefined" ? Coffre.lireJoursTous() : JSON.parse(localStorage.getItem("jours") || "{}") || {}; } catch (e) {}
   const jours = {};
   for (const k of new Set([...Object.keys(compte), ...Object.keys(memo)])) {
     const m = memo[k] || {};
@@ -906,7 +909,7 @@ function afficherCarteJour(el, options) {
 
   if (options.profil) {
     el.append(
-      creer("p", "aide", "Ton objectif du jour, gardé sur cet appareil. Chaque jour où tu l'atteins compte dans ta série ; un jour sans révision par semaine ne la casse pas."),
+      creer("p", "aide", "Ton objectif du jour, gardé sur cet appareil, et sur tes autres appareils si tu as un compte. Chaque jour où tu l'atteins compte dans ta série ; un jour sans révision par semaine ne la casse pas."),
       choix()
     );
     if (!objectif) return;

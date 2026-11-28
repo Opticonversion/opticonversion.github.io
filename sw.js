@@ -13,7 +13,7 @@
 // =====================================================================
 
 // <versionner> (partie écrite par versionner.py, ne pas modifier à la main)
-const VERSION = "0fb4327bc9";
+const VERSION = "dfdd2f7c4b";
 const FICHIERS = [
   "accueil.js?v=ab1e5a22",
   "amis.html",
@@ -26,7 +26,7 @@ const FICHIERS = [
   "calculateurs.js?v=bf2e2c5b",
   "calculette.js?v=481476d2",
   "catalogue.js?v=c675bf30",
-  "coffre.js?v=666e7965",
+  "coffre.js?v=80fe33f0",
   "compte.html",
   "compte.js?v=d42db538",
   "compter.js?v=234d3f31",
@@ -284,7 +284,7 @@ const FICHIERS = [
   "questions-U42.js?v=49471ad6",
   "questions-U43.js?v=ea60cae6",
   "questions-U5.js?v=894b0129",
-  "rythme.js?v=7ca9228b",
+  "rythme.js?v=80383e6b",
   "sons.js?v=355500ef",
   "sons/faux.mp3",
   "sons/fin-0.mp3",

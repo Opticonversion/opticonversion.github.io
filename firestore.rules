@@ -14,12 +14,16 @@ service cloud.firestore {
     match /eleves/{uid} {
       allow read, delete: if request.auth != null && request.auth.uid == uid;
       allow create, update: if request.auth != null && request.auth.uid == uid
-        && request.resource.data.keys().hasOnly(["progression", "progressionT", "records", "revisions", "profil", "maj"])
+        && request.resource.data.keys().hasOnly(["progression", "progressionT", "records", "revisions", "profil", "maj", "jours", "objectif", "traces"])
         && request.resource.data.progression is string && request.resource.data.progression.size() < 200000
         && request.resource.data.get("progressionT", "") is string && request.resource.data.get("progressionT", "").size() < 200000
         && request.resource.data.records is string && request.resource.data.records.size() < 50000
         && request.resource.data.get("revisions", "") is string && request.resource.data.get("revisions", "").size() < 200000
-        && profilValide(request.resource.data.get("profil", {}));
+        && profilValide(request.resource.data.get("profil", {}))
+        // Depuis le 28 nov. 2026 (coffre.js) : réponses par jour et par appareil, objectif du jour, étoiles de l'Atelier
+        && request.resource.data.get("jours", "") is string && request.resource.data.get("jours", "").size() < 60000
+        && request.resource.data.get("objectif", "") is string && request.resource.data.get("objectif", "").size() < 200
+        && request.resource.data.get("traces", "") is string && request.resource.data.get("traces", "").size() < 20000;
     }
 
     // ---------- Mes amis (amis.html) ----------

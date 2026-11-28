@@ -26,6 +26,9 @@ const Coffre = (() => {
     "jours":                { efface: true,  quoi: "réponses données chaque jour (série de jours)" },
     "objectif":             { efface: true,  quoi: "objectif du jour (5, 10 ou 20)" },
     "objectif-choisi-le":   { efface: true,  quoi: "jour où l'objectif a été choisi" },
+    "objectif-t":           { efface: true,  quoi: "heure du choix de l'objectif : le plus récent gagne entre appareils (objectif)" },
+    "jours-autres":         { efface: true,  quoi: "réponses données chaque jour sur tes autres appareils, additionnées (jours)" },
+    "appareil":             { efface: false, quoi: "numéro de cet appareil tiré au hasard, pour additionner les jours entre appareils" },
     "plan":                 { efface: true,  quoi: "plan de révision de la semaine" },
     "erreurs-types":        { efface: true,  quoi: "type de la dernière erreur de chaque question ratée" },
     "seance-passee":        { efface: true,  quoi: "séance du jour déjà faite" },
@@ -34,7 +37,7 @@ const Coffre = (() => {
     "invitation-jour":      { efface: true,  quoi: "invitation déjà montrée aujourd'hui" },
     "accueil":              { efface: true,  quoi: "première ouverture de l'accueil déjà faite" },
     "decouverte":           { efface: true,  quoi: "cartes de découverte déjà vues" },
-    "traces":               { efface: true,  quoi: "étoiles de l'Atelier des tracés" },
+    "traces":               { efface: true,  quoi: "étoiles de l'Atelier des tracés (traces)" },
     "definitions":          { efface: true,  quoi: "définitions sues ou à revoir" },
     "definitions-seances":  { efface: true,  quoi: "révision de définitions en cours" },
     "examen-en-cours":      { efface: true,  quoi: "examen blanc commencé" },
@@ -59,7 +62,10 @@ const Coffre = (() => {
     "appli-visites":        { efface: false, quoi: "nombre de visites (invitation à installer l'appli)" }
   };
   // Les données copiées en ligne : clé du navigateur → champ Firestore
-  const SYNCHRO = { "progression": "progression", "progression-t": "progressionT", "records": "records", "revisions": "revisions", "profil": "profil" };
+  const SYNCHRO = { "progression": "progression", "progression-t": "progressionT", "records": "records", "revisions": "revisions", "profil": "profil",
+    "jours": "jours", "objectif": "objectif", "traces": "traces" };
+  // Série de jours en ligne : 70 jours par appareil (comme « jours » dans essentiel.js), 6 appareils au plus
+  const JOURS_GARDES = 70, APPAREILS_GARDES = 6;
 
   // ---------- 2. Lire et écrire sans jamais planter ----------
   const stockage = () => { try { return typeof localStorage === "undefined" ? null : localStorage; } catch (e) { return null; } };
@@ -128,7 +134,8 @@ const Coffre = (() => {
 
   // Le document en ligne (ou null) + les changements de ce navigateur → la progression fusionnée.
   // migrer (facultatif) = migrerAnciennesCles d'essentiel.js : anciennes données repérées par l'énoncé → ids.
-  function fusionner(enLigne, attente, migrer) {
+  // extras (facultatif) = extrasLocaux() : série de jours, objectif et étoiles fusionnés en plus (f.extras)
+  function fusionner(enLigne, attente, migrer, extras) {
     const d = objet(enLigne);
     const base = {
       progression: texteJson(d.progression), temps: texteJson(d.progressionT),
@@ -136,17 +143,82 @@ const Coffre = (() => {
     };
     const f = fusionnerDonnees(base, attente);
     if (typeof migrer === "function") migrer(f.progression, f.temps, f.revisions);
+    if (extras) f.extras = fusionnerExtras(enLigne, extras);
     return f;
   }
 
+  // ---------- 3 bis. Série de jours, objectif du jour, étoiles de l'Atelier (calcul pur) ----------
+  // Ces trois données ne passent pas par « attente » : à chaque synchronisation, l'état complet de ce navigateur
+  // est fusionné avec l'en-ligne. Rien n'est compté deux fois : chaque appareil garde ses propres jours en ligne
+  // (sous son numéro), l'objectif le plus récent gagne, le meilleur nombre d'étoiles gagne.
+  const derniersJours = j => {
+    const garde = {};
+    Object.keys(objet(j)).sort().slice(-JOURS_GARDES).forEach(k => { if (j[k] && typeof j[k] === "object") garde[k] = j[k]; });
+    return garde;
+  };
+  // Additionne des comptes par jour { jour: { n, j, ok } } : n et j additionnés, ok si l'un l'a
+  function additionnerJours(listes) {
+    const total = {};
+    for (const l of listes) for (const [k, e] of Object.entries(objet(l))) {
+      if (!e || typeof e !== "object") continue;
+      const t = total[k] || (total[k] = { n: 0 });
+      t.n += Number(e.n) || 0;
+      if (e.j !== undefined) t.j = (t.j || 0) + (Number(e.j) || 0);
+      if (e.ok) t.ok = true;
+    }
+    return total;
+  }
+  // local = { appareil, jours, objectif, objectifT, traces } (état de ce navigateur)
+  // Rend { jours (en ligne, par appareil), joursAutres (les autres appareils additionnés), objectif: { valeur, t }, traces }
+  function fusionnerExtras(enLigne, local) {
+    const d = objet(enLigne);
+    // Série de jours : cet appareil fait foi pour lui-même ; les autres sont gardés tels quels
+    const tous = {};
+    for (const [app, j] of Object.entries(texteJson(d.jours))) { const g = derniersJours(j); if (Object.keys(g).length) tous[app] = g; }
+    const mesJours = derniersJours(local.jours);
+    if (Object.keys(mesJours).length) tous[local.appareil] = mesJours; else delete tous[local.appareil];
+    // Au plus 6 appareils : ceux qui ont répondu le plus récemment (celui-ci toujours gardé)
+    const dernier = app => Object.keys(tous[app]).sort().pop() || "";
+    const gardes = Object.keys(tous).filter(a => a !== local.appareil).sort((a, b) => dernier(b).localeCompare(dernier(a)) || a.localeCompare(b))
+      .slice(0, APPAREILS_GARDES - (tous[local.appareil] ? 1 : 0));
+    const jours = {};
+    for (const a of Object.keys(tous).sort()) if (a === local.appareil || gardes.includes(a)) jours[a] = tous[a];
+    const joursAutres = additionnerJours(Object.keys(jours).filter(a => a !== local.appareil).map(a => jours[a]));
+    // Objectif : le choix le plus récent gagne ; un choix sans heure (ancienne version) ne remplace pas l'en-ligne
+    const oE = texteJson(d.objectif), vL = Number(local.objectif) || 0, tL = Number(local.objectifT) || 0;
+    const objectif = vL && (!oE.valeur || tL > (Number(oE.t) || 0)) ? { valeur: vL, t: tL } : (oE.valeur ? { valeur: Number(oE.valeur), t: Number(oE.t) || 0 } : {});
+    // Étoiles : le meilleur gagne, des deux côtés
+    const traces = Object.assign({}, texteJson(d.traces));
+    for (const [k, v] of Object.entries(objet(local.traces))) if (typeof v === "number" && (traces[k] === undefined || v > traces[k])) traces[k] = v;
+    return { jours, joursAutres, objectif, traces };
+  }
+  // L'état de ce navigateur pour fusionnerExtras (crée le numéro d'appareil la première fois)
+  function extrasLocaux() {
+    let appareil = lireTexte("appareil");
+    if (!appareil) { appareil = "a" + Math.random().toString(36).slice(2, 10) + Date.now().toString(36); ecrireTexte("appareil", appareil); }
+    return { appareil, jours: lireJson("jours"), objectif: lireTexte("objectif"), objectifT: lireTexte("objectif-t"), traces: lireJson("traces") };
+  }
+  // Réponses de chaque jour, tous appareils réunis : ce navigateur (« jours ») + les autres (« jours-autres »).
+  // ok = objectif atteint sur un appareil, ou total du jour au moins égal à l'objectif actuel.
+  function lireJoursTous() {
+    const total = additionnerJours([lireJson("jours"), lireJson("jours-autres")]), objectif = Number(lireTexte("objectif")) || 0;
+    if (objectif) for (const e of Object.values(total)) if (e.n >= objectif) e.ok = true;
+    return total;
+  }
+
   // La progression fusionnée → les champs du document Firestore (même format qu'avant le coffre ; « maj » est ajouté par compte.js)
-  const versEnLigne = f => ({
+  // Les trois champs en plus (jours, objectif, traces) n'existent que si la fusion les a calculés.
+  const versEnLigne = f => Object.assign({
     progression: JSON.stringify(f.progression),
     progressionT: JSON.stringify(f.temps),
     records: JSON.stringify(f.records),
     revisions: JSON.stringify(f.revisions),
     profil: f.profil
-  });
+  }, f.extras ? {
+    jours: JSON.stringify(f.extras.jours),
+    objectif: JSON.stringify(f.extras.objectif),
+    traces: JSON.stringify(f.extras.traces)
+  } : {});
 
   // ---------- 4. La synchronisation ----------
   // transaction(miseAJour) : lit le document en ligne, appelle miseAJour(documentOuNull) qui rend les champs
@@ -158,14 +230,15 @@ const Coffre = (() => {
     const attente = premiereFois
       ? { progression: lireJson("progression"), "progression-t": lireJson("progression-t"), records: lireJson("records"), profil: lireJson("profil"), revisions: lireJson("revisions") }
       : lireJson("attente");
-    const attenteAvant = lireTexte("attente");
+    const attenteAvant = lireTexte("attente"), extras = extrasLocaux();
     let fusion = null;
     const r = await transaction(enLigne => {
-      fusion = fusionner(enLigne, attente, migrer);
+      fusion = fusionner(enLigne, attente, migrer, extras);
       return versEnLigne(fusion);
     });
 
-    const avant = JSON.stringify([lireJson("progression"), lireJson("records"), lireJson("profil"), lireJson("revisions")]);
+    const autresAvant = () => [lireJson("jours-autres"), lireTexte("objectif"), lireJson("traces")];
+    const avant = JSON.stringify([lireJson("progression"), lireJson("records"), lireJson("profil"), lireJson("revisions"), autresAvant()]);
     // Une réponse donnée PENDANT l'envoi est dans « attente » mais pas dans la fusion : on la remet par-dessus,
     // et on garde l'attente pour le prochain envoi (renvoyer un changement déjà parti ne change rien).
     const bouge = lireTexte("attente") !== attenteAvant;
@@ -175,12 +248,23 @@ const Coffre = (() => {
     ecrireJson("progression-t", local.temps);
     ecrireJson("records", local.records);
     ecrireJson("profil", local.profil);
+    // Série de jours des autres appareils, objectif, étoiles. Ce qui a bougé ici PENDANT l'envoi est gardé :
+    // une étoile gagnée entre-temps (le meilleur gagne), un objectif choisi entre-temps (plus récent).
+    const x = fusion.extras;
+    ecrireJson("jours-autres", x.joursAutres);
+    if (x.objectif.valeur && (Number(lireTexte("objectif-t")) || 0) <= x.objectif.t) {
+      ecrireTexte("objectif", String(x.objectif.valeur));
+      if (x.objectif.t) ecrireTexte("objectif-t", String(x.objectif.t));
+    }
+    const etoiles = Object.assign({}, x.traces);
+    for (const [k, v] of Object.entries(lireJson("traces"))) if (typeof v === "number" && (etoiles[k] === undefined || v > etoiles[k])) etoiles[k] = v;
+    ecrireJson("traces", etoiles);
     ecrireTexte("compte-uid", uid);
     if (!bouge) ecrireJson("attente", {});
-    const apres = JSON.stringify([local.progression, local.records, local.profil, local.revisions]);
+    const apres = JSON.stringify([local.progression, local.records, local.profil, local.revisions, autresAvant()]);
     return { nouveau: !!(r && r.nouveau), change: avant !== apres };
   }
 
   return { CLES, SYNCHRO, lireTexte, ecrireTexte, lireJson, ecrireJson, marquerEnAttente, effacerTravail,
-    fusionner, fusionnerDonnees, versEnLigne, synchroniser };
+    fusionner, fusionnerDonnees, versEnLigne, synchroniser, fusionnerExtras, additionnerJours, lireJoursTous };
 })();
