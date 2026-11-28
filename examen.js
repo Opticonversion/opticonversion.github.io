@@ -84,6 +84,8 @@ function creerContexteSujet(q, options) {
     return p;
   };
   const annexe = (a, parent) => { const f = creerAnnexe(a); if (f) (parent || boite).appendChild(f); };
+  // Schéma du montage (situation de départ ou partie) : { schema: "img/schemas/U42/….svg", schemaTexte }, sous le tableau
+  const schema = (x, parent) => { if (x && x.schema && typeof creerSchema === "function") (parent || boite).appendChild(creerSchema(x.schema, x.schemaTexte)); };
   if (options.tete) texte(options.tete, "contexte-tete");
   const det = document.createElement("details");
   det.className = "contexte-situation sujet-situation";
@@ -96,6 +98,7 @@ function creerContexteSujet(q, options) {
   det.appendChild(resume);
   if (s.contexte) texte(s.contexte, "", det);
   annexe(s.annexe, det);
+  schema(s, det);
   // « toggle » part aussi, plus tard, pour l'ouverture faite ici : seul un geste de l'élève compte
   const auDepart = det.open;
   let touche = false;
@@ -119,6 +122,7 @@ function creerContexteSujet(q, options) {
     bloc.appendChild(t);
     if (partie.contexte) texte(partie.contexte, "", bloc);
     annexe(partie.annexe, bloc);
+    schema(partie, bloc);
     boite.appendChild(bloc);
   }
   // Ce qu'ont apporté les questions précédentes de la même partie (replié), puis ce que cette question ajoute
@@ -1113,19 +1117,63 @@ const Examen = (() => {
       li.append(haut, barre);
       // Les thèmes des questions ratées ou laissées vides dans cette partie
       const themes = [...new Set(x.lignes.filter(l => !l.juste).map(l => l.q.theme))].filter(t => ordinairesDe(code).some(q => q.theme === t));
-      if (themes.length) {
+      // La suite à l'Atelier des tracés : les niveaux choisis par l'auteur du sujet (partie.atelier), puis ceux des thèmes ratés
+      const niveaux = [];
+      if (x.lignes.some(l => !l.juste)) {
+        (Array.isArray(x.p.atelier) ? x.p.atelier : []).forEach(id => niveaux.push(typeof TRACES !== "undefined" && Array.isArray(TRACES) ? TRACES.find(N => N && N.id === id) : null));
+        themes.forEach(t => niveaux.push(niveauAtelier(code, t)));
+      }
+      const dejaMis = new Set(), liensAtelier = [];
+      niveaux.filter(Boolean).forEach(N => {
+        const ouvert = niveauOuvert(N);
+        if (dejaMis.has(ouvert.id)) return;
+        dejaMis.add(ouvert.id);
+        const a = el("a", "", "S'entraîner au tracé : " + ouvert.titre + (ouvert !== N ? ", pour arriver à « " + N.titre + " »" : ""));
+        a.href = "traces.html#" + ouvert.id;
+        liensAtelier.push(a);
+      });
+      if (themes.length || liensAtelier.length) {
         const liens = el("p", "examen-theme-liens");
         themes.forEach(t => {
           const a = el("a", "", "Refaire le QCM : " + t);
           a.href = "#" + code + "/" + encodeURIComponent(t);
           liens.appendChild(a);
         });
+        liensAtelier.forEach(a => liens.appendChild(a));
         li.appendChild(liens);
       }
       ul.appendChild(li);
     });
     bilan.appendChild(ul);
+    // Vision : un calcul de Prentice (ou voisin) raté → une ligne discrète vers la fiche gratuite,
+    // seulement si la fiche est ouverte (window.ligneFicheGratuite, lettre.js, renvoie null sinon)
+    if (typeof window.ligneFicheGratuite === "function") {
+      const ratee = n.parties.flatMap(x => x.lignes).find(l => !l.juste && estCalcul(l.q) && window.ligneFicheGratuite(l.q));
+      if (ratee) bilan.appendChild(window.ligneFicheGratuite(ratee.q));
+    }
     return bilan;
+  }
+
+  // Niveau de l'Atelier des tracés (traces-*.js, chargés par qcm.html) qui travaille ce thème, ou null.
+  // Parmi les niveaux du thème, on préfère un premier niveau de chapitre (toujours ouvert : dans un chapitre,
+  // un niveau réussi ouvre le suivant ; un niveau encore fermé renvoie seulement à la liste de l'Atelier).
+  function niveauAtelier(code, theme) {
+    if (typeof TRACES === "undefined" || !Array.isArray(TRACES)) return null;
+    const niveaux = TRACES.filter(x => x && x.epreuve === code && x.id && x.titre);
+    const duTheme = niveaux.filter(x => x.theme === theme);
+    const premierDuChapitre = x => niveaux.find(y => y.chapitre === x.chapitre) === x;
+    return duTheme.find(premierDuChapitre) || duTheme[0] || null;
+  }
+  // Le niveau qu'on peut vraiment ouvrir pour aller vers N : N lui-même s'il est ouvert, sinon le premier niveau
+  // pas encore réussi de son chapitre (même règle que traces.js : un niveau réussi ouvre le suivant du chapitre).
+  // Étoiles : localStorage « traces » (lecture seule ici).
+  function niveauOuvert(N) {
+    let etoiles = {};
+    try { etoiles = JSON.parse(localStorage.getItem("traces") || "{}") || {}; } catch (e) {}
+    const memes = TRACES.filter(x => x && x.epreuve === N.epreuve && (x.chapitre || "") === (N.chapitre || ""));
+    const i = memes.indexOf(N);
+    if (i <= 0 || etoiles[memes[i - 1].id]) return N;
+    return memes.find(x => !etoiles[x.id]) || N;
   }
 
   // Ce que dit le lien « Sujet blanc » aux lecteurs d'écran : « 40 questions · 1 h 35 · meilleure note 13,5 / 20 »

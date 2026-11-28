@@ -18,7 +18,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Opticonversion">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
-<link rel="stylesheet" href="style.css?v=4485ca76">
+<link rel="stylesheet" href="style.css?v=aa47fbbb">
 </head>
 <body>
 <header class="entete">
@@ -106,35 +106,35 @@
 <script src="questions-U41.js?v=7a11c243"></script>
 <script src="questions-U42.js?v=49471ad6"></script>
 <script src="questions-U43.js?v=ea60cae6"></script>
-<script src="questions-U5.js?v=952a7f14"></script>
+<script src="questions-U5.js?v=894b0129"></script>
 <script src="questions-U3.js?v=60f0103f"></script>
 <!-- Sujets blancs (#U5/sujet) : un fichier par épreuve, après les questions ; un fichier absent ne casse rien -->
 <script src="sujets-U5.js?v=146772d3"></script>
 <script src="sujets-U3.js?v=f1429d02"></script>
-<script src="sujets-U42.js?v=e0c72a21"></script>
-<script src="sujets-U43.js?v=a9434843"></script>
+<script src="sujets-U42.js?v=c6f50368"></script>
+<script src="sujets-U43.js?v=dfefbcf9"></script>
 <script src="sujets-U41.js?v=85599410"></script>
 <!-- Questions d'entraînement (mêmes notions, autres chiffres) : chargées ici seulement, hors Essentiel -->
 <script src="entrainement-U41.js?v=2ff5d7d1"></script>
 <script src="entrainement-U42.js?v=b8336c15"></script>
 <script src="entrainement-U43.js?v=07bcc848"></script>
-<script src="entrainement-U5.js?v=069a3eeb"></script>
+<script src="entrainement-U5.js?v=808f4b70"></script>
 <script src="entrainement-U3.js?v=8a9403ec"></script>
 <!-- Fiches « Spécificités » (facultatives : la page marche sans elles) -->
 <!-- Niveaux de l'Atelier (pour compter niveaux et étoiles sur la page de l'épreuve) -->
 <script src="traces-U42.js?v=6b6df119"></script>
-<script src="traces-U43.js?v=77abc155"></script>
+<script src="traces-U43.js?v=c39f16f1"></script>
 <script src="traces-U5.js?v=6c873d8a"></script>
 <script src="specificites-U41.js?v=3d591e09"></script>
 <script src="specificites-U42.js?v=33080df6"></script>
 <script src="specificites-U43.js?v=d64dab99"></script>
-<script src="specificites-U5.js?v=43533990"></script>
+<script src="specificites-U5.js?v=5c9dc658"></script>
 <script src="specificites-U3.js?v=719774fd"></script>
 <script src="coffre.js?v=666e7965"></script>
 <script src="essentiel.js?v=7e8432f5"></script>
-<script src="rythme.js?v=ee7b6ef1"></script>
+<script src="rythme.js?v=7ca9228b"></script>
 <!-- Examen blanc chronométré (#U5/examen) : avant le script de la page, qui l'ouvre dès le chargement -->
-<script src="examen.js?v=07617f9d"></script>
+<script src="examen.js?v=ecf17fd1"></script>
 <script src="calculette.js?v=481476d2"></script>
 <script src="atelier-calculatrice.js?v=6e07c21a"></script>
 <script>
@@ -1424,6 +1424,21 @@
       b.onclick = () => montrerSituation(casQ, b);
       expl.appendChild(b);
     }
+    // « Revoir la notion » : la page du thème (définitions et questions corrigées), dans un nouvel onglet pour ne pas
+    // perdre la série. Adresse calculée comme dans .claude/scripts/generer-notions.js (fichierNotion et slug).
+    if (q.theme) {
+      const slug = t => String(t).toLowerCase().replace(/œ/g, "oe").replace(/æ/g, "ae").normalize("NFD").replace(/[̀-ͯ]/g, "")
+        .replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+      const a = document.createElement("a");
+      a.className = "lien-correction";
+      a.style.cssText = "display: flex; align-items: center; width: fit-content;";
+      a.href = "notion-" + q.epreuve.toLowerCase() + "-" + slug(q.theme) + ".html";
+      a.target = "_blank";
+      a.rel = "noopener";
+      a.textContent = "Revoir la notion « " + q.theme + " »";
+      a.setAttribute("aria-label", a.textContent + ", dans un nouvel onglet");
+      expl.appendChild(a);
+    }
     // La question est liée à un piège des Spécificités : un lien discret vers ce piège
     const piege = PIEGES_PAR_QUESTION()[q.id];
     if (piege) {
@@ -2642,6 +2657,25 @@
       }));
     }
 
+    // Mes amis : après une série réussie, une ligne pour inviter un ami de sa classe. Seulement connecté, avec
+    // moins de 3 amis, une fois par visite, jamais avec la proposition de créer un compte, ni en premiers pas ni dans un cas.
+    if (window.compteUid && window.Amis && !premiers && !casFini && pourcent >= SEUIL_BIEN_REUSSI * 100 && !zone.querySelector(".invitation-compte")) {
+      let vu = false;
+      try { vu = sessionStorage.getItem("amis-bilan-vu") === "1"; } catch (e) {}
+      if (!vu) Amis.apercu().then(a => {
+        if (a.amis >= 3 || !zone.querySelector(".bilan")) return;
+        try { sessionStorage.setItem("amis-bilan-vu", "1"); } catch (e) {}
+        const p = document.createElement("p");
+        p.className = "bilan-amis";
+        const lien = document.createElement("a");
+        lien.href = "amis.html";
+        lien.textContent = "Envoie ton code à un ami de ta classe";
+        p.append(lien, " : vous verrez chacun où en est l'autre.");
+        const fin = zone.querySelector(".bilan-actions");
+        if (fin) fin.after(p); else zone.querySelector(".bilan").appendChild(p);
+      }).catch(err => console.error(err));
+    }
+
     lancerConfettis(zone.querySelector(".bilan"), palier.confettis);
     majBarreSerie();
     // Lecteurs d'écran : le focus va sur le résultat
@@ -2748,12 +2782,12 @@
   repriseAuChargement = false;
   pageChargee = true;
 </script>
-<script src="lettre.js?v=00852505" defer></script>
+<script src="lettre.js?v=00233957" defer></script>
 <script src="compter.js?v=234d3f31" defer></script>
 <script src="vivant.js?v=0b03b85f" defer></script>
 <script src="appli.js?v=0724163c" defer></script>
 <script src="sons.js?v=355500ef" defer></script>
-<script type="module" src="compte.js?v=b42b2898"></script>
+<script type="module" src="compte.js?v=d42db538"></script>
 <!-- Mesure d'audience anonyme, sans cookies (GoatCounter) -->
 <script data-goatcounter="https://opticonversion.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </body>

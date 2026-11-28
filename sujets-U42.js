@@ -21,6 +21,8 @@ SUJETS.push({
       ["Timbre type", "26 mm × 36 mm"]
     ]
   },
+  schema: "img/schemas/U42/sujet-macro-montage.svg",
+  schemaTexte: "Schéma du montage, sur l'axe optique, de gauche à droite : le timbre, son pied A au foyer objet F₁ ; 25 mm plus loin, la lentille macro L₁ ; 5,0 mm après, l'objectif L₂ et sa pupille ; 4,0 mm après, le capteur. Deux rayons partent de A, sortent parallèles de L₁ et convergent sur le capteur.",
   parties: [
     { lettre: "A", titre: "Le téléphone seul", points: 3,
       contexte: "Sans la lentille macro. Pour faire la mise au point, l'objectif L₂ avance ou recule ; le capteur, lui, reste fixe." },
@@ -285,12 +287,14 @@ QUESTIONS.push(
   {
     id: "U42-357", epreuve: "U42", theme: "Champs et diaphragmes", session: "complément", difficulte: "moyen",
     sujet: "SUJET-U42-01", partie: "C", etape: 4,
+    schemaQuestion: "img/schemas/U42/sujet-macro-champ.svg",
+    schemaTexte: "Sur l'axe, de gauche à droite : le plan du timbre ; 25 mm plus loin, la monture de L₁, de bords M₁ (en haut) et M₂ (en bas), 11 mm de diamètre ; 6,25 mm derrière L₁, la pupille d'entrée virtuelle, de bords P₁ (en haut) et P₂ (en bas), 2,5 mm de diamètre.",
     question: "Le timbre est à 25 mm devant L₁, la pupille d'entrée 6,25 mm derrière. Pour le champ de pleine lumière, la droite à tracer passe par :",
     choix: [
-      "Le centre de la pupille d'entrée et le bord de la monture",
-      "Un bord de la pupille d'entrée et le bord de la monture situé à l'opposé",
-      "Un bord de la pupille d'entrée et le bord de la monture du même côté",
-      "Le bord de la monture et le foyer objet de L₁"
+      "Le centre de la pupille d'entrée et M₁",
+      "P₂ et M₁, des bords situés de part et d'autre de l'axe",
+      "P₁ et M₁, des bords situés du même côté de l'axe",
+      "M₁ et le foyer objet de L₁"
     ],
     bonne: 2,
     explication: "Le plan du timbre est en dehors de l'intervalle entre la monture de L₁ et la pupille d'entrée : la pleine lumière s'appuie sur les bords situés du même côté de l'axe. La droite passant par le centre de la pupille donne le champ moyen, celle passant par les bords opposés donne le champ total.",

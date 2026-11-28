@@ -92,6 +92,14 @@ function majIcone(a) {
     a.classList.remove("avec-avatar");
   }
   a.title = p.pseudo ? "Profil de " + p.pseudo : "Mon profil";
+  // Mes amis : une pastille quand une demande d'ami attend (nombre gardé dans data-demandes par Amis.apercu)
+  const demandes = Number(a.dataset.demandes) || 0;
+  if (demandes) {
+    const pastille = document.createElement("span");
+    pastille.className = "pastille-amis";
+    pastille.setAttribute("aria-hidden", "true");
+    a.appendChild(pastille);
+  }
   // À côté de l'image, dans la barre du haut : « Créer ton compte », ou « Connecté : pseudo ».
   // Avant la réponse de la connexion, compte-uid dit si ce navigateur était connecté.
   const connecte = a.dataset.connecte ? a.dataset.connecte === "oui" : !!lireTexte("compte-uid");
@@ -100,7 +108,8 @@ function majIcone(a) {
   texte.textContent = connecte ? (p.pseudo ? "Connecté : " + p.pseudo : "Connecté") : "Créer ton compte";
   a.appendChild(texte);
   a.classList.add("avec-texte");
-  a.setAttribute("aria-label", connecte ? "Mon profil, " + texte.textContent : "Mon profil : créer ton compte");
+  a.setAttribute("aria-label", (connecte ? "Mon profil, " + texte.textContent : "Mon profil : créer ton compte") +
+    (demandes ? (demandes > 1 ? ", " + demandes + " demandes d'ami" : ", une demande d'ami") : ""));
 }
 // ---------- Ce que la page compte.html affiche ----------
 const ui = {
@@ -229,6 +238,20 @@ async function demarrer() {
   const paire = (a, b) => (a < b ? a + "_" + b : b + "_" + a);
   const erreurAmis = code => Object.assign(new Error(code), { code });
   let minuterieResume = null;
+  // Aperçu pour la pastille du profil, le bilan du QCM et l'accueil : gardé 5 minutes pour cet onglet
+  // (sessionStorage « amis-apercu »), pour ne pas relire Firestore à chaque page.
+  const DUREE_APERCU = 5 * 60000;
+  const lireApercu = () => { try { return JSON.parse(sessionStorage.getItem("amis-apercu") || "null"); } catch (e) { return null; } };
+  const garderApercu = a => { try { sessionStorage.setItem("amis-apercu", JSON.stringify(a)); } catch (e) {} };
+  const oublierApercu = () => { try { sessionStorage.removeItem("amis-apercu"); } catch (e) {} };
+  const jourLocalAmis = () => { const d = new Date(); return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0"); };
+  function majPastille(demandes) {
+    if (!icone) return;
+    const n = String(demandes || 0);
+    if (icone.dataset.demandes === n) return;
+    icone.dataset.demandes = n;
+    majIcone(icone);
+  }
   const Amis = {
     uid: () => utilisateur ? utilisateur.uid : null,
     normaliserCode: c => String(c || "").toUpperCase().replace(/[^A-Z0-9]/g, ""),
@@ -281,8 +304,30 @@ async function demarrer() {
       ecrire("amis", { code: local.code, empreinte, t: Date.now() });
       return true;
     },
+    // { demandes, amis, revises } : demandes reçues, nombre d'amis, et (avec { revises: true }) pseudos des amis
+    // qui ont révisé aujourd'hui. Lit le cache s'il a moins de 5 minutes ; met la pastille du profil à jour.
+    async apercu(options) {
+      if (!utilisateur) return { demandes: 0, amis: 0, revises: [] };
+      const veutRevises = !!(options && options.revises);
+      const c = lireApercu();
+      if (c && c.uid === utilisateur.uid && Date.now() - c.t < DUREE_APERCU && c.jour === jourLocalAmis() && (!veutRevises || c.revises)) {
+        majPastille(c.demandes);
+        return c;
+      }
+      const l = await (veutRevises ? Amis.liste() : Amis.liste({ sansResumes: true }));
+      return Amis.retenirApercu(l, veutRevises);
+    },
+    retenirApercu(l, avecRevises) {
+      const a = { uid: utilisateur.uid, t: Date.now(), jour: jourLocalAmis(), demandes: l.recues.length, amis: l.amis.length };
+      if (avecRevises) a.revises = l.amis.filter(x => x.resume && x.resume.jour === a.jour)
+        .sort((x, y) => (y.resume.semaine && y.resume.semaine.questions || 0) - (x.resume.semaine && x.resume.semaine.questions || 0))
+        .map(x => x.resume.pseudo || x.pseudo || "Un ami");
+      garderApercu(a);
+      majPastille(a.demandes);
+      return a;
+    },
     // Amis acceptés (avec leur résumé), demandes reçues, demandes envoyées
-    async liste() {
+    async liste(options) {
       if (!utilisateur) return { amis: [], recues: [], envoyees: [] };
       const moi = utilisateur.uid;
       const snap = await F.getDocs(F.query(F.collection(db, "amities"), F.where("membres", "array-contains", moi)));
@@ -293,12 +338,14 @@ async function demarrer() {
         if (a.accepte) amis.push(item);
         else (a.de === moi ? envoyees : recues).push(item);
       });
+      if (options && options.sansResumes) return { amis, recues, envoyees };
       await Promise.all(amis.map(async ami => {
         try {
           const r = await F.getDoc(F.doc(db, "resumes", ami.uid));
           ami.resume = r.exists() ? r.data() : null;
         } catch (e) { console.error(e); ami.resume = null; }
       }));
+      Amis.retenirApercu({ amis, recues }, true);      // la liste complète tient l'aperçu à jour (page Mes amis)
       return { amis, recues, envoyees };
     },
     // Demande d'ami avec le code de l'autre. Si l'autre nous avait déjà demandé, on accepte sa demande.
@@ -327,6 +374,7 @@ async function demarrer() {
         avatar: String(p.avatar || "").slice(0, 20), accepte: false, date: F.serverTimestamp() });
       envois.push(maintenant);
       ecrire("amis-demandes", envois);
+      oublierApercu();
       window.compter?.("ami-demande", "Demande d'ami envoyée");
       return "demande";
     },
@@ -334,12 +382,14 @@ async function demarrer() {
       if (!utilisateur) throw erreurAmis("deconnecte");
       await Amis.activer();             // accepter, c'est montrer son résumé à cet ami
       await F.updateDoc(F.doc(db, "amities", id), { accepte: true });
+      oublierApercu();
       window.compter?.("ami-accepte", "Demande d'ami acceptée");
     },
     // Refuser une demande, annuler la sienne, ou retirer un ami : il ne voit plus rien, et toi non plus
     async retirer(id) {
       if (!utilisateur) throw erreurAmis("deconnecte");
       await F.deleteDoc(F.doc(db, "amities", id));
+      oublierApercu();
     },
     // Tout arrêter : amitiés, résumé et code disparaissent
     async desactiver() {
@@ -355,6 +405,8 @@ async function demarrer() {
         if (c.exists() && c.data().uid === moi) await F.deleteDoc(c.ref);
       }
       ecrire("amis", {});
+      oublierApercu();
+      majPastille(0);
     }
   };
   window.Amis = Amis;
@@ -420,6 +472,9 @@ async function demarrer() {
     utilisateur = u;
     window.compteUid = u ? u.uid : null;
     window.dispatchEvent(new CustomEvent("compte-change", { detail: { uid: window.compteUid } }));
+    // Mes amis : la pastille du profil (demande d'ami en attente), d'après l'aperçu gardé 5 minutes
+    if (u) Amis.apercu().catch(e => console.error(e));
+    else majPastille(0);
     // « Mes amis » activé sur un autre appareil : une lecture par session suffit pour le savoir ici
     if (u && !lire("amis").code) {
       let vu = false;

@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 470 330" role="img" aria-labelledby="t">
+  <title id="t">Plan du timbre, monture de L1 et pupille d'entrée virtuelle 6,25 mm derrière L1</title>
+  <style>
+    :root { background: #0f1219; color-scheme: dark; }
+    text { font-family: -apple-system, "Segoe UI", Roboto, sans-serif; font-size: 17px; fill: #e7e9ee; }
+    .p { font-size: 15px; fill: #aab2c0; }
+    .c { font-size: 15px; fill: #c9ced8; }
+    .lentille { stroke: #9ec5ff; stroke-width: 3; fill: none; }
+    .rayon { stroke: #f0c674; stroke-width: 2; fill: none; }
+    .cote { stroke: #9aa3b2; stroke-width: 1.2; }
+  </style>
+  <defs>
+    <marker id="fl" markerUnits="userSpaceOnUse" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" orient="auto-start-reverse"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#9ec5ff" stroke-width="2"/></marker>
+    <marker id="mc" markerUnits="userSpaceOnUse" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#9aa3b2"/></marker>
+    <marker id="mt" markerUnits="userSpaceOnUse" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="13" markerHeight="13" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#e7e9ee"/></marker>
+  </defs>
+
+  <line x1="16" y1="165" x2="458" y2="165" stroke="#5b6270" stroke-width="1.5"/>
+  <line x1="40" y1="28" x2="40" y2="246" stroke="#9aa3b2" stroke-width="1.5" stroke-dasharray="5 5"/>
+  <text x="48" y="40" class="p">plan du timbre</text>
+  <line x1="290" y1="110.0" x2="290" y2="84.0" stroke="#9ec5ff" stroke-width="5" stroke-linecap="round"/>
+  <line x1="290" y1="220.0" x2="290" y2="246.0" stroke="#9ec5ff" stroke-width="5" stroke-linecap="round"/>
+  <line x1="290" y1="110.0" x2="290" y2="220.0" stroke="#9ec5ff" stroke-width="1.5" stroke-opacity=".5"/>
+  <circle cx="290" cy="110.0" r="4" fill="#e7e9ee"/><text x="280" y="115.0" text-anchor="end">M₁</text>
+  <circle cx="290" cy="220.0" r="4" fill="#e7e9ee"/><text x="280" y="225.0" text-anchor="end">M₂</text>
+  <text x="290" y="74.0" text-anchor="middle" class="p">monture de L₁ (Ø 11 mm)</text>
+  <line x1="352" y1="152.5" x2="352" y2="130.5" stroke="#6fd3c4" stroke-width="4" stroke-dasharray="4 3"/>
+  <line x1="352" y1="177.5" x2="352" y2="199.5" stroke="#6fd3c4" stroke-width="4" stroke-dasharray="4 3"/>
+  <circle cx="352" cy="152.5" r="4" fill="#e7e9ee"/><text x="362" y="150.5">P₁</text>
+  <circle cx="352" cy="177.5" r="4" fill="#e7e9ee"/><text x="362" y="191.5">P₂</text>
+  <text x="382" y="107" class="p" text-anchor="middle">pupille d'entrée</text>
+  <text x="382" y="124" class="p" text-anchor="middle">Ø 2,5 mm, virtuelle</text>
+  <line x1="40" y1="264" x2="40" y2="280" class="cote"/><line x1="290" y1="264" x2="290" y2="280" class="cote"/>
+  <line x1="41" y1="272" x2="289" y2="272" class="cote" marker-start="url(#mc)" marker-end="url(#mc)"/>
+  <text x="165.0" y="292" class="c" text-anchor="middle">25 mm</text>
+
+  <line x1="290" y1="264" x2="290" y2="280" class="cote"/><line x1="352" y1="264" x2="352" y2="280" class="cote"/>
+  <line x1="291" y1="272" x2="351" y2="272" class="cote" marker-start="url(#mc)" marker-end="url(#mc)"/>
+  <text x="321.0" y="292" class="c" text-anchor="middle">6,25 mm</text>
+
+  <text x="16" y="318" class="p" style="font-size:12px">Même échelle sur les deux axes. Lumière de gauche à droite.</text>
+</svg>

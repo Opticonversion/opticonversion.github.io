@@ -29,9 +29,12 @@ SUJETS.push({
     { lettre: "B", titre: "Chaîne des conjugués", points: 4,
       contexte: "L'utilisateur est emmétrope et n'accommode pas. Réglé sur l'infini, l'oculaire est à 225 mm de l'objectif." },
     { lettre: "C", titre: "L'œil de l'utilisateur", points: 4,
-      contexte: "Karim est myope de −4,00 δ aux deux yeux, sans astigmatisme. Il retire ses lunettes, n'accommode pas et vise une crête lointaine (à l'infini). Pour simplifier les calculs, on place son œil au foyer image de l'oculaire (en réalité 3 mm plus loin, au cercle oculaire)." },
+      contexte: "Karim est myope de −4,00 δ aux deux yeux, sans astigmatisme. Il retire ses lunettes, n'accommode pas et vise une crête lointaine (à l'infini). Pour simplifier les calculs, on place son œil au foyer image de l'oculaire (en réalité 3 mm plus loin, au cercle oculaire).",
+      atelier: ["U43-11"] },
     { lettre: "D", titre: "Mécanique de la mise au point", points: 4,
       contexte: "Tourner la bague (3) déplace le porte-oculaire (4) et l'oculaire (5) le long de l'axe optique, noté axe X.",
+      schema: "img/schemas/U43/monoculaire-8x40-coupe.svg",
+      schemaTexte: "Coupe simplifiée du monoculaire le long de l'axe optique X, de gauche à droite : le corps 1 et le barillet 2 qui tient l'objectif (doublet collé) ; les prismes de Porro, dessinés dépliés ; à 200 mm de l'objectif, le diaphragme de champ de 14 mm, porté par le manchon arrière du corps ; la bague de mise au point 3, moletée ; le porte-oculaire 4, fileté dans la bague, avec l'ergot du corps dans sa rainure droite ; l'oculaire 5, 25 mm après le diaphragme ; l'œilleton ; le cercle oculaire, 28 mm après l'oculaire.",
       annexe: {
         titre: "Pièces et montage",
         colonnes: ["Repère", "Pièce", "Montage"],
@@ -46,6 +49,9 @@ SUJETS.push({
     },
     { lettre: "E", titre: "Étude des champs", points: 5,
       contexte: "Instrument réglé sur l'infini pour un emmétrope : l'oculaire est à 225 mm de l'objectif. Les prismes n'arrêtent aucun rayon.",
+      schema: "img/schemas/U43/monoculaire-8x40-coupe.svg",
+      schemaTexte: "Coupe simplifiée du monoculaire le long de l'axe optique X, de gauche à droite : le corps 1 et le barillet 2 qui tient l'objectif (doublet collé) ; les prismes de Porro, dessinés dépliés ; à 200 mm de l'objectif, le diaphragme de champ de 14 mm, porté par le manchon arrière du corps ; la bague de mise au point 3, moletée ; le porte-oculaire 4, fileté dans la bague, avec l'ergot du corps dans sa rainure droite ; l'oculaire 5, 25 mm après le diaphragme ; l'œilleton ; le cercle oculaire, 28 mm après l'oculaire.",
+      atelier: ["U43-18", "U43-19"],
       annexe: {
         titre: "Diaphragmes de l'instrument",
         colonnes: ["Diaphragme", "Position", "Diamètre"],

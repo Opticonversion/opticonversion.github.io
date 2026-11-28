@@ -276,7 +276,7 @@ QUESTIONS.push(
     question: "Au cadran de Parent (sujet légèrement myopisé), la ligne 3h-9h est vue la plus noire. Axe du cylindre négatif compensateur ?",
     choix: ["30°", "90°", "180°", "120°"],
     bonne: 1,
-    explication: "Sujet myopisé : les deux focales sont en avant de la rétine, et la ligne vue la plus noire est parallèle à la focale arrière, la plus proche de la rétine. Elle est horizontale (0°-180°). L'axe du cylindre négatif est perpendiculaire à la direction vue la plus noire : 90°. À l'examen, le « calcul » avec les chiffres du cadran (×30) n'est pas accepté comme justification.",
+    explication: "Sujet myopisé : les deux focales sont en avant de la rétine, et la ligne vue la plus noire est parallèle à la focale arrière, la plus proche de la rétine. Elle est horizontale (0°-180°). L'axe du cylindre négatif est perpendiculaire à la direction vue la plus noire : 90°. À l'examen, le calcul avec les heures du cadran (× 30) ne justifie rien : il faut raisonner sur les focales.",
     surLaCopie: "Le sujet est légèrement myopisé : les deux focales sont en avant de la rétine. La ligne vue la plus noire est parallèle à la focale arrière, la plus proche de la rétine. Elle est horizontale. L'axe du cylindre négatif est perpendiculaire : 90°.",
     indice: "Sujet myopisé : la ligne la plus noire correspond à la focale arrière. L'axe du cylindre négatif est perpendiculaire à cette ligne.",
     schema: "img/schemas/U5/cadran-parent-3-9.svg",
@@ -685,7 +685,7 @@ QUESTIONS.push(
     question: "Sujet légèrement myopisé : au cadran de Parent, la ligne 12h-6h est la plus noire. Quelle justification de l'axe du cylindre négatif est juste ?",
     choix: ["Sur la ligne 12h-6h, on prend le plus petit chiffre, 6 × 30 = 180°, ce qui donne l'axe cherché.", "La ligne la plus noire correspond à la focale arrière, qui est ici verticale, mais sans conclure sur l'axe.", "Sujet myopisé : la ligne la plus noire est la focale arrière, verticale. L'axe du cylindre négatif lui est perpendiculaire : 180°.", "L'axe du cylindre négatif est à 180°, sans justification de la ligne observée au cadran de Parent."],
     bonne: 2,
-    explication: "La justification attendue s'appuie sur la focale arrière, puis conclut sur l'axe. Le calcul « × 30 » donne le bon chiffre mais n'est pas accepté comme justification ; la phrase qui s'arrête à la focale arrière n'a pas de conclusion ; celle qui donne seulement 180° n'a pas d'argument.",
+    explication: "La justification attendue s'appuie sur la focale arrière, puis conclut sur l'axe. Le calcul « × 30 » tombe sur le bon chiffre mais ne justifie rien, car il ne parle pas des focales ; la phrase qui s'arrête à la focale arrière n'a pas de conclusion ; celle qui donne seulement 180° n'a pas d'argument.",
     surLaCopie: "Le sujet est myopisé : les deux focales sont en avant de la rétine et la ligne vue la plus noire est parallèle à la focale arrière. Elle est verticale. L'axe du cylindre négatif est perpendiculaire à cette ligne : horizontal, soit 180°.",
     indice: "Le correcteur veut la focale arrière dans le raisonnement, pas un calcul avec les chiffres du cadran. Et une conclusion chiffrée."
   },
@@ -1972,7 +1972,7 @@ QUESTIONS.push(
     question: "Chez un sujet non presbyte, le bris du punctum proximum de convergence se fait à 12 cm du canthus externe. Que conclure ?",
     choix: ["La convergence est insuffisante : la norme est un bris à 8 cm au plus", "La convergence est normale : un bris à 12 cm reste dans la norme du non-presbyte", "La convergence est excessive : le bris aurait dû se faire plus loin", "On ne peut rien conclure sans avoir d'abord mesuré la phorie de loin"],
     bonne: 0,
-    explication: "Chez un sujet non presbyte, le bris du PPC doit se faire à 8 cm au plus du canthus externe (5 cm de la racine du nez). Un bris à 12 cm est trop loin : insuffisance de convergence, qui peut gêner la lecture. Le recouvrement doit aussi revenir à moins de 6 cm du bris.",
+    explication: "Chez un sujet non presbyte, le bris du PPC doit se faire à 8 cm au plus du canthus externe (5 cm de la racine du nez). Un bris à 12 cm est trop loin : insuffisance de convergence, qui peut gêner la lecture. Le recouvrement doit aussi revenir à 6 cm au plus du bris.",
     indice: "Un bon PPC converge de très près. Compare 12 cm à la limite de 8 cm."
   },
   {
@@ -2851,6 +2851,114 @@ QUESTIONS.push(
     bonne: 0,
     explication: "À un point de la rétine d'un œil correspond, sur l'autre rétine, une petite zone, l'aire de Panum : si l'image de l'autre œil y tombe, les deux images fusionnent malgré leur légère disparité et la vision est simple. Au-delà de cette aire, c'est la diplopie. La disparité de fixation reste dans l'aire de Panum.",
     indice: "La fusion tolère un petit décalage entre les deux images : où se trouve ce domaine de tolérance ?"
+  },
+
+  // ---------- Lot du 28 nov. : critère de Sheard (réserve opposée, point de flou) et Prentice (verre torique, verres de signes opposés) ----------
+  {
+    id: "U5-366", epreuve: "U5", theme: "Masquage et phories", session: "2022",
+    difficulte: "moyen",
+    contexte: "De près, Lucas a 5 Δ d'ésophorie. Ses réserves fusionnelles de près ont été mesurées au von Graefe.",
+    annexe: { titre: "Réserves fusionnelles de près", colonnes: ["", "Flou", "Bris", "Recouvrement"], lignes: [["Convergence (base externe)", "14 Δ", "20 Δ", "15 Δ"], ["Divergence (base interne)", "8 Δ", "13 Δ", "9 Δ"]] },
+    question: "Pour Lucas, le critère de Sheard est-il respecté ?",
+    choix: ["Oui : la convergence au flou, 14 Δ, dépasse 2 × 5 = 10 Δ", "Oui : la divergence au bris, 13 Δ, dépasse 2 × 5 = 10 Δ", "Non : la divergence au flou, 8 Δ, reste sous 2 × 5 = 10 Δ", "Non : la divergence au flou, 8 Δ, reste sous 3 × 5 = 15 Δ"],
+    bonne: 2,
+    erreurs: {
+      0: { type: "notion", message: "Une ésophorie se compense en divergeant : la réserve opposée est la divergence (base interne), pas la convergence." },
+      1: { type: "notion", message: "Sheard se lit au point de flou, pas au bris. En divergence, le flou est à 8 Δ : sous les 10 Δ demandés." }
+    },
+    explication: "Une ésophorie se compense en divergeant : la réserve opposée est la divergence (prismes base interne). On la lit au point de flou : 8 Δ. Sheard demande au moins 2 × 5 = 10 Δ. 8 < 10 : critère non respecté, la vision de près risque d'être inconfortable. Les pièges : prendre la convergence, lire le bris, ou tripler la phorie.",
+    surLaCopie: "Ésophorie de 5 Δ : la réserve opposée est la divergence, 8 Δ au point de flou.\nSheard demande au moins 2 × 5 = 10 Δ : critère non respecté, inconfort probable de près.",
+    indice: "Une ésophorie se compense dans quel sens ? Puis lis la réserve au premier signe, le flou."
+  },
+  {
+    id: "U5-367", epreuve: "U5", theme: "Masquage et phories", session: "2022",
+    difficulte: "difficile",
+    contexte: "De près, Jade a 9 Δ d'exophorie. Ses réserves fusionnelles de près ont été mesurées au von Graefe.",
+    annexe: { titre: "Réserves fusionnelles de près", colonnes: ["", "Flou", "Bris", "Recouvrement"], lignes: [["Convergence (base externe)", "15 Δ", "22 Δ", "14 Δ"], ["Divergence (base interne)", "18 Δ", "24 Δ", "19 Δ"]] },
+    question: "Pour Jade, le critère de Sheard est-il respecté ?",
+    choix: ["Oui : la divergence au flou vaut 18 Δ, soit exactement 2 × 9 Δ", "Non : la convergence au flou, 15 Δ, reste sous 2 × 9 = 18 Δ", "Oui : la convergence au bris, 22 Δ, dépasse 2 × 9 = 18 Δ", "Non : il faudrait au moins 27 Δ, soit trois fois la phorie"],
+    bonne: 1,
+    erreurs: {
+      0: { type: "notion", message: "Une exophorie se compense en convergeant : la réserve opposée est la convergence (base externe), pas la divergence." },
+      2: { type: "notion", message: "Sheard se lit au point de flou, pas au bris : en convergence, 15 Δ, sous les 18 Δ demandés." }
+    },
+    explication: "Une exophorie se compense en convergeant : la réserve opposée est la convergence (prismes base externe), lue au point de flou : 15 Δ. Sheard demande au moins 2 × 9 = 18 Δ. 15 < 18 : critère non respecté. La divergence, qui vaut 18 Δ, ne sert à rien ici : elle va dans le même sens que la phorie.",
+    surLaCopie: "Exophorie de 9 Δ : la réserve opposée est la convergence, 15 Δ au point de flou.\nSheard demande au moins 2 × 9 = 18 Δ : critère non respecté.",
+    indice: "Quelle réserve aide une exophorie ? Lis-la au flou, puis compare au double de la phorie."
+  },
+  {
+    id: "U5-368", epreuve: "U5", theme: "Masquage et phories", session: "complément",
+    difficulte: "difficile",
+    type: "calcul",
+    question: "De près, un sujet a 6 Δ d'ésophorie ; sa réserve en divergence (base interne) donne un flou à 9 Δ. Avec P = (2 × phorie − réserve opposée) ÷ 3, calcule le prisme qui respecterait le critère de Sheard, en Δ.",
+    reponse: {"valeur": 1, "unite": "Δ", "decimales": 1, "signe": false, "tolerance": 0.05},
+    erreurs: [
+      { valeur: 3, type: "notion", message: "Tu as oublié de diviser par 3 : (2 × 6 − 9) ÷ 3 = 1 Δ." }
+    ],
+    explication: "P = (2 × 6 − 9) ÷ 3 = 3 ÷ 3 = 1 Δ, au total sur les deux verres. Ésophorie : le prisme se place base externe. Contrôle : la phorie descend à 5 Δ et la réserve en divergence monte à 10 Δ, le double de 5. Le prisme reste un dernier recours.",
+    indice: "Deux fois la phorie, moins la réserve opposée, le tout divisé par trois."
+  },
+  {
+    id: "U5-369", epreuve: "U5", theme: "Masquage et phories", session: "complément",
+    difficulte: "moyen",
+    question: "Pour le critère de Sheard, pourquoi lit-on la réserve au point de flou plutôt qu'au point de bris ?",
+    choix: ["Le bris ne se mesure qu'en vision de loin, jamais en vision de près", "Le flou et le bris donnent toujours la même valeur, c'est une habitude", "Le bris donne la phorie du sujet, et le flou donne sa réserve", "Au flou, la vergence fusionnelle est épuisée : l'accommodation intervient"],
+    bonne: 3,
+    erreurs: { 2: "notion" },
+    explication: "Quand on ajoute des prismes, le sujet compense d'abord par sa vergence fusionnelle seule. Au point de flou, cette réserve est épuisée : il commence à faire varier son accommodation pour converger ou diverger, d'où le flou. Au-delà, jusqu'au bris, l'effort n'est plus confortable. S'il n'y a pas de flou, on prend le bris.",
+    indice: "Que se passe-t-il quand la vergence fusionnelle ne suffit plus et que l'accommodation vient l'aider ?"
+  },
+  {
+    id: "U5-370", epreuve: "U5", theme: "Anisométropie", session: "complément",
+    difficulte: "difficile",
+    type: "calcul",
+    question: "OD +3,00 (−2,00) 180° et OG +3,00. En lecture, le regard passe 8 mm sous les centres optiques. Calcule l'effet prismatique vertical différentiel.",
+    reponse: {"valeur": 1.6, "unite": "Δ", "decimales": 1, "signe": false, "tolerance": 0.05},
+    erreurs: [
+      { valeur: 0, type: "notion", message: "Les sphères sont égales, mais le cylindre de l'OD agit dans le méridien vertical : à 90°, l'OD ne vaut que +1,00." },
+      { valeur: 0.8, type: "notion", message: "Tu as pris l'équivalent sphérique (+2,00). Le regard descend : on prend la puissance dans le méridien vertical, +1,00 à l'OD." },
+      { valeur: 16, type: "unite", message: "Prentice demande le décentrement en centimètres : 8 mm = 0,8 cm." }
+    ],
+    explication: "Le regard se déplace verticalement : on prend la puissance dans le méridien vertical (90°). Le cylindre d'axe 180° agit entièrement à 90° : OD +3,00 − 2,00 = +1,00 ; OG +3,00. Prentice, d = 0,8 cm : OD 0,8 × 1,00 = 0,8 Δ ; OG 0,8 × 3,00 = 2,4 Δ, bases supérieures des deux côtés. Différentiel : 2,4 − 0,8 = 1,6 Δ base supérieure sur l'OG.",
+    indice: "Quel méridien compte quand le regard descend ? Un cylindre agit à 90° de son axe."
+  },
+  {
+    id: "U5-371", epreuve: "U5", theme: "Anisométropie", session: "complément",
+    difficulte: "moyen",
+    question: "Pour l'effet prismatique vertical d'un verre −0,50 (−1,25) 180°, quelle puissance mets-tu dans la formule de Prentice ?",
+    choix: ["−1,75 δ, la puissance dans le méridien vertical", "−0,50 δ, la sphère du verre prise seule", "−1,12 δ, l'équivalent sphérique du verre", "−1,25 δ, le cylindre du verre pris seul"],
+    bonne: 0,
+    erreurs: {
+      1: { type: "notion", message: "La sphère seule oublie le cylindre, qui agit entièrement à 90° de son axe : dans le méridien vertical, −0,50 − 1,25 = −1,75 δ." },
+      2: { type: "notion", message: "L'équivalent sphérique est une moyenne. Pour un effet vertical, on prend la puissance dans le méridien vertical : −1,75 δ." }
+    },
+    explication: "Un déplacement vertical du regard fait travailler le méridien vertical (90°). Un cylindre n'a pas de puissance dans son axe et toute sa puissance à 90° de son axe : axe 180°, il agit entièrement à 90°. Puissance à 90° : −0,50 + (−1,25) = −1,75 δ. Si l'axe était à 90°, le méridien vertical vaudrait −0,50 δ.",
+    indice: "Un cylindre agit à 90° de son axe. Quel méridien travaille quand le regard monte ou descend ?"
+  },
+  {
+    id: "U5-372", epreuve: "U5", theme: "Anisométropie", session: "complément",
+    difficulte: "moyen",
+    type: "calcul",
+    question: "OD −2,50 et OG +1,00 (sphériques). En lecture, le regard passe 6 mm sous les centres optiques. Calcule l'effet prismatique vertical différentiel.",
+    reponse: {"valeur": 2.1, "unite": "Δ", "decimales": 1, "signe": false, "tolerance": 0.05},
+    erreurs: [
+      { valeur: 0.9, type: "notion", message: "Tu as soustrait. Un verre − et un verre + : les bases sont opposées (inférieure à l'OD, supérieure à l'OG), on additionne." },
+      { valeur: 21, type: "unite", message: "Prentice demande le décentrement en centimètres : 6 mm = 0,6 cm." }
+    ],
+    explication: "Prentice, d = 0,6 cm. OD : 0,6 × 2,50 = 1,5 Δ ; verre divergent, regard sous le centre : base inférieure. OG : 0,6 × 1,00 = 0,6 Δ ; verre convergent : base supérieure. Bases opposées, les effets s'ajoutent : 1,5 + 0,6 = 2,1 Δ (base inférieure sur l'OD). Un effet vertical différentiel de cette taille gêne la fusion : on cherche à le réduire.",
+    indice: "Trouve la base de chaque prisme. Bases opposées : on additionne ; même sens : on soustrait."
+  },
+  {
+    id: "U5-373", epreuve: "U5", theme: "Anisométropie", session: "complément",
+    difficulte: "difficile",
+    question: "OD +3,00 et OG −1,00 (sphériques). Le sujet regarde 1 cm au-dessus des centres optiques. Effet prismatique vertical différentiel ?",
+    choix: ["2 Δ, base inférieure sur l'OD", "3 Δ : seul le verre convergent dévie la lumière", "4 Δ, base inférieure sur l'OD", "4 Δ, base supérieure sur l'OD"],
+    bonne: 2,
+    erreurs: {
+      0: { type: "notion", message: "Tu as soustrait. Verre + et verre − : les bases sont opposées, on additionne : 3 + 1 = 4 Δ." }
+    },
+    explication: "Au-dessus des centres optiques. OD, verre convergent : base vers le centre optique, donc vers le bas : 3 Δ base inférieure. OG, verre divergent : base vers le bord, donc vers le haut : 1 Δ base supérieure. Bases opposées : 3 + 1 = 4 Δ, soit 4 Δ base inférieure sur l'OD (ou base supérieure sur l'OG).",
+    indice: "Au-dessus du centre, où est la base d'un verre + ? D'un verre − ? Puis additionne ou soustrais."
   }
 );
 

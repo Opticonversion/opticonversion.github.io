@@ -750,3 +750,50 @@ TRACES.push({
   ],
   conclusion: "A₁ tombe sur R et A₂ sur la rétine : le myope voit net sans accommoder. FA = −2 500 / (−100) = +25 mm : l'objet est entre F et la loupe, plus près d'elle que pour un emmétrope."
 });
+
+// ==============================================================
+//  Le monoculaire 8×40 du sujet blanc U43 (SUJET-U43-01, ajout du 28/11/2026) : mêmes chiffres que le sujet.
+//  U43-18 : le champ entre l'objectif et l'oculaire, sans le diaphragme de champ (à quoi il sert).
+//  U43-19 : le cercle oculaire, image de la monture de l'objectif par l'oculaire.
+// ==============================================================
+TRACES.push({
+  // angle négatif : B₁ au-dessus de l'axe, sinon la flèche A₁B₁ cache F'obj (confondu avec Foc)
+  id: "U43-18", epreuve: "U43", chapitre: "Champs",
+  titre: "Le monoculaire sans son diaphragme de champ",
+  regle: "Entre l'objectif et l'oculaire, la pupille est la monture de l'objectif et la lucarne celle de l'oculaire. Le plan des champs, plan focal de l'objectif, est ENTRE les deux : la pleine lumière s'appuie sur les bords opposés, le champ total sur les bords du même côté.",
+  consigne: "Monoculaire 8×40 : objectif Ob (f' = 200 mm, diamètre 40 mm), oculaire Oc (f' = 25 mm, diamètre 24 mm), 225 mm après Ob. On a retiré son diaphragme de champ pour voir à quoi il sert. L'oiseau est à l'infini. Étudie le champ entre Ob et Oc.",
+  theme: "Étude des champs",
+  systeme: { objet: { infini: true, angle: -3 }, elements: [
+    { type: "lentille", nom: "Ob", x: 0, f: 200, rayon: 20 },
+    { type: "lentille", nom: "Oc", x: 225, f: 25, rayon: 12 }
+  ] },
+  espaceChamps: { apres: "Ob", pupille: "Ob", lucarne: "Oc" },
+  vue: { xmin: -20, xmax: 260, hmax: 25, carreauX: 20, carreauY: 2.5 },
+  etapes: [
+    { action: "placer", quoi: "image", apres: "Ob", rayons: ["O", "F"], texte: "L'oiseau est à l'infini : son image B₁ se forme dans le plan focal image de l'objectif. C'est le plan des champs. Place B₁." },
+    { action: "relier", quoi: "champ-pleine-lumiere", texte: "Touche les deux bords qui limitent le champ de pleine lumière dans le plan de B₁. Ce plan est-il entre Ob et Oc ?" },
+    { action: "calcul", grandeur: "rayon-champ", decimales: 1, unite: "mm", signe: false, texte: "Calcule le rayon du champ de pleine lumière dans le plan focal de l'objectif (Thalès entre le bord bas de Ob et le bord haut de Oc)." },
+    { action: "relier", quoi: "champ-total", texte: "Champ total : touche les deux bords qui le limitent." }
+  ],
+  conclusion: "Sans diaphragme, l'image s'assombrit entre 8,4 mm et 12,9 mm de l'axe : c'est le champ de contour. Le fabricant place donc dans ce plan un diaphragme de 14 mm de diamètre (rayon 7 mm, plus petit que la pleine lumière) : le bord du champ devient net, tan α = 7 / 200 = 0,035, soit 70 m à 1 000 m."
+});
+
+TRACES.push({
+  id: "U43-19", epreuve: "U43", chapitre: "Instrument et œil",
+  titre: "Le cercle oculaire du monoculaire",
+  regle: "Le cercle oculaire est la pupille de sortie : l'image de la pupille d'entrée (ici la monture de l'objectif) donnée par l'oculaire. On y place la pupille de l'œil pour voir tout le champ ; sa distance à l'oculaire est le dégagement oculaire.",
+  consigne: "Monoculaire 8×40 réglé sur l'infini : oculaire Oc (f' = 25 mm) à 225 mm de l'objectif. L'objet AB est la monture de l'objectif : A au centre, B au bord, à 20 mm de l'axe. Construis son image par l'oculaire, puis chiffre le cercle oculaire.",
+  theme: "Étude des champs",
+  systeme: { objet: { x: 0, h: 20 }, elements: [
+    { type: "lentille", nom: "Oc", x: 225, f: 25 }
+  ] },
+  vue: { xmin: -10, xmax: 290, hmax: 22, carreauX: 10, carreauY: 2 },
+  etapes: [
+    { action: "rayon", apres: "Oc", rayon: { depuis: "B", par: "O" }, texte: "Ce rayon part du bord B de la monture et passe par le centre de l'oculaire. Que devient-il ?" },
+    { action: "rayon", apres: "Oc", rayon: { depuis: "B", par: "parallele" }, texte: "Ce rayon part de B parallèlement à l'axe. Par où ressort-il de l'oculaire ?" },
+    { action: "placer", quoi: "image", apres: "Oc", rayons: ["O", "parallele"], texte: "Place B', l'image du bord de la monture : c'est le bord du cercle oculaire." },
+    { action: "calcul", grandeur: "OA'", apres: "Oc", decimales: 1, unite: "mm", signe: true, texte: "Calcule O₂A', la position du cercle oculaire par rapport à l'oculaire." },
+    { action: "calcul", grandeur: "A'B'", apres: "Oc", decimales: 1, unite: "mm", signe: true, texte: "Calcule A'B', le rayon du cercle oculaire, avec son signe." }
+  ],
+  conclusion: "Le cercle oculaire est à 28,1 mm après l'oculaire : c'est le dégagement de 28 mm annoncé par le fabricant. Son diamètre, 2 × 2,5 = 5 mm, vaut le diamètre de l'objectif divisé par le grossissement : 40 / 8."
+});

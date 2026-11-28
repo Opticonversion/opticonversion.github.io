@@ -45,13 +45,14 @@ service cloud.firestore {
         && nombreValide(s.questions) && s.jours is int && s.jours >= 0 && s.jours <= 7;
     }
     function resumeValide(d) {
-      return d.keys().hasOnly(["code", "pseudo", "avatar", "annee", "questions", "reussite", "serie", "semaine", "maj"])
+      return d.keys().hasOnly(["code", "pseudo", "avatar", "annee", "questions", "reussite", "serie", "semaine", "jour", "maj"])
         && d.code is string && d.code.matches('^[A-HJ-NP-Z2-9]{6}$')
         && d.get("pseudo", "") is string && d.get("pseudo", "").size() <= 20
         && d.get("avatar", "") is string && d.get("avatar", "").size() <= 20
         && d.get("annee", "") is string && d.get("annee", "").size() <= 40
         && nombreValide(d.questions) && nombreValide(d.serie)
         && reussiteValide(d.reussite) && semaineValide(d.semaine)
+        && (!("jour" in d) || (d.jour is string && d.jour.matches('^[0-9]{4}-[0-9]{2}-[0-9]{2}$')))
         && d.maj == request.time;
     }
 

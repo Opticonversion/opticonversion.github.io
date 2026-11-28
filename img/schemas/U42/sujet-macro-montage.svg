@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 30 520 340" role="img" aria-labelledby="t">
+  <title id="t">Montage : timbre au foyer objet de la lentille macro L1, objectif L2 à 5 mm, capteur à 4 mm</title>
+  <style>
+    :root { background: #0f1219; color-scheme: dark; }
+    text { font-family: -apple-system, "Segoe UI", Roboto, sans-serif; font-size: 17px; fill: #e7e9ee; }
+    .p { font-size: 15px; fill: #aab2c0; }
+    .c { font-size: 15px; fill: #c9ced8; }
+    .lentille { stroke: #9ec5ff; stroke-width: 3; fill: none; }
+    .rayon { stroke: #f0c674; stroke-width: 2; fill: none; }
+    .cote { stroke: #9aa3b2; stroke-width: 1.2; }
+  </style>
+  <defs>
+    <marker id="fl" markerUnits="userSpaceOnUse" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" orient="auto-start-reverse"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#9ec5ff" stroke-width="2"/></marker>
+    <marker id="mc" markerUnits="userSpaceOnUse" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#9aa3b2"/></marker>
+    <marker id="mt" markerUnits="userSpaceOnUse" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="13" markerHeight="13" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#e7e9ee"/></marker>
+  </defs>
+
+  <line x1="16" y1="150" x2="508" y2="150" stroke="#5b6270" stroke-width="1.5"/>
+  <line x1="40" y1="150" x2="40" y2="72" stroke="#e7e9ee" stroke-width="3" marker-end="url(#mt)"/>
+  <text x="50" y="80" class="p">timbre</text><text x="50" y="98" class="p">(pas à l'échelle)</text>
+  <text x="40" y="174" text-anchor="middle">A = F₁</text>
+  <path class="rayon" d="M40 150 L315 139 L370 139 L414 150"/>
+  <path class="rayon" d="M40 150 L315 161 L370 161 L414 150"/>
+  <line x1="315" y1="89.5" x2="315" y2="210.5" class="lentille" marker-start="url(#fl)" marker-end="url(#fl)"/>
+  <text x="315" y="59.5" text-anchor="middle">Lentille macro L₁</text>
+  <text x="315" y="77.5" text-anchor="middle" class="p">f'₁ = +25 mm · Ø 11 mm</text>
+  <line x1="370" y1="124" x2="370" y2="176" class="lentille" marker-start="url(#fl)" marker-end="url(#fl)"/>
+  <line x1="363" y1="139" x2="377" y2="139" stroke="#e7e9ee" stroke-width="2"/><line x1="363" y1="161" x2="377" y2="161" stroke="#e7e9ee" stroke-width="2"/>
+  <text x="370" y="246" text-anchor="middle">Objectif L₂</text>
+  <text x="370" y="264" text-anchor="middle" class="p">f'₂ = +4,0 mm · pupille Ø 2,0 mm</text>
+  <rect x="414" y="119" width="7" height="62" fill="#c7a3ff" fill-opacity=".85"/>
+  <text x="428" y="138" class="p">capteur</text>
+  <line x1="40" y1="292" x2="40" y2="308" class="cote"/><line x1="315" y1="292" x2="315" y2="308" class="cote"/>
+  <line x1="41" y1="300" x2="314" y2="300" class="cote" marker-start="url(#mc)" marker-end="url(#mc)"/>
+  <text x="177.5" y="320" class="c" text-anchor="middle">25 mm</text>
+
+  <line x1="315" y1="292" x2="315" y2="308" class="cote"/><line x1="370" y1="292" x2="370" y2="308" class="cote"/>
+  <line x1="316" y1="300" x2="369" y2="300" class="cote" marker-start="url(#mc)" marker-end="url(#mc)"/>
+  <text x="342.5" y="320" class="c" text-anchor="middle">5,0 mm</text>
+
+  <line x1="370" y1="292" x2="370" y2="308" class="cote"/><line x1="414" y1="292" x2="414" y2="308" class="cote"/>
+  <line x1="371" y1="300" x2="413" y2="300" class="cote" marker-start="url(#mc)" marker-end="url(#mc)"/>
+  <text x="392.0" y="342" class="c" text-anchor="middle">4,0 mm</text>
+
+  <text x="16" y="362" class="p" style="font-size:12px">Distances et lentilles à l'échelle ; timbre agrandi.</text>
+</svg>

@@ -1029,6 +1029,8 @@ function afficherCarteJour(el, options) {
   r.semaine.forEach(j => { (parEtat[j.etat] = parEtat[j.etat] || []).push(j.nom); });
   texte.appendChild(creer("p", "visuellement-cache", "Cette semaine\u00a0: " +
     Object.keys(parEtat).map(e => ETATS[e] + " " + parEtat[e].join(", ")).join(" ; ") + "."));
+  // Accueil : les amis qui ont révisé aujourd'hui (Mes amis), sous la semaine
+  if (!options.profil) texte.appendChild(ligneAmisRevises());
 
   // L'action du jour. Objectif atteint : 5 minutes de plus si l'élève en veut encore. Sinon, chaque jour, les mêmes
   // questions qu'à la première visite : combien de questions (5, 10 ou 20 : c'est l'objectif, le dernier choix reste coché),
@@ -1492,7 +1494,8 @@ function phrasePlanSeance() {
 // ---------- Mes amis : le résumé que voient les amis acceptés (compte.js l'envoie, amis.html l'affiche) ----------
 // Jamais le détail question par question : des totaux seulement.
 // questions = questions faites (hors cas, comme le profil) ; reussite = { U5: [réussies, faites], … } ;
-// serie = jours de révision d'affilée ; semaine = effort de la semaine en cours (questions répondues, jours de révision).
+// serie = jours de révision d'affilée ; semaine = effort de la semaine en cours (questions répondues, jours de révision) ;
+// jour = date (AAAA-MM-JJ) du dernier jour où l'élève a répondu à une question (« Lina a révisé aujourd'hui » sur l'accueil).
 function calculerResumeAmi() {
   const reussite = {};
   let questions = 0;
@@ -1510,5 +1513,35 @@ function calculerResumeAmi() {
     const e = jours[rythmeCle(d)];
     if (e && e.n) { q += e.n; j++; }
   }
-  return { questions, reussite, serie: calculerRythme().serie, semaine: { lundi: rythmeCle(lundi), questions: q, jours: j } };
+  const jour = Object.keys(jours).filter(k => jours[k].n > 0).sort().pop() || "";
+  return Object.assign({ questions, reussite, serie: calculerRythme().serie, semaine: { lundi: rythmeCle(lundi), questions: q, jours: j } },
+    jour ? { jour } : {});
+}
+
+// Accueil, carte « Aujourd'hui » : les amis qui ont révisé aujourd'hui (pseudos), rangés par compte.js (Amis.apercu).
+// Rien à dire : pas de ligne. Jamais de chiffre ni de rang.
+function phraseAmisRevises(noms) {
+  if (!noms || !noms.length) return "";
+  if (noms.length === 1) return noms[0] + " a révisé aujourd'hui.";
+  if (noms.length === 2) return noms[0] + " et " + noms[1] + " ont révisé aujourd'hui.";
+  const autres = noms.length - 2;
+  return noms[0] + ", " + noms[1] + " et " + autres + (autres > 1 ? " autres amis ont" : " autre ami a") + " révisé aujourd'hui.";
+}
+function ligneAmisRevises() {
+  const p = document.createElement("p");
+  p.className = "jour-amis";
+  const phrase = phraseAmisRevises(window.amisRevises);
+  p.hidden = !phrase;
+  if (phrase) {
+    const a = document.createElement("a");
+    a.href = "amis.html";
+    a.textContent = phrase;
+    p.appendChild(a);
+  }
+  return p;
+}
+// Appelée quand compte.js connaît la réponse : met la ligne à jour dans la carte déjà affichée
+function majAmisRevises(noms) {
+  window.amisRevises = noms || [];
+  document.querySelectorAll(".jour-amis").forEach(ancienne => ancienne.replaceWith(ligneAmisRevises()));
 }

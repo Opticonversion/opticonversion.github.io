@@ -20,7 +20,11 @@ window.TUNNEL = {
   },
   vente: {
     ouverte: false,          // le 25 janvier 2027 : true (et retirer « noindex » de pieges-vision.html)
-    payhip: ""               // lien Payhip du produit « Les pièges de calcul en Vision »
+    payhip: "",              // lien Payhip du produit « Les pièges de calcul en Vision »
+    // Avis d'élèves testeurs (avec leur accord, jamais de nom) : la partie « Ce qu'en disent les élèves »
+    // de pieges-vision.html n'apparaît que s'il y en a au moins un. Exemple :
+    // { texte: "J'avais toujours la base fausse sur Prentice, maintenant je la vérifie.", qui: "Élève de 2e année, BTS OL" }
+    avis: []
   }
 };
 
@@ -46,6 +50,9 @@ window.TUNNEL = {
     p.innerHTML = 'Fiche gratuite : un calcul de Prentice corrigé pas à pas, avec ce qu\'on écrit sur la copie. <a href="' + T.fiche.page + '">La recevoir</a>';
     return p;
   };
+
+  // Lignes déjà écrites dans les pages (calculateurs.html, sous Prentice) : visibles seulement une fois la fiche ouverte
+  document.querySelectorAll("[data-fiche-gratuite]").forEach(el => { el.hidden = !T.fiche.ouverte; });
 
   // ---------- Blocs « lettre » (accueil, profil, notions) ----------
   const MESSAGES = {
@@ -201,6 +208,20 @@ window.TUNNEL = {
   }
 
   // ---------- Page de vente (pieges-vision.html) ----------
+  const zoneAvis = document.getElementById("vente-avis");
+  const avis = (T.vente.avis || []).filter(a => a && a.texte);
+  if (zoneAvis && avis.length) {
+    const liste = zoneAvis.querySelector("ul");
+    avis.forEach(a => {
+      const li = document.createElement("li");
+      const citation = document.createElement("blockquote");
+      citation.textContent = "« " + a.texte.trim() + " »";
+      li.appendChild(citation);
+      if (a.qui) { const qui = document.createElement("p"); qui.className = "vente-avis-qui"; qui.textContent = a.qui; li.appendChild(qui); }
+      liste.appendChild(li);
+    });
+    zoneAvis.hidden = false;
+  }
   const achat = document.getElementById("vente-achat");
   if (achat) {
     const bouton = document.getElementById("vente-acheter");

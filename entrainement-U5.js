@@ -871,10 +871,10 @@ QUESTIONS.push(
     theme: "Masquage et phories",
     session: "complément",
     entrainement: true,
-    question: "Au PPC d'un sujet non presbyte, la diplopie apparaît à 12 cm (bris) et disparaît à 17 cm (recouvrement). Conclusion ?",
+    question: "Au PPC d'un sujet non presbyte, la diplopie apparaît à 12 cm du canthus externe (bris) et disparaît à 17 cm (recouvrement). Conclusion ?",
     choix: ["Insuffisance de convergence : le recouvrement est trop loin de 7 cm", "Résultat normal", "Excès de convergence", "Insuffisance de convergence : le bris est trop loin (norme : 8 cm au plus)"],
     bonne: 3,
-    explication: "Normes du PPC : bris à 8 cm au plus, recouvrement à moins de 6 cm du bris. Ici le bris est à 12 cm, donc trop loin : insuffisance de convergence. Le recouvrement, lui, est à 5 cm du bris, dans la norme.",
+    explication: "Normes du PPC : bris à 8 cm au plus du canthus externe, recouvrement à 6 cm au plus du bris. Ici le bris est à 12 cm, donc trop loin : insuffisance de convergence. Le recouvrement, lui, est à 5 cm du bris, dans la norme.",
     indice: "Compare chaque chiffre à sa norme : le bris, puis l'écart entre bris et recouvrement."
   },
   {

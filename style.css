@@ -2724,7 +2724,18 @@ button.atc-onglet { min-height: 32px; cursor: pointer; }
 .vente-prix { font-family: var(--titre); font-size: 2rem; color: var(--or-clair); font-variant-numeric: lining-nums; }
 .vente-enonce { padding: 10px 14px; border-radius: 10px; background: var(--fond); border: 1px solid var(--bord); }
 .page-vente section h3 { margin-top: 18px; }
+.calculateur > .lien-gratuit { margin: 6px 0 14px; }
+.vente-avis-liste { overflow-wrap: anywhere; list-style: none; margin: 0; padding: 0; display: grid; gap: 16px; }
+.vente-avis-liste blockquote { margin: 0; padding-left: 14px; border-left: 3px solid var(--or); line-height: 1.55; }
+.vente-avis-qui { margin: 6px 0 0 17px; color: var(--doux); font-size: 0.9rem; }
 @media (max-width: 720px) {
   .vente-tete { grid-template-columns: 1fr; gap: 18px; }
   .vente-couverture { width: 150px; }
 }
+/* Mes amis : pastille du profil (demande d'ami en attente, compte.js), ligne de l'accueil (rythme.js), ligne du bilan (qcm.html) */
+nav a.lien-compte .pastille-amis { position: absolute; top: 3px; left: 31px; width: 10px; height: 10px; border-radius: 50%; background: var(--rouge); box-shadow: 0 0 0 2px var(--fond); pointer-events: none; }
+nav a.lien-compte:not(.avec-avatar) .pastille-amis { left: 22px; }
+.jour-amis { margin: 2px 0 0; font-size: 0.95rem; }
+.jour-amis a { display: inline-block; padding: 8px 0; color: var(--or-clair); }
+.bilan-amis { margin: 16px 0 0; color: var(--doux); font-size: 0.95rem; text-align: center; }
+.bilan-amis a { color: var(--or-clair); font-weight: 700; }

@@ -1,0 +1,68 @@
+/* Fiches de révision à part : fiche-lentilles.html et fiche-reglementation.html.
+   Fichier séparé de style.css pour ne pas gêner les autres chantiers. */
+
+.fiche-sommaire { display: flex; flex-wrap: wrap; gap: 0 22px; margin: 0 0 8px; padding: 0; list-style: none; font-size: 0.95rem; }
+.fiche-sommaire a { display: inline-block; padding: 13px 0; }
+
+.fiche-page h2 { margin-top: 52px; scroll-margin-top: 90px; }
+.fiche-page h3 { scroll-margin-top: 90px; margin-top: 26px; }
+.fiche-page p, .fiche-page li { max-width: 70ch; line-height: 1.55; text-wrap: pretty; }
+.fiche-page ul.fiche-points { padding-left: 1.2em; }
+.fiche-page ul.fiche-points li { margin-bottom: 6px; }
+
+/* Une lentille */
+.lentille-carte { margin: 34px 0 0; padding: 22px 0 0; border-top: 1px solid var(--bord-fort); scroll-margin-top: 90px; }
+.lentille-carte h2 { margin: 0 0 2px; font-family: var(--titre); font-weight: 500; font-size: 1.5rem; color: var(--or-clair); }
+.lentille-carte .lentille-mesures { margin: 0 0 12px; color: var(--doux); font-size: 0.93rem; font-variant-numeric: tabular-nums; }
+.lentille-carte .lentille-mesures b { color: var(--texte); font-weight: 600; }
+
+.coupe { margin: 0; }
+.coupe svg { display: block; width: 100%; height: auto; max-width: 520px; }
+.coupe .surface { fill: rgba(255, 255, 255, 0.07); stroke: var(--doux); stroke-width: 1.5; }
+.coupe .cote { stroke: var(--doux); stroke-width: 1.2; fill: none; }
+.coupe .cote-texte { font: 600 15px var(--corps); fill: var(--texte); font-variant-numeric: tabular-nums; }
+.coupe .rappel { stroke: var(--doux); stroke-width: 1; fill: none; }
+.coupe .repere circle { fill: var(--fond); stroke: var(--or-clair); stroke-width: 1.5; }
+.coupe .repere text { font: 700 13px var(--corps); fill: var(--texte); text-anchor: middle; dominant-baseline: central; }
+.coupe .lentille { fill: none; stroke: var(--or); stroke-width: 6; stroke-linecap: round; }
+.coupe .lentille.jupe { stroke-opacity: 0.8; }
+.coupe .lentille.centre { stroke-width: 8; }
+.coupe .lentille.fine { stroke-width: 4; }
+.coupe .reserve { fill: var(--or); fill-opacity: 0.45; stroke: var(--or); stroke-width: 1; }
+@media (max-width: 560px) {
+  .coupe .cote-texte { font-size: 21px; }
+  .coupe .repere text { font-size: 19px; }
+  .coupe .repere circle { r: 15px; }
+}
+
+.legende { list-style: none; margin: 12px 0 0; padding: 0; font-size: 0.95rem; }
+.legende li { display: grid; grid-template-columns: 20px 1fr; gap: 10px; align-items: start; margin-bottom: 8px; line-height: 1.45; }
+.legende .num { font-weight: 700; color: var(--or-clair); font-variant-numeric: tabular-nums; }
+
+.lentille-details { margin: 14px 0 0; display: grid; gap: 10px; }
+.lentille-details div { padding-top: 10px; border-top: 1px solid var(--bord); }
+.lentille-details dt { font-weight: 700; color: var(--or-clair); font-size: 0.9rem; }
+.lentille-details dd { margin: 2px 0 0; line-height: 1.5; }
+
+/* Tableaux */
+.fiche-defile { overflow-x: auto; margin: 14px 0 0; }
+.fiche-defile:focus-visible { outline: 2px solid var(--or); outline-offset: 2px; }
+.fiche-table { width: 100%; border-collapse: collapse; font-size: 0.93rem; font-variant-numeric: tabular-nums; }
+.fiche-table caption { text-align: left; margin-bottom: 6px; font-size: 0.85rem; font-weight: 700; color: var(--doux); }
+.fiche-table th, .fiche-table td { padding: 9px 8px; text-align: left; vertical-align: top; border-top: 1px solid var(--bord); line-height: 1.45; }
+.fiche-table thead th { border-top: 0; color: var(--doux); font-size: 0.82rem; font-weight: 700; background: rgba(255, 255, 255, 0.03); }
+.fiche-table tbody th { font-weight: 600; }
+.fiche-table b.chiffre { color: var(--or-clair); white-space: nowrap; }
+.fiche-table td.chiffre { white-space: nowrap; font-weight: 700; color: var(--or-clair); }
+.fiche-table.large { min-width: 560px; }
+
+/* Encadré « à retenir » et piège */
+.fiche-retenir { margin: 16px 0 0; padding-top: 12px; border-top: 1px solid var(--bord); }
+.fiche-retenir p { margin: 0; }
+.fiche-retenir p + p { margin-top: 6px; }
+
+.fiche-source { margin: 8px 0 0; font-size: 0.85rem; color: var(--doux); }
+.fiche-sources li { margin-bottom: 8px; font-size: 0.93rem; }
+
+html[data-fond="clair"] .coupe .surface { fill: rgba(255, 255, 255, 0.1); }
+.fiche-page section > h2:first-child { margin-top: 0; }
