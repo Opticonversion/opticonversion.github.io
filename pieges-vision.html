@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Douze calculs de l'épreuve U5 du BTS Opticien-Lunetier corrigés pas à pas, avec l'erreur qui fait perdre les points : Prentice, aniséiconie, kératométrie, Dk/e, phorie.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#13171f">
+<title>Les pièges de calcul en Vision · Opticonversion</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='13' fill='none' stroke='%23d9b26f' stroke-width='3'/%3E%3Ccircle cx='16' cy='16' r='5' fill='%23d9b26f'/%3E%3C/svg%3E">
+<script>/* Fond choisi par l'élève (profil), appliqué avant l'affichage */ try { if (localStorage.getItem("fond") === "clair") { document.documentElement.dataset.fond = "clair"; var m = document.querySelector('meta[name="theme-color"]'); if (m) m.content = "#1a1f2a"; } } catch (e) {}</script>
+<link rel="preload" href="polices/bodoni-moda.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="polices/atkinson-hyperlegible-next.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="manifest" href="manifest.webmanifest">
+<!-- Pages du menu chargées d'avance quand le doigt ou la souris s'en approche (Chrome, Edge ; les autres l'ignorent). Seulement le HTML : aucun script n'y tourne, rien n'est compté. -->
+<script type="speculationrules">{"prefetch": [{"where": {"and": [{"href_matches": "/*"}, {"selector_matches": "nav a, .pied-liens a[href$='.html']"}]}, "eagerness": "moderate"}]}</script>
+<link rel="apple-touch-icon" href="img/icone-apple-180.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Opticonversion">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link rel="stylesheet" href="style.css?v=4485ca76">
+</head>
+<body>
+<header class="entete">
+  <a class="logo" href="index.html" aria-label="Opticonversion, accueil">
+    <svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="13" fill="none" stroke="#d9b26f" stroke-width="2.5"/><circle cx="16" cy="16" r="5.5" fill="#d9b26f"/><circle cx="18.5" cy="13.5" r="1.6" fill="#0b0d12"/></svg>
+    <span>Opticonversion</span>
+  </a>
+  <nav>
+    <a href="index.html">Accueil</a>
+    <a href="essentiel.html">Essentiel</a>
+    <a href="qcm.html">QCM</a>
+    <a href="definitions.html">Définitions</a>
+    <a href="traces.html">Tracés</a>
+    <a href="calculateurs.html">Outils</a>
+  </nav>
+</header>
+
+<main class="page-vente">
+  <div class="vente-tete">
+    <img class="vente-couverture apparait" src="img/pieges-vision-couverture.png" width="579" height="819" alt="Couverture du PDF">
+    <div class="vente-texte">
+      <h1 class="apparait">Les pièges de calcul en Vision</h1>
+      <p class="sous-titre apparait" style="--d:2">Douze calculs de l'épreuve U5 corrigés pas à pas, avec l'erreur qui fait perdre les points. Un PDF de 15 pages à imprimer.</p>
+      <div id="vente-achat" class="vente-achat apparait" style="--d:3">
+        <p class="vente-prix">7 €</p>
+        <a id="vente-acheter" class="bouton" href="#" rel="noopener" hidden>Acheter</a>
+        <p id="vente-bientot" class="doux" role="status">En vente à partir du 25 janvier 2027.</p>
+      </div>
+      <p class="doux vente-auteur">Le PDF arrive par e-mail après le paiement. Écrit par un opticien diplômé du BTS.</p>
+    </div>
+  </div>
+
+  <section class="apparait" style="--d:4">
+    <h2>Ce qu'il y a dedans</h2>
+    <p>Chaque calcul tient sur une page : l'énoncé, la résolution étape par étape, l'erreur la plus fréquente et la réponse telle qu'on l'écrit sur la copie.</p>
+    <ul class="vente-liste">
+      <li><strong>Prentice :</strong> un verre + et un verre −, un verre torique, un écart pupillaire mal pris.</li>
+      <li><strong>Aniséiconie :</strong> de puissance, puis axile.</li>
+      <li><strong>Kératométrie :</strong> lire les rayons, puis l'astigmatisme interne.</li>
+      <li><strong>Dk/e :</strong> une lentille hydrogel, puis deux lentilles pour la nuit.</li>
+      <li><strong>Phorie :</strong> le Maddox, le critère de Sheard, le jeu phorique.</li>
+      <li><strong>Les 12 erreurs sur une page,</strong> à relire la veille de l'épreuve.</li>
+    </ul>
+  </section>
+
+  <section class="apparait" style="--d:5">
+    <h2>Un extrait : Prentice, un verre + et un verre −</h2>
+    <p class="vente-enonce">Yanis, 22 ans, porte OD +2,00 et OG −1,50. Ses verres sont centrés pour la vision de loin. En lecture, son regard passe 1 cm sous les centres optiques. Calculez l'effet prismatique vertical différentiel et dites s'il peut gêner la lecture.</p>
+    <ol class="vente-etapes">
+      <li><strong>Prentice sur chaque œil, d en cm.</strong> OD : 1 × 2,00 = 2,0 Δ. OG : 1 × 1,50 = 1,5 Δ.</li>
+      <li><strong>La base de chaque prisme.</strong> OD, verre convergent : la base va vers le centre optique, donc vers le haut. OG, verre divergent : la base va vers le bord, donc vers le bas.</li>
+      <li><strong>Bases opposées : on additionne.</strong> 2,0 + 1,5 = 3,5 Δ base supérieure sur l'OD.</li>
+      <li><strong>Comparer.</strong> Au-delà de 2 Δ d'écart vertical, la fusion devient le plus souvent impossible : vision double ou fatigue en lecture.</li>
+    </ol>
+    <p><strong>L'erreur classique.</strong> « 2,0 − 1,5 = 0,5 Δ : pas de gêne. » On a soustrait par habitude, alors que les bases sont opposées.</p>
+    <div class="sur-la-copie">
+      <p class="sur-la-copie-titre">Sur la copie</p>
+      <p class="sur-la-copie-ligne">Prentice, P = d (cm) × |D|. OD : 1 × 2,00 = 2,0 Δ base supérieure (verre convergent) ; OG : 1 × 1,50 = 1,5 Δ base inférieure (verre divergent).</p>
+      <p class="sur-la-copie-ligne">Bases opposées : 2,0 + 1,5 = 3,5 Δ base supérieure OD (base à 90°), au-delà de 2 Δ : fusion difficile en lecture.</p>
+    </div>
+  </section>
+
+  <section class="apparait" style="--d:6">
+    <h2>Avant d'acheter</h2>
+    <h3>D'où viennent les calculs ?</h3>
+    <p>Ce sont des calculs qui reviennent en U5. Les énoncés et les chiffres ont été écrits pour ce guide ; les normes sont celles de la synthèse du jury.</p>
+    <h3>Et le reste de l'épreuve ?</h3>
+    <p>Ce PDF traite ces douze calculs et rien d'autre. Les QCM, les définitions et les sujets blancs restent gratuits sur le site.</p>
+    <h3>Je peux l'imprimer ?</h3>
+    <p>Oui. Il est pensé pour une imprimante noir et blanc.</p>
+    <h3>Une question ?</h3>
+    <p>Écris à <a href="mailto:opticonversion.bts@gmail.com">opticonversion.bts@gmail.com</a>.</p>
+  </section>
+</main>
+
+
+<footer><span class="pied-marque"><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="13" fill="none" stroke="#d9b26f" stroke-width="2.5"/><circle cx="16" cy="16" r="5.5" fill="#d9b26f"/><circle cx="18.5" cy="13.5" r="1.6" fill="#0b0d12"/></svg>Opticonversion</span><span>© 2026</span><span class="pied-liens"><a href="notions.html">Notions</a> <span aria-hidden="true">·</span> <a href="confidentialite.html">Confidentialité</a> <span aria-hidden="true">·</span> <a href="mentions-legales.html">Mentions légales</a> <span aria-hidden="true">·</span> <a href="mailto:opticonversion.bts@gmail.com">Contact</a></span></footer>
+
+<script src="lettre.js?v=de210a3f" defer></script>
+<script src="compter.js?v=234d3f31" defer></script>
+<script src="vivant.js?v=0b03b85f" defer></script>
+<script src="appli.js?v=0724163c" defer></script>
+<script src="coffre.js?v=666e7965"></script>
+<script type="module" src="compte.js?v=b42b2898"></script>
+<!-- Mesure d'audience anonyme, sans cookies (GoatCounter) -->
+<script data-goatcounter="https://opticonversion.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+</body>
+</html>

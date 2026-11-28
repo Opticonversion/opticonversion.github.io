@@ -1488,3 +1488,27 @@ function phrasePlanSeance() {
   const plan = planDeLaSemaine();
   return plan && plan.themes.length ? " Ton plan de la semaine : " + themesDansLOrdreDuJour(plan).map(t => t.t).join(", ") + "." : "";
 }
+
+// ---------- Mes amis : le résumé que voient les amis acceptés (compte.js l'envoie, amis.html l'affiche) ----------
+// Jamais le détail question par question : des totaux seulement.
+// questions = questions faites (hors cas, comme le profil) ; reussite = { U5: [réussies, faites], … } ;
+// serie = jours de révision d'affilée ; semaine = effort de la semaine en cours (questions répondues, jours de révision).
+function calculerResumeAmi() {
+  const reussite = {};
+  let questions = 0;
+  EPREUVES.forEach(e => {
+    const b = bilanQuestions(Catalogue.ordinaires(e.code));
+    if (b.faites) reussite[e.code] = [b.reussies, b.faites];
+    questions += b.faites;
+  });
+  const jours = reponsesParJour();
+  const lundi = rythmeLundi(rythmeMidi(0));
+  let q = 0, j = 0;
+  for (let i = 0; i < 7; i++) {
+    const d = new Date(lundi);
+    d.setDate(d.getDate() + i);
+    const e = jours[rythmeCle(d)];
+    if (e && e.n) { q += e.n; j++; }
+  }
+  return { questions, reussite, serie: calculerRythme().serie, semaine: { lundi: rythmeCle(lundi), questions: q, jours: j } };
+}

@@ -18,7 +18,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Opticonversion">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
-<link rel="stylesheet" href="style.css?v=3c4f9543">
+<link rel="stylesheet" href="style.css?v=4485ca76">
 </head>
 <body>
 <header class="entete">
@@ -38,7 +38,7 @@
 
 <main>
   <h1 class="apparait">Confidentialité</h1>
-  <p class="sous-titre apparait" style="--d:2">Version courte : sans compte, ta progression ne quitte pas ton navigateur et les visites sont comptées de façon anonyme. Avec un compte, on garde seulement ta progression, et tu peux tout supprimer en un clic. Si tu demandes à être prévenu des nouveautés, on garde ton e-mail pour ça seulement.</p>
+  <p class="sous-titre apparait" style="--d:2">Version courte : sans compte, ta progression ne quitte pas ton navigateur et les visites sont comptées de façon anonyme. Avec un compte, on garde seulement ta progression (et, si tu utilises Mes amis, un résumé que voient seulement les amis que tu acceptes), et tu peux tout supprimer en un clic. Si tu demandes à être prévenu des nouveautés, on garde ton e-mail pour ça seulement.</p>
 
   <section class="apparait" style="--d:3">
     <h2>Sans compte</h2>
@@ -48,14 +48,18 @@
     <p>Si tu crées un compte (avec Google, ou avec ton e-mail et un mot de passe), on enregistre en ligne :</p>
     <ul>
       <li>un identifiant anonyme fourni par Google (une suite de lettres et de chiffres) ;</li>
-      <li>ton profil, si tu le remplis : le pseudo ou prénom que tu choisis, où tu en es (1re année, 2e année…) et ton avatar. Il n'est visible que par toi ;</li>
+      <li>ton profil, si tu le remplis : le pseudo ou prénom que tu choisis, où tu en es (1re année, 2e année…) et ton avatar. Il n'est visible que par toi, et par les amis que tu acceptes si tu utilises « Mes amis » ;</li>
       <li>tes réponses aux questions (juste ou faux, à la dernière tentative, avec l'heure de cette réponse pour garder la plus récente quand tu utilises plusieurs appareils), ton meilleur score par thème et le calendrier de révision des questions ratées (date du prochain retour) ;</li>
       <li>la date de la dernière mise à jour.</li>
     </ul>
     <p>On n'enregistre ni ton nom, ni ta photo, ni ton e-mail dans notre base de progression. Le service de connexion (Firebase Authentication, de Google) conserve ton adresse e-mail pour te reconnaître à la prochaine connexion ; si tu choisis un mot de passe, il est stocké chiffré et personne, pas même nous, ne peut le lire. Ton e-mail sert uniquement à te connecter, à valider ton adresse et à réinitialiser ton mot de passe : jamais de publicité ni de newsletter.</p>
 
+    <h3>Mes amis</h3>
+    <p>Si tu utilises la page <a href="amis.html">Mes amis</a> (seulement avec un compte, et seulement si tu le décides), on enregistre en plus : ton code ami (6 caractères tirés au hasard), un résumé de ta progression et la liste de tes amis et de tes demandes d'ami. Le résumé contient ton pseudo, ton personnage, ton année, le nombre de questions faites, tes questions réussies et faites par épreuve, ta série de jours de révision et le nombre de questions et de jours de révision de la semaine en cours. Jamais tes réponses une par une, ni ton e-mail.</p>
+    <p>Personne n'est visible par défaut. Ton résumé n'est lisible que par les amis que tu as acceptés, ou qui ont accepté ta demande. Une demande d'ami montre seulement ton pseudo et ton personnage à l'élève à qui tu l'envoies. Tu peux retirer un ami à tout moment : vous ne voyez plus rien l'un de l'autre. « Arrêter Mes amis » (ou la suppression de ton compte) efface ton code, ton résumé et tous tes liens d'amitié.</p>
+
     <h3>Mesure d'audience</h3>
-    <p>Pour savoir quelles pages servent vraiment, on compte les visites avec GoatCounter, un outil sans cookies et sans suivi d'une page à l'autre. Il enregistre seulement des informations générales et anonymes : la page vue, le site d'où tu viens, le type de navigateur et d'écran, le pays. On compte aussi, de la même façon anonyme, quelques actions : une série de QCM, un cas pratique, une révision de définitions ou un niveau de l'Atelier terminés, un examen blanc ou un sujet blanc commencé ou rendu (avec la note seulement en trois tranches : moins de 8, de 8 à 12, plus de 12), l'installation de l'appli, la création d'un compte, l'inscription aux nouveautés, l'ouverture de « Pourquoi ces thèmes ? » dans le plan de révision et l'arrivée sur le site par le lien d'une de nos vidéos (seul le nom de la vidéo est envoyé) ; seul le nom de l'action est envoyé, jamais ton pseudo, ton e-mail ni ta note exacte. Ton adresse IP sert seulement, sur le moment, à deviner le pays et à ne pas compter deux fois la même visite : elle reste au plus 8 heures dans la mémoire de GoatCounter et n'est jamais enregistrée. Rien ne permet de t'identifier, c'est pourquoi aucune bannière de consentement n'est nécessaire. Ces statistiques sont gardées 25 mois, puis effacées automatiquement.</p>
+    <p>Pour savoir quelles pages servent vraiment, on compte les visites avec GoatCounter, un outil sans cookies et sans suivi d'une page à l'autre. Il enregistre seulement des informations générales et anonymes : la page vue, le site d'où tu viens, le type de navigateur et d'écran, le pays. On compte aussi, de la même façon anonyme, quelques actions : une série de QCM, un cas pratique, une révision de définitions ou un niveau de l'Atelier terminés, un examen blanc ou un sujet blanc commencé ou rendu (avec la note seulement en trois tranches : moins de 8, de 8 à 12, plus de 12), l'installation de l'appli, la création d'un compte, l'inscription aux nouveautés, l'ouverture de « Pourquoi ces thèmes ? » dans le plan de révision, l'activation de Mes amis, une demande d'ami envoyée ou acceptée, le partage de son lien d'ami et l'arrivée sur le site par le lien d'une de nos vidéos (seul le nom de la vidéo est envoyé) ; seul le nom de l'action est envoyé, jamais ton pseudo, ton e-mail ni ta note exacte. Ton adresse IP sert seulement, sur le moment, à deviner le pays et à ne pas compter deux fois la même visite : elle reste au plus 8 heures dans la mémoire de GoatCounter et n'est jamais enregistrée. Rien ne permet de t'identifier, c'est pourquoi aucune bannière de consentement n'est nécessaire. Ces statistiques sont gardées 25 mois, puis effacées automatiquement.</p>
 
     <h3>Si tu signales une erreur</h3>
     <p>Le formulaire « Signaler une erreur » enregistre seulement la question concernée, le type de problème et ton message facultatif. Rien ne te relie à ce signalement : ni compte, ni e-mail, ni adresse IP conservée par nous. Ne mets pas d'informations personnelles dans le message. Les signalements sont supprimés une fois la question vérifiée.</p>
@@ -68,12 +72,13 @@
     <p>Les Shorts sont lus depuis YouTube en mode « confidentialité renforcée » : rien n'est chargé depuis YouTube tant que tu ne lances pas une vidéo. Quand tu en lances une, les règles de confidentialité de YouTube s'appliquent.</p>
 
     <h3>Pourquoi</h3>
-    <p>Pour que tu retrouves ta progression sur tes différents appareils, et, si tu le demandes, pour te prévenir des nouveautés par e-mail. Pas de publicité sur le site, pas de revente, pas de suivi de navigation individuel.</p>
+    <p>Pour que tu retrouves ta progression sur tes différents appareils, et, si tu le demandes, pour te prévenir des nouveautés par e-mail. On regarde aussi, de temps en temps, des chiffres globaux tirés de toutes les progressions (nombre de comptes actifs, questions et thèmes les plus ratés) pour corriger et améliorer les questions : jamais la progression d'un élève en particulier, et ces chiffres ne quittent pas Opticonversion. Pas de publicité sur le site, pas de revente, pas de suivi de navigation individuel.</p>
 
     <h3>Sur quoi ça repose (base légale)</h3>
     <ul>
       <li>Le stockage dans ton navigateur, sans compte : il sert seulement à faire marcher le site comme tu le demandes (garder tes réponses, tes réglages).</li>
       <li>Le compte : ton consentement, que tu donnes en le créant. Tu le retires quand tu veux en supprimant ton compte.</li>
+      <li>Mes amis : ton consentement, que tu donnes en prenant ton code ami et en acceptant chaque ami. Tu le retires en retirant un ami ou en arrêtant Mes amis.</li>
       <li>Les e-mails de nouveautés : ton consentement, que tu donnes en t'inscrivant. Tu le retires quand tu veux en te désinscrivant.</li>
       <li>La mesure d'audience et les signalements d'erreur : notre intérêt légitime à savoir quelles pages servent et à corriger les questions fausses. Tu peux t'y opposer en nous écrivant.</li>
     </ul>
@@ -93,8 +98,8 @@
 <script src="compter.js?v=234d3f31" defer></script>
 <script src="vivant.js?v=0b03b85f" defer></script>
 <script src="appli.js?v=0724163c" defer></script>
-<script src="coffre.js?v=768a24fb"></script>
-<script type="module" src="compte.js?v=c05b4182"></script>
+<script src="coffre.js?v=666e7965"></script>
+<script type="module" src="compte.js?v=b42b2898"></script>
 <!-- Mesure d'audience anonyme, sans cookies (GoatCounter) -->
 <script data-goatcounter="https://opticonversion.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </body>

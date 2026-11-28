@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Ajoute tes amis de BTS OL sur Opticonversion avec un code ami et voyez chacun où en est l'autre.">
+<meta name="theme-color" content="#13171f">
+<title>Mes amis · Opticonversion</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='13' fill='none' stroke='%23d9b26f' stroke-width='3'/%3E%3Ccircle cx='16' cy='16' r='5' fill='%23d9b26f'/%3E%3C/svg%3E">
+<script>/* Fond choisi par l'élève (profil), appliqué avant l'affichage */ try { if (localStorage.getItem("fond") === "clair") { document.documentElement.dataset.fond = "clair"; var m = document.querySelector('meta[name="theme-color"]'); if (m) m.content = "#1a1f2a"; } } catch (e) {}</script>
+<link rel="preload" href="polices/bodoni-moda.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="polices/atkinson-hyperlegible-next.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="manifest" href="manifest.webmanifest">
+<!-- Pages du menu chargées d'avance quand le doigt ou la souris s'en approche (Chrome, Edge ; les autres l'ignorent). Seulement le HTML : aucun script n'y tourne, rien n'est compté. -->
+<script type="speculationrules">{"prefetch": [{"where": {"and": [{"href_matches": "/*"}, {"selector_matches": "nav a, .pied-liens a[href$='.html']"}]}, "eagerness": "moderate"}]}</script>
+<link rel="apple-touch-icon" href="img/icone-apple-180.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Opticonversion">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link rel="stylesheet" href="style.css?v=4485ca76">
+</head>
+<body>
+<header class="entete">
+  <a class="logo" href="index.html" aria-label="Opticonversion, accueil">
+    <svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="13" fill="none" stroke="#d9b26f" stroke-width="2.5"/><circle cx="16" cy="16" r="5.5" fill="#d9b26f"/><circle cx="18.5" cy="13.5" r="1.6" fill="#0b0d12"/></svg>
+    <span>Opticonversion</span>
+  </a>
+  <nav>
+    <a href="index.html">Accueil</a>
+    <a href="essentiel.html">Essentiel</a>
+    <a href="qcm.html">QCM</a>
+    <a href="definitions.html">Définitions</a>
+    <a href="traces.html">Tracés</a>
+    <a href="calculateurs.html">Outils</a>
+  </nav>
+</header>
+
+<main>
+  <div class="tete-page">
+    <h1 class="apparait">Mes amis</h1>
+    <p class="sous-titre apparait" style="--d:2">Ajoute tes amis de classe avec ton code ami. Vous voyez chacun un résumé de la progression de l'autre, jamais le détail de vos réponses.</p>
+    <img class="tete-compagnon" data-pose="clin-doeil" src="img/nounours-clin-doeil.svg" alt="" width="120" height="120">
+  </div>
+
+  <div id="amis-chargement" role="status">
+    <p class="aide" id="amis-chargement-texte">Chargement…</p>
+  </div>
+
+  <section id="amis-deconnecte" class="apparait" hidden aria-labelledby="titre-sans-compte">
+    <h2 id="titre-sans-compte">Il te faut un compte</h2>
+    <p class="aide" id="amis-invitation-recue" hidden>Tu as reçu le code ami <b id="amis-invitation-code"></b>. Il est gardé : crée ton compte (ou connecte-toi), puis reviens sur cette page pour envoyer ta demande.</p>
+    <p class="aide">Mes amis marche avec un compte gratuit, pour que tes amis voient où tu en es, même si tu changes de téléphone.</p>
+    <a class="bouton" href="compte.html#creer-compte">Créer mon compte gratuit</a>
+  </section>
+
+  <div id="amis-connecte" hidden>
+    <section class="apparait" aria-labelledby="titre-code">
+      <h2 id="titre-code">Ton code ami</h2>
+      <div id="code-inactif">
+        <p class="aide">Pour ajouter des amis, prends ton code et envoie-le. Ce que tes amis verront de toi : ton pseudo, ton personnage, ton année, le nombre de questions faites, ta réussite par épreuve et tes jours de révision. Rien n'est visible tant que tu n'as pas accepté quelqu'un.</p>
+        <button class="bouton" type="button" id="bouton-activer">Obtenir mon code ami</button>
+      </div>
+      <div id="code-actif" hidden>
+        <p class="code-ami" id="mon-code" aria-label="Ton code ami"></p>
+        <p class="aide">Envoie-le à tes amis (Insta, WhatsApp…) avec ce lien : <span class="code-lien" id="mon-lien"></span>. Ils te demandent en ami, et tu acceptes.</p>
+        <div class="bilan-actions" style="justify-content:flex-start">
+          <button class="bouton" type="button" id="bouton-partager">Partager mon lien</button>
+          <button class="bouton secondaire" type="button" id="bouton-copier">Copier le lien</button>
+        </div>
+      </div>
+      <p class="aide" id="sans-pseudo" hidden>Tu n'as pas encore de pseudo : choisis-en un dans <a href="compte.html">ton profil</a> pour que tes amis te reconnaissent.</p>
+      <p class="aide amis-message" id="code-etat" role="status"></p>
+    </section>
+
+    <section class="apparait" aria-labelledby="titre-ajout">
+      <h2 id="titre-ajout">Ajouter un ami</h2>
+      <form id="form-ajout" class="form-ajout" autocomplete="off" novalidate>
+        <label for="champ-code">Son code ami</label>
+        <div class="form-ajout-ligne">
+          <input id="champ-code" maxlength="8" placeholder="Ex. : K7MPQ3" autocapitalize="characters" spellcheck="false">
+          <button class="bouton" type="submit" id="bouton-ajouter">Ajouter</button>
+        </div>
+      </form>
+      <p class="aide amis-message" id="ajout-etat" role="status"></p>
+    </section>
+
+    <section class="apparait" id="bloc-demandes" hidden aria-labelledby="titre-demandes">
+      <h2 id="titre-demandes">Demandes en attente</h2>
+      <ul class="liste-demandes" id="liste-demandes"></ul>
+    </section>
+
+    <section class="apparait" aria-labelledby="titre-amis">
+      <h2 id="titre-amis">Tes amis</h2>
+      <p class="aide" id="amis-vide">Pas encore d'ami ici. Envoie ton code à quelqu'un de ta classe.</p>
+      <ul class="liste-amis" id="liste-amis"></ul>
+      <p class="aide amis-message" id="amis-etat" role="status"></p>
+    </section>
+
+    <section class="apparait" id="bloc-arreter" hidden aria-labelledby="titre-arreter">
+      <h2 id="titre-arreter">Ce que tes amis voient</h2>
+      <p class="aide">Ton pseudo, ton personnage, ton année, le nombre de questions faites, ta réussite par épreuve, tes jours de révision et ton activité de la semaine. Jamais tes réponses une par une, ni ton e-mail. Tu peux retirer un ami à tout moment, ou tout arrêter.</p>
+      <button class="bouton danger" type="button" id="bouton-arreter">Arrêter Mes amis</button>
+    </section>
+  </div>
+
+  <dialog id="fenetre-retirer" class="fenetre-situation fenetre-confirmer" aria-labelledby="fenetre-retirer-titre" closedby="any">
+    <form method="dialog">
+      <h2 id="fenetre-retirer-titre"></h2>
+      <p id="fenetre-retirer-texte"></p>
+      <div class="actions-compte">
+        <button class="bouton secondaire" value="non" autofocus>Annuler</button>
+        <button class="bouton danger" value="oui" id="fenetre-retirer-oui"></button>
+      </div>
+    </form>
+  </dialog>
+
+  <p class="aide apparait">Ce qui est gardé et pourquoi : voir la page <a href="confidentialite.html">confidentialité</a>.</p>
+</main>
+
+<footer><span class="pied-marque"><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="13" fill="none" stroke="#d9b26f" stroke-width="2.5"/><circle cx="16" cy="16" r="5.5" fill="#d9b26f"/><circle cx="18.5" cy="13.5" r="1.6" fill="#0b0d12"/></svg>Opticonversion</span><span>© 2026</span><span class="pied-liens"><a href="notions.html">Notions</a> <span aria-hidden="true">·</span> <a href="confidentialite.html">Confidentialité</a> <span aria-hidden="true">·</span> <a href="mentions-legales.html">Mentions légales</a> <span aria-hidden="true">·</span> <a href="mailto:opticonversion.bts@gmail.com">Contact</a></span></footer>
+
+<script src="epreuves.js?v=d49a38a4"></script>
+<script src="catalogue.js?v=c675bf30"></script>
+<script src="questions-U41.js?v=7a11c243"></script>
+<script src="questions-U42.js?v=49471ad6"></script>
+<script src="questions-U43.js?v=ea60cae6"></script>
+<script src="questions-U5.js?v=952a7f14"></script>
+<script src="questions-U3.js?v=60f0103f"></script>
+<script src="coffre.js?v=666e7965"></script>
+<script src="essentiel.js?v=7e8432f5"></script>
+<script src="rythme.js?v=ee7b6ef1"></script>
+<script src="amis.js?v=b244529b"></script>
+<script src="compter.js?v=234d3f31" defer></script>
+<script src="vivant.js?v=0b03b85f" defer></script>
+<script src="appli.js?v=0724163c" defer></script>
+<script type="module" src="compte.js?v=b42b2898"></script>
+<!-- Mesure d'audience anonyme, sans cookies (GoatCounter) -->
+<script data-goatcounter="https://opticonversion.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+</body>
+</html>

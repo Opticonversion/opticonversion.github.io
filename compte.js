@@ -35,7 +35,7 @@ function ajouterIcone() {
   a.href = "compte.html";
   a.className = "lien-compte";
   a.setAttribute("aria-label", "Mon profil");
-  if (location.pathname.endsWith("compte.html")) a.classList.add("actif");
+  if (/(compte|amis)\.html$/.test(location.pathname)) a.classList.add("actif");
   nav.appendChild(a);
   majIcone(a);
   return a;
@@ -197,6 +197,14 @@ async function demarrer() {
   const auth = A.getAuth(app);
   auth.languageCode = "fr";
   const db = F.getFirestore(app);
+  // Tests en local seulement : sessionStorage « emulateur » = 1 sur localhost branche le site sur l'émulateur Firebase
+  // (notes/tests/amis/) au lieu du vrai projet. Sans effet sur opticonversion.fr.
+  let emulateur = false;
+  try { emulateur = location.hostname === "localhost" && sessionStorage.getItem("emulateur") === "1"; } catch (e) {}
+  if (emulateur) {
+    A.connectAuthEmulator(auth, "http://localhost:9099", { disableWarnings: true });
+    F.connectFirestoreEmulator(db, "localhost", 8085);
+  }
 
   // Signalement d'erreur sur une question (sans compte, sans donnée personnelle)
   // Garde-fou : 1 signalement toutes les 30 secondes et 10 par jour au plus depuis ce navigateur
@@ -212,6 +220,144 @@ async function demarrer() {
     try { localStorage.setItem("signalements-envoyes", JSON.stringify(envois)); } catch (e) {}
   };
   firebasePret({ F, db });
+
+  // ---------- Mes amis (amis.html) ----------
+  // Accès Firestore seul ; l'affichage est dans amis.html, le calcul du résumé dans rythme.js (calculerResumeAmi).
+  // Règles : firestore.rules (codes, resumes, amities). Personne n'est visible tant qu'il n'a pas accepté un ami.
+  const LETTRES_CODE = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";   // sans 0, O, 1, I (faciles à confondre)
+  const AMIS_MAX = 50, DEMANDES_PAR_JOUR = 20, DELAI_RESUME = 5 * 60000;
+  const paire = (a, b) => (a < b ? a + "_" + b : b + "_" + a);
+  const erreurAmis = code => Object.assign(new Error(code), { code });
+  let minuterieResume = null;
+  const Amis = {
+    uid: () => utilisateur ? utilisateur.uid : null,
+    normaliserCode: c => String(c || "").toUpperCase().replace(/[^A-Z0-9]/g, ""),
+    codeValide: c => /^[A-HJ-NP-Z2-9]{6}$/.test(c),
+    // Le résumé de l'élève connecté (null s'il n'a pas activé « Mes amis ») ; garde le code dans ce navigateur
+    async monResume() {
+      if (!utilisateur) return null;
+      const snap = await F.getDoc(F.doc(db, "resumes", utilisateur.uid));
+      const d = snap.exists() ? snap.data() : null;
+      const local = lire("amis");
+      if (d && local.code !== d.code) ecrire("amis", { code: d.code });
+      if (!d && local.code) ecrire("amis", {});
+      return d;
+    },
+    // Active « Mes amis » : tire un code libre, puis publie le résumé (lisible par les seuls amis acceptés)
+    async activer() {
+      if (!utilisateur) throw erreurAmis("deconnecte");
+      const deja = await Amis.monResume();
+      if (deja) return deja.code;
+      for (let essai = 0; essai < 6; essai++) {
+        const tirage = crypto.getRandomValues(new Uint32Array(6));
+        const code = Array.from(tirage, n => LETTRES_CODE[n % LETTRES_CODE.length]).join("");
+        try {
+          await F.setDoc(F.doc(db, "codes", code), { uid: utilisateur.uid });
+        } catch (e) {
+          if (e.code === "permission-denied") continue;      // code déjà pris par quelqu'un : on en tire un autre
+          throw e;
+        }
+        ecrire("amis", { code });
+        await Amis.envoyerResume({ force: true });
+        window.compter?.("amis-active", "Mes amis activé");
+        return code;
+      }
+      throw erreurAmis("code");
+    },
+    // Envoie le résumé s'il a changé, au plus toutes les 5 minutes (le dernier changement part à la fin du délai)
+    async envoyerResume(options) {
+      const force = options && options.force;
+      clearTimeout(minuterieResume);
+      const local = lire("amis");
+      if (!utilisateur || !local.code || typeof window.calculerResumeAmi !== "function") return false;
+      const p = lire("profil");
+      const donnees = Object.assign({ code: local.code, pseudo: String(p.pseudo || "").slice(0, 20), avatar: String(p.avatar || "").slice(0, 20),
+        annee: String(p.annee || "").slice(0, 40) }, window.calculerResumeAmi());
+      const empreinte = JSON.stringify(donnees);
+      if (!force && empreinte === local.empreinte) return false;
+      const attendre = (local.t || 0) + DELAI_RESUME - Date.now();
+      if (!force && attendre > 0) { minuterieResume = setTimeout(() => Amis.envoyerResume().catch(e => console.error(e)), attendre); return false; }
+      await F.setDoc(F.doc(db, "resumes", utilisateur.uid), Object.assign({}, donnees, { maj: F.serverTimestamp() }));
+      ecrire("amis", { code: local.code, empreinte, t: Date.now() });
+      return true;
+    },
+    // Amis acceptés (avec leur résumé), demandes reçues, demandes envoyées
+    async liste() {
+      if (!utilisateur) return { amis: [], recues: [], envoyees: [] };
+      const moi = utilisateur.uid;
+      const snap = await F.getDocs(F.query(F.collection(db, "amities"), F.where("membres", "array-contains", moi)));
+      const amis = [], recues = [], envoyees = [];
+      snap.forEach(d => {
+        const a = d.data(), autre = a.membres.find(u => u !== moi);
+        const item = { id: d.id, uid: autre, code: a.code, pseudo: a.pseudo, avatar: a.avatar };
+        if (a.accepte) amis.push(item);
+        else (a.de === moi ? envoyees : recues).push(item);
+      });
+      await Promise.all(amis.map(async ami => {
+        try {
+          const r = await F.getDoc(F.doc(db, "resumes", ami.uid));
+          ami.resume = r.exists() ? r.data() : null;
+        } catch (e) { console.error(e); ami.resume = null; }
+      }));
+      return { amis, recues, envoyees };
+    },
+    // Demande d'ami avec le code de l'autre. Si l'autre nous avait déjà demandé, on accepte sa demande.
+    async demander(texte, deja) {
+      if (!utilisateur) throw erreurAmis("deconnecte");
+      const code = Amis.normaliserCode(texte);
+      if (!Amis.codeValide(code)) throw erreurAmis("format");
+      const moi = utilisateur.uid;
+      const c = await F.getDoc(F.doc(db, "codes", code));
+      if (!c.exists()) throw erreurAmis("inconnu");
+      const autre = c.data().uid;
+      if (autre === moi) throw erreurAmis("soi");
+      const etat = deja || await Amis.liste();
+      const id = paire(moi, autre);
+      if (etat.amis.some(a => a.id === id)) throw erreurAmis("deja-ami");
+      if (etat.envoyees.some(a => a.id === id)) throw erreurAmis("deja-demande");
+      if (etat.recues.some(a => a.id === id)) { await Amis.accepter(id); return "accepte"; }
+      if (etat.amis.length + etat.envoyees.length >= AMIS_MAX) throw erreurAmis("max");
+      const maintenant = Date.now();
+      let envois = lire("amis-demandes");
+      envois = (Array.isArray(envois) ? envois : []).filter(t => maintenant - t < 864e5);
+      if (envois.length >= DEMANDES_PAR_JOUR) throw erreurAmis("limite");
+      await Amis.activer();             // demander un ami, c'est aussi accepter qu'il voie ton résumé une fois la demande acceptée
+      const p = lire("profil");
+      await F.setDoc(F.doc(db, "amities", id), { membres: [moi, autre], de: moi, code, pseudo: String(p.pseudo || "").slice(0, 20),
+        avatar: String(p.avatar || "").slice(0, 20), accepte: false, date: F.serverTimestamp() });
+      envois.push(maintenant);
+      ecrire("amis-demandes", envois);
+      window.compter?.("ami-demande", "Demande d'ami envoyée");
+      return "demande";
+    },
+    async accepter(id) {
+      if (!utilisateur) throw erreurAmis("deconnecte");
+      await Amis.activer();             // accepter, c'est montrer son résumé à cet ami
+      await F.updateDoc(F.doc(db, "amities", id), { accepte: true });
+      window.compter?.("ami-accepte", "Demande d'ami acceptée");
+    },
+    // Refuser une demande, annuler la sienne, ou retirer un ami : il ne voit plus rien, et toi non plus
+    async retirer(id) {
+      if (!utilisateur) throw erreurAmis("deconnecte");
+      await F.deleteDoc(F.doc(db, "amities", id));
+    },
+    // Tout arrêter : amitiés, résumé et code disparaissent
+    async desactiver() {
+      if (!utilisateur) return;
+      const moi = utilisateur.uid;
+      const snap = await F.getDocs(F.query(F.collection(db, "amities"), F.where("membres", "array-contains", moi)));
+      await Promise.all(snap.docs.map(d => F.deleteDoc(d.ref)));
+      const r = await F.getDoc(F.doc(db, "resumes", moi));
+      if (r.exists()) {
+        const code = r.data().code;
+        await F.deleteDoc(r.ref);
+        const c = await F.getDoc(F.doc(db, "codes", code));
+        if (c.exists() && c.data().uid === moi) await F.deleteDoc(c.ref);
+      }
+      ecrire("amis", {});
+    }
+  };
+  window.Amis = Amis;
   const fournisseur = new A.GoogleAuthProvider();
   fournisseur.setCustomParameters({ prompt: "select_account" });
 
@@ -230,6 +376,7 @@ async function demarrer() {
       return { nouveau: !snap.exists() };
     });
     const r = await Coffre.synchroniser(utilisateur.uid, transaction, window.migrerAnciennesCles);
+    Amis.envoyerResume().catch(e => console.error(e));
     if (r.nouveau) window.compter?.("compte-cree", "Compte créé");     // statistiques anonymes (compter.js)
     majCompteurRevision();
     if (icone) majIcone(icone);
@@ -271,6 +418,14 @@ async function demarrer() {
 
   A.onAuthStateChanged(auth, async u => {
     utilisateur = u;
+    window.compteUid = u ? u.uid : null;
+    window.dispatchEvent(new CustomEvent("compte-change", { detail: { uid: window.compteUid } }));
+    // « Mes amis » activé sur un autre appareil : une lecture par session suffit pour le savoir ici
+    if (u && !lire("amis").code) {
+      let vu = false;
+      try { vu = sessionStorage.getItem("amis-verifie") === u.uid; sessionStorage.setItem("amis-verifie", u.uid); } catch (e) {}
+      if (!vu) Amis.monResume().catch(e => console.error(e));
+    }
     if (icone) { icone.classList.toggle("connecte", !!u); icone.dataset.connecte = u ? "oui" : "non"; majIcone(icone); }
     ui.montrer(!!u, u);
     if (u) {
@@ -402,6 +557,7 @@ async function demarrer() {
   // On confirme d'abord l'identité (Google ou mot de passe), PUIS on efface les données et le compte.
   const formReauth = document.getElementById("reauth");
   async function supprimerTout(effacerNavigateur) {
+    await Amis.desactiver();             // amitiés, résumé et code ami
     await F.deleteDoc(F.doc(db, "eleves", auth.currentUser.uid));
     await A.deleteUser(auth.currentUser);
     ecrireTexte("compte-uid", null);

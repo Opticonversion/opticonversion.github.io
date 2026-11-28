@@ -22,6 +22,82 @@ service cloud.firestore {
         && profilValide(request.resource.data.get("profil", {}));
     }
 
+    // ---------- Mes amis (amis.html) ----------
+    // Personne n'est visible par défaut. Un élève qui active « Mes amis » reçoit un code (codes/{CODE})
+    // et publie un RÉSUMÉ de sa progression (resumes/{uid}), jamais le détail question par question.
+    // Une amitié (amities/{uidA_uidB}, les deux identifiants rangés dans l'ordre) est créée par celui qui
+    // connaît le code de l'autre ; seul l'autre peut l'accepter ; chacun des deux peut la supprimer.
+    // Un résumé n'est lisible que par son auteur et par ses amis ACCEPTÉS.
+    function paire(a, b) { return a < b ? a + "_" + b : b + "_" + a; }
+    function cheminAmitie(a, b) { return /databases/$(database)/documents/amities/$(paire(a, b)); }
+    function sontAmis(a, b) { return exists(cheminAmitie(a, b)) && get(cheminAmitie(a, b)).data.accepte == true; }
+    function nombreValide(n) { return n is int && n >= 0 && n <= 100000; }
+    // Réussite d'une épreuve : [questions réussies, questions tentées]
+    function paireValide(l) { return l is list && l.size() == 2 && nombreValide(l[0]) && nombreValide(l[1]) && l[0] <= l[1]; }
+    function reussiteValide(r) {
+      return r is map && r.keys().hasOnly(["U41", "U42", "U43", "U5", "U3"])
+        && paireValide(r.get("U41", [0, 0])) && paireValide(r.get("U42", [0, 0])) && paireValide(r.get("U43", [0, 0]))
+        && paireValide(r.get("U5", [0, 0])) && paireValide(r.get("U3", [0, 0]));
+    }
+    function semaineValide(s) {
+      return s is map && s.keys().hasOnly(["lundi", "questions", "jours"])
+        && s.lundi is string && s.lundi.size() == 10
+        && nombreValide(s.questions) && s.jours is int && s.jours >= 0 && s.jours <= 7;
+    }
+    function resumeValide(d) {
+      return d.keys().hasOnly(["code", "pseudo", "avatar", "annee", "questions", "reussite", "serie", "semaine", "maj"])
+        && d.code is string && d.code.matches('^[A-HJ-NP-Z2-9]{6}$')
+        && d.get("pseudo", "") is string && d.get("pseudo", "").size() <= 20
+        && d.get("avatar", "") is string && d.get("avatar", "").size() <= 20
+        && d.get("annee", "") is string && d.get("annee", "").size() <= 40
+        && nombreValide(d.questions) && nombreValide(d.serie)
+        && reussiteValide(d.reussite) && semaineValide(d.semaine)
+        && d.maj == request.time;
+    }
+
+    match /codes/{code} {
+      // On lit UN code qu'on connaît (pour trouver l'élève à ajouter), jamais la liste des codes.
+      allow get: if request.auth != null;
+      allow list, update: if false;
+      allow create: if request.auth != null && code.matches('^[A-HJ-NP-Z2-9]{6}$')
+        && request.resource.data.keys().hasOnly(["uid"]) && request.resource.data.uid == request.auth.uid;
+      allow delete: if request.auth != null && resource.data.uid == request.auth.uid;
+    }
+
+    match /resumes/{uid} {
+      allow read: if request.auth != null && (request.auth.uid == uid || sontAmis(request.auth.uid, uid));
+      allow create, update: if request.auth != null && request.auth.uid == uid && resumeValide(request.resource.data);
+      allow delete: if request.auth != null && request.auth.uid == uid;
+    }
+
+    match /amities/{id} {
+      // Lecture (et liste « mes amitiés ») : seulement les deux élèves concernés.
+      allow read: if request.auth != null && request.auth.uid in resource.data.membres;
+      // Demande : par celui qui a le code de l'autre, jamais déjà acceptée. Elle porte son pseudo et son avatar
+      // (pour que l'autre sache qui demande) et le code utilisé (preuve qu'il le connaît).
+      allow create: if request.auth != null
+        && request.resource.data.keys().hasOnly(["membres", "de", "code", "pseudo", "avatar", "accepte", "date"])
+        && request.resource.data.membres is list && request.resource.data.membres.size() == 2
+        && request.resource.data.de == request.auth.uid
+        && request.auth.uid in request.resource.data.membres
+        && request.resource.data.membres[0] != request.resource.data.membres[1]
+        && id == paire(request.resource.data.membres[0], request.resource.data.membres[1])
+        && request.resource.data.accepte == false
+        && request.resource.data.code is string && request.resource.data.code.matches('^[A-HJ-NP-Z2-9]{6}$')
+        && get(/databases/$(database)/documents/codes/$(request.resource.data.code)).data.uid
+           == (request.resource.data.membres[0] == request.auth.uid ? request.resource.data.membres[1] : request.resource.data.membres[0])
+        && request.resource.data.get("pseudo", "") is string && request.resource.data.get("pseudo", "").size() <= 20
+        && request.resource.data.get("avatar", "") is string && request.resource.data.get("avatar", "").size() <= 20
+        && request.resource.data.date == request.time;
+      // Acceptation : seulement par celui qui a reçu la demande, et seulement le champ « accepte » passe à vrai.
+      allow update: if request.auth != null && request.auth.uid in resource.data.membres
+        && request.auth.uid != resource.data.de
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(["accepte"])
+        && request.resource.data.accepte == true;
+      // Refuser, annuler ou retirer un ami : l'un ou l'autre, à tout moment.
+      allow delete: if request.auth != null && request.auth.uid in resource.data.membres;
+    }
+
     // Signalements d'erreur : n'importe qui peut en ENVOYER un (sans compte),
     // personne ne peut les lire ni les modifier depuis le site (lecture dans la console Firebase).
     match /signalements/{id} {

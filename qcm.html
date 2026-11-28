@@ -18,7 +18,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Opticonversion">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
-<link rel="stylesheet" href="style.css?v=3c4f9543">
+<link rel="stylesheet" href="style.css?v=4485ca76">
 </head>
 <body>
 <header class="entete">
@@ -130,9 +130,9 @@
 <script src="specificites-U43.js?v=d64dab99"></script>
 <script src="specificites-U5.js?v=43533990"></script>
 <script src="specificites-U3.js?v=719774fd"></script>
-<script src="coffre.js?v=768a24fb"></script>
+<script src="coffre.js?v=666e7965"></script>
 <script src="essentiel.js?v=7e8432f5"></script>
-<script src="rythme.js?v=f8ddd781"></script>
+<script src="rythme.js?v=ee7b6ef1"></script>
 <!-- Examen blanc chronométré (#U5/examen) : avant le script de la page, qui l'ouvre dès le chargement -->
 <script src="examen.js?v=07617f9d"></script>
 <script src="calculette.js?v=481476d2"></script>
@@ -1394,6 +1394,11 @@
         ? "Question acquise : elle ne reviendra plus dans « À revoir »."
         : "Elle reviendra " + (suite.jours === 1 ? "demain" : "dans " + suite.jours + " jours") + " dans «\u00a0À revoir\u00a0».";
       expl.appendChild(info);
+    }
+    // Calcul raté sur un sujet de la fiche gratuite (Prentice, aniséiconie…) : une ligne vers elle (lettre.js, seulement une fois la fiche ouverte)
+    if ((q.type === "calcul" || q.type === "pose") && !reponse.juste) {
+      const ligneFiche = window.ligneFicheGratuite?.(q);
+      if (ligneFiche) expl.appendChild(ligneFiche);
     }
     // « Sur la copie » (examen.js) : la rédaction modèle, juste avant l'explication, que la réponse soit juste ou non
     const copieModele = creerSurLaCopie(q);
@@ -2743,11 +2748,12 @@
   repriseAuChargement = false;
   pageChargee = true;
 </script>
+<script src="lettre.js?v=de210a3f" defer></script>
 <script src="compter.js?v=234d3f31" defer></script>
 <script src="vivant.js?v=0b03b85f" defer></script>
 <script src="appli.js?v=0724163c" defer></script>
 <script src="sons.js?v=355500ef" defer></script>
-<script type="module" src="compte.js?v=c05b4182"></script>
+<script type="module" src="compte.js?v=b42b2898"></script>
 <!-- Mesure d'audience anonyme, sans cookies (GoatCounter) -->
 <script data-goatcounter="https://opticonversion.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </body>

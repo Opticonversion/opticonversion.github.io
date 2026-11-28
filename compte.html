@@ -18,7 +18,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Opticonversion">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
-<link rel="stylesheet" href="style.css?v=3c4f9543">
+<link rel="stylesheet" href="style.css?v=4485ca76">
 </head>
 <body data-rafraichir="oui">
 <header class="entete">
@@ -38,7 +38,7 @@
 
 <main>
   <h1 class="apparait" id="profil-titre">Ton profil</h1>
-  <p class="sous-titre apparait" style="--d:2" id="profil-sous-titre">Choisis ton pseudo et ton personnage. Ton profil n'est visible que par toi.</p>
+  <p class="sous-titre apparait" style="--d:2" id="profil-sous-titre">Choisis ton pseudo et ton personnage. Ton profil n'est visible que par toi et par les amis que tu acceptes.</p>
 
   <section class="profil apparait" style="--d:3">
     <div class="profil-tete">
@@ -95,6 +95,15 @@
     <div id="bloc-records" hidden>
       <h3>Mes meilleurs scores</h3>
       <ol class="profil-records" id="profil-records"></ol>
+    </div>
+  </section>
+
+  <!-- Mes amis : la page amis.html ; ici seulement le nombre d'amis et de demandes (compte.js : window.Amis) -->
+  <section class="apparait" style="--d:3" aria-labelledby="titre-profil-amis">
+    <h2 id="titre-profil-amis">Mes amis</h2>
+    <div class="profil-amis">
+      <p id="profil-amis-texte">Ajoute tes amis de classe avec un code ami : vous voyez chacun un résumé de la progression de l'autre.</p>
+      <a class="bouton secondaire" href="amis.html" id="profil-amis-lien">Mes amis</a>
     </div>
   </section>
 
@@ -191,9 +200,9 @@
 <script src="sujets-U42.js?v=e0c72a21"></script>
 <script src="sujets-U43.js?v=a9434843"></script>
 <script src="sujets-U41.js?v=85599410"></script>
-<script src="coffre.js?v=768a24fb"></script>
+<script src="coffre.js?v=666e7965"></script>
 <script src="essentiel.js?v=7e8432f5"></script>
-<script src="rythme.js?v=f8ddd781"></script>
+<script src="rythme.js?v=ee7b6ef1"></script>
 <script>
   // ---------- Profil : gardé dans le navigateur, et en ligne si l'élève est connecté ----------
   const $ = id => document.getElementById(id);
@@ -203,8 +212,8 @@
     $("profil-pseudo").textContent = p.pseudo || "Sans pseudo";
     $("profil-titre").textContent = p.pseudo ? "Salut " + p.pseudo + " !" : "Ton profil";
     $("profil-sous-titre").textContent = p.pseudo
-      ? "Ton espace de révision : où tu en es, épreuve par épreuve. Il n'est visible que par toi."
-      : "Choisis ton pseudo et ton personnage. Ton profil n'est visible que par toi.";
+      ? "Ton espace de révision : où tu en es, épreuve par épreuve. Il n'est visible que par toi ; tes amis n'en voient qu'un résumé."
+      : "Choisis ton pseudo et ton personnage. Ton profil n'est visible que par toi et par les amis que tu acceptes.";
     const perso = AVATARS.find(a => a.id === p.avatar) || AVATARS[0];
     $("profil-annee").textContent = [p.annee, "avec " + perso.nom].filter(Boolean).join(" · ");
     $("profil-avatar").src = cheminAvatar(perso.id);
@@ -328,12 +337,36 @@
     // Sans pseudo : le formulaire est ouvert d'emblée ; sinon il reste replié
     if (!lireProfil().pseudo) $("profil-modifier").open = true;
   });
+
+  // ---------- Mes amis : nombre d'amis et de demandes (une lecture à la connexion) ----------
+  window.addEventListener("compte-change", async e => {
+    const texte = $("profil-amis-texte"), lien = $("profil-amis-lien");
+    const invitation = Coffre.lireTexte("amis-invitation");
+    if (!e.detail.uid || !window.Amis) {
+      texte.textContent = invitation ? "Tu as reçu un code ami. Crée ton compte, puis ouvre Mes amis pour envoyer ta demande."
+        : "Ajoute tes amis de classe avec un code ami : vous voyez chacun un résumé de la progression de l'autre. Il faut un compte.";
+      lien.className = invitation ? "bouton" : "bouton secondaire";
+      return;
+    }
+    try {
+      const l = await Amis.liste();
+      const n = l.amis.length, d = l.recues.length;
+      const morceaux = [];
+      if (d) morceaux.push(d > 1 ? d + " demandes d'ami à voir." : "Une demande d'ami à voir.");
+      if (n) morceaux.push(n > 1 ? "Tu as " + n + " amis." : "Tu as un ami.");
+      if (invitation) morceaux.push("Tu as reçu un code ami : ouvre Mes amis pour envoyer ta demande.");
+      texte.textContent = morceaux.length ? morceaux.join(" ")
+        : "Ajoute tes amis de classe avec ton code ami : vous voyez chacun un résumé de la progression de l'autre.";
+      lien.className = d || invitation ? "bouton" : "bouton secondaire";
+      if (invitation) lien.href = "amis.html#" + invitation;
+    } catch (err) { console.error(err); }
+  });
 </script>
 <script src="compter.js?v=234d3f31" defer></script>
 <script src="vivant.js?v=0b03b85f" defer></script>
 <script src="appli.js?v=0724163c" defer></script>
-<script src="lettre.js?v=92532f67" defer></script>
-<script type="module" src="compte.js?v=c05b4182"></script>
+<script src="lettre.js?v=de210a3f" defer></script>
+<script type="module" src="compte.js?v=b42b2898"></script>
 <!-- Mesure d'audience anonyme, sans cookies (GoatCounter) -->
 <script data-goatcounter="https://opticonversion.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </body>

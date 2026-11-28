@@ -2656,3 +2656,75 @@ button.atc-onglet { min-height: 32px; cursor: pointer; }
   .calculateur > .lien-entrainement { margin-top: 10px; }
 }
 .spec-formules .formule-calculer { flex-basis: 100%; margin: 0; }
+
+/* ---------- Mes amis (amis.html, amis.js) : code ami, demandes, cartes des amis ---------- */
+.code-ami { margin: 4px 0 8px; font-family: var(--corps); font-size: 2.2rem; font-weight: 700; letter-spacing: 0.16em; color: var(--or-clair); font-variant-numeric: lining-nums; }
+.code-lien { color: var(--texte); overflow-wrap: anywhere; }
+.amis-message { margin: 12px 0 0; }
+.amis-message:empty { display: none; }
+.form-ajout label { display: block; color: var(--doux); font-size: 0.9rem; margin-bottom: 6px; }
+.form-ajout-ligne { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.form-ajout-ligne input { flex: 1 1 10em; max-width: 16em; margin: 0; text-transform: uppercase; letter-spacing: 0.1em; }
+.form-ajout-ligne .bouton { margin-top: 0; }
+.liste-demandes, .liste-amis { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.demande { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; padding: 12px 0; border-top: 1px solid var(--bord); }
+.demande:first-child { border-top: 0; }
+.demande-avatar { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; object-position: center 20%; background: var(--or-fond); flex: none; }
+.demande-texte { flex: 1 1 12em; margin: 0; }
+.demande-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.demande-actions .bouton { margin-top: 0; }
+.ami { padding: 16px 0 6px; border-top: 1px solid var(--bord); }
+.ami:first-child { border-top: 0; padding-top: 4px; }
+.ami-tete { display: flex; align-items: center; gap: 14px; margin-bottom: 10px; }
+.ami-avatar { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; object-position: center 20%; background: var(--or-fond); border: 2px solid var(--or); flex: none; }
+.ami-qui { flex: 1; min-width: 0; }
+.ami-pseudo { margin: 0; font-family: var(--titre); font-size: 1.45rem; font-weight: 500; line-height: 1.15; overflow-wrap: anywhere; }
+.ami-annee { margin: 2px 0 0; color: var(--doux); font-size: 0.9rem; }
+.ami-retirer { flex: none; min-height: 44px; padding: 0 12px; font: inherit; font-size: 0.88rem; color: var(--doux); background: transparent; border: 0; border-radius: 999px; cursor: pointer; }
+.ami-retirer:hover { color: #f0a39a; }
+.ami-semaine { margin: 0 0 4px; font-weight: 700; }
+.ami-detail { margin: 0 0 10px; color: var(--doux); font-size: 0.94rem; }
+.ami-epreuves { display: grid; gap: 10px; }
+.ami-epreuve-nom { display: block; margin-bottom: 6px; font-size: 0.92rem; color: var(--doux); }
+.ami-epreuve-nom b { color: rgb(var(--accent-rgb)); margin-right: 6px; }
+.ami-epreuve .progression-bloc { margin: 0; }
+.ami-epreuve .part-reussies { background: rgb(var(--accent-rgb)); }
+.ami-epreuve .part-ratees { background: rgba(var(--accent-rgb), 0.3); }
+/* Profil (compte.html) : le bloc qui mène à Mes amis */
+.profil-amis { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 18px; }
+.profil-amis p { margin: 0; flex: 1 1 14em; color: var(--doux); }
+.profil-amis .bouton { margin-top: 0; flex: none; }
+
+/* ---------- Fiche gratuite (fiche-prentice.html, lettre.js) et page de vente (pieges-vision.html) ---------- */
+.gratuit-liste, .vente-liste { margin: 0; padding-left: 1.2em; display: grid; gap: 8px; line-height: 1.55; max-width: 62ch; }
+.gratuit-auteur, .vente-auteur { margin: 14px 0 0; font-size: 0.94rem; }
+.gratuit-case { display: flex; flex-direction: row; gap: 10px; align-items: flex-start; margin: 12px 0 0; padding: 6px 0; color: var(--texte) !important; font-size: 0.95rem !important; line-height: 1.45; cursor: pointer; }
+.gratuit-case input:focus-visible { outline: 2px solid var(--or); outline-offset: 3px; }
+#gratuit-merci-adresse, .page-vente a, .page-gratuit a { overflow-wrap: anywhere; }
+.gratuit-case input { flex: none; width: 22px; height: 22px; margin: 0; padding: 0; accent-color: var(--or); cursor: pointer; }
+.gratuit-form .bouton { justify-self: start; margin: 6px 0 0; }
+.gratuit-demo { margin: 0 0 12px; padding: 8px 12px; border-left: 3px solid var(--or); color: var(--doux); font-size: 0.9rem; }
+.gratuit-merci p, #gratuit-bientot p { margin: 0 0 10px; }
+.gratuit-merci:focus { outline: none; }
+.gratuit-merci a, #gratuit-bientot a { color: var(--or); }
+/* Ligne vers la fiche dans la correction d'un calcul raté (qcm.html) */
+.lien-gratuit { margin: 10px 0 0; color: var(--doux); font-size: 0.92rem; }
+.lien-gratuit a { color: var(--or); white-space: nowrap; }
+/* Bloc « lettre » une fois la fiche ouverte : un lien vers la fiche */
+.lettre.vers-fiche .bouton { margin-top: 4px; }
+/* Page de vente */
+.vente-tete { display: grid; grid-template-columns: minmax(0, 220px) minmax(0, 1fr); gap: 28px; align-items: start; margin-bottom: 24px; }
+.vente-texte h1 { margin-top: 0; }
+.vente-texte .sous-titre { margin-bottom: 18px; }
+.vente-couverture { display: block; width: 100%; height: auto; border-radius: 4px; box-shadow: 0 0 0 1px var(--bord); }
+.vente-etapes { margin: 0 0 14px; padding-left: 1.4em; display: grid; gap: 8px; line-height: 1.55; }
+.vente-achat { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 18px; }
+.vente-achat p { margin: 0; }
+.vente-achat .bouton { margin: 0; }
+.vente-prix { font-family: var(--titre); font-size: 2rem; color: var(--or-clair); font-variant-numeric: lining-nums; }
+.vente-enonce { padding: 10px 14px; border-radius: 10px; background: var(--fond); border: 1px solid var(--bord); }
+.page-vente section h3 { margin-top: 18px; }
+@media (max-width: 720px) {
+  .vente-tete { grid-template-columns: 1fr; gap: 18px; }
+  .vente-couverture { width: 150px; }
+}
