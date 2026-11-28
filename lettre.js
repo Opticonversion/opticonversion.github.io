@@ -54,7 +54,7 @@ window.TUNNEL = {
     reseau: "Pas de connexion pour le moment. Réessaie quand internet est revenu."
   };
 
-  document.querySelectorAll("[data-lettre]").forEach((bloc, rang) => {
+  document.querySelectorAll("div.lettre[data-lettre]").forEach((bloc, rang) => {
     const id = "lettre-" + rang;
 
     if (T.fiche.ouverte) {
@@ -122,7 +122,7 @@ window.TUNNEL = {
         await window.inscrireLettre(adresse, source);
         try { localStorage.setItem("lettre", "1"); } catch (e) {}
         // Les autres blocs de la page disent aussi que c'est fait
-        document.querySelectorAll("[data-lettre]").forEach(b => { if (b !== bloc && !b.classList.contains("inscrit")) b.dispatchEvent(new Event("lettre-inscrit")); });
+        document.querySelectorAll("div.lettre[data-lettre]").forEach(b => { if (b !== bloc && !b.classList.contains("inscrit")) b.dispatchEvent(new Event("lettre-inscrit")); });
         montrerInscrit(adresse);
         const texte = bloc.querySelector(".lettre-texte");   // le lecteur d'écran lit la confirmation
         texte.setAttribute("tabindex", "-1");

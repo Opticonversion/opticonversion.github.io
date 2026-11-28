@@ -13,7 +13,7 @@
 // =====================================================================
 
 // <versionner> (partie écrite par versionner.py, ne pas modifier à la main)
-const VERSION = "2120962dfb";
+const VERSION = "5cc2464619";
 const FICHIERS = [
   "amis.html",
   "amis.js?v=b244529b",
@@ -261,7 +261,7 @@ const FICHIERS = [
   "img/schemas/U5/worth-diplopie-homonyme.svg",
   "img/schemas/U5/worth-neutralisation-og.svg",
   "index.html",
-  "lettre.js?v=de210a3f",
+  "lettre.js?v=00852505",
   "manifest.webmanifest",
   "mentions-legales.html",
   "notions.html",
